@@ -7,7 +7,7 @@ export class DomainError extends Error {
   code:string;
   constructor(code:string,message:string){ super(message); this.name="DomainError"; this.code=code; }
 }
-const fail=(code:string,message:string):never=>{throw new DomainError(code,message);};
+function fail(code:string,message:string):never{throw new DomainError(code,message);}
 export const PALETTE=["#ffc47b","#f391a8","#a0d8b3","#99c8e6","#c7a3ec"] as const;
 export const WINDOW_COLOURS=["amber","rose","mint","sky","violet"] as const;
 export const FOOTPRINTS:Record<Asset,readonly[number,number]>={chair:[1,1],table:[1.6,1.6],lamp:[.8,.8],plant:[.8,.8]};
@@ -87,7 +87,7 @@ function checkPlacement(item:Furniture,all:readonly Furniture[]){
  if(Math.abs(item.x)+width/2>3.5||Math.abs(item.z)+depth/2>3.5)fail("COLLISION","That piece would cross the room edge.");
  const overlap=(x:number,z:number,w:number,d:number)=>Math.abs(item.x-x)<(width+w)/2-1e-8&&Math.abs(item.z-z)<(depth+d)/2-1e-8;
  for(const other of all){if(other.id===item.id)continue;const [w,d]=size(other);if(overlap(other.x,other.z,w,d))fail("COLLISION","That space is occupied by another piece.");}
- for(const fixed of FIXED_FOOTPRINTS)if(overlap(fixed.x,fixed.z,...fixed.size))fail("COLLISION","That space is occupied by the fixed room structure.");
+ for(const fixed of FIXED_FOOTPRINTS)if(overlap(fixed.x,fixed.z,fixed.size[0],fixed.size[1]))fail("COLLISION","That space is occupied by the fixed room structure.");
 }
 export function mutateFurniture(input:readonly Furniture[],value:unknown,owner:string):{furniture:Furniture[];entityRevision:number}{
  const command=parseCommand(value);

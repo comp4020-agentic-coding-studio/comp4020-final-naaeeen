@@ -58,7 +58,7 @@ not six distinct downloaded models. Fixed wall/sofa/shelf footprints are reused
 from the reviewed prototype and validated in the same domain as movable objects.
 
 Response success{ok:true,commandId,sequence,entityRevision,changed}; failure
-{ok:false,code,message}. CodesINVALID_INPUT400,FORBIDDEN403,REVISION_CONFLICT409,
+{ok:false,code,message}. CodesINVALID_INPUT400,COLLISION400,FORBIDDEN403,REVISION_CONFLICT409,
 COMMAND_ID_REUSED409,RATE_LIMITED429,STORAGE_UNAVAILABLE503.
 Validation failure never changes SQLite/sequence. Valid owner editing produces
 a new entity revision; sameUUID+canonical payload returns original receipt

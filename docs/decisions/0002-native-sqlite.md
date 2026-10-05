@@ -10,7 +10,9 @@ native addon/build. Within the deadline and256MBsingleMachine this removes one
 packaging boundary. No superiority, performance or stable-API status is inferred
 from the word built-in. Verify prepared statements, rollback, duplicate receipts,
 restart persistence and the real Linux image; keep datastore behind Store methods.
-Node's API status must be checked against the installed release, not old docs.
+The official v24.21.0 API source marks node:sqlite Release candidate. This is
+an explicit trade-off, not a stable-API claim; keep Store replaceable and test
+the installed operations.
 
 Adopt mounted SQLite with short transactions, foreign keys, WAL andFULL, numbered
 startup migration and strict data path. SQLite3.53.4 is later than the documented

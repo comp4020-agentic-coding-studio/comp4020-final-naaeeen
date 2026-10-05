@@ -1,0 +1,14 @@
+import {mkdir,writeFile,readFile,chmod} from "node:fs/promises";import{createHash}from"node:crypto";import{execFileSync}from"node:child_process";
+const root=new URL("../.tools/",import.meta.url);await mkdir(root,{recursive:true});
+const name="flyctl_0.4.112_Linux_x86_64.tar.gz";
+const url="https://github.com/superfly/flyctl/releases/download/v0.4.112/"+name;
+const response=await fetch(url);if(!response.ok)throw Error("Fly CLI download failed "+response.status);
+const bytes=Buffer.from(await response.arrayBuffer());
+if(createHash("sha256").update(bytes).digest("hex")!=="5859b57e4428282ffe782c306ce696fa84986b7c7a3ee72b61549c3185484710")throw Error("CLI release digest mismatch");
+await writeFile(new URL(name,root),bytes);
+const members=execFileSync("tar",["-tzf",new URL(name,root).pathname],{encoding:"utf8"}).trim().split("\n");
+if(members.some(n=>n.startsWith("/")||n.split("/").includes("..")))throw Error("Invalid CLI archive member");
+if(!members.includes("flyctl"))throw Error("CLI member missing");
+execFileSync("tar",["-xzf",new URL(name,root).pathname,"-C",root.pathname,"flyctl"],{stdio:"ignore"});
+const target=new URL("flyctl",root);await chmod(target,0o755);
+console.log("Pinned Fly CLI v0.4.112 verified and installed in ignored .tools.");

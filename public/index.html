@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171c30">
+  <meta name="description" content="Make a small room your own. Leave a coloured pane and a little thought in a shared neighbourhood lamp.">
+  <title>Night Neighbourhood</title>
+  <link rel="stylesheet" href="/style.css?v=c8-20261006-2">
+  <script type="importmap">{"imports":{"three":"/vendor/build/three.module.js","three/addons/":"/vendor/examples/jsm/"}}</script>
+  <script type="module" src="/app.js?v=c8-20261006-2"></script>
+</head>
+<body data-view="overview">
+  <a class="skip-link" href="#controls">Skip to your controls</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Night Neighbourhood home"><span class="wordmark-icon" aria-hidden="true">▦</span><span>Night<br>Neighbourhood</span></a>
+      <p class="header-motto">A little room.<br>A light we make together.</p>
+      <a class="readme-link" href="/readme/">About this place <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <div class="intro-row">
+        <div><p class="eyebrow">COME IN, MAKE YOURSELF AT HOME</p><h1 id="greeting">Leave a little light.</h1><p id="welcome-copy">Choose a window, arrange your room, and add your colour to the shared lamp.</p></div>
+        <span class="connection" id="connection" role="status">Opening the neighbourhood…</span>
+      </div>
+      <nav class="place-nav" aria-label="Neighbourhood spaces">
+        <button type="button" data-view="overview" aria-pressed="true"><span aria-hidden="true">▦</span> The neighbourhood</button>
+        <button type="button" data-view="room" aria-pressed="false"><span aria-hidden="true">⌂</span> My window</button>
+        <button type="button" data-view="courtyard" aria-pressed="false"><span aria-hidden="true">✧</span> Shared lamp</button>
+      </nav>
+      <div class="place-layout" data-view="overview" id="place-layout">
+        <section class="scene-card" aria-labelledby="scene-title">
+          <div class="scene-heading"><div><p class="eyebrow">A SMALL PLACE, MADE TOGETHER</p><h2 id="scene-title">The courtyard, tonight</h2></div><p id="scene-description">A room of your own. A light for everyone.</p></div>
+          <div id="world" tabindex="0" role="img" aria-label="Fixed view of a warm room and the shared courtyard lamp. Furniture can also be chosen from the object list."><p class="scene-loading">Putting the kettle on…</p></div>
+          <div class="scene-footer"><span id="render-status" role="status">Opening the scene…</span><label class="pixel-control" for="pixel-scale">Scene detail <select id="pixel-scale"><option value="2">Gentle pixels</option><option value="1">Crisp</option></select></label></div>
+          <section id="window-wall" class="window-wall" aria-labelledby="windows-heading"><div class="wall-heading"><h3 id="windows-heading">Windows with a little light</h3><p>Saved windows, left by visitors.</p></div><div id="neighbours" class="neighbours"><p class="empty-state">Opening the shutters…</p></div></section>
+        </section>
+        <aside class="controls-card" id="controls" aria-labelledby="controls-heading">
+          <div class="panel-heading"><span class="panel-number" id="panel-number" aria-hidden="true">01</span><div><p class="eyebrow" id="panel-eyebrow">YOUR PLACE IN THE NEIGHBOURHOOD</p><h2 id="controls-heading">Make a window yours</h2></div></div>
+          <section id="profile-panel">
+            <p class="panel-intro" id="profile-intro">A name and a warm colour are enough to begin.</p>
+            <form id="profile-form">
+              <label for="nickname">Name on your window</label><input id="nickname" name="name" type="text" maxlength="48" autocomplete="nickname" placeholder="What should we call you?" disabled required aria-describedby="name-hint"><p id="name-hint" class="field-hint">1–24 characters. A nickname is welcome.</p>
+              <fieldset><legend>Your window colour</legend><div class="palette" id="window-palette"></div></fieldset>
+              <div class="draft-preview"><span class="window-preview" id="window-preview" aria-hidden="true"></span><span><strong id="window-preview-name">Your window</strong><small id="profile-draft-label">Colour preview · not published yet</small></span></div>
+              <p class="public-notice"><span aria-hidden="true">↗</span> This is a public rehearsal. Saving puts your name and window colour where other visitors can see them.</p>
+              <button type="submit" class="primary-button" id="save-window" disabled>Save my window <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="cookie-note">This browser remembers your room. Keep its cookies to find your window again.</p>
+          </section>
+          <section id="room-panel" hidden>
+            <p class="panel-intro">Six little things, placed your way. Choose a piece, then move or turn it.</p>
+            <label for="object-list">Furniture to arrange</label><select id="object-list" disabled></select>
+            <p id="object-description" class="object-description">Waiting for your room…</p>
+            <div class="move-pad" aria-label="Move the chosen piece by half a floor tile"><button type="button" id="move-north" aria-label="Move chosen furniture towards the back" disabled>↑</button><button type="button" id="move-west" aria-label="Move chosen furniture left" disabled>←</button><button type="button" id="rotate" disabled>Turn 90°</button><button type="button" id="move-east" aria-label="Move chosen furniture right" disabled>→</button><button type="button" id="move-south" aria-label="Move chosen furniture towards the front" disabled>↓</button></div>
+            <p class="field-hint room-hint">Each move saves when confirmed. Walls and other furniture keep their space.</p>
+            <button type="button" class="secondary-button" id="edit-window">Edit my name &amp; colour <span aria-hidden="true">↗</span></button>
+          </section>
+          <section id="lamp-panel" hidden>
+            <p class="panel-intro">One pane is yours. Choose a colour and, if you like, leave a small thought behind it.</p>
+            <form id="lamp-form">
+              <fieldset><legend>Your pane colour</legend><div class="palette" id="lamp-palette"></div></fieldset>
+              <label for="lamp-note">A little reason for your light <span class="optional">optional</span></label><textarea id="lamp-note" name="note" rows="3" maxlength="280" placeholder="Mine is blue for the quiet after rain…" disabled aria-describedby="note-hint"></textarea><p class="field-hint" id="note-hint"><span id="note-length">0</span>/140 characters</p>
+              <div class="lamp-preview"><span id="pane-preview" aria-hidden="true">✧</span><p id="lamp-draft-label">Your draft pane. Save it to add it to the lamp.</p></div>
+              <p class="public-notice"><span aria-hidden="true">↗</span> Your pane, name and note will be visible to other visitors. You can change or withdraw your own pane.</p>
+              <button type="submit" class="primary-button" id="save-lamp" disabled>Add my light <span aria-hidden="true">✧</span></button>
+            </form>
+            <button type="button" id="withdraw-lamp" class="quiet-button" hidden disabled>Withdraw my pane</button>
+          </section>
+          <div class="save-status"><p id="action-status" role="status" aria-live="polite" aria-atomic="true">Viewing alone publishes nothing.</p><div id="recovery-actions" hidden><button type="button" id="retry-command" class="secondary-button" hidden>Try this save again</button><button type="button" id="read-latest" class="secondary-button" hidden>Read latest saved state</button></div></div>
+        </aside>
+      </div>
+      <section class="lamp-stories" id="lamp-stories" aria-labelledby="stories-heading" hidden><div class="stories-heading"><p class="eyebrow">THE REASONS BEHIND THE COLOURS</p><h2 id="stories-heading">Little lights, left here</h2></div><div id="contributions" class="contributions"><p class="empty-state">The lamp is waiting for its first coloured pane.</p></div></section>
+      <details class="display-details"><summary>Display details</summary><pre id="display-diagnostics">The scene is starting.</pre></details>
+    </main>
+    <footer><p>A quiet, public rehearsal. No account or email needed.</p><p>Furniture: <a href="https://kaylousberg.itch.io/furniture-bits">KayKit Furniture Bits</a>, CC0 · <a href="/readme/">Read our story</a></p></footer>
+  </div>
+</body>
+</html>
