@@ -27,8 +27,8 @@ GET /api/state establishes a secure random session when absent and returns:
   "catalogueVersion":1
 }
 ```
-Unsubmitted lantern parts are omitted from shared parts; own part revision is0
-when absent. Neighbours = latest8published windows plus own published window if
+Unsubmitted lantern parts are omitted; lantern.ownRevision is0 initially and
+retains the withdrawn part revision for the next valid contribution. Neighbours = latest8published windows plus own published window if
 older. Lantern projection = latest8parts plus own if older. Every visitor can
 return to THEIR window even when not among newest8. Rooms are personal authorship,
 not a promise of secrecy; API exposes only own editable room in initialC8.

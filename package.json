@@ -7,7 +7,9 @@
     "typecheck": "tsc --noEmit",
     "check": "pnpm typecheck && pnpm test",
     "check:evidence": "node scripts/check-evidence.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "start": "node src/server.ts",
+    "test:domain": "vitest run --config vitest.domain.config.ts"
   },
   "devDependencies": {
     "@types/jsdom": "^30.0.0",
