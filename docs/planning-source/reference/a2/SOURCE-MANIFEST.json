@@ -1,0 +1,366 @@
+{
+  "sourceRoot": "/home/lizhi/comp4020/comp4020-ass2-Naaeeen",
+  "sourceCommit": "750f835079fbd761052bba857f3de3c8389c35e2",
+  "inspectedSourceStatus": "clean",
+  "sourceStatusPorcelain": "",
+  "importedAtUtc": "2026-10-05T15:47:18.3482987+00:00",
+  "importedOn": "2026-10-06",
+  "purpose": "Historical references for selectively adapted A3 methods; no scripts or permissions activated.",
+  "records": [
+    {
+      "source": "AGENTS.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "AGENTS.source.md",
+      "sha256": "b470d6627cab4ed0d56f0774dfcc0fe6df6f58a77222be28c894a38c1b3d4b36"
+    },
+    {
+      "source": "CLAUDE.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "CLAUDE.source.md",
+      "sha256": "3e54bbbf9b9fc232efbdf1d65ec104cef72a787af006721031f4ed2fb91a079e"
+    },
+    {
+      "source": "PLAN.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "PLAN.source.md",
+      "sha256": "1c81c586e2d1f6fafac06981a2d2714f03ee8e1240ac66f774e3ce182b63d2ec"
+    },
+    {
+      "source": "PROCESS.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "PROCESS.source.md",
+      "sha256": "371b3459ab20585d12fb880d09e931d4bbd0d7547baa6ee0c9a4d36f1ab5dc10"
+    },
+    {
+      "source": "README.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "README.source.md",
+      "sha256": "74bf51ccc76b48420d06b2e790b0f9e15a1b9622adce9ff5ae3d1b64a7648099"
+    },
+    {
+      "source": "package.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "package.source.json",
+      "sha256": "ff0ae5e4230e99b9fd5be2a962bb5d0a680b18532fd6a8b4e8e72dcc2c0a5f51"
+    },
+    {
+      "source": "mise.toml",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "mise.source.toml",
+      "sha256": "d5f14a7e098358aafb9830c179bfa63f0b7164f1cbe7a833ce8614a0c3818ec8"
+    },
+    {
+      "source": ".gitignore",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "gitignore.source.txt",
+      "sha256": "7d0cc1028d0498f27a0eebf7dd5a7c2ee90b78fbab6a3064e2aac8b54bcc8d9f"
+    },
+    {
+      "source": ".gitattributes",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "gitattributes.source.txt",
+      "sha256": "a4055ea1c7977f0f9f49b38659909446b0ef38cb70aa5144093a1455f9509b71"
+    },
+    {
+      "source": ".github/workflows/checks.yml",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "ci/checks.source.yml.txt",
+      "sha256": "41751a5ce2cd77fbe29cbca10f4cc53afeeb546f4ddf0cd0f42ad15cf84a0f28"
+    },
+    {
+      "source": ".github/trufflehog.yml",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "ci/trufflehog.source.yml.txt",
+      "sha256": "0be5d332f0ac50d910862123eb5583c8fced1919e7115faf7f73e875e266e1e8"
+    },
+    {
+      "source": ".githooks/pre-commit",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "hooks/pre-commit.source.txt",
+      "sha256": "7e23212f15fafde0ecb9a2f93a8d95253de77be607179b360c949ddc849c5b28"
+    },
+    {
+      "source": "docs/IMPLEMENTATION-RESEARCH.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/IMPLEMENTATION-RESEARCH.md",
+      "sha256": "f0fb4434b3c2addc33a800725a19bba7b83989caa1b100074e495396fe0f6bd0"
+    },
+    {
+      "source": "docs/PROCESS-EVIDENCE.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/PROCESS-EVIDENCE.md",
+      "sha256": "bf09cda2bae686e4674fb3124b36db68703304a6acefbd6c9b190adf4e1f9d4e"
+    },
+    {
+      "source": "docs/planning/requirements-audit.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/requirements-audit.md",
+      "sha256": "56533fedb06606e4a0abca39cd1ca7349c471979532500630d78a2d3a76aa6d2"
+    },
+    {
+      "source": "docs/planning/implementation-goals.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/implementation-goals.md",
+      "sha256": "6ebfa50311e8ad49f3f58fcdc08c51638946ee253b71ac43c7039d0992181713"
+    },
+    {
+      "source": "docs/planning/final-submission-audit.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/final-submission-audit.md",
+      "sha256": "50deb8058aed93fd0f12e636bf83660789d095ba02a5f3f8adf7a76c7d8d9cc2"
+    },
+    {
+      "source": "docs/planning/gate-3-review.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/gate-3-review.md",
+      "sha256": "8109ea4be303ec11827f1ac3d14326a035b90cca164132cae33d7906b41ac2c1"
+    },
+    {
+      "source": "docs/planning/gate-4-plan.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/gate-4-plan.md",
+      "sha256": "2d75ce8add6e37e62e59e94d6caa2dcd5e9c83dd3c3306829425e6c47cd4fa8a"
+    },
+    {
+      "source": "docs/planning/gate-4-review.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/gate-4-review.md",
+      "sha256": "62d1f4308dd81d654b82437eb9009a4df91d1d9a12e6910773e6625acb8afd41"
+    },
+    {
+      "source": "docs/planning/gate-2-source-ledger.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/planning/gate-2-source-ledger.md",
+      "sha256": "77666aa3a987c292077282b775b281d8f3c5c6e16da8cd5b21fed928b4e4effc"
+    },
+    {
+      "source": "docs/harness-research/README.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/README.source.md",
+      "sha256": "88f0f8f38a6c81aab1eb49526d21295c4a44c26c707702edfb8a8bb186472880"
+    },
+    {
+      "source": "docs/harness-research/REPORT.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/REPORT.md",
+      "sha256": "acb1e7c255ad52dbbbc75953766b34708eb51642f44f8a92058305ab910a1031"
+    },
+    {
+      "source": "docs/harness-research/sources.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/sources.md",
+      "sha256": "4f166b9d3d7a8af4e2e2f4b0710d901cae6af50877a58c4c1d42f0b5322fdc67"
+    },
+    {
+      "source": "docs/harness-research/baseline.CLAUDE.md.txt",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/baseline.CLAUDE.md.txt",
+      "sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb"
+    },
+    {
+      "source": "docs/harness-research/candidate-v1.CLAUDE.md.txt",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/candidate-v1.CLAUDE.md.txt",
+      "sha256": "d1306bc236ac7f842e15160bb48355283003daaa7e7eaff6fd61b067164295f9"
+    },
+    {
+      "source": "docs/harness-research/candidate-v2.CLAUDE.md.txt",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/candidate-v2.CLAUDE.md.txt",
+      "sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6"
+    },
+    {
+      "source": "docs/harness-research/candidate-v3.CLAUDE.md.txt",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/candidate-v3.CLAUDE.md.txt",
+      "sha256": "649b250d0531e735077423d591f7f528d4f174a8abdb266f49528b184917fe79"
+    },
+    {
+      "source": "docs/harness-research/review-01.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/review-01.md",
+      "sha256": "4d3f35de0563555de2e0aa708b7146b0a101fd7eb73a6fb7eaa0e666632bf2de"
+    },
+    {
+      "source": "docs/harness-research/review-02-evaluation.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/review-02-evaluation.md",
+      "sha256": "19124cedd0857e050a839e12e5e2baa3009a926035084dc9f4573ab82a37b825"
+    },
+    {
+      "source": "docs/harness-research/review-03-final.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/review-03-final.md",
+      "sha256": "4d8e42bd0906e35f9c9916fc767350b200685fa9e9c6b1b89507f5c04bc7454a"
+    },
+    {
+      "source": "docs/harness-research/results-summary.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/results-summary.json",
+      "sha256": "003d9845f72e29f1dca57afd2d10a27bea879c725fc361bfbbf09eb85dce45ba"
+    },
+    {
+      "source": "docs/harness-research/blind-review-protocol.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/blind-review-protocol.md",
+      "sha256": "1af0b2430a5a20b0da8f1cf07979162548ac774f9b9472bdd168de81635defa8"
+    },
+    {
+      "source": "docs/harness-research/blind-review-r1.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/blind-review-r1.json",
+      "sha256": "982973fdf1ecbc22afa25d37bc18a398e94386d09b083df153714493f8e776fd"
+    },
+    {
+      "source": "docs/harness-research/blind-review-final.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/blind-review-final.json",
+      "sha256": "030417cc1c751765cbe9cf0ae40ac12eb74606c77a967c9dc78b7139bdc0e19a"
+    },
+    {
+      "source": "docs/harness-research/environment-control-amendment.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/environment-control-amendment.md",
+      "sha256": "5112c3172d8a0f9f522b1361926ca67d5805b32dd1e40cbe6ccbf7a7ee7df6cb"
+    },
+    {
+      "source": "docs/harness-research/scope-control-amendment.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/scope-control-amendment.md",
+      "sha256": "dc558a821326bb33b0acecc19c572661e7c081f644003814c5f51f3c92c01c22"
+    },
+    {
+      "source": "docs/harness-research/runner-control-calibration.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/runner-control-calibration.json",
+      "sha256": "579c1b16d5e1426e48fc72ae4343887089463f2f3604374dd748e3abe9a52f1b"
+    },
+    {
+      "source": "docs/harness-research/completion-audit.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/completion-audit.md",
+      "sha256": "b6b5b760cb237fa5f8264fc1e7f0a5ef4ce51f17dc856bdbab12e69f501ab6c2"
+    },
+    {
+      "source": "docs/harness-research/eval/fixtures.py",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/eval/fixtures.py.source.txt",
+      "sha256": "71ff081639a3ec89ec5a5479d0e77b6f274141f1896b004db7f30403cd9073b2"
+    },
+    {
+      "source": "docs/harness-research/eval/grader.py",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/eval/grader.py.source.txt",
+      "sha256": "0d484ef5b94cc67382b3752d2b2c9bcdd66a198ff034c7b7bec3771f6d735ba4"
+    },
+    {
+      "source": "docs/harness-research/eval/run_trials.py",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/eval/run_trials.py.source.txt",
+      "sha256": "3095093ce4d5dec536ba6173d1b292302bd8a6ed8be159301e29c6f31b4264d1"
+    },
+    {
+      "source": "docs/harness-research/eval/protocol.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/harness-research/eval/protocol.json",
+      "sha256": "8336a7bf2c0b17389321ad7817fa10b2b4a2918b34d4df300760f02bae264ed6"
+    },
+    {
+      "source": "docs/review/process-comparison/README.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/process-comparison/README.source.md",
+      "sha256": "56fc6c21f167b5236439bb27c6cf1cddcad94654aaad399cc31276e1dfac795b"
+    },
+    {
+      "source": "docs/review/process-comparison/protocol.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/process-comparison/protocol.json",
+      "sha256": "b187f1eeea10cc9327c1208af5d980577240bd47e69d43a5f8bfda6a00d3ad94"
+    },
+    {
+      "source": "docs/review/process-comparison/criteria.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/process-comparison/criteria.json",
+      "sha256": "f5e8143a8fa3e00d969d989e5730aac65c2703122c86bf3b08fafe6813ae78c2"
+    },
+    {
+      "source": "docs/review/process-comparison/research.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/process-comparison/research.md",
+      "sha256": "86f5a5038c060cf7b360b3a142f2f32cfd6fdd01ba37ccc59c02bd243eb19e12"
+    },
+    {
+      "source": "docs/review/process-comparison/technique-clarification.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/process-comparison/technique-clarification.md",
+      "sha256": "9a4e1726c837cbc013eb2aa367c15c6758199d9d5b073d5f091f9853cf5d486b"
+    },
+    {
+      "source": "docs/review/manifest.json",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "docs/review/manifest.json",
+      "sha256": "cb58c137f2a0e0327fce63e5857e51932513527520f696b64c6295a37d5ef3f5"
+    },
+    {
+      "source": "public/vendor-notices.txt",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "public/vendor-notices.txt",
+      "sha256": "06387f00afa0752b3ce5c473f52fbd42d707bfdedf29dd6f30193b025c916c76"
+    },
+    {
+      "source": "scripts/check-evidence.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "scripts/check-evidence.ts.source.txt",
+      "sha256": "0ebeaa4b9db783f3253970c1df3b700aa4b4a91c81405597752a1efe4c15b37c"
+    },
+    {
+      "source": "scripts/check-evidence.test.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "scripts/check-evidence.test.ts.source.txt",
+      "sha256": "e9051792b1370be4f6182bff49b8c7f7df4fba14a8ef1f6c1bba6062abc7cfc9"
+    },
+    {
+      "source": "scripts/pages-base.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "scripts/pages-base.ts.source.txt",
+      "sha256": "443059040654d3473b8d2fda9be04192e8828cc3356ad77118c7be8d1ef0b1da"
+    },
+    {
+      "source": "scripts/pages-base.test.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "scripts/pages-base.test.ts.source.txt",
+      "sha256": "f989965c95418c7852bef916b49b05b5a982a2b007729be02686fc736dae6056"
+    },
+    {
+      "source": "spec/README.md",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "spec/README.source.md",
+      "sha256": "fd8044c7abcc8a66aa06339ed4f047839823d118a85ec63a7fe277d52c785a65"
+    },
+    {
+      "source": "spec/support/built-deck-link.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "spec/support/built-deck-link.ts.source.txt",
+      "sha256": "c1c344c10d7ffe210fa2c28425c4f6cdf4fc31aaaaf46f72c304a328fb6b2fd2"
+    },
+    {
+      "source": "spec/support/built-deck-link.test.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "spec/support/built-deck-link.test.ts.source.txt",
+      "sha256": "93a22ba3cd4d46afd116aad74cc6d58db1f077df46f332e58f927cf2c9383843"
+    },
+    {
+      "source": "spec/study-navigation.test.ts",
+      "status": "COPIED_VERIFIED_REFERENCE_ONLY",
+      "destination": "spec/study-navigation.test.ts.source.txt",
+      "sha256": "2cf27a4e3dd04a5a0746deb5739491be8c1965547a7d6b803dc2732c50542598"
+    }
+  ],
+  "excluded": [
+    "credentials/configuration",
+    "node_modules/build/cache",
+    "raw trials/traces/environment snapshots",
+    "A2 teaching data/media",
+    "active deployment/settings"
+  ]
+}

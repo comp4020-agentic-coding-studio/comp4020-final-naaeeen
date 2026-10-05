@@ -1,0 +1,138 @@
+{
+  "method": "independent separate agent, masked sample IDs; no model tests run by reviewer",
+  "scores": [
+    {
+      "sample_id": "S01",
+      "trial_id": "r1b-D6-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S02",
+      "trial_id": "r1b-D1-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S03",
+      "trial_id": "r1b-D1-A",
+      "scores": [
+        2,
+        1,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S04",
+      "trial_id": "r1b-D4-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S05",
+      "trial_id": "r1b-D2-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S06",
+      "trial_id": "r1b-D3-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S07",
+      "trial_id": "r1b-D5-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S08",
+      "trial_id": "r1b-D3-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S09",
+      "trial_id": "r1b-D2-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S10",
+      "trial_id": "r1b-D6-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S11",
+      "trial_id": "r1b-D5-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "S12",
+      "trial_id": "r1b-D4-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    }
+  ],
+  "finding": {
+    "sample_id": "S03",
+    "trial_id": "r1b-D1-A",
+    "priority": "P2",
+    "status": "Reproduced with the exact regex in a read-only Node probe: href text inside title was extracted as a link.",
+    "description": "Link regex can match href text inside another quoted HTML attribute, accepting a non-link when the target deck exists."
+  },
+  "limits": [
+    "Necessary honest limitations not penalized.",
+    "Mechanical PASS does not establish semantic correctness.",
+    "D1 fourth rubric note clarifies third dimension rather than adding weight.",
+    "Some source/command outputs were omitted for masking; related uncertainties remain."
+  ]
+}

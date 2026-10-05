@@ -1,0 +1,76 @@
+{
+  "recordedOn": "2026-10-06",
+  "status": "Final integrated review complete; no remaining actionable plan contradiction",
+  "reviews": [
+    {
+      "id": "inheritance",
+      "context": "Fresh fork without parent history",
+      "findings": "Hardcoded provenance, stale selected direction and missing inheritance index",
+      "resolution": "Live Git provenance and wrong-pin control; source manifest58verified; index and direction corrected"
+    },
+    {
+      "id": "prototype",
+      "context": "Independent code review and fresh no-history review",
+      "findings": "Shared artifact picking, fixed-obstacle collision, early controls, gesture/resource handling",
+      "resolution": "Source fixes, meaningful red regression, actual browser selection and API negative checks"
+    },
+    {
+      "id": "comparison-one",
+      "context": "Fresh no-parent-history initial read; retained context on correction",
+      "order": "M,N,P; Q,R,S",
+      "firstVisualRanking": "WITHDRAWN: incorrect crops",
+      "correctedVisualRecommendation": "M fixed3D, unmasked",
+      "productRecommendation": "Q coauthored courtyard",
+      "limits": "Model judgements, no user preference or statistical A/B"
+    },
+    {
+      "id": "comparison-two",
+      "context": "Prior asset research and parent preferred direction retained; restricted evidence, not fully blind",
+      "order": "P,N,M; S,R,Q",
+      "firstVisualRanking": "WITHDRAWN: incorrect crops",
+      "correctedVisualRecommendation": "M fixed3D, unmasked",
+      "productRecommendation": "Q, S as future alternative",
+      "limits": "Do not count correction as another fresh trial"
+    },
+    {
+      "id": "system-technical",
+      "context": "Fresh no-parent-history child review; focused recheck after fixes",
+      "findings": "Lost identity exchange response; backup authority revival; expiry, room generation and snapshot epoch races",
+      "resolution": "Saved replacement key before POST; replay receipts/generation; disaster quarantine/reconciliation; explicit expiry and room/epoch barriers",
+      "recheck": "No remaining blocker reported; production untested"
+    },
+    {
+      "id": "whole-plan-one",
+      "context": "Fresh no-parent-history reviewer",
+      "findings": "Assessment entry, later archive occasion, Core/Full mismatch, simultaneous user trial",
+      "resolution": "Two assessment invitations/slots; explicit occasionUUID contract; gated schemas/commands; early and simultaneous user tasks",
+      "recheck": "Original findings and final scope/invitation wording fixed; reviewer reported no remaining actionable contradiction. Read-only, retained original review context."
+    },
+    {
+      "id": "whole-plan-two",
+      "context": "Fresh no-parent-history product/feasibility reviewer",
+      "findings": "Bootstrap/privacy story conflict, repeated archive loop, understated work, solo incompleteness pressure",
+      "resolution": "Host invitation for prebuilt circle; no private invite-preview content; archiveintentUUID; conditional50h Core using full SSE; complete neutral lamp; earlier product/mobile gates",
+      "recheck": "Original findings and final scope/invitation wording fixed; reviewer reported no remaining actionable contradiction. Read-only, retained original review context."
+    },
+    {
+      "id": "selection-marker",
+      "context": "Fresh no-parent-history code review plus parent actual browser",
+      "findings": "Selected chair marker invisible under rug and too narrow at pixelScale2",
+      "resolution": "Thicker raised band/rim, disposed resources; desktop/390x844 visible, no observed logs",
+      "recheck": "Passed local browser; not a human usability result"
+    }
+  ],
+  "remainingValidation": [
+    "Actual A3 repository and Fly provision",
+    "Production identity/SQLite/redeployment/faults",
+    "Physical phone and touch",
+    "Real-friends synchronous and next-day trial"
+  ],
+  "controlCorrections": [
+    "Rejected requested-phone observations when DOM remaineddesktop",
+    "Rejected incorrect nativecrop evidence and withdrew ranking",
+    "SVG duplicate diagnosticreads not independent samples",
+    "Framework/renderer migration caveat qualified and versioned Node sourceverified"
+  ]
+}

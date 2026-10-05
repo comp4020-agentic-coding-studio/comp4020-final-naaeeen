@@ -1,0 +1,70 @@
+{
+  "method": "independent masked review by a separate agent",
+  "scores": [
+    {
+      "sample_id": "T01",
+      "trial_id": "final-H2-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "T02",
+      "trial_id": "final-H1-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "T03",
+      "trial_id": "final-D6-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "T04",
+      "trial_id": "final-D6-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "T05",
+      "trial_id": "final-H1-B",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    },
+    {
+      "sample_id": "T06",
+      "trial_id": "final-H2-A",
+      "scores": [
+        2,
+        2,
+        2
+      ],
+      "serious_issue": false
+    }
+  ],
+  "findings": "No material fabrication, inflated verification or source-hierarchy error identified.",
+  "limits": [
+    "Only supplied anonymized artifacts and records reviewed; no model/test execution by reviewer.",
+    "Masked instruction text and some omitted trace detail remain uncertain."
+  ]
+}

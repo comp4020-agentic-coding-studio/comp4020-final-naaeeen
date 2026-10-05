@@ -1,0 +1,282 @@
+{
+  "checkedOn": "2026-10-06",
+  "scope": "Active local links, syntax, example JSON, actual image format/dimensions and imported byte hashes; not semantic truth, image framing, external URL reachability or application acceptance",
+  "historicalReferenceLinks": "Excluded: byte-preserved A2 references describe their original layout",
+  "counts": {
+    "markdown": 25,
+    "json": 16,
+    "jsonExamples": 6,
+    "localLinks": 76,
+    "sourceHashes": 58,
+    "assetHashes": 8,
+    "screenshots": 44
+  },
+  "screenshotDimensions": [
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-desktop-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 49670
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106357
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-final-desktop-full.jpg",
+      "width": 1905,
+      "height": 1370,
+      "bytes": 138892
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-final-desktop-layout.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 108449
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-final-phone-full.jpg",
+      "width": 375,
+      "height": 1927,
+      "bytes": 87046
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-final-phone-layout.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 37127
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-phone-full.jpg",
+      "width": 375,
+      "height": 1927,
+      "bytes": 86833
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-phone-layout.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 36996
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-phone-scene.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 17437
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-style-chunky.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106353
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-fixed-style-crisp.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106572
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-orbit-desktop-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 45274
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-orbit-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 101372
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-orbit-phone-full.jpg",
+      "width": 375,
+      "height": 1927,
+      "bytes": 84049
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-orbit-phone-layout.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 35829
+    },
+    {
+      "file": "evaluation\\screenshots\\camera-orbit-phone-scene.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 12836
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-M-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106357
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-M-phone.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 36996
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-N-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 101372
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-N-phone.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 35829
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-P-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106122
+    },
+    {
+      "file": "evaluation\\screenshots\\candidate-P-phone.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 36241
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-fixed-phone-full.jpg",
+      "width": 1905,
+      "height": 1353,
+      "bytes": 119615
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-fixed-phone-layout.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106357
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-fixed-phone-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 38998
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-orbit-phone-full.jpg",
+      "width": 1905,
+      "height": 1353,
+      "bytes": 132655
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-orbit-phone-layout.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 101372
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-camera-orbit-phone-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 34321
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-flat-iso-phone-full.jpg",
+      "width": 1905,
+      "height": 1353,
+      "bytes": 118941
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-flat-iso-phone-layout.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106122
+    },
+    {
+      "file": "evaluation\\screenshots\\failed-viewport-flat-iso-phone-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 42493
+    },
+    {
+      "file": "evaluation\\screenshots\\fixed-3d-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106424
+    },
+    {
+      "file": "evaluation\\screenshots\\flat-iso-desktop-scene.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 5054
+    },
+    {
+      "file": "evaluation\\screenshots\\flat-iso-desktop.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106122
+    },
+    {
+      "file": "evaluation\\screenshots\\flat-iso-phone-full.jpg",
+      "width": 375,
+      "height": 1927,
+      "bytes": 84897
+    },
+    {
+      "file": "evaluation\\screenshots\\flat-iso-phone-layout.jpg",
+      "width": 375,
+      "height": 812,
+      "bytes": 36241
+    },
+    {
+      "file": "evaluation\\screenshots\\flat-iso-phone-scene.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 15197
+    },
+    {
+      "file": "evaluation\\screenshots\\placement-defect-before.jpg",
+      "width": 1905,
+      "height": 1072,
+      "bytes": 106336
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-M-desktop.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 49670
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-M-phone.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 17437
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-N-desktop.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 45274
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-N-phone.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 12836
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-P-desktop.jpg",
+      "width": 1088,
+      "height": 620,
+      "bytes": 5054
+    },
+    {
+      "file": "evaluation\\screenshots\\rejected-crop-candidate-P-phone.jpg",
+      "width": 356,
+      "height": 330,
+      "bytes": 15197
+    }
+  ],
+  "failures": [],
+  "passed": true
+}

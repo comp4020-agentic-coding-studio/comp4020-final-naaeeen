@@ -1,0 +1,30 @@
+{
+  "recordedOn": "2026-10-06",
+  "type": "visual inspection, not a performance trial",
+  "checks": [
+    {
+      "scale": "1",
+      "file": "camera-fixed-style-crisp.jpg",
+      "actual": {
+        "canvas": {
+          "height": 620,
+          "width": 1088
+        },
+        "height": 1080,
+        "width": 1920
+      }
+    },
+    {
+      "scale": "4",
+      "file": "camera-fixed-style-chunky.jpg",
+      "actual": {
+        "canvas": {
+          "height": 155,
+          "width": 272
+        },
+        "height": 1080,
+        "width": 1920
+      }
+    }
+  ]
+}

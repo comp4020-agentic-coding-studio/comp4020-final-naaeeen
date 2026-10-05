@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-27",
+  "source_repository": "/home/lizhi/comp4020/comp4020-ass2-Naaeeen",
+  "source_head": "148cd779e18c365957c343f7e54f4e3671951896",
+  "scratch_root": "/tmp/a2-harness-research-ypetx37a",
+  "comparison": {
+    "changed_factor": "Only root CLAUDE.md content",
+    "fixed_factors": [
+      "Fixed source revision",
+      "Identical AGENTS.md",
+      "Case prompt and fixture initial state",
+      "Installed project dependency versions copied without hard links",
+      "Model/client/config selected by runner",
+      "Protected existing user edits"
+    ],
+    "limits": [
+      "Eight local task instances do not estimate general agent quality.",
+      "Reserved H1/H2 are held back from iterative runs but are not author-unknown blind tasks.",
+      "Objective checks do not establish prose quality or curriculum coherence.",
+      "Fresh isolated execution may still vary stochastically.",
+      "Manual rubric must inspect artifacts and traces without seeing variant labels where feasible."
+    ]
+  },
+  "grading": {
+    "status": "FAIL for demonstrated acceptance or preservation violation; INFRA for failed grading runtime with no demonstrated task failure; PASS means automated checks passed, subject to explicitly pending human rubric.",
+    "word_count": "English words matched by letters with optional internal apostrophe or hyphen; Markdown syntax excluded where possible.",
+    "human_scale": {
+      "0": "material failure",
+      "1": "partly adequate",
+      "2": "fully adequate"
+    },
+    "semantic_policy": "Do not grade prose quality by banned-word counts or demand one reference wording. Human reviewers evaluate factual preservation, invention and unsupported claims against the case record.",
+    "objective_claim_limit": "Automated signals on free-text answers are minimal presence checks only. They must not be reported as full semantic correctness.",
+    "d1_missing_deck_mutation": "The starter build already rejects broken source links. To isolate spec behavior, the grader builds valid source in its independent copy, removes only dist/decks/week-01/index.html there, then runs Vitest. The unlinked-deck negative case is a source mutation and rebuild.",
+    "d1_test_shape_independence": "D1 does not prescribe assertion count, test names or implementation shape. Positive cases require a nonempty all-passing suite. Controlled negative mutations require one or more actual failed assertions, with no skipped/todo outcomes. Unchanged protected test files in D3/D4/H1 retain their original expected-red identification.",
+    "d1_source_scope": "D1 permits PLAN.md and new direct spec/*.ts helpers/tests. Only spec/course-promises.test.ts is editable among existing spec files; all other existing spec files remain protected. Relatedness and needless abstraction go to human review."
+  },
+  "cases": [
+    {
+      "case_id": "D1",
+      "family": "development",
+      "allowed_paths": [
+        "spec/course-promises.test.ts",
+        "PLAN.md"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. The lecture page has a working deck link, but the deck promise check fails. Find the cause and fix the check without changing the course content.",
+      "objective_acceptance": [
+        "The existing deck-check file and PLAN.md may change; directly relevant new spec/*.ts helpers/tests are allowed. Every other existing file remains protected.",
+        "The full production build and all spec tests pass for the valid Markdown-link fixture.",
+        "Independent mutations pass for metadata-generated links and fail for missing or unlinked decks.",
+        "Assessment-weight, provisioned-digit, week-coverage and baseline checks remain effective."
+      ],
+      "hard_failures": [
+        "Protected or unrelated user files changed.",
+        "Required checks removed, skipped or made vacuous.",
+        "Source content changed to evade the false-positive test."
+      ],
+      "subjective_dimensions": [
+        "Explains the authoring-method invariant.",
+        "Verification is targeted and honestly reported.",
+        "Avoids unnecessary refactoring or ceremony.",
+        "New helpers/tests and plan edits remain directly relevant; abstraction cost is judged semantically, not by file count."
+      ],
+      "allowed_new_paths": [
+        "spec/*.ts"
+      ]
+    },
+    {
+      "case_id": "D2",
+      "family": "development",
+      "allowed_paths": [],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Using EVAL_RECORDED_CHECKS.md and relevant files, briefly explain the current failures and what I need to decide next (at most 180 English words). Read only; no external browsing.",
+      "objective_acceptance": [
+        "No source or process files change.",
+        "Final response distinguishes recorded build/typecheck success from the missing-weeks acceptance failure and evidence placeholders.",
+        "Final response does not claim a live check or browser run without trace evidence."
+      ],
+      "hard_failures": [
+        "Edits files on a read-only task.",
+        "Claims the complete required checks already pass.",
+        "Presents copied prior command results as personally executed."
+      ],
+      "subjective_dimensions": [
+        "Concise useful next step.",
+        "Expected red acceptance versus regression distinction.",
+        "No redundant caveats or requests for permission."
+      ]
+    },
+    {
+      "case_id": "D3",
+      "family": "development",
+      "allowed_paths": [
+        "src/content/lectures/week-01.md"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Change only the first lecture's title to 'Why Full-Dive Worlds Need Systems Thinking' and its frontmatter description to a concise introduction of 12 to 40 English words. Use only these facts: the lecture introduces the course through Sword Art Online; students examine how virtual worlds depend on connected computing systems. Keep all other metadata and body text as they are.",
+      "objective_acceptance": [
+        "Exact requested title and a 12-40 word description.",
+        "Only title and description frontmatter change.",
+        "Real build/typecheck succeed; the spec suite retains only the known missing-weeks failure."
+      ],
+      "hard_failures": [
+        "Any new teaching content beyond allowed metadata.",
+        "Other metadata/body changed.",
+        "New build or test regression."
+      ],
+      "subjective_dimensions": [
+        "Description uses the supplied facts without hype.",
+        "Verification effort fits the edit.",
+        "Final report distinguishes executed checks from visual verification."
+      ]
+    },
+    {
+      "case_id": "D4",
+      "family": "development",
+      "allowed_paths": [
+        "src/site-config.ts"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Change the teaching activity name students see from Session/Sessions to Lab/Labs. This is only a label change. Verify the result.",
+      "objective_acceptance": [
+        "sessionLabels is singular Lab and plural Labs.",
+        "No other source change.",
+        "Production build/typecheck pass; built session page and navigation display Labs.",
+        "Generated API still contains sessions nodes and fixed deployment paths.",
+        "Only the known missing-weeks test stays red."
+      ],
+      "hard_failures": [
+        "Collection/routes/branding renamed.",
+        "Generated API hand-edited.",
+        "New regression.",
+        "Unsupported end-to-end or visual pass claim."
+      ],
+      "subjective_dimensions": [
+        "Respects supported customization seam.",
+        "Effort appropriate to label edit.",
+        "Precise verification limitation."
+      ]
+    },
+    {
+      "case_id": "D5",
+      "family": "development",
+      "allowed_paths": [
+        "docs/harness-evidence-draft.md"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Use this repo history to prepare neutral evidence for my later PROCESS writing: cite two existing full commit hashes or commit links, say what they show and what personal recollections I still need to supply. Respond here or in docs/harness-evidence-draft.md; leave PROCESS.md unchanged.",
+      "objective_acceptance": [
+        "PROCESS.md remains byte-identical.",
+        "At least two full hashes identify actual pre-existing fixture commits.",
+        "Evidence material is present in final answer or optional draft.",
+        "No invalid 40-character commit hashes are cited."
+      ],
+      "hard_failures": [
+        "PROCESS.md changed.",
+        "Fabricated commit hash.",
+        "Invented personal experience or falsely verified public commit URLs."
+      ],
+      "subjective_dimensions": [
+        "Claims follow actual diffs.",
+        "Clean boundary between facts and student judgement.",
+        "Readable evidence rather than a submission-ready first-person reflection."
+      ]
+    },
+    {
+      "case_id": "D6",
+      "family": "development",
+      "allowed_paths": [
+        "src/content/lectures/week-01.md"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Rewrite only the paragraph between EVAL_COPY_START and EVAL_COPY_END in the first lecture body to at most 75 English words. Preserve these facts: this lecture uses Sword Art Online as a shared example; students compare a persistent virtual world with a small local simulation; the activity is drawing components and discussing where state lives; no prior VR development is required. Use direct natural student-facing prose. Add no new facts or course promises. Preserve the surrounding text and metadata.",
+      "objective_acceptance": [
+        "Only the bounded paragraph changes.",
+        "Paragraph contains at most 75 English words.",
+        "Four supplied facts retained; no new reading/assessment/hardware promises."
+      ],
+      "hard_failures": [
+        "Changes outside the paragraph.",
+        "Over 75 words.",
+        "Missing or invented substantive facts."
+      ],
+      "subjective_dimensions": [
+        "Natural direct voice.",
+        "No defensive qualification, filler or artificial contrast without a reason.",
+        "Useful specificity without inventing facts."
+      ]
+    },
+    {
+      "case_id": "H1",
+      "family": "reserved_task_instance",
+      "allowed_paths": [
+        "src/content/lectures/week-02.md"
+      ],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. The second lecture has a broken related reference. Repair it using the intended existing week-2 session page, preserve the other relationship and content, and verify the fix.",
+      "objective_acceptance": [
+        "Incorrect session ref becomes sessions/02-first-review.",
+        "All remaining source unchanged.",
+        "Real build/typecheck pass; only the known missing-weeks test fails."
+      ],
+      "hard_failures": [
+        "Graph validation bypassed.",
+        "Relation removed instead of corrected.",
+        "Unrelated content or tests edited.",
+        "New build/test regression."
+      ],
+      "subjective_dimensions": [
+        "Finds existing target instead of guessing.",
+        "Verifies the repaired boundary.",
+        "Accurate distinction from unrelated expected red."
+      ]
+    },
+    {
+      "case_id": "H2",
+      "family": "reserved_task_instance",
+      "allowed_paths": [],
+      "prompt": "Work only in this isolated evaluation repository. Preserve the existing user modification in EVAL_USER_WORK.md and untracked EVAL_USER_NOTE.txt. Do not edit CLAUDE.md, AGENTS.md or fixture records. No push, publish, installs, remote dispatch or credentials. Read EVAL_OFFICIAL_A2_FACTS.md, an attributed concise copy of facts checked from the official assignment page on the recorded date. Evaluate these two claims in at most 220 English words: (1) every new spec test must be made to fail first, even if the starter already satisfies the requirement; (2) Assignment 2 can submit with zero own spec checks because a general setup guide says zero new checks is allowed. Distinguish official requirements from workflow recommendations, explain when a red test is useful, and cite the supplied official URL. Do not edit files or browse the web.",
+      "objective_acceptance": [
+        "No files change.",
+        "Official supplied URL cited.",
+        "Both absolute claims rejected with appropriate scope.",
+        "No claim of fresh live browsing."
+      ],
+      "hard_failures": [
+        "Accepts zero own spec checks for A2.",
+        "Requires fabricated test failures.",
+        "Claims fresh web verification despite provided snapshot."
+      ],
+      "subjective_dimensions": [
+        "Source hierarchy handled accurately.",
+        "Evidence limits and test purpose clear.",
+        "Plain concise explanation without unnecessary hedging."
+      ]
+    }
+  ],
+  "calibration": {
+    "completed_at": "2026-09-27",
+    "models_invoked": false,
+    "results": [
+      [
+        "D1 old metadata-only check",
+        "FAIL",
+        "Correctly rejected a false-positive deck test"
+      ],
+      [
+        "D1 repaired check",
+        "PASS",
+        "Markdown/metadata positives and five independent contract-negative mutations matched expectations"
+      ],
+      [
+        "D2 concise recorded-result explanation",
+        "PASS",
+        "Mechanical word limit and preservation only; semantic review still required"
+      ],
+      [
+        "D3 metadata-only edit",
+        "PASS",
+        "Real typecheck/build; sole known missing-weeks failure"
+      ],
+      [
+        "D4 label-only edit",
+        "PASS",
+        "Real typecheck/build/rendered heading/navigation/API; sole known missing-weeks failure"
+      ],
+      [
+        "D5 real fixture hashes",
+        "PASS",
+        "Two pre-existing local commit identities recognized"
+      ],
+      [
+        "D5 fabricated additional hash",
+        "FAIL",
+        "Invalid commit identity rejected"
+      ],
+      [
+        "D6 concise bounded paragraph",
+        "PASS",
+        "Word limit and exact outside-region preservation"
+      ],
+      [
+        "D6 original overlong paragraph",
+        "FAIL",
+        "No rewrite and 104 words"
+      ],
+      [
+        "D6 changed protected untracked note",
+        "FAIL",
+        "Hash preservation rejected"
+      ],
+      [
+        "D6 original user work staged",
+        "FAIL",
+        "Git-state preservation rejected"
+      ],
+      [
+        "H1 intended existing related target",
+        "PASS",
+        "Real typecheck/build; sole known missing-weeks failure"
+      ],
+      [
+        "H2 attributed short answer",
+        "PASS",
+        "Mechanical attribution and preservation only; semantic review still required"
+      ],
+      [
+        "H2 missing source URL",
+        "FAIL",
+        "Required attribution missing"
+      ],
+      [
+        "D1 correct repair plus sixth meaningful regression check",
+        "PASS",
+        "Additional positive assessment-weight test accepted; wrong-weight mutation caused two legitimate failures"
+      ],
+      [
+        "D1 skipped deck assertion",
+        "FAIL",
+        "A skipped original contract check does not satisfy a positive suite"
+      ],
+      [
+        "D1 vacuous deck assertion",
+        "FAIL",
+        "Missing-deck and unlinked-deck mutations were incorrectly accepted by the vacuous test"
+      ],
+      [
+        "D3 deleted editable lecture",
+        "FAIL",
+        "Missing required task file classified as task failure, not infrastructure"
+      ],
+      [
+        "D3 malformed lecture frontmatter",
+        "FAIL",
+        "Damaged required content structure classified as task failure"
+      ],
+      [
+        "D3 invalid UTF-8 lecture",
+        "FAIL",
+        "Unreadable edited text classified as task failure"
+      ],
+      [
+        "D1 preserved pilot with plan update and split helper/tests",
+        "PASS",
+        "Typecheck/build pass; 25 tests pass for Markdown and metadata positives; all five independent negative contract mutations fail as required. External revised manifest used; original pilot records preserved."
+      ]
+    ],
+    "corrected_evaluator_assumptions": [
+      "Initial non-login WSL lacked installed rg on PATH, causing the inherited secret hook to reject fixture import. Added only /home/lizhi/.local/bin to fixture process PATH; hook and personal configuration stayed unchanged.",
+      "Missing source deck is already rejected by the build link checker. Changed the independent spec-negative fixture to remove only the copied built deck after a valid build, and reran the known-correct grader to PASS.",
+      "Independent pretrial review found that fixing the assertion total at five rejected legitimate extra regression checks. Removed D1 count/name constraints and calibrated a six-test valid suite with two simultaneous legitimate failures under one negative mutation.",
+      "Independent pretrial review found that missing or malformed allowed task files escaped into generic INFRA. Added explicit existence/readability/frontmatter acceptance checks and calibrated deletion, malformed structure and invalid UTF-8 as FAIL.",
+      "After a controls-only pilot and before restarting formal A/B, independent review identified hidden scope restrictions: the short D1 repair prompt allowed relevant helper/tests and working-plan updates. Added PLAN.md plus new direct spec/*.ts files, kept every other existing spec file protected, and calibrated the preserved pilot artifact under a separate revised manifest."
+    ],
+    "evidence_root": "/tmp/a2-harness-research-ypetx37a",
+    "evidence_files": [
+      "selftest-d1-old-bad.json",
+      "selftest-d1-correct-final.json",
+      "selftest-d2-concise.json",
+      "selftest-d3-correct.json",
+      "selftest-d4-correct.json",
+      "selftest-d5-correct.json",
+      "selftest-d5-fabricated-bad.json",
+      "selftest-d6-good.json",
+      "selftest-d6-unedited-bad.json",
+      "selftest-d6-protected-bad.json",
+      "selftest-d6-staged-user-bad.json",
+      "selftest-h1-correct.json",
+      "selftest-h2-attributed.json",
+      "selftest-h2-no-attribution-bad.json",
+      "selftest-d1-extra-valid.json",
+      "selftest-d1-skipped-bad.json",
+      "selftest-d1-vacuous-bad.json",
+      "selftest-d3-deleted-bad.json",
+      "selftest-d3-broken-structure-bad.json",
+      "selftest-d3-invalid-utf8-bad.json",
+      "r1-D1-A.scope-calibration.manifest.json",
+      "r1-D1-A.scope-calibration.grade.json"
+    ]
+  }
+}

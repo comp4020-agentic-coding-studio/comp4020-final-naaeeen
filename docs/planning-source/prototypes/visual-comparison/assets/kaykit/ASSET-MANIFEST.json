@@ -1,0 +1,89 @@
+{
+  "author": "Kay Lousberg",
+  "pack": "KayKit Furniture Bits 1.0",
+  "licence": "CC0",
+  "commit": "96d5930a8dbdb363409bbc2d3341718b00e17c9c",
+  "accessedOn": "2026-10-06",
+  "records": [
+    {
+      "name": "LICENSE.txt",
+      "bytes": 827,
+      "sha256": "cd675f2adc31eb5fedaedc1072d8ddc27b917f523682f0561837c03dc56393cb",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/LICENSE.txt"
+    },
+    {
+      "name": "chair_A.gltf",
+      "bytes": 3022,
+      "sha256": "fdc71044f23c89c5cff9093cff18bac295c9b750e73daf3cbd8ee6ca9e930dbb",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/chair_A.gltf"
+    },
+    {
+      "name": "chair_A.bin",
+      "bytes": 16504,
+      "sha256": "8db53212634ccc983dc0e9940f2809b3951abe91d0cc8ad040cf74d7100f19a8",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/chair_A.bin"
+    },
+    {
+      "name": "furniturebits_texture.png",
+      "bytes": 15605,
+      "sha256": "de62db37a80d1801c3d9eb674890ae04b04469e0c149481a51fa250562c628dc",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/furniturebits_texture.png"
+    },
+    {
+      "name": "table_medium.gltf",
+      "bytes": 2973,
+      "sha256": "fd5e5fe8bbf1d3729b6bd725165d58490e9cbd8dd46ce42314b01f20951a302b",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/table_medium.gltf"
+    },
+    {
+      "name": "table_medium.bin",
+      "bytes": 9328,
+      "sha256": "0e6ba8fd006f673d946979e45487067f4e274be9bbd07816fd371578d2a37518",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/table_medium.bin"
+    },
+    {
+      "name": "lamp_standing.gltf",
+      "bytes": 3034,
+      "sha256": "ff42a083e688c94948493c441d4db51c7e0736336525b3eed4f4da75825b88b7",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/lamp_standing.gltf"
+    },
+    {
+      "name": "lamp_standing.bin",
+      "bytes": 11648,
+      "sha256": "ee58a9e2776406071c8ac60714f1b4dd7ad83a11848ee24aec77b297c9d535d9",
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/lamp_standing.bin"
+    }
+  ],
+  "modelFacts": [
+    {
+      "name": "chair_A",
+      "triangles": 308,
+      "materials": 1,
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/chair_A.gltf"
+    },
+    {
+      "name": "table_medium",
+      "triangles": 168,
+      "materials": 1,
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/table_medium.gltf"
+    },
+    {
+      "name": "lamp_standing",
+      "triangles": 320,
+      "materials": 1,
+      "source": "https://raw.githubusercontent.com/KayKit-Game-Assets/KayKit-Furniture-Bits-1.0/96d5930a8dbdb363409bbc2d3341718b00e17c9c/addons/kaykit_furniture_bits/Assets/gltf/lamp_standing.gltf"
+    }
+  ],
+  "rendered": true,
+  "renderObservation": {
+    "recordedOn": "2026-10-06",
+    "models": [
+      "chair_A",
+      "table_medium",
+      "lamp_standing"
+    ],
+    "instances": 4,
+    "evidence": "../../../../evaluation/browser-matrix.json",
+    "scope": "Loaded and visible in local Three.js browser prototype; not production mobile capacity"
+  }
+}

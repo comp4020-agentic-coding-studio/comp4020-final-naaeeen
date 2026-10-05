@@ -1,0 +1,94 @@
+{
+  "recordedOn": "2026-10-06",
+  "stage": "After selection-marker and touch-target fixes; not a fresh comparison trial",
+  "shots": [
+    {
+      "size": "desktop",
+      "layout": "camera-fixed-final-desktop-layout.jpg",
+      "full": "camera-fixed-final-desktop-full.jpg",
+      "metrics": {
+        "canvasHeight": 310,
+        "canvasWidth": 544,
+        "devicePixelRatio": 1,
+        "drawCalls": 236,
+        "firstPageSceneReadyMs": 296,
+        "fps": 60,
+        "frameCadenceMs": 16.68,
+        "geometries": 18,
+        "mode": "camera-fixed",
+        "modelCount": 3,
+        "modelInstances": 4,
+        "modelStatus": "loaded",
+        "pixelScale": 2,
+        "proceduralContent": [
+          "architectural shell and dressing",
+          "plant",
+          "two resident figures",
+          "shared lantern"
+        ],
+        "reducedMotion": false,
+        "renderCpuMs": 1.12,
+        "renderer": "Three.js 186",
+        "sampleFrames": 60,
+        "sampleWindowMs": 1000.8,
+        "sceneReadyMs": 118.6,
+        "stateRevision": 8,
+        "textures": 6,
+        "triangles": 11744,
+        "view": "camera-fixed",
+        "viewport": {
+          "height": 1080,
+          "width": 1920
+        },
+        "viewportHeight": 620,
+        "viewportWidth": 1088,
+        "visibility": "visible"
+      },
+      "logs": []
+    },
+    {
+      "size": "phone",
+      "layout": "camera-fixed-final-phone-layout.jpg",
+      "full": "camera-fixed-final-phone-full.jpg",
+      "metrics": {
+        "canvasHeight": 165,
+        "canvasWidth": 171,
+        "devicePixelRatio": 1,
+        "drawCalls": 236,
+        "firstPageSceneReadyMs": 313.30000000447035,
+        "fps": 59.9,
+        "frameCadenceMs": 16.68,
+        "geometries": 18,
+        "mode": "camera-fixed",
+        "modelCount": 3,
+        "modelInstances": 4,
+        "modelStatus": "loaded",
+        "pixelScale": 2,
+        "proceduralContent": [
+          "architectural shell and dressing",
+          "plant",
+          "two resident figures",
+          "shared lantern"
+        ],
+        "reducedMotion": false,
+        "renderCpuMs": 1.15,
+        "renderer": "Three.js 186",
+        "sampleFrames": 60,
+        "sampleWindowMs": 1000.9,
+        "sceneReadyMs": 161.4,
+        "stateRevision": 8,
+        "textures": 6,
+        "triangles": 11744,
+        "view": "camera-fixed",
+        "viewport": {
+          "height": 844,
+          "width": 390
+        },
+        "viewportHeight": 330,
+        "viewportWidth": 341,
+        "visibility": "visible"
+      },
+      "logs": []
+    }
+  ]
+}

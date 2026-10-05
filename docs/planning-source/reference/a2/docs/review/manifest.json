@@ -1,0 +1,21 @@
+{
+  "stage": "Gate 5 candidate audited; course-judgement revision ready for student review; public release pending",
+  "repository_language": "English",
+  "sources": {
+    "PROCESS.md": "371b3459ab20585d12fb880d09e931d4bbd0d7547baa6ee0c9a4d36f1ab5dc10",
+    "CLAUDE.md": "3e54bbbf9b9fc232efbdf1d65ec104cef72a787af006721031f4ed2fb91a079e",
+    "docs/planning/implementation-goals.md": "6ebfa50311e8ad49f3f58fcdc08c51638946ee253b71ac43c7039d0992181713",
+    "docs/IMPLEMENTATION-RESEARCH.md": "f0fb4434b3c2addc33a800725a19bba7b83989caa1b100074e495396fe0f6bd0",
+    "docs/harness-research/REPORT.md": "acb1e7c255ad52dbbbc75953766b34708eb51642f44f8a92058305ab910a1031"
+  },
+  "process_english_words": 600,
+  "student_review": [
+    "Review the revised course-design rationale and acceptance evidence.",
+    "Public release requires separate authorization."
+  ],
+  "release": "No public publication or repository visibility change.",
+  "local_review_copy_policy": "Translated convenience copies are preserved outside this repository in the Windows workspace. They are not submission files.",
+  "process_comparison": "process-comparison/README.md",
+  "latest_process_revision": "process-comparison/course-judgement-revision.md",
+  "word_count_method": "Body only; Markdown links counted as displayed labels; whitespace-separated words."
+}

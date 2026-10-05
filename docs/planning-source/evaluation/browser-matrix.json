@@ -1,0 +1,1237 @@
+{
+  "recordedOn": "2026-10-06",
+  "environment": "Windows Node24.15.0; Codex in-app desktop Chromium; warm local cache; CSS phone viewport emulation",
+  "deviations": [
+    "SVG reports one180-frame aggregate rather than three rolling windows; duplicates retained",
+    "firstPageSceneReadyMs retained across views, not comparablepercandidate",
+    "First three phone attempts remained desktop; rejected, verified390x844 newtab",
+    "Touch targetsraised44px between desktop and validphone captures",
+    "All native scene crops rejected after independentreview; fullscreenshots used, correctedreviewunmasked"
+  ],
+  "runs": [
+    {
+      "view": "camera-fixed",
+      "condition": "desktop-1920x1080",
+      "samples": [
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 57.1,
+          "frameCadenceMs": 17.5,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.98,
+          "renderer": "Three.js 186",
+          "sampleFrames": 61,
+          "sampleWindowMs": 1000.3,
+          "sceneReadyMs": 108.7,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 60,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.98,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.8,
+          "sceneReadyMs": 108.7,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 59.9,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.97,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1001,
+          "sceneReadyMs": 108.7,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "camera-fixed-desktop.jpg",
+      "sceneScreenshot": "camera-fixed-desktop-scene.jpg",
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "camera-orbit",
+      "condition": "desktop-1920x1080",
+      "samples": [
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 57.1,
+          "frameCadenceMs": 17.5,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.15,
+          "renderer": "Three.js 186",
+          "sampleFrames": 61,
+          "sampleWindowMs": 1002.2,
+          "sceneReadyMs": 109.2,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 60,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.21,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.8,
+          "sceneReadyMs": 109.2,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 60,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.1,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.8,
+          "sceneReadyMs": 109.2,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "camera-orbit-desktop.jpg",
+      "sceneScreenshot": "camera-orbit-desktop-scene.jpg",
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "flat-iso",
+      "condition": "desktop-1920x1080",
+      "samples": [
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.5,
+          "rafP95Ms": 16.5,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 36.1,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.5,
+          "rafP95Ms": 16.5,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 36.1,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.7,
+          "rafP95Ms": 17,
+          "rafSampleCount": 180,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 36.1,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        }
+      ],
+      "screenshot": "flat-iso-desktop.jpg",
+      "sceneScreenshot": "flat-iso-desktop-scene.jpg",
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "camera-fixed",
+      "condition": "desktop-emulated-390x844",
+      "samples": [
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 58.1,
+          "frameCadenceMs": 17.22,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.16,
+          "renderer": "Three.js 186",
+          "sampleFrames": 62,
+          "sampleWindowMs": 1011.8,
+          "sceneReadyMs": 115.5,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 59.9,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.09,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1001,
+          "sceneReadyMs": 115.5,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 60,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.04,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.7,
+          "sceneReadyMs": 115.5,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "failed-viewport-camera-fixed-phone-layout.jpg",
+      "fullScreenshot": "failed-viewport-camera-fixed-phone-full.jpg",
+      "sceneScreenshot": "failed-viewport-camera-fixed-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 1920,
+        "controlsTop": 183.296875,
+        "innerHeight": 1080,
+        "innerWidth": 1920,
+        "paletteTargets": [
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          }
+        ],
+        "scrollWidth": 1920
+      },
+      "logs": [],
+      "valid": false,
+      "rejection": "Requested viewport did not apply to this tab. Actual DOM viewport remained1920x1080. Not phone results.",
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "camera-orbit",
+      "condition": "desktop-emulated-390x844",
+      "samples": [
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 57.1,
+          "frameCadenceMs": 17.5,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.16,
+          "renderer": "Three.js 186",
+          "sampleFrames": 61,
+          "sampleWindowMs": 1006.7,
+          "sceneReadyMs": 104.1,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 59.9,
+          "frameCadenceMs": 16.69,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.18,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1001.3,
+          "sceneReadyMs": 104.1,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 310,
+          "canvasWidth": 544,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "fps": 60,
+          "frameCadenceMs": 16.67,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.06,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.4,
+          "sceneReadyMs": 104.1,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "viewportHeight": 620,
+          "viewportWidth": 1088,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "failed-viewport-camera-orbit-phone-layout.jpg",
+      "fullScreenshot": "failed-viewport-camera-orbit-phone-full.jpg",
+      "sceneScreenshot": "failed-viewport-camera-orbit-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 1920,
+        "controlsTop": 183.296875,
+        "innerHeight": 1080,
+        "innerWidth": 1920,
+        "paletteTargets": [
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          }
+        ],
+        "scrollWidth": 1920
+      },
+      "logs": [],
+      "valid": false,
+      "rejection": "Requested viewport did not apply to this tab. Actual DOM viewport remained1920x1080. Not phone results.",
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "flat-iso",
+      "condition": "desktop-emulated-390x844",
+      "samples": [
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.7,
+          "rafP95Ms": 16.7,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 37,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.7,
+          "rafP95Ms": 16.7,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 37,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 295.90000000596046,
+          "height": 620,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.7,
+          "rafP95Ms": 17,
+          "rafSampleCount": 180,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 37,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 1080,
+            "width": 1920
+          },
+          "visibility": "visible",
+          "width": 1088
+        }
+      ],
+      "screenshot": "failed-viewport-flat-iso-phone-layout.jpg",
+      "fullScreenshot": "failed-viewport-flat-iso-phone-full.jpg",
+      "sceneScreenshot": "failed-viewport-flat-iso-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 1920,
+        "controlsTop": 183.296875,
+        "innerHeight": 1080,
+        "innerWidth": 1920,
+        "paletteTargets": [
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          },
+          {
+            "height": 35,
+            "width": 35
+          }
+        ],
+        "scrollWidth": 1920
+      },
+      "logs": [],
+      "valid": false,
+      "rejection": "Requested viewport did not apply to this tab. Actual DOM viewport remained1920x1080. Not phone results.",
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "camera-fixed",
+      "condition": "desktop-emulated-390x844",
+      "valid": true,
+      "samples": [
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 57.2,
+          "frameCadenceMs": 17.49,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.98,
+          "renderer": "Three.js 186",
+          "sampleFrames": 62,
+          "sampleWindowMs": 1007.5,
+          "sceneReadyMs": 101.9,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 60,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.94,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.8,
+          "sceneReadyMs": 101.9,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 59.9,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-fixed",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.96,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1001,
+          "sceneReadyMs": 101.9,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-fixed",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "camera-fixed-phone-layout.jpg",
+      "fullScreenshot": "camera-fixed-phone-full.jpg",
+      "sceneScreenshot": "camera-fixed-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 390,
+        "controlsTop": 672.03125,
+        "innerHeight": 844,
+        "innerWidth": 390,
+        "paletteTargets": [
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          }
+        ],
+        "scrollWidth": 390
+      },
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "camera-orbit",
+      "condition": "desktop-emulated-390x844",
+      "valid": true,
+      "samples": [
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 58.1,
+          "frameCadenceMs": 17.21,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.15,
+          "renderer": "Three.js 186",
+          "sampleFrames": 62,
+          "sampleWindowMs": 1005.6,
+          "sceneReadyMs": 96.6,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 59.9,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 1.09,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1001,
+          "sceneReadyMs": 96.6,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        },
+        {
+          "canvasHeight": 165,
+          "canvasWidth": 171,
+          "devicePixelRatio": 1,
+          "drawCalls": 235,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "fps": 59.9,
+          "frameCadenceMs": 16.68,
+          "geometries": 17,
+          "mode": "camera-orbit",
+          "modelCount": 3,
+          "modelInstances": 4,
+          "modelStatus": "loaded",
+          "pixelScale": 2,
+          "proceduralContent": [
+            "architectural shell and dressing",
+            "plant",
+            "two resident figures",
+            "shared lantern"
+          ],
+          "reducedMotion": false,
+          "renderCpuMs": 0.96,
+          "renderer": "Three.js 186",
+          "sampleFrames": 60,
+          "sampleWindowMs": 1000.9,
+          "sceneReadyMs": 96.6,
+          "stateRevision": 6,
+          "textures": 6,
+          "triangles": 11632,
+          "view": "camera-orbit",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "viewportHeight": 330,
+          "viewportWidth": 341,
+          "visibility": "visible"
+        }
+      ],
+      "screenshot": "camera-orbit-phone-layout.jpg",
+      "fullScreenshot": "camera-orbit-phone-full.jpg",
+      "sceneScreenshot": "camera-orbit-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 390,
+        "controlsTop": 672.03125,
+        "innerHeight": 844,
+        "innerWidth": 390,
+        "paletteTargets": [
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          }
+        ],
+        "scrollWidth": 390
+      },
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    },
+    {
+      "view": "flat-iso",
+      "condition": "desktop-emulated-390x844",
+      "valid": true,
+      "samples": [
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "height": 330,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.5,
+          "rafP95Ms": 16.5,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 38.8,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "visibility": "visible",
+          "width": 341
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "height": 330,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.5,
+          "rafP95Ms": 16.5,
+          "rafSampleCount": 1,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 38.8,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "visibility": "visible",
+          "width": 341
+        },
+        {
+          "assetEquivalence": "Same semantic objects and palette; illustrations differ from the GLTF assets",
+          "assetStatus": "Illustrative SVG assets; no external model assets loaded",
+          "domNodeCount": 428,
+          "drawCalls": null,
+          "firstPageSceneReadyMs": 212.89999999850988,
+          "height": 330,
+          "measurementNotes": "Stationary SVG scene. RAF values measure browser callback cadence, not GPU or SVG render time. Pixel scaling is a 3D-only comparison factor.",
+          "mode": "flat-iso",
+          "pixelScale": 2,
+          "pixelScaleApplies": false,
+          "rafMedianMs": 16.7,
+          "rafP95Ms": 17,
+          "rafSampleCount": 180,
+          "renderer": "SVG/DOM isometric",
+          "requestedMode": "flat-iso",
+          "sceneReadyIncludes": "First supplied state and two RAF callbacks after its SVG redraw",
+          "sceneReadyMs": 38.8,
+          "stateRevision": 6,
+          "triangles": null,
+          "view": "flat-iso",
+          "viewport": {
+            "height": 844,
+            "width": 390
+          },
+          "visibility": "visible",
+          "width": 341
+        }
+      ],
+      "screenshot": "flat-iso-phone-layout.jpg",
+      "fullScreenshot": "flat-iso-phone-full.jpg",
+      "sceneScreenshot": "flat-iso-phone-scene.jpg",
+      "layout": {
+        "clientWidth": 390,
+        "controlsTop": 672.03125,
+        "innerHeight": 844,
+        "innerWidth": 390,
+        "paletteTargets": [
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          },
+          {
+            "height": 44,
+            "width": 44
+          }
+        ],
+        "scrollWidth": 390
+      },
+      "logs": [],
+      "sceneScreenshotRejected": true,
+      "sceneScreenshotRejection": "Native clip captures proved unequal/incorrect framing; use full viewport screenshot for visual evidence."
+    }
+  ]
+}

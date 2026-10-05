@@ -1,0 +1,26 @@
+{
+  "method": "in-memory synthetic TOML; no real configuration writes",
+  "checks": [
+    {
+      "case": "normal exact-path registration is metadata only",
+      "pass": true
+    },
+    {
+      "case": "model change remains detectable",
+      "pass": true
+    },
+    {
+      "case": "sandbox change remains detectable",
+      "pass": true
+    },
+    {
+      "case": "unrelated project change remains detectable",
+      "pass": true
+    },
+    {
+      "case": "extra fixture project settings rejected",
+      "pass": true
+    }
+  ],
+  "passed": true
+}

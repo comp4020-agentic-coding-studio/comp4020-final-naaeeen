@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "declaredOn": "2026-10-06",
+  "stage": "After exploratory prototype debugging, before the recorded comparison matrix",
+  "reason": "Exploratory runs exposed a picking defect and a fixed-obstacle collision defect. These were corrected before sampling. Do not call the later matrix an unseen first trial.",
+  "conditions": ["Local Windows desktop, Codex in-app Chromium browser", "1920x1080 and 390x844 CSS viewports; DPR recorded in scene diagnostics", "One visible candidate sampled at a time", "Warm local module/asset cache; no WAN or physical-phone claim", "Same persisted revision-6 semantic state and chair-a selection for screenshots", "Gentle pixels (scale 2) for the primary camera/renderer comparison"],
+  "order": ["fixed desktop", "orbit desktop", "SVG desktop", "fixed phone viewport", "orbit phone viewport", "SVG phone viewport"],
+  "sampling": "Read three distinct approximately one-second diagnostics windows per condition. Store raw DOM-rendered diagnostics and screenshot filenames. CPU render and RAF cadence do not measure GPU completion or performance headroom.",
+  "readiness": "sceneReadyMs starts at renderer factory entry and excludes module fetch; firstPageSceneReadyMs starts at page navigation and is comparable only for freshly navigated pages under the recorded cache conditions",
+  "styleCheck": "Additional fixed-camera crisp and chunky snapshots are visual inspections, not matched performance trials.",
+  "interpretation": "No inferential statistical test, population preference, retention estimate, production capacity claim or pass/fail speed threshold is derived from these small local samples.",
+  "limits": ["Camera B changes both projection and navigation package", "SVG uses illustrative geometry, not the downloaded 3D assets", "Mobile layout emulation is not real mobile GPU or touch testing", "Screenshots are design feasibility evidence, not final art direction"]
+}

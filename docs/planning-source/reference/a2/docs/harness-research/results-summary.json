@@ -1,0 +1,422 @@
+{
+  "scope": "Exploratory local paired comparisons; mechanical PASS is not full semantic correctness.",
+  "rounds": {
+    "r1b": {
+      "A": "original 810-word harness",
+      "B": "candidate v2, 953 words",
+      "cases": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6"
+      ]
+    },
+    "final": {
+      "A": "original 810-word harness",
+      "B": "final v3, 844 words",
+      "cases": [
+        "D6",
+        "H1",
+        "H2"
+      ]
+    }
+  },
+  "scored_trials": 18,
+  "mechanical_passes": 18,
+  "control_pilot": {
+    "executed": 2,
+    "not_started": 10,
+    "not_in_scored_comparison": true,
+    "reason": "automatic client project registrations and an overly narrow D1 grader scope were corrected transparently"
+  },
+  "trials": [
+    {
+      "trial": "r1b-D1-A",
+      "round": "r1b",
+      "case_id": "D1",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 381.161,
+      "usage": {
+        "input_tokens": 909577,
+        "cached_input_tokens": 839040,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 10138,
+        "reasoning_output_tokens": 4992
+      },
+      "command_count": 24,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D1-B",
+      "round": "r1b",
+      "case_id": "D1",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 436.111,
+      "usage": {
+        "input_tokens": 898273,
+        "cached_input_tokens": 838528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12833,
+        "reasoning_output_tokens": 5899
+      },
+      "command_count": 20,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D2-A",
+      "round": "r1b",
+      "case_id": "D2",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 49.008,
+      "usage": {
+        "input_tokens": 127463,
+        "cached_input_tokens": 93312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1259,
+        "reasoning_output_tokens": 361
+      },
+      "command_count": 9,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D2-B",
+      "round": "r1b",
+      "case_id": "D2",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 53.368,
+      "usage": {
+        "input_tokens": 143765,
+        "cached_input_tokens": 108544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1194,
+        "reasoning_output_tokens": 322
+      },
+      "command_count": 5,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D3-A",
+      "round": "r1b",
+      "case_id": "D3",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 104.5,
+      "usage": {
+        "input_tokens": 217472,
+        "cached_input_tokens": 194304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2548,
+        "reasoning_output_tokens": 977
+      },
+      "command_count": 8,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D3-B",
+      "round": "r1b",
+      "case_id": "D3",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 86.186,
+      "usage": {
+        "input_tokens": 181483,
+        "cached_input_tokens": 151040,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1636,
+        "reasoning_output_tokens": 305
+      },
+      "command_count": 7,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D4-A",
+      "round": "r1b",
+      "case_id": "D4",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 103.453,
+      "usage": {
+        "input_tokens": 408305,
+        "cached_input_tokens": 359680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2334,
+        "reasoning_output_tokens": 896
+      },
+      "command_count": 11,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D4-B",
+      "round": "r1b",
+      "case_id": "D4",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 138.089,
+      "usage": {
+        "input_tokens": 370162,
+        "cached_input_tokens": 332288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3571,
+        "reasoning_output_tokens": 1072
+      },
+      "command_count": 11,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D5-A",
+      "round": "r1b",
+      "case_id": "D5",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 61.602,
+      "usage": {
+        "input_tokens": 157025,
+        "cached_input_tokens": 135808,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1621,
+        "reasoning_output_tokens": 258
+      },
+      "command_count": 8,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D5-B",
+      "round": "r1b",
+      "case_id": "D5",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 61.257,
+      "usage": {
+        "input_tokens": 155811,
+        "cached_input_tokens": 131328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1606,
+        "reasoning_output_tokens": 392
+      },
+      "command_count": 7,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D6-A",
+      "round": "r1b",
+      "case_id": "D6",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 74.415,
+      "usage": {
+        "input_tokens": 217700,
+        "cached_input_tokens": 193024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1615,
+        "reasoning_output_tokens": 291
+      },
+      "command_count": 6,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "r1b-D6-B",
+      "round": "r1b",
+      "case_id": "D6",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 55.625,
+      "usage": {
+        "input_tokens": 182039,
+        "cached_input_tokens": 158592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1304,
+        "reasoning_output_tokens": 145
+      },
+      "command_count": 5,
+      "harness_sha256": "d4073b3c23d271d54f75372ee41a956846669f1342dd5912182b9d48a1211ac6",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-D6-A",
+      "round": "final",
+      "case_id": "D6",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 83.894,
+      "usage": {
+        "input_tokens": 245826,
+        "cached_input_tokens": 219392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1994,
+        "reasoning_output_tokens": 408
+      },
+      "command_count": 8,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-D6-B",
+      "round": "final",
+      "case_id": "D6",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 58.984,
+      "usage": {
+        "input_tokens": 177056,
+        "cached_input_tokens": 154240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1320,
+        "reasoning_output_tokens": 133
+      },
+      "command_count": 6,
+      "harness_sha256": "649b250d0531e735077423d591f7f528d4f174a8abdb266f49528b184917fe79",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-H1-A",
+      "round": "final",
+      "case_id": "H1",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 163.265,
+      "usage": {
+        "input_tokens": 572778,
+        "cached_input_tokens": 527488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3485,
+        "reasoning_output_tokens": 1201
+      },
+      "command_count": 15,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-H1-B",
+      "round": "final",
+      "case_id": "H1",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 112.147,
+      "usage": {
+        "input_tokens": 439380,
+        "cached_input_tokens": 408064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2730,
+        "reasoning_output_tokens": 699
+      },
+      "command_count": 12,
+      "harness_sha256": "649b250d0531e735077423d591f7f528d4f174a8abdb266f49528b184917fe79",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-H2-A",
+      "round": "final",
+      "case_id": "H2",
+      "variant": "A",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 46.004,
+      "usage": {
+        "input_tokens": 87057,
+        "cached_input_tokens": 63872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 974,
+        "reasoning_output_tokens": 322
+      },
+      "command_count": 5,
+      "harness_sha256": "533ddadcbf9e1a68c90b760d352c9af32671cd171151401ab1c67c0783a076bb",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "trial": "final-H2-B",
+      "round": "final",
+      "case_id": "H2",
+      "variant": "B",
+      "status": "PASS",
+      "run_status": "COMPLETED",
+      "elapsed_seconds": 30.587,
+      "usage": {
+        "input_tokens": 64466,
+        "cached_input_tokens": 48768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 730,
+        "reasoning_output_tokens": 277
+      },
+      "command_count": 4,
+      "harness_sha256": "649b250d0531e735077423d591f7f528d4f174a8abdb266f49528b184917fe79",
+      "environment_unchanged": true,
+      "grader_unchanged": true,
+      "manifest_unchanged": true
+    }
+  ],
+  "important_limits": [
+    "No universal-best or statistical superiority claim.",
+    "Final v3 was rechecked on three tasks, not the entire six-task development set.",
+    "One baseline-generated test had a quoted-attribute regex gap found by blind review and reproduced independently.",
+    "Several agent pnpm checks were blocked by automatic-install/sandbox behavior; artifact grading used the installed pinned runtime independently.",
+    "Two active case pairs shared resources; timings are descriptive, not controlled speed measurements.",
+    "Claude documentation and compatibility were researched; these model trials used Codex, not a second Claude-model benchmark."
+  ]
+}

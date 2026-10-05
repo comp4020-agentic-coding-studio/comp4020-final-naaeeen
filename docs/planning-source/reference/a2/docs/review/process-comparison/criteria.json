@@ -1,0 +1,22 @@
+{
+  "task": "Judge which draft better explains this student's actual agent work in clear, natural English, using only supported facts. Cite specific passages and improvements, not vague taste.",
+  "rubric": {
+    "clarity": "0: reader cannot follow; 1: several opaque terms; 2: mostly clear with specific repairs; 3: understandable on first reading with technical terms explained through examples.",
+    "concrete_practices": "0: tool list only; 1: generic practices; 2: at least three actual agent practices tied to actions; 3: practices show what was asked, checked, or changed.",
+    "course_argument": "0: absent; 1: disconnected course introduction; 2: course goal explains implementation choices; 3: one clear idea links course needs, harness rules/checks and human judgement.",
+    "evidence_and_decisions": "0: unsupported; 1: links without causal explanation; 2: concrete evidence and why a change was chosen; 3: research, test/review observation, accepted change and verification are clearly connected.",
+    "voice": "0: formulaic/marketing or defensive; 1: abstract report language dominates; 2: direct student voice with some awkward phrases; 3: natural, specific first-person prose without empty prestige claims or ritual caveats.",
+    "reader_effort": "0: broad catalogue; 1: overloaded with details; 2: focused with three purposeful document links; 3: tight narrative and evidence route easy for a tutor to follow."
+  },
+  "disqualifiers": [
+    "Invented user experiences/reasons, learner feedback or personal execution of agent checks.",
+    "18 pairs rather than18 scored runs; universal superiority or model/provider comparison claims.",
+    "Claims of deployment or resolution of all browser/network issues.",
+    "Unsupported commit citation, false source provenance or changing fixed facts."
+  ],
+  "score_use": "Ordinal editing aid only; no total score interpreted as a predicted grade or human preference.",
+  "calibration": {
+    "bad": "We proved Claude beats Codex after18pairs, and my classmates learned faster.",
+    "instruction": "Before comparing candidates, say whether this calibration sentence is supported by evidence.md and identify its unsupported claims. This sentence is a deliberate reviewer check, not project evidence."
+  }
+}

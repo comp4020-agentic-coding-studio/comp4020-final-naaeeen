@@ -1,0 +1,57 @@
+{
+  "recordedOn": "2026-10-06",
+  "scope": "Local demo HTTP/domain boundary; not authentication or actual lost-ACK fault injection",
+  "initialRevision": 8,
+  "results": [
+    {
+      "name": "Reject another demo actor editing an owned chair",
+      "status": 403,
+      "outcome": {
+        "ok": false,
+        "code": "FORBIDDEN",
+        "message": "This item belongs to the other resident."
+      },
+      "unchangedRevision": 8
+    },
+    {
+      "name": "Reject stale revision without mutation",
+      "status": 409,
+      "outcome": {
+        "ok": false,
+        "code": "REVISION_CONFLICT",
+        "message": "This item changed; use its latest position."
+      },
+      "unchangedRevision": 8
+    },
+    {
+      "name": "Reject a plant inside the fixed sofa",
+      "status": 400,
+      "outcome": {
+        "ok": false,
+        "code": "COLLISION",
+        "message": "Another item occupies that space."
+      },
+      "unchangedRevision": 8
+    },
+    {
+      "name": "Repeat the already accepted browser command, one committed effect",
+      "status": 200,
+      "outcome": {
+        "ok": true,
+        "revision": 8,
+        "entityRevision": 3
+      },
+      "unchangedRevision": 8
+    },
+    {
+      "name": "Reject changed payload under the accepted command ID",
+      "status": 400,
+      "outcome": {
+        "ok": false,
+        "code": "COMMAND_ID_REUSED",
+        "message": "That command ID already has another payload."
+      },
+      "unchangedRevision": 8
+    }
+  ]
+}

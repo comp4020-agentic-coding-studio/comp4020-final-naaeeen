@@ -1,0 +1,11 @@
+{
+  "recordedOn": "2026-10-06",
+  "command": "node --test --experimental-test-coverage model.test.mjs",
+  "workingDirectory": "prototypes/visual-comparison",
+  "runtime": "Node 24.15.0",
+  "observedExitCode": 0,
+  "tests": 15, "pass": 15, "fail": 0, "skip": 0,
+  "coverage": {"file": "model.mjs", "linePercent": 100, "branchPercent": 84.51, "functionPercent": 100},
+  "scope": "Only the local prototype domain module. Not HTTP/browser/renderer/production authentication coverage.",
+  "importantControls": ["A missing module initially failed tests", "The fixed-sofa regression failed before the obstacle fix", "Shared-note stale revision and bounded input tests close a previously untested flow"]
+}

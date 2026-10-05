@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "declaredOn": "2026-10-06",
+  "statusAtDeclaration": "No prototype or candidate result observed",
+  "question": "Which constrained visual implementation best supports a cosy, expressive, maintainable social courtyard in the initial development window?",
+  "studyType": "Controlled technical/interaction comparison and independent masked model review; not a human preference experiment",
+  "candidates": [
+    {"id":"camera-fixed","renderer":"Three.js 0.186.1","camera":"fixed orthographic","content":"matched small courtyard"},
+    {"id":"camera-orbit","renderer":"Three.js 0.186.1","camera":"bounded perspective/orbit","content":"same scene and controls"},
+    {"id":"flat-iso","renderer":"SVG/DOM isometric feasibility sketch","camera":"fixed 2D projection","content":"same semantic objects and palette; different illustrative assets disclosed"}
+  ],
+  "fixedFactors": ["room schema and initial placements","two demo residents and ownership","same mutation API and persistent state","same DOM action controls","1920x1080 and390x844 viewports","same warm palette and scene scale targets"],
+  "changedFactors": {"cameraComparison":"camera/projection/navigation only","flatComparison":"entire rendering path; feasibility comparison rather than isolated camera effect","pixelComparison":"same 3D scene with crisp vs low-resolution nearest upscaling"},
+  "tasks": [
+    "Load the scene and identify a chair, plant and shared lantern",
+    "Select a prop using canvas/SVG and also the object list",
+    "Move and rotate an owned item, then reload",
+    "In a second demo resident session, contribute a different lantern colour; first session updates automatically",
+    "Reject editing another resident's owned item and reject a stale revision",
+    "Resize, exercise keyboard controls and complete the action at390x844",
+    "Temporarily disconnect/reconnect and read the latest state",
+    "Inspect crisp/pixel rendering, console errors and diagnostics"
+  ],
+  "mechanicalAcceptance": ["real models load without missing dependencies where used","no observed uncaught errors","state changes automatically reach another browser session","acknowledged choices survive reload and local server restart","invalid/unauthorized/stale demo commands do not mutate state","core actions have DOM controls independent of precise3D picking"],
+  "measurements": ["dependency/asset bytes","time-to-scene-ready under recorded local conditions","RAF cadence/frame time over bounded sample","3D draw calls/triangle counts where available","synchronization observation and event sequence","actual viewport and browser/device conditions"],
+  "modelReviewRubric": {"warmthAndReadability":"0-3 ordinal inspection aid","orientationAndOcclusion":"0-3","diyClarity":"0-3","phoneAndKeyboardFit":"0-3","scopeAndExtension":"0-3"},
+  "reviewControls": ["reviewers fork with no prior conversation","neutral candidate labels and separately stored mapping","same brief and task evidence","reverse candidate order for another reviewer","verify findings against artifacts; do not turn ordinal scores into predicted marks"],
+  "limits": ["model visual review is not user preference","localdesktop emulated phone viewport is not physical-phone performance","demo identities/JSON persistence are research scaffolding, not production authentication or SQLite deployment validation","SVG illustration differs from3D asset quality; do not attribute visual differences solely to renderer","a small bounded scene does not establish large-neighbourhood capacity"],
+  "stoppingCondition": "Resolve material correctness/interaction failures, observe required tasks, reconcile fresh reviews and record remaining human/hardware validation; do not repeat passing runs without a changed condition."
+}
