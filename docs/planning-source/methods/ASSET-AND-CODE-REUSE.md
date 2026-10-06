@@ -1,5 +1,10 @@
 # Asset and code reuse method
 
+Active A3 procedure, revised7October2026. Read with repository docs/harness/REPORT.md.
+ALWAYS return to applicable sections at each phase, section and substantial
+subsection; record actual evidence, comparisons, reviews and refinements in
+docs/revisit/REGISTER.md. Historical references below do not supply current results.
+
 Before adopting a pack, template or library record the original author/source,
 exact version or download, licence text, allowed use and redistribution, attribution,
 file formats, size and dependencies. Use original author pages for terms. Do not
@@ -24,3 +29,13 @@ Separate the persistent room schema from renderer-specific loading details.
 A room's visual language can borrow a mechanism without copying game identity,
 characters or unlicensed assets. Preserve provenance and record where our novel
 social interaction differs from the reference.
+
+## A3 section-level adoption gate
+
+For each proposed asset/package/template subsection compare a small representative
+use case with current code: user benefit, actual supported capability, licence/
+compatibility, setup and maintenance cost, device/resource fit and what we still
+implement. Declare criteria before the sample, inspect the running result, obtain
+fresh critique when consequential, and retain provenance. Do not import an entire
+editor/engine/harness because a demo looks complete. Current procedural avatars/
+furniture and preserved CC0legacy assets have different attribution scopes.

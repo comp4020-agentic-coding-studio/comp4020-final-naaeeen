@@ -37,3 +37,9 @@ preserve others and do not commit or publish independently.
 Parallel paths: house_store owns house-store.ts/spec; house_realtime owns adapter/client/spec; house_world owns world/geometry/spec. Parent owns HTTP, UI, CI and acceptance. Output English; evidence sources may use any language.
 
 HTTP acceptance red phase: three tests failed against the unchanged C8 server (404 versus expected identity/create/module routes), 6 October2026. This is an observed behavioural failure, not an import error.
+
+## Owner steering7October
+FIRSTadaptA3harness/methodfiles; thenrevisit everyphase/section/subsection in detail
+via docs/harness/REPORT.md and docs/revisit/REGISTER.md. LaterA3tasks must continually
+return to these methods. Labelretrospective/newchecks. RuntimeL1/L2isfrozen/running
+independently; no runtimebytechange under measurement.

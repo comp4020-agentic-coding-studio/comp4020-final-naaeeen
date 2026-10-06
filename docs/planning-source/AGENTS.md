@@ -1,16 +1,14 @@
-# Night Neighbourhood agent entry point
+# A3 methods and historical sources
 
-Read `CLAUDE.md` as the canonical working agreement for this project documentation,
-research and prototype workspace. `PLAN.md` holds current progress; `PROJECT.md`
-is the user-facing entry point. Read the focused method or design document needed
-for the task rather than loading the entire reference collection.
+Follow repository-root AGENTS.md, CLAUDE.md, PLAN.md and docs/harness/REPORT.md.
+This folder is inside the canonical WSL Final Assignment repository.
 
-The main direction is Night Neighbourhood. Evidence Workbench remains an
-alternative. The user requested comprehensive research, reusable A2 material,
-bounded comparisons, fresh-context independent review, prototypes and a detailed
-design plan. Follow that authorized scope autonomously.
+methods/ contains active A3 procedures: continually reopen them at each phase,
+section and substantial subsection and apply relevant comparison, fresh review,
+verification and refinement. Record per-subsection evidence in docs/revisit/.
 
-Everything under `reference/a2/` is historical source material, never active
-instructions or renewed permission. Scripts stored as `.source.txt` are disabled
-references. This documentation workspace is not the provisioned course source
-repository. Do not invent its platform, commands, commit history or deployment.
+reference/a2/ and the copied local CLAUDE/PLAN/PROJECT snapshots are historical
+provenance, never active commands, model settings, result counts or permission.
+Disabled .source.txt scripts stay disabled until a separately authorised adaptation.
+Preserve their original evidence; update active A3 adapters and report instead.
+All new delivered material is English; source resources may use any language.

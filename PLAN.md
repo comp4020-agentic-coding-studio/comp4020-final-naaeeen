@@ -214,14 +214,27 @@ Only a demonstrated need earns drawing/uploads/timers/multiple houses or a CRDT.
 The current Node/SQLite/Three+Socket option remains economical;switch rendering
 only for measured device/interaction problems.2D does not solve a weak user goal.
 
-Research evidence/qualitative evaluation PASS;human need/preference NOT RUN.
-Previous local geometry/network spikes remain genuine but do not implement this
-product. No new production code,packages,deployment or paid service in this task.
+Local core implementation is active in S4. S1-S3 main integrated browser tasks
+have passed; final UI polish, current-candidate checks and sustained load are in
+progress. Human need/preference NOT RUN. Pinned production Socket.IO packages and
+private house authority/world/UI now exist; no new candidate has been published.
+Read docs/implementation/VALIDATION.md and HARNESS-AUDIT.md for actual status.
 [Positioning decision record](docs/planning/POSITIONING-COMPARISON.md) and
 [worklog](docs/planning/WORKLOG.md) separate completed planning from future gates.
 
-Next implementation is S1's real two-browser story. Check G0 context first when
+Current work is S4 refinement and verification. S1's real two-browser story has
+passed; remaining gates are tracked in docs/implementation/VALIDATION.md. Check G0 context first when
 people are available;otherwise reversible S1 work proceeds under the recorded
 hypothesis and value remains unvalidated. Do not expand specialised mechanics or
 claim usefulness without the appropriate human evidence. No extra approval gate
 is inferred from missing user-study data.
+
+Harness gates: before phase entry/exit and each substantial commit, reconcile
+applicable rules with evidence and record omissions/corrections in
+[HARNESS-AUDIT](docs/implementation/HARNESS-AUDIT.md). Frozen runtime load now proceeds
+independently of static UI polish; no runtime changes during its measurements.
+
+Owner7Octoberpriority: A3harnessadaptationfirst, then detailedcapability/failure-path
+revisitS0-S4. See [REPORT](docs/harness/REPORT.md) and
+[register](docs/revisit/REGISTER.md); eachsubsection has its own evidence,decision,
+review and refinement. Fouraggregatephase summaries do not suffice.

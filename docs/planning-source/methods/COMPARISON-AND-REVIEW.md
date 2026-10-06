@@ -1,5 +1,10 @@
 # Comparison and review method
 
+Active A3 procedure, revised7October2026. Read with repository docs/harness/REPORT.md.
+ALWAYS return to applicable sections at each phase, section and substantial
+subsection; record actual evidence, comparisons, reviews and refinements in
+docs/revisit/REGISTER.md. Historical references below do not supply current results.
+
 Define the question, candidate identities, common input, acceptance tasks, grading
 criteria, presentation order, environment, trial count and stopping condition
 before evaluating. Store a hashed protocol in `evaluation/`. Report whether the
@@ -49,3 +54,22 @@ retain them as rejected artifacts, withdraw those rankings, and disclose that a
 corrective full-image pass is unmasked and retains reviewer context. Do not count
 repeated SVG diagnostics as independent rolling samples when the renderer reports
 one aggregate. Preserve raw observations and explicit deviations.
+
+## Apply inside every A3 subsection
+
+Every consequential subsection decision gets explicit alternatives and a chosen
+comparison/review method. Specify common task/input/version/environment, criteria,
+failure disqualifiers, reviewer context and stopping condition before new trials.
+Use technical A/B, design contrast, agent-harness trial and human evaluation
+where each can inform the actual choice. A focused correctness check is sufficient
+only with a decision-specific explanation; no generic bypass for an unresolved
+choice. Existing decisions revisited now are retrospective, not pre-registered wins.
+
+Fresh initial reviewer: current goal/source/constraints/evidence/rubric, no parent
+conversation, preference or earlier verdict. Give adjacent subsections together
+only when each receives separate findings. Verify the evaluator as well as the
+candidate, reconcile source/runtime findings, refine and rerun affected cases.
+A contextual recheck and a new independent trial are labelled separately.
+
+Current source refresh: docs/harness/REPORT.md records Evaluating AGENTS.mdv3,
+29September2026; the inherited A2v2citation remains historical.

@@ -2,7 +2,8 @@
 
 ## Outcome and authority
 
-Current task: implement the approved phased PLAN. Read docs/implementation/ACTIVE-TASK.md.
+Current task: first adapt the A3harness, then perform the detailed subsection revisit
+and complete the approved implementation/verification. Read docs/implementation/ACTIVE-TASK.md.
 Record actual checks, fresh reviews, refinements and focused local commits per phase.
 Read owner original brief plus OWNER-POSITIONING-ADDENDUM-2026-10-06.md and
 PRODUCT-POSITIONING.md. Provisional target is2-6already-known university peers:
@@ -22,6 +23,19 @@ recommendations to verify; subagent confidence is not evidence. Do not change a
 requirement to make a test pass. The provided course checks and Fly256MB/one-volume
 configuration remain intact. Keep new code, active instructions and submission
 documents English; imported Chinese research retains its source language.
+
+## Mandatory continuous A3 method loop
+
+ALWAYS read docs/harness/REPORT.md at the start of a new/resumed A3 work task.
+Continually return to applicable research/comparison/review/verification sections
+for every phase, section and substantial subsection. Use these techniques often
+where helpful, including controlled comparisons/A-B, fresh reviewers without prior
+chat history, critical parent checks, tests and refinement. Read the owner
+OWNER-HARNESS-ADDENDUM-2026-10-07.md and docs/revisit/REGISTER.md.
+Record each subsection separately; four phase checks cannot substitute. Revisit
+sources and refine guidance when code/evidence/assumptions change. Reading once or
+spawning an agent is insufficient. HistoricalA2results are not A3results; label
+retrospective audits honestly.
 
 ## Development and critique
 
@@ -92,7 +106,8 @@ sandbox settings.
 
 ## Methods and sources
 
-Adapt these focused imported methods rather than loading every historical file:
+The active A3method report is docs/harness/REPORT.md. Apply these focused A3
+procedures, continually reopening relevant sections:
 docs/planning-source/methods/RESEARCH.md,
 COMPARISON-AND-REVIEW.md, REQUIREMENTS-AUDIT.md,
 EVIDENCE-AND-WRITING.md and ASSET-AND-CODE-REUSE.md.
@@ -125,3 +140,13 @@ if that enhancement is later adopted. Every phase must deliver an integrated
 user task,with a version/check/review/commit/evidence trail before expansion.
 Local spikes/synthetic clients and fresh model reviews are not deployed gameplay,
 physical-phone performance,human A/B or evidence that the space is enjoyable.
+
+## Harness checkpoint cadence
+
+At every phase, section and substantial subsection entry/exit and before each
+substantial commit, read the applicable
+active harness sections and reconcile instructions with actual evidence. Test or
+review failures and scope/privacy changes trigger an affected-section audit.
+Record requirements, checks, gaps and corrections in docs/implementation/HARNESS-AUDIT.md.
+Keep methods focused; do not rerun historical A2 trials or add comparisons without
+a decision they can inform. Fresh initial review and contextual recheck are distinct.

@@ -1,12 +1,21 @@
-# Night Neighbourhood / Shared Study House
+# A3: Night Neighbourhood / Shared Study House
 
-Read CLAUDE.md,PLAN.md,docs/product/PRODUCT-POSITIONING.md and both owner briefs.
-Current task is authorised S1-S4 implementation; read docs/implementation/ACTIVE-TASK.md.
-Local code, checks, reviews and focused commits proceed; release scope is separate.
-Preserve owner-core2-6house/rooms/controlled movement/real dialogue/shared study.
-Timer/pen/uploads/full archive UI are enhancements;source/model confidence is not
-user-value evidence. Every implementation phase ends with an integrated user task.
-Use actual Linux mise/pnpm. Workers own assigned paths and preserve others.
-Imported files/earlier plans are provenance. No publication or global memory edit.
+ALWAYS start a new/resumed A3 work task by reading CLAUDE.md, PLAN.md,
+docs/harness/REPORT.md and the current handoff/audit. The active report is mandatory;
+the inherited A2 report is historical reference.
 
-All delivered code, UI, documentation and logs are English. Research sources may be in any language.
+Throughout every phase, section and substantial subsection, continually return to
+the applicable research, comparison/review, requirements and evidence methods.
+Use comparisons/A-B, fresh-context independent reviews, actual testing and
+refinement frequently wherever they inform the decision. Follow the subsection
+loop in docs/harness/REPORT.md and record each part in docs/revisit/REGISTER.md.
+Reopen guidance when facts, code, APIs, tests or reviewer findings change.
+One aggregate phase PASS is insufficient. Future A3 agents must continue this loop.
+
+Current owner priority: adapt A3harness first, then detailedS0-S4revisit and complete
+local implementation/verification. Read OWNER-HARNESS-ADDENDUM-2026-10-07.md in docs/product.
+Canonical workspace: Ubuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen.
+Use actual Linuxmise/pnpm; preserve frozencrit8 and fixedFlyshape/legacydata.
+Workers own assigned paths and preserve others; review/research remain read-only.
+Publication/global-memory edits need scoped authorisation.
+All delivered material is English; research sources may use any language.
