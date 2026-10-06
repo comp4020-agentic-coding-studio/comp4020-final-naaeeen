@@ -405,3 +405,22 @@ describe("durable house authority", () => {
   });
 
 });
+
+it("bounds native preparation work while repeated reads and changed permissions stay current",()=>{
+ const f=pair();const roomId=f.store.snapshot(f.a.id).residents.find(r=>r.id===f.a.id)!.bedroomId;
+ f.store.snapshot(f.b.id);f.store.me(f.a.id);f.store.session(f.a.digest);
+ const nativePrepare=vi.spyOn(f.store.db,"prepare");
+ for(let i=0;i<50;i++){
+  expect(f.store.snapshot(f.a.id).house.id).toBe(f.home.id);
+  expect(f.store.snapshot(f.b.id).residents).toHaveLength(2);
+  expect(f.store.session(f.a.digest)?.id).toBe(f.a.id);
+ }
+ expect(nativePrepare.mock.calls.length).toBeLessThan(8);
+ f.store.execute(f.a.id,command("room.configure",{roomId,open:true,palette:"sage"},0));
+ expect(f.store.snapshot(f.b.id,roomId).room?.open).toBe(true);
+ f.store.execute(f.a.id,command("room.configure",{roomId,open:false,palette:"sage"},1));
+ expect(()=>f.store.snapshot(f.b.id,roomId)).toThrowError(error("FORBIDDEN"));
+ f.store.execute(f.a.id,command("profile.set",{name:"Renamed owner",colour:"rose"},f.store.me(f.a.id).identity.revision));
+ expect(f.store.snapshot(f.b.id).residents.find(r=>r.id===f.a.id)?.name).toBe("Renamed owner");
+ f.store.close();expect(f.store.ready()).toBe(false);
+});

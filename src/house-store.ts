@@ -1,5 +1,5 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
-import { DatabaseSync } from "node:sqlite";
+import { DatabaseSync, type StatementSync } from "node:sqlite";
 import { validatePlacements } from "../public/house-geometry.js";
 import { HouseError } from "./house-contract.ts";
 import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, Me, Placement, Profile, Resident } from "./house-contract.ts";
@@ -79,12 +79,23 @@ function card(row: CardRow): Card { return { id: row.id, authorId: row.author_id
 export class HouseStore {
   readonly db!: DatabaseSync;
   private closed = false;
+  // Reuse only this store's constant SQL plans; each execution reads current rows.
+  // Native StatementSync has no explicit finalize API in the installed runtime.
+  private readonly statements = new Map<string, StatementSync>();
+  private prepared(sql: string): StatementSync {
+    let statement = this.statements.get(sql);
+    if (!statement) {
+      if (this.statements.size >= 96) throw new HouseError("STORAGE_UNAVAILABLE", "The house query catalogue exceeds its supported bound.");
+      statement = this.db.prepare(sql); this.statements.set(sql, statement);
+    }
+    return statement;
+  }
   constructor(path: string) {
     try { this.db = new DatabaseSync(path); }
     catch (error) { return storageError(error); }
     try {
       this.db.exec("PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;");
-      const version = (this.db.prepare("PRAGMA user_version").get() as { user_version: number }).user_version;
+      const version = (this.prepared("PRAGMA user_version").get() as { user_version: number }).user_version;
       if (version !== 0 && version !== 1) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
       if (version === 0) this.transaction(() => this.db.exec(`
         CREATE TABLE identities (id TEXT PRIMARY KEY, name TEXT NOT NULL, colour TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);
@@ -107,9 +118,9 @@ export class HouseStore {
         CREATE TABLE receipts (actor_id TEXT NOT NULL REFERENCES identities(id), command_id TEXT NOT NULL, command_hash TEXT NOT NULL, response TEXT NOT NULL, room_id TEXT, PRIMARY KEY(actor_id,command_id));
         PRAGMA user_version=1;
       `));
-      this.transaction(() => this.db.prepare("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS));
-      this.db.prepare("SELECT id FROM identities LIMIT 1").get();
-    } catch (error) { this.closed = true; this.db.close(); storageError(error); }
+      this.transaction(() => this.prepared("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS));
+      this.prepared("SELECT id FROM identities LIMIT 1").get();
+    } catch (error) { this.closed = true; this.statements.clear(); this.db.close(); storageError(error); }
   }
 
   private transaction<T>(action: () => T): T {
@@ -118,17 +129,17 @@ export class HouseStore {
     catch (error) { try { this.db.exec("ROLLBACK"); } catch { /* Preserve the original cause. */ } throw error; }
   }
   private identity(id: string): IdentityRow {
-    const row = this.db.prepare("SELECT * FROM identities WHERE id=?").get(id) as IdentityRow | undefined;
+    const row = this.prepared("SELECT * FROM identities WHERE id=?").get(id) as IdentityRow | undefined;
     return row ?? fail("FORBIDDEN", "A current house identity is required.");
   }
   private active(id: string): Membership | undefined {
-    return this.db.prepare("SELECT h.*,m.slot,m.bedroom_id FROM members m JOIN houses h ON h.id=m.house_id WHERE m.identity_id=? AND m.status='active' AND h.status='active'").get(id) as Membership | undefined;
+    return this.prepared("SELECT h.*,m.slot,m.bedroom_id FROM members m JOIN houses h ON h.id=m.house_id WHERE m.identity_id=? AND m.status='active' AND h.status='active'").get(id) as Membership | undefined;
   }
   private requireHome(id: string): Membership { return this.active(id) ?? fail("FORBIDDEN", "Current house membership is required."); }
   private requireOwner(id: string, h: HomeRow): void { if (h.owner_id !== id) fail("FORBIDDEN", "Only the house owner can administer membership."); }
   private requireRevision(expected: unknown, actual: number): void { if (revision(expected) !== actual) fail("REVISION_CONFLICT", "This item changed. Keep your draft and reread the saved state."); }
   private bedroom(id: string): RoomRow {
-    return this.db.prepare("SELECT * FROM bedrooms WHERE id=? AND archived=0").get(id) as RoomRow | undefined ?? fail("FORBIDDEN", "This bedroom is unavailable.");
+    return this.prepared("SELECT * FROM bedrooms WHERE id=? AND archived=0").get(id) as RoomRow | undefined ?? fail("FORBIDDEN", "This bedroom is unavailable.");
   }
   private access(id: string, roomId: string): RoomRow {
     const h = this.requireHome(id), r = this.bedroom(roomId);
@@ -136,16 +147,16 @@ export class HouseStore {
     return r;
   }
   private sequence(streamId: string): number {
-    const row = this.db.prepare("SELECT sequence FROM streams WHERE id=?").get(streamId) as { sequence: number } | undefined;
+    const row = this.prepared("SELECT sequence FROM streams WHERE id=?").get(streamId) as { sequence: number } | undefined;
     return row?.sequence ?? 0;
   }
   private bump(streamId: string): number {
-    this.db.prepare("INSERT INTO streams(id,sequence) VALUES (?,1) ON CONFLICT(id) DO UPDATE SET sequence=sequence+1").run(streamId);
+    this.prepared("INSERT INTO streams(id,sequence) VALUES (?,1) ON CONFLICT(id) DO UPDATE SET sequence=sequence+1").run(streamId);
     return this.sequence(streamId);
   }
   private setProfile(id: string, payload: Record<string, unknown>): number {
     const name = text(payload.name, 40, true), nextColour = colour(payload.colour);
-    this.db.prepare("UPDATE identities SET name=?,colour=?,revision=revision+1 WHERE id=?").run(name, nextColour, id);
+    this.prepared("UPDATE identities SET name=?,colour=?,revision=revision+1 WHERE id=?").run(name, nextColour, id);
     return this.identity(id).revision;
   }
   private newCode(excluding?: string): string {
@@ -153,21 +164,21 @@ export class HouseStore {
     for (let attempt = 0; attempt < 32; attempt++) {
       let bits = BigInt("0x" + randomBytes(5).toString("hex")), code = "";
       for (let i = 0; i < 8; i++) { code = alphabet[Number(bits & 31n)] + code; bits >>= 5n; }
-      if (code !== excluding && !this.db.prepare("SELECT id FROM houses WHERE code=?").get(code)) return code;
+      if (code !== excluding && !this.prepared("SELECT id FROM houses WHERE code=?").get(code)) return code;
     }
     return fail("STORAGE_UNAVAILABLE", "A unique invitation could not be allocated. Please retry.");
   }
   private claim(id: string, h: HomeRow, slot: number): string {
     const roomId = randomUUID();
-    this.db.prepare("INSERT INTO bedrooms(id,house_id,owner_id,slot,palette,placements) VALUES (?,?,?,?,?,?)").run(roomId, h.id, id, slot, this.identity(id).colour, "[]");
-    this.db.prepare("INSERT INTO members(house_id,identity_id,slot,bedroom_id,status) VALUES (?,?,?,?,'active') ON CONFLICT(house_id,identity_id) DO UPDATE SET slot=excluded.slot,bedroom_id=excluded.bedroom_id,status='active'").run(h.id, id, slot, roomId);
-    this.db.prepare("INSERT INTO streams(id,sequence) VALUES (?,0)").run("bedroom:" + roomId);
+    this.prepared("INSERT INTO bedrooms(id,house_id,owner_id,slot,palette,placements) VALUES (?,?,?,?,?,?)").run(roomId, h.id, id, slot, this.identity(id).colour, "[]");
+    this.prepared("INSERT INTO members(house_id,identity_id,slot,bedroom_id,status) VALUES (?,?,?,?,'active') ON CONFLICT(house_id,identity_id) DO UPDATE SET slot=excluded.slot,bedroom_id=excluded.bedroom_id,status='active'").run(h.id, id, slot, roomId);
+    this.prepared("INSERT INTO streams(id,sequence) VALUES (?,0)").run("bedroom:" + roomId);
     return roomId;
   }
   ready(): boolean {
-    try { if (this.closed) return false; this.db.prepare("SELECT id FROM identities LIMIT 1").get(); return true; } catch { return false; }
+    try { if (this.closed) return false; this.prepared("SELECT id FROM identities LIMIT 1").get(); return true; } catch { return false; }
   }
-  close(): void { if (!this.closed) { this.closed = true; this.db.close(); } }
+  close(): void { if (!this.closed) { this.closed = true; this.statements.clear(); this.db.close(); } }
 
   ensureSession(token?: string): HouseIdentity {
     try {
@@ -177,21 +188,21 @@ export class HouseStore {
       }
       return this.transaction(() => {
         const id = randomUUID(), nextToken = randomBytes(32).toString("base64url"), digest = houseSessionDigest(nextToken);
-        this.db.prepare("INSERT INTO identities(id,name,colour) VALUES (?,'Study friend','amber')").run(id);
-        this.db.prepare("INSERT INTO sessions(token_digest,identity_id,expires_at) VALUES (?,?,?)").run(digest, id, Date.now() + HOUSE_SESSION_SECONDS * 1000);
+        this.prepared("INSERT INTO identities(id,name,colour) VALUES (?,'Study friend','amber')").run(id);
+        this.prepared("INSERT INTO sessions(token_digest,identity_id,expires_at) VALUES (?,?,?)").run(digest, id, Date.now() + HOUSE_SESSION_SECONDS * 1000);
         return { id, token: nextToken, digest, created: true };
       });
     } catch (error) { return storageError(error); }
   }
   session(digest: string): { id: string } | undefined {
     try {
-      const row = this.db.prepare("SELECT identity_id FROM sessions WHERE token_digest=? AND expires_at>?").get(digest, Date.now()) as { identity_id: string } | undefined;
+      const row = this.prepared("SELECT identity_id FROM sessions WHERE token_digest=? AND expires_at>?").get(digest, Date.now()) as { identity_id: string } | undefined;
       return row ? { id: row.identity_id } : undefined;
     } catch (error) { return storageError(error); }
   }
   me(id: string): Me {
     try { return this.transaction(() => {
-      const h = this.active(id), count = this.db.prepare("SELECT COUNT(*) AS count FROM archives WHERE identity_id=?").get(id) as { count: number };
+      const h = this.active(id), count = this.prepared("SELECT COUNT(*) AS count FROM archives WHERE identity_id=?").get(id) as { count: number };
       return { identity: profile(this.identity(id)), home: h ? home(h) : null, archiveCount: count.count };
     }); } catch (error) { return storageError(error); }
   }
@@ -200,7 +211,7 @@ export class HouseStore {
     try { return this.transaction(() => {
       const h = this.requireHome(id); this.requireOwner(id, h);
       const cursor = after === "" ? "" : uuid(after);
-      const rows = this.db.prepare("SELECT i.id,i.name FROM removed_guards g JOIN identities i ON i.id=g.identity_id WHERE g.house_id=? AND i.id>? ORDER BY i.id LIMIT 51").all(h.id, cursor) as { id: string; name: string }[];
+      const rows = this.prepared("SELECT i.id,i.name FROM removed_guards g JOIN identities i ON i.id=g.identity_id WHERE g.house_id=? AND i.id>? ORDER BY i.id LIMIT 51").all(h.id, cursor) as { id: string; name: string }[];
       const members = rows.slice(0, 50);
       return { members, nextCursor: rows.length > 50 ? members[49]!.id : null };
     }); } catch (error) { return storageError(error); }
@@ -208,8 +219,8 @@ export class HouseStore {
   issueRecovery(id: string): string {
     try { return this.transaction(() => {
       this.identity(id); const proof = randomBytes(32).toString("base64url");
-      this.db.prepare("DELETE FROM recovery WHERE identity_id=?").run(id);
-      this.db.prepare("INSERT INTO recovery(proof_digest,identity_id) VALUES (?,?)").run(houseSessionDigest(proof), id);
+      this.prepared("DELETE FROM recovery WHERE identity_id=?").run(id);
+      this.prepared("INSERT INTO recovery(proof_digest,identity_id) VALUES (?,?)").run(houseSessionDigest(proof), id);
       return proof;
     }); } catch (error) { return storageError(error); }
   }
@@ -217,12 +228,12 @@ export class HouseStore {
     try {
       if (typeof proof !== "string" || !TOKEN.test(proof)) fail("FORBIDDEN", "The recovery proof is invalid or already used.");
       return this.transaction(() => {
-        const row = this.db.prepare("SELECT identity_id FROM recovery WHERE proof_digest=?").get(houseSessionDigest(proof)) as { identity_id: string } | undefined;
+        const row = this.prepared("SELECT identity_id FROM recovery WHERE proof_digest=?").get(houseSessionDigest(proof)) as { identity_id: string } | undefined;
         if (!row) fail("FORBIDDEN", "The recovery proof is invalid or already used.");
         const id = row.identity_id, token = randomBytes(32).toString("base64url"), digest = houseSessionDigest(token);
-        this.db.prepare("DELETE FROM recovery WHERE identity_id=?").run(id);
-        this.db.prepare("DELETE FROM sessions WHERE identity_id=?").run(id);
-        this.db.prepare("INSERT INTO sessions(token_digest,identity_id,expires_at) VALUES (?,?,?)").run(digest, id, Date.now() + HOUSE_SESSION_SECONDS * 1000);
+        this.prepared("DELETE FROM recovery WHERE identity_id=?").run(id);
+        this.prepared("DELETE FROM sessions WHERE identity_id=?").run(id);
+        this.prepared("INSERT INTO sessions(token_digest,identity_id,expires_at) VALUES (?,?,?)").run(digest, id, Date.now() + HOUSE_SESSION_SECONDS * 1000);
         return { id, token, digest, created: false };
       });
     } catch (error) { return storageError(error); }
@@ -233,17 +244,17 @@ export class HouseStore {
       const h = this.requireHome(id); this.identity(id);
       const privateRoom = zoneId === "lounge" ? null : this.access(id, uuid(zoneId));
       const streamId = privateRoom ? "bedroom:" + privateRoom.id : "lounge:" + h.id;
-      const residents = this.db.prepare("SELECT i.*,m.slot,m.bedroom_id,b.open FROM members m JOIN identities i ON i.id=m.identity_id JOIN bedrooms b ON b.id=m.bedroom_id WHERE m.house_id=? AND m.status='active' ORDER BY m.slot").all(h.id) as (IdentityRow & { slot: number; bedroom_id: string; open: number })[];
-      const chats = this.db.prepare("SELECT id,author_id AS authorId,name,text,at,sequence FROM (SELECT * FROM chat WHERE zone_id=? AND at>=? ORDER BY sequence DESC LIMIT 100) ORDER BY sequence").all(streamId, Date.now() - CHAT_RETENTION_MS) as unknown as Chat[];
-      return { schemaVersion: 2, selfId: id, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.db.prepare("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
+      const residents = this.prepared("SELECT i.*,m.slot,m.bedroom_id,b.open FROM members m JOIN identities i ON i.id=m.identity_id JOIN bedrooms b ON b.id=m.bedroom_id WHERE m.house_id=? AND m.status='active' ORDER BY m.slot").all(h.id) as (IdentityRow & { slot: number; bedroom_id: string; open: number })[];
+      const chats = this.prepared("SELECT id,author_id AS authorId,name,text,at,sequence FROM (SELECT * FROM chat WHERE zone_id=? AND at>=? ORDER BY sequence DESC LIMIT 100) ORDER BY sequence").all(streamId, Date.now() - CHAT_RETENTION_MS) as unknown as Chat[];
+      return { schemaVersion: 2, selfId: id, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
     }); } catch (error) { return storageError(error); }
   }
 
   exportOwn(id: string): object {
     try { return this.transaction(() => {
       const h = this.active(id);
-      const archives = this.db.prepare("SELECT id,house_id,room,cards,at FROM archives WHERE identity_id=? ORDER BY at,id").all(id) as { id: string; house_id: string; room: string; cards: string; at: number }[];
-      return { schemaVersion: 2, identity: profile(this.identity(id)), home: h ? home(h) : null, room: h ? room(this.bedroom(h.bedroom_id)) : null, cards: h ? (this.db.prepare("SELECT * FROM cards WHERE house_id=? AND author_id=? ORDER BY id").all(h.id, id) as CardRow[]).map(card) : [], archives: archives.map(a => ({ id: a.id, houseId: a.house_id, room: JSON.parse(a.room), cards: JSON.parse(a.cards), at: a.at })) };
+      const archives = this.prepared("SELECT id,house_id,room,cards,at FROM archives WHERE identity_id=? ORDER BY at,id").all(id) as { id: string; house_id: string; room: string; cards: string; at: number }[];
+      return { schemaVersion: 2, identity: profile(this.identity(id)), home: h ? home(h) : null, room: h ? room(this.bedroom(h.bedroom_id)) : null, cards: h ? (this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? ORDER BY id").all(h.id, id) as CardRow[]).map(card) : [], archives: archives.map(a => ({ id: a.id, houseId: a.house_id, room: JSON.parse(a.room), cards: JSON.parse(a.cards), at: a.at })) };
     }); } catch (error) { return storageError(error); }
   }
 
@@ -252,7 +263,7 @@ export class HouseStore {
       const command = parseCommand(untrusted), hash = houseSessionDigest(id + "\n" + canonical(command));
       return this.transaction(() => {
         this.identity(id);
-        const previous = this.db.prepare("SELECT command_hash,response,room_id FROM receipts WHERE actor_id=? AND command_id=?").get(id, command.commandId) as ReceiptRow | undefined;
+        const previous = this.prepared("SELECT command_hash,response,room_id FROM receipts WHERE actor_id=? AND command_id=?").get(id, command.commandId) as ReceiptRow | undefined;
         if (previous) {
           if (previous.command_hash !== hash) fail("COMMAND_ID_REUSED", "This command ID was already used for another action.");
           if (previous.room_id) this.access(id, previous.room_id);
@@ -260,25 +271,25 @@ export class HouseStore {
         }
         const outcome = this.apply(id, command);
         const receipt: HouseReceipt = { ok: true, commandId: command.commandId, streamId: outcome.streamId, sequence: outcome.sequence ?? this.bump(outcome.streamId), entityRevision: outcome.entityRevision, ...(outcome.result ? { result: outcome.result } : {}) };
-        this.db.prepare("INSERT INTO receipts(actor_id,command_id,command_hash,response,room_id) VALUES (?,?,?,?,?)").run(id, command.commandId, hash, JSON.stringify(receipt), outcome.roomId ?? null);
+        this.prepared("INSERT INTO receipts(actor_id,command_id,command_hash,response,room_id) VALUES (?,?,?,?,?)").run(id, command.commandId, hash, JSON.stringify(receipt), outcome.roomId ?? null);
         return receipt;
       });
     } catch (error) { return storageError(error); }
   }
 
   private trimCards(houseId: string): void {
-    this.db.prepare("DELETE FROM cards WHERE house_id=? AND state!='active' AND id NOT IN (SELECT id FROM cards WHERE house_id=? AND state!='active' ORDER BY inactive_sequence DESC,id DESC LIMIT 12)").run(houseId, houseId);
+    this.prepared("DELETE FROM cards WHERE house_id=? AND state!='active' AND id NOT IN (SELECT id FROM cards WHERE house_id=? AND state!='active' ORDER BY inactive_sequence DESC,id DESC LIMIT 12)").run(houseId, houseId);
   }
   private depart(target: string, h: HomeRow, removed: boolean, sequence: number): void {
-    const member = this.db.prepare("SELECT bedroom_id FROM members WHERE house_id=? AND identity_id=? AND status='active'").get(h.id, target) as { bedroom_id: string } | undefined;
+    const member = this.prepared("SELECT bedroom_id FROM members WHERE house_id=? AND identity_id=? AND status='active'").get(h.id, target) as { bedroom_id: string } | undefined;
     if (!member) fail("FORBIDDEN", "This person is not an active member.");
     const r = this.bedroom(member.bedroom_id);
-    this.db.prepare("UPDATE cards SET state='ownerLeft',revision=revision+1,inactive_sequence=? WHERE house_id=? AND author_id=? AND state='active'").run(sequence, h.id, target);
-    const ownCards = (this.db.prepare("SELECT * FROM cards WHERE house_id=? AND author_id=? ORDER BY id").all(h.id, target) as CardRow[]).map(card);
-    this.db.prepare("UPDATE bedrooms SET archived=1,open=0,revision=revision+1 WHERE id=?").run(r.id);
-    this.db.prepare("INSERT INTO archives(id,identity_id,house_id,room,cards,at) VALUES (?,?,?,?,?,?)").run(randomUUID(), target, h.id, JSON.stringify({ ...room(r), open: false, revision: r.revision + 1 }), JSON.stringify(ownCards), Date.now());
-    this.db.prepare("UPDATE members SET status=? WHERE house_id=? AND identity_id=?").run(removed ? "removed" : "left", h.id, target);
-    if (removed) this.db.prepare("INSERT INTO removed_guards(house_id,identity_id) VALUES (?,?) ON CONFLICT DO NOTHING").run(h.id, target);
+    this.prepared("UPDATE cards SET state='ownerLeft',revision=revision+1,inactive_sequence=? WHERE house_id=? AND author_id=? AND state='active'").run(sequence, h.id, target);
+    const ownCards = (this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? ORDER BY id").all(h.id, target) as CardRow[]).map(card);
+    this.prepared("UPDATE bedrooms SET archived=1,open=0,revision=revision+1 WHERE id=?").run(r.id);
+    this.prepared("INSERT INTO archives(id,identity_id,house_id,room,cards,at) VALUES (?,?,?,?,?,?)").run(randomUUID(), target, h.id, JSON.stringify({ ...room(r), open: false, revision: r.revision + 1 }), JSON.stringify(ownCards), Date.now());
+    this.prepared("UPDATE members SET status=? WHERE house_id=? AND identity_id=?").run(removed ? "removed" : "left", h.id, target);
+    if (removed) this.prepared("INSERT INTO removed_guards(house_id,identity_id) VALUES (?,?) ON CONFLICT DO NOTHING").run(h.id, target);
     this.trimCards(h.id);
   }
 
@@ -290,8 +301,8 @@ export class HouseStore {
       text(p.name, 40, true); colour(p.colour);
       if (this.active(id)) fail("ALREADY_MEMBER", "Leave your current house before creating another.");
       const houseId = randomUUID(), code = this.newCode(), entityRevision = this.setProfile(id, p);
-      this.db.prepare("INSERT INTO houses(id,capacity,owner_id,code,status) VALUES (?,?,?,?,'active')").run(houseId, p.capacity as number, id, code);
-      const h = this.db.prepare("SELECT * FROM houses WHERE id=?").get(houseId) as HomeRow;
+      this.prepared("INSERT INTO houses(id,capacity,owner_id,code,status) VALUES (?,?,?,?,'active')").run(houseId, p.capacity as number, id, code);
+      const h = this.prepared("SELECT * FROM houses WHERE id=?").get(houseId) as HomeRow;
       const bedroomId = this.claim(id, h, 0);
       return { streamId: "lounge:" + h.id, entityRevision, result: { houseId, bedroomId } };
     }
@@ -299,15 +310,15 @@ export class HouseStore {
       keys(p, ["code", "name", "colour"], ["code", "name", "colour"]); text(p.name, 40, true); colour(p.colour);
       const code = text(p.code, 9, true).toUpperCase().replace("-", "");
       if (!/^[0-9A-HJKMNP-TV-Z]{8}$/.test(code)) fail("INVALID_INPUT", "Enter the eight-character house code.");
-      const h = this.db.prepare("SELECT * FROM houses WHERE code=? AND status='active'").get(code) as HomeRow | undefined;
+      const h = this.prepared("SELECT * FROM houses WHERE code=? AND status='active'").get(code) as HomeRow | undefined;
       if (!h) fail("FORBIDDEN", "This invitation is unavailable.");
       const current = this.active(id);
       if (current) {
         if (current.id !== h.id) fail("ALREADY_MEMBER", "Leave your current house before joining another.");
         return { streamId: "lounge:" + h.id, sequence: this.sequence("lounge:" + h.id), entityRevision: this.identity(id).revision, result: { houseId: h.id, bedroomId: current.bedroom_id } };
       }
-      if (this.db.prepare("SELECT 1 FROM removed_guards WHERE house_id=? AND identity_id=?").get(h.id, id)) fail("FORBIDDEN", "The owner must reinstate this identity before it can rejoin.");
-      const claimed = this.db.prepare("SELECT slot FROM members WHERE house_id=? AND status='active'").all(h.id) as { slot: number }[];
+      if (this.prepared("SELECT 1 FROM removed_guards WHERE house_id=? AND identity_id=?").get(h.id, id)) fail("FORBIDDEN", "The owner must reinstate this identity before it can rejoin.");
+      const claimed = this.prepared("SELECT slot FROM members WHERE house_id=? AND status='active'").all(h.id) as { slot: number }[];
       const slot = Array.from({ length: h.capacity }, (_, n) => n).find(n => !claimed.some(m => m.slot === n));
       if (slot === undefined) fail("SPACE_FULL", "This house has no unclaimed permanent bedroom.");
       const entityRevision = this.setProfile(id, p), bedroomId = this.claim(id, h, slot);
@@ -326,9 +337,9 @@ export class HouseStore {
       const value = text(p.text, 280, true), zoneId = p.zoneId === "lounge" ? "lounge" : uuid(p.zoneId);
       const r = zoneId === "lounge" ? null : this.access(id, zoneId);
       const streamId = r ? "bedroom:" + r.id : lounge, sequence = this.bump(streamId), chatId = randomUUID();
-      this.db.prepare("INSERT INTO chat(id,zone_id,author_id,name,text,at,sequence) VALUES (?,?,?,?,?,?,?)").run(chatId, streamId, id, this.identity(id).name, value, Date.now(), sequence);
-      this.db.prepare("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS);
-      this.db.prepare("DELETE FROM chat WHERE zone_id=? AND id NOT IN (SELECT id FROM chat WHERE zone_id=? ORDER BY sequence DESC LIMIT 100)").run(streamId, streamId);
+      this.prepared("INSERT INTO chat(id,zone_id,author_id,name,text,at,sequence) VALUES (?,?,?,?,?,?,?)").run(chatId, streamId, id, this.identity(id).name, value, Date.now(), sequence);
+      this.prepared("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS);
+      this.prepared("DELETE FROM chat WHERE zone_id=? AND id NOT IN (SELECT id FROM chat WHERE zone_id=? ORDER BY sequence DESC LIMIT 100)").run(streamId, streamId);
       return { streamId, sequence, entityRevision: 0, result: { chatId }, ...(r ? { roomId: r.id } : {}) };
     }
     if (c.type === "room.configure" || c.type === "room.placements") {
@@ -339,7 +350,7 @@ export class HouseStore {
       if (c.type === "room.configure") {
         if (typeof p.open !== "boolean") fail("INVALID_INPUT", "Choose whether your door is open.");
         const palette = colour(p.palette);
-        this.db.prepare("UPDATE bedrooms SET open=?,palette=?,revision=revision+1 WHERE id=?").run(p.open ? 1 : 0, palette, r.id);
+        this.prepared("UPDATE bedrooms SET open=?,palette=?,revision=revision+1 WHERE id=?").run(p.open ? 1 : 0, palette, r.id);
         if (r.open !== (p.open ? 1 : 0)) this.bump(lounge);
       } else {
         if (!Array.isArray(p.placements) || p.placements.length > 10) fail("INVALID_INPUT", "Use at most ten furniture pieces.");
@@ -352,7 +363,7 @@ export class HouseStore {
           return { id: itemId, kind: item.kind, x: item.x, z: item.z, rotation: item.rotation as number, colour: colour(item.colour) };
         });
         if (!validatePlacements(placements)) fail("INVALID_INPUT", "Keep furniture inside the room, clear of other pieces and the door/spawn route.");
-        this.db.prepare("UPDATE bedrooms SET placements=?,revision=revision+1 WHERE id=?").run(JSON.stringify(placements), r.id);
+        this.prepared("UPDATE bedrooms SET placements=?,revision=revision+1 WHERE id=?").run(JSON.stringify(placements), r.id);
       }
       return { streamId: "bedroom:" + r.id, roomId: r.id, entityRevision: r.revision + 1, result: { roomId: r.id } };
     }
@@ -362,48 +373,48 @@ export class HouseStore {
       if (resourceUrl) { let url: URL; try { url = new URL(resourceUrl); } catch { return fail("INVALID_INPUT", "Enter an https resource link."); } if (url.protocol !== "https:" || url.username || url.password) fail("INVALID_INPUT", "Enter an https resource link without credentials."); }
       if (typeof p.helpRequested !== "boolean") fail("INVALID_INPUT", "Choose whether help is requested.");
       const requestedId = p.cardId === undefined ? undefined : uuid(p.cardId);
-      const existing = requestedId ? this.db.prepare("SELECT * FROM cards WHERE id=?").get(requestedId) as CardRow | undefined : this.db.prepare("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
+      const existing = requestedId ? this.prepared("SELECT * FROM cards WHERE id=?").get(requestedId) as CardRow | undefined : this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
       if (requestedId && !existing) fail("FORBIDDEN", "This card is unavailable.");
       if (existing && (existing.author_id !== id || existing.house_id !== h.id)) fail("FORBIDDEN", "Only the author may edit their card.");
       if (existing && existing.state !== "active") fail("FORBIDDEN", "An inactive card is read-only. Start a new current card.");
       this.requireRevision(c.expectedRevision, existing?.revision ?? 0);
       const cardId = existing?.id ?? randomUUID(), entityRevision = (existing?.revision ?? 0) + 1;
-      this.db.prepare("INSERT INTO cards(id,house_id,author_id,small_goal,question,resource_url,next_step,help_requested,state,revision) VALUES (?,?,?,?,?,?,?,?,'active',?) ON CONFLICT(id) DO UPDATE SET small_goal=excluded.small_goal,question=excluded.question,resource_url=excluded.resource_url,next_step=excluded.next_step,help_requested=excluded.help_requested,revision=excluded.revision").run(cardId, h.id, id, smallGoal, question, resourceUrl, nextStep, p.helpRequested ? 1 : 0, entityRevision);
+      this.prepared("INSERT INTO cards(id,house_id,author_id,small_goal,question,resource_url,next_step,help_requested,state,revision) VALUES (?,?,?,?,?,?,?,?,'active',?) ON CONFLICT(id) DO UPDATE SET small_goal=excluded.small_goal,question=excluded.question,resource_url=excluded.resource_url,next_step=excluded.next_step,help_requested=excluded.help_requested,revision=excluded.revision").run(cardId, h.id, id, smallGoal, question, resourceUrl, nextStep, p.helpRequested ? 1 : 0, entityRevision);
       return { streamId: lounge, entityRevision, result: { cardId } };
     }
     if (c.type === "card.close") {
       keys(p, ["cardId"], ["cardId"]); const cardId = uuid(p.cardId);
-      const existing = this.db.prepare("SELECT * FROM cards WHERE id=?").get(cardId) as CardRow | undefined;
+      const existing = this.prepared("SELECT * FROM cards WHERE id=?").get(cardId) as CardRow | undefined;
       if (!existing || existing.author_id !== id || existing.house_id !== h.id) fail("FORBIDDEN", "Only the author may close this card.");
       this.requireRevision(c.expectedRevision, existing.revision);
       if (existing.state !== "active") fail("FORBIDDEN", "This card is already inactive.");
       const sequence = this.bump(lounge);
-      this.db.prepare("UPDATE cards SET state='closed',revision=revision+1,inactive_sequence=? WHERE id=?").run(sequence, cardId); this.trimCards(h.id);
+      this.prepared("UPDATE cards SET state='closed',revision=revision+1,inactive_sequence=? WHERE id=?").run(sequence, cardId); this.trimCards(h.id);
       return { streamId: lounge, sequence, entityRevision: existing.revision + 1, result: { cardId } };
     }
     if (c.type === "house.leave") {
       keys(p, []);
-      const count = this.db.prepare("SELECT COUNT(*) AS count FROM members WHERE house_id=? AND status='active'").get(h.id) as { count: number };
+      const count = this.prepared("SELECT COUNT(*) AS count FROM members WHERE house_id=? AND status='active'").get(h.id) as { count: number };
       if (h.owner_id === id && count.count > 1) fail("FORBIDDEN", "Transfer ownership before leaving this house.");
       const sequence = this.bump(lounge); this.depart(id, h, false, sequence);
-      if (count.count === 1) this.db.prepare("UPDATE houses SET status='archived',code=NULL WHERE id=?").run(h.id);
+      if (count.count === 1) this.prepared("UPDATE houses SET status='archived',code=NULL WHERE id=?").run(h.id);
       return { streamId: lounge, sequence, entityRevision: 0, result: { houseId: h.id, archived: count.count === 1 } };
     }
 
     keys(p, ["memberId"], ["memberId"]); const target = uuid(p.memberId); this.requireOwner(id, h);
     if (c.type === "house.reinstate") {
-      if (!this.db.prepare("SELECT 1 FROM removed_guards WHERE house_id=? AND identity_id=?").get(h.id, target)) fail("FORBIDDEN", "This identity has no removed membership to reinstate.");
-      this.db.prepare("DELETE FROM removed_guards WHERE house_id=? AND identity_id=?").run(h.id, target);
+      if (!this.prepared("SELECT 1 FROM removed_guards WHERE house_id=? AND identity_id=?").get(h.id, target)) fail("FORBIDDEN", "This identity has no removed membership to reinstate.");
+      this.prepared("DELETE FROM removed_guards WHERE house_id=? AND identity_id=?").run(h.id, target);
       return { streamId: lounge, entityRevision: 0, result: { memberId: target } };
     }
     if (target === id) fail("FORBIDDEN", "Choose another current resident.");
-    if (!this.db.prepare("SELECT 1 FROM members WHERE house_id=? AND identity_id=? AND status='active'").get(h.id, target)) fail("FORBIDDEN", "Choose a current member of this house.");
+    if (!this.prepared("SELECT 1 FROM members WHERE house_id=? AND identity_id=? AND status='active'").get(h.id, target)) fail("FORBIDDEN", "Choose a current member of this house.");
     if (c.type === "house.transfer") {
-      this.db.prepare("UPDATE houses SET owner_id=? WHERE id=?").run(target, h.id);
+      this.prepared("UPDATE houses SET owner_id=? WHERE id=?").run(target, h.id);
       return { streamId: lounge, entityRevision: 0, result: { memberId: target } };
     }
     const sequence = this.bump(lounge); this.depart(target, h, true, sequence);
-    this.db.prepare("UPDATE houses SET code=? WHERE id=?").run(this.newCode(h.code!), h.id);
+    this.prepared("UPDATE houses SET code=? WHERE id=?").run(this.newCode(h.code!), h.id);
     return { streamId: lounge, sequence, entityRevision: 0, result: { memberId: target } };
   }
 }
