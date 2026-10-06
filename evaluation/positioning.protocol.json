@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "declaredAt": "2026-10-06 Australia/Sydney",
+  "baseline": "5c774ae7e2c3850bf69ce71fc2671c92f3ae7bda",
+  "question": "Which narrow user job earns the mandatory cozy multiplayer house and can be fully delivered in a two-week owner-led build?",
+  "type": "Qualitative evidence-backed positioning comparison,not human A/B or causal experiment",
+  "researchBeforeProtocol": "Four exploratory lanes generated competitor/paper/candidate/scope evidence; their initial recommendations are not scored evaluation trials.",
+  "hardRequirements": [
+    "housecode2-6permanentmembers",
+    "personalDIYbedroomsanddoors",
+    "controllableavatars",
+    "actualreciprocaltextandtruthfulpresence",
+    "sharedstudyspace",
+    "usefulsharedboard"
+  ],
+  "candidateCards": {
+    "A": {
+      "job": "Begin and close one personally chosen study task alongside known friends",
+      "target": "2-6 university friends with overlapping evening work time",
+      "loop": "join,greet,declare optional next small step,sit,work,leave a next-step note",
+      "board": "one current goal and next-step card per resident",
+      "roomPurpose": "recognisable personal corner and voluntary retreat",
+      "cuts": "mandatory sharedtimer,helpqueue,infinitecanvas,uploads"
+    },
+    "B": {
+      "job": "When stuck,find a willing familiar peer without summoning busy friends and preserve a next step",
+      "target": "2-6 already-known university friends taking same/related courses,overlapping evening self-study",
+      "loop": "join,set own availability,work,post concise question,volunteer offers,chat,author records next step",
+      "board": "one goal/question/next-step card with optional offer per resident",
+      "roomPurpose": "personal corner and selective visits;door access distinct from availability",
+      "cuts": "tutormatching,answerrepository,rankings,mandatorytimer,richdrawing/uploads"
+    },
+    "C": {
+      "job": "Get one actionable piece of feedback from trusted friends on a work-in-progress",
+      "target": "2-6 student creators/creative coding friends who already exchange drafts",
+      "loop": "join,share external artifact link and specific question,invite visit,chat,record revision",
+      "board": "one link/question/next-step card per resident",
+      "roomPurpose": "small personalised studio identity",
+      "cuts": "assetuploads,collaborativeediting,fullgallery,timer"
+    },
+    "D": {
+      "job": "Let familiar distant friends encounter each other without arranging a call",
+      "target": "2-6 friends with evening overlap who want casual company while doing their own work",
+      "loop": "drop in,walk/greet,talk/quiet retreat,leave a small note,return",
+      "board": "today plan/note board",
+      "roomPurpose": "domestic shared ownership and privacy",
+      "cuts": "timer,studyanalytics,helpflow,workartifactmanagement"
+    }
+  },
+  "rubric": [
+    "specific observable user job and trigger",
+    "every mandatory feature has a plausible role without forced hoops",
+    "honest differentiation against closest well-configured alternatives",
+    "bounded implementation and integration cost in 14 days",
+    "falsifiable user value and feasible access to target users",
+    "coherent README/rules/spec/human judgement evidence",
+    "ongoing upkeep without expanding into a platform"
+  ],
+  "rating": "Supported / plausible but unvalidated / weak; concise reasons,no invented probability or weighted score",
+  "reviewers": "Two fresh fork_turns=none evaluators,opposite candidate presentation order,same owner brief/source dossier/budget. No parent recommendation or chat history.",
+  "stopping": "One initial independent pass per reviewer,parent resolution of material contradictions,one bounded refinement pass if revisions require it. No repetition for artificial agreement.",
+  "humanComparison": {
+    "status": "NOT RUN",
+    "comparison": "Chosen house task flow vs a well-configured private Discord text channel with status convention and one pinned goal/help message/thread",
+    "sharedTask": "Identify a willing partner,raise a brief question,have a short conversation,preserve/retrieve a next step while one friend stays quiet",
+    "scope": "Two or three existing-friend pairs/groups, counterbalanced order,one bounded session per condition and a next-day return if possible",
+    "record": [
+      "coaching required",
+      "correct availability interpretation",
+      "unwanted interruptions",
+      "request/nextstep findability",
+      "extra movement/setup effort",
+      "reasoned choice to reuse or prefer baseline"
+    ],
+    "limits": "Small qualitative pilot; no productivity,grades,wellbeing or statistical preferenceclaim",
+    "falsifiers": [
+      "baseline already serves job comfortably",
+      "requests rare or uncomfortable",
+      "movement/DIY increases burden without valuedpresence",
+      "people do not return except when prompted"
+    ]
+  }
+}
