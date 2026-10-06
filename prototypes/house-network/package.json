@@ -1,0 +1,21 @@
+{
+  "name": "shared-house-network-spike",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only matched transport spike; not production authentication",
+  "engines": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0"
+  },
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "verify": "node verify.mjs",
+    "start": "node server-cli.mjs"
+  },
+  "dependencies": {
+    "socket.io": "4.8.4",
+    "socket.io-client": "4.8.4"
+  }
+}
