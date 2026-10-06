@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-07",
+  "kind": "registered technical/design comparison, not human A/B",
+  "baselineCommit": "f18fd52",
+  "tasks": [
+    "new create/join/Continue/options",
+    "six residents reach doors/seats/board",
+    "own bedroom with ten valid furniture pieces",
+    "walk with chat moved and resize",
+    "draw/sticky/text/image paste with peer and saved return",
+    "standalone board loads without game"
+  ],
+  "viewports": [
+    [
+      1920,
+      1080
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "comparisons": [
+    {
+      "id": "space",
+      "factor": "authoritative floor footprint",
+      "hold": "same avatar/collision radii and furniture footprints; evaluate geometry independent of zoom",
+      "measure": "reachable targets, valid saved arrangements, usable circulation"
+    },
+    {
+      "id": "camera",
+      "factor": "camera configure/follow/manual controls",
+      "hold": "matched supplied viewport/HUD/self path and room bounds for pure rig controls",
+      "measure": "HUD-change continuity, offscreen loss, overview retained, pan/zoom/recenter and reduced motion"
+    },
+    {
+      "id": "shell",
+      "factor": "whole coherent UX candidate",
+      "hold": "same user tasks/identities and course viewports",
+      "measure": "actual task completion, focus/draft ownership, readable long content and reachable controls",
+      "limit": "multiple presentation factors change; not single-factor causal efficacy A/B"
+    },
+    {
+      "id": "board",
+      "factor": "element merge vs scene replacement negative control",
+      "hold": "identical independent creates/update/delete/undo/reconnect",
+      "measure": "unrelated peer objects retained, deterministic convergence and durable retry"
+    }
+  ],
+  "stop": "Each declared task has actual source-bound verification; actionable independent findings repaired and affected checks pass. Do not repeat green runs for technique counts.",
+  "humanPreference": "NOT RUN; owner feedback is qualitative baseline observation; no sampled user A/B winner"
+}

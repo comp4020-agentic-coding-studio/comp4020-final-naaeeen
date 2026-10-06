@@ -189,3 +189,15 @@ records instead of treating this report as a one-time planning artifact.
 Harness adaptation review and qualitative good/bad scenario checks:
 [REVIEW-AND-CALIBRATION](REVIEW-AND-CALIBRATION.md). These do not measure agent
 performance. Detailed subsection audits are separate ongoing work.
+
+## Active owner redesign extension
+
+The 7 October hands-on feedback rejected the prior UX. R0–R4 now covers game title/
+HUD/options, spatial proportions/tracking and a full standalone whiteboard with
+movable chat. Apply the same detailed loop to each new subsection in REDESIGN-PLAN.
+Do not treat the 195-test baseline or model agreement as new design acceptance.
+Record a current-source comparison, failure-path test, actual browser observation
+and review/refinement where each informs the decision. If fresh-agent spawning
+hits host thread limits, record that outcome and label contextual review; perform
+fresh implementation review when a slot becomes available rather than pretending
+context-retaining review was fresh. Stop resolved lanes and preserve their records.

@@ -2,8 +2,9 @@
 
 ## Outcome and authority
 
-Current task: first adapt the A3harness, then perform the detailed subsection revisit
-and complete the approved implementation/verification. Read docs/implementation/ACTIVE-TASK.md.
+Current task: implement the owner-authorised R0–R4 game interaction, spatial/camera
+and full independent shared whiteboard redesign. The previous S0–S4 local core is
+historical evidence; current acceptance must follow the new owner brief. Read docs/implementation/ACTIVE-TASK.md.
 Record actual checks, fresh reviews, refinements and focused local commits per phase.
 Read owner original brief plus OWNER-POSITIONING-ADDENDUM-2026-10-06.md and
 PRODUCT-POSITIONING.md. Provisional target is2-6already-known university peers:
@@ -12,9 +13,11 @@ author-written next step. User value is unvalidated;do not treat our prototypes
 or model agreement as demand,market uniqueness,productivity or HD proof.
 
 Mandatory house experience remains code/membership,owned DIY bedrooms/doors,
-controlled avatars,real text/presence/shared study and useful board. Timer,pen,
-uploads,big catalogues and full archive UI are enhancements. Core board has one
-author-owned current goal/question/next-step card,not a task platform.
+controlled avatars,real text/presence/shared study and useful board. The 7 October owner redesign adds a full standalone-capable collaborative board
+with drawing, sticky notes, text/paste and movable companion chat. Read
+docs/product/OWNER-REDESIGN-2026-10-07.md and docs/implementation/REDESIGN-PLAN.md.
+Existing author-owned study cards remain separate. Timers, huge furniture catalogues
+and full archive-management UI remain enhancements.
 PLAN.md is authoritative;previous plans are history. Crit8 remains frozen6dc79c5.
 
 Use current official course pages, the user's stated aims, actual repository

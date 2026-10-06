@@ -47,3 +47,12 @@ remain preserved. Runtime freeze is released. The larger close-follow world and
 Windows/WSL reusable agent defaults are implemented and verified within their
 recorded scopes. Follow [CURRENT-HANDOFF](CURRENT-HANDOFF.md) for current evidence,
 commit milestones and external/student follow-up gates.
+
+## Active new redesign goal
+
+The prior local core goal is complete. The owner rejected its interaction quality
+after trying it and authorised R0–R4 game UI/UX, spatial/camera and full independent
+whiteboard implementation. Read the owner redesign brief and REDESIGN-PLAN here.
+Workers preserve existing identity/private-data/draft semantics and own separate
+files; parent owns build/server wiring, integration, reviews and final acceptance.
+All new project artifacts remain in WSL. New local commits are authorised.

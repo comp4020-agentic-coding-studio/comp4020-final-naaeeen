@@ -14,8 +14,10 @@ loop in docs/harness/REPORT.md and record each part in docs/revisit/REGISTER.md.
 Reopen guidance when facts, code, APIs, tests or reviewer findings change.
 One aggregate phase PASS is insufficient. Future A3 agents must continue this loop.
 
-Current owner priority: adapt A3harness first, then detailedS0-S4revisit and complete
-local implementation/verification. Read OWNER-HARNESS-ADDENDUM-2026-10-07.md in docs/product.
+Current owner priority: implement the R0–R4 game UI/UX, spatial/camera and full
+standalone board redesign after the owner tried the earlier local core. Read
+docs/product/OWNER-REDESIGN-2026-10-07.md and docs/implementation/REDESIGN-PLAN.md.
+Continue detailed subsection research/review/refinement; preserve S0–S4 history. Read OWNER-HARNESS-ADDENDUM-2026-10-07.md in docs/product.
 Canonical workspace: Ubuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen.
 Use actual Linuxmise/pnpm; preserve frozencrit8 and fixedFlyshape/legacydata.
 Workers own assigned paths and preserve others; review/research remain read-only.

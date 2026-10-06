@@ -1,3 +1,13 @@
+# Active redesign extension, 7 October 2026
+
+The owner tried the local core and requested a substantial game UI/UX, spatial and
+camera redesign plus a full standalone-capable shared whiteboard with movable chat.
+[Owner brief](docs/product/OWNER-REDESIGN-2026-10-07.md) and
+[phased implementation extension](docs/implementation/REDESIGN-PLAN.md) are the
+current scope and subsection gates. They supersede the earlier card-only board and
+drawing-as-future cut line below. This root remains the single authoritative plan;
+the preserved sections retain product rationale and historical delivery evidence.
+
 # Shared Study House: purpose-first delivery plan
 
 6 October 2026. Authorised implementation is active; see docs/implementation/ACTIVE-TASK.md.
@@ -216,9 +226,7 @@ Only a demonstrated need earns drawing/uploads/timers/multiple houses or a CRDT.
 The current Node/SQLite/Three+Socket option remains economical;switch rendering
 only for measured device/interaction problems.2D does not solve a weak user goal.
 
-Local core implementation is active in S4. S1-S3 main integrated browser tasks
-have passed; final UI polish, current-candidate checks and sustained load are in
-progress. Human need/preference NOT RUN. Pinned production Socket.IO packages and
+The earlier S1–S4 local core was completed; its historical evidence is preserved. Human need/preference NOT RUN. Pinned production Socket.IO packages and
 private house authority/world/UI now exist; no new candidate has been published.
 Read docs/implementation/VALIDATION.md and HARNESS-AUDIT.md for actual status.
 [Positioning decision record](docs/planning/POSITIONING-COMPARISON.md) and

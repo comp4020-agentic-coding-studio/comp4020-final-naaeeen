@@ -1,3 +1,15 @@
+# Active redesign handoff
+
+7 October 2026: a new comprehensive goal is active after the owner tried and
+rejected the earlier interaction quality. Read [owner redesign brief](../product/OWNER-REDESIGN-2026-10-07.md),
+[phased plan](REDESIGN-PLAN.md) and [research](../research/2026-10-07-game-and-board-redesign.md).
+R0 baseline/contract/research is recorded; R1 shell, R2 space/camera and R3 board
+authority/workspace proceed in bounded parallel ownership. Parent owns build/server
+wiring, integration, native acceptance and final reviews/commits. No new release.
+
+The sections below describe the prior completed local core and remain history.
+Their passing checks do not establish acceptance of changed code or owner's UX.
+
 # Current A3 handoff
 
 Updated 7 October 2026. The authorised S1–S4 local core is implemented and verified.
