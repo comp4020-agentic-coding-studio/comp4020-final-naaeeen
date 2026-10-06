@@ -90,3 +90,8 @@ Their historical directory instructions do not override this release contract.
 
 Official: https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/08-its-alive/
 and assessments/final-project/, topics/assessment/, topics/ai-use-and-integrity/.
+
+## Current presentation requirement
+The owner wants a world-first game-likeHUD, not the former webpage layout.
+Read docs/NIGHT-NEIGHBOURHOOD-PLAN.md andADR0003. Native accessible controls and
+visible save/recovery still use the same domain contracts.

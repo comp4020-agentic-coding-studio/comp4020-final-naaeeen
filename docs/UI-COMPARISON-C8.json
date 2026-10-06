@@ -1,0 +1,29 @@
+{
+  "declaredOn": "2026-10-06",
+  "stage": "Initial UI/owner feedback already observed; redesigned candidate not yet observed",
+  "question": "Can a world-first HUD satisfy the requested game feeling while retaining Crit8 actions?",
+  "candidates": {
+    "A": "webpage composition at38358b3",
+    "B": "world-first HUD pending observation"
+  },
+  "fixed": [
+    "same semantic room/state when feasible",
+    "same saved API and assets",
+    "window/pane/move/rotate/revisit tasks",
+    "1920x1080 and390x844"
+  ],
+  "changed": [
+    "layout/panel placement/world canvas area",
+    "contextual controls and helper copy"
+  ],
+  "acceptance": [
+    "scene dominates presentation",
+    "reachable labelled44px controls",
+    "visible saved/error/recovery outcomes",
+    "phone no horizontal overflow and keyboard can scroll",
+    "models loaded and owned actions correct"
+  ],
+  "method": "Owner requirement-led design/technical comparison; not statistical human A/B",
+  "review": "Independent artifact review; disclose context and unmatched data",
+  "stop": "Resolve material issues, pass core tasks, record uncertainty"
+}

@@ -5,3 +5,7 @@
 
 # Preserve byte-exact historical imports and their SHA manifests.
 docs/planning-source/** -text
+
+# Keep the original licensed asset bytes; vendor licence whitespace is deliberate.
+public/assets/kaykit/** -text
+public/assets/kaykit/LICENSE.txt -whitespace

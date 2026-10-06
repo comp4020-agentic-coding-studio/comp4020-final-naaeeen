@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#171c30">
   <meta name="description" content="Make a small room your own. Leave a coloured pane and a little thought in a shared neighbourhood lamp.">
   <title>Night Neighbourhood</title>
-  <link rel="stylesheet" href="/style.css?v=c8-20261006-2">
+  <link rel="stylesheet" href="/style.css?v=c8-game-20261006">
   <script type="importmap">{"imports":{"three":"/vendor/build/three.module.js","three/addons/":"/vendor/examples/jsm/"}}</script>
-  <script type="module" src="/app.js?v=c8-20261006-2"></script>
+  <script type="module" src="/app.js?v=c8-game-20261006"></script>
 </head>
 <body data-view="overview">
   <a class="skip-link" href="#controls">Skip to your controls</a>
@@ -24,9 +24,10 @@
         <span class="connection" id="connection" role="status">Opening the neighbourhood…</span>
       </div>
       <nav class="place-nav" aria-label="Neighbourhood spaces">
-        <button type="button" data-view="overview" aria-pressed="true"><span aria-hidden="true">▦</span> The neighbourhood</button>
-        <button type="button" data-view="room" aria-pressed="false"><span aria-hidden="true">⌂</span> My window</button>
-        <button type="button" data-view="courtyard" aria-pressed="false"><span aria-hidden="true">✧</span> Shared lamp</button>
+        <button type="button" data-view="overview" aria-label="The neighbourhood" aria-pressed="true"><span aria-hidden="true">▦</span> Neighbours</button>
+        <button type="button" data-view="room" aria-label="My window" aria-pressed="false"><span aria-hidden="true">⌂</span> Room</button>
+        <button type="button" data-view="courtyard" aria-label="Shared lamp" aria-pressed="false"><span aria-hidden="true">✧</span> Lamp</button>
+        <button type="button" id="tools-toggle" aria-controls="controls" aria-expanded="true" aria-label="Show or hide tools" aria-pressed="false">Hide</button>
       </nav>
       <div class="place-layout" data-view="overview" id="place-layout">
         <section class="scene-card" aria-labelledby="scene-title">

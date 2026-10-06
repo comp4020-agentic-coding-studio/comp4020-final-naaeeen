@@ -3,3 +3,179 @@
 @media(max-width:760px){.place-layout[data-view=room] .panel-intro{display:none}.place-layout[data-view=room] .controls-card{padding-top:12px}.place-layout[data-view=room] .panel-heading{margin-bottom:11px}.place-layout[data-view=room] .scene-footer{min-height:52px}}
 
 @media(max-width:760px){body[data-view=room] .intro-row{display:none}body[data-view=room] .place-nav{padding-top:14px}}
+
+/* World-first C8 HUD. Data and authority stay in the existing command layer. */
+body { background:#152039; }
+.site-shell { width:100%; max-width:none; margin:0; position:relative; }
+.site-header {
+  position:absolute; top:20px; left:24px; right:24px; padding:0;
+  border:0; z-index:5; pointer-events:none;
+}
+.site-header > * { pointer-events:auto; }
+.wordmark { font-size:18px; gap:9px; }
+.wordmark-icon { font-size:32px; }
+.header-motto { display:none; }
+.readme-link {
+  min-height:44px; display:flex; align-items:center; padding:0 14px;
+  border:1px solid #e8c8a147; border-radius:9px; background:#172238e8;
+  font-size:11px; box-shadow:0 4px 14px #080d2233;
+}
+main { position:relative; height:100svh; min-height:680px; }
+.intro-row {
+  position:absolute; top:80px; left:24px; right:24px; z-index:4;
+  display:flex; align-items:start; padding:0;
+}
+.intro-row .eyebrow, #welcome-copy { display:none; }
+#greeting { font:13px/1.5 "Trebuchet MS",sans-serif; color:#ddc9b7; margin:0; letter-spacing:0; }
+.connection { font-size:10px; background:#172238dc; padding:7px 10px; border-radius:20px; }
+.place-layout { position:absolute; inset:0; display:block; }
+.scene-card { border:0; border-radius:0; background:transparent; box-shadow:none; overflow:visible; height:100%; }
+#world { position:absolute; inset:0; width:100%; height:100%; border-radius:0; }
+.scene-heading { position:absolute; left:24px; bottom:120px; z-index:3; padding:0; background:none; pointer-events:none; }
+.scene-heading .eyebrow { color:#bdc5cf; font-size:8px; }
+.scene-heading h2 { font-size:19px; color:#f3e2cf; }
+.scene-heading > p { display:none; }
+.scene-footer {
+  position:absolute; left:24px; bottom:22px; z-index:4; border:0;
+  padding:0; min-height:44px; background:none;
+}
+.scene-footer #render-status { display:none; }
+.pixel-control { padding:0 8px; gap:8px; }
+.pixel-control select { background:#18243cdc; border-color:#52607a; }
+.place-nav {
+  position:absolute; left:50%; bottom:20px; z-index:6;
+  transform:translateX(-50%); display:flex; gap:6px; padding:7px;
+  border:1px solid #c9a77d77; border-bottom:3px solid #65523d;
+  border-radius:13px; background:#182239ef;
+  box-shadow:0 8px 22px #060b203d, inset 0 1px #f2d3ab22;
+}
+.place-nav button { min-height:46px; padding:8px 14px; font-size:12px; border-radius:8px; }
+.place-nav button span { font-size:22px; }
+.place-nav button[aria-pressed=true] { background:#e7bd8f; color:#2c2630; box-shadow:inset 0 -3px #b58b61; }
+#tools-toggle { padding:8px 12px; min-width:46px; }
+.controls-card {
+  position:absolute; right:24px; bottom:112px; z-index:5; width:306px;
+  max-height:calc(100svh - 180px); overflow:auto; overscroll-behavior:contain;
+  padding:18px; border:1px solid #d2ad846d; border-radius:13px;
+  background:#202b40f2; box-shadow:0 12px 30px #03081955, inset 0 1px #ead4ae17;
+}
+.panel-heading { margin-bottom:12px; gap:8px; }
+.panel-number { font-size:20px; }
+.panel-heading .eyebrow { display:none; }
+.panel-heading h2 { font-size:21px; }
+.panel-intro { font-size:11px; margin-bottom:12px; }
+.controls-card input, .controls-card select { min-height:44px; }
+.controls-card fieldset { margin-bottom:12px; }
+.controls-card .field-hint { margin-bottom:12px; }
+.public-notice { font-size:11px; }
+.cookie-note { font-size:10px; }
+.draft-preview { padding:8px 10px; margin-bottom:10px; }
+.save-status { margin-top:12px; padding-top:10px; }
+.window-wall {
+  position:absolute; left:24px; top:145px; z-index:3; width:178px;
+  max-height:46svh; overflow:auto; padding:13px;
+  background:#172238cc; border:1px solid #8090a638; border-radius:12px;
+}
+.wall-heading { display:block; margin-bottom:11px; }
+.wall-heading h3 { font-size:11px; }
+.wall-heading p { display:none; }
+.neighbours { grid-template-columns:repeat(2,minmax(0,1fr)); gap:17px 12px; }
+.neighbour-window { width:36px; height:40px; }
+.neighbour-name { font-size:10px; }
+body[data-view=room] .window-wall, body[data-view=courtyard] .window-wall { display:none; }
+body[data-view=room] .controls-card {
+  left:50%; right:auto; bottom:100px; width:min(640px,calc(100% - 40px));
+  transform:translateX(-50%); padding:13px 16px;
+}
+body[data-view=room] .panel-heading, body[data-view=room] .panel-intro,
+body[data-view=room] .room-hint { display:none; }
+#room-panel { display:grid; grid-template-columns:175px 1fr; column-gap:16px; align-items:center; }
+#room-panel label { grid-column:1; margin-bottom:4px; }
+#object-list { grid-column:1; }
+#object-description { grid-column:1; margin:5px 0 0; font-size:9px; }
+.move-pad {
+  grid-column:2; grid-row:1/4; display:flex; gap:6px;
+  width:100%; margin:0; align-items:center; justify-content:center;
+}
+.move-pad button { min-width:44px; height:44px; }
+.move-pad #rotate { min-width:85px; font-size:11px; }
+#edit-window { grid-column:1/-1; margin-top:10px; min-height:34px; padding:7px 10px; }
+body[data-view=room] .save-status { margin-top:8px; padding-top:8px; min-height:25px; }
+.lamp-stories {
+  position:absolute; left:24px; bottom:112px; z-index:4; width:285px;
+  max-height:43svh; overflow:auto; display:block; padding:4px;
+}
+.stories-heading .eyebrow { display:none; }
+.stories-heading h2 { font-size:16px; margin:0 0 12px; }
+.contributions { display:flex; flex-direction:column; gap:10px; }
+.contribution { border:0; background:#efdfc4; color:#332d31; border-radius:13px 13px 13px 3px; padding:13px 15px; }
+.contribution h3 { color:#3a3033; font-weight:700; }
+.contribution p { color:#443d3d; font-size:12px; line-height:1.45; }
+.contribution small { color:#65585b; }
+.display-details { position:absolute; right:24px; top:115px; z-index:5; margin:0; }
+.display-details summary { min-height:40px; font-size:9px; }
+.display-details pre { width:min(340px,80vw); max-height:260px; background:#172238f7; }
+footer { position:absolute; right:24px; bottom:5px; z-index:4; padding:0; gap:10px; font-size:8px; }
+footer p:first-child { display:none; }
+#world .render-error { z-index:2; padding:120px 340px; }
+@media(max-width:760px) {
+  body { overflow-x:hidden; }
+  .site-shell { width:100%; }
+  .site-header { position:relative; inset:auto; padding:13px 14px; gap:8px; min-height:64px; }
+  .wordmark { font-size:16px; }
+  .wordmark-icon { font-size:28px; }
+  .readme-link { font-size:10px; padding:0 10px; }
+  main { height:auto; min-height:calc(100svh - 64px); padding-bottom:105px; }
+  .intro-row, body[data-view=room] .intro-row { position:relative; inset:auto; display:flex; margin:0 14px 8px; padding:0; }
+  #greeting { font-size:11px; max-width:190px; }
+  .connection { font-size:8px; margin:0; max-width:135px; padding:4px 7px; }
+  .place-layout { position:relative; inset:auto; display:flex; flex-direction:column; gap:0; }
+  .scene-card { position:relative; height:42svh; min-height:285px; max-height:360px; width:100%; }
+  #world, .place-layout[data-view=room] #world, .place-layout[data-view=courtyard] #world { position:absolute; height:100%; inset:0; }
+  .scene-heading, .place-layout[data-view=room] .scene-heading,
+  .place-layout[data-view=courtyard] .scene-heading { left:15px; top:10px; bottom:auto; padding:0; }
+  .scene-heading .eyebrow { display:none; }
+  .scene-heading h2 { font-size:15px; }
+  .scene-footer { left:auto; right:13px; bottom:6px; padding:0; min-height:44px; }
+  .pixel-control { font-size:9px; }
+  .pixel-control select { min-height:36px; }
+  .window-wall { top:38px; left:14px; width:88px; max-height:250px; padding:9px; background:#172238a6; }
+  .wall-heading { display:none; }
+  .neighbours { grid-template-columns:1fr; gap:14px; }
+  .neighbour-window { width:25px; height:28px; }
+  .neighbour-name { font-size:8px; }
+  .controls-card, body[data-view=room] .controls-card,
+  .place-layout[data-view=room] .controls-card {
+    position:relative; left:auto; right:auto; top:auto; bottom:auto;
+    transform:none; width:calc(100% - 28px); margin:8px 14px 0;
+    max-height:none; overflow:visible; padding:16px;
+    background:#202b40; border-radius:17px;
+  }
+  .panel-heading { margin-bottom:10px; }
+  .panel-heading h2 { font-size:20px; }
+  #room-panel { display:block; }
+  #room-panel label { font-size:10px; margin-bottom:5px; }
+  #object-description { margin:6px 0 10px; }
+  .move-pad, .place-layout[data-view=room] .move-pad {
+    display:flex; flex-wrap:nowrap; gap:5px; width:100%; margin:0 0 9px; justify-content:space-between;
+  }
+  .move-pad button { flex:0 0 44px; }
+  .move-pad #rotate { flex:1; min-width:70px; }
+  #edit-window { min-height:44px; margin-top:6px; }
+  .place-nav {
+    position:fixed; left:50%; bottom:calc(12px + env(safe-area-inset-bottom));
+    width:calc(100% - 24px); max-width:440px; gap:3px; padding:6px;
+    justify-content:space-between; border-radius:13px;
+  }
+  .place-nav button { flex:1; display:flex; flex-direction:column; gap:2px; min-height:49px; padding:5px 7px; font-size:10px; }
+  .place-nav button span { font-size:19px; display:block; }
+  .place-nav #tools-toggle { flex:0 0 44px; font-size:11px; }
+  .lamp-stories { position:relative; inset:auto; width:calc(100% - 28px); margin:17px 14px 0; max-height:none; padding:0; }
+  .display-details { position:relative; inset:auto; margin:10px 14px; }
+  .display-details pre { width:100%; }
+  footer { position:relative; inset:auto; padding:0 14px 95px; font-size:9px; }
+  #world .render-error { padding:65px 22px; font-size:12px; }
+}
+
+/* Keep editing action targets touch-sized on desktop and mobile. */
+#edit-window { min-height:44px; }

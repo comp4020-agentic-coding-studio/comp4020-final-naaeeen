@@ -74,7 +74,9 @@ function pieceName(item) {
   const base = names[item.asset] || item.asset;
   return same.length > 1 ? `${base} ${same.findIndex((piece) => piece.id === item.id) + 1}` : base;
 }
+function openTools() { $('controls').hidden = false; const toggle = $('tools-toggle'); if (toggle) { toggle.setAttribute('aria-pressed', 'false'); toggle.setAttribute('aria-expanded', 'true'); toggle.textContent = 'Hide'; } }
 function choose(id) {
+  openTools();
   if (id === 'lantern') { changeView('courtyard'); return; }
   if (!state?.room.furniture.some((piece) => piece.id === id)) return;
   selected = id;
@@ -84,6 +86,7 @@ function choose(id) {
   updateControls();
 }
 function changeView(next) {
+  openTools();
   if (!['overview', 'room', 'courtyard'].includes(next)) return;
   view = next;
   document.body.dataset.view = next;
@@ -130,7 +133,7 @@ function renderContributions() {
     const note = document.createElement('p'); note.textContent = part.note || `A little ${colours.find((colour) => colour.hex === part.colour)?.name.toLowerCase() || 'coloured'} light.`;
     article.append(heading, note); return article;
   });
-  if (!nodes.length) { const empty = document.createElement('p'); empty.className = 'empty-state'; empty.textContent = 'The lamp is waiting for its first coloured pane. A little light is enough.'; nodes.push(empty); }
+  if (!nodes.length) { const empty = document.createElement('p'); empty.className = 'empty-state'; empty.textContent = 'The lamp is already warm. Add your own colour if you like.'; nodes.push(empty); }
   $('contributions').replaceChildren(...nodes);
 }
 function restorePendingDraft() {
@@ -203,6 +206,7 @@ async function sendPending() {
     } else if (response.status >= 400 && response.status < 500 && result.ok === false) {
       pending = null; storePending();
       if (result.code === 'REVISION_CONFLICT') { status('This changed in another tab. Your draft is still here. Read the latest state, then save again.', 'error'); showReadLatest(); }
+      else if (result.code === 'FORBIDDEN') { status('This browser session changed. This save could not be confirmed for the current window. Read the latest saved state to open the current window.', 'error'); showReadLatest(); }
       else { status(result.message || 'This change could not be saved. Please review your choices.', 'error'); }
     } else {
       status('This save is not confirmed yet. Try the same save again; it will not add your change twice.', 'error');
@@ -275,7 +279,7 @@ function callRenderer(method, ...args) {
 }
 async function openScene() {
   try {
-    const module = await import('/render-three.js?v=c8-20261006-2');
+    const module = await import('/render-three.js?v=c8-game-20261006');
     $('world').replaceChildren();
     renderer = await module.createRenderer($('world'), { mode: 'camera-fixed', pixelScale: Number($('pixel-scale').value), onSelect: choose, onMetrics: updateDiagnostics, onReady: () => { sceneReady = true; $('render-status').textContent = 'A little room, ready to arrange'; updateDiagnostics({ firstSceneReadyMs: Math.round(performance.now()) }); }, onError: (error) => { sceneReady = false; $('render-status').textContent = 'Scene unavailable · controls still work'; updateDiagnostics({ sceneError: String(error.message || error) }); } });
     if (state) callRenderer('setState', state);
@@ -302,3 +306,6 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) loadState(
 // Identity is established before SSE, so the first connection cannot create a competing session.
 loadState().catch((error) => { status(error.message, 'error'); setConnection('Room not loaded'); showReadLatest(); });
 openScene(); updatePreviews(); updateDiagnostics();
+
+// A toolbelt toggle keeps the world available without turning editing into canvas-only UI.
+$('tools-toggle').addEventListener('click', () => { const hidden = !$('controls').hidden; $('controls').hidden = hidden; $('tools-toggle').setAttribute('aria-pressed', String(hidden)); $('tools-toggle').setAttribute('aria-expanded', String(!hidden)); $('tools-toggle').textContent = hidden ? 'Tools' : 'Hide'; });
