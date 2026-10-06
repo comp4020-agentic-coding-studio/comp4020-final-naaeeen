@@ -60,3 +60,7 @@ room visits/limited DIY/lifecycle;S3 question/next-step card value loop;S4 real
 resource/device/baseline comparison,restore and course evidence.
 Each ends in a usable story,actual version,checks,review,focused commit and
 go/pivot/hold judgement. Cut enhancements first. Human evidence remains NOT RUN.
+
+## 6 October: authorised implementation begins
+
+Confirmed canonical Ubuntu/lizhi repo, clean main ahead5 before changes. Read actual harness and inherited A2 methods; latest owner authorisation supersedes planning-only routing. Output English; resources any language. Frozen shared interfaces and assigned non-overlapping store/realtime/world/browser ownership; parent owns integration. New scoped commands now carry original house ID because a delayed lounge or departure action must never apply to a later house. Fresh store review reproduced missing7daychat expiry and private revision leakage; regressions/fixes are in progress. HTTP red:3 behavioral404 failures before routes; current integrated3PASS. Native packages Socket.IO/client4.8.4 installed/pinned; production audit clean; existing evidencecheckPASS. No human value trial, realphone or newdeploy evidence yet.

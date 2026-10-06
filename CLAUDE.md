@@ -2,7 +2,8 @@
 
 ## Outcome and authority
 
-Current task: purpose/user-goal refinement and an executable phased plan.
+Current task: implement the approved phased PLAN. Read docs/implementation/ACTIVE-TASK.md.
+Record actual checks, fresh reviews, refinements and focused local commits per phase.
 Read owner original brief plus OWNER-POSITIONING-ADDENDUM-2026-10-06.md and
 PRODUCT-POSITIONING.md. Provisional target is2-6already-known university peers:
 when stuck,find a voluntarily willing friend,briefly converse,and preserve an
@@ -26,7 +27,7 @@ documents English; imported Chinese research retains its source language.
 
 Work through the shortest complete saved interaction, then improve expression
 and visual quality. Preserve separation between domain state and renderer.
-Keep the frozen Crit8 production behaviour intact during planning. New prototypes
+Preserve the frozen Crit8 tag and legacy database; integrate the new house additively. New prototypes
 are loopback-only and clearly labelled, with isolated data/dependencies. Explore
 new approaches critically; do not let the earlier window/lamp slice limit the
 final capability. Research unfamiliar/changing APIs from primary documentation and

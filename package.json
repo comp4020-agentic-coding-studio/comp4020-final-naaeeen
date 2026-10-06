@@ -10,7 +10,8 @@
     "test": "vitest run",
     "start": "node src/server.ts",
     "test:domain": "vitest run --config vitest.domain.config.ts",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "test:house": "vitest run --config vitest.house.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
@@ -27,6 +28,8 @@
   },
   "dependencies": {
     "marked": "17.0.3",
+    "socket.io": "4.8.4",
+    "socket.io-client": "4.8.4",
     "three": "0.186.1"
   }
 }

@@ -1,6 +1,6 @@
 # Shared Study House: purpose-first delivery plan
 
-6 October 2026. Product-positioning refinement; production implementation is pending.
+6 October 2026. Authorised implementation is active; see docs/implementation/ACTIVE-TASK.md.
 This root PLAN.md is the one active plan. Prior plans are preserved in
 [history](docs/history/before-purpose-refinement/PLAN.md). Technical progress does
 not decide what the product is for.
