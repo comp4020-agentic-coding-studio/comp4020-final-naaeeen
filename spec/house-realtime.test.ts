@@ -145,6 +145,42 @@ describe("house realtime authority", () => {
     clock.mockReturnValue(base + 200);
     expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 2, x: pose.x + .74, z: pose.z, heading: 0 })).code).toBe("INVALID_MOVE");
   });
+  test("logs an immediate walk-to-idle transition once without stationary frame spam", async () => {
+    const records: Record<string, unknown>[] = [];
+    const f = await setup({ log: (record: Record<string, unknown>) => records.push(record) });
+    const base = Date.now(); const clock = vi.spyOn(Date, "now").mockReturnValue(base);
+    const socket = await f.client(); const reply = await subscribe(socket);
+    const arrival = reply.snapshot.players.find((player: any) => player.id === f.store.ids[0]);
+    const position = { x: arrival.x + .1, z: arrival.z, heading: 0 };
+    clock.mockReturnValue(base + 100);
+    expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 1, ...position })).ok).toBe(true);
+    clock.mockReturnValue(base + 200);
+    expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 2, ...position })).ok).toBe(true);
+    for (let sequence = 3; sequence <= 6; sequence++) {
+      clock.mockReturnValue(base + sequence * 100);
+      expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence, ...position })).ok).toBe(true);
+    }
+    const motion = records.filter(record => String(record.action).startsWith("motion."));
+    expect(motion.map(record => record.action)).toEqual(["motion.start", "motion.stop"]);
+    expect(motion[1]).toEqual({ at: base + 200, actor: f.store.ids[0], action: "motion.stop", outcome: "idle" });
+    for (const record of motion) expect(Object.keys(record).sort()).toEqual(["action", "actor", "at", "outcome"]);
+  });
+  test("logs one timer stop after movement input ends and no duplicate on a later idle frame", async () => {
+    const records: Record<string, unknown>[] = [];
+    const f = await setup({ log: (record: Record<string, unknown>) => records.push(record) });
+    const base = Date.now(); const clock = vi.spyOn(Date, "now").mockReturnValue(base);
+    const socket = await f.client(); const reply = await subscribe(socket);
+    const arrival = reply.snapshot.players.find((player: any) => player.id === f.store.ids[0]);
+    const position = { x: arrival.x + .1, z: arrival.z, heading: 0 };
+    clock.mockReturnValue(base + 100);
+    expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 1, ...position })).ok).toBe(true);
+    clock.mockReturnValue(base + 351);
+    await vi.waitFor(() => expect(records.filter(record => record.action === "motion.stop")).toHaveLength(1));
+    clock.mockReturnValue(base + 600);
+    expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 2, ...position })).ok).toBe(true);
+    expect(records.filter(record => String(record.action).startsWith("motion.")).map(record => record.action)).toEqual(["motion.start", "motion.stop"]);
+    expect(records.find(record => record.action === "motion.stop")?.at).toBe(base + 351);
+  });
   test("same-tab reconnect retains choice but a new controller lease defaults quiet", async () => {
     const f = await setup(); const token = randomUUID(); const a = await f.client(); const first = await subscribe(a, token);
     await ask(a, "house.availability", { generation: first.snapshot.generation, value: "chat" });

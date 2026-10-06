@@ -259,9 +259,10 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       const candidate = { x: body.x as number, z: body.z as number };
       const swept = slide(layout, { x: lease.x, z: lease.z }, dx, dz);
       if (!validPosition(layout, candidate) || Math.hypot(swept.x - candidate.x, swept.z - candidate.z) > .01) throw new HouseError("INVALID_MOVE", "Furniture or a wall blocks that path.");
-      if (lease.animation !== "walk" && Math.hypot(dx, dz) > .001) log(context.id, "motion.start", "walking");
+      const animation = Math.hypot(dx, dz) > .001 ? "walk" : "idle";
+      if (lease.animation !== animation) log(context.id, animation === "walk" ? "motion.start" : "motion.stop", animation === "walk" ? "walking" : "idle");
       lease.motionCredit = credit - Math.hypot(dx, dz);
-      lease.x = candidate.x; lease.z = candidate.z; lease.heading = (body.heading as number) % (Math.PI * 2); lease.sequence = body.sequence as number; lease.lastMoveAt = now; lease.animation = Math.hypot(dx, dz) > .001 ? "walk" : "idle"; motionDirty = true;
+      lease.x = candidate.x; lease.z = candidate.z; lease.heading = (body.heading as number) % (Math.PI * 2); lease.sequence = body.sequence as number; lease.lastMoveAt = now; lease.animation = animation; motionDirty = true;
       return { ok: true, sequence: lease.sequence };
     });
     handle("house.availability", body => {
