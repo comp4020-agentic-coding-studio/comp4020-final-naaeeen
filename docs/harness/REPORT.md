@@ -105,7 +105,10 @@ unresolved choice cannot be dismissed with a generic not-needed statement.
 A new consequential review starts without parent conversation history (native
 fork_turns none where available). Supply the current goal, owner constraints,
 relevant source/diff, actual evidence and rubric. Exclude parent preferences,
-earlier verdicts and candidate winners. Keep review read-only and bounded.
+earlier verdicts and candidate winners. A general worker handoff may contain
+verdicts: give fresh reviewers a sanitised fact-only packet instead and do not
+require them to open that handoff. Normal resumed workers still read it.
+Keep review read-only and bounded.
 
 For subjective candidates, mask labels/order when useful and retain the mapping
 outside the review. Fresh context reduces shared framing; shared model biases

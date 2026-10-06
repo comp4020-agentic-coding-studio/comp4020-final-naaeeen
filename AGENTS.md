@@ -1,7 +1,9 @@
 # A3: Night Neighbourhood / Shared Study House
 
 ALWAYS start a new/resumed A3 work task by reading CLAUDE.md, PLAN.md,
-docs/harness/REPORT.md and the current handoff/audit. The active report is mandatory;
+docs/harness/REPORT.md and the current handoff/audit. Fresh reviewers receive a
+sanitised fact-only packet instead of a verdict-bearing handoff; normal resumed
+workers still read the full handoff. The active report is mandatory;
 the inherited A2 report is historical reference.
 
 Throughout every phase, section and substantial subsection, continually return to

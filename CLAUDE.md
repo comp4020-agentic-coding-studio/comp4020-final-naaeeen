@@ -50,7 +50,8 @@ justify it. Record the observation, alternatives, choice, cost and verification
 in docs/decisions, not just a list of features.
 
 Delegate bounded independent work with explicit file ownership; workers are not
-alone and must preserve each other's changes. Read-only fresh reviewers get only
+alone and must preserve each other's changes. Fresh reviewers skip verdict-bearing handoffs/review logs and receive a sanitised
+factual packet with the current interfaces/version. Read-only fresh reviewers get only
 the current brief, evidence and rubric without parent conversation/preferences.
 Reconcile findings yourself. For a consequential comparison, declare factors and
 stopping criteria before trials; distinguish technical checks/model judgement
