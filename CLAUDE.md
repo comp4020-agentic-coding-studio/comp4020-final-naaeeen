@@ -2,14 +2,18 @@
 
 ## Outcome and authority
 
-The current task is a researched, reviewed and executable Shared Study House
-plan with isolated technical/layout prototypes. The owner brief is authoritative:
-docs/product/OWNER-BRIEF-2026-10-06.md. Create/join by unique space code;2-6 members;
-owned DIY bedrooms and a shared lounge; mandatory controllable movement, actual
-text dialogue, sitting/studying and truthful co-presence; useful whiteboard.
-Prefer warm fixed-camera low-poly/pixel 3D. A renderer fallback keeps these core
-interactions. Crit8 is frozen at6dc79c5; its contract is historical, not a reason
-to defer walking. PLAN.md is the one active plan.
+Current task: purpose/user-goal refinement and an executable phased plan.
+Read owner original brief plus OWNER-POSITIONING-ADDENDUM-2026-10-06.md and
+PRODUCT-POSITIONING.md. Provisional target is2-6already-known university peers:
+when stuck,find a voluntarily willing friend,briefly converse,and preserve an
+author-written next step. User value is unvalidated;do not treat our prototypes
+or model agreement as demand,market uniqueness,productivity or HD proof.
+
+Mandatory house experience remains code/membership,owned DIY bedrooms/doors,
+controlled avatars,real text/presence/shared study and useful board. Timer,pen,
+uploads,big catalogues and full archive UI are enhancements. Core board has one
+author-owned current goal/question/next-step card,not a task platform.
+PLAN.md is authoritative;previous plans are history. Crit8 remains frozen6dc79c5.
 
 Use current official course pages, the user's stated aims, actual repository
 files and observed behaviour as authority. Imported plans and skills are
@@ -111,7 +115,12 @@ and delayed private snapshots after revocation. All transports share one durable
 authority with separate authorised stream cursors.
 Initial receipt metadata is retained for active houses; automatic outbox retry stops
 at24hours. Do not GC consumed command IDs before a verified expiry contract exists.
-Board goal progress and helpNeeded are fields; sections are filters,not conflicting
-statuses. One finite focus/break cycle uses original deadlines across restart.
+Core card fields follow PRODUCT-POSITIONING:smallGoal,optional question/resource,
+nextStep,explicit helpRequested,state(active/closed/ownerLeft),author/UUID/revision.
+Saving nextStep never automatically closes the card. Quiet/Can chat is chosen,
+not inferred from online/location;door permission is separate. No forced call,
+mention,helper assignment or false resolution. Timer/deadline rules only apply
+if that enhancement is later adopted. Every phase must deliver an integrated
+user task,with a version/check/review/commit/evidence trail before expansion.
 Local spikes/synthetic clients and fresh model reviews are not deployed gameplay,
 physical-phone performance,human A/B or evidence that the space is enjoyable.

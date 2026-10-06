@@ -1,248 +1,227 @@
-# Shared Study House: master design and implementation plan
+# Shared Study House: purpose-first delivery plan
 
-6 October 2026. Research and reviewed planning stage complete. This is the sole active PLAN.md. It replaces
-earlier window/lamp and4-8person/walking-later proposals, while preserving their
-history. The task is research,planning and isolated local validation; production
-gameplay has not been upgraded.
+6 October 2026. Product-positioning refinement; production implementation is pending.
+This root PLAN.md is the one active plan. Prior plans are preserved in
+[history](docs/history/before-purpose-refinement/PLAN.md). Technical progress does
+not decide what the product is for.
 
-## Outcome and authority
+## 1. The decision in one paragraph
 
-Build a warm small multiplayer house for2-6 existing friends. A unique space code
-creates/joins the whole house; each resident owns a DIY bedroom. Named doors lead
-from the common lounge to personal rooms. Residents control moving avatars,
-converse through actual text,see truthful presence,sit/study together and use a
-shared board. The first useful loop is arrive,greet,sit,post a goal/resource,visit
-an opened bedroom,leave and find saved traces next time.
+For 2-6 already-known university friends studying the same or related subjects
+during an overlapping evening,build a small game-like house that helps someone
+who is stuck find a voluntarily willing peer,have a short text conversation,and
+keep an author-written next step for later. Friends may also sit quietly together.
+The primary user outcome is one clarified next step,with willing participants
+and minimal unwanted interruption. This is a provisional value hypothesis,not
+validated demand or a claim of higher productivity/grades.
 
-Owner requirements are [preserved verbatim](docs/product/OWNER-BRIEF-2026-10-06.md).
-Movement,real dialogue,personal ownership and shared study are minimum experience
-requirements,including a2D fallback. Earlier implementation convenience cannot
-redefine them. The recommended product definition is recognisable ownership,easy
-reciprocal conversation,truthful presence and voluntary shared focus with little
-setup. Warmth and pleasure require actual people,not test scores.
+Read [PRODUCT-POSITIONING](docs/product/PRODUCT-POSITIONING.md) for target,trigger,
+purpose,selling point,fair alternatives and falsifiers. Original [house requirements](docs/product/OWNER-BRIEF-2026-10-06.md)
+and [new purpose request](docs/product/OWNER-POSITIONING-ADDENDUM-2026-10-06.md)
+remain authoritative. If owner/user evidence points elsewhere,we can restart the
+positioning before production code; no previous answer is a design constraint.
 
-## Read this plan with its supporting documents
+## 2. Why this rather than a feature collection
 
-| Document | Authority and purpose |
-| --- | --- |
-| [Capability contract](docs/product/SHARED-HOUSE-CONTRACT.md) | H01-H25 traceability,actors,product policies and core promises |
-| [Experience design](docs/design/SHARED-HOUSE-EXPERIENCE.md) | Complete journeys,2-6 layouts,game controls,board and social rituals |
-| [Implementation](docs/architecture/SHARED-HOUSE-IMPLEMENTATION.md) | Schema,permissions,streams,input,leases,migration and resource budget |
-| [Source ledger](docs/research/2026-10-06-shared-house-sources.md) | Primary references,version/licence boundaries and actual adoption |
-| [Comparison/review record](docs/planning/COMPARISON-AND-REVIEW.md) | Declared protocol,actual results,failures and reviewed refinements |
-| [Protocol](evaluation/shared-house-planning.protocol.json) | Parent-owned criteria declared before trials |
-| [Worklog](docs/planning/WORKLOG.md) | Current handoff,commits,checks and next action |
+Current gogh,Virtual Cottage2,Mini Cozy Room and On-Together already offer much of
+avatar/decoration/co-study/chat. Gather and Discord preserve discussion;Focusmate
+supports familiar partners. None of those capabilities alone is our innovation.
+The candidate difference is the default low-pressure familiar-peer task flow.
 
-AGENTS.md routes to this plan and CLAUDE.md. docs/C8-CONTRACT.md and
-[old handoff](docs/history/crit-8-implementation-handoff.md) describe frozen release
-history. docs/NIGHT-NEIGHBOURHOOD-PLAN.md is a pointer,not another active plan.
-Earlier docs/research feasibility notes are context,not current capacity policy.
-Imported planning-source bytes and historical A2 methods remain provenance.
+Compare fairly against private Discord with status convention,pinned question
+format,threads and a next-step summary. If the group prefers it,or questions are
+rare/uncomfortable,the house has not earned its extra interaction cost.
+[Current evidence](docs/research/2026-10-06-positioning-evidence.md) records product
+updates and papers;[comparison](docs/planning/POSITIONING-COMPARISON.md) records
+four candidates and two fresh evaluations. Agreement is model judgement,not a
+human A/B win. Candidate A,simply starting/finishing alongside friends,is a pivot
+option requiring its own evidence,not an automatically successful fallback.
 
-## Product direction,original synthesis and scope
+Research suggests awareness and shared conventions matter;room geometry does
+not itself create a meaningful place. Avatar location is not actual attention,
+and no paper proves this house improves students' results. We test presence and
+ownership because they are chosen experiential values,not by inventing a study
+benefit for every requested feature.
 
-Borrow rooms/letters from Kind Words,ownership/shared focus from gogh,
-visits/cafe/light chat from Virtual Cottage2,spatial availability from Gather,and
-shared low-demand activity from WEBFISHING. Spirit City/Chill Corner inform warm
-ambience; Tiny Glade informs forgiving DIY. All are reference descriptions,not
-APIs to embed or copied game art. [The ledger](docs/research/2026-10-06-shared-house-sources.md)
-explains each supported observation and limit.
+## 3. A single complete usage loop
 
-Our contribution is a persistent connected house for a particular small group:
-personal rooms express identity; spatial actions communicate voluntary availability;
-the board connects study intentions/questions/resources to later return.
-We do not claim market uniqueness or proven effects on concentration/loneliness.
+Join the known house -> recognise actual friends -> choose Quiet/Can chat ->
+sit/work -> optionally post goal/question/context -> a willing friend replies ->
+walk/talk -> author records next step -> continue or leave -> retrieve it later.
 
-| Core,complete first | Enhancement after core works | Continued development |
+No decoration,goal entry or help request is required before ordinary movement/chat.
+No automatic pairing,queue,helper assignment,forced timer,teleport or compulsory
+reply. Door permission,connection presence and declared availability are distinct.
+A conversation corner is a social cue;it does not silently make public-room chat private.
+The help loop is in the lounge:connected+present there+self-declared Can chat
+identifies currently approachable peers. Bedroom retreat never changes willingness
+or door permission automatically;no cross-room summoning feature is required.
+
+## 4. First-release cut line
+
+| Keep complete | Bound precisely | Enhance only after a measured need |
 | --- | --- | --- |
-|2-6capacity,code create/join,stable member/room | Bounded uploaded images after decoder gate | Additional house themes/capacity migration |
-| Keyboard/touch avatars,idle/walk/sit/stand | Wave and a few reactions | Modular outfits/advanced character options |
-| Real presence,chat bubbles and transcript | Quiet ambient audio/weather preset | More ambience/pets/shared objects |
-| Own DIY room,authorised room visits | Extra catalogue variants | Catalogue packs and safe user-created content |
-| Atomic seating and shared focus state | Small result/postcard ritual | More study rituals/groups |
-| Board notes,goals,links,short pen marks | Card filtering/export | Rich text/offline CRDT collaboration |
+| Unique house code;2-6 permanent members | One active house/identity;capacity fixed initially | Multi-house selector/public discovery |
+| Own bedrooms/doors and recognisable DIY | Six furniture categories,up to10pieces,grid move/quarter-turn/palette | Large catalogue/modular building/clothing |
+| Controllable real avatars and text | Idle/walk/sit/stand;fixed camera;bounded bubbles/transcript | Extra reactions/camera modes |
+| Shared seats and voluntary quiet study | Explicit Quiet/Can chat;no attention inference | Shared timer under reviewed deadline contract |
+| Useful live shared board | One active card/member,up to12inactive cards(closed/ownerLeft);18total | Pen strokes,uploads,filters,rich canvas/CRDT |
+| Safe saved return and basic recovery | Cookie identity,recovery proof,room/card persistence | Full archive/history-management UI |
 
-Images/drawing were explored rather than dismissed. Short bounded drawing is core;
-image decoding/storage is a real additional gate. Do not add a large city,voice/video,
-economy or productivity dashboard before the embodied loop is pleasant. The timer and short pen marks are selected
-first-release mechanisms,not owner-mandated implementations; an explicit change
-may simplify them while preserving shared study and a useful collaborative board.
+Card fields: small goal,optional question,optional resource link,next step,
+helpRequested choice,state(active/closed/ownerLeft),author/UUID/revision. Author controls
+content/outcome;peers respond in ordinary chat. No additional offer workflow until
+a pilot shows replies are hard to notice. Independent cards update without
+overwriting others;conflicting edits retain the draft.
 
-## Space,visual and interaction decisions
+Minimum safety/private room rules and graceful departure are retained;we do not
+expose a boundary while dropping its protection. Their smallest mechanisms belong
+in the implementation budget. A full archive browser is not a launch feature.
+[Reliability design](docs/architecture/SHARED-HOUSE-IMPLEMENTATION.md) retains
+detailed lifecycle rules and clearly marks timer/drawing/image extensions.
 
-Use a stable rectangular cutaway lounge and reusable bedroom template. Capacity
-changes data-driven doors/seats/signs,not five bespoke game levels. Draw only the
-currently visited room; do not simulate six bedrooms behind the lounge walls.
-Compare rear-wall doors with split rear/side doors under matched light,geometry,
-camera and tasks. Treat actual label occlusion/reachability as evidence.
+## 5. Evidence and gates before expanding
 
-Initial recommendation is rear-wall doors for2/3 and split rear/side banks for4-6,
-with clear own-door signs. This is a reasoned design choice from the comparison,
-not human preference evidence. The prototype holds one floor size for control;
-production may use compact/standard parameters after route and device checks. Names,colour
-accents and vacancy markers remain legible without relying only on colour.
-The controlled prototype is not final art or multiplayer presence.
+G0,target fit: owner assists access to at least two existing-friend pairs or one
+3-4person group. Ask for recent co-study/help episodes and actual current tools.
+Recruitment and interviews are NOT RUN. Strong requests scripted by us demonstrate
+usability only,not naturally occurring need. If B has no meaningful trigger,pivot
+before building specialised workflow.
 
-World-first desktop HUD: small house/status controls,contextual lower actions and
-optional chat/board/editor sheets. Phone retains world area plus thumb movement
-and one compact sheet. Native door/seat/board actions complement scene interaction.
-No hover-only requirements. Input/IME suppresses game keys,focus is visible,
-touch targets are at least44px and reduced motion preserves actual navigation.
+G1,integrated loop: two real browsers create/join,see real movement,exchange text,
+save identity/a chat message and reconnect;the useful card loop is completed in S3. Separate successful network/layout spikes do not
+meet this gate. No extra furniture,timers or uploads until this works.
 
-Start with a coherent cream/wood/amber palette and limited identity colours.
-Fixed oblique orthographic3D with modest shadows is the preferred route. Pixel
-effect applies to world,not text. Local procedural figures can demonstrate the
-loop; a same-rig animated asset can improve expression after verified adoption.
-Never equate a skinned glTF download with completed movement or seat integration.
+G2,value pilot: chosen task versus configured Discord;counterbalance order,
+bounded sessions,record coaching,correct willingness interpretation,unwanted
+interruption,extra setup/movement,next-step findability and reasoned reuse choice.
+[Protocol](evaluation/positioning.protocol.json) contains B's tentative scenario;
+it is not a four-way human winner test. Register the final participant protocol
+before any trial. No human trial has run.
 
-## Key engineering choices
+G3,return: observe next-day retrieval/continuation and whether return was voluntary
+or prompted. If only decorating is valued,revise the purpose argument. If a baseline
+is preferable,record that rather than hide the result.
 
-Retain Node24HTTP,SQLite,Three0.186.1 and accessible DOM. Leading network choice is
-Socket.IO4.8.4 attached to existing HTTP,with one domain authority for all commands.
-SSE+POST and Colyseus remain documented alternatives; the matched spike compares
-SSE full snapshots against Socket.IO deltas,not every framework's optimal design.
-No production package was added during planning.
+## 6. Implement by section inside usable vertical phases
 
-Separate durable house/member/room/board/chat/focus data from transient motion,
-connections,controller generations and seats. Persist deadlines,not per-second
-ticks. Bedrooms and lounge have separate authorised sequence streams; private
-edits cannot create publicly-visible cursor gaps. Same UUID/payload returns a
-receipt; new payload for old UUID rejects. Commit precedes ACK/broadcast.
+These are exact responsibility boundaries,not invitations to implement disconnected
+layers for a week. Every phase has a working user story,actual version,checks,
+review and a decision about the next phase.
 
-Capacity counts permanent residents; disconnect does not surrender a bedroom.
-One controlling tab and one observer avoids duplicate avatars. Reconnect has a
-bounded reservation; restart clears presence/seats and rebuilds from authorised
-snapshots. Seat claims are atomic; chat/board drafts survive conflicts. The detailed
-contract gives explicit proposed defaults,not hidden assumptions.
-
-Keep the board bounded: DOM cards+SVG strokes,per-object revisions,release-to-save
-drags and author/current-state checked undo. tldraw/Excalidraw do not automatically
-supply our membership,persistence or asset rules. Add a larger editor/CRDT only when
-observed collaboration needs justify its runtime/licence/testing costs.
-
-## Actual baseline and changes needed
-
-Frozen crit-8 is6dc79c5ec6cc5610a867d653892d2b827ee94536.
-Current production has cookie identities,owned saved furniture,revision/UUID
-receipts,static residents,a public lantern and full-state SSE. It has no house
-membership,doors/presence/movement/chat/focus/board implementation.
-
-Retain proven session/prepared-query/transaction/editor safeguards and resource
-loading/disposal. Replace the product domain and factor coupled app.js and
-render-three.js into state/network/world/UI modules; do not append every feature
-to those files. Provide an explicit v1-to-v2 migration,archive public C8 traces,
-and offer deliberate import of a returning owner's furniture. Never silently
-transform public neighbours into private members.
-
-Fixed Fly shape stays one shared-cpu1x,256MB and1GB/data volume. New production
-adoption will be tested in that shape. Prototypes/dependencies/evaluation are
-excluded from production Docker context. No publication is part of this planning task.
-
-## Two-week execution budget and dependencies
-
-Assume one accountable developer using AI for bounded implementation/review,with
-roughly5-6focused hours/day. This is an estimated70-85hour budget including a
-10-15hour reserve,not measured effort or a completion guarantee. If availability
-is3hours/day,the same core likely needs a longer calendar; adding agents does not
-remove integration or human testing work. Day numbers start at implementation,
-not today's research session. Stage gates take precedence over a date checkbox.
-
-| Stage / target days | Work and estimated effort | Exit gate and responsibility |
+| Section | Inputs/outputs and ownership | First acceptance |
 | --- | --- | --- |
-| P0,current | Requirements,research,comparisons,review,plan | Parent verifies sources/results and resolves material review issues |
-| P1,days1-2 | Shared-house schema/migration,code join,basic identity recovery,controller skeleton,integrated simple3D movement/chat;10-12h | Two real browsers create/join,greet and move; production domain/backend+world owners integrate |
-| P2,days3-4 | Door/room access,atomic seats,reconnect/multiple tabs,ordering;10-12h | Last slot/seat races,rejoin,revocation and authorised room transitions tested |
-| P3,days5-6 | Small DIY catalogue,add/remove/nudge/rotate/palette,save/import;8-10h | Two owned rooms distinguishable; routes safe; restart retains edits |
-| P4,days7-8 | Board goals/notes/links/strokes,individual revisions,conflict/undo;8-10h | Two people collaborate on independent objects; conflicts keep drafts; board survives restart |
-| P5,days9-10 | Group focus deadlines,quiet interaction,small optional image gate;5-7h | Shared clock/restart/pause roles consistent; image not enabled before memory/access checks |
-| P6,days11-12 | Both viewports,real phone/keyboard,slow network,user refinements,server instruments;8-10h | Complete loop on desktop/phone; bounded load and meaningful action logs |
-| P7,days13-14 | Backup restoration/redeploy,rehearsal,owner-authored course account and fixes;5-7h | Verified candidate/evidence,independent review; release under scoped authorisation |
-| Reserve |10-15h for integration/failed gates | Cut enhancements first; never silently delete core experience |
+| I1 Identity/house/store | Server-resolved identity,code,permanent slots/rooms;atomic commands and migration | Same identity returns to full house;last-slot race yields one claimant;safe transfer/leave/remove/export |
+| I2 Realtime/client reducer | Authorised snapshot/cursor,input generation,chat/presence events | Two browsers agree;no stale private response or duplicate avatar |
+| I3 World/avatar/input | Template/catalogue state and real players -> fixed3D,collision,door/seat targets | Keyboard/touch move,talk,sit,enter/return;typing never drives |
+| I4 Shared card board | Author goal/question/next-step intent -> per-card revision/persistence | Two cards edited concurrently;no losing draft or falsely closed request |
+| I5 UI/room expression | Lobby,contextual HUD,transcript,DIY and willingness controls | Who/where/willingness understood;friend recognises personal corner |
+| I6 Verification/instruments | Invariants,browser flows,structured action events,restore/load evidence | Promised core works at both viewports and fixed Fly shape |
 
-P1 is deliberately simple and integrated: separate successful geometry/network
-spikes do not prove a complete game. Invite two friends as soon as P1 works.
-Do not postpone all human feedback to day13. P2 precedes richer room editing;
-P3 precedes content expansion; P4 precedes image/CRDT choices.
-Observability starts with meaningful commands,not a last-minute dashboard.
+Freeze interfaces before splitting workers. Parent owns contract,integration,
+grading and final verification. Workers get non-overlapping paths,preserve others
+and use available roles/skills. Fresh review is read-only;source and actual runtime
+outcomes can overrule confident agent output.
 
-Parallel ownership can split pure rules/storage,world/input,DOM board/chat and
-read-only review after interfaces are frozen. Parent owns integration/contracts,
-protocol grading and final checks. Every worker gets paths and preserves others.
-No agent independently changes schema,permissions or grading to make its work pass.
+## 7. Phases,dependencies and estimated budget
 
-## Acceptance,testing and measured gates
+Assume one accountable owner with roughly5-6focused hours/day and bounded AI
+assistance. Estimate58-73implementation/verification hours plus2-4for the initial target check
+and10-14reserve:70-91hours,not measured evidence or a guarantee. If only3hours/day are available,
+extend the calendar instead of deleting the owner-core experience.
+Day numbers start at implementation;exact next Crit cutoff is verified separately.
 
-Use red-green-refactor for new production rules/bugs. Cover atomic last-slot
-claims,code uniqueness,bedroom access,revocation,stale generations/sequence,
-seat races,UUID replay/changed payload,collision/trap prevention,focus deadlines,
-board independent edits/undo and WAL-backed migration/restore.
+| Phase / target | Sections and user story | Work breakdown | Exit gate / artifact | Estimate |
+| --- | --- | --- | --- | --- |
+| S0,current | Purpose/cutline and target access | Current sources,candidate comparison,owner/user episodes,decision | This plan+G0result;do not claim demand yet | Research done;2-4h future target check |
+| S1,days1-3 | I1-I3,I5-I6:invite a friend and actually meet | Identity/code/rooms skeleton5-6h;realtime4-5h;simple world/lobby with basic phone controls4-5h;integration/review3-4h | Two-browser create/join/move/chat/save identity+chat/rejoin on both viewports with basic touch/input;basic action logs;small commit+evidence |16-20h |
+| S2,days4-6 | I1-I3,I5:stay and make the place yours | Door access/seat leases4-5h;room+bounded DIY4-5h;recovery/migration/minimal membership lifecycle4-6h;paired use/review2-3h | Own room/visits saved;willingness follows reconnect policy;revocation/races and minimal transfer/last-leave/remove/rotation/export tested;first uncoached scene use |14-19h |
+| S3,days7-9 | I1-I2,I4-I5:one request to one next step | Card schema/UI4-5h;sync/conflicts3-4h;complete task/return/review3h | Live useful board;author-controlled result;departure card/overflow/export tested;next-day task;G2preparation |10-12h |
+| S4,days10-14 | I1-I6:hold up under real use | Phone/keyboard/slow network5-6h;load/logs/restore5-6h;value pilot3-4h;fixes/docs/release candidate5-6h | Fixed resource tests,verified deployed candidate after authorisation,course evidence and G2/G3observations |18-22h |
+| Reserve | Confirmed failures only | Integration/device/review fixes | No automatic feature expansion |10-14h |
 
-Real browser flow: create/join -> identify friend -> move/greet -> sit -> board ->
-own room/DIY -> open visit -> disconnect/rejoin -> return. Run at1920x1080 and
-390x844,resize mid-use,keyboard,touch and text/IME. Physical phone performance/input
-requires actual hardware; headless/synthetic results cannot establish it.
+Dependency chain:
+S0 -> S1 -> S2 -> S3 -> S4.
+Within S1,I1 identity/command interface precedes I2 events and I3 real avatar binding.
+I3 primitives may be prototyped concurrently,but first delivery integrates them.
+S2 room permissions precede guest data. I1/I2/I5 deliver minimal owner transfer,
+sole-resident archive,member removal/code rotation/reinstatement and own-data export
+in S2;no full archive browsing UI. S3 extends the same departure transaction with
+card ownerLeft/snapshot/retention behaviour and tests. S3 small card schema precedes
+richer board.
+Human feedback begins as soon as S1 works,not only on day14. Instrumentation starts
+with semantic commands,not a last-minute dashboard. No new horizontal milestone
+is accepted without the associated usable story.
 
-Production target has two exact30minute workloads: L1=one house,six controllers
-plus six observers,twelve total connections,two slow observer readers; L2=two
-six-person houses,twelve controllers and zero observers,twelve total connections,
-one slow-reading controller per house. Each connected controller sends10Hz motion;
-each house sends six chat/board intents per minute. Reliable shared changes
-p95<=1second,RSS<=180MiB,slow-reader recovery and no growing queues. Target>=30FPS on a named ordinary laptop; measure GPU/device
-independently. These are future acceptance targets,not demonstrated results.
+Every phase ends with: frozen candidate -> required/affected checks -> independent
+review -> parent verification/refinement -> focused commit -> evidence/harness
+update -> go/pivot/hold decision. Passing a code test cannot replace value judgement.
 
-Run actual pnpm check and check:evidence,affected tests and dependency/secret checks.
-Default CI does not run current Playwright browser tests; during production work
-explicitly wire a maintained bounded browser suite and preserve the two supplied
-invariants. Report coverage scope and gaps; prose has no application coverage.
+## 8. Acceptance and stop conditions
 
-Human judgement: two friends without coaching recognise ownership and availability,
-exchange messages,study/use board and choose whether to return. Record hesitation,
-misread states,missed messages and control issues. Small counterbalanced UI trials
-are qualitative; subagent rankings are not statistical human A/B evidence.
+Core behavioural checks:2-6capacity,unique code,ownership,room access/revocation,
+control takeover,seat races,UUID retry,stream order,avatar collision and per-card
+conflict preservation. Recovery must return an existing member rather than steal
+another slot. Archive ownership is protected even though an archive product UI
+is deferred. Author marking a card closed does not prove a correct academic answer.
 
-## Risks,alternatives and switch conditions
+Real browser task at1920x1080 and390x844:join -> approach/greet -> choose willingness
+-> sit -> question card/chat -> next step -> own room/DIY/visit -> reload/reconnect.
+Exercise resize,keyboard,touch and actual IME/phone where available.
+Do not require all users to post help or decorate before they can use the house.
 
-| Evidence-triggered issue | First response | Alternative that preserves core |
-| --- | --- | --- |
-|3D GPU/readability misses named-device gate | Smaller draw area/quality,less shadow,palette,procedural avatar,safe-area camera |2D scene with same movement/chat/rooms/board contracts |
-| Motion/rejoin inconsistent | Fix authority,generation,cursors and interpolation | Bounded Colyseus spike if its lifecycle reduces actual defects |
-| Synchronous DB stalls | Shorter transactions,batch/previews,retention/profile | Bounded worker queue after measurement; no separate DB workaround |
-| Rich board integration exceeds budget | Complete finite notes/goals/links/strokes first | Konva/Fabric; defer infinite canvas/CRDT,not useful board |
-| Asset rig/style/licence does not fit | One verified rig or original procedural limbs | Replace visual layer without rewriting identity/network |
-| Two-week availability insufficient | Reserve for reliability;remove enhancements | Extend calendar before dropping mandatory interactions |
+Retain the exact production L1/L2loads from the architecture doc:12total connections
+in either one six-person house+six observers or two six-person houses with12controllers;
+bounded movement/chat/card updates,slow readers,30minutes,RSS<=180MiB and reliable
+changes p95<=1second. These remain NOT RUN.20second localhost/network-only results
+cannot substitute. Test migration/backup restoration before any database release.
 
-Classify the failing layer before switching. A2D renderer does not fix identity or
-network correctness. Library existence does not prove our art or experience works.
+Existing production check currently excludes Playwright browser coverage;wire a
+bounded maintained core suite during implementation. Run actual pnpm check and
+check:evidence,affected tests,dependency/secret checks;report coverage scope.
+Do not create application coverage for prose.
 
-## Course,operations and continued growth
+Budget cut order:timer -> pen/images ->extra catalogue/reactions -> full archive UI.
+Core movement,real chat,owned room/shared place/useful board stay. If core remains
+infeasible,extend schedule or explicitly revisit owner constraints,not mark done.
 
-[C9](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/09-all-at-once/)
-needs deployed realtime and a documented consequential multiplayer choice; control
-takeover/seat leases or board conflict handling is an appropriate decision.
-[C10](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/10-fly-by-instruments/)
-needs server-side action logs/live view and a blind group demo. Capture actor,
-action,time,outcome/sequence without private text,codes or proofs. Do not log motion
-every render frame. Verify exact Shitao group cutoff from current schedule before
-the next release; do not assume two-week completion arrives before C9.
+## 9. The HD case and what evidence earns it
 
-Final deadline9November2026,noon Sydney. Preserve README/CLAUDE/spec agreement;
-before the next authorised upgrade,rewrite README around only actual implemented
-house promises. Owner writes/revises personal PROCESS/reflections from evidence;
-planning files are not fabricated student reflections. Preserve crit-8 tag.
+[Official assessment](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/)
+expects a focused response,corroborated choices/corrections and robust actual use.
+There is no feature-count strategy or grade guarantee.
 
-Future catalogue packs use stable IDs,licences,footprints,pivots,variants,versioned
-migrations and golden existing-room fixtures. Themes reuse floor/seat/door
-templates and the same permission/command system. Separate public/private legacy
-data and test backup restoration. Monitor storage including WAL/receipts; alert
-at70% and manage deliberate retention. Code/recovery credentials stay out of logs.
+Our proposed good: peer help starts voluntarily,a quiet resident is not forcibly
+summoned,and the requester keeps an actionable next step. README states target,
+purpose,alternatives and limits;CLAUDE guards truth/quiet/ownership;spec protects
+checkable properties;people judge comfort,embodiment,ownership and usefulness.
+A curated source-to-choice-to-test-to-commit chain matters more than a catalogue
+of APIs or agent reviews. The owner authors personal PROCESS/reflections from
+actual events;we do not fabricate feelings or human trials.
 
-## Planning completion and next action
+C9 requires deployed realtime plus one consequential multiplayer behaviour decision:
+explicit willingness or card conflict/quiet delivery is suitable if implemented.
+C10 requires server action logs/live observation and an instruments-only group demo.
+Log meaningful actor/action/time/outcome,not private text,codes or raw motion frames.
+Keep the earlier Crit8 tag frozen. Final deadline9November2026,noon Sydney;
+the two-week budget is not that deadline and may not cover the next Crit cutoff.
 
-This research-stage plan is complete: protocol/results links resolve,decisive
-sources and actual files were checked,two fresh no-history reviewers inspected
-it,confirmed findings were refined and the relevant local checks passed. Actual prototype checks
-are recorded as PASS/FAIL/NOT RUN; no staged future acceptance is claimed complete.
+## 10. Continuation and current evidence status
 
-The next implementation step is P1: agree the capability interfaces and write
-failing create/join/movement/chat tests,then integrate one real two-browser house
-loop. It is not adding more catalogue items to the former window/lamp application.
+When the core is valued,add licensed catalogue/theme variants through stable IDs,
+footprints,seat/door anchors and versioned schemas. Test existing-room migration.
+Only a demonstrated need earns drawing/uploads/timers/multiple houses or a CRDT.
+The current Node/SQLite/Three+Socket option remains economical;switch rendering
+only for measured device/interaction problems.2D does not solve a weak user goal.
+
+Research evidence/qualitative evaluation PASS;human need/preference NOT RUN.
+Previous local geometry/network spikes remain genuine but do not implement this
+product. No new production code,packages,deployment or paid service in this task.
+[Positioning decision record](docs/planning/POSITIONING-COMPARISON.md) and
+[worklog](docs/planning/WORKLOG.md) separate completed planning from future gates.
+
+Next implementation is S1's real two-browser story. Check G0 context first when
+people are available;otherwise reversible S1 work proceeds under the recorded
+hypothesis and value remains unvalidated. Do not expand specialised mechanics or
+claim usefulness without the appropriate human evidence. No extra approval gate
+is inferred from missing user-study data.

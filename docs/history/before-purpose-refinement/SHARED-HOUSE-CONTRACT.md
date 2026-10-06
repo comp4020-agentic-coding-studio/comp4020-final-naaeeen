@@ -6,10 +6,7 @@ prototype results do not establish that the deployed application has these featu
 
 ## Capability and definition of good
 
-Two to six already-known university friends studying the same or related subjects
-share a persistent house. The provisional primary job is a voluntary short peer
-conversation when someone is stuck,with an author-written next step to retrieve.
-See [product positioning](PRODUCT-POSITIONING.md) for assumptions and falsifiers. Each owns a bedroom; doors
+Two to six existing friends share a persistent house. Each owns a bedroom; doors
 connect them to a common lounge. Residents control avatars, converse, sit together,
 study and use a board for intentions, questions and useful resources. Returning
 reveals their actual saved work. Good means recognisable ownership, easy reciprocal
@@ -25,9 +22,10 @@ An extra browser tab is neither another member nor another avatar.
 ## Requirements and traceability
 
 All H01-H20 are selected production promises. H01-H09 and useful board H10
-preserve owner requirements. Shared timers,pen tools and broad board management are now deferred enhancements
-under the purpose decision. Live question/next-step cards provide the useful board;
-quiet seating and explicit willingness provide shared study without a forced clock. H21-H25 govern planning and growth.
+preserve owner requirements. A shared timer,goal stages and pen strokes are our
+chosen implementation mechanisms,not verbatim owner mandates; their simplest
+forms may be substituted with an ADR while retaining shared study and a useful
+collaborative board. H21-H25 govern planning and growth.
 See the implementation plan for tests and the results record for actual status.
 
 | ID | Owner source | Promise and acceptance |
@@ -39,9 +37,9 @@ See the implementation plan for tests and the results record for actual status.
 | H05 | section2 | Keyboard and touch control the avatar with immediate feedback |
 | H06 | section2 | Real remote people move smoothly; saved profiles are not presence |
 | H07 | section2 | Actual reciprocal text, correctly attributed bubbles and transcript |
-| H08 | section2 | Sit/stand and voluntarily study together;Quiet/Can chat is self-declared |
+| H08 | section2 | Sit/stand and voluntarily participate in a consistent shared focus session |
 | H09 | section2 | Meaningful room DIY is saved and recognisable on return |
-| H10 | section1 | Live shared board preserves a small goal/question/resource/next step |
+| H10 | section1 | Collaborative whiteboard supports useful goals, notes, links and pen marks |
 | H11 | section4 | Last-slot joins are atomic; an extra person cannot take a full house |
 | H12 | section4 | Reconnect and multiple tabs do not duplicate the avatar |
 | H13 | section4 | Furniture blocks sensibly; door/spawn/seat routes cannot be trapped |
@@ -118,18 +116,14 @@ generation. Standing, room transition, takeover, removal or lease expiry release
 the seat. Process restart clears all seat/control/presence leases; clients rejoin
 at a safe spawn and claim seats again. Restart never creates ghost occupants.
 
-Explicit availability is Quiet or Can chat,chosen by the member and shown with
-last-set time. Online connection,availability and bedroom permission are separate;
-location is not attention and Can chat is not a guaranteed reply. Default Quiet on
-new arrival/full reload/new lease/server restart/next-day return. Within a30second
-reconnect lease,the same controller may retain its last-set choice;reconnecting
-is never displayed as currently available. Willingness stays transient,not a
-saved next-day Can chat promise. Card posting never forces a call,modal,mention or reply from quiet
-residents. Ordinary conversation remains available regardless of board use.
-
-A group timer is an enhancement,not a launch requirement. If added,retain the
-previously reviewed finite work/break deadline contract;see the archived contract
-for those details. No productivity ranking or attention monitoring is promised.
+One active group focus session per lounge. Members opt in/out independently; the
+starter controls pause/end and the space owner can take over. Default25/5minutes
+with a simple duration choice. Persist deadlines or paused remaining time, not
+a countdown every second. No users online and restart do not automatically pause
+time. The first release is one work phase then one optional break,not automatic
+repeat: derive both original deadlines at creation. On resume at/after work end,
+show the remaining original break; at/after break end,show ended. Never grant a
+new break merely because the server restarted. Repeated reads are idempotent.
 
 ## Conversation, board and DIY
 
@@ -153,44 +147,31 @@ away from active controls and clamp to the safe viewport. Quiet mode suppresses
 bubbles but retains unread count/transcript. Test six senders,long Chinese and
 phone soft-keyboard states.
 
-The first board holds one active card per resident and up to12inactive cards(closed/ownerLeft),
-18total. Fields are smallGoal,question(optional),resourceUrl(optional),nextStep,
-helpRequested,state(active/closed/ownerLeft),UUID,author and revision. helpRequested is an
-explicit author choice. Saving nextStep leaves the card active;only the author
-explicitly closes it. Active steps survive return until changed/closed. Closed/departed
-history is bounded and disclosed;it is not an indefinite answer archive.
+The useful first board has note, resource-link and goal cards plus short freehand
+marks. A goal can identify its author and progress enum(todo/doing/done) plus a separate helpNeeded boolean.
+Today/Stuck/Useful/Done are filtered views,not extra storage statuses. A drag
+changes board coordinates only; explicit progress/help actions change fields.
+Stuck filters helpNeeded,Useful filters resource cards,Done filters completed goals.
+Cards have
+individual revisions; conflicts preserve the losing draft. Drag preview is
+transient; release commits once. Strokes have unique IDs and are immutable after
+commit; deletion/undo is an author/current-state checked inverse, not whole-board
+replacement.
 
-In the departure/removal transaction,an author's active card becomes ownerLeft,
-not solved/closed-by-author;preserve its current next step in that identity's
-private departure export/room archive. The old house can show the contribution
-with a departed label while it remains in bounded history. The author no longer
-reads the old lounge;original-identity archive/export retrieves only their own
-room/card snapshot. A new slot occupant gets a new card/room,never inherited text.
+Proposed bounds:60active cards,100strokes,400points/stroke,300characters/card,
+five pen colours and bounded board coordinates. Notes/list view provides a
+keyboard/phone alternative. Images remain open to a tested first-release
+enhancement: add server decode, storage quotas and authorised reads first.
 
-Inactive cards(closed or ownerLeft) retain the newest12by persisted inactive
-sequence,with UUID tie-break;the13th evicts the oldest inactive in the same
-transaction. Active cards are never quota-evicted. Concurrent closes share one
-stream order. Disclose this retention before closing/leaving. Saving nextStep
-does not close it,so unfinished active steps persist across next-day return.
-
-Authors control card content/outcome. Peers respond in ordinary chat,not by
-assigning helpers or editing another person's problem. Different cards update
-independently;stale edits preserve drafts. No full-board replacement,matching,
-queue,automatic resolution or compulsory goal entry. Drawing,uploads,filters
-and board-wide undo are enhancements;future schema migration is explicit.
-
-Bedroom DIY initially has six categories,up to10pieces,half-grid placement,
-quarter-turns and a few palette/wall/floor choices. Protect spawn/door aisles.
-Use preview,native nudge/rotate/remove and clear save confirmation. A larger
-catalogue must earn its cost through actual ownership tasks,not pack availability.
-Full archive browser UI is deferred;original-identity read/export and correct
-archived ownership remain protected lifecycle duties.
+Bedroom DIY starts with10-12catalogue types, at most16placed pieces, half-grid
+positions, quarter-turns and limited palette/wall/floor choices. Protect the door
+aisle and safe spawn. Show gentle collision preview; provide nudge/rotate/remove,
+undo and safe reset. Save on release/confirmation, not every pointer frame.
 
 ## Human acceptance and remaining adaptable choices
 
-Two real friends should join without coaching,recognise one another,read chosen
-willingness,move/talk/sit,post a brief question when genuinely needed,write their
-own next step,visit an opened room and return. Compare with configured Discord. Include
+Two real friends should join without coaching, recognise one another, greet, walk
+to seats, post a goal/link, visit an opened room and return the next day. Include
 actual phone input when available. Record failures and whether people know what
 the other person is doing; do not claim improved wellbeing from passing tests.
 

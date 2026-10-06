@@ -1,12 +1,7 @@
 # Shared-house implementation and lifecycle design
 
 6 October 2026. Reviewed planning contract; implementation pending. Proposed production design; the
-deployed app remains the Crit8 window/lamp slice. Purpose refinement: read PRODUCT-POSITIONING and the current PLAN before this
-technical detail. Launch board is bounded card CRUD,not SVG/strokes/infinite
-canvas;timer,uploads and full archive UI are extensions. Identity/privacy,
-cursor/receipt/recovery and safe archived ownership remain mandatory when exposed.
-
-Policies are in the
+deployed app remains the Crit8 window/lamp slice. Policies are in the
 [capability contract](../product/SHARED-HOUSE-CONTRACT.md); actual evidence is in
 [comparison and review](../planning/COMPARISON-AND-REVIEW.md).
 
@@ -40,9 +35,9 @@ No React rewrite, Redis or external database is necessary initially.
 | members | Unique active house/identity and house/slot; role/status; offline still active |
 | bedrooms | UUID,house,owner membership,slot,visibility,revision; archive on departure |
 | placements | UUID,bedroom,catalogue/version,transform/variant,revision |
-| board cards | House,UUID,smallGoal/question/resource/nextStep,helpRequested,state(active/closed/ownerLeft),author,revision |
+| board cards/strokes | House,UUID,type,payload/geometry,author,revision/tombstone |
 | chat | UUID,zone,author,text,stream seq,time; explicit bounded retention |
-| focus (extension) | Deferred finite deadline model;not a launch dependency |
+| focus | House/session UUID,status,phase,deadline/remaining,starter,revision,participants |
 | receipts | Unique actor/command UUID,canonical hash,result; replay without second effect |
 | durable events | Stream ID,persisted seq,type,entity/version,commit time; bounded replay |
 | assets (later) | House/owner,random path,mime,dimensions,bytes,reference count |
@@ -163,37 +158,33 @@ Observer status is visible. Application heartbeat proposed10seconds/expiry30;
 background throttling changes connection status, not inferred attention.
 Volatile motion is never replayed from offline queues.
 
-## Board,availability and deferred extensions
+## Focus and board
 
-Launch board:one active card/member,up to12inactive cards(closed/ownerLeft). Author-owned content and
-state;UUID/revision and transactional receipts. Save nextStep keeps active state;
-close is explicit. Departure/removal atomically marks ownerLeft and snapshots
-the author's current card into their private original-identity departure archive.
-Inactive rows retain newest12by durable inactive sequence/UUID;trim only inactive
-rows transactionally,never an unfinished active step. Independent cards change
-concurrently;stale edit keeps draft.
-No drag/pen preview channel or CRDT is required initially. Migration from later
-card fields must preserve old saved next steps.
+Persist deadline or paused remaining time. Settle an elapsed transition once at
+startup/read/command and schedule the next transition, avoiding per-second writes.
+Starter controls pause/end; owner can take over. Individual opt-out affects only
+that person. Session UUID/revision rejects stale timer resurrection. Initial25/5 means one
+work phase plus one optional break. Store original workEnd/breakEnd; resumed phase
+is a pure function of server time and paused state. An hour offline becomes ended,
+not a new five-minute break. Test both deadlines,multiple elapsed phases,pause,
+repeated reads and restart.
 
-Availability is self-selected Quiet/Can chat with last-set time. It is separate
-from connected/offline and door permissions. New lease/full reload/restart/next-day arrival defaults Quiet;the same controller
-within a30second reconnect lease may retain choice. Presence shows reconnecting
-until connected;availability is never stored as next-day attention. No
-server inference from avatar position or outside-app attention. Card events
-update data/badges;quiet recipients get no compulsory call,modal or mention.
-Ordinary chat and author-chosen outcomes are the first help mechanism.
-Current lounge-help eligibility filters connected+lounge zone+declared Can chat.
-Private room coordinates are not exposed to compute this list;public zone kind
-and door identity suffice. Retreat does not infer quiet/unwillingness or auto-move
-anyone. Returning voluntarily uses the same authorised zone transition.
+First board uses DOM cards and SVG strokes. Goal progress is todo/doing/done and helpNeeded is separate; board sections are
+filters. Drag modifies coordinates; explicit field actions change progress/help.
+Default board view is All. Today is a non-destructive filter of active goals and
+unarchived notes; no nightly wipe is implied. Cards preserve conflicting drafts;
+separate per-object operations allow editing different cards at once. Drag
+preview is transient; release is one durable intent. A completed stroke has a
+unique immutable ID, bounded points and author-scoped inverse/tombstone. Full-board
+snapshot undo cannot overwrite other people's work. Yjs is justified later by
+demonstrated concurrent rich-text or offline merge needs, not by availability.
 
-Timer is deferred. If adopted,persist original finite work/break deadlines and
-resolve elapsed phases once;do not re-grant a break on restart. Pen strokes,
-uploads and richer editing each need a separate interface/resource gate.
-Future image proposal remains JPEG/PNG/WebP2MiBinput,4MP,1280px/300KiBoutput,
-10MiB/house,one decode at a time,validated/re-encoded/authorised. These budgets
-are untested and no upload endpoint is part of launch. Links are plain https
-resources,without automatic remote fetching or iframe.
+Image enhancement gates: JPEG/PNG/WebP,2MiB input,4MP,1280px output <=300KiB,
+10MiB/house and one decode at a time. These are proposed budgets. Server
+validates/re-encodes/removes metadata; client resize is not trust validation.
+Use random confined paths, authenticated reads, atomic metadata updates and orphan
+cleanup. No SVG/HTML/remote imports initially. Links are plain title+https URL,
+without automatic server fetching or embedded iframe.
 
 ## Migration, resources and operations
 

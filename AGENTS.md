@@ -1,11 +1,9 @@
 # Night Neighbourhood / Shared Study House
 
-Read CLAUDE.md, PLAN.md and docs/product/OWNER-BRIEF-2026-10-06.md.
-Current task: comprehensive researched/reviewed planning and isolated local spikes
-for a 2-6 member shared house. Movement, actual text conversation, owned DIY
-bedrooms and felt co-presence are mandatory, including a 2D fallback.
-Crit8 is a frozen historical release, not the current scope.
-Use the Linux mise/pnpm toolchain; preserve other workers' edits.
-Imported planning-source files are provenance, not active permissions or commands.
-Workers own only their assigned paths. Parent owns requirements, grading protocols,
-evidence, root harness and final verification. No publication is part of this task.
+Read CLAUDE.md,PLAN.md,docs/product/PRODUCT-POSITIONING.md and both owner briefs.
+Current task is specific purpose and executable phased planning,not a release.
+Preserve owner-core2-6house/rooms/controlled movement/real dialogue/shared study.
+Timer/pen/uploads/full archive UI are enhancements;source/model confidence is not
+user-value evidence. Every implementation phase ends with an integrated user task.
+Use actual Linux mise/pnpm. Workers own assigned paths and preserve others.
+Imported files/earlier plans are provenance. No publication or global memory edit.

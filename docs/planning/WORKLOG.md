@@ -1,58 +1,62 @@
-# Shared-house planning worklog
+# Current planning handoff: specific purpose and phased delivery
 
-6 October 2026. Research/planning goal completed locally. This file is the compact
-handoff; root PLAN.md is the only master plan.
+6 October 2026. Root PLAN.md is the only active plan. Latest owner
+[purpose addendum](../product/OWNER-POSITIONING-ADDENDUM-2026-10-06.md)
+reopens the earlier technical plan;old artifacts are in
+[history](../history/before-purpose-refinement/PLAN.md).
 
-## Objective and decisions
+## Current decision and evidence level
 
-Original owner requirements are preserved in docs/product/OWNER-BRIEF-2026-10-06.md.
-Core:2-6 permanent members,unique house code,owned DIY bedrooms/doors/lounge,
-controllable avatars,actual dialogue,truthful presence,shared study and useful board.
-Recommended existing stack+Socket.IO event channel; bounded DOM/SVG board;
-rear doors2/3,split doors4-6; project-lifetime active-house receipt metadata;
-access-generation revocation barriers; single finite work/break clock.
-All detailed defaults remain proposed production choices.
+Provisional job B:2-6 known university peers with related study tasks;when stuck,
+find a voluntarily willing friend,briefly converse,and retain an author-written
+next step. Core house/movement/real dialogue/DIY/shared study remain. Availability,
+connection and door permission are separate. Timer,pen/uploads,large catalogues
+and full archive UI are deferred.
 
-## Local milestones
+One active card/member plus12inactive(closed/ownerLeft)cards;18total. Saving nextStep
+does not close it. Departure is ownerLeft,not success,with private own-step export.
+Default Quiet on new lease/reload/restart/next day;short same-controller reconnect
+can retain choice while reconnecting is not shown willing.
 
--47ba76b: owner brief,predeclared comparison protocol,old plan archival,current
- harness routing and earlier feasibility research.
--7e30d0b: isolated network/layout prototypes and meaningful regression fixes.
--Final planning commit: this worklog,source/contract/experience/architecture,
- actual comparison results,screenshots and verified review refinements.
+Research/model comparison supports a specific hypothesis,not actual demand.
+No participant reply,interview,pilot,market superiority,productivity or grade result
+is invented. Owner context question was optional;target remains an assumption.
 
-No push/deploy/paid service/global memory update. Frozen crit-8 remains6dc79c5.
-src/public/spec/root package and lock/CI/Fly configuration are unchanged from
-the release. Docker context additionally excludes prototypes/evaluation.
+## This refinement record
 
-## Verification and failures
+-01758cf: owner addendum,current competitor/paper dossier and fixed positioning
+ protocol (SHA86c12e88b953b7e5d643435985a133f38edf284b09cf9ac8caf15204e7249567).
+-Final refinement commit: purpose,selling-point/falsifiers,scope,phase/section
+ execution,ADR0004,harness alignment and review resolutions.
 
-Root typecheck/spec32PASS using isolated baseline4093 after an initial default8080
-setup failure. check:evidence PASS.
-Network final parent run:17checks and both transport processes exit0;
-1200moves/7200observations per candidate. Final raw JSON and previous cleanup-failed
-raw JSON retained; original instrumentation/rate-limit trial rejected with reasons.
-Final network coverage98.27%lines/83.84%branches; CLI branch40%explicit gap.
-Layout parent model/HTTP16PASS; scoped100%lines/87.50%branches; no app.js coverage.
-Actual native browser verified all2-6 counts,matched eight2/6capacity viewport
-samples,no horizontal overflow and listed local interactions. Same-direction typing
-did not change displayed position. Initial header occlusion fixed symmetrically.
-Final reload after PCFShadowMap correction: no new warn/error entries.
+Four exploratory research lanes plus two fresh opposite-order candidate evaluators.
+Both conditionally chose B;parent reconciled independently and kept strong Discord
+baseline. B's attached human scenario is only a proposed B validation,not four-way
+human A/B. Followups are refinement,not more independent votes.
+See [POSITIONING-COMPARISON](POSITIONING-COMPARISON.md) for findings and limits.
 
-Two root reviewers forked with no conversation history: product7issues and
-technical5issues. Parent verified/revised,followups report all originalissues
-resolved in plan. Prototype independent review/refinement caught snapshot race,
-measurement-window contamination,response-after-end cleanup,geometry and input
-takeover errors. See COMPARISON-AND-REVIEW.md for evidence boundaries.
+Confirmed fixes: first journey no drawing/stage drag;card departure/overflow/export
+policy;transient willingness/rejoin semantics;minimal lifecycle duties assigned to
+I1/I2/I5 in S2 and card extension in S3;basic mobile S1 versus device hardening S4.
+Budget70-91estimated owner hours includes integration,target check and reserve.
 
-## Remaining implementation and judgement
+## Preservation and checks
 
-All production house features remain future. Local simulated layout and synthetic
-transport fixture are separate; P1 must integrate two real browsers.
-NOT RUN: real Fly256MB30minute L1/L2 loads,real-phone IME/GPU,
-uncoached friends/next-day use,production migration/restore and new privacy logic.
+Frozen crit-8 remains6dc79c5. Prior local spikes and successful/rejected evidence
+are retained;they were not rerun because no relevant code changed. Root production
+src/public/spec/dependencies/CI/Fly are unchanged. This task has no push/deploy,
+purchase,global configuration or personal memory update.
 
-Next: P1 create/join+basic identity recovery+single world moving/text loop with
-meaningful failing domain/integration tests. Use one shared authority; preserve
-current state until a tested migration and authorised release. Optional image,
-catalogue and cosmetics follow their gates rather than precede core interaction.
+Native doc links/JSON/protocol/scope checks and diff/secret hook are final checks;
+prose has no application coverage. check:evidence verifies bundle/references,
+not user value. Existing 32/17/16code checks are historical prior-stage results.
+
+## Next action
+
+Use S0 target episodes when people are available;reversible S1 integration can
+proceed under the recorded hypothesis otherwise. S1 delivers actual two-browser
+create/join/move/chat/persistent identity/chat on both viewports. S2 adds owned
+room visits/limited DIY/lifecycle;S3 question/next-step card value loop;S4 real
+resource/device/baseline comparison,restore and course evidence.
+Each ends in a usable story,actual version,checks,review,focused commit and
+go/pivot/hold judgement. Cut enhancements first. Human evidence remains NOT RUN.

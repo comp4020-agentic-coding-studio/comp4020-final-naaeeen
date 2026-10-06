@@ -7,10 +7,7 @@ and lifecycle. References and measured trials are linked from that plan.
 ## The place
 
 A late-night house for existing friends: warm cutaway rooms around a shared
-reading lounge. Quiet study and spontaneous conversation are both legitimate. The selected task
-is voluntary familiar-peer help when stuck,not a full productivity platform.
-[Product positioning](../product/PRODUCT-POSITIONING.md) and PLAN.md define the
-launch scope;older timer/pen concepts below are enhancement research,not mandates.
+reading lounge. Quiet study and spontaneous conversation are both legitimate.
 There is no attention score or obligation to reply. Entering creates a clear
 sense of who is around; saved contributions connect yesterday with today.
 
@@ -30,11 +27,10 @@ rendering/scene-transition costs.
    flow,not only the final polish stage. Full house retains returning-member access.
 3. Arrive at the lounge door: see real connected residents,walk freely,greet.
    A concise movement hint dismisses after use; native interaction buttons remain.
-4. Approach a chair and sit; seat ownership and success/failure are visible. Choose Quiet or Can chat voluntarily;
-   a shared timer is a later option. A person can keep chatting or opt out.
+4. Approach a chair and sit; seat ownership and success/failure are visible. Join
+   a shared focus session voluntarily. A person can keep chatting or opt out.
 5. Approach the board: open a readable panel,post a goal/question or resource,
-   explicitly share a question,edit fields,and save an author-written next step.
-   Close a card deliberately when finished;others see live updates.
+   move it between stages,draw a short explanatory mark. Others see changes.
 6. Walk through own door: make a few meaningful furniture/colour choices,preview,
    save with clear confirmation. Open the door when ready to welcome housemates.
 7. Leave/reconnect/return: presence changes truthfully while room,board and chosen
@@ -98,27 +94,23 @@ style; a commercial-quality character creator is not a prerequisite.
 
 ## Board as a social object
 
-One current card per resident shows a small goal,an optional question/context,
-optional resource link,and the author's next step. A clearly chosen help request
-is visible to willing readers without automatically interrupting quiet members.
-A friend replies in ordinary chat;there is no matching,queue or assigned tutor.
-The author may leave the question open if no one responds.
+Board view initially contains Today / Stuck / Useful / Done filters. Goal progress
+is todo/doing/done,with separate helpNeeded. Filters are not additional statuses;
+drag changes spatial position,explicit buttons change progress/help. A study
+goal card can be marked Stuck and becomes an invitation for help,not a ranking.
+Members add a resource link or annotate a note with pen marks while talking.
+Completed work stays as a small actual trace for next-day return.
 
-Saving a next step does not close the card. One active card/resident plus12inactive(closed/ownerLeft)
-cards is an18object launch bound. Closed history is disclosed as limited;active
-steps remain until the author changes/closes them. A return task asks the author
-to find the saved step without scrolling a long conversation.
-
-Native fields are readable on phone and suppress movement/IME conflicts. The
-world board opens the panel;the user may also approach people or sit quietly
-without entering a card. Pen marks,uploads,filters and rich canvas are extensions
-only if a real task requires them. Door access,connection and willingness remain
-distinct;the conversation corner has no unannounced privacy boundary.
+Keep cards bounded rather than infinite pan/zoom. Text/link/goal and short marks
+are the initial meaningful set. Images are next once storage/decode passes its
+gate. Keyboard users can use cards and per-stroke delete; drawing is optional
+for completing a study task. Zoom/full-panel mode must be reversible without
+losing an unsaved draft.
 
 ## A few distinctive rituals
 
-Bring a goal to the table: optionally create a card,then sit; its short title is visible
-with the self-declared availability marker. Asking for help explicitly shares question/context and invites a
+Bring a goal to the table: create a board card,then sit; its short title is visible
+with the chosen focus marker. Asking for help marks a goal Stuck and invites a
 friend to approach/respond. Leave one useful thing: a completed goal/link/note
 connects the next visit to a real shared session. These reuse board/chat/seat
 contracts and are design hypotheses; they do not require a rewards economy.
