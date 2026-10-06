@@ -53,3 +53,12 @@ Owner feedback and the actualgame references are recorded inADR0003.
 Screenshots in docs/screenshots compare oldwebpage and HUD; these use generated
 testvisitorlabels and changedrosters, so are requirement-led visual evidence,
 not a perfectlymatched preferenceA/B. Physicalphone/softkeyboard nottested.
+
+## Additional real-network boundary
+
+A targeted fourth Playwright case delivered the window command to the actual
+backend, discarded its response after the real commit, then retried via the
+visible pending-save action. Both requests used the same UUID and the visitor
+revision remained1. It passed separately after the earlier three-case full
+suite; no server or browser success response was mocked. This is still local
+verification, not production delivery or a human preference study.

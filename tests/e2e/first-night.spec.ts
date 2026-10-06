@@ -37,3 +37,23 @@ test("a changed cookie identity gives the old page an explicit recovery path",as
  await page.locator("#read-latest").click();await expect(page.locator("#greeting")).not.toContainText("E2E original identity");
  await saveWindow(page,"E2E current identity");await expect(page.locator("#action-status")).toContainText(/saved/i);
 });
+test("an acknowledgement lost after a real commit reuses its pending command",async({page})=>{
+ await ready(page);
+ let blocked=false;const ids:string[]=[];
+ await page.route("**/api/command",async route=>{
+  const command=route.request().postDataJSON();ids.push(command.commandId);
+  if(!blocked){blocked=true;await route.fetch();await route.abort("failed");}
+  else await route.continue();
+ });
+ await page.locator("#nickname").fill("E2E uncertain save");
+ await page.locator("#save-window").click();
+ await expect(page.locator("#retry-command")).toBeVisible();
+ await expect(page.locator("#action-status")).toContainText(/confirmed|confirmation/i);
+ await page.locator("#retry-command").click();
+ await expect(page.locator("#action-status")).toContainText(/saved/i);
+ expect(ids).toHaveLength(2);expect(ids[0]).toBe(ids[1]);
+ const snapshot=await (await page.request.get("/api/state")).json();
+ expect(snapshot.visitor.name).toBe("E2E uncertain save");
+ expect(snapshot.visitor.revision).toBe(1);
+ await page.reload();await expect(page.locator("#nickname")).toHaveValue("E2E uncertain save");
+});

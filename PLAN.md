@@ -29,3 +29,7 @@ Owner steering10:28: world-firstgameHUD;ADR0003andlivingplan supersedeold webpag
 Final localcandidate11:03:32fast+3realbrowsercasespass; ownwindow survives
 localprocessrestart. ParentcompletedHUDafterboundedworkerhandoff; no remaining
 confirmedreviewblocker. Productionruntimeauditclean. Publicationapprovalnext.
+
+Publication remains gated by the pending human authorization question.
+Additional local lost-ACK test passed: real commit, client response discarded,
+same UUID retry, one revision. No remote push/visibility/deploy performed.
