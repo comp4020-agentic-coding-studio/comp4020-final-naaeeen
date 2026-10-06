@@ -1,20 +1,19 @@
 # Process overview
 
-<!-- TEMPLATE: replace everything in this file with your own account, this
-     comment included --- `pnpm check:evidence` fails while it's still here. -->
+*Initial C8 account, 6 October 2026. AI-assisted draft grounded in my stated aims and recorded work; student review remains required. This account will be rewritten as the project develops towards the final submission.*
 
-How you got from the brief to the harness, agentic workflow and stack behind
-this app, told however suits the work. The
-[final project brief](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/assessments/final-project/#what-you-submit)
-says what it covers and how long it runs.
+I wanted to move beyond another game and make a cosy place with enough technical depth for about two weeks of work. The starting idea combined a personal room, bounded DIY and a shared object that could change over time. Research into gogh and Kind Words 2 made me narrow the originality claim: room decoration and gentle social interaction already have strong examples. The question became whether separately authored panes in one persistent lamp could give people a reason to return, without followers, scores or an obligation to reply.
 
-Markers follow the links you give them; they don't trawl the repo for evidence
-you didn't point at. A link to the record is one whose text is the commit hash,
-and it can sit anywhere in a sentence:
-[`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d) for one
-commit, or
-[`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
-for a range.
+I also wanted to reuse the careful research and review methods from Assignment 2. Reuse needed a boundary: old instructions, tests and permissions could not become evidence for a new app. The first milestone, [b1677a4](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/b1677a4), brought 163 planning files into [docs/planning-source](docs/planning-source/PROJECT.md), preserving their provenance while making the root instructions specific to this repository. The historical prototype's 15 tests are not this implementation's tests. Its fixed-camera comparisons informed the visual choice, but they are not new participant trials.
 
-`pnpm check:evidence` checks that this comment is gone and that every commit you
-link exists in this repo. Whether the account is any good is the marker's call.
+The live [C8 brief](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/08-its-alive/) changed the immediate scope. A stranger must be able to do the core thing and find a saved trace on return. My earlier invite-only circle would put a grant and limited membership ahead of that first action. [ADR 0001](docs/decisions/0001-crit8-slice.md) records the public rehearsal alternative: cookie identity, a deliberately published window and an owned lamp pane. This keeps the authorship model while postponing invitations and recovery. The cost is public content, so the interface says who can see each save. It does not describe visitors as trusted friends.
+
+The stack follows that smaller loop. TypeScript and Node serve the page, commands and full state snapshots; SQLite stores sessions, rooms, panes and command receipts. [ADR 0002](docs/decisions/0002-native-sqlite.md) explains choosing the installed node:sqlite binding over another native package. The actual Linux runtime reported SQLite 3.53.4. The binding is release candidate, so avoiding an extra build dependency is a trade-off, not proof of stability. A fixed Three.js cutaway uses licensed furniture models and procedural scenery, while HTML controls keep editing possible without accurate scene picking.
+
+I asked agents to own separate server, interface and renderer files, with the main agent reconciling their work. Their reports needed code and observed results behind them. The domain milestone [87a8c14](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/87a8c14) defines owned editing, bounded text and full collision geometry. Store and HTTP tests then exercise real SQLite restart, atomic receipt rollback, replay, stale revisions and attempts to edit another visitor's objects. Repeating a timed-out save must not apply it twice; changing its payload must not reuse a successful command ID.
+
+The first runnable application milestone [38358b3](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/38358b3) joined the server, scene and native controls. I then asked for the experience to look more like a game: the large headline, scene card and webpage sidebar were the wrong presentation. [ADR 0003](docs/decisions/0003-world-first-game-interface.md) records inspected official screenshots and a world-first HUD alternative. The data and ownership rules remain useful even when the interface direction changes.
+
+A fresh integrated review also exposed a stuck-tab case: after the browser acquired another cookie identity, a save could fail without an in-page recovery action. A real browser regression reproduced the hidden control. That failure is evidence to fix, not something a passing happy-path suite can overrule. The review record separates this from human preference.
+
+Local browser checks now exercise two identities, peer changes, a returning cookie, furniture controls and pane withdrawal. That establishes a working local slice, not a shipped app or evidence that people value it. The supplied route checks remain intact, and [C8-VALIDATION](docs/C8-VALIDATION.md) records the check scope and pending release work. Docker and Fly deployment still need verification. The next critique should ask whether visitors can explain the lamp and whether contributing feels worthwhile. I want to change the design when that evidence warrants it, rather than protect the original plan because an agent already implemented it.
