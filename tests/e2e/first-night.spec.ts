@@ -1,5 +1,5 @@
 import {test,expect,type Page} from "@playwright/test";
-const ready=async(page:Page)=>{await page.goto("/");await expect(page.locator("#save-window")).toBeEnabled();await expect(page.locator("#render-status")).toContainText(/ready|available/i);};
+const ready=async(page:Page)=>{await page.goto("/legacy/");await expect(page.locator("#save-window")).toBeEnabled();await expect(page.locator("#render-status")).toContainText(/ready|available/i);};
 async function saveWindow(page:Page,name:string){await page.locator("#nickname").fill(name);await page.locator("#save-window").click();await expect(page.locator("#greeting")).toContainText(name);await expect(page.locator("#action-status")).toContainText(/saved/i);}
 test("two browser identities share authored lights and a saved visitor returns",async({browser},info)=>{
  const a=await browser.newContext({viewport:{width:1920,height:1080}}),b=await browser.newContext({viewport:{width:390,height:844}});

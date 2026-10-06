@@ -25,6 +25,7 @@ dockerfile = "Dockerfile"
 
 [env]
 PORT = "8080"
+PUBLIC_ORIGIN = "https://comp4020-final-naaeeen.fly.dev"
 
 [http_service]
 internal_port = 8080

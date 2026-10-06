@@ -30,16 +30,44 @@ jobs:
         with:
           cache: true
       - run: pnpm install --frozen-lockfile
+      - name: Install the maintained Chromium browser
+        timeout-minutes: 5
+        run: pnpm exec playwright install --with-deps chromium
       - name: Build and start the app
         # the same image Fly deploys, with a throwaway /data in place of the
         # volume; the spec runs against it
         run: |
           docker build -t app .
-          docker run -d --init --name app -p 8080:8080 -e PORT=8080 --tmpfs /data app
+          # PUBLIC_ORIGIN matches browser Origin exactly. Chromium accepts
+          # Secure cookies on localhost; keep production cookie protection on.
+          docker run -d --init --name app -p 127.0.0.1:8080:8080 \
+            -e PORT=8080 -e PUBLIC_ORIGIN=http://localhost:8080 --tmpfs /data app
+          if ! timeout 60s bash -c \
+            'until curl --connect-timeout 1 --max-time 2 --fail --silent http://localhost:8080/healthz >/dev/null; do sleep 1; done'; then
+            echo "app did not become healthy within 60 seconds"
+            exit 1
+          fi
       - name: Run the spec
         run: pnpm check
         env:
           APP_URL: http://localhost:8080
+      - name: Verify the maintained browser core against the image
+        timeout-minutes: 5
+        run: pnpm exec playwright test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts
+        env:
+          APP_URL: http://localhost:8080
+          EXPECT_SECURE_COOKIES: 'true'
+      - name: Preserve browser failure diagnostics
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: browser-core
+          path: |
+            .local/browser-report/
+            .local/browser-results/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Show the app's output
         # what the container printed, so a crash or slow boot is visible
         if: ${{ failure() }}
@@ -66,6 +94,9 @@ jobs:
             --config=.github/trufflehog.yml
             --include-detectors=CustomRegex --results=unverified
             --no-verification
+      - name: Remove the disposable app
+        if: ${{ always() }}
+        run: docker rm -f app || true
 
   deploy:
     needs: check
