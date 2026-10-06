@@ -18,7 +18,7 @@ retains context. Controlled comparisons define common inputs, criteria, versions
 and stopping conditions before execution. No technique is treated as success
 merely because its name appears in the worklog.
 
-## S4 audit now
+## Earlier S4 audit snapshot
 
 | Active method / rule | Observed evidence | Gap / corrective action |
 | --- | --- | --- |
@@ -35,7 +35,7 @@ merely because its name appears in the worklog.
 | Honest process/course evidence | REVIEW-LOG, lecturer principles mapped to actual code | No personal reflections/participant preference/device/deployed claims invented |
 | Stop/backpressure/coordination | Root explicit RUNTIME FROZEN,START7October | Earlier hold lasted longer than intended; load remains independent of static polish, explicit dispatch state tracked |
 
-## What follows before completion
+## Follow-up required at that earlier checkpoint
 
 Record final source versions and hashes, current native checks, browser and image
 evidence, independent rechecks, full L1/L2results including failure classifications,
@@ -56,3 +56,26 @@ P3path/classificationomissions, corrected. Registered43capability/failure-path
 subsections; S0/S1 andS2/S3 freshaudits each cover16rows, with actual newreproductions.
 No newagent-performanceA/B orhumantrial claimed. L1frozen1800sdiagnosticRSSfailed;
 L2continues. The detailedrevisit must stillreconcile/fix findings perrow.
+
+## Final local reconciliation, 7 October 2026
+
+This checkpoint supersedes earlier pending/current counts without changing their
+historical observations. The parent reopened the active REPORT and subsection
+methods, inspected current artifacts and reconciled reviewer findings.
+
+| Requirement | Current evidence | Remaining limit |
+| --- | --- | --- |
+| Canonical workspace and logical history | All artifacts in WSL; core `ea60440`, native checks `5548bb1`, load evidence `2c120a1` | New commits are local |
+| Detailed recurring methods | 43 separate rows with requirements, alternatives/checks, findings, revisions and scoped status | Retrospective audits are labelled; no universal efficacy claim |
+| Fresh review and critical recheck | Fresh store/transport/UI/world/CI and final document reviews; contextual rechecks labelled; parent reproductions | One contaminated packet and its routing repair remain disclosed |
+| Meaningful comparisons | Eight matched memory trials; registered camera A/B with 16 final images; actual-source load counterexample and 14 controls | No new agent-efficacy or human A/B study |
+| Required and native checks | 195 tests/typecheck; 163 expanded cases; 19 maintained native cases across scoped runs; clean production audit | Branches 77.47%, below 80%; Docker/remote CI not executed |
+| Sustained source-bound acceptance | Exact 1,800-second L1/L2 pair PASS; thirteen recorded hashes; original failures retained | Shared WSL localhost, no Fly cgroup/WAN result |
+| Evaluator refinement | Glyph overflow, live-client late ACK, selector/spawn checks, bounded CI readiness and calibrated motion generator | Busy-host startup failures remain unconfirmed |
+| Global reusable methods | Validated matching Windows/WSL instructions/skill with backups; current desktop injection observed | No web/mobile settings or account-wide sync |
+| Architecture and course argument | Actual additive DB/snapshot architecture, release runbook, course and PROCESS evidence maps | Student writing, live crits, physical devices and human value remain open |
+
+Parent final diff/link/JSON/image checks close the local record. Stop resolved
+lanes. Subsequent work starts from the current handoff and affected subsection,
+continues the same methods, and creates new evidence rather than inventing a
+completed participant study or deployed result.

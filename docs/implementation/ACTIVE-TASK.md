@@ -38,8 +38,12 @@ Parallel paths: house_store owns house-store.ts/spec; house_realtime owns adapte
 
 HTTP acceptance red phase: three tests failed against the unchanged C8 server (404 versus expected identity/create/module routes), 6 October2026. This is an observed behavioural failure, not an import error.
 
-## Owner steering7October
-FIRSTadaptA3harness/methodfiles; thenrevisit everyphase/section/subsection in detail
-via docs/harness/REPORT.md and docs/revisit/REGISTER.md. LaterA3tasks must continually
-return to these methods. Labelretrospective/newchecks. RuntimeL1/L2isfrozen/running
-independently; no runtimebytechange under measurement.
+## Owner steering and completed local checkpoint, 7 October
+
+The A3 harness was adapted first; all 43 meaningful S0–S4 subsections now have
+individual records. Current local implementation and native verification are
+complete. The exact full v3 L1/L2 pair passed; earlier failures and calibrations
+remain preserved. Runtime freeze is released. The larger close-follow world and
+Windows/WSL reusable agent defaults are implemented and verified within their
+recorded scopes. Follow [CURRENT-HANDOFF](CURRENT-HANDOFF.md) for current evidence,
+commit milestones and external/student follow-up gates.

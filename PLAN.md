@@ -63,7 +63,7 @@ or door permission automatically;no cross-room summoning feature is required.
 | --- | --- | --- |
 | Unique house code;2-6 permanent members | One active house/identity;capacity fixed initially | Multi-house selector/public discovery |
 | Own bedrooms/doors and recognisable DIY | Six furniture categories,up to10pieces,grid move/quarter-turn/palette | Large catalogue/modular building/clothing |
-| Controllable real avatars and text | Idle/walk/sit/stand;fixed camera;bounded bubbles/transcript | Extra reactions/camera modes |
+| Controllable real avatars and text | Idle/walk/sit/stand;fixed-angle close follow+Overview;bounded bubbles/transcript | Extra reactions/free orbit/photo modes |
 | Shared seats and voluntary quiet study | Explicit Quiet/Can chat;no attention inference | Shared timer under reviewed deadline contract |
 | Useful live shared board | One active card/member,up to12inactive cards(closed/ownerLeft);18total | Pen strokes,uploads,filters,rich canvas/CRDT |
 | Safe saved return and basic recovery | Cookie identity,recovery proof,room/card persistence | Full archive/history-management UI |
@@ -113,7 +113,7 @@ review and a decision about the next phase.
 | --- | --- | --- |
 | I1 Identity/house/store | Server-resolved identity,code,permanent slots/rooms;atomic commands and migration | Same identity returns to full house;last-slot race yields one claimant;safe transfer/leave/remove/export |
 | I2 Realtime/client reducer | Authorised snapshot/cursor,input generation,chat/presence events | Two browsers agree;no stale private response or duplicate avatar |
-| I3 World/avatar/input | Template/catalogue state and real players -> fixed3D,collision,door/seat targets | Keyboard/touch move,talk,sit,enter/return;typing never drives |
+| I3 World/avatar/input | Template/catalogue state and real players -> fixed-angle3D,collision,door/seat targets | Keyboard/touch move,talk,sit,enter/return;typing never drives |
 | I4 Shared card board | Author goal/question/next-step intent -> per-card revision/persistence | Two cards edited concurrently;no losing draft or falsely closed request |
 | I5 UI/room expression | Lobby,contextual HUD,transcript,DIY and willingness controls | Who/where/willingness understood;friend recognises personal corner |
 | I6 Verification/instruments | Invariants,browser flows,structured action events,restore/load evidence | Promised core works at both viewports and fixed Fly shape |
@@ -173,11 +173,13 @@ Do not require all users to post help or decorate before they can use the house.
 Retain the exact production L1/L2loads from the architecture doc:12total connections
 in either one six-person house+six observers or two six-person houses with12controllers;
 bounded movement/chat/card updates,slow readers,30minutes,RSS<=180MiB and reliable
-changes p95<=1second. These remain NOT RUN.20second localhost/network-only results
-cannot substitute. Test migration/backup restoration before any database release.
+changes p95<=1second. Original v1 trials and statement-reuse v2 trials retained FAIL outcomes; repaired
+pacing-v3 full trials passed both configurations with the same gates. Short calibrations
+cannot substitute. See operational/refinement evidence for individual results. Test migration/backup restoration before any database release.
 
-Existing production check currently excludes Playwright browser coverage;wire a
-bounded maintained core suite during implementation. Run actual pnpm check and
+The current workflow wires a bounded five-test browser lane against its production
+image with configured localhost origin and Secure cookies. Local native rehearsal
+passed; Docker/image/remote workflow execution remains unverified here. Run actual pnpm check and
 check:evidence,affected tests,dependency/secret checks;report coverage scope.
 Do not create application coverage for prose.
 
@@ -203,7 +205,7 @@ C9 requires deployed realtime plus one consequential multiplayer behaviour decis
 explicit willingness or card conflict/quiet delivery is suitable if implemented.
 C10 requires server action logs/live observation and an instruments-only group demo.
 Log meaningful actor/action/time/outcome,not private text,codes or raw motion frames.
-Keep the earlier Crit8 tag frozen. Final deadline9November2026,noon Sydney;
+Keep the earlier Crit8 tag frozen. Final course page states noon Monday9November2026;the working timezone is Sydney;
 the two-week budget is not that deadline and may not cover the next Crit cutoff.
 
 ## 10. Continuation and current evidence status
@@ -222,8 +224,10 @@ Read docs/implementation/VALIDATION.md and HARNESS-AUDIT.md for actual status.
 [Positioning decision record](docs/planning/POSITIONING-COMPARISON.md) and
 [worklog](docs/planning/WORKLOG.md) separate completed planning from future gates.
 
-Current work is S4 refinement and verification. S1's real two-browser story has
-passed; remaining gates are tracked in docs/implementation/VALIDATION.md. Check G0 context first when
+The authorised S1–S4 local core is complete. Current implementation, native checks
+and source-bound sustained acceptance are recorded in
+[VALIDATION](docs/implementation/VALIDATION.md). Remaining external and student
+gates are tracked separately. Check G0 context first when
 people are available;otherwise reversible S1 work proceeds under the recorded
 hypothesis and value remains unvalidated. Do not expand specialised mechanics or
 claim usefulness without the appropriate human evidence. No extra approval gate
@@ -231,10 +235,70 @@ is inferred from missing user-study data.
 
 Harness gates: before phase entry/exit and each substantial commit, reconcile
 applicable rules with evidence and record omissions/corrections in
-[HARNESS-AUDIT](docs/implementation/HARNESS-AUDIT.md). Frozen runtime load now proceeds
-independently of static UI polish; no runtime changes during its measurements.
+[HARNESS-AUDIT](docs/implementation/HARNESS-AUDIT.md). The full runtime measurement is complete; recorded source bytes remained fixed
+throughout. New measurements require a new declared candidate.
 
 Owner7Octoberpriority: A3harnessadaptationfirst, then detailedcapability/failure-path
 revisitS0-S4. See [REPORT](docs/harness/REPORT.md) and
 [register](docs/revisit/REGISTER.md); eachsubsection has its own evidence,decision,
 review and refinement. Fouraggregatephase summaries do not suffice.
+
+
+## Owner camera refinement,7October2026
+
+The owner requests a substantially larger visible world, rooms, avatars and
+conversation, including full-frame play where the room can extend offscreen.
+The canvas already fills the viewport; whole-room fitting inside conservative
+HUD reservations makes the actual scene too small. Moving an orthographic camera
+closer does not itself increase scale. Compare the unchanged full-fit baseline
+against a close fixed-angle, bounded self-follow camera with a dead zone and
+accessible Overview/Recenter. A close stationary view is a negative-control option;
+free orbit adds gesture/orientation cost and is deferred unless it earns that cost.
+
+The parent selects bounded follow for a prototype, following current Three0.186.1
+and source-backed game-camera research. Preserve authoritative geometry and motion,
+privacy, typing isolation and explicit Quiet. Use actual HUD safe rectangles;
+keep self visible, avoid offscreen-edge floating chat, settle while seated, preserve
+mode/scale on resize and provide a stable room editing view. Reduced motion removes
+follow easing/bob; Overview supplies a stationary alternative.
+
+Declare a matched technical/design comparison before observing new results, then
+measure avatar projection, visible room coverage, target hit picking, reachability,
+labels/glyph bounds, drift and native task completion at desktop/portrait/landscape.
+The proposed scale/coverage ranges are design targets, not ergonomic standards.
+Screenshots and model review do not prove human preference. A larger rendered room
+comes first; physical geometry expansion needs a separate layout/routing benefit
+and regression check. Results: [camera evidence](docs/implementation/CAMERA-EVIDENCE.md) and
+[manifest](docs/revisit/CAMERA-EVIDENCE.json).
+
+
+Current local checkpoint7October: required check195tests/typecheck PASS; expanded
+house coverage163tests with93.43%lines/84.27%statements/77.47%branches. CameraB2
+25focused units,8native cases and16matched images accepted locally. Five CI-native
+flows and two maintained lifecycle/recovery/export journeys passed matchingChrome153.
+Earlier busy-host lifecycle failures remain unconfirmed and retained; standalone
+5sdiagnostics used a different deadline, corrected with a matched10sprobe. Three
+other current house journeys passed; room/DIY feedback-selector recheck passed.
+Human fit/value, physical phone/IME, deployed TLS/restart and authorised publication
+remain separate. No personal student reflection is fabricated from these checks.
+
+
+Local sustained acceptance7October: pacing-v3 L1/L2 PASS at165.160/169.031MiB,
+1800.344/1800.367s,p95101.968/103.042ms; allsavedview deliveries and faultcycles
+accounted,zeroinvalidnormalmotion/unexpectedtimeout. Currentlocal core is verified;
+student authored writing,real-friend/device study and production release remain
+separate. Reviewed code ea60440; maintainedverification5548bb1.
+
+## Continuation after local core completion
+
+Core implementation `ea60440`, native verification `5548bb1` and calibrated load
+evidence `2c120a1` form the local candidate. The 43-row revisit and linked records
+preserve individual findings, refinements and gaps. [Current handoff](docs/implementation/CURRENT-HANDOFF.md)
+is the entry point for the next task; this PLAN remains authoritative for scope.
+
+Use the [release runbook](docs/implementation/RELEASE-RUNBOOK.md) for production
+verification and reversible data protection. Use [course alignment](docs/implementation/COURSE-ALIGNMENT.md)
+and [PROCESS evidence](docs/implementation/PROCESS-EVIDENCE-MAP.md) for student
+writing and Crit preparation. Physical-device and real-friend trials determine
+experience/value before feature expansion. New rooms, furniture, themes and board
+capabilities remain staged content/contract work, not implied first-version scope.

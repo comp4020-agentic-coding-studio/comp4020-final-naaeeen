@@ -1,229 +1,196 @@
 # Shared-house implementation and lifecycle design
 
-6 October 2026. Reviewed planning contract; implementation pending. Proposed production design; the
-deployed app remains the Crit8 window/lamp slice. Purpose refinement: read PRODUCT-POSITIONING and the current PLAN before this
-technical detail. Launch board is bounded card CRUD,not SVG/strokes/infinite
-canvas;timer,uploads and full archive UI are extensions. Identity/privacy,
-cursor/receipt/recovery and safe archived ownership remain mandatory when exposed.
+Updated 7 October 2026. This describes the actual local implementation. The
+published service remains the frozen Crit8 rehearsal until an authorised release.
+[PLAN](../../PLAN.md) defines purpose and scope; [validation](../implementation/VALIDATION.md)
+and the [subsection register](../revisit/REGISTER.md) identify actual acceptance.
+Historical plans remain useful alternatives, not current endpoint/schema contracts.
 
-Policies are in the
-[capability contract](../product/SHARED-HOUSE-CONTRACT.md); actual evidence is in
-[comparison and review](../planning/COMPARISON-AND-REVIEW.md).
+## Stack and ownership boundaries
 
-## Stack decision and module boundaries
+One Linux Node 24.21.0 process serves native HTTP, SQLite, Socket.IO 4.8.4,
+Three.js 0.186.1 modules and DOM controls. Production remains one shared CPU /
+256 MB Fly machine with one 1 GB `/data` volume. No React rewrite, Redis,
+external database or generic ECS/plugin architecture was introduced.
 
-Retain native Node24 HTTP, SQLite, Three.js0.186.1 and DOM controls. Socket.IO4.8.4
-is the leading incremental option, pending its isolated measured comparison.
-It attaches to the [existing HTTP server](https://socket.io/docs/v4/server-initialization/).
-One process, one256MB Fly machine and one /data volume remain fixed constraints.
-
-SSE+POST can meet low-frequency shared updates; motion requires a separate
-transient path rather than the current durable full projection.
-[Colyseus0.18](https://docs.colyseus.io/migrating/0.18) offers schema/lifecycle and
-prediction primitives but changes the room/state integration model. maxClients
-does not define permanent membership. Plain ws leaves room/ACK/recovery machinery
-to us. A technical transport-plus-payload comparison cannot rank every framework.
-
-Proposed modules: identity/recovery; pure house rules and service; SQLite store
-with migrations; presence/control/seat leases; realtime adapters; one client
-reducer/outbox; world shell/avatars/furniture/picking; UI lobby/chat/board/editor.
-These are responsibilities, not already-created production files. Keep domain
-state independent of models and avoid a generic ECS/plugin layer without need.
-No React rewrite, Redis or external database is necessary initially.
-
-## Data and lifecycle
-
-| Record | Constraints and retained meaning |
+| Actual module | Responsibility |
 | --- | --- |
-| identities/sessions | Stable public UUID; random cookie/recovery digests; expiry and revocation |
-| houses | UUID,unique normalized join code,capacity2..6,owner,join status,template version |
-| members | Unique active house/identity and house/slot; role/status; offline still active |
-| bedrooms | UUID,house,owner membership,slot,visibility,revision; archive on departure |
-| placements | UUID,bedroom,catalogue/version,transform/variant,revision |
-| board cards | House,UUID,smallGoal/question/resource/nextStep,helpRequested,state(active/closed/ownerLeft),author,revision |
-| chat | UUID,zone,author,text,stream seq,time; explicit bounded retention |
-| focus (extension) | Deferred finite deadline model;not a launch dependency |
-| receipts | Unique actor/command UUID,canonical hash,result; replay without second effect |
-| durable events | Stream ID,persisted seq,type,entity/version,commit time; bounded replay |
-| assets (later) | House/owner,random path,mime,dimensions,bytes,reference count |
+| src/house-contract.ts | Typed durable/live data and command/receipt shapes |
+| src/house-store.ts | Identity, membership, permissions, transactions and persistence |
+| src/house-realtime.ts | Current-session authority, streams, control, presence and seats |
+| src/server.ts | HTTP, origin/input boundaries, cookies, static files and shutdown |
+| public/house-client.js | Ordered authorised reducer, uncertain-command outbox and transport |
+| public/house-geometry.js | Shared footprints, collision, layouts and validated routes |
+| public/house-world.js | Original procedural room/avatar models, input, picking and animation |
+| public/house-camera.js | Transient close follow, overview and safe framing |
+| public/house-label-layout.js | Bounded previews, glyph/rectangle layout and occlusion |
+| public/house-ui.js | Lobby, status, conversation, cards, room drafts and administration |
 
-Use foreign keys, prepared statements and short transactions. Active-slot partial
-indexes or separate archived records preserve former bedrooms without duplicate
-slot constraints. Verify actual SQL against migrations rather than copying this
-table as executable schema.
+Socket.IO offers acknowledgement and connection machinery while keeping the
+existing HTTP/store. Its transport is not durable delivery. SSE plus POST remains
+a credible lower-frequency alternative; Colyseus changes schema/lifecycle and
+prediction integration. The earlier comparison bundled transport and projection
+factors and cannot rank every framework. See the recorded comparison and ADRs.
 
-Only memory holds avatar position/heading/animation, connections, control
-generation, seat leases, typing and drag/pen previews. Camera/selection is local.
-Do not write motion per frame or label saved residents as online.
+## Actual storage and migration
 
-Create/join uses one BEGIN IMMEDIATE transaction: authenticate, validate active
-home/code/capacity, allocate slot and room, write receipt/event, COMMIT, then ACK
-and broadcast. Code collisions retry without partial rows. A repeated join for
-an existing member returns their membership. Two last-slot requests yield one
-new resident. Deliberate departure is separate from disconnection.
+`neighbourhood.sqlite` schema 1 / `night_session` preserve the unchanged C8 public
+window data. `house.sqlite` schema 1 / `house_session` add the private house.
+Wire/export schemaVersion 2 is independent of SQLite user_version. No in-place
+v1-to-v2 legacy migration or automatic identity/content import occurred.
 
-## Identity, codes and permissions
-
-The8-character code invites a new member; it cannot restore an old identity.
-Throttle lookups with bounded buckets. Trust proxy IP headers only under the
-actual Fly proxy contract; never accept arbitrary forwarded headers as authority.
-Keep code/session/recovery proofs out of query strings and logs.
-
-Keep HttpOnly and production Secure cookies. Authenticate handshake and every
-mutation; recheck membership/bedroom access on subscriptions and asset reads.
-Recovery rotates sessions, invalidates old control leases and closes revoked
-connections. Implement basic recovery export/import alongside P1/P2 identity,
-including return to a full house without another member claim. Display names and connection IDs never authorise actions.
-
-One active house per identity initially. Closed bedroom layouts/chat are owner
-only; opening shares with current house members. Closing unsubscribes visitors,
-clears their bedroom scene and returns them to the lounge. A per-member
-permissionEpoch and per-zone access generation form a revocation barrier: stamp
-snapshots/events,increment on close/removal/recovery,abort old requests and reject
-responses tagged with older access generation. Server delivery rechecks current
-access; client reducer cannot restore an old private scene after the barrier. Removed members lose
-read/write/push/asset access. New residents never inherit former private content. Removal transaction rotates
-the code and retains a removed-identity guard; reinstatement is an owner command.
-Newly issued codes are still shareable capabilities,not a guaranteed human ban.
-
-## One durable authority and ordered visibility
-
-All HTTP/socket intents use the same validator/transaction function. Retain
-current UUID receipts, canonical payload hashes and expected revisions.
-[Socket.IO delivery](https://socket.io/docs/v4/delivery-guarantees/) defaults to
-at-most-once; ACK/recovery alone is not persistence.
-
-Use separate persisted streams: lounge:houseId for shared member/board/focus/chat,
-bedroom:bedroomId for private layout/chat. A public cursor must not expose gaps
-from hidden room edits. Only authorised viewers subscribe.
-
-Envelope: schemaVersion,serverEpoch,streamId,seq,type,entityId,entityVersion,payload.
-Snapshot supplies authorised state,stream cursor,permissionEpoch/access generation
-and serverTime. A membership/control permission channel on the same connection
-orders grant/revoke barriers; all zone projections carry the issued access token's
-generation. Client zone request generation invalidates outstanding HTTP responses
-on revocation/switch. Re-grant requires a fresh authorised snapshot.
-Subscribe/buffer, obtain a consistent snapshot, apply newer queued events.
-Duplicates ignore; a real gap requests resynchronisation. Process epoch changes
-clear transient state, not persisted sequence. An HTTP response enters the same
-reducer as its later event, deduplicated by stream/seq/command UUID.
-
-Permission validation precedes returning any private receipt. Receipt replay must
-not mutate state even after lease expiry. New writes require current control
-generation where applicable; identity bootstrap/create/join happen before a
-movement controller exists and have separate authorisation.
-
-## Proposed interfaces
-
-| Boundary | Input/result and checks |
+| Persistent record | Meaning |
 | --- | --- |
-| GET /api/me | Own identity/home reference; no published presence |
-| POST /api/houses | capacity,command UUID; one active-home guard |
-| POST /api/houses/join | normalized code,command UUID; atomic membership |
-| GET /api/houses/:id/snapshot | Member-scoped lounge projection |
-| GET /api/bedrooms/:id/snapshot | Owner or open same-house visitor |
-| POST /api/command | Durable chat/board/door/placement/focus intent; revision/receipt |
-| socket subscribe/snapshot | Cookie,member,zone; one controller plus one observer |
-| socket input | Controller generation,motion sequence,input/target; transient |
-| socket seat.claim/stand | Current zone/controller; single occupant and expiry |
-| socket preview | Bounded typing/drag/pen; no save claim |
-| recovery export/import/revoke | Explicit proof flow; no proof in URL/log |
-| GET /api/archives/bedrooms/:id | Original identity only,read-only/export; independent of active membership |
-| upload/read later | Membership,quota,decode and metadata guards |
+| identities, sessions, recovery | Stable UUID/profile; opaque session/proof digests, expiry and revocation |
+| houses | Unique eight-character code, fixed capacity 2–6, owner and active/archive state |
+| members, bedrooms | Permanent active house/slot ownership; offline keeps membership; archived former rooms |
+| bedroom placements | Validated bounded JSON arrangement, palette, door permission and common room revision |
+| cards | Author-owned goal/question/resource/nextStep, explicit help/state/revision |
+| chat | Author/name/text/time and zone sequence; latest 100 per zone, up to seven days |
+| streams | Persisted per-zone sequence counters; no persisted delta-event table |
+| receipts | Actor/UUID/canonical hash and committed outcome; idempotent replay |
+| archives, removed_guards | Original-identity room/card export and stable removal guard |
 
-Errors: INVALID_INPUT,FORBIDDEN,SPACE_FULL,ALREADY_MEMBER,REVISION_CONFLICT,
-COMMAND_ID_REUSED,CONTROL_MOVED,SEAT_TAKEN,RATE_LIMITED,STORAGE_UNAVAILABLE.
-Timeout means uncertainty. Preserve pending UUID/draft until current authorised
-state or receipt resolves it. First release does not GC active-house receipt keys:
-retain actor/UUID/hash and outcome metadata without private message text for the
-project lifetime. Limit new writes and track receipt size. Outbox auto-retry lasts
-24hours; older entries require inspect/confirm,not silent resubmission. A future
-GC design must define a server-verifiable command expiry and keep consumed-ID
-protection; do not delete receipts first and hope the client never replays. Zone change never redirects a queued message.
+Only memory holds connections, avatar position/heading/animation, controller and
+access generations, seat reservations and declared willingness. Camera, selection
+and unsaved previews are local. The first release has no drawing, typing-preview,
+upload, timer or CRDT channel.
 
-## Movement, seating and input
+Use short BEGIN IMMEDIATE transactions, foreign keys and bound SQL parameters.
+Create/join allocates a permanent slot and bedroom atomically with its receipt and
+cursor; last-slot contenders yield one winner with no loser profile side effect.
+A disconnection is not a departure. Rejoin returns the same member/room.
 
-Target10Hz network updates with locally interpolated rendering. Local control
-predicts simple ground-plane movement; server validates allowed zone,finite
-coordinates,speed,footprints,motion sequence and generation. This is proposed
-behaviour, not a measured WAN guarantee. Do not reuse the90/min saved-edit limit.
+The store reuses at most 96 constant SQL StatementSync plans per instance. Every
+execution still reads current rows with current bindings; this is not a result or
+permission cache. References clear on close/startup failure. Future query/catalogue
+changes must revisit the bound and migration compatibility. The native preparation,
+authority, failure/restart and short controlled comparisons are recorded separately
+from sustained RSS acceptance.
 
-Use circle-vs-AABB footprints, sliding collision and protected spawn/door aisles.
-Lounge geometry is fixed; private DIY protects walkable routes. Avatars pass one
-another. Clear held keys on blur/zone change, and suppress movement during text,
-board/editor focus and Chinese IME composition. Mobile has persistent reachable
-movement/action controls; click-to-walk needs validated routes, not only raycasting.
+## Identity, permissions and lifecycle
 
-Seats bind member/generation to a30-second reconnect lease. Atomic claim rejects
-another occupant. Stand/zone switch/takeover/removal/expiry releases; restart
-clears occupancy and clients reclaim after spawn. No ghost avatars or seats.
+An HttpOnly opaque cookie identifies the actor; production adds Secure and
+SameSite=Lax. Display names, body actor fields, socket IDs and house codes never
+authorise an identity. Recovery proof is private, single-use and replaces old
+sessions/controllers; returning to a full house does not claim another slot.
 
-One controller may explicitly move between tabs; older generations reject input.
-Observer status is visible. Application heartbeat proposed10seconds/expiry30;
-background throttling changes connection status, not inferred attention.
-Volatile motion is never replayed from offline queues.
+The code invites someone into the whole house. Capacity counts permanent members,
+not sockets. One active house per identity; one controller and one observer per
+identity, and twelve live views per process. Stable removal guards prevent that
+same identity rejoining until owner reinstatement, but do not identify every
+possible new human identity. Removal rotates the code. Transfer ownership before
+leaving with others; last departure archives the house and disables its code.
 
-## Board,availability and deferred extensions
+Own bedrooms begin closed. Opening grants current housemates arrangement/history
+access; closing or removal clears a visitor's private scene and returns them to
+an authorised lounge. Every input, subscription, delivery and private receipt
+replay checks current membership/session/room access. Server epoch, access
+generation, controller generation and client request barriers reject stale data.
+A new grant requires a fresh authorised snapshot; camera motion never changes rights.
 
-Launch board:one active card/member,up to12inactive cards(closed/ownerLeft). Author-owned content and
-state;UUID/revision and transactional receipts. Save nextStep keeps active state;
-close is explicit. Departure/removal atomically marks ownerLeft and snapshots
-the author's current card into their private original-identity departure archive.
-Inactive rows retain newest12by durable inactive sequence/UUID;trim only inactive
-rows transactionally,never an unfinished active step. Independent cards change
-concurrently;stale edit keeps draft.
-No drag/pen preview channel or CRDT is required initially. Migration from later
-card fields must preserve old saved next steps.
+`X-House-Identity` is a compatibility precondition for delayed UI requests, compared
+against the cookie actor before and after body receipt. It never authenticates the
+caller. New clients supply it; old callers may omit it. Scoped HTTP mutations also
+need current zone, controller generation and private tab token. The original
+house ID and command UUID survive uncertainty; a draft cannot move into a new house.
 
-Availability is self-selected Quiet/Can chat with last-set time. It is separate
-from connected/offline and door permissions. New lease/full reload/restart/next-day arrival defaults Quiet;the same controller
-within a30second reconnect lease may retain choice. Presence shows reconnecting
-until connected;availability is never stored as next-day attention. No
-server inference from avatar position or outside-app attention. Card events
-update data/badges;quiet recipients get no compulsory call,modal or mention.
-Ordinary chat and author-chosen outcomes are the first help mechanism.
-Current lounge-help eligibility filters connected+lounge zone+declared Can chat.
-Private room coordinates are not exposed to compute this list;public zone kind
-and door identity suffice. Retreat does not infer quiet/unwillingness or auto-move
-anyone. Returning voluntarily uses the same authorised zone transition.
+Own export contains the profile, current owned room/cards and original-identity
+room/card archives. It contains no session/recovery secrets and no general chat
+transcript export. Departures preserve owned work before trimming inactive cards.
+Archived rooms are retrieved through this export, not a separate archive browser.
 
-Timer is deferred. If adopted,persist original finite work/break deadlines and
-resolve elapsed phases once;do not re-grant a break on restart. Pen strokes,
-uploads and richer editing each need a separate interface/resource gate.
-Future image proposal remains JPEG/PNG/WebP2MiBinput,4MP,1280px/300KiBoutput,
-10MiB/house,one decode at a time,validated/re-encoded/authorised. These budgets
-are untested and no upload endpoint is part of launch. Links are plain https
-resources,without automatic remote fetching or iframe.
+## Actual interfaces and synchronisation
 
-## Migration, resources and operations
+| Boundary | Current contract |
+| --- | --- |
+| GET /api/house/me | Establish/return own identity, active home and archive count |
+| POST /api/house/command | Stable UUID durable intent through the shared authority |
+| GET /api/house/snapshot?zone=… | Current member's authorised bounded projection |
+| POST /api/house/recover | Private proof; rotate sessions and return recovered identity |
+| POST /api/house/recovery-key | Authenticated proof issuance/replacement |
+| POST /api/house/export | Authenticated original-identity room/card export |
+| GET /api/house/removed-members | Current-owner keyset pagination |
+| Socket subscription/control/motion/seat/availability | Current cookie, membership, zone and generation |
+| house.snapshot / house.motion / house.revoked | Authorised saved projection, compact transient players and revocation |
 
-Current v1 has visitors/sessions/one room per visitor/parts/receipts/global seq.
-Test a v1-to-v2 migration using copied real fixtures. Retain public C8 content
-separately; never announce that public neighbours became private members. An
-owner may deliberately import their own prior furniture into a new house.
-Preserve catalogue transforms/IDs or present explicit incompatibility.
+The HTTP body is bounded at 16 KiB, UTF-8 JSON only; origin, rate and session
+boundaries are enforced. Failures retain clear domain codes without private payloads.
+Static routes are whitelisted/confined; remote resource links are validated HTTPS,
+without server fetch or iframe. Text uses textContent. `/readme/` publishes the
+whole argument; `/legacy/` retains the public C8 UI and its existing API.
 
-Back up consistently with WAL-aware SQLite backup, test restoration, then migrate
-at mounted startup. Fly release commands cannot access /data. A v2 DB cannot run
-under the C8 binary without compatible schema or tested restore. Document handling
-of writes after a backup before any rollback; never silently discard them.
+Lounge and bedroom streams have separate persisted cursors. Current implementation
+broadcasts bounded authorised snapshots and compact volatile motion; it does not
+implement the earlier proposed replay-event envelope, delta log or history API.
+Reconnect obtains current saved state. Receipts commit atomically with effects and
+cursors before ACK. Delayed/repeated ACK cannot claim another effect. A timeout is
+pending, not saved. Automatic outbox retries stop after 24 hours; explicit original-
+scope retry/export/discard is available. Receipt keys are not garbage-collected
+until a verified server expiry/consumed-ID contract exists.
 
-Production gates use two exact configurations,30minutes each: (L1) one house,six
-controllers plus six observers=twelve connections,including two slow observer
-readers; (L2) two six-person houses,twelve controllers plus zero observers=twelve
-connections,including one slow-reading controller in each house. Each controller
-sends10Hz motion while connected; each house sends six chat/board intents per
-minute. RSS<=180MiB,reliable change p95<=1second,bounded queues/stable event loop.
-Slow-client expiry/rejoin is part of the result,not a silent exclusion. Local comparison's200MiB gate has a different purpose.
-Server capacity starts at two parallel six-person houses/twelve views, not an
-unlimited public service; idle houses persist but have no simulation loop.
+## Movement, seats, camera and personal expression
 
-Coalesce transient updates for slow clients. Stop queuing on backpressure; close
-and re-snapshot rather than accumulate reliable payloads. Measure synchronous
-SQLite commit/event-loop delay before introducing a bounded DB worker.
+Client ground-plane prediction/interpolation accompanies server speed, sequence,
+generation and geometry checks. Circle/AABB collision, sliding, route clamping
+and protected arrivals keep doors/seats/board reachable. Avatars pass one another.
+Actual permanent slots spawn apart. Clear input on blur/visibility/permission
+change; text/IME/editor focus never drives a character. Volatile motion is not
+queued as a durable offline command.
 
-Log meaningful server actor/action/time/result/stream sequence and bounded
-latency; no message/board text,codes or proofs. Log motion start/stop/zone/seat
-actions and aggregates rather than every frame. Alert at70%volume use and bound
-chat/event/receipt/assets with explicit retry horizons. No change to the fixed
-machine/volume shape is a valid hidden workaround.
+Seats have one occupant and a 30-second same-controller reconnect reservation.
+Stand, zone change, takeover, removal, expiry and restart release/reset correctly.
+Changed furniture reconciles invalid positions and chair poses. DIY is six kinds,
+ten pieces, half-unit grid, quarter turns and six palettes. Revisioned metadata/
+layout drafts preserve newer edits; only an own receipt safely advances their base.
+Conflicts retain work and offer an explicit saved-state review/reset.
+
+Close play fills more of the frame while fixed-angle bounded following keeps
+self clear of actual controls. Overview reveals context; Recenter returns to self.
+Editing uses a stable overview. Reduced motion disables easing/decorative bob.
+The [camera evidence](../implementation/CAMERA-EVIDENCE.md) includes matched views,
+actual mesh/glyph bounds and disclosed cropping; this is not human preference proof.
+
+Quiet/Can chat is explicit and separate from presence, location and room openness.
+New lease/full reload/restart defaults Quiet; short same-token reconnect may retain
+choice and its last-set time. Lounge helper eligibility requires connected, present
+there and self-declared Can chat. Quiet hides all floating speech previews; transcript
+and unread cues remain. Fresh previews use monotonic arrival, max three globally,
+one/member, about 80 Unicode codepoints and four seconds. Initial/reconnect history
+never appears as fresh speech. Smaller viewports may suppress more labels; native
+roster/Overview/Chat retain context.
+
+Cards are optional, one active per author plus twelve inactive per house. Each card
+has its own revision; authors control content and explicit closure. NextStep never
+automatically solves/closes a question. Departure uses ownerLeft and original-
+identity archive before trimming. No forced timer, pairing, mention or reply.
+
+## Operations, evidence and future changes
+
+Native operations tests restore both live WAL databases, identities, receipts,
+room state and next steps; main-file-only copies fail the deliberately populated
+WAL control. Separate database backups do not create a common cross-database
+instant; quiesce writes when that common boundary is required. A later source write
+is absent from the earlier backup. Restore/rollback must account for it explicitly.
+
+Mounted startup creates/checks the additive schema and fails safely on unknown
+versions. A Fly release command cannot access the volume. The old C8 binary can
+continue with its unchanged legacy database and ignores house.sqlite; preserve
+that new file and its later writes during a UI/binary rollback. Any future
+incompatible house schema needs an explicitly tested compatibility/restore plan.
+No new production backup/deployment is claimed by local tests.
+
+Exact sustained L1/L2 gates remain twelve views, 10 Hz input, six durable intents/
+minute/house, 1800 seconds/configuration, RSS <=180 MiB and combined reliable p95
+<=1 second. All slow-reader expiry/rejoin, count, queue and valid-input gates are
+retained. Source-frozen pacing-v3 runs follow a calibrated generator repair; older
+failures remain evidence. [Operations](../implementation/operations-evidence.md)
+and [load refinement](../revisit/LOAD-PACING-REFINEMENT.md) distinguish full trials,
+short calibration, double-based source tests and unmeasured Fly/WAN conditions.
+
+Catalogue/theme additions need stable IDs/footprints/anchors, licences and migration
+checks. Live profile appearance, larger layouts, richer board, drawing, uploads,
+timers, voice and multiple houses each need demonstrated value, their own contracts
+and resource acceptance. No new package earns adoption merely by popularity.
+Future renderer work should measure actual target devices and startup/frame cost;
+software-rendered local checks cannot prove physical-phone performance or enjoyment.
