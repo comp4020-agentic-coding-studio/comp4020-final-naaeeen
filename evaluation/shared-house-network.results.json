@@ -1,0 +1,229 @@
+{
+  "fixtureOnly": true,
+  "protocolSha256": "57a4e07831b490ea15184707a1656f061dc32eab831036f07086f53c20128278",
+  "runtime": {
+    "node": "v24.21.0",
+    "socketIo": "4.8.4",
+    "socketIoClient": "4.8.4"
+  },
+  "observations": [
+    {
+      "transport": "sse",
+      "completed": true,
+      "clients": 6,
+      "requestsPerSecondPerClient": 10,
+      "warmupSeconds": 5,
+      "measureSeconds": 20,
+      "warmupWallMs": 5004.700014,
+      "measureWallMs": 19999.367335000003,
+      "acknowledgementDrainMs": 0.12975400000141235,
+      "deliveryDrainMs": 2.4470750000000407,
+      "attemptedMoves": 1200,
+      "acceptedMoves": 1200,
+      "schedulerLatenessMs": {
+        "count": 200,
+        "min": 0,
+        "p50": 0.9767319999991741,
+        "p95": 2.1358329999966372,
+        "max": 2.5783879999980854
+      },
+      "measuredClientSendIntervalsMs": [
+        {
+          "clientIndex": 0,
+          "count": 199,
+          "min": 97.21185400000104,
+          "p50": 99.98566700000083,
+          "p95": 101.43581000000086,
+          "max": 102.40496600000006
+        },
+        {
+          "clientIndex": 1,
+          "count": 199,
+          "min": 97.25026400000206,
+          "p50": 100.05882399999973,
+          "p95": 101.68221599999924,
+          "max": 102.66943299999912
+        },
+        {
+          "clientIndex": 2,
+          "count": 199,
+          "min": 97.22766700000102,
+          "p50": 100.0141509999994,
+          "p95": 101.72809499999858,
+          "max": 103.51411000000007
+        },
+        {
+          "clientIndex": 3,
+          "count": 199,
+          "min": 96.89833499999986,
+          "p50": 99.9913689999994,
+          "p95": 101.76423199999954,
+          "max": 103.81604200000038
+        },
+        {
+          "clientIndex": 4,
+          "count": 199,
+          "min": 96.14205200000106,
+          "p50": 99.9785609999999,
+          "p95": 101.78707399999985,
+          "max": 103.87500100000034
+        },
+        {
+          "clientIndex": 5,
+          "count": 199,
+          "min": 95.76435000000129,
+          "p50": 100.03348200000255,
+          "p95": 101.84631699999954,
+          "max": 103.90863399999944
+        }
+      ],
+      "serverAcceptedMovesDelta": 1200,
+      "observedClientDeliveries": 7200,
+      "expectedClientDeliveries": 7200,
+      "visibleLatencyMs": {
+        "p50": 6.317732999999862,
+        "p95": 9.934141999998246,
+        "max": 23.549399999999878
+      },
+      "processRssMiB": {
+        "peak": 90.16796875,
+        "samples": 21,
+        "after": 90.16796875
+      },
+      "measuredTcpStreamBytes": {
+        "read": 550500,
+        "written": 17089326
+      },
+      "failures": [],
+      "chatIdempotence": true,
+      "rejoinSnapshot": true,
+      "thresholds": {
+        "p95VisibleMs": 1000,
+        "rssMiB": 200
+      },
+      "passesThresholds": true,
+      "serverStderr": "",
+      "serverExit": {
+        "code": 1,
+        "signal": null
+      }
+    },
+    {
+      "transport": "socket.io",
+      "completed": true,
+      "clients": 6,
+      "requestsPerSecondPerClient": 10,
+      "warmupSeconds": 5,
+      "measureSeconds": 20,
+      "warmupWallMs": 5004.210006000001,
+      "measureWallMs": 20001.311738999997,
+      "acknowledgementDrainMs": 0.12549700000090525,
+      "deliveryDrainMs": 3.264484999999695,
+      "attemptedMoves": 1200,
+      "acceptedMoves": 1200,
+      "schedulerLatenessMs": {
+        "count": 200,
+        "min": 0,
+        "p50": 1.1769229999990785,
+        "p95": 2.374814000002516,
+        "max": 2.6014199999990524
+      },
+      "measuredClientSendIntervalsMs": [
+        {
+          "clientIndex": 0,
+          "count": 199,
+          "min": 97.58138399999734,
+          "p50": 100.10260299999936,
+          "p95": 101.54617200000212,
+          "max": 102.4189269999988
+        },
+        {
+          "clientIndex": 1,
+          "count": 199,
+          "min": 97.34570099999837,
+          "p50": 100.04995600000257,
+          "p95": 101.63584199999605,
+          "max": 102.37235599999985
+        },
+        {
+          "clientIndex": 2,
+          "count": 199,
+          "min": 97.3172590000031,
+          "p50": 100.06193100000382,
+          "p95": 101.78538899999694,
+          "max": 102.35824500000308
+        },
+        {
+          "clientIndex": 3,
+          "count": 199,
+          "min": 97.36593999999604,
+          "p50": 100.0597259999995,
+          "p95": 101.81787700000132,
+          "max": 102.48680700000114
+        },
+        {
+          "clientIndex": 4,
+          "count": 199,
+          "min": 97.37655899999663,
+          "p50": 100.05508399999962,
+          "p95": 101.83368199999677,
+          "max": 102.73449299999629
+        },
+        {
+          "clientIndex": 5,
+          "count": 199,
+          "min": 97.38559800000075,
+          "p50": 100.04229199999827,
+          "p95": 101.85152799999923,
+          "max": 102.89500100000441
+        }
+      ],
+      "serverAcceptedMovesDelta": 1200,
+      "observedClientDeliveries": 7200,
+      "expectedClientDeliveries": 7200,
+      "visibleLatencyMs": {
+        "p50": 4.2775519999995595,
+        "p95": 6.91889600000286,
+        "max": 20.012102000000596
+      },
+      "processRssMiB": {
+        "peak": 89.9453125,
+        "samples": 21,
+        "after": 89.9453125
+      },
+      "measuredTcpStreamBytes": {
+        "read": 106249,
+        "written": 1709705
+      },
+      "failures": [],
+      "chatIdempotence": true,
+      "rejoinSnapshot": true,
+      "thresholds": {
+        "p95VisibleMs": 1000,
+        "rssMiB": 200
+      },
+      "passesThresholds": true,
+      "serverStderr": "",
+      "serverExit": {
+        "code": 0,
+        "signal": null
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic clients on the same host; not human or browser usability",
+    "Each transport server runs in its own process; RSS excludes this client harness",
+    "TCP stream byte counters include HTTP/WebSocket framing and fixture metrics overhead, excluding TCP/IP headers and ACKs",
+    "SSE full snapshots versus Socket.IO deltas intentionally compares payload strategy and transport together",
+    "Socket.IO uses WebSocket only; no polling fallback or cross-origin deployment measured",
+    "Opaque cookie identities are an explicitly loopback-only fixture, not production authentication",
+    "No Fly latency, physical device FPS, long-run reliability, DIY/whiteboard or CRDT claim"
+  ],
+  "core": {
+    "exitCode": 0,
+    "signal": null,
+    "stdout": "\u2714 HTTP controller rejects non-object JSON as invalid input without creating a room (109.919342ms)\n\u2714 shared limiter accepts nominal 10Hz ticks after a bounded 300ms delivery pause, but rejects excess (55.085405ms)\n\u2714 sse: permanent capacity 2 rejects the extra member (163.978558ms)\n\u2714 sse: permanent capacity 6 rejects the extra member (115.599107ms)\n\u2714 sse: last-slot race, membership authorization, separate room delivery (114.185384ms)\n\u2714 sse: valid movement, bounds, throttle, forged identity and duplicate chat (167.032251ms)\n\u2714 sse: reconnect snapshot and real SQLite restart keep durable chat/membership (185.000041ms)\n\u2714 socket.io: permanent capacity 2 rejects the extra member (172.222396ms)\n\u2714 socket.io: permanent capacity 6 rejects the extra member (220.708014ms)\n\u2714 socket.io: last-slot race, membership authorization, separate room delivery (204.567954ms)\n\u2714 socket.io: valid movement, bounds, throttle, forged identity and duplicate chat (107.822915ms)\n\u2714 socket.io: reconnect snapshot and real SQLite restart keep durable chat/membership (236.308064ms)\n\u2714 loopback fixture rejects missing session and cross-origin mutation (88.633521ms)\n\u2139 tests 13\n\u2139 suites 0\n\u2139 pass 13\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 2006.592238\n",
+    "stderr": ""
+  },
+  "parentExitCode": 1
+}

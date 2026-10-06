@@ -21,8 +21,8 @@ documents English; imported Chinese research retains its source language.
 ## Development and critique
 
 Work through the shortest complete saved interaction, then improve expression
-and visual quality. Preserve the long-term renderer-independent room/contribution
-model; Keep the frozen Crit8 production behaviour intact during planning. New prototypes
+and visual quality. Preserve separation between domain state and renderer.
+Keep the frozen Crit8 production behaviour intact during planning. New prototypes
 are loopback-only and clearly labelled, with isolated data/dependencies. Explore
 new approaches critically; do not let the earlier window/lamp slice limit the
 final capability. Research unfamiliar/changing APIs from primary documentation and
@@ -98,5 +98,20 @@ and assessments/final-project/, topics/assessment/, topics/ai-use-and-integrity/
 
 ## Current presentation requirement
 The owner wants a world-first game-likeHUD, not the former webpage layout.
-Read PLAN.md, the owner brief and the evaluated design decisions. Native accessible controls and
-visible save/recovery still use the same domain contracts.
+Read PLAN.md, the owner brief and the evaluated design decisions. Native accessible
+controls and visible save/recovery must follow the reviewed capability contracts.
+
+## Current shared-house corrections
+
+Capacity counts permanent members,not connections; offline residents keep rooms.
+A sole resident may archive/leave; archived bedroom read/export belongs only to
+its original identity. Removal rotates join code and revokes old membership.
+One controller generation plus permission/access generations prevents stale input
+and delayed private snapshots after revocation. All transports share one durable
+authority with separate authorised stream cursors.
+Initial receipt metadata is retained for active houses; automatic outbox retry stops
+at24hours. Do not GC consumed command IDs before a verified expiry contract exists.
+Board goal progress and helpNeeded are fields; sections are filters,not conflicting
+statuses. One finite focus/break cycle uses original deadlines across restart.
+Local spikes/synthetic clients and fresh model reviews are not deployed gameplay,
+physical-phone performance,human A/B or evidence that the space is enjoyable.
