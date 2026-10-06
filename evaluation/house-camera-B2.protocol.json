@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "declaredBeforeCameraImplementation": true,
+  "kind": "matched local technical/design comparison, no human A/B",
+  "candidateA": "current whole-room fit, repaired long-name bounds, identical projection instrumentation",
+  "candidateB": "B2 package: refined close camera plus avatar name ellipsis/full accessible name, phone184px/13px and desktop224px/14px attributed speech",
+  "capacity": [
+    2,
+    6
+  ],
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 844,
+      "height": 390
+    },
+    {
+      "width": 390,
+      "height": 520,
+      "qualification": "reduced-height simulation, not physical keyboard"
+    }
+  ],
+  "sameInput": "actual independent local identities, initial server spawn/room geometry, same names/chat; native forms for all actions",
+  "tasks": [
+    "spawn idle",
+    "Can chat and fresh attributed text",
+    "edge walk",
+    "seat sit/stand",
+    "own door enter/return",
+    "board route",
+    "overview then recenter/move",
+    "stable DIY pick",
+    "observer takeover",
+    "resize",
+    "reduced motion",
+    "revocation/history regressions"
+  ],
+  "mechanicalAcceptance": {
+    "prominence": "provisional upright head-to-foot projected CSS height96-160 desktop and56-88 phone; explicit rationale required for viewport constraints below this range",
+    "room": "projected room footprint >=80% usable width OR >=70% usable height; cropping allowed in play",
+    "self": "upright head/foot visible in a HUD-free play rectangle while moving and after resize; no invented relocation",
+    "idle": "after settling, camera displacement <1 CSS pixel over5 seconds; no idle zoom/yaw",
+    "labels": "painted glyphs bounded, attributed labels do not overlap HUD/takeover/camera controls; offscreen people do not float in screen-edge speech",
+    "invariants": "same movement speed/collision/routes, controller/IME guards, privacy clearing, monotonic four-second max3 bubbles, no history replay",
+    "pick": "visible actual projected door/seat/furniture target hits same authoritative target; overview movement clearly returns to play"
+  },
+  "stopping": "stop after red/green, matched native projection/PNG measurements and fresh reviewer findings reconciled; failed criteria require refinement or parent decision",
+  "qualifications": [
+    "SwiftShader localhost is not physical-phone/GPU/Fly measurement",
+    "No human preference/gamefeel claim",
+    "Concurrent UI changes must be captured as confounders"
+  ],
+  "A_sha256": "2bcafa78de12bdf84385e0dcb88edb63014c452ee71e65d26a8bafbf1717f38f",
+  "predecessor_sha256": "8182b9dd4f29fa15790818c22bd4f517186580edbaa76c33997d33bd9e5ff66d",
+  "changedFactors": [
+    "fixed-orientation follow camera",
+    "desktop resize continuity",
+    "foreground text package and larger conversation preview",
+    "safe area height cap retains8px head/foot margin"
+  ],
+  "calibration": "Wait for initial notice to close; await server-projected Can chat; name glyph bounds account for actual overflow clipping; speech body clipping is intended. These correct evaluator false positives/confounders, not acceptance removal.",
+  "initialResultsPreserved": ".local/camera-comparison/native-results.json; initial screenshots camera-A/B-* retained as first prototype evidence; final screenshots camera-A/B2-* use current common HUD fixture."
+}

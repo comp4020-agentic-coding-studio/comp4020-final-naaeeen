@@ -1,0 +1,692 @@
+{
+  "kind": "frozen local native technical/design comparison; not human A/B",
+  "runtime": "WSL Ubuntu/lizhi native mise Node24.21.0/pnpm11.9.0; Playwright1.63.0 cached Chromium1234; SwiftShader; localhost4093",
+  "initialPrototypeEvidence": "Initial16 A/B PNGs and .local/camera-comparison/native-results.json retained; final uses distinct A2/B2 PNGs.",
+  "nativeMaintainedSuite": {
+    "exit": 0,
+    "tests": 8,
+    "result": "PASS",
+    "duration": "3.7m",
+    "output": ".local/camera-browser-final",
+    "log": ".local/camera-comparison/interactions-final.log"
+  },
+  "baselineSourceSha256": "2bcafa78de12bdf84385e0dcb88edb63014c452ee71e65d26a8bafbf1717f38f",
+  "scriptSha256": "3241097d89caea27881e2466d0e485d6631b9640b59276b3ccd95ffb37a0da85",
+  "sourceHashes": {
+    "public/house-world.js": "0bbf9a2ada8eb547275fee674c12bf95a99036cfb7c3203023b34abb3f15c8ff",
+    "public/house-camera.js": "0ec4197a1deee892c09129d7b4a2887043b567ac125e708e853229863a5fb0ba",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "spec/house-world.test.ts": "c02995284daa9e536c9e4442ab320c688b92a932cb616cc04e9e90d092713d82",
+    "spec/house-camera.test.ts": "aa736143d002736db5bcc6f4a4c180fbd864aaf568f88ddcef8186501ad3afa8",
+    "spec/house-label-layout.test.ts": "bd8917cc57a3eb2fad9f8a940b3887dc3ba841a6339c3c8647a14345bdb7edc5",
+    "tests/e2e/house-world-readability.spec.ts": "0262995eb12e4715a5af1f4553a28c54314456654414569ad9ae70073e0d7c3a",
+    "evaluation/house-camera.protocol.json": "8182b9dd4f29fa15790818c22bd4f517186580edbaa76c33997d33bd9e5ff66d",
+    "evaluation/house-camera-B2.protocol.json": "29890ddef4d1090a0cfb3ec0ad6d930a2ec4d0f565d33b41aed02bdf2d4682b0"
+  },
+  "freezeBefore": {
+    "public/house-world.js": "0bbf9a2ada8eb547275fee674c12bf95a99036cfb7c3203023b34abb3f15c8ff",
+    "public/house-camera.js": "0ec4197a1deee892c09129d7b4a2887043b567ac125e708e853229863a5fb0ba",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "public/house-geometry.js": "7dc28ad3eae9c8874c6ae9cb352d38ecc94f3630f8426a85d4e5b57c1544dc53",
+    "public/house-ui.js": "77b6c32f89412b8226d2f63cc603cfd91f6bda98b2a300e11b8029ec039d2984",
+    "public/house-client.js": "fa80759780442fe69c8fabd0befb17b2fcede8634e2c761490d480183273e70b",
+    "public/house.css": "ed3e72cb63b0af4fa6473077f1ace6f7992e64ea2b839f95a48106ab8025c7c1",
+    "public/house.html": "8361c5f724311ed2afe17edc8c4dec914f1ac16f36b26ee3ceb4c0cf9b1b64d9"
+  },
+  "freezeAfter": {
+    "public/house-world.js": "0bbf9a2ada8eb547275fee674c12bf95a99036cfb7c3203023b34abb3f15c8ff",
+    "public/house-camera.js": "0ec4197a1deee892c09129d7b4a2887043b567ac125e708e853229863a5fb0ba",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "public/house-geometry.js": "7dc28ad3eae9c8874c6ae9cb352d38ecc94f3630f8426a85d4e5b57c1544dc53",
+    "public/house-ui.js": "77b6c32f89412b8226d2f63cc603cfd91f6bda98b2a300e11b8029ec039d2984",
+    "public/house-client.js": "fa80759780442fe69c8fabd0befb17b2fcede8634e2c761490d480183273e70b",
+    "public/house.css": "ed3e72cb63b0af4fa6473077f1ace6f7992e64ea2b839f95a48106ab8025c7c1",
+    "public/house.html": "8361c5f724311ed2afe17edc8c4dec914f1ac16f36b26ee3ceb4c0cf9b1b64d9"
+  },
+  "pageErrors": [],
+  "samples": [
+    {
+      "candidate": "A2",
+      "contexts": 2,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 83.2,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 2,
+      "visibleBubbles": 1,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 448.9,
+        "right": 1471.1,
+        "top": 192,
+        "bottom": 908
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-2-1920x1080.png",
+      "pngDimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "7fc5571c22c409667ed71ebda9b3fa53df7ad594891fa1481e7f81552c5e0379"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 2,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 32.91,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 2,
+      "visibleBubbles": 1,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 8,
+        "right": 382,
+        "top": 258.9,
+        "bottom": 486.1
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-2-390x844.png",
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "sha256": "62c797130798a13d424624b672e48d1ddcc7e85dcf231e5961aa8715f32662a5"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 2,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 13.06,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 1,
+      "visibleBubbles": 2,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 341.8,
+        "right": 502.2,
+        "top": 105.6,
+        "bottom": 218
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-2-844x390.png",
+      "pngDimensions": [
+        844,
+        390
+      ],
+      "sha256": "5c10596b185228df394c52767baed04d95c06eae808986f536db2d5e77bc88ed"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 2,
+      "viewport": {
+        "width": 390,
+        "height": 520
+      },
+      "qualification": "reduced-height simulation",
+      "uprightAvatarHeight": 12.64,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 2,
+      "visibleBubbles": 0,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 123.2,
+        "right": 266.8,
+        "top": 136.8,
+        "bottom": 224
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-2-390x520.png",
+      "pngDimensions": [
+        390,
+        520
+      ],
+      "sha256": "eb60da3ded2b7af9df2d88d51305b4c2cbfea2f55e366b57156911fd24fb3a32"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 6,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 83.2,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 6,
+      "visibleBubbles": 3,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 448.9,
+        "right": 1471.1,
+        "top": 192,
+        "bottom": 908
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-6-1920x1080.png",
+      "pngDimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "42b8cefe57141394309c9475b62c7ff1f6d73d989475d01375a29ab6654a05bd"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 6,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 32.91,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 6,
+      "visibleBubbles": 3,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 8,
+        "right": 382,
+        "top": 258.9,
+        "bottom": 486.1
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-6-390x844.png",
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "sha256": "6a4d2ae606bf909229ad672d70f4c7eb00eb70269fcbed96e6cec4315c1ed311"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 6,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 13.06,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 1,
+      "visibleBubbles": 1,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 341.8,
+        "right": 502.2,
+        "top": 105.6,
+        "bottom": 218
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-6-844x390.png",
+      "pngDimensions": [
+        844,
+        390
+      ],
+      "sha256": "6a400a13bcad52255d622ad72ed0ece987845e37704bcebd75572489284ba98c"
+    },
+    {
+      "candidate": "A2",
+      "contexts": 6,
+      "viewport": {
+        "width": 390,
+        "height": 520
+      },
+      "qualification": "reduced-height simulation",
+      "uprightAvatarHeight": 12.64,
+      "actualSelfMeshHeight": null,
+      "actualSelfMeshBounds": null,
+      "safeArea": null,
+      "meshOutsidePaddedAreaBy": null,
+      "visibleNames": 3,
+      "visibleBubbles": 0,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [
+        "availability hud"
+      ],
+      "worldPixelBounds": {
+        "left": 123.2,
+        "right": 266.8,
+        "top": 136.8,
+        "bottom": 224
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-A2-6-390x520.png",
+      "pngDimensions": [
+        390,
+        520
+      ],
+      "sha256": "8c2a170b68b22e9cce98319efbaa756b72e78149de97fe89e8809c343a7fef56"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 2,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 128,
+      "actualSelfMeshHeight": 148.39,
+      "actualSelfMeshBounds": {
+        "left": 922.6762856550502,
+        "right": 997.3237143449498,
+        "top": 492.28541236172885,
+        "bottom": 640.6770679857473
+      },
+      "safeArea": {
+        "x": 8,
+        "y": 221,
+        "w": 1904,
+        "h": 677,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 2,
+      "visibleBubbles": 1,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 421.7,
+        "right": 1994.3,
+        "top": -176.7,
+        "bottom": 924.8
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-2-1920x1080.png",
+      "pngDimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "fbf03cb8fbcd7247a1f058bae600e2f55c5b51c3e20627a4f6223f0681892edd"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 2,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 72,
+      "actualSelfMeshHeight": 84.44,
+      "actualSelfMeshBounds": {
+        "left": 173.58380275274925,
+        "right": 216.41619724725075,
+        "top": 328.9179977635696,
+        "bottom": 413.3607176981357
+      },
+      "safeArea": {
+        "x": 8,
+        "y": 204,
+        "w": 374,
+        "h": 326,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 2,
+      "visibleBubbles": 2,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": -164.2,
+        "right": 654,
+        "top": -21,
+        "bottom": 475.9
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-2-390x844.png",
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "sha256": "9534ec002fca4f29fdc65483e2f27bc6f4347a3622a044bee42ef11ba880c53c"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 2,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 78,
+      "actualSelfMeshHeight": 90.43,
+      "actualSelfMeshBounds": {
+        "left": 732.2558615710462,
+        "right": 777.7441384289538,
+        "top": 161.54111065792858,
+        "bottom": 251.96727580381477
+      },
+      "safeArea": {
+        "x": 674,
+        "y": 99,
+        "w": 162,
+        "h": 207,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 2,
+      "visibleBubbles": 1,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 427,
+        "right": 1385.3,
+        "top": -246.1,
+        "bottom": 425.1
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-2-844x390.png",
+      "pngDimensions": [
+        844,
+        390
+      ],
+      "sha256": "a12afdb168a2176030f0c9c72f511b4c3640e8c7c8bb1fe4d237a98e7a477f17"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 2,
+      "viewport": {
+        "width": 390,
+        "height": 520
+      },
+      "qualification": "reduced-height simulation",
+      "uprightAvatarHeight": 72,
+      "actualSelfMeshHeight": 84.44,
+      "actualSelfMeshBounds": {
+        "left": 306.5838027527492,
+        "right": 349.41619724725075,
+        "top": 155.91799776356953,
+        "bottom": 240.36071769813572
+      },
+      "safeArea": {
+        "x": 274,
+        "y": 140,
+        "w": 108,
+        "h": 108,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 2,
+      "visibleBubbles": 0,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": -31.2,
+        "right": 787,
+        "top": -194,
+        "bottom": 302.9
+      },
+      "selfAuthoritativePosition": {
+        "x": -0.325,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-2-390x520.png",
+      "pngDimensions": [
+        390,
+        520
+      ],
+      "sha256": "96b5412b39ccdbf5ee7c9e540a3de2ec0eda4ff4061defbf79bef6bd75baebef"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 6,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 128,
+      "actualSelfMeshHeight": 148.39,
+      "actualSelfMeshBounds": {
+        "left": 922.6762856550503,
+        "right": 997.3237143449498,
+        "top": 492.28541236172896,
+        "bottom": 640.6770679857473
+      },
+      "safeArea": {
+        "x": 8,
+        "y": 221,
+        "w": 1904,
+        "h": 677,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 6,
+      "visibleBubbles": 3,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 531.5,
+        "right": 2104.1,
+        "top": -126.9,
+        "bottom": 974.6
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-6-1920x1080.png",
+      "pngDimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "33e855db35c530522e09255a1d5ae3246c435ff8d3687ac965c47c75994e692e"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 6,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 72,
+      "actualSelfMeshHeight": 84.44,
+      "actualSelfMeshBounds": {
+        "left": 173.58380275274928,
+        "right": 216.41619724725078,
+        "top": 328.9179977635695,
+        "bottom": 413.3607176981357
+      },
+      "safeArea": {
+        "x": 8,
+        "y": 204,
+        "w": 374,
+        "h": 326,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 5,
+      "visibleBubbles": 3,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": -85,
+        "right": 733.1,
+        "top": -13.9,
+        "bottom": 483
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-6-390x844.png",
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "sha256": "88d7bd040ace94f5f8cb45d7948030887e084fc58ef6e47f2f3b7b7ebfb9ae72"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 6,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "qualification": "native layout viewport",
+      "uprightAvatarHeight": 78,
+      "actualSelfMeshHeight": 90.43,
+      "actualSelfMeshBounds": {
+        "left": 733.2558615710462,
+        "right": 778.7441384289539,
+        "top": 194.54111065792856,
+        "bottom": 284.9672758038148
+      },
+      "safeArea": {
+        "x": 676,
+        "y": 165,
+        "w": 160,
+        "h": 141,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0,
+      "visibleNames": 2,
+      "visibleBubbles": 0,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 494.9,
+        "right": 1453.2,
+        "top": -182.8,
+        "bottom": 488.5
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-6-844x390.png",
+      "pngDimensions": [
+        844,
+        390
+      ],
+      "sha256": "45499d87a9842824d12f2cbcd845a8da1d7a593eaf6adf76e24b61cad0db2ecd"
+    },
+    {
+      "candidate": "B2",
+      "contexts": 6,
+      "viewport": {
+        "width": 390,
+        "height": 520
+      },
+      "qualification": "reduced-height simulation",
+      "uprightAvatarHeight": 72,
+      "actualSelfMeshHeight": 84.44,
+      "actualSelfMeshBounds": {
+        "left": 306.5838027527492,
+        "right": 349.41619724725075,
+        "top": 163.9179977635695,
+        "bottom": 248.3607176981357
+      },
+      "safeArea": {
+        "x": 274,
+        "y": 156,
+        "w": 108,
+        "h": 92,
+        "available": true
+      },
+      "meshOutsidePaddedAreaBy": 0.361,
+      "visibleNames": 1,
+      "visibleBubbles": 0,
+      "labelViolations": 0,
+      "uprightApproximationControlOverlaps": [],
+      "worldPixelBounds": {
+        "left": 48,
+        "right": 866.1,
+        "top": -178.9,
+        "bottom": 318
+      },
+      "selfAuthoritativePosition": {
+        "x": -1.625,
+        "z": 3.3
+      },
+      "screenshot": "docs/revisit/screenshots/camera-B2-6-390x520.png",
+      "pngDimensions": [
+        390,
+        520
+      ],
+      "sha256": "0e554f58db195297d3f4a0b8456acc983f8ecb806cca64e847cfcb64281fd2da"
+    }
+  ],
+  "qualifications": [
+    "Upright head/foot projection and actual mesh vertices including self ring are different measures.",
+    "Only B2 has actual self mesh diagnostic; A2 uses the same upright point measurement and native PNG.",
+    "Padded play rectangles use6px HUD clearance; actual vertices may lie outside the padded rectangle by less than6px while remaining clear of original HUD.",
+    "A2 baseline six-person390x520 has one approximate upright/control intersection; reference failure is preserved rather than requiring the baseline to pass the new criteria.",
+    "B2 play permits cropped/offscreen people; roster, Overview and Chat provide the full authorised context.",
+    "Native font/browser/software renderer and parallel localhost tests are not physical-phone/IME/GPU/Fly/human game-feel evidence.",
+    "World branch coverage remains below80%; browser tasks are not counted as unit coverage."
+  ]
+}

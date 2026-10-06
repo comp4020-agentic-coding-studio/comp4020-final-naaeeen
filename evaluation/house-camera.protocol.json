@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "declaredBeforeCameraImplementation": true,
+  "kind": "matched local technical/design comparison, no human A/B",
+  "candidateA": "current whole-room fit, repaired long-name bounds, identical projection instrumentation",
+  "candidateB": "fixed orientation orthographic close play, bounded self-follow/deadzone, accessible Overview/Recenter, stable edit overview",
+  "capacity": [
+    2,
+    6
+  ],
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 844,
+      "height": 390
+    },
+    {
+      "width": 390,
+      "height": 520,
+      "qualification": "reduced-height simulation, not physical keyboard"
+    }
+  ],
+  "sameInput": "actual independent local identities, initial server spawn/room geometry, same names/chat; native forms for all actions",
+  "tasks": [
+    "spawn idle",
+    "Can chat and fresh attributed text",
+    "edge walk",
+    "seat sit/stand",
+    "own door enter/return",
+    "board route",
+    "overview then recenter/move",
+    "stable DIY pick",
+    "observer takeover",
+    "resize",
+    "reduced motion",
+    "revocation/history regressions"
+  ],
+  "mechanicalAcceptance": {
+    "prominence": "provisional upright head-to-foot projected CSS height96-160 desktop and56-88 phone; explicit rationale required for viewport constraints below this range",
+    "room": "projected room footprint >=80% usable width OR >=70% usable height; cropping allowed in play",
+    "self": "upright head/foot visible in a HUD-free play rectangle while moving and after resize; no invented relocation",
+    "idle": "after settling, camera displacement <1 CSS pixel over5 seconds; no idle zoom/yaw",
+    "labels": "painted glyphs bounded, attributed labels do not overlap HUD/takeover/camera controls; offscreen people do not float in screen-edge speech",
+    "invariants": "same movement speed/collision/routes, controller/IME guards, privacy clearing, monotonic four-second max3 bubbles, no history replay",
+    "pick": "visible actual projected door/seat/furniture target hits same authoritative target; overview movement clearly returns to play"
+  },
+  "stopping": "stop after red/green, matched native projection/PNG measurements and fresh reviewer findings reconciled; failed criteria require refinement or parent decision",
+  "qualifications": [
+    "SwiftShader localhost is not physical-phone/GPU/Fly measurement",
+    "No human preference/gamefeel claim",
+    "Concurrent UI changes must be captured as confounders"
+  ],
+  "A_sha256": "2bcafa78de12bdf84385e0dcb88edb63014c452ee71e65d26a8bafbf1717f38f"
+}
