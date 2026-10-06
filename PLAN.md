@@ -1,35 +1,28 @@
-# Crit8 implementation handoff
+# Shared Study House: research and planning in progress
 
-Status: active; target6October2026,12:00 Canberra/Sydney. Start09:31; desired window
-2h30, but the actual cutoff is slightly earlier. New WSL repo:
- /home/lizhi/comp4020/comp4020-final-naaeeen.
-Initial clean main HEAD1f4b58c. No unrelated changes found.
+6 October 2026. This root PLAN.md is the sole active plan. The final researched
+implementation plan will replace this working handoff after comparison/review.
 
-Done: live course requirements; actual Docker/Fly/spec/CI; installed Linux
-Node24.21.0/pnpm11.9.0; built-in SQLite3.53.4;163byte-verified imported source files
-under docs/planning-source, excluding Windows dependencies/caches/demo state.
+Authoritative owner source: [full brief](docs/product/OWNER-BRIEF-2026-10-06.md).
+Mandatory: unique create/join space code, capacity2-6, one owned DIY bedroom per
+member, lounge with doors, controllable avatars, actual text conversation, visible
+co-presence, sitting/shared study, useful collaborative whiteboard.
+Prefer warm fixed-view low-poly/pixel 3D. A simpler renderer retains the core loop.
 
-Decisions: retain supplied checks/config; fixed Three0.186.1 plus licensed models.
-C8 public visitor rehearsal avoids the invite-only plan's stranger-entry failure.
-Session-owned window, bounded room editing and authored shared lamp form the slice.
-Private circles/recovery/archives/richer templates are later, not C8 claims.
+Baseline:6dc79c5ec6cc5610a867d653892d2b827ee94536, frozen crit-8.
+This is a local research/prototype task, not a production upgrade or publication.
+Prior pending-approval/deployment handoff is archived in
+[Crit8 history](docs/history/crit-8-implementation-handoff.md).
 
-Ownership: parent owns contracts/domain tests/runtime manifests/harness/evidence;
-workers receive server, frontend and renderer/assets separately. Review is read-only.
-Next: first migration commit, failing behavioural tests, implementation, browser,
-independent review, actual checks, meaningful commits, reviewable release decision.
+Work phases: actualrepo/course/harness -> owner requirements -> primary research ->
+predeclared transport/layout spikes -> capability/architecture/design ->
+fresh no-history reviews -> verified refinements -> finalplan and local commits.
 
-Unverified: production app, deployment, physical phone, human preference, final
-private-circle features. Repo is private. Do not claim shipped before remote
-actions and live checks. User's personal publish permission still needs concrete
-approval. Do not read or log local mise tokens.
+Read [worklog](docs/planning/WORKLOG.md) for progress and
+[comparison protocol](evaluation/shared-house-planning.protocol.json) for fixed
+criteria. Research lanes: products/layouts, networkcontracts, whiteboard/tools,
+code/harness. Worker paths: prototypes/house-network/** and house-layout/** only.
+Parent ownsdocs/evaluation/rootfiles. Do not add packages to production manifests.
 
-Owner steering10:28: world-firstgameHUD;ADR0003andlivingplan supersedeold webpagecomposition. Actual firstBrowser32checks+2E2Epass; thirdidentityrecoveryE2Ered, fixpending.
-
-Final localcandidate11:03:32fast+3realbrowsercasespass; ownwindow survives
-localprocessrestart. ParentcompletedHUDafterboundedworkerhandoff; no remaining
-confirmedreviewblocker. Productionruntimeauditclean. Publicationapprovalnext.
-
-Publication remains gated by the pending human authorization question.
-Additional local lost-ACK test passed: real commit, client response discarded,
-same UUID retry, one revision. No remote push/visibility/deploy performed.
+The inherited methods in docs/planning-source/methods remain useful after checking
+their actual scope; old A2runs, modelpins, paths and PASS claims stay historical.

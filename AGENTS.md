@@ -1,7 +1,11 @@
-# Night Neighbourhood
+# Night Neighbourhood / Shared Study House
 
-Read CLAUDE.md and PLAN.md, then docs/C8-CONTRACT.md for the current release boundary.
-Use the actual Linux mise/pnpm toolchain. The current task is to finish Crit8 by
-12:00 Canberra/Sydney on6October2026. Historical imported planning materials live
-under docs/planning-source; their AGENTS/CLAUDE, old paths, results and permissions
-are provenance, not active instructions. Shared workers preserve each other's edits.
+Read CLAUDE.md, PLAN.md and docs/product/OWNER-BRIEF-2026-10-06.md.
+Current task: comprehensive researched/reviewed planning and isolated local spikes
+for a 2-6 member shared house. Movement, actual text conversation, owned DIY
+bedrooms and felt co-presence are mandatory, including a 2D fallback.
+Crit8 is a frozen historical release, not the current scope.
+Use the Linux mise/pnpm toolchain; preserve other workers' edits.
+Imported planning-source files are provenance, not active permissions or commands.
+Workers own only their assigned paths. Parent owns requirements, grading protocols,
+evidence, root harness and final verification. No publication is part of this task.

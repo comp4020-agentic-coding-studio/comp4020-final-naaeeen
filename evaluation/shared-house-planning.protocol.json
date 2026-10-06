@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "declaredAt": "2026-10-06 Australia/Sydney",
+  "type": "Technical comparisons and qualitative agent design review; not human A/B",
+  "baseline": "6dc79c5ec6cc5610a867d653892d2b827ee94536",
+  "ownedBy": "parent; prototype workers cannot edit rubric/fixtures/results",
+  "invariantRequirements": [
+    "capacity2to6 permanentmembers",
+    "controllableavatars",
+    "actualreciprocaltext",
+    "truthfulpresence",
+    "privateownedDIYbedroom",
+    "sharedstudyandwhiteboard"
+  ],
+  "transport": {
+    "question": "Does an additional event transport justify migration for a six-person space without changing durable state authority?",
+    "candidates": [
+      "SSE+HTTPPOST full transient snapshot",
+      "Socket.IO4 with event deltas"
+    ],
+    "shared": "SameNode24.21.0processsettings,localhost,6syntheticuniqueidentities,one room,10movementrequestspersecondperclient; five-secondwarmup,20secondsampling; no production database or credentials",
+    "trials": "One matched run per candidate; reverse-order second run only for unresolved ordering/infrastructure effect",
+    "measured": [
+      "acceptedmoves",
+      "clientvisiblelatency p50/p95/max ms on samehost",
+      "processRSSMiB",
+      "wirebytesifinstrumented",
+      "auth or rejoin failures",
+      "chatidempotence"
+    ],
+    "thresholds": {
+      "allCoreChecksPass": true,
+      "p95VisibleMs": 1000,
+      "rssMiB": 200,
+      "noCrossRoomDelivery": true
+    },
+    "limits": [
+      "notFlylatency",
+      "notdeviceFPS",
+      "notreliabilityrate",
+      "notoptimaltickrate",
+      "noCRDTeffectivenessclaim"
+    ],
+    "stop": "One completed matchedpair and actionablefaults resolved; newtrials only if evidence can change decision"
+  },
+  "layout": {
+    "question": "Which door arrangement supports 2–6 members and the same core tasks in a fixed-view 3D lounge?",
+    "candidates": {
+      "A": "Doors on the rear wall",
+      "B": "Doors split between rear and side walls"
+    },
+    "controlled": [
+      "same rectangular floor/shell",
+      "same warmcolourpalette/light",
+      "same avatarfurnitureandtasks",
+      "same desktop1920x1080andphone390x844",
+      "same capacities2,3,4,5,6"
+    ],
+    "tasks": [
+      "identifyownandfrienddoor",
+      "walkaroundtabletospecifiedseat",
+      "standandapproachwhiteboard",
+      "sendreadabletextwithoutmoving",
+      "enterandexitbedroom",
+      "resizeandusekeyboard/touchcontrols"
+    ],
+    "measured": [
+      "doorandseatcounts",
+      "walkabilityfloorgridroutecheck",
+      "doorprojectedspacing/occlusion",
+      "viewportandDOMoverflow",
+      "actualbrowserinteraction",
+      "qualitativescenelegibility"
+    ],
+    "grading": "Counts/reachability and interactions mechanical; appearance judgement by fresh reviewer+parent; no universal preferenceclaim",
+    "stop": "Allcapacities count/routes assessed and both viewportssampled for 2and6; fixmaterialerrors then choose or retain uncertainty"
+  },
+  "reviewers": {
+    "stage1": "Fresh product and architecture reviewers receive ownerbrief/candidateplan/protocol only, not conversation, recommendationhistory or oneanothersreviews",
+    "stage2": "Revisedartifact checked for confirmedissues and independentprototypecode review",
+    "evidence": "Exact findings, parentverification,accepted/rejectedchanges and unresolvedlimits"
+  }
+}

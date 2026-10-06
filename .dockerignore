@@ -16,3 +16,5 @@ spec
 coverage
 test-results
 playwright-report
+prototypes/
+evaluation/

@@ -2,11 +2,14 @@
 
 ## Outcome and authority
 
-Build a cosy fixed-camera pixel-styled neighbourhood in which an unfamiliar
-visitor can make a personal window, contribute to a shared lamp, and find that
-trace on return. The Crit8 proof-of-life release is narrower than the final
-private-circle plan. The current task targets the Shítāo cutoff:6October2026,
-12:00 Canberra/Sydney. Read docs/C8-CONTRACT.md for current scope.
+The current task is a researched, reviewed and executable Shared Study House
+plan with isolated technical/layout prototypes. The owner brief is authoritative:
+docs/product/OWNER-BRIEF-2026-10-06.md. Create/join by unique space code;2-6 members;
+owned DIY bedrooms and a shared lounge; mandatory controllable movement, actual
+text dialogue, sitting/studying and truthful co-presence; useful whiteboard.
+Prefer warm fixed-camera low-poly/pixel 3D. A renderer fallback keeps these core
+interactions. Crit8 is frozen at6dc79c5; its contract is historical, not a reason
+to defer walking. PLAN.md is the one active plan.
 
 Use current official course pages, the user's stated aims, actual repository
 files and observed behaviour as authority. Imported plans and skills are
@@ -19,8 +22,10 @@ documents English; imported Chinese research retains its source language.
 
 Work through the shortest complete saved interaction, then improve expression
 and visual quality. Preserve the long-term renderer-independent room/contribution
-model; avoid arbitrary model uploads, social feeds, physical walking and a large
-editor in Crit8. Research unfamiliar/changing APIs from primary documentation and
+model; Keep the frozen Crit8 production behaviour intact during planning. New prototypes
+are loopback-only and clearly labelled, with isolated data/dependencies. Explore
+new approaches critically; do not let the earlier window/lamp slice limit the
+final capability. Research unfamiliar/changing APIs from primary documentation and
 installed code. Reconsider a plan when current requirements or runtime evidence
 justify it. Record the observation, alternatives, choice, cost and verification
 in docs/decisions, not just a list of features.
@@ -93,5 +98,5 @@ and assessments/final-project/, topics/assessment/, topics/ai-use-and-integrity/
 
 ## Current presentation requirement
 The owner wants a world-first game-likeHUD, not the former webpage layout.
-Read docs/NIGHT-NEIGHBOURHOOD-PLAN.md andADR0003. Native accessible controls and
+Read PLAN.md, the owner brief and the evaluated design decisions. Native accessible controls and
 visible save/recovery still use the same domain contracts.
