@@ -101,3 +101,31 @@ integration still runs the repository's normal pnpm check and check:evidence.
 No commits, pushes, publication, deployment or memory edits were performed by this
 worker. Human value trials, actual devices, production L1/L2 load, backup restoration
 and migration of intentionally linked legacy data remain unverified.
+
+
+## Removed-member administration follow-up
+
+At 23:56 Sydney on 6 October, the parent selected the missing reinstatement
+discovery path. HouseStore.removedResidents(id, after = "") supplies a separate
+owner-only administration read. It rechecks active membership and current house
+ownership in one SQLite transaction, validates a non-empty UUID cursor, and uses
+parameterised keyset pagination ordered by stable identity UUID. A page returns
+at most 50 {id,name} members; a 51st database row determines whether nextCursor
+points to the last returned identity. This list is neither embedded in a shared
+snapshot nor attached to a zone stream.
+
+Two added behavioural tests first failed because the method did not exist.
+After implementation, all 21 store tests passed in 1.97 seconds. The second test
+creates 51 removed identities through actual join/remove transactions, then
+checks 50/1 pagination, uppercase cursor normalisation, exhausted pagination,
+unchanged snapshots and exclusion of a second house's guards. The first test
+checks current-owner access, non-owner/outsider/removed-identity denial, invalid
+cursor rejection, removal discovery, reinstatement disappearance and ownership
+transfer. Whole repository typecheck and git diff --check passed.
+
+Updated V8 coverage scoped to src/house-store.ts: statements 95.02%, branches
+93.19%, functions 100%, lines 98.89%. The existing independent reviewer could not
+be dispatched again because collaboration returned an agent thread limit.
+The parent was asked to include these ten lines and their regressions in its
+existing fresh HTTP/UI review; that follow-up review is pending in this worker's
+record. No worker commits or external writes were made.

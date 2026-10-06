@@ -195,6 +195,16 @@ export class HouseStore {
       return { identity: profile(this.identity(id)), home: h ? home(h) : null, archiveCount: count.count };
     }); } catch (error) { return storageError(error); }
   }
+  /** Owner administration is paged separately from shared house snapshots. */
+  removedResidents(id: string, after = ""): { members: { id: string; name: string }[]; nextCursor: string | null } {
+    try { return this.transaction(() => {
+      const h = this.requireHome(id); this.requireOwner(id, h);
+      const cursor = after === "" ? "" : uuid(after);
+      const rows = this.db.prepare("SELECT i.id,i.name FROM removed_guards g JOIN identities i ON i.id=g.identity_id WHERE g.house_id=? AND i.id>? ORDER BY i.id LIMIT 51").all(h.id, cursor) as { id: string; name: string }[];
+      const members = rows.slice(0, 50);
+      return { members, nextCursor: rows.length > 50 ? members[49]!.id : null };
+    }); } catch (error) { return storageError(error); }
+  }
   issueRecovery(id: string): string {
     try { return this.transaction(() => {
       this.identity(id); const proof = randomBytes(32).toString("base64url");

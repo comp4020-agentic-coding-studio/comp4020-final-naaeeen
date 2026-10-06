@@ -359,4 +359,49 @@ describe("durable house authority", () => {
     expect(store.session(recovered.digest)).toEqual({ id: a.id });
   });
 
+  it("lists removed identities only for the current owner and removes reinstated guards", () => {
+    const { store, a, b } = pair(); const outsider = store.ensureSession();
+    expect(store.removedResidents(a.id)).toEqual({ members: [], nextCursor: null });
+    expect(() => store.removedResidents(b.id)).toThrowError(error("FORBIDDEN"));
+    expect(() => store.removedResidents(outsider.id)).toThrowError(error("FORBIDDEN"));
+    store.execute(a.id, command("house.remove", { memberId: b.id }));
+    expect(store.removedResidents(a.id)).toEqual({ members: [{ id: b.id, name: "Bob" }], nextCursor: null });
+    expect(() => store.removedResidents(b.id)).toThrowError(error("FORBIDDEN"));
+    expect(() => store.removedResidents(a.id, "invalid-cursor")).toThrowError(error("INVALID_INPUT"));
+    store.execute(a.id, command("house.reinstate", { memberId: b.id }));
+    expect(store.removedResidents(a.id)).toEqual({ members: [], nextCursor: null });
+    store.execute(b.id, command("house.join", { code: store.me(a.id).home!.code, name: "Bob", colour: "blue" }));
+    store.execute(a.id, command("house.transfer", { memberId: b.id }));
+    expect(() => store.removedResidents(a.id)).toThrowError(error("FORBIDDEN"));
+    expect(store.removedResidents(b.id)).toEqual({ members: [], nextCursor: null });
+  });
+
+  it("paginates removed guards without duplicates or exposing other houses", () => {
+    const { store, a, b, home } = pair();
+    const removed = [{ id: b.id, name: "Bob" }];
+    store.execute(a.id, command("house.remove", { memberId: b.id }));
+    for (let i = 0; i < 50; i++) {
+      const member = store.ensureSession(), name = "Former resident " + i;
+      store.execute(member.id, command("house.join", { code: store.me(a.id).home!.code, name, colour: "sage" }));
+      store.execute(a.id, command("house.remove", { memberId: member.id }));
+      removed.push({ id: member.id, name });
+    }
+    removed.sort((x, y) => x.id < y.id ? -1 : x.id > y.id ? 1 : 0);
+    const before = store.snapshot(a.id), first = store.removedResidents(a.id);
+    expect(first.members).toEqual(removed.slice(0, 50));
+    expect(first.nextCursor).toBe(removed[49]!.id);
+    const last = store.removedResidents(a.id, first.nextCursor!.toUpperCase());
+    expect(last).toEqual({ members: removed.slice(50), nextCursor: null });
+    expect(store.removedResidents(a.id, removed[50]!.id)).toEqual({ members: [], nextCursor: null });
+    expect(store.snapshot(a.id)).toEqual(before);
+    const otherOwner = store.ensureSession(), otherMember = store.ensureSession();
+    store.execute(otherOwner.id, command("house.create", { capacity: 2, name: "Other owner", colour: "rose" }));
+    const otherHouse = store.me(otherOwner.id).home!;
+    store.execute(otherMember.id, command("house.join", { code: otherHouse.code, name: "Other guard", colour: "blue" }));
+    store.execute(otherOwner.id, command("house.remove", { memberId: otherMember.id }, undefined, otherHouse.id));
+    expect(store.removedResidents(a.id)).toEqual(first);
+    expect(store.removedResidents(otherOwner.id)).toEqual({ members: [{ id: otherMember.id, name: "Other guard" }], nextCursor: null });
+    expect(home.id).not.toBe(otherHouse.id);
+  });
+
 });
