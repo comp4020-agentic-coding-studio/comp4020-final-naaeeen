@@ -1,0 +1,135 @@
+{
+  "version": 3,
+  "registeredBeforeMeasurement": "2026-10-06",
+  "purpose": "Synthetic localhost gate for the actual integrated server, separate from deployment/human evidence.",
+  "server": {
+    "module": "src/server.ts:createService",
+    "bind": "127.0.0.1",
+    "port": 4096,
+    "data": "unique ignored .local/house-load/<run>/data",
+    "secureCookies": false,
+    "origin": "http://127.0.0.1:4096",
+    "isolation": "One dedicated Node child per configuration; development server on 4093 stays untouched."
+  },
+  "configurations": {
+    "L1": {
+      "houses": 1,
+      "membersPerHouse": 6,
+      "controllers": 6,
+      "observers": 6,
+      "totalViews": 12,
+      "slowReaders": 2,
+      "slowRoles": "two observers"
+    },
+    "L2": {
+      "houses": 2,
+      "membersPerHouse": 6,
+      "controllers": 12,
+      "observers": 0,
+      "totalViews": 12,
+      "slowReaders": 2,
+      "slowRoles": "one controller in each house"
+    }
+  },
+  "workload": {
+    "durationSecondsPerConfiguration": 1800,
+    "order": [
+      "L1",
+      "L2"
+    ],
+    "motionHzPerConnectedController": 10,
+    "motionSpeedMetresPerSecond": 2,
+    "motionRoute": "Actual slide/validPosition geometry, actual server-projected lounge arrival z (recorded per controller) and x in [-2,2]; send only while Socket.IO connected. Controller schedules are staggered evenly across the 100ms period to avoid artificial synchronised bursts. Readable controllers are single-flight: do not send while an earlier motion ACK is outstanding. Preserve both the minimum 80ms send interval and 80ms after the actual ACK, with the existing nextSend += 100 deadline. Apply accepted local route pose/direction only after an actual successful ACK from the same socket/control generation. Rejections remain counted rather than advancing optimistic pose. Deliberately paused controllers retain stationary 10Hz sends even while ACKs are outstanding; that fault workload is not throttled by the readable single-flight rule. Recorded achieved per-controller rates must stay 9.8..10.2Hz; no invalid fast burst is silently discarded. Before TCP pause the existing motion ACK drains; the slow controller continues valid stationary 10Hz frames during suppressed reads, then resumes route walking. These frames still run actual authority/geometry/dirty-tick/broadcast handlers. Reconnect motion waits for actual successful house.subscribe ACK and current generation; a transport-level connected flag alone cannot confer control. Bootstrap/subscribe handshake is outside ready-controller input time.",
+    "durableIntentsPerMinutePerHouse": 6,
+    "intents": "One stable UUID and actual houseId per command, original lounge zone/current generation; alternate chat.send/card.save every 10s, rotate authors. Card ID/revision from actually received state.",
+    "payloads": "Bounded synthetic English text.",
+    "slowReader": "Pinned Engine.IO WS.ws -> ws.WebSocket._socket. ws.pause sets _paused and calls actual TCP readable pause; verify isPaused and no snapshot deliveries. Transport read suppression, not callback delay.",
+    "slowSchedule": "At t=15s and every 300s pause 65s. Wait through heartbeat disconnection and 30s control lease expiry; same-token fresh socket rejoin verifies latest durable cursor, new control generation and Quiet. Under-1800s calibration pauses at t=5s for <=8s, with no expiry claim. Version2: calibration durations100..1799 seconds exercise one complete65-second pause/heartbeat/lease-expiry/rejoin cycle per reader at t=15s; durations<100 keep the brief no-expiry calibration. Full1800-second runs retain six cycles per reader."
+  },
+  "measurement": {
+    "visibility": "For each saved scheduled intent target every view of that house, including paused/disconnected slow readers. Monotonic send-to-actual-snapshot time with snapshot.durable.sequence >= receipt.sequence. Catch-up is included in overall p95/separate slow metrics. Missing delivery fails.",
+    "server": "Child RSS/monitorEventLoopDelay. Runtime-only Server.prototype.attach wrapper captures real Socket.IO server without replacing handlers. Actual Engine.IO writeBuffer/ws.bufferedAmount sampled every 100ms; unseen instantaneous peaks are not established by sampling.",
+    "bounds": {
+      "rssMaxMiB": 180,
+      "durableVisibleP95Ms": 1000,
+      "serverQueuePackets": 4,
+      "serverQueueBytes": 524288,
+      "eventLoopP95Ms": 50,
+      "eventLoopP99Ms": 100
+    },
+    "eventLoopThresholdNote": "Architecture specifies bounded/stable event loop without numeric threshold. 50ms p95/100ms p99 are predeclared local diagnostic criteria.",
+    "acceptanceAccounting": "For 1800s require exactly180 saved intents per house, max scheduled-intent interval <=11s, twelve healthy final views and observed peak12, zero unexpected disconnections outside deliberate slow-reader pauses/teardown, six complete expiry/rejoin cycles for each of two slow readers. Achieved connected-time motion cadence alone cannot hide lost views. Actual /health must return ok at both startup and after drain before fixture teardown.",
+    "rejectedFrameDiagnostics": {
+      "limit": 32,
+      "scope": "First 32 actual rejected-motion replies or unexpected non-paused ACK timeouts. Deliberately paused expected timeouts remain aggregate counters and do not fill rejection traces. Count dropped trace entries.",
+      "fields": [
+        "viewIndex",
+        "sequence",
+        "generation",
+        "sendAtMs",
+        "ackAtMs",
+        "elapsedMs",
+        "previousAckAtMs",
+        "outstandingAtSend",
+        "outstandingAtAck",
+        "pausedAtSend",
+        "pausedAtAck",
+        "readyAtSend",
+        "readyAtAck",
+        "code",
+        "message"
+      ],
+      "privacy": "No actor IDs, session cookies, controller tokens, invitation codes, coordinates or chat/card content. Complete bounded server rejection messages are retained.",
+      "outstanding": "Separate readable/normal and deliberately paused outstanding maxima; combined value remains for historical comparison."
+    }
+  },
+  "acceptance": "Exact fixture/duration >=1800s each, numeric bounds, complete delivery, no unexpected normal motion rejection/ACK timeout, all slow readers expire/rejoin. Short runs remain CALIBRATION.",
+  "retention": "Only sanitised aggregate results/evidence committed. Raw server logs/databases/cookies/codes/identities stay ignored under .local. No production credentials read. Completed full runs append immutable entries to full-history; original L1/L2 failures also stay in separate original.results.json files. Retained v1 harness/protocol bytes stay ignored .local. Version2 protocol and complete generator/backend source/results/history are preserved before version3 changes. Labelled pacing-v3 outputs must not overwrite earlier results.",
+  "commands": {
+    "calibration": "mise exec -- node tools/house-load.mjs --duration 20 --config all",
+    "full": "mise exec -- node tools/house-load.mjs --duration 1800 --config all",
+    "expiryCalibration": "mise exec -- node tools/house-load.mjs --duration 100 --config all"
+  },
+  "externalLimits": [
+    "No Fly machine or /data volume exercised",
+    "No physical network impairment, phone/IME, human trial/preference or academic-value proof"
+  ],
+  "correctionRegisteredAfterOriginalTrials": "2026-10-07",
+  "pacingRefinement": {
+    "registeredBeforeNewChecksUTC": "2026-10-06T17:36:25.664252+00:00",
+    "scope": "Generator-only pacing/ACK route-state refinement; app/realtime/geometry/dependencies and all acceptance gates unchanged.",
+    "baseline": {
+      "generatorSHA256": "42499e30eefdbe7342d1d7c83afd201ff30cc8cfca69c053c488bc1f9f590bee",
+      "realtimeSHA256": "0a3823c4dfc62e77aa52206c6d260d47f3367f5f6bfacfaa8cd16ae8c0beb995",
+      "protocolV2SHA256": "f49317a09aa39ec51202c973b52e8602cd7c37ceb556f2fd5f2cf5dacf640bc9",
+      "preservedProtocol": "evaluation/house-load.protocol.v2-preserved.json",
+      "preservedSourceResults": ".local/load-pacing-v2-preserved/preservation-manifest.json"
+    },
+    "attributionLimit": "Actual frozen callback/handler replay proves feasible compressed-arrival overlap. V2 aggregates lack timing/messages, so neither the original one nor 29 rejections are attributed to this path.",
+    "sourceCalibration": {
+      "method": "AST-extract actual unchanged/candidate motion callbacks and execute actual realtime handler transpiled from installed TypeScript. Inject only clocks, transport and synthetic authority; no duplicated pacing/server policy.",
+      "cases": [
+        "Baseline sends at100/200ms while first ACK pending; real handler receives at200/201ms and emits movement-specific RATE_LIMITED.",
+        "Candidate sends once while pending; waits>=80ms after ACK; does not commit local pose before successful ACK; normal60s cadence remains9.8..10.2Hz.",
+        "Ordinary readable motion remains10Hz with2ms ACKs and zero rejects.",
+        "Deliberately paused stationary motion retains10Hz with suppressed ACKs and growing paused outstanding count.",
+        "Not-ready/disconnected/preparing-pause views do not send; stale-generation ACK cannot mutate current pose/lastAck.",
+        "Unchanged server still rejects excessive walking speed and compressed non-stationary movement; general action-rate negative control remains distinct.",
+        "Actual trace recorder retains at most32 safe entries, reports dropped entries, and keeps normal/paused outstanding metrics separate."
+      ],
+      "candidateDisqualifiers": "Stop if paused stationary workload changes, ordinary cadence falls outside9.8..10.2Hz, rejection/timeout/count/view/generation/expiry gates fail or backend source changes."
+    },
+    "liveCalibration": {
+      "configuration": "L2",
+      "durationSeconds": 100,
+      "port": 4098,
+      "label": "pacing-v3",
+      "sameAcceptanceCriteria": true,
+      "classification": "CALIBRATION, not sustained/full acceptance; fullDuration remains false and deliberately paused-reader combined p95 remains included.",
+      "command": "mise exec -- node tools/house-load.mjs --duration 100 --config L2 --port 4098 --label pacing-v3",
+      "nextFullRun": "Parent inspection/review and explicit GO required; this worker does not launch 30-minute runs."
+    }
+  },
+  "correctionRegisteredAfterStatementReuseV2Trials": "2026-10-07",
+  "registrationNote": "The original workload was registered 6 October 2026. Version 3 generator/diagnostic criteria were separately registered before new checks at pacingRefinement.registeredBeforeNewChecksUTC; original registration date is retained for provenance."
+}

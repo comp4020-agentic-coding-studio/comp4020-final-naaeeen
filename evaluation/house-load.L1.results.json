@@ -1,0 +1,311 @@
+{
+  "protocolVersion": 1,
+  "classification": "synthetic-localhost-complete-server",
+  "config": "L1",
+  "status": "FAIL",
+  "limitation": "No Fly deployment, real network, physical phone, human usability or value evidence.",
+  "durationRequestedSeconds": 1800,
+  "durationMeasuredSeconds": 1800.354,
+  "candidate": {
+    "commitAtStart": "2f941e1a1faee7bc6bdf5ffcbe77ddf11748ae8f",
+    "sourceHashes": {
+      "src/server.ts": "7453b65bacfc79912e066f600b8a8bf1c094dc4b99dcdd05c7f01f532753192e",
+      "src/house-realtime.ts": "0a3823c4dfc62e77aa52206c6d260d47f3367f5f6bfacfaa8cd16ae8c0beb995",
+      "src/house-store.ts": "935493406f732360387e3a531c8515518a99f5300f3e55ae32a874787b2a0128",
+      "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "public/house-geometry.js": "7dc28ad3eae9c8874c6ae9cb352d38ecc94f3630f8426a85d4e5b57c1544dc53",
+      "tools/house-load.mjs": "8d64caa5c4a1af6645d892faaf565794d636028c24eedde53dcf8dda6fef9aa3",
+      "evaluation/house-load.protocol.json": "ed305dfe86873a4fdfb489f639b6a1fb2b91a25687ad215f103d29737a11c7f5",
+      "package.json": "2b4a7fe6611f1a38dc98ce2539d0b082168908b0126351b97b924eafe854bd95",
+      "pnpm-lock.yaml": "dc7ab3eb2935e4fc45a8674c3c34e72563384eb01d2cfb895527771ecfeae0c6"
+    }
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "socketIO": "4.8.4",
+    "engineIO": "6.6.11",
+    "ws": "8.21.3",
+    "bind": "127.0.0.1",
+    "port": 4096,
+    "secureCookies": false
+  },
+  "workload": {
+    "houses": 1,
+    "controllers": 6,
+    "observers": 6,
+    "totalViews": 12,
+    "motionHzPerConnectedController": 10,
+    "motionMetresPerSecond": 2,
+    "initialControllerPoses": [
+      {
+        "house": 0,
+        "slot": 0,
+        "x": -1.625,
+        "z": 3.3
+      },
+      {
+        "house": 0,
+        "slot": 1,
+        "x": -0.9750000000000001,
+        "z": 3.3
+      },
+      {
+        "house": 0,
+        "slot": 2,
+        "x": -0.325,
+        "z": 3.3
+      },
+      {
+        "house": 0,
+        "slot": 3,
+        "x": 0.325,
+        "z": 3.3
+      },
+      {
+        "house": 0,
+        "slot": 4,
+        "x": 0.9750000000000001,
+        "z": 3.3
+      },
+      {
+        "house": 0,
+        "slot": 5,
+        "x": 1.625,
+        "z": 3.3
+      }
+    ],
+    "intentsPerMinutePerHouse": 6,
+    "intentStats": [
+      {
+        "house": 0,
+        "scheduled": 180,
+        "saved": 180,
+        "expected": 180,
+        "maxIntervalMs": 10002.626
+      }
+    ],
+    "chatAndCardAlternated": true,
+    "motionRateHzPerController": [
+      10,
+      10,
+      10,
+      9.999,
+      9.999,
+      9.999
+    ],
+    "motionSent": 108015,
+    "motionAcknowledged": 108015,
+    "motionRejected": 0,
+    "intentsSaved": 180,
+    "expectedSlowAckTimeouts": 0,
+    "unexpectedTimeouts": 0,
+    "maxOutstandingMotion": 1,
+    "healthAtStart": true,
+    "healthAtEnd": true,
+    "unexpectedDisconnects": 0,
+    "healthyViewsAtEnd": 12,
+    "disconnectCounts": {}
+  },
+  "metrics": {
+    "serverRssMaxMiB": 196.492,
+    "serverQueuePacketsObservedMax": 0,
+    "serverQueueBytesObservedMax": 0,
+    "maxConnectionsObserved": 12,
+    "eventLoopP95Ms": 14.565,
+    "eventLoopP99Ms": 18.072,
+    "eventLoopMaxMs": 50.889,
+    "visibilitySamples": 2160,
+    "durableMissingDeliveries": 0,
+    "durableVisibleP95Ms": 104.611,
+    "durableVisibleMaxMs": 60038.082,
+    "slowVisibilitySamples": 82,
+    "slowVisibleMaxMs": 60038.082
+  },
+  "slowReaders": [
+    {
+      "reader": 0,
+      "cycle": 1,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 1,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 0,
+      "cycle": 2,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 2,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 3,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 0,
+      "cycle": 3,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 4,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 0,
+      "cycle": 4,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 5,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 0,
+      "cycle": 5,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 0,
+      "cycle": 6,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    },
+    {
+      "reader": 1,
+      "cycle": 6,
+      "completed": true,
+      "role": "observer",
+      "tcpPauseVerified": true,
+      "readerStayedPaused": true,
+      "expiryObserved": true,
+      "rejoined": true,
+      "freshSnapshot": true,
+      "quietAfterExpiry": null,
+      "generationAdvanced": null
+    }
+  ],
+  "actionCounts": {
+    "house.create:saved": 1,
+    "house.join:saved": 5,
+    "zone.subscribe:ok": 36,
+    "availability.set:ok": 6,
+    "chat.send:saved": 90,
+    "motion.start:walking": 6,
+    "card.save:saved": 90,
+    "connection.disconnect:offline": 12,
+    "motion.stop:idle": 6
+  },
+  "errors": {},
+  "gates": {
+    "actualHealth": true,
+    "intentWorkload": true,
+    "healthyViews": true,
+    "motionCadence": true,
+    "exactViews": true,
+    "fullDuration": true,
+    "rss": false,
+    "visibleP95": true,
+    "durableDeliveryComplete": true,
+    "validNormalMotion": true,
+    "boundedServerQueue": true,
+    "eventLoop": true,
+    "slowExpiryRejoin": true
+  }
+}

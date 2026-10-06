@@ -1,0 +1,18 @@
+{
+  "classification": "synthetic-localhost-aborted-candidate",
+  "config": "L1",
+  "status": "ABORTED",
+  "reason": "owner required spawn repair before runtime freeze",
+  "stoppedAtUTC": "2026-10-06T13:14:01.181455+00:00",
+  "durationRequestedSeconds": 1800,
+  "lastObservedElapsedSeconds": 60,
+  "lastObservedMetrics": {
+    "serverRssMaxMiB": 148.855,
+    "intentsSaved": 7,
+    "motionRejected": 0,
+    "unexpectedTimeouts": 0
+  },
+  "fullMeasurementEstablished": false,
+  "L2Started": false,
+  "limitation": "Scoped local test termination at parent hold request; no product failure or PASS result."
+}

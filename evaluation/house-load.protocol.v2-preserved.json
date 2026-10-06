@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "registeredBeforeMeasurement": "2026-10-06",
+  "purpose": "Synthetic localhost gate for the actual integrated server, separate from deployment/human evidence.",
+  "server": {
+    "module": "src/server.ts:createService",
+    "bind": "127.0.0.1",
+    "port": 4096,
+    "data": "unique ignored .local/house-load/<run>/data",
+    "secureCookies": false,
+    "origin": "http://127.0.0.1:4096",
+    "isolation": "One dedicated Node child per configuration; development server on 4093 stays untouched."
+  },
+  "configurations": {
+    "L1": {
+      "houses": 1,
+      "membersPerHouse": 6,
+      "controllers": 6,
+      "observers": 6,
+      "totalViews": 12,
+      "slowReaders": 2,
+      "slowRoles": "two observers"
+    },
+    "L2": {
+      "houses": 2,
+      "membersPerHouse": 6,
+      "controllers": 12,
+      "observers": 0,
+      "totalViews": 12,
+      "slowReaders": 2,
+      "slowRoles": "one controller in each house"
+    }
+  },
+  "workload": {
+    "durationSecondsPerConfiguration": 1800,
+    "order": [
+      "L1",
+      "L2"
+    ],
+    "motionHzPerConnectedController": 10,
+    "motionSpeedMetresPerSecond": 2,
+    "motionRoute": "Actual slide/validPosition geometry, actual server-projected lounge arrival z (recorded per controller) and x in [-2,2]; send only while Socket.IO connected. Controller schedules are staggered evenly across the 100ms period to avoid artificial synchronised bursts. Readable controllers avoid sending within 80ms after the previous actual ACK to satisfy the server guard despite scheduling jitter. Recorded achieved per-controller rates must stay 9.8..10.2Hz; no invalid fast burst is silently discarded. Before TCP pause the existing motion ACK drains; the slow controller continues valid stationary 10Hz frames during suppressed reads, then resumes route walking. These frames still run actual authority/geometry/dirty-tick/broadcast handlers. Reconnect motion waits for actual successful house.subscribe ACK and current generation; a transport-level connected flag alone cannot confer control. Bootstrap/subscribe handshake is outside ready-controller input time.",
+    "durableIntentsPerMinutePerHouse": 6,
+    "intents": "One stable UUID and actual houseId per command, original lounge zone/current generation; alternate chat.send/card.save every 10s, rotate authors. Card ID/revision from actually received state.",
+    "payloads": "Bounded synthetic English text.",
+    "slowReader": "Pinned Engine.IO WS.ws -> ws.WebSocket._socket. ws.pause sets _paused and calls actual TCP readable pause; verify isPaused and no snapshot deliveries. Transport read suppression, not callback delay.",
+    "slowSchedule": "At t=15s and every 300s pause 65s. Wait through heartbeat disconnection and 30s control lease expiry; same-token fresh socket rejoin verifies latest durable cursor, new control generation and Quiet. Under-1800s calibration pauses at t=5s for <=8s, with no expiry claim. Version2: calibration durations100..1799 seconds exercise one complete65-second pause/heartbeat/lease-expiry/rejoin cycle per reader at t=15s; durations<100 keep the brief no-expiry calibration. Full1800-second runs retain six cycles per reader."
+  },
+  "measurement": {
+    "visibility": "For each saved scheduled intent target every view of that house, including paused/disconnected slow readers. Monotonic send-to-actual-snapshot time with snapshot.durable.sequence >= receipt.sequence. Catch-up is included in overall p95/separate slow metrics. Missing delivery fails.",
+    "server": "Child RSS/monitorEventLoopDelay. Runtime-only Server.prototype.attach wrapper captures real Socket.IO server without replacing handlers. Actual Engine.IO writeBuffer/ws.bufferedAmount sampled every 100ms; unseen instantaneous peaks are not established by sampling.",
+    "bounds": {
+      "rssMaxMiB": 180,
+      "durableVisibleP95Ms": 1000,
+      "serverQueuePackets": 4,
+      "serverQueueBytes": 524288,
+      "eventLoopP95Ms": 50,
+      "eventLoopP99Ms": 100
+    },
+    "eventLoopThresholdNote": "Architecture specifies bounded/stable event loop without numeric threshold. 50ms p95/100ms p99 are predeclared local diagnostic criteria.",
+    "acceptanceAccounting": "For 1800s require exactly180 saved intents per house, max scheduled-intent interval <=11s, twelve healthy final views and observed peak12, zero unexpected disconnections outside deliberate slow-reader pauses/teardown, six complete expiry/rejoin cycles for each of two slow readers. Achieved connected-time motion cadence alone cannot hide lost views. Actual /health must return ok at both startup and after drain before fixture teardown."
+  },
+  "acceptance": "Exact fixture/duration >=1800s each, numeric bounds, complete delivery, no unexpected normal motion rejection/ACK timeout, all slow readers expire/rejoin. Short runs remain CALIBRATION.",
+  "retention": "Only sanitised aggregate results/evidence committed. Raw server logs/databases/cookies/codes/identities stay ignored under .local. No production credentials read. Completed full runs append immutable entries to full-history; original L1/L2 failures also stay in separate original.results.json files. Retained v1 harness/protocol bytes stay ignored .local.",
+  "commands": {
+    "calibration": "mise exec -- node tools/house-load.mjs --duration 20 --config all",
+    "full": "mise exec -- node tools/house-load.mjs --duration 1800 --config all",
+    "expiryCalibration": "mise exec -- node tools/house-load.mjs --duration 100 --config all"
+  },
+  "externalLimits": [
+    "No Fly machine or /data volume exercised",
+    "No physical network impairment, phone/IME, human trial/preference or academic-value proof"
+  ],
+  "correctionRegisteredAfterOriginalTrials": "2026-10-07"
+}

@@ -1,0 +1,84 @@
+{
+  "version": 2,
+  "classification": "controlled technical diagnostic; not full acceptance",
+  "registeredBeforeVariantTrials": "2026-10-07",
+  "registerIds": [
+    "S4.I6f",
+    "S4.I6j",
+    "S4.H2"
+  ],
+  "question": "Which minimal reversible local candidate reduces actual-server RSS and allocation work while preserving all authority and delivery boundaries?",
+  "candidates": {
+    "A": "Frozen actual source; default V8 limits",
+    "B": "A plus constant-SQL prepared-statement reuse in HouseStore only; per-store map capped at 96 keys",
+    "C": "B plus freshly authorised motion metadata reads and motion-only projection; a bundled factor, not separate causal effects",
+    "D": "A bytes with child-only --max-old-space-size=96; V8 heap bound only, not RSS/VM constraint"
+  },
+  "common": {
+    "runtime": "existing mise Node24.21.0 / pnpm11.9.0; shared unchanged ancestor node_modules; identical shared node_modules symlink supports unchanged server static Three file paths",
+    "configuration": "L2: two 6-member houses, 12 controllers, 12 total real WS views",
+    "resources": "same unconstrained Ubuntu WSL host; dedicated sequential child, same loopback port; production Fly256MB/one-volume unchanged",
+    "data": "fresh private database per run; each house has 100 full bounded ASCII chat messages and 18 full bounded cards (6 active +12 closed) seeded by real HouseStore.execute; no production data",
+    "workload": "existing frozen v2 house-load valid actual-pose geometry, readiness/generation, staggered10Hz, 2m/s; alternate chat/card every10s per house; two real TCP-paused controller readers at15s for65s, heartbeat/lease expiry/rejoin/fresh cursor/Quiet",
+    "durationSeconds": 100,
+    "repetitionsPerCandidate": 2,
+    "order": [
+      "A1",
+      "B1",
+      "C1",
+      "D1",
+      "D2",
+      "C2",
+      "B2",
+      "A2"
+    ],
+    "noConcurrentVariantTrials": true
+  },
+  "metrics": [
+    "child actual RSS max/series",
+    "heapUsed/heapTotal/external/arrayBuffers max/series",
+    "V8 heap limit",
+    "event loop p95/p99/max",
+    "actual native statement preparations + get/all/run counts",
+    "full snapshot/motionContext/session/me counts",
+    "action counts",
+    "valid motion cadence/ack/rejection/timeouts",
+    "durable visibility/delivery incl both slow readers",
+    "queue peaks/health/connections",
+    "child CPU usage",
+    "normal-reader visible p95 separately from deliberately paused-reader p95; original combined p95 remains reported/gated"
+  ],
+  "criteria": {
+    "rssMaxMiB": 180,
+    "durableVisibleP95Ms": 1000,
+    "motionHzRange": [
+      9.8,
+      10.2
+    ],
+    "zeroUnexpectedMotionRejectionsAndTimeouts": true,
+    "completeDurableDelivery": true,
+    "exact12FinalHealthyViews": true,
+    "twoSuccessfulSlowExpiryRejoinCycles": true,
+    "queuePacketsMax": 4,
+    "queueBytesMax": 524288,
+    "eventLoopP95Ms": 50,
+    "eventLoopP99Ms": 100,
+    "shortFaultConcentrationNote": "The fixed65s reader pause concentrates deliberately delayed deliveries above5% in100s. Original combined visible p95<=1s may fail even correct recovery; retain that gate and DIAGNOSTIC_FAIL, and report normal-reader p95 separately. Memory comparisons remain diagnostic."
+  },
+  "functionalValidator": "Unedited copied original spec/house-store,realtime,http,operations tests in every candidate; explicit private motion metadata validator checks same fresh house/profile/resident/door/room/sequence data, closed/cross-house/removal/session boundaries. Test grader hashes protected. Do not rewrite a failed test for candidate. Extra matched seeded-content lease-expiry race regression runs on every candidate; performance delivery validates command result entity ID/content/revision, not cursor alone. Content calibration includes good chat/card, missing chat/card and mismatched question/resource; occupied-port and signalled-child calibrations verify preserved classifications.",
+  "failureClassification": [
+    "DIAGNOSTIC_PASS",
+    "DIAGNOSTIC_FAIL",
+    "ABORTED",
+    "INFRASTRUCTURE_FAILURE",
+    "NOT_RUN"
+  ],
+  "stop": "100s each; stop failed candidate execution on crash/unhealthy infrastructure or functional failure and preserve evidence. No 1800s trial without parent candidate selection. Functional failure disqualifies. RSS<=180 is unchanged; short PASS never marks acceptance complete.",
+  "retention": "candidate copies, raw logs/databases/identities/cookies, run JSON and samples stay ignored .local/memory-candidates. Public report sanitised aggregate only. Original house-load results untouched; no heap dumps or credentials.",
+  "limits": [
+    "small synthetic localhost trials; not evidence of30minute stability or leak",
+    "WSL memory availability/default V8 limit differ from256MB Fly VM",
+    "no Fly deployment, physical phone, WAN, IME, user preference or academic benefit"
+  ],
+  "pretrialRefinements": "Fresh reviewer found missing question/resource grading and negative abort duration after initial freeze; task coordinator interrupted first A run before matched trial set. Retain v1 frozen/partial evidence; newv2 hash before every matched trial. All four candidates previously passed55tests and real-service validators; no candidate edits during this refinement."
+}
