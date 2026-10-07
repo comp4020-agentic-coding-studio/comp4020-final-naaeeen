@@ -24,6 +24,7 @@ type View = Actor & {
     subscriptionId: string;
     pointer?: BoardPointer;
     pointerAt: number;
+    pendingPresence?: boolean;
     budgetAt: number;
     events: number;
 };
@@ -77,6 +78,7 @@ function outboundFits(socket: Socket, value: unknown): boolean {
     const conn = socket.conn as unknown as {
         readyState: string;
         writeBuffer?: {
+            type?: string;
             data?: unknown;
         }[];
         transport: {
@@ -90,6 +92,12 @@ function outboundFits(socket: Socket, value: unknown): boolean {
         return false;
     let queued = conn.transport.socket.bufferedAmount;
     for (const p of conn.writeBuffer) {
+        if (!p.type || !["open", "close", "ping", "pong", "upgrade", "noop", "message"].includes(p.type))
+            return false;
+        if (p.data === undefined && p.type !== "message") {
+            queued += 32;
+            continue;
+        }
         if (typeof p.data !== "string" && !Buffer.isBuffer(p.data))
             return false;
         queued += Buffer.byteLength(p.data) + 32;
@@ -152,6 +160,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
         const problem = failure(error), payload = { schemaVersion: 1, subscriptionId: view.subscriptionId, code: problem.code, message: problem.message };
         view.houseId = null;
         delete view.pointer;
+        delete view.pendingPresence;
         if (outboundFits(view.socket, payload))
             view.socket.emit("board.revoked", payload);
         else
@@ -163,6 +172,11 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
             return;
         try {
             member(view, view.houseId);
+            // Presence is volatile latest state. Do not queue a history behind a large ACK.
+            if (event === "board.presence" && !view.socket.conn.transport.writable) {
+                view.pendingPresence = true;
+                return;
+            }
             const payload = { ...value, schemaVersion: 1, subscriptionId: view.subscriptionId };
             if (!outboundFits(view.socket, payload)) {
                 revoke(view, new BoardError("SLOW_CONNECTION", "Your connection fell behind. Reconnect to the saved board."));
@@ -180,7 +194,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
             if (view.houseId === houseId)
                 deliver(view, event, value);
     }
-    function presence(houseId: string): void {
+    function presenceViews(houseId: string) {
         const people = [];
         for (const view of views.values()) {
             if (view.houseId !== houseId)
@@ -193,7 +207,10 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 revoke(view, error);
             }
         }
-        publish(houseId, "board.presence", { houseId, views: people });
+        return people;
+    }
+    function presence(houseId: string): void {
+        publish(houseId, "board.presence", { houseId, views: presenceViews(houseId) });
     }
     function snapshots(houseId: string): void {
         for (const view of views.values())
@@ -252,6 +269,15 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
             return;
         }
         views.set(socket.id, view);
+        const transport = socket.conn.transport;
+        const flushPresence = () => {
+            if (!view.pendingPresence || !view.houseId || !transport.writable) return;
+            const houseId = view.houseId;
+            delete view.pendingPresence;
+            // Flush only this view; rebroadcasting would create ready-event feedback.
+            deliver(view, "board.presence", { houseId, views: presenceViews(houseId) });
+        };
+        transport.on("ready", flushPresence);
         socket.on("board.subscribe", (value: unknown, ack: unknown) => {
             try {
                 sameActor(view);
@@ -264,6 +290,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 view.houseId = houseId;
                 view.subscriptionId = randomUUID();
                 delete view.pointer;
+                delete view.pendingPresence;
                 const snapshot = { ...store.snapshot(houseId), schemaVersion: 1 as const, subscriptionId: view.subscriptionId };
                 member(view, houseId);
                 if(typeof ack==="function")acknowledge(view, ack, { ok: true, schemaVersion: 1, subscriptionId: view.subscriptionId, snapshot });
@@ -308,6 +335,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
             }
         });
         socket.on("disconnect", () => {
+            transport.off("ready", flushPresence);
             const houseId = view.houseId;
             views.delete(socket.id);
             if (houseId)

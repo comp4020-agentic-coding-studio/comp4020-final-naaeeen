@@ -25,6 +25,7 @@ const storageError = (error: unknown): never => {
 export class BoardStore {
     readonly db!: DatabaseSync;
     private closed = false;
+    private utf8Storage = true;
     private readonly statements = new Map<string, StatementSync>();
     private prepared(sql: string): StatementSync {
         let s = this.statements.get(sql);
@@ -70,6 +71,7 @@ export class BoardStore {
                     boardFail("STORAGE_UNAVAILABLE", "The board data path contains a different database.");
                 this.db.exec("PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA busy_timeout=5000;");
             }
+            this.utf8Storage = (this.prepared("PRAGMA encoding").get() as { encoding: string }).encoding === "UTF-8";
             this.prepared("SELECT house_id FROM boards LIMIT 1").get();
         }
         catch (e) {
@@ -136,6 +138,21 @@ export class BoardStore {
     private rows(houseId: string): ElementRow[] {
         return this.prepared("SELECT id,value,author_id FROM elements WHERE house_id=?").all(houseId) as ElementRow[];
     }
+    private elementTotals(houseId: string, actorId?: string): { count: number; bytes: number } {
+        const own = actorId !== undefined;
+        const args: string[] = own ? [houseId, actorId!] : [houseId];
+        if (this.utf8Storage) {
+            // octet_length reads stored byte lengths without materializing every JSON value.
+            return this.prepared(own
+                ? "SELECT COUNT(*) AS count,COALESCE(SUM(octet_length(value)),0) AS bytes FROM contributions WHERE house_id=? AND actor_id=?"
+                : "SELECT COUNT(*) AS count,COALESCE(SUM(octet_length(value)),0) AS bytes FROM elements WHERE house_id=?").get(...args) as { count: number; bytes: number };
+        }
+        // Wire quotas are UTF8 even for a supported existing UTF16 SQLite file.
+        const rows = this.prepared(own
+            ? "SELECT value FROM contributions WHERE house_id=? AND actor_id=?"
+            : "SELECT value FROM elements WHERE house_id=?").all(...args) as { value: string }[];
+        return { count: rows.length, bytes: rows.reduce((total, row) => total + Buffer.byteLength(row.value), 0) };
+    }
     private files(houseId: string): BoardFile[] {
         return (this.prepared("SELECT id,mime_type,created FROM assets WHERE house_id=? ORDER BY created,id").all(houseId) as Omit<AssetRow, "bytes" | "digest">[]).map(r => ({ id: r.id, mimeType: r.mime_type, created: r.created, url: `/api/board/asset?houseId=${encodeURIComponent(houseId)}&fileId=${encodeURIComponent(r.id)}` }));
     }
@@ -181,19 +198,25 @@ export class BoardStore {
             const p = validateBoardPatch(value);
             return this.mutate(actorId, p.id, { type: "patch", ...p }, () => {
                 this.ensure(p.houseId);
-                const rows = this.rows(p.houseId), existing = new Map(rows.map(r => [r.id, JSON.parse(r.value) as BoardElement]));
-                const touched: BoardElement[] = [];
+                const totals = this.elementTotals(p.houseId);
+                let count = totals.count, bytes = totals.bytes;
+                const touched: BoardElement[] = [], serialized = new Map<string, string>();
                 let changed = false;
                 for (const incoming of p.elements) {
-                    const previous = existing.get(incoming.id), winner = previous ? winningBoardElement(previous, incoming) : incoming;
+                    const row = this.prepared("SELECT value FROM elements WHERE house_id=? AND id=?").get(p.houseId, incoming.id) as { value: string } | undefined;
+                    const previous = row ? JSON.parse(row.value) as BoardElement : undefined;
+                    const winner = previous ? winningBoardElement(previous, incoming) : incoming;
+                    const canonical = boardCanonical(winner);
                     touched.push(winner);
-                    if (!previous || boardCanonical(previous) !== boardCanonical(winner)) {
+                    serialized.set(winner.id, canonical);
+                    if (!previous || boardCanonical(previous) !== canonical) {
                         changed = true;
-                        existing.set(winner.id, winner);
+                        if (!row) count++;
+                        bytes += Buffer.byteLength(canonical) - (row ? Buffer.byteLength(row.value) : 0);
                     }
                 }
-                const scene = orderBoardElements([...existing.values()]);
-                if (scene.length > BOARD_LIMITS.elements || Buffer.byteLength(JSON.stringify(scene)) > BOARD_LIMITS.sceneBytes)
+                // JSON array brackets and commas count toward the same serialized quota.
+                if (count > BOARD_LIMITS.elements || bytes + Math.max(0, count - 1) + 2 > BOARD_LIMITS.sceneBytes)
                     boardFail("LIMIT_EXCEEDED", "The board is full (2,000 objects or 2 MiB). Export local work before simplifying it.");
                 for (const e of touched) {
                     if (e.type === "image" && e.fileId !== null && !this.prepared("SELECT id FROM assets WHERE house_id=? AND id=?").get(p.houseId, e.fileId as string))
@@ -206,14 +229,12 @@ export class BoardStore {
                     const own = prior ? winningBoardElement(JSON.parse(prior.value) as BoardElement, e) : e;
                     this.prepared("INSERT INTO contributions(house_id,actor_id,id,value) VALUES (?,?,?,?) ON CONFLICT(house_id,actor_id,id) DO UPDATE SET value=excluded.value").run(p.houseId, actorId, e.id, boardCanonical(own));
                 }
-                const ownRows = this.prepared("SELECT value FROM contributions WHERE house_id=? AND actor_id=?").all(p.houseId, actorId) as {
-                    value: string;
-                }[];
-                if (ownRows.length > BOARD_LIMITS.elements || Buffer.byteLength("[" + ownRows.map(r => r.value).join(",") + "]") > BOARD_LIMITS.sceneBytes)
+                const ownTotals = this.elementTotals(p.houseId, actorId);
+                if (ownTotals.count > BOARD_LIMITS.elements || ownTotals.bytes + Math.max(0, ownTotals.count - 1) + 2 > BOARD_LIMITS.sceneBytes)
                     boardFail("LIMIT_EXCEEDED", "Your saved contributions exceed 2 MiB. Export before adding larger objects.");
                 if (changed)
                     for (const e of touched)
-                        this.prepared("INSERT INTO elements(house_id,id,value,author_id) VALUES (?,?,?,?) ON CONFLICT(house_id,id) DO UPDATE SET value=excluded.value").run(p.houseId, e.id, boardCanonical(e), actorId);
+                        this.prepared("INSERT INTO elements(house_id,id,value,author_id) VALUES (?,?,?,?) ON CONFLICT(house_id,id) DO UPDATE SET value=excluded.value").run(p.houseId, e.id, serialized.get(e.id)!, actorId);
                 return { ok: true, id: p.id, houseId: p.houseId, sequence: changed ? this.bump(p.houseId) : this.sequence(p.houseId), elements: orderBoardElements(touched) };
             });
         }

@@ -42,11 +42,13 @@ function outbound(socket: Socket, bytes: number): "ready" | "wait" | "overflow" 
   const connection = socket.conn;
   if (connection.readyState !== "open") return "overflow";
   const transport = connection.transport;
-  const runtime = connection as unknown as { writeBuffer?: { data?: unknown }[] };
+  const runtime = connection as unknown as { writeBuffer?: { type?: string; data?: unknown }[] };
   const websocket = transport as unknown as { socket?: { bufferedAmount?: number } };
   if (transport.name !== "websocket" || !Array.isArray(runtime.writeBuffer) || typeof websocket.socket?.bufferedAmount !== "number") return "overflow";
   let queued = 0;
   for (const packet of runtime.writeBuffer) {
+    if (!packet.type || !["open", "close", "ping", "pong", "upgrade", "noop", "message"].includes(packet.type)) return "overflow";
+    if (packet.data === undefined && packet.type !== "message") { queued += 32; continue; }
     if (typeof packet.data !== "string" && !Buffer.isBuffer(packet.data)) return "overflow";
     queued += Buffer.byteLength(packet.data) + 32;
   }

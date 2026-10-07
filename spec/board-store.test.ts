@@ -1,4 +1,5 @@
 import { crc32 } from "node:zlib";
+import { DatabaseSync } from "node:sqlite";
 import { randomUUID } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,6 +22,52 @@ function fixture() {
 }
 const patch = (f: ReturnType<typeof fixture>, elements: unknown[], id = randomUUID()) => f.store.patch(f.actorId, { id, houseId: f.houseId, elements });
 describe("durable board authority", () => {
+    test("retains UTF8 wire quotas for an existing UTF16 database", () => {
+        const f = fixture(), path = join(f.path, "utf16.sqlite"), initialized = new DatabaseSync(path);
+        initialized.exec("PRAGMA encoding='UTF-16le'; CREATE TABLE encoding_probe(x TEXT); DROP TABLE encoding_probe"); initialized.close();
+        const store = new BoardStore(path); cleanups.push(() => store.close());
+        expect((store.db.prepare("PRAGMA encoding").get() as { encoding: string }).encoding).toBe("UTF-16le");
+        const text = "x".repeat(14000) + "学".repeat(100);
+        for (let n = 0; n < 40; n += 3) {
+            const elements = Array.from({ length: Math.min(3, 40 - n) }, (_, k) => shape("utf16_" + (n + k), { type: "text", fontSize: 20, fontFamily: 5, text, originalText: text, textAlign: "left", verticalAlign: "top", containerId: null, autoResize: true, lineHeight: 1.25 }));
+            store.patch(f.actorId, { id: randomUUID(), houseId: f.houseId, elements });
+        }
+        const snapshot = store.snapshot(f.houseId);
+        expect(snapshot.elements).toHaveLength(40);
+        expect(Buffer.byteLength(JSON.stringify(snapshot.elements))).toBeLessThan(2 * 1024 * 1024);
+    });
+
+    test("counts UTF8 scene bytes and rolls back an overflowing partial patch", () => {
+        const f = fixture(), text = "😀".repeat(3750);
+        const note = (id: string, version = 1, content = text) => shape(id, { type: "text", version, fontSize: 20, fontFamily: 5, text: content, originalText: content, textAlign: "left", verticalAlign: "top", containerId: null, autoResize: true, lineHeight: 1.25 });
+        for (let n = 0; n < 66; n += 3) patch(f, Array.from({ length: 3 }, (_, k) => note("utf8_" + (n + k))));
+        const before = f.store.snapshot(f.houseId), extra = Array.from({ length: 4 }, (_, n) => note("extra_" + n));
+        const hypothetical = JSON.stringify([...before.elements, ...extra]);
+        expect(Buffer.byteLength(hypothetical)).toBeGreaterThan(2 * 1024 * 1024);
+        expect(hypothetical.length).toBeLessThan(2 * 1024 * 1024);
+        expect(Buffer.byteLength(JSON.stringify({ id: randomUUID(), houseId: f.houseId, elements: extra }))).toBeLessThan(128 * 1024);
+        const retryId = randomUUID();
+        expect(() => patch(f, extra, retryId)).toThrowError(expect.objectContaining({ code: "LIMIT_EXCEEDED" }));
+        expect(f.store.snapshot(f.houseId)).toEqual(before);
+        patch(f, [note("utf8_0", 2, "small"), note("utf8_1", 2, "small")]);
+        expect(patch(f, extra, retryId).elements).toHaveLength(4);
+        expect(Buffer.byteLength(JSON.stringify(f.store.snapshot(f.houseId).elements))).toBeLessThanOrEqual(2 * 1024 * 1024);
+    });
+    test("keeps own UTF8 contribution quota after peer compaction and rollback", () => {
+        const f = fixture(), text = "😀".repeat(3750), peer = randomUUID();
+        const note = (id: string, version = 1, content = text) => shape(id, { type: "text", version, fontSize: 20, fontFamily: 5, text: content, originalText: content, textAlign: "left", verticalAlign: "top", containerId: null, autoResize: true, lineHeight: 1.25 });
+        for (let n = 0; n < 66; n += 3) patch(f, Array.from({ length: 3 }, (_, k) => note("own_utf8_" + (n + k))));
+        f.store.patch(peer, { id: randomUUID(), houseId: f.houseId, elements: Array.from({ length: 66 }, (_, n) => note("own_utf8_" + n, 2, "peer compacted")) });
+        const before = f.store.snapshot(f.houseId), ownBefore = f.store.ownExport(f.actorId, f.houseId), extra = Array.from({ length: 4 }, (_, n) => note("own_extra_" + n));
+        expect(Buffer.byteLength(JSON.stringify([...before.elements, ...extra]))).toBeLessThan(2 * 1024 * 1024);
+        expect(Buffer.byteLength(JSON.stringify([...ownBefore.elements, ...extra]))).toBeGreaterThan(2 * 1024 * 1024);
+        const retryId = randomUUID();
+        expect(() => patch(f, extra, retryId)).toThrowError(expect.objectContaining({ code: "LIMIT_EXCEEDED" }));
+        expect(f.store.snapshot(f.houseId)).toEqual(before);
+        expect(f.store.ownExport(f.actorId, f.houseId)).toEqual(ownBefore);
+        expect(patch(f, extra.map(e => ({ ...e, text: "small", originalText: "small" })), retryId).elements).toHaveLength(4);
+    });
+
     test("preserves peer elements across independent patches and retry", () => {
         const f = fixture();
         patch(f, [shape("a")]);
