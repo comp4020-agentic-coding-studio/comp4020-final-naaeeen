@@ -19,8 +19,12 @@ Original/candidate/quiet resource failures remain preserved; CI workload is pend
 Original 4093 preview uses exact .local/implementation-s1 and passes WSL health (PID 4936,
 exec 59237). Test 4099 uses exact .local/redesign-preview/data (PID 308,exec 68903).
 Do not reseed/delete either data root. Crit8 tag and root backup files remain intact.
-Root next: inspect final clean/source/tag packet, perform authorised release backup,
-push reviewed main, verify actual CI/registered workload/Fly and live user flows.
+The owner approved checkpoint/main pushes and the existing CI/Fly release. Both
+branches are published; mounted backup preflight passed. The latest CI at 99cdaba
+passed the actual sandbox preflight, then failed deleting the browser output mount
+root (EROFS). See RELEASE-STATUS.md for each failed run and its exact scope.
+Root next: review the bounded output-directory correction, commit/push, verify
+actual nine-case CI/registered workload/Fly and live user flows.
 Human/physical-device/value and student personal rewriting remain separate.
 
 # Historical redesign checkpoint

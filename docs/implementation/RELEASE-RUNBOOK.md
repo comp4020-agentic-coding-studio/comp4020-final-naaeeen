@@ -1,9 +1,13 @@
 # Local candidate and production release runbook
 
-7 October 2026. No new production release or production backup has been performed.
-This runbook prepares a reviewable operation. External writes require the existing
-scoped authorization; local evidence does not grant publication or deployment
-permission. Preserve the frozen `crit-8` tag and the configured one shared-CPU
+7 October 2026. The owner explicitly approved the checkpoint/main repository pushes
+and the existing CI/Fly release. The checkpoint branch and reviewed main commits
+have been published. A private mounted backup preflight succeeded; see
+[backup evidence](RELEASE-BACKUP-EVIDENCE.md). The redesigned production release is
+still pending a successful CI run. Current run results are in
+[release status](RELEASE-STATUS.md). Local evidence alone does not grant broader
+publication, credential, hosting or data-replacement authority. Preserve the frozen
+`crit-8` tag and the configured one shared-CPU
 machine with 256 MB RAM and one 1 GB volume.
 
 ## Prepare the authorized candidate
@@ -48,14 +52,18 @@ try {
 }
 ```
 
-Repeat for `house.sqlite` if it exists; it is absent before the first house startup.
-Both current databases use SQLite `user_version=1`; house wire/export
+Use the reviewed [mounted backup helper](../../tools/backup-mounted-data.mjs) for
+the authorized operation. It uses fixed app/file names, creates a private unique
+backup directory and verifies each copied database before deployment. Include
+`house.sqlite` and `board.sqlite` when they exist; do not create absent optional
+files during backup. The first house/board startup is additive. The legacy and house
+databases use SQLite `user_version=1`; house wire/export
 `schemaVersion=2` is a different version. The new database is additive and leaves
 legacy data separate. Verify against the actual [store](../../src/house-store.ts)
 and [architecture](../architecture/SHARED-HOUSE-IMPLEMENTATION.md) before a future
 migration.
 
-Each database backup is consistent individually, but two separate backups do not
+Each database backup is consistent individually, but separate backups do not
 represent one common instant. Quiesce writes if that paired boundary is needed;
 record capture times and later writes. Store a private copy outside the same
 single volume before depending on it for recovery. Keep backups, manifests,
@@ -77,9 +85,10 @@ and fixed one-machine configuration. A public main-branch push can trigger the
 it as a release action. Mounted startup creates `house.sqlite` without moving
 `crit-8` or reseeding the legacy database.
 
-Verify live `/`, `/readme/`, `/healthz`, HTTPS/Secure cookies and two independent
-browser flows: join/move/chat, seats and room access, saved DIY/cards, return after
-restart, recovery and own-data export. Export contains the current own room/cards
+Verify live `/`, `/board/`, `/readme/`, `/healthz`, HTTPS/Secure cookies and two
+independent browser flows: join/move/chat, seats and room access, saved DIY/cards,
+board drawing/text/chat/save/reload, return, recovery and own-data export. A full mounted-process restart remains a separately recorded operation;
+do not claim it from an ordinary page reload. Export contains the current own room/cards
 and private archives, not a chat transcript. Check actual logs and resource use.
 An HTTP 200 response alone does not establish gameplay or persistence.
 

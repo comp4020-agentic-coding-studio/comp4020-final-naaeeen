@@ -217,3 +217,17 @@ Optional house/board databases were absent and not created, as expected for the 
 Crit8 release. This is individual file consistency, not off-volume recovery; CI will
 repeat the backup for the exact final candidate before deployment. No private copy
 or raw report is committed.
+
+## R4 release environment and artifact lifecycle refinement
+
+On resume, root reopened AGENTS, CLAUDE, PLAN, the active REPORT and applicable
+comparison/evidence methods. Actual CI stages and sanitized artifacts were checked
+instead of treating local or reviewer outcomes as remote success. Runs 37575162606,
+37577667210 and 37578702188 remain failed with their distinct scopes in
+RELEASE-STATUS.md. The latest run establishes kernel sandbox enforcement, then
+exposes an output lifecycle error: Playwright deletes its output root, which was
+a bind mount under a read-only parent. The bounded alternative is a writable child
+inside each output mount; broader writable source is unnecessary. The worker owns
+only the CI shell and environment README, fresh review remains read-only, and
+root owns final diff, native checks, authorization and publication. Application,
+startup and resource criteria are preserved. A new actual CI run remains required.
