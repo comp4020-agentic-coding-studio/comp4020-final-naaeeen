@@ -29,6 +29,7 @@ export function createHouseWorld(container, callbacks = {}) {
   let scene, camera, layout = createLayout(4), live = null, own = { ...layout.spawn }, heading = 0;
   let inputEnabled = true, editing = false, composing = false, suspended = false, previousEditMode = null, pendingEditFraming = false, gesture = null, direction = { x: 0, z: 0 }, route = [], routeTarget = null;
   let lastFrame = null, lastSent = -Infinity, sent = null, renderKey = '', frame = 0, disposed = false, pendingStand = false;
+  let renderDirty = true, lastRender = -Infinity;
   let prompt, roomLabel = null, selection = null, context = null, previewPlacements = null, lastHint = '';
   let safeArea = null, layoutDirty = true, lastLabelLayout = -Infinity;
   const dimensionObserver = new ResizeObserver(entries => { for (const observed of entries) { const item = labelEntries.get(observed.target); if (!item) continue; const box = observed.borderBoxSize?.[0]; if (box && box.inlineSize > 0 && box.blockSize > 0) { if (Math.abs(item.size.w - box.inlineSize) > 0.1 || Math.abs(item.size.h - box.blockSize) > 0.1) { item.size = { w: box.inlineSize, h: box.blockSize }; layoutDirty = true; } item.sizeDirty = false; } else { item.sizeDirty = true; layoutDirty = true; } } });
@@ -58,7 +59,7 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function pickable(group, target) { group.traverse(o => { o.userData.target = target; }); pickTargets.push({ point: new THREE.Box3().setFromObject(group).getCenter(new THREE.Vector3()), target }); }
   function clearScene() {
-    selfFrameGeometry = null;
+    selfFrameGeometry = null; renderDirty = true;
     scene?.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); if (o.isLight) o.shadow?.dispose(); });
     dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
   }
@@ -118,7 +119,8 @@ export function createHouseWorld(container, callbacks = {}) {
       const resident = live.durable.residents.find(r => r.slot === slot), self = resident?.id === live.durable.selfId;
       const text = resident ? resident.name + (self ? '\nYour room' : resident.open ? '\nDoor open' : '\nDoor closed') : 'Room ' + (slot + 1) + '\nVacant';
       updateLabel(entry.name, text, self ? 'own-door' : 'door');
-      entry.plaque.material = mat(resident ? colour(resident.colour) : '#d6cbb7');
+      const material = mat(resident ? colour(resident.colour) : '#d6cbb7');
+      if (entry.plaque.material !== material) { entry.plaque.material = material; renderDirty = true; }
       // Raycast objects and projected pick targets share this same target object.
       entry.target.roomId = resident?.bedroomId;
     }
@@ -182,7 +184,7 @@ export function createHouseWorld(container, callbacks = {}) {
     resize(); if (live) syncPlayers(live);
   }
   function avatar(player) {
-    const root = new THREE.Group(), body = new THREE.Group(); root.add(body); scene.add(root);
+    const root = new THREE.Group(), body = new THREE.Group(); root.add(body); scene.add(root); renderDirty = true;
     const accent = colour(player.colour), garments = [cylinder(0.205, 0.43, 0, 0.73, 0, accent, body)];
     box(0.26, 0.065, 0.21, 0, 0.94, 0, '#f0dbc2', body);
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.235, 12, 10), mat('#ebc5a5')); head.position.set(0, 1.17, 0); head.castShadow = true; body.add(head);
@@ -226,7 +228,7 @@ export function createHouseWorld(container, callbacks = {}) {
     const w = Math.max(container.clientWidth, 1), h = Math.max(container.clientHeight, 1);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5)); renderer.setSize(w, h, false);
     labels.forEach(sizeLabel);
-    layoutDirty = true;
+    layoutDirty = true; renderDirty = true;
     camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 60);
     camera.position.set(CAMERA_ORIENTATION.x, CAMERA_ORIENTATION.y, CAMERA_ORIENTATION.z); camera.lookAt(0, CAMERA_ORIENTATION.lookY, 0); canvas.dataset.cameraOrientation = JSON.stringify(CAMERA_ORIENTATION); camera.updateMatrixWorld(true);
     const bounds = new THREE.Box3().setFromObject(scene);
@@ -250,12 +252,15 @@ export function createHouseWorld(container, callbacks = {}) {
     const point = geometry?.centre ?? new THREE.Vector3(own.x, AVATAR_HEIGHT / 2 + (seated ? SEATED_LIFT : 0), own.z).applyMatrix4(camera.matrixWorldInverse);
     const value = cameraRig.frame(point, dt, false, geometry?.extents);
     if (!value) return;
+    const changed = ['left', 'right', 'top', 'bottom'].some(key => camera[key] !== value[key]);
     camera.left = value.left; camera.right = value.right; camera.top = value.top; camera.bottom = value.bottom; camera.updateProjectionMatrix();
+    if (changed) renderDirty = true;
     if (value.changed) layoutDirty = true;
     canvas.dataset.cameraMode = value.mode; canvas.dataset.cameraZoom = String(value.zoom); canvas.dataset.cameraPlayArea = JSON.stringify(value.area);
     const projected = cameraCorners.map(p => ({ x: (p.x - camera.left) * value.pxPerUnit, y: (camera.top - p.y) * value.pxPerUnit }));
     canvas.dataset.worldLeft = Math.min(...projected.map(p => p.x)).toFixed(1); canvas.dataset.worldRight = Math.max(...projected.map(p => p.x)).toFixed(1);
     canvas.dataset.worldTop = Math.min(...projected.map(p => p.y)).toFixed(1); canvas.dataset.worldBottom = Math.max(...projected.map(p => p.y)).toFixed(1);
+    return changed;
   }
 
   function self() { return live?.players.find(p => p.id === live.durable.selfId); }
@@ -312,11 +317,11 @@ export function createHouseWorld(container, callbacks = {}) {
     const visible = next.players.filter(p => p.connected && p.zoneId === next.durable.zoneId);
     const ids = new Set(visible.map(p => p.id));
     for (const [id, entry] of avatars) if (!ids.has(id)) {
-      dimensionObserver.unobserve?.(entry.name); dimensionObserver.unobserve?.(entry.bubble); scene.remove(entry.root); entry.root.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); }); labelEntries.get(entry.name)?.line.remove(); labelEntries.get(entry.bubble)?.line.remove(); entry.name.remove(); entry.bubble.remove(); avatars.delete(id); layoutDirty = true;
+      dimensionObserver.unobserve?.(entry.name); dimensionObserver.unobserve?.(entry.bubble); scene.remove(entry.root); entry.root.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); }); labelEntries.get(entry.name)?.line.remove(); labelEntries.get(entry.bubble)?.line.remove(); entry.name.remove(); entry.bubble.remove(); avatars.delete(id); layoutDirty = true; renderDirty = true;
       for (let i = labels.length - 1; i >= 0; i--) if (labels[i].el === entry.name || labels[i].el === entry.bubble) labels.splice(i, 1);
     }
     for (const p of visible) { const entry = avatars.get(p.id) ?? avatar(p), accent = colour(p.colour);
-      if (entry.accent !== accent) { entry.accent = accent; for (const mesh of entry.garments) mesh.material = mat(accent); }
+      if (entry.accent !== accent) { entry.accent = accent; for (const mesh of entry.garments) mesh.material = mat(accent); renderDirty = true; }
       entry.player = p; entry.name.dataset.playerId = p.id; entry.name.dataset.name = p.name; entry.name.dataset.availability = p.availability; entry.name.dataset.connected = String(p.connected); entry.name.classList.add('house-avatar-name'); const nameText = p.name + (p.id === next.durable.selfId ? ' (you)' : '') + '\n' + (p.availability === 'chat' ? 'Can chat' : 'Quiet'); if (entry.nameText !== nameText) { entry.nameText = nameText; entry.nameDisplay.textContent = p.name + (p.id === next.durable.selfId ? ' (you)' : ''); entry.nameAvailability.textContent = p.availability === 'chat' ? 'Can chat' : 'Quiet'; entry.name.title = nameText; entry.name.setAttribute('aria-label', nameText); labelEntries.get(entry.name).sizeDirty = true; layoutDirty = true; } entry.name.dataset.availabilitySetAt = String(p.availabilitySetAt); }
   }
   function animate(time) {
@@ -345,18 +350,26 @@ export function createHouseWorld(container, callbacks = {}) {
       const motion = { x: own.x, z: own.z, heading, animation: moving ? 'walk' : 'idle' };
       if (sent && (Math.hypot(sent.x - own.x, sent.z - own.z) > 0.005 || sent.animation !== motion.animation) || !sent && moving) { callbacks.onMove?.(motion); lastSent = time; sent = motion; }
     }
+    let renderActive = moving;
     for (const [id, entry] of avatars) {
       const state = entry.player, local = id === live.durable.selfId && live.controller;
       const seated = state.animation === 'sit' || !!state.seatId;
       const targetX = local ? own.x : state.x ?? layout.spawn.x, targetZ = local ? own.z : state.z ?? layout.spawn.z;
-      const blend = local || reduced || Math.hypot(targetX - entry.x, targetZ - entry.z) > 2 ? 1 : 1 - Math.exp(-dt * 12);
+      const remaining = Math.hypot(targetX - entry.x, targetZ - entry.z);
+      // Keep interpolation smooth through settling; subpixel tails use the idle draw.
+      if (remaining > 0.000001) renderActive = true;
+      const blend = local || reduced || remaining > 2 ? 1 : 1 - Math.exp(-dt * 12);
       entry.x += (targetX - entry.x) * blend; entry.z += (targetZ - entry.z) * blend;
-      entry.root.position.set(entry.x, seated ? SEATED_LIFT : 0, entry.z); entry.name.dataset.x = entry.x.toFixed(3); entry.name.dataset.z = entry.z.toFixed(3);
-      const yaw = local && !seated ? heading : state.heading ?? 0; entry.body.rotation.y = yaw;
+      const lift = seated ? SEATED_LIFT : 0, yaw = local && !seated ? heading : state.heading ?? 0;
       const walk = !seated && (local ? moving : state.animation === 'walk'); const swing = walk ? Math.sin(time * 0.011) * 0.55 : 0;
+      const bob = !reduced && walk ? Math.abs(Math.sin(time * 0.011)) * 0.035 : 0;
+      if (walk) renderActive = true;
+      // Stationary seat/heading changes and the final idle pose also need a frame.
+      if (entry.root.position.y !== lift || entry.body.rotation.y !== yaw || entry.legs[0].rotation.x !== (seated ? -Math.PI / 3 : swing) || entry.body.position.y !== bob) renderDirty = true;
+      entry.root.position.set(entry.x, lift, entry.z); entry.name.dataset.x = entry.x.toFixed(3); entry.name.dataset.z = entry.z.toFixed(3); entry.body.rotation.y = yaw;
       entry.legs[0].rotation.x = seated ? -Math.PI / 3 : swing; entry.legs[1].rotation.x = seated ? -Math.PI / 3 : -swing; entry.knees.forEach(knee => { knee.rotation.x = seated ? Math.PI / 3 : 0; });
       entry.arms[0].rotation.x = seated ? -0.85 : -swing * 0.65; entry.arms[1].rotation.x = seated ? -0.85 : swing * 0.65;
-      entry.body.position.y = !reduced && walk ? Math.abs(Math.sin(time * 0.011)) * 0.035 : 0;
+      entry.body.position.y = bob;
 
     }
     if (live) {
@@ -367,9 +380,12 @@ export function createHouseWorld(container, callbacks = {}) {
       const hint = active ? context ?? 'WASD / arrows to walk · E near a door, seat or board' : editing ? 'Select a piece to arrange your room' : live.controller ? '' : 'Observer · control is active in another tab';
       if (hint !== lastHint) { lastHint = hint; callbacks.onHint?.(hint); }
     }
-    updateCamera(dt);
+    if (updateCamera(dt)) renderActive = true;
     recordProjection();
-    renderer.render(scene, camera);
+    // Only GPU submission is budgeted. Input, prediction, camera and DOM stay at RAF cadence.
+    if (renderDirty || renderActive || time - lastRender >= 100) {
+      renderer.render(scene, camera); renderDirty = false; lastRender = time;
+    }
     updateSpeech(window.performance.now());
     placeLabels(time);
     frame = requestAnimationFrame(animate);
@@ -488,9 +504,9 @@ export function createHouseWorld(container, callbacks = {}) {
     const target = hit.object.userData.target;
     if (editing && target.type === 'placement') {
       callbacks.onSelectPlacement?.(target.id);
-      if (selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); }
+      if (selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); renderDirty = true; }
       const placement = roomPlacements().find(p => p.id === target.id); if (!placement) return;
-      const rect = footprint(placement); selection = new THREE.Mesh(new THREE.BoxGeometry(rect.w + 0.1, 0.025, rect.d + 0.1), new THREE.MeshBasicMaterial({ color: '#fff1bd', wireframe: true })); selection.position.set(rect.x, 0.08, rect.z); scene.add(selection);
+      const rect = footprint(placement); selection = new THREE.Mesh(new THREE.BoxGeometry(rect.w + 0.1, 0.025, rect.d + 0.1), new THREE.MeshBasicMaterial({ color: '#fff1bd', wireframe: true })); selection.position.set(rect.x, 0.08, rect.z); scene.add(selection); renderDirty = true;
     } else if (!editing && target.type !== 'placement') approach(target);
   }
   function pointerdown(event) {
@@ -524,7 +540,7 @@ export function createHouseWorld(container, callbacks = {}) {
     if (suspended === !!value) return;
     suspended = !!value; clearInput(); gesture = null; lastFrame = null;
     if (suspended) cancelAnimationFrame(frame);
-    else if (!disposed) frame = requestAnimationFrame(animate);
+    else if (!disposed) { renderDirty = true; frame = requestAnimationFrame(animate); }
     canvas.dataset.suspended = String(suspended);
   }
   const listeners = [[window, 'keydown', keydown], [window, 'keyup', keyup], [window, 'blur', clearInput], [document, 'focusin', focusin], [document, 'visibilitychange', () => { if (document.hidden) clearInput(); }], [document, 'compositionstart', compositionstart], [document, 'compositionend', compositionend], [canvas, 'pointerdown', pointerdown], [canvas, 'pointermove', pointermove], [canvas, 'pointerup', pointerup], [canvas, 'pointercancel', pointercancel], [canvas, 'wheel', wheel], [canvas, 'contextmenu', event => event.preventDefault()], [window, 'resize', resize]];
@@ -552,7 +568,7 @@ export function createHouseWorld(container, callbacks = {}) {
           pendingEditFraming = restoreMode !== 'inspection'; previousEditMode = null;
         }
         updateCamera(0); cameraModeChanged();
-      } if (!editing && selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); selection = null; } },
+      } if (!editing && selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); selection = null; renderDirty = true; } },
     dispose() { if (disposed) return; disposed = true; speech.clear(); cancelAnimationFrame(frame); observer.disconnect(); dimensionObserver.disconnect(); listeners.forEach(([element, type, listener]) => element.removeEventListener(type, listener)); clearScene(); for (const material of materials.values()) material.dispose(); renderer.dispose(); canvas.remove(); overlay.remove(); },
   };
 }

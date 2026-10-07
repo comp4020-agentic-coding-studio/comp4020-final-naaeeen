@@ -1,13 +1,13 @@
 import { JSDOM } from "jsdom";
 import { afterEach, expect, it, vi } from "vitest";
 import { Box3 } from "three";
-const rendered = vi.hoisted(()=>({ scene: null as any }));
+const rendered = vi.hoisted(()=>({ scene: null as any, camera: null as any, count: 0 }));
 vi.mock("three",async importOriginal=>{
  const actual=await importOriginal<any>();
- class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(scene:any){rendered.scene=scene;} dispose(){} }
+ class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(scene:any,camera:any){rendered.scene=scene;rendered.camera=camera;rendered.count++;} dispose(){} }
  return {...actual,WebGLRenderer:Renderer};
 });
-import { createLayout, footprint } from '../public/house-geometry.js';
+import { createLayout, footprint, SEATED_LIFT } from '../public/house-geometry.js';
 import { createHouseWorld } from "../public/house-world.js";
 const cleanups: (()=>void)[]=[];
 afterEach(()=>{for(const f of cleanups.splice(0))f();vi.unstubAllGlobals();});
@@ -41,12 +41,13 @@ function speechFixture(width=390,height=844,callbacks:any={}){
  let next:FrameRequestCallback=()=>{},clock=0;vi.spyOn(dom.window.performance,'now').mockImplementation(()=>clock);
  vi.stubGlobal('requestAnimationFrame',(cb:FrameRequestCallback)=>{next=cb;return 1;});vi.stubGlobal('cancelAnimationFrame',()=>{});
  const container=dom.window.document.getElementById('world')!;Object.defineProperty(container,'clientWidth',{value:width,configurable:true});Object.defineProperty(container,'clientHeight',{value:height,configurable:true});
+ const initialRenderCount=rendered.count;
  const world=createHouseWorld(container,callbacks);cleanups.push(()=>{world.dispose();dom.window.close();});
  const players=Array.from({length:6},(_,i)=>({id:'p'+i,name:'Friend '+i,colour:'sage',connected:true,zoneId:'lounge',x:0,z:3.3,heading:0,animation:'idle',availability:'chat',availabilitySetAt:0,generation:1}));
  const snapshot:any={serverEpoch:'epoch',accessGeneration:1,generation:1,controller:true,durable:{schemaVersion:2,selfId:'p0',house:{id:'house',capacity:6,ownerId:'p0',code:'12345678'},residents:players.map((p,i)=>({...p,slot:i,bedroomId:'room'+i,open:false})),streamId:'lounge:house',sequence:0,zoneId:'lounge',room:null,cards:[],chat:[]},players};
  const step=(time:number)=>{clock=time;next(time);};
  const visible=()=>[...container.querySelectorAll<HTMLElement>('.chat-bubble')].filter(n=>!n.hidden);
- return {world,snapshot,container,step,visible};
+ return {world,snapshot,container,step,visible,renders:()=>rendered.count-initialRenderCount};
 }
 it('does not replay retained history as speech even when the wall clock is skewed',()=>{
  const f=speechFixture();f.snapshot.durable.chat=[{id:'old',authorId:'p1',name:'Friend 1',text:'Retained history',at:9999999999999,sequence:1}];
@@ -418,4 +419,128 @@ it('keeps a queued door approach across changes to the same occupant name, colou
  f.world.update(changed);
  for(let time=0;time<=1000;time+=100)f.step(time);
  expect(interact).toHaveBeenCalledExactlyOnceWith({type:'door',slot:1,roomId:'room1'});
+});
+
+
+it('renders the first usable frame and bounds static GPU draws while RAF and speech keep running',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);expect(f.renders()).toBe(1);
+ const chatting=structuredClone(f.snapshot);chatting.durable.sequence=1;
+ chatting.durable.chat=[{id:'fresh-idle',authorId:'p1',name:'Friend 1',text:'Still responsive',at:0,sequence:1}];
+ f.world.update(chatting);f.step(1000/60);expect(f.visible()).toHaveLength(1);expect(f.renders()).toBe(1);
+ for(let frame=2;frame<=60;frame++){f.world.update(structuredClone(chatting));f.step(frame*1000/60);}
+ expect(f.renders()-1).toBeLessThanOrEqual(10);
+ expect(f.renders()).toBeGreaterThan(1);
+ expect(f.container.querySelector('canvas')?.dataset.selfAnimation).toBe('idle');
+ f.step(4001);expect(f.visible()).toHaveLength(0);
+});
+
+it('renders local walking at every RAF while preserving elapsed movement and realtime sends',()=>{
+ const onMove=vi.fn(),f=speechFixture(390,844,{onMove});f.world.update(f.snapshot);f.step(0);
+ f.world.setDirection(-1,0);const before=f.renders();
+ for(let frame=1;frame<=12;frame++)f.step(frame*1000/60);
+ expect(f.renders()-before).toBe(12);
+ expect(Math.hypot(f.world.getPosition().x,f.world.getPosition().z-3.3)).toBeCloseTo(.52,2);
+ expect(onMove).toHaveBeenCalledTimes(2);
+ expect(onMove.mock.calls.every(([motion])=>motion.animation==='walk')).toBe(true);
+});
+
+it('renders remote walking and interpolation at every RAF then returns to the static budget',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const moved=structuredClone(f.snapshot);Object.assign(moved.players[1],{x:1,z:3.3,animation:'walk'});
+ f.world.update(moved);const before=f.renders();
+ for(let frame=1;frame<=12;frame++)f.step(frame*1000/60);
+ expect(f.renders()-before).toBe(12);
+ const stopped=structuredClone(moved);stopped.players[1].animation='idle';f.world.update(stopped);
+ const settling=f.renders();for(let frame=13;frame<=24;frame++)f.step(frame*1000/60);
+ expect(f.renders()-settling).toBe(12);
+ const peer=f.container.querySelector<HTMLElement>('.house-avatar-name[data-player-id="p1"]')!;
+ expect(Number(peer.dataset.x)).toBeGreaterThan(.95);expect(Number(peer.dataset.x)).toBeLessThanOrEqual(1);
+ for(let frame=25;frame<=180;frame++)f.step(frame*1000/60);
+ const idle=f.renders();for(let frame=181;frame<=240;frame++)f.step(frame*1000/60);
+ expect(f.renders()-idle).toBeLessThanOrEqual(10);
+});
+
+it('renders a settling follow camera every RAF after the avatar stops',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ f.world.setLabelSafeArea({viewport:{left:8,top:120,right:220,bottom:500},safeRects:[]});f.world.recenterCamera();f.step(10);
+ const corrected=structuredClone(f.snapshot);corrected.players[0].x=3;f.world.update(corrected);
+ const before=f.renders(),canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!,left=canvas.dataset.worldLeft;
+ for(let frame=1;frame<=8;frame++)f.step(10+frame*1000/60);
+ expect(f.renders()-before).toBe(8);expect(canvas.dataset.worldLeft).not.toBe(left);
+ expect(f.world.getPosition()).toEqual({x:3,z:3.3});
+});
+
+it('redraws scene membership and material changes before the next idle draw is due',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const scene=rendered.scene,changed=structuredClone(f.snapshot);
+ changed.durable.residents[1].colour='rose';changed.players[1].colour='rose';
+ f.world.update(changed);f.step(10);expect(f.renders()).toBe(2);expect(rendered.scene).toBe(scene);
+ expect(doorPlaque(doorGroup(1)).material.color.getHexString()).toBe('c6999b');
+ const departed=structuredClone(changed);departed.players=departed.players.filter((p:any)=>p.id!=='p1');
+ f.world.update(departed);f.step(20);expect(f.renders()).toBe(3);expect(avatarRoots()).toHaveLength(5);
+ f.world.update(changed);f.step(30);expect(f.renders()).toBe(4);expect(avatarRoots()).toHaveLength(6);
+ f.world.update(null);f.step(40);expect(f.renders()).toBe(5);expect(rendered.scene).not.toBe(scene);
+});
+
+it('redraws projection controls and resize before the next idle draw is due',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ f.world.setCameraZoom(1.3);f.step(10);expect(f.renders()).toBe(2);
+ f.world.setCameraMode('overview');f.step(20);expect(f.renders()).toBe(3);
+ const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
+ canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:120,clientY:300,button:2,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointermove',{clientX:170,clientY:300,button:2,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointerup',{clientX:170,clientY:300,button:2,bubbles:true}));
+ f.step(30);expect(f.renders()).toBe(4);expect(f.world.getCameraMode()).toBe('inspection');
+ Object.defineProperty(f.container,'clientWidth',{value:701,configurable:true});f.world.resize();f.step(40);expect(f.renders()).toBe(5);
+ f.world.recenterCamera();f.step(50);expect(f.renders()).toBe(6);
+});
+
+it('redraws DIY preview and actual selection changes before the next idle draw is due',()=>{
+ const f=speechFixture(),room=structuredClone(f.snapshot);
+ room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';
+ room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'plant',kind:'plant',x:0,z:0,rotation:0,colour:'sage'}]};
+ for(const p of room.players)p.zoneId='room0';f.world.update(room);f.world.setCameraMode('overview');f.world.setEditing(true);f.step(0);
+ const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
+ vi.spyOn(canvas,'getBoundingClientRect').mockReturnValue({left:0,top:0,right:390,bottom:844,width:390,height:844,x:0,y:0,toJSON(){}});
+ rendered.scene.updateMatrixWorld(true);
+ const point=JSON.parse(canvas.dataset.pickTargets!).find((item:any)=>item.target.type==='placement');
+ canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:point.x,clientY:point.y,button:0,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointerup',{clientX:point.x,clientY:point.y,button:0,bubbles:true}));
+ f.step(10);expect(f.renders()).toBe(2);expect(sceneMeshes().some(mesh=>mesh.material.wireframe===true)).toBe(true);
+ f.world.setEditing(false);f.step(20);expect(f.renders()).toBe(3);expect(sceneMeshes().some(mesh=>mesh.material.wireframe===true)).toBe(false);
+ f.world.setRoomPreview([{...room.durable.room.placements[0],x:1}]);f.step(30);expect(f.renders()).toBe(4);
+ const selected=sceneMeshes().find(mesh=>mesh.userData.target?.type==='placement');expect(selected).toBeDefined();
+});
+
+it('does not draw while suspended and forces the updated scene on the first resumed RAF',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);const before=f.world.getPosition();
+ f.world.setSuspended(true);const changed=structuredClone(f.snapshot);changed.players[1].colour='rose';f.world.update(changed);
+ f.world.setDirection(-1,0);f.step(10);expect(f.renders()).toBe(1);expect(f.world.getPosition()).toEqual(before);
+ f.world.setSuspended(false);f.step(20);expect(f.renders()).toBe(2);expect(f.world.getPosition()).toEqual(before);
+ expect(garmentMeshes(avatarRoots()[1]).every(mesh=>mesh.material.color.getHexString()==='c6999b')).toBe(true);
+});
+
+
+it('redraws stationary remote heading and seating changes and the final idle limb pose',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const turned=structuredClone(f.snapshot);turned.players[1].heading=1;f.world.update(turned);f.step(10);
+ expect(f.renders()).toBe(2);expect(avatarRoots()[1].children[0].rotation.y).toBe(1);
+ const seated=structuredClone(turned);Object.assign(seated.players[1],{animation:'sit',seatId:'seat:0'});f.world.update(seated);f.step(20);
+ expect(f.renders()).toBe(3);expect(avatarRoots()[1].position.y).toBe(SEATED_LIFT);
+ const walked=structuredClone(turned);walked.players[1].animation='walk';f.world.update(walked);f.step(30);expect(f.renders()).toBe(4);
+ f.world.update(turned);f.step(40);expect(f.renders()).toBe(5);expect(avatarRoots()[1].position.y).toBe(0);
+ const body=avatarRoots()[1].children[0],leg=body.children.find((child:any)=>child.isGroup&&child.position.y===.52);
+ expect(leg.rotation.x).toBe(0);expect(body.position.y).toBe(0);
+});
+
+it('keeps stationary walking limbs at RAF cadence with reduced motion enabled',()=>{
+ const f=speechFixture();f.world.setReducedMotion(true);f.world.update(f.snapshot);f.step(0);
+ const walked=structuredClone(f.snapshot);walked.players[1].animation='walk';f.world.update(walked);
+ const before=f.renders();for(let frame=1;frame<=12;frame++)f.step(frame*1000/60);
+ expect(f.renders()-before).toBe(12);expect(avatarRoots()[1].children[0].position.y).toBe(0);
+});
+
+it('forces a resumed frame even without intervening scene changes',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);f.world.setSuspended(true);f.step(10);expect(f.renders()).toBe(1);
+ f.world.setSuspended(false);f.step(20);expect(f.renders()).toBe(2);
 });
