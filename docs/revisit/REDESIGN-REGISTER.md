@@ -100,3 +100,11 @@ outstanding matching against historical scanning under equal receipt/version/
 chat/recovery tasks; all workload gates and input scheduling remain unchanged.
 It is evaluator implementation work, with causal performance effect unproven
 before a full revised-instrument run. Deployment remains open.
+
+Current R2/R4 acceptance VERIFIED atdaef80c byCI37603266802:495/28, native9,
+all300s unchanged resource gates, mountedbackup/deploy/HTTPS, exactdeployedclient/
+worldsource and livecore19.2s/room30.9s. Earlierfailed motion andworkload results
+remain exactarchives. Freshreview andparent calibration/reconciliation complete
+for actual changed code; incomplete broadrecheck isnotcounted asclosure verdict.
+See currentMOVEMENT-RECONCILIATION and RESOURCE-TRACKER-EVIDENCE. Finalevidence-only
+publication needs its own actualCI result; no further source change is planned.

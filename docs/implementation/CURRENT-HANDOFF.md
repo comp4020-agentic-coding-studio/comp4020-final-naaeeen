@@ -1,3 +1,32 @@
+# Current release verified; final evidence publication checkpoint
+
+CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Runtime5c40545,
+evaluator e54a694 verified atdaef80c byCI37603266802 terminalSUCCESS. Actual495/28
+required/native9/300sresource/process+secrets/privatebackup/Fly+HTTPS allPASS.
+Resource protocol98e62217/instrumentec3301bf/source545d79c3 match; allgatestrue,
+RSS204.85MiB,p9510.658ms,24finaltransports,7188patches/skips0,pending0/disconnect0.
+ExactPASS indexed-ci artifactad745f1c committed; oldFAIL376007 andv1protocol kept.
+
+Liveprobe2026-10-07T10:00:08.176Z matches6codehashes (includesactualmotionclient),
+Node24.21.0/sharedCPU1/256MB/data. RSS101188KiB onepoint,cgroupnull. Currentlive
+core19.2s/room30.9s PASS; boardJS/CSSmatchescurrentbytes plusimageboard2PASS,
+prioridenticalboardliveproofretained. MOVEMENT-RECONCILIATION exactJSON iscurrent
+closure; earlierFINAL-RELEASE/b95JSON remainsitsownhistoricalscope.
+
+Sourceclient4281ff8c/world7b8e9acf unchanged since5c; crit8remote351722/6dc79,
+checkpointf5a25f2 andoriginalpreview4093 .local/implementation-s1 preserved. No
+workerwrites/tests/GPU/load active. Allchangedmotion/tracker code receivedfresh
+reviews thenparent checks. Broadcontextualfull-objective recheckincomplete and
+notcountedascurrentclosure. Physical/human/WAN/stress/offvolume/boardcoverage/
+studentwriting limits unchanged.
+
+Nextroot: boundedfinalevidence review, commit+approvedpush records ONLY, inspect
+that finalactualCI once; ifPASS andruntimeunchanged, markgoalcomplete andreport
+conciseEnglishtrylinks. Do NOT recursivelypublishanotherdocjusttorestatePASS.
+Newfailuresreopenactualaffectedgate; don'tblindrerun orwaivecriteria.
+
+# Historical source-specific checkpoints
+
 # Indexed evaluator: local pass, full release pending
 
 Application5c40545 staysfrozen; sourcee54a694 updatesonlyresourceinstrument/test/

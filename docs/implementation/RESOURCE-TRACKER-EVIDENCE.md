@@ -1,3 +1,17 @@
+# Verified movement and evaluator release
+
+Runtime `5c40545` and evaluator `e54a694` are verified at `daef80c` by
+[CI 37603266802](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37603266802):
+495 required checks across 28 files, nine native cases, all 300-second resource
+gates, process and secret checks, mounted backups, deployment and HTTPS smoke.
+Six deployed source hashes match. The revised live core and room journeys pass
+in 19.2 and 30.9 seconds. [Exact results](../../evaluation/movement-reconciliation.results.json)
+and the [resource artifact](../../evaluation/board-resource.indexed-ci.results.json)
+bind the source, protocol, instrument and observations. Earlier failures remain
+preserved. Pending labels below describe their historical checkpoints. The final
+evidence publication keeps runtime bytes unchanged and receives its own CI check;
+a further status-only publication is unnecessary.
+
 # Resource evaluator refinement
 
 7 October 2026. Sourcee54a694; application motion remains5c40545. This changes
@@ -64,3 +78,13 @@ no automatic retry or weakened threshold is introduced. Reduced algorithmic cost
 is established; the precise earlier failure cause and sustained effect remain
 unproven until new measurements. Physical Fly/phones, WAN and human results are
 outside this synthetic gate.
+
+## Actual full verification
+
+CI37603266802 on protocol98e62217/instrumentec3301bf passes all300s gates. Root
+independently verifies artifactad745f1c and backend/source hashes. All7,188patches
+save with zero skips;708chat; pointer18.307–18.637Hz; no pending/unexpected
+disconnection; full realTCP slow-reader rejoin/recovery passes. RSS204.85MiB and
+normalp9510.658ms meet unchanged criteria. This completes the previously unrun
+actual-transport/sustained gate for this attempt; it does not establish a causal
+performance model or human preference. Earlier37600728762FAIL remains separate.

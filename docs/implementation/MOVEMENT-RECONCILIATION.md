@@ -1,3 +1,17 @@
+# Verified movement and evaluator release
+
+Runtime `5c40545` and evaluator `e54a694` are verified at `daef80c` by
+[CI 37603266802](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37603266802):
+495 required checks across 28 files, nine native cases, all 300-second resource
+gates, process and secret checks, mounted backups, deployment and HTTPS smoke.
+Six deployed source hashes match. The revised live core and room journeys pass
+in 19.2 and 30.9 seconds. [Exact results](../../evaluation/movement-reconciliation.results.json)
+and the [resource artifact](../../evaluation/board-resource.indexed-ci.results.json)
+bind the source, protocol, instrument and observations. Earlier failures remain
+preserved. Pending labels below describe their historical checkpoints. The final
+evidence publication keeps runtime bytes unchanged and receives its own CI check;
+a further status-only publication is unnecessary.
+
 # Movement reconciliation: verification protocol and record
 
 7 October 2026. R2 movement/collision and R4 acceptance reopened by actual CI
@@ -139,3 +153,29 @@ Resource tracker sourcee54a694 preserves every criterion and obligation; parent
 495/28 PASS. [Refinement evidence](RESOURCE-TRACKER-EVIDENCE.md) records actual
 red/green, alternative comparisons, fresh review and new source freeze. Full
 CI/resource/deploy/live acceptance remains pending; application5c40545 unchanged.
+
+## Current acceptance and limits
+
+Root verifies all hashes/gates from the downloaded full result: duration300s,
+204.84765625MiB peak processRSS, normalp9510.658ms, all12+12views/24transports,
+7,188saved patches/zero skips,708chat, zero pending/unexpected disconnects.
+Pointer range18.307–18.637Hz meets the unchanged18–20.5 requirement. The actual
+slow-reader disconnection/rejoin/cutoff recovery passes with the revised tracker.
+These observations establish this registered attempt, not general reliability
+or proof of the earlier failure's sole cause. The microcomparison remains distinct.
+
+Actual live source/topology probe at2026-10-07T10:00:08.176Z matches six code files,
+Node24.21.0 and one sharedCPU/256MB/data mount. AppRSS101188KiB is one moment;
+cgroup telemetry is unavailable. Revised live core19.2s and room30.9s pass without
+deadline changes. Current image board cases and fetched unchanged JS/CSS/source
+retain the existing board evidence scope. Physical phone/IME, human value/A-B,
+sustained physicalFly stress and off-volume restore remain not run; previous
+board-unit coverage gap remains explicit. Student PROCESS/reflection review is
+required before claiming personal learning or HD-level understanding.
+
+Final fresh read-only evidence review independently checked retained CI terminal
+state, source/protocol/resource hashes, all resource gates, live logs, source
+probe and links, with no actionable inconsistency. It did not rerun tests or
+inspect CI counts through terminal metadata. Root subsequently saved the actual
+check-job log and confirmed its495/28 and native9 output. Final publication has
+unchanged runtime and receives its own actualCI outcome before completion.

@@ -1,3 +1,17 @@
+# Verified movement and evaluator release
+
+Runtime `5c40545` and evaluator `e54a694` are verified at `daef80c` by
+[CI 37603266802](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37603266802):
+495 required checks across 28 files, nine native cases, all 300-second resource
+gates, process and secret checks, mounted backups, deployment and HTTPS smoke.
+Six deployed source hashes match. The revised live core and room journeys pass
+in 19.2 and 30.9 seconds. [Exact results](../../evaluation/movement-reconciliation.results.json)
+and the [resource artifact](../../evaluation/board-resource.indexed-ci.results.json)
+bind the source, protocol, instrument and observations. Earlier failures remain
+preserved. Pending labels below describe their historical checkpoints. The final
+evidence publication keeps runtime bytes unchanged and receives its own CI check;
+a further status-only publication is unnecessary.
+
 # Current movement gate: open
 
 CI [37596250446](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37596250446)

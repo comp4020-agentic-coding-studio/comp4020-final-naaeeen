@@ -1,13 +1,12 @@
-# Current movement gate: open
+# Current acceptance: verified movement and evaluator release
 
-CI [37596250446](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37596250446)
-at docs-only source `61e297e` failed real peer movement: the owner's predicted
-avatar had travelled far while the peer still saw it near spawn. Eight other
-browser cases passed. Earlier `b95d9a1` results below remain valid for their exact
-source and scope; they do not close this newly observed failure. The current
-motion reconciliation correction requires fresh review, affected native flows,
-required checks and actual CI/deployment verification. See
-[MOVEMENT-RECONCILIATION.md](docs/implementation/MOVEMENT-RECONCILIATION.md).
+Runtime `5c40545` and evaluator `e54a694` pass actual CI `37603266802` at
+`daef80c`: 495 required checks, nine native cases, unchanged 300-second resource
+gates, backups, deployment and affected live flows. Read
+[the current release record](docs/implementation/MOVEMENT-RECONCILIATION.md) and
+[exact result](evaluation/movement-reconciliation.results.json). Earlier scoped
+results and failures remain history; physical/human/coverage/student-writing
+limits are preserved. Final evidence-only publication has unchanged runtime.
 
 # Active redesign extension, 7 October 2026
 
