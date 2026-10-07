@@ -106,3 +106,14 @@ world99bac82 removes repeated static geometry work and fixes stale queued-door
 visits. Parent final local454checks and two affected native flows pass; one matched
 comparison records8.204s baseline/4.951s candidate join. It does not prove general
 reliability. Refined-world CI and deployed source/flow verification remain required.
+
+## Subsequent idleGPU refinement
+
+CI37587377555 at38148c8 passed454requiredchecks/eight native cases, then failed
+peer admission under10s; downstream skipped. Actual filtered network timings
+were milliseconds while UI actions took seconds. Reviewedsourceee40225 now budgets
+only staticGPU drawing at<=10Hz, preserving all active/logic/network cadence and
+models/AA/light/shadow/criteria. Parent465checks, two affected native flows and
+worldcoverage92.95/83.81 pass. One fixed-order diagnostic records9861ms/257ms join;
+cache/host/confounds and differing duration are explicit. Latestremote acceptance
+remains pending; see [GPU evidence](IDLE-RENDER-EVIDENCE.md).

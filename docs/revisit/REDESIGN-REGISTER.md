@@ -57,3 +57,13 @@ diagnostic and final454checks/two affected native flows are recorded in
 [STARTUP-REFINEMENT](../implementation/STARTUP-REFINEMENT.md). Earlier CI/live/resource
 rows above bind d693d06 and are retained; they do not establish the refined
 world's remote acceptance. Final CI/deploy remains open until actual verification.
+
+## GPU-only stationary draw refinement
+
+R2/R4 reopened after37587377555: milliseconds network completion did not explain
+seconds of browser action delay. A separate explicit factor budgets idleGPU work
+without throttling simulation/active movement. Actual red2controls, fresh47test
+review, one native9861/257ms diagnosticpair, unmodified native2PASS and parent
+465requiredchecks are in [IDLE-RENDER-EVIDENCE](../implementation/IDLE-RENDER-EVIDENCE.md).
+Latestremote gates remain OPEN; earlier d693 ormetadata-stage passes are not reused
+as proof of the new world. Frame scheduling is now part of future animation gates.

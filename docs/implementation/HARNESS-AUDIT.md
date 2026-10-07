@@ -272,3 +272,19 @@ preview cleanup was rejected against the actual own-room draft contract; a feasi
 stale door destination got a narrow red/green fix instead. Detailed evidence is
 STARTUP-REFINEMENT.md and evaluation/startup-refinement.results.json. Remote refined
 world acceptance remains pending, so the goal is active.
+
+## IdleGPU refinement and scope calibration
+
+LatestCI37587377555 failed despite earlierlocalPASS. Root preservedthefailure and
+filtered only own-fixture selectors/path/status/timing metadata: service requests
+were2–6ms, browser titleaction8.684s. PrimaryThree/R3F sources motivated a distinct
+idle-onlyGPU factor, with active/logic cadence preserved and explicit invalidation.
+Actual2RED idlecontrols became47GREEN includingpose/projection/DOMspeech/resume;
+fresh reviewer independently47PASS and12numerical camera stability controls.
+Parentnewnativepair9861/257ms remains single/fixed-order/confounded; finalunmodified
+native2 and465requiredchecks pass. World92.95/83.81 coverage is scoped separately
+from boardunit gaps. Actualowned-room image isinspected; nohuman/battery claim.
+A newfixture's positive seated-lift assumption was correctedtoexistingconstant,
+notruntime geometry. ReadersmisroutedtoA2were correctedwithliteralA3WSLprefix and
+currenthash checks; the activeREPORT nowrequires those factualpacket fields.
+CurrentremoteCI/deploy/live sourceverification remains required.

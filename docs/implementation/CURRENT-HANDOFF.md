@@ -1,3 +1,28 @@
+# Current GPU-budget refinement handoff
+
+Localsourceee40225 (not yet pushed) implements reviewed GPU-only idlebudget. Remote
+38148c8 CI37587377555 fails peer admission/lobby10s; other8cases pass. Filtered own
+trace confirms joinHTTP2005.674ms +me2001.608ms, UI titleclick8.684s; browser/render
+scheduling supported, soleGPUcause unproven. Earlierd693CI/resource/deploy/live
+results and failed381/03b/bc3 remain scoped history; latestacceptance OPEN.
+
+Finalworld737f4b78f2652da6c9f1789b58b9ab4b34a80fcdc7a6f125263a04bbddc9712a;
+spec99f4f88f6e2f62b36f7d8ac493413b912bba5dc0436eb6d93c06cfc0eaf00a97.
+IdleGPU draws<=10Hz; active rendering and all logic/input/realtime/speech/labels
+remainRAF. Dirty/projection/pose/resume redraw immediate; novisual/deadline/retry/
+server change. Freshreview47PASS; parent465required/build/typecheck PASS27files.
+Worldcoverage92.95stmt/83.81branch. Native strictgame19.6s/room33.2s PASS; parent
+rendered owned-room inspection. Fixed-order native pair baselinejoin9861ms versus
+candidate257ms; task duration differs and cache/host confounds remain explicit.
+ExactIDLE-RENDER-EVIDENCE.md +evaluation/idle-render.results.json.
+
+Preview4093 remains on exact.local/implementation-s1, exec55499 afterWSLrestart,
+data preserved. Latestnative71460DONE2PASS; check6795DONE465PASS; coverageDONE47PASS.
+No browser/load/test worker remains running. Worker lanescomplete; root next:
+commit scoped records/harness path correction, approvedpush, actualCI9/resource/
+backup/deploy, refined live source and affectedflows, finalcompletionaudit. Do not
+substitute earlierPASS or blindlyretry; neverwaive10s startup orprovidedCI gates.
+
 # Current startup refinement handoff
 
 Main local99bac82 (not yet pushed) commits reviewed incremental world +36world

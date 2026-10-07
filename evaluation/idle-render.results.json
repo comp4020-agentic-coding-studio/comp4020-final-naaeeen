@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "sourceCommit": "ee402251c4d7ad9442a247f5c04c92a78cdc9dd0",
+  "sourceHashes": {
+    "public/house-world.js": "737f4b78f2652da6c9f1789b58b9ab4b34a80fcdc7a6f125263a04bbddc9712a",
+    "spec/house-world.test.ts": "99f4f88f6e2f62b36f7d8ac493413b912bba5dc0436eb6d93c06cfc0eaf00a97"
+  },
+  "trigger": {
+    "ciRun": 37587377555,
+    "commit": "38148c8",
+    "status": "FAIL",
+    "otherCasesPassed": 8,
+    "failure": "Peer admission remained visible under unchanged10s guard; resource/deploy skipped",
+    "sanitizedNetworkEvidence": {
+      "joinCommandHTTPStatus": 200,
+      "joinCommandMs": 5.674,
+      "followingIdentityHTTPStatus": 200,
+      "followingIdentityMs": 1.608,
+      "titleJoinClickMs": 8684.5,
+      "joinClickMs": 278.2
+    },
+    "inference": "Browser/render scheduling is a supported bottleneck hypothesis; sole GPU cause is not established"
+  },
+  "renderPolicy": {
+    "idleMaximumDrawHz": 10,
+    "activeRendering": "Original RAF cadence during motion/interpolation/camera easing",
+    "simulationInputNetworkSpeechLabels": "Original RAF cadence unchanged",
+    "forcedRedraw": "Geometry/material/pose/selection/membership/resize/projection/resume",
+    "unchanged": [
+      "geometry",
+      "lighting",
+      "shadow512",
+      "antialiasing",
+      "pixelRatio",
+      "textures",
+      "network/startup/case budgets",
+      "retries0",
+      "server",
+      "resource protocol"
+    ]
+  },
+  "regression": {
+    "redFailed": 2,
+    "redPassed": 42,
+    "observedOldIdleDrawsPerSecond": 60,
+    "finalWorldTestsPassed": 47,
+    "typecheck": "PASS",
+    "freshReview": "No findings; reviewer independently47PASS;12numeric camera stability cases show no settled churn",
+    "calibration": "One new fixture assumed positive seated lift; corrected to unchanged authoritative negative constant, no runtime pose alteration"
+  },
+  "comparison": {
+    "type": "Technical single fixed-order native diagnostic, not human/reliability trial",
+    "order": [
+      "baseline",
+      "candidate"
+    ],
+    "factor": "Idle GPU-only budget with explicit invalidation and unchanged active/logic cadence",
+    "commonTask": "Same2personhouse/names/browser/settings/1920x1080 and390x844 touch/origin/server; fresh browser per candidate",
+    "stoppingCondition": "One pair then final unmodified critical flows and required gates",
+    "baselineSourceSHA256": "289709170486ab54524da38ac234181912a6700e67008d6d6801b2b20dd2b189",
+    "candidateSourceSHA256": "737f4b78f2652da6c9f1789b58b9ab4b34a80fcdc7a6f125263a04bbddc9712a",
+    "baselineTimings": [
+      {
+        "action": "create",
+        "milliseconds": 345,
+        "completed": true,
+        "budgetAccepted": true
+      },
+      {
+        "action": "join",
+        "milliseconds": 9861,
+        "completed": true,
+        "budgetAccepted": true
+      }
+    ],
+    "candidateTimings": [
+      {
+        "action": "create",
+        "milliseconds": 251,
+        "completed": true,
+        "budgetAccepted": true
+      },
+      {
+        "action": "join",
+        "milliseconds": 257,
+        "completed": true,
+        "budgetAccepted": true
+      }
+    ],
+    "ownerDrawCount": {
+      "baseline": 77,
+      "candidate": 8
+    },
+    "limitations": [
+      "Fixed order, cache/host variation and different completion durations can confound timing/counts.",
+      "Counts are actual observed calls during each task, not equal-duration GPU samples or measured battery use.",
+      "No general speedup, solecause, physical-phone or human preference claim."
+    ]
+  },
+  "requiredGate": {
+    "status": "PASS",
+    "testsPassed": 465,
+    "filesPassed": 27,
+    "boardBuild": "PASS",
+    "typecheck": "PASS"
+  },
+  "affectedWorldCoverage": {
+    "lines": {
+      "total": 429,
+      "covered": 416,
+      "skipped": 0,
+      "pct": 96.96
+    },
+    "statements": {
+      "total": 1093,
+      "covered": 1016,
+      "skipped": 0,
+      "pct": 92.95
+    },
+    "functions": {
+      "total": 123,
+      "covered": 113,
+      "skipped": 0,
+      "pct": 91.86
+    },
+    "branches": {
+      "total": 661,
+      "covered": 554,
+      "skipped": 0,
+      "pct": 83.81
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "native": {
+    "status": "PASS",
+    "cases": 2,
+    "gameCoreSeconds": 19.6,
+    "seatRoomDIYAccessSeconds": 33.2,
+    "scope": "Existing unmodified strict10s-startup/60s-core and90s-room flows on final source; actual rendered room inspected"
+  },
+  "remoteGate": "Pending; previous verified d693d06 release remains deployed, later failed runs retained"
+}

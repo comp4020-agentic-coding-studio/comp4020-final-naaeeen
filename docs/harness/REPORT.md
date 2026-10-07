@@ -211,3 +211,12 @@ and link scoped evidence; explicitly label older local validation checkpoints
 as superseded for release status. Preserve failed results and historical
 observations rather than rewriting their chronology. This is a documentation
 consistency check, not another application test or performance experiment.
+
+## Observed Windows/WSL reviewer routing correction
+
+Fresh-context packets must include the exact distribution/user/repository and a
+literal --cd command prefix, plus source identities. Several readers initially
+selected historicalA2paths from memory when given relative files; root corrected
+them and verified currentA3hashes. Currenttask paths override memory examples.
+Confirm the actual checkout before using its AGENTS, source or prior findings.
+This is a factual routing correction, not a measured agent-performance win.

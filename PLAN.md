@@ -17,8 +17,10 @@ quotas and a third SQLite file. It does not inherit acceptance from the previous
 
 Current release acceptance: the d693d06 CI run37579809454 and selected live flows
 passed; later publication startup failures reopen acceptance for the refined world.
-The reviewed [startup refinement](docs/implementation/STARTUP-REFINEMENT.md) has
-454localchecks/two affected native passes and awaits remote validation; see [release status](docs/implementation/RELEASE-STATUS.md) and
+The reviewed [GPU-only idle refinement](docs/implementation/IDLE-RENDER-EVIDENCE.md)
+has465localchecks/two affected native passes and awaits remote validation; the
+[earlier metadata refinement](docs/implementation/STARTUP-REFINEMENT.md) remains
+recorded with its source-specific outcomes; see [release status](docs/implementation/RELEASE-STATUS.md) and
 [exact scoped release evidence](evaluation/redesign-release.results.json). The
 registered300s synthetic resource workload passed all unchanged gates. Prior
 failures remain archived. Physical devices, human value/A-B, prolonged Fly stress,
