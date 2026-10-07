@@ -15,8 +15,10 @@ board has its own authority, image BLOBs, element-level reconciliation, explicit
 quotas and a third SQLite file. It does not inherit acceptance from the previous
 195-test candidate or thirty-minute L1/L2 workload.
 
-Current release acceptance: CI run37579809454 and selected live game/room/board
-flows passed; see [release status](docs/implementation/RELEASE-STATUS.md) and
+Current release acceptance: the d693d06 CI run37579809454 and selected live flows
+passed; later publication startup failures reopen acceptance for the refined world.
+The reviewed [startup refinement](docs/implementation/STARTUP-REFINEMENT.md) has
+454localchecks/two affected native passes and awaits remote validation; see [release status](docs/implementation/RELEASE-STATUS.md) and
 [exact scoped release evidence](evaluation/redesign-release.results.json). The
 registered300s synthetic resource workload passed all unchanged gates. Prior
 failures remain archived. Physical devices, human value/A-B, prolonged Fly stress,

@@ -46,3 +46,14 @@ hashes, unchanged acceptance thresholds and document links. These are technical
 comparisons/review/native checks, not participant A-B. Final evidence-only/fixture
 publication CI has its own remote run identity; app runtime is unchanged. Historical
 local snapshots below linked evidence are preserved and superseded explicitly.
+
+## Startup gate reopened after the verified release
+
+R4.3 latest-main acceptance reopened after two actual peer-join startup failures
+(16.288s/11.539s); eight other cases pass. R2/R4 refinement now retains static
+geometry through resident metadata and cancels stale queued door targets. Actual
+red/green36world tests, fresh review/contextual route recheck, one matched native
+diagnostic and final454checks/two affected native flows are recorded in
+[STARTUP-REFINEMENT](../implementation/STARTUP-REFINEMENT.md). Earlier CI/live/resource
+rows above bind d693d06 and are retained; they do not establish the refined
+world's remote acceptance. Final CI/deploy remains open until actual verification.

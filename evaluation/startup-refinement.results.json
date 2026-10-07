@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "sourceCommit": "99bac82f64638d901ffafbf8f7f2b5917e20f242",
+  "sourceHashes": {
+    "public/house-world.js": "289709170486ab54524da38ac234181912a6700e67008d6d6801b2b20dd2b189",
+    "spec/house-world.test.ts": "13cd354242d60f36e78d58e9e4cb28abee10aa7579022739747dadb3ff1d2bf3"
+  },
+  "previousCI": {
+    "37581974214": {
+      "status": "FAIL",
+      "peerJoinMilliseconds": 16287.979597999998,
+      "otherCasesPassed": 8
+    },
+    "37582431626": {
+      "status": "FAIL",
+      "peerJoinMilliseconds": 11538.886256000002,
+      "otherCasesPassed": 8
+    }
+  },
+  "meaningfulRegressions": {
+    "metadataLifecycle": {
+      "passed": 16,
+      "failed": 7
+    },
+    "staleDoorRoute": {
+      "failed": 2,
+      "controlPassed": 1
+    },
+    "finalWorldTestsPassed": 36
+  },
+  "comparison": {
+    "scope": "Single fixed-order native diagnostic with real paired contexts; not reliability/human study",
+    "order": [
+      "baseline",
+      "candidate"
+    ],
+    "commonTask": "Create2personhouse; join from390x844 touch context; show real peer in1920x1080 owner; same names/server/runtime/settings/guards",
+    "factor": "Incremental resident metadata instead of rebuilding static scene; required metadata/lifecycle correctness repairs included",
+    "stoppingCondition": "One matched baseline/candidate pair; then final-source strict behavior checks and CI",
+    "baselineSourceSHA256": "56f5fed2d0719df167f4267f2547d234bf591da37829e34a108bdb4811a06b5f",
+    "candidateSourceSHA256": "f6e5e3782dcad580b7b838103a828047f77b992ec5b8e6ebfd14b5b2a63ba3af",
+    "baselineStartup": [
+      {
+        "action": "create",
+        "milliseconds": 378,
+        "completed": true,
+        "budgetAccepted": true
+      },
+      {
+        "action": "join",
+        "milliseconds": 8204,
+        "completed": true,
+        "budgetAccepted": true
+      }
+    ],
+    "candidateStartup": [
+      {
+        "action": "create",
+        "milliseconds": 243,
+        "completed": true,
+        "budgetAccepted": true
+      },
+      {
+        "action": "join",
+        "milliseconds": 4951,
+        "completed": true,
+        "budgetAccepted": true
+      }
+    ],
+    "ownerRebuildCount": {
+      "baseline": 3,
+      "candidate": 2
+    },
+    "earlierDifferentUptimeBaseline": {
+      "status": "FAIL",
+      "startup": [
+        {
+          "action": "create",
+          "milliseconds": 446,
+          "completed": true,
+          "budgetAccepted": true
+        },
+        {
+          "action": "join",
+          "milliseconds": 11253,
+          "completed": true,
+          "budgetAccepted": false
+        }
+      ]
+    },
+    "limitations": [
+      "WSL restarted between earlier11253ms failure and matched pair; that earlier failure is not the matched baseline.",
+      "Fixed order and host/GPU cache variability can confound timing; no general speedup or solecause claim.",
+      "Final queued-door cancellation is subsequent to candidate trial; current source has separately passed strict game/room native flows.",
+      "OnlyWebGLRenderer mocked in36world unit tests; actual Threegeometry/materials are exercised."
+    ]
+  },
+  "finalNative": {
+    "status": "PASS",
+    "cases": 2,
+    "gameCoreSeconds": 30.6,
+    "seatRoomDIYAccessSeconds": 48.8,
+    "startupGuardMilliseconds": 10000,
+    "caseBudgetsUnchanged": true,
+    "scope": "Actual existing strict core plus seat/door/DIY/access flows on final source; phase timings not separately extracted"
+  },
+  "requiredCheck": {
+    "status": "PASS",
+    "testsPassed": 454,
+    "testFilesPassed": 27,
+    "buildAndTypecheck": "PASS"
+  },
+  "review": {
+    "fresh": "No actionable finding at incremental candidate; reviewer independently reran33world tests",
+    "contextual": "Subsequent narrow route/source recheck no findings; worker36tests then parent454required gate"
+  },
+  "remoteAcceptance": "PENDING for refined world; d693d06 previous release remains deployed/verified for its scope"
+}

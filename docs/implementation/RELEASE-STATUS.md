@@ -1,8 +1,9 @@
 # Approved redesign release status
 
 7 October 2026. The owner approved public checkpoint/main pushes and the existing
-CI/Fly release. The redesigned application is deployed and all three selected live flows pass.
-The verified CI and live results below supersede earlier pending labels. Preserve the Crit 8 tag, original data, existing secret hooks, fixed Fly
+CI/Fly release. The d693d06 application is deployed and its three selected live flows pass.
+Later publication CI failed the startup guard; refined-world acceptance is open.
+See [startup refinement](STARTUP-REFINEMENT.md) for the current version/gate. Preserve the Crit 8 tag, original data, existing secret hooks, fixed Fly
 256 MB machine and one mounted volume.
 
 ## Actual CI history
@@ -94,3 +95,14 @@ Human value/preference/A-B, physical-phone performance, board unit coverage belo
 80%, prolonged stress on the actual Fly VM, off-volume backup recovery and student
 personal writing remain distinct future work. They are not represented as completed
 by this implementation/release. The app is available for the owner to try.
+
+## Later startup failure and reviewed refinement
+
+Runs37581974214 (03b5f6f) and37582431626 (bc3e4a9) each passed required specs and
+eight browser cases, but peer join exceeded the unchanged10s startup guard at
+16.288s/11.539s. Resource/backup/deploy were skipped; no new release replaced the
+verified d693d06 app. Failures remain saved separately. The reviewed incremental
+world99bac82 removes repeated static geometry work and fixes stale queued-door
+visits. Parent final local454checks and two affected native flows pass; one matched
+comparison records8.204s baseline/4.951s candidate join. It does not prove general
+reliability. Refined-world CI and deployed source/flow verification remain required.

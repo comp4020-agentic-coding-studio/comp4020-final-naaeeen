@@ -256,3 +256,19 @@ RSS is one point only. Root inspected actual live room/CI board images without
 claiming human preference. Exact evidence and all residual gaps remain in
 evaluation/redesign-release.results.json and RELEASE-STATUS.md. Final logical
 fixture/evidence commits and main CI are the remaining publication checkpoint.
+
+## Startup refinement after later CI contradiction
+
+Two final publication runs contradicted startup acceptance despite the earlier
+release PASS. Root inspected actual failure logs, preserved source/result/version
+boundaries, reopened acceptance and rejected blind reruns or timeout changes. A
+local11.253s baseline failure was preserved before a WSL restart; a new common-host
+pair used the same task/names/viewports/renderer/origin/guards and recorded8.204s
+versus4.951s. Fixed order/cache/host confounds remain explicit. Candidate tests
+reproduce geometry disposal, verify incremental metadata and retain private
+lifecycle rebuilding. Fresh review plus contextual route recheck and parent
+454required/two native passes validate the final source. A proposed blanket DIY
+preview cleanup was rejected against the actual own-room draft contract; a feasible
+stale door destination got a narrow red/green fix instead. Detailed evidence is
+STARTUP-REFINEMENT.md and evaluation/startup-refinement.results.json. Remote refined
+world acceptance remains pending, so the goal is active.

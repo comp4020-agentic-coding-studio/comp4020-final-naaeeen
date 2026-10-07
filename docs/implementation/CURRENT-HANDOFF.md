@@ -1,3 +1,31 @@
+# Current startup refinement handoff
+
+Main local99bac82 (not yet pushed) commits reviewed incremental world +36world
+tests. Remotebc3e4a9; CI37581974214/37582431626 fail only peer startup at16.288/11.539s.
+Previous d693d06 CI/resource/deploy/live3PASS remain scoped historical release;
+latest acceptance OPEN. Parent454required/build/typecheck in27files PASS; final
+strictgame30.6s and seat/room/DIY/access48.8s PASS, unchangedbudgets. One matched
+current-host nativepair baselinejoin8204ms/candidate4951ms, owner3→2rebuilds;
+earlierdifferent-uptime11253ms FAIL preserved. Not a generalreliability claim.
+
+Final world289709170486ab54524da38ac234181912a6700e67008d6d6801b2b20dd2b189;
+spec13cd354242d60f36e78d58e9e4cb28abee10aa7579022739747dadb3ff1d2bf3.
+Fresh33testreview +contextualnarrowroute recheck; worker36 thenparent454 PASS.
+Only world/spec runtimecandidate changes; renderer/shadows/FPS/config/server/
+protocol untouched. Static metadata/colour/label/pick refresh, private lifecycle
+rebuild, own-roomdraft retention and stale-door-route cancellation are covered.
+Exactscope: STARTUP-REFINEMENT.md and evaluation/startup-refinement.results.json.
+
+WSL Ubuntu/lizhi canonicalrepo /home/lizhi/comp4020/comp4020-final-naaeeen. Afteractual
+WSL restart, preview4093 restored with exact.local/implementation-s1, exec55499;
+no reseed/delete. Worker lanes COMPLETE; root owns GPU/server/release. Lastnative
+24683 DONE2PASS; check84796 DONE454PASS. No browser/load job is still running.
+Root next: privacy/link/source diffaudit, commit docs, approvedpushmain, actualCI
+9/resource/backups/deploy; refined live source/affectedflows; completionaudit.
+Do not add evidence-only followup commits after successful final CI without a new
+material gap; remote run identity is authoritative for publication. Preserve old
+results/tag/data and explicit human/phone/unitcoverage/resource scope limitations.
+
 # Current R4 released application handoff
 
 7 October 2026. The owner approved the public checkpoint/main pushes and existing
