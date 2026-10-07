@@ -14,7 +14,7 @@ export interface HouseAuthority {
 interface Options { origin?: string; secureCookies?: boolean; log?: (record: Record<string, unknown>) => void }
 interface Context { socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number }
 interface Lease { id: string; digest: string; houseId: string; token: string; socketId: string | null; generation: number; expiresAt: number; zoneId: string; x: number; z: number; heading: number; animation: "idle" | "walk" | "sit"; seatId: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; sequence: number; lastMoveAt: number; motionCredit: number }
-const LEASE_MS = 30_000, MAX_BYTES = 512 * 1024, MAX_CONNECTIONS = 12;
+const LEASE_MS = 30_000, MAX_FRAME_BYTES = 1024 * 1024, MAX_BYTES = 2 * 1024 * 1024, MAX_CONNECTIONS = 12;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 const inputObject = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new HouseError("INVALID_INPUT", "An action object is required.");
@@ -50,7 +50,7 @@ function outbound(socket: Socket, bytes: number): "ready" | "wait" | "overflow" 
     if (typeof packet.data !== "string" && !Buffer.isBuffer(packet.data)) return "overflow";
     queued += Buffer.byteLength(packet.data) + 32;
   }
-  if (runtime.writeBuffer.length >= 4 || websocket.socket.bufferedAmount + queued + bytes + 32 > MAX_BYTES) return "overflow";
+  if (bytes > MAX_FRAME_BYTES || runtime.writeBuffer.length >= 4 || websocket.socket.bufferedAmount + queued + bytes + 32 > MAX_BYTES) return "overflow";
   return transport.writable ? "ready" : "wait";
 }
 
@@ -304,6 +304,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   }
   const timer = setInterval(tick, 100); timer.unref();
   return {
+    io,
     refresh: queueRefresh,
     revokeIdentity(id: string) {
       const lease = leases.get(id); if (lease) release(lease); leases.delete(id);

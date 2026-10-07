@@ -11,12 +11,14 @@ import type { Identity } from "./store.ts";
 import { HouseStore } from "./house-store.ts";
 import { HouseError } from "./house-contract.ts";
 import { attachHouseRealtime } from "./house-realtime.ts";
+import { BoardStore } from "./board-store.ts";
+import { attachBoardService } from "./board-service.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const COOKIE = "night_session";
 const BODY_LIMIT = 16 * 1024;
 const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
-const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream" };
+const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
 export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string }
 interface Connection { response: ServerResponse; digest: string }
 
@@ -69,6 +71,9 @@ export function createService(options: ServiceOptions) {
   let houseStore: HouseStore;
   try { houseStore = new HouseStore(join(dataDir, "house.sqlite")); }
   catch (error) { store.close(); throw error; }
+  let boardStore: BoardStore;
+  try { boardStore = new BoardStore(join(dataDir, "board.sqlite")); }
+  catch (error) { houseStore.close(); store.close(); throw error; }
   function setHouseCookie(response: ServerResponse, token: string): void { response.setHeader("Set-Cookie", `house_session=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_SECONDS}${secureCookies ? "; Secure" : ""}`); }
   function houseAuth(request: IncomingMessage): {id: string; digest: string} {
     const token = cookieToken(request, "house_session"); const digest = token ? sessionDigest(token) : "";
@@ -120,8 +125,9 @@ export function createService(options: ServiceOptions) {
   }
   function broadcast(): void { for (const connection of connections) deliver(connection); }
   function staticFile(pathname: string): string | undefined {
-    const pageFiles: Record<string, string> = { "/": existsSync(join(publicDir, "house.html")) ? "house.html" : "index.html", "/legacy/": "index.html", "/house.html": "house.html", "/house-ui.js": "house-ui.js", "/house-world.js": "house-world.js", "/house-label-layout.js": "house-label-layout.js", "/house-camera.js": "house-camera.js", "/house-geometry.js": "house-geometry.js", "/house-client.js": "house-client.js", "/house.css": "house.css", "/index.html": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/readme.css": "readme.css", "/render-three.js": "render-three.js", "/render-iso.js": "render-iso.js", "/favicon.svg": "favicon.svg" };
+    const pageFiles: Record<string, string> = { "/": existsSync(join(publicDir, "house.html")) ? "house.html" : "index.html", "/legacy/": "index.html", "/house.html": "house.html", "/house-ui.js": "house-ui.js", "/house-shell.js": "house-shell.js", "/board/": "board.html", "/board": "board.html", "/board.html": "board.html", "/house-world.js": "house-world.js", "/house-label-layout.js": "house-label-layout.js", "/house-camera.js": "house-camera.js", "/house-geometry.js": "house-geometry.js", "/house-client.js": "house-client.js", "/house.css": "house.css", "/index.html": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/readme.css": "readme.css", "/render-three.js": "render-three.js", "/render-iso.js": "render-iso.js", "/favicon.svg": "favicon.svg" };
     if (pageFiles[pathname]) return confinedFile(publicDir, pageFiles[pathname]);
+    if (pathname.startsWith("/board-assets/") && /\.(?:js|css|json|woff2?|ttf|txt|svg|png)$/.test(pathname)) return confinedFile(join(publicDir, "board-assets"), pathname.slice(14));
     if (pathname.startsWith("/assets/") && /\.(?:glb|gltf|png|jpe?g|webp|svg|bin)$/.test(pathname)) return confinedFile(join(publicDir, "assets"), pathname.slice(8));
     if (["/vendor/build/three.module.js", "/vendor/build/three.core.js"].includes(pathname)) return confinedFile(join(ROOT, "node_modules/three/build"), pathname.slice("/vendor/build/".length));
     if (pathname.startsWith("/vendor/examples/jsm/") && pathname.endsWith(".js")) return confinedFile(join(ROOT, "node_modules/three/examples/jsm"), pathname.slice("/vendor/examples/jsm/".length));
@@ -137,9 +143,10 @@ export function createService(options: ServiceOptions) {
       if (pathname.includes("\\") || pathname.includes("\0")) throw new DomainError("INVALID_INPUT", "The requested path is invalid.");
       if (pathname === "/health" || pathname === "/healthz") {
         if (request.method !== "GET" && request.method !== "HEAD") { json(response, 405, { ok: false, code: "INVALID_INPUT", message: "Use GET." }); return; }
-        const ready = store.ready() && houseStore.ready();
+        const ready = store.ready() && houseStore.ready() && boardStore.ready();
         json(response, ready ? 200 : 503, { ok: ready }); return;
       }
+      if (pathname.startsWith("/api/board/") && await board.handle(request, response)) return;
       if (pathname.startsWith("/api/house/")) {
         if (request.method === "GET" && pathname === "/api/house/me") {
           rateLimit("bootstrap:" + (request.socket.remoteAddress ?? "local"));
@@ -226,9 +233,11 @@ export function createService(options: ServiceOptions) {
       if (extname(file) === ".html") {
         const source = readFileSync(file, "utf8");
         const hashes = [...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].filter((match) => match[1]!.trim()).map((match) => `'sha256-${createHash("sha256").update(match[1]!).digest("base64")}'`);
-        response.setHeader("Content-Security-Policy", `default-src 'self'; script-src 'self' ${hashes.join(" ")}; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'`);
+        const isBoard = ["/board/", "/board", "/board.html"].includes(pathname);
+        if (isBoard) response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        response.setHeader("Content-Security-Policy", `default-src 'self'; script-src 'self' ${hashes.join(" ")}; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors ${isBoard ? "'self'" : "'none'"}`);
       }
-      response.writeHead(200, { "Content-Type": MIME[extname(file)] ?? "application/octet-stream", "Content-Length": statSync(file).size, "Cache-Control": pathname.startsWith("/assets/") || pathname.startsWith("/vendor/") ? "public, max-age=3600" : "no-cache" });
+      response.writeHead(200, { "Content-Type": MIME[extname(file)] ?? "application/octet-stream", "Content-Length": statSync(file).size, "Cache-Control": pathname.startsWith("/assets/") || pathname.startsWith("/vendor/") || ["/board-assets/chunks/", "/board-assets/fonts/", "/board-assets/assets/"].some(prefix => pathname.startsWith(prefix)) ? "public, max-age=3600" : "no-cache" });
       if (request.method === "HEAD") { response.end(); return; }
       const stream = createReadStream(file); stream.on("error", () => response.destroy()); stream.pipe(response);
     } catch (error) {
@@ -239,6 +248,7 @@ export function createService(options: ServiceOptions) {
   }
   const server = createServer((request, response) => { void handle(request, response); });
   const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => console.log(JSON.stringify(record))});
+  const board = attachBoardService(realtime.io, houseStore, boardStore, {origin: options.origin, secureCookies, log: (record) => console.log(JSON.stringify(record))});
   server.requestTimeout = 15_000; server.headersTimeout = 10_000;
   const heartbeat = setInterval(() => {
     for (const connection of connections) {
@@ -251,15 +261,16 @@ export function createService(options: ServiceOptions) {
     stopping = true; clearInterval(heartbeat);
     // End legacy streams before Socket.IO closes the shared HTTP listener.
     for (const connection of connections) connection.response.end(); connections.clear();
+    board.close();
     const realtimeClosing = realtime.close();
     // A reader can pause a large asset response; bound shutdown without dropping committed state.
     const forceClose = setTimeout(() => server.closeAllConnections(), 1000); forceClose.unref();
     server.closeIdleConnections();
     try { await realtimeClosing; } finally { clearTimeout(forceClose); }
     await new Promise<void>((done, reject) => { if (!server.listening) { done(); return; } server.close((error) => error ? reject(error) : done()); server.closeIdleConnections(); });
-    store.close(); houseStore.close();
+    store.close(); houseStore.close(); boardStore.close();
   }
-  return { server, store, houseStore, close };
+  return { server, store, houseStore, boardStore, close };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

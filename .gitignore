@@ -31,3 +31,6 @@ coverage/
 *.db-*
 playwright-report/
 test-results/
+
+# Rebuilt by build:board in development, CI and the Docker build stage.
+/public/board-assets/

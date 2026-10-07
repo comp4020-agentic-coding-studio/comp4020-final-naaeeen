@@ -5,21 +5,29 @@
   "scripts": {
     "prepare": "git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath .githooks || true",
     "typecheck": "tsc --noEmit",
-    "check": "pnpm typecheck && pnpm test",
+    "check": "pnpm build:board && pnpm typecheck && pnpm test",
     "check:evidence": "node scripts/check-evidence.ts",
     "test": "vitest run",
     "start": "node src/server.ts",
     "test:domain": "vitest run --config vitest.domain.config.ts",
     "test:browser": "playwright test",
-    "test:house": "vitest run --config vitest.house.config.ts"
+    "test:house": "vitest run --config vitest.house.config.ts",
+    "build:board": "node scripts/build-board.mjs",
+    "test:board": "vitest run --config vitest.board.config.ts"
   },
   "devDependencies": {
+    "@excalidraw/excalidraw": "0.18.1",
     "@playwright/test": "1.63.0",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^24.0.0",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "@types/three": "0.186.0",
     "@vitest/coverage-v8": "5.0.1",
+    "esbuild": "0.28.2",
     "jsdom": "^30.1.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "typescript": "^6.0.3",
     "vitest": "^5.0.1"
   },
