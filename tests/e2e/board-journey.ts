@@ -9,8 +9,16 @@ const record = (value: unknown): value is Record<string, unknown> => Boolean(val
 
 export function boardFixtureOrigin(baseURL: string | undefined) {
   const origin = baseURL ?? 'http://127.0.0.1:4088';
-  const url = new URL(origin);
-  if (!['localhost', '127.0.0.1'].includes(url.hostname)) throw new Error('Board mutation cases require the authorised loopback fixture.');
+  const rejection = 'Board mutation cases require loopback or an explicitly authorised live board fixture.';
+  let url: URL;
+  try { url = new URL(origin); } catch { throw new Error(rejection); }
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error(rejection);
+  const loopback = ['localhost', '127.0.0.1'].includes(url.hostname);
+  // This fixture-only opt-in is scoped to the owner's existing approved Fly release.
+  const liveOrigin = 'https://comp4020-final-naaeeen.fly.dev';
+  const authorisedLive = process.env.AUTHORIZED_LIVE_BOARD_TESTS === 'comp4020-final-naaeeen' &&
+    (origin === liveOrigin || origin === liveOrigin + '/');
+  if (!loopback && !authorisedLive) throw new Error(rejection);
   return origin;
 }
 
