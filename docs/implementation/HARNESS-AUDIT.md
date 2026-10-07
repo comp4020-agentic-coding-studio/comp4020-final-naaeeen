@@ -314,3 +314,10 @@ Motion correction5c40545 now has source-frozen worker184, parent485/27files,
 nativecore20.5s/room29.6s PASS, fresh collision finding and contextual recheck.
 R2 local correction accepted; R4 remote gates remain OPEN. Native viewports and
 scoped coverage are separate from physical devices, WAN and real-user outcomes.
+
+R4 resource publication37600728762 fails onlyworkload despite485/native9 PASS.
+Exact FAIL/v1protocol preserved. Current tracker refinement compares bounded
+outstanding matching against historical scanning under equal receipt/version/
+chat/recovery tasks; all workload gates and input scheduling remain unchanged.
+It is evaluator implementation work, with causal performance effect unproven
+before a full revised-instrument run. Deployment remains open.

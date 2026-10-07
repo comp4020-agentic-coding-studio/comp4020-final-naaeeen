@@ -1,0 +1,30 @@
+{
+  "scope": "Technical microcomparison and correctness controls; not resource workload improvement or human A/B",
+  "baselineSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+  "changedFactor": "Retained-history scanning versus unresolved per-view or global indexes",
+  "task": "Same board views, delivery targets, ordered patch/version/nonce/chat/snapshot/late-HTTP/recovery events and observation timestamps",
+  "acceptance": "Same full retained delivery map, target pending sets, sequence/canonical merged state, normal/slow latency order and values, no double count, unchanged scheduling/guards/checkpoint grading",
+  "negativeControls": "Missing/stale target remains pending; completed historical record cannot be read by reflect",
+  "stoppingCondition": "Meaningful red then equivalence/control green, existing selfchecks, typecheck, fresh independent review reconciled",
+  "excluded": "No server, browser, full300s workload, provider actions, commits or push",
+  "microcomparison": {
+    "retainedHistory": 2000,
+    "boardViews": 12,
+    "houses": 2,
+    "membersPerHouse": 6,
+    "unresolvedIntents": 16,
+    "rounds": 100,
+    "order": [
+      "retained-history-baseline",
+      "global-unresolved",
+      "per-view-unresolved"
+    ],
+    "trials": 1,
+    "measures": [
+      "delivery records visited per reflect",
+      "diagnostic execution milliseconds",
+      "complete-state checksum"
+    ],
+    "timingLimit": "One deterministic local technical diagnostic; no resource-workload or host-general speed claim"
+  }
+}

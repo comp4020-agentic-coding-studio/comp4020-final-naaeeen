@@ -1,3 +1,44 @@
+# Indexed evaluator: local pass, full release pending
+
+Application5c40545 staysfrozen; sourcee54a694 updatesonlyresourceinstrument/test/
+protocolmetadata. Fullledger preserved; per-view unresolvedtargets indexavoids
+completedhistory scans. Freshreview+contextualtestfollowup no findings;10tests,
+5selfcheck/8checkpointPASS. Parent495/28requiredbuild/type/specPASS. Microcomparison
+fullstate/latenciesequivalent; visits2443392/19368/5736, pending48 preserved.
+No sustainedperformance/rootcauseclaim. RESOURCE-TRACKER-EVIDENCE.md recordsproof.
+
+Protocol98e62217, instrumentec3301bf, backendmanifest545d79c3; alloriginalprotocol
+criteria andtimer/gatebytesunchanged. OriginalFAIL37600728762 +protocolv1archived.
+Nextroot: commitcurrentdocs/PROCESS/archive, approvedpush, oneactualnewCI495/native9/
+resource300/backup/deploy, downloadverifyartifacthashes/gates, livedeployedclient+
+world/sourceprobe andaffectedflows, finalrequirementaudit. GoalACTIVE, no waiver.
+No workerwrites/tests/load; preview4093process748 exact.local/implementation-s1
+preserved. OriginalCrit8tagremote351722/6dc79 andcheckpointf5a25f2 unchanged.
+
+# Previous source-specific checkpoints
+
+# Resource evaluator workload gate reopened
+
+CI37600728762/71ec3a7 required485 +maintainednative9 PASS. Resource300.001s FAIL
+onlyworkload: skippedpatches10, boardpointer16.283-16.617Hz<18. Allothergatestrue,
+RSS204.97MiB,p95118.948ms,zero missingtargets/unexpecteddisconnect. DeploySKIPPED.
+Fullfailed artifact archived in evaluation/board-resource.motion-publication-fail.results.json
+and old exactprotocol in board-resource.protocol.v1.json. GoalACTIVE; no blindretry
+or waivedthresholds. Priorproductionb95 remains.
+
+Readonlydiagnosis found reflect scanning cumulativecompletehistory on everyboard
+event and six times everyHTTPwrite; current7,886records. Causal effect unproven.
+Workerpending_delivery_tracker ownstool+relevantresource specs ONLY; rootowns
+protocol/instrument rebind/archive/docs/checks/CI/live/publication. Preserve full
+all-delivery Map and actualpending/slow/crosshouse/canonical/currentepoch semantics,
+originaltimestamps and alltimers/acceptance. Need red/equivalence/operationcount
+comparison and freshreview before fullnewinstrument attempt. NoGPU/load running;
+4093process748 originaldata preserved. CurrentuncommittedPROCESS/provenance docs
+ownedbyroot. Nextfrozenworkerresult thenparenttestcheck/protocolsamecriteria,
+logicalcommits/push andactualCI/resource/deploy/live.
+
+# Previous source-specific checkpoints
+
 # Current movement correction: local pass, remote pending
 
 CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source5c40545

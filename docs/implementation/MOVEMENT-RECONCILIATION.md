@@ -92,3 +92,50 @@ binds the frozen five source hashes. Original preview data/cookies andCrit8 refs
 are preserved. Required evidence/diff checks pass; the existing commit hook ran.
 Actual approved main CI/resource/backup/deploy and selected live-source checks
 remain pending. Do not inherit earlier b95 remote acceptance for this new source.
+
+## Evidence provenance and review limits
+
+The retained parent logs are private
+`.local/redesign-closeout/motion-required-check.log` and `motion-native.log`; the
+coverage summary is `.local/house-coverage/coverage-summary.json`. Five source
+hashes are committed in the JSON result. The worker's184-case checkpoint and
+historical red runs were returned as tool output, without separate saved logs.
+The126-case contextual reviewer run was reviewer-reported output; the evidence
+reviewer did not rerun it or inspect a raw log. These facts limit replayability
+of those intermediate checkpoints; they are not substituted for parent checks.
+
+A second fresh read-only evidence review verified the current five hashes,
+parent485/27 and native20.5/29.6 logs, coverage figures and committed regression
+assertions. It reported no actionable inconsistency. That was an evidence review,
+not another application test. A separate exploratory lane did not complete source
+inspection after Windows/WSL tooling errors, so it supplies no independent root-
+cause evidence and is not counted as a completed code review.
+
+## First corrected-source CI: resource workload failed
+
+[CI37600728762](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37600728762)
+at71ec3a7 passes485 required cases and all nine maintained image browser cases.
+The300.001s registered resource result is FAIL solely on workload: ten skipped
+scene-write slots and every board pointer below18Hz (16.283–16.617Hz). All other
+gates pass, including204.97MiB peakRSS, normal deliveryp95118.948ms, no missing
+delivery, no unexpected disconnection and full recovery. Deployment is skipped.
+[Exact failed artifact](../../evaluation/board-resource.motion-publication-fail.results.json)
+and the original [v1 protocol](../../evaluation/board-resource.protocol.v1.json)
+are preserved. No threshold, skip count or result has been relabelled.
+
+Backend, protocol and instrument hashes match the earlier300s PASS; motion client
+and world are outside this synthetic backend workload. This failure does not by
+itself establish an application regression or a proven host cause. Inspection
+finds the generator's reflect function scanning every retained historical delivery
+on each received event and six more times after every HTTP write. Completed
+history grows to7,886 records in this run. This synchronous evaluator work shares
+the generator timers/ACK event loop. The proposed refinement indexes outstanding
+obligations while retaining every full delivery record for final pending/counters.
+Its acceptance is exact grading equivalence, bounded completed-history work,
+unchanged scheduling/criteria, fresh review and a newly frozen full resource run.
+The causal performance effect is unmeasured until that run.
+
+Resource tracker sourcee54a694 preserves every criterion and obligation; parent
+495/28 PASS. [Refinement evidence](RESOURCE-TRACKER-EVIDENCE.md) records actual
+red/green, alternative comparisons, fresh review and new source freeze. Full
+CI/resource/deploy/live acceptance remains pending; application5c40545 unchanged.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "status": "LOCAL_NATIVE_PASS_CI_RESOURCE_FAIL",
   "trigger": {
     "ciRun": 37596250446,
     "commit": "61e297e",
@@ -64,12 +64,39 @@
     "scope": "Unmodified ci-core and house seat/door/DIY/access native flows;1920x1080 and390x844;unchanged deadlines and retries"
   },
   "remote": {
-    "status": "PENDING"
+    "status": "FAIL",
+    "commit": "71ec3a7e8b4da54eac034dd56e8fe74a489be38f",
+    "ciRun": 37600728762,
+    "requiredTests": 485,
+    "nativeCases": 9,
+    "resource": "FAIL workload only",
+    "resourceArtifact": "board-resource.motion-publication-fail.results.json",
+    "deployment": "SKIPPED"
   },
   "limitations": [
     "Exact prior CI packet failure unproven",
     "No WAN reliability or human A/B claim",
     "Prior board coverage gaps remain unchanged"
   ],
-  "sourceCommit": "5c40545281a5decf5d10ea4ecc7674213b7d1526"
+  "sourceCommit": "5c40545281a5decf5d10ea4ecc7674213b7d1526",
+  "provenance": {
+    "retainedParentLogs": [
+      ".local/redesign-closeout/motion-required-check.log",
+      ".local/redesign-closeout/motion-native.log"
+    ],
+    "retainedCoverage": ".local/house-coverage/coverage-summary.json",
+    "workerRedAnd184": "tool output only; no separate log retained",
+    "contextual126": "reviewer-reported output; no raw log independently inspected",
+    "freshEvidenceReview": "hashes, parent logs, coverage and regression assertions checked; no actionable inconsistencies; no tests executed",
+    "exploratoryLane": "source inspection incomplete due tooling errors; no independent root-cause evidence"
+  },
+  "trackerRefinement": {
+    "sourceCommit": "e54a694",
+    "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
+    "protocolSHA256": "98e62217a1b8482ba18e8005993888895f6231ee71af514db157ec298b29fe23",
+    "parentRequired": 495,
+    "files": 28,
+    "criteriaAndScheduling": "unchanged",
+    "fullWorkload": "PENDING"
+  }
 }

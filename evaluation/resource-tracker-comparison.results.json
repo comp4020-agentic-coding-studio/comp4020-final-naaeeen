@@ -1,0 +1,44 @@
+{
+  "status": "TECHNICAL_MICROCOMPARISON_PASS",
+  "scope": "Actual frozen/current instrument functions; global-unresolved technical alternative; not full resource improvement or human A/B",
+  "runtime": "v24.21.0",
+  "baselineSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+  "candidateSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
+  "protocolSHA256": "0a58624562e487380200aa831997ddecb1ea09aa57ac968ee87ceaf64f5aa85b",
+  "results": [
+    {
+      "kind": "retained-history-baseline",
+      "recordsVisited": 2443392,
+      "durationMs": 21.06,
+      "committedIntents": 2016,
+      "targets": 12096,
+      "pending": 48,
+      "normalObserved": 10040,
+      "slowObserved": 2008,
+      "stateSHA256": "1e0944147f4b2accd3e45b5994a9a3c1b9809315a87d8dd5b110b84951d31009"
+    },
+    {
+      "kind": "global-unresolved",
+      "recordsVisited": 19368,
+      "durationMs": 2.252,
+      "committedIntents": 2016,
+      "targets": 12096,
+      "pending": 48,
+      "normalObserved": 10040,
+      "slowObserved": 2008,
+      "stateSHA256": "1e0944147f4b2accd3e45b5994a9a3c1b9809315a87d8dd5b110b84951d31009"
+    },
+    {
+      "kind": "per-view-unresolved",
+      "recordsVisited": 5736,
+      "durationMs": 2.322,
+      "committedIntents": 2016,
+      "targets": 12096,
+      "pending": 48,
+      "normalObserved": 10040,
+      "slowObserved": 2008,
+      "stateSHA256": "1e0944147f4b2accd3e45b5994a9a3c1b9809315a87d8dd5b110b84951d31009"
+    }
+  ],
+  "timingLimit": "Single local diagnostic with fixed order; operation counts and equivalence establish the bounded algorithm change"
+}

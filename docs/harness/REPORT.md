@@ -220,3 +220,16 @@ selected historicalA2paths from memory when given relative files; root corrected
 them and verified currentA3hashes. Currenttask paths override memory examples.
 Confirm the actual checkout before using its AGENTS, source or prior findings.
 This is a factual routing correction, not a measured agent-performance win.
+
+## Observed resource-evaluator overhead
+
+The current300s CI workload failed while all other resource gates and actual
+browser cases passed. Preserve that failure and investigate evaluator work as
+well as application work. Here, the parent generator's reflection loop scans all
+historical deliveries after each event and HTTP receipt, sharing its timers and
+ACK callbacks. An outstanding-target index is being checked against the unchanged
+ledger, timestamps, missing-target/slow-recovery grading and scheduling rules.
+A source bottleneck does not establish the exact cause of a prior timing failure;
+a matched algorithm check is not a sustained resource or human result. Freeze
+revised instrumentation explicitly, preserve old protocol/artifact identities,
+and keep every acceptance threshold and skipped-deadline failure intact.

@@ -17,3 +17,41 @@ The first runnable application milestone [38358b3](https://github.com/comp4020-a
 A fresh integrated review also exposed a stuck-tab case: after the browser acquired another cookie identity, a save could fail without an in-page recovery action. A real browser regression reproduced the hidden control. That failure is evidence to fix, not something a passing happy-path suite can overrule. The review record separates this from human preference.
 
 Local browser checks now exercise two identities, peer changes, a returning cookie, furniture controls and pane withdrawal. That establishes a working local slice, not a shipped app or evidence that people value it. The supplied route checks remain intact, and [C8-VALIDATION](docs/C8-VALIDATION.md) records the check scope and pending release work. Docker and Fly deployment still need verification. The next critique should ask whether visitors can explain the lamp and whether contributing feels worthwhile. I want to change the design when that evidence warrants it, rather than protect the original plan because an agent already implemented it.
+
+## Final-project development evidence, 7 October
+
+This addendum is an AI-assisted factual log for later student reflection. The
+initial C8 account above describes its own milestone, not the current product or
+release. The owner subsequently requested controllable real avatars, owned DIY
+bedrooms, shared study, game-style entry/HUD and an independent collaborative
+whiteboard. The detailed redesign register and release records retain the
+research, comparisons, implementation and review evidence for those changes.
+
+The movement repair [5c40545](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/5c40545)
+shows why passing previous checks did not justify defending the first solution.
+A later CI run showed the owner moving far locally while the peer saw its avatar
+near spawn. The working hypothesis was a gap between optimistic prediction and
+volatile transport authority; the precise first dropped or rejected packet was
+not established. The agent compared fire-and-forget movement, queued delivery
+and bounded acknowledgement/correction against the same ownership, collision,
+speed and deadline constraints. It kept a single transient flight rather than
+replaying old movement after a stall.
+
+Fresh review then challenged the correction itself. The shared collision slide
+was not idempotent at a plant corner: a locally projected endpoint could fail the
+server's next sweep. The implementer reproduced the reviewer's failing case and
+changed endpoint validation, while preserving the server rules. A contextual
+recheck confirmed the finding resolved. The final parent checks passed485 cases,
+with native two-user movement/chat and seats/rooms/DIY/access flows passing on
+the frozen source. These checks measure the specified behavior; they do not
+prove human enjoyment, market value or an HD grade.
+
+This is a concrete requirements-to-evidence-to-refinement example. The agent
+reports, tests and screenshots were inspected and corrected rather than treated
+as authorities. Missing historical raw logs are distinguished from retained
+parent check logs and source-bound coverage; the fresh review and its follow-up
+are not counted as two independent studies. Actual publication, resource and
+deployed checks are recorded separately in
+[MOVEMENT-RECONCILIATION](docs/implementation/MOVEMENT-RECONCILIATION.md). Personal
+lessons and claims about lecture understanding remain for the student to assess
+and write after reviewing the code and evidence.
