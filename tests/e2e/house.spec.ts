@@ -2,6 +2,8 @@ import { test, expect, type Browser, type BrowserContext, type Locator, type Pag
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { beginAdmission, continueSavedHome, showResidents, openHouseSettings, openChat, closeChat, openStudyNotes, openMyRoom, showMovement, chooseCamera, clickProjectedTarget } from './house-journey.ts';
+
 const DESKTOP = { width: 1920, height: 1080 };
 const PHONE = { width: 390, height: 844 };
 const canvas = (page: Page) => page.locator('.house-world-canvas');
@@ -11,9 +13,8 @@ const renderedResident = (page: Page, name: string) => page.locator('.house-avat
 
 test.setTimeout(60_000);
 
-async function arrival(page: Page) {
-  await page.goto('/');
-  await expect(page.getByLabel('Your name', { exact: true })).toBeVisible();
+async function arrival(page: Page, kind: 'create' | 'join') {
+  await beginAdmission(page, kind);
 }
 
 async function settled(page: Page) {
@@ -27,15 +28,15 @@ async function settled(page: Page) {
 }
 
 async function create(page: Page, name: string) {
-  await arrival(page);
+  await arrival(page, 'create');
   await page.getByLabel('Your name', { exact: true }).fill(name);
   await page.getByRole('combobox', { name: 'Avatar colour', exact: true }).selectOption('sage');
-  await page.getByRole('combobox', { name: 'House capacity', exact: true }).selectOption('2');
+  await page.getByRole('combobox', { name: 'Bedrooms', exact: true }).selectOption('2');
   const created = page.waitForResponse(response => new URL(response.url()).pathname === '/api/house/command' && response.request().method() === 'POST' && response.request().postDataJSON()?.type === 'house.create');
   await page.getByRole('button', { name: 'Create house', exact: true }).click();
   expect((await created).ok()).toBe(true);
   await settled(page);
-  await page.getByRole('button', { name: 'House settings', exact: true }).click();
+  await openHouseSettings(page);
   const code = (await page.locator('#join-code-display').textContent())?.trim() ?? '';
   expect(code).toMatch(/^[0-9A-Z]{8}$/);
   await page.getByRole('button', { name: 'Close panel', exact: true }).click();
@@ -43,10 +44,10 @@ async function create(page: Page, name: string) {
 }
 
 async function joinHouse(page: Page, name: string, code: string) {
-  await arrival(page);
+  await arrival(page, 'join');
   await page.getByLabel('Your name', { exact: true }).fill(name);
   await page.getByRole('combobox', { name: 'Avatar colour', exact: true }).selectOption('rose');
-  await page.getByLabel('Join code', { exact: true }).fill(code);
+  await page.getByLabel('House code', { exact: true }).fill(code);
   const joined = page.waitForResponse(response => new URL(response.url()).pathname === '/api/house/command' && response.request().method() === 'POST' && response.request().postDataJSON()?.type === 'house.join');
   await page.getByRole('button', { name: 'Join house', exact: true }).click();
   expect((await joined).ok()).toBe(true);
@@ -64,6 +65,7 @@ async function pair(browser: Browser, ownerName: string, peerName: string) {
   try {
     const code = await create(owner, ownerName);
     await joinHouse(peer, peerName, code);
+    await showResidents(owner);await showResidents(peer);
     await expect(roster(owner)).toContainText(peerName);
     await expect(roster(peer)).toContainText(ownerName);
     return { ownerContext, peerContext, owner, peer, errors, code };
@@ -191,14 +193,15 @@ test('independent residents move, converse, and return to persisted identity and
     await expect.poll(async () => Number(await resident(peer, 'Browser owner').getAttribute('data-x'))).toBeGreaterThan(ownerBeforeMove.x + 0.2);
     await expect.poll(async () => Number(await renderedResident(peer, 'Browser owner').getAttribute('data-x'))).toBeGreaterThan(ownerBeforeMove.x + 0.2);
     expect(moved.x).toBeGreaterThan(ownerBeforeMove.x + 0.2);
-    await typingDoesNotMove(owner, owner.getByLabel('Say something', { exact: true }));
-    await owner.getByLabel('Say something', { exact: true }).fill('Could we look at this example together?');
+    await openChat(owner);
+    await typingDoesNotMove(owner, owner.getByLabel('Message this room', { exact: true }));
+    await owner.getByLabel('Message this room', { exact: true }).fill('Could we look at this example together?');
     await owner.getByRole('button', { name: 'Send', exact: true }).click();
-    await peer.getByRole('button', { name: /^Chat/ }).click();
+    await openChat(peer);
     await expect(peer.locator('#transcript')).toContainText('Could we look at this example together?');
-    await peer.getByLabel('Say something', { exact: true }).fill('<b>literal browser message</b>');
+    await peer.getByLabel('Message this room', { exact: true }).fill('<b>literal browser message</b>');
     await peer.getByRole('button', { name: 'Send', exact: true }).click();
-    await owner.getByRole('button', { name: /^Chat/ }).click();
+    await openChat(owner);
     await expect(owner.locator('#transcript')).toContainText('<b>literal browser message</b>');
     await expect(owner.locator('#transcript span b')).toHaveCount(0);
     await screenshot(owner, info, 'house-desktop-chat');
@@ -209,12 +212,13 @@ test('independent residents move, converse, and return to persisted identity and
     const returned = await returning.newPage();
     returned.on('pageerror', error => errors.push(`return: ${error.message}`));
     await returned.goto('/');
+    await continueSavedHome(returned);
     await settled(returned);
     await expect(roster(returned)).toContainText('Browser owner');
     await expect(resident(peer, 'Browser owner')).toContainText(/quiet/i);
-    await returned.getByRole('button', { name: 'House settings', exact: true }).click();
+    await openHouseSettings(returned);
     await expect(returned.locator('#join-code-display')).toHaveText(code);
-    await returned.getByRole('button', { name: /^Chat/ }).click();
+    await openChat(returned);
     await expect(returned.locator('#transcript')).toContainText('Could we look at this example together?');
     await expect(returned.locator('#transcript')).toContainText('<b>literal browser message</b>');
     expect(errors).toEqual([]);
@@ -227,6 +231,7 @@ test('independent residents move, converse, and return to persisted identity and
 test('native touch controls move an avatar and resizing preserves usable controls', async ({ browser }, info) => {
   const { ownerContext, peerContext, owner, peer, errors } = await pair(browser, 'Touch witness', 'Touch resident');
   try {
+    await showMovement(peer);
     const controlNames = ['Move forward', 'Move back', 'Move left', 'Move right', 'Interact'];
     for (const name of controlNames) {
       const box = await peer.getByRole('button', { name, exact: true }).boundingBox();
@@ -240,16 +245,20 @@ test('native touch controls move an avatar and resizing preserves usable control
     const after = await position(peer);
     expect(Math.hypot(after.x - before.x, after.z - before.z)).toBeGreaterThan(0.2);
     await expect.poll(async () => Number(await resident(owner, 'Touch resident').getAttribute('data-x'))).toBeLessThan(before.x - 0.2);
-    await typingDoesNotMove(peer, peer.getByLabel('Say something', { exact: true }));
+    await openChat(peer);
+    await typingDoesNotMove(peer, peer.getByLabel('Message this room', { exact: true }));
     await expect.poll(async () => Number(await renderedResident(owner, 'Touch resident').getAttribute('data-x'))).toBeLessThan(before.x - 0.2);
-    await peer.getByRole('button', { name: 'Study board', exact: true }).tap();
+    await openStudyNotes(peer);
     await peer.getByLabel('Small goal', { exact: true }).fill('Touch input reaches the board');
     await peer.getByRole('button', { name: 'Close panel', exact: true }).tap();
     await viewportFits(peer, PHONE);
     await screenshot(peer, info, 'house-phone-world');
     await owner.setViewportSize(PHONE);
     await viewportFits(owner, PHONE);
-    await expect(owner.getByRole('button', { name: 'Interact', exact: true })).toBeVisible();
+    await expect(owner.getByRole('button', { name: 'Pause and options', exact: true })).toBeVisible();
+    await peer.setViewportSize(DESKTOP);await viewportFits(peer, DESKTOP);
+    await expect(peer.getByRole('button', { name: 'Interact', exact: true })).toBeVisible();
+    await peer.setViewportSize(PHONE);await viewportFits(peer, PHONE);
     await owner.setViewportSize(DESKTOP);
     await viewportFits(owner, DESKTOP);
     await screenshot(owner, info, 'house-desktop-world');
@@ -262,7 +271,7 @@ test('native touch controls move an avatar and resizing preserves usable control
 test('two authors save independent cards, retain drafts, and retrieve active next steps', async ({ browser }, info) => {
   const { ownerContext, peerContext, owner, peer, errors } = await pair(browser, 'Card author', 'Card peer');
   try {
-    for (const page of [owner, peer]) await page.getByRole('button', { name: 'Study board', exact: true }).click();
+    for (const page of [owner, peer]) await openStudyNotes(page);
     await owner.getByLabel('Small goal', { exact: true }).fill('Understand the example');
     await owner.getByLabel('Question', { exact: true }).fill('Where does the final term come from?');
     await owner.getByLabel('Resource link', { exact: true }).fill('https://example.com/course-example');
@@ -286,8 +295,9 @@ test('two authors save independent cards, retain drafts, and retrieve active nex
     await peer.getByRole('button', { name: 'Save card', exact: true }).click();
     await expect(owner.locator('#cards')).toContainText('An unsaved independent thought');
     await Promise.all([owner.reload(), peer.reload()]);
+    await Promise.all([continueSavedHome(owner), continueSavedHome(peer)]);
     await Promise.all([settled(owner), settled(peer)]);
-    for (const page of [owner, peer]) await page.getByRole('button', { name: 'Study board', exact: true }).click();
+    for (const page of [owner, peer]) await openStudyNotes(page);
     await expect(owner.getByLabel('Small goal', { exact: true })).toHaveValue('Understand the example');
     await expect(owner.getByLabel('Next step', { exact: true })).toHaveValue('Expand the preceding line myself');
     await expect(owner.getByLabel('Ask for help', { exact: true })).toBeChecked();
@@ -303,29 +313,11 @@ test('two authors save independent cards, retain drafts, and retrieve active nex
 });
 
 
-async function walkAxis(page: Page, axis: 'x' | 'z', target: number) {
-  await canvas(page).focus();
-  await expect(canvas(page)).toBeFocused();
-  const current = (await position(page))[axis];
-  const negative = target < current;
-  const key = axis === 'x' ? (negative ? 'ArrowLeft' : 'ArrowRight') : (negative ? 'ArrowUp' : 'ArrowDown');
-  await page.keyboard.down(key);
-  try {
-    await page.waitForFunction(({ axis, target, negative }) => {
-      const node = document.querySelector<HTMLElement>('.house-world-canvas');
-      const value = Number(axis === 'x' ? node?.dataset.selfX : node?.dataset.selfZ);
-      return negative ? value <= target + 0.12 : value >= target - 0.12;
-    }, { axis, target, negative }, { timeout: 10_000, polling: 'raf' });
-  } finally {
-    await page.keyboard.up(key);
-  }
-}
-
 async function walkToOwnRoom(page: Page, ownerName: string) {
   await page.bringToFront();
   const started = Date.now();
   const before = await position(page);
-  await page.getByRole('button', { name: 'Room settings', exact: true }).click();
+  await openMyRoom(page);
   await page.getByRole('button', { name: 'Walk to my room', exact: true }).click();
   await expect.poll(async () => {
     const after = await position(page);
@@ -356,7 +348,7 @@ test('real seat and door interactions preserve owned DIY and revoke a bedroom vi
     await owner.keyboard.press('e');
     await expect(canvas(owner)).not.toHaveAttribute('data-self-animation', 'sit');
     await walkToOwnRoom(owner, 'Room owner');
-    await owner.getByRole('button', { name: 'Room settings', exact: true }).click();
+    await openMyRoom(owner);
     await owner.getByRole('combobox', { name: 'Room palette', exact: true }).selectOption('lavender');
     await owner.getByLabel('Open my room to current housemates', { exact: true }).check();
     await owner.getByRole('button', { name: 'Save room settings', exact: true }).click();
@@ -385,29 +377,24 @@ test('real seat and door interactions preserve owned DIY and revoke a bedroom vi
     await expect(renderedResident(owner, 'Room owner')).toBeVisible();
     await screenshot(owner, info, 'house-desktop-owned-room');
     await owner.reload();
+    await continueSavedHome(owner);
     await settled(owner);
     await walkToOwnRoom(owner, 'Room owner');
-    await owner.getByRole('button', { name: 'Room settings', exact: true }).click();
+    await openMyRoom(owner);
     await expect(owner.getByRole('combobox', { name: 'Room palette', exact: true })).toHaveValue('lavender');
     await expect(owner.getByLabel('Open my room to current housemates', { exact: true })).toBeChecked();
     await expect(owner.locator('#placement option')).toHaveCount(originalPieces + 1);
     await expect(owner.locator(`#placement option[value="${addedPieceId}"]`)).toHaveText(addedArrangement!);
-    // Walk around the actual two-person table to the owner's rear door; no API relocation.
-    await walkAxis(peer, 'x', -2);
-    await peer.bringToFront();
-    await canvas(peer).focus();
-    await expect(canvas(peer)).toBeFocused();
-    const guestStarted = Date.now();
-    await peer.keyboard.down('ArrowUp');
-    try {
-      await expect(peer.locator('#context-hint')).toContainText('Visit Room owner', { timeout: 30_000 });
-    } finally {
-      await peer.keyboard.up('ArrowUp');
-    }
-    console.log(`Guest keyboard approach timing: ${Date.now() - guestStarted}ms`);
-    await peer.keyboard.press('e');
+    // The current keys are camera-relative. Select the physical door in Overview;
+    // native raycast -> collision-aware route -> arrival still performs the actual visit.
+    await chooseCamera(peer, 'overview');
+    const guestBefore = await position(peer), guestStarted = Date.now();
+    await clickProjectedTarget(peer, { type: 'door', slot: 0 });
+    await expect.poll(async () => {const after=await position(peer);return Math.hypot(after.x-guestBefore.x,after.z-guestBefore.z);}).toBeGreaterThan(0.2);
+    await expect(peer.locator('#place-label')).toHaveText("Room owner's room", { timeout: 30_000 });
+    console.log(`Guest native door approach timing: ${Date.now() - guestStarted}ms`);
     await expect(peer.locator('#place-label')).toHaveText("Room owner's room");
-    await peer.getByRole('button', { name: 'Room settings', exact: true }).tap();
+    await openMyRoom(peer);
     await expect(peer.locator('#room-form')).toBeHidden();
     await expect(peer.locator('#furniture-editor')).toBeHidden();
     await peer.getByRole('button', { name: 'Close panel', exact: true }).tap();

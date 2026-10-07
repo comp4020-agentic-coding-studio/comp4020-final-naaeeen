@@ -61,7 +61,7 @@ describe('transient fixed-angle camera', () => {
   }
   expect(rig.frame({ x: 5, y: -4 }, 0.25)!.left).toBe(initial.left);
   rig.setMode('play'); const editing = rig.frame({ x: 4, y: 4 }, 0.1, true)!;
-  expect(editing.mode).toBe('overview'); expect(editing.left).toBe(initial.left);
+  expect(editing.mode).toBe('inspection'); expect(editing.left).toBe(initial.left);
  });
  it('removes easing for reduced motion and reframes actual visual-viewport changes', () => {
   const rig = createHouseCamera({ reducedMotion: true }); rig.configure(portrait); rig.frame({ x: 0, y: 0 }, 0);
@@ -69,6 +69,92 @@ describe('transient fixed-angle camera', () => {
   expect(rig.frame(moved, 0.001)!.changed).toBe(false);
   rig.configure({ ...portrait, height: 520, viewport: { left: 0, top: 0, right: 390, bottom: 520 }, safeRects: [{ x: 0, y: 0, w: 390, h: 180 }, { x: 0, y: 380, w: 390, h: 140 }] });
   const resized = rig.frame(moved, 0)!; expect(resized.mode).toBe('play'); expect(resized.area.y + resized.area.h).toBeLessThanOrEqual(380);
-  expect(resized.pxPerUnit).toBe(now.pxPerUnit);
+  expect(resized.pxPerUnit).toBeCloseTo(now.pxPerUnit, 10);
  });
+});
+
+describe('explicit camera ownership', () => {
+ it('does not recenter or rescale when a chat window changes HUD geometry', () => {
+  const rig = createHouseCamera(); rig.configure(portrait);
+  rig.frame({x:0,y:0},0); const before = rig.frame({x:3,y:0},0.1)!;
+  rig.configure({...portrait, safeRects:[...portrait.safeRects,{x:0,y:220,w:180,h:240}]});
+  const after = rig.frame({x:3,y:0},0)!;
+  expect(after.left).toBe(before.left); expect(after.top).toBe(before.top); expect(after.pxPerUnit).toBe(before.pxPerUnit);
+ });
+ it('preserves manual inspection pan and zoom until explicit recenter', () => {
+  const rig = createHouseCamera(); rig.configure(portrait); rig.frame({x:0,y:0},0);
+  expect(rig.setZoom(1.4)).toBe(true); expect(rig.getZoom()).toBe(1.4);
+  expect(rig.pan(60,-30)).toBe(true); const before=rig.frame({x:0,y:0},0)!;
+  expect(before.mode).toBe('inspection');
+  const walking=rig.frame({x:4,y:2},0.25)!; expect(walking.left).toBe(before.left); expect(walking.top).toBe(before.top);
+  rig.configure({...portrait,width:699}); const resized=rig.frame({x:4,y:2},0)!;
+  expect(rig.getZoom()).toBe(1.4); expect((resized.left+resized.right)/2).toBeCloseTo((before.left+before.right)/2,10);
+  rig.recenter(); expect(rig.frame({x:4,y:2},0)!.mode).toBe('play');
+  expect(rig.setZoom(NaN)).toBe(false); rig.setZoom(99); expect(rig.getZoom()).toBe(1.8);
+ });
+});
+
+it('keeps a stationary actor visible after actual visual viewport shrink',()=>{
+ const rig=createHouseCamera({reducedMotion:true});rig.configure(portrait);rig.frame({x:0,y:0},0);
+ const self={x:5,y:3};rig.frame(self,0.001);
+ const smaller={...portrait,height:520,viewport:{left:0,top:0,right:390,bottom:520},safeRects:[{x:0,y:0,w:390,h:180},{x:0,y:380,w:390,h:140}]};
+ rig.configure(smaller);const resized=rig.frame(self,0)!;
+ const projected=screen(resized,self,smaller),half=72/2;
+ expect(projected.y-half).toBeGreaterThanOrEqual(resized.area.y);
+ expect(projected.y+half).toBeLessThanOrEqual(resized.area.y+resized.area.h);
+});
+
+it('keeps a stationary actor visible when zooming in during play',()=>{
+ const rig=createHouseCamera({reducedMotion:true});rig.configure(portrait);rig.frame({x:0,y:0},0);
+ const self={x:5,y:3};rig.frame(self,0.01);rig.setZoom(1.8);const zoomed=rig.frame(self,0)!;
+ const p=screen(zoomed,self),half=72*1.8/2;
+ expect(p.y-half).toBeGreaterThanOrEqual(zoomed.area.y);
+ expect(p.y+half).toBeLessThanOrEqual(zoomed.area.y+zoomed.area.h);
+});
+
+it('fits the whole room when explicitly choosing overview after close zoom',()=>{
+ const rig=createHouseCamera();rig.configure(portrait);rig.frame({x:0,y:0},0);rig.setZoom(1.8);rig.setMode('overview');
+ const value=rig.frame({x:0,y:0},0)!;
+ for(const x of [bounds.minX,bounds.maxX])for(const y of [bounds.minY,bounds.maxY]){
+  const p=screen(value,{x,y});expect(p.x).toBeGreaterThanOrEqual(value.area.x);expect(p.x).toBeLessThanOrEqual(value.area.x+value.area.w);
+  expect(p.y).toBeGreaterThanOrEqual(value.area.y);expect(p.y).toBeLessThanOrEqual(value.area.y+value.area.h);
+ }
+});
+
+it('contains the supplied asymmetric rendered mesh envelope while following and settling',()=>{
+ const rig=createHouseCamera();
+ const config={width:390,height:520,bounds,uprightHeight:1.15,viewport:{left:275,top:128,right:383,bottom:250},safeRects:[]};
+ const extents={minX:-.48,maxX:.62,minY:-.9,maxY:.63};
+ rig.configure(config);rig.frame({x:0,y:0},0,false,extents);
+ for(let i=1;i<=100;i++){
+  const self={x:i*.035,y:-i*.035},value=rig.frame(self,1/60,false,extents)!;
+  const p=screen(value,self);
+  expect(p.x+extents.minX*value.pxPerUnit).toBeGreaterThanOrEqual(value.area.x-0.001);
+  expect(p.x+extents.maxX*value.pxPerUnit).toBeLessThanOrEqual(value.area.x+value.area.w+0.001);
+  expect(p.y-extents.maxY*value.pxPerUnit).toBeGreaterThanOrEqual(value.area.y-0.001);
+  expect(p.y-extents.minY*value.pxPerUnit).toBeLessThanOrEqual(value.area.y+value.area.h+0.001);
+ }
+});
+
+it('recenter contains a fitted asymmetric mesh before any movement frame',()=>{
+ const rig=createHouseCamera();
+ rig.configure({width:844,height:390,bounds,uprightHeight:1.15,viewport:{left:8,top:128,right:836,bottom:238},safeRects:[]});
+ const extents={minX:-.4,maxX:.4,minY:-.98,maxY:.62},self={x:0,y:0};
+ const first=rig.frame(self,0,false,extents)!,p=screen(first,self);
+ expect(p.y-extents.minY*first.pxPerUnit).toBeLessThanOrEqual(first.area.y+first.area.h+.001);
+ expect(p.y-extents.maxY*first.pxPerUnit).toBeGreaterThanOrEqual(first.area.y-.001);
+});
+
+it('refits overview when only the visual viewport changes while retaining HUD-only framing',()=>{
+ const rig=createHouseCamera();
+ const config={width:390,height:844,bounds,uprightHeight:1.15,viewport:{left:0,top:0,right:390,bottom:844},safeRects:[]};
+ rig.configure(config);rig.setMode('overview');const before=rig.frame({x:0,y:0},0)!;
+ rig.configure({...config,safeRects:[{x:0,y:100,w:100,h:200}]});
+ const hud=rig.frame({x:0,y:0},0)!;expect(hud.left).toBe(before.left);expect(hud.top).toBe(before.top);
+ rig.configure({...config,viewport:{left:0,top:0,right:390,bottom:420}});
+ const resized=rig.frame({x:0,y:0},0)!;
+ for(const x of [bounds.minX,bounds.maxX])for(const y of [bounds.minY,bounds.maxY]){
+  const p=screen(resized,{x,y});expect(p.x).toBeGreaterThanOrEqual(resized.area.x);expect(p.x).toBeLessThanOrEqual(resized.area.x+resized.area.w);
+  expect(p.y).toBeGreaterThanOrEqual(resized.area.y);expect(p.y).toBeLessThanOrEqual(resized.area.y+resized.area.h);
+ }
 });

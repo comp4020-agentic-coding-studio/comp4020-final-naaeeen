@@ -454,3 +454,14 @@ describe("Socket.IO namespace admission failures", () => {
     }
   });
 });
+
+test("preserves long Unicode conversation under the existing total outbox bound", () => {
+  const storage = memoryStorage(); const box = createCommandOutbox(storage);
+  const houseId = randomUUID(), zoneId = randomUUID();
+  const command = { commandId: randomUUID(), houseId, type: "chat.send", expectedRevision: 1,
+    payload: { zoneId, text: "🙂".repeat(2000) } };
+  expect(new TextEncoder().encode(JSON.stringify(command)).length).toBeGreaterThan(8 * 1024);
+  box.add(command, "person", zoneId, 1000);
+  expect(createCommandOutbox(storage).eligible("person", zoneId, 2000, houseId)[0].command).toEqual(command);
+  expect(() => box.add({ ...command, commandId: randomUUID(), payload: { zoneId, text: "界".repeat(4200) } }, "person", zoneId, 1000)).toThrow();
+});

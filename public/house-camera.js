@@ -34,51 +34,126 @@ export function cameraPlayArea(width, height, viewport = null, safeRects = []) {
   return best ? { ...best, available: true } : { ...view, available: false };
 }
 
+
+/** Zoom is a transient multiplier; panning enters inspection until explicitly recentered. */
 export function createHouseCamera({ reducedMotion = false } = {}) {
   let config = null, centre = null, mode = 'play', reset = true, previous = null;
-  function configure(value) { config = { ...value, area: cameraPlayArea(value.width, value.height, value.viewport, value.safeRects) }; reset = true; }
-  function setMode(value) { if (value !== 'play' && value !== 'overview') return false; mode = value; reset = true; return true; }
+  let zoom = 1, overviewBaseSpan = null, inspectionBaseSpan = null, followTarget = null, previousSelf = null, reframeSelf = false, activeFollowArea = null;
+  function configure(value) {
+    const changedExtent = !config || value.width !== config.width || value.height !== config.height ||
+      JSON.stringify(value.bounds) !== JSON.stringify(config.bounds) || JSON.stringify(value.viewport) !== JSON.stringify(config.viewport);
+    reframeSelf = reframeSelf || !config || value.width !== config.width || value.height !== config.height || JSON.stringify(value.viewport) !== JSON.stringify(config.viewport);
+    config = { ...value, area: cameraPlayArea(value.width, value.height, value.viewport, value.safeRects) };
+    // Movable HUD controls do not own the camera. Preserve centre, mode and zoom.
+    if (changedExtent) overviewBaseSpan = null;
+  }
+  function setMode(value) {
+    if (!['play', 'overview', 'inspection'].includes(value)) return false;
+    if (value === 'play') reset = true;
+    if (value === 'overview') { zoom = 1; overviewBaseSpan = null; reset = true; }
+    if (value === 'inspection' && mode !== value) inspectionBaseSpan = previous ? (previous.top - previous.bottom) * zoom : null;
+    mode = value; followTarget = null; return true;
+  }
+  function setZoom(value) {
+    if (!finite(value)) return false;
+    const next = clamp(value, 0.65, 1.8);
+    if (next !== zoom) reframeSelf = true;
+    zoom = next; return true;
+  }
+  function pan(dx, dy) {
+    if (!previous || !finite(dx) || !finite(dy)) return false;
+    setMode('inspection');
+    centre.x -= dx / previous.pxPerUnit; centre.y += dy / previous.pxPerUnit;
+    return true;
+  }
   return {
-    configure, setMode, getMode: () => mode,
-    reset() { centre = null; reset = true; previous = null; },
-    frame(self, elapsed, editing = false) {
+    configure, setMode, getMode: () => mode, setZoom, getZoom: () => zoom, pan,
+    setReducedMotion(value) { reducedMotion = !!value; },
+    recenter() { return setMode('play'); },
+    reset() { centre = null; reset = true; previous = null; previousSelf = null; followTarget = null; activeFollowArea = null; overviewBaseSpan = null; inspectionBaseSpan = null; },
+    /** @param {{x:number,y:number}} self @param {number} elapsed @param {boolean} editing
+     * @param {{minX:number,maxX:number,minY:number,maxY:number}|null} selfExtents */
+    frame(self, elapsed, editing = false, selfExtents = null) {
       if (!config) return null;
       const { width, height, bounds, uprightHeight, area } = config;
-      const overview = mode === 'overview' || editing;
-      let span, pxPerUnit;
+      const effectiveMode = editing ? 'inspection' : mode;
       const focus = { x: area.x + area.w / 2, y: area.y + area.h / 2 };
-      if (overview) {
-        span = Math.max((bounds.maxY - bounds.minY) * height / Math.max(1, area.h - 24), (bounds.maxX - bounds.minX) * height / Math.max(1, area.w - 24));
-        pxPerUnit = height / span;
-        centre = { x: (bounds.minX + bounds.maxX) / 2 - (focus.x - width / 2) / pxPerUnit, y: (bounds.minY + bounds.maxY) / 2 + (focus.y - height / 2) / pxPerUnit };
-      } else {
-        const desired = width < 700 ? 72 : 128;
-        // Extremely short simulated viewports cannot fit the normal phone target.
-        const actorHeight = Math.min(desired, height * 0.2, Math.max(24, area.h - 16));
-        pxPerUnit = actorHeight / Math.max(0.01, uprightHeight); span = height / pxPerUnit;
-        const centered = { x: self.x - (focus.x - width / 2) / pxPerUnit, y: self.y + (focus.y - height / 2) / pxPerUnit };
-        if (!centre || reset) centre = centered;
-        else {
-          const screen = { x: width / 2 + (self.x - centre.x) * pxPerUnit, y: height / 2 - (self.y - centre.y) * pxPerUnit };
-          const deadW = Math.max(0, Math.min(area.w * 0.4, area.w - 48)), deadH = Math.max(0, Math.min(area.h * 0.4, area.h - actorHeight - 24));
-          const dx = screen.x - clamp(screen.x, focus.x - deadW / 2, focus.x + deadW / 2), dy = screen.y - clamp(screen.y, focus.y - deadH / 2, focus.y + deadH / 2);
-          const target = { x: centre.x + dx / pxPerUnit, y: centre.y - dy / pxPerUnit };
-          const blend = reducedMotion ? 1 : 1 - Math.exp(-Math.min(Math.max(elapsed, 0), 0.25) / 0.14);
-          centre.x += (target.x - centre.x) * blend; centre.y += (target.y - centre.y) * blend;
-          // Settle subpixel motion and correct hard safe bounds immediately, without moving the actor.
-          if (Math.abs(target.x - centre.x) * pxPerUnit < 0.1) centre.x = target.x;
-          if (Math.abs(target.y - centre.y) * pxPerUnit < 0.1) centre.y = target.y;
-          const currentX = width / 2 + (self.x - centre.x) * pxPerUnit, currentY = height / 2 - (self.y - centre.y) * pxPerUnit;
-          centre.x += (currentX - clamp(currentX, area.x + Math.min(24, area.w / 2), area.x + area.w - Math.min(24, area.w / 2))) / pxPerUnit;
-          centre.y -= (currentY - clamp(currentY, area.y + actorHeight / 2 + 8, area.y + area.h - actorHeight / 2 - 8)) / pxPerUnit;
+      // Smooth viewport adaptation avoids a scale threshold and never depends on HUD dragging.
+      const desired = 72 + clamp((width - 390) / 710, 0, 1) * 56;
+      const actorHeight = Math.min(desired, height * 0.2);
+      const playBaseSpan = height * Math.max(0.01, uprightHeight) / Math.max(24, actorHeight);
+      let baseSpan = playBaseSpan;
+      if (effectiveMode === 'overview') {
+        if (overviewBaseSpan === null) {
+          overviewBaseSpan = Math.max((bounds.maxY - bounds.minY) * height / Math.max(1, area.h - 24),
+            (bounds.maxX - bounds.minX) * height / Math.max(1, area.w - 24));
+          const fitScale = height / (overviewBaseSpan / zoom);
+          centre = { x: (bounds.minX + bounds.maxX) / 2 - (focus.x - width / 2) / fitScale,
+            y: (bounds.minY + bounds.maxY) / 2 + (focus.y - height / 2) / fitScale };
         }
-        // Pan is bounded to the authorised room extent plus one visible span.
+        baseSpan = overviewBaseSpan;
+      } else if (effectiveMode === 'inspection') {
+        if (inspectionBaseSpan === null) inspectionBaseSpan = previous ? (previous.top - previous.bottom) * zoom : playBaseSpan;
+        baseSpan = inspectionBaseSpan;
+      }
+      const span = baseSpan / zoom, pxPerUnit = height / span;
+      const moving = reframeSelf || !previousSelf || Math.hypot(self.x - previousSelf.x, self.y - previousSelf.y) > 0.000001;
+      // HUD dragging does not own a stationary camera, including its settling target.
+      if (moving || !activeFollowArea || reset) activeFollowArea = { ...area };
+      const followArea = activeFollowArea;
+      const measured = selfExtents && ['minX', 'maxX', 'minY', 'maxY'].every(key => finite(selfExtents[key]));
+      const envelope = measured ? selfExtents : {
+        minX: -24 / pxPerUnit, maxX: 24 / pxPerUnit,
+        minY: -uprightHeight / 2 - 8 / pxPerUnit, maxY: uprightHeight / 2 + 8 / pxPerUnit,
+      };
+      const screenPoint = () => ({ x: width / 2 + (self.x - centre.x) * pxPerUnit, y: height / 2 - (self.y - centre.y) * pxPerUnit });
+      const safe = {
+        minX: followArea.x - envelope.minX * pxPerUnit,
+        maxX: followArea.x + followArea.w - envelope.maxX * pxPerUnit,
+        minY: followArea.y + envelope.maxY * pxPerUnit,
+        maxY: followArea.y + followArea.h + envelope.minY * pxPerUnit,
+      };
+      // A genuinely smaller space cannot contain a larger mesh; retain its centre.
+      if (safe.minX > safe.maxX) safe.minX = safe.maxX = (safe.minX + safe.maxX) / 2;
+      if (safe.minY > safe.maxY) safe.minY = safe.maxY = (safe.minY + safe.maxY) / 2;
+
+      if (!centre || (reset && effectiveMode === 'play')) {
+        centre = { x: self.x - (focus.x - width / 2) / pxPerUnit, y: self.y + (focus.y - height / 2) / pxPerUnit };
+        followTarget = null; activeFollowArea = { ...area };
+      } else if (effectiveMode === 'play') {
+        if (moving) {
+          const screen = screenPoint();
+          const focus = { x: followArea.x + followArea.w / 2, y: followArea.y + followArea.h / 2 };
+          const deadW = Math.max(0, Math.min(followArea.w * 0.4, safe.maxX - safe.minX));
+          const deadH = Math.max(0, Math.min(followArea.h * 0.4, safe.maxY - safe.minY));
+          const minX = clamp(focus.x - deadW / 2, safe.minX, safe.maxX), maxX = clamp(focus.x + deadW / 2, safe.minX, safe.maxX);
+          const minY = clamp(focus.y - deadH / 2, safe.minY, safe.maxY), maxY = clamp(focus.y + deadH / 2, safe.minY, safe.maxY);
+          const dx = screen.x - clamp(screen.x, minX, maxX), dy = screen.y - clamp(screen.y, minY, maxY);
+          followTarget = { x: centre.x + dx / pxPerUnit, y: centre.y - dy / pxPerUnit };
+        }
+        if (followTarget) {
+          const blend = reducedMotion ? 1 : 1 - Math.exp(-clamp(elapsed, 0, 0.25) / 0.14);
+          centre.x += (followTarget.x - centre.x) * blend; centre.y += (followTarget.y - centre.y) * blend;
+          if (Math.abs(followTarget.x - centre.x) * pxPerUnit < 0.1) centre.x = followTarget.x;
+          if (Math.abs(followTarget.y - centre.y) * pxPerUnit < 0.1) centre.y = followTarget.y;
+        }
+      }
+      if (effectiveMode === 'play') {
+        // Constrain explicit recenter and easing with the same posed render envelope.
+        const current = screenPoint();
+        centre.x += (current.x - clamp(current.x, safe.minX, safe.maxX)) / pxPerUnit;
+        centre.y -= (current.y - clamp(current.y, safe.minY, safe.maxY)) / pxPerUnit;
+      }
+      // Permit inspection near the room edge while preventing indefinite lost-world pan.
+      if (effectiveMode !== 'overview') {
         centre.x = clamp(centre.x, bounds.minX - span * width / height, bounds.maxX + span * width / height);
         centre.y = clamp(centre.y, bounds.minY - span, bounds.maxY + span);
       }
-      reset = false;
+      reset = false; reframeSelf = false; previousSelf = { ...self };
       const horizontal = span * width / height;
-      const value = { left: centre.x - horizontal / 2, right: centre.x + horizontal / 2, top: centre.y + span / 2, bottom: centre.y - span / 2, area: { ...area }, mode: overview ? 'overview' : 'play', pxPerUnit, changed: false };
+      const value = { left: centre.x - horizontal / 2, right: centre.x + horizontal / 2,
+        top: centre.y + span / 2, bottom: centre.y - span / 2, area: { ...area }, mode: effectiveMode,
+        zoom, pxPerUnit, changed: false };
       value.changed = !previous || ['left', 'right', 'top', 'bottom'].some(key => Math.abs(value[key] - previous[key]) * pxPerUnit > 0.001);
       previous = value; return value;
     },

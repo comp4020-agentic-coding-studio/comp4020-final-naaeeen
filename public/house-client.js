@@ -56,7 +56,7 @@ export function createCommandOutbox(storage) {
     return plainObject(command) && typeof command.commandId === 'string' && uuid.test(command.commandId)
       && typeof command.type === 'string' && command.type.length > 0 && command.type.length <= 64
       && plainObject(command.payload) && (command.houseId === undefined || boundedId(command.houseId))
-      && bytes(command) <= 8 * 1024;
+      && bytes(command) <= 12 * 1024;
   }
   function read() {
     if (!storage) throw problem('STORAGE_UNAVAILABLE', 'This tab cannot preserve pending drafts. Enable session storage before saving.');

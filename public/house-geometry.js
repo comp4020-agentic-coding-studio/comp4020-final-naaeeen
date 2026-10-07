@@ -1,10 +1,20 @@
-/** Browser/server shared geometry. Coordinates are metres in the 12 × 8 floor. */
+/** Browser/server shared geometry. Coordinates are metres; room dimensions and destination anchors are authoritative. */
 /** @typedef {{x:number,z:number}} Point */
 /** @typedef {{id?:string,x:number,z:number,w:number,d:number}} Obstacle */
 /** @typedef {{id:string,x:number,z:number,heading:number,target:Point}} Seat */
 /** @typedef {{id:string,slot:number,x:number,z:number,wall:'rear'|'side',target:Point}} Door */
 /** @typedef {{width:number,depth:number,obstacles:Obstacle[],seats:Seat[],doors:Door[],spawn:Point,boardTarget:Point,exitTarget:Point}} Layout */
 export const AVATAR_RADIUS = 0.24;
+export const ROOM_DIMENSIONS = Object.freeze({
+  lounge: Object.freeze({ width: 16, depth: 11 }),
+  bedroom: Object.freeze({ width: 14, depth: 10 }),
+});
+export const BEDROOM_ARRIVAL = Object.freeze({ x: 0, z: 3 });
+export const BEDROOM_EXIT = Object.freeze({ x: 0, z: 4.3 });
+export const CAMERA_ORIENTATION = Object.freeze({ x: 11, y: 13, z: 14, lookY: 0.4 });
+export const AVATAR_HEIGHT = 1.46;
+export const SEATED_LIFT = -0.05;
+export const FURNITURE_HEIGHTS = Object.freeze({ chairSeat: 0.4, deskTop: 0.75, tableTop: 0.735 });
 export const COLOURS = Object.freeze(['amber', 'sage', 'rose', 'blue', 'lavender', 'peach']);
 export const FURNITURE = Object.freeze({
   desk: Object.freeze({ w: 2, d: 1 }), chair: Object.freeze({ w: 0.8, d: 0.8 }),
@@ -15,11 +25,12 @@ export const FURNITURE = Object.freeze({
 /** @param {number} capacity @returns {Layout} */
 export function createLayout(capacity = 4) {
   if (!Number.isInteger(capacity) || capacity < 2 || capacity > 6) throw new RangeError('Capacity must be 2 to 6.');
+  const { width, depth } = ROOM_DIMENSIONS.lounge;
   const rear = capacity <= 4 ? capacity : Math.ceil(capacity / 2);
-  const spacing = rear <= 3 ? 2.6 : 1.72;
+  const spacing = rear <= 3 ? 3.2 : 2.4;
   const doors = Array.from({ length: capacity }, (_, slot) => slot < rear
-    ? { id: 'door-' + slot, slot, wall: /** @type {'rear'} */ ('rear'), x: (slot - (rear - 1) / 2) * spacing, z: -3.96, target: { x: (slot - (rear - 1) / 2) * spacing, z: -3.06 } }
-    : { id: 'door-' + slot, slot, wall: /** @type {'side'} */ ('side'), x: -5.96, z: (slot - rear - (capacity - rear - 1) / 2) * 2.2, target: { x: -5.04, z: (slot - rear - (capacity - rear - 1) / 2) * 2.2 } });
+    ? { id: 'door-' + slot, slot, wall: /** @type {'rear'} */ ('rear'), x: (slot - (rear - 1) / 2) * spacing, z: -depth / 2 + 0.04, target: { x: (slot - (rear - 1) / 2) * spacing, z: -depth / 2 + 0.94 } }
+    : { id: 'door-' + slot, slot, wall: /** @type {'side'} */ ('side'), x: -width / 2 + 0.04, z: (slot - rear - (capacity - rear - 1) / 2) * 2.8, target: { x: -width / 2 + 0.96, z: (slot - rear - (capacity - rear - 1) / 2) * 2.8 } });
   const seats = Array.from({ length: capacity }, (_, i) => {
     const angle = Math.PI / 2 + i * Math.PI * 2 / capacity;
     const x = Math.cos(angle) * 2.15, z = Math.sin(angle) * 1.9;
@@ -27,18 +38,18 @@ export function createLayout(capacity = 4) {
   });
   const obstacles = [
     { id: 'table', x: 0, z: 0, w: 2.5, d: 1.8 },
-    { id: 'tea-cabinet', x: -4.55, z: 3.42, w: 1.7, d: 0.6 },
-    { id: 'bookcase', x: 4.65, z: -2.15, w: 1.5, d: 0.62 },
-    { id: 'couch', x: 3.95, z: 2.55, w: 1.9, d: 0.9 },
-    { id: 'rear-lamp', x: -3.1, z: -2.55, w: 0.4, d: 0.4 },
-    { id: 'rear-pot', x: -5.4, z: -3.4, w: 0.52, d: 0.52 },
-    { id: 'board', x: 5.8, z: 0.25, w: 0.15, d: 2 },
+    { id: 'tea-cabinet', x: -6.25, z: 4.65, w: 1.78, d: 0.65 },
+    { id: 'bookcase', x: 6.7, z: -3.55, w: 1.5, d: 0.62 },
+    { id: 'couch', x: 5.8, z: 3.8, w: 1.9, d: 0.9 },
+    { id: 'rear-lamp', x: -4.8, z: -4.1, w: 0.5, d: 0.5 },
+    { id: 'rear-pot', x: -7.25, z: -4.7, w: 0.6, d: 0.6 },
+    { id: 'board', x: width / 2 - 0.2, z: 0.25, w: 0.3, d: 2 },
     ...seats.map(seat => {
       const yaw = Math.atan2(seat.x, seat.z), s = Math.sin(yaw), c = Math.cos(yaw);
       return { id: seat.id, x: seat.x + s * 0.035, z: seat.z + c * 0.035, w: Math.abs(c) * 0.78 + Math.abs(s) * 0.8, d: Math.abs(s) * 0.78 + Math.abs(c) * 0.8 };
     }),
   ];
-  return { width: 12, depth: 8, doors, seats, obstacles, spawn: { x: 0, z: 2.85 }, boardTarget: { x: 4.85, z: 0.25 }, exitTarget: { x: 0, z: 3.2 } };
+  return { width, depth, doors, seats, obstacles, spawn: { x: 0, z: 2.85 }, boardTarget: { x: width / 2 - 1.15, z: 0.25 }, exitTarget: { x: 0, z: 4.7 } };
 }
 
 /** @param {{kind:string,x:number,z:number,rotation:number,id:string}} placement @returns {Obstacle} */
@@ -48,7 +59,7 @@ export function footprint(placement) {
   return { id: placement.id, x: placement.x, z: placement.z, w: placement.rotation % 2 ? base.d : base.w, d: placement.rotation % 2 ? base.w : base.d };
 }
 
-/** Furniture cannot occupy the arrival band or central exit corridor. @param {unknown} value */
+/** Furniture protects the arrival/exit aperture and must keep actual routes open. @param {unknown} value */
 export function validatePlacements(value) {
   if (!Array.isArray(value) || value.length > 10) return false;
   const ids = new Set(), rectangles = [];
@@ -58,19 +69,21 @@ export function validatePlacements(value) {
     if (!Number.isFinite(p.x) || !Number.isFinite(p.z) || !Number.isInteger(p.x * 2) || !Number.isInteger(p.z * 2)) return false;
     if (!Number.isInteger(p.rotation) || p.rotation < 0 || p.rotation > 3) return false;
     const r = footprint(p);
-    if (Math.abs(r.x) + r.w / 2 > 5.75 || Math.abs(r.z) + r.d / 2 > 3.75) return false;
-    if (r.z + r.d / 2 > 2.5 || Math.abs(r.x) - r.w / 2 < 0.65) return false;
+    const { width, depth } = ROOM_DIMENSIONS.bedroom;
+    if (Math.abs(r.x) + r.w / 2 > width / 2 - 0.25 || Math.abs(r.z) + r.d / 2 > depth / 2 - 0.25) return false;
+    // Protect a compact one-person arrival/exit aperture, not a full-room strip.
+    if (Math.abs(r.x) < r.w / 2 + 0.65 && r.z + r.d / 2 > BEDROOM_ARRIVAL.z - 0.5 && r.z - r.d / 2 < BEDROOM_EXIT.z + 0.45) return false;
     if (rectangles.some(other => Math.abs(r.x - other.x) < (r.w + other.w) / 2 + 0.08 && Math.abs(r.z - other.z) < (r.d + other.d) / 2 + 0.08)) return false;
     ids.add(p.id); rectangles.push(r);
   }
   const layout = bedroomLayout(value);
-  return layout.seats.every(seat => validPosition(layout, seat.target) && findRoute(layout, layout.spawn, seat.target) !== null);
+  return findRoute(layout, layout.spawn, layout.exitTarget) !== null && layout.seats.every(seat => validPosition(layout, seat.target) && findRoute(layout, layout.spawn, seat.target) !== null);
 }
 
 /** @param {{kind:string,x:number,z:number,rotation:number,id:string}[]} placements @returns {Layout} */
 export function bedroomLayout(placements = []) {
   const obstacles = placements.map(footprint);
-  const room = { width: 12, depth: 8, obstacles, seats: [], doors: [], spawn: { x: 0, z: 3 }, exitTarget: { x: 0, z: 3.3 }, boardTarget: { x: 0, z: 3.3 } };
+  const room = { ...ROOM_DIMENSIONS.bedroom, obstacles, seats: [], doors: [], spawn: { ...BEDROOM_ARRIVAL }, exitTarget: { ...BEDROOM_EXIT }, boardTarget: { ...BEDROOM_EXIT } };
   room.seats = placements.filter(p => p.kind === 'chair').map(p => {
     const heading = p.rotation * Math.PI / 2;
     const candidates = [1.05, 0.85, 1.25].flatMap(radius => [0, 1, -1, 2, 0.5, -0.5, 1.5, -1.5].map(turn => {

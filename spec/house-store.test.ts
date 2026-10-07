@@ -232,10 +232,10 @@ describe("durable house authority", () => {
 
   it("bounds plain Unicode input, safe resource links and inactive author writes", () => {
     const { store, a, b } = pair();
-    const exact = "\u{1f642}".repeat(280);
+    const exact = "\u{1f642}".repeat(2000);
     store.execute(a.id, command("chat.send", { zoneId: "lounge", text: exact }));
     expect(store.snapshot(a.id).chat[0]!.text).toBe(exact);
-    for (const invalid of ["\u{1f642}".repeat(281), "", " \u0000bad"]) expect(() => store.execute(a.id, command("chat.send", { zoneId: "lounge", text: invalid }))).toThrowError(error("INVALID_INPUT"));
+    for (const invalid of ["\u{1f642}".repeat(2001), "", " \u0000bad"]) expect(() => store.execute(a.id, command("chat.send", { zoneId: "lounge", text: invalid }))).toThrowError(error("INVALID_INPUT"));
     for (const link of ["not a url", "ftp://example.com", "https://user:password@example.com"]) {
       expect(() => store.execute(a.id, command("card.save", { ...card("Resource"), resourceUrl: link }, 0))).toThrowError(error("INVALID_INPUT"));
     }

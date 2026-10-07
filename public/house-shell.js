@@ -1,0 +1,26 @@
+// Transient shell geometry and focus are deliberately separate from house authority.
+const focusable = element => [...element.querySelectorAll("button,a[href],input,select,textarea,iframe,[tabindex]")].filter(item=>!item.disabled&&item.tabIndex>=0&&!item.closest("[hidden]"));
+export function createModalFocus(element, document=element.ownerDocument) {
+ let launcher=null,opened=false;
+ function keydown(event){if(!opened||event.key!=="Tab")return;const targets=focusable(element);if(!targets.length){event.preventDefault();element.focus();return;}const first=targets[0],last=targets.at(-1);if(event.shiftKey&&(document.activeElement===first||!element.contains(document.activeElement))){event.preventDefault();last.focus();}else if(!event.shiftKey&&(document.activeElement===last||!element.contains(document.activeElement))){event.preventDefault();first.focus();}}
+ element.addEventListener("keydown",keydown);
+ return {open(source=document.activeElement){if(!opened)launcher=source;opened=true;(focusable(element)[0]||element).focus();},close(){opened=false;if(launcher?.isConnected&&!launcher.closest("[hidden]"))launcher.focus();launcher=null;},dispose(){element.removeEventListener("keydown",keydown);opened=false;launcher=null;}};
+}
+export function createMovableWindow({window,element,handle,body,collapse,resize,onChange=()=>{}}){
+ let shown=false,collapsed=false,launcher=null,gesture=null;
+ let box={x:Math.max(8,window.innerWidth-404),y:100,w:380,h:430};
+ const viewport=()=>({w:window.visualViewport?.width||window.innerWidth,h:window.visualViewport?.height||window.innerHeight});
+ function apply(){const view=viewport();box.w=Math.max(Math.min(240,view.w-16),Math.min(box.w,view.w-16));box.h=Math.max(Math.min(220,view.h-16),Math.min(box.h,view.h-16));const height=collapsed?62:box.h;box.x=Math.max(8,Math.min(box.x,view.w-box.w-8));box.y=Math.max(8,Math.min(box.y,view.h-height-8));Object.assign(element.style,{left:box.x+"px",top:box.y+"px",width:box.w+"px",height:height+"px"});body.hidden=collapsed;resize.hidden=collapsed;collapse.textContent=collapsed?"Expand":"Collapse";collapse.setAttribute("aria-expanded",String(!collapsed));element.dataset.collapsed=String(collapsed);element.dataset.compact=String(height<310);onChange({shown,collapsed});}
+ function end(){gesture=null;}
+ function start(event,mode){if(event.button!==undefined&&event.button!==0)return;if(mode==="move"&&event.target.closest("button,a,input,select,textarea"))return;event.preventDefault();gesture={mode,id:event.pointerId,x:event.clientX,y:event.clientY,box:{...box}};event.currentTarget.setPointerCapture?.(event.pointerId);}
+ const drag=event=>start(event,"move"),sizing=event=>start(event,"resize");
+ function move(event){if(!gesture||event.pointerId!==gesture.id)return;event.preventDefault();const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;if(gesture.mode==="move"){box.x=gesture.box.x+dx;box.y=gesture.box.y+dy;}else{box.w=gesture.box.w+dx;box.h=gesture.box.h+dy;}apply();}
+ function keys(event,mode){if(event.target!==event.currentTarget)return;const d={ArrowLeft:[-16,0],ArrowRight:[16,0],ArrowUp:[0,-16],ArrowDown:[0,16]}[event.key];if(!d)return;event.preventDefault();event.stopPropagation();if(mode==="move"){box.x+=d[0];box.y+=d[1];}else{box.w+=d[0];box.h+=d[1];}apply();}
+ const dragKeys=event=>keys(event,"move"),resizeKeys=event=>keys(event,"resize"),toggle=()=>{collapsed=!collapsed;apply();};
+ function isolate(event){event.stopPropagation();if(event.type==="keydown"&&event.key==="Escape"){event.preventDefault();controller.close();}}
+ handle.addEventListener("pointerdown",drag);handle.addEventListener("keydown",dragKeys);resize.addEventListener("pointerdown",sizing);resize.addEventListener("keydown",resizeKeys);collapse.addEventListener("click",toggle);
+ for(const type of ["keydown","keyup","wheel","paste"])element.addEventListener(type,isolate);
+ window.addEventListener("pointermove",move);window.addEventListener("pointerup",end);window.addEventListener("pointercancel",end);window.addEventListener("resize",apply);window.visualViewport?.addEventListener("resize",apply);
+ const controller={open(source=element.ownerDocument.activeElement){launcher=source;shown=true;collapsed=false;element.hidden=false;apply();handle.focus();},close(){shown=false;element.hidden=true;end();if(launcher?.isConnected&&!launcher.closest("[hidden]"))launcher.focus();launcher=null;onChange({shown,collapsed});},isReadable:()=>shown&&!collapsed,isOpen:()=>shown,reset(){controller.close();collapsed=false;box={x:Math.max(8,window.innerWidth-404),y:100,w:380,h:430};apply();},constrain:apply,dispose(){for(const type of ["keydown","keyup","wheel","paste"])element.removeEventListener(type,isolate);handle.removeEventListener("pointerdown",drag);handle.removeEventListener("keydown",dragKeys);resize.removeEventListener("pointerdown",sizing);resize.removeEventListener("keydown",resizeKeys);collapse.removeEventListener("click",toggle);window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",end);window.removeEventListener("pointercancel",end);window.removeEventListener("resize",apply);window.visualViewport?.removeEventListener("resize",apply);end();}};
+ apply();return controller;
+}

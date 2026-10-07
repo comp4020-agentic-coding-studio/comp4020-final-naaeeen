@@ -8,7 +8,7 @@ describe('shared house collision geometry', () => {
     let queries = 0;
     for (let capacity = 2; capacity <= 6; capacity++) {
       const layout = createLayout(capacity);
-      expect(layout.width).toBe(12); expect(layout.depth).toBe(8);
+      expect(layout.width).toBe(16); expect(layout.depth).toBe(11);
       expect(layout.doors).toHaveLength(capacity); expect(layout.seats).toHaveLength(capacity);
       expect(new Set(layout.doors.map((door: { slot: number }) => door.slot)).size).toBe(capacity);
       expect(validPosition(layout, layout.spawn)).toBe(true);
@@ -30,7 +30,7 @@ describe('shared house collision geometry', () => {
 
   test('invalid numbers, furniture, walls and unsupported capacities are rejected', () => {
     const layout = createLayout(4);
-    for (const p of [{ x: NaN, z: 0 }, { x: 0, z: Infinity }, { x: 0, z: 0 }, { x: 6, z: 3 }]) expect(validPosition(layout, p)).toBe(false);
+    for (const p of [{ x: NaN, z: 0 }, { x: 0, z: Infinity }, { x: 0, z: 0 }, { x: 8, z: 3 }]) expect(validPosition(layout, p)).toBe(false);
     for (const n of [1, 7, 3.5, NaN]) expect(() => createLayout(n)).toThrow(RangeError);
     for (const o of layout.obstacles) expect(validPosition(layout, { x: o.x, z: o.z })).toBe(false);
   });
@@ -42,7 +42,7 @@ describe('shared house collision geometry', () => {
     expect(validPosition(layout, result)).toBe(true);
     const empty = bedroomLayout([]);
     const wall = slide(empty, { x: 5.7, z: 0 }, 20, 2);
-    expect(wall.x).toBeLessThanOrEqual(5.76); expect(wall.z).toBeGreaterThan(1.9);
+    expect(wall.x).toBeLessThanOrEqual(6.76); expect(wall.z).toBeGreaterThan(1.9);
     expect(slide(empty, { x: 0, z: 3 }, NaN, 1)).toEqual({ x: 0, z: 3 });
   });
 
@@ -73,8 +73,8 @@ describe('DIY placement validation', () => {
   test('overlap, room blocking, invalid transforms, kinds and duplicate IDs are rejected', () => {
     const valid = piece('a', 'bed', -3, -1.5);
     const bad = [
-      [valid, piece('b', 'plant', -3, -1.5)], [piece('a', 'desk', 0, -2)], [piece('a', 'plant', 3, 3)],
-      [piece('a', 'bed', 5, 0)], [piece('a', 'plant', 2.1, 0)], [piece('a', 'lamp', 2, 0, 4)],
+      [valid, piece('b', 'plant', -3, -1.5)], [piece('a', 'desk', 0, 3)], [piece('a', 'plant', 0, 4)],
+      [piece('a', 'bed', 6.5, 0)], [piece('a', 'plant', 2.1, 0)], [piece('a', 'lamp', 2, 0, 4)],
       [piece('a', 'sofa', 2, 0)], [piece('a', 'plant', NaN, 0)], [{ ...valid, colour: 'neon' }],
       [valid, piece('a', 'plant', 3, 0)], Array.from({ length: 11 }, (_, i) => piece(String(i), 'plant', 3, 0)),
     ];
@@ -99,3 +99,14 @@ describe('DIY placement validation', () => {
   });
 });
 
+
+test('expands saved bedrooms additively and protects arrival while allowing central DIY', () => {
+ const saved=[piece('bed','bed',-3,-1.5),piece('desk','desk',3,-2),piece('chair','chair',3,0),piece('shelf','shelf',-4.5,1),piece('plant','plant',4.5,1.5),piece('lamp','lamp',1.5,1.5)];
+ const room=bedroomLayout(saved); expect(room.width).toBe(14); expect(room.depth).toBe(10);
+ expect(room.spawn).toEqual({x:0,z:3}); expect(validatePlacements(saved)).toBe(true);
+ expect(validatePlacements([piece('centre','desk',0,-2)])).toBe(true);
+ expect(validatePlacements([piece('arrival','lamp',0,3)])).toBe(false);
+ const ten=[...saved,piece('p2','plant',-5.5,-3.5),piece('s2','shelf',4,-4),piece('l2','lamp',-2,1.5),piece('p3','plant',5.5,3.5)];
+ expect(validatePlacements(ten)).toBe(true);
+ const expanded=bedroomLayout(ten); expect(findRoute(expanded,expanded.spawn,expanded.exitTarget)).not.toBeNull();
+});

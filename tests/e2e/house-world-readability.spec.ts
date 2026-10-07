@@ -1,16 +1,18 @@
 import { test, expect, type Page } from '@playwright/test';
 
+import { beginAdmission, continueSavedHome, chooseCamera, openMyRoom, clickProjectedTarget, projectionFramingFailures } from './house-journey.ts';
+
 const longName = 'W'.repeat(40);
-const controls = '.top,#roster,.availability,.toolbelt,.quick-chat,.movement,.context-hint,.chat-privacy,#panel,#notice,#takeover,#camera-controls';
+const controls = '.world-status,#resident-disclosure,.availability,.toolbelt,#chat-window,.movement,.touch-toggle,.context-hint,#panel,#notice,#takeover';
 
 // Fixtures use actual admission and browser identity; no renderer-created people.
 async function createHouse(page: Page) {
-  await page.goto('/');
+  await beginAdmission(page, 'create');
   // The server accepts 40 characters; the current lobby input is narrower.
   // Admit the server boundary through its real form, explicitly widening this fixture only.
   await page.getByLabel('Your name', { exact: true }).evaluate(el => el.removeAttribute('maxlength'));
   await page.getByLabel('Your name', { exact: true }).fill(longName);
-  await page.getByRole('combobox', { name: 'House capacity', exact: true }).selectOption('2');
+  await page.getByRole('combobox', { name: 'Bedrooms', exact: true }).selectOption('2');
   await page.getByRole('button', { name: 'Create house', exact: true }).click();
   await expect(page.locator('#lobby')).toBeHidden();
   await expect(page.locator('.house-avatar-name')).toHaveCount(1);
@@ -38,7 +40,7 @@ async function visualViolations(page: Page) {
       if (rect.left < 0 || rect.right > innerWidth || rect.top < 0 || rect.bottom > innerHeight) violations.push('box outside viewport');
       if (el.scrollWidth > el.clientWidth + 1) violations.push('text exceeds inline bounds');
       if (activeControls.some(control => rect.left < control.right && rect.right > control.left && rect.top < control.bottom && rect.bottom > control.top)) violations.push('label overlaps active control');
-      if (el.textContent?.includes('W'.repeat(40)) && (!el.title.includes('W'.repeat(40)) || !(el.getAttribute('aria-label') || '').includes('W'.repeat(40)))) violations.push('full name unavailable');
+      if ((el.dataset.name === 'W'.repeat(40) || el.textContent?.includes('W'.repeat(40))) && (!el.title.includes('W'.repeat(40)) || !(el.getAttribute('aria-label') || '').includes('W'.repeat(40)))) violations.push('full name unavailable');
     }
     return { viewport: { width: innerWidth, height: innerHeight }, violations };
   }, controls);
@@ -59,6 +61,7 @@ for (const viewport of [{ width: 1920, height: 1080 }, { width: 390, height: 844
       const observer = await context.newPage();
       observer.on('pageerror', error => errors.push(error.message));
       await observer.goto('/');
+      await continueSavedHome(observer);
       await expect(observer.locator('#takeover')).toBeVisible();
       await expect.poll(async () => (await visualViolations(observer)).violations).toEqual([]);
       expect((await visualViolations(observer)).viewport).toEqual(viewport);
@@ -75,16 +78,9 @@ async function projection(page: Page) {
  });
 }
 async function selfClear(page: Page) {
- // Scene/privacy reset clears these diagnostics immediately; wait for the next authorised rendered frame.
- await expect.poll(async () => Boolean((await projection(page)).mesh)).toBe(true);
- const value = await projection(page), half = value.height / 2;
- expect(value.area.available).toBe(true);
- expect(value.screenY - half).toBeGreaterThanOrEqual(value.area.y - 1);
- expect(value.screenY + half).toBeLessThanOrEqual(value.area.y + value.area.h + 1);
- expect(value.mesh.left).toBeGreaterThanOrEqual(value.area.x - 1); expect(value.mesh.right).toBeLessThanOrEqual(value.area.x + value.area.w + 1);
- expect(value.mesh.top).toBeGreaterThanOrEqual(value.area.y - 1); expect(value.mesh.bottom).toBeLessThanOrEqual(value.area.y + value.area.h + 1);
- expect(value.screenX).toBeGreaterThanOrEqual(value.area.x);
- expect(value.screenX).toBeLessThanOrEqual(value.area.x + value.area.w);
+ // Mode/area can publish before the resumed RAF publishes the actual mesh projection.
+ // Poll all identical numeric framing bounds together using the unchanged default timeout.
+ await expect.poll(async () => projectionFramingFailures(await projection(page))).toEqual([]);
 }
 
 for (const viewport of [{ width: 1920, height: 1080 }, { width: 390, height: 844 }, { width: 844, height: 390 }, { width: 390, height: 520 }]) {
@@ -97,32 +93,33 @@ for (const viewport of [{ width: 1920, height: 1080 }, { width: 390, height: 844
    const play = await projection(page); expect(play.mode).toBe('play');
    expect(play.height).toBeGreaterThanOrEqual(viewport.width > 1000 ? 96 : 56);
    expect(play.height).toBeLessThanOrEqual(viewport.width > 1000 ? 160 : 88);
-   await page.getByRole('button', { name: 'Overview', exact: true }).click();
+   await chooseCamera(page, 'overview');
    await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'overview');
    await expect.poll(async () => (await projection(page)).height).toBeLessThan(play.height);
    expect((await projection(page)).x).toBe(play.x); expect((await projection(page)).z).toBe(play.z);
    await page.locator('canvas').focus(); await page.keyboard.down('ArrowRight');
    try { await page.waitForFunction(start => Number(document.querySelector<HTMLElement>('canvas')?.dataset.selfX) > 1.5, play.x, { timeout: 15_000 }); }
    finally { await page.keyboard.up('ArrowRight'); }
-   await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'play'); await selfClear(page);
-   await page.getByRole('button', { name: 'Recenter', exact: true }).click();
-   await expect.poll(async () => (await projection(page)).left).not.toBe(play.left); await selfClear(page);
+   await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'overview'); await selfClear(page);
+   await chooseCamera(page, 'play');
+   await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'play');await selfClear(page);
    await expect(page.locator('#notice')).toBeHidden();
    await page.waitForTimeout(2000); const settled = await projection(page); await page.waitForTimeout(5000);
    const idle = await projection(page); expect(Math.abs(idle.left - settled.left)).toBeLessThan(1); expect(Math.abs(idle.top - settled.top)).toBeLessThan(1);
-   // Use the renderer's projected physical mesh centre, then exercise native raycast -> route -> seat authority.
-   const seat = await page.locator('canvas').evaluate(el => JSON.parse((el as HTMLElement).dataset.pickTargets || '[]').find((entry: any) => entry.target.type === 'seat' && entry.target.seatId === 'seat-1'));
-   expect(seat?.visible).toBe(true); await page.mouse.click(seat.x, seat.y);
+   // Overview exposes the destination; test the actual physical mesh raycast, not an API seat claim.
+   await chooseCamera(page, 'overview');
+   await clickProjectedTarget(page, { type: 'seat', seatId: 'seat-1' });
    await expect(page.locator('canvas')).toHaveAttribute('data-self-animation', 'sit', { timeout: 30_000 });
    await selfClear(page); await page.waitForTimeout(2000); const sitting = await projection(page); await page.waitForTimeout(1000);
    expect((await projection(page)).left).toBe(sitting.left);
    await page.locator('canvas').focus(); await page.keyboard.press('e');
    await expect(page.locator('canvas')).not.toHaveAttribute('data-self-animation', 'sit');
-   await page.getByRole('button', { name: 'Room settings', exact: true }).click();
+   await chooseCamera(page, 'play');
+   await openMyRoom(page);
    await page.getByRole('button', { name: 'Walk to my room', exact: true }).click();
    await expect(page.locator('#place-label')).toHaveText(longName + "'s room", { timeout: 30_000 }); await selfClear(page);
-   await page.getByRole('button', { name: 'Room settings', exact: true }).click();
-   await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'overview');
+   await openMyRoom(page);
+   await expect(page.locator('canvas')).toHaveAttribute('data-camera-mode', 'inspection');
    await expect.poll(async () => page.evaluate(() => {
     const area=JSON.parse(document.querySelector<HTMLElement>('canvas')?.dataset.cameraPlayArea || 'null'), panel=document.querySelector('#panel')!.getBoundingClientRect();
     return area && !(area.x<panel.right && area.x+area.w>panel.left && area.y<panel.bottom && area.y+area.h>panel.top);
@@ -149,7 +146,7 @@ test('reduced-motion close play settles without easing and overview stays statio
   finally{await page.keyboard.up('ArrowRight');}
   await selfClear(page);await page.waitForTimeout(500);const first=await projection(page);await page.waitForTimeout(1000);const next=await projection(page);
   expect(Math.abs(next.left-first.left)).toBeLessThan(1);expect(Math.abs(next.top-first.top)).toBeLessThan(1);
-  await page.getByRole('button',{name:'Overview',exact:true}).click();await expect.poll(async()=> (await projection(page)).height).toBeLessThan(first.height);
+  await chooseCamera(page,'overview');await expect.poll(async()=> (await projection(page)).height).toBeLessThan(first.height);
   const overview=await projection(page);await page.waitForTimeout(1000);expect((await projection(page)).left).toBe(overview.left);
  } finally{await context.close();}
 });

@@ -1,11 +1,13 @@
 import { JSDOM } from "jsdom";
 import { afterEach, expect, it, vi } from "vitest";
+import { Box3 } from "three";
+const rendered = vi.hoisted(()=>({ scene: null as any }));
 vi.mock("three",async importOriginal=>{
  const actual=await importOriginal<any>();
- class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(){} dispose(){} }
+ class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(scene:any){rendered.scene=scene;} dispose(){} }
  return {...actual,WebGLRenderer:Renderer};
 });
-import { createLayout } from '../public/house-geometry.js';
+import { createLayout, footprint } from '../public/house-geometry.js';
 import { createHouseWorld } from "../public/house-world.js";
 const cleanups: (()=>void)[]=[];
 afterEach(()=>{for(const f of cleanups.splice(0))f();vi.unstubAllGlobals();});
@@ -23,7 +25,7 @@ function distance(frameMs:number){
  world.update({serverEpoch:"epoch",accessGeneration:1,generation:1,controller:true,durable:{schemaVersion:2,selfId:"self",house:{id:"house",capacity:2,ownerId:"self",code:"12345678"},residents:[{id:"self",name:"Robin",colour:"sage",slot:0,bedroomId:"room",open:false}],streamId:"lounge:house",sequence:0,zoneId:"lounge",room:null,cards:[],chat:[]},players:[{id:"self",name:"Robin",colour:"sage",connected:true,zoneId:"lounge",x:0,z:2.85,heading:0,animation:"idle",availability:"quiet",generation:1}]} as any);
  world.setDirection(-1,0);next(0);
  for(let t=frameMs;t<=1000+.001;t+=frameMs)next(t);
- return Math.abs(world.getPosition().x);
+ return Math.hypot(world.getPosition().x, world.getPosition().z - 2.85);
 }
 it("uses elapsed time for the same walking speed at fast and slow render rates",()=>{
  const fast=distance(1000/30),slow=distance(250);
@@ -31,14 +33,14 @@ it("uses elapsed time for the same walking speed at fast and slow render rates",
  expect(slow).toBeCloseTo(fast,1);
 });
 
-function speechFixture(){
+function speechFixture(width=390,height=844){
  const dom=new JSDOM("<div id='world'></div>",{url:"http://localhost"});
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:false})});
  vi.stubGlobal('window',dom.window);vi.stubGlobal('document',dom.window.document);vi.stubGlobal('HTMLElement',dom.window.HTMLElement);
  vi.stubGlobal('ResizeObserver',class{observe(){}disconnect(){}});
  let next:FrameRequestCallback=()=>{},clock=0;vi.spyOn(dom.window.performance,'now').mockImplementation(()=>clock);
  vi.stubGlobal('requestAnimationFrame',(cb:FrameRequestCallback)=>{next=cb;return 1;});vi.stubGlobal('cancelAnimationFrame',()=>{});
- const container=dom.window.document.getElementById('world')!;Object.defineProperty(container,'clientWidth',{value:390});Object.defineProperty(container,'clientHeight',{value:844});
+ const container=dom.window.document.getElementById('world')!;Object.defineProperty(container,'clientWidth',{value:width,configurable:true});Object.defineProperty(container,'clientHeight',{value:height,configurable:true});
  const world=createHouseWorld(container);cleanups.push(()=>{world.dispose();dom.window.close();});
  const players=Array.from({length:6},(_,i)=>({id:'p'+i,name:'Friend '+i,colour:'sage',connected:true,zoneId:'lounge',x:0,z:3.3,heading:0,animation:'idle',availability:'chat',availabilitySetAt:0,generation:1}));
  const snapshot:any={serverEpoch:'epoch',accessGeneration:1,generation:1,controller:true,durable:{schemaVersion:2,selfId:'p0',house:{id:'house',capacity:6,ownerId:'p0',code:'12345678'},residents:players.map((p,i)=>({...p,slot:i,bedroomId:'room'+i,open:false})),streamId:'lounge:house',sequence:0,zoneId:'lounge',room:null,cards:[],chat:[]},players};
@@ -121,12 +123,12 @@ it('keeps the controlled avatar prominent in portrait play while preserving worl
  expect(f.world.getPosition()).toEqual({x:0,z:3.3});
 });
 
-it('returns overview to close play on movement and keeps DIY camera stable',()=>{
+it('keeps chosen overview during movement and keeps DIY inspection camera stable',()=>{
  const f=speechFixture();f.world.update(f.snapshot);f.step(0);
  f.world.setCameraMode('overview');expect(f.world.getCameraMode()).toBe('overview');f.step(100);
  const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;const overviewHeight=Number(canvas.dataset.selfAvatarHeight);
- f.world.setDirection(-1,0);f.step(200);expect(f.world.getCameraMode()).toBe('play');expect(Number(canvas.dataset.selfAvatarHeight)).toBeGreaterThan(overviewHeight);
- f.world.setDirection(0,0);f.world.setEditing(true);f.step(300);expect(f.world.getCameraMode()).toBe('overview');
+ f.world.setDirection(-1,0);f.step(200);expect(f.world.getCameraMode()).toBe('overview');expect(Number(canvas.dataset.selfAvatarHeight)).toBe(overviewHeight);
+ f.world.setDirection(0,0);f.world.setEditing(true);f.step(300);expect(f.world.getCameraMode()).toBe('inspection');
  const stable=canvas.dataset.worldLeft;f.step(500);expect(canvas.dataset.worldLeft).toBe(stable);
  f.world.setEditing(false);f.world.setCameraMode('play');f.step(600);expect(f.world.getCameraMode()).toBe('play');
 });
@@ -140,4 +142,85 @@ it('applies phone foreground sizing to newly joined and rebuilt authorised actor
  snapshot.durable.zoneId='room0';snapshot.durable.streamId='bedroom:room0';snapshot.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};
  for(const player of snapshot.players)player.zoneId='room0';f.world.update(snapshot);check('p0');check('p2');
  f.world.update(null);expect(f.container.querySelector('canvas')?.hasAttribute('data-pick-targets')).toBe(false);expect(f.container.querySelector('canvas')?.hasAttribute('data-self-mesh-bounds')).toBe(false);
+});
+
+it('suspends world movement and resumes the same camera position and zoom',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);f.world.setCameraZoom(1.3);
+ const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;f.step(100);const left=canvas.dataset.worldLeft,before=f.world.getPosition();
+ f.world.setSuspended(true);f.world.setDirection(-1,0);f.step(1000);
+ expect(f.world.getPosition()).toEqual(before); expect(canvas.dataset.worldLeft).toBe(left);
+ f.world.setSuspended(false);f.step(2000);expect(f.world.getPosition()).toEqual(before);expect(f.world.getCameraZoom()).toBe(1.3);
+});
+it('keeps one camera orientation across the responsive threshold',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
+ const pose=canvas.dataset.cameraOrientation;
+ Object.defineProperty(f.container,'clientWidth',{value:701,configurable:true});
+ f.world.resize();f.step(100);expect(canvas.dataset.cameraOrientation).toBe(pose);
+});
+
+it('lets a deliberate canvas drag take focus after chat typing without moving the actor',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const input=document.createElement('textarea');document.body.append(input);input.focus();
+ const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!,before=f.world.getPosition();
+ canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:120,clientY:300,button:0,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointermove',{clientX:170,clientY:300,button:0,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointerup',{clientX:170,clientY:300,button:0,bubbles:true}));
+ expect(f.world.getCameraMode()).toBe('inspection');expect(document.activeElement).toBe(canvas);
+ expect(f.world.getPosition()).toEqual(before);
+});
+
+it('keeps each rotated DIY mesh inside its authoritative footprint',()=>{
+ const f=speechFixture(),room=structuredClone(f.snapshot);
+ room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';
+ for(const player of room.players)player.zoneId='room0';
+ for(const kind of ['bed','desk','chair','shelf','plant','lamp'])for(let rotation=0;rotation<4;rotation++){
+  const p={id:'piece',kind,x:2,z:0,rotation,colour:'sage'};
+  room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[p]};
+  f.world.update(room);f.step(rotation*100);
+  const group=rendered.scene.children.find((o:any)=>o.userData.target?.type==='placement');
+  const actual=new Box3().setFromObject(group,true),logical=footprint(p);
+  expect(actual.min.x,kind+' x min r'+rotation).toBeGreaterThanOrEqual(logical.x-logical.w/2-.001);
+  expect(actual.max.x,kind+' x max r'+rotation).toBeLessThanOrEqual(logical.x+logical.w/2+.001);
+  expect(actual.min.z,kind+' z min r'+rotation).toBeGreaterThanOrEqual(logical.z-logical.d/2-.001);
+  expect(actual.max.z,kind+' z max r'+rotation).toBeLessThanOrEqual(logical.z+logical.d/2+.001);
+ }
+});
+
+it('keeps the actual animated self mesh and ring inside short HUD-free play space',()=>{
+ for(const [width,height] of [[844,390],[390,520]]){
+  const f=speechFixture(width,height);f.world.update(f.snapshot);f.step(0);
+  const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
+  f.world.setLabelSafeArea({viewport:{left:8,top:128,right:width-8,bottom:250},safeRects:[]});
+  f.world.recenterCamera();
+  let clock=0;
+  for(const [dx,dz] of [[1,1],[-1,-1],[1,0],[0,1]]){
+   f.world.setDirection(dx,dz);
+   for(let i=1;i<=120;i++){
+    clock+=1000/60;f.step(clock);
+    const mesh=JSON.parse(canvas.dataset.selfMeshBounds!),area=JSON.parse(canvas.dataset.cameraPlayArea!);
+    expect(mesh.left,width+'x'+height+' left').toBeGreaterThanOrEqual(area.x-.001);
+    expect(mesh.right,width+'x'+height+' right').toBeLessThanOrEqual(area.x+area.w+.001);
+    expect(mesh.top,width+'x'+height+' top').toBeGreaterThanOrEqual(area.y-.001);
+    expect(mesh.bottom,width+'x'+height+' bottom').toBeLessThanOrEqual(area.y+area.h+.001);
+   }
+  }
+ }
+});
+
+it('restores framing after the room editor closes before its next HUD report',()=>{
+ for(const [width,height] of [[390,844],[390,520]])for(const mode of ['play','overview']){
+  const f=speechFixture(width,height);f.world.update(f.snapshot);f.step(0);
+  const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
+  const base={viewport:{left:8,top:128,right:width-8,bottom:height===844?740:403},safeRects:[]};
+  f.world.setLabelSafeArea(base);f.world.setCameraMode(mode);f.step(100);
+  const beforeHeight=Number(canvas.dataset.selfAvatarHeight);
+  f.world.setEditing(true);f.world.setLabelSafeArea({...base,safeRects:[{x:0,y:180,w:width,h:height-180}]});f.step(200);
+  f.world.setEditing(false);f.world.setLabelSafeArea(base);f.step(300);
+  expect(f.world.getCameraMode()).toBe(mode);
+  const mesh=JSON.parse(canvas.dataset.selfMeshBounds!),area=JSON.parse(canvas.dataset.cameraPlayArea!);
+  expect(mesh.top,width+'x'+height+' '+mode+' top').toBeGreaterThanOrEqual(area.y-.001);
+  expect(mesh.bottom,width+'x'+height+' '+mode+' bottom').toBeLessThanOrEqual(area.y+area.h+.001);
+  expect(Number(canvas.dataset.selfAvatarHeight)).toBeCloseTo(beforeHeight,1);
+ }
 });

@@ -334,7 +334,7 @@ export class HouseStore {
     if (uuid(c.houseId) !== h.id) fail("FORBIDDEN", "This queued action belongs to a different house.");
     if (c.type === "chat.send") {
       keys(p, ["zoneId", "text"], ["zoneId", "text"]);
-      const value = text(p.text, 280, true), zoneId = p.zoneId === "lounge" ? "lounge" : uuid(p.zoneId);
+      const value = text(p.text, 2000, true), zoneId = p.zoneId === "lounge" ? "lounge" : uuid(p.zoneId);
       const r = zoneId === "lounge" ? null : this.access(id, zoneId);
       const streamId = r ? "bedroom:" + r.id : lounge, sequence = this.bump(streamId), chatId = randomUUID();
       this.prepared("INSERT INTO chat(id,zone_id,author_id,name,text,at,sequence) VALUES (?,?,?,?,?,?,?)").run(chatId, streamId, id, this.identity(id).name, value, Date.now(), sequence);

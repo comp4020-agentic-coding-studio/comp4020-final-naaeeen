@@ -1,8 +1,11 @@
 import { createHouseClient, createPendingInspector } from "./house-client.js";
 import { createHouseWorld } from "./house-world.js";
 import { validatePlacements } from "./house-geometry.js";
+import { createMovableWindow, createModalFocus } from "./house-shell.js";
 const $ = id => document.getElementById(id);
-const HUD_SAFE_SELECTOR=".top,#roster,.availability,.toolbelt,.quick-chat,.movement,.context-hint,.chat-privacy,#panel,#notice,#takeover,#camera-controls";
+function setPlaceLabel(text){const label=$("place-label");label.textContent=text;label.title=text;}
+setPlaceLabel($("place-label").textContent||"");
+const HUD_SAFE_SELECTOR=".world-status,#resident-disclosure,.availability,.toolbelt,#chat-window,.movement,.touch-toggle,.context-hint,#panel,#notice,#takeover";
 let live = null, me = null, world = null, client = null, activePanel = null;
 let cardDirty = false, cardBase = null, cardProjection=null, roomDraft = null, suspendedDrafts = null;
 let lastScope="", lastIdentityScope="", lastHouseKey="", inspector=null, pendingRequest=0, privacyGeneration=0,bootstrapRequest=0,keyIssuance=null;
@@ -10,10 +13,27 @@ const unreadStreams=new Map();
 let adminRequest=0,safeAreaFrame=null;
 let lastDurableKey = "", noticeTimer, chatVersion=0, cardVersion=0, checkingMembership=false;
 const pending = new Map();
+let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null;
+const panelFocus=createModalFocus($("panel")),boardFocus=createModalFocus($("board-workspace"));
+const chatWindow=createMovableWindow({window,element:$("chat-window"),handle:$("chat-handle"),body:$("chat-body"),collapse:$("chat-collapse"),resize:$("chat-resize"),onChange:state=>{if(state.shown&&!state.collapsed&&chatReadable())markChatRead();queueSafeArea();}});
+let reducedMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||false;
+try{const saved=window.localStorage.getItem("night-neighbourhood.reduced-motion");if(saved!==null)reducedMotion=saved==="true";}catch{/* A blocked preference store does not block play. */}
+$("reduced-motion").checked=reducedMotion;document.body.dataset.reducedMotion=String(reducedMotion);
+function setShellInert(){const modal=Boolean(embeddedFrame||activePanel&&activePanel!=="room");for(const id of ["world","game-controls","entry","chat-window"])$(id).inert=modal;}
+function renderTitle(){
+ $("lobby-export").hidden=!me?.archiveCount;$("archive-count").hidden=!me?.archiveCount;$("archive-count").textContent=me?.archiveCount?me.archiveCount+" private room archive"+(me.archiveCount===1?"":"s")+" available in your download.":"";
+ entered=false;$("title-screen").hidden=false;$("lobby").hidden=true;$("game-controls").hidden=true;document.body.dataset.screen="title";
+ $("title-continue").hidden=!me?.home;$("title-create").disabled=Boolean(me?.home);$("title-join").disabled=Boolean(me?.home);
+ $("title-status").textContent=me?.home?"Your saved home is ready.":"Create a house, or use a friend’s house code.";applyInput();
+}
+function openAdmission(kind){if(me?.home){notice("Continue your saved home first. House settings includes leaving it.");return;}$("title-screen").hidden=true;$("lobby").hidden=false;$("admission-title").textContent=kind==="create"?"Create your house":"Join your friends";$("create-form").hidden=kind!=="create";$("join-form").hidden=kind!=="join";$("name").focus();document.body.dataset.screen="admission";applyInput();}
+function closeBoard(){if(!embeddedFrame)return;embeddedFrame.remove();embeddedFrame=null;embeddedContext="";$("board-workspace").hidden=true;$("board-status").textContent="";setShellInert();applyInput();boardFocus.close();if(boardLauncher?.isConnected&&!boardLauncher.closest("[hidden]"))boardLauncher.focus();boardLauncher=null;queueSafeArea();}
+function openBoard(){if(!live){notice("Waiting for the house connection.");return;}closePanel();chatWindow.close();boardLauncher=document.activeElement;embeddedContext=privateContext();embeddedFrame=document.createElement("iframe");embeddedFrame.id="board-frame";embeddedFrame.title="Collaborative shared board";embeddedFrame.src="/board/?embedded=1";const ownedFrame=embeddedFrame;embeddedFrame.addEventListener("load",()=>{if(embeddedFrame===ownedFrame&&embeddedContext===privateContext())$("board-status").textContent="House-wide workspace";});$("board-frame-host").replaceChildren(embeddedFrame);$("board-workspace").hidden=false;$("board-status").textContent="Opening the shared workspace…";setShellInert();applyInput();boardFocus.open(boardLauncher);}
+
 const RETAIN_INTENT_CODES=new Set(["TIMEOUT","PENDING","STORAGE_UNAVAILABLE","NOT_CONTROLLER","STALE_ZONE","CLOSED","IDENTITY_CHANGED","INSPECTION_REQUIRED"]);
 function node(tag, text, className) { const e=document.createElement(tag); if(text!==undefined)e.textContent=text; if(className)e.className=className; return e; }
 function notice(message,persistent=false){
- clearTimeout(noticeTimer);const target=activePanel?$("panel-feedback"):!$("lobby").hidden?$("lobby-feedback"):$("notice");for(const id of ["notice","panel-feedback","lobby-feedback"])$(id).hidden=true;target.textContent=message;target.hidden=false;queueSafeArea();
+ clearTimeout(noticeTimer);const target=activePanel?$("panel-feedback"):!$("title-screen").hidden?$("title-feedback"):!$("lobby").hidden?$("lobby-feedback"):$("notice");for(const id of ["notice","panel-feedback","lobby-feedback","title-feedback"])$(id).hidden=true;target.textContent=message;target.hidden=false;queueSafeArea();
  if(!persistent)noticeTimer=setTimeout(()=>{target.hidden=true;queueSafeArea();},6500);
 }
 async function api(path, body) {
@@ -59,7 +79,7 @@ function queueSafeArea(){
   const viewport={left:Math.max(0,left),top:Math.max(0,top),right:Math.min(origin.width,left+(view?.width||window.innerWidth)),bottom:Math.min(origin.height,top+(view?.height||window.innerHeight))};
   const safeRects=[];
   for(const element of document.querySelectorAll(HUD_SAFE_SELECTOR)){
-   if(element.hidden||element.closest("[hidden]"))continue;
+   if(element.hidden||element.closest("[hidden]")||(element.id==="panel"&&element.dataset.tool==="options"))continue;
    const rect=element.getBoundingClientRect();if(rect.width&&rect.height)safeRects.push({x:rect.left-origin.left,y:rect.top-origin.top,w:rect.width,h:rect.height});
   }
   world.setLabelSafeArea({viewport,safeRects});
@@ -67,27 +87,30 @@ function queueSafeArea(){
 }
 function renderCameraMode(mode=world?.getCameraMode?.()||"play"){
  $("camera-overview").setAttribute("aria-pressed",String(mode==="overview"));
- const ready=Boolean(live&&world?.setCameraMode);$("camera-overview").disabled=!ready;$("camera-recenter").disabled=!ready;
- $("camera-controls").hidden=Boolean(activePanel)||!live;
+ const ready=Boolean(live&&world?.setCameraMode);for(const id of ["camera-overview","camera-recenter","camera-zoom"])$(id).disabled=!ready;
+ const zoom=world?.getCameraZoom?.()||1;$("camera-zoom").value=String(zoom);$("camera-zoom-value").textContent=Math.round(zoom*100)+"%";
+ $("camera-controls").hidden=activePanel!=="options";$("game-settings").hidden=!live;$("resume-game").hidden=!live;$("return-title").hidden=!live;
+ $("pause-description").textContent=live?"Game paused. Your house connection stays live.":"Choose your comfort settings before entering the house.";
 }
-function applyInput(){world?.setInputEnabled(Boolean(live?.controller&&!activePanel&&$("lobby").hidden));renderCameraMode();}
-function closePanel(){adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();queueSafeArea();}
+function applyInput(){world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
+function closePanel(){adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("modal-backdrop").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();if(chatReadable())markChatRead();panelFocus.close();queueSafeArea();}
 function openPanel(name){
- if(!["recovery","pending"].includes(name)&&!live){notice("Waiting for the house connection.");return;}
- const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
- for(const key of ["chat","board","room","house","recovery","pending"])$(key+"-panel").hidden=key!==name;
- $("panel-title").textContent={chat:"A conversation here",board:"Our study board",room:"Make it yours",house:"Our little house",recovery:"Welcome back",pending:"Pending drafts"}[name];
+ if(name==="chat"){if(!live){notice("Waiting for the house connection.");return;}if(chatWindow.isOpen())chatWindow.close();else {chatWindow.open(document.activeElement);renderTranscript();markChatRead();}return;}
+ if(!["recovery","pending","options","about"].includes(name)&&!live){notice("Waiting for the house connection.");return;}
+ if(embeddedFrame)return;
+ const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(name!=="room"));$("modal-backdrop").hidden=name==="room";$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
+ for(const key of ["board","room","house","recovery","pending","options","about"])$(key+"-panel").hidden=key!==name;
+ $("panel-title").textContent={board:"Study notes",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood"}[name];
  applyInput();
- if(name==="chat"){renderTranscript();markChatRead();}
  if(name==="pending")void protectedAction(renderPending)();
  if(name==="board"){renderCards();if(!cardDirty)fillCard();}
  if(name==="room")renderRoom();
  if(name==="house")renderHouse();
- $("panel-close").focus();queueSafeArea();
+ panelFocus.open();queueSafeArea();
 }
 function updateWorld(snapshot){
  if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
- world.update(snapshot);applyInput();queueSafeArea();
+ world.update(snapshot);world?.setReducedMotion?.(reducedMotion);applyInput();queueSafeArea();
 }
 async function interact(target){
  if(!live||!target)return;
@@ -102,7 +125,7 @@ async function interact(target){
   if(self?.seatId)await client.stand();else await client.claimSeat(target.seatId);
  }else if(target.type==="board"){
   if(live.durable.zoneId!=="lounge"){notice("The shared board is in the lounge.");return;}
-  openPanel("board");
+  openBoard();
  }
 }
 function privateContext(){return privacyGeneration+":"+(live?.durable.selfId||me?.identity.id||"");}
@@ -112,20 +135,21 @@ function roomScope(){const room=ownRoom();return room?scopeKey(live)+":"+room.id
 function cardValues(){return Object.fromEntries(["small-goal","question","resource","next-step"].map(id=>[id,$(id).value]).concat([["help-requested",$("help-requested").checked]]));}
 function restoreCard(values){for(const [id,value] of Object.entries(values))if(id==="help-requested")$(id).checked=value;else $(id).value=value;}
 function clearPrivateDOM(){
+ setPlaceLabel("");
  for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries"])$(id).replaceChildren();
- for(const id of ["chat-input","small-goal","question","resource","next-step","palette","recovery-proof"])$(id).value="";
- for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback"])$(id).textContent="";
- $("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
- world?.setRoomPreview?.(null);
+ for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","recovery-proof"])$(id).value="";
+ for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
+ $("chat-draft-status").textContent="Enter for a new line · Ctrl / ⌘ Enter to send";$("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
+ world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
 }
 function onSnapshot(snapshot){
  if(!snapshot){
   privacyGeneration++;
   if(live)suspendedDrafts={scope:scopeKey(live),identity:identityScope(live),chat:$("chat-input").value,chatVersion,card:cardValues()};
-  live=null;lastDurableKey="";lastHouseKey="";world?.update(null);world?.setInputEnabled(false);clearPrivateDOM();
-  $("place-label").textContent="Waiting for the house connection";
+  closeBoard();chatWindow.close();live=null;lastDurableKey="";lastHouseKey="";world?.update(null);world?.setInputEnabled(false);clearPrivateDOM();
+  setPlaceLabel("Waiting for the house connection");
   $("house-code-button").disabled=true;
-  for(const button of document.querySelectorAll("[data-panel]"))button.disabled=button.dataset.panel!=="pending";
+  for(const button of document.querySelectorAll("[data-panel]"))button.disabled=!["pending","options","about"].includes(button.dataset.panel);
   $("connection-status").textContent="Reconnecting…";$("quick-chat").querySelector("button").disabled=true;
   applyInput();if(activePanel)closePanel();return;
  }
@@ -138,13 +162,15 @@ function onSnapshot(snapshot){
  }
  if(roomDraft&&roomDraft.scope!==roomScope())roomDraft=null;
  if(suspendedDrafts?.scope===lastScope){$("chat-input").value=suspendedDrafts.chat;restoreCard(suspendedDrafts.card);suspendedDrafts=null;}
- $("connection-limit-pending").hidden=true;$("lobby").hidden=true;$("game-controls").hidden=false;$("roster").hidden=false;$("house-code-button").hidden=false;
+ $("connection-limit-pending").hidden=true;$("title-screen").hidden=entered;$("lobby").hidden=true;document.body.dataset.screen=entered?"game":"title";$("game-controls").hidden=!entered;$("roster").hidden=false;$("house-code-button").hidden=false;
  $("connection-status").textContent=snapshot.controller?"Together, live":"Viewing · another tab controls";
  $("house-code-button").disabled=false;
  for(const button of document.querySelectorAll("[data-panel]"))button.disabled=false;
  $("takeover").hidden=snapshot.controller;$("quick-chat").querySelector("button").disabled=!snapshot.controller;
+ $("shared-board").disabled=!snapshot;$("resident-count").textContent=String(snapshot.durable.residents.length);
  const owner=snapshot.durable.residents.find(r=>r.id===snapshot.durable.room?.ownerId);
- $("place-label").textContent=snapshot.durable.zoneId==="lounge"?"Shared study lounge":(owner?.name||"A friend")+"'s room";
+ setPlaceLabel(snapshot.durable.zoneId==="lounge"?"Shared study lounge":(owner?.name||"A friend")+"'s room");
+ $("chat-title").textContent=snapshot.durable.zoneId==="lounge"?"Lounge chat":(owner?.name||"Room")+"’s room chat";
  const self=snapshot.players.find(p=>p.id===snapshot.durable.selfId);
  for(const radio of document.querySelectorAll("input[name=availability]")){radio.checked=self?.availability===radio.value;radio.disabled=!snapshot.controller;}
  $("availability-freshness").replaceChildren();
@@ -161,12 +187,13 @@ function onSnapshot(snapshot){
 function unreadKey(){return live?live.durable.house.id+":"+live.durable.selfId+":"+live.durable.streamId:"";}
 function updateUnread(snapshot,history){
  const key=unreadKey(), state=unreadStreams.get(key)||{sequence:0,unread:0,seen:new Set()};
- for(const message of snapshot.durable.chat||[]){if(!history&&!state.seen.has(message.id)&&message.sequence>state.sequence&&message.authorId!==snapshot.durable.selfId&&activePanel!=="chat")state.unread++;state.seen.add(message.id);}
+ for(const message of snapshot.durable.chat||[]){if(!history&&!state.seen.has(message.id)&&message.sequence>state.sequence&&message.authorId!==snapshot.durable.selfId&&!chatReadable())state.unread++;state.seen.add(message.id);}
  state.seen=new Set(snapshot.durable.chat.map(message=>message.id));
  state.sequence=Math.max(state.sequence,...snapshot.durable.chat.map(message=>message.sequence));
- if(activePanel==="chat")state.unread=0;unreadStreams.set(key,state);$("chat-count").textContent=state.unread?String(state.unread):"";
+ if(chatReadable())state.unread=0;unreadStreams.set(key,state);$("chat-count").textContent=state.unread?String(state.unread):"";
  $("chat-count").setAttribute("aria-label",state.unread+" unread messages here");
 }
+function chatReadable(){return entered&&!activePanel&&!embeddedFrame&&chatWindow.isReadable();}
 function markChatRead(){const state=unreadStreams.get(unreadKey());if(state)state.unread=0;$("chat-count").textContent="";$("chat-count").setAttribute("aria-label","0 unread messages here");}
 
 function renderRoster(){
@@ -184,9 +211,11 @@ function renderRoster(){
  }
 }
 function renderTranscript(){
- $("transcript").replaceChildren();
- for(const chat of live?.durable.chat||[]){const item=node("li");item.dataset.messageId=chat.id;item.append(node("b",chat.name+": "),node("span",chat.text));$("transcript").append(item);}
- $("transcript").scrollTop=$("transcript").scrollHeight;
+ const transcript=$("transcript"),atEnd=transcript.scrollHeight-transcript.scrollTop-transcript.clientHeight<40,previous=transcript.scrollTop,messages=live?.durable.chat||[];
+ const retained=new Set(messages.map(chat=>chat.id));for(const item of [...transcript.children])if(!retained.has(item.dataset.messageId))item.remove();
+ const existing=new Map([...transcript.children].map(item=>[item.dataset.messageId,item]));
+ messages.forEach((chat,index)=>{let item=existing.get(chat.id);if(!item){item=node("li");item.dataset.messageId=chat.id;item.append(node("b",chat.name),node("span",chat.text));}if(transcript.children[index]!==item)transcript.insertBefore(item,transcript.children[index]||null);});
+ if(atEnd)transcript.scrollTop=transcript.scrollHeight;else transcript.scrollTop=previous;
 }
 function renderCards(){
  $("cards").replaceChildren();
@@ -275,7 +304,7 @@ function renderHouse(){
   if(d.selfId===d.house.ownerId&&member.id!==d.selfId){
    const buttons=node("div");
    for(const [title,type] of [["Transfer ownership","house.transfer"],["Remove member","house.remove"]]){
-    const button=node("button",title);button.addEventListener("click",protectedAction(async()=>{
+    const button=node("button",title,type==="house.remove"?"danger":undefined);button.addEventListener("click",protectedAction(async()=>{
      if(type==="house.remove"&&!confirm("Remove "+member.name+"? Their room will be archived privately and the invite code will change."))return;
      await save(type,{memberId:member.id});notice(type==="house.remove"?"Member removed; the invite code has changed.":"Ownership transferred.");
     }));buttons.append(button);
@@ -295,23 +324,25 @@ function invalidateIdentityView(){
  client?.close();client=null;inspector?.close();inspector=null;live=null;
  roomDraft=null;suspendedDrafts=null;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
  lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();keyIssuance=null;setRecoveryBusy(false);
- clearPrivateDOM();closePanel();world?.update(null);world?.setInputEnabled(false);$("notice").textContent="";$("notice").hidden=true;
+ closeBoard();chatWindow.reset();clearPrivateDOM();closePanel();world?.update(null);world?.setInputEnabled(false);$("notice").textContent="";$("notice").hidden=true;
  $("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;$("connection-limit-pending").hidden=true;
 }
-async function bootstrap(){
+async function bootstrap(enter=false){
  const request=++bootstrapRequest,epoch=privacyGeneration,loaded=await api("/api/house/me");
  if(request!==bootstrapRequest||epoch!==privacyGeneration)return;
  if(me?.identity.id!==loaded.identity.id||me?.home?.id!==loaded.home?.id)invalidateIdentityView();
  me=loaded;
  if(!me.home){
   client?.close();client=null;live=null;world?.update(null);world?.setInputEnabled(false);
-  $("lobby").hidden=false;$("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;
+  renderTitle();$("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;
   $("name").value=me.identity.name==="Study friend"?"":me.identity.name;$("colour").value=me.identity.colour;
-  $("connection-status").textContent="Your evening awaits";$("place-label").textContent="A little place to make progress together";
+  $("connection-status").textContent="Your evening awaits";setPlaceLabel("A little place to make progress together");
   $("lobby-export").hidden=me.archiveCount===0;$("archive-count").hidden=me.archiveCount===0;
   inspector ||= createPendingInspector({expectedIdentityId:me?.identity.id,fetchMe:()=>api("/api/house/me")});
   $("archive-count").textContent=me.archiveCount+" private room archive"+(me.archiveCount===1?"":"s")+" available in your download.";return;
  }
+ if(!enter&&!entered){renderTitle();return;}
+ entered=true;$("title-screen").hidden=true;$("lobby").hidden=true;$("game-controls").hidden=false;$("connection-status").textContent="Opening your house…";$("title-status").textContent="Opening your saved home…";
  if(!client){
   const actorId=me.identity.id;let ownedClient;
   ownedClient=createHouseClient({expectedIdentityId:actorId,onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
@@ -325,35 +356,45 @@ for(const [form,type] of [["create-form","house.create"],["join-form","house.joi
  try{inspector ||= createPendingInspector({expectedIdentityId:me?.identity.id,fetchMe:()=>api("/api/house/me")});await inspector.command(intent);pending.delete(lobbyKey);}
  catch(error){
   if(!error.code||["STORAGE_UNAVAILABLE","ALREADY_MEMBER","TIMEOUT","PENDING"].includes(error.code)){
-   try{const saved=await api("/api/house/me");if(saved.home){pending.delete(lobbyKey);await bootstrap();notice("Opened your saved house. The original reply was interrupted.");return;}}catch{ /* The original UUID remains pending for an explicit retry. */ }
+   try{const saved=await api("/api/house/me");if(saved.home){pending.delete(lobbyKey);await bootstrap(true);notice("Opened your saved house. The original reply was interrupted.");return;}}catch{ /* The original UUID remains pending for an explicit retry. */ }
   }else pending.delete(lobbyKey);
   throw error;
  }
- await bootstrap();notice(type==="house.create"?"Your house is ready. Share its code with a friend.":"Welcome to the house.");
+ await bootstrap(true);notice(type==="house.create"?"Your house is ready. Share its code with a friend.":"Welcome to the house.");
 }));
 $("quick-chat").addEventListener("submit",protectedAction(async()=>{
  const text=$("chat-input").value.trim();if(!text||!live)return;
  const submittedVersion=chatVersion,submittedScope=scopeKey(live),submittedText=$("chat-input").value,submittedZone=live.durable.zoneId;
  await save("chat.send",{zoneId:submittedZone,text});
- if(chatVersion===submittedVersion&&scopeKey(live)===submittedScope&&$("chat-input").value===submittedText)$("chat-input").value="";
+ if(chatVersion===submittedVersion&&scopeKey(live)===submittedScope&&$("chat-input").value===submittedText){$("chat-input").value="";$("chat-draft-status").textContent="Message saved · Enter for a new line";}
  if(suspendedDrafts?.scope===submittedScope&&suspendedDrafts.chatVersion===submittedVersion&&suspendedDrafts.chat===submittedText)suspendedDrafts.chat="";
 }));
 for(const radio of document.querySelectorAll("input[name=availability]"))radio.addEventListener("change",protectedAction(()=>client.setAvailability(radio.value)));
 $("panel-close").addEventListener("click",closePanel);
-document.addEventListener("keydown",event=>{if(event.key==="Escape")closePanel();});
+document.addEventListener("keydown",event=>{if(event.key!=="Escape"||event.isComposing)return;event.preventDefault();if(embeddedFrame){closeBoard();return;}if(activePanel){closePanel();return;}if(entered&&live)openPanel("options");});
+$("title-continue").addEventListener("click",protectedAction(()=>bootstrap(true)));
+$("title-create").addEventListener("click",()=>openAdmission("create"));$("title-join").addEventListener("click",()=>openAdmission("join"));$("admission-back").addEventListener("click",renderTitle);
+$("chat-close").addEventListener("click",()=>chatWindow.close());$("shared-board").addEventListener("click",openBoard);$("board-return").addEventListener("click",closeBoard);
+window.addEventListener("message",event=>{if(embeddedFrame&&event.source===embeddedFrame.contentWindow&&event.origin===window.location.origin&&event.data?.type==="night-board-close")closeBoard();});
+$("resume-game").addEventListener("click",closePanel);
+$("return-title").addEventListener("click",()=>{closePanel();closeBoard();chatWindow.close();client?.close();client=null;onSnapshot(null);renderTitle();});
+$("touch-toggle").addEventListener("click",()=>{const visible=$("movement-controls").hidden;$("movement-controls").hidden=!visible;$("touch-toggle").setAttribute("aria-expanded",String(visible));world?.setDirection?.(0,0);queueSafeArea();});
+$("camera-zoom").addEventListener("input",()=>{world?.setCameraZoom?.(Number($("camera-zoom").value));renderCameraMode();});
+$("reduced-motion").addEventListener("change",()=>{reducedMotion=$("reduced-motion").checked;document.body.dataset.reducedMotion=String(reducedMotion);world?.setReducedMotion?.(reducedMotion);try{window.localStorage.setItem("night-neighbourhood.reduced-motion",String(reducedMotion));}catch{/* Play remains available without local preferences. */}});
+$("chat-input").addEventListener("keydown",event=>{if(event.key==="Enter"&&(event.ctrlKey||event.metaKey)&&!event.isComposing){event.preventDefault();$("quick-chat").requestSubmit();}});
 for(const button of document.querySelectorAll("[data-panel]"))button.addEventListener("click",()=>openPanel(button.dataset.panel));
 $("house-code-button").addEventListener("click",()=>openPanel("house"));
 $("recover-open").addEventListener("click",()=>openPanel("recovery"));
 $("recovery-form").addEventListener("submit",protectedAction(async()=>{await api("/api/house/recover",{proof:$("recovery-proof").value.trim()});invalidateIdentityView();await bootstrap();notice("Your room and saved work are back. Create a new recovery key.");}));
 $("camera-overview").addEventListener("click",()=>{world?.setCameraMode?.("overview");renderCameraMode();queueSafeArea();});
-$("camera-recenter").addEventListener("click",()=>{world?.setCameraMode?.("play");renderCameraMode();queueSafeArea();});
+$("camera-recenter").addEventListener("click",()=>{if(world?.recenterCamera)world.recenterCamera();else world?.setCameraMode?.("play");renderCameraMode();queueSafeArea();});
 $("takeover").addEventListener("click",protectedAction(()=>client.takeover()));
 $("interact").addEventListener("click",()=>world?.interact());
 for(const [id,x,z] of [["move-up",0,-1],["move-down",0,1],["move-left",-1,0],["move-right",1,0]]){
  const button=$(id);button.addEventListener("pointerdown",event=>{event.preventDefault();button.setPointerCapture(event.pointerId);world?.setDirection(x,z);});
  for(const name of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(name,()=>world?.setDirection(0,0));
 }
-$("chat-input").addEventListener("input",()=>{chatVersion++;});
+$("chat-input").addEventListener("input",()=>{chatVersion++;$("chat-draft-status").textContent=$("chat-input").value?"Unsent draft · Ctrl / ⌘ Enter to send":"Enter for a new line · Ctrl / ⌘ Enter to send";});
 $("card-form").addEventListener("input",()=>{cardVersion++;cardDirty=true;$("close-card").disabled=true;$("card-status").textContent="Unsaved draft";});
 $("card-form").addEventListener("submit",protectedAction(async()=>{
  const submittedVersion=cardVersion, submittedScope=identityScope(live), submittedBase=cardBase;
@@ -463,8 +504,8 @@ const hudResizeObserver=typeof window.ResizeObserver==="function"?new window.Res
 for(const element of document.querySelectorAll(HUD_SAFE_SELECTOR))hudResizeObserver?.observe(element);
 window.addEventListener("resize",queueSafeArea);
 window.visualViewport?.addEventListener("resize",queueSafeArea);window.visualViewport?.addEventListener("scroll",queueSafeArea);
-window.addEventListener("pagehide",()=>{clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}client?.close();world?.dispose();});
-bootstrap().catch(error=>{if(showConnectionLimit(error))return;notice(error.message,true);$("connection-status").textContent="Could not open the house";});
+window.addEventListener("pagehide",()=>{clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
+bootstrap().catch(error=>{if(showConnectionLimit(error))return;notice(error.message,true);$("connection-status").textContent="Could not open the house";$("title-status").textContent="Could not check your saved home. Reload to retry.";});
 
 $("walk-room").addEventListener("click",()=>{const resident=live?.durable.residents.find(r=>r.id===live.durable.selfId);closePanel();if(resident&&!world?.approach({type:"door",slot:resident.slot}))notice("Stand up before walking to your room.");});
 $("return-lounge").addEventListener("click",()=>{closePanel();if(!world?.approach({type:"exit"}))notice("Stand up before returning to the lounge.");});
