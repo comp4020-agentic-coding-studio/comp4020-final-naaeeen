@@ -1,0 +1,40 @@
+{
+  "scope": "matched own-process single-syscall denial; not Docker execution",
+  "changedFactor": "clone3 denied errno EPERM vs ENOSYS",
+  "node": "v24.21.0",
+  "glibc": "2.39",
+  "seccompLibrary": "libseccomp.so.2",
+  "coreDumpsDisabled": true,
+  "noNewPrivilegesInProbeChildren": true,
+  "environment": "PATH=/usr/bin:/bin; HOME=/tmp; no inherited secrets",
+  "hostSettingsChanged": false,
+  "results": [
+    {
+      "deniedSyscall": "clone3",
+      "errno": 1,
+      "label": "EPERM",
+      "exitCode": -6,
+      "outcome": "FAIL: Node aborted before JavaScript with uv_thread_create assertion"
+    },
+    {
+      "deniedSyscall": "clone3",
+      "errno": 38,
+      "label": "ENOSYS",
+      "exitCode": 0,
+      "outcome": "PASS: Node v24.21.0 started and printed STARTED"
+    }
+  ],
+  "effectiveProfileDelta": {
+    "names": [
+      "clone3"
+    ],
+    "action": "SCMP_ACT_ERRNO",
+    "errnoRet": 38
+  },
+  "effectiveProfileSHA256": "aa9c681c7e5eb6c58e89200d10c3c7bc4a608a3f498272ce39dc67937f8a31bd",
+  "upstreamProfileSHA256": "cc3e61cabda6bbc1e53e54d27ba4d55a9d3be829b6dd1a596f4a7b31b1cc7849",
+  "limits": [
+    "Single-syscall denial control only; not a full-profile or Docker execution",
+    "Container Chromium sandbox and nine application cases remain unverified locally"
+  ]
+}

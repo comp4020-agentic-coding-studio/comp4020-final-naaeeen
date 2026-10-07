@@ -18,7 +18,7 @@ jobs:
     # Runs once the repo is public; until then `pnpm check` is the same
     # sensors, locally.
     if: ${{ !github.event.repository.private }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: read
@@ -30,9 +30,9 @@ jobs:
         with:
           cache: true
       - run: pnpm install --frozen-lockfile
-      - name: Install the maintained Chromium browser
+      - name: Pull the pinned maintained browser image
         timeout-minutes: 5
-        run: pnpm exec playwright install --with-deps chromium
+        run: bash tools/ci-browser.sh --pull
       - name: Build and start the app
         # the same image Fly deploys, with a throwaway /data in place of the
         # volume; the spec runs against it
@@ -53,7 +53,7 @@ jobs:
           APP_URL: http://localhost:8080
       - name: Verify the maintained browser core against the image
         timeout-minutes: 5
-        run: pnpm exec playwright test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts tests/e2e/board.spec.ts tests/e2e/title-dialog.spec.ts
+        run: bash tools/ci-browser.sh
         env:
           APP_URL: http://localhost:8080
           EXPECT_SECURE_COOKIES: 'true'
@@ -89,6 +89,7 @@ jobs:
           path: |
             .local/browser-report/
             .local/browser-results/
+            .local/browser-environment/
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
@@ -126,7 +127,7 @@ jobs:
     needs: check
     # The template repo itself has no Fly app; only student repos deploy.
     if: ${{ !github.event.repository.private && !github.event.repository.is_template && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: read
