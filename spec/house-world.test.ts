@@ -7,7 +7,7 @@ vi.mock("three",async importOriginal=>{
  class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(scene:any,camera:any){rendered.scene=scene;rendered.camera=camera;rendered.count++;} dispose(){} }
  return {...actual,WebGLRenderer:Renderer};
 });
-import { createLayout, footprint, SEATED_LIFT } from '../public/house-geometry.js';
+import { createLayout, bedroomLayout, slide, footprint, CAMERA_ORIENTATION, SEATED_LIFT } from '../public/house-geometry.js';
 import { createHouseWorld } from "../public/house-world.js";
 const cleanups: (()=>void)[]=[];
 afterEach(()=>{for(const f of cleanups.splice(0))f();vi.unstubAllGlobals();});
@@ -543,4 +543,104 @@ it('keeps stationary walking limbs at RAF cadence with reduced motion enabled',(
 it('forces a resumed frame even without intervening scene changes',()=>{
  const f=speechFixture();f.world.update(f.snapshot);f.step(0);f.world.setSuspended(true);f.step(10);expect(f.renders()).toBe(1);
  f.world.setSuspended(false);f.step(20);expect(f.renders()).toBe(2);
+});
+
+
+it('bounds unacknowledged prediction, rolls back rejected motion and keeps held manual intent', async()=>{
+ let settle:(reply:any)=>void=()=>{};
+ const move=vi.fn(()=>new Promise(resolve=>{settle=resolve;}));
+ const f=speechFixture(390,844,{onMove:move});f.world.update(f.snapshot);f.step(0);
+ const start=f.world.getPosition();f.world.setDirection(-1,0);f.step(100);
+ for(const time of [250,500,750,1000])f.step(time);
+ expect(move).toHaveBeenCalledTimes(1);
+ expect(Math.hypot(f.world.getPosition().x-start.x,f.world.getPosition().z-start.z)).toBeLessThanOrEqual(.65001);
+ settle({ok:false,position:start});await Promise.resolve();await Promise.resolve();
+ expect(f.world.getPosition()).toEqual(start);
+ f.step(1100);expect(Math.hypot(f.world.getPosition().x-start.x,f.world.getPosition().z-start.z)).toBeCloseTo(.26,3);
+ expect(move).toHaveBeenCalledTimes(2);
+});
+
+it('keeps normal acknowledged walking at2.6units per second and ignores a former room receipt',async()=>{
+ const move=vi.fn(async(position:any)=>({ok:true,position}));
+ const f=speechFixture(390,844,{onMove:move});f.world.update(f.snapshot);f.step(0);
+ const start=f.world.getPosition();f.world.setDirection(-1,0);
+ for(let t=100;t<=1000;t+=100){f.step(t);await Promise.resolve();await Promise.resolve();}
+ expect(Math.hypot(f.world.getPosition().x-start.x,f.world.getPosition().z-start.z)).toBeCloseTo(2.6,3);
+ let settle:(reply:any)=>void=()=>{};move.mockImplementationOnce(()=>new Promise(resolve=>{settle=resolve;}));f.step(1100);
+ const next=structuredClone(f.snapshot);next.durable.zoneId='room0';next.durable.streamId='bedroom:room0';next.generation=2;
+ next.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};for(const p of next.players){p.zoneId='room0';p.x=0;p.z=3.3;}
+ f.world.update(next);const arrived=f.world.getPosition();settle({ok:false,position:{x:9,z:9}});await Promise.resolve();await Promise.resolve();
+ expect(f.world.getPosition()).toEqual(arrived);
+});
+
+
+it('waits80ms after a delayed receipt and keeps at most ten dispatches per second',async()=>{
+ let settle:(reply:any)=>void=()=>{};const moves:any[]=[];
+ const f=speechFixture(390,844,{onMove:(motion:any)=>{moves.push({...motion});return new Promise(resolve=>{settle=resolve;});}});
+ f.world.update(f.snapshot);f.step(0);f.world.setDirection(-1,0);f.step(100);f.step(250);
+ settle({ok:true});await Promise.resolve();await Promise.resolve();f.step(300);expect(moves).toHaveLength(1);
+ f.step(330);expect(moves).toHaveLength(2);expect(Math.hypot(moves[1].x-moves[0].x,moves[1].z-moves[0].z)).toBeLessThanOrEqual(.65001);
+});
+
+it('keeps coalesced curved manual motion reachable by a single server sweep from its acknowledged anchor',async()=>{
+ let settle:(reply:any)=>void=()=>{};const moves:any[]=[];
+ const f=speechFixture(390,844,{onMove:(motion:any)=>{moves.push({...motion});return new Promise(resolve=>{settle=resolve;});}});
+ const state=structuredClone(f.snapshot);state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'plant',kind:'plant',x:0,z:0,rotation:0,colour:'sage'}]};
+ const layout=bedroomLayout(state.durable.room.placements);for(const player of state.players)Object.assign(player,{zoneId:'room0',x:-.7,z:.7});
+ f.world.update(state);f.step(0);f.world.setDirection(1,0);f.step(100);settle({ok:true});await Promise.resolve();await Promise.resolve();
+ const anchor={x:moves[0].x,z:moves[0].z};
+ f.step(200);f.world.setDirection(0,-1);f.step(300);f.step(400);f.world.setDirection(-1,0);f.step(500);f.step(600);
+ const predicted=f.world.getPosition(),swept=slide(layout,anchor,predicted.x-anchor.x,predicted.z-anchor.z);
+ expect(Math.hypot(swept.x-predicted.x,swept.z-predicted.z)).toBeLessThanOrEqual(.010001);
+ settle({ok:true});await Promise.resolve();await Promise.resolve();f.step(700);
+ const sent=moves.at(-1),from={x:moves[1].x,z:moves[1].z},packet=slide(layout,from,sent.x-from.x,sent.z-from.z);
+ expect(Math.hypot(packet.x-sent.x,packet.z-sent.z)).toBeLessThanOrEqual(.010001);
+});
+
+it.each(['seat','epoch','control','closed'])('ignores pending world correction after a %s lifecycle boundary',async(change)=>{
+ let settle:(reply:any)=>void=()=>{};const f=speechFixture(390,844,{onMove:()=>new Promise(resolve=>{settle=resolve;})});
+ f.world.update(f.snapshot);f.step(0);f.world.setDirection(-1,0);f.step(100);
+ const next=structuredClone(f.snapshot);if(change==='epoch')next.serverEpoch='epoch-b';if(change==='control'){next.generation++;next.controller=false;}if(change==='seat'){next.players[0].seatId='seat:0';next.players[0].animation='sit';}
+ if(change==='closed')f.world.update(null);else f.world.update(next);const before=f.world.getPosition();settle({ok:false,position:{x:9,z:9}});await Promise.resolve();await Promise.resolve();
+ expect(f.world.getPosition()).toEqual(before);
+});
+
+
+it('replans a rejected automatic approach and sends swept chords around furniture after delayed receipts',async()=>{
+ const layout=createLayout(6),actions=vi.fn();let anchor={x:0,z:3.3},pending:any=null,clock=0,rejections=0,packets=0;
+ const f=speechFixture(390,844,{onInteract:actions,onMove:(motion:any)=>{
+  const swept=slide(layout,anchor,motion.x-anchor.x,motion.z-anchor.z);
+  expect(Math.hypot(swept.x-motion.x,swept.z-motion.z)).toBeLessThanOrEqual(.010001);
+  expect(Math.hypot(motion.x-anchor.x,motion.z-anchor.z)).toBeLessThanOrEqual(.65001);packets++;
+  return new Promise(resolve=>{pending={motion,resolve,due:clock+150};});
+ }});
+ f.world.update(f.snapshot);f.step(0);expect(f.world.approach({type:'door',slot:5})).toBe(true);
+ for(clock=50;clock<=15000&&!actions.mock.calls.length;clock+=50){
+  f.step(clock);
+  if(pending&&pending.due<=clock){const receipt=pending;pending=null;if(!rejections){rejections++;receipt.resolve({ok:false,position:anchor});}else{anchor={x:receipt.motion.x,z:receipt.motion.z};receipt.resolve({ok:true,position:anchor});}await Promise.resolve();await Promise.resolve();}
+ }
+ expect(rejections).toBe(1);expect(packets).toBeGreaterThan(3);expect(actions).toHaveBeenCalledWith(expect.objectContaining({type:'door',slot:5,roomId:'room5'}));
+});
+
+
+it('emits a server-sweepable endpoint when collision sliding is non-idempotent at a plant corner',async()=>{
+ const angle=1.0241974673298322,length=.6158136343932711,dx=Math.cos(angle),dz=Math.sin(angle),yaw=Math.atan2(CAMERA_ORIENTATION.x,CAMERA_ORIENTATION.z);
+ const accepted={x:-.5252986615523696,z:.3930936870165169};let anchor={x:accepted.x-.0026*dx,z:accepted.z-.0026*dz};const packets:any[]=[];
+ const state:any={};const f=speechFixture(390,844,{onMove:async(motion:any)=>{packets.push({...motion});return {ok:true,position:motion};}});
+ Object.assign(state,structuredClone(f.snapshot));state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'plant',kind:'plant',x:0,z:0,rotation:0,colour:'sage'}]};
+ const layout=bedroomLayout(state.durable.room.placements);for(const player of state.players)Object.assign(player,{zoneId:'room0',...anchor});
+ f.world.update(state);f.step(0);f.world.setDirection(dx*Math.cos(yaw)-dz*Math.sin(yaw),dx*Math.sin(yaw)+dz*Math.cos(yaw));f.step(1);await Promise.resolve();await Promise.resolve();anchor={x:packets[0].x,z:packets[0].z};
+ expect(anchor.x).toBeCloseTo(accepted.x,6);f.step(1+length/2.6*1000);
+ const motion=packets.at(-1),swept=slide(layout,anchor,motion.x-anchor.x,motion.z-anchor.z);
+ expect(Math.hypot(swept.x-motion.x,swept.z-motion.z)).toBeLessThanOrEqual(.010001);
+ expect(Math.hypot(motion.x-anchor.x,motion.z-anchor.z)).toBeGreaterThan(.1);
+});
+
+it('bounds prediction when transport is busy after a same-room authority correction and retains held intent',async()=>{
+ let busy=false;const moves:any[]=[];const f=speechFixture(390,844,{onMove:(motion:any)=>{if(busy)return false;moves.push(motion);busy=true;return new Promise(()=>{});}});
+ f.world.update(f.snapshot);f.step(0);f.world.setDirection(-1,0);f.step(100);
+ const corrected=structuredClone(f.snapshot);Object.assign(corrected.players[0],{x:4,z:3.3});f.world.update(corrected);const authority=f.world.getPosition();
+ for(let time=200;time<=1200;time+=100)f.step(time);
+ expect(Math.hypot(f.world.getPosition().x-authority.x,f.world.getPosition().z-authority.z)).toBeLessThanOrEqual(.65001);
+ busy=false;f.step(1300);expect(moves).toHaveLength(2);expect(Math.hypot(f.world.getPosition().x-authority.x,f.world.getPosition().z-authority.z)).toBeGreaterThan(.1);
 });

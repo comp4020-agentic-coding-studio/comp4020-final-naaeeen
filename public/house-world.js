@@ -7,10 +7,12 @@ const PALETTE = { amber: '#ceb47d', sage: '#a5b49c', rose: '#c6999b', blue: '#92
 const KEY = { w: [0, -1], ArrowUp: [0, -1], s: [0, 1], ArrowDown: [0, 1], a: [-1, 0], ArrowLeft: [-1, 0], d: [1, 0], ArrowRight: [1, 0] };
 const typing = target => target instanceof HTMLElement && (target.matches('input,textarea,select') || target.isContentEditable);
 
+/** @typedef {{ok:boolean,stale?:boolean,position?:{x:number,z:number},code?:string}} MotionReceipt */
+
 /**
  * A renderer of actual authorised zone state, with transient local prediction.
  * @param {HTMLElement} container
- * @param {{onMove?:(motion:{x:number,z:number,heading:number,animation:string})=>void,onInteract?:(target:object)=>void,onSelectPlacement?:(id:string)=>void,onHint?:(text:string)=>void,onCameraModeChange?:(mode:string)=>void}} callbacks
+ * @param {{onMove?:(motion:{x:number,z:number,heading:number,animation:string})=>void|false|Promise<MotionReceipt>,onInteract?:(target:object)=>void,onSelectPlacement?:(id:string)=>void,onHint?:(text:string)=>void,onCameraModeChange?:(mode:string)=>void}} callbacks
  */
 export function createHouseWorld(container, callbacks = {}) {
   const canvas = document.createElement('canvas'); canvas.className = 'house-world-canvas'; canvas.id = 'house-world'; canvas.tabIndex = 0; canvas.setAttribute('aria-label', 'Shared study house. Move with WASD or arrow keys. Press E to interact nearby.');
@@ -29,6 +31,7 @@ export function createHouseWorld(container, callbacks = {}) {
   let scene, camera, layout = createLayout(4), live = null, own = { ...layout.spawn }, heading = 0;
   let inputEnabled = true, editing = false, composing = false, suspended = false, previousEditMode = null, pendingEditFraming = false, gesture = null, direction = { x: 0, z: 0 }, route = [], routeTarget = null;
   let lastFrame = null, lastSent = -Infinity, sent = null, renderKey = '', frame = 0, disposed = false, pendingStand = false;
+  let motionFlight = null, motionGeneration = 0, acknowledged = false, predictionDistance = 0, motionAnchor = { ...own }, lastSettled = -Infinity;
   let renderDirty = true, lastRender = -Infinity;
   let prompt, roomLabel = null, selection = null, context = null, previewPlacements = null, lastHint = '';
   let safeArea = null, layoutDirty = true, lastLabelLayout = -Infinity;
@@ -293,18 +296,41 @@ export function createHouseWorld(container, callbacks = {}) {
     const found = findRoute(layout, own, target.point); if (!found) return false;
     route = found; routeTarget = target; keys.clear(); direction = { x: 0, z: 0 }; return true;
   }
+  function resetMotion() {
+    motionGeneration++; motionFlight = null; predictionDistance = 0; motionAnchor = { ...own }; acknowledged = false; lastSent = -Infinity; lastSettled = -Infinity;
+  }
+  function reachableMotion(position) {
+    if (!validPosition(layout, position)) return false;
+    const swept = slide(layout, motionAnchor, position.x - motionAnchor.x, position.z - motionAnchor.z);
+    return Math.hypot(swept.x - position.x, swept.z - position.z) <= .009;
+  }
+  function recoverMotion(position) {
+    if (Number.isFinite(position.x) && Number.isFinite(position.z)) own = { x: position.x, z: position.z };
+    motionAnchor = { ...own }; predictionDistance = 0; sent = null; renderDirty = true;
+    // Keep held manual input. A planned route is recalculated from authority.
+    if (routeTarget) { route = findRoute(layout, own, routeTarget.point) ?? []; if (!route.length) routeTarget = null; }
+  }
+  function reconcileMotion(reply, flight) {
+    if (disposed || motionFlight !== flight || motionGeneration !== flight.generation || reply?.stale) return;
+    motionFlight = null; lastSettled = window.performance.now();
+    if (reply?.ok) {
+      motionAnchor = { x: flight.motion.x, z: flight.motion.z };
+      predictionDistance = Math.max(0, predictionDistance - flight.distance);
+      if (!reachableMotion(own)) recoverMotion(motionAnchor);
+    } else recoverMotion(reply?.position ?? motionAnchor);
+  }
   function update(next) {
-    if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { x: 0, z: 2.85 }; rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
+    if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { x: 0, z: 2.85 }; resetMotion(); rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
     const previous = live, changedZone = previous?.durable.zoneId !== next.durable.zoneId || previous?.durable.streamId !== next.durable.streamId;
     const changedIdentity = previous?.serverEpoch !== next.serverEpoch || previous?.durable.house.id !== next.durable.house.id || previous?.durable.selfId !== next.durable.selfId;
     const changedControl = previous?.generation !== next.generation || previous?.controller !== next.controller || previous?.accessGeneration !== next.accessGeneration;
     live = next;
     const p = self();
     speech.ingest([next.serverEpoch, next.durable.selfId, next.durable.house.id, next.durable.zoneId, next.accessGeneration, next.generation].join('/'), next.durable.chat, { quiet: p?.availability !== 'chat', visibleAuthors: new Set(next.players.filter(player => player.connected && player.zoneId === next.durable.zoneId).map(player => player.id)) }, window.performance.now());
-    if (changedZone || changedIdentity || changedControl) { pendingEditFraming = false; if (changedZone || changedIdentity) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone || changedIdentity) previewPlacements = null; clearInput(); sent = null; pendingStand = false; own = { x: p?.x ?? (next.durable.room ? 0 : layout.spawn.x), z: p?.z ?? (next.durable.room ? 3 : 2.85) }; }
-    if (p && (previous?.players.find(q => q.id === previous.durable.selfId)?.seatId && !p.seatId || p.animation === 'sit' || p.seatId || !next.controller || !previous)) own = { x: p.x ?? own.x, z: p.z ?? own.z };
+    if (changedZone || changedIdentity || changedControl) { pendingEditFraming = false; if (changedZone || changedIdentity) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone || changedIdentity) previewPlacements = null; clearInput(); sent = null; pendingStand = false; own = { x: p?.x ?? (next.durable.room ? 0 : layout.spawn.x), z: p?.z ?? (next.durable.room ? 3 : 2.85) }; resetMotion(); }
+    if (p && (previous?.players.find(q => q.id === previous.durable.selfId)?.seatId && !p.seatId || p.animation === 'sit' || p.seatId || !next.controller || !previous)) { own = { x: p.x ?? own.x, z: p.z ?? own.z }; resetMotion(); }
     if (!p?.seatId) pendingStand = false;
-    if (p && next.controller && Number.isFinite(p.x) && Number.isFinite(p.z) && Math.hypot(p.x - own.x, p.z - own.z) > 1.15) { own = { x: p.x, z: p.z }; clearInput(); }
+    if (p && next.controller && Number.isFinite(p.x) && Number.isFinite(p.z) && Math.hypot(p.x - own.x, p.z - own.z) > 1.15) { own = { x: p.x, z: p.z }; resetMotion(); sent = null; if (routeTarget) route = findRoute(layout, own, routeTarget.point) ?? []; }
     // Resident metadata changes keep the room's geometry and shadow resources.
     // Authority, zone and full room changes still clear all prior scene content.
     const key = JSON.stringify([next.serverEpoch, next.durable.house.id, next.durable.selfId, next.accessGeneration, next.generation, next.durable.house.capacity, next.durable.zoneId, next.durable.streamId, next.durable.room]);
@@ -344,11 +370,43 @@ export function createHouseWorld(container, callbacks = {}) {
         if (route.length) { const next = route[0], length = Math.hypot(next.x - own.x, next.z - own.z); dx = (next.x - own.x) / length; dz = (next.z - own.z) / length; distanceToWaypoint = length; }
         else { const arrived = routeTarget; routeTarget = null; if (arrived) action(arrived); }
       }
-      if (dx || dz) { const before = own; const stride = Math.min(dt * 2.6, distanceToWaypoint); own = slide(layout, own, dx * stride, dz * stride); moving = Math.hypot(own.x - before.x, own.z - before.z) > 0.0001; if (moving) heading = Math.atan2(dx, dz); }
+      if (dx || dz) {
+        const before = own;
+        let stride = Math.min(dt * 2.6, distanceToWaypoint, acknowledged ? Math.max(0, .65 - predictionDistance) : Infinity);
+        let candidate = slide(layout, before, dx * stride, dz * stride);
+        // slide is not idempotent: validate the emitted chord itself. Shorten
+        // only blocked strides, keeping full elapsed speed on clear paths.
+        if (callbacks.onMove && !reachableMotion(candidate)) {
+          const alongWall = [slide(layout, before, dx * stride, 0), slide(layout, before, 0, dz * stride)]
+            .filter(position => reachableMotion(position)).sort((a, b) => Math.hypot(b.x - before.x, b.z - before.z) - Math.hypot(a.x - before.x, a.z - before.z));
+          if (alongWall.length) candidate = alongWall[0];
+          else {
+            for (let attempt = 0; attempt < 8 && !reachableMotion(candidate); attempt++) {
+              stride /= 2; candidate = slide(layout, before, dx * stride, dz * stride);
+            }
+            if (!reachableMotion(candidate)) candidate = before;
+          }
+        }
+        own = candidate;
+        const travelled = Math.hypot(own.x - before.x, own.z - before.z); predictionDistance += travelled;
+        moving = travelled > 0.0001; if (moving) heading = Math.atan2(dx, dz);
+      }
     }
-    if (live?.controller && !p?.seatId && time - lastSent >= 100) {
+    if (live?.controller && !p?.seatId && !motionFlight && time - lastSent >= 100 && time - lastSettled >= 80) {
       const motion = { x: own.x, z: own.z, heading, animation: moving ? 'walk' : 'idle' };
-      if (sent && (Math.hypot(sent.x - own.x, sent.z - own.z) > 0.005 || sent.animation !== motion.animation) || !sent && moving) { callbacks.onMove?.(motion); lastSent = time; sent = motion; }
+      if (sent && (Math.hypot(sent.x - own.x, sent.z - own.z) > 0.005 || sent.animation !== motion.animation) || !sent && moving) {
+        const result = callbacks.onMove?.(motion);
+        if (result === false) {
+          acknowledged = true; recoverMotion(motionAnchor); moving = false;
+        } else {
+          lastSent = time; sent = motion;
+          if (result?.then) {
+            acknowledged = true;
+            const flight = { generation: motionGeneration, motion, distance: predictionDistance }; motionFlight = flight;
+            result.then(reply => reconcileMotion(reply, flight), () => reconcileMotion({ ok: false }, flight));
+          }
+        }
+      }
     }
     let renderActive = moving;
     for (const [id, entry] of avatars) {

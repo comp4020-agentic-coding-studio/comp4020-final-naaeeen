@@ -92,7 +92,7 @@ function mockTransport(initial = snapshot()) {
     connect() { socket.connected = true; listeners.get("connect")?.(); return socket; },
     disconnect() { socket.connected = false; }, timeout() { return socket; },
     emitWithAck(event: string, value: any) { calls.push({event,value}); return event === "house.subscribe" ? Promise.resolve({ ok: true, snapshot: state }) : respond(event,value); },
-    volatile: { emit(event: string,value: any) { calls.push({event,value}); } },
+    emit(event: string,value: any) { calls.push({event,value}); }, get volatile() { return socket; },
   };
   vi.stubGlobal("io", () => socket); vi.stubGlobal("sessionStorage", memoryStorage());
   return { socket, calls, emit: (event: string, value: any) => listeners.get(event)?.(value), state: (next: any) => { state = next; }, reply: (handler: typeof respond) => { respond = handler; } };
@@ -352,7 +352,8 @@ describe("outbox inspection and explicit recovery", () => {
   test("clears control before a reconnect acknowledgement so stale motion cannot be sent", async () => {
     const transport = mockTransport(); const client = createHouseClient(); await client.connect();
     let finish!: (reply: any) => void;
-    transport.socket.emitWithAck = () => new Promise(resolve => { finish = resolve; });
+    const original = transport.socket.emitWithAck;
+    transport.socket.emitWithAck = (event:string,value:any) => event === "house.subscribe" ? new Promise(resolve => { finish = resolve; }) : original(event,value);
     transport.emit("connect", undefined);
     client.move({ x: 1, z: 1, heading: 0 });
     expect(transport.calls.filter(call => call.event === "house.move")).toHaveLength(0);
@@ -464,4 +465,34 @@ test("preserves long Unicode conversation under the existing total outbox bound"
   box.add(command, "person", zoneId, 1000);
   expect(createCommandOutbox(storage).eligible("person", zoneId, 2000, houseId)[0].command).toEqual(command);
   expect(() => box.add({ ...command, commandId: randomUUID(), payload: { zoneId, text: "界".repeat(4200) } }, "person", zoneId, 1000)).toThrow();
+});
+
+
+describe('acknowledged transient movement',()=>{
+ test('keeps at most one flight and recovers a rejected or missing receipt from authority',async()=>{
+  const state=snapshot();state.players.push({id:'person',x:0,z:3.3} as never);
+  const transport=mockTransport(state);const client=createHouseClient();await client.connect();
+  let settle:(reply:any)=>void=()=>{};transport.reply(()=>new Promise(resolve=>{settle=resolve;}));
+  const moving=client.move({x:.26,z:3.3,heading:0});expect(moving).toBeInstanceOf(Promise);
+  for(let i=0;i<100;i++)expect(client.move({x:i,z:3.3,heading:0})).toBe(false);
+  expect(transport.calls.filter(call=>call.event==='house.move')).toHaveLength(1);
+  settle({ok:false,code:'INVALID_MOVE'});await expect(moving).resolves.toMatchObject({ok:false,position:{x:0,z:3.3}});
+  transport.reply(async()=>{throw new Error('ACK missing');});
+  await expect(client.move({x:.26,z:3.3,heading:0})).resolves.toMatchObject({ok:false,position:{x:0,z:3.3}});
+  transport.reply(async(_event,value)=>({ok:true,sequence:value.sequence}));
+  await expect(client.move({x:.26,z:3.3,heading:0})).resolves.toMatchObject({ok:true,position:{x:.26,z:3.3}});client.close();
+ });
+ test.each(['room','epoch','control','identity','closed'])('ignores a late %s movement acknowledgement',async(change)=>{
+  const state=snapshot();state.players.push({id:'person',x:0,z:3.3} as never);
+  const transport=mockTransport(state);const client=createHouseClient();await client.connect();
+  let settle:(reply:any)=>void=()=>{};transport.reply(()=>new Promise(resolve=>{settle=resolve;}));
+  const pending=client.move({x:.26,z:3.3,heading:0});expect(pending).toBeInstanceOf(Promise);
+  const sent=transport.calls.find(call=>call.event==='house.move')!;
+  if(change==='closed')client.close();else{
+   const next=snapshot(change==='room'?2:1,1,change==='room'?'private':'lounge',change==='epoch'?'epoch-b':'epoch-a',change==='control'?2:1);
+   next.players.push({id:change==='identity'?'other':'person',x:5,z:3.3} as never);if(change==='identity')next.durable.selfId='other';
+   if(change==='room'){transport.state(next);await client.subscribe('private');}else transport.emit('house.snapshot',next);
+  }
+  settle({ok:true,sequence:sent.value.sequence});await expect(pending).resolves.toMatchObject({stale:true});client.close();
+ });
 });

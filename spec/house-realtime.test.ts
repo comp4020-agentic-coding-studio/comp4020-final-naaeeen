@@ -4,6 +4,7 @@ import { io, type Socket } from "socket.io-client";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { attachHouseRealtime } from "../src/house-realtime.ts";
 import { HouseError } from "../src/house-contract.ts";
+import { createHouseClient } from "../public/house-client.js";
 import { createLayout, bedroomLayout, validPosition, findRoute } from "../public/house-geometry.js";
 import type { HouseSnapshot, LiveSnapshot, Me, HouseCommand, Placement } from "../src/house-contract.ts";
 
@@ -28,7 +29,7 @@ class Authority {
   execute(_id: string, command: HouseCommand) { return { ok: true as const, commandId: command.commandId, streamId: this.houseId, sequence: 1, entityRevision: 1 }; }
 }
 const cleanups: (() => Promise<unknown>)[] = [];
-afterEach(async () => { vi.restoreAllMocks(); for (const cleanup of cleanups.splice(0).reverse()) await cleanup(); });
+afterEach(async () => { vi.restoreAllMocks(); vi.unstubAllGlobals(); for (const cleanup of cleanups.splice(0).reverse()) await cleanup(); });
 async function setup(options = {}) {
   const store = new Authority();
   const server = createServer((_req, res) => res.end("fixture"));
@@ -289,4 +290,52 @@ describe("house realtime authority", () => {
     f.realtime.refresh();
     expect(f.store.tokens.size).toBe(0);
   });
+});
+
+
+describe('actual client movement recovery against isolated realtime authority',()=>{
+ async function actualClient(){
+  const f=await setup(),socket=await f.client(),states:any[]=[];
+  vi.stubGlobal('io',()=>socket);
+  const client=createHouseClient({storage:undefined,onSnapshot:state=>{if(state)states.push(state);}});cleanups.push(async()=>client.close());
+  await client.connect();const state=states.at(-1),pose=state.players.find((player:any)=>player.id===state.durable.selfId);
+  const base=Date.now(),clock=vi.spyOn(Date,'now').mockReturnValue(base);
+  return {f,socket,client,state,pose,clock,base,states};
+ }
+ test('a dropped transport packet has one bounded flight and next held step still reaches the actual peer',async()=>{
+  const {f,socket,client,pose,clock,base}=await actualClient();const observer=await f.client(1);await subscribe(observer);
+  const transport=(socket as any).io.engine.transport;clock.mockReturnValue(base+100);transport.writable=false;
+  const pending=client.move({x:pose.x+.26,z:pose.z,heading:0});transport.writable=true;
+  expect(pending).toBeInstanceOf(Promise);for(let i=0;i<100;i++)expect(client.move({x:pose.x+10+i,z:pose.z,heading:0})).toBe(false);
+  await expect(pending).resolves.toMatchObject({ok:false,position:{x:pose.x,z:pose.z}});
+  expect(socket.sendBuffer).toHaveLength(0);clock.mockReturnValue(base+1200);
+  await expect(client.move({x:pose.x+.26,z:pose.z,heading:0})).resolves.toMatchObject({ok:true});
+  const view=(await subscribe(observer)).snapshot.players.find((player:any)=>player.id===pose.id);
+  expect(view.x-pose.x).toBeGreaterThan(.2);expect(view.x).toBeCloseTo(pose.x+.26,6);
+ });
+ test('server guard rejection returns authority and recovery advances at unchanged walking speed',async()=>{
+  const {f,client,pose,clock,base}=await actualClient();const observer=await f.client(1);await subscribe(observer);
+  clock.mockReturnValue(base+100);
+  await expect(client.move({x:pose.x+3,z:pose.z,heading:0})).resolves.toMatchObject({ok:false,code:'INVALID_MOVE',position:{x:pose.x,z:pose.z}});
+  await expect(client.move({x:pose.x+.26,z:pose.z,heading:0})).resolves.toMatchObject({ok:true});
+  clock.mockReturnValue(base+150);
+  await expect(client.move({x:pose.x+.36,z:pose.z,heading:0})).resolves.toMatchObject({ok:false,code:'RATE_LIMITED',position:{x:pose.x+.26,z:pose.z}});
+  clock.mockReturnValue(base+200);
+  await expect(client.move({x:pose.x+.52,z:pose.z,heading:0})).resolves.toMatchObject({ok:true});
+  const view=(await subscribe(observer)).snapshot.players.find((player:any)=>player.id===pose.id);
+  expect(view.x-pose.x).toBeCloseTo(.52,6);expect(view.x-pose.x).toBeGreaterThan(.2);
+ });
+ test('furniture reconciliation invalidates a pending former pose and late timeout cannot rewind new controlled movement',async()=>{
+  const {f,socket,client,clock,base,states}=await actualClient();const room=(await client.subscribe(f.store.bedroomId)).snapshot;
+  const start=room.players.find((player:any)=>player.id===room.durable.selfId),layout=bedroomLayout([]),route=findRoute(layout,start,{x:2,z:2})!;expect(route).not.toBeNull();
+  let now=base;for(const point of route.slice(1)){clock.mockReturnValue(now+=250);await expect(client.move({...point,heading:0})).resolves.toMatchObject({ok:true});}
+  clock.mockReturnValue(now+=100);const transport=(socket as any).io.engine.transport;transport.writable=false;
+  const pending=client.move({x:2.26,z:2,heading:0});transport.writable=true;expect(pending).toBeInstanceOf(Promise);
+  const changed=nextSnapshot(socket,state=>state.generation>room.generation);f.store.placements=[{id:randomUUID(),kind:'plant',x:2,z:2,rotation:0,colour:'sage'}];f.realtime.refresh();const fresh=await changed;
+  await vi.waitFor(()=>expect(states.at(-1).generation).toBe(fresh.generation));const authority=fresh.players.find((player:any)=>player.id===fresh.durable.selfId);expect(authority.x).toBe(start.x);expect(authority.z).toBe(start.z);
+  clock.mockReturnValue(now+=100);await expect(client.move({x:authority.x+.26,z:authority.z,heading:0})).resolves.toMatchObject({ok:true});
+  await expect(pending).resolves.toMatchObject({stale:true});const observer=await f.client(1),view=(await subscribe(observer,randomUUID(),f.store.bedroomId)).snapshot.players.find((player:any)=>player.id===authority.id);
+  expect(view.x).toBeCloseTo(authority.x+.26,6);expect(view.x-authority.x).toBeGreaterThan(.2);
+ });
+
 });

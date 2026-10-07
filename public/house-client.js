@@ -126,7 +126,17 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   if (storage && !flightsByStorage.has(storage)) flightsByStorage.set(storage, new Map());
   const inFlight = storage ? flightsByStorage.get(storage) : new Map();
   const inspected = new Set();
-  const reducer = createSnapshotReducer(snapshot => { latestLive = snapshot; onSnapshot(snapshot); });
+  let motionFlight = null, motionGeneration = 0, motionAuthority = null;
+  const motionScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
+    snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.streamId, snapshot.durable.zoneId,
+    snapshot.players.find(player => player.id === snapshot.durable.selfId)?.seatId ?? null]) : null;
+  const reducer = createSnapshotReducer(snapshot => {
+    if (motionScope(snapshot) !== motionScope(latestLive)) { motionGeneration++; motionFlight = null; motionAuthority = null; }
+    latestLive = snapshot;
+    const player = snapshot?.players.find(player => player.id === snapshot.durable.selfId);
+    if (Number.isFinite(player?.x) && Number.isFinite(player?.z)) motionAuthority = { x: player.x, z: player.z };
+    onSnapshot(snapshot);
+  });
   const report = error => { onError(error); return error; };
   function settle(reply) {
     if (!reply || reply.ok !== true) throw problem(reply?.code ?? 'UNAVAILABLE', reply?.message ?? 'The house did not acknowledge this action.');
@@ -337,8 +347,19 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   return {
     connect, subscribe, command, getPending, retryPending, discardPending, discardOtherIdentities, exportPending,
     move(position) {
-      if (closed || !latestLive?.controller || !socket?.connected) return;
-      socket.volatile.emit('house.move', { generation: latestLive.generation, sequence: ++sequence, x: position.x, z: position.z, heading: position.heading });
+      if (closed || !latestLive?.controller || !socket?.connected || motionFlight) return false;
+      const request = requestGeneration, lifecycle = motionGeneration, scope = motionScope(latestLive);
+      const body = { generation: latestLive.generation, sequence: ++sequence, x: position.x, z: position.z, heading: position.heading };
+      const current = () => !closed && socket?.connected && request === requestGeneration && lifecycle === motionGeneration && scope === motionScope(latestLive);
+      // One transient flight, no replay queue. A dropped packet or ACK must settle.
+      const flight = socket.timeout(1000).volatile.emitWithAck('house.move', body).then(reply => {
+        if (!current()) return { ok: false, stale: true };
+        if (reply?.ok !== true || reply.sequence !== body.sequence) return { ok: false, code: reply?.code ?? 'INVALID_ACK', position: motionAuthority && { ...motionAuthority } };
+        motionAuthority = { x: body.x, z: body.z };
+        return { ok: true, position: { ...motionAuthority } };
+      }, () => current() ? { ok: false, code: 'PENDING', position: motionAuthority && { ...motionAuthority } } : { ok: false, stale: true });
+      motionFlight = flight;
+      return flight.finally(() => { if (motionFlight === flight) motionFlight = null; });
     },
     setAvailability: value => controlled('house.availability', { value }),
     claimSeat: seatId => controlled('house.seat', { seatId }),
