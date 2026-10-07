@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { randomUUID } from "node:crypto";
@@ -7,9 +7,11 @@ import { io } from "socket.io-client";
 import { createLayout, bedroomLayout, validPosition } from "../public/house-geometry.js";
 import { createService } from "../src/server.ts";
 const fixtures: {app: ReturnType<typeof createService>; directory: string}[] = [];
-async function fixture() {
+async function fixture(markdown?: string) {
  const directory = mkdtempSync(join(tmpdir(), "house-http-"));
- const app=createService({dataDir:directory, secureCookies:false});
+ const readmePath=markdown === undefined ? undefined : join(directory,"readme.md");
+ if(readmePath)writeFileSync(readmePath,markdown!);
+ const app=createService({dataDir:directory, secureCookies:false, readmePath});
  fixtures.push({app,directory});
  await new Promise<void>(resolve=>app.server.listen(0,"127.0.0.1",resolve));
  const base="http://127.0.0.1:"+(app.server.address() as {port:number}).port;
@@ -96,9 +98,12 @@ it("shuts down with a legacy live stream still open",async()=>{
 
 it("renders source evidence links against the repository instead of unavailable readme subpaths",async()=>{
  const {base}=await fixture();const html=await (await fetch(base+"/readme/")).text();
- expect(html).toContain('href="https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/docs/implementation/VALIDATION.md"');
- expect(html).not.toContain('href="docs/implementation/VALIDATION.md"');
+ expect(html).toContain('href="https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/docs/implementation/REDESIGN-VALIDATION.md"');
+ expect(html).not.toContain('href="docs/implementation/REDESIGN-VALIDATION.md"');
  expect(html).toContain('href="https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/PLAN.md"');
+ expect(html).toContain('href="/board/"');
+ expect(html).not.toContain('href="https://github.com/board/"');
+ expect((await fetch(base+"/board/")).status).toBe(200);
 });
 
 
@@ -117,4 +122,12 @@ it("rejects a delayed draft or private request captured for another cookie ident
  expect(valid.status).toBe(200);
  expect(app.houseStore.me(secondMe.identity.id).identity.name).toBe("Delayed draft");
  expect(app.houseStore.me(original.identity.id).home).toBeNull();
+});
+
+it("keeps root app paths, anchors and external URLs while resolving repository source links",async()=>{
+ const {base}=await fixture("[Board](/board/) [Anchor](#evidence) [External](https://example.test/source) [Protocol relative](//example.test/source) [Source](docs/implementation/REDESIGN-VALIDATION.md)");
+ const html=await (await fetch(base+"/readme/")).text();
+ for(const href of ["/board/","#evidence","https://example.test/source","//example.test/source",
+  "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/docs/implementation/REDESIGN-VALIDATION.md"])
+  expect(html).toContain('href="'+href+'"');
 });

@@ -220,8 +220,9 @@ export function createService(options: ServiceOptions) {
         const renderLink = renderer.link;
         renderer.link = function(token) {
           const href = token.href;
+          const appPath = href.startsWith("/") && !href.startsWith("//");
           const absolute = href.startsWith("#") || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(href);
-          return renderLink.call(this, { ...token, href: absolute ? href : new URL(href, "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/").href });
+          return renderLink.call(this, { ...token, href: absolute || appPath ? href : new URL(href, "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/").href });
         };
         const body = marked.parse(markdown, { async: false, renderer });
         const page = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Night Neighbourhood README</title><link rel="stylesheet" href="/readme.css"></head><body><header><a href="/">Night Neighbourhood</a><p>Project README</p></header><main>${body}</main></body></html>`;
