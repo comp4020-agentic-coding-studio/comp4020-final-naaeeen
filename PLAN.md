@@ -15,16 +15,13 @@ board has its own authority, image BLOBs, element-level reconciliation, explicit
 quotas and a third SQLite file. It does not inherit acceptance from the previous
 195-test candidate or thirty-minute L1/L2 workload.
 
-Current release acceptance: the d693d06 CI run37579809454 and selected live flows
-passed; later publication startup failures reopen acceptance for the refined world.
-The reviewed [GPU-only idle refinement](docs/implementation/IDLE-RENDER-EVIDENCE.md)
-has465localchecks/two affected native passes and awaits remote validation; the
-[earlier metadata refinement](docs/implementation/STARTUP-REFINEMENT.md) remains
-recorded with its source-specific outcomes; see [release status](docs/implementation/RELEASE-STATUS.md) and
-[exact scoped release evidence](evaluation/redesign-release.results.json). The
-registered300s synthetic resource workload passed all unchanged gates. Prior
-failures remain archived. Physical devices, human value/A-B, prolonged Fly stress,
-board unit-coverage target and personal student writing remain separate gaps.
+Current release acceptance is VERIFIED: final runtime ee40225 at b95d9a1 passes
+CI37594001833,465requiredchecks,nine browser cases,the registered300s resource
+exercise,mounted backup/deploy,and selected revised live game/room flows. See
+[final release](docs/implementation/FINAL-RELEASE.md) and
+[exact closure](evaluation/final-release.results.json). Earlier metadata/GPU
+failures remain preserved. This does not establish physical-device or human value
+results; board unit coverage and student personal writing gaps remain explicit.
 
 Current local acceptance and operational limits are reconciled in
 [redesign validation](docs/implementation/REDESIGN-VALIDATION.md). R4 keeps the

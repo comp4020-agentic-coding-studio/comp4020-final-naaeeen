@@ -1,3 +1,32 @@
+# Verified implementation and release handoff
+
+7 October2026. Runtimeee40225/world737f4... is deployed and VERIFIED atb95d9a1 by
+actualCI37594001833 check+deploy:465requiredchecks/native9/registeredresource300.001s/
+process+secrets/privatebackup/Fly+HTTPS PASS. Root confirms source/protocol hashes,
+allgatestrue,200.87MiB RSSpeak,11.86ms normalp95,24finaltransports,zero pending or
+unexpecteddisconnect. Revised livegame19.2s/room35.1s PASS. Five deployedcodehashes
+andboardJS/CSSbytes match; currentimageboard2PASS plus unchanged-source priorlive
+editor12.8s evidence retained.1sharedCPU/256MB/data mount checked. FINAL-RELEASE.md
+and evaluation/final-release.results.json are the requirement-level closure.
+
+Implementation fulfilled. Final evidence-onlypublication follows, with identical
+runtime; root checks that separate remoteCI outcome before markinggoalcomplete.
+Do not recursivelycommit another status solely to restate its success. Future
+work inspects current HEAD/CI and starts from owner feedback, preserving all prior
+source-specific failures and successfulgates. Board69.85/67.67 andReact0%unit scope,
+physical/human/physicalstress/offvolume/studentwriting gaps remain explicit.
+
+CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Preview4093 exact
+.local/implementation-s1,exec55499, originaldata/cookies preserved. FrozenCrit8 refs
+351722.../6dc79c5 andcheckpointf5a25f2 unchanged. No native/test/load job currently
+running; root owns final publication checkpoint. Reopen active REPORT/CLAUDE/PLAN
+at meaningful section entry; fresh packets include literalWSL path/currenthashes.
+
+# Historical checkpoints
+
+All earlier OPEN/pending/not-pushed labels below describe their checkpoint times;
+they are superseded by the verified release above and preserved as history.
+
 # Current GPU-budget refinement handoff
 
 Localsourceee40225 (not yet pushed) implements reviewed GPU-only idlebudget. Remote

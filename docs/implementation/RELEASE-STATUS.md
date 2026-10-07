@@ -1,9 +1,10 @@
 # Approved redesign release status
 
 7 October 2026. The owner approved public checkpoint/main pushes and the existing
-CI/Fly release. The d693d06 application is deployed and its three selected live flows pass.
-Later publication CI failed the startup guard; refined-world acceptance is open.
-See [startup refinement](STARTUP-REFINEMENT.md) for the current version/gate. Preserve the Crit 8 tag, original data, existing secret hooks, fixed Fly
+CI/Fly release. Final runtime ee40225 is deployed and VERIFIED at b95d9a1 by CI37594001833
+and revised live game/room flows. [Final release](FINAL-RELEASE.md) supersedes
+pending labels below, which remain historical source-specific checkpoints.
+Preserve the Crit 8 tag, original data, existing secret hooks, fixed Fly
 256 MB machine and one mounted volume.
 
 ## Actual CI history
@@ -117,3 +118,13 @@ models/AA/light/shadow/criteria. Parent465checks, two affected native flows and
 worldcoverage92.95/83.81 pass. One fixed-order diagnostic records9861ms/257ms join;
 cache/host/confounds and differing duration are explicit. Latestremote acceptance
 remains pending; see [GPU evidence](IDLE-RENDER-EVIDENCE.md).
+
+## Final verified release
+
+CI37594001833 atb95d9a1 passes check+deploy. Root checks exact downloaded resource
+source/gates:300.001s,200.87MiB peakRSS,11.86ms normalp95,24finaltransports andzero
+pending/unexpecteddisconnect. Private backups, secrets andprocess evidence pass.
+Deployed source/board assets match final source; live game19.2s/room35.1s pass.
+[Final closure](FINAL-RELEASE.md) records scope/gaps. Final documentation-only
+publication has identical runtime and a separate CI identity; no recursive doc
+updates are needed solely to restate that followup run.

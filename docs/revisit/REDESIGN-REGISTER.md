@@ -67,3 +67,15 @@ review, one native9861/257ms diagnosticpair, unmodified native2PASS and parent
 465requiredchecks are in [IDLE-RENDER-EVIDENCE](../implementation/IDLE-RENDER-EVIDENCE.md).
 Latestremote gates remain OPEN; earlier d693 ormetadata-stage passes are not reused
 as proof of the new world. Frame scheduling is now part of future animation gates.
+
+## Final release acceptance
+
+The latest runtimeee40225 atb95d9a1 is VERIFIED by actualCI37594001833 and revised
+live flows. R4.2 full unchangedresource300.001s passes all gates; R4.3 required465
+and maintainednative9 pass; R4.4 mountedbackup/deploy and exact livedeployed
+source/board assets pass. R1/R2 changed live gameplay/room/DIY/access pass19.2/35.1s.
+All R0–R3 scoped evidence above is retained; boardbytes/backend are unchanged and
+its currentimage two-case gate passes. [Final closure](../implementation/FINAL-RELEASE.md)
+links exact evidence and preserves physical/human/coverage/studentwriting gaps.
+These results supersede OPEN/pending labels at earlier checkpoint times, without
+rewriting failures or claiming unexecuted participant/physicalstress experiments.

@@ -288,3 +288,15 @@ A newfixture's positive seated-lift assumption was correctedtoexistingconstant,
 notruntime geometry. ReadersmisroutedtoA2were correctedwithliteralA3WSLprefix and
 currenthash checks; the activeREPORT nowrequires those factualpacket fields.
 CurrentremoteCI/deploy/live sourceverification remains required.
+
+## Final requirement closure
+
+Root reconciled the full owner/objective requirements against actual source,
+artifacts, plan and independent read-only completion mapping. FinalCI37594001833
+passes465/native9/resource/allrelease gates; downloaded source/protocol/gates
+match. Actual revised live flows and byte/topology probe pass. FINAL-RELEASE.md
+provides the requirement-level map, exact final-release.results.json, and genuine
+coverage/human/device/physicalstress/studentwriting limits. PriorCI failures and
+factor-specific comparisons remain preserved. Finalpublication is docs-only with
+unchangedruntime; check its actualremoteCI once, without recursively recreating
+status-only commits. No requiredimplementation work is deferred to save effort.
