@@ -104,3 +104,35 @@ source, unchanged kernel assertions and safe diagnostics, then independently ran
 `mise exec -- node tools/ci-browser-sandbox.mjs --renderer-controls` and diff checks.
 All six fixture controls passed; no actionable issue was found. Actual container
 renderer reads and the nine application cases still require a new approved CI run.
+
+## Writable artifact-child correction after actual CI
+
+At main 99cdaba, CI run 37578702188 passed the container sandbox preflight, then
+Playwright failed while removing `/workspace/.local/browser-results` with EROFS.
+No application case, registered resource workload or deployment ran. Installed
+Playwright 1.63.0 `lib/runner/index.js` clears each result output directory before
+tests and only special-cases EBUSY; its HTML reporter also removes its output folder.
+The output directories were the bind-mount roots under the read-only source mount.
+
+The shell now explicitly sets `PW_OUTPUT_DIR=.local/browser-results/run` and
+`PW_REPORT_DIR=.local/browser-report/html`. Existing config already consumes these
+overrides. Each disposable child can be removed/recreated within its existing
+writable artifact mount. Source and Node mounts remain read-only; no mount, user,
+profile, capability, network, timeout, case selector or resource gate changed.
+Existing artifact collection still includes these child paths recursively.
+
+A matched native control used the actual installed Playwright runner/HTML reporter,
+a chmod 0555 source parent and chmod 0755 artifact roots. Root-directory output
+failed with EACCES; child-directory output passed, cleared seeded stale result/HTML
+files, wrote a new HTML report and last-run record, and retained sibling root
+sentinels. This is a permission analogue, not a reproduced Docker EROFS mount.
+The disposable source parent permission was restored. The one filesystem fixture
+launched no browser and ran zero application cases. Exact native results/raw logs
+are private under `.local/browser-output-control/6477eebc-810d-4859-87ce-a59d8a6bcd1e`. Existing-config consumption of both overrides,
+bash syntax and diff checks passed. Actual Docker cleanup and nine cases await CI.
+
+A fresh-context read-only reviewer traced the exact two-file patch, both installed
+cleanup paths and recursive artifact collection, and independently passed bash
+syntax and scoped diff checks. No actionable issue was found. The reviewer did
+not rerun application tests or inspect private fixture logs; Docker cleanup and
+the nine application cases remain pending actual CI.
