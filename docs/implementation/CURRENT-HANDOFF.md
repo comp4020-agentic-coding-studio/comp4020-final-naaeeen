@@ -1,3 +1,27 @@
+# Current movement correction: local pass, remote pending
+
+CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source5c40545
+commits client4281ff8c/world7b8e9acf and three affected specs. CI37596250446 at
+61e297e failed peer-motion divergence while eight cases passed. Exact initial
+packet rejection/drop is unproven; do not weaken thresholds/limits/retries.
+
+One volatile motion ACK flight/no replay,1000ms timeout,.65 outstanding travel,
+validated emitted chord/wallcomponent/bounded shortenings, held-input recovery
+and scoped stale guards implemented. Server/geometry/UI/resources unchanged.
+Fresh reviewer reproduced plant-corner .030633659 gap; worker reproduced/refined;
+contextual recheck126 PASS/no further findings. Worker184 affected PASS; root485
+required/build/type in27files PASS. Coverageclient93.39/88.31 world92.42/82.88.
+Unmodified nativecore20.5s +room29.6s PASS; process evidence/diff PASS.
+MOVEMENT-RECONCILIATION.md/exactJSON record scope and limitations.
+
+No worker tests/writes/services remain. Preview4093 existing process748 exact
+.local/implementation-s1, originaldata/cookies preserved. Parent ownsdocs review,
+logical evidencecommit, approvedmainpush, actualnewCI9/resource/backup/deploy,
+then exact deployedcodehash/affectedlive flows and requirement audit. GoalACTIVE.
+Priorb95 release scopes below are history; latestremote acceptanceOPEN.
+
+# Historical release checkpoints
+
 # Verified implementation and release handoff
 
 7 October2026. Runtimeee40225/world737f4... is deployed and VERIFIED atb95d9a1 by

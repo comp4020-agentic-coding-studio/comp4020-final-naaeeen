@@ -79,3 +79,17 @@ its currentimage two-case gate passes. [Final closure](../implementation/FINAL-R
 links exact evidence and preserves physical/human/coverage/studentwriting gaps.
 These results supersede OPEN/pending labels at earlier checkpoint times, without
 rewriting failures or claiming unexecuted participant/physicalstress experiments.
+
+## Motion reconciliation gate reopened
+
+Actual CI37596250446 at61e297e contradicted real peer movement. R2 collision/
+prediction and R4 current-source acceptance are OPEN while preserving prior scoped
+b95 evidence. Fire-and-forget/drop/reject recovery alternatives, unchanged guard
+criteria and fresh-review plant-corner refinement are recorded separately in
+[MOVEMENT-RECONCILIATION](../implementation/MOVEMENT-RECONCILIATION.md). Current
+checks/release cannot inherit the earlier465/native9 PASS.
+
+Motion correction5c40545 now has source-frozen worker184, parent485/27files,
+nativecore20.5s/room29.6s PASS, fresh collision finding and contextual recheck.
+R2 local correction accepted; R4 remote gates remain OPEN. Native viewports and
+scoped coverage are separate from physical devices, WAN and real-user outcomes.

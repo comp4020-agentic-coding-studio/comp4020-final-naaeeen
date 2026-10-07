@@ -1,3 +1,14 @@
+# Current movement gate: open
+
+CI [37596250446](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37596250446)
+at docs-only source `61e297e` failed real peer movement: the owner's predicted
+avatar had travelled far while the peer still saw it near spawn. Eight other
+browser cases passed. Earlier `b95d9a1` results below remain valid for their exact
+source and scope; they do not close this newly observed failure. The current
+motion reconciliation correction requires fresh review, affected native flows,
+required checks and actual CI/deployment verification. See
+[MOVEMENT-RECONCILIATION.md](MOVEMENT-RECONCILIATION.md).
+
 # Approved redesign release status
 
 7 October 2026. The owner approved public checkpoint/main pushes and the existing

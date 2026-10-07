@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "trigger": {
+    "ciRun": 37596250446,
+    "commit": "61e297e",
+    "result": "FAIL",
+    "peerX": 0.1861069202345747,
+    "otherCasesPassed": 8,
+    "scope": "Peer-motion divergence; exact first rejection/drop unproven"
+  },
+  "sourceHashes": {
+    "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+    "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+    "spec/house-client.test.ts": "8622134ce8e7166d2af93ddec3c3d14db432f0352248f690dea0ed35a2e3d6f9",
+    "spec/house-world.test.ts": "1a024e87d12f716fe69f6d3850a913d5b2c5dbc692beb05201c4f0ccc439a557",
+    "spec/house-realtime.test.ts": "34004bceb41269b670385fe8fd378b8ae5af463f218500e77253b95d1468daa2"
+  },
+  "policy": {
+    "timeoutMs": 1000,
+    "maximumMotionFlights": 1,
+    "queue": "none",
+    "maximumOutstandingTravelUnits": 0.65,
+    "dispatchMinimumMs": 100,
+    "afterSettlementMinimumMs": 80,
+    "serverLimits": "unchanged",
+    "testDeadlinesAndRetries": "unchanged"
+  },
+  "review": {
+    "initial": "fresh no-history reviewer",
+    "finding": "plant-corner shared slide non-idempotence",
+    "serverSweepError": 0.030633659,
+    "refinement": "validate endpoint, valid wall component then at most eight shortenings",
+    "recheck": "contextual;126 focused tests PASS; no further actionable finding"
+  },
+  "checks": {
+    "workerAffected": 184,
+    "client": 43,
+    "world": 58,
+    "realtime": 25,
+    "ui": 58,
+    "parentRequired": 485,
+    "files": 27,
+    "boardBuild": "PASS",
+    "typecheck": "PASS",
+    "diff": "PASS"
+  },
+  "affectedCoverage": {
+    "client": {
+      "statements": 93.39,
+      "branches": 88.31
+    },
+    "world": {
+      "statements": 92.42,
+      "branches": 82.88
+    }
+  },
+  "native": {
+    "status": "PASS",
+    "cases": 2,
+    "gameCoreSeconds": 20.5,
+    "seatRoomDIYAccessSeconds": 29.6,
+    "origin": "http://localhost:4093",
+    "scope": "Unmodified ci-core and house seat/door/DIY/access native flows;1920x1080 and390x844;unchanged deadlines and retries"
+  },
+  "remote": {
+    "status": "PENDING"
+  },
+  "limitations": [
+    "Exact prior CI packet failure unproven",
+    "No WAN reliability or human A/B claim",
+    "Prior board coverage gaps remain unchanged"
+  ],
+  "sourceCommit": "5c40545281a5decf5d10ea4ecc7674213b7d1526"
+}
