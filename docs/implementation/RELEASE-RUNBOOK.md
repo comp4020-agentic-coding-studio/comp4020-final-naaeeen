@@ -3,8 +3,8 @@
 7 October 2026. The owner explicitly approved the checkpoint/main repository pushes
 and the existing CI/Fly release. The checkpoint branch and reviewed main commits
 have been published. A private mounted backup preflight succeeded; see
-[backup evidence](RELEASE-BACKUP-EVIDENCE.md). The redesigned production release is
-still pending a successful CI run. Current run results are in
+[backup evidence](RELEASE-BACKUP-EVIDENCE.md). The redesigned production release passed CI and deployed; selected live game, room
+and board flows also pass. Current run results are in
 [release status](RELEASE-STATUS.md). Local evidence alone does not grant broader
 publication, credential, hosting or data-replacement authority. Preserve the frozen
 `crit-8` tag and the configured one shared-CPU

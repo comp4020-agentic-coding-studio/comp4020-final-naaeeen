@@ -15,12 +15,20 @@ board has its own authority, image BLOBs, element-level reconciliation, explicit
 quotas and a third SQLite file. It does not inherit acceptance from the previous
 195-test candidate or thirty-minute L1/L2 workload.
 
+Current release acceptance: CI run37579809454 and selected live game/room/board
+flows passed; see [release status](docs/implementation/RELEASE-STATUS.md) and
+[exact scoped release evidence](evaluation/redesign-release.results.json). The
+registered300s synthetic resource workload passed all unchanged gates. Prior
+failures remain archived. Physical devices, human value/A-B, prolonged Fly stress,
+board unit-coverage target and personal student writing remain separate gaps.
+
 Current local acceptance and operational limits are reconciled in
 [redesign validation](docs/implementation/REDESIGN-VALIDATION.md). R4 keeps the
 provided course checks and public-repository/deploy conditions, adds the maintained
 standalone-board browser cases, preserves the Crit 8 tag and original user data,
-and prepares a local preview. Physical phones, production Docker/Fly/WAN, a real
-friend value pilot and student-authored PROCESS/reflections remain separate gates.
+and provides the local preview and verified deployed app. Physical phones, sustained
+resource use on the actual Fly VM, WAN impairment, a real friend value pilot and
+student-authored PROCESS/reflections remain separate gates.
 
 
 # Shared Study House: purpose-first delivery plan

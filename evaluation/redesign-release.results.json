@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "scope": "CI and live release closeout; each evidence type remains separately bounded",
+  "candidateCommit": "d693d06ecaaefee587cdfe81f8628c7d3c60dde0",
+  "ci": {
+    "runId": 37579809454,
+    "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37579809454",
+    "status": "PASS",
+    "requiredSpecTests": 411,
+    "nativeCasesPassed": 9,
+    "privateMountedBackup": "PASS",
+    "deploy": "PASS",
+    "processEvidence": "PASS",
+    "verifiedSecretScan": "PASS",
+    "courseKeyShapeScan": "PASS"
+  },
+  "resource": {
+    "path": "evaluation/board-resource.results.json",
+    "sha256": "cd13733d6a0336688b11873a3a693354c7fc6ee5473840bd6d0b584e6c98aac3",
+    "status": "PASS",
+    "protocolSHA256": "1ef473487e69243cfc338710246354da125dcbdce4356ec93a8b15824eddb540",
+    "sourceManifestSHA256": "545d79c3ea7d85addc95242b26232c8ec0b53bb50cb9a1b0b7387bf3bc937cd7",
+    "instrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+    "durationSeconds": 300,
+    "rssPeakMiB": 202.58984375,
+    "normalP95Ms": 8.862,
+    "observedDeliveryTargets": 47376,
+    "unexpectedDisconnects": 0,
+    "allGatesTrue": true,
+    "scope": "SYNTHETIC; process RSS, not constrained to Fly",
+    "historicalResult": {
+      "path": "evaluation/board-resource.pre-ci.results.json",
+      "sha256": "40085419a254ecb3ff26ae5a0f9dd265fd8ecdf92dfe22a055fb225ef099fe38",
+      "status": "FAIL"
+    }
+  },
+  "live": {
+    "url": "https://comp4020-final-naaeeen.fly.dev",
+    "native": {
+      "gameCore": {
+        "status": "PASS",
+        "durationSeconds": 30.9
+      },
+      "seatRoomDIYAccess": {
+        "status": "PASS",
+        "durationSeconds": 49.5
+      },
+      "standaloneBoard": {
+        "status": "PASS",
+        "durationSeconds": 12.8,
+        "scope": "Real HTTPS two-user native draw/sticky/text/image paste/chat/undo/export/save/reload; desktop and emulated touch viewport",
+        "earlierAttempt": "Blocked by loopback-only fixture guard before board mutation; exact-app opt-in added without changing case body or limits"
+      }
+    },
+    "sourceAndTopology": {
+      "status": "PASS",
+      "capturedAt": "2026-10-07T06:21:00.420Z",
+      "scope": "read-only deployed source/topology and one moment of memory; not sustained physical resource acceptance",
+      "machine": {
+        "count": 1,
+        "cpuKind": "shared",
+        "cpus": 1,
+        "memoryMB": 256,
+        "mountPath": "/data"
+      },
+      "sentinel": "READONLY_SOURCE_PROBE_V1",
+      "node": "v24.21.0",
+      "hashes": {
+        "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
+        "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
+        "public/house-world.js": "56f5fed2d0719df167f4267f2547d234bf591da37829e34a108bdb4811a06b5f",
+        "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+        "package.json": "23f2af5f0d0997145ebf8387f58b02096c3b657f04594d73feaa602322bc37d6"
+      },
+      "appRSSKiB": [
+        105668
+      ],
+      "cgroup": {
+        "memory.current": null,
+        "memory.max": null,
+        "memory.peak": null
+      }
+    },
+    "readOnlyProbe": {
+      "privateScriptPath": ".local/redesign-closeout/live-source-inspect.mjs",
+      "sha256": "2f145c00c7e2b7296a8bb97cffe4241cfba2be79fbbeb20b4ef7dd9948b8138d",
+      "freshReview": "Confirmed stale-PASS finding repaired; contextual recheck found no remaining actionable issue",
+      "negativeControls": [
+        "Empty token invalidates previous PASS before any API call",
+        "Missing local source invalidates previous PASS before any API call"
+      ]
+    },
+    "fixtureGuard": {
+      "status": "PASS",
+      "controlsPassed": 23,
+      "freshReview": "No actionable findings; default remote origins restricted; explicit flag authorizes only exact HTTPS app",
+      "path": "tests/e2e/board-journey.ts",
+      "sha256": "d5b1b26a687a25cd466c336330f23a90bb85c8fb9fe09ded7510c244baff1516",
+      "controlPath": "spec/browser-fixture-origin.test.ts",
+      "controlSHA256": "570164f1cad122f6118b238a6acf7abe34a27130de141330dd2b83211ba5a8a0",
+      "parentFirstInvocation": "NOT_RUN: default8080 global-setup fixture absent; subsequent correct4093 invocation23PASS"
+    }
+  },
+  "limitations": [
+    "Resource run is synthetic Ubuntu process RSS, not a256MB-constrained Fly stress run, WAN speed or physical-phone result.",
+    "Resource pointer ACK/cadence does not prove peer pointer content/automatic drain; focused pressure tests cover that separate behavior.",
+    "Resource sole bootstrap ACK and individual successful disconnect attribution are not independently graded by this full workload.",
+    "Live RSS is one moment of one server process; cgroup memory telemetry is unavailable.",
+    "Board unit statement/branch coverage remains69.85/67.67percent and main.jsx unit coverage is0.",
+    "No real-human A/B, preference/value study, physical phone, or student-authored reflection is established."
+  ]
+}

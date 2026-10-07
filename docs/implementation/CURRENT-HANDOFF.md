@@ -1,31 +1,45 @@
-# Current R4 application handoff
+# Current R4 released application handoff
 
-7 October 2026. Local app source/checks are ready; root owns the approved release.
-Required build/type/spec: 411/411 PASS. Process evidence and production audit PASS.
-House coverage: 86.28% statements / 80.03% branches. Board coverage: 69.85% / 67.67%,
-with main.jsx unit coverage zero. Preserve that gap.
+7 October 2026. The owner approved the public checkpoint/main pushes and existing
+CI/Fly release. Run37579809454 passed at d693d06: Docker build, 411 required checks,
+nine maintained browser cases, registered300s resource workload, evidence/secret
+checks, private exact-candidate mounted backup, deployment and HTTP smoke.
 
-Seven maintained cases passed before startup enforcement; two painted title cases
-passed separately. The strict shared startup helper has seven passing controls and
-the affected game passes in 55.5s, with accepted 724/8672/8200 ms phases. Nine cases
-collect for the updated CI selector; no combined nine-case local run is claimed.
-[Exact source and scoped evidence](../../evaluation/redesign-closeout.results.json).
+Live HTTPS game core PASS30.9s; seat/room/DIY/access flow PASS49.5s; full standalone
+board core PASS12.8s. Exact server/board/world/UI/package hashes match deployment;
+one shared CPU/256MB machine and /data mount verified. One-point server RSS105668KiB;
+cgroup telemetry unavailable. Source bindings and scopes:
+[evaluation/redesign-release.results.json](../../evaluation/redesign-release.results.json)
+and [RELEASE-STATUS.md](RELEASE-STATUS.md).
 
-Current local commits: ca57bb2 game/world, 2e1cdb4 transport, fc4b5d8 README routing.
-Browser/CI/evidence checkpoint dc99dad is committed. No worker push/deploy.
-Resource protocol 1ef47348/manifest 545d79c3/instrument6130e233 is READY; e579 archived.
-Original/candidate/quiet resource failures remain preserved; CI workload is pending.
+Resource current result PASS, all gates true, 202.59MiB peak RSS, 8.862ms normalp95,
+no unexpected disconnect, 24finaltransports. Protocol1ef47348 / manifest545d79c3 /
+instrument6130e233 unchanged. Exact pre-CI FAIL and its history remain archived;
+this is synthetic Ubuntu process acceptance, not actual Fly stress/WAN evidence.
 
-Original 4093 preview uses exact .local/implementation-s1 and passes WSL health (PID 4936,
-exec 59237). Test 4099 uses exact .local/redesign-preview/data (PID 308,exec 68903).
-Do not reseed/delete either data root. Crit8 tag and root backup files remain intact.
-The owner approved checkpoint/main pushes and the existing CI/Fly release. Both
-branches are published; mounted backup preflight passed. The latest CI at 99cdaba
-passed the actual sandbox preflight, then failed deleting the browser output mount
-root (EROFS). See RELEASE-STATUS.md for each failed run and its exact scope.
-Root next: review the bounded output-directory correction, commit/push, verify
-actual nine-case CI/registered workload/Fly and live user flows.
-Human/physical-device/value and student personal rewriting remain separate.
+Final publication contains fixture-only exact-app live opt-in and23new controls
+(commit670b235), plus final evidence; no runtime source change. Root first ran controls
+without default8080 fixture (NOT RUN), then correct4093 fixture:23PASS. Typecheck,
+scoped fresh review and unchanged nine-case collection pass. Existing main CI will
+recheck that commit; preserve its separate run identity. Board unit statement/branch
+coverage69.85/67.67%, main.jsx0%; house86.28/80.03%. No human/physical-phone/value/
+grade or student-reflection proof. These gaps do not become PASS through release.
+
+Canonical WSL /home/lizhi/comp4020/comp4020-final-naaeeen. Original preview restored
+at http://localhost:4093 (PID917, exec48949), exact .local/implementation-s1, health
+passes WindowsIPv4. Preserve its data/cookies. Previous4099 test process stopped
+with the interruption; its .local/redesign-preview/data remains preserved. Do not
+reseed/delete either. Crit8 tag remains frozen; logical main history and public
+redesign-game-board checkpoint are preserved. Read active REPORT/PLAN/CLAUDE before
+new work; use subsection comparisons/fresh review/refinement where useful.
+
+Implementation and the approved application release are complete. The final
+evidence/fixture commit runs existing main CI again; its remote run is the source
+of truth for that publication checkpoint, without a recursive evidence-only commit.
+At this record creation, root still needs to confirm that final run after pushing.
+New work must inspect current HEAD/remote CI first and preserve these successful
+application results. Future feature work begins from owner feedback and explicit
+scope, not a restart of completed lanes.
 
 # Historical redesign checkpoint
 

@@ -231,3 +231,28 @@ inside each output mount; broader writable source is unnecessary. The worker own
 only the CI shell and environment README, fresh review remains read-only, and
 root owns final diff, native checks, authorization and publication. Application,
 startup and resource criteria are preserved. A new actual CI run remains required.
+
+## R4 actual release and live-flow closeout
+
+The output-child comparison and fresh review were verified by actual CI run
+37579809454: nine native cases, all unchanged registered resource gates, evidence,
+secret scans, backup and deploy pass. Root downloaded artifacts and independently
+checked current protocol/instrument/runtime hashes, all true gates,300s duration,
+24 final transports,202.59MiB peak RSS and8.862ms normalp95. Exact earlier FAIL is
+archived before current result replacement. Fresh source audit limits pointer ACK
+and sole-snapshot/per-event-disconnect claims rather than expanding PASS scope.
+
+Live game and room flows pass; loopback-restricted board test initially stops
+before mutation. A fixture-only explicit exact-app HTTPS opt-in received23red/green
+controls, fresh review, typecheck and parent recheck; unchanged board flow passes
+live12.8s. Root's initial isolated-control command lacked APP_URL and did not run
+checks; the correct4093 invocation passes23. No deadline or app behavior changed.
+
+The read-only deployed-source probe's fresh reviewer found stalePASS retention.
+Root repaired invalidation before local hashing and API operations, reproduced
+empty-token and missing-source negative controls, then obtained a contextual
+recheck. Actual source/topology probe passes; cgroup telemetry is unavailable and
+RSS is one point only. Root inspected actual live room/CI board images without
+claiming human preference. Exact evidence and all residual gaps remain in
+evaluation/redesign-release.results.json and RELEASE-STATUS.md. Final logical
+fixture/evidence commits and main CI are the remaining publication checkpoint.
