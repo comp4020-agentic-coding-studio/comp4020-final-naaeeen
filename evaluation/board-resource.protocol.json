@@ -20,7 +20,7 @@
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
   },
   "sourceManifestSHA256": "545d79c3ea7d85addc95242b26232c8ec0b53bb50cb9a1b0b7387bf3bc937cd7",
-  "instrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+  "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
   "configuration": {
     "houses": 2,
     "membersPerHouse": 6,
@@ -129,5 +129,13 @@
     "reviewer": "redesign_integrated_review",
     "confirmedFindings": "Original reflection/deadline/protocol defects were reproduced and repaired. Later source controls found a feasible moving snapshot cutoff and compressed normal pointer arrivals after a 93 ms ACK; the specific historical failures remain unattributed. Quota-only matched diagnostics supported removing whole-scene patch churn. Real-service queued ping controls reproduced a false close below unchanged queue bounds. Contextual independent review checked exact quota/control/cutoff sources and actual controls; six stale-completion controls passed. All runtime bounds and full workload gates remain unchanged. Real current-subscription pressure fixture proved a large ACK plus legal transient presence filled the eight-packet queue below four MiB. Presence now coalesces while busy and flushes latest current-authorized state only to that view; reliable ACK/patch/chat packet and byte bounds are unchanged. Matching real house heartbeat controls support the same typed control-packet accounting. Fresh source review accepted authorization/epoch/listener cleanup, with strengthened automatic-drain grading required.",
     "execution": "Original and quota-only shortened diagnostics, interrupted full candidate and explicit quiet-host retry remain preserved FAIL/DIAGNOSTIC. New candidate fixes confirmed transient presence pressure and current-connection pending state, generalizes only host reporting, and preserves all acceptance gates. Final local native/check gates and one controlled CI runner execution are pending; no local full retry is authorised."
+  },
+  "instrumentRevision": {
+    "number": 2,
+    "registeredAtUTC": "2026-10-07T09:47:38.786845+00:00",
+    "previousProtocolSHA256": "1ef473487e69243cfc338710246354da125dcbdce4356ec93a8b15824eddb540",
+    "previousInstrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+    "change": "Per-view unresolved delivery index; full delivery ledger, observation semantics, scheduling, bounds and workload criteria preserved.",
+    "review": "Fresh no-history source review; exact equivalence/negative controls and technical operation-count comparison. Full resource performance not yet verified."
   }
 }

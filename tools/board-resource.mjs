@@ -252,7 +252,7 @@ async function run() {
     const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash], { cwd: root, silent: true, execArgv: [], env: { ...process.env, NODE_ENV: "test" } });
     let origin, runtime, lastSample, phase = "startup", failure = null, closing = false, running = false, start = 0, end = 0, unexpectedDisconnects = 0, scopeErrors=0, staleFramesIgnored=0, stderrBytes = 0, stdoutBytes = 0;
     const httpCounts = new Map();
-    const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
+    const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), pendingByView = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
     let readyResolve, readyReject;
     const ready = new Promise((r, j) => {
         readyResolve = r;
@@ -337,15 +337,23 @@ async function run() {
             for (const m of chat)
                 v.chatIds.add(m.id);
         v.sequence = Math.max(v.sequence ?? 0, sequence ?? 0);
-        for (const d of deliveries.values()) {
+        // Retain the full delivery history for grading; inspect only this
+        // view's unresolved targets on the event/HTTP-receipt hot path.
+        const pending = pendingByView.get(v.index);
+        if (!pending)
+            return;
+        for (const d of pending) {
             if (d.house !== v.house || !d.pending.has(v.index))
                 continue;
             const seen = d.type === "patch" ? (v.elements.get(d.elementId)?.version ?? 0) >= d.version : v.chatIds.has(d.messageId);
             if (seen) {
                 d.pending.delete(v.index);
+                pending.delete(d);
                 latencies[d.slow.has(v.index) ? "slow" : "normal"].push(at - d.at);
             }
         }
+        if (!pending.size)
+            pendingByView.delete(v.index);
     }
     async function connect(v) {
         v.ready = false;
@@ -461,6 +469,12 @@ async function run() {
     function delivery(house, type, details, at) {
         const targets = views.filter(v => v.role === "board" && v.house === house), d = { house, type, ...details, at, pending: new Set(targets.map(v => v.index)), slow: new Set(targets.filter(v => v.intendedFault).map(v => v.index)) };
         deliveries.set(randomUUID(), d);
+        for (const v of targets) {
+            let pending = pendingByView.get(v.index);
+            if (!pending)
+                pendingByView.set(v.index, pending = new Set());
+            pending.add(d);
+        }
         return d;
     }
     const writeJobs = new Set();
@@ -868,8 +882,8 @@ async function selfCheck(){
  const ts=await import("typescript"),raw=readFileSync(fileURLToPath(import.meta.url),"utf8"),sf=ts.createSourceFile("instrument.mjs",raw,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);let reflectSource,freezeSource,writeSource;
  function scan(n){if(ts.isFunctionDeclaration(n)&&n.name?.text==="reflect")reflectSource=n.getText(sf);if(ts.isFunctionDeclaration(n)&&n.name?.text==="freeze")freezeSource=n.getText(sf);if(ts.isCallExpression(n)&&n.expression.getText(sf)==="setInterval"&&n.arguments[0]?.getText(sf).includes("v.nextWrite"))writeSource=n.arguments[0].getText(sf);ts.forEachChild(n,scan);}scan(sf);
  const outcomes={};
- try{const f=new Function("deliveries","latencies","performance","return ("+reflectSource+");")(new Map(),{normal:[],slow:[]},{now:()=>0}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.suppliedIncomingApplied=v.elements.has("incoming_probe")&&v.sequence===1;}catch(e){outcomes.suppliedIncomingApplied=false;outcomes.reflectException=e.name;}
- try{const f=new Function("deliveries","latencies","performance","house","return ("+reflectSource+");")(new Map(),{normal:[],slow:[]},{now:()=>0},{elements:[{id:"seed_probe",version:1,versionNonce:1}]}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.seedCannotSubstituteIncoming=v.elements.has("incoming_probe")&&!v.elements.has("seed_probe");}catch{outcomes.seedCannotSubstituteIncoming=false;}
+ try{const f=new Function("deliveries","pendingByView","latencies","performance","return ("+reflectSource+");")(new Map(),new Map(),{normal:[],slow:[]},{now:()=>0}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.suppliedIncomingApplied=v.elements.has("incoming_probe")&&v.sequence===1;}catch(e){outcomes.suppliedIncomingApplied=false;outcomes.reflectException=e.name;}
+ try{const f=new Function("deliveries","pendingByView","latencies","performance","house","return ("+reflectSource+");")(new Map(),new Map(),{normal:[],slow:[]},{now:()=>0},{elements:[{id:"seed_probe",version:1,versionNonce:1}]}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.seedCannotSubstituteIncoming=v.elements.has("incoming_probe")&&!v.elements.has("seed_probe");}catch{outcomes.seedCannotSubstituteIncoming=false;}
  let clock=14000,calls={patch:0,chat:0};const stats={patchSkipped:0,chatSkipped:0},v={role:"board",nextWrite:500,nextChat:5000,writePending:false,skipped:0,chatSkipped:0};const callback=new Function("performance","views","stats","launch","write","return ("+writeSource+");")({now:()=>clock},[v],stats,fn=>void fn(),async(_v,chat=false)=>{calls[chat?"chat":"patch"]++;});callback();await Promise.resolve();clock++;callback();await Promise.resolve();outcomes.collapsedDeadlinesCounted=stats.patchSkipped===27&&stats.chatSkipped===1&&v.nextWrite===14500&&v.nextChat===15000&&calls.patch===1&&calls.chat===1;
  const contents={"/fixture/runtime.ts":Buffer.from("runtime stable"),instrument:Buffer.from("instrument stable"),protocol:Buffer.from("changed criteria")},reads=[],sourceHashes={"runtime.ts":hash(contents["/fixture/runtime.ts"])},p={sourceHashes,sourceManifestSHA256:hash(Buffer.from(JSON.stringify(sourceHashes))),instrumentSHA256:hash(contents.instrument)};
  const f=new Function("hash","readFileSync","join","root","protocolPath","fail","return ("+freezeSource.replaceAll("fileURLToPath(import.meta.url)",JSON.stringify("instrument"))+");")(hash,path=>{reads.push(path);return contents[path];},join,"/fixture","protocol",code=>fail(code));try{f(p,hash(Buffer.from("original criteria")));outcomes.protocolDriftRejected=false;}catch(e){outcomes.protocolDriftRejected=e.code==="PROTOCOL_FREEZE_CHANGED";}outcomes.protocolActuallyRead=reads.includes("protocol");
