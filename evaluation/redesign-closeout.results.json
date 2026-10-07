@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local application closeout; remote CI, registered resource acceptance and production release remain separate",
+  "recordedAt": "2026-10-07T05:00:06.886918+00:00",
+  "sourceHashes": {
+    "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
+    "src/board-store.ts": "73df2046445a22c32de533959734eeddc5e33fb6550e2a59868f31f7d71e54b3",
+    "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
+    "src/house-realtime.ts": "f25be21c47d6b10cb266e93560d67d41627f4579c9a2ac1be12225415bef25dc",
+    "public/house-world.js": "56f5fed2d0719df167f4267f2547d234bf591da37829e34a108bdb4811a06b5f",
+    "public/house-camera.js": "a6159242e0978e5f24ed38a4d71efc9feafd8f44bb39f3908323fcd0e2dca1d5",
+    "public/house.css": "827a9077d40ebf02bcc6f364822dec21b1f116a0e683d0698d48b270e96f282f",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "tests/e2e/ci-core.spec.ts": "ee03ac28c93b34e9cbfd68bfb3fafd992a8848565ede48ce21eb89f21d658304",
+    "tests/e2e/startup-timing.ts": "b1be724030f48f6950c7db557c6c02f639af69433f5bb50435faeff78bead36c",
+    "tests/e2e/title-dialog.spec.ts": "edca76952e2e4161d5bf9ce963b2c2a13e5ff3e2b61d52c20abcd522ef52e679",
+    "tests/e2e/board.spec.ts": "f15ac225524b160e90702fca934e648c4f8e66e2a3ad00e96ae755bdb129fb64",
+    "spec/startup-timing.test.ts": "cc6fdf694e5425ada7d8bf207c5ced3f733145960ffbc901cae8010700ec3145",
+    "spec/board-rejoin-pressure.test.ts": "812c6ae4a423db62b8b353b4f259d0a2f99b0eb8a1f310bf434bf511da5bfeab"
+  },
+  "requiredGate": {
+    "command": "APP_URL=http://127.0.0.1:4099 mise exec -- pnpm check",
+    "status": "PASS",
+    "exitCode": 0,
+    "testFiles": 26,
+    "testsPassed": 411,
+    "testsFailed": 0
+  },
+  "processEvidence": {
+    "status": "PASS",
+    "citedCommitsResolved": 3
+  },
+  "productionDependencyAudit": {
+    "status": "PASS",
+    "knownVulnerabilities": 0
+  },
+  "coverage": {
+    "board": {
+      "testsPassed": 130,
+      "metrics": {
+        "lines": {
+          "total": 1181,
+          "covered": 997,
+          "skipped": 0,
+          "pct": 84.41
+        },
+        "statements": {
+          "total": 1891,
+          "covered": 1321,
+          "skipped": 0,
+          "pct": 69.85
+        },
+        "functions": {
+          "total": 326,
+          "covered": 205,
+          "skipped": 0,
+          "pct": 62.88
+        },
+        "branches": {
+          "total": 1389,
+          "covered": 940,
+          "skipped": 0,
+          "pct": 67.67
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "reactEntryUnitCoveragePercent": 0
+    },
+    "house": {
+      "testsPassed": 211,
+      "metrics": {
+        "lines": {
+          "total": 2033,
+          "covered": 1920,
+          "skipped": 0,
+          "pct": 94.44
+        },
+        "statements": {
+          "total": 4432,
+          "covered": 3824,
+          "skipped": 0,
+          "pct": 86.28
+        },
+        "functions": {
+          "total": 594,
+          "covered": 518,
+          "skipped": 0,
+          "pct": 87.2
+        },
+        "branches": {
+          "total": 2940,
+          "covered": 2353,
+          "skipped": 0,
+          "pct": 80.03
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "reactEntryUnitCoveragePercent": null,
+      "execution": "One worker; earlier parallel instrumented run retained with one unchanged5000ms timeout."
+    }
+  },
+  "native": {
+    "preEnforcementSeven": {
+      "status": "PASS",
+      "testsPassed": 7,
+      "scope": "Before whole-startup assertion; original 7 cases, 60s game and 10s interactions"
+    },
+    "titlePaint": {
+      "status": "PASS",
+      "testsPassed": 2,
+      "previousPaintFailures": 2,
+      "durationsSeconds": [
+        13.8,
+        3.8
+      ],
+      "captureTestPath": "tests/e2e/house.spec.ts",
+      "currentTestPath": "tests/e2e/title-dialog.spec.ts",
+      "bodyRelocationSHA256": "6183ca5d0b2191819e4f5e11dba754ee997d3230bd1cd4d9bd2ed6b84fd21db1",
+      "scope": "Actual native pointer actionability and painted surfaces; no explicit title-keyboard or physical-device claim"
+    },
+    "strictGame": {
+      "status": "PASS",
+      "testsPassed": 1,
+      "durationSeconds": 55.5,
+      "startup": {
+        "clock": "out-of-browser monotonic",
+        "startupTimings": [
+          {
+            "action": "create to first usable frame",
+            "milliseconds": 724,
+            "completed": true,
+            "budgetAccepted": true
+          },
+          {
+            "action": "join to first usable frame",
+            "milliseconds": 8672,
+            "completed": true,
+            "budgetAccepted": true
+          },
+          {
+            "action": "saved return to first usable frame",
+            "milliseconds": 8200,
+            "completed": true,
+            "budgetAccepted": true
+          }
+        ],
+        "complete": true,
+        "withinTenSeconds": true
+      }
+    },
+    "startupControls": {
+      "status": "PASS",
+      "testsPassed": 7,
+      "earlierControlFailure": "12-second successful task incorrectly accepted before assertion",
+      "scope": "Actual shared helper with synthetic monotonic clocks; not a 12-second human or live-device experiment"
+    },
+    "ciCollection": {
+      "status": "PASS",
+      "cases": 9,
+      "files": 4,
+      "execution": "New nine-case remote CI selection not executed locally as one combined run"
+    }
+  },
+  "resource": {
+    "status": "READY",
+    "protocolSHA256": "1ef473487e69243cfc338710246354da125dcbdce4356ec93a8b15824eddb540",
+    "sourceManifestSHA256": "545d79c3ea7d85addc95242b26232c8ec0b53bb50cb9a1b0b7387bf3bc937cd7",
+    "instrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
+    "sceneBytes": 1865727,
+    "imageBytes": [
+      2018703,
+      2018703
+    ]
+  },
+  "images": [
+    {
+      "path": "evaluation/spatial-redesign/render-A.png",
+      "bytes": 318068,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e30928fc9a4037373d689352f08897bdd209c14b505ca2639cd34359bbe6aae6",
+      "scope": "Historical successful technical-prototype captures; label positions vary, no pixel-identical or human-preference claim."
+    },
+    {
+      "path": "evaluation/spatial-redesign/render-C.png",
+      "bytes": 345311,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "9fe5cdf2361e0043c9a4f3cd6e2da442af58276eedd320d776f75cbc1837957f",
+      "scope": "Historical successful technical-prototype captures; label positions vary, no pixel-identical or human-preference claim."
+    }
+  ],
+  "limitations": [
+    "Board main.jsx unit coverage is zero; complete board statement and branch targets remain below80percent.",
+    "Original resource and both subsequent retries remain FAIL; no new full local workload or resource PASS.",
+    "Physical phones, human value or A/B, Docker/Fly/WAN behavior and student personal reflections are not established here."
+  ],
+  "artifactInspection": {
+    "jsonFilesValidated": 20,
+    "pngFilesValidated": 6,
+    "headerManifestImagesMatched": 4,
+    "historicalHeaderCaptureHashes": "Preserved original capture hashes; CSS/world later changed.",
+    "credentialShapeHits": 0,
+    "scope": "Independent text/structure/hash scan, plus parent A/C image inspection; not general image-privacy proof."
+  },
+  "preview": {
+    "url": "http://localhost:4093",
+    "dataDir": ".local/implementation-s1",
+    "pid": 4936,
+    "status": "HTTP200 health",
+    "sourceBound": true
+  },
+  "localSourceCommits": [
+    "ca57bb2",
+    "2e1cdb4",
+    "fc4b5d8"
+  ],
+  "parentReleasePreparation": {
+    "productionBackupPreflight": "PASS",
+    "capturedAt": "2026-10-07T04:59:59.935Z",
+    "appHead": "fc4b5d875c3d6b338058742a8e53dd619169a6cd",
+    "runtimeNode": "24.21.0",
+    "legacyPages": 24,
+    "optionalHouseAndBoard": "ABSENT; not created",
+    "scope": "Private same-volume per-file integrity; not off-volume recovery. Exact-final-candidate CI backup remains future."
+  }
+}

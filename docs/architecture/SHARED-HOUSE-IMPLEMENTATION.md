@@ -1,3 +1,11 @@
+# Active game and standalone-board extension
+
+The 7 October redesign adds the implementation contract below to the earlier house
+authority design. It supersedes card-only/no-drawing statements in the historical
+house sections. Source is authoritative: three additive SQLite databases, a
+vanilla Three game and a separately built React/Excalidraw board. The original
+Crit 8/legacy database and house schema remain preserved.
+
 # Shared-house implementation and lifecycle design
 
 Updated 7 October 2026. This describes the actual local implementation. The
@@ -10,8 +18,9 @@ Historical plans remain useful alternatives, not current endpoint/schema contrac
 
 One Linux Node 24.21.0 process serves native HTTP, SQLite, Socket.IO 4.8.4,
 Three.js 0.186.1 modules and DOM controls. Production remains one shared CPU /
-256 MB Fly machine with one 1 GB `/data` volume. No React rewrite, Redis,
-external database or generic ECS/plugin architecture was introduced.
+256 MB Fly machine with one 1 GB `/data` volume. The game remains vanilla Three/DOM; the independent board is a React/Excalidraw
+browser island. No Redis, external database or generic ECS/plugin architecture
+was introduced.
 
 | Actual module | Responsibility |
 | --- | --- |
@@ -53,8 +62,8 @@ v1-to-v2 legacy migration or automatic identity/content import occurred.
 
 Only memory holds connections, avatar position/heading/animation, controller and
 access generations, seat reservations and declared willingness. Camera, selection
-and unsaved previews are local. The first release has no drawing, typing-preview,
-upload, timer or CRDT channel.
+and unsaved previews are local. The game authority has no drawing, typing-preview, timer or CRDT channel.
+The independent board authority below owns drawing, images and shared elements.
 
 Use short BEGIN IMMEDIATE transactions, foreign keys and bound SQL parameters.
 Create/join allocates a permanent slot and bedroom atomically with its receipt and
@@ -167,8 +176,9 @@ identity archive before trimming. No forced timer, pairing, mention or reply.
 
 ## Operations, evidence and future changes
 
-Native operations tests restore both live WAL databases, identities, receipts,
-room state and next steps; main-file-only copies fail the deliberately populated
+Native operations tests restore the original two live WAL databases, identities,
+receipts, room state and next steps; the board integration tests separately restore
+all three quiescent databases and board asset BLOBs; main-file-only copies fail the deliberately populated
 WAL control. Separate database backups do not create a common cross-database
 instant; quiesce writes when that common boundary is required. A later source write
 is absent from the earlier backup. Restore/rollback must account for it explicitly.
@@ -189,8 +199,96 @@ and [load refinement](../revisit/LOAD-PACING-REFINEMENT.md) distinguish full tri
 short calibration, double-based source tests and unmeasured Fly/WAN conditions.
 
 Catalogue/theme additions need stable IDs/footprints/anchors, licences and migration
-checks. Live profile appearance, larger layouts, richer board, drawing, uploads,
-timers, voice and multiple houses each need demonstrated value, their own contracts
-and resource acceptance. No new package earns adoption merely by popularity.
+checks. Live profile appearance, timers, voice and multiple houses each need demonstrated
+value, their own contracts and resource acceptance. The current larger layouts and
+independent drawing/image board follow the owner-authorised redesign below. No new package earns adoption merely by popularity.
 Future renderer work should measure actual target devices and startup/frame cost;
 software-rendered local checks cannot prove physical-phone performance or enjoyment.
+
+## Current independent board implementation
+
+`board.sqlite` has its own version-one schema, separate from `house.sqlite` and
+`neighbourhood.sqlite`. Durable elements, tombstones, binary images, messages,
+canonical mutation receipts and per-actor last-authored contributions belong there.
+HouseStore remains authoritative for identity and active membership. No cross-file
+atomic departure transaction or replicated storage is claimed. Read/actions/delivery
+recheck current sessions/membership; a 200-ms sweep clears revoked board views.
+
+HTTP `/api/board/context` establishes/reuses identity. Snapshot and authenticated
+asset reads are distinct. Patch/image/chat writes require captured actor intent,
+original house ID and mutation UUID. Bodies have separate explicit limits.
+`/api/board/export` provides own authored contributions/uploads, including after
+departure; it does not reveal a shared cursor or other residents' chat/assets.
+
+Socket.IO `/board` has an independent physical manager (`forceNew`) from the game.
+Subscribe returns one full snapshot through its ACK; duplicating that large snapshot
+was reproduced to close valid near-limit boards and repaired. Envelopes include
+schema version, house, subscription identity and cursor. Old subscription/identity
+responses cannot repopulate a revoked view. Cursor/selection/view state is transient.
+Every response/error ACK and revocation path has the same outbound protection.
+
+Persistent updates are touched elements, not whole-scene replacement. Higher
+versions win; equal versions use lower nonce. Canonical winners and retained
+tombstones preserve convergence and deletion. Remote changes use the editor's
+NEVER history capture; own undo preserves unrelated peer edits. This is not
+character-level text merging. Conflicting local work is recoverable explicitly.
+
+Canvas bounds: two MiB serialized state, 2,000 elements including tombstones. Images
+are PNG/JPEG/WebP, two MiB each, twenty files/twenty MiB per house. Snapshot files
+are metadata/authorized URLs; binary never accompanies every element refresh. PNG
+structure/CRC and image dimensions are checked. JPEG/WebP header checks do not
+claim full server pixel decoding. Arbitrary SVG/embedded frames/server URL fetch
+are disabled. Chat retains the latest hundred messages for seven days.
+
+The client keeps original UUIDs and scoped pending work on uncertainty. Review
+reproductions repaired failed-image loss of adjacent text and a false Saved state.
+The resulting unchanged-callback feedback then caused a real React update loop;
+notifications now require an actual element/file-data change. Both module and
+native checks cover these boundaries; helper tests alone did not establish UI.
+
+## Presentation, packaging and future changes
+
+The game uses title/Create/Join/Continue, compact HUD, independent movable chat and
+modal tools. Lounge16x11 and bedroom14x10 preserve saved coordinates. Fixed camera
+orientation, manual pan/zoom, explicit Overview and recenter use measured posed
+actor extents. Options is excluded from underlying world framing; closing an editor
+restores a play/Overview frame after new HUD geometry arrives. Visual-viewport
+changes invalidate fits, while ordinary chat dragging preserves the camera.
+
+The full-screen same-origin board iframe suspends game input/rendering without
+relocating the avatar. Only board HTML permits SAMEORIGIN framing. Standalone entry,
+key issuance/recovery and private export need no Three/game renderer. Proofs stay in
+private component memory with actor/generation fencing and clear on close/revoke.
+
+A native esbuild stage bundles the browser island and self-hosts required fonts
+and licences. Runtime Node dependencies stay separate. Fixed-name entry JS/CSS
+revalidate after a new build; fingerprinted chunks/fonts have bounded caching.
+The game now supports 2,000-character text. Its actual worst retained Unicode
+transcript exceeded the old512-KiB guard; a real red/green subscription test supports
+separate1-MiB frame/2-MiB queue ceilings. Four-packet and16-KiB input limits remain.
+Board frames have independent4-MiB/eight-packet protection. Old load results are
+source-bound and do not become acceptance of these expanded limits.
+
+Backups include all three quiescent/WAL-aware databases, including image binaries.
+Future content uses stable furniture IDs/footprints and tested existing-room
+migrations. Tombstone/receipt compaction and unused-image reclamation need explicit
+expiry/reset epochs, stale-offline rules and source-bound tests before changing
+retention. They are not silently promised by the present hard caps. Production
+Docker/Fly/WAN and physical-phone/human value remain separately verified tasks.
+
+## Operator rollback and data boundary
+
+Stop writes and use SQLite backup for all three databases before a new release.
+Include board image BLOBs in board.sqlite; a scene JSON export alone is not a complete
+backup. Restoring independent live copies does not produce a common instant, so
+quiesce the service for a consistent three-file checkpoint. The actual local
+createService/backup/restart tests cover this boundary; production mounted-volume
+operations remain NOT RUN.
+
+A rollback to the frozen Crit 8 binary reads only neighbourhood.sqlite. Retain
+house.sqlite and board.sqlite with all later user changes when changing binaries.
+A rollback to the earlier house binary ignores board.sqlite but must also retain
+it. Never replace the volume with an old fixture or seed database to make an older
+binary start. Unsupported schema versions fail closed and require a tested
+compatibility/restore decision. No production credential, volume or deployment
+change is authorised by this local runbook.

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "scope": "Actual native header non-overlap, synthetic identities only",
+  "sources": {
+    "public/house.css": "7a8fbaf381061f29e9a36746e9db9a922c84808c66d13e886fb28fd2cdcf853e",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "public/house-world.js": "bdb1b85357b407756b5388f97366dababf7bbf34e6b0c638dc4ffb739d0f5363",
+    "public/house-camera.js": "a6159242e0978e5f24ed38a4d71efc9feafd8f44bb39f3908323fcd0e2dca1d5"
+  },
+  "images": [
+    {
+      "path": "docs/screenshots/redesign/header-latin-1920.png",
+      "bytes": 122808,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "8a3cc84fc7fbd7ff39c8137604a409f0937f9836c47d9cc3c87027fa16a759ec",
+      "content": "Synthetic40-character name; no invitation, session, recovery key or private user data."
+    },
+    {
+      "path": "docs/screenshots/redesign/header-latin-390.png",
+      "bytes": 61818,
+      "width": 390,
+      "height": 844,
+      "sha256": "682dcf8f6b07fc3d3577b448d80758f74d7cb35c99807b5337ba10724afa2050",
+      "content": "Synthetic40-character name; no invitation, session, recovery key or private user data."
+    },
+    {
+      "path": "docs/screenshots/redesign/header-cjk-1920.png",
+      "bytes": 120180,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "3204f37ac2a78e65d095fa6cbe5991bda44de7e0d831a57efdeb83ca272ef331",
+      "content": "Synthetic40-character name; no invitation, session, recovery key or private user data."
+    },
+    {
+      "path": "docs/screenshots/redesign/header-cjk-390.png",
+      "bytes": 59562,
+      "width": 390,
+      "height": 844,
+      "sha256": "5fa2196de4c9c13d2984c82005958f0a824b7a87c44f456610f4d5fbb7fa6b2e",
+      "content": "Synthetic40-character name; no invitation, session, recovery key or private user data."
+    }
+  ],
+  "verification": "PNGsignature,IHDRunmodifieddimensions,allchunkCRC; portrait image opened in Codex before selected copy; original screenshots retained."
+}

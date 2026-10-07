@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "registeredAtUTC": "2026-10-07T01:17:56.243779+00:00",
+  "status": "READY_HELD_FOR_PARENT_GO",
+  "scope": "LOCAL SYNTHETIC combined house+board resource exercise; current maximum 24 independent websocket engines; not a deployment or human trial",
+  "durationSeconds": 300,
+  "automaticRetry": false,
+  "sourceHashes": {
+    "package.json": "23f2af5f0d0997145ebf8387f58b02096c3b657f04594d73feaa602322bc37d6",
+    "pnpm-lock.yaml": "00daf7036a60683951034eb4fefd87bf09436353300eca61aab8338ddbacfedd",
+    "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/board-service.ts": "36742993f8fb27b613f0c9b5da05170ecc9357b2b6999585b0f11330dab0f170",
+    "src/board-store.ts": "196f39f8ca2d27e9150e729b7af52d657f876bb34b691766aac1716f3c7de24b",
+    "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+    "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+    "src/house-realtime.ts": "26f4b21177981947dd79116eb8044355b5fb865090370c86586e39324a70d3fe",
+    "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "src/server.ts": "40a8833c1498c92601b0430645177c0394d57dfa30d095cee78a69ece76514f2",
+    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+  },
+  "sourceManifestSHA256": "5d08fc44496755053c1901307e3f37314c2cf46d51e3a81e746267be07d3e122",
+  "instrumentSHA256": "732bbac399743228a0140dda5ac21b033afb05e4cb4d328034a053f89aa96252",
+  "configuration": {
+    "houses": 2,
+    "membersPerHouse": 6,
+    "gameControllers": 12,
+    "boardViews": 12,
+    "physicalEngines": 24,
+    "forceNewBoardManagers": true,
+    "capacitySource": "Existing per-process 12 house contexts and 12 board views; distinct Socket.IO managers as production frontend"
+  },
+  "fixture": {
+    "sceneMinBytes": 1677721,
+    "sceneMaxBytes": 1992294,
+    "sceneDescription": "80 bound sticky rectangles/text pairs (11000 chars text plus originalText each), 10 arrows, 10 freehand elements with64 pressure points,20 persistent tombstones,2image elements:202 objects perhouse; sorted bounded integer fractional indices",
+    "elementMaxBytes": 32768,
+    "patchMaxBytes": 131072,
+    "seedPatchTargetBytes": 110000,
+    "retainedBoardChat": 100,
+    "chatCharacters": 4000,
+    "imageCountPerHouse": 2,
+    "imageSidePixels": 820,
+    "imageMinBytes": 1945600,
+    "imageMaxBytes": 2097152,
+    "imageDescription": "CRC-correct deterministic xorshift RGB PNG seeds101/102 inhouse0 and201/202 inhouse1; near2MiB entropy, authenticated exactbinary reload byall12boardviews; onlymetadata insnapshots.",
+    "bootstrap": "Actual GET house/me, HTTP create/join6 permanent members eachhouse, real asset/patch/chat HTTP writes distributed across6 identities;12actual root subscriptions and12 forceNew board subscriptions; initial andfinal count24; solefullsnapshot ACK expected; asset reads validate exactSHA256",
+    "houseDistinction": "Seed notes and updatedpayloads carry distincthouse/member prefixes atfixedlength; eachhouse has distinctimagebytes, so crosshouse routing orsharedstorage cannot pass from identical fixtures."
+  },
+  "workload": {
+    "motionTargetHzPerReadableController": 10,
+    "motionPolicy": "Valid stationary actual server-projected arrival coordinates; each frame executes real membership/control/geometry/dirty tick. Staggered deadlines/single-flight normal ACK; no replay bursts. Pause fault continues nominal stationary sends until transport disconnection, counts them separately from readable cadence. No production movement-limit relaxation.",
+    "motionMeasuredRangeHz": [
+      9.5,
+      10.2
+    ],
+    "pointerMaximumHzPerReadableView": 20,
+    "pointerPolicy": "At least50ms between generator sends; single-flight normal ACK; supplied current subscriptionId, bounded coordinates and one actual selected elementID. Fault sends continue untildisconnect. Achieved readable range18..20.5Hz reported; maximum requested20Hz.",
+    "sceneWritesHzPerActor": 2,
+    "sceneWriteDescription": "Each actor updates one of six independent ~22KiB notes perhouse with higher version/fixedlength text; fresh mutationUUID and captured original identity/house; one outstanding HTTP patch peractor, skippeddeadline counted andfails workload gate",
+    "chatWritesPerActorPerMinute": 12,
+    "httpBudget": "Scene120+chat12=132writes/minute/actor plus <=25bootstrap writes withinfirstminute; reads/downloads counted separately; never raise240/session/min endpoint bounds",
+    "minimumSavedPatches": 6800,
+    "minimumSavedChat": 680,
+    "expectedNominalPatches": 7188,
+    "expectedNominalChat": 708,
+    "measurements": "Send-to-actual Socket.IO visibility, sender plus all6boardviews/house; every intent target remains pending until observed orrecovered. Higher observed objectversion satisfiesearlier savedversion. Paused65s chatbacklog is about78 messages andfits100retention. Finalrecovery compareslatest100 scheduledchat IDsbycommitted receiptsequence; olderretiredchat iscounted asintentdelivery butnotincorrectlyrequired toremain forever.",
+    "deadlineAccounting": "Collapsed scene and chat deadlines are counted as skipped and fail the workload gate. Send at most one current intent after a late callback; do not burst catch-up chats. At 14 seconds with scene deadline 500 ms and chat deadline 5000 ms, count 27 skipped scene slots and one skipped chat slot."
+  },
+  "slowReader": {
+    "residentCount": 1,
+    "transports": 2,
+    "pauseAtSeconds": 30,
+    "pauseSeconds": 65,
+    "mechanism": "Real ws.WebSocket.pause invokes actual TCP readable pause on one resident root game and forceNew board transport; verify _socket.isPaused; notcallbackdelay",
+    "expiry": "Wait through heartbeat/backpressure close and30-second game leaseexpiry. Initial gameavailability is Canchat; freshgame subscription must advance generation andreturnQuiet. Board fresh subscription mustcarrycurrentepoch andallcommittedversions/chat. Every disconnect attributed intentionalversusunexpected.",
+    "sendPolicy": "Nominal10Hz stationary/20Hz pointer duringfault until transportdisconnect; expected suppressed ACKtime outs counted separately; readable cadence excludeswholefaultinterval; HTTPdurable writescontinueunderoriginalcookie/house"
+  },
+  "negativeControls": {
+    "stalledInvalidPointerACK": "Afterfullfixture bootstrap, one existing boardtransport server writable=false (diagnostic synthetic fault, distinct from later realTCPpause);100 invalidpointer requests withACK; verify close and\u22648packets/4MiB using same actualservice handler; restore freshboard view beforemeasurement",
+    "grader": "All24views tracked individually acrossinitial/final/reconnect. Missing target, skippedwrite, shortened duration orchanged frozen source preventsPASS. No90secondsmoke substitutes300seconds."
+  },
+  "bounds": {
+    "rssMaxMiB": 210,
+    "reserveWithinFixed256MiB": 46,
+    "normalDeliveryP95Ms": 1000,
+    "boardQueuePackets": 8,
+    "boardQueueBytes": 4194304,
+    "houseQueuePackets": 4,
+    "houseQueueBytes": 2097152,
+    "eventLoopP95Ms": 50,
+    "eventLoopP99Ms": 100,
+    "gameInboundBytes": 16384,
+    "eventLoopThresholdScope": "Predeclared local diagnostic criteria; not a rewritten legacy180MiB acceptance record",
+    "houseFrameBytes": 1048576,
+    "houseBudgetRevision": "New valid Unicode-transcript allowance: 1 MiB encoded frame and 2 MiB combined queue, four packets, unchanged 16 KiB inbound. The historical 180 MiB / 512 KiB legacy trials remain unchanged."
+  },
+  "measurement": {
+    "server": "Fresh child process invoking real createService; processRSS/heap/external/arrayBuffers, monitorEventLoopDelay andCPU sampled100ms; save sanitized one-second series plus maxima; clients/generatorRSS excluded",
+    "queues": "Read-only wrappers inspect actual Engine.IO writeBuffer/ws bufferedAmount immediately before and after every sendPacket and at 100 ms samples. Known control packets without data contribute header overhead; unknown payload types fail telemetry. Neither authority nor transport handlers are replaced.",
+    "sourceFreeze": "Check runtime source hashes, exact protocol bytes and instrument before start, in the child, every 10 seconds and at finish. Protocol/instrument/runtime drift all produce ABORTED consistently in file and console. Documentation or HEAD changes outside the source manifest do not change runtime identity.",
+    "privacy": "No rawactor IDs, cookies, invitationcodes, command text, sceneJSON orserverlogs committed. Per-viewindices/counts, aggregateoutcomes, numeric telemetry andsource/contenthashes only; rawtempSQLite ignored .local",
+    "httpBudget": "Record per-actor aggregate totals andmaximum rolling60second boardHTTP read/writecounts, includingbootstrap, assetdownloads andfinalreads; never outputidentity/cookie/request text. <=240/lane gate.",
+    "recovery": "Final recovery verifies all 202 seed IDs, 20 persistent tombstones, exact untouched element payloads and latest authored payloads, latest 100 retained scheduled chats by receipt sequence, and two metadata-only files per house. Every delivery target remains counted.",
+    "inbound": "Read actual Engine.IO maxHttpBufferSize from the isolated running service; it must remain 16384 bytes.",
+    "scopes": "Check every board envelope schemaVersion1/currentsubscriptionId/actualhouseId and every initialgame self/home; discarded staleepochs counted separately, wrongcurrentepoch/house fails. Never persist raw IDs."
+  },
+  "classification": {
+    "FULL_PASS": "All declared gatestrue after>=300seconds, complete24views andslowrecovery; anygatefail=FAIL; noautomaticretry",
+    "CALIBRATION": "Bootstrap-only diagnostic initializesvalidfullfixture,12+12views andassetreload/invalidACK; no sustainedworkload/slowexpiry claim, cannotPASSfullacceptance",
+    "NOT_RUN": "ParentGO/GPUidle/sourcefreeze notyet supplied",
+    "ABORTED": "Changed frozen source cancels the paused-reader timer, stops workload and produces ABORTED, not a shortened PASS."
+  },
+  "limitations": [
+    "Shared WSL host/cgroup constraints measured andreported; no256MiB Flymemory enforcement",
+    "No Flymachine,/data mountedvolume, Docker/WANorrealnetworkimpairment",
+    "No physicalphone, browserWebGL/Reactrendering, humanpreference/usability/valueorcoursegradeevidence",
+    "300seconds doesnotreplace legacy30-minute180MiB L1/L2history orprovelong-termmemory stability",
+    "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
+  ],
+  "commands": {
+    "inspect": "mise exec -- node tools/board-resource.mjs --inspect",
+    "calibration": "mise exec -- node tools/board-resource.mjs --bootstrap-calibration",
+    "run": "mise exec -- node tools/board-resource.mjs --run --go <protocolSHA256> --freeze <sourceManifestSHA256>",
+    "selfCheck": "mise exec -- node tools/board-resource.mjs --self-check"
+  },
+  "review": {
+    "kind": "Context-retaining independent instrument review",
+    "reviewer": "redesign_integrated_review",
+    "confirmedFindings": "Incoming reflection used an undefined seed variable; collapsed write deadlines were uncounted with chat catch-up bursts; protocol drift was not checked and abort labels disagreed. Actual-source isolated controls reproduced these failures and pass after correction. Parent has not authorised calibration or full run."
+  }
+}

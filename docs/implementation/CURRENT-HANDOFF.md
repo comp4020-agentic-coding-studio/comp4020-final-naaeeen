@@ -1,14 +1,100 @@
-# Active redesign handoff
+# Current R4 application handoff
 
-7 October 2026: a new comprehensive goal is active after the owner tried and
-rejected the earlier interaction quality. Read [owner redesign brief](../product/OWNER-REDESIGN-2026-10-07.md),
-[phased plan](REDESIGN-PLAN.md) and [research](../research/2026-10-07-game-and-board-redesign.md).
-R0 baseline/contract/research is recorded; R1 shell, R2 space/camera and R3 board
-authority/workspace proceed in bounded parallel ownership. Parent owns build/server
-wiring, integration, native acceptance and final reviews/commits. No new release.
+7 October 2026. Local app source/checks are ready; root owns the approved release.
+Required build/type/spec: 411/411 PASS. Process evidence and production audit PASS.
+House coverage: 86.28% statements / 80.03% branches. Board coverage: 69.85% / 67.67%,
+with main.jsx unit coverage zero. Preserve that gap.
 
-The sections below describe the prior completed local core and remain history.
-Their passing checks do not establish acceptance of changed code or owner's UX.
+Seven maintained cases passed before startup enforcement; two painted title cases
+passed separately. The strict shared startup helper has seven passing controls and
+the affected game passes in 55.5s, with accepted 724/8672/8200 ms phases. Nine cases
+collect for the updated CI selector; no combined nine-case local run is claimed.
+[Exact source and scoped evidence](../../evaluation/redesign-closeout.results.json).
+
+Current local commits: ca57bb2 game/world, 2e1cdb4 transport, fc4b5d8 README routing.
+Remaining browser/CI/evidence commit is being closed. No worker push/deploy.
+Resource protocol 1ef47348/manifest 545d79c3/instrument6130e233 is READY; e579 archived.
+Original/candidate/quiet resource failures remain preserved; CI workload is pending.
+
+Original 4093 preview uses exact .local/implementation-s1 and is healthy (PID 4936,
+exec 59237). Test 4099 uses exact .local/redesign-preview/data (PID 308,exec 68903).
+Do not reseed/delete either data root. Crit8 tag and root backup files remain intact.
+Root next: inspect final clean/source/tag packet, perform authorised release backup,
+push reviewed main, verify actual CI/registered workload/Fly and live user flows.
+Human/physical-device/value and student personal rewriting remain separate.
+
+# Historical redesign checkpoint
+
+The following interrupted checkpoint is preserved as history; its process IDs,
+RUNNING/HELD labels and pending checks do not describe the current state.
+
+
+
+7 October 2026. Goal ACTIVE: game title/HUD/options, improved room/actor/camera,
+and a full standalone shared whiteboard with movable chat. Canonical WSL:
+/home/lizhi/comp4020/comp4020-final-naaeeen, Ubuntu/lizhi, native mise Node24.21/pnpm11.9.
+English UI/docs/source; research any language. Local work/commits authorised,
+new publication not performed. Original crit-8 tag/data remain intact.
+
+Read root PLAN/CLAUDE/AGENTS, active REPORT and owner redesign brief. R0 planning
+commit5af0812; [phases](REDESIGN-PLAN.md), [18 checkpoints](../revisit/REDESIGN-REGISTER.md),
+[research](../research/2026-10-07-game-and-board-redesign.md). Fresh reviewers receive
+fact-only packets, not this verdict-bearing handoff. All implementations reviewed
+fresh initially; later rechecks labelled contextual. Host slot limits recorded.
+
+R1: title/Create/Join/Continue, compact dock, separate movable multiline chat,
+Options/suspension, identity/draft guards. 64 affected UI/shell tests after Options
+safeRects regression. Native 15-case run:12PASS3FAIL; failures preserved.
+R2:16x11lounge/14x10bedroom, saved coordinates unchanged; 90routes, matched camera
+comparison. Native failures sustained after10s strictpoll: Options counted as world
+blocker cached tiny Overview; actual actor mesh larger than approximation. World
+worker owns camera/world and ONLY HUD-predicate in UI; gameshell owns57UItests and
+e2e adapters. Red/green fixes done; targeted3-camera native recheck currentlyRUNNING,
+sourcefrozen for that runner. Do not infer usability from pure tests.
+
+R3: BoardStore/contract/service69actualtestsPASS after large-bootstrap repair;
+separateboard.sqlite with membership/epoch/receipt/image guards. Finalclienthash
+bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1.
+Mainhash dddcac608947fad90b2f659f18cde7a062947a0ce5f3d8153a0c483fa0e9d6b8.
+42client/helperchecksPASS; final native2D+full-house cold recoveryPASS, noGameimports.
+Fresh integrated review reproduced lost-image/text; repair retaineddirty then native
+found React185 unchanged-callback feedback; fixed onlynotifyactualdelta/filedata.
+Independent contextual recheck reproduced mirror/latefile/noFalseSaved and42PASS.
+Private key onlymemory, serialized/capturedintent, clearonclose/revoke; no secrets
+captured/logged. Own contribution export remains distinctfrom full canvas export.
+
+R4: Parent realcreateService4casesPASS covers scopediframe/cache/assets/auth/restart,
+three-quiescentSQLite WALbackups+startupcleanup. Firstfixtures omitted actualcreate
+fields/revision/status; correctedagainstsource, notproductionbugs. Fixed-name entry
+cache had actualred(public3600 vsno-cache), repaired and4PASS. Full gate335PASS before
+latestrepairs; firstattemptNOTRUN becauseIomittedAPP_URL8080. Final gate must use
+APP_URL=http://127.0.0.1:4099, native pnpmchecknow includesboardbuild.
+Dependencies pinned React18.3.1 (React19 peers mismatched); fullaudit+peer+lockedinstall
+PASS after actualpublishedpatchedtransitives; unusedoptionalSasswatcher false,
+esbuild true; hooksstill.githooks. Neverstage generatedassets/.local/data/logs/secrets.
+
+Runtime: parentpreview4099 execsession99645 uses.local/redesign-preview/data.
+It preservesprototype testdata; doesNOTyetloadlastlarge-bootstrapservicepatch until
+nextverifiedrestart. Userprevious4093 uses.local/implementation-s1; preserveitsdata
+andcookies whenfinallyupgradinguserpreview. Browser cookies sharehostacrossports:
+use127.0.0.1forparentinspection, independentnativecontextsforfixtures.
+GameShellnativecamera runner currentlyGPUowner; allotherbrowser/loadjobsHELD.
+Boardfinal2Drunnersclosed. Resourceworker owns tools/board-resource/protocol/results;
+registered24engines (12game+12board,2sixmemberhouses),1.78MiBscene/maxchat/two1.93MiB
+images perhouse,300s,noautoretry,210MiBlocalRSS,realpaired65sTCPpause/allviewaccounting.
+HELD: parentinspectlatestinstrument/protocolhashes; classifyEnginepingwithoutdata;
+retainseed/tombstone/peerobjects inrecoverygrade. Nofullrunstarted, explicitGOrequired.
+Parentownsserver/package/build, integrationtests,README/docs/commits/finalacceptance.
+
+Next: acceptorrepairtargeted3cameraresults, currentnativeboardrecoveryreviewcomplete,
+inspect/freeze/GO one300sresource whenGPUidle, preserveanyFAIL/calibration history;
+maintainboardbrowsercoverage/CI, accurateJSXcoveragegap; rewriteREADME/architecture/
+validation/ledger, artifact/secret/diffchecks,focusedcommits. Finaluserpreview should
+restartverified4093serverwithits ORIGINALdata, notreplaceuserswithfreshtestdatabase.
+Dockerimage/Fly/TLS/redeploy,physicalphone/IME/humanpreference/value andstudentPROCESS/
+reflections remainseparateNOTRUN. Do notclaimanHD oruniversalencryption/reliability.
+
+# Prior local-core handoff (historical source)
 
 # Current A3 handoff
 

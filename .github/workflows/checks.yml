@@ -53,10 +53,34 @@ jobs:
           APP_URL: http://localhost:8080
       - name: Verify the maintained browser core against the image
         timeout-minutes: 5
-        run: pnpm exec playwright test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts
+        run: pnpm exec playwright test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts tests/e2e/board.spec.ts tests/e2e/title-dialog.spec.ts
         env:
           APP_URL: http://localhost:8080
           EXPECT_SECURE_COOKIES: 'true'
+      - name: Run the registered combined board workload
+        id: registered_resource
+        timeout-minutes: 8
+        # A reported Ubuntu runner, with the same frozen task/bounds; not Fly performance.
+        # One attempt. Earlier failed WSL trials remain in their separate committed files.
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync, spawnSync } from "node:child_process";
+          import { rmSync } from "node:fs";
+          // This disposable checkout must not upload an older result if startup fails.
+          rmSync("evaluation/board-resource.results.json", { force: true });
+          const ready = JSON.parse(execFileSync(process.execPath, ["tools/board-resource.mjs", "--inspect"], { encoding: "utf8" }));
+          if (ready.status !== "READY") throw new Error("Registered resource source is not ready");
+          const run = spawnSync(process.execPath, ["tools/board-resource.mjs", "--run", "--go", ready.protocolSHA256, "--freeze", ready.sourceManifestSHA256], { stdio: "inherit" });
+          process.exit(run.status ?? 1);
+          NODE
+      - name: Preserve the sanitized resource result
+        if: ${{ !cancelled() && steps.registered_resource.outcome != 'skipped' }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: registered-board-resource
+          path: evaluation/board-resource.results.json
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Preserve browser failure diagnostics
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v5
@@ -117,6 +141,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # 1.6
+      - name: Verify private mounted SQLite backups
+        timeout-minutes: 3
+        # Existing app/token; online per-file copies stay private on the mounted volume.
+        run: node tools/backup-mounted-data.mjs
       - name: Deploy
         # --remote-only builds the Dockerfile on Fly's builders; --ha=false
         # keeps the app at one machine and one volume.

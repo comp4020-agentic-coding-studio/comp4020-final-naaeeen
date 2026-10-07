@@ -1,10 +1,13 @@
-# Integrated house validation
+# Historical S0–S4 integrated house validation
+
+For the active R0–R4 redesign, read [REDESIGN-VALIDATION](REDESIGN-VALIDATION.md).
+The counts and source-bound measurements below are preserved for the earlier core.
 
 Updated 7 October 2026. Actual local evidence is distinct from deployed use,
 physical devices and human value. Canonical workspace is Ubuntu/lizhi
 `/home/lizhi/comp4020/comp4020-final-naaeeen`. Core milestone: `ea60440`.
 
-## Current local acceptance
+## Historical S0–S4 local acceptance
 
 | Scope | Executed result | What it establishes |
 | --- | --- | --- |

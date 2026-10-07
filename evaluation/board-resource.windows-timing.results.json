@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "scope": "Supplementary Windows host timing; not a resource acceptance gate",
+  "startedAt": "2026-10-07T02:22:15.1224321Z",
+  "finishedAt": "2026-10-07T02:27:35.1946487Z",
+  "durationSeconds": 320.1,
+  "requestedTickMs": 100,
+  "ticks": 2902,
+  "maxGapMs": 575.936,
+  "gapsOver1000ms": 0,
+  "quietRunStart": "2026-10-07T02:23:01.435Z",
+  "quietRunEnd": "2026-10-07T02:29:13.942Z",
+  "limitation": "Overlaps most of quiet retry, excludes its late 67-second event-loop stall; no pause cause established."
+}

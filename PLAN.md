@@ -8,6 +8,21 @@ current scope and subsection gates. They supersede the earlier card-only board a
 drawing-as-future cut line below. This root remains the single authoritative plan;
 the preserved sections retain product rationale and historical delivery evidence.
 
+Current source separates the author-owned study cards from the shared drawing
+canvas. The historical card-only row, drawing/upload cut order and two-database
+statements below describe S0–S4, before this owner-authorised extension. The current
+board has its own authority, image BLOBs, element-level reconciliation, explicit
+quotas and a third SQLite file. It does not inherit acceptance from the previous
+195-test candidate or thirty-minute L1/L2 workload.
+
+Current local acceptance and operational limits are reconciled in
+[redesign validation](docs/implementation/REDESIGN-VALIDATION.md). R4 keeps the
+provided course checks and public-repository/deploy conditions, adds the maintained
+standalone-board browser cases, preserves the Crit 8 tag and original user data,
+and prepares a local preview. Physical phones, production Docker/Fly/WAN, a real
+friend value pilot and student-authored PROCESS/reflections remain separate gates.
+
+
 # Shared Study House: purpose-first delivery plan
 
 6 October 2026. Authorised implementation is active; see docs/implementation/ACTIVE-TASK.md.
@@ -310,3 +325,10 @@ and [PROCESS evidence](docs/implementation/PROCESS-EVIDENCE-MAP.md) for student
 writing and Crit preparation. Physical-device and real-friend trials determine
 experience/value before feature expansion. New rooms, furniture, themes and board
 capabilities remain staged content/contract work, not implied first-version scope.
+
+Current local app closeout: 411 tests/type/build, evidence and production audit pass.
+Scoped native 7, painted-title 2 and strictly timed game 1 pass; CI collects 9 cases.
+Board unit coverage remains 69.85% statements/67.67% branches with main.jsx 0%.
+Resource failures are preserved; root owns actual CI/load/backup/deploy acceptance.
+Original 4093 preview reuses .local/implementation-s1 without reseeding.
+See docs/implementation/REDESIGN-VALIDATION.md and evaluation/redesign-closeout.results.json.

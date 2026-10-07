@@ -58,3 +58,21 @@ PROCESS is rewritten as the work develops, rather than extended as a diary.
 Passing the existing evidence sensor's old PROCESS links does not show that its
 narrative explains this house. The student must write that account and name
 borrowed or earlier work under the [AI-use policy](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/ai-use-and-integrity/).
+
+## Owner-tested redesign evidence
+
+The owner's hands-on rejection triggered the new R0–R4 scope, recorded in
+`5af0812`. `321e27c` adds independently reviewed board authority and69actual tests.
+The [18 redesign checkpoints](../revisit/REDESIGN-REGISTER.md) link the new owner
+requirements and their separate methods. Native integration exposed cached modal
+framing/actual mesh/editor-return/viewport errors beyond initially green units.
+Fresh board review found lost image/text, false Saved, bounded-ACK and expired-chat
+paths; another actual native run found a React feedback loop. Each has preserved
+reproduction, scoped repair/recheck and current source identity.
+
+The [resource protocol](../../evaluation/board-resource.protocol.json) itself was
+reviewed: undefined reflection state, dropped deadlines/chat bursts and protocol
+drift classification were reproduced in isolated controls before a full workload.
+Do not call that an agent-performance win or a human A/B study. Current acceptance
+and final commits still need reconciliation after the held resource measurement.
+The student must select/explain these real decisions in their own PROCESS argument.

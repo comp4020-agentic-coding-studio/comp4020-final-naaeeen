@@ -1,0 +1,79 @@
+{
+  "protocolHash": "ccbb7780ecb575898b55e2ddd5259fdaf09addc66632ee674efe1b7c5edb7b75",
+  "sourceHashes": {
+    "beforeCamera": "0ec4197a1deee892c09129d7b4a2887043b567ac125e708e853229863a5fb0ba",
+    "afterCamera": "e46c9c7032111f6f3f2813af13e53f79991e6f48eeff1b4c4a673db088b3f220",
+    "beforeGeometry": "7dc28ad3eae9c8874c6ae9cb352d38ecc94f3630f8426a85d4e5b57c1544dc53",
+    "afterGeometry": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd"
+  },
+  "geometry": {
+    "before": {
+      "dimensions": [
+        12,
+        8
+      ],
+      "walkableSamples": 1021,
+      "clearRoutes": 90
+    },
+    "after": {
+      "dimensions": [
+        16,
+        11
+      ],
+      "walkableSamples": 2263,
+      "clearRoutes": 90
+    }
+  },
+  "bedroom": {
+    "savedBefore": true,
+    "savedAfter": true,
+    "tenBefore": false,
+    "tenAfter": true,
+    "savedTransformsEqual": true
+  },
+  "camera": {
+    "portrait": {
+      "routeSamples": 462,
+      "original": {
+        "avatarPixels": 72,
+        "followLossSamples": 0,
+        "stationaryControlLossSamples": 231,
+        "idleDriftPx": 0,
+        "hudJumpPx": 37.909096970715474,
+        "scaleChange": 0,
+        "finalInside": true
+      },
+      "revised": {
+        "avatarPixels": 71.99999999999999,
+        "followLossSamples": 0,
+        "stationaryControlLossSamples": 231,
+        "idleDriftPx": 0,
+        "hudJumpPx": 0,
+        "scaleChange": 0,
+        "finalInside": true
+      }
+    },
+    "desktop": {
+      "routeSamples": 462,
+      "original": {
+        "avatarPixels": 128,
+        "followLossSamples": 0,
+        "stationaryControlLossSamples": 34,
+        "idleDriftPx": 0,
+        "hudJumpPx": 631.2127342030292,
+        "scaleChange": 0,
+        "finalInside": true
+      },
+      "revised": {
+        "avatarPixels": 128,
+        "followLossSamples": 0,
+        "stationaryControlLossSamples": 34,
+        "idleDriftPx": 0,
+        "hudJumpPx": 0,
+        "scaleChange": 0,
+        "finalInside": true
+      }
+    }
+  },
+  "pass": true
+}

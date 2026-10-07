@@ -99,3 +99,10 @@ and deployment uncertainties; they are not a request to repeat resolved lanes.
 Current milestones are `ea60440`, `5548bb1` and `2c120a1`. The annotated frozen
 tag is `crit-8`, peeled commit `6dc79c5`. Read the current handoff and validation
 for source identities and planned external/student work.
+
+## Active redesign after owner trial
+
+The owner rejected the baseline interaction quality on 7 October. Current R0–R4
+work uses [18 additional detailed checkpoints](REDESIGN-REGISTER.md); earlier
+S0–S4 acceptance remains bound to its historical source. Changed UI, geometry,
+camera and full board require their own current checks and reviews.

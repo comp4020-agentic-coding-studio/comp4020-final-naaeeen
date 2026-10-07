@@ -1,0 +1,114 @@
+[
+  {
+    "kind": "latin",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "header": {
+      "x": 22,
+      "y": 20,
+      "w": 401,
+      "h": 66,
+      "bottom": 86,
+      "right": 423
+    },
+    "availabilityTop": 95,
+    "title": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's room",
+    "text": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's room",
+    "textLines": 2,
+    "button": {
+      "w": 44,
+      "h": 44
+    },
+    "badge": {
+      "w": 110.5,
+      "h": 44
+    },
+    "overflow": false
+  },
+  {
+    "kind": "latin",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "header": {
+      "x": 12,
+      "y": 12,
+      "w": 264,
+      "h": 64,
+      "bottom": 76,
+      "right": 276
+    },
+    "availabilityTop": 87,
+    "title": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's room",
+    "text": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's room",
+    "textLines": 2,
+    "button": {
+      "w": 44,
+      "h": 44
+    },
+    "badge": {
+      "w": 88.765625,
+      "h": 44
+    },
+    "overflow": false
+  },
+  {
+    "kind": "cjk",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "header": {
+      "x": 22,
+      "y": 20,
+      "w": 401,
+      "h": 66,
+      "bottom": 86,
+      "right": 423
+    },
+    "availabilityTop": 95,
+    "title": "学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习's room",
+    "text": "学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习's room",
+    "textLines": 2,
+    "button": {
+      "w": 44,
+      "h": 44
+    },
+    "badge": {
+      "w": 110.5,
+      "h": 44
+    },
+    "overflow": false
+  },
+  {
+    "kind": "cjk",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "header": {
+      "x": 12,
+      "y": 12,
+      "w": 264,
+      "h": 64,
+      "bottom": 76,
+      "right": 276
+    },
+    "availabilityTop": 87,
+    "title": "学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习's room",
+    "text": "学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习's room",
+    "textLines": 2,
+    "button": {
+      "w": 44,
+      "h": 44
+    },
+    "badge": {
+      "w": 88.765625,
+      "h": 44
+    },
+    "overflow": false
+  }
+]
