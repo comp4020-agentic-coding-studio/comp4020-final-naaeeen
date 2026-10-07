@@ -217,13 +217,15 @@
     "url": "http://localhost:4093",
     "dataDir": ".local/implementation-s1",
     "pid": 4936,
-    "status": "HTTP200 health",
-    "sourceBound": true
+    "status": "WSL health200 and parent Windows IPv4 curl -4 localhost health200",
+    "sourceBound": true,
+    "browserInspection": "Host browser ACL initializer blocked after supported retry/reset; app open queued, visible rendering not confirmed"
   },
   "localSourceCommits": [
     "ca57bb2",
     "2e1cdb4",
-    "fc4b5d8"
+    "fc4b5d8",
+    "dc99dad"
   ],
   "parentReleasePreparation": {
     "productionBackupPreflight": "PASS",

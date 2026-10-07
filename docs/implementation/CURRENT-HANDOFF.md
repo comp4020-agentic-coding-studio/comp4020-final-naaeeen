@@ -12,11 +12,11 @@ collect for the updated CI selector; no combined nine-case local run is claimed.
 [Exact source and scoped evidence](../../evaluation/redesign-closeout.results.json).
 
 Current local commits: ca57bb2 game/world, 2e1cdb4 transport, fc4b5d8 README routing.
-Remaining browser/CI/evidence commit is being closed. No worker push/deploy.
+Browser/CI/evidence checkpoint dc99dad is committed. No worker push/deploy.
 Resource protocol 1ef47348/manifest 545d79c3/instrument6130e233 is READY; e579 archived.
 Original/candidate/quiet resource failures remain preserved; CI workload is pending.
 
-Original 4093 preview uses exact .local/implementation-s1 and is healthy (PID 4936,
+Original 4093 preview uses exact .local/implementation-s1 and passes WSL health (PID 4936,
 exec 59237). Test 4099 uses exact .local/redesign-preview/data (PID 308,exec 68903).
 Do not reseed/delete either data root. Crit8 tag and root backup files remain intact.
 Root next: inspect final clean/source/tag packet, perform authorised release backup,
@@ -193,3 +193,8 @@ hashes/dimensions and the 43-row register. No missing local file links were foun
 The fresh final consistency review and contextual affected-document recheck have
 no remaining actionable issue within their assigned scope. Existing secret hooks
 remain enabled; final diffs are checked before each focused local commit.
+
+Parent additionally verified Windows IPv4 health with curl -4 localhost. Default
+.NET localhost timed out; no app/network/sandbox configuration changed. Browser
+control initialization is blocked by host ACLs after supported retry/reset; the
+app-open request is queued and visible user-browser rendering is not confirmed.

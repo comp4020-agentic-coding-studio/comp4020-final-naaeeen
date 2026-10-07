@@ -97,3 +97,8 @@ Optional house/board databases were absent and not created, as expected for the 
 Crit8 release. This is individual file consistency, not off-volume recovery; CI will
 repeat the backup for the exact final candidate before deployment. No private copy
 or raw report is committed.
+
+The final browser/CI/evidence checkpoint is dc99dad. The original preview passes
+WSL and parent Windows IPv4 health checks. Host browser initialization remains
+blocked by ACLs; opening is queued and visible user-browser rendering is not
+confirmed. No app, network or sandbox setting was changed for that boundary.
