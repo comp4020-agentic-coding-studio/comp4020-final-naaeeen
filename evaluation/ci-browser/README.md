@@ -68,3 +68,39 @@ A new fresh-context read-only review checked the control, both hashes, complete
 base-rule preservation, sole denial delta and effective-profile wiring. It found
 no actionable defect. The reviewer inspected the sanitized native results rather
 than rerunning them; Docker/Chromium/application execution remains pending CI.
+
+## Renderer discovery correction after actual CI
+
+At commit 31bd1ba, CI run 37577667210 passed Docker build and 411 spec checks,
+verified container settings and launched Chromium, then failed the preflight's
+renderer discovery. No application case, resource workload or deployment ran.
+The old scan required readable renderer cmdline plus a reconstructed ancestry;
+its zero matches did not establish which condition failed.
+
+The helper now obtains renderer OS IDs from the browser-scoped
+[SystemInfo.getProcessInfo](https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#method-getProcessInfo)
+using Playwright's public
+[newBrowserCDPSession](https://playwright.dev/docs/api/class-browser#browser-new-browser-cdp-session).
+It anchors the returned browser PID to launchServer's actual process PID, rejects
+missing/invalid/duplicate renderer IDs, and retains every existing /proc status,
+uid_map, namespace, NoNewPrivs and additional-seccomp assertion. Renderer cmdline
+and ancestry are not used for discovery. Sandbox flags/default confinement,
+profile, all deadlines and the nine application cases are unchanged.
+
+Sanitized preflight failure artifacts now record only the failed check stage,
+error code and process/renderer counts; they omit IDs, process arguments and the
+private connection endpoint. Six native fixture controls validate positive IDs,
+namespace mismatch, missing renderer, malformed ID, duplicate ID and browser-as-
+renderer rejection. They do not prove actual Docker renderer permissions.
+
+The versioned [Chromium 153 handler](https://github.com/chromium/chromium/blob/153.0.8010.12/content/browser/devtools/protocol/system_info_handler.cc#L325)
+obtains renderer IDs from RenderProcessHost's OS process and the browser ID from
+the current process. The launch-PID assertion anchors those IDs before kernel
+reads; Linux process file readability under actual CI policy remains a runtime
+check. The prior scan failure is not labelled as a proven permissions defect.
+
+A fresh-context read-only reviewer checked the final scoped diff, versioned API/PID
+source, unchanged kernel assertions and safe diagnostics, then independently ran
+`mise exec -- node tools/ci-browser-sandbox.mjs --renderer-controls` and diff checks.
+All six fixture controls passed; no actionable issue was found. Actual container
+renderer reads and the nine application cases still require a new approved CI run.
