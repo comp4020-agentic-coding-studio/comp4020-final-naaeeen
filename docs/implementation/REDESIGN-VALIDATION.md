@@ -4,8 +4,14 @@
 HUD/Options, spatial proportions/camera and full independent collaborative board.
 The canonical workspace is Ubuntu/lizhi,
 /home/lizhi/comp4020/comp4020-final-naaeeen, with mise Node24.21.0/pnpm11.9.0.
-Local commits are authorised; no push, publication or deployment is performed.
-Earlier S0–S4 and 30-minute workload results remain [historical](VALIDATION.md).
+The local checkpoint below preceded approved publication. Subsequent CI and live
+release passed at37579809454:411required checks,nine native cases,the registered
+300s resource attempt,backup/deploy and selected live game/room/board flows. See
+[release status](RELEASE-STATUS.md) and
+[exact release evidence](../../evaluation/redesign-release.results.json). They
+supersede pending/NOT RUN release labels in this preserved local record; physical
+phones,human value and sustained Fly stress remain separate. Earlier S0–S4 and
+30-minute workload results remain [historical](VALIDATION.md).
 
 ## Requirement, refinement and current evidence
 

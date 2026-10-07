@@ -201,3 +201,13 @@ and review/refinement where each informs the decision. If fresh-agent spawning
 hits host thread limits, record that outcome and label contextual review; perform
 fresh implementation review when a slot becomes available rather than pretending
 context-retaining review was fresh. Stop resolved lanes and preserve their records.
+
+## Observed release-record reconciliation
+
+At release closeout, reconcile the active PLAN, current handoff, subsection
+register and release status against actual run/artifact identities. A stale
+pending row was found after the verified release here. Update its current state
+and link scoped evidence; explicitly label older local validation checkpoints
+as superseded for release status. Preserve failed results and historical
+observations rather than rewriting their chronology. This is a documentation
+consistency check, not another application test or performance experiment.

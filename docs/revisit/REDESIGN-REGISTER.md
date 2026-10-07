@@ -6,6 +6,9 @@ rejected its interaction quality. Read [owner brief](../product/OWNER-REDESIGN-2
 The earlier 43-row register remains historical; these checkpoints cover the new
 scope separately. Each links requirements, comparisons/reproductions, actual checks,
 findings, refinement and remaining acceptance. Counts are evidence scopes, not grades.
+Release closeout is recorded in [RELEASE-STATUS](../implementation/RELEASE-STATUS.md)
+and [exact scoped results](../../evaluation/redesign-release.results.json). Local
+row evidence is retained; CI/live observations supplement only the checked tasks.
 
 | ID | User outcome / important boundary | Method and recorded refinement | Current status / evidence |
 | --- | --- | --- | --- |
@@ -24,10 +27,22 @@ findings, refinement and remaining acceptance. Counts are evidence scopes, not g
 | R3.4 | Chat/presence/pending status reflect reality | Expired replay and bounded-ACK repairs; native shortcut/peer presence; missing image swallowed adjacent text then callback feedback loop exposed/repaired | ACCEPTED LOCAL source/native; [workspace](../implementation/BOARD-WORKSPACE-EVIDENCE.md) |
 | R3.5 | Standalone identity recovery works privately | Captured actor/serialized issuance/current-cookie check/generation fences; six red regressions; actual full two-member cold recovery; proofs never captured/logged | ACCEPTED LOCAL; [workspace](../implementation/BOARD-WORKSPACE-EVIDENCE.md) |
 | R4.1 | Old data and new assets survive restart/backup | Additive third SQLite file; actual createService/restart, three quiescent WAL backups and unsupported-schema descriptor cleanup | ACCEPTED LOCAL; spec/board-integration.test.ts |
-| R4.2 | Valid full state and all permitted views fit | Near-limit bootstrap exposed duplicate snapshot close, repaired; registered 24-engine/300s/slow-reader workload and calibrated grader | Original and two subsequent resource FAILs retained; current registered CI attempt pending; [protocol](../../evaluation/board-resource.protocol.json) |
-| R4.3 | Tests/reviews are trustworthy and maintained | Fresh initial reviews, labelled contextual rechecks, actual-module/native reproductions; current finite-frame negative controls; failed fixtures/infra retained | Local411/checks, scoped native7+title2+strictgame and honest coverage recorded; CI9/production pending; no human A/B claim |
-| R4.4 | The result can be extended and released responsibly | Local focused commits, self-hosted editor/assets/licences, explicit quotas/layout/backup/epoch contracts | LOCAL preparation; Docker/Fly/phone/human value/student reflections NOT RUN |
+| R4.2 | Valid full state and all permitted views fit | Near-limit bootstrap exposed duplicate snapshot close, repaired; registered 24-engine/300s/slow-reader workload and calibrated grader | ACCEPTED CI SYNTHETIC300s at37579809454: all gates true,24finaltransports,202.59MiB peakRSS,8.862ms normalp95; original/two subsequent FAILs archived; [result](../../evaluation/board-resource.results.json) and [protocol](../../evaluation/board-resource.protocol.json) |
+| R4.3 | Tests/reviews are trustworthy and maintained | Fresh initial reviews, labelled contextual rechecks, actual-module/native reproductions; current finite-frame negative controls; failed fixtures/infra retained | ACCEPTED local411, CI411/native9 at37579809454 and selected live game/room/board flows; additional exact-origin23controls pass. Coverage gaps and no human A/B claim remain explicit; [release](../implementation/RELEASE-STATUS.md) |
+| R4.4 | The result can be extended and released responsibly | Local focused commits, self-hosted editor/assets/licences, explicit quotas/layout/backup/epoch contracts | ACCEPTED approved Docker/Fly release and selected live tasks at37579809454; actual256MB/one-volume topology/source verified. Physical phones, sustained Fly stress, off-volume restore, human value and student reflections remain separate; [release](../implementation/RELEASE-STATUS.md) |
 
 Return to the relevant checkpoint after source/assumption/findings change. Stop
 resolved lanes; open gaps need actual evidence. The required gate's earlier 335
 PASS checkpoint precedes later repairs and is not relabelled as final acceptance.
+
+## Release checkpoint reconciliation
+
+The CI output-child repair was compared under matched installed Playwright cleanup
+conditions and freshly reviewed, then verified by nine actual image browser cases.
+The exact-app live test guard retained default remote rejection;23controls and
+fresh review preceded the sole blocked board case rerun. A fresh release evidence
+review independently verified artifact/archive equality, current source/protocol
+hashes, unchanged acceptance thresholds and document links. These are technical
+comparisons/review/native checks, not participant A-B. Final evidence-only/fixture
+publication CI has its own remote run identity; app runtime is unchanged. Historical
+local snapshots below linked evidence are preserved and superseded explicitly.
