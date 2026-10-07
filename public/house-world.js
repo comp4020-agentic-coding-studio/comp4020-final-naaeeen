@@ -21,7 +21,7 @@ export function createHouseWorld(container, callbacks = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.02;
-  const materials = new Map(), keys = new Set(), labels = [], avatars = new Map(), labelEntries = new WeakMap(), speech = createBubbleFeed();
+  const materials = new Map(), keys = new Set(), labels = [], avatars = new Map(), doors = new Map(), labelEntries = new WeakMap(), speech = createBubbleFeed();
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2(), pickTargets = [];
   let reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cameraRig = createHouseCamera({ reducedMotion: reduced });
@@ -29,7 +29,7 @@ export function createHouseWorld(container, callbacks = {}) {
   let scene, camera, layout = createLayout(4), live = null, own = { ...layout.spawn }, heading = 0;
   let inputEnabled = true, editing = false, composing = false, suspended = false, previousEditMode = null, pendingEditFraming = false, gesture = null, direction = { x: 0, z: 0 }, route = [], routeTarget = null;
   let lastFrame = null, lastSent = -Infinity, sent = null, renderKey = '', frame = 0, disposed = false, pendingStand = false;
-  let prompt, selection = null, context = null, previewPlacements = null, lastHint = '';
+  let prompt, roomLabel = null, selection = null, context = null, previewPlacements = null, lastHint = '';
   let safeArea = null, layoutDirty = true, lastLabelLayout = -Infinity;
   const dimensionObserver = new ResizeObserver(entries => { for (const observed of entries) { const item = labelEntries.get(observed.target); if (!item) continue; const box = observed.borderBoxSize?.[0]; if (box && box.inlineSize > 0 && box.blockSize > 0) { if (Math.abs(item.size.w - box.inlineSize) > 0.1 || Math.abs(item.size.h - box.blockSize) > 0.1) { item.size = { w: box.inlineSize, h: box.blockSize }; layoutDirty = true; } item.sizeDirty = false; } else { item.sizeDirty = true; layoutDirty = true; } } });
   const fixed = id => layout.obstacles.find(item => item.id === id);
@@ -49,11 +49,18 @@ export function createHouseWorld(container, callbacks = {}) {
     overlay.append(el); const line = document.createElementNS('http://www.w3.org/2000/svg', 'line'); line.setAttribute('stroke', '#f4e4c3bb'); line.setAttribute('stroke-width', '1.5'); line.style.display = 'none'; leaderLayer.append(line);
     const entry = { el, point, baseText: text, kind, line, size: { w: kind === 'chat-bubble' ? 160 : 108, h: kind === 'chat-bubble' ? 38 : 34 }, sizeDirty: true, previous: null, screenRect: null }; sizeLabel(entry); labels.push(entry); labelEntries.set(el, entry); dimensionObserver.observe(el, { box: 'border-box' }); layoutDirty = true; return el;
   }
+  function updateLabel(el, text, kind = labelEntries.get(el).kind) {
+    const entry = labelEntries.get(el);
+    if (entry.baseText === text && entry.kind === kind) return;
+    el.textContent = text; el.title = text; el.setAttribute('aria-label', text);
+    el.className = 'house-world-label ' + kind;
+    entry.baseText = text; entry.kind = kind; entry.sizeDirty = true; layoutDirty = true;
+  }
   function pickable(group, target) { group.traverse(o => { o.userData.target = target; }); pickTargets.push({ point: new THREE.Box3().setFromObject(group).getCenter(new THREE.Vector3()), target }); }
   function clearScene() {
     selfFrameGeometry = null;
     scene?.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); if (o.isLight) o.shadow?.dispose(); });
-    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; labels.length = 0; avatars.clear(); leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
+    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
   }
   function plant(parent, x = 0, z = 0, scale = 1) {
     const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(scale); parent.add(g);
@@ -99,11 +106,23 @@ export function createHouseWorld(container, callbacks = {}) {
     g.position.set(door.x, 0, door.z); if (door.wall === 'side') g.rotation.y = Math.PI / 2; scene.add(g);
     box(1.32, 1.96, 0.15, 0, 0.97, 0.02, '#a88764', g); box(1.14, 1.8, 0.17, 0, 0.9, 0.1, '#cfb08b', g);
     box(0.83, 0.6, 0.025, 0, 1.3, 0.20, '#bc9b73', g); box(0.83, 0.62, 0.025, 0, 0.53, 0.20, '#bc9b73', g);
-    cylinder(0.035, 0.08, 0.4, 0.95, 0.23, '#7f693f', g); box(0.44, 0.18, 0.035, 0, 1.62, 0.23, resident ? colour(resident.colour) : '#d6cbb7', g);
+    cylinder(0.035, 0.08, 0.4, 0.95, 0.23, '#7f693f', g); const plaque = box(0.44, 0.18, 0.035, 0, 1.62, 0.23, resident ? colour(resident.colour) : '#d6cbb7', g);
     const self = resident?.id === live.durable.selfId;
     const text = resident ? resident.name + (self ? '\nYour room' : resident.open ? '\nDoor open' : '\nDoor closed') : 'Room ' + (door.slot + 1) + '\nVacant';
-    label(text, new THREE.Vector3(door.x, 2.1, door.z + 0.18), self ? 'own-door' : 'door');
-    pickable(g, { type: 'door', slot: door.slot, roomId: resident?.bedroomId });
+    const name = label(text, new THREE.Vector3(door.x, 2.1, door.z + 0.18), self ? 'own-door' : 'door');
+    const target = { type: 'door', slot: door.slot, roomId: resident?.bedroomId };
+    pickable(g, target); doors.set(door.slot, { plaque, name, target });
+  }
+  function syncResidents() {
+    for (const [slot, entry] of doors) {
+      const resident = live.durable.residents.find(r => r.slot === slot), self = resident?.id === live.durable.selfId;
+      const text = resident ? resident.name + (self ? '\nYour room' : resident.open ? '\nDoor open' : '\nDoor closed') : 'Room ' + (slot + 1) + '\nVacant';
+      updateLabel(entry.name, text, self ? 'own-door' : 'door');
+      entry.plaque.material = mat(resident ? colour(resident.colour) : '#d6cbb7');
+      // Raycast objects and projected pick targets share this same target object.
+      entry.target.roomId = resident?.bedroomId;
+    }
+    if (roomLabel) updateLabel(roomLabel, (live.durable.residents.find(r => r.id === live.durable.room.ownerId)?.name ?? 'Resident') + "'s room");
   }
   function lounge() {
     layout.doors.forEach(doorView);
@@ -150,7 +169,7 @@ export function createHouseWorld(container, callbacks = {}) {
     roomPlacements().forEach(furniture);
     box(1.5, 0.027, 0.65, layout.exitTarget.x, 0.038, layout.exitTarget.z + 0.15, '#b3a891');
     label('Return to lounge', new THREE.Vector3(layout.exitTarget.x, 0.85, layout.exitTarget.z + 0.17), 'exit');
-    label((live.durable.residents.find(r => r.id === live.durable.room.ownerId)?.name ?? 'Resident') + "'s room", new THREE.Vector3(-2.8, 2.28, -layout.depth / 2 + 0.9), 'room');
+    roomLabel = label((live.durable.residents.find(r => r.id === live.durable.room.ownerId)?.name ?? 'Resident') + "'s room", new THREE.Vector3(-2.8, 2.28, -layout.depth / 2 + 0.9), 'room');
   }
   function rebuild() {
     clearScene(); scene = new THREE.Scene(); scene.background = new THREE.Color('#252e3e');
@@ -164,7 +183,7 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function avatar(player) {
     const root = new THREE.Group(), body = new THREE.Group(); root.add(body); scene.add(root);
-    cylinder(0.205, 0.43, 0, 0.73, 0, colour(player.colour), body);
+    const accent = colour(player.colour), garments = [cylinder(0.205, 0.43, 0, 0.73, 0, accent, body)];
     box(0.26, 0.065, 0.21, 0, 0.94, 0, '#f0dbc2', body);
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.235, 12, 10), mat('#ebc5a5')); head.position.set(0, 1.17, 0); head.castShadow = true; body.add(head);
     const hair = new THREE.Mesh(new THREE.SphereGeometry(0.243, 12, 8, 0, Math.PI * 2, 0, Math.PI * 0.53), mat('#735745')); hair.position.set(0, 1.2, 0); body.add(hair);
@@ -174,7 +193,7 @@ export function createHouseWorld(container, callbacks = {}) {
     const arms = [], legs = [], knees = [];
     for (const side of [-1, 1]) {
       const arm = new THREE.Group(); arm.position.set(side * 0.25, 0.89, 0); body.add(arm); arms.push(arm);
-      box(0.12, 0.31, 0.14, 0, -0.15, 0, colour(player.colour), arm); cylinder(0.067, 0.09, 0, -0.34, 0, '#ebc5a5', arm);
+      garments.push(box(0.12, 0.31, 0.14, 0, -0.15, 0, accent, arm)); cylinder(0.067, 0.09, 0, -0.34, 0, '#ebc5a5', arm);
       const leg = new THREE.Group(); leg.position.set(side * 0.11, 0.52, 0); body.add(leg); legs.push(leg);
       box(0.135, 0.22, 0.16, 0, -0.1, 0, '#626557', leg);
       const knee = new THREE.Group(); knee.position.y = -0.22; leg.add(knee); knees.push(knee);
@@ -192,7 +211,7 @@ export function createHouseWorld(container, callbacks = {}) {
     bubbleText.className = 'house-bubble-text'; bubbleText.style.cssText = 'display:block;height:18px;line-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'; bubbleHeader.append(speaker, hint); bubble.append(bubbleHeader, bubbleText);
     const ring = new THREE.Mesh(new THREE.RingGeometry(0.32, 0.35, 24), new THREE.MeshBasicMaterial({ color: '#fff1cc', side: THREE.DoubleSide, transparent: true, opacity: 0.85 })); ring.rotation.x = -Math.PI / 2; ring.position.y = 0.05; root.add(ring); ring.visible = player.id === live.durable.selfId;
     root.position.set(player.x ?? layout.spawn.x, 0, player.z ?? layout.spawn.z);
-    const entry = { root, body, arms, legs, knees, name, nameDisplay, nameAvailability, nameText: '', bubble, speaker, bubbleText, previewId: null, player, x: root.position.x, z: root.position.z }; avatars.set(player.id, entry); return entry;
+    const entry = { root, body, arms, legs, knees, garments, accent, name, nameDisplay, nameAvailability, nameText: '', bubble, speaker, bubbleText, previewId: null, player, x: root.position.x, z: root.position.z }; avatars.set(player.id, entry); return entry;
   }
   function sizeLabel(item) {
     const phone = container.clientWidth < 700;
@@ -271,27 +290,34 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function update(next) {
     if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { x: 0, z: 2.85 }; rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
-    const previous = live, changedZone = previous?.durable.zoneId !== next.durable.zoneId;
+    const previous = live, changedZone = previous?.durable.zoneId !== next.durable.zoneId || previous?.durable.streamId !== next.durable.streamId;
+    const changedIdentity = previous?.serverEpoch !== next.serverEpoch || previous?.durable.house.id !== next.durable.house.id || previous?.durable.selfId !== next.durable.selfId;
     const changedControl = previous?.generation !== next.generation || previous?.controller !== next.controller || previous?.accessGeneration !== next.accessGeneration;
     live = next;
     const p = self();
     speech.ingest([next.serverEpoch, next.durable.selfId, next.durable.house.id, next.durable.zoneId, next.accessGeneration, next.generation].join('/'), next.durable.chat, { quiet: p?.availability !== 'chat', visibleAuthors: new Set(next.players.filter(player => player.connected && player.zoneId === next.durable.zoneId).map(player => player.id)) }, window.performance.now());
-    if (changedZone || changedControl) { pendingEditFraming = false; if (changedZone) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone) previewPlacements = null; clearInput(); sent = null; pendingStand = false; own = { x: p?.x ?? (next.durable.room ? 0 : layout.spawn.x), z: p?.z ?? (next.durable.room ? 3 : 2.85) }; }
+    if (changedZone || changedIdentity || changedControl) { pendingEditFraming = false; if (changedZone || changedIdentity) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone || changedIdentity) previewPlacements = null; clearInput(); sent = null; pendingStand = false; own = { x: p?.x ?? (next.durable.room ? 0 : layout.spawn.x), z: p?.z ?? (next.durable.room ? 3 : 2.85) }; }
     if (p && (previous?.players.find(q => q.id === previous.durable.selfId)?.seatId && !p.seatId || p.animation === 'sit' || p.seatId || !next.controller || !previous)) own = { x: p.x ?? own.x, z: p.z ?? own.z };
     if (!p?.seatId) pendingStand = false;
     if (p && next.controller && Number.isFinite(p.x) && Number.isFinite(p.z) && Math.hypot(p.x - own.x, p.z - own.z) > 1.15) { own = { x: p.x, z: p.z }; clearInput(); }
-    const key = JSON.stringify([next.durable.house.capacity, next.durable.zoneId, next.durable.room, next.durable.residents.map(r => [r.id, r.name, r.colour, r.slot, r.open])]);
+    // Resident metadata changes keep the room's geometry and shadow resources.
+    // Authority, zone and full room changes still clear all prior scene content.
+    const key = JSON.stringify([next.serverEpoch, next.durable.house.id, next.durable.selfId, next.accessGeneration, next.generation, next.durable.house.capacity, next.durable.zoneId, next.durable.streamId, next.durable.room]);
     if (key !== renderKey) { renderKey = key; rebuild(); }
-    syncPlayers(next);
+    // A queued visit belongs to the bedroom chosen when the route began.
+    if (routeTarget?.type === 'door' && routeTarget.roomId !== next.durable.residents.find(r => r.slot === routeTarget.slot)?.bedroomId) { route = []; routeTarget = null; }
+    syncResidents(); syncPlayers(next);
   }
   function syncPlayers(next) {
     const visible = next.players.filter(p => p.connected && p.zoneId === next.durable.zoneId);
     const ids = new Set(visible.map(p => p.id));
     for (const [id, entry] of avatars) if (!ids.has(id)) {
-      dimensionObserver.unobserve?.(entry.name); dimensionObserver.unobserve?.(entry.bubble); scene.remove(entry.root); entry.root.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); }); labelEntries.get(entry.name)?.line.remove(); labelEntries.get(entry.bubble)?.line.remove(); entry.name.remove(); entry.bubble.remove(); avatars.delete(id);
+      dimensionObserver.unobserve?.(entry.name); dimensionObserver.unobserve?.(entry.bubble); scene.remove(entry.root); entry.root.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); }); labelEntries.get(entry.name)?.line.remove(); labelEntries.get(entry.bubble)?.line.remove(); entry.name.remove(); entry.bubble.remove(); avatars.delete(id); layoutDirty = true;
       for (let i = labels.length - 1; i >= 0; i--) if (labels[i].el === entry.name || labels[i].el === entry.bubble) labels.splice(i, 1);
     }
-    for (const p of visible) { const entry = avatars.get(p.id) ?? avatar(p); entry.player = p; entry.name.dataset.playerId = p.id; entry.name.dataset.name = p.name; entry.name.dataset.availability = p.availability; entry.name.dataset.connected = String(p.connected); entry.name.classList.add('house-avatar-name'); const nameText = p.name + (p.id === next.durable.selfId ? ' (you)' : '') + '\n' + (p.availability === 'chat' ? 'Can chat' : 'Quiet'); if (entry.nameText !== nameText) { entry.nameText = nameText; entry.nameDisplay.textContent = p.name + (p.id === next.durable.selfId ? ' (you)' : ''); entry.nameAvailability.textContent = p.availability === 'chat' ? 'Can chat' : 'Quiet'; entry.name.title = nameText; entry.name.setAttribute('aria-label', nameText); labelEntries.get(entry.name).sizeDirty = true; layoutDirty = true; } entry.name.dataset.availabilitySetAt = String(p.availabilitySetAt); }
+    for (const p of visible) { const entry = avatars.get(p.id) ?? avatar(p), accent = colour(p.colour);
+      if (entry.accent !== accent) { entry.accent = accent; for (const mesh of entry.garments) mesh.material = mat(accent); }
+      entry.player = p; entry.name.dataset.playerId = p.id; entry.name.dataset.name = p.name; entry.name.dataset.availability = p.availability; entry.name.dataset.connected = String(p.connected); entry.name.classList.add('house-avatar-name'); const nameText = p.name + (p.id === next.durable.selfId ? ' (you)' : '') + '\n' + (p.availability === 'chat' ? 'Can chat' : 'Quiet'); if (entry.nameText !== nameText) { entry.nameText = nameText; entry.nameDisplay.textContent = p.name + (p.id === next.durable.selfId ? ' (you)' : ''); entry.nameAvailability.textContent = p.availability === 'chat' ? 'Can chat' : 'Quiet'; entry.name.title = nameText; entry.name.setAttribute('aria-label', nameText); labelEntries.get(entry.name).sizeDirty = true; layoutDirty = true; } entry.name.dataset.availabilitySetAt = String(p.availabilitySetAt); }
   }
   function animate(time) {
     if (disposed || suspended) return;
@@ -398,7 +424,7 @@ export function createHouseWorld(container, callbacks = {}) {
       const preview = byAuthor.get(id), item = labelEntries.get(entry.bubble);
       if (preview && entry.bubble.dataset.rank !== String(preview.rank)) { entry.bubble.dataset.rank = String(preview.rank); layoutDirty = true; }
       if (entry.bubble.hidden !== !preview) { entry.bubble.hidden = !preview; layoutDirty = true; }
-      if (preview && entry.previewId !== preview.id) {
+      if (preview && (entry.previewId !== preview.id || entry.speaker.textContent !== entry.player.name)) {
         entry.previewId = preview.id; entry.speaker.textContent = entry.player.name; entry.bubbleText.textContent = preview.preview;
         entry.bubble.dataset.messageId = preview.id; entry.bubble.dataset.rank = String(preview.rank); entry.bubble.title = 'Full message in Chat'; entry.bubble.setAttribute('aria-label', entry.player.name + ': ' + preview.preview + '. Full message in Chat.'); item.sizeDirty = true; layoutDirty = true;
       }

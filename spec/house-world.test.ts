@@ -33,7 +33,7 @@ it("uses elapsed time for the same walking speed at fast and slow render rates",
  expect(slow).toBeCloseTo(fast,1);
 });
 
-function speechFixture(width=390,height=844){
+function speechFixture(width=390,height=844,callbacks:any={}){
  const dom=new JSDOM("<div id='world'></div>",{url:"http://localhost"});
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:false})});
  vi.stubGlobal('window',dom.window);vi.stubGlobal('document',dom.window.document);vi.stubGlobal('HTMLElement',dom.window.HTMLElement);
@@ -41,7 +41,7 @@ function speechFixture(width=390,height=844){
  let next:FrameRequestCallback=()=>{},clock=0;vi.spyOn(dom.window.performance,'now').mockImplementation(()=>clock);
  vi.stubGlobal('requestAnimationFrame',(cb:FrameRequestCallback)=>{next=cb;return 1;});vi.stubGlobal('cancelAnimationFrame',()=>{});
  const container=dom.window.document.getElementById('world')!;Object.defineProperty(container,'clientWidth',{value:width,configurable:true});Object.defineProperty(container,'clientHeight',{value:height,configurable:true});
- const world=createHouseWorld(container);cleanups.push(()=>{world.dispose();dom.window.close();});
+ const world=createHouseWorld(container,callbacks);cleanups.push(()=>{world.dispose();dom.window.close();});
  const players=Array.from({length:6},(_,i)=>({id:'p'+i,name:'Friend '+i,colour:'sage',connected:true,zoneId:'lounge',x:0,z:3.3,heading:0,animation:'idle',availability:'chat',availabilitySetAt:0,generation:1}));
  const snapshot:any={serverEpoch:'epoch',accessGeneration:1,generation:1,controller:true,durable:{schemaVersion:2,selfId:'p0',house:{id:'house',capacity:6,ownerId:'p0',code:'12345678'},residents:players.map((p,i)=>({...p,slot:i,bedroomId:'room'+i,open:false})),streamId:'lounge:house',sequence:0,zoneId:'lounge',room:null,cards:[],chat:[]},players};
  const step=(time:number)=>{clock=time;next(time);};
@@ -223,4 +223,199 @@ it('restores framing after the room editor closes before its next HUD report',()
   expect(mesh.bottom,width+'x'+height+' '+mode+' bottom').toBeLessThanOrEqual(area.y+area.h+.001);
   expect(Number(canvas.dataset.selfAvatarHeight)).toBeCloseTo(beforeHeight,1);
  }
+});
+
+function sceneMeshes() {
+ const meshes:any[]=[];rendered.scene.traverse((object:any)=>{if(object.geometry)meshes.push(object);});return meshes;
+}
+function avatarRoots() {
+ return rendered.scene.children.filter((object:any)=>object.children.some((child:any)=>child.geometry?.type==='RingGeometry'));
+}
+function doorGroup(slot:number) {
+ return rendered.scene.children.find((object:any)=>object.userData.target?.type==='door'&&object.userData.target.slot===slot);
+}
+function doorPlaque(group:any) {
+ return group.children.find((mesh:any)=>mesh.geometry?.parameters.width===.44);
+}
+function garmentMeshes(root:any) {
+ const meshes:any[]=[];root.traverse((mesh:any)=>{
+  const p=mesh.geometry?.parameters;
+  if(p&&(p.radiusTop===.205&&p.height===.43||p.width===.12&&p.height===.31&&p.depth===.14))meshes.push(mesh);
+ });return meshes;
+}
+function projectedDoor(container:HTMLElement,slot:number) {
+ const canvas=container.querySelector<HTMLCanvasElement>('canvas')!;
+ return JSON.parse(canvas.dataset.pickTargets!).find((entry:any)=>entry.target.type==='door'&&entry.target.slot===slot).target;
+}
+
+it('retains existing lounge geometry and shadows when a peer joins a vacant bedroom slot',()=>{
+ const f=speechFixture();f.snapshot.players=f.snapshot.players.slice(0,1);f.snapshot.durable.residents=f.snapshot.durable.residents.slice(0,1);
+ f.world.update(f.snapshot);f.step(0);
+ const scene=rendered.scene,meshes=sceneMeshes(),disposals=meshes.map(mesh=>vi.spyOn(mesh.geometry,'dispose'));
+ const light=scene.children.find((object:any)=>object.isDirectionalLight),shadowDispose=vi.spyOn(light.shadow,'dispose');
+ const door=doorGroup(1),plaque=doorPlaque(door),label=[...f.container.querySelectorAll<HTMLElement>('.door')].find(el=>el.textContent==='Room 2\nVacant')!;
+ const joined=structuredClone(f.snapshot),peer={...joined.players[0],id:'peer',name:'Morgan',colour:'rose',x:1};
+ joined.players.push(peer);joined.durable.residents.push({...peer,slot:1,bedroomId:'peer-room',open:true});
+ f.world.update(joined);f.step(100);
+ expect(disposals.every(dispose=>dispose.mock.calls.length===0)).toBe(true);
+ expect(shadowDispose).not.toHaveBeenCalled();expect(rendered.scene===scene).toBe(true);
+ expect(meshes.every(mesh=>sceneMeshes().includes(mesh))).toBe(true);
+ expect(doorGroup(1)===door).toBe(true);expect(doorPlaque(door)===plaque).toBe(true);
+ expect(label.textContent).toBe('Morgan\nDoor open');expect(label.getAttribute('aria-label')).toBe(label.textContent);
+ expect(plaque.material.color.getHexString()).toBe('c6999b');
+ expect(door.children.every((mesh:any)=>mesh.userData.target.roomId==='peer-room')).toBe(true);
+ expect(projectedDoor(f.container,1).roomId).toBe('peer-room');
+ expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(2);
+});
+
+it('refreshes resident labels, door targets and avatar colours in place, then removes only the departed avatar',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const scene=rendered.scene,door=doorGroup(1),plaque=doorPlaque(door),target=door.userData.target;
+ const floor=sceneMeshes()[0],floorDispose=vi.spyOn(floor.geometry,'dispose');
+ const roots=avatarRoots(),selfGarments=garmentMeshes(roots[0]),peerGarments=garmentMeshes(roots[1]);
+ expect(selfGarments).toHaveLength(3);expect(peerGarments).toHaveLength(3);
+ const changed=structuredClone(f.snapshot),fullName='<img src=x> Morgan';
+ Object.assign(changed.durable.residents[1],{name:fullName,colour:'rose',open:true,bedroomId:'replacement-room'});
+ Object.assign(changed.players[1],{name:fullName,colour:'rose'});
+ Object.assign(changed.durable.residents[0],{name:'Alex',colour:'blue'});Object.assign(changed.players[0],{name:'Alex',colour:'blue'});
+ f.world.update(changed);f.step(100);
+ expect(rendered.scene===scene).toBe(true);expect(avatarRoots()[1]===roots[1]).toBe(true);expect(floorDispose).not.toHaveBeenCalled();
+ expect(door.userData.target===target).toBe(true);expect(target.roomId).toBe('replacement-room');
+ expect(projectedDoor(f.container,1).roomId).toBe('replacement-room');
+ expect(plaque.material.color.getHexString()).toBe('c6999b');
+ expect(peerGarments.every(mesh=>mesh.material.color.getHexString()==='c6999b')).toBe(true);
+ expect(selfGarments.every(mesh=>mesh.material.color.getHexString()==='92aebb')).toBe(true);
+ expect(garmentMeshes(roots[2]).every(mesh=>mesh.material.color.getHexString()==='a5b49c')).toBe(true);
+ const doorLabel=[...f.container.querySelectorAll<HTMLElement>('.door')].find(el=>el.textContent===fullName+'\nDoor open')!;
+ expect(doorLabel.title).toBe(fullName+'\nDoor open');expect(doorLabel.getAttribute('aria-label')).toBe(doorLabel.title);expect(doorLabel.querySelector('img')).toBeNull();
+ expect(f.container.querySelector('.own-door')?.textContent).toBe('Alex\nYour room');
+ expect(f.container.querySelector<HTMLElement>('.house-avatar-name[data-player-id="p1"]')?.title).toBe(fullName+'\nCan chat');
+ const peerDisposals:any[]=[];roots[1].traverse((mesh:any)=>{if(mesh.geometry)peerDisposals.push(vi.spyOn(mesh.geometry,'dispose'));});
+ const departed=structuredClone(changed);departed.players=departed.players.filter((p:any)=>p.id!=='p1');departed.durable.residents=departed.durable.residents.filter((r:any)=>r.id!=='p1');
+ f.world.update(departed);f.step(200);
+ expect(rendered.scene===scene).toBe(true);expect(floorDispose).not.toHaveBeenCalled();expect(peerDisposals.every(dispose=>dispose.mock.calls.length===1)).toBe(true);
+ expect(avatarRoots()).not.toContain(roots[1]);expect(f.container.querySelector('[data-player-id="p1"]')).toBeNull();
+ expect(doorGroup(1)===door).toBe(true);expect(doorLabel.textContent).toBe('Room 2\nVacant');expect(plaque.material.color.getHexString()).toBe('d6cbb7');
+ expect(door.children.every((mesh:any)=>mesh.userData.target.roomId===undefined)).toBe(true);expect(projectedDoor(f.container,1).roomId).toBeUndefined();
+ const moved=structuredClone(departed);moved.durable.residents.find((r:any)=>r.id==='p0').slot=1;
+ f.world.update(moved);f.step(300);
+ expect(doorLabel.classList.contains('own-door')).toBe(true);expect(doorLabel.textContent).toBe('Alex\nYour room');
+ expect(f.container.querySelectorAll('.own-door')).toHaveLength(1);expect(projectedDoor(f.container,0).roomId).toBeUndefined();
+});
+
+it('rebuilds geometry for room, capacity and privacy changes and clears prior zone content',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const loungeScene=rendered.scene,loungeDispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose');
+ const room=structuredClone(f.snapshot);room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';
+ room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};
+ room.players[0].zoneId='room0';room.players[1].zoneId='room0';
+ f.world.update(room);f.step(100);
+ expect(rendered.scene===loungeScene).toBe(false);expect(loungeDispose).toHaveBeenCalledTimes(1);
+ expect(f.container.querySelectorAll('.door,.own-door')).toHaveLength(0);expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(2);
+ expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toHaveLength(0);
+ const roomScene=rendered.scene,roomDispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose');
+ const renamed=structuredClone(room);renamed.durable.residents[0].name='Updated owner';renamed.players[0].name='Updated owner';
+ f.world.update(renamed);f.step(200);
+ expect(rendered.scene===roomScene).toBe(true);expect(roomDispose).not.toHaveBeenCalled();expect(f.container.querySelector('.room')?.textContent).toBe("Updated owner's room");
+ const closed=structuredClone(renamed);closed.durable.room.open=false;closed.durable.room.revision=2;
+ f.world.update(closed);f.step(300);expect(rendered.scene===roomScene).toBe(false);expect(roomDispose).toHaveBeenCalledTimes(1);
+ const changed=structuredClone(f.snapshot);changed.durable.house.capacity=2;changed.durable.residents=changed.durable.residents.slice(0,2);changed.players=changed.players.slice(0,2);
+ f.world.update(changed);f.step(400);expect(f.container.querySelectorAll('.door,.own-door')).toHaveLength(2);expect(f.container.querySelector('.room')).toBeNull();
+ const capacityScene=rendered.scene,capacityDispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose');
+ f.world.update(null);expect(capacityDispose).toHaveBeenCalledTimes(1);expect(f.container.querySelectorAll('.house-avatar-name,.door,.own-door,.room')).toHaveLength(0);
+ expect(f.container.querySelector('canvas')?.hasAttribute('data-pick-targets')).toBe(false);
+ f.world.update(changed);f.step(500);expect(rendered.scene===capacityScene).toBe(false);expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(2);
+});
+
+it.each(['serverEpoch','house','self','access','generation','stream'] as const)('rebuilds the scene across a direct %s lifecycle change in the same zone',kind=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const scene=rendered.scene,dispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose'),changed=structuredClone(f.snapshot);
+ if(kind==='serverEpoch')changed.serverEpoch='next-epoch';
+ if(kind==='house')changed.durable.house.id='next-house';
+ if(kind==='self')changed.durable.selfId='p1';
+ if(kind==='access')changed.accessGeneration=2;
+ if(kind==='generation')changed.generation=2;
+ if(kind==='stream')changed.durable.streamId='replacement-stream';
+ f.world.update(changed);f.step(100);expect(rendered.scene===scene).toBe(false);expect(dispose).toHaveBeenCalledTimes(1);
+ if(kind==='self')expect(f.container.querySelector('.own-door')?.textContent).toBe('Friend 1\nYour room');
+});
+
+it('keeps static resources across player motion, availability and disconnect while retaining the permanent room owner',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const scene=rendered.scene,door=doorGroup(1),roots=avatarRoots();
+ const floorDispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose');
+ const shadowDispose=vi.spyOn(scene.children.find((object:any)=>object.isDirectionalLight).shadow,'dispose');
+ const moved=structuredClone(f.snapshot);Object.assign(moved.players[1],{x:1,z:3,heading:1,animation:'walk',availability:'quiet'});
+ f.world.update(moved);f.step(100);
+ expect(rendered.scene===scene).toBe(true);expect(avatarRoots()[1]===roots[1]).toBe(true);
+ expect(f.container.querySelector<HTMLElement>('.house-avatar-name[data-player-id="p1"]')?.title).toBe('Friend 1\nQuiet');
+ const offline=structuredClone(moved);offline.players[1].connected=false;
+ f.world.update(offline);f.step(200);
+ expect(avatarRoots()).not.toContain(roots[1]);expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(5);
+ expect(doorGroup(1)===door).toBe(true);expect(door.userData.target.roomId).toBe('room1');
+ expect([...f.container.querySelectorAll('.door')].some(el=>el.textContent==='Friend 1\nDoor closed')).toBe(true);
+ const online=structuredClone(offline);online.players[1].connected=true;
+ f.world.update(online);f.step(300);
+ expect(rendered.scene===scene).toBe(true);expect(floorDispose).not.toHaveBeenCalled();expect(shadowDispose).not.toHaveBeenCalled();
+ expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(6);expect(avatarRoots()).not.toContain(roots[1]);
+});
+
+it('updates an active speech speaker after a resident rename without replacing the bubble or replaying history',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const chatting=structuredClone(f.snapshot);chatting.durable.sequence=1;
+ chatting.durable.chat=[{id:'fresh',authorId:'p1',name:'Friend 1',text:'A next step',at:0,sequence:1}];
+ f.world.update(chatting);f.step(100);
+ const bubble=f.visible().find(el=>el.dataset.playerId==='p1')!,scene=rendered.scene;
+ expect(bubble.getAttribute('aria-label')).toBe('Friend 1: A next step. Full message in Chat.');
+ const renamed=structuredClone(chatting);renamed.durable.residents[1].name='<script>Morgan';renamed.players[1].name='<script>Morgan';
+ f.world.update(renamed);f.step(200);
+ expect(rendered.scene===scene).toBe(true);expect(f.visible()).toContain(bubble);expect(bubble.dataset.messageId).toBe('fresh');
+ expect(bubble.getAttribute('aria-label')).toBe('<script>Morgan: A next step. Full message in Chat.');
+ expect(bubble.firstElementChild?.firstElementChild?.textContent).toBe('<script>Morgan');expect(bubble.querySelector('script')).toBeNull();
+ f.step(4100);expect(f.visible()).toHaveLength(0);
+});
+
+it.each(['id','ownerId','revision','open','palette','placements'] as const)('rebuilds actual bedroom geometry for a direct room %s change',field=>{
+ const f=speechFixture(),room=structuredClone(f.snapshot);
+ room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';
+ room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};
+ for(const player of room.players)player.zoneId='room0';
+ f.world.update(room);f.step(0);
+ const scene=rendered.scene,dispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose'),changed=structuredClone(room);
+ if(field==='id')changed.durable.room.id='replacement-room';
+ if(field==='ownerId')changed.durable.room.ownerId='p1';
+ if(field==='revision')changed.durable.room.revision=2;
+ if(field==='open')changed.durable.room.open=false;
+ if(field==='palette')changed.durable.room.palette='rose';
+ if(field==='placements')changed.durable.room.placements=[{id:'plant',kind:'plant',x:2,z:1,rotation:0,colour:'sage'}];
+ f.world.update(changed);f.step(100);
+ expect(rendered.scene===scene).toBe(false);expect(dispose).toHaveBeenCalledTimes(1);
+ expect(f.container.querySelectorAll('.door,.own-door')).toHaveLength(0);
+ if(field==='ownerId')expect(f.container.querySelector('.room')?.textContent).toBe("Friend 1's room");
+ if(field==='placements')expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toEqual([expect.objectContaining({target:{type:'placement',id:'plant'}})]);
+});
+
+
+it.each(['replace','remove'] as const)('cancels only a queued door approach when its bedroom occupant changes: %s',change=>{
+ const interact=vi.fn(),f=speechFixture(390,844,{onInteract:interact}),target=createLayout(6).doors[1].target;
+ Object.assign(f.snapshot.players[0],target);f.world.update(f.snapshot);
+ expect(f.world.approach({type:'door',slot:1})).toBe(true);
+ const changed=structuredClone(f.snapshot);
+ if(change==='replace')Object.assign(changed.durable.residents[1],{id:'replacement',name:'New peer',bedroomId:'new-room'});
+ else changed.durable.residents=changed.durable.residents.filter((resident:any)=>resident.slot!==1);
+ f.world.update(changed);
+ for(let time=0;time<=1000;time+=100)f.step(time);
+ expect(interact).not.toHaveBeenCalled();expect(f.world.getPosition()).toEqual(target);
+});
+
+it('keeps a queued door approach across changes to the same occupant name, colour and door state',()=>{
+ const interact=vi.fn(),f=speechFixture(390,844,{onInteract:interact}),target=createLayout(6).doors[1].target;
+ Object.assign(f.snapshot.players[0],target);f.world.update(f.snapshot);
+ expect(f.world.approach({type:'door',slot:1})).toBe(true);
+ const changed=structuredClone(f.snapshot);
+ Object.assign(changed.durable.residents[1],{name:'Morgan',colour:'rose',open:true});
+ Object.assign(changed.players[1],{name:'Morgan',colour:'rose'});
+ f.world.update(changed);
+ for(let time=0;time<=1000;time+=100)f.step(time);
+ expect(interact).toHaveBeenCalledExactlyOnceWith({type:'door',slot:1,roomId:'room1'});
 });
