@@ -1,10 +1,13 @@
-# Latest publication gate: RSS headroom open
+# Current acceptance: verified allocation release
 
-Docs-only `bef0fb8`, CI `37605048981`, fails only the 210 MiB resource RSS bound
-at 212.363 MiB. All other resource gates pass. The prior checked release below
-remains deployed and valid for its recorded attempt; it does not close the latest
-failure. A controlled Node runtime budget comparison is underway, preserving all
-acceptance criteria and applying any adopted policy to production and testing.
+Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` pass actual CI
+`37717775859` at `aee040c`: 498 checks, nine native cases, all unchanged 300-second
+resource gates, backups, deployment and affected live board flows. Read
+[the current allocation evidence](docs/implementation/ASSET-ALLOCATION-EVIDENCE.md)
+and [exact results](evaluation/movement-reconciliation.results.json).
+The RSS failure and invalid runtime comparison remain preserved; physical/human/
+coverage/student-writing limits remain explicit. Final evidence publication has
+unchanged runtime. Earlier sections describe their own source checkpoints.
 
 # Current acceptance: verified movement and evaluator release
 

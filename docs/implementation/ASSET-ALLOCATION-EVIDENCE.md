@@ -1,3 +1,17 @@
+# Current release: verified image allocation refinement
+
+8 October 2026. Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` are
+verified at `aee040c` by [CI 37717775859](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37717775859).
+All 498 checks, nine image browser cases, 300-second resource gates, process and
+secret checks, backups, deployment and HTTPS smoke pass. Root verifies seven
+deployed source hashes and affected live board cases at 9.7 and 3.4 seconds.
+[Exact results](../../evaluation/movement-reconciliation.results.json) and the
+[resource artifact](../../evaluation/board-resource.asset-ci.results.json) bind
+202.54 MiB peak RSS, 9.282 ms normal p95, all 24 transports, zero skips/missing
+targets/unexpected disconnects and full recovery. Earlier failures and diagnostic
+limitations remain history. Final evidence publication keeps runtime bytes
+unchanged and receives its own CI result before completion.
+
 # Board image allocation refinement
 
 8 October 2026. Source `da3d7ec` changes only the board store and its allocation
@@ -76,3 +90,26 @@ metadata is additional. Every workload, timing, memory, queue, input and recover
 criterion stays mandatory. Node launch arguments are unchanged. Next: actual
 approved CI, full 300-second resource gate, backup/deploy and affected live-board
 source/flows. The deployed prior gameplay proof remains its own scope.
+
+## Actual full and deployed verification
+
+CI37717775859 at aee040c passes all gates for300.002s, with202.5390625MiB peak
+RSS, normalp959.282ms,7188patches/skips0,708chat, no normal-input rejects/missing targets/
+unexpected disconnects and24finaltransports. Root verifies artifactfb49546c,
+protocol9acf2031, manifestf9d4ad86 and every backend/instrument hash.
+This establishes the registered attempt; it does not prove the earlier failure's
+sole cause or a general memory/reliability improvement.
+
+Probe2026-10-08T02:38:03.540Z matches seven source files, Node24.21.0 and one
+sharedCPU/256MB/data mount;102228KiB appRSS is one moment, cgroup telemetry null.
+Actual HTTPS boardcore9.7s andfull-house recovery3.4s pass on the changed store.
+Game sources are unchanged; previous scoped livecore/room proof and current
+nine-case image gate remain valid. Physical-device/human, sustained actualFly
+load, WAN impairment andoff-volume restore remain not run; overall board-unit
+coverage and student reflection limitations are unchanged.
+
+Final evidence review caught reference aliasing in the reconstructed historical
+release entry: current live fields had been copied into the older release record.
+Root restored that entry from the immutable committed aee040c snapshot, compared
+all three remote/resource/live fields for exact equality, and kept the seven-file
+current probe separate. This is an evidence correction, not an application change.

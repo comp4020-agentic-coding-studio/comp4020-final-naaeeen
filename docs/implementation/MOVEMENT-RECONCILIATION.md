@@ -1,3 +1,17 @@
+# Current release: verified image allocation refinement
+
+8 October 2026. Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` are
+verified at `aee040c` by [CI 37717775859](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37717775859).
+All 498 checks, nine image browser cases, 300-second resource gates, process and
+secret checks, backups, deployment and HTTPS smoke pass. Root verifies seven
+deployed source hashes and affected live board cases at 9.7 and 3.4 seconds.
+[Exact results](../../evaluation/movement-reconciliation.results.json) and the
+[resource artifact](../../evaluation/board-resource.asset-ci.results.json) bind
+202.54 MiB peak RSS, 9.282 ms normal p95, all 24 transports, zero skips/missing
+targets/unexpected disconnects and full recovery. Earlier failures and diagnostic
+limitations remain history. Final evidence publication keeps runtime bytes
+unchanged and receives its own CI result before completion.
+
 # Verified movement and evaluator release
 
 Runtime `5c40545` and evaluator `e54a694` are verified at `daef80c` by

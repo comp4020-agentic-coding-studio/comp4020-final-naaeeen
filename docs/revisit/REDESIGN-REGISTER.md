@@ -114,3 +114,10 @@ SuspendedhostinvalidatesprivateNodebudgetpair andcandidatehadsubstantivefailures
 notadopted. Actualsourceallocationfixda3d7ec hasmeaningful2RED/26GREEN, nativeSQLite
 ownership andfreshreview; root498/28 pluscurrentnativeboard2PASS. FullCI/resource/
 deploy/live remainpending; currentASSET-ALLOCATION-EVIDENCE scopes the refinement.
+
+R4 currentallocationrelease VERIFIED at aee/CI37717775859:498/28,native9, all
+300.002s resourcegates, backup/deploy/HTTPS, sevendeployedsourcehashes andchanged
+liveboard9.7/3.4PASS. RSS202.54/p959.282 withzero skips/missing/disconnects.
+EarlierRSSFAIL/invalidmemorycomparison kept; no Nodeflags orcriteriachanged.
+CurrentASSET-ALLOCATION-EVIDENCE isauthoritativeforthisnewsource. Finalrecords
+publication getsownactualCI; no recursive status-only commits.

@@ -1,3 +1,32 @@
+# Current release verified; final evidence publication checkpoint
+
+8Oct2026 canonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen.
+Storeda3d7ec/motion5c/evaluator e54 verifiedataee040c byCI37717775859 SUCCESS:
+498/28, native9, allresource300.002s gates, process/secrets/privatebackup/deploy/
+HTTPS PASS. Resourceartifactfb49546c, protocol9acf2031, manifestf9d4ad86, script
+ ec3301bf match; RSS202.54MiB,p959.282ms,24views,7188patches/skips0,pending0/
+disconnect0. ExactPASSasset-ci artifact andnewclosureJSON committed-next.
+
+Seven deployedsourcehashes includingstore8612adba match; probeOct8T02:38:03.540Z
+Node24.21.0/sharedCPU1/256MB/data; appRSS102228KiB singlepoint,cgroupnull. Actual
+changed liveboardcore9.7/recovery3.4PASS. Motion/world/UI/server unchanged; prior
+scoped livegame19.2/room30.9 andcurrentimage9PASSretained. Physical/human/WAN/
+physicalstress/offvolume/overallboardcoverage/studentwriting limits unchanged.
+
+Sourceasset tests2RED/26GREEN +actualSQLiteownership/lifetime +freshreview;
+root498required/currentnativeboard2PASS. Node8prototypecrossedhostsleep:
+invalidpair/unpaireddiagnosticfailedinteractiongates, NOTADOPTED. No Nodeflag or
+acceptancechange. RSSFAIL376050 +protocolv2 andallolderfailures preserved.
+Originalpreview4093 DATA_DIRexact.local/implementation-s1 session97222 alive;
+no tests/GPU/load/workerwrites running. Frozencrit8/checkpointrefs unchanged.
+
+Nextroot: boundedfinalevidencecheck, commit+approvedpush recordsONLY; inspect
+thatfinalCI once. IfPASS andsourceunchanged, markgoalcomplete/reportconciseEnglish
+links; do NOT recursivelycommitto restatePASS. Ifa newfailure, preserveit and
+reopenactualaffectedgate ratherthanwaivingcriteria/replayinginvalidtrials.
+
+# Historical source-specific checkpoints
+
 # Asset allocation refinement: local pass, release pending
 
 8 October. Runtime/store commit da3d7ec removes unused BLOB selection and an extra
