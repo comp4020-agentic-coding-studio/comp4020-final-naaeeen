@@ -6,7 +6,8 @@
   "durationSeconds": 300,
   "automaticRetry": false,
   "sourceHashes": {
-    "package.json": "23f2af5f0d0997145ebf8387f58b02096c3b657f04594d73feaa602322bc37d6",
+    "Dockerfile": "86ee51730010c69a9550d7ac7a0096d93b2dc5209dfbf56a6c69593cee19c653",
+    "package.json": "2722f5108aea6f172fba62c12e9ae86f9507c2acb06508b222fe61d155c5108f",
     "pnpm-lock.yaml": "00daf7036a60683951034eb4fefd87bf09436353300eca61aab8338ddbacfedd",
     "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
     "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
@@ -16,11 +17,12 @@
     "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
     "src/house-realtime.ts": "f25be21c47d6b10cb266e93560d67d41627f4579c9a2ac1be12225415bef25dc",
     "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "src/server-runtime.ts": "c477688c95d2afea42726f2cb970f17f904f5df653ffdb0875995d33fce46aad",
     "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
   },
-  "sourceManifestSHA256": "f9d4ad86f7800e2f26d288c09aaaf47852c2fb935c86327bdf1633e091bb25bc",
-  "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
+  "sourceManifestSHA256": "5a4351029bf50095cf046e04f390795c054c3ff58d5c70e644d14097d4d42b30",
+  "instrumentSHA256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0",
   "configuration": {
     "houses": 2,
     "membersPerHouse": 6,
@@ -143,5 +145,15 @@
     "previousProtocolSHA256": "98e62217a1b8482ba18e8005993888895f6231ee71af514db157ec298b29fe23",
     "change": "Metadata-only existing asset lookup; exactly bounded view of independently owned native SQLite BLOB. Node flags, workload and every acceptance criterion unchanged.",
     "evidence": "Node24.21.0 primary implementation, native lifetime/isolation controls and fresh review; sustained RSS benefit not yet verified."
+  },
+  "serverRuntimeRevision": {
+    "registeredAtUTC": "2026-10-08T03:04:34.827663+00:00",
+    "previousProtocolSHA256": "9acf203180c28d6a30c5ba04b94b28c631c00271c334cede9a1b66cb278b3590",
+    "serverNodeArgs": [
+      "--max-semi-space-size=8"
+    ],
+    "generatorNodeArgs": [],
+    "change": "Explicit server-only young-generation capacity applied equally to Docker/pnpm start/resource child; old-space, APIs and all criteria unchanged.",
+    "qualification": "PROVISIONAL; prior interrupted/unpaired private trial does not qualify it. Prospective full controlled CI and live flows must pass."
   }
 }

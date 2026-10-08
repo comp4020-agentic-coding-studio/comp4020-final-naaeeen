@@ -22,4 +22,4 @@ COPY src/ ./src/
 COPY public/ ./public/
 COPY --from=build /app/public/board-assets ./public/board-assets
 EXPOSE 8080
-CMD ["node", "src/server.ts"]
+CMD ["node", "--max-semi-space-size=8", "src/server.ts"]

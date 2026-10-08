@@ -8,7 +8,7 @@
     "check": "pnpm build:board && pnpm typecheck && pnpm test",
     "check:evidence": "node scripts/check-evidence.ts",
     "test": "vitest run",
-    "start": "node src/server.ts",
+    "start": "node --max-semi-space-size=8 src/server.ts",
     "test:domain": "vitest run --config vitest.domain.config.ts",
     "test:browser": "playwright test",
     "test:house": "vitest run --config vitest.house.config.ts",

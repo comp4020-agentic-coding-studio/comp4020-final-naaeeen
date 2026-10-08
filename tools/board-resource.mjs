@@ -1,5 +1,6 @@
 /** Registered LOCAL SYNTHETIC combined resource exercise. */
 import { fork } from "node:child_process";
+import { SERVER_NODE_ARGS } from "../src/server-runtime.ts";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -249,7 +250,7 @@ async function run() {
         fail("PARENT_GO_REQUIRED");
     const startedAt = new Date().toISOString(), dir = join(root, ".local/board-resource", startedAt.replaceAll(":", "-") + "-" + randomUUID());
     mkdirSync(join(dir, "data"), { recursive: true });
-    const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash], { cwd: root, silent: true, execArgv: [], env: { ...process.env, NODE_ENV: "test" } });
+    const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash], { cwd: root, silent: true, execArgv: [...SERVER_NODE_ARGS], env: { ...process.env, NODE_ENV: "test" } });
     let origin, runtime, lastSample, phase = "startup", failure = null, closing = false, running = false, start = 0, end = 0, unexpectedDisconnects = 0, scopeErrors=0, staleFramesIgnored=0, stderrBytes = 0, stdoutBytes = 0;
     const httpCounts = new Map();
     const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), pendingByView = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
