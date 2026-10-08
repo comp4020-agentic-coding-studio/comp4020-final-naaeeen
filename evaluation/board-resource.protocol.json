@@ -11,7 +11,7 @@
     "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
     "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
     "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
-    "src/board-store.ts": "73df2046445a22c32de533959734eeddc5e33fb6550e2a59868f31f7d71e54b3",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
     "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
     "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
     "src/house-realtime.ts": "f25be21c47d6b10cb266e93560d67d41627f4579c9a2ac1be12225415bef25dc",
@@ -19,7 +19,7 @@
     "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
   },
-  "sourceManifestSHA256": "545d79c3ea7d85addc95242b26232c8ec0b53bb50cb9a1b0b7387bf3bc937cd7",
+  "sourceManifestSHA256": "f9d4ad86f7800e2f26d288c09aaaf47852c2fb935c86327bdf1633e091bb25bc",
   "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
   "configuration": {
     "houses": 2,
@@ -137,5 +137,11 @@
     "previousInstrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
     "change": "Per-view unresolved delivery index; full delivery ledger, observation semantics, scheduling, bounds and workload criteria preserved.",
     "review": "Fresh no-history source review; exact equivalence/negative controls and technical operation-count comparison. Full resource performance not yet verified."
+  },
+  "assetAllocationRevision": {
+    "registeredAtUTC": "2026-10-08T02:22:27.966765+00:00",
+    "previousProtocolSHA256": "98e62217a1b8482ba18e8005993888895f6231ee71af514db157ec298b29fe23",
+    "change": "Metadata-only existing asset lookup; exactly bounded view of independently owned native SQLite BLOB. Node flags, workload and every acceptance criterion unchanged.",
+    "evidence": "Node24.21.0 primary implementation, native lifetime/isolation controls and fresh review; sustained RSS benefit not yet verified."
   }
 }

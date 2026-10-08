@@ -267,7 +267,7 @@ export class BoardStore {
             const digest = createHash("sha256").update(bytes).digest("hex");
             return this.mutate(actorId, id, { type: "asset", id, houseId, file: { id: fileId, mimeType, digest } }, () => {
                 this.ensure(houseId);
-                const prior = this.prepared("SELECT id,mime_type,created,bytes,digest FROM assets WHERE house_id=? AND id=?").get(houseId, fileId) as AssetRow | undefined;
+                const prior = this.prepared("SELECT mime_type,digest FROM assets WHERE house_id=? AND id=?").get(houseId, fileId) as Pick<AssetRow, "mime_type" | "digest"> | undefined;
                 if (prior && (prior.digest !== digest || prior.mime_type !== mimeType))
                     boardFail("ID_REUSED", "An image ID already contains different bytes.");
                 if (!prior) {
@@ -295,8 +295,9 @@ export class BoardStore {
         try {
             boardUuid(houseId);
             boardId(fileId);
-            const r = this.prepared("SELECT mime_type,bytes FROM assets WHERE house_id=? AND id=?").get(houseId, fileId) as AssetRow | undefined;
-            return r ? { mimeType: r.mime_type, bytes: Buffer.from(r.bytes) } : undefined;
+            const r = this.prepared("SELECT mime_type,bytes FROM assets WHERE house_id=? AND id=?").get(houseId, fileId) as Pick<AssetRow, "mime_type" | "bytes"> | undefined;
+            // node:sqlite returns independently owned BLOB storage; retain its exact view.
+            return r ? { mimeType: r.mime_type, bytes: Buffer.from(r.bytes.buffer, r.bytes.byteOffset, r.bytes.byteLength) } : undefined;
         }
         catch (e) {
             return storageError(e);

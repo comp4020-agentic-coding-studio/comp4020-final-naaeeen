@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { BoardStore } from "../src/board-store.ts";
 export function shape(id = "shape_a", changes: Record<string, unknown> = {}) {
     return { id, type: "rectangle", x: 0, y: 0, width: 100, height: 80, angle: 0, strokeColor: "#1e1e1e", backgroundColor: "transparent", fillStyle: "solid", strokeWidth: 2, strokeStyle: "solid", roughness: 1, opacity: 100, seed: 1, version: 1, versionNonce: 100, index: "a0", isDeleted: false, groupIds: [], frameId: null, boundElements: null, updated: 1000, link: null, locked: false, roundness: null, ...changes };
@@ -13,6 +13,7 @@ const cleanups: (() => void)[] = [];
 afterEach(() => {
     for (const cleanup of cleanups.splice(0).reverse())
         cleanup();
+    vi.restoreAllMocks();
 });
 function fixture() {
     const path = mkdtempSync(join(tmpdir(), "board-store-"));
@@ -238,6 +239,69 @@ describe("durable board authority", () => {
         expect(restarted.isOwnAsset(f.actorId, f.houseId, "restart-image")).toBe(true);
         expect(restarted.isOwnAsset(randomUUID(), f.houseId, "restart-image")).toBe(false);
         expect(restarted.getAsset(f.houseId, "missing")).toBeUndefined();
+    });
+    test("checks existing image metadata without materializing its near-limit BLOB", () => {
+        const f = fixture(), png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=", "base64");
+        // Ancillary text enlarges a valid PNG while retaining its original raster.
+        const text = Buffer.alloc(1900 * 1024 + 12, 120);
+        text.writeUInt32BE(text.length - 12);
+        text.write("tEXt", 4, "ascii");
+        text.write("allocation\0", 8, "ascii");
+        text.writeUInt32BE(crc32(text.subarray(4, -4)), text.length - 4);
+        const bytes = Buffer.concat([png.subarray(0, -12), text, png.subarray(-12)]);
+        const upload = () => ({ id: randomUUID(), houseId: f.houseId, file: { id: "large-metadata", mimeType: "image/png", dataURL: "data:image/png;base64," + bytes.toString("base64") } });
+        const metadataReads: Record<string, unknown>[] = [], nativePrepare = f.store.db.prepare.bind(f.store.db);
+        vi.spyOn(f.store.db, "prepare").mockImplementation(sql => {
+            const statement = nativePrepare(sql), nativeGet = statement.get.bind(statement);
+            vi.spyOn(statement, "get").mockImplementation((...args) => {
+                const row = nativeGet(...args);
+                if (row && Object.hasOwn(row, "digest")) metadataReads.push(row);
+                return row;
+            });
+            return statement;
+        });
+        const first = f.store.asset(f.actorId, upload()), duplicate = f.store.asset(f.actorId, upload());
+        expect(duplicate.file).toEqual(first.file);
+        expect(duplicate.sequence).toBe(first.sequence);
+        expect(metadataReads).toHaveLength(1);
+        expect(Object.hasOwn(metadataReads[0]!, "bytes")).toBe(false);
+        expect(f.store.getAsset(f.houseId, "large-metadata")!.bytes.equals(bytes)).toBe(true);
+    });
+    test("adapts only a SQLite byte view's bounded backing storage without another allocation", () => {
+        const f = fixture(), backing = Uint8Array.from([201, 202, 203, 204, 205, 0, 255, 17, 128, 0, 42, 9, 13, 206, 207]);
+        const bytes = backing.subarray(5, 13), statement = f.store.db.prepare("SELECT 1");
+        vi.spyOn(statement, "get").mockReturnValue({ mime_type: "image/png", bytes });
+        vi.spyOn(f.store.db, "prepare").mockReturnValue(statement);
+        const asset = f.store.getAsset(f.houseId, "bounded-view")!;
+        expect(Buffer.isBuffer(asset.bytes)).toBe(true);
+        expect(asset.mimeType).toBe("image/png");
+        expect([...asset.bytes]).toEqual([0, 255, 17, 128, 0, 42, 9, 13]);
+        expect(asset.bytes.buffer === bytes.buffer).toBe(true);
+        expect(asset.bytes.byteOffset).toBe(bytes.byteOffset);
+        expect(asset.bytes.byteLength).toBe(bytes.byteLength);
+        asset.bytes.fill(7);
+        expect([...backing.subarray(0, 5)]).toEqual([201, 202, 203, 204, 205]);
+        expect([...backing.subarray(13)]).toEqual([206, 207]);
+    });
+    test("keeps native SQLite BLOB results alive and download mutations separate from persisted bytes", () => {
+        const f = fixture(), valid = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=", "base64");
+        f.store.asset(f.actorId, { id: randomUUID(), houseId: f.houseId, file: { id: "owned-blob", mimeType: "image/png", dataURL: "data:image/png;base64," + valid.toString("base64") } });
+        const statement = f.store.db.prepare("SELECT bytes FROM assets WHERE house_id=? AND id=?");
+        const native = statement.get(f.houseId, "owned-blob")!.bytes as Uint8Array;
+        const nextNative = statement.get(f.houseId, "owned-blob")!.bytes as Uint8Array;
+        expect(native).toBeInstanceOf(Uint8Array);
+        expect(native.buffer).not.toBe(nextNative.buffer);
+        const first = f.store.getAsset(f.houseId, "owned-blob")!, second = f.store.getAsset(f.houseId, "owned-blob")!;
+        first.bytes[0] = 0;
+        const mutated = Buffer.from(valid); mutated[0] = 0;
+        f.store.chat(f.actorId, "Ada", { id: randomUUID(), houseId: f.houseId, text: "Later database work" });
+        f.store.snapshot(f.houseId);
+        expect(f.store.getAsset(f.houseId, "owned-blob")!.bytes.equals(valid)).toBe(true);
+        f.store.close();
+        expect([...native]).toEqual([...valid]);
+        expect([...nextNative]).toEqual([...valid]);
+        expect(second.bytes.equals(valid)).toBe(true);
+        expect(first.bytes.equals(mutated)).toBe(true);
     });
     test("accepts bounded JPEG/WebP headers and rejects unsupported, truncated or animated formats", () => {
         const f = fixture(), upload = (id: string, mimeType: string, bytes: Buffer) => f.store.asset(f.actorId, { id: randomUUID(), houseId: f.houseId, file: { id, mimeType, dataURL: `data:${mimeType};base64,` + bytes.toString("base64") } });
