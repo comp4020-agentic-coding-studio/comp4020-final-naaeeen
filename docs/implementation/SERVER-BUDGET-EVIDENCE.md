@@ -1,3 +1,18 @@
+# Current release: verified 16 MiB server policy
+
+8 October 2026. Source `d2dcf5f` with the prior motion/board refinements is verified
+at `2723796` by [CI 37722868698](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37722868698).
+All 504 checks, nine image browser cases, unchanged 300-second resource gates,
+process/secret checks, backups, deployment and HTTPS smoke pass. Root verifies
+all eight deployed source hashes and the actual server flag. Four current live
+journeys pass: game 21.4s, rooms/DIY/access 33.6s, board 8.8s and recovery 3.0s.
+[Exact results](../../evaluation/movement-reconciliation.results.json) and the
+[full resource artifact](../../evaluation/board-resource.semi16-ci.results.json)
+bind 202.17 MiB peak RSS, 6.757 ms normal p95, zero skips/missing targets/unexpected
+disconnects and all 24 transports. Earlier failures and invalid diagnostics remain
+history. Final evidence publication keeps runtime bytes unchanged and receives
+its own CI result before completion.
+
 # Prospective server young-generation budget
 
 8 October 2026. Source `4e83db6`. This is a provisional runtime policy, requiring
@@ -87,3 +102,22 @@ and labelled contextual parameter recheck pass. Root504/29 required checks and
 local budgeted board7.8s/recovery2.1s/game15.6s pass. The tool itself is unchanged.
 Prospective full300s actualCI, deployment gating and affectedlive checks remain
 required; the previous structural review is not renamed as another fresh trial.
+
+## Accepted controlled and deployed result
+
+Full CI37722868698 at2723796 passes every original gate for300s: server flags
+exactlysemi16, RSS202.171875MiB, heap36.799766540527344MiB, normalp956.757ms,
+7188patches/skips0,708chat, pointer18.757–18.897Hz, no normal-input rejection or
+timeout, no pending/unexpecteddisconnect and24finaltransports. Protocol4f8feadb,
+manifestdaec2567, instrument7cce6f96 and every source hash match. Root downloads
+artifactb07a8915 and verifies its literal all-true gates. The configured16policy
+qualifies for this workload; it is not an optimality or universal reliability claim.
+GitHub instances/fixed order are not a matched causal performance study.
+
+After deployment, probe2026-10-08T03:39:01.833Z verifies eight code files and the
+actual server16 argument, Node24.21.0/sharedCPU1/256MB/data mount. AppRSS103920KiB
+is one moment; cgroup telemetry unavailable. Actual HTTPS game21.4s, room/DIY/
+access33.6s, board8.8s and full-house recovery3.0s pass. Existing physical/human/
+sustainedFly/WAN/off-volume/overallboardcoverage/student-writing limits remain.
+Historical release records are copied from immutable snapshots or deep copies;
+current live evidence never overwrites older release attribution.

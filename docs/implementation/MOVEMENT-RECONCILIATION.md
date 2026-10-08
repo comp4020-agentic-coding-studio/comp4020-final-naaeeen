@@ -1,3 +1,18 @@
+# Current release: verified 16 MiB server policy
+
+8 October 2026. Source `d2dcf5f` with the prior motion/board refinements is verified
+at `2723796` by [CI 37722868698](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37722868698).
+All 504 checks, nine image browser cases, unchanged 300-second resource gates,
+process/secret checks, backups, deployment and HTTPS smoke pass. Root verifies
+all eight deployed source hashes and the actual server flag. Four current live
+journeys pass: game 21.4s, rooms/DIY/access 33.6s, board 8.8s and recovery 3.0s.
+[Exact results](../../evaluation/movement-reconciliation.results.json) and the
+[full resource artifact](../../evaluation/board-resource.semi16-ci.results.json)
+bind 202.17 MiB peak RSS, 6.757 ms normal p95, zero skips/missing targets/unexpected
+disconnects and all 24 transports. Earlier failures and invalid diagnostics remain
+history. Final evidence publication keeps runtime bytes unchanged and receives
+its own CI result before completion.
+
 # Current release: verified image allocation refinement
 
 8 October 2026. Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` are

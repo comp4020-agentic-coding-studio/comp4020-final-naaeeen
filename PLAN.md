@@ -1,12 +1,13 @@
-# Latest gate: consistent server allocation budget under test
+# Current acceptance: verified game, board and server policy
 
-Docs-only `18a2cfe`, CI `37719301016`, fails solely on peak RSS (216.191 MiB
-against 210). All interaction, workload and recovery gates pass. The previous
-allocation release below remains deployed and verified for its attempt.
-A prospective 8 MiB server semi-space policy will be tested on the controlled CI
-host, applied identically to production and resource child, with the generator
-unflagged. The earlier WSL diagnostic remains invalid/unqualified; it is not
-used as an A/B win or performance proof. Every existing acceptance criterion stays.
+Source `d2dcf5f` passes actual CI `37722868698` at `2723796`: 504 checks, nine
+native cases, every unchanged 300-second resource criterion, backups and release.
+Eight deployed source hashes, the actual 16 MiB server flag and four affected
+live journeys pass. Read [current release evidence](docs/implementation/SERVER-BUDGET-EVIDENCE.md)
+and [exact results](evaluation/movement-reconciliation.results.json).
+The 8 MiB failure, RSS failures and invalid interrupted comparison remain scoped
+history. Physical/human/coverage/student-writing gaps remain explicit. Final
+evidence publication has unchanged runtime and receives its separate CI result.
 
 # Current acceptance: verified allocation release
 

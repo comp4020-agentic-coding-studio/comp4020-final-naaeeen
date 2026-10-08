@@ -127,3 +127,10 @@ server-onlyyoung8policy, notqualificationfrominvalidWSLpair. Launchcoupling/
 actualflag probes, freshreview, parent504/29 andlocalnative3PASS; fullcontrolled
 CIandlive stillrequired. Canonicalmanifestcaughtunsortednewentry beforeload;
 rootfixedsorting/sourcebindings whilekeepingallfreeze/acceptancechecks.
+
+CurrentR4qualifiedsemi16 at2723796/CI37722868698 passes504/native9/full300s/all
+releasegates; RSS202.17/p956.757,zero skips/missing/reject/disconnect. Actual
+8hashes+serverarg16/fourchangedliveflowsPASS. Preserve8FAIL/defaultRSSFAIL and
+invalidprivatecomparison; no optimality/causal/human/physicalstressclaim. Final
+evidencepublication requires ownactualCI, thenstopresolvedlane/no recursive
+success-onlycommits. Historicaldata immutable/deepcopied afterpriorreviewfinding.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "PRIOR_RELEASE_VERIFIED_SEMI16_PROVISIONAL",
+  "status": "VERIFIED",
   "trigger": {
     "ciRun": 37596250446,
     "commit": "61e297e",
@@ -66,11 +66,11 @@
   },
   "remote": {
     "status": "PASS",
-    "commit": "aee040c83b0d0657260577ec0779e4e0389e784e",
-    "ciRun": 37717775859,
-    "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37717775859",
-    "requiredTests": 498,
-    "files": 28,
+    "commit": "2723796022da96606cf79d34566089fe22642c44",
+    "ciRun": 37722868698,
+    "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37722868698",
+    "requiredTests": 504,
+    "files": 29,
     "nativeCases": 9,
     "resource": "PASS",
     "processAndSecretChecks": "PASS",
@@ -114,15 +114,32 @@
     "deployment": "SKIPPED"
   },
   "resource": {
-    "artifact": "board-resource.asset-ci.results.json",
-    "artifactSHA256": "fb49546cbda8835370390a08ceda09abe1155b53ec1f8071084f46d3e9997794",
-    "protocolSHA256": "9acf203180c28d6a30c5ba04b94b28c631c00271c334cede9a1b66cb278b3590",
-    "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
-    "sourceManifestSHA256": "f9d4ad86f7800e2f26d288c09aaaf47852c2fb935c86327bdf1633e091bb25bc",
+    "artifact": "board-resource.semi16-ci.results.json",
+    "artifactSHA256": "b07a891547cbe38f417184d6f3ca3c82ad3b9a76a2d0c292b4bbe3fec71913eb",
+    "protocolSHA256": "4f8feadb5fc8ef65e9b6c6a27a959704b33547571d66a3c858a9b04d19691364",
+    "instrumentSHA256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0",
+    "sourceManifestSHA256": "daec256705018706da538eeccd699463cfc4e8fdbb78aa320ad7e1f0defbcc6d",
+    "runtime": {
+      "node": "v24.21.0",
+      "host": {
+        "platform": "linux",
+        "kernel": "6.17.0-1022-azure",
+        "runner": "GitHub Actions"
+      },
+      "execArgv": [
+        "--max-semi-space-size=16"
+      ],
+      "heapLimitMiB": 4144,
+      "constrainedMemoryBytes": 18446744073709552000,
+      "inboundBytes": 16384,
+      "cgroupMemoryMax": null,
+      "cgroupCpuMax": null
+    },
     "allGatesTrue": true,
-    "durationSeconds": 300.002,
-    "rssPeakMiB": 202.5390625,
-    "normalP95Ms": 9.282,
+    "durationSeconds": 300,
+    "rssPeakMiB": 202.171875,
+    "heapPeakMiB": 36.799766540527344,
+    "normalP95Ms": 6.757,
     "views": [
       12,
       12,
@@ -133,21 +150,25 @@
     "chatSaved": 708,
     "pending": 0,
     "unexpectedDisconnects": 0,
+    "pointerHzRange": [
+      18.757,
+      18.897
+    ],
     "scope": "SYNTHETIC; process RSS, not constrained to Fly"
   },
   "live": {
     "origin": "https://comp4020-final-naaeeen.fly.dev",
     "gameCore": {
       "status": "PASS",
-      "seconds": 19.2
+      "seconds": 21.4
     },
     "seatsRoomsDIYAccess": {
       "status": "PASS",
-      "seconds": 30.9
+      "seconds": 33.6
     },
     "sourceAndTopology": {
       "status": "PASS",
-      "capturedAt": "2026-10-08T02:38:03.540Z",
+      "capturedAt": "2026-10-08T03:39:01.833Z",
       "scope": "read-only deployed source/topology and one moment of memory; not sustained physical resource acceptance",
       "machine": {
         "count": 1,
@@ -162,13 +183,17 @@
         "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
         "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
         "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+        "src/server-runtime.ts": "1ce9691c19ff1b561f1bb21497b71a8969afc29db9c25b7777d0c2e0651a352c",
         "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
         "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
         "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
-        "package.json": "23f2af5f0d0997145ebf8387f58b02096c3b657f04594d73feaa602322bc37d6"
+        "package.json": "50de35cbcdaaf8b8a8dec6b3b9bd4825d156c33432a7b3ac00acdb14c5306d84"
       },
       "appRSSKiB": [
-        102228
+        103920
+      ],
+      "serverBudgetArgs": [
+        "--max-semi-space-size=16"
       ],
       "cgroup": {
         "memory.current": null,
@@ -193,13 +218,13 @@
     "boardEvidence": "Current image passes both maintained board cases; fetched JS/CSS/backend match unchanged board source; prior unchanged-source live standalone evidence remains separately scoped.",
     "boardCore": {
       "status": "PASS",
-      "seconds": 9.7
+      "seconds": 8.8
     },
     "boardIdentityRecovery": {
       "status": "PASS",
-      "seconds": 3.4
+      "seconds": 3.0
     },
-    "gameEvidence": "Motion/world/UI/server sources unchanged; prior source-bound live core19.2s and room30.9s plus current image nine-case gate retained. Current affected live board cases independently rerun."
+    "gameEvidence": "Current budgeted deployment: all four affected native live flows independently rerun."
   },
   "preservation": {
     "crit8Annotated": "351722bac3d37f6c22bb18c9c22f6713b7e2c3df",
@@ -208,7 +233,7 @@
     "originalPreviewDataDir": ".local/implementation-s1"
   },
   "evidenceReviewLimits": "Earlier full-objective contextual recheck did not inspect the latest files; not used as a current closure verdict. Current motion/tracker code have fresh reviews, parent checks and source-bound CI/live evidence.",
-  "finalPublication": "Evidence-only records have unchanged runtime/protocol/instrument; inspect separate final CI once, then stop this completed lane. Earlier failures and unpaired diagnostic remain scoped.",
+  "finalPublication": "Evidence-only checkpoint with unchanged runtime/protocol/instrument. Inspect its actual CI once; do not recursively publish another success-status commit.",
   "latestFailedPublication": {
     "commit": "18a2cfe",
     "ciRun": 37719301016,
@@ -351,9 +376,10 @@
     "protocolSHA256": "4f8feadb5fc8ef65e9b6c6a27a959704b33547571d66a3c858a9b04d19691364",
     "sourceManifestSHA256": "daec256705018706da538eeccd699463cfc4e8fdbb78aa320ad7e1f0defbcc6d",
     "instrumentSHA256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0",
-    "fullQualification": "PENDING",
+    "fullQualification": "PASS controlledCI37722868698 and four actual liveflows",
     "criteria": "unchanged",
-    "review": "existing fresh structural review; contextual16 parameter recheck"
+    "review": "existing fresh structural review; contextual16 parameter recheck",
+    "state": "ACCEPTED16"
   },
   "semi8ControlledTrial": {
     "ciRun": 37721319415,
@@ -369,5 +395,108 @@
     "allOtherGates": true,
     "deployment": "SKIPPED",
     "artifact": "board-resource.semi8-ci-fail.results.json"
+  },
+  "priorAssetRelease": {
+    "remote": {
+      "status": "PASS",
+      "commit": "aee040c83b0d0657260577ec0779e4e0389e784e",
+      "ciRun": 37717775859,
+      "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/37717775859",
+      "requiredTests": 498,
+      "files": 28,
+      "nativeCases": 9,
+      "resource": "PASS",
+      "processAndSecretChecks": "PASS",
+      "mountedBackup": "PASS",
+      "deploymentAndHTTPS": "PASS"
+    },
+    "resource": {
+      "artifact": "board-resource.asset-ci.results.json",
+      "artifactSHA256": "fb49546cbda8835370390a08ceda09abe1155b53ec1f8071084f46d3e9997794",
+      "protocolSHA256": "9acf203180c28d6a30c5ba04b94b28c631c00271c334cede9a1b66cb278b3590",
+      "instrumentSHA256": "ec3301bfaf2d3b9e9ebbb1335d6e2245923f74957a256cafd90660862a7229ed",
+      "sourceManifestSHA256": "f9d4ad86f7800e2f26d288c09aaaf47852c2fb935c86327bdf1633e091bb25bc",
+      "allGatesTrue": true,
+      "durationSeconds": 300.002,
+      "rssPeakMiB": 202.5390625,
+      "normalP95Ms": 9.282,
+      "views": [
+        12,
+        12,
+        24
+      ],
+      "patchSkipped": 0,
+      "patchSaved": 7188,
+      "chatSaved": 708,
+      "pending": 0,
+      "unexpectedDisconnects": 0,
+      "scope": "SYNTHETIC; process RSS, not constrained to Fly"
+    },
+    "live": {
+      "origin": "https://comp4020-final-naaeeen.fly.dev",
+      "gameCore": {
+        "status": "PASS",
+        "seconds": 19.2
+      },
+      "seatsRoomsDIYAccess": {
+        "status": "PASS",
+        "seconds": 30.9
+      },
+      "sourceAndTopology": {
+        "status": "PASS",
+        "capturedAt": "2026-10-08T02:38:03.540Z",
+        "scope": "read-only deployed source/topology and one moment of memory; not sustained physical resource acceptance",
+        "machine": {
+          "count": 1,
+          "cpuKind": "shared",
+          "cpus": 1,
+          "memoryMB": 256,
+          "mountPath": "/data"
+        },
+        "sentinel": "READONLY_SOURCE_PROBE_V1",
+        "node": "v24.21.0",
+        "hashes": {
+          "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
+          "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
+          "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+          "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+          "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+          "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+          "package.json": "23f2af5f0d0997145ebf8387f58b02096c3b657f04594d73feaa602322bc37d6"
+        },
+        "appRSSKiB": [
+          102228
+        ],
+        "cgroup": {
+          "memory.current": null,
+          "memory.max": null,
+          "memory.peak": null
+        }
+      },
+      "boardAssets": [
+        {
+          "path": "public/board-assets/app.js",
+          "bytes": 808340,
+          "sha256": "a947ce00c1710601649194b148d40eb0ea31e4408a54ba9829bef5eabf2f620c",
+          "status": "MATCH"
+        },
+        {
+          "path": "public/board-assets/app.css",
+          "bytes": 156576,
+          "sha256": "f3531d9f115267e11b70e49dad650fdb03ce7b19224e59069942b07134aa8268",
+          "status": "MATCH"
+        }
+      ],
+      "boardEvidence": "Current image passes both maintained board cases; fetched JS/CSS/backend match unchanged board source; prior unchanged-source live standalone evidence remains separately scoped.",
+      "boardCore": {
+        "status": "PASS",
+        "seconds": 9.7
+      },
+      "boardIdentityRecovery": {
+        "status": "PASS",
+        "seconds": 3.4
+      },
+      "gameEvidence": "Motion/world/UI/server sources unchanged; prior source-bound live core19.2s and room30.9s plus current image nine-case gate retained. Current affected live board cases independently rerun."
+    }
   }
 }

@@ -1,3 +1,30 @@
+# Current release verified; final evidence checkpoint
+
+CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source d2dcf5f
+semi16 plusmotion5c/storeda3/tool7cce verifiedat2723796 byCI37722868698 SUCCESS:
+504/29,native9,allresource300s/process+secrets/privatebackup/deploy/HTTPS PASS.
+Artifactb07a8915,proto4f8feadb/manifestdaec2567/script7cce match. RSS202.17,
+heap36.8,p956.757,7188patches/skips0,all24views,pending0/disconnect0,reject0.
+Actualserver16arg+8codehashes match; Oct8T03:39:01.833Z probeNode24.21/sharedCPU1/
+256MB/data; RSS103920KiB onepoint,cgroupnull. Changedcurrentlivegame21.4/room33.6/
+board8.8/recovery3.0PASS. All4flowsrerun onactualconfigureddeployment.
+
+Semi8fullCI workloadFAIL/skips3+pointer<18 andearlierRSSFAILs stayexactarchives;
+privatehost-interruptedpairinvalid/unqualified.16acceptedforthisregistered
+attempt, notuniversaloptimality/causality/physicalstress/humanproof. Original
+preview4093data.local/implementation-s1/session71630preserved; C8/checkpointrefs
+unchanged. Allsourcefrozen,workers/tests/GPU/load complete. CurrentJSON usesdeep
+copies forhistoricalproofs; prioraliasfindingfixed fromimmutablecommit.
+
+Nextroot: boundedfinalevidence review, commit+approvedpush recordsONLY, inspect
+thatfinalCI once. IfPASS/sourceunchanged, markgoalcomplete/reportEnglishtrylinks;
+doNOTrecursivelycreateanotherstatusonlycommit. Newgenuinefailuremustbe preserved
+andaffectedgate reopened, notwaived. Existingphysical/human/coverage/offvolume/
+studentwriting limits separate. Rootownsfinalpublication; noimplementation gap
+confirmedinownerR0–R4scope. SERVER-BUDGET-EVIDENCE/exactJSONcurrentclosure.
+
+# Historical source-specific checkpoints
+
 # Semi16 candidate local pass; full controlled CI pending
 
 Source d2dcf5f changesonly4coupledbudgetvalues8→16. Tool7cce andstore8612 unchanged.
