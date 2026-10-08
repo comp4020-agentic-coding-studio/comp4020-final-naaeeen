@@ -8,7 +8,7 @@ import { describe, expect, test } from "vitest";
 import { SERVER_NODE_ARGS } from "../src/server-runtime.ts";
 
 const root = resolve(fileURLToPath(new URL("../", import.meta.url)));
-const expectedArgs = ["--max-semi-space-size=8"];
+const expectedArgs = ["--max-semi-space-size=16"];
 const resourceURL = new URL("../tools/board-resource.mjs", import.meta.url);
 type Launch = { modulePath: string; args: string[]; options: ForkOptions };
 
