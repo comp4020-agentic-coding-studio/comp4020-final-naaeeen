@@ -108,3 +108,9 @@ remain exactarchives. Freshreview andparent calibration/reconciliation complete
 for actual changed code; incomplete broadrecheck isnotcounted asclosure verdict.
 See currentMOVEMENT-RECONCILIATION and RESOURCE-TRACKER-EVIDENCE. Finalevidence-only
 publication needs its own actualCI result; no further source change is planned.
+
+R4 RSS-onlypublication37605048981 reopens210MiBheadroom; exactFAIL preserved.
+SuspendedhostinvalidatesprivateNodebudgetpair andcandidatehadsubstantivefailures,
+notadopted. Actualsourceallocationfixda3d7ec hasmeaningful2RED/26GREEN, nativeSQLite
+ownership andfreshreview; root498/28 pluscurrentnativeboard2PASS. FullCI/resource/
+deploy/live remainpending; currentASSET-ALLOCATION-EVIDENCE scopes the refinement.

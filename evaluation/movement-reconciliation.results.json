@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "VERIFIED",
+  "status": "PRIOR_RELEASE_VERIFIED_LATEST_RSS_GATE_OPEN",
   "trigger": {
     "ciRun": 37596250446,
     "commit": "61e297e",
@@ -201,5 +201,27 @@
     "originalPreviewDataDir": ".local/implementation-s1"
   },
   "evidenceReviewLimits": "Earlier full-objective contextual recheck did not inspect the latest files; not used as a current closure verdict. Current motion/tracker code have fresh reviews, parent checks and source-bound CI/live evidence.",
-  "finalPublication": "Evidence-only checkpoint, runtime/instrument/protocol bytes unchanged; inspect its separate remoteCI before goal completion. Do not recursively commit to restate its success."
+  "finalPublication": "Evidence-only checkpoint, runtime/instrument/protocol bytes unchanged; inspect its separate remoteCI before goal completion. Do not recursively commit to restate its success.",
+  "latestFailedPublication": {
+    "commit": "bef0fb8",
+    "ciRun": 37605048981,
+    "resource": "FAIL RSS only",
+    "rssPeakMiB": 212.36328125,
+    "deployment": "SKIPPED",
+    "artifact": "board-resource.rss-publication-fail.results.json"
+  },
+  "assetRefinement": {
+    "sourceCommit": "da3d7ec",
+    "storeSHA256": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "parentRequired": 498,
+    "files": 28,
+    "boardNativeSeconds": [
+      9.0,
+      2.5
+    ],
+    "protocolSHA256": "9acf203180c28d6a30c5ba04b94b28c631c00271c334cede9a1b66cb278b3590",
+    "sourceManifestSHA256": "f9d4ad86f7800e2f26d288c09aaaf47852c2fb935c86327bdf1633e091bb25bc",
+    "fullWorkload": "PENDING",
+    "nodeFlags": "unchanged"
+  }
 }

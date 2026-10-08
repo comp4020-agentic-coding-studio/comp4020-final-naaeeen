@@ -1,3 +1,54 @@
+# Asset allocation refinement: local pass, release pending
+
+8 October. Runtime/store commit da3d7ec removes unused BLOB selection and an extra
+image download copy. Source store8612adba; fresh source/API ownership review and
+26 store tests pass. Root498/28 build/type/spec PASS; current native board2 PASS
+9.0/2.5s on restarted preview4093, originaldata preserved, exec97222. Node flags,
+permissions and every resource criterion remain unchanged. ASSET-ALLOCATION-EVIDENCE
+and exactJSON record source/protocol/manifest and limits.
+
+Latest CI37605048981/bef fails ONLYRSS212.363>210. Previous daef/376032 deploy/live
+proof remainsvaliditsownscope. ExactRSSFAIL andprotocolv2 archived. PrivateNode8
+comparison crossedhostsuspend; baselinecompromised, candidateunpaired hadsubstantive
+pointer/skipped failures, NOTADOPTED. No winner/causality claim. All trial jobsended.
+Current protocol9acf2031 /manifestf9d4ad86 /instrumentec3301bf preserve allcriteria.
+
+Nextroot: commitcurrentevidence/archives/harness, approvedmainpush; actualnewCI498/
+native9/resource300/backup/deploy; downloadverifyallsource/gates; actualdeployed
+store7fileprobe +affectedliveboardflows; finalscopedreleaseproof. GoalACTIVE and
+currentgateOPEN. No tests/GPU/load/workerwrites running. FrozenCrit8 andcheckpoint
+refs unchanged; localoriginalDATA_DIRexact.local/implementation-s1. Do notwaive
+RSS210, replayinvalidtrials ascomparison, orcountmissing/incomplete reviewslanes.
+
+# Historical source-specific checkpoints
+
+# Current gate reopened: RSS headroom
+
+Finaldocs-onlybef0fb8 CI37605048981 resource300s FAIL ONLYrss212.363MiB>210.
+Allothergatestrue:7188patches/skips0,708chat,pointer18.173-18.42Hz,all24views,
+no pending/unexpecteddisconnect/reject,normalp9516.35ms. DeploySKIPPED. Previous
+daef/376032 fullyverifiedruntime5c+tracker e54 remainsdeployed/live19.2/30.9PASS;
+currentgoalACTIVE andlatestacceptanceOPEN. Do notwaive210 orrepeatblindly.
+ExactFAIL archivedevaluation/board-resource.rss-publication-fail.results.json;
+currentprotocol98 keptasv2.
+
+Read-onlyruntime_memory_analysis: FAILheapPeak49.003<priorPASS49.625, external/
+arraysnearlysame. RSSresidency sensitivity, NOTprovenheapleak/host/youngcause.
+UnflaggedDocker/start andresourceforkexecArgv[]; syntheticheaplimit4288MiB,
+fixedFly256MB. Node24docs explainyoungcap3xsemi andmemory/throughputtradeoff.
+Worker memory_budget_trial ownsONLY.local/runtime-memory-trial: onecontrolled
+120sbaseline vschild--max-semi-space-size=8 pair, generatorunflagged, actualfull
+fixture/24wires/original65sfault; original300s criteria stayintact soNOTfullPASS.
+Privatecopies/protocol frozen andheapTotal/V8spaces telemetry added. NoGPU/load
+elsewhere; preview4093originaldata/process748 preserved. Rootownsproduction
+policy decision/review/tests/docs/protocol/CI; do notchangelaunchersbeforetrial
+evidence. Candidate mustapplyfairlyBOTHproduction andresourcechild, nottestonly.
+Nextgetexacttrialmetrics, choosesafevalidatedsharedbudget, meaningfultests/
+freshreview/sourcefreeze, actual300CI/live thencompletion. Priorsourceproofs
+remain scopedhistory, no currentclosureverdict fromincompleteaudits.
+
+# Historical verified source checkpoints
+
 # Current release verified; final evidence publication checkpoint
 
 CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Runtime5c40545,

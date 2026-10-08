@@ -1,0 +1,1258 @@
+{
+  "classification": "DIAGNOSTIC_ONLY",
+  "comparisonValidity": "NOT_A_VALID_MATCHED_PAIR_BASELINE_HOST_INTERRUPTED",
+  "sourceFreezeVerifiedAfterRuns": true,
+  "privateInstrumentSHA256": "0d83a3dd88a7aa146cb868dfc8ed37b67705bf4f0546b69401f729fa90127680",
+  "privateProtocolSHA256": "28a289c871202f79b2af2846d26ff8dc916b88b3f192d3845c45958c69fd0752",
+  "sourceManifestSHA256": "545d79c3ea7d85addc95242b26232c8ec0b53bb50cb9a1b0b7387bf3bc937cd7",
+  "summary": {
+    "baseline": {
+      "classification": "HOST_INTERRUPTION_ENVIRONMENTALLY_COMPROMISED",
+      "harnessStatus": "FAIL",
+      "diagnostic": {
+        "classification": "DIAGNOSTIC_ONLY",
+        "candidate": "baseline",
+        "generatorNode": "v24.21.0",
+        "generatorExecArgv": [],
+        "childExecArgv": [],
+        "expectedOriginalGateFailures": [
+          "duration",
+          "workload"
+        ]
+      },
+      "startedAt": "2026-10-07T10:22:59.107Z",
+      "finishedAt": "2026-10-08T02:07:11.215Z",
+      "utcElapsedSeconds": 56652.108,
+      "monotonicWallSeconds": 129.37942247400133,
+      "durationSeconds": 120,
+      "runtime": {
+        "node": "v24.21.0",
+        "host": {
+          "platform": "linux",
+          "kernel": "6.18.33.2-microsoft-standard-WSL2",
+          "runner": "WSL"
+        },
+        "execArgv": [],
+        "heapLimitMiB": 2240,
+        "constrainedMemoryBytes": 18446744073709552000,
+        "inboundBytes": 16384,
+        "cgroupMemoryMax": null,
+        "cgroupCpuMax": null
+      },
+      "memoryFinal": {
+        "rssMiB": 200.04296875,
+        "rssPeakMiB": 210.41015625,
+        "heapMiB": 23.23253631591797,
+        "heapPeakMiB": 52.576438903808594,
+        "heapTotalMiB": 89.2890625,
+        "heapTotalPeakMiB": 94.078125,
+        "externalMiB": 10.939873695373535,
+        "arrayBuffersMiB": 0.3381767272949219
+      },
+      "maximumObservedRetainedSamples": {
+        "rssMiB": 205.23046875,
+        "rssPeakMiB": 210.41015625,
+        "heapMiB": 48.269676208496094,
+        "heapPeakMiB": 52.576438903808594,
+        "heapTotalMiB": 94.078125,
+        "heapTotalPeakMiB": 94.078125,
+        "externalMiB": 22.075008392333984,
+        "arrayBuffersMiB": 7.560514450073242
+      },
+      "eventLoop": {
+        "p95Ms": 19.316735,
+        "p99Ms": 66.813951,
+        "maxMs": 875.560959
+      },
+      "cpu": {
+        "user": 27162372,
+        "system": 10051914
+      },
+      "queues": {
+        "house": {
+          "packets": 4,
+          "bytes": 293
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2447138
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 9,
+      "houseViews": 5,
+      "boardViews": 4,
+      "invalidTelemetry": 0,
+      "v8SpacesFinal": [
+        {
+          "name": "read_only_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "new_space",
+          "sizeMiB": 64,
+          "usedMiB": 0.1815185546875,
+          "availableMiB": 31.8165283203125,
+          "physicalMiB": 64
+        },
+        {
+          "name": "old_space",
+          "sizeMiB": 19.4140625,
+          "usedMiB": 18.78862762451172,
+          "availableMiB": 0.5746917724609375,
+          "physicalMiB": 19.5
+        },
+        {
+          "name": "code_space",
+          "sizeMiB": 2.5,
+          "usedMiB": 1.9429931640625,
+          "availableMiB": 0.55670166015625,
+          "physicalMiB": 2.5
+        },
+        {
+          "name": "shared_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "trusted_space",
+          "sizeMiB": 3.12109375,
+          "usedMiB": 2.0697860717773438,
+          "availableMiB": 1.05059814453125,
+          "physicalMiB": 3.25
+        },
+        {
+          "name": "shared_trusted_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "new_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 32,
+          "physicalMiB": 0
+        },
+        {
+          "name": "large_object_space",
+          "sizeMiB": 0.25390625,
+          "usedMiB": 0.2500152587890625,
+          "availableMiB": 0,
+          "physicalMiB": 0.25390625
+        },
+        {
+          "name": "code_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "shared_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "shared_trusted_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "trusted_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        }
+      ],
+      "v8SpacePeaks": {
+        "read_only_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "new_space": {
+          "sizeMiB": 64,
+          "usedMiB": 31.727439880371094,
+          "physicalMiB": 64
+        },
+        "old_space": {
+          "sizeMiB": 19.4140625,
+          "usedMiB": 18.78862762451172,
+          "physicalMiB": 19.5
+        },
+        "code_space": {
+          "sizeMiB": 2.5,
+          "usedMiB": 1.9429931640625,
+          "physicalMiB": 2.5
+        },
+        "shared_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "trusted_space": {
+          "sizeMiB": 3.12109375,
+          "usedMiB": 2.3563690185546875,
+          "physicalMiB": 3.25
+        },
+        "shared_trusted_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "new_large_object_space": {
+          "sizeMiB": 13.078125,
+          "usedMiB": 13.064956665039062,
+          "physicalMiB": 13.078125
+        },
+        "large_object_space": {
+          "sizeMiB": 8.21875,
+          "usedMiB": 8.209991455078125,
+          "physicalMiB": 8.21875
+        },
+        "code_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "shared_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "shared_trusted_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "trusted_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        }
+      },
+      "delivery": {
+        "targets": 18408,
+        "committedIntents": 3068,
+        "observed": 14637,
+        "normalObserved": 13783,
+        "slowObserved": 854,
+        "pending": 3771,
+        "normalPending": 3753,
+        "normalP95Ms": 94.879,
+        "normalP99Ms": 639.036,
+        "normalMaxMs": 1187.548,
+        "slowP95Ms": 65148.008,
+        "slowMaxMs": 68218.63
+      },
+      "stats": {
+        "motionSent": 10669,
+        "motionOk": 10479,
+        "motionRejected": 0,
+        "motionTimeouts": 7,
+        "pointerSent": 18141,
+        "pointerOk": 17785,
+        "pointerRejected": 0,
+        "pointerTimeouts": 7,
+        "patchScheduled": 2792,
+        "patchSkipped": 76,
+        "patchSaved": 2792,
+        "patchRejected": 0,
+        "chatSaved": 276,
+        "chatSkipped": 0,
+        "expectedFaultTimeouts": 532,
+        "invalidSent": 100,
+        "invalidAcked": 0,
+        "initialSnapshots": 14,
+        "assetReads": 24,
+        "assetBytesRead": 48448872
+      },
+      "gates": {
+        "scopedDelivery": true,
+        "inbound": true,
+        "httpBudget": true,
+        "duration": false,
+        "all24Initial": true,
+        "all24Final": false,
+        "rss": false,
+        "boardQueues": true,
+        "houseQueues": true,
+        "telemetryValid": true,
+        "eventLoop": true,
+        "health": true,
+        "unexpectedDisconnects": false,
+        "allNormalDelivered": false,
+        "allDeliveredIncludingCatchup": false,
+        "normalP95": true,
+        "normalInputs": false,
+        "workload": false,
+        "recovery": true,
+        "negativeAck": true,
+        "slowExpiry": true
+      },
+      "failedGates": [
+        "duration",
+        "all24Final",
+        "rss",
+        "unexpectedDisconnects",
+        "allNormalDelivered",
+        "allDeliveredIncludingCatchup",
+        "normalInputs",
+        "workload"
+      ],
+      "nonDurationMinimumGateFailures": [
+        "all24Final",
+        "rss",
+        "unexpectedDisconnects",
+        "allNormalDelivered",
+        "allDeliveredIncludingCatchup",
+        "normalInputs"
+      ],
+      "normalInputCounts": {
+        "motionRejected": 0,
+        "motionTimeouts": 7,
+        "pointerRejected": 0,
+        "pointerTimeouts": 7,
+        "patchSkipped": 76,
+        "patchRejected": 0,
+        "chatSkipped": 0,
+        "expectedFaultTimeouts": 532
+      },
+      "errors": {
+        "UNEXPECTED_board_DISCONNECT": 8,
+        "UNEXPECTED_house_DISCONNECT": 7
+      },
+      "perViewWorkrate": {
+        "motionHz": {
+          "range": [
+            9.233,
+            9.676
+          ],
+          "nullCount": 7,
+          "views": [
+            {
+              "viewIndex": 0,
+              "rate": 9.676,
+              "eligibleSeconds": 51.673
+            },
+            {
+              "viewIndex": 2,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 4,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 6,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 8,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 10,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 12,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 14,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 16,
+              "rate": 9.25,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 18,
+              "rate": 9.233,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 20,
+              "rate": 9.242,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 22,
+              "rate": 9.25,
+              "eligibleSeconds": 120.001
+            }
+          ]
+        },
+        "pointerHz": {
+          "range": [
+            15.475,
+            18.065
+          ],
+          "nullCount": 7,
+          "views": [
+            {
+              "viewIndex": 1,
+              "rate": 18.065,
+              "eligibleSeconds": 30.004
+            },
+            {
+              "viewIndex": 3,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 5,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 7,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 9,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 11,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 13,
+              "rate": null,
+              "eligibleSeconds": 0
+            },
+            {
+              "viewIndex": 15,
+              "rate": 15.575,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 17,
+              "rate": 15.542,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 19,
+              "rate": 15.475,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 21,
+              "rate": 15.617,
+              "eligibleSeconds": 120.001
+            },
+            {
+              "viewIndex": 23,
+              "rate": null,
+              "eligibleSeconds": 0
+            }
+          ]
+        }
+      },
+      "perViewConnectedAtEnd": {
+        "0": true,
+        "1": false,
+        "2": false,
+        "3": false,
+        "4": false,
+        "5": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": false,
+        "10": false,
+        "11": false,
+        "12": false,
+        "13": false,
+        "14": false,
+        "15": true,
+        "16": true,
+        "17": true,
+        "18": true,
+        "19": true,
+        "20": true,
+        "21": true,
+        "22": true,
+        "23": false
+      },
+      "unexpectedDisconnects": 15,
+      "slowEvidence": {
+        "tcpPauseVerified": true,
+        "pauseSeconds": 65,
+        "role": "one resident with two independent TCP transports",
+        "bothDisconnected": true,
+        "rejoined": true,
+        "generationAdvanced": true,
+        "quietAfterExpiry": true,
+        "allCommittedRecovered": true,
+        "readerStayedPaused": true,
+        "checkpointSequence": 1361,
+        "receiptsAtCutoff": 1238,
+        "postCheckpointReceiptsExcluded": 15
+      },
+      "recovery": [
+        {
+          "houseIndex": 0,
+          "allSeedIds": true,
+          "allUnmodifiedElements": true,
+          "allLatestPayloads": true,
+          "tombstones": 20,
+          "allLatestVersions": true,
+          "allScheduledChat": true,
+          "files": 2,
+          "metadataOnly": true,
+          "elements": 202,
+          "chat": 100
+        },
+        {
+          "houseIndex": 1,
+          "allSeedIds": true,
+          "allUnmodifiedElements": true,
+          "allLatestPayloads": true,
+          "tombstones": 20,
+          "allLatestVersions": true,
+          "allScheduledChat": true,
+          "files": 2,
+          "metadataOnly": true,
+          "elements": 202,
+          "chat": 100
+        }
+      ],
+      "fixture": [
+        {
+          "houseIndex": 0,
+          "elements": 202,
+          "sceneBytes": 1865727,
+          "chatMessages": 100,
+          "chatBytes": 416925,
+          "files": 2,
+          "snapshotBytes": 2283091,
+          "imageBytes": [
+            2018703,
+            2018703
+          ],
+          "imageSHA256": [
+            "b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db",
+            "35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"
+          ],
+          "patchBatches": 21
+        },
+        {
+          "houseIndex": 1,
+          "elements": 202,
+          "sceneBytes": 1865727,
+          "chatMessages": 100,
+          "chatBytes": 416925,
+          "files": 2,
+          "snapshotBytes": 2283091,
+          "imageBytes": [
+            2018703,
+            2018703
+          ],
+          "imageSHA256": [
+            "b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c",
+            "c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"
+          ],
+          "patchBatches": 21
+        }
+      ],
+      "exitCode": 1,
+      "environmentBefore": {
+        "atUTC": "2026-10-07T10:22:58.485898+00:00",
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "loadAverage": [
+          0.07275390625,
+          0.0712890625,
+          0.20263671875
+        ],
+        "memory": {
+          "MemTotal": "7761568 kB",
+          "MemAvailable": "6741828 kB",
+          "SwapTotal": "2097152 kB",
+          "SwapFree": "2097152 kB"
+        },
+        "generatorCommandPrefix": [
+          "mise",
+          "exec",
+          "--",
+          "node"
+        ],
+        "NODE_OPTIONS_present": false
+      },
+      "environmentAfter": {
+        "atUTC": "2026-10-08T02:07:16.408181+00:00",
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "loadAverage": [
+          1.29638671875,
+          0.49560546875,
+          0.34033203125
+        ],
+        "memory": {
+          "MemTotal": "7761568 kB",
+          "MemAvailable": "6687996 kB",
+          "SwapTotal": "2097152 kB",
+          "SwapFree": "2097152 kB"
+        },
+        "generatorCommandPrefix": [
+          "mise",
+          "exec",
+          "--",
+          "node"
+        ],
+        "NODE_OPTIONS_present": false
+      }
+    },
+    "semi8": {
+      "classification": "UNPAIRED_DIAGNOSTIC",
+      "harnessStatus": "FAIL",
+      "diagnostic": {
+        "classification": "DIAGNOSTIC_ONLY",
+        "candidate": "semi8",
+        "generatorNode": "v24.21.0",
+        "generatorExecArgv": [],
+        "childExecArgv": [
+          "--max-semi-space-size=8"
+        ],
+        "expectedOriginalGateFailures": [
+          "duration",
+          "workload"
+        ]
+      },
+      "startedAt": "2026-10-08T02:07:18.104Z",
+      "finishedAt": "2026-10-08T02:09:20.873Z",
+      "utcElapsedSeconds": 122.769,
+      "monotonicWallSeconds": 132.81079232699994,
+      "durationSeconds": 120.003,
+      "runtime": {
+        "node": "v24.21.0",
+        "host": {
+          "platform": "linux",
+          "kernel": "6.18.33.2-microsoft-standard-WSL2",
+          "runner": "WSL"
+        },
+        "execArgv": [
+          "--max-semi-space-size=8"
+        ],
+        "heapLimitMiB": 2072,
+        "constrainedMemoryBytes": 18446744073709552000,
+        "inboundBytes": 16384,
+        "cgroupMemoryMax": null,
+        "cgroupCpuMax": null
+      },
+      "memoryFinal": {
+        "rssMiB": 202.515625,
+        "rssPeakMiB": 202.515625,
+        "heapMiB": 63.228187561035156,
+        "heapPeakMiB": 63.228187561035156,
+        "heapTotalMiB": 76.3984375,
+        "heapTotalPeakMiB": 76.3984375,
+        "externalMiB": 11.018969535827637,
+        "arrayBuffersMiB": 0.41727256774902344
+      },
+      "maximumObservedRetainedSamples": {
+        "rssMiB": 199.5625,
+        "rssPeakMiB": 199.5625,
+        "heapMiB": 60.7996826171875,
+        "heapPeakMiB": 62.778358459472656,
+        "heapTotalMiB": 73.46875,
+        "heapTotalPeakMiB": 73.46875,
+        "externalMiB": 21.799190521240234,
+        "arrayBuffersMiB": 7.045368194580078
+      },
+      "eventLoop": {
+        "p95Ms": 19.169279,
+        "p99Ms": 34.734079,
+        "maxMs": 500.695039
+      },
+      "cpu": {
+        "user": 33141037,
+        "system": 12676353
+      },
+      "queues": {
+        "house": {
+          "packets": 1,
+          "bytes": 64
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2306154
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "invalidTelemetry": 0,
+      "v8SpacesFinal": [
+        {
+          "name": "read_only_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "new_space",
+          "sizeMiB": 16,
+          "usedMiB": 5.0242767333984375,
+          "availableMiB": 2.9752349853515625,
+          "physicalMiB": 16
+        },
+        {
+          "name": "old_space",
+          "sizeMiB": 49.9140625,
+          "usedMiB": 49.59014892578125,
+          "availableMiB": 0.262298583984375,
+          "physicalMiB": 50
+        },
+        {
+          "name": "code_space",
+          "sizeMiB": 2.5,
+          "usedMiB": 1.93511962890625,
+          "availableMiB": 0.5645751953125,
+          "physicalMiB": 2.5
+        },
+        {
+          "name": "shared_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "trusted_space",
+          "sizeMiB": 3.37109375,
+          "usedMiB": 2.0739212036132812,
+          "availableMiB": 1.2967453002929688,
+          "physicalMiB": 3.5
+        },
+        {
+          "name": "shared_trusted_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "new_large_object_space",
+          "sizeMiB": 2.1796875,
+          "usedMiB": 2.177490234375,
+          "availableMiB": 5.822509765625,
+          "physicalMiB": 2.1796875
+        },
+        {
+          "name": "large_object_space",
+          "sizeMiB": 2.43359375,
+          "usedMiB": 2.4276351928710938,
+          "availableMiB": 0,
+          "physicalMiB": 2.43359375
+        },
+        {
+          "name": "code_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "shared_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "shared_trusted_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        },
+        {
+          "name": "trusted_large_object_space",
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "availableMiB": 0,
+          "physicalMiB": 0
+        }
+      ],
+      "v8SpacePeaks": {
+        "read_only_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "new_space": {
+          "sizeMiB": 16,
+          "usedMiB": 7.9956512451171875,
+          "physicalMiB": 16
+        },
+        "old_space": {
+          "sizeMiB": 49.9140625,
+          "usedMiB": 49.59014892578125,
+          "physicalMiB": 50
+        },
+        "code_space": {
+          "sizeMiB": 2.5,
+          "usedMiB": 1.93511962890625,
+          "physicalMiB": 2.5
+        },
+        "shared_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "trusted_space": {
+          "sizeMiB": 3.62109375,
+          "usedMiB": 2.4023818969726562,
+          "physicalMiB": 3.50390625
+        },
+        "shared_trusted_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "new_large_object_space": {
+          "sizeMiB": 6.5390625,
+          "usedMiB": 6.532478332519531,
+          "physicalMiB": 6.5390625
+        },
+        "large_object_space": {
+          "sizeMiB": 3.859375,
+          "usedMiB": 3.8551559448242188,
+          "physicalMiB": 3.859375
+        },
+        "code_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "shared_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "shared_trusted_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        },
+        "trusted_large_object_space": {
+          "sizeMiB": 0,
+          "usedMiB": 0,
+          "physicalMiB": 0
+        }
+      },
+      "delivery": {
+        "targets": 18816,
+        "committedIntents": 3136,
+        "observed": 18816,
+        "normalObserved": 17959,
+        "slowObserved": 857,
+        "pending": 0,
+        "normalPending": 0,
+        "normalP95Ms": 39.757,
+        "normalP99Ms": 186.556,
+        "normalMaxMs": 754.689,
+        "slowP95Ms": 62016.958,
+        "slowMaxMs": 65087.863
+      },
+      "stats": {
+        "motionSent": 13730,
+        "motionOk": 13562,
+        "motionRejected": 0,
+        "motionTimeouts": 0,
+        "pointerSent": 23635,
+        "pointerOk": 22718,
+        "pointerRejected": 597,
+        "pointerTimeouts": 0,
+        "patchScheduled": 2860,
+        "patchSkipped": 8,
+        "patchSaved": 2860,
+        "patchRejected": 0,
+        "chatSaved": 276,
+        "chatSkipped": 0,
+        "expectedFaultTimeouts": 488,
+        "invalidSent": 100,
+        "invalidAcked": 0,
+        "initialSnapshots": 14,
+        "assetReads": 24,
+        "assetBytesRead": 48448872
+      },
+      "gates": {
+        "scopedDelivery": true,
+        "inbound": true,
+        "httpBudget": true,
+        "duration": false,
+        "all24Initial": true,
+        "all24Final": true,
+        "rss": true,
+        "boardQueues": true,
+        "houseQueues": true,
+        "telemetryValid": true,
+        "eventLoop": true,
+        "health": true,
+        "unexpectedDisconnects": true,
+        "allNormalDelivered": true,
+        "allDeliveredIncludingCatchup": true,
+        "normalP95": true,
+        "normalInputs": false,
+        "workload": false,
+        "recovery": true,
+        "negativeAck": true,
+        "slowExpiry": true
+      },
+      "failedGates": [
+        "duration",
+        "normalInputs",
+        "workload"
+      ],
+      "nonDurationMinimumGateFailures": [
+        "normalInputs"
+      ],
+      "normalInputCounts": {
+        "motionRejected": 0,
+        "motionTimeouts": 0,
+        "pointerRejected": 597,
+        "pointerTimeouts": 0,
+        "patchSkipped": 8,
+        "patchRejected": 0,
+        "chatSkipped": 0,
+        "expectedFaultTimeouts": 488
+      },
+      "errors": {
+        "RATE_LIMITED": 597
+      },
+      "perViewWorkrate": {
+        "motionHz": {
+          "range": [
+            9.841,
+            9.9
+          ],
+          "nullCount": 0,
+          "views": [
+            {
+              "viewIndex": 0,
+              "rate": 9.863,
+              "eligibleSeconds": 54.852
+            },
+            {
+              "viewIndex": 2,
+              "rate": 9.883,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 4,
+              "rate": 9.9,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 6,
+              "rate": 9.85,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 8,
+              "rate": 9.85,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 10,
+              "rate": 9.841,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 12,
+              "rate": 9.858,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 14,
+              "rate": 9.883,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 16,
+              "rate": 9.9,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 18,
+              "rate": 9.85,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 20,
+              "rate": 9.841,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 22,
+              "rate": 9.841,
+              "eligibleSeconds": 120.003
+            }
+          ]
+        },
+        "pointerHz": {
+          "range": [
+            16.8,
+            17.429
+          ],
+          "nullCount": 0,
+          "views": [
+            {
+              "viewIndex": 1,
+              "rate": 17.429,
+              "eligibleSeconds": 54.852
+            },
+            {
+              "viewIndex": 3,
+              "rate": 17.016,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 5,
+              "rate": 16.908,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 7,
+              "rate": 17.066,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 9,
+              "rate": 16.983,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 11,
+              "rate": 16.975,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 13,
+              "rate": 16.941,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 15,
+              "rate": 16.958,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 17,
+              "rate": 16.916,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 19,
+              "rate": 16.85,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 21,
+              "rate": 16.9,
+              "eligibleSeconds": 120.003
+            },
+            {
+              "viewIndex": 23,
+              "rate": 16.8,
+              "eligibleSeconds": 120.003
+            }
+          ]
+        }
+      },
+      "perViewConnectedAtEnd": {
+        "0": true,
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "7": true,
+        "8": true,
+        "9": true,
+        "10": true,
+        "11": true,
+        "12": true,
+        "13": true,
+        "14": true,
+        "15": true,
+        "16": true,
+        "17": true,
+        "18": true,
+        "19": true,
+        "20": true,
+        "21": true,
+        "22": true,
+        "23": true
+      },
+      "unexpectedDisconnects": 0,
+      "slowEvidence": {
+        "tcpPauseVerified": true,
+        "pauseSeconds": 65,
+        "role": "one resident with two independent TCP transports",
+        "bothDisconnected": true,
+        "rejoined": true,
+        "generationAdvanced": true,
+        "quietAfterExpiry": true,
+        "allCommittedRecovered": true,
+        "readerStayedPaused": true,
+        "checkpointSequence": 1362,
+        "receiptsAtCutoff": 1239,
+        "postCheckpointReceiptsExcluded": 2
+      },
+      "recovery": [
+        {
+          "houseIndex": 0,
+          "allSeedIds": true,
+          "allUnmodifiedElements": true,
+          "allLatestPayloads": true,
+          "tombstones": 20,
+          "allLatestVersions": true,
+          "allScheduledChat": true,
+          "files": 2,
+          "metadataOnly": true,
+          "elements": 202,
+          "chat": 100
+        },
+        {
+          "houseIndex": 1,
+          "allSeedIds": true,
+          "allUnmodifiedElements": true,
+          "allLatestPayloads": true,
+          "tombstones": 20,
+          "allLatestVersions": true,
+          "allScheduledChat": true,
+          "files": 2,
+          "metadataOnly": true,
+          "elements": 202,
+          "chat": 100
+        }
+      ],
+      "fixture": [
+        {
+          "houseIndex": 0,
+          "elements": 202,
+          "sceneBytes": 1865727,
+          "chatMessages": 100,
+          "chatBytes": 416925,
+          "files": 2,
+          "snapshotBytes": 2283091,
+          "imageBytes": [
+            2018703,
+            2018703
+          ],
+          "imageSHA256": [
+            "b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db",
+            "35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"
+          ],
+          "patchBatches": 21
+        },
+        {
+          "houseIndex": 1,
+          "elements": 202,
+          "sceneBytes": 1865727,
+          "chatMessages": 100,
+          "chatBytes": 416925,
+          "files": 2,
+          "snapshotBytes": 2283091,
+          "imageBytes": [
+            2018703,
+            2018703
+          ],
+          "imageSHA256": [
+            "b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c",
+            "c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"
+          ],
+          "patchBatches": 21
+        }
+      ],
+      "exitCode": 1,
+      "environmentBefore": {
+        "atUTC": "2026-10-08T02:07:16.435876+00:00",
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "loadAverage": [
+          1.29638671875,
+          0.49560546875,
+          0.34033203125
+        ],
+        "memory": {
+          "MemTotal": "7761568 kB",
+          "MemAvailable": "6687400 kB",
+          "SwapTotal": "2097152 kB",
+          "SwapFree": "2097152 kB"
+        },
+        "generatorCommandPrefix": [
+          "mise",
+          "exec",
+          "--",
+          "node"
+        ],
+        "NODE_OPTIONS_present": false
+      },
+      "environmentAfter": {
+        "atUTC": "2026-10-08T02:09:25.086826+00:00",
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "loadAverage": [
+          1.0166015625,
+          0.65771484375,
+          0.41943359375
+        ],
+        "memory": {
+          "MemTotal": "7761568 kB",
+          "MemAvailable": "6722316 kB",
+          "SwapTotal": "2097152 kB",
+          "SwapFree": "2097152 kB"
+        },
+        "generatorCommandPrefix": [
+          "mise",
+          "exec",
+          "--",
+          "node"
+        ],
+        "NODE_OPTIONS_present": false
+      }
+    }
+  },
+  "limitations": [
+    "Baseline crossed a long host interruption; baseline and semi8 cannot be used as a fair comparison or causal improvement claim.",
+    "Semi8 is a single unpaired 120s WSL diagnostic; original >=300s and saved patch/chat minima remain false.",
+    "Semi8 normal-input and skipped-patch failures remain failures despite complete delivery and recovery.",
+    "No production source/runtime configuration changed; no retry or further candidate/full run performed.",
+    "No browser/GPU/Fly/cgroup stress/WAN/physical/human results."
+  ]
+}

@@ -239,3 +239,18 @@ actual CI37603266802's full300s workload with all original gates. This verifies
 that source-bound attempt, not the sole cause of a previous timing failure or
 universal harness superiority. Preserve intermediate logs and disclose missing
 raw reviewer logs; do not count an incomplete exploratory/audit lane as review.
+
+## Observed suspension and isolated-test routing
+
+If machine suspension crosses a timed/network trial, preserve its raw outputs
+and classify the comparison as environmentally compromised. An already-running
+candidate may supply an explicitly unpaired diagnostic; it cannot become an A/B
+win. Keep substantive interaction failures separate from expected short-duration
+failures. Do not adopt a memory optimization solely because one RSS value falls.
+
+Several isolated store/house lanes selected default Vitest configuration, whose
+global setup requires a running APP_URL. Factual agent packets should include
+the actual isolated config (vitest.board/house.config.ts) or explicit live origin
+for the default required suite. Missing-server setup is NOT RUN/infrastructure,
+not a product regression. Calibrate pool/backing assumptions against native runtime
+behavior before accepting a generated allocation test.

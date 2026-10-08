@@ -1,3 +1,11 @@
+# Latest publication gate: RSS headroom open
+
+Docs-only `bef0fb8`, CI `37605048981`, fails only the 210 MiB resource RSS bound
+at 212.363 MiB. All other resource gates pass. The prior checked release below
+remains deployed and valid for its recorded attempt; it does not close the latest
+failure. A controlled Node runtime budget comparison is underway, preserving all
+acceptance criteria and applying any adopted policy to production and testing.
+
 # Current acceptance: verified movement and evaluator release
 
 Runtime `5c40545` and evaluator `e54a694` pass actual CI `37603266802` at
