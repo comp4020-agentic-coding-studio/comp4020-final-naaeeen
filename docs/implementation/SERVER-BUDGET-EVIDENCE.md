@@ -68,3 +68,22 @@ Next: approved main CI504/native9/fullresource, backup/deploy only on all PASS,
 then eight deployed source hashes plus the actual server flag and affected live
 flows. A synthetic PASS remains distinct from sustained actual Fly stress,
 physical phones, human value and a grade claim.
+
+## Controlled 8 MiB result and next candidate
+
+CI37721319415 at a6b5fcc is a full controlled FAIL solely on workload. Server
+arguments are exactly semi8, generator unflagged; RSS181.410MiB/heap32.990 meets
+memory, but three scene slots are skipped and pointer range17.900–18.232Hz
+includes values below18. All normal input rejection/timeout counts are zero; all
+47,358targets are observed and recovery passes. These failures remain substantive;
+no deployment occurs and GC or the flag is not asserted as the sole cause. The
+complete failed artifact and exact v4 protocol remain committed.
+
+Next source d2dcf5f changes only the shared setting from8 to16 in four coupled
+sites. A larger young generation is the next single-factor capacity/collection
+tradeoff, not an accepted winner. Old-space, generator, API, workloads and all
+criteria stay unchanged. Intended coupling mismatch5/6 becomes6/6PASS; type/diff
+and labelled contextual parameter recheck pass. Root504/29 required checks and
+local budgeted board7.8s/recovery2.1s/game15.6s pass. The tool itself is unchanged.
+Prospective full300s actualCI, deployment gating and affectedlive checks remain
+required; the previous structural review is not renamed as another fresh trial.

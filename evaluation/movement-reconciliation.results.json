@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "PRIOR_RELEASE_VERIFIED_LATEST_RUNTIME_BUDGET_PROVISIONAL",
+  "status": "PRIOR_RELEASE_VERIFIED_SEMI16_PROVISIONAL",
   "trigger": {
     "ciRun": 37596250446,
     "commit": "61e297e",
@@ -336,23 +336,38 @@
   },
   "sourceHashScope": "Original unchanged motion modules/specs at5c40545; current backend hashes in resource manifest and live source probe.",
   "serverBudgetCandidate": {
-    "sourceCommit": "4e83db6",
+    "sourceCommit": "d2dcf5f",
     "serverArgs": [
-      "--max-semi-space-size=8"
+      "--max-semi-space-size=16"
     ],
     "generatorArgs": [],
     "parentRequired": 504,
     "files": 29,
     "nativeLocalSeconds": {
       "boardCore": 7.8,
-      "boardRecovery": 1.9,
-      "gameCore": 19.8
+      "boardRecovery": 2.1,
+      "gameCore": 15.6
     },
-    "protocolSHA256": "5c0270fc672bc46b930b937372b630079042e0bca2d613f8fb8b8523ef39820e",
-    "sourceManifestSHA256": "5a4351029bf50095cf046e04f390795c054c3ff58d5c70e644d14097d4d42b30",
+    "protocolSHA256": "4f8feadb5fc8ef65e9b6c6a27a959704b33547571d66a3c858a9b04d19691364",
+    "sourceManifestSHA256": "daec256705018706da538eeccd699463cfc4e8fdbb78aa320ad7e1f0defbcc6d",
     "instrumentSHA256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0",
     "fullQualification": "PENDING",
-    "previousPrivateDiagnostic": "unqualified; not an A/B winner",
-    "criteria": "unchanged"
+    "criteria": "unchanged",
+    "review": "existing fresh structural review; contextual16 parameter recheck"
+  },
+  "semi8ControlledTrial": {
+    "ciRun": 37721319415,
+    "sourceCommit": "a6b5fcc",
+    "status": "FAIL workload",
+    "rssPeakMiB": 181.41015625,
+    "patchSkipped": 3,
+    "pointerHzRange": [
+      17.9,
+      18.232
+    ],
+    "normalP95Ms": 28.543,
+    "allOtherGates": true,
+    "deployment": "SKIPPED",
+    "artifact": "board-resource.semi8-ci-fail.results.json"
   }
 }

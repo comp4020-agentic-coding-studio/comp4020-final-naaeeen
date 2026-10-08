@@ -1,3 +1,39 @@
+# Semi16 candidate local pass; full controlled CI pending
+
+Source d2dcf5f changesonly4coupledbudgetvalues8→16. Tool7cce andstore8612 unchanged.
+MeaningfulRED5/6→GREEN6, type/diff/contextualparamrecheckPASS; root504/29 and
+localcurrentnativeboard7.8/recovery2.1/game15.6PASS. Preview4093originaldata
+session71630 runningsemi16. No GPU/load/workerwritesactive. GoalACTIVE.
+
+Semi8CI377213/a6 failedONLYworkload (3skips +pointer17.9<18) despiteRSS181.41
+andallothergatestrue; Node8NOTQUALIFIED/no deploy. ExactFAIL/v4proto retained.
+Semi16 prospectiveall300s gates required; no raisedlimits, no GCcausalityclaim.
+Rootnext commitscurrentdocs/archive, approvedpush, actualfullCI504/native9/resource/
+backups/deploy; eightlivehashes+actual16flag, changedruntimecore/board/roomflows.
+C8/checkpoint/originaldata preserved. Priorunflaggedaee release remainsdeployed.
+CurrentSERVER-BUDGET-EVIDENCE/exactJSON record candidatehashes/criteria/limits.
+
+# Historical source-specific checkpoints
+
+# Semi8 controlled trial failed workload; single-factor16 candidate next
+
+CI37721319415 sourcea6b5fcc FAIL ONLYworkload: RSS181.410<210,heap32.990,
+7185patches/skips3,p9528.543/max611.793,allnormalinputs0reject,all24views/
+targetdelivered/recoverytrue,othergatestrue. Node8NOTQUALIFIED/deploySKIPPED.
+Exactfullartifact semi8-ci-fail andprotocolv4 archived. No claimskipssolelyGC.
+Prospective16semi candidatebalancescapacity/collection; allcriteria/workload/
+oldspace/generator remainunchanged. GoalACTIVE.
+
+Worker server_young_budget ownsONLYconstant16/DockerCMD/package.start/spec
+expectedArgs tinyupdate; existingtoolimport/fork unchanged. Need focusedchecks
+/contextualparamrecheck/freeze. Rootownsproto canonical sourcebindings/docs/CI.
+Currentstore8612/motion4281/world7b8 untouched; preview4093 atoriginaldata/
+session59746 currentlysemi8. No otherloads/GPU/writes. Nextfrozen16, preview
+restart/checksource/coupling, code+recordcommit/push, fullnewcontrolled300CI
+beforeadoption/deploy. Priorunflaggedaee assetrelease remainsdeployed/liveproof.
+
+# Historical source-specific checkpoints
+
 # Prospective server budget: local pass, controlled CI pending
 
 Source4e83db6 appliesonlyserver--max-semi-space-size=8 toDocker/directstart/resource
