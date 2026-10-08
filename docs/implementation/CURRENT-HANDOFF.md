@@ -1,3 +1,49 @@
+# Prospective server budget: local pass, controlled CI pending
+
+Source4e83db6 appliesonlyserver--max-semi-space-size=8 toDocker/directstart/resource
+child; sharedreadonlypolicy andcoupling/probe tests. Generatorunflagged, oldspace/
+Nodeversion/API/data/criteriaunchanged. MeaningfulRED3; focused16+type/diff and
+freshreviewPASS. Root504/29 build/type/spec andnativeboard7.8/1.9/game19.8PASS
+on originalpreview4093session59746. No qualification/performance claim yet.
+
+Latest18a/377193 FAILONLYRSS216.191>210; heap63.046,p956.534 andallothergatestrue.
+ExactFAIL archived +protocolv3 kept. PrivateNode8interrupted/unpaireddiagnostic
+remainsunqualified; thisnewcandidate mustpass itsownstablefull300 CIbeforedeploy.
+Serverbudgetevidence andexactJSON recordsource/limits. Currentproto5c0270fc /
+manifest5a435102 /script7cce6f96 includeDocker/package/sharedpolicy; firstunsorted
+metadatafailcorrectedbeforeload, allcriteria/scheduleblocks unchanged.
+
+Nextroot: commitdocs/archive/harness, approvedpush; actualCI504/native9/resource
+allgates/privatebackup/deploy; exacteightcodehashes+actualflag8 probe, affectedlive
+core/board/room flows. GoalACTIVE/currentacceptanceOPEN. No workerwrites/checks/
+GPU/load active. Oldsourceaee release remainsdeployed; originaldata/tag preserved.
+
+# Historical source-specific checkpoints
+
+# Latest RSS gate reopened: prospective explicit young-space budget
+
+CI37719301016 docs-only18a FAILONLYrss216.191>210; heapPeak63.046 (priorpass~49),
+normalp956.534,7188patches/skips0,pointerreject0,all24views,no lost/disconnect,
+allothergatestrue. ExactFAIL archivedasset-rss-publication-fail andprotocolv3.
+Previousaee/377177 fullrelease/native/liveboard9.7/3.4 remains its own proof.
+GoalACTIVE/latestacceptanceOPEN. No raise210 orblindrerun.
+
+Worker server_young_budget owns Docker/package(startonly), new src/server-runtime.ts,
+resourceimport/forkargv andnewlaunchspecONLY. PROVISIONAL --max-semi-space-size=8
+forserverbothproduction+syntheticchild; generatorunflagged/no globalNode_OPTIONS.
+Need meaningfullaunchercouplingRED/actualNodeargs, freshreview, parentchecks,
+thenstableGitHubfull300 allgates beforedeployment. Priorprivate8trialhostsuspend
+invalidbaseline/unpairedcandidatesubstantivefailures remainsNOTQUALIFIED; new
+trial muststandonown controlled full evidence. Oldspace/Nodeversion/APIs/quotas/
+timers/210/inputs unchanged. Rootownsprotocol/sourcehash rebind/docs/publication.
+
+Currentstore8612/motion4281/world7b8 unchanged; preview4093 originaldata/session97222
+alive. No otherload/GPU/writers. FrozenCrit8/checkpointrefs preserved. Nextworker
+freeze/review thenparentrequired/native/sourcevalidation, code+recordcommit/push,
+actualCI/fullresource/privatebackup/deploy andlivecontrolledsource/flows.
+
+# Historical source-specific checkpoints
+
 # Current release verified; final evidence publication checkpoint
 
 8Oct2026 canonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen.

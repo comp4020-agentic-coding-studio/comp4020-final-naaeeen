@@ -342,3 +342,9 @@ liveboard9.7/3.4PASS. RSS202.54/p959.282 withzero skips/missing/disconnects.
 EarlierRSSFAIL/invalidmemorycomparison kept; no Nodeflags orcriteriachanged.
 CurrentASSET-ALLOCATION-EVIDENCE isauthoritativeforthisnewsource. Finalrecords
 publication getsownactualCI; no recursive status-only commits.
+
+R4 latest18a publication RSS216-onlyFAIL preserved. Source4e83db6 isprospective
+server-onlyyoung8policy, notqualificationfrominvalidWSLpair. Launchcoupling/
+actualflag probes, freshreview, parent504/29 andlocalnative3PASS; fullcontrolled
+CIandlive stillrequired. Canonicalmanifestcaughtunsortednewentry beforeload;
+rootfixedsorting/sourcebindings whilekeepingallfreeze/acceptancechecks.

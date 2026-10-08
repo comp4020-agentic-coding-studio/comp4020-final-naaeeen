@@ -1,3 +1,13 @@
+# Latest gate: consistent server allocation budget under test
+
+Docs-only `18a2cfe`, CI `37719301016`, fails solely on peak RSS (216.191 MiB
+against 210). All interaction, workload and recovery gates pass. The previous
+allocation release below remains deployed and verified for its attempt.
+A prospective 8 MiB server semi-space policy will be tested on the controlled CI
+host, applied identically to production and resource child, with the generator
+unflagged. The earlier WSL diagnostic remains invalid/unqualified; it is not
+used as an A/B win or performance proof. Every existing acceptance criterion stays.
+
 # Current acceptance: verified allocation release
 
 Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` pass actual CI

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "VERIFIED",
+  "status": "PRIOR_RELEASE_VERIFIED_LATEST_RUNTIME_BUDGET_PROVISIONAL",
   "trigger": {
     "ciRun": 37596250446,
     "commit": "61e297e",
@@ -210,12 +210,14 @@
   "evidenceReviewLimits": "Earlier full-objective contextual recheck did not inspect the latest files; not used as a current closure verdict. Current motion/tracker code have fresh reviews, parent checks and source-bound CI/live evidence.",
   "finalPublication": "Evidence-only records have unchanged runtime/protocol/instrument; inspect separate final CI once, then stop this completed lane. Earlier failures and unpaired diagnostic remain scoped.",
   "latestFailedPublication": {
-    "commit": "bef0fb8",
-    "ciRun": 37605048981,
+    "commit": "18a2cfe",
+    "ciRun": 37719301016,
     "resource": "FAIL RSS only",
-    "rssPeakMiB": 212.36328125,
+    "rssPeakMiB": 216.19140625,
+    "heapPeakMiB": 63.04613494873047,
+    "normalP95Ms": 6.534,
     "deployment": "SKIPPED",
-    "artifact": "board-resource.rss-publication-fail.results.json"
+    "artifact": "board-resource.asset-rss-publication-fail.results.json"
   },
   "assetRefinement": {
     "sourceCommit": "da3d7ec",
@@ -332,5 +334,25 @@
       "boardEvidence": "Current image passes both maintained board cases; fetched JS/CSS/backend match unchanged board source; prior unchanged-source live standalone evidence remains separately scoped."
     }
   },
-  "sourceHashScope": "Original unchanged motion modules/specs at5c40545; current backend hashes in resource manifest and live source probe."
+  "sourceHashScope": "Original unchanged motion modules/specs at5c40545; current backend hashes in resource manifest and live source probe.",
+  "serverBudgetCandidate": {
+    "sourceCommit": "4e83db6",
+    "serverArgs": [
+      "--max-semi-space-size=8"
+    ],
+    "generatorArgs": [],
+    "parentRequired": 504,
+    "files": 29,
+    "nativeLocalSeconds": {
+      "boardCore": 7.8,
+      "boardRecovery": 1.9,
+      "gameCore": 19.8
+    },
+    "protocolSHA256": "5c0270fc672bc46b930b937372b630079042e0bca2d613f8fb8b8523ef39820e",
+    "sourceManifestSHA256": "5a4351029bf50095cf046e04f390795c054c3ff58d5c70e644d14097d4d42b30",
+    "instrumentSHA256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0",
+    "fullQualification": "PENDING",
+    "previousPrivateDiagnostic": "unqualified; not an A/B winner",
+    "criteria": "unchanged"
+  }
 }
