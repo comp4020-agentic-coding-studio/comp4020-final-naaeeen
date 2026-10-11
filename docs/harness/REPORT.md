@@ -254,3 +254,11 @@ the actual isolated config (vitest.board/house.config.ts) or explicit live origi
 for the default required suite. Missing-server setup is NOT RUN/infrastructure,
 not a product regression. Calibrate pool/backing assumptions against native runtime
 behavior before accepting a generated allocation test.
+
+## 12 October correction: public runtime metadata
+
+An observed inspection read mise.local.toml and exposed a token in private tool
+output. For versions read tracked mise.toml and use explicit installed-tool
+version commands. Never read overrides/.env/credentials for runtime verification.
+Publish whitelisted results/hashes, not raw inspection transcripts. Provider or
+credential changes need scoped authorization. See ../crit-9/VERIFICATION.md.

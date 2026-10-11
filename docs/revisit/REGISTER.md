@@ -106,3 +106,11 @@ The owner rejected the baseline interaction quality on 7 October. Current R0–R
 work uses [18 additional detailed checkpoints](REDESIGN-REGISTER.md); earlier
 S0–S4 acceptance remains bound to its historical source. Changed UI, geometry,
 camera and full board require their own current checks and reviews.
+
+## Crit 9 decision study, 12 October
+
+[Comparison/reviews](../crit-9/COMPARISON-AND-REVIEWS.md) record separate C9/rubric,
+code/history, authority alternatives, evaluator calibration, counterevidence,
+fresh review and claim-refinement lanes. [Verification](../crit-9/VERIFICATION.md)
+separates completed checks from student/deployment/human follow-up. Retrospective
+research does not rewrite S/R chronology or the authoritative product scope.

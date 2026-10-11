@@ -32,8 +32,9 @@ directly at [/board/](/board/), with Create, Join and identity recovery, without
 loading the game. Companion board chat moves beside the canvas; on narrow screens
 it docks and collapses. This is house-wide board conversation, separate from room
 chat. Everyone currently in the house may edit shared canvas objects. Simultaneous
-changes merge by element; text conflicts provide recoverable drafts, rather than
-character-level co-editing.
+changes reconcile whole elements, rather than co-editing individual characters.
+When a submitted edit loses in its reply, its local draft can be recovered.
+A later peer overwrite does not guarantee recovery of an earlier accepted edit.
 
 Study notes remain author-controlled goal/question/next-step cards. Saving a next
 step does not declare the question solved. A missing reply is pending, not saved;

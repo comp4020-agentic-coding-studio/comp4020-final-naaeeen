@@ -373,3 +373,13 @@ Board unit coverage remains 69.85% statements/67.67% branches with main.jsx 0%.
 Resource failures are preserved; root owns actual CI/load/backup/deploy acceptance.
 Original 4093 preview reuses .local/implementation-s1 without reseeding.
 See docs/implementation/REDESIGN-VALIDATION.md and evaluation/redesign-closeout.results.json.
+
+## Crit 9 research handoff, 12 October
+
+Owner requested a deep implemented multiuser decision. Read
+[recommendation](docs/crit-9/DECISION-RECOMMENDATION.md) and
+[verification](docs/crit-9/VERIFICATION.md). Proposed single argument: shared
+canvas exploration with author-controlled study commitments; willingness is a
+strong tied option. Research/tests are retrospective, not deployment/human proof.
+Product scope/phases remain unchanged. Student C9 reflection, PROCESS rewrite
+remain separate work; the factual README recovery overclaim was corrected.
