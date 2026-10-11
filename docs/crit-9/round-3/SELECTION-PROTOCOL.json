@@ -1,0 +1,137 @@
+{
+  "registeredAtUTC": "2026-10-11T15:57:33.983762+00:00",
+  "baseline": "ea991747f83e81b5178c10cc86b0c1727062ba28",
+  "ownerQuestion": "Find design-first HCI/usergoal/tradeoff point with authenticAI-process evidence, stronger than bugrepair if available.",
+  "eligibility": [
+    "Actuallyimplemented, notprospectivefeature",
+    "Namedusergoal and specificmultiuserbehavior",
+    "Two plausible alternatives can function correctly but serve conflicting priorities",
+    "Reasonforchoice and sacrificedbenefit",
+    "Evidence of actual AIresearch/comparison/review/refinement, nottechniquecount"
+  ],
+  "candidates": {
+    "S": "Negotiableapproachability: presence, willingness androomaccess independentlychosen",
+    "V": "Readablelocalframing andchoseninspection/overview versuswhole-roomcontext",
+    "W": "Focused standalonecollaborativeboard withchat versuscontinuousin-worldinteraction",
+    "I": "Sharedthinkingcontent withindividualview/history/draft andsharedawareness",
+    "C": "Author-controlledstudycommitments versusfluidshared/delegatedauthorship",
+    "F": "Uncertain-submissionrecovery andnewer-thoughtprotection"
+  },
+  "criteria": {
+    "userGoalSpecificity": {
+      "weight": 20,
+      "anchors": [
+        "0 featureword",
+        "1 genericconvenience",
+        "2 concretecontext/task",
+        "3 specificneed/tensionwithscopeandunvalidatedassumptions"
+      ]
+    },
+    "genuineDesignTradeoff": {
+      "weight": 25,
+      "anchors": [
+        "0 correctvsbuggy",
+        "1 vaguealternative",
+        "2 functionalalternativesdifferinvaluablecapabilities",
+        "3 strongestalternativebenefitexplicitlyweighedwithscope/switchcondition"
+      ]
+    },
+    "hciMechanismDepth": {
+      "weight": 20,
+      "anchors": [
+        "0 labelonly",
+        "1 principlementioned",
+        "2 mechanismconnectedtochoices/costs",
+        "3 originalresearchcounterevidenceandactualdesignboundarycriticallyused"
+      ]
+    },
+    "c9BehaviorAndDemo": {
+      "weight": 15,
+      "anchors": [
+        "0 noimplementedmultiuserbehavior",
+        "1 indirect/abstract",
+        "2 directbehaviorbutbroad/awkwarddemo",
+        "3 oneclearcurrentbehaviorandshortsuccess/countercaseexample"
+      ]
+    },
+    "authenticAgentProcess": {
+      "weight": 15,
+      "anchors": [
+        "0 assertedtechniques",
+        "1 sourceinspectiononly",
+        "2 actualdirection/review/refinementwithprovenance",
+        "3 meaningfulmatchedalternative/negativefeedbackchangeddesign,acceptedartifactchecked"
+      ]
+    },
+    "evidencePrecision": {
+      "weight": 5,
+      "anchors": [
+        "0 overclaim",
+        "1 plan/partial",
+        "2 sourceandboundedhistoricalchecks",
+        "3 inspectablecurrentevidence,limits/humanclaimsseparated"
+      ]
+    }
+  },
+  "scale": "Integer0,1,2,3 only. Rawreviewjudgement, notscientificmeasurement orgrade.",
+  "orders": [
+    [
+      "W",
+      "F",
+      "S",
+      "C",
+      "V",
+      "I"
+    ],
+    [
+      "I",
+      "V",
+      "C",
+      "S",
+      "F",
+      "W"
+    ]
+  ],
+  "sensitivity": {
+    "design": [
+      20,
+      35,
+      20,
+      15,
+      5,
+      5
+    ],
+    "process": [
+      20,
+      20,
+      15,
+      15,
+      25,
+      5
+    ]
+  },
+  "selection": "Parentweighsspecificgoal/functionalalternatives/currentevidence andcrit9fit; noaverage/modelvoteclaim. Preserveviewsdisagreeing.",
+  "methods": [
+    "PrimaryHCI/productreferencecountercases",
+    "Actualsource/history/protocoloutcomeaudit",
+    "Designscenarioalternativecomparisonwithcommonneeds",
+    "Twofreshnohistoryreviews,orderedreversal",
+    "Parentrefine andtargeted independentrecheck",
+    "Nativeevidence/link/hashverification"
+  ],
+  "stop": [
+    "Oneprimarydesigndecision orretaincurrentwithreason",
+    "Do notinvent newruntimefeatures justtoimproveargument",
+    "Atleasttwo substantive review/refinementsteps inclsourcecountercase",
+    "No rerunresolvedbenchmarksolelyforcounts",
+    "Englishthirdroundfiles clearlysupersedepriorjointgoalrecommendation,localcommitsverified"
+  ],
+  "limits": [
+    "No humanAB/pilot conducted",
+    "Historicalcomparisonnotpreregisteredtoday",
+    "Normal-workingalternative needed; deliberatebrokenstubnotdesignwinner",
+    "Do notclaimsoftQuietconsent/DND",
+    "Do notclaim3Droomcreatesplace/socialnormsbyitself",
+    "No provider/push/deploy/credential changes"
+  ]
+}

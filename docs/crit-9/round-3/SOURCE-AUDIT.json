@@ -1,0 +1,30 @@
+{
+  "baseline": "ea991747f83e81b5178c10cc86b0c1727062ba28",
+  "currentBehavior": {
+    "realtime": "src/house-realtime.ts124-130,216-228,270-273",
+    "roster": "public/house-ui.js199-210",
+    "quietUnread": "public/house-ui.js188-194;public/house-world.js329",
+    "door": "src/house-store.ts242-249,335-353"
+  },
+  "planningEvidence": "docs/planning/POSITIONING-COMPARISON.md11-20,41-55,97-110",
+  "planningCommit": "52ce8ee8e812d3a0744c6027cb22fcf925654880",
+  "codeCommits": [
+    "2f941e1a1faee7bc6bdf5ffcbe77ddf11748ae8f",
+    "ea604400634acfbcd5be87de5e7c01e901b5596d"
+  ],
+  "closeoutRecordCommit": "f18fd52b6e766b9b0201be3330463afa923db8e1",
+  "historicalUIRefinement": "docs/revisit/UI-REFINEMENT.md136-154",
+  "provenanceLimits": [
+    "Goal is agent-derived provisional, not interviewresult",
+    "Productjobscompared, not three willingnessalgorithms experimentallytested",
+    "Same-dayrecords/correctsource not independentlyverifiedrawredchronology",
+    "No agent originally inferredconsent frommovement established"
+  ],
+  "sourceHashes": {
+    "src/house-realtime.ts": "f25be21c47d6b10cb266e93560d67d41627f4579c9a2ac1be12225415bef25dc",
+    "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+    "public/house.html": "d2b5a9ff50071a9c58b709899d7ea5e0ee5f0e199ac9d8d53ea7e406486d01b0"
+  }
+}

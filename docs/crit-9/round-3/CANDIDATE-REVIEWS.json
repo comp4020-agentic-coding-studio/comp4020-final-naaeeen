@@ -1,0 +1,224 @@
+{
+  "kind": "No-history qualitative design judgement, not human AB or grade",
+  "criterionOrder": [
+    "usergoal",
+    "functionaltradeoff",
+    "HCI",
+    "C9",
+    "AIprocess",
+    "precision"
+  ],
+  "weights": [
+    20,
+    25,
+    20,
+    15,
+    15,
+    5
+  ],
+  "profiles": {
+    "design": [
+      20,
+      35,
+      20,
+      15,
+      5,
+      5
+    ],
+    "process": [
+      20,
+      20,
+      15,
+      15,
+      25,
+      5
+    ]
+  },
+  "A": {
+    "order": [
+      "W",
+      "F",
+      "S",
+      "C",
+      "V",
+      "I"
+    ],
+    "history": "none",
+    "ratings": {
+      "W": [
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "F": [
+        2,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "S": [
+        3,
+        3,
+        2,
+        3,
+        2,
+        3
+      ],
+      "C": [
+        3,
+        3,
+        2,
+        3,
+        1,
+        2
+      ],
+      "V": [
+        3,
+        3,
+        2,
+        2,
+        3,
+        2
+      ],
+      "I": [
+        2,
+        3,
+        2,
+        3,
+        1,
+        2
+      ]
+    },
+    "choice": "W; S strongest countercase",
+    "why": "Direct owner goal full focusedboard withchat while sacrificing continuous spatialcontext; editor/architecture/nativeiterations",
+    "limit": "Not head-to-head working producttrials; room-to-boardpresence/chat changes",
+    "scores": {
+      "base": {
+        "W": 93.33,
+        "F": 58.33,
+        "S": 88.33,
+        "C": 81.67,
+        "V": 86.67,
+        "I": 75.0
+      },
+      "design": {
+        "W": 93.33,
+        "F": 51.67,
+        "S": 91.67,
+        "C": 88.33,
+        "V": 86.67,
+        "I": 81.67
+      },
+      "process": {
+        "W": 95.0,
+        "F": 65.0,
+        "S": 86.67,
+        "C": 76.67,
+        "V": 88.33,
+        "I": 70.0
+      }
+    }
+  },
+  "B": {
+    "order": [
+      "I",
+      "V",
+      "C",
+      "S",
+      "F",
+      "W"
+    ],
+    "history": "none",
+    "ratings": {
+      "I": [
+        2,
+        2,
+        2,
+        3,
+        2,
+        2
+      ],
+      "V": [
+        3,
+        3,
+        2,
+        2,
+        3,
+        3
+      ],
+      "C": [
+        2,
+        3,
+        2,
+        3,
+        2,
+        3
+      ],
+      "S": [
+        3,
+        3,
+        3,
+        3,
+        2,
+        3
+      ],
+      "F": [
+        2,
+        1,
+        1,
+        3,
+        3,
+        3
+      ],
+      "W": [
+        3,
+        3,
+        2,
+        3,
+        2,
+        3
+      ]
+    },
+    "choice": "S; W strongest owner-feedback countercase, V technical-process",
+    "why": "Clear contextualsocialgoal, approachabilitysoftdeclared separatelyfromaccess/location; crediblealternatives",
+    "limit": "No human interpretation/effect; processcomparisons didnotteststatusalgorithms headtohead",
+    "scores": {
+      "base": {
+        "I": 71.67,
+        "V": 88.33,
+        "C": 81.67,
+        "S": 95.0,
+        "F": 63.33,
+        "W": 88.33
+      },
+      "design": {
+        "I": 71.67,
+        "V": 88.33,
+        "C": 85.0,
+        "S": 98.33,
+        "F": 56.67,
+        "W": 91.67
+      },
+      "process": {
+        "I": 71.67,
+        "V": 90.0,
+        "C": 80.0,
+        "S": 91.67,
+        "F": 70.0,
+        "W": 86.67
+      }
+    }
+  },
+  "sharedLimits": [
+    "Freshhistories not independenthuman samples",
+    "Integers remainordinaljudgements",
+    "Do notaverage toclaimunique best",
+    "Historicaltests inspectednotrerunbyreviewers",
+    "No paper/prototype establishes reducedinterruption"
+  ]
+}
