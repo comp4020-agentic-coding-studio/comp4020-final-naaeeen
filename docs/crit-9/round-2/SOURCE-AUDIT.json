@@ -1,0 +1,61 @@
+{
+  "baseline": "3c91f53f6ed052af617fc1555c16929d1ec06921",
+  "inspectedSourceHashes": {
+    "board/client.js": "bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1",
+    "board/main.jsx": "dddcac608947fad90b2f659f18cde7a062947a0ce5f3d8153a0c483fa0e9d6b8",
+    "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0"
+  },
+  "historicalEpisodes": [
+    {
+      "record": "docs/revisit/OUTBOX-REFINEMENT.md",
+      "lines": "105-110,154-189",
+      "issue": "Uncertain commands dropped, queued discard/expiry races, numericTimeoutError and identity-switch race",
+      "acceptedImplementation": "ea604400634acfbcd5be87de5e7c01e901b5596d",
+      "recordFirstCommit": "f18fd52b6e766b9b0201be3330463afa923db8e1",
+      "provenance": "Tracked same-day worker report and accepted source; raw red outputs not inspected"
+    },
+    {
+      "record": "docs/implementation/BOARD-WORKSPACE-EVIDENCE.md",
+      "lines": "144-177",
+      "issue": "Missing-image+text batch lost before validation; Retry Saved with no POST",
+      "acceptedImplementation": "f5a25f2bbfc00af43791dd8c88905dd45320c0c4",
+      "provenance": "Worker-authored report, scoped test definitions and final code; internal fixes consolidated into one feature commit"
+    },
+    {
+      "record": "docs/implementation/BOARD-WORKSPACE-EVIDENCE.md",
+      "lines": "228-245,266-272",
+      "issue": "Retention repair caused native React185 despite scoped passing tests; delta-only notify correction",
+      "acceptedImplementation": "f5a25f2bbfc00af43791dd8c88905dd45320c0c4",
+      "provenance": "Same-day report preserves native result and final-review infrastructure gap; no invented fresh approval"
+    }
+  ],
+  "evidenceBoundaries": [
+    "Current source/commit inclusion independently inspected",
+    "Reported historical red order is not fresh execution",
+    "First-night lostACK browser is legacy, not current board/house",
+    "No agent/harness matched guidance A/B or human study performed"
+  ],
+  "newDraftObservation": {
+    "reportedActualModuleReproduction": true,
+    "node": "24.21.0",
+    "exit": 0,
+    "normal": {
+      "status": "saved",
+      "pending": 0,
+      "draftInExport": false
+    },
+    "quotaFailure": {
+      "status": "saved",
+      "pending": 0,
+      "errorVisible": true,
+      "draftRetainedInMemory": true,
+      "draftInExport": false
+    },
+    "scope": "Synthetic fetch/storage module reproduction by independent explorer, not browser; parent source confirms consequence",
+    "inference": "Unsent composer outside submitted pending queue; wording ambiguity and narrow quota recovery gap, not false ACK of submitted command"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "registeredAtUTC": "2026-10-11T14:32:06.417303+00:00",
+  "sourceCommit": "3c91f53f6ed052af617fc1555c16929d1ec06921",
+  "question": "Which implemented C9 decision best integrates HCI reasoning and demonstrated AI-agent direction/correction?",
+  "whyNewCriteria": "Owner explicitly adds HCI and AI-agent best practices as joint priority; first round did not separately weight an actual agent-correction chain. Earlier verdict is challengeable, not input to fresh reviewers.",
+  "criteria": {
+    "hciMechanism": {
+      "weight": 25,
+      "anchors": [
+        "0 slogan/cosmetic",
+        "1 named principle only",
+        "2 contextual mechanism/mentalmodel/cost",
+        "3 research-grounded mechanism plus serious counterevidence and task limits"
+      ]
+    },
+    "agentDirectionEvidence": {
+      "weight": 25,
+      "anchors": [
+        "0 technique list",
+        "1 current inspection only",
+        "2 traceable requirement/check/review/refinement",
+        "3 contemporaneous failure or discriminating comparison -> grounded correction/harness -> verified accepted behavior"
+      ]
+    },
+    "c9BehaviorFit": {
+      "weight": 20,
+      "anchors": [
+        "0 non-multiuser",
+        "1 indirect framing",
+        "2 actual behavior with others",
+        "3 one observable consequential behavior with credible alternatives"
+      ]
+    },
+    "implementationEvidence": {
+      "weight": 15,
+      "anchors": [
+        "0 speculation",
+        "1 plan/partial only",
+        "2 source/tests/history",
+        "3 source plus scoped runtime/browser evidence, bounded claims"
+      ]
+    },
+    "countercaseAndCost": {
+      "weight": 10,
+      "anchors": [
+        "0 strawman",
+        "1 named cost",
+        "2 strong alternative/context",
+        "3 demonstrated alternative benefit and switch/falsifier"
+      ]
+    },
+    "demonstrationClarity": {
+      "weight": 5,
+      "anchors": [
+        "0 abstract",
+        "1 lengthy setup",
+        "2 short concrete task",
+        "3 observable success plus important failure/limit"
+      ]
+    }
+  },
+  "candidates": [
+    "C author-controlled cards/sharedcanvas",
+    "B explicit willingness/presence",
+    "F uncertain delivery/pending/retry",
+    "A whole-element collaboration/conflict/undo",
+    "I sharedcontent/userlocal view-selection-draft-history",
+    "J chosen camera follow/overview/manual inspection"
+  ],
+  "reviewOrders": [
+    [
+      "I",
+      "C",
+      "F",
+      "J",
+      "A",
+      "B"
+    ],
+    [
+      "B",
+      "A",
+      "J",
+      "F",
+      "C",
+      "I"
+    ]
+  ],
+  "sensitivityWeights": {
+    "hci": [
+      40,
+      15,
+      20,
+      15,
+      5,
+      5
+    ],
+    "agent": [
+      15,
+      40,
+      20,
+      15,
+      5,
+      5
+    ]
+  },
+  "constraints": [
+    "Do not read old verdicts into first fresh packets",
+    "Reject personal learning/authorship chronology invented",
+    "No human preference or HD score inferred",
+    "Remote content safety is not same-object intention-preserving undo",
+    "Pending is bounded by actual command/draft/recovery behavior",
+    "A single C9 point, no umbrella list unless coherent one state boundary"
+  ],
+  "steps": [
+    "Read actual source/history and currentcourse/primaryresearch",
+    "Build balanced fact packet from independent audits",
+    "Two no-history candidate reviews with reversed order",
+    "Parent reconcile/researchcountercase",
+    "Run bounded discriminating technical or acceptance-oracle comparison if a material uncertainty remains",
+    "Fresh skeptical final review, refine and targeted recheck",
+    "Validate English files/citations/provenance, focused local commits"
+  ],
+  "stop": [
+    "One primary recommendation plus clearly subordinated context selected",
+    "Important source/code conflicts resolved or candidate downgraded",
+    "At least two substantive review/refinement steps, no rerun of resolved first-round lanes",
+    "Actual methods and unrun human work labeled",
+    "English round-2 evidence and main-index relationship clear"
+  ],
+  "scope": "Research/documentation. No runtime feature edits, deployment/provider calls, credential reads/changes or student reflection writing. Isolated local prototypes only if useful."
+}
