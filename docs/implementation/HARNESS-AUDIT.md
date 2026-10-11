@@ -355,3 +355,28 @@ releasegates; RSS202.17/p956.757,zero skips/missing/reject/disconnect. Actual
 invalidprivatecomparison; no optimality/causal/human/physicalstressclaim. Final
 evidencepublication requires ownactualCI, thenstopresolvedlane/no recursive
 success-onlycommits. Historicaldata immutable/deepcopied afterpriorreviewfinding.
+
+## 12 October Crit 9 second-round method closeout
+
+Owner requested stronger joint HCI/agent-process judgement, reopening the previous
+choice. Protocol registered before fresh comparison; runtime baseline3c91f53.
+[Detailed subsection trail](../crit-9/round-2/COMPARISON-AND-REVIEW.md) and
+[validation](../crit-9/round-2/VALIDATION.md) cover entry/finding/refinement/exit:
+
+| Section | Grounding and correction | Acceptance scope |
+| --- | --- | --- |
+| Criteria/course | Current C9/lectures, explicit HCI+agent weights. | Frozen protocol; no automatic HD inference. |
+| Source/chronology | Actual code/Git versus worker red reports. | Provenance qualified, consolidated commits retained. |
+| HCI alternatives | Original awareness/ownership/undo/recovery countercases. | Contextual recommendation, no human value claim. |
+| Model comparison | Reversed no-history packets; undeclared fractional anchors. | Discrete contextual correction; disagreement preserved. |
+| Submitted intent | Current real loopback authority plus client failure scenarios. | Accepted v2 fourcases, not browser/WAN. |
+| Composer/awareness | Quota/export and local/shared-wording gaps verified. | Runtime defects logged, not silently waived/repaired. |
+| Evaluator calibration | Derived-flag controls too weak. | Raw-observation controls; synthetic scope explicit. |
+| Evaluator failure | Delayedhold could hang. | v3 registered safety amendment; affected checks only. |
+| Fresh-review input | A heading filter exposed earlier verdict. | Partial contamination labelled; clean packet/reviewer. |
+| Packaging | Version links/provenance and prepared replay. | Native JSON/syntax/link/hash/diff checks. |
+
+Applied the matching evidence-driven/deep-research/WSL methods, not unrelated
+global procedures. No runtime/CI/provider/student-reflection changes; generic
+evidence PASS on crit8 does not establish C9 readiness. Future agents route
+similar claims through these scope/calibration checks before acceptance.

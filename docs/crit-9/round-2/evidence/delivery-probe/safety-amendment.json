@@ -1,0 +1,17 @@
+{
+  "registeredAt": "2026-10-11T14:47:28.935489+00:00",
+  "kind": "Narrow reviewer-driven evaluator safety amendment",
+  "reason": "Fresh independent review confirmed P2: delayed ACK waits only on held; an early rejection or timeout settles saving but never resolves held, preventing bounded failure recording and owned-server cleanup.",
+  "scope": "Only private evaluator wait/cleanup; preserve accepted v2 traces/hash provenance; no runtime or production changes",
+  "stopException": "Original one-correction stop was used; parent explicitly authorizes this narrow safety exception to record bounded failures, not seek another product PASS.",
+  "affectedRuns": [
+    "Injected early delayed-ACK transport failure before held resolution; expect recorded failure and process exit 1 within 5 seconds",
+    "Single delayed-ACK successful sanity case; expect exit 0"
+  ],
+  "waitBoundMs": 1000,
+  "terminationAcceptanceMs": 5000,
+  "cleanup": "race held vs saving settlement vs bounded timer; clear timer and release held response/abort own fetch/close owned server in finally",
+  "previousScriptSha256": "073919fd06646af76f171ac75229983781c4d8e0c2b0818883b201613bbbbb15",
+  "previousProtocolSha256": "18fc9e19e279d079f1ff546962c8c4b4abfae32759106e5c1a49e646ad81a28d",
+  "allEarlierArtifacts": "first-run-precomputed-calibration plus accepted-v2-before-safety-amendment"
+}

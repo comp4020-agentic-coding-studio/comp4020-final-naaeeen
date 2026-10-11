@@ -1,0 +1,25 @@
+{
+  "kind": "Current BoardClient delivery failure-path check and evaluator calibration",
+  "baseline": "3c91f53f6ed052af617fc1555c16929d1ec06921",
+  "cases": [
+    "normal_ack",
+    "lost_ack",
+    "no_commit",
+    "delayed_ack"
+  ],
+  "fixture": "fresh createService SQLite loopback authority and two opaque identities per case",
+  "injection": "lost_ack after authority response consumed; no_commit before HTTP dispatch; delayed_ack held after authority response until newer draft exists",
+  "acceptance": "pending before acknowledgement; failure never saved; original UUID and full serialized body retained through retry; one committed chat and receipt; canonical replay receipt with no sequence increment; separate peer HTTP snapshot; newer draft survives delayed ACK; SQLite persistence after close and reopen",
+  "oracles": "weak final status label versus declared conjunctive state/queue/payload/receipt/peer/replay/newer-draft checks",
+  "calibration": "same evaluator on synthetically broken optimisticSaved/no-durable-effect and lost-newer-draft traces, labelled synthetic",
+  "runtime": "explicit installed Linux Node24.21.0, no wrapper/install/env-file inspection",
+  "stopping": "one run; one affected evaluator correction only if defect; no production mutation",
+  "limits": [
+    "module+HTTP only; no browser",
+    "no WAN/Fly/physical/human/1-second/exactly-once-general claim"
+  ],
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+    "https://www.sqlite.org/atomiccommit.html"
+  ]
+}

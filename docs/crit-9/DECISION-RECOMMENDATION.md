@@ -4,6 +4,13 @@
 Implementation baseline: dea0b7a2f352cc93fd2d9c88d0287607a9d8d304.
 This is retrospective documentation; the new comparison did not precede the original implementation.
 
+## Second-round update
+
+The owner added HCI and demonstrated AI-agent correction as a joint selection
+goal. [Round 2](round-2/RECOMMENDATION.md) recommends the narrower uncertain-message/
+newer-composition decision for that task. This first-round recommendation remains
+historical product-purpose reasoning; it is not the latest joint-goal verdict.
+
 ## Recommended single argument
 
 **Friends can share an explanation without sharing authority over each other's

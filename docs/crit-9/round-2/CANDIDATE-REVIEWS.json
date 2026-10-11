@@ -1,0 +1,273 @@
+{
+  "kind": "No-history model candidate review; no human preference or automatic grade",
+  "criteriaOrder": [
+    "HCI",
+    "agentDirection",
+    "C9fit",
+    "implementation",
+    "countercase",
+    "demo"
+  ],
+  "weights": [
+    25,
+    25,
+    20,
+    15,
+    10,
+    5
+  ],
+  "sensitivity": {
+    "hci": [
+      40,
+      15,
+      20,
+      15,
+      5,
+      5
+    ],
+    "agent": [
+      15,
+      40,
+      20,
+      15,
+      5,
+      5
+    ]
+  },
+  "reviewerA": {
+    "initialHistory": "none",
+    "presentationOrder": [
+      "I",
+      "C",
+      "F",
+      "J",
+      "A",
+      "B"
+    ],
+    "protocolDeviation": "Initial fractional anchors not declared; preserved, excluded from primary discrete comparison. Contextual discrete recheck is not a new fresh trial.",
+    "originalFractionalRatings": {
+      "I": [
+        2.5,
+        1.5,
+        3,
+        2,
+        2.5,
+        2.5
+      ],
+      "C": [
+        2.5,
+        1.5,
+        3,
+        2.5,
+        2.5,
+        3
+      ],
+      "F": [
+        2.5,
+        2.5,
+        3,
+        2.5,
+        2.5,
+        3
+      ],
+      "J": [
+        2.5,
+        3,
+        2,
+        3,
+        2.5,
+        2.5
+      ],
+      "A": [
+        2.5,
+        2,
+        3,
+        2.5,
+        2.5,
+        2.5
+      ],
+      "B": [
+        2.5,
+        2,
+        3,
+        2.5,
+        2.5,
+        3
+      ]
+    },
+    "discreteRatings": {
+      "I": [
+        2,
+        1,
+        3,
+        2,
+        2,
+        2
+      ],
+      "C": [
+        2,
+        1,
+        3,
+        2,
+        2,
+        3
+      ],
+      "F": [
+        2,
+        2,
+        3,
+        2,
+        2,
+        3
+      ],
+      "J": [
+        2,
+        3,
+        2,
+        3,
+        2,
+        2
+      ],
+      "A": [
+        2,
+        2,
+        3,
+        2,
+        2,
+        2
+      ],
+      "B": [
+        2,
+        2,
+        3,
+        2,
+        2,
+        3
+      ]
+    },
+    "discreteVerdict": "J leads all profiles; F strongest directly multiuser recovery alternative",
+    "scope": "Actual source/history inspected; no tests or primarypapers independently reread; new faultprobe excluded",
+    "scores": {
+      "joint": {
+        "I": 65.0,
+        "C": 66.67,
+        "F": 75.0,
+        "J": 80.0,
+        "A": 73.33,
+        "B": 75.0
+      },
+      "hci": {
+        "I": 68.33,
+        "C": 70.0,
+        "F": 75.0,
+        "J": 76.67,
+        "A": 73.33,
+        "B": 75.0
+      },
+      "agent": {
+        "I": 60.0,
+        "C": 61.67,
+        "F": 75.0,
+        "J": 85.0,
+        "A": 73.33,
+        "B": 75.0
+      }
+    }
+  },
+  "reviewerB": {
+    "initialHistory": "none",
+    "presentationOrder": [
+      "B",
+      "A",
+      "J",
+      "F",
+      "C",
+      "I"
+    ],
+    "discreteRatings": {
+      "B": [
+        3,
+        2,
+        3,
+        3,
+        2,
+        3
+      ],
+      "A": [
+        3,
+        2,
+        3,
+        3,
+        2,
+        2
+      ],
+      "J": [
+        2,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "F": [
+        3,
+        3,
+        3,
+        2,
+        2,
+        3
+      ],
+      "C": [
+        3,
+        2,
+        3,
+        3,
+        2,
+        3
+      ],
+      "I": [
+        3,
+        2,
+        3,
+        2,
+        2,
+        2
+      ]
+    },
+    "discreteVerdict": "F joint/agent winner; B/F/C tie under HCI emphasis",
+    "scope": "Actual source/history and selectedprimarysource read; no tests; assignedbaselinevsdocsHEAD runtime diff checked; currentprobe excluded",
+    "scores": {
+      "joint": {
+        "B": 88.33,
+        "A": 86.67,
+        "J": 85.0,
+        "F": 91.67,
+        "C": 88.33,
+        "I": 81.67
+      },
+      "hci": {
+        "B": 93.33,
+        "A": 91.67,
+        "J": 80.0,
+        "F": 93.33,
+        "C": 93.33,
+        "I": 86.67
+      },
+      "agent": {
+        "B": 85.0,
+        "A": 83.33,
+        "J": 88.33,
+        "F": 93.33,
+        "C": 85.0,
+        "I": 78.33
+      }
+    }
+  },
+  "limits": [
+    "Ordinal ratings not calibrated human measurement",
+    "Different research/evidence thresholds produce disagreement",
+    "No unique robust winner acrossreviewers/profiles",
+    "Reversedorder not randomizedhumanAB",
+    "No post-result scoreupgrade for newprobe"
+  ]
+}

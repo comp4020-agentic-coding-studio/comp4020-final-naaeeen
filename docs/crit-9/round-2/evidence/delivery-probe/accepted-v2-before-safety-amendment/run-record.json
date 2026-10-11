@@ -1,0 +1,17 @@
+{
+  "environment": "Windows-to-Ubuntu-WSL bridge; user lizhi",
+  "node": "v24.21.0",
+  "finalSourceHashesMatchFreeze": true,
+  "syntaxExit": 0,
+  "initialRunExit": 0,
+  "initialRunScope": "real-case observations valid; precomputed-flag-only calibration judged insufficient in self-review",
+  "correction": "one evaluator-only trace-recomputation refinement and one affected rerun; first artifacts preserved",
+  "correctedRunExit": 0,
+  "allOwnedServersClosed": "each case awaits app.close and then opens board.sqlite read-only",
+  "processPolicy": "no preview/provider process inspected, started or stopped",
+  "helperError": "One functions script ReferenceError before any tool invocation; no probe mutation or execution occurred",
+  "completedAt": "2026-10-11T14:45:04.090981+00:00",
+  "finalHead": "14702d35688098a264456f789ed7e74b98055ba1",
+  "initialBaselineHead": "3c91f53f6ed052af617fc1555c16929d1ec06921",
+  "headDrift": "HEAD advanced during parallel documentation work; frozen runtime source hashes still match"
+}

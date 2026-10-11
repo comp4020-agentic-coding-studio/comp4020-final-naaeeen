@@ -1,0 +1,15 @@
+{
+  "baseline": "3c91f53f6ed052af617fc1555c16929d1ec06921",
+  "frozenAt": "2026-10-11T14:40:18.378478+00:00",
+  "protocolSha256": "2fbd60edb0d6e273e369472d7d2bf0aa856affe3efdc9ee2cad956fbfc1ebf92",
+  "scriptSha256": "59cb4c5b73db48e8375ad5712119d4343a14f1856975876b76c58aa468a8b051",
+  "sourceSha256": {
+    "board/client.js": "bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1",
+    "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
+    "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1"
+  }
+}

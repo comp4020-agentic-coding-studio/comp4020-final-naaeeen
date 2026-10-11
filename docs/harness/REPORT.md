@@ -1,6 +1,6 @@
 # A3 AI-agent research and working methods
 
-Active Final Project guidance. Updated7October2026. Read this report at the start
+Active Final Project guidance. Updated12October2026. Read this report at the start
 of every new/resumed A3 work task and return to its applicable sections throughout
 research, design, implementation, verification and refinement. The owner explicitly
 requires recurring checks for each phase, section and substantial subsection.
@@ -262,3 +262,28 @@ output. For versions read tracked mise.toml and use explicit installed-tool
 version commands. Never read overrides/.env/credentials for runtime verification.
 Publish whitelisted results/hashes, not raw inspection transcripts. Provider or
 credential changes need scoped authorization. See ../crit-9/VERIFICATION.md.
+
+## 12 October second-round corrections: evidence scope and grader calibration
+
+Apply [the round2 record](../crit-9/round-2/COMPARISON-AND-REVIEW.md) when evaluating
+similar claims. Older source summaries retain their original check dates.
+
+- Check the actual route/generation: a legacy lost-ACK browser case is not current
+  board/house evidence. Module/HTTP, browser and human checks remain distinct.
+- Calibrate important outcome graders with observed-state controls, not merely
+  flipping their already-derived PASS flags. Preserve weak/failed versions.
+- Specify rating anchors before review; undeclared fractions are a deviation,
+  not silently comparable scores. Keep reviewer disagreement and judgement visible.
+- Sanitize fresh packets by exact sections and assert verdict text absent before
+  delegation. A reviewer exposed to prior verdicts reports contamination; use
+  factual checks without calling it clean independent preference confirmation.
+- Bound evaluator waits and ensure failure recording/owned-resource cleanup.
+  Version safety amendments explicitly and do not call affected checks a full rerun.
+
+These observed corrections guide acceptance; technique count or model agreement
+does not prove HCI benefit, agent effectiveness or an HD result.
+
+Dependent orchestration must inspect nested shell exit_code and required result
+invariants before committing/marking a goal complete. A tool returning normally
+does not imply its command succeeded. Verify the actual commit and worktree; this
+corrects an observed premature finalization during the round2 byte-provenance fix.

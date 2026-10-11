@@ -383,3 +383,13 @@ canvas exploration with author-controlled study commitments; willingness is a
 strong tied option. Research/tests are retrospective, not deployment/human proof.
 Product scope/phases remain unchanged. Student C9 reflection, PROCESS rewrite
 remain separate work; the factual README recovery overclaim was corrected.
+
+## Crit 9 second research round, 12 October
+
+[Round2 recommendation](docs/crit-9/round-2/RECOMMENDATION.md) is the latest
+HCI+agent-process discussion choice: scoped submitted-message confirmation/retry
+preserves original intent and newer composition. Earlier card-authority argument
+remains product context; camera/readability remains a strong alternative.
+[Validation](docs/crit-9/round-2/VALIDATION.md) separates v2fourcase authority
+evidence from v3safetychecks and records actual product gaps not repaired here.
+No runtime/CI/provider changes, student reflection or human validation implied.

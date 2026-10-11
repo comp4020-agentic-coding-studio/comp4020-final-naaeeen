@@ -1,0 +1,34 @@
+{
+  "probeFresh": {
+    "history": "none",
+    "finding": "P2 delayedACKholdcouldhangonrequestfailure",
+    "recheck": "Contextual only; waitrace/cleanup and expectedfailurecontrol inspected; findingresolved",
+    "testsRun": false,
+    "limits": [
+      "Timerexpirybranchnotseparatelyexecuted",
+      "v3fullsuiteNOTRUN"
+    ]
+  },
+  "synthesisPartiallyContaminated": {
+    "history": "none",
+    "contamination": "Headingfiltermissedexactthe inheading; earlierverdictparagraphseen",
+    "role": "Factualsourcechecking, not clean independent preferenceconfirmation",
+    "finding": "VALIDATIONfileabsentatdraft; scopeV2fourcasesvsV3safetychecks",
+    "testsRun": false
+  },
+  "synthesisClean": {
+    "history": "none",
+    "input": "Exact-span sanitized FINAL-REVIEW-PACKET.md plus actualcode/factualartifacts only",
+    "verdict": "No new actionable defect; coherent C9 under joint goal with narrow scope",
+    "recommendedScope": "Nonexpired submittedboardmessage, originalactor/text/ID; oldACKcannotclearnewercomposer",
+    "countercase": "Simpler truthful optimistic feedback can preserve invariants without fullqueue dashboard; no UXcostbenefitstudy",
+    "testsRun": false,
+    "limits": [
+      "Workerreportchronologyvsrawredproof",
+      "Unsentdraftquotarecovery",
+      "Expiry",
+      "Awarenesslocalitywording",
+      "NoDOM/SockIO/WAN/human/learningclaim"
+    ]
+  }
+}

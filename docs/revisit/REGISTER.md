@@ -114,3 +114,11 @@ code/history, authority alternatives, evaluator calibration, counterevidence,
 fresh review and claim-refinement lanes. [Verification](../crit-9/VERIFICATION.md)
 separates completed checks from student/deployment/human follow-up. Retrospective
 research does not rewrite S/R chronology or the authoritative product scope.
+
+## Crit 9 second-round subsection audit
+
+[Detailed record](../crit-9/round-2/COMPARISON-AND-REVIEW.md) separately covers
+criteria, source/history, primary HCI countercases, candidate-rating calibration,
+composer recovery, local/shared awareness, raw-outcome grading, bounded evaluator
+failure, clean-review sanitization and final packaging. Current product gaps are
+recorded, not waived. Scope/source/hash/actualchecks in round2VALIDATION.md.

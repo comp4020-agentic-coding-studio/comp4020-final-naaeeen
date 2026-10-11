@@ -1,0 +1,47 @@
+{
+  "kind": "Reviewer-driven safety amendment verification",
+  "recordedAt": "2026-10-11T14:49:09.701195+00:00",
+  "revision": 3,
+  "syntaxExit": 0,
+  "earlyFailure": {
+    "actualExit": 1,
+    "classification": "EXPECTED_FAILURE_CONTROL",
+    "expectedFailureRecorded": true,
+    "elapsedMs": 263,
+    "declaredTerminationBoundMs": 5000,
+    "errors": [
+      {
+        "name": "Error",
+        "message": "DELAYED_ACK_SETTLED_BEFORE_HOLD",
+        "code": "DELAYED_ACK_SETTLED_BEFORE_HOLD",
+        "firstOk": false
+      }
+    ],
+    "ownedServersClosed": [
+      {
+        "mode": "delayed_ack",
+        "injection": "early-delayed-failure"
+      }
+    ]
+  },
+  "delayedSuccessSanity": {
+    "actualExit": 0,
+    "classification": "PASS",
+    "elapsedMs": 315,
+    "allDeclaredChecks": true,
+    "ownedServersClosed": [
+      {
+        "mode": "delayed_ack",
+        "injection": null
+      }
+    ]
+  },
+  "productionSourceHashesMatch": true,
+  "fullSuiteRerun": "NOT RUN; accepted v2 traces preserved",
+  "historicalAcceptedResults": "accepted-v2-before-safety-amendment/results.json",
+  "historicalRootResults": "results.json retains accepted v2 bytes; its recorded hashes belong to v2, not safety revision3",
+  "firstCalibrationArtifacts": "first-run-precomputed-calibration",
+  "scriptSha256": "c2028bec892152e2f8ca59dab75dc4347181e31c4b64ef411ef566ad871afffb",
+  "protocolSha256": "f18bcb1712c3c327ca722a0684e12744d5ae132cc25942ba57a42d0a311656c5",
+  "safetyAmendmentSha256": "11a9889cdb53693ebbabdcc072247b660561fe1b23441da8165dc8aa1ac1fae8"
+}
