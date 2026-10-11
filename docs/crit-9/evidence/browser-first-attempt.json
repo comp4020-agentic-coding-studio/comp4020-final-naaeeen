@@ -1,0 +1,79 @@
+{
+  "status": "INFRASTRUCTURE_FAILURE",
+  "task": "Two independent users save author-owned study cards, preserve the peer draft during a live saved nextStep update, retain an active card, and retrieve both own steps after reload.",
+  "test": "tests/e2e/house.spec.ts:271 two authors save independent cards, retain drafts, and retrieve active next steps",
+  "head": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "startedAt": "2026-10-11T13:41:54.395Z",
+  "serverCommand": [
+    "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "--max-semi-space-size=16",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/server.mjs",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/data",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/endpoint.json"
+  ],
+  "testCommand": [
+    "pnpm",
+    "exec",
+    "playwright",
+    "test",
+    "tests/e2e/house.spec.ts",
+    "--grep",
+    "^two authors save independent cards, retain drafts, and retrieve active next steps$"
+  ],
+  "browserExecutable": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+  "browserSandbox": true,
+  "retries": 0,
+  "viewportFixtures": [
+    "1920x1080 desktop",
+    "390x844 emulated phone"
+  ],
+  "outputs": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z",
+  "origin": "http://127.0.0.1:43401",
+  "serverPID": 757,
+  "healthStatus": 200,
+  "testEnvironment": {
+    "APP_URL": "http://127.0.0.1:43401",
+    "CI": "true",
+    "PW_EXECUTABLE": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "PW_OUTPUT_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/playwright-results",
+    "PW_REPORT_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/playwright-report",
+    "HOUSE_EVIDENCE_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/screenshots"
+  },
+  "testExit": {
+    "code": 1,
+    "signal": null
+  },
+  "serverExit": {
+    "code": 0,
+    "signal": null
+  },
+  "finishedAt": "2026-10-11T13:41:57.386Z",
+  "browserFlowStatus": "NOT_RUN",
+  "reason": "Existing Playwright CLI reported No tests found; the anchored grep did not match the path-prefixed full test title. No browser was launched.",
+  "sourceManifestSHA256": "3ab05859f0eb2a312a152692da87197d21a9bfd1d59c7de6e31ff150954b50b0",
+  "preparationObservation": "pnpm exec automatically reported lockfile current and dependencies already up to date, then ran the repository prepare script. No package download or tracked source diff was observed. The prepare script invokes git config core.hooksPath .githooks. No unowned configuration was reverted.",
+  "automaticApprovalObservation": "Earlier mise exec version-check command was rejected due potential tool preparation. Installed tools were then verified read-only; a no-config/no-env/no-hooks/no-deps/locked route was accepted.",
+  "coveredByTestSource": [
+    "Two separate browser contexts create/join the same house and see one another.",
+    "Both author-owned cards appear in both users card lists.",
+    "A saved authored nextStep becomes visible in the peer browser without reload.",
+    "The peer unsaved nextStep draft remains intact during the other author save.",
+    "The author card still shows Question open after saving nextStep.",
+    "Both own saved goal and nextStep fields return after both pages reload; author helpRequested returns.",
+    "Desktop and emulated-phone screenshots are taken; pageerror collection must be empty."
+  ],
+  "notVerifiedInThisRun": [
+    "All browser-flow assertions, because no test matched.",
+    "Human usability, voluntary collaboration, actual next-day return, deployment, physical-phone behavior, HTTP negative authorization, and within-one-second propagation.",
+    "Test source does not explicitly compare identity IDs in this focused case, does not prove browser profile restart or server restart durability, and does not contain a measured one-second assertion."
+  ],
+  "cleanup": {
+    "ownedServerExit": {
+      "code": 0,
+      "signal": null
+    },
+    "ownedServerStillPresent": false,
+    "trackedDiffObserved": false,
+    "unrelatedUntrackedPreserved": "docs/crit-9/"
+  }
+}

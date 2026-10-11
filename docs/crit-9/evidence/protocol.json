@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "registeredAtUTC": "2026-10-11T13:29:11.167197+00:00",
+  "kind": "Controlled technical policy comparison; no human A/B or production change",
+  "parentProtocol": "docs/crit-9/DECISION-SELECTION-PROTOCOL.json",
+  "sourceCommit": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "question": "How do shared canvas plus author cards, shared everything, and author everything distribute collaboration and commitment authority?",
+  "policies": {
+    "S": "Exact current HouseStore and BoardStore snapshots; shared canvas, author cards.",
+    "P": "Exact copies except remove the two card author-ID predicates; retain current house guards, revisions, receipts, original author IDs and all other constraints.",
+    "O": "Exact copies except add prior object original-author edit guard inside BoardStore patch transaction; card author guard remains."
+  },
+  "factor": "Only author ACLs on existing cards or canvas objects. Team task represented using same existing card fields, without new shared-card type or UI.",
+  "commonMembership": "BoardStore does not authenticate membership. Common trusted-actor wrapper checks HouseStore.me(actor).home.id against patch houseId before every board patch. This wrapper is test scope, not full HTTP/session/browser authentication. House commands retain actual house/session identity preconditions; opaque identities established through actual ensureSession.",
+  "fixed": {
+    "runtime": "Linux mise Node24.21.0",
+    "sqlite": "Node native sqlite; fresh isolated native database pair per case/order/policy",
+    "stores": "No providers, HTTP/listeners, production database or UI changes",
+    "concurrency": "Sequential serialized delivery permutations representing common offline edit races; not simultaneous threads/network timing"
+  },
+  "scenarios": [
+    {
+      "id": "peer-diagram",
+      "task": "B modifies A's existing diagram object at higher version",
+      "expect": {
+        "S": "accept",
+        "P": "accept",
+        "O": "FORBIDDEN"
+      },
+      "tradeoff": "Collaborative correction versus protection of individually intended object."
+    },
+    {
+      "id": "peer-individual-rewrite",
+      "task": "B rewrites A's personal goal/question/next step card",
+      "expect": {
+        "S": "FORBIDDEN",
+        "P": "accept",
+        "O": "FORBIDDEN"
+      },
+      "tradeoff": "Prevent unrequested commitment substitution versus allow agreed delegation."
+    },
+    {
+      "id": "peer-individual-close",
+      "task": "B closes A's active personal commitment",
+      "expect": {
+        "S": "FORBIDDEN",
+        "P": "accept",
+        "O": "FORBIDDEN"
+      },
+      "tradeoff": "Only A declares outcome versus teammate completing a delegated item."
+    },
+    {
+      "id": "shared-team-task-edit",
+      "task": "Card text explicitly states jointly owned team presentation task; B updates next step by prior agreement",
+      "expect": {
+        "S": "FORBIDDEN",
+        "P": "accept",
+        "O": "FORBIDDEN"
+      },
+      "tradeoff": "Strongest P benefit; S/O require creator mediation or a different shared-task object. Baseline retains creator label, not full shared ownership UX."
+    },
+    {
+      "id": "shared-team-task-close",
+      "task": "B closes the same kind of genuinely shared task by prior agreement",
+      "expect": {
+        "S": "FORBIDDEN",
+        "P": "accept",
+        "O": "FORBIDDEN"
+      },
+      "tradeoff": "P permits teammate closure; S/O block it even when socially legitimate."
+    },
+    {
+      "id": "owner-next-step-active",
+      "task": "A saves nextStep on own active card",
+      "expect": {
+        "S": "active",
+        "P": "active",
+        "O": "active"
+      },
+      "tradeoff": "Recording a next step does not assert completion."
+    },
+    {
+      "id": "stale-same-author-revision",
+      "task": "Two same-author drafts target expected revision 1; run delivery AB and BA on fresh fixtures",
+      "orders": [
+        "AB",
+        "BA"
+      ],
+      "expect": "First commits, second REVISION_CONFLICT; state and receipt set unchanged after denial."
+    },
+    {
+      "id": "distinct-object-race",
+      "task": "A updates own object a and B own object b from shared snapshot; run AB and BA",
+      "orders": [
+        "AB",
+        "BA"
+      ],
+      "expect": "Both accepted and both changes retained for all policies."
+    },
+    {
+      "id": "same-object-race",
+      "task": "A and B edit A's object at version2, nonces100 and50; run AB and BA",
+      "orders": [
+        "AB",
+        "BA"
+      ],
+      "expect": {
+        "S": "B lower nonce canonical winner in both orders",
+        "P": "B lower nonce canonical winner in both orders",
+        "O": "B denied, A winner in both orders"
+      },
+      "tradeoff": "S/P deterministic whole-object winner is not semantic consensus; O blocks shared corrections."
+    },
+    {
+      "id": "outsider-cross-house",
+      "task": "C is an actual member of a separate house and tries to rewrite/close A card and patch A board",
+      "expect": "All denied; both target store tables and receipts unchanged. Board denial comes from common membership wrapper."
+    },
+    {
+      "id": "denial-rollback",
+      "task": "For any denied action in every case compare full logical table dump before/after",
+      "expect": "State, sequences and receipts unchanged; synthetic identities/fixtures excluded only because created before captured action."
+    },
+    {
+      "id": "restart-replay",
+      "task": "Commit a card save and board patch; close/reopen both SQLite stores; exact replay and changed payload under same ID",
+      "expect": "Saved snapshots persist, exact receipts repeat without mutation, changed payload denied. Meaning limited to tested SQLite restart, not network delivery/redeployment."
+    },
+    {
+      "id": "evaluator-negative-control",
+      "task": "Apply same retention invariant to actual distinct-object snapshot and known-bad whole-scene replacement containing only last patch",
+      "expect": "Actual passes; known-bad loses unrelated peer object and is rejected",
+      "scope": "Synthetic evaluator calibration; no replacement source variant or UI"
+    }
+  ],
+  "evaluator": "standalone Node assert script; hash/freeze protocol, script and copied sources before first execution.",
+  "measurement": "Categorical acceptance/error and persisted state, author attribution, winning content, revisions, sequences, receipt counts. No speed/performance score or policy win by test counts.",
+  "stop": "One bounded registered comparison under approximately ten minutes; preserve failures/exit/log/provenance; rerun only affected checks after validated evaluator repair.",
+  "review": "Fresh read-only evaluator review if agent slot available; parent reconciles selection.",
+  "limits": [
+    "No user need or preference evidence",
+    "No full UX prototype for P/O",
+    "No service auth/browser/network verification",
+    "No semantic merge/consensus proof",
+    "No timing superiority",
+    "No house-card/shared-board cross-database atomicity claim"
+  ]
+}

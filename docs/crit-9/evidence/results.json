@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "kind": "technical policy comparison",
+  "startedAtUTC": "2026-10-11T13:31:47.423Z",
+  "finishedAtUTC": "2026-10-11T13:31:49.680Z",
+  "node": "v24.21.0",
+  "sqliteVersion": "3.53.4",
+  "sourceCommit": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "protocolSHA256": "d3b6a89af9a8d41f8ba7a60726abffe4607fea09773dc15976189129fee3b11a",
+  "evaluatorSHA256": "a4c666ff03dca135f700cf04f0f95e97e2c4e487c332ad66f00c7914e9d88681",
+  "records": [
+    {
+      "policy": "S",
+      "scenario": "peer-diagram",
+      "status": "PASS",
+      "observations": {
+        "action": {
+          "accepted": true
+        },
+        "finalX": 99
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "peer-individual-rewrite",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "peer-individual-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "shared-team-task-edit",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "shared-team-task-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "owner-next-step-active",
+      "status": "PASS",
+      "observations": {
+        "accepted": true,
+        "state": "active",
+        "revision": 2
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "stale-same-author-revision-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "firstDraftRetained": "A",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "stale-same-author-revision-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "firstDraftRetained": "B",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "distinct-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "distinct-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "same-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "deliveries": [
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 10
+          },
+          {
+            "actor": "B",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          }
+        ],
+        "finalX": 20,
+        "winner": "B lower nonce",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "same-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "deliveries": [
+          {
+            "actor": "B",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          },
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          }
+        ],
+        "finalX": 20,
+        "winner": "B lower nonce",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "outsider-cross-house",
+      "status": "PASS",
+      "observations": {
+        "cardRewrite": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "cardClose": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvas": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvasDenialLayer": "common trusted-membership wrapper",
+        "serviceAuthTested": false
+      }
+    },
+    {
+      "policy": "S",
+      "scenario": "restart-replay",
+      "status": "PASS",
+      "observations": {
+        "persistedSnapshots": true,
+        "exactReplaySameReceiptAndNoMutation": true,
+        "houseReuse": {
+          "accepted": false,
+          "code": "COMMAND_ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "boardReuse": {
+          "accepted": false,
+          "code": "ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "scope": "native SQLite close/reopen only"
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "peer-diagram",
+      "status": "PASS",
+      "observations": {
+        "action": {
+          "accepted": true
+        },
+        "finalX": 99
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "peer-individual-rewrite",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": true,
+          "entityRevision": 2
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "peer-individual-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": true,
+          "entityRevision": 2
+        },
+        "creatorLabelRetained": true,
+        "state": "closed"
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "shared-team-task-edit",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": true,
+          "entityRevision": 2
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "shared-team-task-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": true,
+          "entityRevision": 2
+        },
+        "creatorLabelRetained": true,
+        "state": "closed"
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "owner-next-step-active",
+      "status": "PASS",
+      "observations": {
+        "accepted": true,
+        "state": "active",
+        "revision": 2
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "stale-same-author-revision-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "firstDraftRetained": "A",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "stale-same-author-revision-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "firstDraftRetained": "B",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "distinct-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "distinct-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "same-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "deliveries": [
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 10
+          },
+          {
+            "actor": "B",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          }
+        ],
+        "finalX": 20,
+        "winner": "B lower nonce",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "same-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "deliveries": [
+          {
+            "actor": "B",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          },
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 20
+          }
+        ],
+        "finalX": 20,
+        "winner": "B lower nonce",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "outsider-cross-house",
+      "status": "PASS",
+      "observations": {
+        "cardRewrite": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "cardClose": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvas": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvasDenialLayer": "common trusted-membership wrapper",
+        "serviceAuthTested": false
+      }
+    },
+    {
+      "policy": "P",
+      "scenario": "restart-replay",
+      "status": "PASS",
+      "observations": {
+        "persistedSnapshots": true,
+        "exactReplaySameReceiptAndNoMutation": true,
+        "houseReuse": {
+          "accepted": false,
+          "code": "COMMAND_ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "boardReuse": {
+          "accepted": false,
+          "code": "ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "scope": "native SQLite close/reopen only"
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "peer-diagram",
+      "status": "PASS",
+      "observations": {
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "finalX": 0
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "peer-individual-rewrite",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "peer-individual-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "individual commitment; no consent stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "shared-team-task-edit",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "shared-team-task-close",
+      "status": "PASS",
+      "observations": {
+        "taskMeaning": "explicitly shared team task; prior agreement stipulated",
+        "action": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "creatorLabelRetained": true,
+        "state": "active"
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "owner-next-step-active",
+      "status": "PASS",
+      "observations": {
+        "accepted": true,
+        "state": "active",
+        "revision": 2
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "stale-same-author-revision-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "firstDraftRetained": "A",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "stale-same-author-revision-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "firstDraftRetained": "B",
+        "second": {
+          "accepted": false,
+          "code": "REVISION_CONFLICT",
+          "stateAndReceiptsPreserved": true
+        }
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "distinct-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "distinct-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "bothChangesRetained": true,
+        "objects": [
+          {
+            "id": "a",
+            "x": 10
+          },
+          {
+            "id": "b",
+            "x": 20
+          }
+        ]
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "same-object-race-AB",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "AB",
+        "deliveries": [
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 10
+          },
+          {
+            "actor": "B",
+            "accepted": false,
+            "code": "FORBIDDEN",
+            "stateAndReceiptsPreserved": true
+          }
+        ],
+        "finalX": 10,
+        "winner": "A original author",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "same-object-race-BA",
+      "status": "PASS",
+      "observations": {
+        "deliveryOrder": "BA",
+        "deliveries": [
+          {
+            "actor": "B",
+            "accepted": false,
+            "code": "FORBIDDEN",
+            "stateAndReceiptsPreserved": true
+          },
+          {
+            "actor": "A",
+            "accepted": true,
+            "returnedCanonicalX": 10
+          }
+        ],
+        "finalX": 10,
+        "winner": "A original author",
+        "semanticConsensus": false
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "outsider-cross-house",
+      "status": "PASS",
+      "observations": {
+        "cardRewrite": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "cardClose": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvas": {
+          "accepted": false,
+          "code": "FORBIDDEN",
+          "stateAndReceiptsPreserved": true
+        },
+        "canvasDenialLayer": "common trusted-membership wrapper",
+        "serviceAuthTested": false
+      }
+    },
+    {
+      "policy": "O",
+      "scenario": "restart-replay",
+      "status": "PASS",
+      "observations": {
+        "persistedSnapshots": true,
+        "exactReplaySameReceiptAndNoMutation": true,
+        "houseReuse": {
+          "accepted": false,
+          "code": "COMMAND_ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "boardReuse": {
+          "accepted": false,
+          "code": "ID_REUSED",
+          "stateAndReceiptsPreserved": true
+        },
+        "scope": "native SQLite close/reopen only"
+      }
+    },
+    {
+      "policy": "calibration",
+      "scenario": "known-bad-scene-replacement",
+      "status": "PASS",
+      "observations": {
+        "actualRetainsUnrelatedPeerObject": true,
+        "knownBadRejected": true,
+        "negativeControlKind": "synthetic last-patch replacement; no production/source variant"
+      }
+    }
+  ],
+  "failures": 0,
+  "exitCode": 0,
+  "limits": [
+    "No user need or preference evidence",
+    "No full UX prototype for P/O",
+    "No service auth/browser/network verification",
+    "No semantic merge/consensus proof",
+    "No timing superiority",
+    "No house-card/shared-board cross-database atomicity claim"
+  ],
+  "interpretation": "PASS verifies predeclared behavior for that policy; it is not evidence of superior user value. No policy selection computed."
+}

@@ -1,0 +1,32 @@
+--- /home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-decision-study/frozen/S/src/house-store.ts	2026-10-12 00:29:11.147234017 +1100
++++ /home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-decision-study/frozen/P/src/house-store.ts	2026-10-12 00:29:11.165699178 +1100
+@@ -375,7 +375,7 @@
+       const requestedId = p.cardId === undefined ? undefined : uuid(p.cardId);
+       const existing = requestedId ? this.prepared("SELECT * FROM cards WHERE id=?").get(requestedId) as CardRow | undefined : this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
+       if (requestedId && !existing) fail("FORBIDDEN", "This card is unavailable.");
+-      if (existing && (existing.author_id !== id || existing.house_id !== h.id)) fail("FORBIDDEN", "Only the author may edit their card.");
++      if (existing && existing.house_id !== h.id) fail("FORBIDDEN", "Only the author may edit their card.");
+       if (existing && existing.state !== "active") fail("FORBIDDEN", "An inactive card is read-only. Start a new current card.");
+       this.requireRevision(c.expectedRevision, existing?.revision ?? 0);
+       const cardId = existing?.id ?? randomUUID(), entityRevision = (existing?.revision ?? 0) + 1;
+@@ -385,7 +385,7 @@
+     if (c.type === "card.close") {
+       keys(p, ["cardId"], ["cardId"]); const cardId = uuid(p.cardId);
+       const existing = this.prepared("SELECT * FROM cards WHERE id=?").get(cardId) as CardRow | undefined;
+-      if (!existing || existing.author_id !== id || existing.house_id !== h.id) fail("FORBIDDEN", "Only the author may close this card.");
++      if (!existing || existing.house_id !== h.id) fail("FORBIDDEN", "Only the author may close this card.");
+       this.requireRevision(c.expectedRevision, existing.revision);
+       if (existing.state !== "active") fail("FORBIDDEN", "This card is already inactive.");
+       const sequence = this.bump(lounge);
+--- /home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-decision-study/frozen/S/src/board-store.ts	2026-10-12 00:29:11.151756453 +1100
++++ /home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-decision-study/frozen/O/src/board-store.ts	2026-10-12 00:29:11.167017494 +1100
+@@ -203,7 +203,8 @@
+                 const touched: BoardElement[] = [], serialized = new Map<string, string>();
+                 let changed = false;
+                 for (const incoming of p.elements) {
+-                    const row = this.prepared("SELECT value FROM elements WHERE house_id=? AND id=?").get(p.houseId, incoming.id) as { value: string } | undefined;
++                    const row = this.prepared("SELECT value,author_id FROM elements WHERE house_id=? AND id=?").get(p.houseId, incoming.id) as { value: string; author_id: string } | undefined;
++                    if (row && row.author_id !== actorId) boardFail("FORBIDDEN", "Only the original object author may edit this object.");
+                     const previous = row ? JSON.parse(row.value) as BoardElement : undefined;
+                     const winner = previous ? winningBoardElement(previous, incoming) : incoming;
+                     const canonical = boardCanonical(winner);

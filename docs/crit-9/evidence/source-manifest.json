@@ -1,0 +1,30 @@
+{
+  "createdAtUTC": "2026-10-11T13:29:11.186154+00:00",
+  "sourceCommit": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "originalSourceHashes": {
+    "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd"
+  },
+  "frozenHashes": {
+    "frozen/O/public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+    "frozen/O/src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "frozen/O/src/board-store.ts": "0e127e5bd4f38054d9cbf3dc4a2b5d133a2ff0c4e093427a1756853741916c7f",
+    "frozen/O/src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+    "frozen/O/src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+    "frozen/P/public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+    "frozen/P/src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "frozen/P/src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "frozen/P/src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+    "frozen/P/src/house-store.ts": "559c0e7ae2dfc4a6454fa8822fce8d5765ca36eddebcd54fbb935ffe7674d07d",
+    "frozen/S/public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+    "frozen/S/src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "frozen/S/src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "frozen/S/src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+    "frozen/S/src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30"
+  },
+  "protocolSHA256": "d3b6a89af9a8d41f8ba7a60726abffe4607fea09773dc15976189129fee3b11a",
+  "parentProtocolSHA256": "7077b48d6b7c8529366b87db908f17e5d13f631798515a8d2534d8a2422d4f92"
+}

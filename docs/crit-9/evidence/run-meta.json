@@ -1,0 +1,7 @@
+{
+  "finishedAtUTC": "2026-10-11T13:31:49.695489+00:00",
+  "command": "mise exec -- node .local/crit9-decision-study/evaluate.mjs",
+  "exitCode": 0,
+  "stdoutSHA256": "ebaeea8491aa8912abe27b6020e03775d6a21dd315baf0f7b2c04f458e06ce5f",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

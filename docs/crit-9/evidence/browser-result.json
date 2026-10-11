@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "task": "Two independent users save author-owned study cards, preserve the peer draft during a live saved nextStep update, retain an active card, and retrieve both own steps after reload.",
+  "test": "tests/e2e/house.spec.ts:271 two authors save independent cards, retain drafts, and retrieve active next steps",
+  "head": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "startedAt": "2026-10-11T13:43:46.057Z",
+  "serverCommand": [
+    "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "--max-semi-space-size=16",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/server.mjs",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/data",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/endpoint.json"
+  ],
+  "testCommand": [
+    "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/@playwright/test/cli.js",
+    "test",
+    "tests/e2e/house.spec.ts",
+    "--grep",
+    "two authors save independent cards, retain drafts, and retrieve active next steps"
+  ],
+  "browserExecutable": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+  "browserSandbox": true,
+  "retries": 0,
+  "viewportFixtures": [
+    "1920x1080 desktop",
+    "390x844 emulated phone"
+  ],
+  "outputs": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z",
+  "origin": "http://127.0.0.1:42189",
+  "serverPID": 722,
+  "healthStatus": 200,
+  "testEnvironment": {
+    "APP_URL": "http://127.0.0.1:42189",
+    "CI": "true",
+    "PW_EXECUTABLE": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "PW_OUTPUT_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/playwright-results",
+    "PW_REPORT_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/playwright-report",
+    "HOUSE_EVIDENCE_DIR": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134334Z/screenshots"
+  },
+  "testExit": {
+    "code": 0,
+    "signal": null
+  },
+  "serverExit": {
+    "code": 0,
+    "signal": null
+  },
+  "finishedAt": "2026-10-11T13:44:08.437Z",
+  "sourceManifestSHA256": "3ab05859f0eb2a312a152692da87197d21a9bfd1d59c7de6e31ff150954b50b0",
+  "sourceFilesChangedDuringRun": [],
+  "nativeScreenshots": [
+    {
+      "path": "screenshots/house-desktop-board.png",
+      "nativeEncoding": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "47b6e1b50f318057ef32bb6ec740431a59f4991eeebbc5522eb9e3434ff690d3"
+    },
+    {
+      "path": "screenshots/house-phone-board.png",
+      "nativeEncoding": "PNG",
+      "width": 390,
+      "height": 844,
+      "sha256": "d6aab6dbeeaecacf1f936bfe2533301c1202fd369f72b29af22b43061e2d97f7"
+    }
+  ],
+  "browserFlowStatus": "PASS",
+  "testLogSummary": "Running 1 test using 1 worker\n\n  \u2713  1 tests/e2e/house.spec.ts:271:1 \u203a two authors save independent cards, retain drafts, and retrieve active next steps (20.1s)\n\n  1 passed (21.4s)",
+  "covered": [
+    "Two independent browser contexts create/join the same house and see one another in the roster.",
+    "Both authors save separate cards; both saved cards appear in both browsers.",
+    "Author saved nextStep appears in peer card list without a peer reload.",
+    "Peer unsaved nextStep draft survives the other author live save.",
+    "Author card still displays Question open after nextStep save.",
+    "Both own goal and nextStep fields return after both pages reload; author Ask for help is restored.",
+    "Both contexts produce native screenshots at the configured desktop and emulated-phone dimensions, with no collected pageerror."
+  ],
+  "limits": [
+    "Local browser integration only; no deployment, human usability, physical phone, natural next-day return, or HTTP negative-authorization result.",
+    "The test uses separate contexts but does not explicitly compare identity IDs in this focused case.",
+    "Retrieval is after page reload with existing browser cookies, not server restart or a new browser profile.",
+    "The test has loose assertion timeouts; it does not measure or prove propagation within one second.",
+    "An emulated mobile browser viewport is not a physical-device result."
+  ],
+  "firstAttempt": {
+    "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-browser-evidence/run-20261011T134141Z/result.json",
+    "status": "INFRASTRUCTURE_FAILURE",
+    "browserFlowStatus": "NOT_RUN",
+    "error": "No tests found",
+    "observation": "pnpm exec automatically ran up-to-date dependency preparation and the existing prepare hook; no tracked source change observed. Corrected run used direct installed Node CLI."
+  },
+  "cleanup": {
+    "ownedServerExit": {
+      "code": 0,
+      "signal": null
+    },
+    "ownedServerStillPresent": false,
+    "trackedDiffExit": 0,
+    "gitStatus": "?? docs/crit-9/"
+  }
+}

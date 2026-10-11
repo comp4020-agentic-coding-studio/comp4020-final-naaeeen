@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Select a defensible implemented C9 multiuser behavior decision; not an automated grade or human preference study.",
+  "registeredAtUTC": "2026-10-11T13:19:26.711931+00:00",
+  "sourceCommit": "dea0b7a2f352cc93fd2d9c88d0287607a9d8d304",
+  "courseURLs": [
+    "https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/09-all-at-once/",
+    "https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/assessments/final-project/",
+    "https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/"
+  ],
+  "criteria": {
+    "c9BehaviorFit": {
+      "weight": 30,
+      "anchors": [
+        "0: no actual simultaneous-user behavior",
+        "1: indirect process relevance",
+        "2: clear multiuser behavior",
+        "3: directly answers C9 with observable alternatives"
+      ]
+    },
+    "valueAndDepth": {
+      "weight": 20,
+      "anchors": [
+        "0: cosmetic/feature list",
+        "1: familiar pattern without product-specific reason",
+        "2: concrete value/tradeoff grounded in target",
+        "3: precise normative choice with strong counter-case and contextual limits"
+      ]
+    },
+    "implementationEvidence": {
+      "weight": 25,
+      "anchors": [
+        "0: unsupported",
+        "1: plan-only",
+        "2: actual code/tests/commits",
+        "3: README-rule-check-artifact chain, exact scope and falsifier"
+      ]
+    },
+    "alternativesAndCosts": {
+      "weight": 15,
+      "anchors": [
+        "0: caricature",
+        "1: unexplored alternatives",
+        "2: credible alternatives and real cost",
+        "3: strongest counter-case and when preferred alternative changes"
+      ]
+    },
+    "demoClarity": {
+      "weight": 10,
+      "anchors": [
+        "0: no demo",
+        "1: explanation only",
+        "2: concrete two-session task",
+        "3: short observable task plus meaningful failure/denial/recovery case"
+      ]
+    }
+  },
+  "eligibility": "A main candidate must be implemented, govern actual multiuser behavior, have code/commit evidence and admit a credible alternative. No human value or HD inference from passing checks.",
+  "candidates": [
+    "A: whole-element collaboration/conflict handling",
+    "B: explicit willingness separate from presence",
+    "C: shared canvas versus author-controlled study commitments",
+    "D: persistent membership versus browser connections",
+    "E: bedroom access/retained history versus decoration authority",
+    "F: pending versus acknowledged saved actions",
+    "G: narrow target/purpose positioning",
+    "H: resource/GPU/harness optimization"
+  ],
+  "reviewOrder1": [
+    "D",
+    "B",
+    "H",
+    "C",
+    "E",
+    "A",
+    "G",
+    "F"
+  ],
+  "reviewOrder2": [
+    "F",
+    "G",
+    "A",
+    "E",
+    "C",
+    "H",
+    "B",
+    "D"
+  ],
+  "sensitivityProfiles": {
+    "product": [
+      35,
+      30,
+      15,
+      15,
+      5
+    ],
+    "corroboration": [
+      25,
+      15,
+      35,
+      15,
+      10
+    ]
+  },
+  "methods": [
+    "Current source and Git audit",
+    "Primary course/product/research evidence",
+    "Controlled technical policy comparison with actual isolated stores and explicit prototype baselines, if it discriminates behavior",
+    "Fresh-context independent candidate review; reversed presentation order",
+    "Parent reconciliation/refinement followed by skeptical final review"
+  ],
+  "disqualifiers": [
+    "Claims depend on unimplemented behavior",
+    "CRDT/OT or universal peer-safe undo falsely attributed",
+    "Quiet falsely described as enforced consent/DND",
+    "No credible counter-case",
+    "Tests/model preference presented as human validation",
+    "Authorship or chronology invented"
+  ],
+  "noProductionChange": "Research/report work; all prototypes isolated, no live-user mutations or runtime/CI changes.",
+  "stopConditions": [
+    "One primary decision and at most one supporting decision chosen with traceable reasons",
+    "Two bounded review/refinement cycles complete and evidence defects resolved",
+    "Technical comparison records legitimate advantages of alternatives, not only chosen-policy wins",
+    "English recommendation/source/evidence files validated; student personal reflection not fabricated"
+  ]
+}
