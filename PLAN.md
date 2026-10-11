@@ -393,3 +393,12 @@ remains product context; camera/readability remains a strong alternative.
 [Validation](docs/crit-9/round-2/VALIDATION.md) separates v2fourcase authority
 evidence from v3safetychecks and records actual product gaps not repaired here.
 No runtime/CI/provider changes, student reflection or human validation implied.
+
+## Crit 9 design-first refinement, 12 October
+
+The owner challenged bug-repair-centered framing and requested a genuine
+user-goal/HCI design tradeoff. Latest [round3recommendation](docs/crit-9/round-3/RECOMMENDATION.md)
+selects independently declared approachability for quiet company/optional talk.
+Full board mode is the strongest owner-led alternative; earlier recovery evidence
+supports reliability/process. [Comparison](docs/crit-9/round-3/DESIGN-COMPARISON.md)
+retains disagreement. This updates discussion choice, not runtime product scope.

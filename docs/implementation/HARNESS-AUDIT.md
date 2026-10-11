@@ -380,3 +380,13 @@ Applied the matching evidence-driven/deep-research/WSL methods, not unrelated
 global procedures. No runtime/CI/provider/student-reflection changes; generic
 evidence PASS on crit8 does not establish C9 readiness. Future agents route
 similar claims through these scope/calibration checks before acceptance.
+
+## 12 October design-first decision revisit
+
+Owner rejected reliability repair as main design argument. [Round3](../crit-9/round-3/EVIDENCE-AND-REVIEW.md)
+revisited user/provisional goal, viable alternativecapabilities, originalHCIpapers
+andcountercases, currentstatus/access/preview/defaultsemantics, preimplementation
+AIcomparisonchronology, S/W/V competingprocessstrengths, freshorderedreviews and
+skeptical scope/refinement. Actual3 selectedtests passed; humanvalue remainsunrun.
+Historicaloutcomeexposure islabelled andnot counted asblindpreferenceproof. Default
+timestamp andcoupledpreview claims were corrected in prose, notruntime behavior.

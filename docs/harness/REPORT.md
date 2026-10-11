@@ -287,3 +287,15 @@ Dependent orchestration must inspect nested shell exit_code and required result
 invariants before committing/marking a goal complete. A tool returning normally
 does not imply its command succeeded. Verify the actual commit and worktree; this
 corrects an observed premature finalization during the round2 byte-provenance fix.
+
+## 12 October design-first audit
+
+Owner distinguishes a genuine goal/value tradeoff from reliable bug repair.
+[Round3](../crit-9/round-3/DESIGN-COMPARISON.md) compares alternatives that can all
+function correctly; counts/negativecontrols do not select a human experience.
+Trace public declarations separately from observable state, defaults and private
+notification preferences. A timestamp can be automatically initialized; a mode
+may couple intentions that the prose incorrectly calls independent.
+Historical process records can contain verdicts. A source auditor may inspect
+them, but cannot then claim fully blind preference review; initial evaluators
+receive exact factual excerpts. Preserve that limitation instead of renaming it.

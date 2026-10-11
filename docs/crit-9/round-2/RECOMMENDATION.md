@@ -4,6 +4,12 @@
 question: demonstrate HCI reasoning **and actual AI-agent direction/correction**.
 It does not invalidate the earlier personal-card decision or claim a universal best.
 
+## Design-first follow-up
+
+The owner subsequently asked for stronger HCI/user-goal/functional-alternative
+reasoning. [Round3](../round-3/RECOMMENDATION.md) is the latest discussion choice.
+This report remains the recovery/verification account for its earlier joint goal.
+
 ## Recommended single Crit 9 decision
 
 **For a submitted board message within the retry window and current authorization,

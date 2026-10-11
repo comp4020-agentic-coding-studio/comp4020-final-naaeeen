@@ -1,0 +1,27 @@
+{
+  "history": "none",
+  "independenceLimit": "Historical positioning outcomes accidentally exposed in source chronology inspection; direct factual review, not fullyblind comparative verdict",
+  "findings": [
+    {
+      "severity": "P2",
+      "target": "Final packet demo",
+      "fact": "world previewquiet flag derivesfromselfavailability; publicmode and privatepreviews coupled",
+      "refinement": "Explicitcoupling and independentsettingsalternative; demo corrected"
+    },
+    {
+      "severity": "P2",
+      "target": "Default/freshnessdescription",
+      "fact": "newlease initializesQuiet+Date.now; currentUItime doesnotdistinguishdefaultfrommanualchoice",
+      "refinement": "Distinguishdefaultvalue and explicitCanchat; time isvalue-setnotattentionsignal"
+    }
+  ],
+  "scopeVerified": [
+    "Softcue not messagegate",
+    "No invisibility/confidentiality/attention guarantee",
+    "Planning existsbeforecode; raw execution/authorship notindependentlyproven",
+    "Papers frameworknotstudentuservalidation",
+    "Runtimehashesunchanged"
+  ],
+  "testsRun": false,
+  "recheck": "Contextual targetedrecheck found both wordingissuesresolved; no remaining actionable mismatch; no testsrerun"
+}

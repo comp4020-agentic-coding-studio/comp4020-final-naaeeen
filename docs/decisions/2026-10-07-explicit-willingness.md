@@ -56,3 +56,13 @@ This is the proposed consequential behavior decision for
 The student must explain how it follows README's good, its rejected options and
 costs, then address the pod's counter-case. This ADR is not the live demonstration,
 Crit9 reflection or proof of the student's understanding.
+
+## 12 October design-first reconsideration
+
+The owner challenged a later reliability-centered Crit9 framing. New
+[designcomparison](../crit-9/round-3/DESIGN-COMPARISON.md) re-examines this existing
+decision against functioning alternatives and full-board/camera choices. The
+latest argument is quiet company with voluntarily declared approachability, not
+enforced consent or inferred attention. House Quiet also couples public status
+with private preview suppression; independent settings are a real alternative.
+New theory/product references are today's interpretation, not backdated research.

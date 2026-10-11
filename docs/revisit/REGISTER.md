@@ -122,3 +122,12 @@ criteria, source/history, primary HCI countercases, candidate-rating calibration
 composer recovery, local/shared awareness, raw-outcome grading, bounded evaluator
 failure, clean-review sanitization and final packaging. Current product gaps are
 recorded, not waived. Scope/source/hash/actualchecks in round2VALIDATION.md.
+
+## Crit 9 design-first subsection revisit
+
+[Round3 evidence](../crit-9/round-3/EVIDENCE-AND-REVIEW.md) separately checks owner/
+provisional goal, correct-working alternatives, HCI/social pressure, paper limits,
+current/default state, public/private coupling, AI planning chronology, inherited
+camera evidence, fresh comparison/reconciliation and final scope refinement.
+Three selected behavior checks protect defaults/unread/freshness; human claims
+remain unrun. Runtime scope and known prior gaps remain unchanged.

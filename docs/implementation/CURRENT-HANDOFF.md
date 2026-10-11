@@ -581,3 +581,14 @@ Parent additionally verified Windows IPv4 health with curl -4 localhost. Default
 .NET localhost timed out; no app/network/sandbox configuration changed. Browser
 control initialization is blocked by host ACLs after supported retry/reset; the
 app-open request is queued and visible user-browser rendering is not confirmed.
+
+## 12 October Crit 9 design research handoff
+
+The owner requested HCI/user-goal tradeoffs rather than a bug-fix-led argument.
+Read docs/crit-9/round-3/RECOMMENDATION.md and EVIDENCE-AND-REVIEW.md.
+Latest discussion choice: quiet company with voluntary approachability, separate
+from connection/location/door access. Full-board mode is the strongest owner-led
+alternative. Earlier rounds remain supporting records. Runtime/CI/providers
+unchanged; board recovery/locality gaps and student/user/live checks remain open.
+Default Quiet is not a personal choice; timestamps include initialization.
+Public cue and private house previews are coupled; no whole-app DND is promised.
