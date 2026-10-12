@@ -390,3 +390,15 @@ AIcomparisonchronology, S/W/V competingprocessstrengths, freshorderedreviews and
 skeptical scope/refinement. Actual3 selectedtests passed; humanvalue remainsunrun.
 Historicaloutcomeexposure islabelled andnot counted asblindpreferenceproof. Default
 timestamp andcoupledpreview claims were corrected in prose, notruntime behavior.
+
+## Crit 9 writing and live acceptance
+
+Owner authorized English student-style completion and explicit AI-smell search.
+Source/factual and prose reviewers began fresh; grounded personal aspiration and
+agent-reading attribution were refined. README missingevidencelinks caused503/504;
+restoredlinks/testunchanged, full504/504 passed. ExactC9reflection checked alongside
+generic evidence. Publiccode42f7c50 CI38187166613 and post-release native proof passed.
+Windows Schannel failure was handled through LinuxTLS, not security weakening.
+First native mobile-overlayfailure/fixturecleanupgap retained; corrected trial
+used normalcontrols/cleanup. Metadata-only closeout requires actualnewCI but no
+recursive proof commits. See submission acceptance/recordedscope.

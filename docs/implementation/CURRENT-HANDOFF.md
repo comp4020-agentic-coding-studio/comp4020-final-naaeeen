@@ -592,3 +592,13 @@ alternative. Earlier rounds remain supporting records. Runtime/CI/providers
 unchanged; board recovery/locality gaps and student/user/live checks remain open.
 Default Quiet is not a personal choice; timestamps include initialization.
 Public cue and private house previews are coupled; no whole-app DND is promised.
+
+## Crit 9 submitted release, 12 October
+
+Core writing/copy commit e8ca2d5 and acceptance milestone42f7c50 are public.
+CI38187166613 passed checks/native/resource/secret scans and Flybackup/deploy.
+New README and board-awareness copy were verified live; post-release two-browser
+availability/Quiet/transcript task passed. Details: docs/crit-9/submission/ACCEPTANCE.md.
+One final evidence-only commit records actual outcomes; do not recursively commit
+new success records. Student's own pod demo/defence and real-friend value study
+remain separate. Superseded release NOT RUN text above is historical.

@@ -1,0 +1,64 @@
+{
+  "protocolSha256": "258f580f3a21f4eb51508376bde12fb89dfd6bab8d6187efd14511e5ada3a1cb",
+  "scriptSha256": "693bb257732265a8b713f8a89e7903e8eb97a42c2d352ed66a1d0baaf834f8b9",
+  "startedAt": "2026-10-12T00:25:04.851Z",
+  "completedAt": "2026-10-12T00:25:16.059Z",
+  "origin": "https://comp4020-final-naaeeen.fly.dev",
+  "node": "v24.21.0",
+  "playwright": "1.63.0",
+  "browser": "153.0.8010.12",
+  "status": "PASS",
+  "latencies": [
+    {
+      "source": "C9 Trial Owner",
+      "value": "chat",
+      "elapsedMs": 200.533554,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Owner",
+      "value": "quiet",
+      "elapsedMs": 305.426923,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Peer",
+      "value": "chat",
+      "elapsedMs": 141.722425,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Peer",
+      "value": "quiet",
+      "elapsedMs": 129.280407,
+      "withinAboutOneSecond": true
+    }
+  ],
+  "checks": {
+    "independentContextsCreateJoin": true,
+    "noReloadDuringMeasurements": true,
+    "ownerTextVisibleInPeerTranscript": true,
+    "quietUnreadAndNoWorldBubbles": true,
+    "quietReplyRetainedInTranscript": true,
+    "openingChatClearsUnread": true,
+    "noPageErrors": true
+  },
+  "cleanup": {
+    "peer": "PASS",
+    "owner": "PASS"
+  },
+  "exitCode": 0,
+  "releaseCommit": "42f7c506e456d9bd317c3212abd670eb19b24474",
+  "ciRun": 38187166613,
+  "ciUrl": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/38187166613",
+  "releaseIdentityEvidence": "Parent verified the exact successful CI/deployment and live served source/readme/board-copy identity; this lane ran the fresh browser task afterwards.",
+  "helperSha256": "cff5e8cd22357ba6bbad41aa3f482c7abae866ed2ccf20cbd62db63894b1efc9",
+  "chromiumRevision": 1243,
+  "scope": "One fresh real deployed browser trial in independent desktop 1920x1080 and phone-emulated 390x844 contexts. No reload during toggles; native UI create/join, text exchange, Quiet unread/retained transcript and world-bubble suppression. No physical-device or human-efficacy claim.",
+  "clock": "Single runner process.hrtime.bigint monotonic clock; start immediately before native radio click; stop after peer waitForFunction confirms the expected roster row text. Includes browser driver overhead; no reload. Four changes, no repetitions for scores.",
+  "metadataCorrection": "The immutable pre-run protocol used an incorrect guessed repository URL for the CI record. This sanitized record uses the exact verified CI URL and full release commit supplied by the parent. The live app origin, task, helper source and measurement protocol were unaffected; the trial was not rerun for metadata.",
+  "earlierEvidence": "Pre-release amended result and the first failed attempt/uncleaned original synthetic fixture remain separate in the parent live folder. This fresh fixture was cleaned through normal peer departure then sole-owner departure.",
+  "pageErrorCount": 0,
+  "screenshots": "NOT RUN: existing pre-release screenshots are separately labelled; this post-release check records behavior and timings only.",
+  "elapsedSeconds": 11.208
+}

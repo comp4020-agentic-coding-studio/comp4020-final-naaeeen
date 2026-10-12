@@ -15,7 +15,7 @@ of the design argument. AI assistance is disclosed once in each account.
 The existing willingness ADR carries the decision. Newreferences checked12October
 are not presented as originalOctober6reading.
 
-Visible-text counts after review: README571,PROCESS979,reflection updated within150–300 words.
+Visible-text counts after review: README571,PROCESS979,reflection243 words.
 Fresh source/factual and prose reviews plus targeted refinement precede publication.
 
 ## Deployed two-session behavior
@@ -57,7 +57,19 @@ Evidence check passed and exact reflections/crit-9.md exists. Factual and prose
 reviewers started without prior chat, requested grounded personal attribution and
 clearer phrasing, then completed contextual rechecks.
 [Review record](REVIEWS.json). Source/word/citation/diff checks precede commit;
-public main push, CI/Fly and new rendered README verification are pending here.
+public main42f7c506 was pushed and its
+[CI/Fly run38187166613](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/38187166613)
+completed successfully. The run passed required specs, maintained browser core,
+the registered300s workload, evidence and both secret scans. Private mounted
+backups, deployment and live health passed. New README argument/source links and
+corrected board copy were read back from the deployed site.
+[Exact release record](evidence/release-42f7c50.json).
+
+A fresh [post-release two-session check](evidence/post-release-live.json) passed:
+four status deliveries129.28–305.43ms, retained Quiet conversation/unread and no
+page errors; its own fixture departed normally. Pre-release and first-failure
+records remain distinct. One final evidence-only publication records these
+results; its CI is verified separately rather than starting recursive updates.
 
 The generic evidence checker can pass on Crit8 alone; current-file presence is
 checked separately. No release success is inferred from the previous green run.

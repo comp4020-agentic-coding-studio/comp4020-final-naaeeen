@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-10-12T00:24:58.169122+00:00",
+  "testedCommit": "42f7c506e456d9bd317c3212abd670eb19b24474",
+  "ci": {
+    "runId": 38187166613,
+    "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/38187166613",
+    "status": "success",
+    "jobs": [
+      {
+        "name": "check",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v7",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run jdx/mise-action@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run pnpm install --frozen-lockfile",
+            "conclusion": "success"
+          },
+          {
+            "name": "Pull the pinned maintained browser image",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build and start the app",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the spec",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify the maintained browser core against the image",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the registered combined board workload",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preserve the sanitized resource result",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preserve browser failure diagnostics",
+            "conclusion": "success"
+          },
+          {
+            "name": "Show the app's output",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Check the process evidence",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for committed secrets",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for a committed course key",
+            "conclusion": "success"
+          },
+          {
+            "name": "Remove the disposable app",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v7",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v7",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify private mounted SQLite backups",
+            "conclusion": "success"
+          },
+          {
+            "name": "Deploy",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify the deployed site is online",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v7",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "live": {
+    "origin": "https://comp4020-final-naaeeen.fly.dev",
+    "health": {
+      "ok": true
+    },
+    "newReadmeArgumentAndLinks": true,
+    "boardAwarenessCopyPublished": true,
+    "readmeHtmlSHA256": "9fe025e28a0911883683473210fda38af97c069ae6467b5d3327523b2c33ae0e"
+  },
+  "resource": {
+    "status": "PASS",
+    "artifactSHA256": "7814d2521bbc16c37b8c59ee23b4c9714d6590620273cdd55daf42b2a6f8fffa",
+    "durationSeconds": 300.001,
+    "rssPeakMiB": 178.91015625,
+    "normalP95Ms": 10.375,
+    "pending": 0,
+    "unexpectedDisconnects": 0,
+    "gates": {
+      "scopedDelivery": true,
+      "inbound": true,
+      "httpBudget": true,
+      "duration": true,
+      "all24Initial": true,
+      "all24Final": true,
+      "rss": true,
+      "boardQueues": true,
+      "houseQueues": true,
+      "telemetryValid": true,
+      "eventLoop": true,
+      "health": true,
+      "unexpectedDisconnects": true,
+      "allNormalDelivered": true,
+      "allDeliveredIncludingCatchup": true,
+      "normalP95": true,
+      "normalInputs": true,
+      "workload": true,
+      "recovery": true,
+      "negativeAck": true,
+      "slowExpiry": true
+    },
+    "protocolSHA256": "4f8feadb5fc8ef65e9b6c6a27a959704b33547571d66a3c858a9b04d19691364",
+    "sourceManifestSHA256": "daec256705018706da538eeccd699463cfc4e8fdbb78aa320ad7e1f0defbcc6d",
+    "scope": "Registered synthetic CI workload, not physical Fly stress or human UX"
+  },
+  "scope": "Verified app release42f7c506; final metadata commit changes only this evidence, not submission text/runtime. Its CI is checked separately, without recursively updating this record."
+}
