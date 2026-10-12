@@ -1,0 +1,111 @@
+{
+  "protocolSha256": "a76a93d065d2e0c568e58535f13affb93692c5f0b5fef445e4fcdba9bb0a0cac",
+  "scriptSha256": "25b96ab0f2106c59c9810b54bcf160156af629370f8505bd9db144f44a8cd1be",
+  "startedAt": "2026-10-11T23:59:24.283Z",
+  "completedAt": "2026-10-11T23:59:40.837Z",
+  "origin": "https://comp4020-final-naaeeen.fly.dev",
+  "node": "v24.21.0",
+  "playwright": "1.63.0",
+  "browser": "153.0.8010.12",
+  "status": "PASS",
+  "latencies": [
+    {
+      "source": "C9 Trial Owner",
+      "value": "chat",
+      "elapsedMs": 475.48749,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Owner",
+      "value": "quiet",
+      "elapsedMs": 394.87925,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Peer",
+      "value": "chat",
+      "elapsedMs": 204.309887,
+      "withinAboutOneSecond": true
+    },
+    {
+      "source": "C9 Trial Peer",
+      "value": "quiet",
+      "elapsedMs": 381.85735,
+      "withinAboutOneSecond": true
+    }
+  ],
+  "checks": {
+    "independentContextsCreateJoin": true,
+    "noReloadDuringMeasurements": true,
+    "ownerTextVisibleInPeerTranscript": true,
+    "quietUnreadAndNoWorldBubbles": true,
+    "quietReplyRetainedInTranscript": true,
+    "openingChatClearsUnread": true,
+    "noPageErrors": true
+  },
+  "cleanup": {
+    "peer": "PASS",
+    "owner": "PASS"
+  },
+  "screenshots": [
+    {
+      "file": "desktop-quiet-unread.png",
+      "dimensions": {
+        "innerWidth": 1920,
+        "innerHeight": 1080,
+        "scrollWidth": 1920
+      },
+      "settingsClosed": true,
+      "sha256": "1be4545a4afad5ff838391f214af71893499abebc6f70fff8d76adfe8c6e30cb"
+    },
+    {
+      "file": "desktop-transcript.png",
+      "dimensions": {
+        "innerWidth": 1920,
+        "innerHeight": 1080,
+        "scrollWidth": 1920
+      },
+      "settingsClosed": true,
+      "sha256": "1fef5b05ebaf68540d90ecb5dcf7c942bc007b715f6515f6e21ffeed0c304ccd"
+    },
+    {
+      "file": "phone-transcript.png",
+      "dimensions": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "scrollWidth": 390
+      },
+      "settingsClosed": true,
+      "sha256": "70d8f1cc60d45f320bdbadc542efe2b1a03fc2f408fcc0f4198bc6978ba20c1f"
+    }
+  ],
+  "scope": "Single real deployed synthetic two-context UI trial on the runtime already deployed before the new evidence-only release. Desktop browser and phone viewport emulation, not a physical phone or human study.",
+  "chromiumRevision": 1243,
+  "maintainedHelperSha256": "cff5e8cd22357ba6bbad41aa3f482c7abae866ed2ccf20cbd62db63894b1efc9",
+  "exitCode": 0,
+  "firstAttempt": {
+    "status": "FAIL",
+    "exitCode": 1,
+    "protocolSha256": "700b3d1f05e7d21b7468b93a0a98ac818142f755c2df87b9a88fe1ef37028112",
+    "scriptSha256": "a192504ddc8867ad7f94172185477443467cdb84ed7004d69a76da7625c6dcf4",
+    "latencies": [
+      {
+        "source": "C9 Trial Owner",
+        "value": "chat",
+        "elapsedMs": 229.943389,
+        "withinAboutOneSecond": true
+      },
+      {
+        "source": "C9 Trial Owner",
+        "value": "quiet",
+        "elapsedMs": 328.196555,
+        "withinAboutOneSecond": true
+      }
+    ],
+    "failure": "Open mobile Residents disclosure intercepted the radio and settings native clicks. Owner could not leave while the peer remained. This was a blocked UI action, not a delayed realtime update.",
+    "cleanup": "INCOMPLETE: first privately created two-member synthetic fixture remains; its temporary browser sessions were closed without retaining recovery credentials. No unrelated household was accessed or changed."
+  },
+  "amendment": "Version 2 closes the source Residents disclosure before radio clicks and closes disclosure/chat before normal UI departure. One repeat was run; no force clicks or game-state injection.",
+  "screenshotsVisuallyInspected": true,
+  "publicPrivacyCheck": "All three PNGs visually inspected: only synthetic names/messages/world UI; invitation and recovery panels closed. No invite code, recovery key, cookie or session token visible."
+}

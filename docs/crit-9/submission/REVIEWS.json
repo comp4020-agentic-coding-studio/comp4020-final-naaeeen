@@ -1,0 +1,20 @@
+{
+  "factual": {
+    "initialHistory": "none",
+    "result": "No materialfact/citation/runtimeerrors",
+    "refinement": "Developerprinciplegroundedinactualcomparisonrequests; personalreadingattributedtoagent",
+    "contextualRecheck": "Resolved; notnewfreshtrial"
+  },
+  "prose": {
+    "initialHistory": "none",
+    "result": "Plaincoherentstudentargument",
+    "refinements": [
+      "CurrentADRquietcompanypurpose/invitations",
+      "Agentreading/directedscopeattribution",
+      "Repeatedcomparisonclausecut",
+      "UsefulREADMEevidencelinks"
+    ],
+    "contextualRecheck": "Materialissuesresolved; oneoptionalcutapplied"
+  },
+  "scope": "No reviewer ran tests; nativechecksandlivebrowser separately recorded"
+}

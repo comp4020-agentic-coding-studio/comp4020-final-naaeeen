@@ -299,3 +299,13 @@ may couple intentions that the prose incorrectly calls independent.
 Historical process records can contain verdicts. A source auditor may inspect
 them, but cannot then claim fully blind preference review; initial evaluators
 receive exact factual excerpts. Preserve that limitation instead of renaming it.
+
+## Crit 9 writing closeout
+
+Owner explicitly requested student-style English, useful references and less AI
+writing boilerplate. See ../crit-9/submission/WRITING-AND-ACCEPTANCE.md. Ground
+first-person choices in owner instructions; attribute agent reading to the agent.
+Keep one AI disclosure and material costs, not repeated generic caveats.
+A README rewrite dropped meaningful plan/validation links; the native test caught
+it. Restore the links instead of weakening the source-link test. Current-C9
+reflection presence must be checked even when generic evidence passes on C8.

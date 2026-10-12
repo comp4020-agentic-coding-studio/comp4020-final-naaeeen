@@ -1,0 +1,99 @@
+{
+  "head": "05f1036d39988dc7f1ad1ae8ff77cf159a3f54c9",
+  "startedUtc": "2026-10-12T00:07:21.531796+00:00",
+  "manifestSHA256": "7020b210d028d543f883955f07bd3fe66c1e19e1b99957b8103d8cd9ba8fd246",
+  "runtime": {
+    "node": "v24.21.0",
+    "pnpm": "11.9.0"
+  },
+  "checks": {
+    "required": {
+      "exit": 0,
+      "durationSeconds": 17.707,
+      "stdoutBytes": 14709,
+      "stderrBytes": 109,
+      "stdoutSHA256": "e532d7d8cfeb192fee34062ad6b5b559a2cba0522994e3d5bfcf22066aaea467",
+      "stderrSHA256": "e3988fd1d3ff55068ef5aed11bb79aa846ea2f8af3bd024056d194e7dcc2af60",
+      "sanitizedOutput": [
+        "Built independent board assets with Excalidraw 0.18.1; fonts and licences are self-hosted.",
+        " Test Files  29 passed (29)",
+        "      Tests  504 passed (504)",
+        "   Start at  11:07:29",
+        "   Duration  10.36s (tests 77%, import 17%, transform 6%)"
+      ]
+    },
+    "evidence": {
+      "exit": 0,
+      "durationSeconds": 1.616,
+      "stdoutBytes": 147,
+      "stderrBytes": 33,
+      "stdoutSHA256": "72c8f166564ae9ae439c3ff8c2005e5afcedf268a7cf63ffc7ecedfb6869e463",
+      "stderrSHA256": "399d1ffc91cba88d38fc0c5b4680f85ba1334e1e3be7f25d0d503da930300e23",
+      "sanitizedOutput": [
+        "\u2713 reflections/crit-8.md, reflections/crit-9.md",
+        "\u2713 PROCESS.md: 6 cited commit(s), all resolve"
+      ]
+    }
+  },
+  "initialFailure": {
+    "record": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-submission/checks/run-20261012T000312Z/summary.json",
+    "exit": 1,
+    "testsPassed": 503,
+    "testsFailed": 1,
+    "totalTests": 504,
+    "reason": "New README omitted source evidence links expected by unchanged house-http test.",
+    "refinement": "Restored README links to PLAN.md and docs/implementation/REDESIGN-VALIDATION.md; left test unchanged."
+  },
+  "server": {
+    "loopback": "127.0.0.1",
+    "freshDataDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-submission/checks/run-20261012T000721Z/data",
+    "semiSpaceMiB": 16,
+    "origin": "http://127.0.0.1:38908",
+    "pid": 780,
+    "exit": 0,
+    "closedMarker": true,
+    "stderrBytes": 0,
+    "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "runDirectory": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit9-submission/checks/run-20261012T000721Z",
+  "crit9Reflection": {
+    "exists": true,
+    "bytes": 1550
+  },
+  "commitLinks": [
+    {
+      "file": "PROCESS.md",
+      "sha": "52ce8ee",
+      "exists": true
+    },
+    {
+      "file": "PROCESS.md",
+      "sha": "b1677a4",
+      "exists": true
+    },
+    {
+      "file": "PROCESS.md",
+      "sha": "ca57bb2",
+      "exists": true
+    },
+    {
+      "file": "PROCESS.md",
+      "sha": "f5a25f2",
+      "exists": true
+    },
+    {
+      "file": "PROCESS.md",
+      "sha": "2f941e1",
+      "exists": true
+    },
+    {
+      "file": "PROCESS.md",
+      "sha": "ea60440",
+      "exists": true
+    }
+  ],
+  "manifestAfterSHA256": "7020b210d028d543f883955f07bd3fe66c1e19e1b99957b8103d8cd9ba8fd246",
+  "changedDuringRun": [],
+  "hookPath": ".githooks",
+  "completedUtc": "2026-10-12T00:07:42.210611+00:00"
+}

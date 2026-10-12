@@ -402,3 +402,11 @@ selects independently declared approachability for quiet company/optional talk.
 Full board mode is the strongest owner-led alternative; earlier recovery evidence
 supports reliability/process. [Comparison](docs/crit-9/round-3/DESIGN-COMPARISON.md)
 retains disagreement. This updates discussion choice, not runtime product scope.
+
+## Crit 9 submission, 12 October
+
+Owner authorized completion using quiet company/voluntary conversation. README,
+PROCESS and reflections/crit-9.md are current English accounts; the willingness
+ADR has alternatives/references. Native504/504 checks and deployed two-context
+observations are recorded in docs/crit-9/submission/ACCEPTANCE.md. Publication and
+current rendered README are separate gates. No human evaluation is invented.
