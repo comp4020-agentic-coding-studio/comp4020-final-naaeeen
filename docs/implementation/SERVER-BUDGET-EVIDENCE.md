@@ -121,3 +121,14 @@ access33.6s, board8.8s and full-house recovery3.0s pass. Existing physical/human
 sustainedFly/WAN/off-volume/overallboardcoverage/student-writing limits remain.
 Historical release records are copied from immutable snapshots or deep copies;
 current live evidence never overwrites older release attribution.
+
+## 12 October prospective intermediate setting
+
+The docs-only5ade8ae resource run38189621823 attempt1 failed solely atRSS212.195
+against210; a separate unchanged reproduction preserves that observation. Owner
+requested an urgent reviewed push. The next server-only candidate uses semi12,
+with all four launch/testsites coupled and exact protocolsourcehashes rebound.
+Old-space, generator, workload, durations, bounds, APIs and data stay unchanged.
+Launcher probes ran red then6/6green; types/evidence/inspectREADY passed. Full
+currentCI and affectedlive qualification remain pending; no passingattempt,
+causalfix or measuredmemorymargin is claimed for12 yet.
