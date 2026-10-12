@@ -152,3 +152,11 @@ preview/messages and the coupled-control cost. Contextual recheck passed.
 See [the record](../crit-9/submission/REFLECTION-REVISION.md). Human preference
 remains untested; unchanged-source RSS failure and bounded reproduction remain
 separate from writing quality and published first-commit history.
+
+### Crit 9 second release closeout
+
+Memorypolicy12 source00328b0 qualifies actualCI38190973611, original300sgates and
+actualFlyflag/8hashes. Post-release native task and ownedcleanup pass. Original
+RSS/livefailures, unchanged16reproduction and assertion-scope correction remain
+separate. [Exact source-bound record](../crit-9/submission/evidence/second-release.json).
+Final evidence-only publication requires ownCI; no recursive success commits.

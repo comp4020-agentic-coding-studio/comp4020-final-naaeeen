@@ -87,3 +87,14 @@ Native launcher probes ran red then6/6green; typecheck, evidence and resource
 --inspectREADY passed. An independent contextual source/protocol check is active.
 This is a prospective memory-margin candidate, not an established repair. The
 unchanged first-head reproduction remains separate; existing CI gates deployment.
+
+## Verified second release
+
+Source00328b0 now passes actualCI38190973611 and Flybackup/deploy. Semi12 resource
+peak200.660MiB, all21unchangedgatestrue, actualdeployedflag and8hashesmatch. Two
+live contexts pass the affectedavailability/message task with ownedcleanup.
+Firstnativefailure and correctedassertion deadline are retained. Independent
+contextualruntime review found no binding/criterion defect. The firstsemi16
+unchangedreproduction passed175.035MiB; no solecause or optimum is inferred.
+[Exact record](evidence/second-release.json). This late revision does not replace
+the first pre-noon source or claim to have completed at its cutoff.

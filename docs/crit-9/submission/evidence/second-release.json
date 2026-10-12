@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-12",
+  "testedHead": "00328b0aaf974b197cbd51a65c883f1556810e29",
+  "ci": {
+    "run": 38190973611,
+    "url": "https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/38190973611",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "check",
+        "conclusion": "success",
+        "startedAt": "2026-10-12T01:13:02Z",
+        "completedAt": "2026-10-12T01:21:42Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "startedAt": "2026-10-12T01:21:44Z",
+        "completedAt": "2026-10-12T01:23:08Z"
+      }
+    ]
+  },
+  "resource": {
+    "head": "00328b0aaf974b197cbd51a65c883f1556810e29",
+    "artifactId": 11721323031,
+    "artifactCreatedAt": "2026-10-12T01:21:30Z",
+    "status": "PASS",
+    "durationSeconds": 300,
+    "rssPeakMiB": 200.66015625,
+    "normalP95Ms": 8.303,
+    "pending": 0,
+    "gates": {
+      "scopedDelivery": true,
+      "inbound": true,
+      "httpBudget": true,
+      "duration": true,
+      "all24Initial": true,
+      "all24Final": true,
+      "rss": true,
+      "boardQueues": true,
+      "houseQueues": true,
+      "telemetryValid": true,
+      "eventLoop": true,
+      "health": true,
+      "unexpectedDisconnects": true,
+      "allNormalDelivered": true,
+      "allDeliveredIncludingCatchup": true,
+      "normalP95": true,
+      "normalInputs": true,
+      "workload": true,
+      "recovery": true,
+      "negativeAck": true,
+      "slowExpiry": true
+    },
+    "flags": [
+      "--max-semi-space-size=12"
+    ],
+    "sourceManifestSHA256": "09b6887d250336706e7ea501aa1f8ee1092b01c018367225e8c018b2e5ed3a00",
+    "protocolSHA256": "4b87256ef4d6d4bcc7525a5864fb4ca7259cf1f2781d5b6a1ad3db7c31862fc5",
+    "artifactSHA256": "b5f1c5d83790d37c092e6ff896b96c4fae58cd8e8b0f185de4c289b3fb32979c",
+    "scope": "one full source-bound CI attempt; not Fly stress, paired performance comparison or explained prior failure"
+  },
+  "deployed": {
+    "sourceHashes": {
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "src/house-realtime.ts": "f25be21c47d6b10cb266e93560d67d41627f4579c9a2ac1be12225415bef25dc",
+      "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+      "src/board-service.ts": "d30a4395fa293d40ccb9091fb0b3cf636945c4a9c5e5d24bd2ed0b386bafc060",
+      "src/server.ts": "64b92ea1c376161bf84a2add3bcf04b185ed7aced91f604b039878d456d238f0",
+      "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+      "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+      "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd"
+    },
+    "serverArgs": [
+      "node",
+      "--max-semi-space-size=12",
+      "src/server.ts"
+    ],
+    "matchedLocalSource": true
+  },
+  "originalFailure": {
+    "head": "5ade8aea7c0641ea837ea45e9daa0a680ca90de0",
+    "run": 38189621823,
+    "attempt": 1,
+    "status": "FAIL",
+    "artifactSHA256": "bc57cc02febed80235087d055f4aa9a13bf73bff96d965d725f452b69de61bd6",
+    "rssPeakMiB": 212.1953125,
+    "normalP95Ms": 7.529,
+    "remainingGates": true,
+    "runtimeDiffSinceVerified9e987e8": "none",
+    "nextAttempt": "one bounded manual unchanged-source reproduction; not an automatic retry or claimed repair"
+  },
+  "unchangedReproduction": {
+    "artifactId": 11721082640,
+    "createdAt": "2026-10-12T01:12:03Z",
+    "status": "PASS",
+    "rssPeakMiB": 175.03515625,
+    "allGates": true,
+    "artifactSHA256": "fd99b8a4af027527262f94b7642b95576e21e1727f335a50b26093b650b57d4a",
+    "retrieval": "selected creation timestamp and exactID, then verified payload timestamps/status; name-only download and numericalID ordering chose the earlier failed attempt",
+    "head": "5ade8aea7c0641ea837ea45e9daa0a680ca90de0",
+    "run": 38189621823,
+    "attempt": 2,
+    "flags": [
+      "--max-semi-space-size=16"
+    ],
+    "sourceManifestSHA256": "daec256705018706da538eeccd699463cfc4e8fdbb78aa320ad7e1f0defbcc6d"
+  },
+  "live": {
+    "first": {
+      "status": "FAIL",
+      "checks": {},
+      "errors": [
+        {
+          "type": "trial",
+          "message": "expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Reconnecting\u2026\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 5000ms\n  - waiting for locator('#connection-status')\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n    - unexpected value \"Your evening awaits\"\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Opening your house\u2026</small>\n    - unexpected value \"Opening your house\u2026\"\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Reconnecting\u2026</small>\n    - unexpected value \"Reconnecting\u2026\"\n"
+        },
+        {
+          "type": "cleanup-owner",
+          "message": "expect(locator).toBeVisible() failed\n\nLocator:  locator('#title-screen')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeVisible\" locator('#title-screen') with timeout 5000ms\n  - waiting for locator('#title-screen')\n    14 \u00d7 locator resolved to <section hidden=\"\" id=\"title-screen\" class=\"title-screen\" aria-labelledby=\"welcome-title\">\u2026</section>\n       - unexpected value \"hidden\"\n"
+        }
+      ],
+      "initialCleanup": {
+        "peer": "NOT RUN",
+        "owner": "FAIL"
+      },
+      "followupOwnedCleanup": {
+        "scope": "only newly generated failedv4 synthetic owner/peer house",
+        "status": "PASS",
+        "peer": "removed by its own synthetic owner; room archive retained",
+        "owner": "left sole house; archive retained"
+      }
+    },
+    "amended": {
+      "status": "PASS",
+      "latencies": [
+        {
+          "source": "C9 Trial Owner",
+          "value": "chat",
+          "elapsedMs": 352.773397,
+          "withinAboutOneSecond": true
+        },
+        {
+          "source": "C9 Trial Owner",
+          "value": "quiet",
+          "elapsedMs": 456.517206,
+          "withinAboutOneSecond": true
+        },
+        {
+          "source": "C9 Trial Peer",
+          "value": "chat",
+          "elapsedMs": 440.215145,
+          "withinAboutOneSecond": true
+        },
+        {
+          "source": "C9 Trial Peer",
+          "value": "quiet",
+          "elapsedMs": 223.820372,
+          "withinAboutOneSecond": true
+        }
+      ],
+      "checks": {
+        "independentContextsCreateJoin": true,
+        "noReloadDuringMeasurements": true,
+        "ownerTextVisibleInPeerTranscript": true,
+        "quietUnreadAndNoWorldBubbles": true,
+        "quietReplyRetainedInTranscript": true,
+        "openingChatClearsUnread": true,
+        "noPageErrors": true
+      },
+      "cleanup": {
+        "peer": "PASS",
+        "owner": "PASS"
+      },
+      "protocolSha256": "b2cda949dc071e9ac3d45639bf5300ebcc37636e6160a15f363aeca75282bd93",
+      "scriptSha256": "44e00e94c7a3e4928d6d6dba93e071f7f109242cbb34cfa3b68df6f82a8ce809",
+      "startedAt": "2026-10-12T01:43:20.293Z",
+      "completedAt": "2026-10-12T01:43:40.627Z",
+      "amendment": "Match existing12-second per-action protocol using explicit expect timeout;1000ms live visibility unchanged. Capture only owned cleanup states."
+    }
+  },
+  "scope": [
+    "one source-bound12MiB full CI attempt",
+    "real deployed desktop plus phone-emulated browser task",
+    "not a causal paired16versus12 study",
+    "not physical-phone or human-value evaluation",
+    "original RSS/live failures preserved"
+  ],
+  "earliestCrit9": {
+    "introducedCommit": "e8ca2d5f714e6b8cf7624fff1016e0a351d84f3d",
+    "introducedAtSydney": "2026-10-12T11:12:31+11:00",
+    "firstRun": 38187166613,
+    "head": "42f7c506e456d9bd317c3212abd670eb19b24474",
+    "checkFinishedAtSydney": "2026-10-12T11:22:06+11:00",
+    "deployFinishedAtSydney": "2026-10-12T11:23:11+11:00",
+    "conclusion": "success",
+    "fileInheritedFromParent": true
+  }
+}

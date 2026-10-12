@@ -602,3 +602,17 @@ availability/Quiet/transcript task passed. Details: docs/crit-9/submission/ACCEP
 One final evidence-only commit records actual outcomes; do not recursively commit
 new success records. Student's own pod demo/defence and real-friend value study
 remain separate. Superseded release NOT RUN text above is historical.
+
+## 12 October second reflection and memory release
+
+Current runtime00328b0 uses server-onlysemi12; reflection9e80cdc has287bodywords
+and the owner-requested causalHCI argument without repaircomparison/draftingfooter.
+Firstreflection exists in e8ca2d5 and firstActions38187166613 completed11:23:11
+Sydney before noon. ActualsecondCI38190973611/resource/Fly/source/flag and native
+pair pass; [full record](../crit-9/submission/evidence/second-release.json).
+Original212RSSfailure and175same-source16reproduction preserved; no causalfix or
+optimality claim. Newfailedlivefixture cleaned through its ownowner. Older initial
+prewritingfixturecleanupgap remains historical, not silently resolved. Chinese
+readingcopy is private .local/crit9-submission/CHINESE-READING.md.
+Finalevidence-onlypublication keepsruntime unchanged; verifyitsactualCI, thenstop
+withoutfurtherstatus-onlycommits. Humanpoddefence/valueevaluation remain separate.

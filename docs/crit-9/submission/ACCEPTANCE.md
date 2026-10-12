@@ -79,3 +79,15 @@ checked separately. No release success is inferred from the previous green run.
 This is automated browser verification with synthetic participants, not a
 real-friend study. The pod demonstration and defence are the student's work.
 No reduced interruption, improved learning or preference over Discord is claimed.
+
+## Subsequent owner revisions and verified runtime
+
+The firstEnglishreflection was already in e8ca2d5, included unchanged in42f7c50;
+its firstsuccessfulcheck/deployended11:22:06/11:23:11Sydney. A commitdiff lists only
+changedfiles; Browsefiles at42f7c50 includes reflections/crit-9.md. The later303word
+revision5ade8ae was pushed11:51 and its originalresourcefailedRSS; unchangedretry
+passed. Owner requested deeperreflection and urgentnewpush after noon. Reflection
+9e80cdc is287words; runtime00328b0 changes only serveryounggenerationpolicy to12.
+[Secondrelease](evidence/second-release.json) preserves actualCI/Fly/source/browser
+results and priorfailures. This does not move the firstcutoff or claim laterwork
+was completed before it. Finalevidence-onlypublication is a separatecurrentCIgate.

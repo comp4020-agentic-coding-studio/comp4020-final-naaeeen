@@ -1,3 +1,25 @@
+# Current release: verified 12 MiB server policy
+
+12 October 2026. Source00328b0 passes
+[CI38190973611](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/actions/runs/38190973611):
+required spec/nativebrowser/evidence/secrets, all unchanged300s resource gates,
+mounted backups and Flydeploy. PeakRSS200.660MiB, normaldeliveryp958.303ms,
+pending0. Actual deployedserver usessemi12; eight source hashes match.
+[Exact verification](../crit-9/submission/evidence/second-release.json).
+
+Post-release native two-context task passes four updates224–457ms, real messages,
+Quiet unread/retention, no pageerrors and owned cleanup. Earlier5-second assertion
+failure is retained; the amended run matches the already-declared12-second action
+bound, keeping the1000ms propagation requirement. Its initial failed fixture was
+cleaned through its own verified synthetic owner.
+
+The originalsemi16 RSS212.195FAIL and unchangedsemi16 reproduction175.035PASS
+remain separate. These separate CI attempts establish no matched causal comparison or
+universal reliability. This12policy qualifies its recorded task; it does not
+explain the original RSS variation. Earlier sections retain their own checkpoints.
+One final evidence publication has unchangedruntime; verify its ownCI separately
+and stop without another success-only publication loop.
+
 # Current release: verified 16 MiB server policy
 
 8 October 2026. Source `d2dcf5f` with the prior motion/board refinements is verified

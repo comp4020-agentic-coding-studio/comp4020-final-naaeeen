@@ -309,3 +309,18 @@ Keep one AI disclosure and material costs, not repeated generic caveats.
 A README rewrite dropped meaningful plan/validation links; the native test caught
 it. Restore the links instead of weakening the source-link test. Current-C9
 reflection presence must be checked even when generic evidence passes on C8.
+
+## Observed 12 October artifact and browser-deadline corrections
+
+Rerun artifacts can reuse names, and numerical artifactIDs here did not order
+chronologically. Select the intendedattempt/creationtimestamp/exactID, then verify
+head/source/protocol/payload timestamps and result. A name-only download selected
+the earlierfailedartifact; parentassertions blocked a false successful record.
+Keep failed attempts and retrieval diagnostics rather than replacing their data.
+
+Playwright action timeout and assertion timeout are separate. A live protocol's
+12-second actionbound ran with default5-secondexpect until explicitlyconfigured.
+Match the declaredbound and retain the failedrun; do not relax livepropagation or
+resource criteria. Resume a saved house via the actualContinue control; title-screen
+visibility during bootstrap is not terminalconnection evidence. Nativepass remains
+separate from humancomfort, physicalphone or an explanation of a priorfailure.
