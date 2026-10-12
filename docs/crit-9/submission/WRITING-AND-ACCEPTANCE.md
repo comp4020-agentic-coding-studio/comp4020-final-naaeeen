@@ -50,3 +50,12 @@ The body is 303 words against indicative 150–300 guidance. Native evidence and
 filename/provenance checks are the affected verification lane; runtime and prior
 successful browser/load evidence are unchanged. No new human or A/B trial is claimed.
 Chinese reading copy remains private and is updated for this reflection only.
+
+## Second cycle after the first publication
+
+The owner requested the first version before noon, followed by deeper review and
+another publication. [Second-cycle record](REFLECTION-REVISION.md) preserves the
+first commit, source comparison, newly found default/causal/coupling issues and
+contextual recheck. Its current reflection is 287 body words. Historical 243/303
+word observations describe their own versions and are not rewritten. Resource
+failure/reproduction and publication are separately scoped in that record.

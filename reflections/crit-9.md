@@ -1,33 +1,32 @@
 # Crit 9 reflection
 
-My first idea combined Kind Words and gogh: moving avatars, personal rooms,
-decoration and a shared study table. These features described the place I wanted
-to build. Refining it meant deciding how people could share that place while
-wanting different things from it.
+I began with a Kind Words/gogh-inspired house: moving avatars, DIY bedrooms and
+shared study. I then asked for a specific user goal. That changed the question
+from what the house should contain to what friends should be able to expect
+from being there.
 
-My breakthrough was examining the expectations created by visible presence.
-Treating every connected avatar as available makes silence ambiguous: is someone
-concentrating, away, or ignoring a friend? Using bedroom doors to answer that
-question confuses access to a private space with willingness to converse. The
-design issue was who would have to explain themselves, and how often.
+My breakthrough was treating visibility as a design choice with social costs.
+The agent's later research on [social translucence](https://smg.media.mit.edu/library/erickson2000.pdf)
+connected awareness with accountability. A friend seeing my avatar can approach
+me, but may also expect a reply. For people working on separate tasks, making
+everyone visible and approachable could undermine the company they came for.
 
-This led to quiet company as the purpose. Starting in Quiet gives arrival a
-modest meaning: someone is here. Choosing Can chat offers an opening for
-conversation; opening a bedroom grants access. Those signals describe different
-intentions. Quiet also hides house speech previews while retaining messages and
-an unread cue. The interface therefore lets people remain present and return to
-a conversation later, rather than making leaving the group their clearest signal
-that they want to concentrate.
+I chose quiet company with voluntary conversation. Default Quiet establishes
+a starting convention; it is not a personal declaration. Choosing Can chat
+expresses willingness, while opening a bedroom grants access. Quiet suppresses
+house speech previews but retains messages and an unread cue. This supports
+staying together while choosing when to attend to conversation.
 
-An invitation before each conversation would make agreement clearer. For familiar
-friends, we chose a lighter declaration to keep short exchanges easy. That shifts
-effort onto maintaining the status. A forgotten Can chat can create expectations,
-and the displayed time cannot certify attention. We accepted that ambiguity in
-exchange for fewer repeated decisions.
+The tradeoff is who does the coordination work. An always-open house needs less
+status upkeep and favours chance encounters. Invitations provide clearer
+agreement but require repeated acceptance. Our declaration needs maintenance
+and can become stale. It also couples public willingness with private previews:
+someone wanting fewer previews must appear Quiet, even if they welcome chat.
+Fewer controls come at the cost of that freedom.
 
-I want to develop a habit of asking what an interface asks of its users. The
-agent helped research alternatives and inspect the code; I kept asking for the
-user goal and the cost of the recommendation. This moved the project beyond
-assembling appealing features. Tests protect the chosen defaults and message
-behavior. The next study should examine whether friends can comfortably stay
-Quiet and how they respond when a status becomes stale.
+I want to become a developer who can explain what convenience asks someone else
+to give up. I asked the agent to compare functioning alternatives; fresh review
+then challenged wording that treated default Quiet as the person's intention.
+We revised the account against the code and decision record. Tests check the
+defaults and delivery. Evaluation with friends should ask whether these cues
+help negotiate participation, or simply create another expectation to manage.

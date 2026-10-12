@@ -142,3 +142,13 @@ review had no material findings; parent reconciled actual README/ADR and diff.
 Native evidence and exact current filename/word/provenance checks apply; runtime
 unchanged. No comparison trial was needed to choose the framing explicitly
 requested by the owner. Detail: ../crit-9/submission/WRITING-AND-ACCEPTANCE.md.
+
+### Crit 9 reflection second-cycle refinement
+
+A new fresh source/argument pass found default-as-intention and causal wording
+issues in the first revision despite its earlier scoped review. Parent source
+checks confirmed them; the second candidate explains coordination work, actual
+preview/messages and the coupled-control cost. Contextual recheck passed.
+See [the record](../crit-9/submission/REFLECTION-REVISION.md). Human preference
+remains untested; unchanged-source RSS failure and bounded reproduction remain
+separate from writing quality and published first-commit history.
