@@ -131,3 +131,14 @@ current/default state, public/private coupling, AI planning chronology, inherite
 camera evidence, fresh comparison/reconciliation and final scope refinement.
 Three selected behavior checks protect defaults/unread/freshness; human claims
 remain unrun. Runtime scope and known prior gaps remain unchanged.
+
+## Crit 9 reflection: causal design reasoning, 12 October
+
+Owner requested original house intent -> refinement -> consequences and removal
+of the repair comparison/drafting footer. Current reflection explains social
+expectations carried by connection/door states, Quiet defaults and invitation
+friction; no user effect is reported as measured. Fresh read-only source/prose
+review had no material findings; parent reconciled actual README/ADR and diff.
+Native evidence and exact current filename/word/provenance checks apply; runtime
+unchanged. No comparison trial was needed to choose the framing explicitly
+requested by the owner. Detail: ../crit-9/submission/WRITING-AND-ACCEPTANCE.md.

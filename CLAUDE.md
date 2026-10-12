@@ -163,7 +163,9 @@ house cue; new-lease Quiet/time can be defaults. It neither measures attention n
 blocks messages. Public cue/private house previews are coupled; room access and
 board conversation remain separate. Preserve these meanings in README and UI.
 Owner requests plain student writing, concrete tradeoffs and useful references.
-Keep factual AI assistance disclosure; don't fabricate interviews, feelings,
-unaided authorship or historical reading. Prefer one material-limit explanation
-over repetitive defensive phrasing. Current PROCESS replaces the old C8/addendum
+Record factual AI assistance in PROCESS and README; the owner requests no
+standalone drafting footer in the Crit 9 reflection. Explain initial intent,
+causal design tradeoffs and implemented consequences in that reflection. Do not
+fabricate interviews, feelings, unaided authorship or historical reading. Prefer
+concrete reasons and costs over repeated defensive phrasing. Current PROCESS replaces the old C8/addendum
 account, and the exact current reflection filename is reflections/crit-9.md.
