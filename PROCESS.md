@@ -1,57 +1,123 @@
 # Process overview
 
-*Initial C8 account, 6 October 2026. AI-assisted draft grounded in my stated aims and recorded work; student review remains required. This account will be rewritten as the project develops towards the final submission.*
+## From a large idea to a particular use
 
-I wanted to move beyond another game and make a cosy place with enough technical depth for about two weeks of work. The starting idea combined a personal room, bounded DIY and a shared object that could change over time. Research into gogh and Kind Words 2 made me narrow the originality claim: room decoration and gentle social interaction already have strong examples. The question became whether separately authored panes in one persistent lamp could give people a reason to return, without followers, scores or an obligation to reply.
+I started with a warm multiplayer house inspired by Kind Words and gogh. I wanted
+moving avatars, personal rooms, some DIY and a shared study space. I also wanted
+the agent to research alternatives and leave a useful commit history. That brief
+could have produced a collection of features without a clear reason to use them.
 
-I also wanted to reuse the careful research and review methods from Assignment 2. Reuse needed a boundary: old instructions, tests and permissions could not become evidence for a new app. The first milestone, [b1677a4](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/b1677a4), brought 163 planning files into [docs/planning-source](docs/planning-source/PROJECT.md), preserving their provenance while making the root instructions specific to this repository. The historical prototype's 15 tests are not this implementation's tests. Its fixed-camera comparisons informed the visual choice, but they are not new participant trials.
+The early Crit 8 slice tested a saved interaction through windows and a shared
+lamp. The later house grew from it, while keeping that checkpoint separate. In
+[52ce8ee](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/52ce8ee),
+the agent compared possible purposes: completing a task alongside friends,
+finding a willing peer when stuck, getting feedback on work, and casually
+encountering distant friends. The provisional focus became brief help between
+known university friends, with an author-chosen next step. This came from
+research and comparison, not interviews with a group who had already asked for it.
+Ordinary company and conversation stayed possible without posting a study goal.
 
-The live [C8 brief](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/crits/08-its-alive/) changed the immediate scope. A stranger must be able to do the core thing and find a saved trace on return. My earlier invite-only circle would put a grant and limited membership ahead of that first action. [ADR 0001](docs/decisions/0001-crit8-slice.md) records the public rehearsal alternative: cookie identity, a deliberately published window and an owned lamp pane. This keeps the authorship model while postponing invitations and recovery. The cost is public content, so the interface says who can see each save. It does not describe visitors as trusted friends.
+## Choosing what presence means
 
-The stack follows that smaller loop. TypeScript and Node serve the page, commands and full state snapshots; SQLite stores sessions, rooms, panes and command receipts. [ADR 0002](docs/decisions/0002-native-sqlite.md) explains choosing the installed node:sqlite binding over another native package. The actual Linux runtime reported SQLite 3.53.4. The binding is release candidate, so avoiding an extra build dependency is a trade-off, not proof of stability. A fixed Three.js cutaway uses licensed furniture models and procedural scenery, while HTML controls keep editing possible without accurate scene picking.
+For Crit 9 I asked for a decision with more HCI depth. I rejected a proposed focus
+on keeping a newer draft after a delayed acknowledgement: it was useful
+reliability work, but mainly explained a repair. I wanted the discussion to show
+a user goal and a capability we consciously gave up.
 
-I asked agents to own separate server, interface and renderer files, with the main agent reconciling their work. Their reports needed code and observed results behind them. The domain milestone [87a8c14](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/87a8c14) defines owned editing, bounded text and full collision geometry. Store and HTTP tests then exercise real SQLite restart, atomic receipt rollback, replay, stale revisions and attempts to edit another visitor's objects. Repeating a timed-out save must not apply it twice; changing its payload must not reuse a successful command ID.
+The resulting argument is quiet company with voluntary conversation. Two avatars
+at a table establish presence, but do not establish willingness to talk. Quiet
+and Can chat are separate from room access and location. An always-open hangout
+would require less upkeep and encourage chance encounters. Invitation and
+acceptance would make engagement clearer but add steps to short familiar
+exchanges. I accepted the softer declaration for this small group, with stale
+states and mistaken expectations as its costs. The
+[decision record](docs/decisions/2026-10-07-explicit-willingness.md) preserves
+those alternatives.
 
-The first runnable application milestone [38358b3](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/38358b3) joined the server, scene and native controls. I then asked for the experience to look more like a game: the large headline, scene card and webpage sidebar were the wrong presentation. [ADR 0003](docs/decisions/0003-world-first-game-interface.md) records inspected official screenshots and a world-first HUD alternative. The data and ownership rules remain useful even when the interface direction changes.
+The agent’s later research gives this argument a clearer basis.
+[Erickson and Kellogg](https://smg.media.mit.edu/library/erickson2000.pdf) describe
+visibility as useful for coordination and accountability. It can also create
+pressure. [Harrison and Dourish](https://dourish.com/~dourishc/publications/1996/cscw96-place.pdf)
+explain why geometry alone cannot give a setting its social meaning. These
+references help explain why a door and a status need different meanings.
+They were added during this reconsideration.
 
-A fresh integrated review also exposed a stuck-tab case: after the browser acquired another cookie identity, a save could fail without an in-page recovery action. A real browser regression reproduced the hidden control. That failure is evidence to fix, not something a passing happy-path suite can overrule. The review record separates this from human preference.
+## Directing the agent
 
-Local browser checks now exercise two identities, peer changes, a returning cookie, furniture controls and pane withdrawal. That establishes a working local slice, not a shipped app or evidence that people value it. The supplied route checks remain intact, and [C8-VALIDATION](docs/C8-VALIDATION.md) records the check scope and pending release work. Docker and Fly deployment still need verification. The next critique should ask whether visitors can explain the lamp and whether contributing feels worthwhile. I want to change the design when that evidence warrants it, rather than protect the original plan because an agent already implemented it.
+I asked the agent to carry Assignment 2's research and review methods into the
+project and adapt them to this repository. The inherited files were
+brought in at [b1677a4](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/b1677a4).
+Old checks and old publication permissions could not stand in for current
+evidence. The active harness now routes research, comparisons and review back
+to the relevant section of the project.
 
-## Final-project development evidence, 7 October
+The planning comparison used separate research lanes and fresh-context reviewers
+who saw candidates in opposite orders. Their agreement was not user preference.
+The records also identified an unfair human-comparison scenario that already
+assumed one candidate's task. No human trial ran. That correction matters because
+a comparison can make a choice look strong simply by asking it the right question.
 
-This addendum is an AI-assisted factual log for later student reflection. The
-initial C8 account above describes its own milestone, not the current product or
-release. The owner subsequently requested controllable real avatars, owned DIY
-bedrooms, shared study, game-style entry/HUD and an independent collaborative
-whiteboard. The detailed redesign register and release records retain the
-research, comparisons, implementation and review evidence for those changes.
+Later I challenged the agent's recommendation again. The
+[design-first revisit](docs/crit-9/round-3/DESIGN-COMPARISON.md) compared viable
+alternatives instead of treating a broken implementation as the opposition.
+Reviewers disagreed between the social-state decision and the full-board mode.
+That left a judgement to make, rather than a vote to report.
 
-The movement repair [5c40545](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/5c40545)
-shows why passing previous checks did not justify defending the first solution.
-A later CI run showed the owner moving far locally while the peer saw its avatar
-near spawn. The working hypothesis was a gap between optimistic prediction and
-volatile transport authority; the precise first dropped or rejected packet was
-not established. The agent compared fire-and-forget movement, queued delivery
-and bounded acknowledgement/correction against the same ownership, collision,
-speed and deadline constraints. It kept a single transient flight rather than
-replaying old movement after a stall.
+## Making the experience fit the purpose
 
-Fresh review then challenged the correction itself. The shared collision slide
-was not idempotent at a plant corner: a locally projected endpoint could fail the
-server's next sweep. The implementer reproduced the reviewer's failing case and
-changed endpoint validation, while preserving the server rules. A contextual
-recheck confirmed the finding resolved. The final parent checks passed485 cases,
-with native two-user movement/chat and seats/rooms/DIY/access flows passing on
-the frozen source. These checks measure the specified behavior; they do not
-prove human enjoyment, market value or an HD grade.
+I called the earlier interface too webpage-like and asked for a game-style
+opening, HUD and larger world. A boxed scene with webpage controls was not the experience I wanted.
+[ca57bb2](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/ca57bb2)
+records the later entry, controls and framing redesign. The camera comparisons
+checked readable scale, routes and what happened when panels moved. Close framing
+makes people prominent but loses distant context; Overview remains a useful
+deliberate choice. Some comparisons changed foreground text as well as camera
+framing, so they do not isolate a camera-only benefit.
 
-This is a concrete requirements-to-evidence-to-refinement example. The agent
-reports, tests and screenshots were inspected and corrected rather than treated
-as authorities. Missing historical raw logs are distinguished from retained
-parent check logs and source-bound coverage; the fresh review and its follow-up
-are not counted as two independent studies. Actual publication, resource and
-deployed checks are recorded separately in
-[MOVEMENT-RECONCILIATION](docs/implementation/MOVEMENT-RECONCILIATION.md). Personal
-lessons and claims about lecture understanding remain for the student to assess
-and write after reviewing the code and evidence.
+I also asked for the shared board to work as a complete app. In
+[f5a25f2](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/f5a25f2),
+it gained its own route, full editor and companion chat. Opening it from the
+house pauses world interaction. This gives sustained joint work more room while
+sacrificing continuous spatial context. The board uses house-wide conversation,
+so it does not preserve the room chat as one seamless stream.
+
+## Stack, rules and verification
+
+TypeScript and Node serve the app; SQLite holds identities, membership, rooms
+and receipts on the course's single mounted volume. Three.js renders the house.
+Socket.IO supplies live transport, while Excalidraw supplies the editor.
+Using an existing editor made the full board feasible, but identity, authorization,
+persistence and recovery remained project work. The native SQLite choice is
+recorded in [ADR 0002](docs/decisions/0002-native-sqlite.md); it avoided another
+native-build dependency at the cost of relying on the pinned runtime.
+
+The social rule became concrete in
+[2f941e1](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/2f941e1)
+and [ea60440](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/commit/ea60440).
+A new controlling session starts Quiet; a brief reconnect can keep its previous
+setting. Furniture persists, while willingness is transient. Review then found
+that the state timestamp existed only in transport and Quiet lacked an unread
+cue. The [UI refinement](docs/revisit/UI-REFINEMENT.md) made both visible.
+
+Independent review also corrected the later argument. Default Quiet is not a
+personal declaration, and its timestamp can be system-initialized. Public
+willingness and private preview suppression are currently coupled. Separate
+controls would offer more freedom but require more decisions from users.
+The [review record](docs/crit-9/round-3/EVIDENCE-AND-REVIEW.md) keeps those limits.
+
+## What the evidence can answer
+
+Tests protect ownership, delivery, reconnect defaults and retained work. Browser
+checks show what two sessions actually receive. The registered resource workload
+checks the small server budget. These results have different scopes. The current
+Crit 9 checks and release status are recorded in
+[the submission record](docs/crit-9/submission/ACCEPTANCE.md).
+
+The unresolved question is whether friends interpret the convention comfortably.
+I would compare the house with a configured Discord group, looking at stale
+states, reply pressure and useful next-step retrieval. More features cannot
+answer that question. I kept bringing the discussion back to why someone would use the house and what
+our choice makes harder.
+
+*Codex assisted the research, implementation, drafting and checks. This account
+is based on my instructions and the repository record.*

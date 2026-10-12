@@ -154,3 +154,16 @@ review failures and scope/privacy changes trigger an affected-section audit.
 Record requirements, checks, gaps and corrections in docs/implementation/HARNESS-AUDIT.md.
 Keep methods focused; do not rerun historical A2 trials or add comparisons without
 a decision they can inform. Fresh initial review and contextual recheck are distinct.
+
+## Crit 9 argument and writing, 12 October
+
+Current accepted argument: quiet company with voluntary conversation. Read the
+willingness ADR and docs/crit-9/submission/ACCEPTANCE.md. Quiet/Can chat is a soft
+house cue; new-lease Quiet/time can be defaults. It neither measures attention nor
+blocks messages. Public cue/private house previews are coupled; room access and
+board conversation remain separate. Preserve these meanings in README and UI.
+Owner requests plain student writing, concrete tradeoffs and useful references.
+Keep factual AI assistance disclosure; don't fabricate interviews, feelings,
+unaided authorship or historical reading. Prefer one material-limit explanation
+over repetitive defensive phrasing. Current PROCESS replaces the old C8/addendum
+account, and the exact current reflection filename is reflections/crit-9.md.
