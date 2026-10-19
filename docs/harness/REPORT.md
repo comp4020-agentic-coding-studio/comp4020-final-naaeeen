@@ -324,3 +324,37 @@ Match the declaredbound and retain the failedrun; do not relax livepropagation o
 resource criteria. Resume a saved house via the actualContinue control; title-screen
 visibility during bootstrap is not terminalconnection evidence. Nativepass remains
 separate from humancomfort, physicalphone or an explanation of a priorfailure.
+
+## 19 October Crit 10 observed method corrections
+
+Current owner boundary is local work only: NO COMMIT, PUSH OR DEPLOYMENT. Follow
+[acceptance](../crit-10/ACCEPTANCE.md), not older publication defaults.
+
+- Protect intended positive authority alongside forbidden actions: former-member
+  personal export must not accidentally acquire the current-member shared guard.
+- Trace an API capability to ordinary UI discovery before claiming a complete
+  user journey. Stored contributions survive, but reopening currently hides them.
+- Accepted logs and receipt IDs distinguish attempts from new effects. Parse
+  stream kinds explicitly; a bedroom stream suffix names a room, not a house.
+- Test log sink failure against the committed operation outcome. Do not let
+  instruments turn a completed recovery into a reported failure.
+- Keep ad hoc source-bound rehearsals outside default E2E discovery when they
+  require private local markers; provide a tracked opt-in config and preserve
+  prior attempts/source snapshots. Native local-scene output can establish more
+  than a server snapshot read alone.
+- A resource result with passing RSS and one failed input gate is FAIL. Inspect
+  clock domains and use discriminating rollback/burst controls before changing
+  source; preserve fixed workload/criteria and the failed binding.
+- History-free discovery helps generate competing interpretations; parent source
+  checks, UI counterexamples and actual results determine the writing claim.
+  Model convergence and a conceptual paper do not validate human benefit.
+
+## Crit 10 publication authorized, 19 October
+
+The owner now authorizes commit and push, including the existing CI/Fly release.
+Earlier no-commit/no-push/local-only text records the preparation boundary and is
+superseded. Publish new content in English; private Chinese reading copies remain
+ignored. Preserve the owner's PROCESS section deletion and reflection edit.
+Verify the exact pushed head, actual CI and deployed behavior; local source hashes
+and past passes alone do not establish a release. Classroom two-person use is
+still a human activity, separate from automated technical rehearsal.

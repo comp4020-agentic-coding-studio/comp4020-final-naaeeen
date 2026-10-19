@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-18T23:35:29.578747+00:00",
+  "command": "pnpm check",
+  "exit": 0,
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0"
+  },
+  "sourceHashes": {
+    "src/server.ts": "b009d6dc89bb915540b54b2c7d3cc53a08f50c13819109b7911f5b37b19f2dfe",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/house-realtime.ts": "109535cb60d2235bef67ccc1a0a7923559ee6f5bf79c16402880f231c319820b",
+    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a"
+  },
+  "testsPassed": 569,
+  "testFilesPassed": 33,
+  "build": "PASS",
+  "typecheck": "PASS",
+  "logSHA256": "23a3164aea75142902df31b3fa8d0c66f52f3a142e9c0222eea59b63676734d6"
+}

@@ -410,3 +410,29 @@ PROCESS and reflections/crit-9.md are current English accounts; the willingness
 ADR has alternatives/references. Native504/504 checks and deployed two-context
 observations are recorded in docs/crit-9/submission/ACCEPTANCE.md. Publication and
 current rendered README are separate gates. No human evaluation is invented.
+
+## Crit 10 local candidate, 19 October
+
+Current owner instruction: complete local server permission/logging verification,
+English reflection and rewritten PROCESS; NO COMMIT, PUSH OR DEPLOYMENT. The
+[acceptance record](docs/crit-10/ACCEPTANCE.md) is authoritative for this candidate.
+The product scope remains the existing house and board. The selected reflection
+examines shared current state versus retained submitted versions; it does not
+claim a complete departure/export UI.
+
+Section order: current brief and authority audit -> logging comparison/red-green ->
+fresh review and correlation repair -> real two-browser rehearsal -> targeted
+clock-boundary regression/refinement -> unchanged full resource verification ->
+English writing/factual review -> evidence/diff closeout. Detailed outcomes and
+remaining publication/classroom actions are in acceptance; resource failures and
+prior releases remain historical.
+
+## Crit 10 publication authorized, 19 October
+
+The owner now authorizes commit and push, including the existing CI/Fly release.
+Earlier no-commit/no-push/local-only text records the preparation boundary and is
+superseded. Publish new content in English; private Chinese reading copies remain
+ignored. Preserve the owner's PROCESS section deletion and reflection edit.
+Verify the exact pushed head, actual CI and deployed behavior; local source hashes
+and past passes alone do not establish a release. Classroom two-person use is
+still a human activity, separate from automated technical rehearsal.

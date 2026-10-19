@@ -1,0 +1,11 @@
+{
+  "editedAt": "2026-10-19T00:14:48.478941+00:00",
+  "change": "Owner requested complete removal of Asking what remains personal from PROCESS.md; no replacement prose added.",
+  "beforeSHA256": "2553713680771d6e7108014b26862452282704439df556d1a354b8ff96d9d62a",
+  "afterSHA256": "d24e48b1ff480359272391f7626f0b8eee0af9a14059fd0418ddc7594b78a5ff",
+  "wordsIncludingHeadingsAndLinks": 731,
+  "removedWords": 229,
+  "nativeEvidenceExit": 0,
+  "commitPushDeployment": "NOT PERFORMED",
+  "note": "Current word count is below900\u20131100 guidance after the explicitly requested deletion."
+}

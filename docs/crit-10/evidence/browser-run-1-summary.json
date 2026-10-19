@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "run": "browser-run-1",
+  "startedAt": "2026-10-18T23:22:12.779Z",
+  "status": "FAIL",
+  "origin": "http://127.0.0.1:45305",
+  "baseline": "6bbc4d227f49add4bfb01c182dc0797da37ec2b0",
+  "sourceHashes": {
+    "src/server.ts": "b009d6dc89bb915540b54b2c7d3cc53a08f50c13819109b7911f5b37b19f2dfe",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/house-realtime.ts": "109535cb60d2235bef67ccc1a0a7923559ee6f5bf79c16402880f231c319820b",
+    "src/board-service.ts": "91c47aa2ed7cf278c3d9d767eb7e6e6d556845faed6bf091f96a1603460ae823",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+    "board/main.jsx": "88e30aff311ad6e6edbccadffcc14b3829c21d2ab1cdce8ae3e24444c7238dd6",
+    "board/client.js": "bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1",
+    "tests/e2e/crit10-rehearsal.spec.ts": "262a9ad5f8d338c1dac2c251d6461c4558106f96aedcb246545a5a25651eac66",
+    ".local/crit10/browser.config.ts": "d4d44290db7b1ba62023133386d262e6597e2415a9e5ddd41fda9f4e4d44ee0f"
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi"
+  },
+  "protocol": {
+    "actionTimeoutMs": 10000,
+    "expectTimeoutMs": 10000,
+    "navigationTimeoutMs": 10000,
+    "testTimeoutMs": 120000,
+    "retries": 0,
+    "viewports": [
+      {
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "isolatedCookieContexts": true,
+    "nativeActions": true,
+    "stateInjection": false,
+    "forcedClicks": false,
+    "trace": false,
+    "video": false,
+    "recoveryCredentialsUsed": false
+  },
+  "assertions": [],
+  "observations": [],
+  "limitations": [
+    "Technical rehearsal, not classmates or human usability evidence.",
+    "Local SwiftShader Chromium; not physical phones, WAN or deployed Fly evidence."
+  ],
+  "failedCheckpoint": "native house create and join",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "locator.selectOption: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Avatar colour', { exact: true })\u001b[22m\n"
+  },
+  "finishedAt": "2026-10-18T23:22:24.180Z",
+  "pageErrors": [],
+  "browserContextsClosed": true
+}

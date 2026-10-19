@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "houseId": "9fee9b36-0bfb-4e7a-8264-73fc79f653b7",
+  "sequence": 0,
+  "elements": [
+    {
+      "angle": 0,
+      "backgroundColor": "#fff3bf",
+      "boundElements": [
+        {
+          "id": "a0mZlWfYH3nD7R7DrCpNK",
+          "type": "text"
+        }
+      ],
+      "fillStyle": "solid",
+      "frameId": null,
+      "groupIds": [],
+      "height": 220,
+      "id": "orUHJOL9YWIhfynDQWowM",
+      "index": "a0",
+      "isDeleted": false,
+      "link": null,
+      "locked": false,
+      "opacity": 100,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1133083025,
+      "strokeColor": "#b4a887",
+      "strokeStyle": "solid",
+      "strokeWidth": 1,
+      "type": "rectangle",
+      "updated": 1792366225033,
+      "version": 2,
+      "versionNonce": 789668863,
+      "width": 280,
+      "x": -140,
+      "y": -7
+    },
+    {
+      "angle": 0,
+      "autoResize": true,
+      "backgroundColor": "transparent",
+      "boundElements": null,
+      "containerId": "orUHJOL9YWIhfynDQWowM",
+      "fillStyle": "solid",
+      "fontFamily": 2,
+      "fontSize": 20,
+      "frameId": null,
+      "groupIds": [],
+      "height": 69,
+      "id": "a0mZlWfYH3nD7R7DrCpNK",
+      "index": "a1",
+      "isDeleted": false,
+      "lineHeight": 1.15,
+      "link": null,
+      "locked": false,
+      "opacity": 100,
+      "originalText": "CRIT10_UI_CONTENT_CANARY_20261019: peer submitted original",
+      "roughness": 1,
+      "roundness": null,
+      "seed": 270933873,
+      "strokeColor": "#354237",
+      "strokeStyle": "solid",
+      "strokeWidth": 2,
+      "text": "CRIT10_UI_CONTENT_CAN\nARY_20261019: peer\nsubmitted original",
+      "textAlign": "left",
+      "type": "text",
+      "updated": 1792366225037,
+      "version": 3,
+      "versionNonce": 1374882129,
+      "verticalAlign": "top",
+      "width": 261.26953125,
+      "x": -135,
+      "y": -2
+    }
+  ],
+  "files": [],
+  "chat": [
+    {
+      "id": "5c86d094-5366-4b3b-8c44-6c14e544da40",
+      "authorId": "94b96de6-75c7-4a18-acd5-5627bc3dda2c",
+      "name": "Crit10 friend",
+      "text": "CRIT10_UI_CONTENT_CANARY_20261019: peer board hello",
+      "at": 1792366224547,
+      "sequence": 1
+    }
+  ]
+}

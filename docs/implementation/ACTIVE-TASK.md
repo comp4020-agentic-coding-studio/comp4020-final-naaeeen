@@ -56,3 +56,22 @@ whiteboard implementation. Read the owner redesign brief and REDESIGN-PLAN here.
 Workers preserve existing identity/private-data/draft semantics and own separate
 files; parent owns build/server wiring, integration, reviews and final acceptance.
 All new project artifacts remain in WSL. New local commits are authorised.
+
+## Active Crit 10 instruction, 19 October
+
+Earlier local-commit/publication defaults are superseded for this task: owner
+requires NO COMMIT, PUSH OR DEPLOYMENT. Work stays in the canonical WSL checkout.
+Complete and review the local permission/logging candidate, two-browser technical
+rehearsal, exact English reflections/crit-10.md and rewritten PROCESS. Follow
+[Crit 10 acceptance](../crit-10/ACCEPTANCE.md) for current evidence and the separate
+pending classroom/publication lanes. Do not infer new runtime acceptance from C9.
+
+## Crit 10 publication authorized, 19 October
+
+The owner now authorizes commit and push, including the existing CI/Fly release.
+Earlier no-commit/no-push/local-only text records the preparation boundary and is
+superseded. Publish new content in English; private Chinese reading copies remain
+ignored. Preserve the owner's PROCESS section deletion and reflection edit.
+Verify the exact pushed head, actual CI and deployed behavior; local source hashes
+and past passes alone do not establish a release. Classroom two-person use is
+still a human activity, separate from automated technical rehearsal.

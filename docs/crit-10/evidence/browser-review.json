@@ -1,0 +1,46 @@
+{
+  "kind": "Independent read-only source review plus same-reviewer follow-up",
+  "findings": [
+    {
+      "issue": "Both HTTP snapshot reads could pass with stale peer local scene",
+      "repair": "Native peer canvas download must contain owner rewrite",
+      "status": "resolved before run2"
+    },
+    {
+      "issue": "Rewrite text lacked content canary and escaped raw-log content assertion",
+      "repair": "Reject rewritten text in raw log explicitly",
+      "status": "resolved before run2"
+    }
+  ],
+  "followup": "Saved actual peer scene export retains rewrite, own-contributions artifact retains original, raw logs exclude both fixture contents, hashes match run2; no remaining material issue within scope.",
+  "newHarnessIsolationReview": "Read-only follow-up found no material integration issue: default config and tests/e2e unchanged; dedicated config validates owned loopback marker, unique run label, source hashes,10s bounds and privacy. New paths still require execution.",
+  "browsersRunByReviewer": false,
+  "finalArtifactFollowup": {
+    "result": "No unsupported material claims found",
+    "run": "browser-run-3",
+    "verified": [
+      "test22178ms, runner23013.671ms",
+      "12 assertion groups,17 attributed records",
+      "source hashes match current files",
+      "peer scene rewrite and own export original",
+      "privacy assertions",
+      "discovery stdout hash and23tests/7files excluding rehearsal",
+      "explicit reload UX gap"
+    ],
+    "boundary": "Read-only artifacts/source only; no tests/browsers run and final screenshots not independently re-inspected by reviewer."
+  },
+  "run4ArtifactFollowup": {
+    "result": "Claims supported; no actionable finding",
+    "run": "browser-run-4",
+    "verified": [
+      "current source hashes including board-service0e0fcfed",
+      "PASS17393ms and12 assertion groups",
+      "17 attributed activity records match summary",
+      "peer scene rewrite and own original/peer-only chat",
+      "own export200 and shared snapshot403",
+      "privacy assertions",
+      "explicit reload export UX gap"
+    ],
+    "boundary": "Read-only artifact/source review; no tests or browsers run. Run3 remains historical."
+  }
+}

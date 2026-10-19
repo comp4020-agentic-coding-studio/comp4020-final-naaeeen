@@ -1,0 +1,12 @@
+import { defineConfig } from '@playwright/test';
+const run = process.env.CRIT10_BROWSER_RUN ?? 'browser-run-1';
+export default defineConfig({
+  testDir: '../../tests/e2e', testMatch: 'crit10-rehearsal.spec.ts',
+  outputDir: './' + run + '-results', workers: 1, retries: 0, forbidOnly: true,
+  timeout: 120_000, expect: { timeout: 10_000 },
+  reporter: [['list'], ['json', { outputFile: './.local/crit10/' + run + '-runner.json' }]],
+  use: { baseURL: process.env.APP_URL ?? 'http://127.0.0.1:45305',
+    actionTimeout: 10_000, navigationTimeout: 10_000, trace: 'off', video: 'off', screenshot: 'off',
+    launchOptions: { executablePath: '/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome',
+      chromiumSandbox: true, args: ['--use-angle=swiftshader'] } },
+});

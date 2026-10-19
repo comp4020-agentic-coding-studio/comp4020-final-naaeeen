@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local real Socket.IO and fresh SQLite regression with a controlled Date.now rollback; native timers and performance.now remain real.",
+  "runtime": {
+    "node": "24.21.0",
+    "vitest": "5.0.1",
+    "execution": "Windows-to-WSL Ubuntu/lizhi bridge"
+  },
+  "command": [
+    "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "vitest.board.config.ts",
+    "spec/board-pointer-clock.test.ts"
+  ],
+  "spec": {
+    "path": "spec/board-pointer-clock.test.ts",
+    "SHA256": "c6bd29c66e279befcd89a402ee26adf6c543f09834560efa5de788a1412c44d2"
+  },
+  "unchangedLimits": {
+    "pointerEvents": 20,
+    "windowMs": 1000
+  },
+  "controlledInput": {
+    "wallClockStepMs": -60000,
+    "pacedPointerCount": 21,
+    "subsequentNativeAckGaps": 20,
+    "minimumAckGapMs": 55
+  },
+  "red": {
+    "sourceSHA256": "91c47aa2ed7cf278c3d9d767eb7e6e6d556845faed6bf091f96a1603460ae823",
+    "commandExitCode": 1,
+    "testCounts": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0
+    },
+    "scenarios": {
+      "backwards-wall-clock": {
+        "wallStepMs": -60000,
+        "pointerCount": 21,
+        "minimumAckGapMs": 55.04804800000011,
+        "monotonicElapsedMs": 1177.448864,
+        "accepted": 20,
+        "rateLimited": 1
+      },
+      "immediate-pointer-abuse": {
+        "pointerCount": 21,
+        "monotonicElapsedMs": 22.130417999999963,
+        "accepted": 20,
+        "lastCode": "RATE_LIMITED"
+      }
+    },
+    "ignoredRawLog": ".local/crit10/pointer-clock-red-v1.log",
+    "rawLogSHA256": "49328440d880c138ed45df78c5cc6e914293b7f77d8d290704c7a57785150a04"
+  },
+  "green": {
+    "sourceSHA256": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "commandExitCode": 0,
+    "testCounts": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    "scenarios": {
+      "backwards-wall-clock": {
+        "wallStepMs": -60000,
+        "pointerCount": 21,
+        "minimumAckGapMs": 55.08432199999993,
+        "monotonicElapsedMs": 1159.606275,
+        "accepted": 21,
+        "rateLimited": 0
+      },
+      "immediate-pointer-abuse": {
+        "pointerCount": 21,
+        "monotonicElapsedMs": 22.639725,
+        "accepted": 20,
+        "lastCode": "RATE_LIMITED"
+      }
+    },
+    "ignoredRawLog": ".local/crit10/pointer-clock-green-v1.log",
+    "rawLogSHA256": "ea1d3a4212102a1fcf77cb9f43e827155c4b021450d7dc7ab041b879b57b5b31"
+  },
+  "correction": "Use monotonic time for pointer-budget initialization and resets only; retain Date.now for pointerAt and existing civil timestamps.",
+  "independentReview": {
+    "context": "Fresh reviewer without parent conversation history",
+    "method": "Read-only static review of the test and minimum production correction",
+    "result": "No actionable findings",
+    "sourceSHA256": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "specSHA256": "c6bd29c66e279befcd89a402ee26adf6c543f09834560efa5de788a1412c44d2",
+    "testsRunByReviewer": false
+  },
+  "interpretation": "The controlled rollback reproduces a duration-clock defect and the monotonic correction resolves this reproduction while the burst limit remains enforced.",
+  "limits": [
+    "This does not establish that a clock rollback caused all earlier workload rejections.",
+    "No full required suite, browser rehearsal, sustained workload, deployment, or human trial was run in this regression lane.",
+    "Raw logs remain ignored; this record includes only sanitized command, source, timing, outcome, and review metadata."
+  ],
+  "separateIndependentExecutionReview": {
+    "agent": "c10_code_fresh_review",
+    "context": "contextual code follow-up, separate from worker fresh static review",
+    "command": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node node_modules/vitest/vitest.mjs run --config vitest.board.config.ts spec/board-pointer-clock.test.ts",
+    "cwd": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+    "exit": 0,
+    "testsPassed": 2,
+    "vitestStartLocal": "10:34:31",
+    "durationSeconds": 1.61,
+    "evidenceBasis": "Executed tool-response report in reviewer thread; exec_command chunk e7b86b. No separate raw log file was saved. Parent checked reported source/spec hashes against current files and current required check independently passes both cases.",
+    "sourceSHA256": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "specSHA256": "c6bd29c66e279befcd89a402ee26adf6c543f09834560efa5de788a1412c44d2",
+    "paced": {
+      "minimumAckGapMs": 55.00503900000001,
+      "monotonicElapsedMs": 1178.0813160000002,
+      "accepted": 21,
+      "rateLimited": 0
+    },
+    "burst": {
+      "monotonicElapsedMs": 24.507255000000214,
+      "accepted": 20,
+      "lastCode": "RATE_LIMITED"
+    }
+  }
+}

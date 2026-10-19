@@ -616,3 +616,44 @@ prewritingfixturecleanupgap remains historical, not silently resolved. Chinese
 readingcopy is private .local/crit9-submission/CHINESE-READING.md.
 Finalevidence-onlypublication keepsruntime unchanged; verifyitsactualCI, thenstop
 withoutfurtherstatus-onlycommits. Humanpoddefence/valueevaluation remain separate.
+
+## Current Crit 10 local candidate, 19 October
+
+Owner currently prohibits commit/push; no deployment is performed. HEAD stays
+6bbc4d227f49add4bfb01c182dc0797da37ec2b0. All new work is in this WSL checkout.
+[Acceptance](../crit-10/ACCEPTANCE.md) links the English reflection/current PROCESS,
+permission rationale, actual tests, browser run4 and resource refinement. Logging
+adds allowlisted actor/action/outcome/context/receipt metadata and HTTP denials;
+accepted retries do not imply new writes. Permission semantics and former-member
+personal export remain intentional.
+
+Fresh code review caught a stream-kind/house-ID correlation defect, reproduced
+then repaired. A full resource trial failed pointer inputs despite passing memory;
+actual socket rollback/burst controls justified using a monotonic pointer-budget
+clock without weakening20/1000. Both trial bindings and original failure remain.
+Read the final acceptance status rather than assuming the second trial passed.
+
+Three history-free discovery agents informed the selected reflection argument:
+shared outcome and personal submitted versions diverge. Parent followed it into
+the UI; former-board export is absent after reload. No human comfort/learning
+claim, complete exit portability, publication or classroom trial is implied.
+Future work: identity-scoped prior-house export discovery, clearly labelled partial
+versions/asset portability; research with real friends, not another editor tool
+merely because it is available. Stop only owned local rehearsal resources.
+
+Final local closeout:569 tests/33 files, board build/typecheck/native evidence,
+opt-in native browser run4 and the second full300s resource trial PASS. The latter
+has21 gates true,201.46875 MiB peak RSS,7188patches/708chats/zero normal input
+rejects or write skips. Failed first trial remains preserved. Exact current-source
+facts and remaining user/publication lanes: ../crit-10/ACCEPTANCE.md. Owned local
+candidate45305 closed, preview4093 untouched, HEAD/remote6bbc4d2 and index unchanged.
+
+## Crit 10 publication authorized, 19 October
+
+The owner now authorizes commit and push, including the existing CI/Fly release.
+Earlier no-commit/no-push/local-only text records the preparation boundary and is
+superseded. Publish new content in English; private Chinese reading copies remain
+ignored. Preserve the owner's PROCESS section deletion and reflection edit.
+Verify the exact pushed head, actual CI and deployed behavior; local source hashes
+and past passes alone do not establish a release. Classroom two-person use is
+still a human activity, separate from automated technical rehearsal.

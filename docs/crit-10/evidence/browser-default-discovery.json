@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "check": "Normal suite listing only",
+  "normalConfigUnchanged": true,
+  "normalTestDir": "tests/e2e",
+  "normalTestCount": 23,
+  "normalFileCount": 7,
+  "crit10RehearsalDiscovered": false,
+  "stdoutSHA256": "fdb875bf8029f011cfde8e4fee95d20984dcc1745709838c802c7dfcfbe572de",
+  "newDefaultSkips": 0
+}

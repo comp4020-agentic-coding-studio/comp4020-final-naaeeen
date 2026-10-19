@@ -402,3 +402,20 @@ Windows Schannel failure was handled through LinuxTLS, not security weakening.
 First native mobile-overlayfailure/fixturecleanupgap retained; corrected trial
 used normalcontrols/cleanup. Metadata-only closeout requires actualnewCI but no
 recursive proof commits. See submission acceptance/recordedscope.
+
+## 19 October Crit 10 audit
+
+The owner narrowed reflection to one deep argument and requested independent
+no-history topic discovery. Three bounded baseline inspections generated competing
+arguments; parent selected the personal/shared-version conflict after checking
+actual assertions and the missing reopen export route. Fresh primary-source and
+prose checks refined claims without inventing authorship or a completed exit UX.
+
+[Subsection record](../crit-10/REVIEW-AND-REFINEMENT.md) covers current brief, server
+authority/positive controls, log alternatives/privacy/retries/sink failures,
+stream correlation, native browser evidentiary controls, default test discovery,
+clock-sensitive pointer budget and current writing. Independent source findings
+were reproduced before correction and rechecked. Actual source-bound results and
+the preserved failed resource trial are linked in acceptance. Old C9 passes do
+not accept new source; no code/CI/provider publication is inferred from local
+checks. Current NO COMMIT/PUSH/DEPLOYMENT supersedes earlier commit defaults.

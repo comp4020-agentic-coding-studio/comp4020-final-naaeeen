@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "run": "browser-run-2",
+  "startedAt": "2026-10-18T23:23:33.035Z",
+  "status": "PASS_WITH_KNOWN_UX_GAP",
+  "origin": "http://127.0.0.1:45305",
+  "baseline": "6bbc4d227f49add4bfb01c182dc0797da37ec2b0",
+  "sourceHashes": {
+    "src/server.ts": "b009d6dc89bb915540b54b2c7d3cc53a08f50c13819109b7911f5b37b19f2dfe",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/house-realtime.ts": "109535cb60d2235bef67ccc1a0a7923559ee6f5bf79c16402880f231c319820b",
+    "src/board-service.ts": "91c47aa2ed7cf278c3d9d767eb7e6e6d556845faed6bf091f96a1603460ae823",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+    "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+    "board/main.jsx": "88e30aff311ad6e6edbccadffcc14b3829c21d2ab1cdce8ae3e24444c7238dd6",
+    "board/client.js": "bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1",
+    "tests/e2e/crit10-rehearsal.spec.ts": "977fe0e1dd181f11c8fb3b7bfb330f962dc868deec64249edd1f2b72da2eff23",
+    ".local/crit10/browser.config.ts": "8aa34b048f382e8c5abd81b86f94f38574f1d0d8eaebe0bd5cc439b510fccca9"
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi"
+  },
+  "protocol": {
+    "actionTimeoutMs": 10000,
+    "expectTimeoutMs": 10000,
+    "navigationTimeoutMs": 10000,
+    "testTimeoutMs": 120000,
+    "retries": 0,
+    "viewports": [
+      {
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "isolatedCookieContexts": true,
+    "nativeActions": true,
+    "stateInjection": false,
+    "forcedClicks": false,
+    "trace": false,
+    "video": false,
+    "recoveryCredentialsUsed": false
+  },
+  "assertions": [
+    {
+      "name": "Native house create/join creates distinct cookie identities despite the same name",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Actual desktop and phone viewport dimensions fit without document overflow",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Live roster, availability, rendered avatars and native overview camera update",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Peer receives the native lounge chat without reload",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Peer native sticky note and board chat reach the owner without reload",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "A native owner rewrite changes the shared scene and peer local scene export while preserving the peer element ID",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Native owner removal revokes the already-open peer board",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "After removal, native contributions export is HTTP 200 and shared snapshot is HTTP 403",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Own export keeps the submitted original while the shared scene has the housemate rewrite",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Server log records correlate successes and denial to cookie-resolved actor UUIDs",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "Structured log allowlist excludes fixture content and credential markers",
+      "result": "PASS",
+      "detail": true
+    },
+    {
+      "name": "No page errors and no source drift during the rehearsal",
+      "result": "PASS",
+      "detail": true
+    }
+  ],
+  "observations": [
+    {
+      "name": "Former-board export after peer reload",
+      "result": "KNOWN_UX_GAP",
+      "formerBoardExportControls": 0,
+      "text": "The admission screen has no former-board export control after reload. The already-open revoked board export passed; complete exit portability is not established."
+    }
+  ],
+  "limitations": [
+    "Technical rehearsal, not classmates or human usability evidence.",
+    "Local SwiftShader Chromium; not physical phones, WAN or deployed Fly evidence.",
+    "Former-board contributions are not discoverable from the reloaded admission UI."
+  ],
+  "actors": {
+    "owner": {
+      "id": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+      "name": "Crit10 friend",
+      "colour": "sage"
+    },
+    "peer": {
+      "id": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+      "name": "Crit10 friend",
+      "colour": "rose"
+    },
+    "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3"
+  },
+  "originalElementId": "Xvv2SJVEPaSt-nzRmeQJ7",
+  "revokedBoundary": {
+    "ownExportHTTP": 200,
+    "sharedSnapshotHTTP": 403,
+    "denialCode": "FORBIDDEN",
+    "ownOriginalPreserved": true,
+    "sharedPeerRewritePreserved": true
+  },
+  "logEvidence": {
+    "source": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit10/candidate-2/server.stdout.log",
+    "records": [
+      {
+        "at": "2026-10-18T23:23:34.517Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "house.create",
+        "outcome": "accepted",
+        "commandId": "0349fde6-35c2-44fa-bb07-f87d1ffc680d",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-18T23:23:34.551Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "zone.subscribe",
+        "outcome": "ok",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:37.203Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "house.join",
+        "outcome": "accepted",
+        "commandId": "0a9b7079-268a-460d-b387-3998b1eade59",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http",
+        "sequence": 2
+      },
+      {
+        "at": "2026-10-18T23:23:37.253Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "zone.subscribe",
+        "outcome": "ok",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:43.664Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "availability.set",
+        "outcome": "ok",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:45.977Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "chat.send",
+        "outcome": "accepted",
+        "commandId": "0d9334a1-8206-49b7-ab26-22a70540543f",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "zoneId": "lounge",
+        "transport": "socket",
+        "sequence": 3
+      },
+      {
+        "at": "2026-10-18T23:23:47.616Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "board.subscribe",
+        "outcome": "current",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:47.927Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board.subscribe",
+        "outcome": "current",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:47.989Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/chat",
+        "outcome": "accepted",
+        "commandId": "8fe5d970-b134-4ee7-9990-3094d50f1934",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http",
+        "sequence": 1
+      },
+      {
+        "at": "2026-10-18T23:23:49.538Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/patch",
+        "outcome": "accepted",
+        "commandId": "0136a782-8c7e-496b-bf81-7ba3912371ec",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http",
+        "sequence": 2
+      },
+      {
+        "at": "2026-10-18T23:23:50.426Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "board/patch",
+        "outcome": "accepted",
+        "commandId": "78d9e149-31f7-47bd-8b21-e3fc120dba5d",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http",
+        "sequence": 3
+      },
+      {
+        "at": "2026-10-18T23:23:54.881Z",
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "house.remove",
+        "outcome": "accepted",
+        "commandId": "2d87f2ec-5b9a-42e5-bc1f-afadc9a910a0",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "socket",
+        "sequence": 4
+      },
+      {
+        "at": "2026-10-18T23:23:54.917Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board.subscription",
+        "outcome": "FORBIDDEN",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:54.924Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "connection.close",
+        "outcome": "FORBIDDEN",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:54.924Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "connection.disconnect",
+        "outcome": "offline",
+        "transport": "socket"
+      },
+      {
+        "at": "2026-10-18T23:23:55.032Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board.export",
+        "outcome": "own",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http"
+      },
+      {
+        "at": "2026-10-18T23:23:55.071Z",
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/snapshot",
+        "outcome": "FORBIDDEN",
+        "houseId": "38854647-599f-4c11-88ef-bb4bd3aef2d3",
+        "transport": "http"
+      }
+    ],
+    "requiredLogs": [
+      {
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "house.create",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "house.join",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "chat.send",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "house.remove",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/patch",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "d1a081e7-71f7-4043-87e2-2ef58a4ecb46",
+        "action": "board/patch",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/chat",
+        "outcome": "accepted"
+      },
+      {
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board.export",
+        "outcome": "own"
+      },
+      {
+        "actor": "e1ad29b7-0b48-45b2-a8e2-e5ace4ee50a5",
+        "action": "board/snapshot",
+        "outcome": "FORBIDDEN"
+      }
+    ],
+    "contentCanaryAbsent": true,
+    "credentialMarkerAbsence": true,
+    "scope": "Actual browser fixture content and credential markers; no recovery key was generated or submitted."
+  },
+  "finishedAt": "2026-10-18T23:23:55.462Z",
+  "pageErrors": [],
+  "browserContextsClosed": true
+}

@@ -63,6 +63,7 @@ explain the alternatives and checks.
 
 Built with Three.js, Socket.IO, SQLite and the MIT-licensed Excalidraw editor.
 Use the pinned Linux toolchain: pnpm build:board, pnpm start, and pnpm check.
-[Plan](PLAN.md) and [validation](docs/implementation/REDESIGN-VALIDATION.md)
+[Permissions and logging](docs/crit-10/PERMISSIONS-AND-LOGGING.md),
+[plan](PLAN.md) and [validation](docs/implementation/REDESIGN-VALIDATION.md)
 record development details. Research and drafting were assisted by AI;
 the project record is in PROCESS.md.

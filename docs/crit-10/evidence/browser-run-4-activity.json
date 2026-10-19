@@ -1,0 +1,198 @@
+{
+  "source": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/crit10/candidate-3/server.stdout.log",
+  "records": [
+    {
+      "at": "2026-10-18T23:35:54.834Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "house.create",
+      "outcome": "accepted",
+      "commandId": "1dfdb3d9-f6db-432c-bb98-4aa17415e93f",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http",
+      "sequence": 1
+    },
+    {
+      "at": "2026-10-18T23:35:54.863Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "zone.subscribe",
+      "outcome": "ok",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:35:57.336Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "house.join",
+      "outcome": "accepted",
+      "commandId": "264f21c8-e602-49ca-abad-1d516ee87f24",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http",
+      "sequence": 2
+    },
+    {
+      "at": "2026-10-18T23:35:57.370Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "zone.subscribe",
+      "outcome": "ok",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:35:59.753Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "availability.set",
+      "outcome": "ok",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:01.434Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "chat.send",
+      "outcome": "accepted",
+      "commandId": "1b0c4edc-1c4e-4bcd-a7df-59fb9f75e7e0",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "zoneId": "lounge",
+      "transport": "socket",
+      "sequence": 3
+    },
+    {
+      "at": "2026-10-18T23:36:03.157Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "board.subscribe",
+      "outcome": "current",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:03.307Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board.subscribe",
+      "outcome": "current",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:04.254Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/chat",
+      "outcome": "accepted",
+      "commandId": "9904b4ee-ff66-4a25-ac6e-f85cb2157d92",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http",
+      "sequence": 1
+    },
+    {
+      "at": "2026-10-18T23:36:04.934Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/patch",
+      "outcome": "accepted",
+      "commandId": "0295eef0-1858-427c-b186-3c606c67c2c2",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http",
+      "sequence": 2
+    },
+    {
+      "at": "2026-10-18T23:36:05.541Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "board/patch",
+      "outcome": "accepted",
+      "commandId": "2bc60bed-aa90-4b15-89d2-9f335ca38ac4",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http",
+      "sequence": 3
+    },
+    {
+      "at": "2026-10-18T23:36:10.083Z",
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "house.remove",
+      "outcome": "accepted",
+      "commandId": "8f845bc5-23d1-4a4f-84e3-bfec47e9a7ec",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "socket",
+      "sequence": 4
+    },
+    {
+      "at": "2026-10-18T23:36:10.167Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "connection.close",
+      "outcome": "FORBIDDEN",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:10.168Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "connection.disconnect",
+      "outcome": "offline",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:10.265Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board.subscription",
+      "outcome": "FORBIDDEN",
+      "transport": "socket"
+    },
+    {
+      "at": "2026-10-18T23:36:10.362Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board.export",
+      "outcome": "own",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http"
+    },
+    {
+      "at": "2026-10-18T23:36:10.388Z",
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/snapshot",
+      "outcome": "FORBIDDEN",
+      "houseId": "70b01cf6-c554-48a2-9cb1-d634a1982a0e",
+      "transport": "http"
+    }
+  ],
+  "requiredLogs": [
+    {
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "house.create",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "house.join",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "chat.send",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "house.remove",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/patch",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "536ead67-3555-4c1a-9db2-cd3d0190bdfc",
+      "action": "board/patch",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/chat",
+      "outcome": "accepted"
+    },
+    {
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board.export",
+      "outcome": "own"
+    },
+    {
+      "actor": "81305fe6-332b-416e-99c3-3324e01088ad",
+      "action": "board/snapshot",
+      "outcome": "FORBIDDEN"
+    }
+  ],
+  "contentCanaryAbsent": true,
+  "credentialMarkerAbsence": true,
+  "scope": "Actual browser fixture content and credential markers; no recovery key was generated or submitted."
+}

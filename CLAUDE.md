@@ -1,3 +1,16 @@
+# Crit 10 release authorization
+
+19 October 2026. The owner now authorizes logical commits and a push to main,
+including the repository's existing CI/Fly release. The earlier local-only
+restriction is superseded; dated preparation records remain historical evidence.
+Publish new material in English. Keep Chinese reading copies, credentials,
+databases and raw local logs ignored. Verify actual CI/deployment and distinguish
+technical rehearsal from the still-pending two-classmate classroom activity.
+
+Current reflection argument: shared current state and personal submitted versions
+can diverge. Check docs/crit-10/TOPIC-COMPARISON.md and actual export reachability;
+do not equate retained data or a permitted API with a complete departure UI.
+
 # Night Neighbourhood working agreement
 
 ## Outcome and authority

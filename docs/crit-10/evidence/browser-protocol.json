@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "criteria": "Native local two-context house and board authority rehearsal with 10000ms per-action/expect/navigation bounds; no state injection, forced clicks, arbitrary sleeps, traces, videos or recovery credentials.",
+  "attempts": [
+    {
+      "run": "browser-run-1",
+      "result": "FAIL",
+      "classification": "selector protocol defect",
+      "checkpoint": "native house create and join",
+      "failure": "getByLabel exact Avatar colour failed within10000ms before native house create",
+      "refinement": "Use existing house.spec.ts role combobox selectors for Avatar colour and Bedrooms; preserve first summary/screenshots/stdout. Subsequent runner artifacts get unique run paths.",
+      "thresholdChange": false
+    },
+    {
+      "run": "browser-run-2",
+      "result": "PASS_WITH_KNOWN_UX_GAP",
+      "nativeTestDurationMs": 22500,
+      "runnerSummary": "1 passed (23.4s)",
+      "thresholdChange": false,
+      "sourceManifest": "browser-run-2-summary.json#sourceHashes",
+      "refinementsBeforeRun": [
+        "Use native role combobox selectors already established in house.spec.ts.",
+        "Independent review: native peer canvas download validates its local scene after owner rewrite; HTTP snapshot reads alone cannot prove that.",
+        "Independent review: raw log rejects the rewritten note as well as the canary-bearing original and chat.",
+        "Explicit10s context/navigation/API read bounds; each run has separate private runner output."
+      ],
+      "knownGap": "Reloaded removed-peer board admission exposes no former-board export control."
+    },
+    {
+      "run": "browser-run-3",
+      "result": "PASS_WITH_KNOWN_UX_GAP",
+      "nativeTestDurationMs": 22178,
+      "runnerDurationMs": 23013.671000000002,
+      "thresholdChange": false,
+      "spec": "tests/rehearsal/crit10-rehearsal.spec.ts",
+      "config": "tests/rehearsal/playwright.config.ts",
+      "reason": "Verify tracked opt-in isolation after parent resource workload completed; runtime source unchanged.",
+      "assertionsPassed": 12,
+      "sourceManifest": "browser-run-3-summary.json#sourceHashes",
+      "knownGap": "The admission screen has no former-board export control after reload. The already-open revoked board export passed; complete exit portability is not established."
+    },
+    {
+      "run": "browser-run-4",
+      "result": "PASS_WITH_KNOWN_UX_GAP",
+      "nativeTestDurationMs": 17393,
+      "runnerDurationMs": 18166.962000000003,
+      "thresholdChange": false,
+      "harnessChange": false,
+      "spec": "tests/rehearsal/crit10-rehearsal.spec.ts",
+      "config": "tests/rehearsal/playwright.config.ts",
+      "reason": "Runtime board pointer-clock regression fix changed src/board-service.ts; same tracked protocol rerun once against restarted candidate-3 server. Run3 remains earlier-source history.",
+      "assertionsPassed": 12,
+      "sourceManifest": "browser-run-4-summary.json#sourceHashes",
+      "boardServiceSHA256": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+      "knownGap": "The admission screen has no former-board export control after reload. The already-open revoked board export passed; complete exit portability is not established."
+    }
+  ],
+  "humanStudy": "NOT RUN",
+  "verification": {
+    "scope": "Pinned local WSL Node24.21.0, Playwright1.63.0, Chromium153.0.8010.12 SwiftShader, sandbox enabled, desktop1920x1080 and touch phone390x844.",
+    "nativePeerSyncEvidence": "Peer local Excalidraw scene downloaded through its visible Canvas file control contains the owner rewrite; no application state injected.",
+    "contributionComparison": "Peer own download contains peer original text; shared local scene contains owner rewrite for same element ID.",
+    "logEvidence": "17 browser-actor records from candidate-3 stdout; successes/removal/export and forbidden snapshot correlate to current cookie-resolved UUIDs, with content/credential-marker assertions passing.",
+    "reviewStatus": "Both independent source-review findings repaired before run2; read-only follow-up checked source hashes and artifacts and found no remaining material issue.",
+    "browserContextsClosed": true,
+    "screenshotsInspected": [
+      "house-desktop",
+      "house-phone",
+      "board-desktop",
+      "board-phone",
+      "peer-revoked",
+      "peer-reloaded-admission"
+    ],
+    "screenshotLimit": "Phone chat overlays much of the scene; these screenshots establish the observed technical state, not human usability.",
+    "finalRun": "browser-run-4",
+    "sourceHashesMatchCurrentFiles": true,
+    "normalDiscovery": {
+      "command": "node node_modules/@playwright/test/cli.js test --list --config=playwright.config.ts",
+      "result": "23 tests in7 files; opt-in rehearsal absent; no normal suite execution or skips added.",
+      "stdout": ".local/crit10/browser-default-discovery.stdout.log"
+    },
+    "screenshotsInspectedForFinalRun": "All six run4 screenshots visually inspected.",
+    "finalArtifactReview": "Same independent reviewer follow-up verified run4 current hashes,17393ms PASS,12 assertions,17 activity records, original/rewrite comparison,200/403 boundary,privacy and explicit UX gap; no actionable finding. No reviewer tests/browsers run.",
+    "finalRuntimeSource": "src/board-service.ts 0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a"
+  },
+  "preservedPrivateArtifacts": {
+    "attempt1Stdout": ".local/crit10/browser-run-1.stdout.log",
+    "attempt1Runner": ".local/crit10/browser-run-1-runner.json",
+    "attempt1AutomaticErrorContext": ".local/crit10/browser-results/crit10-rehearsal-Crit-10-l-9e43d--and-contribution-rehearsal/error-context.md",
+    "attempt2Stdout": ".local/crit10/browser-run-2.stdout.log",
+    "attempt2Runner": ".local/crit10/browser-run-2-runner.json",
+    "attempt3Stdout": ".local/crit10/browser-run-3.stdout.log",
+    "attempt3Runner": ".local/crit10/browser-run-3-runner.json",
+    "attempt4Stdout": ".local/crit10/browser-run-4.stdout.log",
+    "attempt4Runner": ".local/crit10/browser-run-4-runner.json"
+  },
+  "pendingHarnessRefinement": {
+    "reason": "The local spec depended on ignored server marker/config and would be discovered by the maintained tests/e2e suite.",
+    "decision": "Move to tests/rehearsal with a tracked dedicated opt-in config; unchanged maintained testDir and no skips.",
+    "history": "Preserved run2 spec/config snapshots next to run2 evidence; no acceptance inherited for the new paths.",
+    "next": "Wait for parent resource load completion, then run browser-run-3 with dedicated tracked config and verify regular discovery.",
+    "sourceReview": "Same independent reviewer follow-up found no material integration issue; execution of moved paths remains pending.",
+    "status": "RESOLVED: moved harness executed successfully in run3; maintained discovery verified with --list only."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-18T23:27:49.311429+00:00",
+  "scope": "read-only recent existing release logs; no writes or deployed-candidate claim",
+  "exit": 0,
+  "rawOutputSaved": false,
+  "outerKeys": [],
+  "structuredEvents": 0,
+  "distinctPseudonymousActors": 0,
+  "outcomes": [],
+  "configuredStatusExit": 0,
+  "appStatus": {
+    "Name": "comp4020-final-naaeeen",
+    "Status": "suspended",
+    "Hostname": "comp4020-final-naaeeen.fly.dev",
+    "Deployed": true
+  },
+  "machineStates": [
+    {
+      "state": "stopped",
+      "region": "syd"
+    }
+  ],
+  "publicHealthStatus": 200,
+  "interpretation": "Configured read-only commands succeeded; public health responded200. The current recent-log query yielded no parsed action records, so it does not verify live multi-user attribution. No synthetic production users were created."
+}

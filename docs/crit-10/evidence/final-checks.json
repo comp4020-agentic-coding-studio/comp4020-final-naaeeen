@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-18T23:43:30.482225+00:00",
+  "scope": "local candidate, no commit/push/deploy",
+  "head": "6bbc4d227f49add4bfb01c182dc0797da37ec2b0",
+  "remoteMain": "6bbc4d227f49add4bfb01c182dc0797da37ec2b0",
+  "indexEmpty": true,
+  "ownedCandidatePortClosed": true,
+  "existingPreview4093Touched": false,
+  "nativeEvidenceExit": 0,
+  "wordCountsIncludingHeadingsLinks": {
+    "README.md": 573,
+    "PROCESS.md": 960,
+    "reflections/crit-10.md": 281
+  },
+  "requiredTestsPassed": 569,
+  "requiredFilesPassed": 33,
+  "browserFinalRun": 4,
+  "browserAssertionGroups": 12,
+  "browserContextsClosed": true,
+  "resourceStatus": "PASS",
+  "resourceGates": 21,
+  "runtimeSourceHashesMatched": true,
+  "protectedFilesUnchanged": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "Dockerfile",
+    "fly.toml",
+    ".github/workflows/checks.yml",
+    "playwright.config.ts",
+    "evaluation/board-resource.results.json"
+  ],
+  "publication": "NOT PERFORMED",
+  "humanClassroomTask": "NOT RUN"
+}

@@ -160,3 +160,25 @@ actualFlyflag/8hashes. Post-release native task and ownedcleanup pass. Original
 RSS/livefailures, unchanged16reproduction and assertion-scope correction remain
 separate. [Exact source-bound record](../crit-9/submission/evidence/second-release.json).
 Final evidence-only publication requires ownCI; no recursive success commits.
+
+## Crit 10 subsection revisit, 19 October
+
+[Detailed refinement trail](../crit-10/REVIEW-AND-REFINEMENT.md) and
+[acceptance](../crit-10/ACCEPTANCE.md) record each entry/finding/decision/recheck:
+
+| ID | Meaningful subsection | Outcome / scope |
+| --- | --- | --- |
+| C10.1 | Official brief and current owner boundary | Current sources; local only, no commit/push/deploy. |
+| C10.2 | Identity and room reads/edits | Cookie actor, same-name identities, server owner/member/room distinctions. |
+| C10.3 | Personal goals versus owner administration | Real HTTP positive/negative controls; owner cannot alter another's intent. |
+| C10.4 | Shared board and retained submissions | Co-edit versus filtered export; API/data verified, reopened discovery gap. |
+| C10.5 | Log alternatives/privacy/retry/failure | Structured metadata selected;47 logger and9 integration cases; source review repair. |
+| C10.6 | Native browser and method validity | Final tracked opt-in run4; actor correlation, local-scene export, denied read; earlier failure retained. |
+| C10.7 | Resource/clock boundary | Failed full trial retained, native rollback/burst red-green and independent review; final source-bound result in acceptance. |
+| C10.8 | Reflection choice and primary HCI concept | Three no-history discovery passes, parent source checks, psychological ownership used as interpretation. |
+| C10.9 | Student prose/factual correction | One focused251-word reflection, current PROCESS; no invented classroom observation or implementation chronology. |
+| C10.10 | Packaging and continuation | Native checks, source hashes, links/diff/no-staging; publication and classmates remain separate. |
+
+No measured agent A/B or human preference result is claimed. Contextual follow-ups
+remain distinct from first fresh reviews. The new rate-clock correction is a
+technical refinement, not the reflection's central design argument.
