@@ -1,0 +1,279 @@
+import { test, expect, type BrowserContext, type Page } from '@playwright/test';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
+import type { BoardSnapshot } from '../../src/board-contract.ts';
+import type { Me } from '../../src/house-contract.ts';
+import { beginAdmission, chooseCamera, closeTool, openChat, openHouseSettings, showResidents } from '../e2e/house-journey.ts';
+import { closeBoardContexts, editorCanvas, newBoardContext, viewportFits, visibleBox } from '../e2e/board-journey.ts';
+
+process.env.PLAYWRIGHT_NO_COPY_PROMPT = '1';
+test.use({ trace: 'off', video: 'off', screenshot: 'off' });
+const POLL = { timeout: 10_000, intervals: [100, 250, 500] };
+const CONTENT_CANARY = 'CRIT10_UI_CONTENT_CANARY_20261019';
+const ORIGINAL_NOTE = `${CONTENT_CANARY}: peer submitted original`;
+const REWRITTEN_NOTE = 'A housemate rewrote the shared note';
+const HOUSE_MESSAGE = `${CONTENT_CANARY}: lounge hello`;
+const BOARD_MESSAGE = `${CONTENT_CANARY}: peer board hello`;
+const SOURCE_FILES = [
+  'src/server.ts', 'src/activity-log.ts', 'src/house-realtime.ts', 'src/board-service.ts',
+  'src/board-store.ts', 'public/house-ui.js', 'public/house-world.js', 'board/main.jsx',
+  'board/client.js', 'tests/rehearsal/crit10-rehearsal.spec.ts', 'tests/rehearsal/playwright.config.ts',
+];
+
+async function sourceHashes() {
+  return Object.fromEntries(await Promise.all(SOURCE_FILES.map(async file =>
+    [file, createHash('sha256').update(await readFile(file)).digest('hex')])));
+}
+async function settled(page: Page) {
+  await expect(page.locator('#lobby')).toBeHidden();
+  await expect(page.locator('.house-world-canvas')).toBeVisible();
+  await expect(page.locator('#connection-status')).toHaveText('Together, live');
+  await expect(page.locator('.house-world-canvas')).toHaveAttribute('data-self-x', /^-?\d/);
+}
+async function houseMe(page: Page): Promise<Me> {
+  const response = await page.request.get('/api/house/me', { timeout: 10_000 });
+  expect(response.status()).toBe(200);
+  return response.json();
+}
+async function boardMe(page: Page): Promise<Me> {
+  const response = await page.request.get('/api/board/context', { timeout: 10_000 });
+  expect(response.status()).toBe(200); return response.json();
+}
+async function boardSnapshot(page: Page, houseId: string): Promise<BoardSnapshot> {
+  const response = await page.request.get(`/api/board/snapshot?houseId=${encodeURIComponent(houseId)}`, { timeout: 10_000 });
+  expect(response.status()).toBe(200); return response.json();
+}
+async function saveScreen(page: Page, file: string) {
+  await expect(page.locator('#issued-identity-key:visible, #recover-identity-key:visible, #recovery-proof:visible')).toHaveCount(0);
+  await page.screenshot({ path: file, animations: 'disabled' });
+}
+
+test('Crit 10 local two-browser authority and contribution rehearsal', async ({ browser, baseURL }) => {
+  test.setTimeout(120_000);
+  const target = new URL(baseURL ?? '');
+  expect(['127.0.0.1', 'localhost']).toContain(target.hostname);
+  const run = process.env.CRIT10_BROWSER_RUN ?? 'browser-run-1';
+  if (!/^browser-run-[1-9][0-9]*$/.test(run)) throw new Error('Use an explicit browser-run-N evidence prefix.');
+  const evidenceDir = resolve('docs/crit-10/evidence');
+  await mkdir(evidenceDir, { recursive: true });
+  const evidence = (suffix: string) => resolve(evidenceDir, `${run}-${suffix}`);
+  const serverMarker = JSON.parse(await readFile('.local/crit10/server.json', 'utf8'));
+  expect(serverMarker.origin).toBe(target.origin);
+  const initialHashes = await sourceHashes();
+  for (const [file, sha256] of Object.entries(serverMarker.sourceHashes)) expect(initialHashes[file]).toBe(sha256);
+  const summary: Record<string, any> = {
+    schemaVersion: 1, run, startedAt: new Date().toISOString(), status: 'RUNNING', origin: target.origin,
+    baseline: serverMarker.baseline, sourceHashes: initialHashes,
+    runtime: { node: process.version, playwright: '1.63.0', chromium: browser.version(), bridge: 'Windows PowerShell to WSL Ubuntu/lizhi' },
+    protocol: { actionTimeoutMs: 10_000, expectTimeoutMs: 10_000, navigationTimeoutMs: 10_000,
+      testTimeoutMs: 120_000, retries: 0, viewports: [{ width: 1920, height: 1080 }, { width: 390, height: 844 }],
+      isolatedCookieContexts: true, nativeActions: true, stateInjection: false, forcedClicks: false,
+      trace: false, video: false, recoveryCredentialsUsed: false },
+    assertions: [], observations: [], limitations: ['Technical rehearsal, not classmates or human usability evidence.',
+      'Local SwiftShader Chromium; not physical phones, WAN or deployed Fly evidence.'],
+  };
+  const contexts: BrowserContext[] = [], pages: Page[] = [], pageErrors: string[] = [];
+  let checkpoint = 'initialization';
+  const mark = (name: string, detail: unknown = true) => { summary.assertions.push({ name, result: 'PASS', detail }); };
+  try {
+    const desktop = await newBoardContext(browser, target.origin); contexts.push(desktop);
+    const phone = await newBoardContext(browser, target.origin, true); contexts.push(phone);
+    for (const context of contexts) { context.setDefaultTimeout(10_000); context.setDefaultNavigationTimeout(10_000); }
+    const owner = await desktop.newPage(), peer = await phone.newPage(); pages.push(owner, peer);
+    for (const page of pages) page.on('pageerror', error => pageErrors.push(error.name));
+
+    checkpoint = 'native house create and join';
+    await beginAdmission(owner, 'create');
+    await owner.getByLabel('Your name', { exact: true }).fill('Crit10 friend');
+    await owner.getByRole('combobox', { name: 'Avatar colour', exact: true }).selectOption('sage');
+    await owner.getByRole('combobox', { name: 'Bedrooms', exact: true }).selectOption('2');
+    await owner.getByRole('button', { name: 'Create house', exact: true }).click();
+    await settled(owner);
+    await openHouseSettings(owner);
+    const code = (await owner.locator('#join-code-display').innerText()).trim();
+    expect(code).toMatch(/^[0-9A-Z]{8}$/);
+    await closeTool(owner);
+    await beginAdmission(peer, 'join');
+    await peer.getByLabel('Your name', { exact: true }).fill('Crit10 friend');
+    await peer.getByRole('combobox', { name: 'Avatar colour', exact: true }).selectOption('rose');
+    await peer.getByLabel('House code', { exact: true }).fill(code);
+    await peer.getByRole('button', { name: 'Join house', exact: true }).click();
+    await settled(peer);
+    const ownerIdentity = await houseMe(owner), peerIdentity = await houseMe(peer);
+    expect(peerIdentity.identity.id).not.toBe(ownerIdentity.identity.id);
+    expect(peerIdentity.identity.name).toBe(ownerIdentity.identity.name);
+    expect(peerIdentity.home?.id).toBe(ownerIdentity.home?.id);
+    if (!ownerIdentity.home) throw new Error('Native owner creation did not assign a home.');
+    const houseId = ownerIdentity.home.id;
+    summary.actors = { owner: { id: ownerIdentity.identity.id, name: ownerIdentity.identity.name, colour: 'sage' },
+      peer: { id: peerIdentity.identity.id, name: peerIdentity.identity.name, colour: 'rose' }, houseId };
+    mark('Native house create/join creates distinct cookie identities despite the same name');
+    await viewportFits(owner); await viewportFits(peer, true);
+    mark('Actual desktop and phone viewport dimensions fit without document overflow');
+
+    checkpoint = 'live co-presence and house chat';
+    await showResidents(owner); await showResidents(peer);
+    await expect(owner.locator(`#roster [data-player-id="${peerIdentity.identity.id}"]`)).toBeVisible();
+    await expect(peer.locator(`#roster [data-player-id="${ownerIdentity.identity.id}"]`)).toBeVisible();
+    await owner.getByRole('radio', { name: 'Can chat', exact: true }).check();
+    await expect(peer.locator(`#roster [data-player-id="${ownerIdentity.identity.id}"]`)).toContainText(/can chat/i);
+    await expect(peer.locator(`.house-avatar-name[data-player-id="${ownerIdentity.identity.id}"]`)).toBeVisible();
+    await chooseCamera(owner, 'overview');
+    await chooseCamera(peer, 'overview');
+    await expect(owner.locator('.house-avatar-name')).toHaveCount(2);
+    await expect(peer.locator('.house-avatar-name')).toHaveCount(2);
+    mark('Live roster, availability, rendered avatars and native overview camera update');
+    await openChat(owner); await openChat(peer);
+    await owner.getByLabel('Message this room', { exact: true }).fill(HOUSE_MESSAGE);
+    await owner.getByLabel('Message this room', { exact: true }).press('Control+Enter');
+    await expect(peer.locator('#transcript')).toContainText(HOUSE_MESSAGE);
+    await saveScreen(owner, evidence('house-desktop.png'));
+    await saveScreen(peer, evidence('house-phone.png'));
+    mark('Peer receives the native lounge chat without reload');
+
+    checkpoint = 'standalone board editing and chat';
+    const ownerBoard = await desktop.newPage(), peerBoard = await phone.newPage(); pages.push(ownerBoard, peerBoard);
+    for (const page of [ownerBoard, peerBoard]) page.on('pageerror', error => pageErrors.push(error.name));
+    await ownerBoard.goto('/board/'); await peerBoard.goto('/board/');
+    await expect(editorCanvas(ownerBoard)).toBeVisible(); await expect(editorCanvas(peerBoard)).toBeVisible();
+    await expect(ownerBoard.locator('.board-save')).toContainText('All changes saved');
+    await expect(peerBoard.locator('.board-save')).toContainText('All changes saved');
+    expect((await boardMe(ownerBoard)).identity.id).toBe(ownerIdentity.identity.id);
+    expect((await boardMe(peerBoard)).identity.id).toBe(peerIdentity.identity.id);
+    await expect(ownerBoard.locator('.resident-avatar')).toHaveCount(2);
+    await expect(peerBoard.locator('.resident-avatar')).toHaveCount(2);
+    await peerBoard.getByLabel('Message to everyone in your house', { exact: true }).fill(BOARD_MESSAGE);
+    await peerBoard.getByLabel('Message to everyone in your house', { exact: true }).press('Control+Enter');
+    await expect(ownerBoard.locator('.chat-log')).toContainText(BOARD_MESSAGE);
+    await peerBoard.getByRole('button', { name: 'Collapse house chat', exact: true }).click();
+    await ownerBoard.getByRole('button', { name: 'Collapse house chat', exact: true }).click();
+    await peerBoard.getByRole('button', { name: 'Sticky note', exact: true }).click();
+    await peerBoard.getByLabel('Your note', { exact: true }).fill(ORIGINAL_NOTE);
+    await peerBoard.getByRole('button', { name: 'Place note', exact: true }).click();
+    await expect.poll(async () => (await boardSnapshot(ownerBoard, houseId)).elements.some(element =>
+      element.type === 'text' && element.originalText === ORIGINAL_NOTE), POLL).toBe(true);
+    const original = (await boardSnapshot(ownerBoard, houseId)).elements.find(element =>
+      element.type === 'text' && element.originalText === ORIGINAL_NOTE);
+    if (!original) throw new Error('The native sticky note was not persisted.');
+    summary.originalElementId = original.id;
+    mark('Peer native sticky note and board chat reach the owner without reload');
+
+    checkpoint = 'native peer rewrite comparison';
+    await ownerBoard.getByRole('button', { name: 'Fit all objects', exact: true }).click();
+    const stage = await visibleBox(ownerBoard.locator('.board-stage'), 'Owner board stage');
+    await ownerBoard.mouse.dblclick(stage.x + stage.width / 2, stage.y + stage.height / 2);
+    const textEditor = ownerBoard.locator('textarea.excalidraw-wysiwyg');
+    await expect(textEditor).toBeVisible();
+    await expect(textEditor).toHaveValue(ORIGINAL_NOTE);
+    await textEditor.fill(REWRITTEN_NOTE);
+    await textEditor.press('Control+Enter');
+    await expect(textEditor).toHaveCount(0);
+    await expect.poll(async () => (await boardSnapshot(ownerBoard, houseId)).elements.find(element => element.id === original.id)?.originalText, POLL).toBe(REWRITTEN_NOTE);
+    await expect.poll(async () => (await boardSnapshot(peerBoard, houseId)).elements.find(element => element.id === original.id)?.originalText, POLL).toBe(REWRITTEN_NOTE);
+    const sharedDownloadEvent = peerBoard.waitForEvent('download');
+    await peerBoard.getByRole('button', { name: 'Download canvas file', exact: true }).click();
+    const sharedDownload = await sharedDownloadEvent;
+    const sharedPath = evidence('peer-shared-scene.excalidraw');
+    await sharedDownload.saveAs(sharedPath);
+    const peerScene = JSON.parse(await readFile(sharedPath, 'utf8')) as { elements: BoardSnapshot['elements'] };
+    expect(peerScene.elements.find(element => element.id === original.id)?.originalText).toBe(REWRITTEN_NOTE);
+    mark('A native owner rewrite changes the shared scene and peer local scene export while preserving the peer element ID');
+    await saveScreen(ownerBoard, evidence('board-desktop.png'));
+    await saveScreen(peerBoard, evidence('board-phone.png'));
+
+    checkpoint = 'owner removes peer through house UI';
+    await openHouseSettings(owner);
+    const dialog = owner.waitForEvent('dialog');
+    const removeClick = owner.getByRole('button', { name: 'Remove member', exact: true }).click();
+    await (await dialog).accept(); await removeClick;
+    await expect(owner.locator('#membership-actions .member-row')).toHaveCount(1);
+    await expect(peerBoard.getByRole('heading', { name: 'Your house access changed', exact: true })).toBeVisible();
+    await expect(peerBoard.getByRole('button', { name: 'Download my contributions', exact: true })).toBeVisible();
+    expect((await boardMe(peerBoard)).home).toBeNull();
+    mark('Native owner removal revokes the already-open peer board');
+
+    checkpoint = 'revoked board own export and denied shared read';
+    const exportResponse = peerBoard.waitForResponse(response => new URL(response.url()).pathname === '/api/board/export' && response.request().method() === 'POST');
+    const downloadEvent = peerBoard.waitForEvent('download');
+    await peerBoard.getByRole('button', { name: 'Download my contributions', exact: true }).click();
+    const ownExportResponse = await exportResponse;
+    expect(ownExportResponse.status()).toBe(200);
+    const download = await downloadEvent;
+    expect(download.suggestedFilename()).toBe('my-board-contributions.json');
+    const exportPath = evidence('peer-own-contributions.json');
+    await download.saveAs(exportPath);
+    const ownExport = JSON.parse(await readFile(exportPath, 'utf8')) as BoardSnapshot;
+    expect(ownExport.elements.find(element => element.id === original.id)?.originalText).toBe(ORIGINAL_NOTE);
+    expect(ownExport.chat.some(message => message.text === BOARD_MESSAGE && message.authorId === peerIdentity.identity.id)).toBe(true);
+    expect(ownExport.chat.every(message => message.authorId === peerIdentity.identity.id)).toBe(true);
+    const denied = await peerBoard.request.get(`/api/board/snapshot?houseId=${encodeURIComponent(houseId)}`, { timeout: 10_000 });
+    expect(denied.status()).toBe(403);
+    const denial = await denied.json();
+    expect(denial.code).toBe('FORBIDDEN');
+    summary.revokedBoundary = { ownExportHTTP: ownExportResponse.status(), sharedSnapshotHTTP: denied.status(),
+      denialCode: denial.code, ownOriginalPreserved: true, sharedPeerRewritePreserved: true };
+    mark('After removal, native contributions export is HTTP 200 and shared snapshot is HTTP 403');
+    mark('Own export keeps the submitted original while the shared scene has the housemate rewrite');
+    await saveScreen(peerBoard, evidence('peer-revoked.png'));
+
+    checkpoint = 'reload discoverability observation';
+    await peerBoard.reload();
+    await expect(peerBoard.getByRole('heading', { name: 'Your house board', exact: true })).toBeVisible();
+    const formerBoardExportControls = await peerBoard.getByRole('button', { name: /Download my contributions|My contributions/ }).count();
+    expect(formerBoardExportControls).toBe(0);
+    summary.observations.push({ name: 'Former-board export after peer reload', result: 'KNOWN_UX_GAP',
+      formerBoardExportControls, text: 'The admission screen has no former-board export control after reload. The already-open revoked board export passed; complete exit portability is not established.' });
+    summary.limitations.push('Former-board contributions are not discoverable from the reloaded admission UI.');
+    await saveScreen(peerBoard, evidence('peer-reloaded-admission.png'));
+
+    checkpoint = 'browser actor to sanitized server log correlation';
+    const rawLog = await readFile(serverMarker.stdout, 'utf8');
+    const allowedKeys = ['at', 'actor', 'action', 'outcome', 'transport', 'commandId', 'houseId', 'zoneId', 'sequence'];
+    const records = rawLog.split(/\r?\n/).flatMap(line => {
+      try { const value = JSON.parse(line); return value && typeof value === 'object' && typeof value.action === 'string' ? [value] : []; }
+      catch { return []; }
+    });
+    const actorIds = [ownerIdentity.identity.id, peerIdentity.identity.id];
+    const ownRecords = records.filter(record => actorIds.includes(record.actor));
+    expect(ownRecords.length).toBeGreaterThan(0);
+    expect(ownRecords.every(record => Object.keys(record).every(key => allowedKeys.includes(key)))).toBe(true);
+    const requiredLogs = [
+      { actor: ownerIdentity.identity.id, action: 'house.create', outcome: 'accepted' },
+      { actor: peerIdentity.identity.id, action: 'house.join', outcome: 'accepted' },
+      { actor: ownerIdentity.identity.id, action: 'chat.send', outcome: 'accepted' },
+      { actor: ownerIdentity.identity.id, action: 'house.remove', outcome: 'accepted' },
+      { actor: peerIdentity.identity.id, action: 'board/patch', outcome: 'accepted' },
+      { actor: ownerIdentity.identity.id, action: 'board/patch', outcome: 'accepted' },
+      { actor: peerIdentity.identity.id, action: 'board/chat', outcome: 'accepted' },
+      { actor: peerIdentity.identity.id, action: 'board.export', outcome: 'own' },
+      { actor: peerIdentity.identity.id, action: 'board/snapshot', outcome: 'FORBIDDEN' },
+    ];
+    for (const expected of requiredLogs) expect(ownRecords.some(record =>
+      record.actor === expected.actor && record.action === expected.action && record.outcome === expected.outcome)).toBe(true);
+    expect(rawLog.includes(CONTENT_CANARY)).toBe(false);
+    expect(rawLog.includes(REWRITTEN_NOTE)).toBe(false);
+    const credentialMarkers = ['house_session=', 'Cookie:', 'Authorization:', '"token":', '"digest":', '"proof":'];
+    expect(credentialMarkers.filter(marker => rawLog.includes(marker))).toEqual([]);
+    summary.logEvidence = { source: serverMarker.stdout, records: ownRecords, requiredLogs,
+      contentCanaryAbsent: true, credentialMarkerAbsence: true,
+      scope: 'Actual browser fixture content and credential markers; no recovery key was generated or submitted.' };
+    await writeFile(evidence('activity.json'), JSON.stringify(summary.logEvidence, null, 2) + '\n');
+    mark('Server log records correlate successes and denial to cookie-resolved actor UUIDs');
+    mark('Structured log allowlist excludes fixture content and credential markers');
+    expect(pageErrors).toEqual([]);
+    expect(await sourceHashes()).toEqual(initialHashes);
+    mark('No page errors and no source drift during the rehearsal');
+    summary.status = 'PASS_WITH_KNOWN_UX_GAP';
+  } catch (error) {
+    summary.status = 'FAIL'; summary.failedCheckpoint = checkpoint;
+    summary.failure = error instanceof Error ? { name: error.name, message: error.message } : { name: 'Unknown failure' };
+    await Promise.allSettled(pages.map((page, index) => page.screenshot({ path: evidence(`failure-page-${index + 1}.png`), animations: 'disabled' })));
+    throw error;
+  } finally {
+    summary.finishedAt = new Date().toISOString(); summary.pageErrors = pageErrors;
+    await closeBoardContexts(contexts);
+    summary.browserContextsClosed = true;
+    await writeFile(evidence('summary.json'), JSON.stringify(summary, null, 2) + '\n');
+  }
+});

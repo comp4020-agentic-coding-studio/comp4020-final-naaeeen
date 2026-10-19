@@ -1,3 +1,4 @@
+import { performance } from "node:perf_hooks";
 import { randomUUID } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Server, Socket } from "socket.io";
@@ -8,6 +9,7 @@ import type { HouseStore } from "./house-store.ts";
 import { BOARD_LIMITS, BoardError, boardFail, boardKeys, boardObject, boardUuid, validateBoardPointer } from "./board-contract.ts";
 import type { BoardPointer, BoardReceipt } from "./board-contract.ts";
 import type { BoardStore } from "./board-store.ts";
+import { activityMetadata } from "./activity-log.ts";
 interface Options {
     origin?: string;
     secureCookies?: boolean;
@@ -112,9 +114,9 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
     }>();
     let closed = false;
     let activeBodies = 0;
-    const log = (id: string, action: string, outcome: string) => {
+    const log = (id: string | null, action: string, outcome: string, metadata: Record<string, unknown> = {}) => {
         try {
-            options.log?.({ at: Date.now(), actor: id, action, outcome });
+            options.log?.({ ...metadata, at: Date.now(), actor: id, action, outcome });
         }
         catch {
         }
@@ -263,7 +265,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
         }
     });
     function connected(socket: Socket): void {
-        const current = socket.data.boardActor as Actor, view: View = { ...current, socket, houseId: null, subscriptionId: randomUUID(), pointerAt: 0, budgetAt: Date.now(), events: 0 };
+        const current = socket.data.boardActor as Actor, view: View = { ...current, socket, houseId: null, subscriptionId: randomUUID(), pointerAt: 0, budgetAt: performance.now(), events: 0 };
         if (closed || views.size >= BOARD_LIMITS.views) {
             socket.disconnect();
             return;
@@ -310,9 +312,11 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 if (!view.houseId)
                     boardFail("FORBIDDEN", "Open a current board before sharing a pointer.");
                 member(view, view.houseId);
-                const now = Date.now();
-                if (now - view.budgetAt >= 1000) {
-                    view.budgetAt = now;
+                const now = Date.now(), budgetNow = performance.now();
+                // This volatile rate window measures elapsed time; wall-clock
+                // corrections must not extend it. Presence timestamps stay civil.
+                if (budgetNow - view.budgetAt >= 1000) {
+                    view.budgetAt = budgetNow;
                     view.events = 0;
                 }
                 if (++view.events > 20)
@@ -374,6 +378,10 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
         }
         if (!url.pathname.startsWith("/api/board/"))
             return false;
+        const paths = ["/api/board/context", "/api/board/snapshot", "/api/board/asset", "/api/board/patch", "/api/board/chat", "/api/board/export"];
+        const auditAction = paths.includes(url.pathname) ? url.pathname.slice(5) : "board.request";
+        let auditActor: string | null = null;
+        let auditMetadata: Record<string, unknown> = { ...activityMetadata({ houseId: url.searchParams.get("houseId") }) };
         try {
             if (closed)
                 boardFail("STORAGE_UNAVAILABLE", "The board is restarting. Keep local work and retry.");
@@ -391,7 +399,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 json(response, 200, houseStore.me(a.id));
                 return true;
             }
-            const original = actor(request);
+            const original = actor(request); auditActor = original.id;
             intended(request, original, request.method === "POST");
             rate(original, request.method === "POST");
             if (request.method === "GET" && url.pathname === "/api/board/snapshot") {
@@ -439,7 +447,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 activeBodies--;
                 request.setTimeout(0);
             }
-            const body = boardObject(parsed);
+            const body = boardObject(parsed); auditMetadata = { ...activityMetadata(body) };
             sameActor(original);
             intended(request, original, true);
             const houseId = boardUuid(body.houseId);
@@ -448,7 +456,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 const result = store.ownExport(original.id, houseId);
                 sameActor(original);
                 json(response, 200, result);
-                log(original.id, "board.export", "own");
+                log(original.id, "board.export", "own", { houseId, transport: "http" });
                 return true;
             }
             const me = member(original, houseId);
@@ -468,11 +476,12 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 publish(houseId, "board.chat", { houseId, sequence: receipt.sequence, message: receipt.message });
             if (receipt.sequence > priorSequence && receipt.file)
                 snapshots(houseId);
-            log(original.id, url.pathname.slice(5), "saved");
+            log(original.id, url.pathname.slice(5), "accepted", { ...activityMetadata(body), houseId, commandId: receipt.id, sequence: receipt.sequence, transport: "http" });
             return true;
         }
         catch (error) {
             const problem = failure(error), status = problem.code === "UNAUTHENTICATED" ? 401 : ["FORBIDDEN", "IDENTITY_CHANGED"].includes(problem.code) ? 403 : problem.code === "LIMIT_EXCEEDED" ? 413 : problem.code === "RATE_LIMITED" ? 429 : problem.code === "ID_REUSED" ? 409 : problem.code === "STORAGE_UNAVAILABLE" ? 503 : 400;
+            log(auditActor, auditAction, problem.code, { ...auditMetadata, transport: "http" });
             if (!response.destroyed && !response.writableEnded)
                 json(response, status, problem);
             return true;

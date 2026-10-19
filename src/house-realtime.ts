@@ -4,6 +4,7 @@ import { Server, type Socket } from "socket.io";
 import { HouseError } from "./house-contract.ts";
 import type { HouseCommand, HouseReceipt, HouseSnapshot, LiveSnapshot, Me, Player } from "./house-contract.ts";
 import { createLayout, bedroomLayout, validPosition, slide } from "../public/house-geometry.js";
+import { activityMetadata } from "./activity-log.ts";
 
 export interface HouseAuthority {
   session(digest: string): { id: string } | undefined;
@@ -64,7 +65,14 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   const leases = new Map<string, Lease>();
   let nextGeneration = 0, nextAccessGeneration = 0;
   let closed = false, motionDirty = false, sessionSweepAt = 0;
-  const log = (id: string, action: string, outcome: string) => { try { options.log?.({ at: Date.now(), actor: id, action, outcome }); } catch { /* Instruments must not change command success. */ } };
+  const log = (id: string, action: string, outcome: string, metadata: Record<string, unknown> = {}) => { try { options.log?.({ ...metadata, at: Date.now(), actor: id, action, outcome }); } catch { /* Instruments must not change command success. */ } };
+  function receiptMetadata(command: HouseCommand, receipt: HouseReceipt) {
+    // A lounge stream names a house; a bedroom stream names a room. Commands
+    // reaching a bedroom receipt have already passed the store's house check.
+    const houseId = receipt.streamId.startsWith("lounge:") ? receipt.streamId.slice(7)
+      : receipt.streamId.startsWith("bedroom:") ? command.houseId : undefined;
+    return { ...activityMetadata(command), houseId, commandId: receipt.commandId, sequence: receipt.sequence };
+  }
   function release(lease: Lease) { lease.seatId = null; lease.animation = "idle"; }
   function disconnect(context: Context, code: string) { log(context.id, "connection.close", code); context.socket.conn.close(true); }
   function requireSession(context: Context) {
@@ -206,7 +214,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
           if (Date.now() - context.budgetAt >= 1000) { context.events = 0; context.budgetAt = Date.now(); }
           if (++context.events > 30) throw new HouseError("RATE_LIMITED", "Please slow down your house actions.");
           const body = inputObject(raw); result = action(body);
-        } catch (error) { result = failure(error); if (event !== "house.move") log(context.id, event, failure(error).code); }
+        } catch (error) { result = failure(error); if (event !== "house.move") log(context.id, event, failure(error).code, { ...activityMetadata(event === "house.command" && raw && typeof raw === "object" ? (raw as Record<string, unknown>).command : undefined), transport: "socket" }); }
         if (typeof acknowledge === "function") {
           const status = outbound(socket, Buffer.byteLength(JSON.stringify(result)) + 32);
           if (status === "overflow") disconnect(context, "SLOW_READER"); else acknowledge(result);
@@ -296,7 +304,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       if (body.zoneId !== context.zoneId || lease.zoneId !== body.zoneId) throw new HouseError("STALE_ZONE", "This draft belongs to a different room.");
       const command = inputObject(body.command) as unknown as HouseCommand;
       validateCommandZone(command, context.zoneId);
-      const receipt = store.execute(context.id, command); queueRefresh(); log(context.id, command.type, "saved"); return receipt;
+      const receipt = store.execute(context.id, command); queueRefresh(); log(context.id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "socket" }); return receipt;
     });
   });
   function validateCommandZone(command: HouseCommand, zoneId: string) {
@@ -323,7 +331,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         if (zoneId !== context.zoneId) throw new HouseError("STALE_ZONE", "This draft belongs to a different room.");
         validateCommandZone(command, context.zoneId);
       }
-      const receipt = store.execute(id, command); queueRefresh(); log(id, command.type, "saved"); return receipt;
+      const receipt = store.execute(id, command); queueRefresh(); log(id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "http" }); return receipt;
     },
     async close(): Promise<void> {
       if (closed) return; closed = true; clearInterval(timer);

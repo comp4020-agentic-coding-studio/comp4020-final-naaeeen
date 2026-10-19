@@ -13,13 +13,14 @@ import { HouseError } from "./house-contract.ts";
 import { attachHouseRealtime } from "./house-realtime.ts";
 import { BoardStore } from "./board-store.ts";
 import { attachBoardService } from "./board-service.ts";
+import { createActivityLogger, activityMetadata, type ActivityRecord } from "./activity-log.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const COOKIE = "night_session";
 const BODY_LIMIT = 16 * 1024;
 const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
 const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
-export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string }
+export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
 interface Connection { response: ServerResponse; digest: string }
 
 function cookieToken(request: IncomingMessage, name = COOKIE): string | undefined {
@@ -89,7 +90,8 @@ export function createService(options: ServiceOptions) {
       throw new HouseError("IDENTITY_CHANGED", "Your identity changed. Return to the original identity to review this pending action.");
     }
   }
-  function actionLog(actor: string, action: string, outcome: string): void { console.log(JSON.stringify({at: new Date().toISOString(), actor, action, outcome})); }
+  const activity = createActivityLogger(options.activityLog);
+  function actionLog(actor: string, action: string, outcome: string): void { activity({ actor, action, outcome, transport: "http" }); }
   const connections = new Set<Connection>();
   const rateBuckets = new Map<string, { start: number; count: number }>();
   let stopping = false;
@@ -135,6 +137,8 @@ export function createService(options: ServiceOptions) {
   }
   async function handle(request: IncomingMessage, response: ServerResponse): Promise<void> {
     headers(response);
+    let houseAction: string | undefined, houseActor: string | undefined;
+    let houseMetadata: Record<string, unknown> = {};
     try {
       if (stopping) throw new DomainError("STORAGE_UNAVAILABLE", "The neighbourhood is restarting. Please retry.");
       let pathname: string;
@@ -148,6 +152,16 @@ export function createService(options: ServiceOptions) {
       }
       if (pathname.startsWith("/api/board/") && await board.handle(request, response)) return;
       if (pathname.startsWith("/api/house/")) {
+        const actions: Record<string, string> = {
+          "/api/house/me": "house.me", "/api/house/recover": "identity.recover",
+          "/api/house/recovery-key": "identity.recovery-key", "/api/house/export": "identity.export",
+          "/api/house/snapshot": "house.snapshot", "/api/house/removed-members": "house.removed-members",
+          "/api/house/command": "house.command",
+        };
+        houseAction = actions[pathname] ?? "house.request";
+        if (pathname === "/api/house/snapshot")
+          houseMetadata = { ...activityMetadata({ zoneId: new URL(request.url ?? "/", "http://local.invalid").searchParams.get("zone") }) };
+
         if (request.method === "GET" && pathname === "/api/house/me") {
           rateLimit("bootstrap:" + (request.socket.remoteAddress ?? "local"));
           const actor = houseStore.ensureSession(cookieToken(request, "house_session"));
@@ -162,7 +176,7 @@ export function createService(options: ServiceOptions) {
           setHouseCookie(response, actor.token); actionLog(actor.id, "identity.recover", "saved");
           json(response, 200, houseStore.me(actor.id)); return;
         }
-        const actor = houseAuth(request);
+        const actor = houseAuth(request); houseActor = actor.id;
         if (request.method === "GET" && pathname === "/api/house/removed-members") {
           const after = new URL(request.url ?? "/", "http://local.invalid").searchParams.get("after") ?? "";
           json(response, 200, houseStore.removedResidents(actor.id, after)); return;
@@ -174,6 +188,7 @@ export function createService(options: ServiceOptions) {
         if (request.method === "POST") {
           sameOrigin(request); intendedHouseIdentity(request, actor.id); rateLimit("house:" + actor.digest);
           const body = await readJson(request);
+          if (pathname === "/api/house/command") houseMetadata = { ...activityMetadata(body) };
           const current = houseAuth(request); // body arrival may outlive a revoked session
           intendedHouseIdentity(request, current.id);
           if (pathname === "/api/house/recovery-key") {
@@ -244,12 +259,13 @@ export function createService(options: ServiceOptions) {
     } catch (error) {
       if (response.headersSent || response.destroyed) { response.end(); return; }
       const failure = error instanceof DomainError || error instanceof HouseError ? error : new DomainError("STORAGE_UNAVAILABLE", "The neighbourhood is temporarily unavailable. Please retry.");
+      if (houseAction) activity({ ...houseMetadata, actor: houseActor, action: houseAction, outcome: failure.code, transport: "http" });
       json(response, STATUS[failure.code] ?? 503, { ok: false, code: failure.code, message: failure.message });
     }
   }
   const server = createServer((request, response) => { void handle(request, response); });
-  const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => console.log(JSON.stringify(record))});
-  const board = attachBoardService(realtime.io, houseStore, boardStore, {origin: options.origin, secureCookies, log: (record) => console.log(JSON.stringify(record))});
+  const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
+  const board = attachBoardService(realtime.io, houseStore, boardStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
   server.requestTimeout = 15_000; server.headersTimeout = 10_000;
   const heartbeat = setInterval(() => {
     for (const connection of connections) {
