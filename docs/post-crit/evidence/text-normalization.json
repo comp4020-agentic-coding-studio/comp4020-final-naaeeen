@@ -1,0 +1,45 @@
+{
+  "cause": "Parent commit continued after whitespace-check failure; fixed in a follow-up local commit. No production or assertion semantics changed. Previous test/review hashes retain their original byte scope.",
+  "files": [
+    {
+      "path": "docs/post-crit/GAME-API.md",
+      "beforeSHA256": "86a3a01cf5abad61a2acf308ac7f918b96faecb4dae2e1e8d080f7baca02f0b1",
+      "afterSHA256": "d3dc42abbc5717fdfa0d7bea65ef64b44c8d338b5d96fdb3fb4fa250d701a5c7",
+      "beforeCRLF": 0,
+      "afterCRLF": 0,
+      "operation": "Normalize CRLF to LF and final EOF whitespace only"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-backend-checks.md",
+      "beforeSHA256": "10c3f2c89e02a87da1b2577646ef63cfa3731f34e6372bd265ebe467f360ef93",
+      "afterSHA256": "ad953740bc15de724107fff4988f405ff584351fcebc8afb4270c238db5af1e0",
+      "beforeCRLF": 1,
+      "afterCRLF": 0,
+      "operation": "Normalize CRLF to LF and final EOF whitespace only"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-backend-review.md",
+      "beforeSHA256": "42891d18b5da7975900cb0eecdda371ff2f76c570bfa88debba78e2a075deea5",
+      "afterSHA256": "a80df0cbb1557e62cca98680b6bca5fdff0695e445a20dc8463a504ebe0fcf80",
+      "beforeCRLF": 1,
+      "afterCRLF": 0,
+      "operation": "Normalize CRLF to LF and final EOF whitespace only"
+    },
+    {
+      "path": "spec/house-game-backend.test.ts",
+      "beforeSHA256": "1d01f4febdadaced74ffc5ec1b4f1b078cbd4f66433cbaf18c846d0ddd21e1a2",
+      "afterSHA256": "b59ed26a9f541c7448198dfc21eb73bfb28e88d204825c900605a18479dc82d4",
+      "beforeCRLF": 0,
+      "afterCRLF": 0,
+      "operation": "Normalize CRLF to LF and final EOF whitespace only"
+    },
+    {
+      "path": "spec/house-game-realtime.test.ts",
+      "beforeSHA256": "4fe1d529ca4c8e8803269b13288f821c311f3a7d1f38ce1b41da70d75ffba28e",
+      "afterSHA256": "65a02e53001ab828a14bb3e74919e83409e943fac4a57e95a3c4c392edd7b4d7",
+      "beforeCRLF": 0,
+      "afterCRLF": 0,
+      "operation": "Normalize CRLF to LF and final EOF whitespace only"
+    }
+  ]
+}

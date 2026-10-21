@@ -34,4 +34,3 @@ The initial review is independent and history-free; later checks are contextual
 fix verification, not additional fresh independent opinions. Final hashes and
 result artifacts are in game-backend-manifest.json. Browser, resource, whole-app
 cutover and human review were outside this review's scope.
-

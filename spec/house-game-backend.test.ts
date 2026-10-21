@@ -83,4 +83,3 @@ describe("durable Four-in-a-row adapter",()=>{
   f.store.db.exec("UPDATE game_tables SET state='{}'");expect(()=>f.game()).toThrowError(error("STORAGE_UNAVAILABLE"));
  });
 });
-

@@ -79,4 +79,3 @@ parent world-version authorization gate, original resource gates plus separately
 declared combined game workload, parent reproduction and broader required
 checks. Browser, physical-phone and real-friend trials were NOT RUN by this
 backend lane. No deployed or human acceptance is claimed.
-

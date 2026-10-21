@@ -107,4 +107,3 @@ describe("independent sockets and SQLite game authority",()=>{
   f.store.execute(f.people[0]!.id,f.command("house.remove",{memberId:f.people[1]!.id}));f.live.refresh();expect(f.game().latestResult!.reason).toBe("member_removed");
  });
 });
-

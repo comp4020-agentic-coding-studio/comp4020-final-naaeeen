@@ -54,4 +54,3 @@ subscription or stale controller's disconnect does not.
 Closing the UI is local only. Watch is local/read-only. Logical game seats do not
 change physical avatar chairs, Quiet, bedroom doors or study cards. Waiting expiry
 has no played result. Terminal state releases seats and retains only latestResult.
-
