@@ -1,0 +1,31 @@
+{
+  "closures": [
+    {
+      "checkedAtUTC": "2026-10-21T17:47:26.140418+00:00",
+      "scenario": "original",
+      "generatorPID": 66778,
+      "serverPID": 66811,
+      "generatorProcExists": false,
+      "serverProcExists": false
+    },
+    {
+      "checkedAtUTC": "2026-10-21T17:49:32.147438+00:00",
+      "scenario": "combined-first-fail",
+      "generatorPID": null,
+      "serverPID": null,
+      "resourceProcessCountAfterExit": 0,
+      "toolSessionExitCode": 1,
+      "limitation": "Early failure exited before PID inspection; numeric PIDs unavailable. ps found no remaining node board-resource processes and the owning tool session exited1."
+    },
+    {
+      "scenario": "combined-repaired",
+      "launchedAtUTC": "2026-10-21T17:56:07.071373+00:00",
+      "generatorPID": 68018,
+      "serverPID": 68042,
+      "exitCode": 0,
+      "checkedAtUTC": "2026-10-21T18:01:11.183689+00:00",
+      "generatorProcExists": false,
+      "serverProcExists": false
+    }
+  ]
+}

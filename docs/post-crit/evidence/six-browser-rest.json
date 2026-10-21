@@ -1,0 +1,490 @@
+{
+  "manifest": {
+    "caseName": "rest",
+    "scope": "six independent Chromium contexts using actual UI admission/native routing/actual SQLite+Socket.IO; labelled real-socket negative probes only; owner1920x1080, watcher390x844, other4windows844x390; inactive peers use ordinary Options/Pause, preserving real connections/control/seats with serial native rendering; no simultaneous six-canvas/human/physical-device/WAN/Fly/resource-performance claim",
+    "runner": "bc23ed9b2f72f4fd671814baea07b09f34a01975c192d9a9c78f7dc61b8354e3",
+    "sources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "endSources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "sourceStable": true
+  },
+  "checks": {
+    "sixGenuineIdentities": {
+      "count": 6,
+      "distinctRooms": 6,
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "worldVersion": "lounge-2"
+    },
+    "sixRestAndStand": true,
+    "complete": true
+  },
+  "routes": [
+    {
+      "index": 0,
+      "purpose": "rest",
+      "seatId": "rest-seat-1",
+      "acceptedPosition": {
+        "x": 4.8,
+        "z": 4.9
+      },
+      "elapsedMs": 10218
+    },
+    {
+      "index": 1,
+      "purpose": "rest",
+      "seatId": "rest-seat-2",
+      "acceptedPosition": {
+        "x": 5.8,
+        "z": 4.9
+      },
+      "elapsedMs": 12653
+    },
+    {
+      "index": 2,
+      "purpose": "rest",
+      "seatId": "rest-seat-3",
+      "acceptedPosition": {
+        "x": 6.8,
+        "z": 4.9
+      },
+      "elapsedMs": 13204
+    },
+    {
+      "index": 3,
+      "purpose": "rest",
+      "seatId": "rest-seat-6",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 3.4
+      },
+      "elapsedMs": 13656
+    },
+    {
+      "index": 4,
+      "purpose": "rest",
+      "seatId": "rest-seat-5",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 2.4
+      },
+      "elapsedMs": 13398
+    },
+    {
+      "index": 5,
+      "purpose": "rest",
+      "seatId": "rest-seat-4",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 1.4
+      },
+      "elapsedMs": 14457
+    }
+  ],
+  "images": [
+    {
+      "name": "six-rest-follow-390x844",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "avatarLabels": [
+        {
+          "name": "Robin",
+          "visible": false,
+          "rect": {
+            "left": 7.9921875,
+            "top": 360,
+            "right": 58.7265625,
+            "bottom": 398
+          }
+        },
+        {
+          "name": "Finch",
+          "visible": false,
+          "rect": {
+            "left": 54.3359375,
+            "top": 386.6875,
+            "right": 103.0703125,
+            "bottom": 424.6875
+          }
+        },
+        {
+          "name": "Gale",
+          "visible": true,
+          "rect": {
+            "left": 7.9921875,
+            "top": 404,
+            "right": 56.7265625,
+            "bottom": 442
+          }
+        },
+        {
+          "name": "Harper",
+          "visible": true,
+          "rect": {
+            "left": 91.09375,
+            "top": 538.625,
+            "right": 149.8125,
+            "bottom": 576.625
+          }
+        },
+        {
+          "name": "Indigo",
+          "visible": true,
+          "rect": {
+            "left": 69.9609375,
+            "top": 399.453125,
+            "right": 124.5078125,
+            "bottom": 437.453125
+          }
+        },
+        {
+          "name": "Jules",
+          "visible": true,
+          "rect": {
+            "left": 17.7578125,
+            "top": 270.90625,
+            "right": 101.9296875,
+            "bottom": 308.90625
+          }
+        }
+      ],
+      "visibleLabels": 4,
+      "avatars": 6
+    }
+  ],
+  "errors": [],
+  "admission": [
+    {
+      "selfId": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "4d7c2be9-9200-413b-b0ba-05072646723d",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "08d13b0d-859a-4a90-8544-e8cf870da9d4",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "4d7c2be9-9200-413b-b0ba-05072646723d",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "464d06ef-0a86-4fb5-a6d1-93b10196dacb",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f3e1f19e-2bda-445b-bf37-93ed71bfef29",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b0b986db-3b3e-4da9-b5f1-0946ff61fae1",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "b7ea1f49-8485-48b4-a14b-29709c3abc8e",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    }
+  ],
+  "currentAction": {
+    "index": 5,
+    "purpose": "rest",
+    "stage": "native Places route"
+  }
+}

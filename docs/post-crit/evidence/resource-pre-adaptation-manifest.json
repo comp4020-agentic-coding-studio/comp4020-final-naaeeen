@@ -1,0 +1,24 @@
+{
+  "preservedAtUTC": "2026-10-21T16:46:49.558967+00:00",
+  "scope": "Exact pre-adaptation canonical bytes, retained before post-Crit capability update",
+  "files": {
+    "protocol": {
+      "originalPath": "evaluation/board-resource.protocol.json",
+      "preservedPath": "docs/post-crit/evidence/resource-pre-adaptation-protocol.json",
+      "bytes": 15215,
+      "sha256": "1f2cf6b4312f02552a802fbf481f739a661aeab4485ea3c1f4d52d3ee2b3a414"
+    },
+    "result": {
+      "originalPath": "evaluation/board-resource.results.json",
+      "preservedPath": "docs/post-crit/evidence/resource-pre-adaptation-result.json",
+      "bytes": 447598,
+      "sha256": "cd13733d6a0336688b11873a3a693354c7fc6ee5473840bd6d0b584e6c98aac3"
+    },
+    "instrument": {
+      "originalPath": "tools/board-resource.mjs",
+      "preservedPath": "docs/post-crit/evidence/resource-pre-adaptation-instrument.mjs",
+      "bytes": 59163,
+      "sha256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0"
+    }
+  }
+}

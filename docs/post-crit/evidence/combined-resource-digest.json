@@ -1,0 +1,112 @@
+{
+  "checkedAtUTC": "2026-10-21T18:02:07.649759+00:00",
+  "status": "PASS",
+  "durationSeconds": 300.001,
+  "gates": 23,
+  "rssMiB": 182.6171875,
+  "normalP95Ms": 13.023,
+  "patchSaved": 7188,
+  "chatSaved": 708,
+  "patchSkipped": 0,
+  "chatSkipped": 0,
+  "errors": {},
+  "pending": 0,
+  "game": {
+    "actions": 124,
+    "types": {
+      "join": 24,
+      "ready": 24,
+      "move": 74,
+      "leave": 2
+    },
+    "rounds": 12,
+    "outcomes": {
+      "win": 10,
+      "player_left": 2
+    },
+    "projectionTargets": 733,
+    "visibilityP95Ms": 100.992,
+    "visibilityMaxMs": 110.002,
+    "scheduleMaxLagMs": 1.612,
+    "storageSamples": 14,
+    "receiptCountBefore": 12,
+    "receiptCountAfter": 136,
+    "receiptCountDelta": 124,
+    "receiptResponseBytesBefore": 3144,
+    "receiptResponseBytesAfter": 31418,
+    "receiptResponseBytesDelta": 28274,
+    "gameTablesBefore": {
+      "rows": 0,
+      "stateBytes": 0,
+      "maxStateBytes": 0,
+      "activeTables": 0
+    },
+    "gameTablesAfter": {
+      "rows": 2,
+      "stateBytes": 1044,
+      "maxStateBytes": 522,
+      "activeTables": 0
+    },
+    "sqliteAllFilesBefore": {
+      "logicalBytes": 27303208,
+      "allocatedBytes": 27312128
+    },
+    "sqliteAllFilesAfter": {
+      "logicalBytes": 209873624,
+      "allocatedBytes": 209887232
+    },
+    "sqliteAllFilesDelta": {
+      "logicalBytes": 182570416,
+      "allocatedBytes": 182575104
+    },
+    "cgroupAvailable": false,
+    "sampledMaxStateBytesPerTable": 547,
+    "sampledMaxTotalStateBytes": 1094,
+    "allStorageSamplesWithinStateBound": true
+  },
+  "perViewCadence": {
+    "motionMinHz": 9.995,
+    "motionMaxHz": 9.997,
+    "pointerMinHz": 18.226,
+    "pointerMaxHz": 18.34
+  },
+  "eventLoop": {
+    "p95Ms": 14.163967,
+    "p99Ms": 18.038783,
+    "maxMs": 48.398335
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "host": {
+      "platform": "linux",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "runner": "WSL"
+    },
+    "execArgv": [
+      "--max-semi-space-size=12"
+    ],
+    "heapLimitMiB": 2096,
+    "constrainedMemoryBytes": 18446744073709552000,
+    "inboundBytes": 16384,
+    "cgroupMemoryMax": null,
+    "cgroupCpuMax": null
+  },
+  "protocolSHA256": "741d4783ec461c2fe559d9cff2bb09269b7bc47489913871d39725509bc136c8",
+  "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+  "instrumentSHA256": "8dd77f0717121776839aa1a8cb4ad69cd28b87154dcdae4ffd1135064e37c6d1",
+  "resultSHA256": "7bef828e42842b8781fde707e8d4d25c6b6b568e8c2074c3f9b4bc1f68c1aefa",
+  "sourceGuardVerifiedAtExit": true,
+  "closure": {
+    "scenario": "combined-repaired",
+    "launchedAtUTC": "2026-10-21T17:56:07.071373+00:00",
+    "generatorPID": 68018,
+    "serverPID": 68042,
+    "exitCode": 0,
+    "checkedAtUTC": "2026-10-21T18:01:11.183689+00:00",
+    "generatorProcExists": false,
+    "serverProcExists": false
+  },
+  "historyStatuses": [
+    "FAIL"
+  ]
+}

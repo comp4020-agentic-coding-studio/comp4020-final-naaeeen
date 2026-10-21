@@ -1,0 +1,392 @@
+{
+  "manifest": {
+    "scope": "six independent Chromium contexts using actual UI admission/native routing/actual SQLite+Socket.IO; labelled real-socket negative probes only; one watcher390x844, others1920x1080; inactive peers use ordinary Options/Pause, preserving real connections/control/seats with serial native rendering; no simultaneous six-canvas/human/physical-device/WAN/Fly/resource-performance claim",
+    "runner": "743a86a22b2fffc2dbab7f1e232b089ed41a14b65a6269efbd1e93d98e9173ee",
+    "sources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "endSources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "sourceStable": true
+  },
+  "checks": {
+    "sixGenuineIdentities": {
+      "count": 6,
+      "distinctRooms": 6,
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "worldVersion": "lounge-2"
+    },
+    "occupiedSeatNativeRejection": true,
+    "failure": "page.waitForFunction: Timeout 45000ms exceeded.\n    at routeSeat (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-six-browser.mjs:20:190)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-six-browser.mjs:30:182"
+  },
+  "routes": [
+    {
+      "index": 0,
+      "purpose": "study",
+      "seatId": "seat-1",
+      "acceptedPosition": {
+        "x": -0.9999999999999999,
+        "z": -0.10000000000000009
+      },
+      "elapsedMs": 18078
+    },
+    {
+      "index": 1,
+      "purpose": "study",
+      "seatId": "seat-2",
+      "acceptedPosition": {
+        "x": -2.8619546181365427,
+        "z": -1.0499999999999994
+      },
+      "elapsedMs": 16747
+    },
+    {
+      "index": 2,
+      "purpose": "study",
+      "seatId": "seat-6",
+      "acceptedPosition": {
+        "x": 0.861954618136543,
+        "z": -1.05
+      },
+      "elapsedMs": 29885
+    },
+    {
+      "index": 3,
+      "purpose": "study",
+      "seatId": "seat-5",
+      "acceptedPosition": {
+        "x": 0.8619546181365425,
+        "z": -2.950000000000001
+      },
+      "elapsedMs": 39914
+    }
+  ],
+  "images": [],
+  "errors": [],
+  "admission": [
+    {
+      "selfId": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "82454221-7a4f-4185-beb2-97c31e67732d",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "b04bbb9a-e8cd-41dd-9600-d0674b9fad68",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "cf4a7a7d-85f5-47d2-9ef9-cd0afe63e575",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f25fc48f-3db7-498e-b50a-90f545a374c3",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "01b13642-e057-4abc-b3fd-dd5912196d4b",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "82454221-7a4f-4185-beb2-97c31e67732d",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "f2f9db83-11d4-4b24-a679-3525c6ecc54d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    }
+  ]
+}

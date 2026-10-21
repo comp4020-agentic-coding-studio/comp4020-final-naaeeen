@@ -1,0 +1,638 @@
+{
+  "manifest": {
+    "scope": "six independent Chromium contexts using actual UI admission/native routing/actual SQLite+Socket.IO; labelled real-socket negative probes only; owner1920x1080, watcher390x844, other4windows844x390; inactive peers use ordinary Options/Pause, preserving real connections/control/seats with serial native rendering; no simultaneous six-canvas/human/physical-device/WAN/Fly/resource-performance claim",
+    "runner": "88f0908fac0dbed3c93e67b93d8d0583b394f39965920cfaf6fb760b3e0436ce",
+    "sources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "endSources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "sourceStable": true
+  },
+  "checks": {
+    "sixGenuineIdentities": {
+      "count": 6,
+      "distinctRooms": 6,
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "worldVersion": "lounge-2"
+    },
+    "occupiedSeatNativeRejection": true,
+    "sixStudyAndStand": true,
+    "runBudgetExpired": true,
+    "failure": "page.waitForFunction: Target page, context or browser has been closed\n    at routeSeat (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-six-browser.mjs:20:311)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-six-browser.mjs:31:58"
+  },
+  "routes": [
+    {
+      "index": 0,
+      "purpose": "study",
+      "seatId": "seat-1",
+      "acceptedPosition": {
+        "x": -0.9999999999999999,
+        "z": -0.10000000000000009
+      },
+      "elapsedMs": 7454
+    },
+    {
+      "index": 1,
+      "purpose": "study",
+      "seatId": "seat-2",
+      "acceptedPosition": {
+        "x": -2.8619546181365427,
+        "z": -1.0499999999999994
+      },
+      "elapsedMs": 7645
+    },
+    {
+      "index": 2,
+      "purpose": "study",
+      "seatId": "seat-6",
+      "acceptedPosition": {
+        "x": 0.861954618136543,
+        "z": -1.05
+      },
+      "elapsedMs": 12703
+    },
+    {
+      "index": 3,
+      "purpose": "study",
+      "seatId": "seat-5",
+      "acceptedPosition": {
+        "x": 0.8619546181365425,
+        "z": -2.950000000000001
+      },
+      "elapsedMs": 15621
+    },
+    {
+      "index": 4,
+      "purpose": "study",
+      "seatId": "seat-3",
+      "acceptedPosition": {
+        "x": -2.8619546181365436,
+        "z": -2.9499999999999993
+      },
+      "elapsedMs": 21747
+    },
+    {
+      "index": 5,
+      "purpose": "study",
+      "seatId": "seat-4",
+      "acceptedPosition": {
+        "x": -1.0000000000000004,
+        "z": -3.9
+      },
+      "elapsedMs": 21030
+    },
+    {
+      "index": 0,
+      "purpose": "rest",
+      "seatId": "rest-seat-1",
+      "acceptedPosition": {
+        "x": 4.8,
+        "z": 4.9
+      },
+      "elapsedMs": 12664
+    },
+    {
+      "index": 1,
+      "purpose": "rest",
+      "seatId": "rest-seat-2",
+      "acceptedPosition": {
+        "x": 5.8,
+        "z": 4.9
+      },
+      "elapsedMs": 23593
+    },
+    {
+      "index": 2,
+      "purpose": "rest",
+      "seatId": "rest-seat-4",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 1.4
+      },
+      "elapsedMs": 12755
+    },
+    {
+      "index": 3,
+      "purpose": "rest",
+      "seatId": "rest-seat-5",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 2.4
+      },
+      "elapsedMs": 18153
+    },
+    {
+      "index": 4,
+      "purpose": "rest",
+      "seatId": "rest-seat-6",
+      "acceptedPosition": {
+        "x": 7.8,
+        "z": 3.4
+      },
+      "elapsedMs": 27818
+    }
+  ],
+  "images": [
+    {
+      "name": "six-study-follow-1920x1080",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "avatarLabels": [
+        {
+          "name": "Robin",
+          "visible": true,
+          "rect": {
+            "left": 1135.9375,
+            "top": 444.515625,
+            "right": 1236.96875,
+            "bottom": 487.015625
+          }
+        },
+        {
+          "name": "Finch",
+          "visible": true,
+          "rect": {
+            "left": 957.3203125,
+            "top": 223.453125,
+            "right": 1013.1171875,
+            "bottom": 265.953125
+          }
+        },
+        {
+          "name": "Gale",
+          "visible": true,
+          "rect": {
+            "left": 1210.0234375,
+            "top": 389.78125,
+            "right": 1265.8203125,
+            "bottom": 432.28125
+          }
+        },
+        {
+          "name": "Harper",
+          "visible": true,
+          "rect": {
+            "left": 1392.4921875,
+            "top": 299.015625,
+            "right": 1459.1015625,
+            "bottom": 341.515625
+          }
+        },
+        {
+          "name": "Indigo",
+          "visible": true,
+          "rect": {
+            "left": 1080.25,
+            "top": 128.046875,
+            "right": 1142.34375,
+            "bottom": 170.546875
+          }
+        },
+        {
+          "name": "Jules",
+          "visible": true,
+          "rect": {
+            "left": 1334.5859375,
+            "top": 196.0625,
+            "right": 1390.3828125,
+            "bottom": 238.5625
+          }
+        }
+      ],
+      "visibleLabels": 6,
+      "avatars": 6
+    },
+    {
+      "name": "six-study-overview-1920x1080",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "avatarLabels": [
+        {
+          "name": "Robin",
+          "visible": true,
+          "rect": {
+            "left": 829.109375,
+            "top": 444.5,
+            "right": 930.140625,
+            "bottom": 487
+          }
+        },
+        {
+          "name": "Finch",
+          "visible": true,
+          "rect": {
+            "left": 904.2578125,
+            "top": 396,
+            "right": 960.0546875,
+            "bottom": 438.5
+          }
+        },
+        {
+          "name": "Gale",
+          "visible": true,
+          "rect": {
+            "left": 1213.0390625,
+            "top": 396,
+            "right": 1268.8359375,
+            "bottom": 438.5
+          }
+        },
+        {
+          "name": "Harper",
+          "visible": true,
+          "rect": {
+            "left": 1249.4140625,
+            "top": 444.5,
+            "right": 1316.0234375,
+            "bottom": 487
+          }
+        },
+        {
+          "name": "Indigo",
+          "visible": true,
+          "rect": {
+            "left": 1024.75,
+            "top": 277.828125,
+            "right": 1086.84375,
+            "bottom": 320.328125
+          }
+        },
+        {
+          "name": "Jules",
+          "visible": true,
+          "rect": {
+            "left": 1166.8828125,
+            "top": 333.109375,
+            "right": 1222.6796875,
+            "bottom": 375.609375
+          }
+        }
+      ],
+      "visibleLabels": 6,
+      "avatars": 6
+    }
+  ],
+  "errors": [],
+  "admission": [
+    {
+      "selfId": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ac378540-e829-4eb4-b44b-e60aa6e8d765",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c28bbe90-049d-4ecc-b806-a17ae12dfbd3",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "0748ebfd-1eb8-4823-af73-e62205b3254b",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "864c364a-4a2f-4df7-9e35-78f9ab919313",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "a33cb994-401d-4572-b75c-8f1a00d3d7e2",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "47202044-ef6c-417e-864a-3a5c5dc41d0d",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    }
+  ],
+  "currentAction": {
+    "index": 5,
+    "purpose": "rest",
+    "stage": "native Places route"
+  },
+  "failureDiagnostics": [
+    {
+      "index": 0,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "index": 1,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "index": 2,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "index": 3,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "index": 4,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "index": 5,
+      "error": "page.evaluate: Target page, context or browser has been closed"
+    }
+  ]
+}

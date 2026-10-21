@@ -1,0 +1,55 @@
+{
+  "kind": "native PNG validation and final runnable runner binding",
+  "images": {
+    "voice-update-browser-game-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "c18e1a6fbde78e444b95d036eaeff2f3882ef5555f6f43f7e5489b9ae91cbbc4"
+    },
+    "voice-update-browser-game-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "ff7b6a1de3ce99083362037e9908e1b4c5a9d7d41c93a07c7c9a9334a9601727"
+    },
+    "voice-update-browser-game-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "e8c7136fdc3dfdf9e17bb7e30272f370f97317568d1c9c752de59dfbd411df5a"
+    },
+    "voice-update-browser-update-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "37ec485b8f2058118788a4eccee870415b0ce77542ef37bab9a5dd45aaba65a2"
+    },
+    "voice-update-browser-update-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "a16961d3e68acf06cca25b60c02522c4272f3dad97cc1c65aed3de42f9319e78"
+    },
+    "voice-update-browser-update-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "38e3a4f7dd675c727bf50169a8d4b694149002f9c158b4aacddc94ec7be28509"
+    },
+    "voice-update-browser-voice-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "664bc911be36b6b9c33d5a5c8b82e6b9f47b75ec47687a069834c42a27fc6e73"
+    },
+    "voice-update-browser-voice-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "3dc0d0d2b4778a658e3470f74ec7ee88dae0aa080acc484c635054688a8f3c9a"
+    },
+    "voice-update-browser-voice-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "d20ab3094ac06772a53c8bd7d707e8ac0930f53c598da3bd72e698ff1e093540"
+    }
+  },
+  "runnerSha256": "8a43a3dbe45418f881d7e1181d691df2b23b081b1f1b364a7104e68ecaf28048",
+  "preservedInitialRunnerSha256": "eb0b1d0862997b4d4eda848c63f14fc4f2b096cee78fff4950d11d3d1ff0b0dd",
+  "heldProbeRunnerSha256": "c12aba899dc962fffdee4a741e360cccf67a1eef780ddb92345a081fa7d5f510",
+  "mainRunnerHashMatchesPreserved": true,
+  "supplementRunnerHashMatchesPreserved": true
+}

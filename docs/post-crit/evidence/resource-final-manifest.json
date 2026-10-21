@@ -1,0 +1,152 @@
+{
+  "checkedAtUTC": "2026-10-21T18:07:41.509086+00:00",
+  "scope": "Final source/protocol/result/archive/criterion and resource-process reconciliation; no extra workload",
+  "originalStatus": "PASS_21_GATES",
+  "combinedStatus": "PASS_23_GATES",
+  "sourceGuardVerified": true,
+  "originalCriteriaUnchanged": true,
+  "allPreservedArchivesUnchanged": true,
+  "activeResourceProcessCount": 0,
+  "files": {
+    "docs/post-crit/evidence/combined-resource-digest.json": {
+      "bytes": 2924,
+      "sha256": "c57f69ceb8ab56ff2cc7174212644ade320e9c71acb41f2fff8b4eb8f32b385c"
+    },
+    "docs/post-crit/evidence/combined-resource-repair.md": {
+      "bytes": 3845,
+      "sha256": "f7b85d60200fbc3a7f06c2b49720980a43db922e610888d284ee1b22dbb28916"
+    },
+    "docs/post-crit/evidence/combined-resource-storage-analysis.json": {
+      "bytes": 4414,
+      "sha256": "499cd873617b0d2a5addbd2f749ed5c64c672788d9dfe2e5a4b52ff81508f635"
+    },
+    "docs/post-crit/evidence/combined-resource.first-fail.protocol.json": {
+      "bytes": 18722,
+      "sha256": "4af229e040f1a44a93c4d5e838c576942fa38e0b5c0b7608c74ba6ecfc64e76f"
+    },
+    "docs/post-crit/evidence/combined-resource.first-fail.results.json": {
+      "bytes": 29116,
+      "sha256": "d72fc95530858951effff80fb3ac125f2529ffec3488eaae73c1f19f2ebbe271"
+    },
+    "docs/post-crit/evidence/combined-resource.protocol.json": {
+      "bytes": 19575,
+      "sha256": "741d4783ec461c2fe559d9cff2bb09269b7bc47489913871d39725509bc136c8"
+    },
+    "docs/post-crit/evidence/combined-resource.results.json": {
+      "bytes": 757445,
+      "sha256": "7bef828e42842b8781fde707e8d4d25c6b6b568e8c2074c3f9b4bc1f68c1aefa"
+    },
+    "docs/post-crit/evidence/resource-acceptance.md": {
+      "bytes": 7295,
+      "sha256": "f54f5b96d59301682748346562a3bf241ead285ba817f3d1c2f4c617176ed2da"
+    },
+    "docs/post-crit/evidence/resource-attempt-preservation.json": {
+      "bytes": 1313,
+      "sha256": "ea439cecc3cb0c94314009d48500680c009a03a61d3ddc8a9ab85ad7b29a69d4"
+    },
+    "docs/post-crit/evidence/resource-game-grader-first-green.json": {
+      "bytes": 5554,
+      "sha256": "8ebf473dbc9cbc6c6ef2feb949f81ba20ebc316fbdcffef8891340564c604fa6"
+    },
+    "docs/post-crit/evidence/resource-game-grader-green.json": {
+      "bytes": 6347,
+      "sha256": "2cc3ad03c2642ee355619a7d8eb2b71aefab33c871124f1fb0d5cb9db48d59ff"
+    },
+    "docs/post-crit/evidence/resource-game-grader-red.json": {
+      "bytes": 10897,
+      "sha256": "54d8b602c447f0a4ca532b3d6080f78bcac42e8bf8c1c1b982069929affc5dc8"
+    },
+    "docs/post-crit/evidence/resource-game-hash-red.json": {
+      "bytes": 8395,
+      "sha256": "c741ebd5ba3a6422765c96f97c9efd9b6b89ec59635c4acd927201f23828a811"
+    },
+    "docs/post-crit/evidence/resource-game-house-binding-green.json": {
+      "bytes": 10398,
+      "sha256": "33238e84c054609c1295823b2c74419a5ec2a5a12bd114e390e98b6a4a7c6488"
+    },
+    "docs/post-crit/evidence/resource-game-house-binding-real-red.json": {
+      "bytes": 12576,
+      "sha256": "156a30c44c2c616d393c88be7198aa11d5dd10ccb1f12c89d31134bab6a67499"
+    },
+    "docs/post-crit/evidence/resource-game-house-binding-red.json": {
+      "bytes": 12537,
+      "sha256": "c2656d85246c1017ae175bd213bcf581f3447dcb8258c67ad8dfb8dec2d9c56c"
+    },
+    "docs/post-crit/evidence/resource-grader-runtime-green.json": {
+      "bytes": 9204,
+      "sha256": "6b0538a288578529ec0574ebb3f4d930cd4a2d306998d8cc23349c8efa7731fd"
+    },
+    "docs/post-crit/evidence/resource-launch-infrastructure.json": {
+      "bytes": 563,
+      "sha256": "7b00e0669025d964eecb146229c933918ec4545c7c9b6413ce72c590c203ada6"
+    },
+    "docs/post-crit/evidence/resource-measured-instrument.mjs": {
+      "bytes": 72828,
+      "sha256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517"
+    },
+    "docs/post-crit/evidence/resource-methods.md": {
+      "bytes": 6913,
+      "sha256": "4922352ef573827a399edcd7bc8f94f161d890fe62d00388d636b885c79a4616"
+    },
+    "docs/post-crit/evidence/resource-original-digest.json": {
+      "bytes": 998,
+      "sha256": "130443a6d09bf5146ae99179a1f256c8ead33e57da8ae838cd6875996b7e3869"
+    },
+    "docs/post-crit/evidence/resource-original-pass.protocol.json": {
+      "bytes": 17069,
+      "sha256": "6e8140f864469670ec2e9e0e1c58e62754a148b5aab49916ff9717091ca3ee7b"
+    },
+    "docs/post-crit/evidence/resource-original-pass.results.json": {
+      "bytes": 976856,
+      "sha256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244"
+    },
+    "docs/post-crit/evidence/resource-pre-adaptation-instrument.mjs": {
+      "bytes": 59163,
+      "sha256": "7cce6f969b70f35366df2f9188328569eda864da0fef36e2eec26dcb17c825b0"
+    },
+    "docs/post-crit/evidence/resource-pre-adaptation-manifest.json": {
+      "bytes": 1005,
+      "sha256": "51c3f0df23e2c69f7e316f174db36d2dc0d5c08c73b7a597a235e8af25af0f5b"
+    },
+    "docs/post-crit/evidence/resource-pre-adaptation-protocol.json": {
+      "bytes": 15215,
+      "sha256": "1f2cf6b4312f02552a802fbf481f739a661aeab4485ea3c1f4d52d3ee2b3a414"
+    },
+    "docs/post-crit/evidence/resource-pre-adaptation-result.json": {
+      "bytes": 447598,
+      "sha256": "cd13733d6a0336688b11873a3a693354c7fc6ee5473840bd6d0b584e6c98aac3"
+    },
+    "docs/post-crit/evidence/resource-review.md": {
+      "bytes": 3598,
+      "sha256": "16a8242635fd1958dfa4bd3b0c33a2628f21326d07b5d93f142016be51933196"
+    },
+    "docs/post-crit/evidence/resource-runtime-closures.json": {
+      "bytes": 980,
+      "sha256": "b8455c90c3195e73362752f610fd418e75d850a0bf9b051d22c10dc788a747ba"
+    },
+    "docs/post-crit/evidence/resource-source-binding.json": {
+      "bytes": 2043,
+      "sha256": "1d6620cd6acadaef0f7d1892aabbeccb3dd3b557768f9dd234cc2c68a1872cae"
+    },
+    "evaluation/board-resource.protocol.json": {
+      "bytes": 17922,
+      "sha256": "11389933a44152e6920cc555420d721a64a594b7485450611e01f5ff31880a78"
+    },
+    "evaluation/board-resource.results.json": {
+      "bytes": 976856,
+      "sha256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244"
+    },
+    "spec/board-resource-delivery.test.ts": {
+      "bytes": 27932,
+      "sha256": "e37bb5b705984db357258c56877ce5fd63acf92789336e479931242862d935b1"
+    },
+    "spec/server-runtime.test.ts": {
+      "bytes": 7676,
+      "sha256": "150d474fcc7e3324e781eaf8930f95ae3792181dc33940543fda94c21f83b263"
+    },
+    "tools/board-resource.mjs": {
+      "bytes": 72843,
+      "sha256": "8dd77f0717121776839aa1a8cb4ad69cd28b87154dcdae4ffd1135064e37c6d1"
+    }
+  }
+}

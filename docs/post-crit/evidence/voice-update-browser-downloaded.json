@@ -1,0 +1,190 @@
+{
+  "format": "house-local-drafts-v1",
+  "identityId": "d008392f-ad08-4254-9797-b2fd385973cb",
+  "houseId": "1c1bce92-5aef-4b92-9b9c-bded09bd9dd2",
+  "zoneId": "172bca5a-5fd9-43bc-888e-e181a24b15ba",
+  "chat": {
+    "text": "Newer unsent chat after the pending submission",
+    "zoneId": "172bca5a-5fd9-43bc-888e-e181a24b15ba",
+    "version": 5
+  },
+  "work": {
+    "values": {
+      "small-goal": "Unsent draft goal",
+      "question": "",
+      "resource": "",
+      "next-step": "Unsent draft next step",
+      "help-requested": false
+    },
+    "base": {
+      "id": "69290c50-7f3b-441e-8d38-6304410f1207",
+      "revision": 1
+    },
+    "dirty": true,
+    "version": 6
+  },
+  "room": {
+    "scope": "1c1bce92-5aef-4b92-9b9c-bded09bd9dd2:d008392f-ad08-4254-9797-b2fd385973cb:172bca5a-5fd9-43bc-888e-e181a24b15ba:172bca5a-5fd9-43bc-888e-e181a24b15ba:d008392f-ad08-4254-9797-b2fd385973cb",
+    "layout": [
+      {
+        "id": "52dfcb75-3ec3-4c32-9494-14615f8be8bc",
+        "kind": "bed",
+        "x": -4.5,
+        "z": -1,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "ebb6486d-9d0c-4e07-97e9-448185ed0b3e",
+        "kind": "desk",
+        "x": 3.5,
+        "z": -3.5,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "70621081-ced7-4e15-b7d0-c27b9cc65464",
+        "kind": "chair",
+        "x": 3.5,
+        "z": -2,
+        "rotation": 2,
+        "colour": "amber"
+      },
+      {
+        "id": "d2d40d00-52df-47a3-a2cd-88b36e124438",
+        "kind": "lamp",
+        "x": 5.5,
+        "z": -3.5,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "1a2032ac-4ab1-49b2-8523-7bf57cffbaf1",
+        "kind": "shelf",
+        "x": -3.5,
+        "z": -4,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "8388a417-a82e-4319-889b-874b528e7aaf",
+        "kind": "plant",
+        "x": 5.5,
+        "z": 2.5,
+        "rotation": 0,
+        "colour": "sage"
+      },
+      {
+        "id": "f2cb3be0-71f6-4b34-996d-3e86dbaaae10",
+        "kind": "plant",
+        "x": -5,
+        "z": -3,
+        "rotation": 0,
+        "colour": "blue"
+      }
+    ],
+    "layoutBase": 0,
+    "basePlacements": [
+      {
+        "id": "52dfcb75-3ec3-4c32-9494-14615f8be8bc",
+        "kind": "bed",
+        "x": -4.5,
+        "z": -1,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "ebb6486d-9d0c-4e07-97e9-448185ed0b3e",
+        "kind": "desk",
+        "x": 3.5,
+        "z": -3.5,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "70621081-ced7-4e15-b7d0-c27b9cc65464",
+        "kind": "chair",
+        "x": 3.5,
+        "z": -2,
+        "rotation": 2,
+        "colour": "amber"
+      },
+      {
+        "id": "d2d40d00-52df-47a3-a2cd-88b36e124438",
+        "kind": "lamp",
+        "x": 5.5,
+        "z": -3.5,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "1a2032ac-4ab1-49b2-8523-7bf57cffbaf1",
+        "kind": "shelf",
+        "x": -3.5,
+        "z": -4,
+        "rotation": 0,
+        "colour": "amber"
+      },
+      {
+        "id": "8388a417-a82e-4319-889b-874b528e7aaf",
+        "kind": "plant",
+        "x": 5.5,
+        "z": 2.5,
+        "rotation": 0,
+        "colour": "sage"
+      }
+    ],
+    "layoutVersion": 1,
+    "layoutDirty": true,
+    "metadata": {
+      "open": true,
+      "palette": "blue"
+    },
+    "metadataBase": 0,
+    "metadataVersion": 2,
+    "metadataDirty": true,
+    "light": "dim",
+    "lightBase": 0,
+    "lightVersion": 1,
+    "lightDirty": true,
+    "lightMessage": "Unsaved lighting",
+    "starterId": "amber-corner",
+    "starterAttempt": null,
+    "starterBusy": false,
+    "awaitingStarter": 0,
+    "starterMessage": "",
+    "ackRevision": 0,
+    "layoutMessage": "",
+    "metadataMessage": "Unsaved room settings",
+    "reviewing": false
+  },
+  "voice": {
+    "scope": "1c1bce92-5aef-4b92-9b9c-bded09bd9dd2:d008392f-ad08-4254-9797-b2fd385973cb",
+    "baseRevision": 2,
+    "value": "https://discord.gg/unsent-voice-draft",
+    "version": 3,
+    "dirty": true,
+    "saving": false,
+    "message": ""
+  },
+  "pending": [
+    {
+      "commandId": "cde80a26-d4fe-41e3-9d8a-4a94256621e7",
+      "type": "chat.send",
+      "createdAt": 1792601855463,
+      "houseId": "1c1bce92-5aef-4b92-9b9c-bded09bd9dd2",
+      "zoneId": "172bca5a-5fd9-43bc-888e-e181a24b15ba",
+      "state": "pending",
+      "command": {
+        "commandId": "cde80a26-d4fe-41e3-9d8a-4a94256621e7",
+        "type": "chat.send",
+        "payload": {
+          "zoneId": "172bca5a-5fd9-43bc-888e-e181a24b15ba",
+          "text": "Real submitted chat with controlled lost ACK"
+        },
+        "houseId": "1c1bce92-5aef-4b92-9b9c-bded09bd9dd2"
+      },
+      "canRetry": false
+    }
+  ]
+}

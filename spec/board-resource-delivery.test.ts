@@ -1,4 +1,10 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdtempSync, rmSync } from "node:fs";
+import { randomUUID } from "node:crypto";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { io, type Socket } from "socket.io-client";
+import { createService } from "../src/server.ts";
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import ts from "typescript";
 import { describe, expect, test } from "vitest";
 
@@ -229,4 +235,174 @@ describe("registered resource delivery matching", () => {
     expect(t.latencies).toEqual({ normal: [50], slow: [50] });
     expect([...d.pending]).toEqual([]); expect(d.sequence).toBe(3);
   });
+});
+
+
+describe("registered combined game grading", () => {
+  const projection = () => ({ revision: 5, rosterRevision: 2, current: {
+    roundId: "round", status: "active", players: ["a", "b"], ready: [null, null],
+    cells: Array(42).fill(null), turn: 0, lastMove: null, resumeRevision: 0, recoveryDeadlineAt: null
+  }, latestResult: null });
+  const expected = () => ({ revision: 5, rosterRevision: 2, roundId: "round", status: "active",
+    players: ["a", "b"], ready: [false, false], cells: Array(42).fill(null), turn: 0, lastMove: null });
+  const grader = () => new Function("return (" + functionSource("gameProjectionMatches") + ");")();
+  test("accepts the exact visible game and rejects wrong revision, round, cells and player", () => {
+    const grade = grader(); expect(grade(projection(), expected())).toBe(true);
+    for (const field of ["revision", "rosterRevision"]) {
+      const wrong = projection(); (wrong as any)[field]++; expect(grade(wrong, expected())).toBe(false);
+    }
+    for (const mutate of [
+      (g: any) => g.current.roundId = "other",
+      (g: any) => g.current.cells[0] = 1,
+      (g: any) => g.current.players[1] = "outsider",
+      (g: any) => g.current.ready[0] = {},
+      (g: any) => g.current.status = "paused",
+    ]) { const wrong = projection(); mutate(wrong); expect(grade(wrong, expected())).toBe(false); }
+  });
+  test("distinguishes a terminal win from neutral withdrawal and absent terminal state", () => {
+    const grade = grader(), e = { ...expected(), status: "terminal", reason: "win", winner: 0 };
+    const g: any = { revision: 5, rosterRevision: 2, current: null, latestResult: {
+      roundId: "round", players: ["a", "b"], cells: e.cells, lastMove: null, reason: "win", winner: 0,
+      startedAt: 100, endedAt: 200 } };
+    expect(grade(g, e)).toBe(true); g.latestResult.reason = "player_left"; expect(grade(g, e)).toBe(false);
+    g.latestResult = null; expect(grade(g, e)).toBe(false);
+  });
+  test("the original protocol retains every workload, gate, duration, fault and capacity field", () => {
+    const old = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/resource-pre-adaptation-protocol.json", import.meta.url), "utf8"));
+    const current = JSON.parse(readFileSync(new URL("../evaluation/board-resource.protocol.json", import.meta.url), "utf8"));
+    const combined = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.protocol.json", import.meta.url), "utf8"));
+    for (const key of ["durationSeconds", "automaticRetry", "configuration", "fixture", "workload", "slowReader", "negativeControls", "bounds", "measurement", "classification", "limitations"]) {
+      expect(current[key], key).toEqual(old[key]); expect(combined[key], key).toEqual(old[key]);
+    }
+    const oldSource = readFileSync(new URL("../docs/post-crit/evidence/resource-pre-adaptation-instrument.mjs", import.meta.url), "utf8");
+    const gateLine = (raw: string) => raw.split("\n").find(line => line.includes("const gates = {"));
+    expect(gateLine(source)).toBe(gateLine(oldSource));
+  });
+  test("observed revision grading rejects missing, duplicate, slow-excluded, changed and late targets", () => {
+    const scenario = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.protocol.json", import.meta.url), "utf8")).gameScenario;
+    const slow = { pauseAtSeconds: 30, pauseSeconds: 65 };
+    const factory = new Function("q", functionSource("gameStepPlan") + functionSource("gameTargetIndices") + functionSource("gradeGameEvidence") + "return {plan:gameStepPlan,grade:gradeGameEvidence};");
+    const { plan, grade } = factory((values: number[], percentile: number) => [...values].sort((a,b) => a-b)[Math.ceil(values.length * percentile)-1]);
+    const evidence: any = { status: "COMPLETE", actions: [], rounds: [] };
+    for (let houseIndex = 0; houseIndex < 2; houseIndex++) {
+      let revision = 0;
+      for (let roundIndex = 0; roundIndex < 6; roundIndex++) {
+        const steps = plan(roundIndex === 2);
+        for (const [stepIndex, step] of steps.entries()) {
+          const scheduledOffsetSeconds = [5,45,105,145,185,225][roundIndex] + stepIndex;
+          const targetIndices = Array.from({length:6}, (_,m) => houseIndex * 12 + 2*m).filter(i => !(i===0 && scheduledOffsetSeconds>=30 && scheduledOffsetSeconds<95));
+          evidence.actions.push({houseIndex,roundIndex,stepIndex,type:step.type,slot:step.slot,code:step.code,revision:++revision,scheduledOffsetSeconds,sendLagMs:0,targetIndices,status:"VISIBLE",gameHash:"a".repeat(64),observed:targetIndices.map(viewIndex=>({viewIndex,gameHash:"a".repeat(64),latencyMs:100}))});
+        }
+        evidence.rounds.push({houseIndex,roundIndex,actions:steps.length,finalRevision:revision,outcome:roundIndex===2?"player_left":"win"});
+      }
+    }
+    expect(grade(scenario,slow,evidence)).toBe(true);
+    expect(evidence.actions.reduce((n: number,a: any)=>n+a.observed.length,0)).toBe(733);
+    for (const change of [
+      (e: any) => e.actions[0].observed.pop(),
+      (e: any) => e.actions[0].observed[1] = e.actions[0].observed[0],
+      (e: any) => e.actions.find((a: any)=>a.houseIndex===0 && a.roundIndex===1).targetIndices.unshift(0),
+      (e: any) => e.actions[0].revision++,
+      (e: any) => e.actions[0].observed[0].gameHash = "other",
+      (e: any) => e.actions.forEach((a: any)=>{delete a.gameHash;a.observed.forEach((o: any)=>delete o.gameHash);}),
+      (e: any) => e.actions.forEach((a: any)=>{a.gameHash=null;a.observed.forEach((o: any)=>o.gameHash=null);}),
+      (e: any) => e.actions.forEach((a: any)=>{a.gameHash="malformed";a.observed.forEach((o: any)=>o.gameHash="malformed");}),
+      (e: any) => e.actions.pop(),
+      (e: any) => e.actions[0].sendLagMs = 1001,
+      (e: any) => e.actions.forEach((a: any)=>a.observed.forEach((o: any)=>o.latencyMs=1001)),
+      (e: any) => e.rounds[0].outcome = "player_left",
+    ]) { const changed=structuredClone(evidence);change(changed);expect(grade(scenario,slow,changed)).toBe(false); }
+  });
+  test("fixed finite schedules retain both Ready actions, legal moves, win and neutral Leave", () => {
+    const plan = new Function("return (" + functionSource("gameStepPlan") + ");")();
+    expect(plan(false).map((s: any) => s.type)).toEqual(["join", "join", "ready", "ready", ...Array(7).fill("move")]);
+    expect(plan(false).slice(4).map((s: any) => s.column)).toEqual([0, 1, 0, 1, 0, 1, 0]);
+    expect(plan(true).map((s: any) => s.type)).toEqual(["join", "join", "ready", "ready", "move", "move", "leave"]);
+  });
+});
+
+
+// Extract the actual command expression used by playGameRound, including its wiring.
+function instrumentGameCommand(step: any, expected: any, houseId: string) {
+  const gameAST = ts.createSourceFile("round.mjs", functionSource("playGameRound"), ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
+  let payloadStart: number | undefined, commandEnd: number | undefined;
+  function find(node: ts.Node) {
+    if (ts.isVariableDeclaration(node) && node.name.getText(gameAST) === "payload") payloadStart = node.parent.parent.getStart(gameAST);
+    if (ts.isVariableDeclaration(node) && node.name.getText(gameAST) === "command") commandEnd = node.parent.parent.getEnd();
+    ts.forEachChild(node, find);
+  }
+  find(gameAST);
+  if (payloadStart === undefined || commandEnd === undefined) throw new Error("Missing actual game command construction");
+  const construction = gameAST.text.slice(payloadStart, commandEnd);
+  return new Function("randomUUID", "step", "expected", "h", construction + ";return command;")(randomUUID, step, expected, { id: houseId });
+}
+
+describe("combined resource command authority binding", () => {
+  test("the sole instrument change is the combined-only command house field", () => {
+    const measured = readFileSync(new URL("../docs/post-crit/evidence/resource-measured-instrument.mjs", import.meta.url), "utf8");
+    expect(source).toBe(measured.replace('const command = { commandId: randomUUID(), type: "game." + step.type, payload,', 'const command = { commandId: randomUUID(), type: "game." + step.type, houseId: h.id, payload,'));
+    const failed = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.first-fail.protocol.json", import.meta.url), "utf8"));
+    const current = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.protocol.json", import.meta.url), "utf8"));
+    expect(current.gameScenario).toEqual(failed.gameScenario);
+  });
+  test("the actual emitted command retains the original house destination", () => {
+    const c = instrumentGameCommand({type:"join",slot:0}, {roundId:null,revision:0}, "bound-home");
+    expect(c.houseId).toBe("bound-home"); expect(c.payload).toEqual({roundId:null}); expect(c.expectedRevision).toBe(0);
+  });
+  test("real socket authority rejects missing/foreign houses, saves complete games and replays original receipt", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "resource-command-")), service = createService({dataDir:dir,secureCookies:false});
+    const sockets: Socket[] = [];
+    try {
+      await new Promise<void>(done=>service.server.listen(0,"127.0.0.1",done));
+      const address = service.server.address(); if (!address || typeof address === "string") throw new Error("No fixture port");
+      const origin = "http://127.0.0.1:" + address.port;
+      async function http(path: string, cookie?: string, body?: object): Promise<any> {
+        const r = await fetch(origin+path,{method:body?"POST":"GET",headers:{Origin:origin,...(cookie?{Cookie:cookie}:{}),...(body?{"Content-Type":"application/json"}:{})},...(body?{body:JSON.stringify(body)}:{})});
+        const value = await r.json(); if(!r.ok) throw new Error("Fixture HTTP rejected");
+        return {value,cookie:r.headers.get("set-cookie")?.split(";")[0]??cookie};
+      }
+      const houses: any[] = [];
+      for(let houseIndex=0;houseIndex<2;houseIndex++) {
+        const people: any[]=[]; let house: any;
+        for(let n=0;n<2;n++) {
+          const opened=await http("/api/house/me");
+          await http("/api/house/command",opened.cookie,{commandId:randomUUID(),type:n?"house.join":"house.create",payload:{...(n?{code:house.code}:{capacity:2}),name:"Resource fixture",colour:n?"rose":"sage"}});
+          const me=await http("/api/house/me",opened.cookie); house=me.value.home;
+          const socket=io(origin,{autoConnect:false,forceNew:true,reconnection:false,transports:["websocket"],auth:{worldVersion:HOUSE_WORLD_VERSION},extraHeaders:{Origin:origin,Cookie:opened.cookie}});
+          sockets.push(socket);const person:any={socket,identity:me.value.identity.id,snapshot:null};
+          socket.on("house.snapshot",r=>person.snapshot=r);
+          await new Promise<void>((done,reject)=>{socket.once("connect",done);socket.once("connect_error",reject);socket.connect();});
+          const subscription=await socket.timeout(3000).emitWithAck("house.subscribe",{zoneId:"lounge",controllerToken:randomUUID()});
+          expect(subscription.ok).toBe(true);expect(subscription.snapshot.controller).toBe(true);person.snapshot=subscription.snapshot;people.push(person);
+        }
+        houses.push({id:house.id,people});
+      }
+      const initial=instrumentGameCommand({type:"join",slot:0},{roundId:null,revision:0},houses[0].id);
+      const send=async(person:any,command:any)=>person.socket.timeout(3000).emitWithAck("house.command",{generation:person.snapshot.generation,zoneId:"lounge",command});
+      const missing={...initial,commandId:randomUUID()};delete missing.houseId;
+      expect(await send(houses[0].people[0],missing)).toMatchObject({ok:false,code:"INVALID_INPUT"});
+      expect(await send(houses[0].people[0],{...initial,commandId:randomUUID(),houseId:houses[1].id})).toMatchObject({ok:false,code:"FORBIDDEN"});
+      const plan=new Function("return ("+functionSource("gameStepPlan")+");")();
+      for(const [houseIndex,house] of houses.entries()) {
+        let game=service.houseStore.snapshot(house.people[0].identity).game!;
+        let original:any,originalReceipt:any;
+        for(const [stepIndex,step] of plan(houseIndex===1).entries()) {
+          const expected={roundId:game.current?.roundId??null,revision:game.revision,rosterRevision:game.rosterRevision};
+          const command=instrumentGameCommand(step,expected,house.id);
+          const receipt=await send(house.people[step.slot],command);
+          expect(receipt.ok).toBe(true);expect(receipt.result.code).toBe(step.code);expect(receipt.entityRevision).toBe(game.revision+1);
+          if(stepIndex===0){original=command;originalReceipt=receipt;}
+          const deadline=Date.now()+3000;
+          while(house.people.some((person:any)=>person.snapshot.durable.game.revision<receipt.entityRevision) && Date.now()<deadline) await new Promise(done=>setTimeout(done,5));
+          for(const person of house.people)expect(person.snapshot.durable.game.revision).toBe(receipt.entityRevision);
+          game=service.houseStore.snapshot(house.people[0].identity).game!;
+        }
+        expect(game.current).toBeNull();expect(game.latestResult!.reason).toBe(houseIndex===1?"player_left":"win");
+        expect(await send(house.people[0],original)).toEqual(originalReceipt);
+      }
+      expect(service.houseStore.db.prepare("SELECT count(*) AS n FROM receipts").get()).toEqual({n:22});
+    } finally {
+      for(const socket of sockets)socket.disconnect();await service.close();rmSync(dir,{recursive:true,force:true});
+    }
+  },20000);
 });

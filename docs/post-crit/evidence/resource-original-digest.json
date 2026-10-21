@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "durationSeconds": 300.001,
+  "gates": 21,
+  "rssMiB": 197.05859375,
+  "normalP95Ms": 13.052,
+  "patchSaved": 7188,
+  "chatSaved": 708,
+  "patchSkipped": 0,
+  "chatSkipped": 0,
+  "errors": {},
+  "pending": 0,
+  "normalInputs": {
+    "motionRejected": 0,
+    "motionTimeouts": 0,
+    "pointerRejected": 0,
+    "pointerTimeouts": 0,
+    "patchRejected": 0
+  },
+  "protocolSHA256": "6e8140f864469670ec2e9e0e1c58e62754a148b5aab49916ff9717091ca3ee7b",
+  "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+  "instrumentSHA256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517",
+  "resultSHA256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244",
+  "sourceGuardVerifiedAtExit": true,
+  "closure": {
+    "checkedAtUTC": "2026-10-21T17:47:26.140418+00:00",
+    "scenario": "original",
+    "generatorPID": 66778,
+    "serverPID": 66811,
+    "generatorProcExists": false,
+    "serverProcExists": false
+  }
+}

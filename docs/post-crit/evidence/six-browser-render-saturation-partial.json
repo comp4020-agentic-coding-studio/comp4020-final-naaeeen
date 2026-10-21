@@ -1,0 +1,555 @@
+{
+  "manifest": {
+    "scope": "six independent Chromium contexts using actual UI admission/native routing/actual SQLite+Socket.IO; labelled real-socket negative probes only; one watcher390x844, others1920x1080; no human/physical-device/WAN/Fly/resource-performance claim",
+    "runner": "c0d71b72344bd1532c8780a74f08bf7bcaa1a29a0b2630bfbece20f1e84e086a",
+    "sources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "endSources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "sourceStable": true
+  },
+  "checks": {
+    "sixGenuineIdentities": {
+      "count": 6,
+      "distinctRooms": 6,
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "worldVersion": "lounge-2"
+    },
+    "occupiedSeatNativeRejection": true,
+    "failure": "locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('#camera-hud-follow')\u001b[22m\n\u001b[2m    - locator resolved to <button aria-pressed=\"false\" id=\"camera-hud-follow\" aria-label=\"Follow and recenter\">Follow</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-six-browser.mjs:28:497"
+  },
+  "routes": [
+    {
+      "index": 0,
+      "purpose": "study",
+      "seatId": "seat-1",
+      "acceptedPosition": {
+        "x": -0.9999999999999999,
+        "z": -0.10000000000000009
+      },
+      "elapsedMs": 17055
+    },
+    {
+      "index": 1,
+      "purpose": "study",
+      "seatId": "seat-2",
+      "acceptedPosition": {
+        "x": -2.8619546181365427,
+        "z": -1.0499999999999994
+      },
+      "elapsedMs": 15568
+    },
+    {
+      "index": 2,
+      "purpose": "study",
+      "seatId": "seat-6",
+      "acceptedPosition": {
+        "x": 0.861954618136543,
+        "z": -1.05
+      },
+      "elapsedMs": 25307
+    },
+    {
+      "index": 3,
+      "purpose": "study",
+      "seatId": "seat-5",
+      "acceptedPosition": {
+        "x": 0.8619546181365425,
+        "z": -2.950000000000001
+      },
+      "elapsedMs": 31422
+    },
+    {
+      "index": 4,
+      "purpose": "study",
+      "seatId": "seat-3",
+      "acceptedPosition": {
+        "x": -2.8619546181365436,
+        "z": -2.9499999999999993
+      },
+      "elapsedMs": 43256
+    },
+    {
+      "index": 5,
+      "purpose": "study",
+      "seatId": "seat-4",
+      "acceptedPosition": {
+        "x": -1.0000000000000004,
+        "z": -3.9
+      },
+      "elapsedMs": 41705
+    }
+  ],
+  "images": [
+    {
+      "name": "six-study-follow-1920x1080",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "avatarLabels": [
+        {
+          "name": "Robin",
+          "visible": true,
+          "rect": {
+            "left": 1135.640625,
+            "top": 444.5,
+            "right": 1236.671875,
+            "bottom": 487
+          }
+        },
+        {
+          "name": "Finch",
+          "visible": true,
+          "rect": {
+            "left": 895.2109375,
+            "top": 299,
+            "right": 951.0078125,
+            "bottom": 341.5
+          }
+        },
+        {
+          "name": "Gale",
+          "visible": true,
+          "rect": {
+            "left": 1209.7109375,
+            "top": 396,
+            "right": 1265.5078125,
+            "bottom": 438.5
+          }
+        },
+        {
+          "name": "Harper",
+          "visible": true,
+          "rect": {
+            "left": 1464.7890625,
+            "top": 347.5,
+            "right": 1531.3984375,
+            "bottom": 390
+          }
+        },
+        {
+          "name": "Indigo",
+          "visible": true,
+          "rect": {
+            "left": 1079.9375,
+            "top": 125.015625,
+            "right": 1142.03125,
+            "bottom": 167.515625
+          }
+        },
+        {
+          "name": "Jules",
+          "visible": true,
+          "rect": {
+            "left": 1430.5703125,
+            "top": 198.703125,
+            "right": 1486.3671875,
+            "bottom": 241.203125
+          }
+        }
+      ],
+      "visibleLabels": 6,
+      "avatars": 6
+    },
+    {
+      "name": "six-study-overview-1920x1080",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "avatarLabels": [
+        {
+          "name": "Robin",
+          "visible": true,
+          "rect": {
+            "left": 1135.640625,
+            "top": 444.5,
+            "right": 1236.671875,
+            "bottom": 487
+          }
+        },
+        {
+          "name": "Finch",
+          "visible": true,
+          "rect": {
+            "left": 895.2109375,
+            "top": 299,
+            "right": 951.0078125,
+            "bottom": 341.5
+          }
+        },
+        {
+          "name": "Gale",
+          "visible": true,
+          "rect": {
+            "left": 1209.7109375,
+            "top": 396,
+            "right": 1265.5078125,
+            "bottom": 438.5
+          }
+        },
+        {
+          "name": "Harper",
+          "visible": true,
+          "rect": {
+            "left": 1464.7890625,
+            "top": 347.5,
+            "right": 1531.3984375,
+            "bottom": 390
+          }
+        },
+        {
+          "name": "Indigo",
+          "visible": true,
+          "rect": {
+            "left": 1079.9375,
+            "top": 125.015625,
+            "right": 1142.03125,
+            "bottom": 167.515625
+          }
+        },
+        {
+          "name": "Jules",
+          "visible": true,
+          "rect": {
+            "left": 1426.9609375,
+            "top": 201.34375,
+            "right": 1482.7578125,
+            "bottom": 243.84375
+          }
+        }
+      ],
+      "visibleLabels": 6,
+      "avatars": 6
+    }
+  ],
+  "errors": [],
+  "admission": [
+    {
+      "selfId": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "6d156679-201e-4ac6-a378-709ce4d14709",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    },
+    {
+      "selfId": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+      "controller": true,
+      "capacity": 6,
+      "players": [
+        {
+          "id": "ce843906-f5a4-4241-b7d3-ea5ae55a1432",
+          "connected": true,
+          "x": -1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "eec721e7-f263-487f-bbad-f0d9d0f10da0",
+          "connected": true,
+          "x": -0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "31ca8c8a-5b82-4997-8a8c-2e988fde80c5",
+          "connected": true,
+          "x": -0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "925ca09e-4da1-4a3b-bed5-952906ff086f",
+          "connected": true,
+          "x": 0.325,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "6d156679-201e-4ac6-a378-709ce4d14709",
+          "connected": true,
+          "x": 0.9750000000000001,
+          "z": 4.65,
+          "zoneId": "lounge"
+        },
+        {
+          "id": "c02b43de-9d4e-4f94-aba2-0c724dedcb02",
+          "connected": true,
+          "x": 1.625,
+          "z": 4.65,
+          "zoneId": "lounge"
+        }
+      ]
+    }
+  ]
+}

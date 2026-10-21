@@ -1,0 +1,159 @@
+{
+  "config": {
+    "argv": [
+      "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/@playwright/test/cli.js",
+      "test",
+      "tests/e2e/break-and-voice.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/home/lizhi/comp4020/comp4020-final-naaeeen/playwright.config.ts",
+    "rootDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/break-voice-first-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "break-and-voice.spec.ts",
+      "file": "break-and-voice.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "friends choose a shared break, return to their next step and share an external voice destination",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 773,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4108/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4108/\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4108/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4108/\", waiting until \"load\"\u001b[22m\n\n    at beginAdmission (/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/house-journey.ts:5:14)\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/break-and-voice.spec.ts:23:11",
+                    "location": {
+                      "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/house-journey.ts",
+                      "column": 14,
+                      "line": 5
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mhouse-journey.ts:5\n\n  3 | // These helpers perform visible native tasks; they never set game state or bypass actionability.\n  4 | export async function beginAdmission(page: Page, kind: 'create' | 'join') {\n> 5 |   await page.goto('/');\n    |              ^\n  6 |   await expect(page.locator('#title-screen')).toBeVisible();\n  7 |   await page.locator(kind === 'create' ? '#title-create' : '#title-join').click();\n  8 |   await expect(page.locator('#lobby')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/house-journey.ts",
+                        "column": 14,
+                        "line": 5
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4108/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4108/\", waiting until \"load\"\u001b[22m\n\n\n   at house-journey.ts:5\n\n  3 | // These helpers perform visible native tasks; they never set game state or bypass actionability.\n  4 | export async function beginAdmission(page: Page, kind: 'create' | 'join') {\n> 5 |   await page.goto('/');\n    |              ^\n  6 |   await expect(page.locator('#title-screen')).toBeVisible();\n  7 |   await page.locator(kind === 'create' ? '#title-create' : '#title-join').click();\n  8 |   await expect(page.locator('#lobby')).toBeVisible();\n    at beginAdmission (/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/house-journey.ts:5:14)\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/break-and-voice.spec.ts:23:11"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T18:17:59.601Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/break-voice-first-results/break-and-voice-friends-ch-d6b10--external-voice-destination/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/break-voice-first-results/break-and-voice-friends-ch-d6b10--external-voice-destination/test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/break-voice-first-results/break-and-voice-friends-ch-d6b10--external-voice-destination/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/break-voice-first-results/break-and-voice-friends-ch-d6b10--external-voice-destination/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/house-journey.ts",
+                    "column": 14,
+                    "line": 5
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "532fe21da112a36c31f1-f1879d43433051521e70",
+          "file": "break-and-voice.spec.ts",
+          "line": 16,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T18:17:59.157Z",
+    "duration": 1945.5430000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

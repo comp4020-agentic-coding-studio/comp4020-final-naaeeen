@@ -213,3 +213,48 @@ Parent reproduced both as85PASS/2FAIL, then added inspected-outbox guards and an
 explicit current-identity title transition. All87UI tests pass; contextual review
 passes5 targeted cases with no remaining scoped issue. Native current UI is the
 next independent gate. No model judgement or screenshot is called human validation.
+
+## P6 native and resource milestone, 22 October
+
+Current production source is ff949bc. The clock-correction reviewer reproduced
+unreadable persisted rounds after a backward wall-clock change; six meaningful
+regressions preceded the bounded timestamp floor. The 70 affected checks and fresh
+contextual recheck passed. The complete required run then passed 863 tests.
+Later resource-binding tests have a separate 25-test result, not a fabricated new
+full-suite total. See game-clock-* and p6-required-current.json.
+
+Current voice/update recovery and six-resident capabilities have source-bound
+native evidence. The six-person study, rest and game cases are separate scopes;
+the game has two players and four watchers. Earlier saturation, setup and route
+failures remain preserved. The full-size 45-second route timeout has no confirmed
+cause. Current requirements now add three to six actual contributors, which these
+records do not satisfy. See six-browser-aggregate.json and both native handoffs.
+
+A maintained two-context study -> break -> My work test now covers owner-configured
+voice links, watcher admission, explicit play, shared moves, phone fit, neutral
+withdrawal and saved next-step/Quiet preservation. Its first application attempt
+passed; a separate earlier no-listener infrastructure failure remains recorded.
+Parent independently recomputed all 496 source hashes, inspected the native phone
+image and checked the closure record. No real Discord call or media test is claimed.
+The About selector repair resolves an actual hidden-link ambiguity while retaining
+painted-surface and pointer-hit assertions. No runtime change was needed.
+
+The original 300-second workload passed all 21 gates; the separate combined game
+workload passed all 23. Parent read the raw-bound acceptance and checked instrument
+scope; a combined-only missing houseId was repaired after a genuine failure, not by
+weakening server validation. The earlier original result remains bound to its exact
+instrument. Passing sampled process RSS does not prove Fly enforcement or host-wide
+memory. Storage analysis exposed 174.11 MiB logical growth, mostly retained board
+responses; that result opens a real storage-improvement subsection.
+
+A new history-free Astra/max validation reviewer inspected actual patches, raw
+native results, 496 current source hashes, preserved resource protocols/results and
+manifest. It independently ran 17 focused checks, skipped the live-service case
+rather than presenting it as run, and regraded current success plus preserved
+failure. No actionable milestone issue remained. Parent reconciled these findings
+with source and existing acceptance; this review does not rerun browser/load/human
+or Docker CI. All owned services and resource jobs are closed.
+
+Local validation milestone is ready for a focused commit. New group participation,
+room-purpose refinement, lossless receipt-storage work and their later acceptance
+remain open; no overall goal completion or publication is implied.

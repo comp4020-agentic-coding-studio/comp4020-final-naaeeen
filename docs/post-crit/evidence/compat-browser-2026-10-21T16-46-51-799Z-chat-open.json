@@ -1,0 +1,373 @@
+{
+  "kind": "Exact frozen old UI/client/world + copied current local service, same origin/data, synthetic sessions, Chromium desktop. No Fly, physical-device, human or resource acceptance.",
+  "runId": "2026-10-21T16-46-51-799Z-chat-open",
+  "at": "2026-10-21T16:46:51.799Z",
+  "status": "PASS",
+  "manifest": {
+    "runnerSHA256": "2a3818f5810816dbc925065be73a73e424c789a742e2ab4e9e5213ede4d1d389",
+    "frozenCommit": "8cdad6ad17e698d5b02896d570afb7892f365351",
+    "frozenHashes": {
+      "src/server.ts": "b009d6dc89bb915540b54b2c7d3cc53a08f50c13819109b7911f5b37b19f2dfe",
+      "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+      "src/house-realtime.ts": "109535cb60d2235bef67ccc1a0a7923559ee6f5bf79c16402880f231c319820b",
+      "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+      "public/house.html": "d2b5a9ff50071a9c58b709899d7ea5e0ee5f0e199ac9d8d53ea7e406486d01b0",
+      "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+      "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+      "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+      "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+      "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+      "public/house-camera.js": "a6159242e0978e5f24ed38a4d71efc9feafd8f44bb39f3908323fcd0e2dca1d5",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house.css": "827a9077d40ebf02bcc6f364822dec21b1f116a0e683d0698d48b270e96f282f",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+      "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+      "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09"
+    },
+    "currentHashes": {
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house-ui.js": "c350da676eda194e28d2d42c33e552a13f37d7bf3c7d87816bc2d7dc6e1dccf6",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-game-ui.js": "c8acde6cc6414441e6c5acebd75be2382f6ec848affee974a61465c9c60a2b41",
+      "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+      "public/house-game-rules.d.ts": "36aa435f97476bafc495d39e082a6e20a60591acb529c60d9b69bd4f15886758",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+      "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+      "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09"
+    },
+    "runtime": "v24.21.0",
+    "loadedOld": {
+      "owner": {
+        "/": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+        "/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+        "/house-ui.js": "c350da676eda194e28d2d42c33e552a13f37d7bf3c7d87816bc2d7dc6e1dccf6",
+        "/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+        "/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+        "/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+        "/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+        "/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+        "/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c"
+      },
+      "guest": {
+        "/house.css": "827a9077d40ebf02bcc6f364822dec21b1f116a0e683d0698d48b270e96f282f",
+        "/": "d2b5a9ff50071a9c58b709899d7ea5e0ee5f0e199ac9d8d53ea7e406486d01b0",
+        "/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+        "/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+        "/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+        "/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+        "/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+        "/house-camera.js": "a6159242e0978e5f24ed38a4d71efc9feafd8f44bb39f3908323fcd0e2dca1d5",
+        "/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba"
+      }
+    }
+  },
+  "checks": {
+    "exactFrozenAndCurrentCopies": true,
+    "frozenUiInitialControl": true,
+    "committedAckLoss": {
+      "kind": "Destroy only this isolated service transports and close old service synchronously after SQLite execute committed, before realtime ACK handler can return.",
+      "actorId": "1c594072-75b8-47c7-a322-0892f0e23fc2",
+      "command": {
+        "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+        "type": "card.save",
+        "payload": {
+          "cardId": "2c250b28-daa2-45bf-b648-0216e21cf3e1",
+          "smallGoal": "Card committed before the deliberately lost ACK",
+          "question": "",
+          "resourceUrl": "",
+          "nextStep": "Keep the exact UUID and this next step",
+          "helpRequested": false
+        },
+        "houseId": "04cf693a-1214-4a5c-8837-399a9ae90ec6",
+        "expectedRevision": 1
+      },
+      "receipt": {
+        "ok": true,
+        "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+        "streamId": "lounge:04cf693a-1214-4a5c-8837-399a9ae90ec6",
+        "sequence": 8,
+        "entityRevision": 2,
+        "result": {
+          "cardId": "2c250b28-daa2-45bf-b648-0216e21cf3e1"
+        }
+      },
+      "browserReceivedReceipt": false,
+      "wireCommandVerified": true
+    },
+    "sameZoneDraftAvailable": {
+      "text": "Copy this same-zone unsent thought before reloading.",
+      "copiedBeforeReload": true
+    },
+    "legacyReadonlyNoGhosts": {
+      "controller": false,
+      "generation": 0,
+      "players": [],
+      "avatarLabelCount": 0,
+      "oldGeometryWidth": "16"
+    },
+    "oldTakeoverExplainsUpdate": true,
+    "originalPendingExport": {
+      "suggestedFilename": "my-pending-house-drafts.json",
+      "entry": {
+        "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+        "type": "card.save",
+        "createdAt": 1792601222189,
+        "houseId": "04cf693a-1214-4a5c-8837-399a9ae90ec6",
+        "zoneId": "lounge",
+        "state": "pending",
+        "command": {
+          "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+          "type": "card.save",
+          "payload": {
+            "cardId": "2c250b28-daa2-45bf-b648-0216e21cf3e1",
+            "smallGoal": "Card committed before the deliberately lost ACK",
+            "question": "",
+            "resourceUrl": "",
+            "nextStep": "Keep the exact UUID and this next step",
+            "helpRequested": false
+          },
+          "houseId": "04cf693a-1214-4a5c-8837-399a9ae90ec6",
+          "expectedRevision": 1
+        },
+        "canRetry": false
+      },
+      "sessionCreatedAt": 1792601222189
+    },
+    "currentClientControlsIndependently": {
+      "worldVersion": "lounge-2",
+      "controller": true,
+      "geometryWidth": "20"
+    },
+    "doorRevocationClearsPrivateDOM": true,
+    "memberRevocationClearsPrivateDOM": true,
+    "manualReloadResolvesOriginalReceipt": {
+      "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+      "receipt": {
+        "ok": true,
+        "commandId": "a18969a6-3262-48ec-8485-9097af162055",
+        "streamId": "lounge:04cf693a-1214-4a5c-8837-399a9ae90ec6",
+        "sequence": 8,
+        "entityRevision": 2,
+        "result": {
+          "cardId": "2c250b28-daa2-45bf-b648-0216e21cf3e1"
+        }
+      },
+      "cardRevision": 2,
+      "pendingCleared": true,
+      "unsentChatLostOnDeliberateReload": true
+    }
+  },
+  "events": [],
+  "pageErrors": [],
+  "screenshots": [
+    {
+      "path": "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-old-readonly.png",
+      "sha256": "d21ffe8cb8555c2661389b5828a8af88a0e7b8b25d5462ba116a5257ae0fa7b2",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-old-revoked.png",
+      "sha256": "7f11ab2974f5631376164ec5f90370e7044a25e988b12302fc90eaf610e2514f",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-current-recovered.png",
+      "sha256": "894f673ed2040963fcb106cf5f7c6c2504d280f5d3255fa12a64661b581a970b",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "knownLimits": [
+    "Old unsent forms are memory-only and not all hidden multi-zone drafts are recoverable. Pending export exports queued commands, not ordinary unsent fields. Deliberate reload loses unsubmitted form memory after copying. Old roster says offline/another tab controls because players is empty; no modern update banner can be inserted into already-loaded old bytes."
+  ],
+  "origin": "http://127.0.0.1:43235",
+  "browser": {
+    "version": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "args": [
+      "--use-angle=swiftshader"
+    ],
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "migration": {
+    "from": 1,
+    "to": 4,
+    "originalTables": [
+      {
+        "name": "archives",
+        "columns": [
+          "id",
+          "identity_id",
+          "house_id",
+          "room",
+          "cards",
+          "at"
+        ],
+        "count": 1,
+        "sha256": "77105c1ff3bbbeff37ca5b6759ff3241e30aca7a089b45f57e857b368413a7ad"
+      },
+      {
+        "name": "bedrooms",
+        "columns": [
+          "id",
+          "house_id",
+          "owner_id",
+          "slot",
+          "revision",
+          "open",
+          "palette",
+          "placements",
+          "archived"
+        ],
+        "count": 3,
+        "sha256": "77bfb81992502d5abf7ec483b409c480c988f4039ba439cd818c94cf9cbe7621"
+      },
+      {
+        "name": "cards",
+        "columns": [
+          "id",
+          "house_id",
+          "author_id",
+          "small_goal",
+          "question",
+          "resource_url",
+          "next_step",
+          "help_requested",
+          "state",
+          "revision",
+          "inactive_sequence"
+        ],
+        "count": 2,
+        "sha256": "5489014ef4d1d2d3cacd4b635b32cd9dccdbb225bc19f51bd29dd0c41e1304c5"
+      },
+      {
+        "name": "chat",
+        "columns": [
+          "id",
+          "zone_id",
+          "author_id",
+          "name",
+          "text",
+          "at",
+          "sequence"
+        ],
+        "count": 1,
+        "sha256": "18fd7d2302226a0ba661e4d263bd721dfbe9cfc85044f265b3abd02b38f6309c"
+      },
+      {
+        "name": "houses",
+        "columns": [
+          "id",
+          "capacity",
+          "owner_id",
+          "code",
+          "status"
+        ],
+        "count": 1,
+        "sha256": "f0ae79cd84b87141903ab5d3662866d696ddb506e3e6ed10e32995b48923d9c7"
+      },
+      {
+        "name": "identities",
+        "columns": [
+          "id",
+          "name",
+          "colour",
+          "revision"
+        ],
+        "count": 3,
+        "sha256": "6e0f4c4a11225e75e6dee3158abc31d2c7ea2b5e03d008276d7af4fade3c7ef5"
+      },
+      {
+        "name": "members",
+        "columns": [
+          "house_id",
+          "identity_id",
+          "slot",
+          "bedroom_id",
+          "status"
+        ],
+        "count": 3,
+        "sha256": "d31f89d3fa01eef70d0fee18cbd785b94f60bb2d64e169c2041e161aca6d6ae7"
+      },
+      {
+        "name": "receipts",
+        "columns": [
+          "actor_id",
+          "command_id",
+          "command_hash",
+          "response",
+          "room_id"
+        ],
+        "count": 9,
+        "sha256": "cc3406a6331c82250e0136e0d6e367996d7e67846daf7b689cb9deea40e867e4"
+      },
+      {
+        "name": "recovery",
+        "columns": [
+          "proof_digest",
+          "identity_id"
+        ],
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "name": "removed_guards",
+        "columns": [
+          "house_id",
+          "identity_id"
+        ],
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "name": "sessions",
+        "columns": [
+          "token_digest",
+          "identity_id",
+          "expires_at"
+        ],
+        "count": 3,
+        "sha256": "6f5a7d692b7d9916d6abb2e7c0a364eaa04a8aa3c6658815fc8777c071550f76"
+      },
+      {
+        "name": "streams",
+        "columns": [
+          "id",
+          "sequence"
+        ],
+        "count": 4,
+        "sha256": "a373fbc955aaa4c7f60f9952b1ef2d7a90ff555dcaaec0433ee07cbb6d3fbb12"
+      }
+    ]
+  },
+  "completedAt": "2026-10-21T16:47:17.076Z",
+  "scratch": ".local/compat-fixture/2026-10-21T16-46-51-799Z-chat-open",
+  "fixtureDataRetainedIgnored": true,
+  "sourceChangedAfterSnapshot": false
+}

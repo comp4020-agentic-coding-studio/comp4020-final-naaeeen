@@ -1,0 +1,524 @@
+{
+  "manifest": {
+    "scope": "real local two-identity admission/voice/SQLite/Socket.IO; controlled incoming version mismatch, controlled application ACK loss and local expired-draft fixture; intercepted Discord navigation has no provider request/account/call; no physical device/human/WAN/Fly claim",
+    "runner": "eb0b1d0862997b4d4eda848c63f14fc4f2b096cee78fff4950d11d3d1ff0b0dd",
+    "sources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "endSources": {
+      "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+      "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    },
+    "sourceStable": true
+  },
+  "checks": {
+    "gameCopyReopenFit": true,
+    "externalBoundary": {
+      "href": "https://discord.gg/controlled-study",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    "voiceConfigClearBedroom": true,
+    "expiredVoiceGuard": true,
+    "controlledFaultExport": {
+      "injectedVersionOnly": true,
+      "realInitialWorldVersion": "lounge-2",
+      "originalPendingId": "cde80a26-d4fe-41e3-9d8a-4a94256621e7",
+      "commandsBefore": 6,
+      "commandsAfter": 6
+    },
+    "manualReloadCurrent": true,
+    "identityChangeExportGuard": true,
+    "complete": true
+  },
+  "viewports": [
+    {
+      "kind": "game",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": ".game-grid",
+          "left": 688,
+          "top": 352.703125,
+          "right": 1232,
+          "bottom": 624.703125,
+          "width": 544,
+          "height": 272,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-status]",
+          "left": 688,
+          "top": 257.703125,
+          "right": 1232,
+          "bottom": 278.703125,
+          "width": 544,
+          "height": 21,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-last]",
+          "left": 688,
+          "top": 282.703125,
+          "right": 1232,
+          "bottom": 298.703125,
+          "width": 544,
+          "height": 16,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-action=leave]",
+          "left": 688,
+          "top": 769.453125,
+          "right": 779.90625,
+          "bottom": 813.453125,
+          "width": 91.90625,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": 42
+    },
+    {
+      "kind": "game",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": ".game-grid",
+          "left": 25,
+          "top": 247.453125,
+          "right": 365,
+          "bottom": 513.453125,
+          "width": 340,
+          "height": 266,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-status]",
+          "left": 25,
+          "top": 132.953125,
+          "right": 365,
+          "bottom": 173.453125,
+          "width": 340,
+          "height": 40.5,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-last]",
+          "left": 25,
+          "top": 177.453125,
+          "right": 365,
+          "bottom": 193.453125,
+          "width": 340,
+          "height": 16,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-action=leave]",
+          "left": 25,
+          "top": 658.203125,
+          "right": 192,
+          "bottom": 702.203125,
+          "width": 167,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": 42
+    },
+    {
+      "kind": "game",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": ".game-grid",
+          "left": 30,
+          "top": 169,
+          "right": 423.84375,
+          "bottom": 358,
+          "width": 393.84375,
+          "height": 189,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-status]",
+          "left": 30,
+          "top": 77,
+          "right": 423.84375,
+          "bottom": 95,
+          "width": 393.84375,
+          "height": 18,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-last]",
+          "left": 30,
+          "top": 99,
+          "right": 423.84375,
+          "bottom": 115,
+          "width": 393.84375,
+          "height": 16,
+          "visible": true
+        },
+        {
+          "selector": "[data-game-action=leave]",
+          "left": 439.84375,
+          "top": 192.5625,
+          "right": 531.75,
+          "bottom": 236.5625,
+          "width": 91.90625,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": 42
+    },
+    {
+      "kind": "voice",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#panel-title",
+          "left": 740,
+          "top": 374.328125,
+          "right": 944.421875,
+          "bottom": 406.515625,
+          "width": 204.421875,
+          "height": 32.1875,
+          "visible": true
+        },
+        {
+          "selector": "#voice-link",
+          "left": 740,
+          "top": 534.203125,
+          "right": 1180,
+          "bottom": 577.203125,
+          "width": 440,
+          "height": 43,
+          "visible": true
+        },
+        {
+          "selector": "#voice-destination",
+          "left": 740,
+          "top": 577.203125,
+          "right": 1180,
+          "bottom": 595.796875,
+          "width": 440,
+          "height": 18.59375,
+          "visible": true
+        },
+        {
+          "selector": "#panel-close",
+          "left": 1136,
+          "top": 368.421875,
+          "right": 1180,
+          "bottom": 412.421875,
+          "width": 44,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    },
+    {
+      "kind": "voice",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#panel-title",
+          "left": 37,
+          "top": 256.046875,
+          "right": 219.515625,
+          "bottom": 284.796875,
+          "width": 182.515625,
+          "height": 28.75,
+          "visible": true
+        },
+        {
+          "selector": "#voice-link",
+          "left": 37,
+          "top": 414.203125,
+          "right": 353,
+          "bottom": 457.203125,
+          "width": 316,
+          "height": 43,
+          "visible": true
+        },
+        {
+          "selector": "#voice-destination",
+          "left": 37,
+          "top": 457.203125,
+          "right": 353,
+          "bottom": 475.796875,
+          "width": 316,
+          "height": 18.59375,
+          "visible": true
+        },
+        {
+          "selector": "#panel-close",
+          "left": 309,
+          "top": 248.421875,
+          "right": 353,
+          "bottom": 292.421875,
+          "width": 44,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    },
+    {
+      "kind": "voice",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#panel-title",
+          "left": 202,
+          "top": 66.90625,
+          "right": 406.421875,
+          "bottom": 99.09375,
+          "width": 204.421875,
+          "height": 32.1875,
+          "visible": true
+        },
+        {
+          "selector": "#voice-link",
+          "left": 202,
+          "top": 226.78125,
+          "right": 642,
+          "bottom": 269.78125,
+          "width": 440,
+          "height": 43,
+          "visible": true
+        },
+        {
+          "selector": "#voice-destination",
+          "left": 202,
+          "top": 269.78125,
+          "right": 642,
+          "bottom": 288.375,
+          "width": 440,
+          "height": 18.59375,
+          "visible": true
+        },
+        {
+          "selector": "#panel-close",
+          "left": 598,
+          "top": 61,
+          "right": 642,
+          "bottom": 105,
+          "width": 44,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    },
+    {
+      "kind": "update",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#update-required",
+          "left": 700,
+          "top": 20,
+          "right": 1220,
+          "bottom": 236.09375,
+          "width": 520,
+          "height": 216.09375,
+          "visible": true
+        },
+        {
+          "selector": "#update-download",
+          "left": 721,
+          "top": 123.59375,
+          "right": 862.28125,
+          "bottom": 167.59375,
+          "width": 141.28125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-pending",
+          "left": 869.28125,
+          "top": 123.59375,
+          "right": 970.734375,
+          "bottom": 167.59375,
+          "width": 101.453125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-reload",
+          "left": 977.734375,
+          "top": 123.59375,
+          "right": 1093.96875,
+          "bottom": 167.59375,
+          "width": 116.234375,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    },
+    {
+      "kind": "update",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#update-required",
+          "left": 12,
+          "top": 20,
+          "right": 378,
+          "bottom": 326.09375,
+          "width": 366,
+          "height": 306.09375,
+          "visible": true
+        },
+        {
+          "selector": "#update-download",
+          "left": 33,
+          "top": 143.09375,
+          "right": 174.28125,
+          "bottom": 187.09375,
+          "width": 141.28125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-pending",
+          "left": 181.28125,
+          "top": 143.09375,
+          "right": 282.734375,
+          "bottom": 187.09375,
+          "width": 101.453125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-reload",
+          "left": 33,
+          "top": 194.09375,
+          "right": 149.234375,
+          "bottom": 238.09375,
+          "width": 116.234375,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    },
+    {
+      "kind": "update",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "overflow": false,
+      "items": [
+        {
+          "selector": "#update-required",
+          "left": 162,
+          "top": 20,
+          "right": 682,
+          "bottom": 236.09375,
+          "width": 520,
+          "height": 216.09375,
+          "visible": true
+        },
+        {
+          "selector": "#update-download",
+          "left": 183,
+          "top": 123.59375,
+          "right": 324.28125,
+          "bottom": 167.59375,
+          "width": 141.28125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-pending",
+          "left": 331.28125,
+          "top": 123.59375,
+          "right": 432.734375,
+          "bottom": 167.59375,
+          "width": 101.453125,
+          "height": 44,
+          "visible": true
+        },
+        {
+          "selector": "#update-reload",
+          "left": 439.734375,
+          "top": 123.59375,
+          "right": 555.96875,
+          "bottom": 167.59375,
+          "width": 116.234375,
+          "height": 44,
+          "visible": true
+        }
+      ],
+      "cells": null
+    }
+  ],
+  "errors": [],
+  "external": [
+    {
+      "url": "https://discord.gg/controlled-study",
+      "referer": null,
+      "interceptedBeforeProvider": true
+    }
+  ]
+}

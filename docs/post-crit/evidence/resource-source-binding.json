@@ -1,0 +1,34 @@
+{
+  "reboundAtUTC": "2026-10-21T17:16:18.841595+00:00",
+  "scope": "Source rebinding after parent-owned game wall-clock rollback clamp; original criteria unchanged; heavy resource execution held",
+  "instrumentSHA256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517",
+  "protocols": {
+    "evaluation/board-resource.protocol.json": {
+      "protocolSHA256": "6e8140f864469670ec2e9e0e1c58e62754a148b5aab49916ff9717091ca3ee7b",
+      "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+      "gameRulesSHA256": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf"
+    },
+    "docs/post-crit/evidence/combined-resource.protocol.json": {
+      "protocolSHA256": "4af229e040f1a44a93c4d5e838c576942fa38e0b5c0b7608c74ba6ecfc64e76f",
+      "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+      "gameRulesSHA256": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf"
+    }
+  },
+  "executionClosure": {
+    "checkedAtUTC": "2026-10-21T18:07:41.461858+00:00",
+    "productionManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+    "originalAccepted": {
+      "protocolSHA256": "6e8140f864469670ec2e9e0e1c58e62754a148b5aab49916ff9717091ca3ee7b",
+      "instrumentSHA256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517",
+      "status": "PASS_21_GATES"
+    },
+    "combinedAccepted": {
+      "protocolSHA256": "741d4783ec461c2fe559d9cff2bb09269b7bc47489913871d39725509bc136c8",
+      "instrumentSHA256": "8dd77f0717121776839aa1a8cb4ad69cd28b87154dcdae4ffd1135064e37c6d1",
+      "status": "PASS_23_GATES"
+    },
+    "currentDefaultProtocol": "Prospectively rebound to8dd77f after one combined-only field fix; no second default-path run claimed. Original accepted measured bytes preserved separately.",
+    "review": "Fresh instrument, targeted binding repair and storage interpretation reviews completed with parent reconciliation.",
+    "activeResourceProcesses": 0
+  }
+}

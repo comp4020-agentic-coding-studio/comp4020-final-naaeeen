@@ -1,0 +1,8 @@
+{
+  "checkedAtUTC": "2026-10-21T17:55:58.976181+00:00",
+  "status": "INFRASTRUCTURE_FAILURE_BEFORE_PROCESS_CREATION",
+  "code": "FileNotFoundError_mise",
+  "cause": "Direct wsl --exec python does not load login PATH; wrapper used unqualified mise.",
+  "effect": "subprocess.Popen failed before any generator or server process existed. No workload attempt or result file was created.",
+  "refinement": "Use verified absolute /home/lizhi/.local/bin/mise executable; candidate instrument, protocol, production hashes and authorized single full attempt unchanged."
+}

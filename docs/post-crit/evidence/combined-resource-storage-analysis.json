@@ -1,0 +1,174 @@
+{
+  "checkedAtUTC": "2026-10-21T18:03:49.688918+00:00",
+  "scope": "Read-only aggregate attribution in the closed isolated synthetic fixture; no production data or content output",
+  "fixtureStartedAt": "2026-10-21T17:56:08.484Z",
+  "sqliteModuleVersion": "3.45.1",
+  "files": {
+    "neighbourhood.sqlite": {
+      "postCloseLogicalBytes": 69632,
+      "postCloseAllocatedBytes": 69632
+    },
+    "house.sqlite": {
+      "postCloseLogicalBytes": 245760,
+      "postCloseAllocatedBytes": 245760
+    },
+    "board.sqlite": {
+      "postCloseLogicalBytes": 202530816,
+      "postCloseAllocatedBytes": 202534912
+    }
+  },
+  "house": {
+    "receipts": {
+      "count": 136,
+      "responseBytes": 31418
+    },
+    "gameTables": {
+      "rows": 2,
+      "stateBytes": 1044
+    }
+  },
+  "board": {
+    "receipts": {
+      "count": 8142,
+      "responseBytes": 170744820
+    },
+    "scheduledPatchReceipts": {
+      "count": 7188,
+      "responseBytes": 163102432
+    },
+    "scheduledChatReceipts": {
+      "count": 708,
+      "responseBytes": 3044804
+    },
+    "pageAllocationByTable": [
+      {
+        "name": "assets",
+        "bytes": 8089600,
+        "pages": 1975
+      },
+      {
+        "name": "boards",
+        "bytes": 4096,
+        "pages": 1
+      },
+      {
+        "name": "chat",
+        "bytes": 929792,
+        "pages": 227
+      },
+      {
+        "name": "chat_house_sequence",
+        "bytes": 16384,
+        "pages": 4
+      },
+      {
+        "name": "contributions",
+        "bytes": 4243456,
+        "pages": 1036
+      },
+      {
+        "name": "elements",
+        "bytes": 4001792,
+        "pages": 977
+      },
+      {
+        "name": "receipts",
+        "bytes": 184365056,
+        "pages": 45011
+      },
+      {
+        "name": "sqlite_autoindex_assets_1",
+        "bytes": 4096,
+        "pages": 1
+      },
+      {
+        "name": "sqlite_autoindex_boards_1",
+        "bytes": 4096,
+        "pages": 1
+      },
+      {
+        "name": "sqlite_autoindex_chat_1",
+        "bytes": 24576,
+        "pages": 6
+      },
+      {
+        "name": "sqlite_autoindex_contributions_1",
+        "bytes": 57344,
+        "pages": 14
+      },
+      {
+        "name": "sqlite_autoindex_elements_1",
+        "bytes": 36864,
+        "pages": 9
+      },
+      {
+        "name": "sqlite_autoindex_receipts_1",
+        "bytes": 749568,
+        "pages": 183
+      },
+      {
+        "name": "sqlite_schema",
+        "bytes": 4096,
+        "pages": 1
+      }
+    ],
+    "elements": {
+      "rows": 404,
+      "payloadBytes": 3731072
+    },
+    "contributions": {
+      "rows": 414,
+      "payloadBytes": 3956626
+    },
+    "assets": {
+      "rows": 4,
+      "payloadBytes": 8074812
+    },
+    "chat": {
+      "rows": 200,
+      "payloadBytes": 800000
+    }
+  },
+  "interpretation": "Repeated synthetic board mutations retain full idempotency responses; scheduled patches/chats account for the large retained receipt payload measured here. The game adds124house receipts/28274response bytes and one1044-byte latest-table state across two houses. Live SQLite/WAL/SHM totals include transient journal/allocation effects; no total-disk bound or long-term stability is established. No receipt or data was deleted.",
+  "filesScope": "The files object records three main database files only, not an all-file post-close sum. Live9-file baseline/final totals remain in the frozen workload result. SQLite readonly reads may create empty WAL/SHM bookkeeping sidecars without changing saved application records.",
+  "sampledMaxStateBytesPerTable": 547,
+  "sampledMaxTotalStateBytes": 1094,
+  "postReadAllFilesCheckedAtUTC": "2026-10-21T18:06:33.830768+00:00",
+  "postReadAllFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "logicalBytes": 69632,
+      "allocatedBytes": 69632
+    },
+    {
+      "name": "house.sqlite",
+      "logicalBytes": 245760,
+      "allocatedBytes": 245760
+    },
+    {
+      "name": "house.sqlite-wal",
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    },
+    {
+      "name": "board.sqlite",
+      "logicalBytes": 202530816,
+      "allocatedBytes": 202534912
+    },
+    {
+      "name": "board.sqlite-wal",
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    }
+  ]
+}

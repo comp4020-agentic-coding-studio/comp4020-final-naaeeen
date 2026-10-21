@@ -1,0 +1,499 @@
+{
+  "config": {
+    "argv": [
+      "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/@playwright/test/cli.js",
+      "test",
+      "tests/e2e/ci-core.spec.ts",
+      "tests/e2e/first-night.spec.ts",
+      "tests/e2e/board.spec.ts",
+      "tests/e2e/title-dialog.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/home/lizhi/comp4020/comp4020-final-naaeeen/playwright.config.ts",
+    "rootDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "board.spec.ts",
+      "file": "board.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "standalone board core shares a saved canvas without the game",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:36:49.066Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8e2a3123a0c4552ab20a-5cf645d516e20f34a642",
+          "file": "board.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "standalone board identity recovers its original place in a full house",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:36:55.812Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8e2a3123a0c4552ab20a-da401e61e21971333ab9",
+          "file": "board.spec.ts",
+          "line": 157,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ci-core.spec.ts",
+      "file": "ci-core.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "house browser core keeps two live identities and a saved authored next step",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18544,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:36:58.714Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "startup-timings",
+                      "contentType": "application/json",
+                      "body": "ewogICJjbG9jayI6ICJvdXQtb2YtYnJvd3NlciBtb25vdG9uaWMiLAogICJzdGFydHVwVGltaW5ncyI6IFsKICAgIHsKICAgICAgImFjdGlvbiI6ICJjcmVhdGUgdG8gZmlyc3QgdXNhYmxlIGZyYW1lIiwKICAgICAgIm1pbGxpc2Vjb25kcyI6IDEyMzMsCiAgICAgICJjb21wbGV0ZWQiOiB0cnVlLAogICAgICAiYnVkZ2V0QWNjZXB0ZWQiOiB0cnVlCiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogImpvaW4gdG8gZmlyc3QgdXNhYmxlIGZyYW1lIiwKICAgICAgIm1pbGxpc2Vjb25kcyI6IDMxMTIsCiAgICAgICJjb21wbGV0ZWQiOiB0cnVlLAogICAgICAiYnVkZ2V0QWNjZXB0ZWQiOiB0cnVlCiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNhdmVkIHJldHVybiB0byBmaXJzdCB1c2FibGUgZnJhbWUiLAogICAgICAibWlsbGlzZWNvbmRzIjogMTc4MSwKICAgICAgImNvbXBsZXRlZCI6IHRydWUsCiAgICAgICJidWRnZXRBY2NlcHRlZCI6IHRydWUKICAgIH0KICBdLAogICJjb21wbGV0ZSI6IHRydWUsCiAgIndpdGhpblRlblNlY29uZHMiOiB0cnVlCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f68276971f5e1eed12e9-a7eabdd7572e99d6d48e",
+          "file": "ci-core.spec.ts",
+          "line": 37,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "first-night.spec.ts",
+      "file": "first-night.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two browser identities share authored lights and a saved visitor returns",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12430,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:17.454Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff26f86ba2aa6be42f13-e2a0c569da1b7081e059",
+          "file": "first-night.spec.ts",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "published trace persists across reload and contribution can be withdrawn",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4064,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:29.173Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff26f86ba2aa6be42f13-e0c58cd235a5aa74c135",
+          "file": "first-night.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "a changed cookie identity gives the old page an explicit recovery path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:33.246Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff26f86ba2aa6be42f13-20ec519a6e1de2d4195e",
+          "file": "first-night.spec.ts",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "an acknowledgement lost after a real commit reuses its pending command",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1872,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:35.626Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff26f86ba2aa6be42f13-443ce707fa4c89ea4b16",
+          "file": "first-night.spec.ts",
+          "line": 40,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "title-dialog.spec.ts",
+      "file": "title-dialog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "title dialogs are visible and usable at 1920x1080",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3482,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts:36:57",
+                    "location": {
+                      "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                      "column": 57,
+                      "line": 36
+                    },
+                    "snippet": "  34 |       await page.getByRole('button', { name: 'Close panel', exact: true }).click();\n  35 |       await page.locator('#title-screen').getByRole('button', { name: 'About', exact: true }).click();\n> 36 |       await expect(page.locator('#panel .readme-link')).toBeVisible();\n     |                                                         ^\n  37 |       await page.screenshot({ path: info.outputPath('title-about.png'), animations: 'disabled' });\n  38 |       await paintedTitleDialog(page);\n  39 |       const link = page.locator('#panel .readme-link'), box = await link.boundingBox();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                        "column": 57,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n\n\n  34 |       await page.getByRole('button', { name: 'Close panel', exact: true }).click();\n  35 |       await page.locator('#title-screen').getByRole('button', { name: 'About', exact: true }).click();\n> 36 |       await expect(page.locator('#panel .readme-link')).toBeVisible();\n     |                                                         ^\n  37 |       await page.screenshot({ path: info.outputPath('title-about.png'), animations: 'disabled' });\n  38 |       await paintedTitleDialog(page);\n  39 |       const link = page.locator('#panel .readme-link'), box = await link.boundingBox();\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts:36:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:37.517Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                    "column": 57,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a7f435110d082a30b826-f129eb14760f46f28b44",
+          "file": "title-dialog.spec.ts",
+          "line": 24,
+          "column": 3
+        },
+        {
+          "title": "title dialogs are visible and usable at 390x844",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2263,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts:36:57",
+                    "location": {
+                      "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                      "column": 57,
+                      "line": 36
+                    },
+                    "snippet": "  34 |       await page.getByRole('button', { name: 'Close panel', exact: true }).click();\n  35 |       await page.locator('#title-screen').getByRole('button', { name: 'About', exact: true }).click();\n> 36 |       await expect(page.locator('#panel .readme-link')).toBeVisible();\n     |                                                         ^\n  37 |       await page.screenshot({ path: info.outputPath('title-about.png'), animations: 'disabled' });\n  38 |       await paintedTitleDialog(page);\n  39 |       const link = page.locator('#panel .readme-link'), box = await link.boundingBox();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                        "column": 57,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#panel .readme-link')\nExpected: visible\nError: strict mode violation: locator('#panel .readme-link') resolved to 2 elements:\n    1) <a hidden=\"\" id=\"voice-link\" target=\"_blank\" class=\"readme-link\" rel=\"noopener noreferrer\">Open Discord</a> aka getByText('Open Discord', { exact: true })\n    2) <a rel=\"noopener\" href=\"/readme/\" target=\"_blank\" class=\"readme-link\">Read the project, evidence & credits \u2197</a> aka getByRole('link', { name: 'Read the project, evidence &' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#panel .readme-link') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#panel .readme-link')\u001b[22m\n\n\n  34 |       await page.getByRole('button', { name: 'Close panel', exact: true }).click();\n  35 |       await page.locator('#title-screen').getByRole('button', { name: 'About', exact: true }).click();\n> 36 |       await expect(page.locator('#panel .readme-link')).toBeVisible();\n     |                                                         ^\n  37 |       await page.screenshot({ path: info.outputPath('title-about.png'), animations: 'disabled' });\n  38 |       await paintedTitleDialog(page);\n  39 |       const link = page.locator('#panel .readme-link'), box = await link.boundingBox();\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts:36:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T17:37:41.597Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p6-checks/browser-results/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/title-dialog.spec.ts",
+                    "column": 57,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a7f435110d082a30b826-141c572c0d476d96542a",
+          "file": "title-dialog.spec.ts",
+          "line": 24,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T17:36:48.589Z",
+    "duration": 57090.450999999994,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

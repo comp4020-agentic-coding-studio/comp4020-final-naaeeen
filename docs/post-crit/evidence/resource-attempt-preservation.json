@@ -1,0 +1,31 @@
+{
+  "preservedAtUTC": "2026-10-21T17:49:32.147438+00:00",
+  "scope": "Exact accepted original and failed first combined artifacts, before game command binding repair",
+  "files": {
+    "resource-original-pass.protocol.json": {
+      "sourcePath": "evaluation/board-resource.protocol.json",
+      "bytes": 17069,
+      "sha256": "6e8140f864469670ec2e9e0e1c58e62754a148b5aab49916ff9717091ca3ee7b"
+    },
+    "resource-original-pass.results.json": {
+      "sourcePath": "evaluation/board-resource.results.json",
+      "bytes": 976856,
+      "sha256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244"
+    },
+    "resource-measured-instrument.mjs": {
+      "sourcePath": "tools/board-resource.mjs",
+      "bytes": 72828,
+      "sha256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517"
+    },
+    "combined-resource.first-fail.protocol.json": {
+      "sourcePath": "docs/post-crit/evidence/combined-resource.protocol.json",
+      "bytes": 18722,
+      "sha256": "4af229e040f1a44a93c4d5e838c576942fa38e0b5c0b7608c74ba6ecfc64e76f"
+    },
+    "combined-resource.first-fail.results.json": {
+      "sourcePath": "docs/post-crit/evidence/combined-resource.results.json",
+      "bytes": 29116,
+      "sha256": "d72fc95530858951effff80fb3ac125f2529ffec3488eaae73c1f19f2ebbe271"
+    }
+  }
+}

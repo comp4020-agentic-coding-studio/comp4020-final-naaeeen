@@ -1,0 +1,23 @@
+{
+  "createdAt": "2026-10-21T16:52:13.692755+00:00",
+  "acceptedArtifact": "docs/post-crit/evidence/compat-browser-2026-10-21T16-49-08-398Z-reviewed-grader.json",
+  "status": "PASS for exact recorded copied source",
+  "priorInsufficientPass": "compat-browser-2026-10-21T16-46-51-799Z-chat-open.json",
+  "files": {
+    "tools/post-crit-compat-browser.mjs": "9fff00ba48684b1de6508f8b97534834a762876959f4693d150261d02dcc2033",
+    "docs/post-crit/evidence/compat-browser-protocol.md": "3e10ab7e357896a9097c3c6d784ec32ad9b52cdf85556bca1978f3e41d7214ff",
+    "docs/post-crit/evidence/compat-browser-checks.md": "0b6d8a3a347adf5844d9a25e7090c13df04bf0dfae12448edb974f207cf5fa03",
+    "docs/post-crit/evidence/compat-browser-review.md": "8579bdb272389a9398ccc6d1b542327e7e9d4d5f3e1a8938535448afb91bb8d7",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-45-51-799Z-first.json": "9870b2576b9c4c7c0599f553447e4088c01cecebb3373a4cef2657cc42ff625d",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open.json": "55bb5c6eb40d113a9ae67dc0fb951fd79cce119578456d9f5af5245af571f242",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-49-08-398Z-reviewed-grader.json": "55f51be46f32e4b4bf27d735ed03378bf2464410aa6ed44dbf76e2a7751b4438",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-current-recovered.png": "894f673ed2040963fcb106cf5f7c6c2504d280f5d3255fa12a64661b581a970b",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-old-readonly.png": "d21ffe8cb8555c2661389b5828a8af88a0e7b8b25d5462ba116a5257ae0fa7b2",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-46-51-799Z-chat-open-old-revoked.png": "7f11ab2974f5631376164ec5f90370e7044a25e988b12302fc90eaf610e2514f",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-49-08-398Z-reviewed-grader-current-recovered.png": "894f673ed2040963fcb106cf5f7c6c2504d280f5d3255fa12a64661b581a970b",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-49-08-398Z-reviewed-grader-old-readonly.png": "d21ffe8cb8555c2661389b5828a8af88a0e7b8b25d5462ba116a5257ae0fa7b2",
+    "docs/post-crit/evidence/compat-browser-2026-10-21T16-49-08-398Z-reviewed-grader-old-revoked.png": "7f11ab2974f5631376164ec5f90370e7044a25e988b12302fc90eaf610e2514f",
+    "docs/post-crit/evidence/compat-browser-grader-controls.json": "4959764944138baa5353d3dccfebabec587b787fcde6d7d997c1a79781cbdadb"
+  },
+  "scope": "No forward UI acceptance after root changes; no production changes or browser/resource/human claims beyond bounded recorded run."
+}

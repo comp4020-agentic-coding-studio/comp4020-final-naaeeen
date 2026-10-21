@@ -2,7 +2,8 @@
 import { fork } from "node:child_process";
 import { SERVER_NODE_ARGS } from "../src/server-runtime.ts";
 import { createHash, randomUUID } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { monitorEventLoopDelay, performance } from "node:perf_hooks";
@@ -12,11 +13,15 @@ import {setTimeout as timerDelay} from "node:timers/promises";
 import { crc32, deflateSync } from "node:zlib";
 import { Server } from "socket.io";
 import { io } from "socket.io-client";
-const root = resolve(dirname(fileURLToPath(import.meta.url)), ".."), protocolPath = join(root, "evaluation/board-resource.protocol.json"), resultPath = join(root, "evaluation/board-resource.results.json");
-const hash = b => createHash("sha256").update(b).digest("hex"), arg = k => {
+const arg = k => {
     const n = process.argv.indexOf(k);
     return n < 0 ? undefined : process.argv[n + 1];
-}, sleep = ms => new Promise(r => setTimeout(r, ms));
+};
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const protocolPath = resolve(root, arg("--protocol-file") ?? "evaluation/board-resource.protocol.json");
+if (!protocolPath.endsWith(".protocol.json")) throw new Error("A .protocol.json file is required");
+const resultPath = protocolPath.replace(/\.protocol\.json$/, ".results.json");
+const hash = b => createHash("sha256").update(b).digest("hex"), sleep = ms => new Promise(r => setTimeout(r, ms));
 const q = (a, p) => a.length ? [...a].sort((a, b) => a - b)[Math.max(0, Math.ceil(a.length * p) - 1)] : null, round = n => n === null ? null : Math.round(n * 1000) / 1000;
 const fail = code => {
     throw Object.assign(new Error(code), { code });
@@ -118,6 +123,22 @@ async function serve() {
         heapPeak = Math.max(heapPeak, m.heapUsed);
         return { kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
     }
+    // Optional combined diagnostics read aggregate counts only; no authority method is replaced.
+    const storageQueries = p.gameScenario ? {
+        receipts: service.houseStore.db.prepare("SELECT count(*) AS count, coalesce(sum(length(response)),0) AS responseBytes FROM receipts"),
+        games: service.houseStore.db.prepare("SELECT count(*) AS rows, coalesce(sum(length(state)),0) AS stateBytes, coalesce(max(length(state)),0) AS maxStateBytes, coalesce(sum(CASE WHEN json_type(state,'$.current')!='null' THEN 1 ELSE 0 END),0) AS activeTables FROM game_tables")
+    } : null;
+    function storageSample() {
+        if (!storageQueries) fail("GAME_STORAGE_NOT_REGISTERED");
+        const files = [];
+        for (const name of ["neighbourhood.sqlite", "house.sqlite", "board.sqlite"])
+            for (const suffix of ["", "-wal", "-shm"])
+                try { const info = statSync(join(arg("--data"), name + suffix)); files.push({ name: name + suffix, logicalBytes: info.size, allocatedBytes: info.blocks * 512 }); } catch (e) { if (e.code !== "ENOENT") throw e; }
+        const cgroup = {};
+        for (const name of ["memory.current", "memory.peak", "memory.events", "memory.events.local"])
+            try { cgroup[name] = readFileSync("/sys/fs/cgroup/" + name, "utf8").trim(); } catch {}
+        return { receipts: storageQueries.receipts.get(), gameTables: storageQueries.games.get(), files, cgroup };
+    }
     const timer = setInterval(() => process.send?.(sample()), 100);
     timer.unref();
     let closing = false;
@@ -130,6 +151,8 @@ async function serve() {
                 peer.conn.transport.writable = false;
                 process.send?.({ kind: "negativeReady", requestId: m.requestId });
             }
+            else if (m?.kind === "storage")
+                process.send?.({ kind: "storage", requestId: m.requestId, ...storageSample() });
             else if (m?.kind === "sample")
                 process.send?.({ ...sample(), kind: "reply", requestId: m.requestId });
             else if (m?.kind === "stop" && !closing) {
@@ -229,6 +252,55 @@ async function checkpointRecovered(view, house) {
     await Promise.all(view.receiptsAtCheckpoint);
     return gradeRecoveredCheckpoint(view.recoveryCheckpoint, house.elements, house.seedChat, house.receiptJournal);
 }
+function gameStepPlan(neutral) {
+    const steps = [{ type: "join", slot: 0, code: "joined" }, { type: "join", slot: 1, code: "joined" }, { type: "ready", slot: 0, code: "ready" }, { type: "ready", slot: 1, code: "started" }];
+    const columns = neutral ? [0, 1] : [0, 1, 0, 1, 0, 1, 0];
+    for (const [i, column] of columns.entries()) steps.push({ type: "move", slot: i % 2, column, code: !neutral && i === 6 ? "win" : "moved" });
+    if (neutral) steps.push({ type: "leave", slot: 0, code: "left" });
+    return steps;
+}
+function gameTargetIndices(houseIndex, scheduledSeconds, slowReader) {
+    return Array.from({ length: 6 }, (_, memberIndex) => houseIndex * 12 + memberIndex * 2)
+        .filter(index => !(index === 0 && scheduledSeconds >= slowReader.pauseAtSeconds && scheduledSeconds < slowReader.pauseAtSeconds + slowReader.pauseSeconds));
+}
+function rememberGameProjection(view, game) {
+    if (!game || !Number.isSafeInteger(game.revision)) return;
+    view.gameFrames ??= new Map();
+    if (!view.gameFrames.has(game.revision)) view.gameFrames.set(game.revision, { game, at: performance.now(), hash: hash(Buffer.from(JSON.stringify(game))) });
+}
+function gameProjectionMatches(game, expected) {
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    if (!game || game.revision !== expected.revision || game.rosterRevision !== expected.rosterRevision) return false;
+    const terminal = expected.status === "terminal", state = terminal ? game.latestResult : game.current;
+    if (!state || state.roundId !== expected.roundId || !same(state.players, expected.players) || !same(state.cells, expected.cells) || !same(state.lastMove, expected.lastMove)) return false;
+    if (terminal) return game.current === null && state.reason === expected.reason && state.winner === expected.winner && Number.isSafeInteger(state.startedAt) && Number.isSafeInteger(state.endedAt) && state.endedAt >= state.startedAt;
+    return state.status === expected.status && same(state.ready?.map(Boolean), expected.ready) && state.turn === expected.turn && state.resumeRevision === 0 && state.recoveryDeadlineAt === null;
+}
+function gradeGameEvidence(scenario, slowReader, evidence) {
+    const actions = evidence.actions, times = [];
+    if (evidence.status !== "COMPLETE" || actions.length !== scenario.expectedActions || evidence.rounds.length !== 12) return false;
+    for (let houseIndex = 0; houseIndex < 2; houseIndex++) {
+        let revision = 0;
+        for (let roundIndex = 0; roundIndex < 6; roundIndex++) {
+            const plan = gameStepPlan(scenario.neutralRoundIndices.includes(roundIndex));
+            for (const [stepIndex, step] of plan.entries()) {
+                const matches = actions.filter(a => a.houseIndex === houseIndex && a.roundIndex === roundIndex && a.stepIndex === stepIndex);
+                if (matches.length !== 1) return false;
+                const action = matches[0], scheduled = scenario.roundStartsSeconds[roundIndex] + stepIndex * scenario.actionIntervalSeconds;
+                const targets = gameTargetIndices(houseIndex, scheduled, slowReader);
+                if (action.status !== "VISIBLE" || typeof action.gameHash !== "string" || !/^[a-f0-9]{64}$/.test(action.gameHash) || action.type !== step.type || action.slot !== step.slot || action.code !== step.code || action.revision !== ++revision || action.scheduledOffsetSeconds !== scheduled || !Number.isFinite(action.sendLagMs) || action.sendLagMs < 0 || action.sendLagMs > scenario.maximumScheduleLagMs || JSON.stringify(action.targetIndices) !== JSON.stringify(targets) || action.observed.length !== targets.length) return false;
+                for (const target of targets) {
+                    const observations = action.observed.filter(o => o.viewIndex === target);
+                    if (observations.length !== 1 || observations[0].gameHash !== action.gameHash || !Number.isFinite(observations[0].latencyMs) || observations[0].latencyMs < 0) return false;
+                    times.push(observations[0].latencyMs);
+                }
+            }
+            const rounds = evidence.rounds.filter(r => r.houseIndex === houseIndex && r.roundIndex === roundIndex);
+            if (rounds.length !== 1 || rounds[0].actions !== plan.length || rounds[0].finalRevision !== revision || rounds[0].outcome !== (scenario.neutralRoundIndices.includes(roundIndex) ? "player_left" : "win")) return false;
+        }
+    }
+    return times.length === scenario.expectedReadableProjectionTargets && q(times, 0.95) <= scenario.visibleP95Ms;
+}
 function writeResult(r) {
     let old;
     try {
@@ -250,8 +322,9 @@ async function run() {
         fail("PARENT_GO_REQUIRED");
     const startedAt = new Date().toISOString(), dir = join(root, ".local/board-resource", startedAt.replaceAll(":", "-") + "-" + randomUUID());
     mkdirSync(join(dir, "data"), { recursive: true });
-    const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash], { cwd: root, silent: true, execArgv: [...SERVER_NODE_ARGS], env: { ...process.env, NODE_ENV: "test" } });
+    const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash,"--protocol-file",protocolPath], { cwd: root, silent: true, execArgv: [...SERVER_NODE_ARGS], env: { ...process.env, NODE_ENV: "test" } });
     let origin, runtime, lastSample, phase = "startup", failure = null, closing = false, running = false, start = 0, end = 0, unexpectedDisconnects = 0, scopeErrors=0, staleFramesIgnored=0, stderrBytes = 0, stdoutBytes = 0;
+    const gameEvidence = p.gameScenario ? { status: "NOT_RUN", actions: [], rounds: [], storage: [] } : null;
     const httpCounts = new Map();
     const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), pendingByView = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
     let readyResolve, readyReject;
@@ -363,7 +436,7 @@ async function run() {
         v.motionPending = false;
         v.nextPointer = performance.now() + 50;
         v.nextMotion = performance.now() + 100;
-        const socket = io(origin + (v.role === "board" ? "/board" : ""), { autoConnect: false, forceNew: true, reconnection: false, transports: ["websocket"], extraHeaders: { Origin: origin, Cookie: v.cookie } });
+        const socket = io(origin + (v.role === "board" ? "/board" : ""), { autoConnect: false, forceNew: true, reconnection: false, transports: ["websocket"], extraHeaders: { Origin: origin, Cookie: v.cookie }, ...(v.role === "house" ? { auth: { worldVersion: HOUSE_WORLD_VERSION } } : {}) });
         v.socket = socket;
         v.connections++;
         const connectionOrdinal = v.connections;
@@ -406,6 +479,10 @@ async function run() {
         socket.on("house.snapshot", r => {
             if (v.socket !== socket)
                 return;
+            if (p.gameScenario) {
+                if (r?.worldVersion !== HOUSE_WORLD_VERSION || r.durable?.house?.id !== houses[v.house].id || r.durable?.selfId !== v.identity) { scopeErrors++; return; }
+                rememberGameProjection(v, r.durable.game);
+            }
             v.snapshot = r;
             v.generation = r.generation;
             v.houseSnapshots++;
@@ -445,6 +522,7 @@ async function run() {
                 fail("NOT_CONTROLLER");
             if(r.snapshot.durable.house.id!==houses[v.house].id||r.snapshot.durable.selfId!==v.identity)fail("HOUSE_SCOPE_MISMATCH");
             v.snapshot = r.snapshot;
+            if (p.gameScenario) rememberGameProjection(v, r.snapshot.durable.game);
             v.generation = r.snapshot.generation;
             const own = r.snapshot.players.find(a => a.id === v.identity);
             v.x = own.x;
@@ -508,6 +586,66 @@ async function run() {
         }
         for (const peer of views.filter(a => a.role === "board" && a.house === v.house))
             reflect(peer, null, null, peer.sequence);
+    }
+    async function playGameRound(houseIndex, roundIndex) {
+        const scenario = p.gameScenario, neutral = scenario.neutralRoundIndices.includes(roundIndex);
+        const actors = scenario.playerMemberIndices.map(memberIndex => views.find(v => v.role === "house" && v.house === houseIndex && v.memberIndex === memberIndex));
+        const h = houses[houseIndex], steps = gameStepPlan(neutral), startOffset = scenario.roundStartsSeconds[roundIndex];
+        const expected = { revision: h.gameRevision ?? 0, rosterRevision: h.gameRosterRevision ?? 0, roundId: null, status: "waiting", players: [null, null], ready: [false, false], cells: Array(42).fill(null), turn: 0, lastMove: null };
+        const old = actors[0].snapshot.durable.game;
+        if (!old || old.current !== null || old.revision !== expected.revision || old.rosterRevision !== expected.rosterRevision) fail("GAME_ROUND_INITIAL_STATE");
+        for (const [stepIndex, step] of steps.entries()) {
+            const scheduledOffsetSeconds = startOffset + stepIndex * scenario.actionIntervalSeconds;
+            while (performance.now() < start + scheduledOffsetSeconds * 1000) await timerDelay(Math.max(1, start + scheduledOffsetSeconds * 1000 - performance.now()), undefined, { signal: cancellation.signal });
+            const at = performance.now(), sendLagMs = at - start - scheduledOffsetSeconds * 1000;
+            if (sendLagMs > scenario.maximumScheduleLagMs) fail("GAME_ACTION_DEADLINE");
+            const actor = actors[step.slot], targetIndices = gameTargetIndices(houseIndex, scheduledOffsetSeconds, p.slowReader);
+            const targets = targetIndices.map(i => views[i]);
+            if (targets.some(v => !v || !v.ready || !v.socket.connected || v.intendedFault)) fail("GAME_READABLE_TARGET_UNAVAILABLE");
+            const entry = { houseIndex, roundIndex, stepIndex, type: step.type, slot: step.slot, scheduledOffsetSeconds, sendLagMs: round(sendLagMs), targetIndices, observed: [], status: "PENDING" };
+            gameEvidence.actions.push(entry);
+            const payload = { roundId: expected.roundId };
+            if (step.type === "ready") payload.rosterRevision = expected.rosterRevision;
+            if (step.type === "move") payload.column = step.column;
+            const command = { commandId: randomUUID(), type: "game." + step.type, houseId: h.id, payload, ...(["join", "move"].includes(step.type) ? { expectedRevision: expected.revision } : {}) };
+            const receipt = ok(await actor.socket.timeout(5000).emitWithAck("house.command", { generation: actor.generation, zoneId: "lounge", command }));
+            entry.status = "ACCEPTED"; entry.code = receipt.result?.code; entry.revision = receipt.entityRevision;
+            if (stepIndex === 0) {
+                if (typeof receipt.result?.roundId !== "string") fail("GAME_ROUND_ID_MISSING");
+                expected.roundId = receipt.result.roundId;
+            }
+            expected.revision++;
+            if (step.type === "join") { expected.players[step.slot] = actor.identity; expected.rosterRevision++; }
+            else if (step.type === "ready") {
+                expected.ready[step.slot] = true;
+                if (expected.ready.every(Boolean)) { expected.status = "active"; expected.ready = [false, false]; }
+            } else if (step.type === "move") {
+                let row = 5; while (row >= 0 && expected.cells[row * 7 + step.column] !== null) row--;
+                if (row < 0) fail("GAME_INVALID_REGISTERED_COLUMN");
+                expected.cells[row * 7 + step.column] = step.slot;
+                expected.lastMove = { row, column: step.column, slot: step.slot };
+                expected.turn = 1 - step.slot;
+            }
+            if (step.code === "win" || step.type === "leave") {
+                expected.status = "terminal"; expected.rosterRevision++;
+                expected.reason = step.type === "leave" ? "player_left" : "win"; expected.winner = step.type === "leave" ? null : 0;
+            }
+            if (receipt.entityRevision !== expected.revision || receipt.result?.roundId !== expected.roundId || receipt.result?.code !== step.code) fail("GAME_RECEIPT_MISMATCH");
+            const deadline = performance.now() + 5000;
+            while (targets.some(v => !v.gameFrames?.has(expected.revision)) && performance.now() < deadline) await sleep(10);
+            for (const v of targets) {
+                const frame = v.gameFrames?.get(expected.revision);
+                if (!frame) fail("GAME_PROJECTION_TIMEOUT");
+                if (!gameProjectionMatches(frame.game, expected)) fail("GAME_PROJECTION_MISMATCH");
+                entry.observed.push({ viewIndex: v.index, latencyMs: round(frame.at - at), gameHash: frame.hash });
+            }
+            entry.gameHash = entry.observed[0].gameHash;
+            if (entry.observed.some(o => o.gameHash !== entry.gameHash)) fail("GAME_PROJECTION_DIVERGED");
+            entry.status = "VISIBLE";
+        }
+        h.gameRevision = expected.revision; h.gameRosterRevision = expected.rosterRevision;
+        gameEvidence.rounds.push({ houseIndex, roundIndex, outcome: neutral ? "player_left" : "win", actions: steps.length, finalRevision: expected.revision });
+        gameEvidence.storage.push({ phase: "round-finish", houseIndex, roundIndex, elapsedSeconds: round((performance.now() - start) / 1000), ...await rpc("storage") });
     }
     const cancellation=new AbortController();
     let slowEvidence = null, negativeEvidence = null;
@@ -603,6 +741,7 @@ async function run() {
         negative.socket.disconnect();
         await connect(negative);
         negative.intendedFault = false;
+        if (p.gameScenario) gameEvidence.storage.push({ phase: "baseline", ...await rpc("storage") });
         if (calibration) {
             phase = "calibration-finish";
             start = performance.now();
@@ -787,6 +926,12 @@ async function run() {
                 }
                 phase = "measurement";
             });
+            if (p.gameScenario) {
+                gameEvidence.status = "RUNNING";
+                for (let houseIndex = 0; houseIndex < 2; houseIndex++) launch(async () => {
+                    for (let roundIndex = 0; roundIndex < p.gameScenario.roundStartsSeconds.length; roundIndex++) await playGameRound(houseIndex, roundIndex);
+                });
+            }
             while (performance.now() - start < duration) {
                 if (failure)
                     break;
@@ -801,6 +946,7 @@ async function run() {
             if(failure)fail(failure.code);
             await slowJob;
         }
+        if (p.gameScenario) { gameEvidence.storage.push({ phase: "final", ...await rpc("storage") }); gameEvidence.status = calibration ? "CALIBRATION_GAME_ACTIONS_NOT_RUN" : "COMPLETE"; }
         phase = "recovery-check";
         for (const v of views)
             if (v.eligibleAt && v.ready && !v.intendedFault)
@@ -820,7 +966,12 @@ async function run() {
         const perView = views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connections: v.connections, disconnects: v.disconnects, disconnectReasons: v.reasons, connectedAtEnd: v.socket.connected, eligibleSeconds: round(v.eligibleMs / 1000), motionSent: v.motionSent, motionHz: v.role === "house" && v.eligibleMs ? round(v.normalMotionSent / (v.eligibleMs / 1000)) : null, pointerSent: v.pointerSent, pointerHz: v.role === "board" && v.eligibleMs ? round(v.normalPointerSent / (v.eligibleMs / 1000)) : null, saved: v.saved, skipped: v.skipped, patchEvents: v.patchEvents, chatEvents: v.chatEvents, snapshotEvents: v.snapshots, presenceEvents: v.presences, houseSnapshots: v.houseSnapshots, houseMotions: v.houseMotions, revoked: v.revoked, initialSnapshotWireBytes: v.initialSnapshotBytes ?? null }));
         const httpBudget = [...httpCounts.values()].map((c, n) => ({ actorIndex: n, totalReads: c.reads.length, totalWrites: c.writes.length, rollingReadMax60s: rollingMax(c.reads), rollingWriteMax60s: rollingMax(c.writes) }));
         const gates = { scopedDelivery:scopeErrors===0,inbound:runtime.inboundBytes===16384,httpBudget: httpBudget.every(c => c.rollingReadMax60s <= 240 && c.rollingWriteMax60s <= 240), duration: calibration ? null : seconds >= 300, all24Initial: true, all24Final: final.houseViews === 12 && final.boardViews === 12 && final.activeEngines === 24 && views.every(v => v.socket.connected), rss: final.rssPeakMiB <= 210, boardQueues: final.queues.board.packets <= 8 && final.queues.board.bytes <= 4194304, houseQueues: final.queues.house.packets <= 4 && final.queues.house.bytes <= 2097152, telemetryValid: final.invalidTelemetry === 0, eventLoop: final.eventLoop.p95Ms <= 50 && final.eventLoop.p99Ms <= 100, health, unexpectedDisconnects: unexpectedDisconnects === 0, allNormalDelivered: normalPending === 0, allDeliveredIncludingCatchup: pending === 0, normalP95: latencies.normal.length ? q(latencies.normal, 0.95) <= 1000 : calibration ? null : false, normalInputs: stats.motionRejected === 0 && stats.motionTimeouts === 0 && stats.pointerRejected === 0 && stats.pointerTimeouts === 0 && stats.patchRejected === 0, workload: calibration ? null : stats.patchSkipped === 0 &&stats.chatSkipped===0&& stats.patchSaved >= p.workload.minimumSavedPatches && stats.chatSaved >= p.workload.minimumSavedChat && perView.filter(v => v.role === "house").every(v => v.motionHz >= 9.5 && v.motionHz <= 10.2) && perView.filter(v => v.role === "board").every(v => v.pointerHz >= 18 && v.pointerHz <= 20.5), recovery: recovery.every(r => r.allSeedIds&&r.allUnmodifiedElements&&r.allLatestPayloads&&r.tombstones===20&&r.elements===202&&r.allLatestVersions && r.allScheduledChat && r.files === 2 && r.metadataOnly), negativeAck: negativeEvidence.closed && negativeEvidence.queuePacketsPeak <= 8, slowExpiry: calibration ? null : !!slowEvidence?.readerStayedPaused && slowEvidence.bothDisconnected && slowEvidence.rejoined && slowEvidence.generationAdvanced && slowEvidence.quietAfterExpiry && slowEvidence.allCommittedRecovered };
-        const result = { schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
+        if (p.gameScenario) {
+            gates.gameActionsAndVisibleRevisions = calibration ? null : gradeGameEvidence(p.gameScenario, p.slowReader, gameEvidence);
+            const baseline = gameEvidence.storage[0], finalStorage = gameEvidence.storage.at(-1);
+            gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.receipts.count - baseline.receipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
+        }
+        const result = { ...(p.gameScenario ? { game: gameEvidence } : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
         writeResult(result);
         process.stdout.write(JSON.stringify({ status: result.status, durationSeconds: result.durationSeconds, rssMaxMiB: final.rssPeakMiB, normalP95Ms: result.delivery.normalP95Ms, gates }) + "\n");
         if (!calibration && result.status !== "PASS")
@@ -829,13 +980,14 @@ async function run() {
     catch (e) {
         failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE" };
         const status=failureStatus(failure.code);
-        writeResult({ schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations });
+        writeResult({ ...(p.gameScenario ? { game: gameEvidence } : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations });
         process.stdout.write(JSON.stringify({ status, phase, code: failure.code }) + "\n");
         process.exitCode = 1;
     }
     finally {
         running = false;
         closing = true;
+        cancellation.abort();
         for (const t of [motionTimer, pointerTimer, writeTimer, freezeTimer, progressTimer])
             clearInterval(t);
         for (const v of views)

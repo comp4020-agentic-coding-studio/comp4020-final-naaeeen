@@ -33,10 +33,10 @@ for (const viewport of [{ width: 1920, height: 1080 }, { width: 390, height: 844
       await paintedTitleDialog(page);
       await page.getByRole('button', { name: 'Close panel', exact: true }).click();
       await page.locator('#title-screen').getByRole('button', { name: 'About', exact: true }).click();
-      await expect(page.locator('#panel .readme-link')).toBeVisible();
+      await expect(page.locator('#about-panel a[href="/readme/"]')).toBeVisible();
       await page.screenshot({ path: info.outputPath('title-about.png'), animations: 'disabled' });
       await paintedTitleDialog(page);
-      const link = page.locator('#panel .readme-link'), box = await link.boundingBox();
+      const link = page.locator('#about-panel a[href="/readme/"]'), box = await link.boundingBox();
       if (!box) throw new Error('The title About link must be rendered.');
       expect(await link.evaluate((element, point) => element.contains(document.elementFromPoint(point.x, point.y)),
         { x: box.x + box.width / 2, y: box.y + box.height / 2 })).toBe(true);

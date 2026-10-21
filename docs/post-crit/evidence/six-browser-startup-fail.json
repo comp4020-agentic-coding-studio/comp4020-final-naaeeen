@@ -1,0 +1,7 @@
+{
+  "stage": "before browser launch",
+  "classification": "infrastructure bind collision",
+  "error": "EADDRINUSE 127.0.0.1:4108",
+  "refinement": "use OS-assigned loopback ephemeral port; do not stop the unrelated existing listener",
+  "nativeBrowserLaunched": false
+}

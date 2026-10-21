@@ -13,7 +13,7 @@ const resourceURL = new URL("../tools/board-resource.mjs", import.meta.url);
 type Launch = { modulePath: string; args: string[]; options: ForkOptions };
 
 // Inspect the real instrument launch without running its CLI, server or workload.
-function resourceLaunch(serverArgs: readonly string[] = SERVER_NODE_ARGS): Launch {
+function resourceLaunch(serverArgs: readonly string[] = SERVER_NODE_ARGS, protocolPath = join(root, "evaluation/board-resource.protocol.json")): Launch {
   const source = readFileSync(resourceURL, "utf8");
   const ast = ts.createSourceFile("board-resource.mjs", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
   const calls: string[] = [], runtimeImports: ts.ImportDeclaration[] = [];
@@ -29,11 +29,11 @@ function resourceLaunch(serverArgs: readonly string[] = SERVER_NODE_ARGS): Launc
   const bindings = runtimeImports[0]!.importClause?.namedBindings;
   expect(bindings && ts.isNamedImports(bindings) ? bindings.elements.map(binding => binding.getText(ast)) : [])
     .toEqual(["SERVER_NODE_ARGS"]);
-  const evaluate = new Function("fork", "fileURLToPath", "join", "dir", "protocolHash", "root", "process", "SERVER_NODE_ARGS",
+  const evaluate = new Function("fork", "fileURLToPath", "join", "dir", "protocolHash", "root", "process", "SERVER_NODE_ARGS", "protocolPath",
     "return (" + calls[0]!.replaceAll("import.meta.url", JSON.stringify(resourceURL.href)) + ");");
   return evaluate((modulePath: string, args: string[], options: ForkOptions) => ({ modulePath, args, options }),
     fileURLToPath, join, "/resource-fixture", "protocol-fixture", root,
-    { env: { NODE_ENV: "development", RUNTIME_BUDGET_PROBE: "preserved" }, execArgv: ["--max-old-space-size=64"] }, serverArgs);
+    { env: { NODE_ENV: "development", RUNTIME_BUDGET_PROBE: "preserved" }, execArgv: ["--max-old-space-size=64"] }, serverArgs, protocolPath);
 }
 
 function nodeArguments(args: string[]) {
@@ -85,11 +85,19 @@ describe("server young-generation launch budget", () => {
   test("the resource child receives only a copied server budget and keeps its environment", () => {
     const launch = resourceLaunch();
     expect(launch.modulePath).toBe(fileURLToPath(resourceURL));
-    expect(launch.args).toEqual(["--child", "--data", "/resource-fixture/data", "--protocol", "protocol-fixture"]);
+    expect(launch.args).toEqual(["--child", "--data", "/resource-fixture/data", "--protocol", "protocol-fixture", "--protocol-file", join(root, "evaluation/board-resource.protocol.json")]);
     expect(launch.options.execArgv).toEqual(expectedArgs);
     expect(launch.options.execArgv).not.toBe(SERVER_NODE_ARGS);
     expect(launch.options.env).toEqual({ NODE_ENV: "test", RUNTIME_BUDGET_PROBE: "preserved" });
     expect(launch.options.cwd).toBe(root);
+  });
+
+  test("the resource child retains an explicitly selected combined protocol", () => {
+    const selected = join(root, "docs/post-crit/evidence/combined-resource.protocol.json");
+    const launch = resourceLaunch(SERVER_NODE_ARGS, selected);
+    expect(launch.args.slice(-2)).toEqual(["--protocol-file", selected]);
+    expect(launch.options.execArgv).toEqual(expectedArgs);
+    expect(launch.options.env).toEqual({ NODE_ENV: "test", RUNTIME_BUDGET_PROBE: "preserved" });
   });
 
   test("a real resource child observes its explicit budget and inherited test environment", async () => {

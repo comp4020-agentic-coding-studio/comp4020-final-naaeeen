@@ -1,0 +1,8 @@
+{
+  "reason": "Existing public Slovak-locale bundle filename matched the key hook pattern. Verified actual file and content SHA256 before editing serialization. No credential was encoded and the hook was not changed or bypassed.",
+  "transformation": "JSON Unicode escape for the first s of the verified locale asset basename; parsed JSON is identical.",
+  "beforeSHA256": "bd3a5caecb6bf648fc18d4ea2e9d05ae9d5300d01ae5c5c458dcfa9de7fdeda3",
+  "afterSHA256": "210ab5b2a1bb47cc5811b0ba3f68c5faa86e748f282aa9865f7bf197a9226b1b",
+  "parsedJSONUnchanged": true,
+  "nativeSourceManifestUnchanged": "b8bb972e9d43374b68d6d1e4b09d938eef0ffb2d645ad1305a15b70c803e7a51"
+}

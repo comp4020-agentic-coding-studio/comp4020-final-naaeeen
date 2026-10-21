@@ -1,0 +1,56 @@
+{
+  "format": "house-local-drafts-v1",
+  "identityId": "9f426026-bcd7-43c2-a0e7-03dda303de91",
+  "houseId": "f7be3518-f7ac-4ef7-9923-8fee63d1a868",
+  "zoneId": "16ebb517-7bde-4699-8898-a43fa05e8877",
+  "chat": {
+    "text": "Retry original bedroom submission exactly once",
+    "zoneId": "16ebb517-7bde-4699-8898-a43fa05e8877",
+    "version": 4
+  },
+  "work": {
+    "values": {
+      "small-goal": "",
+      "question": "",
+      "resource": "",
+      "next-step": "",
+      "help-requested": false
+    },
+    "base": {
+      "id": "fcf9fc0b-f293-4fbb-9d7d-643a10c97a52",
+      "revision": 1
+    },
+    "dirty": false,
+    "version": 4
+  },
+  "room": null,
+  "voice": {
+    "scope": "f7be3518-f7ac-4ef7-9923-8fee63d1a868:9f426026-bcd7-43c2-a0e7-03dda303de91",
+    "baseRevision": 0,
+    "value": "",
+    "version": 0,
+    "dirty": false,
+    "saving": false,
+    "message": ""
+  },
+  "pending": [
+    {
+      "commandId": "6862556c-ff5b-44bc-a50a-42b67b552f20",
+      "type": "chat.send",
+      "createdAt": 1792602056715,
+      "houseId": "f7be3518-f7ac-4ef7-9923-8fee63d1a868",
+      "zoneId": "16ebb517-7bde-4699-8898-a43fa05e8877",
+      "state": "pending",
+      "command": {
+        "commandId": "6862556c-ff5b-44bc-a50a-42b67b552f20",
+        "type": "chat.send",
+        "payload": {
+          "zoneId": "16ebb517-7bde-4699-8898-a43fa05e8877",
+          "text": "Retry original bedroom submission exactly once"
+        },
+        "houseId": "f7be3518-f7ac-4ef7-9923-8fee63d1a868"
+      },
+      "canRetry": false
+    }
+  ]
+}

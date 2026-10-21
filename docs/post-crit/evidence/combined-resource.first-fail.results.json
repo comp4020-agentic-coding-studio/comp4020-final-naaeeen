@@ -1,0 +1,1129 @@
+{
+  "game": {
+    "status": "RUNNING",
+    "actions": [
+      {
+        "houseIndex": 0,
+        "roundIndex": 0,
+        "stepIndex": 0,
+        "type": "join",
+        "slot": 0,
+        "scheduledOffsetSeconds": 5,
+        "sendLagMs": 0.316,
+        "targetIndices": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10
+        ],
+        "observed": [],
+        "status": "PENDING"
+      },
+      {
+        "houseIndex": 1,
+        "roundIndex": 0,
+        "stepIndex": 0,
+        "type": "join",
+        "slot": 0,
+        "scheduledOffsetSeconds": 5,
+        "sendLagMs": 0.649,
+        "targetIndices": [
+          12,
+          14,
+          16,
+          18,
+          20,
+          22
+        ],
+        "observed": [],
+        "status": "PENDING"
+      }
+    ],
+    "rounds": [],
+    "storage": [
+      {
+        "phase": "baseline",
+        "kind": "storage",
+        "requestId": "d19bd473-4300-4c44-a8c9-732b91d32797",
+        "receipts": {
+          "count": 12,
+          "responseBytes": 3144
+        },
+        "gameTables": {
+          "rows": 0,
+          "stateBytes": 0,
+          "maxStateBytes": 0,
+          "activeTables": 0
+        },
+        "files": [
+          {
+            "name": "neighbourhood.sqlite",
+            "logicalBytes": 4096,
+            "allocatedBytes": 4096
+          },
+          {
+            "name": "neighbourhood.sqlite-wal",
+            "logicalBytes": 70072,
+            "allocatedBytes": 73728
+          },
+          {
+            "name": "neighbourhood.sqlite-shm",
+            "logicalBytes": 32768,
+            "allocatedBytes": 32768
+          },
+          {
+            "name": "house.sqlite",
+            "logicalBytes": 4096,
+            "allocatedBytes": 4096
+          },
+          {
+            "name": "house.sqlite-wal",
+            "logicalBytes": 1038272,
+            "allocatedBytes": 1040384
+          },
+          {
+            "name": "house.sqlite-shm",
+            "logicalBytes": 32768,
+            "allocatedBytes": 32768
+          },
+          {
+            "name": "board.sqlite",
+            "logicalBytes": 21712896,
+            "allocatedBytes": 21716992
+          },
+          {
+            "name": "board.sqlite-wal",
+            "logicalBytes": 4321912,
+            "allocatedBytes": 4325376
+          },
+          {
+            "name": "board.sqlite-shm",
+            "logicalBytes": 32768,
+            "allocatedBytes": 32768
+          }
+        ],
+        "cgroup": {}
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "status": "FAIL",
+  "scope": "SYNTHETIC; process RSS, not constrained to Fly",
+  "startedAt": "2026-10-21T17:47:44.932Z",
+  "finishedAt": "2026-10-21T17:47:53.881Z",
+  "protocolSHA256": "4af229e040f1a44a93c4d5e838c576942fa38e0b5c0b7608c74ba6ecfc64e76f",
+  "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
+  "instrumentSHA256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517",
+  "sourceHashes": {
+    "Dockerfile": "db320fd8913c0ac2921e08c5ce3231ddfaba7b4f6cf7d2d19a9bb3b240bf4743",
+    "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09",
+    "pnpm-lock.yaml": "00daf7036a60683951034eb4fefd87bf09436353300eca61aab8338ddbacfedd",
+    "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+    "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+    "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+    "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+    "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+    "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+    "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65",
+    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "host": {
+      "platform": "linux",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "runner": "WSL"
+    },
+    "execArgv": [
+      "--max-semi-space-size=12"
+    ],
+    "heapLimitMiB": 2096,
+    "constrainedMemoryBytes": 18446744073709552000,
+    "inboundBytes": 16384,
+    "cgroupMemoryMax": null,
+    "cgroupCpuMax": null
+  },
+  "phase": "measurement",
+  "failure": {
+    "phase": "measurement",
+    "code": "INVALID_INPUT"
+  },
+  "stats": {
+    "motionSent": 708,
+    "motionOk": 708,
+    "motionRejected": 0,
+    "motionTimeouts": 0,
+    "pointerSent": 1313,
+    "pointerOk": 1313,
+    "pointerRejected": 0,
+    "pointerTimeouts": 0,
+    "patchScheduled": 132,
+    "patchSkipped": 0,
+    "patchSaved": 132,
+    "patchRejected": 0,
+    "chatSaved": 4,
+    "chatSkipped": 0,
+    "expectedFaultTimeouts": 0,
+    "invalidSent": 100,
+    "invalidAcked": 0,
+    "initialSnapshots": 13,
+    "assetReads": 24,
+    "assetBytesRead": 48448872
+  },
+  "samples": [
+    {
+      "rssMiB": 107.3984375,
+      "heapMiB": 16.171371459960938,
+      "externalMiB": 11.532445907592773,
+      "arrayBuffersMiB": 0.4881114959716797,
+      "rssPeakMiB": 107.3984375,
+      "heapPeakMiB": 16.171371459960938,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 0,
+      "houseViews": 0,
+      "boardViews": 0,
+      "engines": {
+        "created": 0,
+        "closed": 0,
+        "peak": 0
+      },
+      "namespaces": {
+        "houseCreated": 0,
+        "houseClosed": 0,
+        "boardCreated": 0,
+        "boardClosed": 0
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 0.000511,
+        "p99Ms": 0.000511,
+        "maxMs": 0
+      },
+      "cpu": {
+        "user": 229156,
+        "system": 66529
+      },
+      "actions": {},
+      "phase": "startup",
+      "elapsedSeconds": -2.729
+    },
+    {
+      "rssMiB": 146.734375,
+      "heapMiB": 22.59174346923828,
+      "externalMiB": 21.643746376037598,
+      "arrayBuffersMiB": 0.33137035369873047,
+      "rssPeakMiB": 146.734375,
+      "heapPeakMiB": 22.59174346923828,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 0,
+      "houseViews": 0,
+      "boardViews": 0,
+      "engines": {
+        "created": 0,
+        "closed": 0,
+        "peak": 0
+      },
+      "namespaces": {
+        "houseCreated": 0,
+        "houseClosed": 0,
+        "boardCreated": 0,
+        "boardClosed": 0
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 16.441343,
+        "p99Ms": 37.453823,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 479146,
+        "system": 191658
+      },
+      "actions": {
+        "house.create:accepted": 1,
+        "house.join:accepted": 5,
+        "board/asset:accepted": 2,
+        "board/patch:accepted": 21,
+        "board/chat:accepted": 100
+      },
+      "phase": "bootstrap",
+      "elapsedSeconds": -1.715
+    },
+    {
+      "rssMiB": 187.859375,
+      "heapMiB": 47.19108581542969,
+      "externalMiB": 31.99672031402588,
+      "arrayBuffersMiB": 7.011288642883301,
+      "rssPeakMiB": 187.859375,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 0,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 16,
+      "houseViews": 8,
+      "boardViews": 8,
+      "engines": {
+        "created": 16,
+        "closed": 0,
+        "peak": 16
+      },
+      "namespaces": {
+        "houseCreated": 8,
+        "houseClosed": 0,
+        "boardCreated": 8,
+        "boardClosed": 0
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 19.234815,
+        "p99Ms": 34.209791,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 761251,
+        "system": 342762
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 42,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 8,
+        "availability.set:ok": 8,
+        "board.subscribe:current": 8
+      },
+      "phase": "bootstrap",
+      "elapsedSeconds": -0.616
+    },
+    {
+      "rssMiB": 182.55078125,
+      "heapMiB": 21.612884521484375,
+      "externalMiB": 13.200943946838379,
+      "arrayBuffersMiB": 2.219071388244629,
+      "rssPeakMiB": 188.76953125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 18.956287,
+        "p99Ms": 28.164095,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 1046651,
+        "system": 474325
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 42,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 0.397
+    },
+    {
+      "rssMiB": 184.92578125,
+      "heapMiB": 20.26374053955078,
+      "externalMiB": 13.25965690612793,
+      "arrayBuffersMiB": 2.2777843475341797,
+      "rssPeakMiB": 188.76953125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 16.752639,
+        "p99Ms": 24.985599,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 1282448,
+        "system": 547386
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 66,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 1.402
+    },
+    {
+      "rssMiB": 186.92578125,
+      "heapMiB": 32.942230224609375,
+      "externalMiB": 13.476844787597656,
+      "arrayBuffersMiB": 2.4949722290039062,
+      "rssPeakMiB": 188.76953125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 16.441343,
+        "p99Ms": 23.166975,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 1517907,
+        "system": 601585
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 90,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 2.406
+    },
+    {
+      "rssMiB": 188.67578125,
+      "heapMiB": 29.16717529296875,
+      "externalMiB": 13.368119239807129,
+      "arrayBuffersMiB": 2.386246681213379,
+      "rssPeakMiB": 188.76953125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 15.663103,
+        "p99Ms": 22.740991,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 1731386,
+        "system": 670468
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 114,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 3.41
+    },
+    {
+      "rssMiB": 189.67578125,
+      "heapMiB": 20.354843139648438,
+      "externalMiB": 11.326817512512207,
+      "arrayBuffersMiB": 0.34494495391845703,
+      "rssPeakMiB": 189.67578125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 15.556607,
+        "p99Ms": 22.740991,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 1955850,
+        "system": 746416
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 138,
+        "board/chat:accepted": 200,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 4.425
+    },
+    {
+      "rssMiB": 189.92578125,
+      "heapMiB": 32.43373107910156,
+      "externalMiB": 11.551267623901367,
+      "arrayBuffersMiB": 0.5693950653076172,
+      "rssPeakMiB": 189.92578125,
+      "heapPeakMiB": 47.19108581542969,
+      "queues": {
+        "house": {
+          "packets": 0,
+          "bytes": 0
+        },
+        "board": {
+          "packets": 8,
+          "bytes": 2283266
+        },
+        "unknown": {
+          "packets": 0,
+          "bytes": 0
+        }
+      },
+      "activeEngines": 24,
+      "houseViews": 12,
+      "boardViews": 12,
+      "engines": {
+        "created": 25,
+        "closed": 1,
+        "peak": 24
+      },
+      "namespaces": {
+        "houseCreated": 12,
+        "houseClosed": 0,
+        "boardCreated": 13,
+        "boardClosed": 1
+      },
+      "invalidTelemetry": 0,
+      "eventLoop": {
+        "p95Ms": 14.950399,
+        "p99Ms": 22.740991,
+        "maxMs": 37.650431
+      },
+      "cpu": {
+        "user": 2154743,
+        "system": 832423
+      },
+      "actions": {
+        "house.create:accepted": 2,
+        "house.join:accepted": 10,
+        "board/asset:accepted": 4,
+        "board/patch:accepted": 162,
+        "board/chat:accepted": 202,
+        "zone.subscribe:ok": 12,
+        "availability.set:ok": 12,
+        "board.subscribe:current": 13,
+        "house.command:INVALID_INPUT": 2
+      },
+      "phase": "measurement",
+      "elapsedSeconds": 5.433
+    }
+  ],
+  "perView": [
+    {
+      "viewIndex": 0,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 1,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 2,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 3,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 4,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 5,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 6,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 7,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 8,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 9,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 10,
+      "houseIndex": 0,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 11,
+      "houseIndex": 0,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 12,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 13,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 14,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 15,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 16,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 17,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 18,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 19,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 20,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 21,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 22,
+      "houseIndex": 1,
+      "role": "house",
+      "connectionOrdinal": 1,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": null,
+      "currentSnapshotCursor": 6,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": []
+    },
+    {
+      "viewIndex": 23,
+      "houseIndex": 1,
+      "role": "board",
+      "connectionOrdinal": 2,
+      "currentSocketConnected": true,
+      "currentSubscriptionKnown": true,
+      "currentSnapshotCursor": 123,
+      "ready": true,
+      "pointerPending": false,
+      "motionPending": false,
+      "disconnectEvents": [
+        {
+          "connectionOrdinal": 1,
+          "current": true,
+          "reason": "transport close",
+          "phase": "invalid-ack-negative",
+          "elapsedSeconds": null
+        }
+      ]
+    }
+  ],
+  "slowEvidence": null,
+  "fixture": [
+    {
+      "houseIndex": 0,
+      "elements": 202,
+      "sceneBytes": 1865727,
+      "chatMessages": 100,
+      "chatBytes": 416925,
+      "files": 2,
+      "snapshotBytes": 2283091,
+      "imageBytes": [
+        2018703,
+        2018703
+      ],
+      "imageSHA256": [
+        "b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db",
+        "35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"
+      ],
+      "patchBatches": 21
+    },
+    {
+      "houseIndex": 1,
+      "elements": 202,
+      "sceneBytes": 1865727,
+      "chatMessages": 100,
+      "chatBytes": 416925,
+      "files": 2,
+      "snapshotBytes": 2283091,
+      "imageBytes": [
+        2018703,
+        2018703
+      ],
+      "imageSHA256": [
+        "b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c",
+        "c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"
+      ],
+      "patchBatches": 21
+    }
+  ],
+  "server": {
+    "rssMiB": 189.92578125,
+    "heapMiB": 23.030616760253906,
+    "externalMiB": 11.33393669128418,
+    "arrayBuffersMiB": 0.3520641326904297,
+    "rssPeakMiB": 189.92578125,
+    "heapPeakMiB": 47.19108581542969,
+    "queues": {
+      "house": {
+        "packets": 0,
+        "bytes": 0
+      },
+      "board": {
+        "packets": 8,
+        "bytes": 2283266
+      },
+      "unknown": {
+        "packets": 0,
+        "bytes": 0
+      }
+    },
+    "activeEngines": 24,
+    "houseViews": 12,
+    "boardViews": 12,
+    "engines": {
+      "created": 25,
+      "closed": 1,
+      "peak": 24
+    },
+    "namespaces": {
+      "houseCreated": 12,
+      "houseClosed": 0,
+      "boardCreated": 13,
+      "boardClosed": 1
+    },
+    "invalidTelemetry": 0,
+    "eventLoop": {
+      "p95Ms": 14.950399,
+      "p99Ms": 22.134783,
+      "maxMs": 37.650431
+    },
+    "cpu": {
+      "user": 2262784,
+      "system": 869385
+    },
+    "actions": {
+      "house.create:accepted": 2,
+      "house.join:accepted": 10,
+      "board/asset:accepted": 4,
+      "board/patch:accepted": 174,
+      "board/chat:accepted": 204,
+      "zone.subscribe:ok": 12,
+      "availability.set:ok": 12,
+      "board.subscribe:current": 13,
+      "house.command:INVALID_INPUT": 2
+    }
+  },
+  "unexpectedDisconnects": 0,
+  "errors": {
+    "INVALID_INPUT": 2,
+    "ABORT_ERR": 1
+  },
+  "stderrBytes": 0,
+  "stdoutBytes": 0,
+  "limitations": [
+    "Synthetic host/cgroup constraints are measured and reported; no 256 MiB Fly memory enforcement.",
+    "No Flymachine,/data mountedvolume, Docker/WANorrealnetworkimpairment",
+    "No physicalphone, browserWebGL/Reactrendering, humanpreference/usability/valueorcoursegradeevidence",
+    "300seconds doesnotreplace legacy30-minute180MiB L1/L2history orprovelong-termmemory stability",
+    "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
+  ],
+  "history": []
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "Exact frozen old UI/client/world + copied current local service, same origin/data, synthetic sessions, Chromium desktop. No Fly, physical-device, human or resource acceptance.",
+  "runId": "2026-10-21T16-45-51-799Z-first",
+  "at": "2026-10-21T16:45:51.799Z",
+  "status": "FAIL",
+  "manifest": {
+    "runnerSHA256": "9243b98b9475d81a21c3a3d4b46599c342517eeafdc82370c9e51e59e08df4dc",
+    "frozenCommit": "8cdad6ad17e698d5b02896d570afb7892f365351",
+    "frozenHashes": {
+      "src/server.ts": "b009d6dc89bb915540b54b2c7d3cc53a08f50c13819109b7911f5b37b19f2dfe",
+      "src/house-store.ts": "d95d03d1aaa3ede53846086a58c548ae45c5040d5985722e1d4d0ec2f4fbcb30",
+      "src/house-realtime.ts": "109535cb60d2235bef67ccc1a0a7923559ee6f5bf79c16402880f231c319820b",
+      "src/house-contract.ts": "d7eb13fdd434f15359a47bf371ac58f6a92d31ae5258a6c33ba30b723087bdf1",
+      "public/house.html": "d2b5a9ff50071a9c58b709899d7ea5e0ee5f0e199ac9d8d53ea7e406486d01b0",
+      "public/house-ui.js": "48a541d05c86744c830a3691c7406fa0152f3ca9c45d9576f2d444ce94b29ee2",
+      "public/house-client.js": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+      "public/house-world.js": "7b8e9acf0acfbf6c8f4c2c0431942ccc3e96871593676a8b7ee8313fbc711f69",
+      "public/house-geometry.js": "b42e0f7f7787b344739823a430614d0158365b6caf8574893114f4eb9b7e6cdd",
+      "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+      "public/house-camera.js": "a6159242e0978e5f24ed38a4d71efc9feafd8f44bb39f3908323fcd0e2dca1d5",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house.css": "827a9077d40ebf02bcc6f364822dec21b1f116a0e683d0698d48b270e96f282f",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+      "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+      "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09"
+    },
+    "currentHashes": {
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+      "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+      "public/house-ui.js": "c350da676eda194e28d2d42c33e552a13f37d7bf3c7d87816bc2d7dc6e1dccf6",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-game-ui.js": "c8acde6cc6414441e6c5acebd75be2382f6ec848affee974a61465c9c60a2b41",
+      "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+      "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+      "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+      "public/house-game-rules.d.ts": "36aa435f97476bafc495d39e082a6e20a60591acb529c60d9b69bd4f15886758",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+      "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+      "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09"
+    },
+    "runtime": "v24.21.0"
+  },
+  "checks": {
+    "exactFrozenAndCurrentCopies": true
+  },
+  "events": [],
+  "pageErrors": [],
+  "screenshots": [],
+  "knownLimits": [
+    "Old unsent forms are memory-only and not all hidden multi-zone drafts are recoverable. Pending export exports queued commands, not ordinary unsent fields. Deliberate reload loses unsubmitted form memory after copying. Old roster says offline/another tab controls because players is empty; no modern update banner can be inserted into already-loaded old bytes."
+  ],
+  "origin": "http://127.0.0.1:42811",
+  "browser": {
+    "version": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "args": [
+      "--use-angle=swiftshader"
+    ],
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#chat-input')\u001b[22m\n\u001b[2m    - locator resolved to <textarea rows=\"3\" id=\"chat-input\" maxlength=\"2000\" autocomplete=\"off\" placeholder=\"A thought, a question, a hello…\"></textarea>\u001b[22m\n\u001b[2m    - fill(\"Private compatibility marker\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "stack": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#chat-input')\u001b[22m\n\u001b[2m    - locator resolved to <textarea rows=\"3\" id=\"chat-input\" maxlength=\"2000\" autocomplete=\"off\" placeholder=\"A thought, a question, a hello…\"></textarea>\u001b[22m\n\u001b[2m    - fill(\"Private compatibility marker\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-compat-browser.mjs:149:86"
+  },
+  "completedAt": "2026-10-21T16:46:31.750Z",
+  "scratch": ".local/compat-fixture/2026-10-21T16-45-51-799Z-first",
+  "fixtureDataRetainedIgnored": true,
+  "sourceChangedAfterSnapshot": false
+}

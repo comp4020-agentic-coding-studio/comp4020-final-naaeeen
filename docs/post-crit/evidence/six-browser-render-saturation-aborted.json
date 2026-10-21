@@ -1,0 +1,13 @@
+{
+  "classification": "ABORTED infrastructure/render saturation diagnostic",
+  "pid": 60292,
+  "verifiedCommand": "node tools/post-crit-six-browser.mjs",
+  "allSixFullNativeCanvases": true,
+  "observedGpuProcessCpuPercent": 1048,
+  "meaningfulPhaseCompletionLogged": false,
+  "runtimeSourceChanged": false,
+  "temporaryFixtures": [
+    "/tmp/six-native-qz4Sh0"
+  ],
+  "refinement": "ordinary Options/Pause inactive browsers while preserving actual identity/connection/authority; serial native rendering; no simultaneous six-canvas performance claim"
+}

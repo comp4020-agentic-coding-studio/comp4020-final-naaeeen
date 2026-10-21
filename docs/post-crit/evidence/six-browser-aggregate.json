@@ -1,0 +1,191 @@
+{
+  "scope": "Aggregate six-genuine-browser capability coverage across separate isolated capacity6 houses; normal Options/Pause inactive peers; owner1920x1080/watcher390x844/other4windows844x390. Not one continuous six-person journey or simultaneous-render/distributed-user performance.",
+  "runtimeSourcesIdenticalAcrossCases": true,
+  "runtimeSources": {
+    "public/house-ui.js": "1a0918e3f974062e3487a898b73ccd31c5f13f3861df7e1f824e5d539d868b25",
+    "public/house-game-ui.js": "be9cb5e5739eea45097041613be85d665f858b8c26a9eb9840d8cda4574b315c",
+    "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
+    "public/house.html": "6336d3ae1473e50364933d6962fe192f6d1833a8a18066d2e2dff4629604cf93",
+    "public/house.css": "0e0a40b064bbd5f22a4c032ccecb5adeb9aead627d3c8236a94eb2246dfeefaa",
+    "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+    "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+    "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+    "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+  },
+  "cases": {
+    "study": {
+      "file": "six-browser-lounge-budget-partial.json",
+      "sixStudyAndStand": true,
+      "occupiedSeatNativeRejection": true,
+      "overallCase": "ABORTED at240s budget during later rest phase; study subsection completed"
+    },
+    "rest": {
+      "file": "six-browser-rest.json",
+      "complete": true,
+      "sixRestAndStand": true,
+      "routes": [
+        {
+          "index": 0,
+          "purpose": "rest",
+          "seatId": "rest-seat-1",
+          "acceptedPosition": {
+            "x": 4.8,
+            "z": 4.9
+          },
+          "elapsedMs": 10218
+        },
+        {
+          "index": 1,
+          "purpose": "rest",
+          "seatId": "rest-seat-2",
+          "acceptedPosition": {
+            "x": 5.8,
+            "z": 4.9
+          },
+          "elapsedMs": 12653
+        },
+        {
+          "index": 2,
+          "purpose": "rest",
+          "seatId": "rest-seat-3",
+          "acceptedPosition": {
+            "x": 6.8,
+            "z": 4.9
+          },
+          "elapsedMs": 13204
+        },
+        {
+          "index": 3,
+          "purpose": "rest",
+          "seatId": "rest-seat-6",
+          "acceptedPosition": {
+            "x": 7.8,
+            "z": 3.4
+          },
+          "elapsedMs": 13656
+        },
+        {
+          "index": 4,
+          "purpose": "rest",
+          "seatId": "rest-seat-5",
+          "acceptedPosition": {
+            "x": 7.8,
+            "z": 2.4
+          },
+          "elapsedMs": 13398
+        },
+        {
+          "index": 5,
+          "purpose": "rest",
+          "seatId": "rest-seat-4",
+          "acceptedPosition": {
+            "x": 7.8,
+            "z": 1.4
+          },
+          "elapsedMs": 14457
+        }
+      ]
+    },
+    "gameOwnership": {
+      "file": "six-browser-game.json",
+      "complete": true,
+      "checks": {
+        "sixGenuineIdentities": {
+          "count": 6,
+          "distinctRooms": 6,
+          "slots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "worldVersion": "lounge-2"
+        },
+        "watcherDenied": {
+          "nativeSentNoCommand": true,
+          "actualSocketNegative": "GAME_NOT_SEATED"
+        },
+        "visibleGamePanelReads": [
+          1,
+          2,
+          3,
+          4,
+          0,
+          5
+        ],
+        "sixSharedOneMove": {
+          "watchers": 4,
+          "players": 2,
+          "cells": 42,
+          "acceptedMoves": 1,
+          "revision": 5,
+          "phoneFit": true
+        },
+        "realReturnNeutralForAll": true,
+        "sparseOwnDoor": {
+          "slots": [
+            0,
+            1,
+            3,
+            4,
+            5
+          ],
+          "ownedSlot": 5,
+          "bedroomRetained": true
+        },
+        "rejoinVacancyPreservesOthers": true,
+        "complete": true
+      }
+    }
+  },
+  "currentRuntimeHashMatches": true,
+  "images": {
+    "six-browser-six-study-follow-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "23f0cbde4391aef6a257647dbe9c10a321e82caeb8730521bd15db38369e153b",
+      "originalResolutionInspected": true
+    },
+    "six-browser-six-study-overview-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "934367763c2f5e53b67138db23489decb68050e4bb6dfcd5fbc3a0c7ec5f3ffa",
+      "originalResolutionInspected": true
+    },
+    "six-browser-six-rest-follow-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "f80b3b87355c6b4b011a9c44bad7cedbb3133c97dc98e3a88a7990e4886f23aa",
+      "originalResolutionInspected": true
+    },
+    "six-browser-game-player-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f0d13c367966bf732804558c75f81008570c2468c0f20f9b99c74c4052949327",
+      "originalResolutionInspected": true
+    },
+    "six-browser-game-watcher-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "bbffa73dd14c6d60f22c859a50493f965d3d41a45a68d0f2864ab818003aff70",
+      "originalResolutionInspected": true
+    }
+  },
+  "limitations": [
+    "Earlier six unpaused SwiftShader render saturation diagnostic was aborted.",
+    "One paused full-size actor4 study route exceeded45s; actual routeTarget/remaining path/render counts were not captured, so that failure remains unexplained.",
+    "Pure geometry derived seat3 valid55point13.124unit route for stipulated inputs, not observed failed-route evidence.",
+    "Smaller auxiliary windows and normal Pause passed functional cases but do not explain original timeout or establish physical/human/distributed performance."
+  ],
+  "runnerHashes": {
+    "currentRunnable": "5ca7e040f82fd45a3b19ab1437c222de19c913b1a5d99b84a082c7cec7816042",
+    "preservedAcceptedGame": "91765f48ba3b22a14b7982a29ab96e2f3584e388374d4e3ebdc26642707cae46",
+    "preservedRestCandidate": "bc23ed9b2f72f4fd671814baea07b09f34a01975c192d9a9c78f7dc61b8354e3",
+    "preservedStudyPartial": "88f0908fac0dbed3c93e67b93d8d0583b394f39965920cfaf6fb760b3e0436ce"
+  }
+}
