@@ -1,6 +1,7 @@
 import { createHouseClient, createPendingInspector } from "./house-client.js";
 import { createHouseWorld } from "./house-world.js";
-import { validatePlacements } from "./house-geometry.js";
+import { ROOM_PRESETS, getRoomPreset } from "./house-room-content.js";
+import { validatePlacements, footprint } from "./house-geometry.js";
 import { createMovableWindow, createModalFocus } from "./house-shell.js";
 const $ = id => document.getElementById(id);
 function setPlaceLabel(text){const label=$("place-label");label.textContent=text;label.title=text;}
@@ -12,7 +13,7 @@ let lastScope="", lastIdentityScope="", lastHouseKey="", inspector=null, pending
 const unreadStreams=new Map();
 let adminRequest=0,safeAreaFrame=null;
 let lastDurableKey = "", noticeTimer, chatVersion=0, cardVersion=0, checkingMembership=false;
-const pending = new Map();
+const pending = new Map(), pendingZones = new Map(), saveFlights = new Set();
 let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null;
 const panelFocus=createModalFocus($("panel")),boardFocus=createModalFocus($("board-workspace"));
 const chatWindow=createMovableWindow({window,element:$("chat-window"),handle:$("chat-handle"),body:$("chat-body"),collapse:$("chat-collapse"),resize:$("chat-resize"),onChange:state=>{if(state.shown&&!state.collapsed&&chatReadable())markChatRead();queueSafeArea();}});
@@ -47,16 +48,18 @@ async function api(path, body) {
 }
 function command(type,payload,expectedRevision) { return {commandId:crypto.randomUUID(),type,payload,...(live?{houseId:live.durable.house.id}:{}),...(expectedRevision===undefined?{}:{expectedRevision})}; }
 async function save(type,payload,expectedRevision) {
- const key=JSON.stringify([live?.durable.house.id,live?.durable.selfId,type,payload,expectedRevision]);
- const intent=pending.get(key)||command(type,payload,expectedRevision); pending.set(key,intent);
+ if(!live?.controller)throw Object.assign(new Error("Take control in this tab before saving."),{code:"NOT_CONTROLLER"});
+ const key=JSON.stringify([live.durable.house.id,live.durable.selfId,type,payload,expectedRevision]);
+ if(pending.has(key)&&pendingZones.get(key)!==live.durable.zoneId)throw Object.assign(new Error("This pending action belongs to its original room. Return there or inspect Pending drafts to retry the original action."),{code:"STALE_ZONE"});
+ const intent=pending.get(key)||command(type,payload,expectedRevision);pending.set(key,intent);pendingZones.set(key,live.durable.zoneId);saveFlights.add(intent.commandId);
  try {
-  const result=await client.command(intent); pending.delete(key);
-  if(!type.startsWith("house.")){for(let n=0;n<30;n++){if(live?.durable.streamId===result.streamId&&live.durable.sequence>=result.sequence)break;await new Promise(resolve=>setTimeout(resolve,50));}}
+  const result=await client.command(intent);pending.delete(key);pendingZones.delete(key);
+  if(!type.startsWith("house.")){for(let n=0;n<30;n++){const cursor=type.startsWith("card.")?workCursor():live?.durable;if(cursor?.streamId===result.streamId&&cursor.sequence>=result.sequence)break;await new Promise(resolve=>setTimeout(resolve,50));}}
   return result;
  } catch(error) {
-  if(error.code&&!RETAIN_INTENT_CODES.has(error.code))pending.delete(key);
+  if(error.code&&!RETAIN_INTENT_CODES.has(error.code)){pending.delete(key);pendingZones.delete(key);}
   throw error;
- } finally {if(activePanel==="pending")void protectedAction(renderPending)();}
+ } finally {saveFlights.delete(intent.commandId);if(activePanel==="pending")void protectedAction(renderPending)();}
 }
 function showConnectionLimit(error){
  if(!["LOAD_LIMIT","TAB_LIMIT"].includes(error.code))return false;
@@ -66,7 +69,17 @@ function showConnectionLimit(error){
  return true;
 }
 function protectedAction(fn) {return async event=>{event?.preventDefault?.();const context=privateContext();try{await fn(event);}catch(error){if(context!==privateContext())return;if(error.code==="IDENTITY_CHANGED"){invalidateIdentityView();try{await bootstrap();}catch(refreshError){notice(refreshError.message,true);return;}}if(!showConnectionLimit(error))notice(error.message||"That action could not be completed.",true);}};}
-function currentCard(){return live?.durable.cards.find(card=>card.authorId===live.durable.selfId&&card.state==="active")||null;}
+function workCursor(){return live?.durable.ownWork??(live?.durable.zoneId==="lounge"?live.durable:null);}
+function currentCard(){if(!live)return null;return live.durable.ownWork?live.durable.ownWork.card:live.durable.cards.find(card=>card.authorId===live.durable.selfId&&card.state==="active")||null;}
+function effectiveCard(){
+ let card=currentCard();const cursor=workCursor();
+ if(cardProjection){
+  if(cardProjection.scope!==identityScope(live))cardProjection=null;
+  else if(cursor?.streamId===cardProjection.streamId&&cursor.sequence>=cardProjection.sequence)cardProjection=null;
+  else card=cardProjection.closed?null:{...cardProjection.payload,id:cardProjection.id,revision:cardProjection.revision};
+ }
+ return card;
+}
 function ownRoom(){return live && live.durable.room?.ownerId===live.durable.selfId?live.durable.room:null;}
 // Movement remains enabled when ordinary tools are closed. Typing/IME is also guarded by the world.
 function queueSafeArea(){
@@ -100,11 +113,11 @@ function openPanel(name){
  if(embeddedFrame)return;
  const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(name!=="room"));$("modal-backdrop").hidden=name==="room";$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
  for(const key of ["board","room","house","recovery","pending","options","about"])$(key+"-panel").hidden=key!==name;
- $("panel-title").textContent={board:"Study notes",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood"}[name];
+ $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood"}[name];
  applyInput();
  if(name==="pending")void protectedAction(renderPending)();
  if(name==="board"){renderCards();if(!cardDirty)fillCard();}
- if(name==="room")renderRoom();
+ if(name==="room"){renderRoom();void protectedAction(refreshRoomPending)();}
  if(name==="house")renderHouse();
  panelFocus.open();queueSafeArea();
 }
@@ -123,6 +136,11 @@ async function interact(target){
  }else if(target.type==="seat"){
   const self=live.players.find(p=>p.id===live.durable.selfId);
   if(self?.seatId)await client.stand();else await client.claimSeat(target.seatId);
+ }else if(target.type==="desk"){
+  openPanel("board");
+ }else if(target.type==="lamp"){
+  if(!ownRoom()){notice("This lamp belongs to the room owner. Your own room has Lighting controls.");return;}
+  openPanel("room");$("room-light").focus();$("light-form").scrollIntoView?.({block:"nearest"});
  }else if(target.type==="board"){
   if(live.durable.zoneId!=="lounge"){notice("The shared board is in the lounge.");return;}
   openBoard();
@@ -137,10 +155,10 @@ function restoreCard(values){for(const [id,value] of Object.entries(values))if(i
 function clearPrivateDOM(){
  setPlaceLabel("");
  for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries"])$(id).replaceChildren();
- for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","recovery-proof"])$(id).value="";
- for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
+ for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","room-light","starter-preset","recovery-proof"])$(id).value="";
+ for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count","starter-summary","starter-status","light-status"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
  $("chat-draft-status").textContent="Enter for a new line · Ctrl / ⌘ Enter to send";$("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
- world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
+ $("starter-preview").replaceChildren();world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
 }
 function onSnapshot(snapshot){
  if(!snapshot){
@@ -177,12 +195,12 @@ function onSnapshot(snapshot){
  if(self?.availabilitySetAt){const time=node("time",new Date(self.availabilitySetAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}));time.dateTime=new Date(self.availabilitySetAt).toISOString();time.title=new Date(self.availabilitySetAt).toLocaleString();$("availability-freshness").append("Last set ",time);}
  else $("availability-freshness").textContent="Quiet by default · choose when ready";
  updateUnread(snapshot,reconnect||previousScope!==lastScope);renderRoster();updateWorld(snapshot);
- const key=snapshot.durable.streamId+":"+snapshot.durable.sequence;
+ const key=JSON.stringify([snapshot.durable.streamId,snapshot.durable.sequence,workCursor()?.streamId,workCursor()?.sequence,snapshot.controller]);
  if(key!==lastDurableKey){lastDurableKey=key;renderTranscript();if(activePanel==="board"){renderCards();if(!cardDirty)fillCard();}}
  const houseKey=JSON.stringify([snapshot.durable.house,snapshot.durable.residents,snapshot.durable.selfId]);
  if(houseKey!==lastHouseKey){lastHouseKey=houseKey;adminRequest++;if(activePanel==="house")renderHouse();}
  if(activePanel==="room")renderRoom();
- if(activePanel==="board"&&snapshot.durable.zoneId!=="lounge")closePanel();
+
 }
 function unreadKey(){return live?live.durable.house.id+":"+live.durable.selfId+":"+live.durable.streamId:"";}
 function updateUnread(snapshot,history){
@@ -220,9 +238,12 @@ function renderTranscript(){
 function renderCards(){
  $("cards").replaceChildren();
  if(!live)return;
- if(live.durable.zoneId!=="lounge"){ $("cards").append(node("p","Return to the shared lounge to use the study board.","subtle"));$("card-form").hidden=true;return;}
  $("card-form").hidden=false;
- for(const card of live.durable.cards){
+ $("work-visibility").textContent="Your current card is house-visible to current housemates in the lounge. Every desk opens your own work, including when you visit a friend.";
+ for(const control of $("card-form").querySelectorAll("input,textarea,button"))control.disabled=!live.controller;
+ $("close-card").disabled=!live.controller||cardDirty||!effectiveCard();
+ const cards=live.durable.zoneId==="lounge"?live.durable.cards:(effectiveCard()?[{...effectiveCard(),authorId:live.durable.selfId,state:"active"}]:[]);
+ for(const card of cards){
   const person=live.durable.residents.find(r=>r.id===card.authorId);
   const article=node("article",undefined,"card");article.dataset.cardId=card.id;
   article.append(node("small",(person?.name||"Former resident")+(card.authorId===live.durable.selfId?" · you":"")),node("h3",card.smallGoal),node("span",card.state==="ownerLeft"?"Author left · not marked solved":card.state==="closed"?"Closed by author":card.helpRequested?"Question open · replies in chat":"Current goal","card-state"));
@@ -231,32 +252,29 @@ function renderCards(){
   if(card.nextStep)article.append(node("p","Next step: "+card.nextStep));
   $("cards").append(article);
  }
- if(!live.durable.cards.length)$("cards").append(node("p","A clear next step can start with a small question.","subtle"));
+ if(!cards.length)$("cards").append(node("p","A clear next step can start with a small question.","subtle"));
 }
 function fillCard(){
- let card=currentCard();
- if(cardProjection){
-  if(cardProjection.scope!==identityScope(live))cardProjection=null;
-  else if(live.durable.streamId===cardProjection.streamId&&live.durable.sequence>=cardProjection.sequence)cardProjection=null;
-  else card=cardProjection.closed?null:{...cardProjection.payload,id:cardProjection.id,revision:cardProjection.revision};
- }
+ const card=effectiveCard();
  cardBase=card?{id:card.id,revision:card.revision}:null;
  $("small-goal").value=card?.smallGoal||"";$("question").value=card?.question||"";$("resource").value=card?.resourceUrl||"";$("next-step").value=card?.nextStep||"";$("help-requested").checked=card?.helpRequested||false;
- $("close-card").disabled=!card;$("saved-card").hidden=true;$("card-status").textContent=card?"Your saved current card.":"Start one current card. A goal is enough.";
+ $("close-card").disabled=!card||!live?.controller;$("saved-card").hidden=true;$("card-status").textContent=!live?.controller?"Viewing your saved work. Take control to save.":card?"Your saved current card.":"Start one current card. A goal is enough.";
 }
 function ensureRoomDraft(){
  const room=ownRoom();if(!room)return null;
- if(!roomDraft||roomDraft.scope!==roomScope())roomDraft={scope:roomScope(),layout:structuredClone(room.placements),layoutBase:room.revision,basePlacements:structuredClone(room.placements),layoutVersion:0,layoutDirty:false,metadata:{open:room.open,palette:room.palette},metadataBase:room.revision,metadataVersion:0,metadataDirty:false,ackRevision:0,layoutMessage:"",metadataMessage:"",reviewing:false};
+ if(!roomDraft||roomDraft.scope!==roomScope())roomDraft={scope:roomScope(),layout:structuredClone(room.placements),layoutBase:room.revision,basePlacements:structuredClone(room.placements),layoutVersion:0,layoutDirty:false,metadata:{open:room.open,palette:room.palette},metadataBase:room.revision,metadataVersion:0,metadataDirty:false,light:room.light??"standard",lightBase:room.revision,lightVersion:0,lightDirty:false,lightMessage:"",starterId:room.originPresetId||ROOM_PRESETS[0].id,starterAttempt:null,starterBusy:false,awaitingStarter:0,starterMessage:"",ackRevision:0,layoutMessage:"",metadataMessage:"",reviewing:false};
+ if(roomDraft.awaitingStarter&&room.revision>=roomDraft.awaitingStarter)roomDraft.awaitingStarter=0;
  if(!roomDraft.metadataDirty&&room.revision>=roomDraft.ackRevision){roomDraft.metadata={open:room.open,palette:room.palette};roomDraft.metadataBase=room.revision;}
  if(!roomDraft.layoutDirty&&room.revision>=roomDraft.ackRevision){roomDraft.layout=structuredClone(room.placements);roomDraft.basePlacements=structuredClone(room.placements);roomDraft.layoutBase=room.revision;}
+ if(!roomDraft.lightDirty&&room.revision>=roomDraft.ackRevision){roomDraft.light=room.light??"standard";roomDraft.lightBase=room.revision;}
  return roomDraft;
 }
 function renderRoom(){
- const room=ownRoom();$("walk-room").hidden=Boolean(room);$("return-lounge").hidden=!live?.durable.room;
- $("room-form").hidden=!room;$("furniture-editor").hidden=!room;
+ const room=ownRoom();$("walk-room").hidden=Boolean(room);$("return-lounge").hidden=!live?.durable.room;$("walk-room").disabled=!live?.controller;$("return-lounge").disabled=!live;
+ $("room-form").hidden=!room;$("furniture-editor").hidden=!room;$("light-form").hidden=!room;$("starter-editor").hidden=!room;
  $("room-instructions").textContent=room?"Your changes affect this bedroom. Keep the arrival path clear; choose up to ten pieces.":"Walk through your named door to arrange your bedroom. Friends can visit when you open it.";
  world?.setEditing(Boolean(room));if(!room)return;
- const draft=ensureRoomDraft();$("room-open").checked=draft.metadata.open;$("palette").value=draft.metadata.palette;
+ const draft=ensureRoomDraft();$("room-open").checked=draft.metadata.open;$("palette").value=draft.metadata.palette;$("room-light").value=draft.light;$("light-status").textContent=draft.lightMessage||(draft.lightDirty?"Unsaved lighting":"Saved lighting: "+draft.light);for(const control of $("room-panel").querySelectorAll("input,select,button"))control.disabled=!roomWritable();$("return-lounge").disabled=false;renderStarter();
  $("room-status").textContent=draft.metadataMessage||(draft.metadataDirty?"Unsaved room settings":"Your saved room settings.");renderPlacements();
 }
 function renderPlacements(){
@@ -270,12 +288,90 @@ function renderPlacements(){
  $("layout-review").hidden=!roomDraft.layoutDirty;$("layout-review").textContent=roomDraft.reviewing?"Return to my preview":"Review saved layout";
 }
 function modifyPlacement(dx,dz,rotate=false,remove=false){
- const draft=ensureRoomDraft();if(!draft)return;
+ if(!roomWritable())return;const draft=ensureRoomDraft();if(!draft)return;
  const selected=$("placement").value,next=structuredClone(draft.layout),item=next.find(p=>p.id===selected);if(!item)return;
  if(remove)next.splice(next.indexOf(item),1);else {item.x+=dx;item.z+=dz;if(rotate)item.rotation=(item.rotation+1)%4;}
  if(!validatePlacements(next)){notice("That position blocks furniture or the clear route to your door.");return;}
- draft.layout=next;draft.layoutVersion++;draft.layoutDirty=true;draft.layoutMessage="";draft.reviewing=false;renderPlacements();
+ draft.layout=next;draft.layoutVersion++;draft.layoutDirty=true;draft.layoutMessage="";draft.reviewing=false;renderPlacements();renderStarter();
 }
+
+function roomWritable(){return Boolean(live?.controller&&!(roomDraft?.awaitingStarter&&ownRoom()?.revision<roomDraft.awaitingStarter));}
+function forgetPending(commandId,receipt){
+ for(const [key,intent] of pending){
+  if(intent.commandId!==commandId)continue;pending.delete(key);pendingZones.delete(key);
+  if(intent.type==="room.starter"&&roomDraft&&ownRoom()?.id===intent.payload.roomId){
+   roomDraft.starterAttempt=null;roomDraft.starterMessage=receipt?"Original starter acknowledged.":"Local pending starter discarded. Its server status is unknown; review your saved room.";
+   if(receipt?.entityRevision){roomDraft.awaitingStarter=receipt.entityRevision;roomDraft.ackRevision=Math.max(roomDraft.ackRevision,receipt.entityRevision);}
+  }
+ }
+}
+function reconcilePendingMemory(result){
+ const retained=new Set(result.entries.map(entry=>entry.commandId));
+ for(const intent of [...pending.values()])if(!saveFlights.has(intent.commandId)&&!retained.has(intent.commandId))forgetPending(intent.commandId);
+}
+async function refreshRoomPending(){
+ const room=ownRoom(),draft=roomDraft;if(!room||!draft||!roomPending(room))return;
+ const context=privateContext(),result=await pendingSource().getPending();
+ if(context!==privateContext()||roomDraft!==draft)return;reconcilePendingMemory(result);if(activePanel==="room")renderRoom();
+}
+$("starter-check-pending").addEventListener("click",protectedAction(refreshRoomPending));
+function roomPending(room){return [...pending.values()].some(intent=>intent.type.startsWith("room.")&&intent.payload.roomId===room.id);}
+function renderStarter(){
+ const room=ownRoom(),draft=roomDraft;if(!room||!draft)return;
+ if(!$("starter-preset").options.length)for(const preset of ROOM_PRESETS){const option=node("option",preset.name);option.value=preset.id;$("starter-preset").append(option);}
+ $("starter-preset").value=draft.starterAttempt?.presetId||draft.starterId;$("starter-preset").disabled=!live.controller||Boolean(draft.starterAttempt);
+ const preset=getRoomPreset($("starter-preset").value);if(!preset)return;
+ $("starter-preview").replaceChildren();const ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox","-7.5 -5.5 15 11");svg.setAttribute("role","img");svg.setAttribute("aria-label",preset.name+" top-view furniture preview");
+ const shape=(tag,attributes)=>{const item=document.createElementNS(ns,tag);for(const [key,value] of Object.entries(attributes))item.setAttribute(key,String(value));svg.append(item);return item;};
+ const colours={amber:"#ceb47d",sage:"#a5b49c",rose:"#c6999b",blue:"#92aebb",lavender:"#b29eb9",peach:"#d7a489"};
+ shape("rect",{x:-7,y:-5,width:14,height:10,fill:colours[preset.palette],stroke:"#645947","stroke-width":.08,rx:.15});
+ for(const piece of preset.items){const bounds=footprint(piece),element=shape("rect",{x:bounds.x-bounds.w/2,y:bounds.z-bounds.d/2,width:bounds.w,height:bounds.d,fill:colours[piece.colour],stroke:"#4c5549","stroke-width":.06,rx:.08,"data-kind":piece.kind});const title=document.createElementNS(ns,"title");title.textContent=piece.kind+" · "+piece.x+", "+piece.z;element.append(title);const text=shape("text",{x:piece.x,y:piece.z+.12,"font-size":.32,"text-anchor":"middle",fill:"#25372d"});text.textContent=piece.kind;}
+ shape("path",{d:"M -1 5 L 1 5",stroke:"#fff9dc","stroke-width":.2});const door=shape("text",{x:0,y:4.5,"font-size":.32,"text-anchor":"middle",fill:"#25372d"});door.textContent="Door kept";$("starter-preview").append(svg);
+ $("starter-summary").textContent=preset.items.length+" pieces · "+preset.palette+" palette · "+preset.light+" lighting. Applying replaces all furniture, palette and lighting. Your door stays "+(room.open?"open":"closed")+".";
+ const waiting=Boolean(draft.awaitingStarter&&room.revision<draft.awaitingStarter),dirty=draft.layoutDirty||draft.metadataDirty||draft.lightDirty,blocked=waiting||dirty||roomPending(room);
+ $("starter-apply").disabled=!live.controller||draft.starterBusy||(!draft.starterAttempt&&blocked);$("starter-apply").textContent=draft.starterBusy?"Applying…":draft.starterAttempt?"Retry original starter":"Apply starter layout";
+ $("starter-check-pending").hidden=!roomPending(room);$("starter-check-pending").disabled=draft.starterBusy;
+ $("starter-discard").hidden=!dirty;$("starter-discard").disabled=!live.controller||draft.starterBusy;
+ $("starter-status").textContent=waiting?"Starter saved. Waiting for the saved room before further edits.":draft.starterMessage||(dirty?"Save your room drafts, or explicitly discard them before applying a starter.":blocked?"Resolve the pending room action, or check its status after an automatic retry.":"Preview only. Your room stays as saved until you apply.");
+}
+$("starter-preset").addEventListener("input",()=>{const draft=ensureRoomDraft();if(!draft||draft.starterAttempt)return;draft.starterId=$("starter-preset").value;draft.starterMessage="";renderStarter();});
+$("starter-discard").addEventListener("click",()=>{
+ const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft||!roomWritable()||draft.starterBusy)return;
+ if(!confirm("Discard your unsaved furniture, room settings and lighting drafts? Saved room content will be kept until you apply a starter."))return;
+ draft.layoutDirty=false;draft.metadataDirty=false;draft.lightDirty=false;draft.layoutVersion++;draft.metadataVersion++;draft.lightVersion++;draft.layoutMessage="";draft.metadataMessage="";draft.lightMessage="";draft.starterMessage="";renderRoom();
+});
+$("starter-apply").addEventListener("click",protectedAction(async()=>{
+ const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft||!roomWritable()||draft.starterBusy)return;
+ if(!draft.starterAttempt&&(draft.layoutDirty||draft.metadataDirty||draft.lightDirty||roomPending(room))){draft.starterMessage="Save your room drafts or explicitly discard them, and resolve pending actions before applying.";renderStarter();return;}
+ const attempt=draft.starterAttempt??{presetId:draft.starterId,base:room.revision,layoutVersion:draft.layoutVersion,metadataVersion:draft.metadataVersion,lightVersion:draft.lightVersion};draft.starterAttempt=attempt;draft.starterBusy=true;draft.starterMessage="Applying the selected starter…";renderStarter();
+ try{
+  const receipt=await save("room.starter",{roomId:room.id,presetId:attempt.presetId},attempt.base);
+  if(roomDraft!==draft||(live&&draft.scope!==roomScope()))return;
+  draft.ackRevision=Math.max(draft.ackRevision,receipt.entityRevision);draft.awaitingStarter=receipt.entityRevision;
+  if(draft.layoutVersion===attempt.layoutVersion){draft.layoutDirty=false;draft.layoutMessage="Starter arrangement saved.";}
+  if(draft.metadataVersion===attempt.metadataVersion){draft.metadataDirty=false;draft.metadataMessage="Starter room settings saved.";}
+  if(draft.lightVersion===attempt.lightVersion){draft.lightDirty=false;draft.lightMessage="Starter lighting saved.";}
+  draft.starterAttempt=null;draft.starterMessage="Starter saved. Newer room drafts, if any, are kept separately; review them before saving.";
+ }catch(error){if(roomDraft===draft){draft.starterMessage=(!error.code||RETAIN_INTENT_CODES.has(error.code))?"Starter is pending, not confirmed saved. Retry keeps its original preset, revision and action ID. Newer drafts are kept.":"Starter not applied. "+error.message;if(error.code&&!RETAIN_INTENT_CODES.has(error.code))draft.starterAttempt=null;}throw error;}
+ finally{draft.starterBusy=false;if(roomDraft===draft&&live&&draft.scope===roomScope())renderRoom();}
+}));
+$("light-form").addEventListener("input",()=>{if(!roomWritable())return;const draft=ensureRoomDraft();if(!draft)return;draft.light=$("room-light").value;draft.lightVersion++;draft.lightDirty=true;draft.lightMessage="Unsaved lighting";$("light-status").textContent=draft.lightMessage;renderStarter();});
+$("light-reset").addEventListener("click",()=>{const draft=ensureRoomDraft();if(!draft||!roomWritable())return;if(draft.lightDirty&&!confirm("Replace your unsaved lighting choice with saved lighting? Other room drafts will stay."))return;draft.lightDirty=false;draft.lightVersion++;draft.lightMessage="";renderRoom();});
+$("light-form").addEventListener("submit",protectedAction(async()=>{
+ const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft||!roomWritable())return;
+ const submitted={base:draft.lightBase,version:draft.lightVersion,light:draft.light};
+ try{
+  const receipt=await save("room.light",{roomId:room.id,light:submitted.light},submitted.base);
+  if(roomDraft!==draft||(live&&draft.scope!==roomScope()))return;
+  // This command changes only lighting. Advance only sections sharing its known base.
+  if(draft.layoutBase===submitted.base)draft.layoutBase=receipt.entityRevision;
+  if(draft.metadataBase===submitted.base)draft.metadataBase=receipt.entityRevision;
+  if(draft.lightBase===submitted.base)draft.lightBase=receipt.entityRevision;
+  draft.ackRevision=Math.max(draft.ackRevision,receipt.entityRevision);
+  if(draft.lightVersion===submitted.version){draft.lightDirty=false;draft.lightMessage="Lighting saved.";}else draft.lightMessage="Submitted lighting saved. Your newer choice is still a draft.";
+  if(live)renderRoom();
+ }catch(error){if(roomDraft===draft&&draft.scope===roomScope()){draft.lightMessage="Lighting draft kept. "+error.message;renderRoom();}throw error;}
+}));
 
 async function renderRemoved(after="",append=false){
  const request=++adminRequest, houseId=live?.durable.house.id, ownerId=live?.durable.selfId;
@@ -323,7 +419,7 @@ function invalidateIdentityView(){
  privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;
  client?.close();client=null;inspector?.close();inspector=null;live=null;
  roomDraft=null;suspendedDrafts=null;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
- lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();keyIssuance=null;setRecoveryBusy(false);
+ lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();pendingZones.clear();keyIssuance=null;setRecoveryBusy(false);
  closeBoard();chatWindow.reset();clearPrivateDOM();closePanel();world?.update(null);world?.setInputEnabled(false);$("notice").textContent="";$("notice").hidden=true;
  $("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;$("connection-limit-pending").hidden=true;
 }
@@ -397,35 +493,36 @@ for(const [id,x,z] of [["move-up",0,-1],["move-down",0,1],["move-left",-1,0],["m
 $("chat-input").addEventListener("input",()=>{chatVersion++;$("chat-draft-status").textContent=$("chat-input").value?"Unsent draft · Ctrl / ⌘ Enter to send":"Enter for a new line · Ctrl / ⌘ Enter to send";});
 $("card-form").addEventListener("input",()=>{cardVersion++;cardDirty=true;$("close-card").disabled=true;$("card-status").textContent="Unsaved draft";});
 $("card-form").addEventListener("submit",protectedAction(async()=>{
+ if(!live?.controller)return;
  const submittedVersion=cardVersion, submittedScope=identityScope(live), submittedBase=cardBase;
  const payload={...(cardBase?{cardId:cardBase.id}:{}),smallGoal:$("small-goal").value,question:$("question").value,resourceUrl:$("resource").value,nextStep:$("next-step").value,helpRequested:$("help-requested").checked};
  try{
   const receipt=await save("card.save",payload,submittedBase?.revision||0);
   if((live?identityScope(live):lastIdentityScope)!==submittedScope)return;
   cardProjection={scope:submittedScope,id:submittedBase?.id||receipt.result?.cardId,revision:receipt.entityRevision,streamId:receipt.streamId,sequence:receipt.sequence,payload};
-  if(cardVersion===submittedVersion){cardDirty=false;if(live?.durable.zoneId==="lounge")fillCard();else cardBase={id:submittedBase?.id||receipt.result?.cardId,revision:receipt.entityRevision};if(live)notice("Your card is saved. Closing it is your choice.");}
+  if(cardVersion===submittedVersion){cardDirty=false;if(live)fillCard();else cardBase={id:submittedBase?.id||receipt.result?.cardId,revision:receipt.entityRevision};if(live)notice("Your card is saved. Closing it is your choice.");}
   else{const id=submittedBase?.id||receipt.result?.cardId;cardBase=id?{id,revision:receipt.entityRevision}:submittedBase;cardDirty=true;if(live){$("card-status").textContent="Submitted version saved. Your newer edits are still a draft.";notice("Your newer edits are kept as a draft.");}}
  }
  catch(error){if(identityScope(live)!==submittedScope)throw error;$("saved-card").hidden=false;$("card-status").textContent="Draft kept. "+error.message;throw error;}
 }));
 $("saved-card").addEventListener("click",()=>{cardDirty=false;fillCard();});
 $("close-card").addEventListener("click",protectedAction(async()=>{
- const card=currentCard()||(!cardDirty?cardBase:null);if(!card)return;
+ if(!live?.controller||cardDirty)return;const card=effectiveCard()||cardBase;if(!card)return;
  const submittedVersion=cardVersion,submittedScope=identityScope(live),receipt=await save("card.close",{cardId:card.id},card.revision);
  if((live?identityScope(live):lastIdentityScope)!==submittedScope)return;
  cardBase=null;cardProjection={scope:submittedScope,streamId:receipt.streamId,sequence:receipt.sequence,closed:true};
- if(cardVersion===submittedVersion){cardDirty=false;if(live?.durable.zoneId==="lounge")fillCard();if(live)notice("Card closed by you.");}
+ if(cardVersion===submittedVersion){cardDirty=false;if(live)fillCard();if(live)notice("Card closed by you.");}
  else {cardDirty=true;if(live){$("card-status").textContent="Card closed. Your newer edits are a new draft.";notice("Your newer edits are kept as a new draft.");}}
 }));
-$("room-form").addEventListener("input",()=>{const draft=ensureRoomDraft();if(!draft)return;draft.metadata={open:$("room-open").checked,palette:$("palette").value};draft.metadataDirty=true;draft.metadataVersion++;draft.metadataMessage="Unsaved room settings";$("room-status").textContent=draft.metadataMessage;});
+$("room-form").addEventListener("input",()=>{if(!roomWritable())return;const draft=ensureRoomDraft();if(!draft)return;draft.metadata={open:$("room-open").checked,palette:$("palette").value};draft.metadataDirty=true;draft.metadataVersion++;draft.metadataMessage="Unsaved room settings";$("room-status").textContent=draft.metadataMessage;renderStarter();});
 $("room-form").addEventListener("submit",protectedAction(async()=>{
- const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft)return;
+ const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft||!roomWritable())return;
  const submitted={scope:draft.scope,version:draft.metadataVersion,base:draft.metadataBase,metadata:{...draft.metadata},placements:structuredClone(room.revision<draft.ackRevision?draft.basePlacements:room.placements)};
  try{
   const receipt=await save("room.configure",{roomId:room.id,...submitted.metadata},submitted.base);
   if(roomDraft!==draft||(live&&draft.scope!==roomScope()))return;
   if(draft.layoutBase===submitted.base&&JSON.stringify(draft.basePlacements)===JSON.stringify(submitted.placements))draft.layoutBase=receipt.entityRevision;
-  draft.ackRevision=Math.max(draft.ackRevision,receipt.entityRevision);draft.metadataBase=receipt.entityRevision;
+  draft.ackRevision=Math.max(draft.ackRevision,receipt.entityRevision);draft.metadataBase=receipt.entityRevision;if(draft.lightBase===submitted.base)draft.lightBase=receipt.entityRevision;
   if(draft.metadataVersion===submitted.version){draft.metadataDirty=false;draft.metadataMessage="Room settings saved.";}
   else draft.metadataMessage="Submitted settings saved. Your newer edits are still a draft.";
   if(live){renderRoom();notice(draft.metadataMessage);}
@@ -433,19 +530,19 @@ $("room-form").addEventListener("submit",protectedAction(async()=>{
 }));
 for(const [id,dx,dz,rotate,remove] of [["piece-left",-.5,0],["piece-right",.5,0],["piece-forward",0,-.5],["piece-back",0,.5],["piece-rotate",0,0,true],["piece-remove",0,0,false,true]])$(id).addEventListener("click",()=>modifyPlacement(dx,dz,rotate,remove));
 $("piece-add").addEventListener("click",()=>{
- const draft=ensureRoomDraft();if(!draft)return;const kind=$("kind").value;
- for(let z=-3;z<=2;z+=.5)for(let x=-5;x<=5;x+=.5){const item={id:crypto.randomUUID(),kind,x,z,rotation:0,colour:$("palette").value};const next=[...draft.layout,item];if(validatePlacements(next)){draft.layout=next;draft.layoutVersion++;draft.layoutDirty=true;draft.layoutMessage="";draft.reviewing=false;renderPlacements();$("placement").value=item.id;return;}}
+ if(!roomWritable())return;const draft=ensureRoomDraft();if(!draft)return;const kind=$("kind").value;
+ for(let z=-3;z<=2;z+=.5)for(let x=-5;x<=5;x+=.5){const item={id:crypto.randomUUID(),kind,x,z,rotation:0,colour:$("palette").value};const next=[...draft.layout,item];if(validatePlacements(next)){draft.layout=next;draft.layoutVersion++;draft.layoutDirty=true;draft.layoutMessage="";draft.reviewing=false;renderPlacements();renderStarter();$("placement").value=item.id;return;}}
  notice("There is no clear space for that piece. Move or remove something first.");
 });
 $("layout-save").addEventListener("click",protectedAction(async()=>{
- const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft)return;
+ const room=ownRoom(),draft=ensureRoomDraft();if(!room||!draft||!roomWritable())return;
  const submitted={scope:draft.scope,version:draft.layoutVersion,base:draft.layoutBase,placements:structuredClone(draft.layout)};
  try{
   const receipt=await save("room.placements",{roomId:room.id,placements:submitted.placements},submitted.base);
   if(roomDraft!==draft||(live&&draft.scope!==roomScope()))return;
   draft.ackRevision=Math.max(draft.ackRevision,receipt.entityRevision);
   if(draft.layoutBase===submitted.base){draft.layoutBase=receipt.entityRevision;draft.basePlacements=submitted.placements;}
-  if(draft.metadataBase===submitted.base)draft.metadataBase=receipt.entityRevision;
+  if(draft.metadataBase===submitted.base)draft.metadataBase=receipt.entityRevision;if(draft.lightBase===submitted.base)draft.lightBase=receipt.entityRevision;
   if(draft.layoutVersion===submitted.version){draft.layoutDirty=false;draft.layoutMessage="Your arrangement is saved.";}
   else draft.layoutMessage="Submitted arrangement saved. Your newer edits are still a preview.";
   if(live){renderRoom();notice(draft.layoutMessage);}
@@ -480,14 +577,14 @@ async function renderPending(){
  const request=++pendingRequest, identity=live?.durable.selfId||me?.identity.id;
  const result=await pendingSource().getPending();
  if(request!==pendingRequest||activePanel!=="pending"||(live?.durable.selfId||me?.identity.id)!==identity)return;
- $("pending-entries").replaceChildren();
+ reconcilePendingMemory(result);$("pending-entries").replaceChildren();
  for(const entry of result.entries){
   const row=node("article",undefined,"pending-entry");row.dataset.commandId=entry.commandId;
   row.append(node("strong",entry.type+" · "+(entry.state==="expired"?"Expired automatic retry":"Pending reply")),node("p","Saved status unknown · original "+(entry.zoneId||"house admission")+" · "+new Date(entry.createdAt).toLocaleString(),"subtle"));
   const details=node("details"),summary=node("summary","My original draft"),body=node("pre",JSON.stringify(entry.command.payload,null,2));details.append(summary,body);row.append(details);
   const actions=node("div",undefined,"button-row"),retry=node("button",entry.state==="expired"?"Retry expired draft":"Retry original action");retry.dataset.action="retry";retry.disabled=!entry.canRetry;
-  retry.addEventListener("click",protectedAction(async()=>{await pendingSource().retryPending(entry.commandId);notice("Original action acknowledged. Check its saved result.");await bootstrap();if(activePanel==="pending")void protectedAction(renderPending)();}));
-  const discard=node("button","Discard local draft");discard.addEventListener("click",protectedAction(async()=>{if(!confirm("Discard this local pending draft? Its server save status is unknown."))return;await pendingSource().discardPending(entry.commandId);void protectedAction(renderPending)();}));actions.append(retry,discard);row.append(actions);
+  retry.addEventListener("click",protectedAction(async()=>{const context=privateContext(),receipt=await pendingSource().retryPending(entry.commandId);if(context!==privateContext())return;forgetPending(entry.commandId,receipt);notice("Original action acknowledged. Check its saved result.");await bootstrap();if(activePanel==="pending")void protectedAction(renderPending)();}));
+  const discard=node("button","Discard local draft");discard.addEventListener("click",protectedAction(async()=>{if(!confirm("Discard this local pending draft? Its server save status is unknown."))return;const context=privateContext();await pendingSource().discardPending(entry.commandId);if(context!==privateContext())return;forgetPending(entry.commandId);void protectedAction(renderPending)();}));actions.append(retry,discard);row.append(actions);
   if(!entry.canRetry)row.append(node("p","Retry needs control in the original house and room. Export or discard is available here.","subtle"));
   $("pending-entries").append(row);
  }

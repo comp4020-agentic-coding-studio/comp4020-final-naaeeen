@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "reusableProjectionHelper": true
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "reusableProjectionHelper": true
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "reusableProjectionHelper": true
+      },
+      "failures": []
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,93 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "persistentClose": true
+      },
+      "measurements": {
+        "close": {
+          "x": 1136,
+          "y": 84.328125,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 0,
+          "hit": true,
+          "viewport": {
+            "w": 1920,
+            "h": 1080
+          }
+        }
+      },
+      "failures": [
+        "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0.01\nReceived:   0\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at captureRawStack (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toBeGreaterThan (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-shell-browser.mjs:21:400"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "persistentClose": true,
+        "returnControlPreservesCard": true,
+        "followSeatedPose": true
+      },
+      "measurements": {
+        "close": {
+          "x": 309,
+          "y": 41,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 187,
+          "hit": true,
+          "viewport": {
+            "w": 390,
+            "h": 844
+          }
+        },
+        "followSeated": {
+          "mode": "play",
+          "animation": "sit",
+          "height": 72,
+          "mesh": {
+            "left": 174.00541068096572,
+            "top": 401.9976321053862,
+            "right": 221.2541899030316,
+            "bottom": 488.6621007419828
+          }
+        }
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "persistentClose": true,
+        "returnControlPreservesCard": true
+      },
+      "measurements": {
+        "close": {
+          "x": 598,
+          "y": 53,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 627,
+          "hit": true,
+          "viewport": {
+            "w": 844,
+            "h": 390
+          }
+        }
+      },
+      "failures": []
+    }
+  ],
+  "errors": []
+}

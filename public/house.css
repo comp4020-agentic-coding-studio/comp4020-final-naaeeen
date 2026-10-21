@@ -14,3 +14,8 @@ body[data-reduced-motion=true] *{scroll-behavior:auto!important;transition:none!
 .camera-hud{position:absolute;left:24px;top:148px;display:flex;gap:3px;padding:4px;z-index:3}.camera-hud button{min-height:44px;padding:8px 12px;border-color:transparent;background:transparent;font-size:12px}.camera-hud button[aria-pressed=true]{background:#e8ba69;color:#283d35}.camera-hud button:hover{background:#566f60}.camera-hud button[aria-pressed=true]:hover{background:#f5cc85}
 @media(max-width:700px){.camera-hud{left:12px;top:140px}.camera-hud button{padding:8px 10px;font-size:11px}}
 @media(max-height:450px){.camera-hud{left:auto;right:12px;top:76px}.camera-hud button{min-height:44px;padding:7px 9px}}
+
+#light-form,#starter-editor{border-top:1px solid #aab49155;padding-top:12px;margin-top:20px}#starter-editor summary{cursor:pointer;font:20px Georgia,serif;padding:10px 0}#starter-editor select,#light-form select{width:100%}#light-form button{margin-top:12px}.starter-preview{margin-top:12px;background:#ede4cd;border:1px solid #aab49166;border-radius:10px;overflow:hidden}.starter-preview svg{display:block;width:100%;max-height:230px}#starter-status{min-height:2.6em}
+
+/* Keep the tool title and its exit distinct from card actions in long forms. */
+.panel-heading{position:sticky;top:0;z-index:2;background:var(--paper);padding:8px 0;border-bottom:1px solid #aab49155}

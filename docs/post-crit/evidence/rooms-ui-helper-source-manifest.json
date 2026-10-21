@@ -1,0 +1,14 @@
+{
+  "files": {
+    "public/house-ui.js": "ffc86977b98f5cabff8b907f668c2359dcbeac84476fde2209f007ae77c377a7",
+    "public/house-world.js": "30b11044ca167e88940d80856d4670242c9af0b12fe44b57ca34ded3be1fd52f",
+    "public/house.html": "9958d4ee6e6ce041832062f8d51e58159ca98398adbd89c3101e14307c7de708",
+    "public/house.css": "b9947986a41d16f4341352f37120450cf2aa4361b70e6b9807a9cf5ed157c182",
+    "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+    "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+    "public/house-client.js": "9aba6302b448921100898ef38bfc080ba35359da0a978c37e2d4635d17abd5d0",
+    "src/server.ts": "33c2b9e2c6fb449028b967218a4a14c7ce8e05e91e9556f2afe89ae3c4576e5f",
+    "tests/e2e/house-journey.ts": "a9cf3b101ece3573f34239dfec31d234c97bad14e97be2e51ec3492420e4d540"
+  },
+  "scriptSha256": "920ef615bc80af74b68d647d899f5a88d3dd77062424d24d4e98f9222f1108e7"
+}

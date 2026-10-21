@@ -1,0 +1,10 @@
+{
+  "files": {
+    "public/house-ui.js": "ffc86977b98f5cabff8b907f668c2359dcbeac84476fde2209f007ae77c377a7",
+    "public/house-world.js": "30b11044ca167e88940d80856d4670242c9af0b12fe44b57ca34ded3be1fd52f",
+    "public/house.css": "fe736f3a6f84f8f0d81cde7eb8d83458c94a713944f9c1a7caf7405912c4c491",
+    "public/house.html": "9958d4ee6e6ce041832062f8d51e58159ca98398adbd89c3101e14307c7de708",
+    "tests/e2e/house-journey.ts": "a9cf3b101ece3573f34239dfec31d234c97bad14e97be2e51ec3492420e4d540"
+  },
+  "scriptSha256": "30716a71804b120756874fe5a23895cd529931df808ab247e40fb527fd648147"
+}

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {},
+      "measurements": {
+        "close": {
+          "x": 309,
+          "y": -137,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 170,
+          "hit": false,
+          "viewport": {
+            "w": 390,
+            "h": 844
+          }
+        }
+      },
+      "failures": [
+        "Error: 44px Close panel must remain visible/reachable after scrolling to bottom\n    at assert (file:///home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-shell-browser.mjs:10:48)\n    at file:///home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-shell-browser.mjs:20:136"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {},
+      "measurements": {
+        "close": {
+          "x": 598,
+          "y": -565,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 610,
+          "hit": false,
+          "viewport": {
+            "w": 844,
+            "h": 390
+          }
+        }
+      },
+      "failures": [
+        "Error: 44px Close panel must remain visible/reachable after scrolling to bottom\n    at assert (file:///home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-shell-browser.mjs:10:48)\n    at file:///home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-shell-browser.mjs:20:136"
+      ]
+    }
+  ],
+  "errors": []
+}

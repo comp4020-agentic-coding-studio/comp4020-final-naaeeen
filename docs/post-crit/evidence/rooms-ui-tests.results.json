@@ -1,0 +1,192 @@
+{
+  "base": "1699d44",
+  "status": "locally verified; parent acceptance and commit separate",
+  "affectedTests": {
+    "total": 320,
+    "passed": 320,
+    "failed": 0,
+    "files": [
+      "house-camera.test.ts",
+      "house-client.test.ts",
+      "house-http.test.ts",
+      "house-label-layout.test.ts",
+      "house-room-content.test.ts",
+      "house-room-settings.test.ts",
+      "house-ui.test.ts",
+      "house-world.test.ts"
+    ]
+  },
+  "coverageScope": "public/house-ui.js, public/house-world.js, public/house-room-content.js; mocked renderer/DOM and included real HTTP/store tests remain separate from native browser",
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 999,
+        "covered": 962,
+        "skipped": 0,
+        "pct": 96.29
+      },
+      "statements": {
+        "total": 2748,
+        "covered": 2446,
+        "skipped": 0,
+        "pct": 89.01
+      },
+      "functions": {
+        "total": 314,
+        "covered": 271,
+        "skipped": 0,
+        "pct": 86.3
+      },
+      "branches": {
+        "total": 1769,
+        "covered": 1448,
+        "skipped": 0,
+        "pct": 81.85
+      }
+    },
+    "public/house-room-content.js": {
+      "lines": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.73
+      },
+      "statements": {
+        "total": 29,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 96.55
+      },
+      "functions": {
+        "total": 9,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 17,
+        "covered": 16,
+        "skipped": 0,
+        "pct": 94.11
+      }
+    },
+    "public/house-ui.js": {
+      "lines": {
+        "total": 498,
+        "covered": 475,
+        "skipped": 0,
+        "pct": 95.38
+      },
+      "statements": {
+        "total": 1509,
+        "covered": 1285,
+        "skipped": 0,
+        "pct": 85.15
+      },
+      "functions": {
+        "total": 164,
+        "covered": 131,
+        "skipped": 0,
+        "pct": 79.87
+      },
+      "branches": {
+        "total": 963,
+        "covered": 754,
+        "skipped": 0,
+        "pct": 78.29
+      }
+    },
+    "public/house-world.js": {
+      "lines": {
+        "total": 482,
+        "covered": 469,
+        "skipped": 0,
+        "pct": 97.3
+      },
+      "statements": {
+        "total": 1210,
+        "covered": 1133,
+        "skipped": 0,
+        "pct": 93.63
+      },
+      "functions": {
+        "total": 141,
+        "covered": 131,
+        "skipped": 0,
+        "pct": 92.9
+      },
+      "branches": {
+        "total": 789,
+        "covered": 678,
+        "skipped": 0,
+        "pct": 85.93
+      }
+    }
+  },
+  "initialRed": {
+    "failed": 11,
+    "totalNewCases": 11,
+    "record": "terminal output before P2 production edits; no initial JSON report"
+  },
+  "refinementRecords": [
+    {
+      "localRecord": "post-crit-p2-review-red.json",
+      "passed": 0,
+      "failed": 3,
+      "failedTests": [
+        "P2 review blocks old room contents after a starter ACK until the corresponding saved snapshot arrives",
+        "P2 review reconciles UI pending room intents after Pending drafts discard",
+        "P2 review reconciles UI pending room intents after Pending drafts retry"
+      ]
+    },
+    {
+      "localRecord": "post-crit-p2-recovery-red.json",
+      "passed": 0,
+      "failed": 2,
+      "failedTests": [
+        "P2 review reconciles an automatically settled outbox when the Pending list is empty",
+        "P2 lets a stale lighting draft explicitly use saved lighting without discarding room settings"
+      ]
+    },
+    {
+      "localRecord": "post-crit-p2-active-fixture-fail.json",
+      "passed": 319,
+      "failed": 1,
+      "failedTests": [
+        "P2 does not forget an active room intent when pending inspection returns before it is stored"
+      ]
+    }
+  ],
+  "fixtureCorrection": "The319/320 run kept returning an empty mock outbox after simulating a pending failure. Corrected fixture now supplies its retained entry before failure/automatic Pending refresh; no production change was made to satisfy that test.",
+  "native": {
+    "fullTask": "rooms-ui-browser.results.json; 3 viewports x13 criteria; before final sticky CSS",
+    "sharedHelper": "rooms-ui-helper.results.json; 3 viewports; same pre-sticky source",
+    "finalAffectedShell": "rooms-ui-shell.results.json; final CSS 3 viewports close/movement/card-state; desktop and portrait Follow seated captures",
+    "timingLimit": "Historic160ms zero sample cause UNKNOWN; later hold checks functional displacement within3s only, not160ms responsiveness"
+  },
+  "sourceBindings": {
+    "fullTaskBeforeSticky": {
+      "changedFilesSinceRun": {
+        "public/house.css": {
+          "recorded": "b9947986a41d16f4341352f37120450cf2aa4361b70e6b9807a9cf5ed157c182",
+          "current": "fe736f3a6f84f8f0d81cde7eb8d83458c94a713944f9c1a7caf7405912c4c491"
+        }
+      },
+      "otherFilesMatch": true
+    },
+    "helperBeforeSticky": {
+      "changedFilesSinceRun": {
+        "public/house.css": {
+          "recorded": "b9947986a41d16f4341352f37120450cf2aa4361b70e6b9807a9cf5ed157c182",
+          "current": "fe736f3a6f84f8f0d81cde7eb8d83458c94a713944f9c1a7caf7405912c4c491"
+        }
+      },
+      "otherFilesMatch": true
+    },
+    "finalShell": {
+      "changedFilesSinceRun": {},
+      "otherFilesMatch": true
+    }
+  },
+  "publications": "none; no commit/push/deploy/provider changes by worker"
+}

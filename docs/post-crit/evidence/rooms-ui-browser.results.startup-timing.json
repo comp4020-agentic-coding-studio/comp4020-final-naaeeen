@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {},
+      "failures": [
+        "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator: locator('canvas')\nExpected: \"lounge\"\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toHaveAttribute\" locator('canvas') with timeout 5000ms\n  - waiting for locator('canvas')\n\n    at captureRawStack (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toHaveAttribute (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at /home/lizhi/comp4020/comp4020-final-naaeeen/docs/post-crit/evidence/rooms-ui-browser.mjs:37:228"
+      ]
+    }
+  ],
+  "errors": []
+}

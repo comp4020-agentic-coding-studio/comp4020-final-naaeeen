@@ -398,3 +398,18 @@ stand acknowledgements before chaining actions. Preserve failed/aborted attempts
 Choose a camera for the user task, not minimum travel alone. Later narrow source
 fixes get affected checks with exact bindings; do not repeat every passing route
 or claim the earlier full run occurred on a newer hash.
+
+
+### Observed P2 UI integration corrections
+
+A receipt and its later snapshot are different observations: do not give old
+layout values a newly acknowledged revision. Guard read-only UI actions before
+outbox creation. Reconcile in-memory pending markers against actual outbox reads
+at explicit UI boundaries, excluding active requests; absence alone is not proof
+that a save happened. Preserve exact original intent and newer local drafts.
+
+A repeated camera-projection timing mistake showed that prose guidance alone was
+insufficient. The maintained browser helper now owns the bounded RAF wait and
+placement-ID match. Test visible exits at the bottom of long forms, and inspect
+seated poses in Follow at readable scale, not just an Overview thumbnail. A later
+functional pass does not explain an earlier uninstrumented short-hold failure.

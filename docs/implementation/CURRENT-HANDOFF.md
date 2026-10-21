@@ -1,5 +1,17 @@
 # Active post-Crit work, 22 October 2026
 
+Current checkpoint: P1 committed1699d44; P2 UI is accepted for its local commit
+(320 scoped checks, parent77UIchecks, native full+affected source-bound records).
+P2 worker is stopped and has released all source ownership. Canonical4102 test
+services are closed; a current parent read found no4093 listener. Do not treat old
+preview-running statements as live state. Start any preview deliberately later.
+
+Game comparison chose untimedFour-in-a-row. Pure rules are frozen and independently
+reviewed; parentreadactualmodule and48current-format tests pass. They are still
+uncommitted and not integrated. P3 lounge/compatibility and P4 authority/UI/P5voice/
+P6integratedresource work remain. No automatic source-level acceptance inheritance.
+
+
 Canonical Ubuntu/lizhi checkout: /home/lizhi/comp4020/comp4020-final-naaeeen.
 Branch post-crit-improvements, baseline 8cdad6a. Current scope is all eight owner
 feedback items in ../post-crit/OWNER-FEEDBACK.md. Read ../post-crit/PLAN.md,

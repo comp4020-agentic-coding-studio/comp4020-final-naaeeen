@@ -1,0 +1,104 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "persistentClose": true,
+        "returnControlPreservesCard": true,
+        "followSeatedPose": true
+      },
+      "measurements": {
+        "close": {
+          "x": 1136,
+          "y": 84.328125,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 0,
+          "hit": true,
+          "viewport": {
+            "w": 1920,
+            "h": 1080
+          }
+        },
+        "followSeated": {
+          "mode": "play",
+          "animation": "sit",
+          "height": 128,
+          "mesh": {
+            "left": 1041.8012856550502,
+            "top": 448.35690152068656,
+            "right": 1125.7991153831672,
+            "bottom": 602.4270679857473
+          }
+        }
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "persistentClose": true,
+        "returnControlPreservesCard": true,
+        "followSeatedPose": true
+      },
+      "measurements": {
+        "close": {
+          "x": 309,
+          "y": 41,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 187,
+          "hit": true,
+          "viewport": {
+            "w": 390,
+            "h": 844
+          }
+        },
+        "followSeated": {
+          "mode": "play",
+          "animation": "sit",
+          "height": 72,
+          "mesh": {
+            "left": 174.00541068096572,
+            "top": 401.9976321053862,
+            "right": 221.2541899030316,
+            "bottom": 488.6621007419828
+          }
+        }
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "persistentClose": true,
+        "returnControlPreservesCard": true
+      },
+      "measurements": {
+        "close": {
+          "x": 598,
+          "y": 53,
+          "w": 44,
+          "h": 44,
+          "scrollTop": 627,
+          "hit": true,
+          "viewport": {
+            "w": 844,
+            "h": 390
+          }
+        }
+      },
+      "failures": []
+    }
+  ],
+  "errors": []
+}

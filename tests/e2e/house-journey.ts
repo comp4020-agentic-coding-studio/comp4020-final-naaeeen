@@ -40,8 +40,8 @@ export async function openHouseSettings(page: Page) {
 
 export async function openStudyNotes(page: Page) {
   await closeTool(page);
-  await page.getByRole('button', { name: 'Study notes', exact: true }).click();
-  await expect(page.locator('#panel-title')).toHaveText('Study notes');
+  await page.getByRole('button', { name: 'My work', exact: true }).click();
+  await expect(page.locator('#panel-title')).toHaveText('My work');
 }
 
 export async function openMyRoom(page: Page) {
@@ -67,6 +67,14 @@ export async function showMovement(page: Page) {
   await expect(page.getByRole('button', { name: 'Interact', exact: true })).toBeVisible();
 }
 
+// Camera mode is synchronous; screen-space targets are published on a later RAF.
+export async function waitForWorldProjection(page: Page) {
+  await page.evaluate(() => new Promise<void>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('World projection did not receive two animation frames within 5 seconds.')), 5000);
+    requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(timer); resolve(); }));
+  }));
+}
+
 export async function chooseCamera(page: Page, mode: 'play' | 'overview') {
   await closeTool(page);
   await page.getByRole('button', { name: 'Pause and options', exact: true }).click();
@@ -74,6 +82,7 @@ export async function chooseCamera(page: Page, mode: 'play' | 'overview') {
   await page.getByRole('button', { name: mode === 'overview' ? 'Room overview' : 'Follow my avatar', exact: true }).click();
   await page.getByRole('button', { name: 'Resume game', exact: true }).click();
   await expect(page.locator('.house-world-canvas')).toHaveAttribute('data-camera-mode', mode);
+  await waitForWorldProjection(page);
 }
 
 export async function showIdentityTools(page: Page) {
@@ -82,14 +91,16 @@ export async function showIdentityTools(page: Page) {
   if (await details.getAttribute('open') === null) await details.locator('summary').click();
 }
 
-export async function clickProjectedTarget(page: Page, filter: { type: 'door' | 'seat'; slot?: number; seatId?: string }) {
+export async function clickProjectedTarget(page: Page, filter: { type: 'door' | 'seat' | 'placement'; slot?: number; seatId?: string; id?: string }) {
   await closeChat(page);
   await hideResidents(page);
+  await waitForWorldProjection(page);
   const canvas = page.locator('.house-world-canvas');
   const read = () => canvas.evaluate((el, wanted) => JSON.parse((el as HTMLElement).dataset.pickTargets || '[]')
-    .find((entry: { target: { type: string; slot?: number; seatId?: string }; visible: boolean; x: number; y: number }) => entry.target.type === wanted.type
+    .find((entry: { target: { type: string; slot?: number; seatId?: string; id?: string }; visible: boolean; x: number; y: number }) => entry.target.type === wanted.type
       && (wanted.slot === undefined || entry.target.slot === wanted.slot)
-      && (wanted.seatId === undefined || entry.target.seatId === wanted.seatId)), filter);
+      && (wanted.seatId === undefined || entry.target.seatId === wanted.seatId)
+      && (wanted.id === undefined || entry.target.id === wanted.id)), filter);
   await expect.poll(async () => (await read())?.visible).toBe(true);
   const target = await read(), bounds = await canvas.boundingBox();
   expect(bounds).not.toBeNull();expect(Number.isFinite(target.x) && Number.isFinite(target.y)).toBe(true);

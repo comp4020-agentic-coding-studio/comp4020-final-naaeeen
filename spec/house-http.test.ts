@@ -37,7 +37,7 @@ it("creates a private saved house and rejects cross-origin/oversized/unauthentic
 });
 it("serves the game modules and both Three import siblings without exposing source or databases",async()=>{
  const {base}=await fixture();
- for(const path of ["/","/house.html","/house-ui.js","/house-world.js","/house-camera.js","/house-label-layout.js","/house-geometry.js","/house-client.js","/house.css","/socket.io/socket.io.js","/vendor/build/three.module.js","/vendor/build/three.core.js","/legacy/"]) expect((await fetch(base+path)).status,path).toBe(200);
+ for(const path of ["/","/house.html","/house-ui.js","/house-world.js","/house-camera.js","/house-room-content.js","/house-label-layout.js","/house-geometry.js","/house-client.js","/house.css","/socket.io/socket.io.js","/vendor/build/three.module.js","/vendor/build/three.core.js","/legacy/"]) expect((await fetch(base+path)).status,path).toBe(200);
  for(const path of ["/src/house-store.ts","/data/house.sqlite","/vendor/package.json"]) expect((await fetch(base+path)).status,path).toBe(404);
 });
 

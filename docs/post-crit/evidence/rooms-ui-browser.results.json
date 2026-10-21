@@ -1,0 +1,71 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "bedroomWorkPeerDelivery": true,
+        "nativeOwnRooms": true,
+        "chairSitStand": true,
+        "visitorOwnWork": true,
+        "ownerLampVisitorLight": true,
+        "closeRevocation": true,
+        "safeStarter": true,
+        "closeNewCard": true,
+        "observerReadOnly": true,
+        "restartReload": true,
+        "membershipClear": true
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "bedroomWorkPeerDelivery": true,
+        "nativeOwnRooms": true,
+        "chairSitStand": true,
+        "visitorOwnWork": true,
+        "ownerLampVisitorLight": true,
+        "closeRevocation": true,
+        "safeStarter": true,
+        "closeNewCard": true,
+        "observerReadOnly": true,
+        "restartReload": true,
+        "membershipClear": true
+      },
+      "failures": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "variedRooms": true,
+        "viewport": true,
+        "bedroomWorkPeerDelivery": true,
+        "nativeOwnRooms": true,
+        "chairSitStand": true,
+        "visitorOwnWork": true,
+        "ownerLampVisitorLight": true,
+        "closeRevocation": true,
+        "safeStarter": true,
+        "closeNewCard": true,
+        "observerReadOnly": true,
+        "restartReload": true,
+        "membershipClear": true
+      },
+      "failures": []
+    }
+  ],
+  "errors": []
+}

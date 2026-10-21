@@ -225,3 +225,13 @@ a separate fresh policy review, contextual fixes and parent original-image check
 are reconciled in ../post-crit/REVIEW-AND-REFINEMENT.md. Final168checks/typecheckpass;
 full-B and finalobserver sources remain separately bound. P2 full-app integration,
 six-user gathering, physical phones and human comfort remain open.
+
+
+### PC.2 UI local closure
+
+My work is available through the existing single form from any authorized room;
+physical desks, owner lighting, explicit preset previews/adoption and coherent
+chair poses are implemented. Fresh review/refinement covers ACK/draft/observer and
+outbox settlement boundaries. Parent77UIchecks pass; the full3-viewport/2-identity
+task and final affected shell checks have separate source bindings. See
+../post-crit/evidence/P2-ROOM-UI.md and ../post-crit/REVIEW-AND-REFINEMENT.md.

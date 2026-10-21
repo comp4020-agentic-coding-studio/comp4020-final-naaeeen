@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { createLayout, bedroomLayout, slide, validPosition, findRoute, footprint, CAMERA_ORIENTATION, AVATAR_HEIGHT, SEATED_LIFT, FURNITURE_HEIGHTS } from './house-geometry.js';
 import { layoutLabels, createBubbleFeed } from './house-label-layout.js';
+import { roomInteractionTarget } from './house-room-content.js';
 import { createHouseCamera } from './house-camera.js';
 
 const PALETTE = { amber: '#ceb47d', sage: '#a5b49c', rose: '#c6999b', blue: '#92aebb', lavender: '#b29eb9', peach: '#d7a489' };
@@ -33,7 +34,7 @@ export function createHouseWorld(container, callbacks = {}) {
   let lastFrame = null, lastSent = -Infinity, sent = null, renderKey = '', frame = 0, disposed = false, pendingStand = false;
   let motionFlight = null, motionGeneration = 0, acknowledged = false, predictionDistance = 0, motionAnchor = { ...own }, lastSettled = -Infinity;
   let renderDirty = true, lastRender = -Infinity;
-  let prompt, roomLabel = null, selection = null, context = null, previewPlacements = null, lastHint = '';
+  let prompt, roomLabel = null, selection = null, context = null, previewPlacements = null, lastHint = '', roomObjectTargets = [];
   let safeArea = null, layoutDirty = true, lastLabelLayout = -Infinity;
   const dimensionObserver = new ResizeObserver(entries => { for (const observed of entries) { const item = labelEntries.get(observed.target); if (!item) continue; const box = observed.borderBoxSize?.[0]; if (box && box.inlineSize > 0 && box.blockSize > 0) { if (Math.abs(item.size.w - box.inlineSize) > 0.1 || Math.abs(item.size.h - box.blockSize) > 0.1) { item.size = { w: box.inlineSize, h: box.blockSize }; layoutDirty = true; } item.sizeDirty = false; } else { item.sizeDirty = true; layoutDirty = true; } } });
   const fixed = id => layout.obstacles.find(item => item.id === id);
@@ -62,7 +63,7 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function pickable(group, target) { group.traverse(o => { o.userData.target = target; }); pickTargets.push({ point: new THREE.Box3().setFromObject(group).getCenter(new THREE.Vector3()), target }); }
   function clearScene() {
-    selfFrameGeometry = null; renderDirty = true;
+    selfFrameGeometry = null; roomObjectTargets = []; renderDirty = true;
     scene?.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); if (o.isLight) o.shadow?.dispose(); });
     dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; delete canvas.dataset.avatarMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
   }
@@ -77,7 +78,7 @@ export function createHouseWorld(container, callbacks = {}) {
   function lamp(parent, x = 0, z = 0) {
     cylinder(0.19, 0.06, x, 0.04, z, '#806b55', parent); cylinder(0.035, 1.35, x, 0.72, z, '#806b55', parent);
     const shade = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.37, 12, 1, true), mat('#efd4a0')); shade.position.set(x, 1.5, z); parent.add(shade);
-    const glow = new THREE.PointLight('#ffe3ac', 4, 4, 2); glow.position.set(x, 1.35, z); parent.add(glow);
+    const glow = new THREE.PointLight('#ffe3ac', live?.durable.room?.light === 'cosy' ? 6 : live?.durable.room?.light === 'dim' ? 2.7 : 4, 4, 2); glow.position.set(x, 1.35, z); parent.add(glow);
   }
   function chair(parent, accent) {
     box(0.75, 0.17, 0.73, 0, FURNITURE_HEIGHTS.chairSeat - 0.12, 0, '#9d7b5e', parent); box(0.65, 0.12, 0.62, 0, FURNITURE_HEIGHTS.chairSeat - 0.06, 0, accent, parent);
@@ -155,7 +156,7 @@ export function createHouseWorld(container, callbacks = {}) {
     pickable(board, { type: 'board' }); label('Shared board', new THREE.Vector3(fixed('board').x - 0.2, 2.33, fixed('board').z), 'board');
   }
   function furniture(p) {
-    const g = new THREE.Group(); g.position.set(p.x, 0, p.z); g.rotation.y = p.rotation * Math.PI / 2; scene.add(g); const accent = colour(p.colour);
+    const g = new THREE.Group(); g.position.set(p.x, 0, p.z); g.rotation.y = p.rotation * Math.PI / 2 + (p.kind === 'chair' ? Math.PI : 0); scene.add(g); const accent = colour(p.colour);
     if (p.kind === 'chair') chair(g, accent);
     if (p.kind === 'plant') plant(g);
     if (p.kind === 'lamp') lamp(g);
@@ -178,10 +179,12 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function rebuild() {
     clearScene(); scene = new THREE.Scene(); scene.background = new THREE.Color('#252e3e');
-    scene.add(new THREE.HemisphereLight('#e4d9c6', '#758096', 1.05));
-    const sun = new THREE.DirectionalLight('#ffe0ad', 1.75); sun.position.set(0, 9, 5); sun.castShadow = true; sun.shadow.mapSize.set(512, 512);
+    const light = live?.durable.room?.light ?? 'standard';canvas.dataset.roomLight = light;
+    scene.add(new THREE.HemisphereLight(light === 'cosy' ? '#efd4af' : '#e4d9c6', '#758096', light === 'dim' ? 0.34 : light === 'cosy' ? 0.66 : 1.05));
+    const sun = new THREE.DirectionalLight(light === 'cosy' ? '#ffd29b' : '#ffe0ad', light === 'dim' ? 0.48 : light === 'cosy' ? 1.05 : 1.75); sun.position.set(0, 9, 5); sun.castShadow = true; sun.shadow.mapSize.set(512, 512);
     sun.shadow.camera.left = -9; sun.shadow.camera.right = 9; sun.shadow.camera.top = 9; sun.shadow.camera.bottom = -9; sun.shadow.normalBias = 0.035; scene.add(sun);
     layout = live?.durable.room ? bedroomLayout(roomPlacements()) : createLayout(live?.durable.house.capacity ?? 4);
+    if (live?.durable.room) roomObjectTargets = roomPlacements().filter(piece => ['desk', 'lamp'].includes(piece.kind)).map(piece => ({ type: piece.kind, id: piece.id, point: roomInteractionTarget(roomPlacements(), piece.id), text: piece.kind === 'desk' ? 'Open My work · house-visible' : live.durable.room.ownerId === live.durable.selfId ? 'Choose room lighting' : 'Owner controls this lamp' })).filter(target => target.point);
     shell(live?.durable.room?.palette ?? 'sage'); if (live) { if (live.durable.room) bedroom(); else lounge(); }
     prompt = label('', () => new THREE.Vector3(own.x, 1.95, own.z), 'context'); prompt.hidden = true;
     resize(); if (live) syncPlayers(live);
@@ -272,7 +275,7 @@ export function createHouseWorld(container, callbacks = {}) {
   function clearInput() { keys.clear(); direction = { x: 0, z: 0 }; route = []; routeTarget = null; }
   function targets() {
     if (!live) return [];
-    if (live.durable.room) return [{ type: 'exit', point: layout.exitTarget, text: 'Return to lounge' }, ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit in chair' }))];
+    if (live.durable.room) return [{ type: 'exit', point: layout.exitTarget, text: 'Return to lounge' }, ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit in chair' })), ...roomObjectTargets];
     return [
       ...layout.doors.map(d => { const r = live.durable.residents.find(r => r.slot === d.slot); return { type: 'door', slot: d.slot, roomId: r?.bedroomId, point: d.target, text: r ? (r.id === live.durable.selfId ? 'Enter your room' : 'Visit ' + r.name) : 'Vacant room' }; }),
       ...layout.seats.map((s, i) => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit at seat ' + (i + 1) })),
@@ -292,7 +295,7 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function approach(request) {
     if (!canControl() || self()?.seatId) return false;
-    const target = targets().find(t => t.type === request.type && (request.slot === undefined || t.slot === request.slot) && (request.seatId === undefined || t.seatId === request.seatId));
+    const target = targets().find(t => t.type === request.type && (request.slot === undefined || t.slot === request.slot) && (request.seatId === undefined || t.seatId === request.seatId) && (request.id === undefined || t.id === request.id));
     if (!target) return false;
     walkingIntent();
     const found = findRoute(layout, own, target.point); if (!found) return false;
@@ -580,6 +583,7 @@ export function createHouseWorld(container, callbacks = {}) {
       const placement = roomPlacements().find(p => p.id === target.id); if (!placement) return;
       const rect = footprint(placement); selection = new THREE.Mesh(new THREE.BoxGeometry(rect.w + 0.1, 0.025, rect.d + 0.1), new THREE.MeshBasicMaterial({ color: '#fff1bd', wireframe: true })); selection.position.set(rect.x, 0.08, rect.z); scene.add(selection); renderDirty = true;
     } else if (!editing && target.type === 'placement' && target.seatId) approach({ type: 'seat', seatId: target.seatId });
+    else if (!editing && target.type === 'placement') { const piece = roomPlacements().find(p => p.id === target.id); if (piece && ['desk', 'lamp'].includes(piece.kind)) approach({ type: piece.kind, id: piece.id }); }
     else if (!editing && target.type !== 'placement') approach(target);
   }
   function pointerdown(event) {

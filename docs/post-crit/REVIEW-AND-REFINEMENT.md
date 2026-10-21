@@ -127,3 +127,42 @@ P1 is accepted for a local commit and P2 UI handoff. Its isolated backend is d95
 whole-app acceptance against the separately committed P2 backend and the future
 lounge/game remains open. No historical coverage percentage was relabelled as a
 new observer-run measurement. P2 retains the separate bedroom chair-pose correction.
+
+
+## P2 UI closure: useful rooms and recoverable edits
+
+The Sol/ultra implementation followed a history-free Astra plan review and separate
+fresh implementation review. Confirmed async findings changed the code: Close must
+use the acknowledged card revision before its snapshot arrives; observer actions
+must stop before creating outbox entries; a starter ACK cannot pair old fields
+with a new room revision; explicit and automatic outbox settlement need bounded UI
+reconciliation. Targeted failures preceded the fixes. Lighting advances only known
+matching draft bases, and uncertain starter retries retain the original choice.
+
+The parent reviewed actual source (including admission remaining separate from the
+new live-controller save guard), ran all 77 current UI tests independently and
+inspected original-resolution room, seated Follow and scrolled My work images.
+The chair now faces its desk with its backrest behind the avatar. The new global
+heading keeps the 44px Close panel action visible at the bottom of long forms,
+distinct from Close card. A small content-bleed strip above the sticky header is a
+remaining visual polish item, not a failed exit or data-preservation check.
+
+The complete two-identity task passes all 13 declared criteria at desktop,
+portrait and landscape. That full run precedes only the sticky-header CSS. Current
+CSS has separate affected three-viewport Close/return/same-card checks and readable
+Follow seated captures. A historical 160ms desktop zero-motion sample remains
+unexplained; later bounded functional movement is not a 160ms latency pass. Exact
+source scopes live in P2-ROOM-UI.md and the fulltask/final source manifests.
+
+One known P1 evaluator error recurred: reading projected targets immediately after
+a camera-mode change. The shared house-journey helper now waits for the actual RAF
+projection boundary and matches placement IDs, and the P2 runner imports it.
+This turns the repeated guidance into executable test practice. Raycast controls
+passed without production geometry changes; the failed selector/timing attempts
+remain recorded.
+
+Final affected 320-check suite, typecheck and scoped diff pass. Reported scoped
+coverage is 96.29% lines / 81.85% branches; UI branch/function gaps remain stated in
+the worker record. Fresh/contextual review has no actionable scoped finding.
+P2 is accepted locally; full six-resident integration, sustained resource gates,
+physical devices and real-friend judgment remain P6 work. No release is claimed.

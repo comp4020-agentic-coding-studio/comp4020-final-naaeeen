@@ -1,0 +1,274 @@
+{
+  "sourceBindings": {
+    "fullTaskBeforeSticky": {
+      "changedFilesSinceRun": {
+        "public/house.css": {
+          "recorded": "b9947986a41d16f4341352f37120450cf2aa4361b70e6b9807a9cf5ed157c182",
+          "current": "fe736f3a6f84f8f0d81cde7eb8d83458c94a713944f9c1a7caf7405912c4c491"
+        }
+      },
+      "otherFilesMatch": true
+    },
+    "helperBeforeSticky": {
+      "changedFilesSinceRun": {
+        "public/house.css": {
+          "recorded": "b9947986a41d16f4341352f37120450cf2aa4361b70e6b9807a9cf5ed157c182",
+          "current": "fe736f3a6f84f8f0d81cde7eb8d83458c94a713944f9c1a7caf7405912c4c491"
+        }
+      },
+      "otherFilesMatch": true
+    },
+    "finalShell": {
+      "changedFilesSinceRun": {},
+      "otherFilesMatch": true
+    }
+  },
+  "images": [
+    {
+      "file": "helper-rooms-owner-default-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 235012
+    },
+    {
+      "file": "helper-rooms-owner-default-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 91754
+    },
+    {
+      "file": "helper-rooms-owner-default-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 108507
+    },
+    {
+      "file": "rooms-chair-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 206152
+    },
+    {
+      "file": "rooms-chair-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 70286
+    },
+    {
+      "file": "rooms-chair-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 57334
+    },
+    {
+      "file": "rooms-chair-follow-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 292728
+    },
+    {
+      "file": "rooms-chair-follow-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 92802
+    },
+    {
+      "file": "rooms-dim-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 245500
+    },
+    {
+      "file": "rooms-dim-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 81338
+    },
+    {
+      "file": "rooms-dim-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 121460
+    },
+    {
+      "file": "rooms-failure-owner-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 205797
+    },
+    {
+      "file": "rooms-failure-peer-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 303642
+    },
+    {
+      "file": "rooms-failure-refined-owner-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 316024
+    },
+    {
+      "file": "rooms-failure-refined-peer-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 317859
+    },
+    {
+      "file": "rooms-observer-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 445392
+    },
+    {
+      "file": "rooms-observer-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 69100
+    },
+    {
+      "file": "rooms-observer-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 108849
+    },
+    {
+      "file": "rooms-owner-default-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 235012
+    },
+    {
+      "file": "rooms-owner-default-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 91767
+    },
+    {
+      "file": "rooms-owner-default-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 108508
+    },
+    {
+      "file": "rooms-owner-work-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 258633
+    },
+    {
+      "file": "rooms-owner-work-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 52667
+    },
+    {
+      "file": "rooms-owner-work-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 58777
+    },
+    {
+      "file": "rooms-peer-default-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 259834
+    },
+    {
+      "file": "rooms-peer-default-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 108349
+    },
+    {
+      "file": "rooms-peer-default-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 102128
+    },
+    {
+      "file": "rooms-shell-bottom-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 441654
+    },
+    {
+      "file": "rooms-shell-bottom-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 69799
+    },
+    {
+      "file": "rooms-shell-bottom-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 104951
+    },
+    {
+      "file": "rooms-shell-red-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 69845
+    },
+    {
+      "file": "rooms-shell-red-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 103366
+    },
+    {
+      "file": "rooms-starter-applied-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 266014
+    },
+    {
+      "file": "rooms-starter-applied-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 66049
+    },
+    {
+      "file": "rooms-starter-applied-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 100247
+    },
+    {
+      "file": "rooms-starter-dirty-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 345016
+    },
+    {
+      "file": "rooms-starter-dirty-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 67297
+    },
+    {
+      "file": "rooms-starter-dirty-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 122582
+    },
+    {
+      "file": "rooms-visitor-work-1920x1080.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 263864
+    },
+    {
+      "file": "rooms-visitor-work-390x844.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 50635
+    },
+    {
+      "file": "rooms-visitor-work-844x390.png",
+      "width": 844,
+      "height": 390,
+      "bytes": 57513
+    }
+  ]
+}
