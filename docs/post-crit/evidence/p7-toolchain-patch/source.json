@@ -1,0 +1,12 @@
+{
+  "recordedAt": "2026-10-21T21:52:40.223134+00:00",
+  "actualManifestPins": {
+    "vitest": "5.0.3",
+    "@vitest/coverage-v8": "5.0.3",
+    "vite": "8.3.3"
+  },
+  "packageSHA256": "21dd1a20d18203af9e23447cfd762d342267b7929f33a0a510c7ea4b5f0db194",
+  "lockSHA256": "6533eca480d56d61cc2ab55cf2ff5591accbf17ccfe038756a5f9f7ce43080a8",
+  "productionAndPublicEquivalence": "verification-after.json",
+  "review": "Fresh Astra source/primary-doc review, followed by contextual correction after bare indirect update failed to change the required peer. No production exploit path established."
+}

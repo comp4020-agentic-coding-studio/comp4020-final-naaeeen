@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 6,
+      "high": 1,
+      "critical": 0
+    },
+    "dependencies": 26,
+    "devDependencies": 405,
+    "optionalDependencies": 72,
+    "totalDependencies": 431
+  },
+  "advisories": [
+    {
+      "module_name": "vite",
+      "title": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "vite",
+      "title": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "vite",
+      "title": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "vite",
+      "title": "Vite: Cross origin script execution through Vite custom middleware",
+      "severity": "low",
+      "url": "https://github.com/advisories/GHSA-9jrq-w75r-8gcw",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "vite",
+      "title": "Vite: Files outside `server.fs.allow` could be served when project paths match system paths on non-Windows machine",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-rq7h-c2jc-7f22",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "vite",
+      "title": "Vite: First 4 bytes of files outside of `server.fs` setting is exposed by `?vite-wasm-instance`",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-vfpm-58rq-9qcg",
+      "vulnerable_versions": ">=8.3.0 <=8.3.2",
+      "patched_versions": ">=8.3.3",
+      "findings": [
+        {
+          "version": "8.3.0",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker>vite",
+            ".>@vitest/coverage-v8>vitest>vite",
+            ".>vitest>@vitest/mocker>vite",
+            ".>vitest>vite"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "@vitest/mocker",
+      "title": "Vitest: Code injection via unauthenticated manual mock registration",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-qxg6-89mg-rqv8",
+      "vulnerable_versions": ">=5.0.0-beta.1 <5.0.3",
+      "patched_versions": ">=5.0.3",
+      "findings": [
+        {
+          "version": "5.0.1",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker",
+            ".>vitest>@vitest/mocker"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "module_name": "@vitest/mocker",
+      "title": "Vitest: Windows backslash traversal bypasses the @vitest/mocker redirect allowlist fix",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-xp26-3454-mjgp",
+      "vulnerable_versions": ">=5.0.0-rc.2 <5.0.3",
+      "patched_versions": ">=5.0.3",
+      "findings": [
+        {
+          "version": "5.0.1",
+          "paths": [
+            ".>@vitest/coverage-v8>vitest>@vitest/mocker",
+            ".>vitest>@vitest/mocker"
+          ],
+          "dev": true,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    }
+  ]
+}

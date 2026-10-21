@@ -1,0 +1,126 @@
+[
+  {
+    "name": "build-board",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "build:board"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:40:44.378151+00:00",
+    "finishedAt": "2026-10-21T21:40:47.158345+00:00"
+  },
+  {
+    "name": "typecheck",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:40:47.159170+00:00",
+    "finishedAt": "2026-10-21T21:40:52.106439+00:00"
+  },
+  {
+    "name": "required",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "test",
+      "--reporter=json",
+      "--outputFile=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/required-after.json"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:40:52.106777+00:00",
+    "finishedAt": "2026-10-21T21:41:12.680194+00:00"
+  },
+  {
+    "name": "coverage",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "exec",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.house.config.ts",
+      "spec/house-puzzle-ui.test.ts",
+      "--coverage",
+      "--coverage.include=public/house-puzzle-ui.js",
+      "--coverage.reporter=json-summary",
+      "--coverage.reportsDirectory=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/coverage",
+      "--reporter=json",
+      "--outputFile=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/coverage-tests.json"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:41:12.680672+00:00",
+    "finishedAt": "2026-10-21T21:41:16.698501+00:00"
+  },
+  {
+    "name": "evidence",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "check:evidence"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:41:16.698887+00:00",
+    "finishedAt": "2026-10-21T21:41:18.152612+00:00"
+  },
+  {
+    "name": "audit-all",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "audit",
+      "--json"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:41:18.153275+00:00",
+    "finishedAt": "2026-10-21T21:41:19.391633+00:00"
+  },
+  {
+    "name": "audit-production",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "audit",
+      "--prod",
+      "--json"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:41:19.391961+00:00",
+    "finishedAt": "2026-10-21T21:41:20.580707+00:00"
+  },
+  {
+    "name": "production-graph",
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "list",
+      "--prod",
+      "--depth",
+      "Infinity",
+      "--json"
+    ],
+    "exitCode": 0,
+    "startedAt": "2026-10-21T21:41:20.581225+00:00",
+    "finishedAt": "2026-10-21T21:41:21.543858+00:00"
+  }
+]

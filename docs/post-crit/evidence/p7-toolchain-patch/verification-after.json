@@ -1,0 +1,199 @@
+{
+  "checks": [
+    {
+      "name": "build-board",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "build:board"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:40:44.378151+00:00",
+      "finishedAt": "2026-10-21T21:40:47.158345+00:00"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:40:47.159170+00:00",
+      "finishedAt": "2026-10-21T21:40:52.106439+00:00"
+    },
+    {
+      "name": "required",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "test",
+        "--reporter=json",
+        "--outputFile=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/required-after.json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:40:52.106777+00:00",
+      "finishedAt": "2026-10-21T21:41:12.680194+00:00"
+    },
+    {
+      "name": "coverage",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "vitest.house.config.ts",
+        "spec/house-puzzle-ui.test.ts",
+        "--coverage",
+        "--coverage.include=public/house-puzzle-ui.js",
+        "--coverage.reporter=json-summary",
+        "--coverage.reportsDirectory=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/coverage",
+        "--reporter=json",
+        "--outputFile=/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-toolchain-patch/coverage-tests.json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:12.680672+00:00",
+      "finishedAt": "2026-10-21T21:41:16.698501+00:00"
+    },
+    {
+      "name": "evidence",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "check:evidence"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:16.698887+00:00",
+      "finishedAt": "2026-10-21T21:41:18.152612+00:00"
+    },
+    {
+      "name": "audit-all",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "audit",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:18.153275+00:00",
+      "finishedAt": "2026-10-21T21:41:19.391633+00:00"
+    },
+    {
+      "name": "audit-production",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "audit",
+        "--prod",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:19.391961+00:00",
+      "finishedAt": "2026-10-21T21:41:20.580707+00:00"
+    },
+    {
+      "name": "production-graph",
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "list",
+        "--prod",
+        "--depth",
+        "Infinity",
+        "--json"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-10-21T21:41:20.581225+00:00",
+      "finishedAt": "2026-10-21T21:41:21.543858+00:00"
+    }
+  ],
+  "publicFileCount": 475,
+  "allPublicBytesIdentical": true,
+  "productionGraphIdentical": true,
+  "audits": {
+    "audit-all": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "dependencies": 26,
+      "devDependencies": 402,
+      "optionalDependencies": 72,
+      "totalDependencies": 428
+    },
+    "audit-production": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "dependencies": 26,
+      "devDependencies": 0,
+      "optionalDependencies": 0,
+      "totalDependencies": 26
+    }
+  },
+  "unit": {
+    "success": true,
+    "numTotalTests": 1071,
+    "numPassedTests": 1071,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "coverage": {
+    "lines": {
+      "total": 75,
+      "covered": 74,
+      "skipped": 0,
+      "pct": 98.66
+    },
+    "statements": {
+      "total": 335,
+      "covered": 309,
+      "skipped": 0,
+      "pct": 92.23
+    },
+    "functions": {
+      "total": 59,
+      "covered": 50,
+      "skipped": 0,
+      "pct": 84.74
+    },
+    "branches": {
+      "total": 264,
+      "covered": 220,
+      "skipped": 0,
+      "pct": 83.33
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "nativeScope": "Earlier13nativecases retainoriginalmanifest. Productiongraph andallpublicbytesremainidentical; no new-manifestnative run claimed."
+}
