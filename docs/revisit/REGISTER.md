@@ -272,3 +272,14 @@ Earlier checkpoint paragraphs retain their historical dates and source scopes.
 | PC.7.2 | Participation/identity/retry | Review identifies old queuedJoin and same-zone takeover gaps. Freeze consent/participation authority and cleanup before backend/UI work. |
 | PC.7.3 | Shared surface/access/content | Compare actual portrait/landscape tray layouts; one original24pieceillustration first. Phone/keyboard checks planned; human contribution balance untested. |
 | PC.2.4 | Personal work home base | Existing card remains house-visible and viewer-owned. Prefer deliberate room return then My work, with empty-room fallback and preserved drafts; implementation OPEN. |
+
+### PC.6.3 receipt implementation checkpoint
+
+- Encoding/replay: bounded tagged gzip with actual-encoding raw fallback; original
+  IDs, hash precedence, winners and authored exports preserved by store/service tests.
+- Migration: fresh review and parent reproductions exposed CHECK and mixed-case
+  trigger gaps. Canonical DDL plus NOCASE repairs pass negative and canonical positives.
+- Closure: 213 isolated board checks and contextual review pass; parent full required
+  suite passes 1,037. See ../post-crit/evidence/storage-codec-review-closure.json.
+- Remaining: current native board task and unchanged sustained gates plus prospectively
+  registered storage growth. This entry does not close the full resource subsection.

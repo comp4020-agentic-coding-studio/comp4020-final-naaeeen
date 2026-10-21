@@ -362,3 +362,177 @@ describe("durable board authority", () => {
         expect(f.store.asset(f.actorId, { id: randomUUID(), houseId: f.houseId, file: { id: "zero-idat", mimeType: "image/png", dataURL: "data:image/png;base64," + data.toString("base64") } }).file!.id).toBe("zero-idat");
     });
 });
+
+
+describe("lossless receipt storage", () => {
+    const decodedLimit = 2 * 1024 * 1024 + 256;
+    const note = (id: string, text = "saved ".repeat(2000), version = 1) => shape(id, { type: "text", version, fontSize: 20, fontFamily: 5, text, originalText: text, textAlign: "left", verticalAlign: "top", containerId: null, autoResize: true, lineHeight: 1.25 });
+    test("creates schema 2 and stores smaller receipts as versioned BLOBs", () => {
+        const f = fixture(), id = randomUUID(), saved = patch(f, [note("compress")], id);
+        const row = f.store.db.prepare("SELECT typeof(response) AS type,octet_length(response) AS bytes FROM receipts WHERE id=?").get(id)!;
+        expect(f.store.db.prepare("PRAGMA user_version").get()!.user_version).toBe(2);
+        expect(row.type).toBe("blob");
+        expect(row.bytes).toBeLessThan(Buffer.byteLength(JSON.stringify(saved)) / 10);
+        expect(patch(f, [note("compress")], id)).toEqual(saved);
+    });
+    test.each(["UTF-16le", "UTF-16be"])("uses actual %s storage bytes for incompressible CJK fallback", encoding => {
+        const f = fixture(), path = join(f.path, "encoding.sqlite"), initialized = new DatabaseSync(path);
+        initialized.exec(`PRAGMA encoding='${encoding}'; CREATE TABLE encoding_probe(x TEXT); DROP TABLE encoding_probe`); initialized.close();
+        const store = new BoardStore(path); cleanups.push(() => store.close());
+        let state = 19;
+        const text = Array.from({ length: 4000 }, () => { state = (Math.imul(state, 1664525) + 1013904223) >>> 0; return String.fromCharCode(0x4e00 + state % 20000); }).join("");
+        const id = randomUUID(), command = { id, houseId: f.houseId, text }, saved = store.chat(f.actorId, "Ada", command);
+        const row = store.db.prepare("SELECT typeof(response) AS type,octet_length(response) AS bytes FROM receipts WHERE id=?").get(id)!;
+        expect(row.type).toBe("text");
+        expect(row.bytes).toBe(JSON.stringify(saved).length * 2);
+        expect(store.chat(f.actorId, "Ada", command)).toEqual(saved);
+    });
+    test("replays mixed legacy and encoded original winners after later edits and restart", () => {
+        const f = fixture(), id = randomUUID(), original = patch(f, [note("original")], id), legacyId = randomUUID();
+        const legacy = f.store.chat(f.actorId, "Ada", { id: legacyId, houseId: f.houseId, text: "legacy message" });
+        f.store.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(JSON.stringify(legacy), legacyId);
+        f.store.db.prepare("UPDATE chat SET at=0 WHERE id=?").run(legacyId);
+        f.store.patch(randomUUID(), { id: randomUUID(), houseId: f.houseId, elements: [note("original", "new peer winner", 2)] });
+        const own = f.store.ownExport(f.actorId, f.houseId);
+        f.store.close();
+        const reopened = new BoardStore(join(f.path, "board.sqlite")); cleanups.push(() => reopened.close());
+        expect(reopened.patch(f.actorId, { id, houseId: f.houseId, elements: [note("original")] })).toEqual(original);
+        expect(reopened.chat(f.actorId, "Renamed", { id: legacyId, houseId: f.houseId, text: "legacy message" })).toEqual(legacy);
+        expect(reopened.snapshot(f.houseId).chat).toEqual([]);
+        expect(reopened.snapshot(f.houseId).elements[0]!.text).toBe("new peer winner");
+        expect(reopened.ownExport(f.actorId, f.houseId)).toEqual(own);
+    });
+    test("keeps a near-scene-sized losing-patch receipt above the input patch limit", () => {
+        const f = fixture(), ids = Array.from({ length: 66 }, (_, n) => "large_" + n);
+        for (let n = 0; n < ids.length; n += 3) patch(f, ids.slice(n, n + 3).map(id => note(id, "x".repeat(14500), 2)));
+        const id = randomUUID(), elements = ids.map(id => shape(id)), command = { id, houseId: f.houseId, elements };
+        expect(Buffer.byteLength(JSON.stringify(command))).toBeLessThan(128 * 1024);
+        const saved = f.store.patch(f.actorId, command);
+        expect(Buffer.byteLength(JSON.stringify(saved))).toBeGreaterThan(1800 * 1024);
+        expect(Buffer.byteLength(JSON.stringify(saved))).toBeLessThan(decodedLimit);
+        f.store.close();
+        const reopened = new BoardStore(join(f.path, "board.sqlite")); cleanups.push(() => reopened.close());
+        expect(reopened.patch(f.actorId, command)).toEqual(saved);
+    });
+    test("upgrades v1 metadata without rewriting TEXT and reopens v2 idempotently", () => {
+        const f = fixture(), id = randomUUID(), receipt = patch(f, [shape()], id), text = JSON.stringify(receipt);
+        f.store.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(text, id);
+        f.store.db.exec("PRAGMA user_version=1");
+        f.store.close();
+        for (let n = 0; n < 2; n++) {
+            const reopened = new BoardStore(join(f.path, "board.sqlite"));
+            expect(reopened.db.prepare("PRAGMA user_version").get()!.user_version).toBe(2);
+            expect(reopened.db.prepare("SELECT total_changes() AS changes").get()!.changes).toBe(0);
+            expect(reopened.db.prepare("SELECT response FROM receipts WHERE id=?").get(id)!.response).toBe(text);
+            expect(reopened.patch(f.actorId, { id, houseId: f.houseId, elements: [shape()] })).toEqual(receipt);
+            reopened.close();
+        }
+    });
+    test.each([
+        "CREATE TABLE receipts(actor_id TEXT,id TEXT,command_hash TEXT,response TEXT)",
+        "CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response BLOB NOT NULL,PRIMARY KEY(actor_id,id))",
+        "CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response TEXT NOT NULL,PRIMARY KEY(actor_id,id)) STRICT",
+    ])("rejects malformed v1 without advancing its metadata: %s", ddl => {
+        const f = fixture();
+        f.store.db.exec("DROP TABLE receipts; " + ddl + "; PRAGMA user_version=1"); f.store.close();
+        expect(() => new BoardStore(join(f.path, "board.sqlite"))).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        const native = new DatabaseSync(join(f.path, "board.sqlite"));
+        expect(native.prepare("PRAGMA user_version").get()!.user_version).toBe(1); native.close();
+    });
+    test.each([null, 17, "null", "{}", "[]", "{", new Uint8Array([1, 2, 3])])("rejects corrupt receipt %s while preserving hash precedence", response => {
+        const f = fixture(), id = randomUUID(); patch(f, [shape()], id);
+        // NULL violates the existing NOT NULL contract, so represent it as JSON null.
+        f.store.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(response === null ? "null" : response, id);
+        const before = f.store.snapshot(f.houseId);
+        expect(() => patch(f, [shape()], id)).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        expect(() => patch(f, [shape("changed")], id)).toThrowError(expect.objectContaining({ code: "ID_REUSED" }));
+        expect(f.store.snapshot(f.houseId)).toEqual(before);
+    });
+    test("rejects malformed legacy TEXT bytes and a mismatched receipt envelope without applying another effect", () => {
+        const f = fixture(), id = randomUUID(), saved = patch(f, [shape()], id), before = f.store.snapshot(f.houseId);
+        for (const response of [JSON.stringify({ ...saved, id: randomUUID() }), JSON.stringify({ ...saved, houseId: randomUUID() }), JSON.stringify({ ...saved, elements: undefined, message: {} })]) {
+            f.store.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(response, id);
+            expect(() => patch(f, [shape()], id)).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        }
+        const malformed = Buffer.from(JSON.stringify(saved)), index = malformed.indexOf("shape_a"); malformed[index] = 255;
+        f.store.db.prepare("UPDATE receipts SET response=CAST(? AS TEXT) WHERE id=?").run(malformed, id);
+        expect(() => patch(f, [shape()], id)).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        expect(f.store.snapshot(f.houseId)).toEqual(before);
+    });
+    test("checks stored response type/size before selecting response bytes", () => {
+        const f = fixture(), id = randomUUID(); patch(f, [shape()], id);
+        f.store.db.prepare("UPDATE receipts SET response=zeroblob(?) WHERE id=?").run(decodedLimit * 2 + 1, id); f.store.close();
+        const reopened = new BoardStore(join(f.path, "board.sqlite")); cleanups.push(() => reopened.close());
+        const reads: string[] = [], native = reopened.db.prepare.bind(reopened.db);
+        vi.spyOn(reopened.db, "prepare").mockImplementation(sql => {
+            const statement = native(sql), get = statement.get.bind(statement);
+            vi.spyOn(statement, "get").mockImplementation((...args) => { reads.push(sql); return get(...args); }); return statement;
+        });
+        expect(() => reopened.patch(f.actorId, { id, houseId: f.houseId, elements: [shape()] })).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        expect(reads.some(sql => /typeof\(response\)/i.test(sql) && /octet_length\(response\)/i.test(sql))).toBe(true);
+        expect(reads.filter(sql => /FROM receipts/i.test(sql))).toHaveLength(1);
+        expect(() => reopened.patch(f.actorId, { id, houseId: f.houseId, elements: [shape("different")] })).toThrowError(expect.objectContaining({ code: "ID_REUSED" }));
+    });
+    test("rolls back compressed state and contribution writes when receipt insertion fails, then reopens and retries", () => {
+        const f = fixture(), id = randomUUID(), elements = [note("rollback")];
+        f.store.db.exec("CREATE TRIGGER fail_encoded BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'fixture failure'); END");
+        expect(() => patch(f, elements, id)).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        expect(f.store.snapshot(f.houseId)).toMatchObject({ sequence: 0, elements: [] });
+        expect(f.store.ownExport(f.actorId, f.houseId).elements).toEqual([]);
+        expect(f.store.db.prepare("SELECT count(*) AS count FROM receipts").get()!.count).toBe(0);
+        f.store.db.exec("DROP TRIGGER fail_encoded"); f.store.close();
+        const reopened = new BoardStore(join(f.path, "board.sqlite")); cleanups.push(() => reopened.close());
+        const command = { id, houseId: f.houseId, elements }, saved = reopened.patch(f.actorId, command);
+        expect(saved.sequence).toBe(1); expect(reopened.patch(f.actorId, command)).toEqual(saved);
+        expect(reopened.db.prepare("SELECT count(*) AS count FROM receipts").get()!.count).toBe(1);
+    });
+});
+
+
+describe("supported receipt schema migration boundary", () => {
+    const canonical = "CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response TEXT NOT NULL,PRIMARY KEY(actor_id,id))";
+    test.each([
+        ["TEXT-only CHECK", canonical.replace("response TEXT NOT NULL", "response TEXT NOT NULL CHECK(typeof(response)='text')")],
+        ["size-conditional CHECK", canonical.replace("response TEXT NOT NULL", "response TEXT NOT NULL CHECK(typeof(response)='text' OR length(response)<=512)")],
+        ["receipt trigger", canonical + "; CREATE TRIGGER reject_blob BEFORE INSERT ON receipts WHEN typeof(NEW.response)='blob' BEGIN SELECT RAISE(ABORT,'no encoded receipts'); END"],
+        ["explicit receipt unique index", canonical + "; CREATE UNIQUE INDEX one_actor_receipt ON receipts(actor_id)"],
+    ])("rejects noncanonical v1 %s before metadata promotion", (_name, ddl) => {
+        const f = fixture();
+        f.store.db.exec("DROP TABLE receipts; " + ddl + "; PRAGMA user_version=1");
+        f.store.close();
+        expect(() => new BoardStore(join(f.path, "board.sqlite"))).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        const native = new DatabaseSync(join(f.path, "board.sqlite"));
+        expect(native.prepare("PRAGMA user_version").get()!.user_version).toBe(1);
+        native.close();
+    });
+    test("rejects a mixed-case receipt trigger before changing v1 metadata or legacy rows", () => {
+        const f = fixture(), id = randomUUID(), command = { id, houseId: f.houseId, text: "legacy accepted ".repeat(100) };
+        const saved = f.store.chat(f.actorId, "Ada", command);
+        f.store.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(JSON.stringify(saved), id);
+        f.store.db.exec("CREATE TRIGGER reject_mixed_blob BEFORE INSERT ON ReCeIpTs WHEN typeof(NEW.response)='blob' BEGIN SELECT RAISE(ABORT,'no encoded receipts'); END; PRAGMA user_version=1");
+        expect(f.store.db.prepare("SELECT tbl_name FROM sqlite_schema WHERE name='reject_mixed_blob'").get()!.tbl_name).toBe("ReCeIpTs");
+        const rows = f.store.db.prepare("SELECT actor_id,id,command_hash,response FROM receipts ORDER BY actor_id,id").all();
+        f.store.close();
+        expect(() => new BoardStore(join(f.path, "board.sqlite"))).toThrowError(expect.objectContaining({ code: "STORAGE_UNAVAILABLE" }));
+        const native = new DatabaseSync(join(f.path, "board.sqlite"));
+        expect(native.prepare("PRAGMA user_version").get()!.user_version).toBe(1);
+        expect(native.prepare("SELECT actor_id,id,command_hash,response FROM receipts ORDER BY actor_id,id").all()).toEqual(rows);
+        native.close();
+    });
+    test.each(["UTF-8", "UTF-16le", "UTF-16be"])("accepts canonical v1 %s DDL with harmless whitespace/case differences", encoding => {
+        const f = fixture(), path = join(f.path, "canonical.sqlite"), native = new DatabaseSync(path);
+        native.exec(`PRAGMA encoding='${encoding}'; CREATE TABLE encoding_probe(x TEXT); DROP TABLE encoding_probe`); native.close();
+        const original = new BoardStore(path), id = randomUUID(), command = { id, houseId: f.houseId, text: "accepted legacy ".repeat(100) }, saved = original.chat(f.actorId, "Ada", command);
+        original.db.prepare("UPDATE receipts SET response=? WHERE id=?").run(JSON.stringify(saved), id);
+        const row = original.db.prepare("SELECT actor_id,id,command_hash,response FROM receipts WHERE id=?").get(id)!;
+        original.db.exec("DROP TABLE receipts; " + canonical.toLowerCase().replaceAll(",", ", \n\t").replace("receipts(", "receipts ( \n") + "; PRAGMA user_version=1");
+        original.db.prepare("INSERT INTO receipts(actor_id,id,command_hash,response) VALUES(?,?,?,?)").run(row.actor_id, row.id, row.command_hash, row.response); original.close();
+        const reopened = new BoardStore(path); cleanups.push(() => reopened.close());
+        expect(reopened.db.prepare("PRAGMA user_version").get()!.user_version).toBe(2);
+        expect(reopened.db.prepare("SELECT total_changes() AS changes").get()!.changes).toBe(0);
+        expect(reopened.chat(f.actorId, "Ada", command)).toEqual(saved);
+        const newId = randomUUID(), next = reopened.chat(f.actorId, "Ada", { ...command, id: newId });
+        expect(reopened.db.prepare("SELECT typeof(response) AS type FROM receipts WHERE id=?").get(newId)!.type).toBe("blob");
+        expect(next.message!.text).toBe(command.text);
+    });
+});

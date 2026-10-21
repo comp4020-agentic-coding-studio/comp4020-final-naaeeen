@@ -1,0 +1,9 @@
+{
+  "scope": "Parent independent mixed-case receipt-trigger probe; current source may already include ongoing repair.",
+  "script": "import {BoardStore} from './src/board-store.ts';import {DatabaseSync} from 'node:sqlite';import {randomUUID} from 'node:crypto';import {mkdirSync} from 'node:fs';\nconst dir='.local/post-crit/schema-parent-'+randomUUID();mkdirSync(dir,{recursive:true});const file=dir+'/board.sqlite';let s=new BoardStore(file);s.close();let d=new DatabaseSync(file);d.exec(\"CREATE TRIGGER reject_blob BEFORE INSERT ON ReCeIpTs WHEN typeof(NEW.response)='blob' BEGIN SELECT RAISE(ABORT,'no blob'); END;PRAGMA user_version=1\");d.close();let outcome={};try{s=new BoardStore(file);outcome.opened=true;outcome.version=s.db.prepare('PRAGMA user_version').get().user_version;try{s.chat(randomUUID(),'Probe',{id:randomUUID(),houseId:randomUUID(),text:'repeat '.repeat(500)});outcome.write='ACCEPTED'}catch(e){outcome.write=e.code}}catch(e){outcome.opened=false;outcome.error=e.code}finally{s?.close()}console.log(JSON.stringify(outcome));",
+  "observed": {
+    "opened": true,
+    "version": 2,
+    "write": "STORAGE_UNAVAILABLE"
+  }
+}

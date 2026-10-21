@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "kind": "bounded deterministic representation diagnostic",
+  "decision": "Check gzip level 1 correctness/storage tradeoff against raw TEXT, gzip level 6 and Brotli quality 4 without claiming CPU/RAM superiority.",
+  "cases": [
+    "rectangle patch",
+    "repeated text patch",
+    "later text winner",
+    "short chat",
+    "repetitive chat",
+    "incompressible CJK chat",
+    "PNG asset receipt"
+  ],
+  "factors": [
+    "codec level/format",
+    "SQLite UTF-8, UTF-16le, UTF-16be storage encoding"
+  ],
+  "criteria": [
+    "Every candidate losslessly round-trips identical UTF8 JSON bytes.",
+    "The implemented tagged representation decodes to each exact original receipt.",
+    "Actual SQLite octet_length for implemented storage is no greater than raw TEXT for each case and encoding."
+  ],
+  "stoppingCondition": "Run once after source/test checks; fix correctness failures before accepting. No timing ranking, representative-user ratio, old 66-sample reproduction, browser or sustained acceptance is claimed.",
+  "sustainedGrowthTarget": {
+    "bytes": 16777216,
+    "status": "NOT RUN; future unchanged 300-second workload"
+  }
+}

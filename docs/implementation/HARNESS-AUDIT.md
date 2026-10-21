@@ -464,3 +464,18 @@ Local validation is committed at8b22fa4. The staged whitespace failure stopped t
 commit, and a secret-hook false positive was verified as a public locale asset path;
 only JSON serialization changed, with identical parsed content and the hook intact.
 Native/source/resource evidence retains its original scope. No new push or release.
+
+## P7 encoding and integration audit
+
+Reopened REPORT, storage contract, actual diff and failure records before the local
+codec milestone. Both schema review findings were independently reproduced by the
+parent and repaired through meaningful red/green cases. Final code/hashes, supported
+historical DDL and scoped coverage were inspected. The fresh initial review and its
+contextual rechecks remain separately described. The full required run passed 1,037;
+native and sustained acceptance are not inferred from that result.
+
+A coordination failure also changed execution: sending a message to a completed
+worker did not restart its turn. The parent used followup_task and verified running
+status before depending on the repair. Future handoffs must distinguish dispatched,
+running and completed work. This is a correction to observed orchestration, not a
+claim that more agents or another paper caused better product outcomes.

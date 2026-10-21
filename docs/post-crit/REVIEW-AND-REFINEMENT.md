@@ -258,3 +258,23 @@ or Docker CI. All owned services and resource jobs are closed.
 Local validation milestone is ready for a focused commit. New group participation,
 room-purpose refinement, lossless receipt-storage work and their later acceptance
 remain open; no overall goal completion or publication is implied.
+
+## P7 receipt representation and migration review
+
+The compact representation preserves exact accepted responses and the original
+idempotency identity. Raw fallback compares actual SQLite text encoding, based on
+the parent-reproduced UTF-16 counterexample. Initial red cases preceded the codec;
+a fresh implementation review then found an added CHECK schema could be promoted
+before a compressed write failed. A representative insertion probe was rejected
+because it cannot establish arbitrary CHECK compatibility. The bounded solution
+supports the application's canonical receipt schema, with harmless formatting
+normalization and explicit rejection of persistent triggers/indexes.
+
+A contextual review found a further mixed-case table-name lookup gap. The parent
+reproduced it, the new regression failed before NOCASE was added, and all 213 board
+tests then passed. Canonical UTF-8/UTF-16 migration positives remain alongside the
+denials. The reviewer's final eight-case recheck closes both findings; the parent
+inspected final code/hashes and ran the integrated 1,037-test suite. See
+[evidence/storage-codec-review-closure.json](evidence/storage-codec-review-closure.json).
+This qualifies a local implementation milestone, with native and sustained storage
+acceptance still pending. Earlier passing workload results do not accept this source.

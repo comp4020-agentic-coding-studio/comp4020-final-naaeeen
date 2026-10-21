@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-10-21T19:38:39.663976+00:00",
+  "scope": "Preserve previous canonical-gate GREEN/source identities before mixed-case ancillary-object repair",
+  "sources": {
+    "src/board-store.ts": "7f03eda6232c44c904d72a3b9550773cda6b5bd303a48124877641176a5e7f3c",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "spec/board-store.test.ts": "13f23e471fcae2ccf7c1a6733538ad7323f6f109e7313335b8e43a3913ee73cf",
+    "evaluation/receipt-codec-schema-gate-green.json": "f91e01332674bd8d20100781757d1c1d09aad454084bfbf5fc1879c66aed5ae5",
+    "evaluation/receipt-codec-schema-gate-board-green.json": "b5f7764420dcf73e39050423065169bf9a9eddfbea3f373cbdd5a0a7848eba90"
+  }
+}

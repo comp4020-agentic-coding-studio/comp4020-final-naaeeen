@@ -448,3 +448,17 @@ For failures, separate the first observable violated condition from a causal
 explanation; record the trace step/artifact, applicability, competing explanation
 and discriminating recheck. Preserve an unresolved cause when instrumentation is
 missing. Existing project tests and owner constraints outrank a model's selection.
+
+
+### Observed worker restart and UI-evaluator corrections
+
+A message to a completed worker did not resume execution in this host. Use the
+available follow-up task operation for idle/completed workers and verify the actual
+status before marking dependent work RUNNING. A sent message is not execution proof.
+
+The integrated picture task found chat underneath a nonmodal panel despite positive
+geometry/text-presence checks. For visible interactive overlays, measure clipping
+and pointer occlusion as well as bounds, and inspect original screenshots. A transcript
+must actually be visible with its controls; an element's presence or a positive
+bounding box does not establish that task. Apply this to overlapping UI. These checks
+do not establish readability preference or explain an unrelated admission timeout.

@@ -60,7 +60,13 @@ output; no custom gzip parser or format switch is needed.
   STORAGE_UNAVAILABLE without new effects. Do not turn a decode failure into a
   fresh command or silently regenerate its response from current state.
 - Opening v1 upgrades only schema metadata transactionally, after validating the
-  required columns/key structure and compatible non-STRICT receipt table. It must not rewrite old receipts, run VACUUM or delete anything.
+  required columns/key structure and canonical non-STRICT receipt table. Compare
+  the known receipt CREATE TABLE definition with only ASCII whitespace/case
+  normalization; reject added CHECK constraints, persistent receipt triggers and
+  explicit indexes. The ancillary-object lookup uses SQLite NOCASE identifier
+  comparison. Keep the implicit primary-key index. This supports the application's
+  actual schema, not arbitrary customized databases. It must not rewrite old
+  receipts, run VACUUM or delete anything.
   Reopening v2 is idempotent; future versions fail closed. Malformed v1 keeps its
   original metadata on rejection. Old binaries reject v2 when opening; a future
   authorized release must stop/drain old processes before starting the new binary.
@@ -126,3 +132,21 @@ Backfill, a lifetime admission/retention quota and repacking remain separate pol
 The inspected production snapshot is small; the large receipt database is a synthetic
 fixture. New-write compression is useful without rewriting or deleting that fixture
 or touching production. The chosen scope claims reduced measured growth only.
+
+
+## Implementation and independent review checkpoint
+
+The codec and migration boundary are implemented locally. A fresh Astra reviewer
+found two noncanonical-schema gaps: an added TEXT-only CHECK and a trigger whose
+stored table name used mixed case. The parent reproduced both. The repair uses a
+canonical receipt DDL check and a NOCASE ancillary lookup; all original failed
+cases remain in the evidence. The contextual reviewer then confirmed rejection
+preserves v1 metadata, schema and rows, while actual historical UTF-8/UTF-16 files
+still migrate and replay. See [review closure](evidence/storage-codec-review-closure.json)
+and [schema refinement](evidence/storage-codec-schema-gate.md).
+
+All 213 isolated board tests pass on the final codec/store source. The parent's
+integrated required run also passed 1,037 tests. These checks qualify a local
+implementation commit. The two-browser task and newly source-bound sustained
+resource/growth criteria remain open; no release, lifetime storage cap or reduced
+hosting bill is claimed.

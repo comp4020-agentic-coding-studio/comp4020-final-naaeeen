@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-21T19:31:01.727362+00:00",
+  "status": "READY FOR REVIEWER RECHECK: canonical receipt-schema gate repaired; integrated/native/sustained acceptance pending",
+  "head": "d766b2a9f8064f0af31050a61818d07757da3471",
+  "environment": {
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi",
+    "cwd": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "sqlite": "3.53.4"
+  },
+  "red": {
+    "command": "mise exec -- pnpm exec vitest run --config vitest.board.config.ts spec/board-store.test.ts --reporter=json --outputFile=evaluation/receipt-codec-red.json",
+    "exitCode": 1,
+    "baselineProductionSHA256": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "redSpecSHA256": "b8aaeadae7f6308e50cbb2a5c8f289daaa7de056c14313e8ba239000ed1dc79f",
+    "expectedFailures": [
+      "new schema 2",
+      "metadata-only migration",
+      "malformed migration rejection",
+      "receipt envelope validation",
+      "metadata-first response reads"
+    ]
+  },
+  "checks": {
+    "evaluation/receipt-codec-red.json": {
+      "numPassedTests": 31,
+      "numFailedTests": 11,
+      "numTotalTests": 42
+    },
+    "evaluation/receipt-codec-store-green.json": {
+      "numPassedTests": 42,
+      "numFailedTests": 0,
+      "numTotalTests": 42
+    },
+    "evaluation/receipt-codec-focused.json": {
+      "numPassedTests": 76,
+      "numFailedTests": 0,
+      "numTotalTests": 76
+    },
+    "evaluation/receipt-codec-green.json": {
+      "numPassedTests": 97,
+      "numFailedTests": 0,
+      "numTotalTests": 97
+    },
+    "evaluation/receipt-codec-board-green.json": {
+      "numPassedTests": 205,
+      "numFailedTests": 0,
+      "numTotalTests": 205
+    },
+    "evaluation/receipt-codec-schema-gate-red.json": {
+      "numPassedTests": 48,
+      "numFailedTests": 4,
+      "numTotalTests": 52
+    },
+    "evaluation/receipt-codec-schema-gate-green.json": {
+      "numPassedTests": 104,
+      "numFailedTests": 0,
+      "numTotalTests": 104
+    },
+    "evaluation/receipt-codec-schema-gate-board-green.json": {
+      "numPassedTests": 212,
+      "numFailedTests": 0,
+      "numTotalTests": 212
+    }
+  },
+  "typecheck": {
+    "command": "mise exec -- pnpm typecheck",
+    "exitCode": 0
+  },
+  "allBoardCheck": {
+    "command": "mise exec -- pnpm exec vitest run --config vitest.board.config.ts --coverage --coverage.include=src/board-store.ts --coverage.include=src/board-receipt-codec.ts --reporter=json --outputFile=evaluation/receipt-codec-schema-gate-board-green.json",
+    "exitCode": 0
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 331,
+        "covered": 305,
+        "skipped": 0,
+        "pct": 92.14
+      },
+      "statements": {
+        "total": 363,
+        "covered": 336,
+        "skipped": 0,
+        "pct": 92.56
+      },
+      "functions": {
+        "total": 48,
+        "covered": 47,
+        "skipped": 0,
+        "pct": 97.91
+      },
+      "branches": {
+        "total": 279,
+        "covered": 254,
+        "skipped": 0,
+        "pct": 91.03
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/board-receipt-codec.ts": {
+      "lines": {
+        "total": 38,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 5,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 41,
+        "covered": 41,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 58,
+        "covered": 57,
+        "skipped": 0,
+        "pct": 98.27
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/board-store.ts": {
+      "lines": {
+        "total": 293,
+        "covered": 267,
+        "skipped": 0,
+        "pct": 91.12
+      },
+      "functions": {
+        "total": 43,
+        "covered": 42,
+        "skipped": 0,
+        "pct": 97.67
+      },
+      "statements": {
+        "total": 322,
+        "covered": 295,
+        "skipped": 0,
+        "pct": 91.61
+      },
+      "branches": {
+        "total": 221,
+        "covered": 197,
+        "skipped": 0,
+        "pct": 89.14
+      }
+    }
+  },
+  "sources": {
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "src/board-store.ts": "7f03eda6232c44c904d72a3b9550773cda6b5bd303a48124877641176a5e7f3c",
+    "spec/board-receipt-codec.test.ts": "8103385f9d374c43a6a0967c8327f714c8f22e08d6a61bedcd0270be566382e4",
+    "spec/board-store.test.ts": "13f23e471fcae2ccf7c1a6733538ad7323f6f109e7313335b8e43a3913ee73cf",
+    "spec/board-service.test.ts": "4b3f1cc20dc97f359e3ea7b750d652c21a48ceeca8359a6b475628d53a134523",
+    "docs/post-crit/STORAGE-CONTRACT.md": "3c8891ccd9a4f80f5b2db064dc83d30438f35fbeec314ef6f5f685649af8277c",
+    "evaluation/receipt-codec-diagnostic.mjs": "f2473f2e0d664ed16ff3e09e33593ce948e4aa14df2a0af1974055ff4e3ff921",
+    "evaluation/receipt-codec-diagnostic.protocol.json": "9c433fe9dee9371ac2976ba92105644351f72bf2befc91dea5e9022b77ff0f4a",
+    "docs/post-crit/evidence/storage-codec-schema-gate.md": "48a578421b01eb1c4b9fd47cd212238c8a9b7f6a47fc4f2d2c36f748423e32c5",
+    "docs/post-crit/evidence/storage-codec-implementation.md": "d8b1f8b3e6a3e594a28e2c7a7681c0921e201914bcd12fa8c1f22584f13b6de0"
+  },
+  "residualGates": [
+    "Implementation reviewer contextual recheck and parent reconciliation",
+    "Parent final required/full/evidence checks",
+    "Parent two-browser board edit/replay/export task",
+    "Parent unchanged 300-second resource workload and prospective <=16MiB retained response growth gate",
+    "Future authorized exclusive stop/drain old binary and v2-aware rollback plan before deployment"
+  ],
+  "scope": [
+    "No live/production database inspected or modified",
+    "No frozen workload modification",
+    "No backfill, GC, quota, VACUUM or repacking",
+    "No browser/load run, commit, push or deployment by this worker"
+  ],
+  "intermediateRepairs": [
+    "First typecheck detected unknown-size narrowing and installed zlib typings lacking the runtime-supported strict option; fixed with a narrowed size and explicit ZlibOptions extension, then typecheck passed.",
+    "An initial new codec-test draft had three extra parentheses; corrected before its first executable test pass. No assertion or acceptance threshold was weakened."
+  ],
+  "history": {
+    "initialVerification": "evaluation/receipt-codec-verification-before-schema-gate.json",
+    "beforeSchemaGate": "evaluation/receipt-codec-schema-gate-before.json",
+    "initialDiagnostic": "evaluation/receipt-codec-diagnostic.before-schema-gate.results.json",
+    "parentReproduction": "docs/post-crit/evidence/storage-schema-parent-red.json",
+    "parentCanonicalPreviewMetadata": "docs/post-crit/evidence/storage-preview-schema.json"
+  },
+  "schemaGateRed": {
+    "exitCode": 1,
+    "expectedFailures": 4,
+    "baselineSources": {
+      "src/board-store.ts": "b1ca86b0c4ce19f4cb6f05e9955b985ff496df63cb990c94702a32d4b4606050",
+      "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+      "spec/board-store.test.ts": "5125b2f3ddc8d839a0d1dc70e6beab74674713fce3666910b2b7208da508fa92",
+      "spec/board-receipt-codec.test.ts": "8103385f9d374c43a6a0967c8327f714c8f22e08d6a61bedcd0270be566382e4",
+      "spec/board-service.test.ts": "4b3f1cc20dc97f359e3ea7b750d652c21a48ceeca8359a6b475628d53a134523",
+      "evaluation/receipt-codec-board-green.json": "2837b483481c412464dc9556fb81fe8b003c2de25f8a8e73c43046041ca29a08"
+    },
+    "findingScope": "Noncanonical CHECK/trigger/index migration rejection, not a canonical migration regression"
+  },
+  "schemaGate": {
+    "receiptDefinition": "Known canonical unquoted CREATE TABLE SQL with ASCII SQL-whitespace and keyword-case normalization; existing column metadata checks retained",
+    "unsupported": [
+      "Added CHECK/table constraints",
+      "Persistent receipt triggers",
+      "Explicit receipt indexes"
+    ],
+    "implicitPrimaryKeyIndex": "Allowed",
+    "noRewriteVerification": "Opening connection total_changes()=0 and unchanged saved legacy TEXT",
+    "representativeInsertionProbe": "Rejected as insufficient; not implemented"
+  }
+}

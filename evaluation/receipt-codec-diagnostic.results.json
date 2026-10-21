@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-21T19:30:03.390Z",
+  "node": "v24.21.0",
+  "sqliteVersion": "3.53.4",
+  "head": "d766b2a9f8064f0af31050a61818d07757da3471",
+  "sources": {
+    "src/board-store.ts": "7f03eda6232c44c904d72a3b9550773cda6b5bd303a48124877641176a5e7f3c",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "evaluation/receipt-codec-diagnostic.mjs": "f2473f2e0d664ed16ff3e09e33593ce948e4aa14df2a0af1974055ff4e3ff921",
+    "evaluation/receipt-codec-diagnostic.protocol.json": "9c433fe9dee9371ac2976ba92105644351f72bf2befc91dea5e9022b77ff0f4a"
+  },
+  "corpusSHA256": "5f8317bee02dd4f8253784b11fb248bf9bad364e55044c4f033f8640a63ec448",
+  "sampleCount": 7,
+  "codecBytes": [
+    {
+      "name": "rectangle",
+      "rawUTF8Bytes": 536,
+      "gzip1PayloadBytes": 306,
+      "gzip6PayloadBytes": 300,
+      "brotli4PayloadBytes": 280,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "repetitive-text",
+      "rawUTF8Bytes": 24479,
+      "gzip1PayloadBytes": 631,
+      "gzip6PayloadBytes": 506,
+      "brotli4PayloadBytes": 384,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "later-winner",
+      "rawUTF8Bytes": 24479,
+      "gzip1PayloadBytes": 630,
+      "gzip6PayloadBytes": 506,
+      "brotli4PayloadBytes": 382,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "short-chat",
+      "rawUTF8Bytes": 295,
+      "gzip1PayloadBytes": 150,
+      "gzip6PayloadBytes": 148,
+      "brotli4PayloadBytes": 124,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "repetitive-chat",
+      "rawUTF8Bytes": 3282,
+      "gzip1PayloadBytes": 184,
+      "gzip6PayloadBytes": 170,
+      "brotli4PayloadBytes": 129,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "incompressible-CJK",
+      "rawUTF8Bytes": 12282,
+      "gzip1PayloadBytes": 8941,
+      "gzip6PayloadBytes": 8933,
+      "brotli4PayloadBytes": 8889,
+      "allRawRoundTrips": true
+    },
+    {
+      "name": "PNG-asset",
+      "rawUTF8Bytes": 269,
+      "gzip1PayloadBytes": 170,
+      "gzip6PayloadBytes": 161,
+      "brotli4PayloadBytes": 147,
+      "allRawRoundTrips": true
+    }
+  ],
+  "storage": [
+    {
+      "encoding": "UTF-8",
+      "name": "rectangle",
+      "type": "blob",
+      "rawBytes": 536,
+      "storedBytes": 317,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "repetitive-text",
+      "type": "blob",
+      "rawBytes": 24479,
+      "storedBytes": 642,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "later-winner",
+      "type": "blob",
+      "rawBytes": 24479,
+      "storedBytes": 641,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "short-chat",
+      "type": "blob",
+      "rawBytes": 295,
+      "storedBytes": 161,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "repetitive-chat",
+      "type": "blob",
+      "rawBytes": 3282,
+      "storedBytes": 195,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "incompressible-CJK",
+      "type": "blob",
+      "rawBytes": 12282,
+      "storedBytes": 8952,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-8",
+      "name": "PNG-asset",
+      "type": "blob",
+      "rawBytes": 269,
+      "storedBytes": 181,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "rectangle",
+      "type": "blob",
+      "rawBytes": 1072,
+      "storedBytes": 317,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "repetitive-text",
+      "type": "blob",
+      "rawBytes": 48958,
+      "storedBytes": 642,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "later-winner",
+      "type": "blob",
+      "rawBytes": 48958,
+      "storedBytes": 641,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "short-chat",
+      "type": "blob",
+      "rawBytes": 590,
+      "storedBytes": 161,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "repetitive-chat",
+      "type": "blob",
+      "rawBytes": 6564,
+      "storedBytes": 195,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "incompressible-CJK",
+      "type": "text",
+      "rawBytes": 8564,
+      "storedBytes": 8564,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16le",
+      "name": "PNG-asset",
+      "type": "blob",
+      "rawBytes": 538,
+      "storedBytes": 181,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "rectangle",
+      "type": "blob",
+      "rawBytes": 1072,
+      "storedBytes": 317,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "repetitive-text",
+      "type": "blob",
+      "rawBytes": 48958,
+      "storedBytes": 642,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "later-winner",
+      "type": "blob",
+      "rawBytes": 48958,
+      "storedBytes": 641,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "short-chat",
+      "type": "blob",
+      "rawBytes": 590,
+      "storedBytes": 161,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "repetitive-chat",
+      "type": "blob",
+      "rawBytes": 6564,
+      "storedBytes": 195,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "incompressible-CJK",
+      "type": "text",
+      "rawBytes": 8564,
+      "storedBytes": 8564,
+      "exactReceipt": true
+    },
+    {
+      "encoding": "UTF-16be",
+      "name": "PNG-asset",
+      "type": "blob",
+      "rawBytes": 538,
+      "storedBytes": 181,
+      "exactReceipt": true
+    }
+  ],
+  "result": "PASS: bounded synthetic byte/correctness diagnostic only",
+  "limits": [
+    "No timing, RSS or universal codec ranking",
+    "Not the historical 66-sample corpus",
+    "Browser/full-suite/sustained 16MiB growth acceptance not run here",
+    "No existing database, frozen workload or production data modified"
+  ]
+}

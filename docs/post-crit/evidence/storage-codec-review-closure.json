@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-21T20:14:40.831453+00:00",
+  "scope": "Local receipt codec implementation and contextual review closure; native/sustained acceptance open.",
+  "sourceSHA256": {
+    "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "spec/board-store.test.ts": "0e54d29b87dff49cf9c12a8f81d1bfa399ce0f74d94b6a95ed770dc2b9a50dd3",
+    "spec/board-service.test.ts": "4b3f1cc20dc97f359e3ea7b750d652c21a48ceeca8359a6b475628d53a134523",
+    "spec/board-receipt-codec.test.ts": "8103385f9d374c43a6a0967c8327f714c8f22e08d6a61bedcd0270be566382e4"
+  },
+  "review": {
+    "agent": "receipt_codec_fresh_review",
+    "initialContext": "fresh; no parent chat history",
+    "recheck": "contextual",
+    "closedFindings": [
+      "Noncanonical CHECK schema promoted before BLOB write failure",
+      "Mixed-case receipt trigger missed by ancillary lookup"
+    ],
+    "targetedPassed": 8,
+    "intentionallySkipped": 45,
+    "unresolvedInScope": []
+  },
+  "parent": {
+    "confirmed": [
+      "Independent pre-fix CHECK and mixed-case trigger reproductions retained",
+      "Actual private preview backup canonical v1 schema checked read-only",
+      "Final source hashes and SQL paths inspected",
+      "Full integrated required suite passed 1037/1037, zero skipped"
+    ],
+    "fullResult": "p7-required-first.json",
+    "fullResultScope": "Integrated working tree including uncommitted group implementation; not the codec-only commit in isolation."
+  },
+  "scopedResult": "../../../evaluation/receipt-codec-schema-nocase-board-green.json",
+  "coverageSource": "../../../evaluation/receipt-codec-verification.json",
+  "remaining": [
+    "Actual two-browser board/replay/export task on current source",
+    "Frozen original and combined 300-second resource/growth acceptance",
+    "Any later authorized release and live migration"
+  ]
+}

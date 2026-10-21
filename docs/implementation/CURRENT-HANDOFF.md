@@ -2,63 +2,85 @@
 
 Canonical checkout: Ubuntu / lizhi,
 `/home/lizhi/comp4020/comp4020-final-naaeeen`. Branch `post-crit-improvements`;
-HEAD `8b22fa4` (validation milestone; production source remains `ff949bc`). Local commits are authorized. No new push, deployment, paid service
-or personal-memory update is authorized by this task. All delivered files are English.
+HEAD `d766b2a` before the next local implementation milestone. The broad goal is
+ACTIVE. Local commits are authorized; no new push, deployment, paid service or
+personal-memory change is inferred. All delivered project material stays English.
 
-Read `docs/harness/REPORT.md`, the root plan, and `docs/post-crit/PLAN.md` and
-`OWNER-FEEDBACK.md`. New owner requirements reopen the group activity for **3–6
-active participants**, revisit personal-room purpose, and prioritize source-backed
-AI-agent methods, including Google Harness2. The overall goal remains ACTIVE.
+Read the active REPORT, root PLAN, docs/post-crit/PLAN.md and OWNER-FEEDBACK.md.
+The latest requirements are 3–6 actual contributors, useful personal-room return,
+measured receipt storage and effective, recorded AI-agent methods.
 
-## Completed local implementation and scoped evidence
+## Implemented and current verification
 
-- Camera, varied furnished bedrooms, useful desks/chairs/lighting, expanded lounge,
-  two-player Four-in-a-row, optional external Discord destination, and old-client
-  update/recovery are implemented. Milestone commits end with `881e607`, text-only
-  cleanup `c781b3a`, and clock-correction repair `ff949bc`.
-- Build, typecheck and evidence checks passed; the full suite at the clock repair
-  passed 863 tests (`docs/post-crit/evidence/p6-required-current.json`). Later resource
-  binding tests have their own 25-test pass; do not invent a new full-suite count.
-- Native frozen-old cutover, voice/update recovery and six-resident capability
-  evidence are complete with explicit source bindings. Six residents were checked
-  across bounded study/rest/game cases, not one continuous six-renderer journey.
-  Two players plus four watchers remains insufficient for the new group requirement.
-- Maintained browser core: seven cases passed, and two About-link cases passed after
-  a test-only selector correction. The new maintained `break-and-voice.spec.ts` is
-  verified: one real two-context case passed after a separate no-listener setup
-  failure. The worker closed its server/browser; parent496hashes/imagecheck passed.
-- Original 300-second resource workload: 21/21 gates, peak server RSS 197.06 MiB.
-  Separate combined workload: 23/23, RSS 182.62 MiB, 124 game actions and 733 visible
-  revision targets. All resource processes are closed. The lower second RSS is not
-  an isolated improvement comparison. Actual runtime uses semi-space 12 MiB.
-- Storage remains OPEN: the combined fixture grew 174.11 MiB logically. Repeated
-  board operation response receipts account for most growth. The game state is
-  small; passing RAM gates does not bound total retained disk. See
-  `docs/post-crit/evidence/resource-acceptance.md` and `combined-resource-storage-analysis.json`.
+- Earlier camera, six furnished presets, meaningful desks/chairs/lighting, larger
+  lounge, Four-in-a-row, external Discord link and neutral update/recovery are in
+  local commits through ff949bc. Evidence is committed at8b22fa4 and methods atd766b2a.
+- Company research and four-response matched method diagnostic are complete. Both
+  arms extracted correct decisions; no extra default requirement was adopted.
+- Receipt codec/storage schema2 is implemented; wire remains1. Exact replay and
+  canonical historical migration preserve data. CHECK/mixed-case trigger findings
+  are repaired and contextually closed on board-store hash5cd264ab / codec6bbe6f5c.
+  All213board checks pass. Native/sustained acceptance remains open.
+- Picture-table prototype accepted12-per-page with one original24-pieceSVG. Full6
+  native cases and later2 landscape-chat checks have separate source bindings.
+  Earlier incomplete images/alpha defects and the withdrawn explanation remain.
+- Actual picture backend, client and UI are implemented but not yet committed.
+  House schema5, worldVersionlounge-3, bounded transient participation, explicit
+  Start then Join, durable progress, exact retry and cross-game consent are defined
+  in GROUP-API.md. Backend203/client127/UI217 scoped checks and contextual reviews
+  close their reported findings. See GROUP-*-NOTES.md and exact manifests.
+- The parent's integrated working-tree build/typecheck passed and all1,037required
+  tests passed with zero skips in p7-required-first.json. This includes uncommitted
+  group work; it is not a claim about the codec-only commit in isolation. Later
+  pause-copy/CSS edits need their own affected checks.
 
-## Current ownership and next work
+## Active lanes and boundaries
 
-Root owns harness, requirements, plan and evidence reconciliation. The company-method
-refresh completed a four-response matched diagnostic and independent grading; default
-method unchanged, record refinements verified. The validation milestone is committed.
-`receipt_codec_implementation` owns only BoardStore/codec and focused board specs,
-using the independently reviewed storage contract. `picture_table_prototype` owns
-only original art/prototype/evidence and the single native-browser lane. No heavy
-resource run may overlap it. Group participation authority is under contextual
-architecture comparison before backend/UI implementation; its contract is not frozen.
+Root owns integration, current docs, commits and service4108. The isolated process
+was PID98214 at this checkpoint, launched from .local/post-crit/p7-integrated with
+fresh synthetic data and --max-semi-space-size=12. Verify process identity before
+signalling it. Its initial absent-data-directory startup failure is preserved;
+only the new fixture directory was created. Original user data is untouched.
 
-Next: finish method/plan documentation commit; obtain the prototype and exact group
-contract, then split backend and UI ownership. Review/test codec changes independently,
-run affected native/full checks and a newly source-bound sustained workload. Preserve
-all failed evidence; the overall goal remains active until authorized implementation
-and its required verification are complete.
+picture_ui_integration owns the sole native browser lane and current CSS repair.
+The first actual two-context task passed seven gates, then found landscape chat
+under the Break panel and the board clipped below390px. Original images/results
+are in picture-ui-native-task-first. Geometry-only chat acceptance was false;
+new checks require actual visibility and pointer reachability. Only the worker's
+owned CSS/necessary UI is unfrozen for repair. No resource workload overlaps it.
 
-Original preview on 4093 was stopped. Original `.local/implementation-s1` data is
-untouched; verified SQLite backups are in
-`.local/post-crit/preview-backup-20261021T170653Z/`. The isolated 4108 fixture is closed. The prototype worker may own its separate
-loopback server; check with it, never trust an old PID file.
-Use ordinary WSL exec under current full-access / never-approval policy. Never
-reuse the old outside-sandbox PTY 40567 or pass `sandbox_permissions`.
+Several10-second peer-admission failures with the owner's House-settings panel
+open remain unexplained. One ordinary closed-panel case passed; this is not causal
+proof or permission to relax the deadline. A bounded counterbalanced diagnostic
+is planned. Preserve all attempts, including the earlier mismatched5-second expect.
+
+postcrit_resource_acceptance is preparing only: instrument/protocol/grader, no heavy
+runs or extra service. Root reviews the frozen instrument before GO. Keep the
+original300-second workload unchanged, then a separate combined extension retaining
+124game actions/733targets and adding62picture actions/372targets (two houses,
+six real socket participants each). Storage target is <=16MiB retained board+house
+receipt-response growth under this workload; exact response digests are checked
+post-run after server exit. Main/WAL/SHM and allocated/logical bytes stay distinct.
+Do not inherit old resource acceptance or claim a lifetime storage bound.
+
+## Next actions
+
+1. Commit the reviewed codec slice with scoped213-test/implementation evidence.
+2. Repair/recheck native landscape/chat, investigate admission within its registered
+   bound, then verify3 and6 actual browser contributors and personal-room return.
+3. Recheck maintained browser flows, current board replay/export and migration as
+   affected; inspect/commit the picture foundation and UI in logical milestones.
+4. Freeze final production/protocol, close native browsers and stop root4108, then
+   run original and combined300-second workloads sequentially. Preserve all gates,
+   failures, source identities and storage observations.
+5. Reconcile plans/research/review/audit/README, inspect final diff/secrets, and restore
+   a deliberate local preview. No publication is claimed or newly authorized.
+
+Original4093preview is stopped. Original.local/implementation-s1 data is untouched;
+verified backup is .local/post-crit/preview-backup-20261021T170653Z/. Do not overwrite
+or reseed it. Use current full-access ordinary WSL exec; never reuse old outside-
+sandbox PTY40567 or pass sandbox_permissions. Use followup_task to resume completed
+workers; a send_message alone does not restart execution.
 
 ## Historical release records
 

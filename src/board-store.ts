@@ -2,6 +2,7 @@ import { crc32 } from "node:zlib";
 import { createHash } from "node:crypto";
 import { DatabaseSync, type StatementSync } from "node:sqlite";
 import { BOARD_LIMITS, BoardError, boardCanonical, boardFail, boardId, boardKeys, boardObject, boardText, boardUuid, orderBoardElements, validateBoardPatch, winningBoardElement } from "./board-contract.ts";
+import { decodeBoardReceipt, encodeBoardReceipt, validateBoardReceiptStorage, type BoardReceiptKind, type BoardTextEncoding } from "./board-receipt-codec.ts";
 import type { BoardChat, BoardElement, BoardFile, BoardReceipt, BoardSnapshot } from "./board-contract.ts";
 type ElementRow = {
     id: string;
@@ -16,6 +17,9 @@ type AssetRow = {
     digest: string;
 };
 const retentionMs = BOARD_LIMITS.chatDays * 86400000;
+const receiptTableSql = "CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response TEXT NOT NULL,PRIMARY KEY(actor_id,id))";
+// Only unquoted canonical SQL with case/ASCII SQL-whitespace differences is supported.
+const receiptSqlIdentity = (sql: string): string => sql.replace(/[ \t\r\n\f]/g, "").toLowerCase();
 const storageError = (error: unknown): never => {
     if (error instanceof BoardError)
         throw error;
@@ -26,6 +30,7 @@ export class BoardStore {
     readonly db!: DatabaseSync;
     private closed = false;
     private utf8Storage = true;
+    private textEncoding: BoardTextEncoding = "UTF-8";
     private readonly statements = new Map<string, StatementSync>();
     private prepared(sql: string): StatementSync {
         let s = this.statements.get(sql);
@@ -46,7 +51,7 @@ export class BoardStore {
             const version = (this.prepared("PRAGMA user_version").get() as {
                 user_version: number;
             }).user_version;
-            if (version !== 0 && version !== 1)
+            if (version !== 0 && version !== 1 && version !== 2)
                 boardFail("STORAGE_UNAVAILABLE", "This board database version is unsupported.");
             if (version === 0) {
                 if (this.prepared("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").get())
@@ -59,19 +64,22 @@ export class BoardStore {
  CREATE TABLE assets(house_id TEXT NOT NULL REFERENCES boards(house_id),id TEXT NOT NULL,mime_type TEXT NOT NULL,bytes BLOB NOT NULL,digest TEXT NOT NULL,author_id TEXT NOT NULL,created INTEGER NOT NULL,PRIMARY KEY(house_id,id));
  CREATE TABLE chat(house_id TEXT NOT NULL REFERENCES boards(house_id),id TEXT NOT NULL,author_id TEXT NOT NULL,name TEXT NOT NULL,text TEXT NOT NULL,at INTEGER NOT NULL,sequence INTEGER NOT NULL,PRIMARY KEY(house_id,id));
  CREATE INDEX chat_house_sequence ON chat(house_id,sequence);
- CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response TEXT NOT NULL,PRIMARY KEY(actor_id,id));
- PRAGMA user_version=1;`));
+ ${receiptTableSql};
+ PRAGMA user_version=2;`));
             }
             else {
-                const required = ["boards", "elements", "contributions", "assets", "chat", "receipts"];
-                const tables = (this.prepared("SELECT name FROM sqlite_master WHERE type='table'").all() as {
-                    name: string;
-                }[]).map(r => r.name);
-                if (required.some(t => !tables.includes(t)))
-                    boardFail("STORAGE_UNAVAILABLE", "The board data path contains a different database.");
                 this.db.exec("PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA busy_timeout=5000;");
+                this.transaction(() => {
+                    this.validateSchema();
+                    if (version === 1)
+                        this.db.exec("PRAGMA user_version=2");
+                });
             }
-            this.utf8Storage = (this.prepared("PRAGMA encoding").get() as { encoding: string }).encoding === "UTF-8";
+            const encoding = (this.prepared("PRAGMA encoding").get() as { encoding: string }).encoding;
+            if (encoding !== "UTF-8" && encoding !== "UTF-16le" && encoding !== "UTF-16be")
+                boardFail("STORAGE_UNAVAILABLE", "This board database encoding is unsupported.");
+            this.textEncoding = encoding;
+            this.utf8Storage = encoding === "UTF-8";
             this.prepared("SELECT house_id FROM boards LIMIT 1").get();
         }
         catch (e) {
@@ -79,6 +87,32 @@ export class BoardStore {
             this.db.close();
             storageError(e);
         }
+    }
+    private validateSchema(): void {
+        // A v1 upgrade changes only metadata, after verifying the schema we can use.
+        const schemas: Record<string, string[]> = {
+            boards: ["house_id:TEXT:0:1", "sequence:INTEGER:1:0"],
+            elements: ["house_id:TEXT:1:1", "id:TEXT:1:2", "value:TEXT:1:0", "author_id:TEXT:1:0"],
+            contributions: ["house_id:TEXT:1:1", "actor_id:TEXT:1:2", "id:TEXT:1:3", "value:TEXT:1:0"],
+            assets: ["house_id:TEXT:1:1", "id:TEXT:1:2", "mime_type:TEXT:1:0", "bytes:BLOB:1:0", "digest:TEXT:1:0", "author_id:TEXT:1:0", "created:INTEGER:1:0"],
+            chat: ["house_id:TEXT:1:1", "id:TEXT:1:2", "author_id:TEXT:1:0", "name:TEXT:1:0", "text:TEXT:1:0", "at:INTEGER:1:0", "sequence:INTEGER:1:0"],
+            receipts: ["actor_id:TEXT:1:1", "id:TEXT:1:2", "command_hash:TEXT:1:0", "response:TEXT:1:0"],
+        };
+        for (const [table, expected] of Object.entries(schemas)) {
+            const columns = this.prepared(`PRAGMA table_info(${table})`).all() as { name: string; type: string; notnull: number; pk: number }[];
+            const actual = columns.map(c => `${c.name}:${c.type.toUpperCase()}:${c.notnull}:${c.pk}`);
+            if (actual.length !== expected.length || expected.some((column, index) => column !== actual[index]))
+                boardFail("STORAGE_UNAVAILABLE", "The board data path contains an incompatible database.");
+        }
+        const receiptTable = (this.prepared("PRAGMA table_list").all() as { name: string; type: string; strict: number }[]).find(t => t.name === "receipts" && t.type === "table");
+        if (!receiptTable || receiptTable.strict !== 0)
+            boardFail("STORAGE_UNAVAILABLE", "The board receipt table is incompatible.");
+        // Column metadata omits CHECK clauses and additional constraints. Support the
+        // known application schema, rather than guessing arbitrary custom SQL is safe.
+        const definition = this.prepared("SELECT sql FROM sqlite_schema WHERE type='table' AND name='receipts'").get() as { sql: string } | undefined;
+        const extra = this.prepared("SELECT name FROM sqlite_schema WHERE tbl_name='receipts' COLLATE NOCASE AND type IN ('trigger','index') AND sql IS NOT NULL").get();
+        if (!definition || receiptSqlIdentity(definition.sql) !== receiptSqlIdentity(receiptTableSql) || extra)
+            boardFail("STORAGE_UNAVAILABLE", "The board receipt schema is unsupported.");
     }
     private transaction<T>(action: () => T): T {
         this.db.exec("BEGIN IMMEDIATE");
@@ -175,28 +209,32 @@ export class BoardStore {
             return storageError(e);
         }
     }
-    private mutate(actorId: string, id: string, command: unknown, action: () => BoardReceipt): BoardReceipt {
+    private mutate(actorId: string, id: string, houseId: string, kind: BoardReceiptKind, command: unknown, action: () => BoardReceipt): BoardReceipt {
         boardUuid(actorId);
         const hash = createHash("sha256").update(boardCanonical(command)).digest("hex");
         return this.transaction(() => {
-            const prior = this.prepared("SELECT command_hash,response FROM receipts WHERE actor_id=? AND id=?").get(actorId, id) as {
+            const prior = this.prepared("SELECT command_hash,typeof(response) AS response_type,octet_length(response) AS response_bytes FROM receipts WHERE actor_id=? AND id=?").get(actorId, id) as {
                 command_hash: string;
-                response: string;
+                response_type: string;
+                response_bytes: number;
             } | undefined;
             if (prior) {
                 if (prior.command_hash !== hash)
                     boardFail("ID_REUSED", "This save ID belongs to another edit. Keep the original pending action.");
-                return JSON.parse(prior.response) as BoardReceipt;
+                validateBoardReceiptStorage(prior.response_type, prior.response_bytes, this.textEncoding);
+                // CAST preserves TEXT's stored encoding for fatal decoding, including legacy rows.
+                const row = this.prepared("SELECT CAST(response AS BLOB) AS response FROM receipts WHERE actor_id=? AND id=?").get(actorId, id) as { response: Uint8Array };
+                return decodeBoardReceipt(row.response, prior.response_type, this.textEncoding, { id, houseId, kind });
             }
             const receipt = action();
-            this.prepared("INSERT INTO receipts(actor_id,id,command_hash,response) VALUES (?,?,?,?)").run(actorId, id, hash, JSON.stringify(receipt));
+            this.prepared("INSERT INTO receipts(actor_id,id,command_hash,response) VALUES (?,?,?,?)").run(actorId, id, hash, encodeBoardReceipt(receipt, this.textEncoding));
             return receipt;
         });
     }
     patch(actorId: string, value: unknown): BoardReceipt {
         try {
             const p = validateBoardPatch(value);
-            return this.mutate(actorId, p.id, { type: "patch", ...p }, () => {
+            return this.mutate(actorId, p.id, p.houseId, "patch", { type: "patch", ...p }, () => {
                 this.ensure(p.houseId);
                 const totals = this.elementTotals(p.houseId);
                 let count = totals.count, bytes = totals.bytes;
@@ -265,7 +303,7 @@ export class BoardStore {
             const mimeType = f.mimeType as string;
             validateImageBytes(bytes, mimeType);
             const digest = createHash("sha256").update(bytes).digest("hex");
-            return this.mutate(actorId, id, { type: "asset", id, houseId, file: { id: fileId, mimeType, digest } }, () => {
+            return this.mutate(actorId, id, houseId, "asset", { type: "asset", id, houseId, file: { id: fileId, mimeType, digest } }, () => {
                 this.ensure(houseId);
                 const prior = this.prepared("SELECT mime_type,digest FROM assets WHERE house_id=? AND id=?").get(houseId, fileId) as Pick<AssetRow, "mime_type" | "digest"> | undefined;
                 if (prior && (prior.digest !== digest || prior.mime_type !== mimeType))
@@ -309,7 +347,7 @@ export class BoardStore {
             boardKeys(p, ["id", "houseId", "text"]);
             const id = boardUuid(p.id), houseId = boardUuid(p.houseId), text = boardText(p.text, BOARD_LIMITS.chatCharacters, true);
             boardText(name, 40, true);
-            return this.mutate(actorId, id, { type: "chat", id, houseId, text }, () => {
+            return this.mutate(actorId, id, houseId, "chat", { type: "chat", id, houseId, text }, () => {
                 this.ensure(houseId);
                 const sequence = this.bump(houseId), message = { id, authorId: actorId, name, text, at: Date.now(), sequence };
                 this.prepared("INSERT INTO chat(house_id,id,author_id,name,text,at,sequence) VALUES (?,?,?,?,?,?,?)").run(houseId, id, actorId, name, text, message.at, sequence);

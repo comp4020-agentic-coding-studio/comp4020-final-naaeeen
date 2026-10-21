@@ -1,0 +1,8 @@
+{
+  "scope": "Read-only schema metadata from the verified private preview backup; no user content read or database changed.",
+  "file": "board.sqlite",
+  "userVersion": 1,
+  "encoding": "UTF-8",
+  "receiptDDL": "CREATE TABLE receipts(actor_id TEXT NOT NULL,id TEXT NOT NULL,command_hash TEXT NOT NULL,response TEXT NOT NULL,PRIMARY KEY(actor_id,id))",
+  "receiptDDLSHA256": "cb6d16c1b69702dc3582e8b30ce9e2365f048b37a0d391ef9df1f355296ec9ae"
+}

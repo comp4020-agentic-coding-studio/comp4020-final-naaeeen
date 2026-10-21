@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-10-21T19:28:43.880341+00:00",
+  "head": "d766b2a9f8064f0af31050a61818d07757da3471",
+  "scope": "Preserved initial GREEN before confirmed noncanonical receipt-schema gate repair",
+  "sources": {
+    "src/board-store.ts": "b1ca86b0c4ce19f4cb6f05e9955b985ff496df63cb990c94702a32d4b4606050",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "spec/board-store.test.ts": "5125b2f3ddc8d839a0d1dc70e6beab74674713fce3666910b2b7208da508fa92",
+    "spec/board-receipt-codec.test.ts": "8103385f9d374c43a6a0967c8327f714c8f22e08d6a61bedcd0270be566382e4",
+    "spec/board-service.test.ts": "4b3f1cc20dc97f359e3ea7b750d652c21a48ceeca8359a6b475628d53a134523",
+    "evaluation/receipt-codec-board-green.json": "2837b483481c412464dc9556fb81fe8b003c2de25f8a8e73c43046041ca29a08"
+  },
+  "greenArtifact": "evaluation/receipt-codec-board-green.json",
+  "greenCounts": {
+    "numPassedTests": 205,
+    "numFailedTests": 0,
+    "numTotalTests": 205
+  }
+}

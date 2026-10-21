@@ -124,12 +124,34 @@ describe("actual board HTTP and Socket.IO", () => {
         await expect(f.client(f.owner, "https://foreign.invalid")).rejects.toThrow();
         expect(f.board.snapshot(f.home.id).elements).toEqual([]);
     });
+    test("HTTP retries decode the original winner after peer edits and chat expiry", async () => {
+        const f = await fixture(), houseId = f.home.id, originalBody = patchBody(houseId, [element("replayed", 12)]);
+        const saved = await f.post("/api/board/patch", originalBody);
+        expect(saved.status).toBe(200);
+        expect(f.board.db.prepare("SELECT typeof(response) AS type FROM receipts WHERE id=?").get(originalBody.id)!.type).toBe("blob");
+        await f.post("/api/board/patch", patchBody(houseId, [element("replayed", 99, 2)]), f.guest);
+        expect(await f.post("/api/board/patch", originalBody)).toEqual(saved);
+        const chatBody = { id: randomUUID(), houseId, text: "retained response ".repeat(100) }, chat = await f.post("/api/board/chat", chatBody);
+        f.board.db.prepare("UPDATE chat SET at=0 WHERE id=?").run(chatBody.id);
+        expect((await f.get(`/api/board/snapshot?houseId=${houseId}`)).body.chat).toEqual([]);
+        expect(await f.post("/api/board/chat", chatBody)).toEqual(chat);
+        const sequence = f.board.currentSequence(houseId);
+        f.board.db.prepare("UPDATE receipts SET response=? WHERE id=?").run("null", originalBody.id);
+        const corrupt = await f.post("/api/board/patch", originalBody);
+        expect(corrupt.status).toBe(503); expect(corrupt.body.code).toBe("STORAGE_UNAVAILABLE");
+        const reused = await f.post("/api/board/patch", { ...originalBody, elements: [element("different")] });
+        expect(reused.body.code).toBe("ID_REUSED");
+        expect(f.board.currentSequence(houseId)).toBe(sequence);
+        expect(f.board.snapshot(houseId).elements[0]!.x).toBe(99);
+    });
     test("reads binary separately, rejects MIME spoof, and preserves own export after removal", async () => {
         const f = await fixture(), houseId = f.home.id;
         const upload = await f.post("/api/board/asset", { id: randomUUID(), houseId, file: { id: "image_a", mimeType: "image/png", dataURL: "data:image/png;base64," + png } }, f.guest);
         expect(upload.status).toBe(200);
         expect(upload.body.file).toMatchObject({ id: "image_a", mimeType: "image/png" });
-        await f.post("/api/board/patch", patchBody(houseId, [element("guest_contribution", 12)]), f.guest);
+        const authored = patchBody(houseId, [element("guest_contribution", 12)]);
+        await f.post("/api/board/patch", authored, f.guest);
+        expect(f.board.db.prepare("SELECT typeof(response) AS type FROM receipts WHERE id=?").get(authored.id)!.type).toBe("blob");
         await f.post("/api/board/patch", patchBody(houseId, [element("guest_contribution", 25, 2)]), f.owner);
         const snapshot = await f.get(`/api/board/snapshot?houseId=${houseId}`);
         expect(snapshot.body.files[0]).not.toHaveProperty("dataURL");
