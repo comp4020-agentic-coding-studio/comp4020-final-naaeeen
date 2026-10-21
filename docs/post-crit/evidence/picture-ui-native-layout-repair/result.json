@@ -1,0 +1,549 @@
+{
+  "label": "layout-repair",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Actual current app, two native browser contexts; one temporary observer tab and one explicitly bounded dropped Join ACK. No fake UI state, human or physical-device result.",
+  "startedAt": "2026-10-21T20:14:06.295Z",
+  "protocolSHA256": "502fa1e4306122a43fd2be8a158f1a308ab832862ef3adb3c9e08125f0c4ca75",
+  "runnerSHA256": "040917d2582ed429743b8e788e20378f0b8e1de3ec16e4aa6fca1e3c489bd557",
+  "sourceSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "e7a1f61d8312f13a824a89820f3ce5e740efc0992236efb55b9e6d56ca7ca6c8",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [
+    {
+      "name": "two actual residents and saved work with newer draft",
+      "at": "2026-10-21T20:14:13.018Z"
+    },
+    {
+      "name": "opening Watch never joined; real Start and separate Join",
+      "at": "2026-10-21T20:14:31.753Z"
+    },
+    {
+      "name": "desktop and portrait initial targets/exit",
+      "at": "2026-10-21T20:14:34.147Z"
+    },
+    {
+      "name": "real readable chat and primary landscape controls",
+      "at": "2026-10-21T20:14:36.986Z"
+    },
+    {
+      "name": "bounded actual layout diagnostic only",
+      "at": "2026-10-21T20:14:36.986Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-layout-repair/desktop-initial.png",
+      "sha256": "a0715eb71f83b94a6a3139188a4119ff701ac03e7621823e93d7ecdd9632cd90",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-layout-repair/portrait-initial.png",
+      "sha256": "afaa5a3ef7874a689469f6a84c11b1fca8a6e281ec03c48d6fc37ebab8ad0a87",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-layout-repair/landscape-real-chat.png",
+      "sha256": "f775feeb72f6e585309e545ca6a9a34536a50fd9845541e4db69ec04f230655e",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-layout-repair/landscape-initial.png",
+      "sha256": "b53bb0456841a49a19004bfba128c80aff719cc554e25245406b7d93c8a4393d",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [
+    {
+      "name": "desktop-initial",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1,
+        "clientWidth": 1920
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 843,
+      "panelClientHeight": 843,
+      "board": {
+        "x": 447,
+        "y": 429.109375,
+        "width": 650,
+        "height": 437.375,
+        "right": 1097,
+        "bottom": 866.484375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 1199,
+        "y": 466.3125,
+        "width": 350,
+        "height": 263.75,
+        "right": 1549,
+        "bottom": 730.0625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 705.921875,
+        "y": 338.109375,
+        "width": 137.15625,
+        "height": 44,
+        "right": 843.078125,
+        "bottom": 382.109375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 79.25,
+      "cellMinimum": 106.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "portrait-initial",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 1,
+        "clientWidth": 390
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 913,
+      "panelClientHeight": 826,
+      "board": {
+        "x": 30,
+        "y": 360.78125,
+        "width": 330,
+        "height": 223.375,
+        "right": 360,
+        "bottom": 584.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 21,
+        "y": 640.15625,
+        "width": 348,
+        "height": 120,
+        "right": 369,
+        "bottom": 760.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 21,
+        "y": 278.78125,
+        "width": 348,
+        "height": 44,
+        "right": 369,
+        "bottom": 322.78125,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 53,
+      "cellMinimum": 53.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "landscape-real-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 322,
+        "height": 251
+      },
+      "sendBottom": 374,
+      "closeTop": 21.5,
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "landscape-initial",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "devicePixelRatio": 1,
+        "clientWidth": 844
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 433,
+      "panelClientHeight": 372,
+      "board": {
+        "x": 94,
+        "y": 173,
+        "width": 296,
+        "height": 200.6875,
+        "right": 390,
+        "bottom": 373.6875,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 483,
+        "y": 173,
+        "width": 340,
+        "height": 118,
+        "right": 823,
+        "bottom": 291,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 296.109375,
+        "y": 105,
+        "width": 112.296875,
+        "height": 44,
+        "right": 408.40625,
+        "bottom": 149,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 50.5,
+      "cellMinimum": 47.65625,
+      "horizontalOverflow": false
+    }
+  ],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:14:06.675Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:14:07.797Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:14:08.149Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:14:08.860Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:14:10.309Z"
+    },
+    {
+      "event": "join live",
+      "at": "2026-10-21T20:14:12.648Z"
+    }
+  ],
+  "network": [
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:06.882Z",
+      "timing": {
+        "startTime": 1792613646859.606,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.231,
+        "responseStart": 18.442,
+        "responseEnd": 26.57
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:07.803Z",
+      "timing": {
+        "startTime": 1792613647795.168,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.196,
+        "responseStart": 1.349,
+        "responseEnd": 4.096
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:14:07.817Z",
+      "timing": {
+        "startTime": 1792613647801.4338,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.197,
+        "responseStart": 5.232,
+        "responseEnd": 10.334
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:07.819Z",
+      "timing": {
+        "startTime": 1792613647815.108,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.442,
+        "responseStart": 2.16,
+        "responseEnd": 5.252
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:08.142Z",
+      "timing": {
+        "startTime": 1792613648057.85,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.215,
+        "responseStart": 1.74,
+        "responseEnd": 4.604
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T20:14:08.685Z",
+      "timing": {
+        "startTime": 1792613648621.9248,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.321,
+        "responseStart": 1.698,
+        "responseEnd": 4.115
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:08.688Z",
+      "timing": {
+        "startTime": 1792613648622.471,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.157,
+        "responseStart": 2.939,
+        "responseEnd": 5.237
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:09.059Z",
+      "timing": {
+        "startTime": 1792613649036.535,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.937,
+        "responseStart": 12.212,
+        "responseEnd": 14.97
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:10.358Z",
+      "timing": {
+        "startTime": 1792613650306.6191,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.202,
+        "responseStart": 4.841,
+        "responseEnd": 8.832
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:14:10.371Z",
+      "timing": {
+        "startTime": 1792613650358.14,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.277,
+        "responseStart": 8.279,
+        "responseEnd": 10.601
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:10.376Z",
+      "timing": {
+        "startTime": 1792613650370.997,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.191,
+        "responseStart": 1.234,
+        "responseEnd": 3.204
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:12.638Z",
+      "timing": {
+        "startTime": 1792613651886.2842,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.294,
+        "responseStart": 1.999,
+        "responseEnd": 4.749
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:29.701Z",
+      "timing": {
+        "startTime": 1792613669691.161,
+        "domainLookupStart": 0.332,
+        "domainLookupEnd": 0.424,
+        "connectStart": 0.424,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.06,
+        "requestStart": 1.155,
+        "responseStart": 2.223,
+        "responseEnd": 7.149
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:29.733Z",
+      "timing": {
+        "startTime": 1792613669726.926,
+        "domainLookupStart": 0.426,
+        "domainLookupEnd": 0.438,
+        "connectStart": 0.438,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.082,
+        "requestStart": 1.212,
+        "responseStart": 3.048,
+        "responseEnd": 7.421
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:14:29.777Z",
+      "timing": {
+        "startTime": 1792613669773.365,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.24,
+        "responseStart": 1.72,
+        "responseEnd": 4.409
+      }
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "status": "PASS_LAYOUT_ONLY",
+  "finishedAt": "2026-10-21T20:14:37.207Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "e7a1f61d8312f13a824a89820f3ce5e740efc0992236efb55b9e6d56ca7ca6c8",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

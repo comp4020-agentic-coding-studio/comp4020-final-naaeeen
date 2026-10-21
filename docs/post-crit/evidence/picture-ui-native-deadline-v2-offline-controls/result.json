@@ -1,0 +1,129 @@
+{
+  "label": "deadline-v2-offline-controls",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Offline deadline evaluator calibration only. No browser, service, participant or product result.",
+  "mode": "deadline-self-check",
+  "evaluatorVersion": 2,
+  "invocation": {
+    "argv": [
+      "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs",
+      "--label",
+      "deadline-v2-offline-controls",
+      "--deadline-self-check"
+    ],
+    "cwd": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+    "nodeExecutable": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "requestedArguments": [
+      "--label",
+      "deadline-v2-offline-controls",
+      "--deadline-self-check"
+    ]
+  },
+  "rendererOptions": {
+    "launch": {
+      "headless": true,
+      "chromiumSandbox": true,
+      "executablePath": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "args": [
+        "--use-angle=swiftshader"
+      ]
+    },
+    "ownerContext": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1
+    },
+    "peerContext": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "hasTouch": true,
+      "isMobile": false,
+      "deviceScaleFactor": 1
+    },
+    "actualLaunchOccurred": false
+  },
+  "instrumentation": {
+    "interceptors": [],
+    "passiveObservers": [],
+    "additionalTabs": []
+  },
+  "admissions": [],
+  "startedAt": "2026-10-21T21:12:21.920Z",
+  "protocolSHA256": "df85cd52854e5049bee000c66bc66bdf78de5a0365e4cdefb2f45c75260c8b44",
+  "runnerSHA256": "83213154853ec70eeee928ce1d676144621ebfdd4107487c4f87c2a5cb349d39",
+  "sourceSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [],
+  "screenshots": [],
+  "metrics": [],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [],
+  "network": [],
+  "deadlineControls": [
+    {
+      "name": "positive-shared-budget",
+      "clockDomain": "virtual monotonic milliseconds",
+      "elapsedMs": 99,
+      "budgetMs": 100,
+      "outcome": "PASS"
+    },
+    {
+      "name": "negative-two-individual-waits-would-pass",
+      "individualDurationsMs": [
+        70,
+        50
+      ],
+      "individual100msChecksWouldPass": true,
+      "compositeElapsedMs": 120,
+      "budgetMs": 100,
+      "outcome": "EXPECTED_REJECTION"
+    },
+    {
+      "name": "negative-exhausted-budget-never-returns-zero-timeout",
+      "budgetMs": 100,
+      "outcome": "EXPECTED_REJECTION"
+    }
+  ],
+  "status": "PASS_OFFLINE_DEADLINE_CONTROLS",
+  "finishedAt": "2026-10-21T21:12:21.927Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

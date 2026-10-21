@@ -10,7 +10,9 @@ async function breakTable(page: Page) {
   await closeTool(page);
   await page.getByRole('button', { name: 'Places', exact: true }).click();
   await page.locator('#places-panel [data-place="game"]').click();
-  await expect(page.locator('#game-panel')).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator('#break-four')).toBeVisible({ timeout: 30_000 });
+  await page.locator('#break-four').click();
+  await expect(page.locator('#game-panel')).toBeVisible();
 }
 
 test('friends choose a shared break, return to their next step and share an external voice destination', async ({ browser }, info) => {
@@ -69,6 +71,8 @@ test('friends choose a shared break, return to their next step and share an exte
     }))).toBe(true);
     await peer.screenshot({ path: info.outputPath('shared-break-phone.png') });
     await owner.locator('[data-game-action="return"]').click();
+    await expect(owner.locator('#room-panel')).toBeVisible({ timeout: 30_000 });
+    await owner.locator('#open-room-work').click();
     await expect(owner.locator('#board-panel')).toBeVisible();
     await expect(owner.getByLabel('Next step', { exact: true })).toHaveValue('Write the missing step myself');
     await expect(owner.locator('input[name="availability"][value="quiet"]')).toBeChecked();

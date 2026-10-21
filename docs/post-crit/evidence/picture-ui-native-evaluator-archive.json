@@ -1,0 +1,7 @@
+{
+  "runnerSHA256": "8d3c9b34895e287f1584cf3835b4bf03b38e64a05b542c834259feeae67b87bb",
+  "protocolSHA256": "40d1ba95bb2689e214b31ece3445188dc05c06fc2da8d5e4d4d01fa51c612adc",
+  "runner": "picture-ui-native-evaluator-before-shared-deadline.mjs",
+  "protocol": "picture-ui-native-protocol-before-shared-deadline.md",
+  "reason": "Preserve original two-sequential-wait evaluator/provenance before new shared submit-to-ready deadline; old actual passing durations remain scoped historical evidence."
+}

@@ -1,0 +1,907 @@
+{
+  "label": "ordinary-body-diagnostic",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Actual current app, two native browser contexts; one temporary observer tab and one explicitly bounded dropped Join ACK. No fake UI state, human or physical-device result.",
+  "startedAt": "2026-10-21T20:20:47.668Z",
+  "protocolSHA256": "36802b3907610bd1c125c753f9a6444497f0b70a767c98b40e728f9d7c15017b",
+  "runnerSHA256": "78c67be73d44dcb83be422ca510b682eb38a3703cf67b45a5ff565d49e7793c3",
+  "sourceSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "861fd724cd2234d2fff573da3f821b269c6f38d3fc11e02fa9616b4fe066337d",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [
+    {
+      "name": "two actual residents and saved work with newer draft",
+      "at": "2026-10-21T20:20:55.467Z"
+    },
+    {
+      "name": "opening Watch never joined; real Start and separate Join",
+      "at": "2026-10-21T20:21:14.930Z"
+    },
+    {
+      "name": "desktop and portrait initial targets/exit",
+      "at": "2026-10-21T20:21:17.258Z"
+    },
+    {
+      "name": "real readable chat and primary landscape controls",
+      "at": "2026-10-21T20:21:20.046Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/desktop-initial.png",
+      "sha256": "a0715eb71f83b94a6a3139188a4119ff701ac03e7621823e93d7ecdd9632cd90",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/portrait-initial.png",
+      "sha256": "ab46c34671e503cd16c23a7d088cbad08a50704836b73815d1a5f79300186b04",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/landscape-real-chat.png",
+      "sha256": "60f53f63829d9fdce4c453e44c2be6909aac6b42b83aeac0f54254a792e3b684",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/landscape-minimum-chat.png",
+      "sha256": "cdd9956151dc00eba8a58867202f206edd48eac64bb8e002d96089e748a3d4a3",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/landscape-initial.png",
+      "sha256": "de85908158ba25a30a9265f548c784db336014fef8227cee6d099cca4f68874b",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/desktop-ordinary-game-chat.png",
+      "sha256": "6369cb787462e3463c9ff481c6b5abd0d7ee395a035e0317e52280434aabe172",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/failure-owner.png",
+      "sha256": "55775a83482f95db3b3f882615cf5d6761e9c522e832651abc19ee96224de645",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-ordinary-body-diagnostic/failure-peer.png",
+      "sha256": "afaa5a3ef7874a689469f6a84c11b1fca8a6e281ec03c48d6fc37ebab8ad0a87",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [
+    {
+      "name": "desktop-initial",
+      "activities": [
+        {
+          "x": 371,
+          "y": 197.71875,
+          "width": 585,
+          "height": 53,
+          "right": 956,
+          "bottom": 250.71875,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 964,
+          "y": 197.71875,
+          "width": 585,
+          "height": 53,
+          "right": 1549,
+          "bottom": 250.71875,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1,
+        "clientWidth": 1920
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 843,
+      "panelClientHeight": 843,
+      "board": {
+        "x": 447,
+        "y": 429.109375,
+        "width": 650,
+        "height": 437.375,
+        "right": 1097,
+        "bottom": 866.484375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 1199,
+        "y": 466.3125,
+        "width": 350,
+        "height": 263.75,
+        "right": 1549,
+        "bottom": 730.0625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 705.921875,
+        "y": 338.109375,
+        "width": 137.15625,
+        "height": 44,
+        "right": 843.078125,
+        "bottom": 382.109375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 79.25,
+      "cellMinimum": 106.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "portrait-initial",
+      "activities": [
+        {
+          "x": 21,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 192,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 198,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 369,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 1,
+        "clientWidth": 390
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 913,
+      "panelClientHeight": 826,
+      "board": {
+        "x": 30,
+        "y": 360.78125,
+        "width": 330,
+        "height": 223.375,
+        "right": 360,
+        "bottom": 584.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 21,
+        "y": 640.15625,
+        "width": 348,
+        "height": 120,
+        "right": 369,
+        "bottom": 760.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 21,
+        "y": 278.78125,
+        "width": 348,
+        "height": 44,
+        "right": 369,
+        "bottom": 322.78125,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 53,
+      "cellMinimum": 53.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "landscape-real-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 322,
+        "height": 251
+      },
+      "sendBottom": 374,
+      "closeTop": 21.5,
+      "bodyRects": [],
+      "bodyFullyContained": false,
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "landscape-minimum-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 161,
+        "height": 90
+      },
+      "sendBottom": 217,
+      "closeTop": 21.5,
+      "bodyRects": [],
+      "bodyFullyContained": false,
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true,
+      "windowHeight": 220
+    },
+    {
+      "name": "landscape-initial",
+      "activities": [
+        {
+          "x": 189,
+          "y": 17,
+          "width": 211,
+          "height": 44,
+          "right": 400,
+          "bottom": 61,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 408,
+          "y": 17,
+          "width": 211,
+          "height": 44,
+          "right": 619,
+          "bottom": 61,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "devicePixelRatio": 1,
+        "clientWidth": 844
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 433,
+      "panelClientHeight": 372,
+      "board": {
+        "x": 94,
+        "y": 173,
+        "width": 296,
+        "height": 200.6875,
+        "right": 390,
+        "bottom": 373.6875,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 483,
+        "y": 173,
+        "width": 340,
+        "height": 118,
+        "right": 823,
+        "bottom": 291,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 296.109375,
+        "y": 105,
+        "width": 112.296875,
+        "height": 44,
+        "right": 408.40625,
+        "bottom": 149,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 50.5,
+      "cellMinimum": 47.65625,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "desktop-ordinary-game",
+      "controls": [
+        {
+          "selector": "#break-picture",
+          "width": 268,
+          "height": 53,
+          "exposed": true
+        },
+        {
+          "selector": "#break-four",
+          "width": 268,
+          "height": 53,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"return\"]",
+          "width": 135.15625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"join\"]",
+          "width": 135.546875,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"0\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"1\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"2\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"3\"]",
+          "width": 74.296875,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"4\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"5\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"6\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        }
+      ]
+    },
+    {
+      "name": "desktop-ordinary-game-chat",
+      "message": {
+        "top": 37,
+        "bottom": 119.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 119,
+        "height": 48
+      },
+      "sendBottom": 217,
+      "closeTop": 21.5,
+      "bodyRects": [],
+      "bodyFullyContained": false,
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": false
+    },
+    {
+      "name": "failure-owner",
+      "activities": [
+        {
+          "x": 688,
+          "y": 207.8125,
+          "width": 268,
+          "height": 53,
+          "right": 956,
+          "bottom": 260.8125,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 964,
+          "y": 207.8125,
+          "width": 268,
+          "height": 53,
+          "right": 1232,
+          "bottom": 260.8125,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1,
+        "clientWidth": 1920
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 818,
+      "panelClientHeight": 818,
+      "board": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "tray": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "return": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "pieceMinimum": 0,
+      "cellMinimum": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "failure-peer",
+      "activities": [
+        {
+          "x": 21,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 192,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 198,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 369,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 1,
+        "clientWidth": 390
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 913,
+      "panelClientHeight": 826,
+      "board": {
+        "x": 30,
+        "y": 360.78125,
+        "width": 330,
+        "height": 223.375,
+        "right": 360,
+        "bottom": 584.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 21,
+        "y": 640.15625,
+        "width": 348,
+        "height": 120,
+        "right": 369,
+        "bottom": 760.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 21,
+        "y": 278.78125,
+        "width": 348,
+        "height": 44,
+        "right": 369,
+        "bottom": 322.78125,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 53,
+      "cellMinimum": 53.328125,
+      "horizontalOverflow": false
+    }
+  ],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:20:48.037Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:20:48.406Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:20:49.374Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:20:49.556Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:20:51.141Z"
+    },
+    {
+      "event": "join live",
+      "at": "2026-10-21T20:20:55.113Z"
+    }
+  ],
+  "network": [
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:48.229Z",
+      "timing": {
+        "startTime": 1792614048204.608,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.232,
+        "responseStart": 19.481,
+        "responseEnd": 23.989
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:48.456Z",
+      "timing": {
+        "startTime": 1792614048404.841,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.225,
+        "responseStart": 1.291,
+        "responseEnd": 3.74
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:20:48.465Z",
+      "timing": {
+        "startTime": 1792614048457.4438,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.245,
+        "responseStart": 5.476,
+        "responseEnd": 8.438
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:48.470Z",
+      "timing": {
+        "startTime": 1792614048466.8958,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.222,
+        "responseStart": 1.519,
+        "responseEnd": 3.889
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:49.336Z",
+      "timing": {
+        "startTime": 1792614049252.349,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.289,
+        "responseStart": 1.922,
+        "responseEnd": 4.726
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T20:20:49.342Z",
+      "timing": {
+        "startTime": 1792614049270.1392,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.215,
+        "responseStart": 1.576,
+        "responseEnd": 6.775
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:49.342Z",
+      "timing": {
+        "startTime": 1792614049270.524,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.114,
+        "responseStart": 6.244,
+        "responseEnd": 9.392
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:49.775Z",
+      "timing": {
+        "startTime": 1792614049754.537,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.195,
+        "responseStart": 17.36,
+        "responseEnd": 20.526
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:51.154Z",
+      "timing": {
+        "startTime": 1792614051137.492,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.47,
+        "responseStart": 3.655,
+        "responseEnd": 7.396
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:20:51.170Z",
+      "timing": {
+        "startTime": 1792614051154.5999,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.216,
+        "responseStart": 11.314,
+        "responseEnd": 14.039
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:51.176Z",
+      "timing": {
+        "startTime": 1792614051170.634,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.225,
+        "responseStart": 1.515,
+        "responseEnd": 4.015
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:20:55.089Z",
+      "timing": {
+        "startTime": 1792614054219.172,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.221,
+        "responseStart": 2.623,
+        "responseEnd": 6.121
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:21:12.670Z",
+      "timing": {
+        "startTime": 1792614072665.211,
+        "domainLookupStart": 0.305,
+        "domainLookupEnd": 0.358,
+        "connectStart": 0.358,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.193,
+        "requestStart": 1.296,
+        "responseStart": 2.394,
+        "responseEnd": 6.174
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:21:12.672Z",
+      "timing": {
+        "startTime": 1792614072665.905,
+        "domainLookupStart": 0.253,
+        "domainLookupEnd": 0.259,
+        "connectStart": 0.259,
+        "secureConnectionStart": -1,
+        "connectEnd": 0.779,
+        "requestStart": 0.841,
+        "responseStart": 3.796,
+        "responseEnd": 7.692
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:21:12.688Z",
+      "timing": {
+        "startTime": 1792614072683.8733,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.233,
+        "responseStart": 2.046,
+        "responseEnd": 4.677
+      }
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "status": "FAIL",
+  "failure": {
+    "stage": "real chat at short landscape",
+    "message": "Existing shared chat is reachable over ordinary game at desktop\n\nfalse !== true\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Existing shared chat is reachable over ordinary game at desktop\n\nfalse !== true\n\n    at ordinaryControls (file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:32:425)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:50:2107"
+  },
+  "finishedAt": "2026-10-21T20:21:26.848Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "861fd724cd2234d2fff573da3f821b269c6f38d3fc11e02fa9616b4fe066337d",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

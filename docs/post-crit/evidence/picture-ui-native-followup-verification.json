@@ -1,0 +1,250 @@
+{
+  "scope": "Worker follow-up only. Parent owns final review, native completion on changed component, maintained CI, resources and commits.",
+  "currentSourceSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "public/house-puzzle-ui.js": "3b9d84068dfae4e105816af1721a94c807a49f7f9973edb15bcc8e0a7e17fecf",
+    "spec/house-puzzle-ui.test.ts": "269c1ee6156dbeae8a058baa48fac562a04c455e7a3d4212e85ae0ab2a132367",
+    "tools/post-crit-picture-browser.mjs": "83213154853ec70eeee928ce1d676144621ebfdd4107487c4f87c2a5cb349d39",
+    "docs/post-crit/evidence/picture-ui-native-protocol.md": "df85cd52854e5049bee000c66bc66bdf78de5a0365e4cdefb2f45c75260c8b44"
+  },
+  "evaluatorV2": {
+    "archive": "picture-ui-native-evaluator-archive.json",
+    "deadlineBoundary": "Native Submit click start -> Together-live status + visible canvas + self coordinate; one Node monotonic10000ms budget and remaining per-step timeout",
+    "offlineControls": {
+      "file": "picture-ui-native-deadline-v2-offline-controls/result.json",
+      "status": "PASS_OFFLINE_DEADLINE_CONTROLS",
+      "exit": 0,
+      "count": 3,
+      "browserLaunched": false
+    },
+    "oldEvidence": "Original runner/protocol/results retained; earlier actual dim/production passes remain within ten seconds by their raw recorded timings, not retroactively regraded."
+  },
+  "ordinaryModalNative": {
+    "file": "picture-ui-native-admission-modal-v2/result.json",
+    "status": "PASS",
+    "exit": 0,
+    "checks": 7,
+    "mode": "admission-modal",
+    "invocation": {
+      "argv": [
+        "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+        "/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs",
+        "--label",
+        "admission-modal-v2",
+        "--admission-modal"
+      ],
+      "cwd": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+      "nodeExecutable": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "requestedArguments": [
+        "--label",
+        "admission-modal-v2",
+        "--admission-modal"
+      ]
+    },
+    "rendererOptions": {
+      "launch": {
+        "headless": true,
+        "chromiumSandbox": true,
+        "executablePath": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+        "args": [
+          "--use-angle=swiftshader"
+        ]
+      },
+      "ownerContext": {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "deviceScaleFactor": 1
+      },
+      "peerContext": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "hasTouch": true,
+        "isMobile": false,
+        "deviceScaleFactor": 1
+      },
+      "actualLaunchOccurred": true
+    },
+    "instrumentation": {
+      "interceptors": [],
+      "passiveObservers": [
+        {
+          "kind": "response-event-listener",
+          "target": "owner"
+        },
+        {
+          "kind": "response-event-listener",
+          "target": "peer"
+        }
+      ],
+      "additionalTabs": []
+    },
+    "admissionElapsedMs": {
+      "create": 1347.1602859999998,
+      "join": 3103.973857
+    },
+    "ownerPanelBeforePeerSubmit": {
+      "visibility": "visible",
+      "panel": {
+        "hidden": false,
+        "tool": "house",
+        "ariaModal": "true"
+      },
+      "backdrop": {
+        "hidden": false,
+        "filter": "none"
+      },
+      "rendererSuspendedFlag": null
+    },
+    "modalCases": [
+      {
+        "kind": "options",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "suspended": "true",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      },
+      {
+        "kind": "house",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "suspended": "false",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      },
+      {
+        "kind": "options",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "suspended": "true",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      },
+      {
+        "kind": "house",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "suspended": "false",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      },
+      {
+        "kind": "options",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "suspended": "true",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      },
+      {
+        "kind": "house",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "suspended": "false",
+        "backdropOutcome": "remained-open",
+        "focusTrap": true,
+        "keyboardWorldIsolation": true,
+        "pointerWorldIsolation": true
+      }
+    ],
+    "sourceStable": true,
+    "pageErrors": [],
+    "images": "Native dimension/opacity checked; original House1920/844 and Options390 footer/sticky-close images inspected.",
+    "sourceLimit": "This run bound the prior puzzle UI17f86d. It verifies admission/modal behavior, not the later completed-round control repair."
+  },
+  "completionRepair": {
+    "delta": "picture-ui-native-completion-controls-delta.json",
+    "red": "picture-ui-native-completion-controls-red.json;20passed/3failed",
+    "componentGreen": {
+      "file": "picture-ui-native-completion-controls-green.json",
+      "passed": 23,
+      "failed": 0,
+      "exit": 0
+    },
+    "affectedGreen": {
+      "file": "picture-ui-native-completion-affected-green.json",
+      "passed": 229,
+      "failed": 0,
+      "exit": 0,
+      "split": {
+        "component": 23,
+        "shell": 104,
+        "world": 102
+      }
+    },
+    "coverage": {
+      "file": "picture-ui-native-completion-coverage-summary.json",
+      "scope": "public/house-puzzle-ui.js only",
+      "total": {
+        "lines": {
+          "total": 75,
+          "covered": 74,
+          "skipped": 0,
+          "pct": 98.66
+        },
+        "statements": {
+          "total": 335,
+          "covered": 309,
+          "skipped": 0,
+          "pct": 92.23
+        },
+        "functions": {
+          "total": 59,
+          "covered": 50,
+          "skipped": 0,
+          "pct": 84.74
+        },
+        "branches": {
+          "total": 264,
+          "covered": 220,
+          "skipped": 0,
+          "pct": 83.33
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      }
+    },
+    "typecheckExit": 0,
+    "diffCheckExit": 0,
+    "nativeStatus": "Not rerun by worker; parent maintained picture3/solo completion is prepared for a new component binding. Earlier group6 PASS stays bound to its old source.",
+    "preserved": "Original retry and immediate Return retained, unfinished Leave unchanged, no roster/authority/client/backend modification."
+  },
+  "handoff": {
+    "allOwnedBrowsersClosed": true,
+    "root4108Stopped": false,
+    "productionFrozen": true,
+    "remainingWorkerWork": "none after this notes/evidence reconciliation",
+    "parentOwned": "Independent delta recheck, maintained picture3/solo native closure, CI/resources/final commits"
+  }
+}

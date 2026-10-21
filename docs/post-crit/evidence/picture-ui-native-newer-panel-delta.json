@@ -1,0 +1,28 @@
+{
+  "scope": "Active Return must preserve a currently opened newer panel or embedded workspace at the asynchronous UI effect. No authority, routing or backend change.",
+  "priorSHA256": "923e5a57617710dbc14341182c4552275c28a6b8de0c8145df722ce5285cf027",
+  "currentSHA256": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+  "exactTwoChangeProof": true,
+  "changes": [
+    "Queued own-room arrival opens the work-entry panel only if no other panel/workspace is current at effect time.",
+    "Denied-Stand/route fallback opens My work only if no other panel/workspace is current; otherwise reports that My work remains in the toolbelt."
+  ],
+  "alternativeDecision": "Used current UI at effect time instead of adding a panel-interaction generation: it preserves currently open explicit Options/work, while normal Return may still offer its entry if the user has already closed a temporary tool. This is an implementation choice verified by behavioral tests, not a human comparison.",
+  "red": {
+    "file": "picture-ui-native-newer-panel-red-v2.json",
+    "passed": 1,
+    "failed": 3
+  },
+  "reproductions": [
+    "active Return -> real onSnapshot(null) -> Options -> own-room snapshot; old arrival replaced Options",
+    "active Return -> real null -> own-room snapshot -> explicit new work/draft before queued effect; old arrival replaced it",
+    "pending Stand in active Return -> newer Options -> denied Stand; old fallback replaced it"
+  ],
+  "positiveControls": [
+    "ordinary legitimate Return still opens work entry",
+    "manual door entry remains ordinary",
+    "failed subscription preserves authorized view/draft",
+    "normal denied Stand still opens work draft"
+  ],
+  "specSHA256": "4205d466eed01d4357f433187864525e668a55d70d1dab0097c168ec7a9efc5d"
+}

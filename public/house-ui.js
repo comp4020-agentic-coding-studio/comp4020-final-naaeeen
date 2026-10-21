@@ -1,5 +1,6 @@
 import { createHouseClient, createPendingInspector } from "./house-client.js";
 import { createHouseGameUI } from "./house-game-ui.js";
+import { createHousePuzzleUI } from "./house-puzzle-ui.js";
 import { createHouseWorld } from "./house-world.js";
 import { ROOM_PRESETS, getRoomPreset } from "./house-room-content.js";
 import { validatePlacements, footprint } from "./house-geometry.js";
@@ -17,8 +18,9 @@ let adminRequest=0,safeAreaFrame=null;
 let lastDurableKey = "", noticeTimer, chatVersion=0, cardVersion=0, checkingMembership=false;
 const pending = new Map(), pendingZones = new Map(), saveFlights = new Set();
 let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null;
-let gamePendingRows=[],gamePendingRequest=0,gameRefreshKey="",plannedPlace=null;
-const gameUI=createHouseGameUI($("game-panel"),{send:sendGame,resolveJoin:retryOriginalGameJoin,onLeave:closePanel,onReturn:()=>openPanel("board"),onPending:()=>openPanel("pending"),onError:message=>{if(activePanel!=="game")notice(message,true);}});
+let gamePendingRows=[],gamePendingRequest=0,gameRefreshKey="",plannedPlace=null,breakActivity="picture",returnJourney=null;
+const gameUI=createHouseGameUI($("four-game-panel"),{send:sendGame,resolveJoin:retryOriginalGameJoin,onLeave:closePanel,onReturn:()=>returnToMyRoom("four"),onPending:()=>openPanel("pending"),onError:message=>{if(activePanel!=="game")notice(message,true);}});
+const puzzleUI=createHousePuzzleUI($("picture-game-panel"),{send:save,intent:(mode,roundId)=>client.puzzleIntent(mode,roundId),retryIntent:()=>client.retryPuzzleIntent(),pendingIntent:()=>client?.pendingPuzzleIntent?.()||null,onLeave:closePanel,onReturn:()=>returnToMyRoom("picture"),onPending:()=>openPanel("pending"),onChat:()=>openPanel("chat")});
 const panelFocus=createModalFocus($("panel")),boardFocus=createModalFocus($("board-workspace"));
 const chatWindow=createMovableWindow({window,element:$("chat-window"),handle:$("chat-handle"),body:$("chat-body"),collapse:$("chat-collapse"),resize:$("chat-resize"),onChange:state=>{if(state.shown&&!state.collapsed&&chatReadable())markChatRead();queueSafeArea();}});
 let reducedMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||false;
@@ -64,7 +66,7 @@ async function save(type,payload,expectedRevision) {
  } catch(error) {
   if(error.code&&!RETAIN_INTENT_CODES.has(error.code)){pending.delete(key);pendingZones.delete(key);}
   throw error;
- } finally {saveFlights.delete(intent.commandId);if(type.startsWith("game."))void refreshGamePending();if(activePanel==="pending")void protectedAction(renderPending)();}
+ } finally {saveFlights.delete(intent.commandId);if(type.startsWith("game.")||type.startsWith("puzzle."))void refreshGamePending();if(activePanel==="pending")void protectedAction(renderPending)();}
 }
 function showConnectionLimit(error){
  if(!["LOAD_LIMIT","TAB_LIMIT"].includes(error.code))return false;
@@ -108,9 +110,9 @@ function renderCameraMode(mode=world?.getCameraMode?.()||"play"){
  const ready=Boolean(live&&world?.setCameraMode);for(const id of ["camera-overview","camera-look","camera-recenter","camera-zoom","camera-hud-follow","camera-hud-look","camera-hud-overview"])$(id).disabled=!ready||activePanel==="room";
  const zoom=world?.getCameraZoom?.()||1;$("camera-zoom").value=String(zoom);$("camera-zoom-value").textContent=Math.round(zoom*100)+"%";
  $("camera-controls").hidden=activePanel!=="options";$("game-settings").hidden=!live;$("resume-game").hidden=!live;$("return-title").hidden=!live;
- $("pause-description").textContent=live?"Game paused. Your house connection stays live.":"Choose your comfort settings before entering the house.";
+ $("pause-description").textContent=live?"Your view is paused. Friends can keep moving and playing.":"Choose your comfort settings before entering the house.";
 }
-function applyInput(){world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
+function applyInput(){document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
 function closePanel(){adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("modal-backdrop").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();if(chatReadable())markChatRead();panelFocus.close();queueSafeArea();}
 function openPanel(name){
  if(name==="game"&&live?.durable.zoneId!=="lounge"){notice("Walk to the break table in the lounge to open it.");return;}
@@ -119,7 +121,7 @@ function openPanel(name){
  if(embeddedFrame)return;
  const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(!["room","game"].includes(name)));$("modal-backdrop").hidden=["room","game"].includes(name);$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
  for(const key of ["board","room","house","recovery","pending","options","about","game","places","voice"])$(key+"-panel").hidden=key!==name;
- $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood",game:"Four-in-a-row",places:"Places",voice:"Optional voice"}[name];
+ $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood",game:"Break table",places:"Places",voice:"Optional voice"}[name];
  applyInput();
  if(name==="pending")void protectedAction(renderPending)();
  if(name==="board"){renderCards();if(!cardDirty)fillCard();}
@@ -129,7 +131,7 @@ function openPanel(name){
  if(name==="game"){panelFocus.close();$("panel-close").focus();renderGame();}else panelFocus.open();queueSafeArea();
 }
 function updateWorld(snapshot){
- if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
+ if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onMovementIntent:()=>{returnJourney=null;plannedPlace=null;},onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
  world.update(snapshot);world?.setReducedMotion?.(reducedMotion);applyInput();queueSafeArea();
 }
 async function interact(target){
@@ -138,9 +140,9 @@ async function interact(target){
  if(target.type==="door"){
   const resident=live.durable.residents.find(p=>p.slot===target.slot||p.bedroomId===target.roomId);
   if(!resident){notice("This bedroom is waiting for a new housemate.");return;}
-  await client.subscribe(resident.bedroomId);closePanel();
+  closePanel();await client.subscribe(resident.bedroomId);
  }else if(target.type==="exit"){
-  await client.subscribe("lounge");closePanel();
+  closePanel();await client.subscribe("lounge");
  }else if(target.type==="seat"){
   const self=live.players.find(p=>p.id===live.durable.selfId);
   if(self?.seatId)await client.stand();else await client.claimSeat(target.seatId);
@@ -161,10 +163,10 @@ function roomScope(){const room=ownRoom();return room?scopeKey(live)+":"+room.id
 function cardValues(){return Object.fromEntries(["small-goal","question","resource","next-step"].map(id=>[id,$(id).value]).concat([["help-requested",$("help-requested").checked]]));}
 function restoreCard(values){for(const [id,value] of Object.entries(values))if(id==="help-requested")$(id).checked=value;else $(id).value=value;}
 function clearPrivateDOM(){
- setPlaceLabel("");gameUI.update(null);$("game-table-status").hidden=true;
+ setPlaceLabel("");gameUI.update(null);puzzleUI.update(null);$("game-table-status").hidden=true;
  for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries"])$(id).replaceChildren();
  for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","room-light","starter-preset","recovery-proof","voice-url"])$(id).value="";
- for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count","starter-summary","starter-status","light-status"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
+ for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count","starter-summary","starter-status","light-status","room-saved-goal","room-saved-next"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
  $("chat-draft-status").textContent="Enter for a new line · Ctrl / ⌘ Enter to send";$("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
  $("voice-link").hidden=true;$("voice-link").removeAttribute("href");$("voice-destination").textContent="";$("voice-form").hidden=true;
  $("starter-preview").replaceChildren();world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
@@ -209,8 +211,9 @@ function onSnapshot(snapshot){
  const houseKey=JSON.stringify([snapshot.durable.house,snapshot.durable.residents,snapshot.durable.selfId,snapshot.durable.voice,snapshot.controller]);
  if(houseKey!==lastHouseKey){lastHouseKey=houseKey;adminRequest++;if(activePanel==="house")renderHouse();else if(activePanel==="voice")renderVoice();}
  if(activePanel==="room")renderRoom();
- renderGame();const gameKey=JSON.stringify([identityScope(live),live.durable.zoneId,live.controller,live.durable.game?.revision]);if(reconnect||gameKey!==gameRefreshKey){gameRefreshKey=gameKey;void refreshGamePending();}
- if(plannedPlace&&snapshot.durable.zoneId==="lounge"){const place=plannedPlace;plannedPlace=null;queueMicrotask(()=>walkToPlace(place));}
+ continueRoomReturn();
+ renderGame();const gameKey=JSON.stringify([identityScope(live),live.durable.zoneId,live.controller,live.durable.game?.revision,live.durable.puzzle?.revision]);if(reconnect||gameKey!==gameRefreshKey){gameRefreshKey=gameKey;void refreshGamePending();}
+ if(plannedPlace&&snapshot.durable.zoneId==="lounge"){const place=plannedPlace;plannedPlace=null;if(returnJourney){returnJourney.started=false;queueMicrotask(continueRoomReturn);}else queueMicrotask(()=>walkToPlace(place));}
 
 }
 function unreadKey(){return live?live.durable.house.id+":"+live.durable.selfId+":"+live.durable.streamId:"";}
@@ -281,11 +284,12 @@ function ensureRoomDraft(){
  return roomDraft;
 }
 function renderRoom(){
+ const saved=currentCard();$("room-saved-goal").textContent=saved?.smallGoal||"No saved goal yet.";$("room-saved-next").textContent=saved?.nextStep||"No saved next step yet.";$("open-room-work").disabled=!live;
  const room=ownRoom();$("walk-room").hidden=Boolean(room);$("return-lounge").hidden=!live?.durable.room;$("walk-room").disabled=!live?.controller;$("return-lounge").disabled=!live;
  $("room-form").hidden=!room;$("furniture-editor").hidden=!room;$("light-form").hidden=!room;$("starter-editor").hidden=!room;
  $("room-instructions").textContent=room?"Your changes affect this bedroom. Keep the arrival path clear; choose up to ten pieces.":"Walk through your named door to arrange your bedroom. Friends can visit when you open it.";
  world?.setEditing(Boolean(room));if(!room)return;
- const draft=ensureRoomDraft();$("room-open").checked=draft.metadata.open;$("palette").value=draft.metadata.palette;$("room-light").value=draft.light;$("light-status").textContent=draft.lightMessage||(draft.lightDirty?"Unsaved lighting":"Saved lighting: "+draft.light);for(const control of $("room-panel").querySelectorAll("input,select,button"))control.disabled=!roomWritable();$("return-lounge").disabled=false;renderStarter();
+ const draft=ensureRoomDraft();$("room-open").checked=draft.metadata.open;$("palette").value=draft.metadata.palette;$("room-light").value=draft.light;$("light-status").textContent=draft.lightMessage||(draft.lightDirty?"Unsaved lighting":"Saved lighting: "+draft.light);for(const control of $("room-panel").querySelectorAll("input,select,button"))control.disabled=!roomWritable();$("return-lounge").disabled=false;$("open-room-work").disabled=false;renderStarter();
  $("room-status").textContent=draft.metadataMessage||(draft.metadataDirty?"Unsaved room settings":"Your saved room settings.");renderPlacements();
 }
 function renderPlacements(){
@@ -310,7 +314,7 @@ function roomWritable(){return Boolean(live?.controller&&!(roomDraft?.awaitingSt
 function forgetPending(commandId,receipt){
  for(const [key,intent] of pending){
   if(intent.commandId!==commandId)continue;pending.delete(key);pendingZones.delete(key);
-  if(intent.type.startsWith("game."))gamePendingRows=gamePendingRows.filter(row=>row.commandId!==commandId);
+  if(intent.type.startsWith("game.")||intent.type.startsWith("puzzle."))gamePendingRows=gamePendingRows.filter(row=>row.commandId!==commandId);
   if(intent.type==="room.starter"&&roomDraft&&ownRoom()?.id===intent.payload.roomId){
    roomDraft.starterAttempt=null;roomDraft.starterMessage=receipt?"Original starter acknowledged.":"Local pending starter discarded. Its server status is unknown; review your saved room.";
    if(receipt?.entityRevision){roomDraft.awaitingStarter=receipt.entityRevision;roomDraft.ackRevision=Math.max(roomDraft.ackRevision,receipt.entityRevision);}
@@ -479,7 +483,7 @@ async function checkMembership(){
 }
 function setRecoveryBusy(busy){for(const id of ["recovery-key","lobby-recovery-key"])$(id).disabled=busy;}
 function invalidateIdentityView(){
- privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;gamePendingRequest++;gamePendingRows=[];plannedPlace=null;
+ privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;gamePendingRequest++;gamePendingRows=[];plannedPlace=null;returnJourney=null;
  client?.close();client=null;inspector?.close();inspector=null;live=null;
  roomDraft=null;suspendedDrafts=null;voiceDraft=null;updateRecovery=null;voicePendingRows=[];voicePendingScope="";voicePendingError="";$("update-required").hidden=true;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
  lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();pendingZones.clear();keyIssuance=null;setRecoveryBusy(false);
@@ -504,7 +508,7 @@ async function bootstrap(enter=false){
  entered=true;$("title-screen").hidden=true;$("lobby").hidden=true;$("game-controls").hidden=false;$("connection-status").textContent="Opening your house…";$("title-status").textContent="Opening your saved home…";
  if(!client){
   const actorId=me.identity.id;let ownedClient;
-  ownedClient=createHouseClient({expectedIdentityId:actorId,onUpdateRequired:error=>{if(client===ownedClient)showUpdateRequired(error);},onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
+  ownedClient=createHouseClient({expectedIdentityId:actorId,onUpdateRequired:error=>{if(client===ownedClient)showUpdateRequired(error);},onPuzzleIntent:()=>{if(client===ownedClient)renderGame();},onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
   client=ownedClient;await ownedClient.connect();
  }
 }
@@ -636,6 +640,7 @@ $("export-own").addEventListener("click",protectedAction(async()=>{
  const link=node("a");link.href=url;link.download="my-study-house.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }));
 function sendGame(type,payload,revision){
+ if(type==="game.join"&&(live?.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.()?.mode==="join"))throw Object.assign(new Error("Leave picture-table participation before joining Four-in-a-row. Watching is always available."),{code:"ACTIVITY_ACTIVE"});
  const task=save(type,payload,revision);if(type==="game.join"&&live){const key=JSON.stringify([live.durable.house.id,live.durable.selfId,type,payload,revision]),intent=pending.get(key);if(intent)task.gameJoinIntent={scope:identityScope(live),command:structuredClone(intent)};}return task;
 }
 async function retryOriginalGameJoin(intent){
@@ -643,16 +648,43 @@ async function retryOriginalGameJoin(intent){
  const receipt=await client.command(intent);forgetPending(intent.commandId,receipt);void refreshGamePending();return receipt;
 }
 function gamePendingIntents(){
- if(!live)return [];const rows=new Map(gamePendingRows.filter(row=>row.houseId===live.durable.house.id).map(row=>[row.commandId,row]));
+ if(!live)return [];const rows=new Map(gamePendingRows.filter(row=>row.houseId===live.durable.house.id&&row.type.startsWith("game.")).map(row=>[row.commandId,row]));
  for(const intent of pending.values())if(intent.houseId===live.durable.house.id&&intent.type.startsWith("game."))rows.set(intent.commandId,intent);return [...rows.values()];
 }
+function puzzlePendingIntents(){
+ if(!live)return [];const rows=new Map(gamePendingRows.filter(row=>row.houseId===live.durable.house.id&&row.type.startsWith("puzzle.")).map(row=>[row.commandId,row]));for(const value of pending.values())if(value.houseId===live.durable.house.id&&value.type.startsWith("puzzle."))rows.set(value.commandId,value);return [...rows.values()];
+}
+function chooseBreak(activity){breakActivity=activity;renderGame();}
 function renderGame(){
- const rows=gamePendingIntents(),round=live?.durable.game?.current,participant=Boolean(round?.players.includes(live.durable.selfId));gameUI.update(live,{pendingCount:rows.length});
- $("game-table-status").hidden=!live||(!participant&&!rows.length);$("game-table-label").textContent=rows.some(row=>row.type==="game.leave")?"Withdrawal pending":participant?"At break table · "+round.status:"Game action pending";$("game-table-leave").hidden=!participant;$("game-table-reopen").disabled=live?.durable.zoneId!=="lounge";queueSafeArea();
+ const rows=gamePendingIntents(),puzzleRows=puzzlePendingIntents(),round=live?.durable.game?.current,participant=Boolean(round?.players.includes(live.durable.selfId)),puzzleParticipant=Boolean(live?.puzzleRoster?.selfParticipationId),direct=client?.pendingPuzzleIntent?.();gameUI.update(live,{pendingCount:rows.length});puzzleUI.update(live,{pendingCount:puzzleRows.length});
+ $("four-game-panel").hidden=breakActivity!=="four";$("picture-game-panel").hidden=breakActivity!=="picture";$("panel").dataset.breakActivity=breakActivity;document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";
+ $("break-picture").setAttribute("aria-pressed",String(breakActivity==="picture"));$("break-four").setAttribute("aria-pressed",String(breakActivity==="four"));$("break-picture-count").textContent=(live?.puzzleRoster?.memberIds.length||0)+" / 6 active";$("break-four-count").textContent=(round?.players.filter(Boolean).length||0)+" / 2 active";
+ $("break-exclusive").textContent=puzzleParticipant?"You joined the picture table. Leave participation before joining Four-in-a-row; you can watch either.":participant?"You hold a Four-in-a-row slot. Leave that table before joining the picture table; you can watch either.":"Watching never joins. Choose Start if needed, then Join separately. Leave your activity before joining the other.";
+ $("game-table-status").hidden=!live||(!participant&&!puzzleParticipant&&!rows.length&&!puzzleRows.length&&!direct);$("game-table-label").textContent=direct?.mode==="leave"?"Picture withdrawal pending":puzzleParticipant?"At picture table · "+(live.durable.puzzle?.current?.placements.length||0)+" / 24":participant?"At break table · "+round.status:rows.some(row=>row.type==="game.leave")?"Withdrawal pending":"Break action pending";$("game-table-leave").hidden=!participant&&!puzzleParticipant&&!direct;$("game-table-reopen").disabled=live?.durable.zoneId!=="lounge";queueSafeArea();
 }
 async function refreshGamePending(){
  if(!live||!client)return;const request=++gamePendingRequest,context=identityScope(live);
- try{const result=await client.getPending();if(request!==gamePendingRequest||context!==identityScope(live))return;for(const intent of [...pending.values()])if(intent.type.startsWith("game.")&&!saveFlights.has(intent.commandId)&&!result.entries.some(row=>row.commandId===intent.commandId))forgetPending(intent.commandId);gamePendingRows=result.entries.filter(row=>row.type.startsWith("game."));renderGame();}catch{/* Storage/transport problems remain visible through the action or Pending drafts. */}
+ try{const result=await client.getPending();if(request!==gamePendingRequest||context!==identityScope(live))return;for(const intent of [...pending.values()])if((intent.type.startsWith("game.")||intent.type.startsWith("puzzle."))&&!saveFlights.has(intent.commandId)&&!result.entries.some(row=>row.commandId===intent.commandId))forgetPending(intent.commandId);gamePendingRows=result.entries.filter(row=>row.type.startsWith("game.")||row.type.startsWith("puzzle."));renderGame();}catch{/* Storage/transport problems remain visible through the action or Pending drafts. */}
+}
+function fallbackToWork(message){returnJourney=null;plannedPlace=null;const showWork=Boolean(live&&!activePanel&&!embeddedFrame);if(showWork)openPanel("board");notice(message+(showWork?" Your work is available here.":" My work is available from the toolbelt."));}
+function returnToMyRoom(source){
+ if(!live)return;
+ // A viewer can return from either tab; withdraw their actual activity before routing.
+ if(source!=="four"&&(live.durable.game?.current?.players.includes(live.durable.selfId)||gamePendingIntents().some(row=>row.type==="game.join")))gameUI.leave();
+ if(source!=="picture"&&(live.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.()?.mode==="join"))puzzleUI.leave();
+ closePanel();const journey={scope:identityScope(live),waitingStand:Boolean(live.players.find(player=>player.id===live.durable.selfId)?.seatId),started:false};returnJourney=journey;
+ if(ownRoom()){returnJourney=null;openPanel("room");$("open-room-work").focus();return;}
+ if(!live.controller){fallbackToWork("Take control to walk to your room.");return;}
+ if(journey.waitingStand){notice("Standing before walking to your room. My work stays available from the toolbelt.");void client.stand().catch(error=>{if(returnJourney===journey)fallbackToWork(error.message||"Standing was not confirmed.");});return;}
+ continueRoomReturn();
+}
+function continueRoomReturn(){
+ const journey=returnJourney;if(!journey||!live)return;if(journey.scope!==identityScope(live)||!live.controller){returnJourney=null;plannedPlace=null;return;}
+ if(ownRoom()){returnJourney=null;plannedPlace=null;queueMicrotask(()=>{if(live&&identityScope(live)===journey.scope&&ownRoom()&&!activePanel&&!embeddedFrame){openPanel("room");$("open-room-work").focus();}});return;}
+ if(journey.waitingStand){if(live.players.find(player=>player.id===live.durable.selfId)?.seatId)return;journey.waitingStand=false;}
+ if(journey.started)return;journey.started=true;
+ if(live.durable.zoneId!=="lounge"){plannedPlace="room";if(!world?.approach?.({type:"exit"}))fallbackToWork("The route home is unavailable.");return;}
+ if(!world?.routeTo?.("room"))fallbackToWork("The route home is unavailable.");
 }
 function walkToPlace(place){
  if(!live?.controller){notice("Take control in this tab before walking.");return;}
@@ -661,7 +693,9 @@ function walkToPlace(place){
  if(!world?.routeTo?.(place))notice(place==="room"&&ownRoom()?"You are already in your room.":"That place is unavailable right now. Stand up and try again.");
 }
 $("game-table-reopen").addEventListener("click",()=>openPanel("game"));
-$("game-table-leave").addEventListener("click",()=>gameUI.leave());
+$("game-table-leave").addEventListener("click",()=>{if(live?.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.())puzzleUI.leave();else gameUI.leave();});
+$("break-picture").addEventListener("click",()=>chooseBreak("picture"));$("break-four").addEventListener("click",()=>chooseBreak("four"));
+$("open-room-work").addEventListener("click",()=>{returnJourney=null;plannedPlace=null;openPanel("board");});
 for(const button of document.querySelectorAll("[data-place]"))button.addEventListener("click",()=>walkToPlace(button.dataset.place));
 function pendingSource(){return client||(inspector ||= createPendingInspector({expectedIdentityId:me?.identity.id,fetchMe:()=>api("/api/house/me")}));}
 async function renderPending(){
@@ -671,7 +705,7 @@ async function renderPending(){
  reconcilePendingMemory(result);$("pending-entries").replaceChildren();
  for(const entry of result.entries){
   const row=node("article",undefined,"pending-entry");row.dataset.commandId=entry.commandId;
-  row.append(node("strong",entry.type+" · "+(entry.state==="expired"?"Expired automatic retry":"Pending reply")),node("p","Saved status unknown · original "+(entry.zoneId||"house admission")+" · "+new Date(entry.createdAt).toLocaleString(),"subtle"));
+  row.append(node("strong",(entry.label||entry.type)+" · "+(entry.state==="expired"?"Expired automatic retry":"Pending reply")),node("p","Saved status unknown · original "+(entry.zoneId||"house admission")+" · "+new Date(entry.createdAt).toLocaleString(),"subtle"));
   const details=node("details"),summary=node("summary","My original draft"),body=node("pre",JSON.stringify(entry.command.payload,null,2));details.append(summary,body);row.append(details);
   const actions=node("div",undefined,"button-row"),retry=node("button",entry.state==="expired"?"Retry expired draft":"Retry original action");retry.dataset.action="retry";retry.disabled=!entry.canRetry;
   retry.addEventListener("click",protectedAction(async()=>{const context=privateContext(),receipt=await pendingSource().retryPending(entry.commandId);if(context!==privateContext())return;forgetPending(entry.commandId,receipt);notice("Original action acknowledged. Check its saved result.");await bootstrap();if(activePanel==="pending")void protectedAction(renderPending)();}));
@@ -692,7 +726,7 @@ const hudResizeObserver=typeof window.ResizeObserver==="function"?new window.Res
 for(const element of document.querySelectorAll(HUD_SAFE_SELECTOR))hudResizeObserver?.observe(element);
 window.addEventListener("resize",queueSafeArea);
 window.visualViewport?.addEventListener("resize",queueSafeArea);window.visualViewport?.addEventListener("scroll",queueSafeArea);
-window.addEventListener("pagehide",()=>{clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();gameUI.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
+window.addEventListener("pagehide",()=>{privacyGeneration++;live=null;returnJourney=null;plannedPlace=null;clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();gameUI.dispose();puzzleUI.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
 bootstrap().catch(error=>{if(showConnectionLimit(error))return;notice(error.message,true);$("connection-status").textContent="Could not open the house";$("title-status").textContent="Could not check your saved home. Reload to retry.";});
 
 $("walk-room").addEventListener("click",()=>{const resident=live?.durable.residents.find(r=>r.id===live.durable.selfId);closePanel();if(resident&&!world?.approach({type:"door",slot:resident.slot}))notice("Stand up before walking to your room.");});

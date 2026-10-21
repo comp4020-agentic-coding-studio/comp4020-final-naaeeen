@@ -1,0 +1,152 @@
+{
+  "scope": "Worker UI/native handoff; parent owns final review, 3/6-browser group and sustained resource/release acceptance",
+  "sourceSHA256": {
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "spec/house-puzzle-ui.test.ts": "3943a95ed6014d55d4261599f4f8db62d6178675f00ce4f30fdbc465fc1e4898",
+    "spec/house-ui.test.ts": "4205d466eed01d4357f433187864525e668a55d70d1dab0097c168ec7a9efc5d",
+    "spec/house-world.test.ts": "def9a2436a84fdbca29a91ea5cd9bfdda75ce9d2ece3f6facce7afc3b892baa7",
+    "tools/post-crit-picture-browser.mjs": "8d3c9b34895e287f1584cf3835b4bf03b38e64a05b542c834259feeae67b87bb"
+  },
+  "unit": {
+    "file": "picture-ui-native-newer-panel-green.json",
+    "passed": 226,
+    "failed": 0,
+    "exit": 0,
+    "split": {
+      "component": 20,
+      "shell": 104,
+      "world": 102
+    }
+  },
+  "typecheck": {
+    "command": "/home/lizhi/.local/bin/mise exec -- pnpm typecheck",
+    "actualExit": 0
+  },
+  "diffCheck": {
+    "scope": "owned UI/CSS/spec/runner",
+    "actualExit": 0
+  },
+  "componentCoverage": {
+    "sourceUnchangedSinceMeasured": true,
+    "record": "picture-ui-source-binding.json",
+    "statements": 92.53,
+    "branches": 83.9,
+    "functions": 86.44,
+    "lines": 98.66,
+    "scope": "public/house-puzzle-ui.js only; not full-house coverage"
+  },
+  "native": {
+    "currentUiFullAttempt": {
+      "file": "picture-ui-native-final-task/result.json",
+      "overall": "FAIL",
+      "corePassedChecks": [
+        "two actual residents and saved work with newer draft",
+        "opening Watch never joined; real Start and separate Join",
+        "desktop and portrait initial targets/exit",
+        "wrong place kept selection; real peer solve preserved selected-node focus",
+        "native keyboard place without avatar motion",
+        "same-identity observer stayed read only and pending export remained reachable",
+        "real reconnect preserved progress and required explicit Join",
+        "real readable chat and primary landscape controls",
+        "24 real placements complete, image retained, consent cleared",
+        "ordinary game and existing shared chat controls reachable at desktop and portrait",
+        "real Join ACK loss exposed original retry; newer Leave survived historical ACK",
+        "actual Stand and route, explicit Open my work, saved/draft and Quiet preserved",
+        "closing visited room restored legitimate lounge with unchanged puzzle roster"
+      ],
+      "failureClassification": "picture-ui-native-final-task/classification.json; extra paused-renderer metadata predicate invalid, retained as failed attempt",
+      "uiSHA256": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+      "cssSHA256": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+      "sourceStable": true
+    },
+    "affectedReturnBoundary": {
+      "file": "picture-ui-native-final-return-boundary/result.json",
+      "overall": "PASS",
+      "exit": 0,
+      "checks": [
+        "two actual residents and saved work with newer draft",
+        "opening Watch never joined; real Start and separate Join",
+        "desktop and portrait initial targets/exit",
+        "actual Stand and route, explicit Open my work, saved/draft and Quiet preserved",
+        "closing visited room restored legitimate lounge with unchanged puzzle roster",
+        "actual delayed-room Return preserved newer Options and the unsaved work draft"
+      ],
+      "faults": [
+        {
+          "kind": "held actual own-room projections while user opened Options, then forwarded unchanged",
+          "heldFrames": 2,
+          "delayMs": 594
+        }
+      ],
+      "sourceStable": true
+    },
+    "currentCssOrdinaryOpenAdmission": {
+      "file": "picture-ui-native-admission-open-production-repair/result.json",
+      "overall": "PASS_ADMISSION_ONLY",
+      "exit": 0,
+      "uiSHA256": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+      "cssSHA256": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+      "flags": "--no-intercept --admission-only; owner House settings open; no CSS override",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:51:09.892Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:51:11.135Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:51:11.440Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:51:11.925Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:51:12.681Z"
+        },
+        {
+          "event": "join live",
+          "at": "2026-10-21T20:51:15.712Z"
+        }
+      ],
+      "sourceStable": true
+    },
+    "cssDeltaAfterPictureChecks": "picture-ui-native-backdrop-repair-delta.json; exactly modal backdrop blur4px -> none, dim retained",
+    "runtime": {
+      "node": "v24.21.0",
+      "chromium": "153.0.8010.12",
+      "chromiumSandbox": true,
+      "deviceScaleFactor": 1
+    },
+    "pageErrors": {
+      "full": [],
+      "return": [],
+      "ordinaryAdmission": []
+    },
+    "images": "Native PNG bytes decoded outside tested page for dimensions/opacity; original full-size layout/completion/chat/return/Options PNGs visually inspected. No PNG editing."
+  },
+  "review": {
+    "initialRequestedModel": "gpt-6-astra",
+    "initialRequestedEffort": "max",
+    "initialEffectiveRoleEffort": "high fixed by reviewer role; no claim max took effect",
+    "initialFork": "none",
+    "initialFindings": "two P2 consent/return issues reproduced and contextually closed",
+    "laterReturnReview": "parent-arranged fresh Astra/high identified active Return/newer Options issue; fixed with at-effect guards and red/green tests. Final independent delta recheck is parent-owned.",
+    "modalReview": "parent-owned fresh review of one-property blur repair"
+  },
+  "remaining": {
+    "rootGroupNative": "parent has released sole lane for 3/6 automated contributor checks",
+    "resourceAcceptance": "parent-owned; no inherited resource pass",
+    "physicalHumanScreenReader": "not run",
+    "BFCacheContinuation": "unverified; existing disposal boundary remains",
+    "browserLane": "released; all owned contexts/browser closed; root 4108 server left alive"
+  }
+}

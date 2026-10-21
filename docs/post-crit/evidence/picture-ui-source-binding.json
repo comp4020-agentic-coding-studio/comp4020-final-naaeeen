@@ -1,0 +1,87 @@
+{
+  "scope": "Mocked JSDOM component/house shell and renderer unit tests, not native multiplayer or human acceptance",
+  "command": "/home/lizhi/.local/bin/mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-puzzle-ui.test.ts spec/house-ui.test.ts spec/house-world.test.ts --coverage --coverage.include=public/house-puzzle-ui.js --reporter=json --outputFile=docs/post-crit/evidence/picture-ui-reviewed-final.json",
+  "exit": 0,
+  "passed": 217,
+  "failed": 0,
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 75,
+        "covered": 74,
+        "skipped": 0,
+        "pct": 98.66
+      },
+      "statements": {
+        "total": 335,
+        "covered": 310,
+        "skipped": 0,
+        "pct": 92.53
+      },
+      "functions": {
+        "total": 59,
+        "covered": 51,
+        "skipped": 0,
+        "pct": 86.44
+      },
+      "branches": {
+        "total": 261,
+        "covered": 219,
+        "skipped": 0,
+        "pct": 83.9
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-puzzle-ui.js": {
+      "lines": {
+        "total": 75,
+        "covered": 74,
+        "skipped": 0,
+        "pct": 98.66
+      },
+      "functions": {
+        "total": 59,
+        "covered": 51,
+        "skipped": 0,
+        "pct": 86.44
+      },
+      "statements": {
+        "total": 335,
+        "covered": 310,
+        "skipped": 0,
+        "pct": 92.53
+      },
+      "branches": {
+        "total": 261,
+        "covered": 219,
+        "skipped": 0,
+        "pct": 83.9
+      }
+    }
+  },
+  "sourceSHA256": {
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-ui.js": "3379040a1ee5fd6ab7274cb327daa7570a628558f3235cf9c60924d8108871f5",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house.html": "c94d63fd7a852dd85a02e0a2324e1a22d1e127d96fd56b3c6f5f70838a84568a",
+    "public/house.css": "00a431b6c5878ad0124f17418e5101c5d7e82157db39e27ee0258dad409f97b6",
+    "spec/house-puzzle-ui.test.ts": "3943a95ed6014d55d4261599f4f8db62d6178675f00ce4f30fdbc465fc1e4898",
+    "spec/house-ui.test.ts": "48252fe4bec51e0e9f65772a327b6b06ee2baaa0492280187e6f7b9f5db5ed3c",
+    "spec/house-world.test.ts": "def9a2436a84fdbca29a91ea5cd9bfdda75ce9d2ece3f6facce7afc3b892baa7"
+  },
+  "freshReview": {
+    "requestedModel": "gpt-6-astra",
+    "requestedEffort": "max",
+    "fork": "none",
+    "role": "reviewer",
+    "reportedFindings": 2,
+    "findingsReproducedAndFixed": 2,
+    "contextualRecheck": "Both fixes confirmed; no additional concrete pagehide regression; native and BFCache continuation unverified"
+  },
+  "nativeStatus": "HELD for parent GO after backend fresh review and client correction integration; no native process launched"
+}

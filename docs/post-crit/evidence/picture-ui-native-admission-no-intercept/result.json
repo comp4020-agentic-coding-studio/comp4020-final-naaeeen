@@ -1,0 +1,424 @@
+{
+  "label": "admission-no-intercept",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Actual current app, two native browser contexts; one temporary observer tab and one explicitly bounded dropped Join ACK. No fake UI state, human or physical-device result.",
+  "startedAt": "2026-10-21T20:05:31.965Z",
+  "protocolSHA256": "997bb08c8af41d8c2cec00deb60addb50158cc8779746484beeb9455dad64d2d",
+  "runnerSHA256": "1bb420e578d5e30e9f2fc700e5dabd9a02e3996d6ceee5533ba3c8a2b535128a",
+  "sourceSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "00a431b6c5878ad0124f17418e5101c5d7e82157db39e27ee0258dad409f97b6",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-no-intercept/failure-owner.png",
+      "sha256": "0a66121748d440bd357fbc05cbc2cd46c5e5801c36eb409c8afa90c8f8a40510",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-no-intercept/failure-peer.png",
+      "sha256": "a94c24867f36f700d8859256ffdcb92375d3ee8bc9d1f0cee638cf41e8150b97",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [
+    {
+      "name": "failure-owner",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1,
+        "clientWidth": 1920
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 1206,
+      "panelClientHeight": 1038,
+      "board": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "tray": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "return": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": [
+          "panel",
+          "panel"
+        ]
+      },
+      "pieceMinimum": 0,
+      "cellMinimum": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "failure-peer",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 1,
+        "clientWidth": 390
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 0,
+      "panelClientHeight": 0,
+      "board": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": []
+      },
+      "tray": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": []
+      },
+      "return": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "right": 0,
+        "bottom": 0,
+        "fullyExposed": false,
+        "clips": []
+      },
+      "pieceMinimum": 0,
+      "cellMinimum": 0,
+      "horizontalOverflow": false
+    }
+  ],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:05:32.345Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:05:33.449Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:05:33.762Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:05:34.275Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:05:35.647Z"
+    }
+  ],
+  "network": [
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:32.553Z",
+      "timing": {
+        "startTime": 1792613132528.03,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.226,
+        "responseStart": 18.136,
+        "responseEnd": 22.645
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:33.454Z",
+      "timing": {
+        "startTime": 1792613133447.0078,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.176,
+        "responseStart": 1.565,
+        "responseEnd": 3.547
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:05:33.463Z",
+      "timing": {
+        "startTime": 1792613133452.369,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.229,
+        "responseStart": 5.518,
+        "responseEnd": 8.566
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:33.466Z",
+      "timing": {
+        "startTime": 1792613133462.4573,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.232,
+        "responseStart": 1.535,
+        "responseEnd": 5.394
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:33.750Z",
+      "timing": {
+        "startTime": 1792613133665.054,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.184,
+        "responseStart": 1.85,
+        "responseEnd": 5.2
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T20:05:34.302Z",
+      "timing": {
+        "startTime": 1792613134230.103,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.309,
+        "responseStart": 1.931,
+        "responseEnd": 5.866
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:34.302Z",
+      "timing": {
+        "startTime": 1792613134230.617,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.179,
+        "responseStart": 4.988,
+        "responseEnd": 8.998
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:34.523Z",
+      "timing": {
+        "startTime": 1792613134498.898,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.243,
+        "responseStart": 18.409,
+        "responseEnd": 26.712
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:35.645Z",
+      "timing": {
+        "startTime": 1792613135636.0012,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.238,
+        "responseStart": 2.973,
+        "responseEnd": 12.541
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:05:35.671Z",
+      "timing": {
+        "startTime": 1792613135662.2278,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.399,
+        "responseStart": 7.104,
+        "responseEnd": 9.088
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:35.676Z",
+      "timing": {
+        "startTime": 1792613135672.2769,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.167,
+        "responseStart": 1.267,
+        "responseEnd": 3.627
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T20:05:35.726Z",
+      "timing": {
+        "startTime": 1792613135712.259,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.434,
+        "responseStart": 4.276,
+        "responseEnd": 14.326
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:05:48.173Z",
+      "timing": {
+        "startTime": 1792613143515.7468,
+        "domainLookupStart": 0.804,
+        "domainLookupEnd": 0.89,
+        "connectStart": 0.89,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.519,
+        "requestStart": 1.646,
+        "responseStart": 3.013,
+        "responseEnd": 5.653
+      }
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "status": "FAIL",
+  "failure": {
+    "stage": "admission and own work",
+    "message": "expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Opening your house…\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n    - unexpected value \"Your evening awaits\"\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Opening your house…</small>\n    - unexpected value \"Opening your house…\"\n",
+    "stack": "Error: expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Opening your house…\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n    - unexpected value \"Your evening awaits\"\n    - locator resolved to <small role=\"status\" id=\"connection-status\">Opening your house…</small>\n    - unexpected value \"Opening your house…\"\n\n    at captureRawStack (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toHaveText (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at live (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:21:76)\n    at admission (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:22:537)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:35:196"
+  },
+  "finishedAt": "2026-10-21T20:05:50.475Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "00a431b6c5878ad0124f17418e5101c5d7e82157db39e27ee0258dad409f97b6",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

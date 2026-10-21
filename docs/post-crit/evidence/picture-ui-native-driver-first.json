@@ -1,0 +1,7 @@
+{
+  "status": "HARNESS_SETUP_FAIL",
+  "scope": "Before browser or application request; no product result",
+  "exit": 1,
+  "error": "SyntaxError: house-journey.ts does not provide export setCameraMode",
+  "correction": "Used actual existing helper chooseCamera; no production source edit"
+}

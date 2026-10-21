@@ -1,0 +1,19 @@
+{
+  "scope": "Completed-round participation control and confirmed same-round late Join ACK feedback only",
+  "priorSHA256": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+  "currentSHA256": "3b9d84068dfae4e105816af1721a94c807a49f7f9973edb15bcc8e0a7e17fecf",
+  "reversingOnlyTwoChangesReproducesPrior": true,
+  "changes": [
+    {
+      "before": "button(\"leave\").hidden=!joined&&!joinStarted&&!pendingDirect;",
+      "after": "button(\"leave\").hidden=complete||(!joined&&!joinStarted&&!pendingDirect);"
+    },
+    {
+      "before": "say(mode===\"leave\"?\"Withdrawal acknowledged.\":\"Join acknowledged. Waiting for current participation; watching until it arrives.\");",
+      "after": "say(mode===\"leave\"?\"Withdrawal acknowledged.\":round()?.completed?\"The picture is complete. A new picture needs a fresh Start and Join.\":\"Join acknowledged. Waiting for current participation; watching until it arrives.\");"
+    }
+  ],
+  "red": "picture-ui-native-completion-controls-red.json;20 prior cases passed,3 new cases failed",
+  "preserved": "Original pending retry, pending inspector, immediate Return, roster-only authority, unfinished Leave, new-round ACK guards",
+  "affectedNativeProposal": "Parent-owned maintained3-context contributor case should assert completed/Watching0/Joinhidden/Leavehidden/Returnenabled/completeimage after normal real Join and completion, with its own new component binding. No worker full24-piece rerun."
+}

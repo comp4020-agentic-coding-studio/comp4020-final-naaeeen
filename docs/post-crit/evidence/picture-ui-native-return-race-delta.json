@@ -1,0 +1,27 @@
+{
+  "scope": "Door/exit subscription UI continuation only; no server or client authority change",
+  "priorSHA256": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+  "currentSHA256": "923e5a57617710dbc14341182c4552275c28a6b8de0c8145df722ce5285cf027",
+  "undoTwoStatementOrderChangesSHA256": "a1674ef29d9ebbc0eea3763801123259a357ec773d4742c788573ef331882a44",
+  "exactTwoChangeProof": true,
+  "before": [
+    "await client.subscribe(resident.bedroomId);closePanel();",
+    "await client.subscribe(\"lounge\");closePanel();"
+  ],
+  "after": [
+    "closePanel();await client.subscribe(resident.bedroomId);",
+    "closePanel();await client.subscribe(\"lounge\");"
+  ],
+  "observedTraceBeforeFix": "subscribe started -> own-room snapshot accepted -> before subscribe resolves: room/open -> after interact resolves: room/hidden",
+  "red": {
+    "file": "picture-ui-native-return-ordering-red-v2.json",
+    "passed": 2,
+    "failed": 3
+  },
+  "controls": [
+    "manual entry does not auto-open work",
+    "failed subscription keeps authorized view/newer draft",
+    "newer door/exit panel must survive old subscription resolution"
+  ],
+  "specSHA256": "34e211cf8e360d4f4171b690f14d7aad45e9acb61c2c5eb36d81fc4e9f2db73a"
+}

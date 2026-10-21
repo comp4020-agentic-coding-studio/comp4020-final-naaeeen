@@ -1,0 +1,15 @@
+{
+  "scope": "Mocked JSDOM component/house shell and renderer unit tests; not native multiplayer or human acceptance",
+  "command": "/home/lizhi/.local/bin/mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-puzzle-ui.test.ts spec/house-ui.test.ts spec/house-world.test.ts --coverage --coverage.include=public/house-puzzle-ui.js --reporter=json --outputFile=docs/post-crit/evidence/picture-ui-focused-final.json",
+  "exit": 0,
+  "passed": 213,
+  "failed": 0,
+  "coverage": {
+    "scope": "public/house-puzzle-ui.js",
+    "statements": 92.26,
+    "branches": 83.14,
+    "functions": 84.74,
+    "lines": 98.66
+  },
+  "afterThisRun": "Observer-tab own-room work entry red/fix and pending-label copy are awaiting affected rerun; no native process started."
+}

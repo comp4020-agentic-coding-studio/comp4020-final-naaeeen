@@ -1,0 +1,2551 @@
+{
+  "label": "return-repaired-task",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Actual current app, two native browser contexts; one temporary observer tab and one explicitly bounded dropped Join ACK. No fake UI state, human or physical-device result.",
+  "startedAt": "2026-10-21T20:30:09.777Z",
+  "protocolSHA256": "a279c88a52ac14cc2b5dca2ecdae2cf5c70ae70a2c44fd812f4cbf21f9812dad",
+  "runnerSHA256": "ef5a4e5303601a1c83ef716a32bf4389469c3c854448fc502c481148d64bc6a2",
+  "sourceSHA256": {
+    "public/house-ui.js": "923e5a57617710dbc14341182c4552275c28a6b8de0c8145df722ce5285cf027",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [
+    {
+      "name": "two actual residents and saved work with newer draft",
+      "at": "2026-10-21T20:30:18.624Z"
+    },
+    {
+      "name": "opening Watch never joined; real Start and separate Join",
+      "at": "2026-10-21T20:30:36.383Z"
+    },
+    {
+      "name": "desktop and portrait initial targets/exit",
+      "at": "2026-10-21T20:30:38.663Z"
+    },
+    {
+      "name": "wrong place kept selection; real peer solve preserved selected-node focus",
+      "at": "2026-10-21T20:30:40.140Z"
+    },
+    {
+      "name": "native keyboard place without avatar motion",
+      "at": "2026-10-21T20:30:40.339Z"
+    },
+    {
+      "name": "same-identity observer stayed read only and pending export remained reachable",
+      "at": "2026-10-21T20:30:45.541Z"
+    },
+    {
+      "name": "real reconnect preserved progress and required explicit Join",
+      "at": "2026-10-21T20:31:04.204Z"
+    },
+    {
+      "name": "real readable chat and primary landscape controls",
+      "at": "2026-10-21T20:31:07.504Z"
+    },
+    {
+      "name": "24 real placements complete, image retained, consent cleared",
+      "at": "2026-10-21T20:31:29.031Z"
+    },
+    {
+      "name": "ordinary game and existing shared chat controls reachable at desktop and portrait",
+      "at": "2026-10-21T20:31:37.787Z"
+    },
+    {
+      "name": "real Join ACK loss exposed original retry; newer Leave survived historical ACK",
+      "at": "2026-10-21T20:31:44.893Z"
+    },
+    {
+      "name": "actual Stand and route, explicit Open my work, saved/draft and Quiet preserved",
+      "at": "2026-10-21T20:32:03.533Z"
+    },
+    {
+      "name": "closing visited room restored legitimate lounge with unchanged puzzle roster",
+      "at": "2026-10-21T20:32:17.851Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/desktop-initial.png",
+      "sha256": "a455f22cb09aa373e7cbd684e108b0f0cbed75366e76d114262e681df4c23a1e",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/portrait-initial.png",
+      "sha256": "bd0ad3e9cb1f4538fbeecea31c7ece1c772bd9e8f3cf5184c8611c90b0a4654a",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/landscape-real-chat.png",
+      "sha256": "3d953f8551a41a230848847282e87078bc22d1c535027488ad3330e9401e544f",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/landscape-minimum-chat.png",
+      "sha256": "ed7614ec6c1297b9a3f0888165e32a767b1f0a5ec07c9966fa17d4f6694d55c8",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/landscape-initial.png",
+      "sha256": "e46b19515cce141f352cfb93cda26a6092589f784aeb3663987d4b78ced2c5c1",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/landscape-complete.png",
+      "sha256": "0d722f56f63b7ef69bbd7aacf55cbcec41d032e2276370935587f6844849f377",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/portrait-complete.png",
+      "sha256": "8999c6be48b1ba6cf3cb31c84f07afceaa37fef7f61fdcd87b18fba04f2304ea",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/desktop-complete.png",
+      "sha256": "514f3331853e9d47a79c77264c6ce27bc137656c84fbe953ef06bd9e344f1a23",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/desktop-ordinary-game-chat.png",
+      "sha256": "b49a10f3225e3ef48969fedcbe7303bb59ef6c9bee6594264768f8b00150c3e3",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/portrait-ordinary-game-chat.png",
+      "sha256": "3d2a6bc1108f3e392e293ebd7150c84e7242e118ff5fa773edef1ddc321d0a1f",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-return-repaired-task/returned-work-draft.png",
+      "sha256": "afd4dbddfce766da780690a108f7153256594cb8e4e60fba5ba24632218c5cb2",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [
+    {
+      "name": "desktop-initial",
+      "activities": [
+        {
+          "x": 371,
+          "y": 197.71875,
+          "width": 585,
+          "height": 53,
+          "right": 956,
+          "bottom": 250.71875,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 964,
+          "y": 197.71875,
+          "width": 585,
+          "height": 53,
+          "right": 1549,
+          "bottom": 250.71875,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1,
+        "clientWidth": 1920
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 843,
+      "panelClientHeight": 843,
+      "board": {
+        "x": 447,
+        "y": 429.109375,
+        "width": 650,
+        "height": 437.375,
+        "right": 1097,
+        "bottom": 866.484375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 1199,
+        "y": 466.3125,
+        "width": 350,
+        "height": 263.75,
+        "right": 1549,
+        "bottom": 730.0625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 705.921875,
+        "y": 338.109375,
+        "width": 137.15625,
+        "height": 44,
+        "right": 843.078125,
+        "bottom": 382.109375,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 79.25,
+      "cellMinimum": 106.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "portrait-initial",
+      "activities": [
+        {
+          "x": 21,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 192,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 198,
+          "y": 82,
+          "width": 171,
+          "height": 45,
+          "right": 369,
+          "bottom": 127,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 1,
+        "clientWidth": 390
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 913,
+      "panelClientHeight": 826,
+      "board": {
+        "x": 30,
+        "y": 360.78125,
+        "width": 330,
+        "height": 223.375,
+        "right": 360,
+        "bottom": 584.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 21,
+        "y": 640.15625,
+        "width": 348,
+        "height": 120,
+        "right": 369,
+        "bottom": 760.15625,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 21,
+        "y": 278.78125,
+        "width": 348,
+        "height": 44,
+        "right": 369,
+        "bottom": 322.78125,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 53,
+      "cellMinimum": 53.328125,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "landscape-real-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 322,
+        "height": 251
+      },
+      "sendBottom": 374,
+      "closeTop": 21.5,
+      "bodyRects": [
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 472,
+          "right": 814.4375
+        },
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 814.4375,
+          "right": 818.578125
+        },
+        {
+          "top": 123.390625,
+          "bottom": 138.390625,
+          "left": 472,
+          "right": 548.34375
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 81,
+        "bottom": 98.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "landscape-minimum-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 168,
+        "height": 97
+      },
+      "sendBottom": 220,
+      "closeTop": 21.5,
+      "bodyRects": [
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 472,
+          "right": 814.4375
+        },
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 814.4375,
+          "right": 818.578125
+        },
+        {
+          "top": 123.390625,
+          "bottom": 138.390625,
+          "left": 472,
+          "right": 548.34375
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 81,
+        "bottom": 98.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true,
+      "windowHeight": 220
+    },
+    {
+      "name": "landscape-initial",
+      "activities": [
+        {
+          "x": 189,
+          "y": 17,
+          "width": 211,
+          "height": 44,
+          "right": 400,
+          "bottom": 61,
+          "fullyExposed": true,
+          "clips": []
+        },
+        {
+          "x": 408,
+          "y": 17,
+          "width": 211,
+          "height": 44,
+          "right": 619,
+          "bottom": 61,
+          "fullyExposed": true,
+          "clips": []
+        }
+      ],
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "devicePixelRatio": 1,
+        "clientWidth": 844
+      },
+      "panelScroll": 0,
+      "panelScrollHeight": 433,
+      "panelClientHeight": 372,
+      "board": {
+        "x": 94,
+        "y": 173,
+        "width": 296,
+        "height": 200.6875,
+        "right": 390,
+        "bottom": 373.6875,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "tray": {
+        "x": 483,
+        "y": 173,
+        "width": 340,
+        "height": 118,
+        "right": 823,
+        "bottom": 291,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "return": {
+        "x": 296.109375,
+        "y": 105,
+        "width": 112.296875,
+        "height": 44,
+        "right": 408.40625,
+        "bottom": 149,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "pieceMinimum": 50.5,
+      "cellMinimum": 47.65625,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "desktop-ordinary-game",
+      "controls": [
+        {
+          "selector": "#break-picture",
+          "width": 268,
+          "height": 53,
+          "exposed": true
+        },
+        {
+          "selector": "#break-four",
+          "width": 268,
+          "height": 53,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"return\"]",
+          "width": 135.15625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"join\"]",
+          "width": 135.546875,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"0\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"1\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"2\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"3\"]",
+          "width": 74.296875,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"4\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"5\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"6\"]",
+          "width": 74.28125,
+          "height": 44,
+          "exposed": true
+        }
+      ]
+    },
+    {
+      "name": "desktop-ordinary-game-chat",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 168,
+        "height": 97
+      },
+      "sendBottom": 220,
+      "closeTop": 21.5,
+      "bodyRects": [
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 472,
+          "right": 814.4375
+        },
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 814.4375,
+          "right": 818.578125
+        },
+        {
+          "top": 123.390625,
+          "bottom": 138.390625,
+          "left": 472,
+          "right": 548.34375
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 81,
+        "bottom": 98.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "desktop-author-already-visible",
+      "message": {
+        "top": 71,
+        "bottom": 153.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 71,
+        "bottom": 168,
+        "height": 97
+      },
+      "sendBottom": 220,
+      "closeTop": 21.5,
+      "bodyRects": [
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 472,
+          "right": 814.4375
+        },
+        {
+          "top": 102.59375,
+          "bottom": 117.59375,
+          "left": 814.4375,
+          "right": 818.578125
+        },
+        {
+          "top": 123.390625,
+          "bottom": 138.390625,
+          "left": 472,
+          "right": 548.34375
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 81,
+        "bottom": 98.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "portrait-ordinary-game",
+      "controls": [
+        {
+          "selector": "#break-picture",
+          "width": 167,
+          "height": 45,
+          "exposed": true
+        },
+        {
+          "selector": "#break-four",
+          "width": 167,
+          "height": 45,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"return\"]",
+          "width": 340,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-action=\"join\"]",
+          "width": 135.546875,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"0\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"1\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"2\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"3\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"4\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"5\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        },
+        {
+          "selector": "[data-game-column=\"6\"]",
+          "width": 45.140625,
+          "height": 44,
+          "exposed": true
+        }
+      ]
+    },
+    {
+      "name": "portrait-ordinary-game-chat",
+      "message": {
+        "top": 206,
+        "bottom": 288.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 206,
+        "bottom": 394,
+        "height": 188
+      },
+      "sendBottom": 518,
+      "closeTop": 113.5,
+      "bodyRects": [
+        {
+          "top": 237.59375,
+          "bottom": 252.59375,
+          "left": 24,
+          "right": 320.53125
+        },
+        {
+          "top": 237.59375,
+          "bottom": 252.59375,
+          "left": 320.53125,
+          "right": 324.671875
+        },
+        {
+          "top": 258.390625,
+          "bottom": 273.390625,
+          "left": 24,
+          "right": 146.25
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 216,
+        "bottom": 233.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    },
+    {
+      "name": "portrait-author-already-visible",
+      "message": {
+        "top": 206,
+        "bottom": 288.1875,
+        "height": 82.1875
+      },
+      "transcript": {
+        "top": 206,
+        "bottom": 394,
+        "height": 188
+      },
+      "sendBottom": 518,
+      "closeTop": 113.5,
+      "bodyRects": [
+        {
+          "top": 237.59375,
+          "bottom": 252.59375,
+          "left": 24,
+          "right": 320.53125
+        },
+        {
+          "top": 237.59375,
+          "bottom": 252.59375,
+          "left": 320.53125,
+          "right": 324.671875
+        },
+        {
+          "top": 258.390625,
+          "bottom": 273.390625,
+          "left": 24,
+          "right": 146.25
+        }
+      ],
+      "bodyFullyContained": true,
+      "bodyUnobscured": true,
+      "authorContained": true,
+      "author": {
+        "top": 216,
+        "bottom": 233.59375
+      },
+      "messageUnobscured": true,
+      "sendUnobscured": true,
+      "closeUnobscured": true,
+      "readable": true
+    }
+  ],
+  "pageErrors": [],
+  "faults": [
+    {
+      "kind": "one real Join ACK dropped; real snapshots/requests forwarded",
+      "at": "2026-10-21T20:31:38.725Z"
+    }
+  ],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:30:10.222Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:30:11.352Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:30:11.689Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:30:12.473Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:30:13.859Z"
+    },
+    {
+      "event": "join live",
+      "at": "2026-10-21T20:30:18.176Z"
+    }
+  ],
+  "network": [
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:10.397Z",
+      "timing": {
+        "startTime": 1792614610383.102,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.179,
+        "responseStart": 8.39,
+        "responseEnd": 10.896
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:11.357Z",
+      "timing": {
+        "startTime": 1792614611349.845,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.215,
+        "responseStart": 1.362,
+        "responseEnd": 4.095
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:30:11.366Z",
+      "timing": {
+        "startTime": 1792614611356.1611,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.225,
+        "responseStart": 5.782,
+        "responseEnd": 9.137
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:11.370Z",
+      "timing": {
+        "startTime": 1792614611366.235,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.222,
+        "responseStart": 1.346,
+        "responseEnd": 4.18
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:11.682Z",
+      "timing": {
+        "startTime": 1792614611596.1968,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.187,
+        "responseStart": 1.891,
+        "responseEnd": 4.298
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T20:30:12.192Z",
+      "timing": {
+        "startTime": 1792614612131.803,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.237,
+        "responseStart": 1.845,
+        "responseEnd": 5.058
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:12.193Z",
+      "timing": {
+        "startTime": 1792614612132.189,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.093,
+        "responseStart": 4.243,
+        "responseEnd": 7.383
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:12.692Z",
+      "timing": {
+        "startTime": 1792614612683.4639,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 2.636,
+        "responseStart": 5.749,
+        "responseEnd": 31.73
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:13.861Z",
+      "timing": {
+        "startTime": 1792614613855.4138,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.461,
+        "responseStart": 2.98,
+        "responseEnd": 5.598
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T20:30:13.879Z",
+      "timing": {
+        "startTime": 1792614613864.6428,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.325,
+        "responseStart": 8.777,
+        "responseEnd": 12.539
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:13.886Z",
+      "timing": {
+        "startTime": 1792614613879.906,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.218,
+        "responseStart": 2.325,
+        "responseEnd": 5.68
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:18.164Z",
+      "timing": {
+        "startTime": 1792614617020.424,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.456,
+        "responseStart": 7.038,
+        "responseEnd": 10.064
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:34.170Z",
+      "timing": {
+        "startTime": 1792614634165.6409,
+        "domainLookupStart": 0.983,
+        "domainLookupEnd": 1.18,
+        "connectStart": 1.18,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.72,
+        "requestStart": 1.808,
+        "responseStart": 2.985,
+        "responseEnd": 5.506
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:34.200Z",
+      "timing": {
+        "startTime": 1792614634192.8809,
+        "domainLookupStart": 0.458,
+        "domainLookupEnd": 0.472,
+        "connectStart": 0.472,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.037,
+        "requestStart": 1.127,
+        "responseStart": 2.228,
+        "responseEnd": 5.593
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:34.251Z",
+      "timing": {
+        "startTime": 1792614634240.2493,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.817,
+        "responseStart": 8.211,
+        "responseEnd": 11.419
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:38.889Z",
+      "timing": {
+        "startTime": 1792614638884.3792,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.241,
+        "responseStart": 1.961,
+        "responseEnd": 4.401
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.092Z",
+      "timing": {
+        "startTime": 1792614640087.153,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.171,
+        "responseStart": 2.612,
+        "responseEnd": 4.423
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.097Z",
+      "timing": {
+        "startTime": 1792614640094.2358,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.151,
+        "responseStart": 1.291,
+        "responseEnd": 3.177
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.140Z",
+      "timing": {
+        "startTime": 1792614640130.2231,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.261,
+        "responseStart": 2.264,
+        "responseEnd": 7.44
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.298Z",
+      "timing": {
+        "startTime": 1792614640291.4697,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.227,
+        "responseStart": 2.422,
+        "responseEnd": 7.721
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.309Z",
+      "timing": {
+        "startTime": 1792614640304.322,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.311,
+        "responseStart": 1.778,
+        "responseEnd": 8.674
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:40.368Z",
+      "timing": {
+        "startTime": 1792614640348.146,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.317,
+        "responseStart": 5.343,
+        "responseEnd": 8.457
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:46.073Z",
+      "timing": {
+        "startTime": 1792614646057.6338,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.229,
+        "responseStart": 1.835,
+        "responseEnd": 4.668
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:46.866Z",
+      "timing": {
+        "startTime": 1792614646815.505,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.21,
+        "responseStart": 3.896,
+        "responseEnd": 6.999
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:30:54.989Z",
+      "timing": {
+        "startTime": 1792614652244.1357,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.775,
+        "responseStart": 3.146,
+        "responseEnd": 8.024
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:07.706Z",
+      "timing": {
+        "startTime": 1792614667699.51,
+        "domainLookupStart": 0.339,
+        "domainLookupEnd": 0.451,
+        "connectStart": 0.451,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.826,
+        "requestStart": 2.077,
+        "responseStart": 3.556,
+        "responseEnd": 6.962
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:07.709Z",
+      "timing": {
+        "startTime": 1792614667700.405,
+        "domainLookupStart": 0.403,
+        "domainLookupEnd": 0.415,
+        "connectStart": 0.415,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.256,
+        "requestStart": 1.337,
+        "responseStart": 6.209,
+        "responseEnd": 9.795
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:07.751Z",
+      "timing": {
+        "startTime": 1792614667745.587,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.723,
+        "responseStart": 3.644,
+        "responseEnd": 6.187
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:09.109Z",
+      "timing": {
+        "startTime": 1792614669102.328,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.449,
+        "responseStart": 2.245,
+        "responseEnd": 4.594
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:09.136Z",
+      "timing": {
+        "startTime": 1792614669130.921,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.262,
+        "responseStart": 2.918,
+        "responseEnd": 6.793
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:09.180Z",
+      "timing": {
+        "startTime": 1792614669176.094,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.172,
+        "responseStart": 1.682,
+        "responseEnd": 4.264
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.416Z",
+      "timing": {
+        "startTime": 1792614670411.755,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.239,
+        "responseStart": 1.944,
+        "responseEnd": 5.797
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.418Z",
+      "timing": {
+        "startTime": 1792614670412.1902,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.128,
+        "responseStart": 4.493,
+        "responseEnd": 7.229
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.465Z",
+      "timing": {
+        "startTime": 1792614670457.0798,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.213,
+        "responseStart": 2.857,
+        "responseEnd": 6.226
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.810Z",
+      "timing": {
+        "startTime": 1792614670805.6482,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.204,
+        "responseStart": 1.488,
+        "responseEnd": 5.118
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.840Z",
+      "timing": {
+        "startTime": 1792614670833.8572,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.208,
+        "responseStart": 1.86,
+        "responseEnd": 5.245
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:10.887Z",
+      "timing": {
+        "startTime": 1792614670881.3801,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.294,
+        "responseStart": 1.822,
+        "responseEnd": 4.97
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:11.912Z",
+      "timing": {
+        "startTime": 1792614671907.737,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.203,
+        "responseStart": 1.698,
+        "responseEnd": 4.065
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:11.958Z",
+      "timing": {
+        "startTime": 1792614671950.033,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.167,
+        "responseStart": 2.171,
+        "responseEnd": 8.121
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:12.002Z",
+      "timing": {
+        "startTime": 1792614671998.0938,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.692,
+        "responseStart": 2.064,
+        "responseEnd": 5.518
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:12.821Z",
+      "timing": {
+        "startTime": 1792614672814.289,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.194,
+        "responseStart": 2.067,
+        "responseEnd": 5.459
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:12.830Z",
+      "timing": {
+        "startTime": 1792614672819.1528,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.14,
+        "responseStart": 3.212,
+        "responseEnd": 5.444
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:12.837Z",
+      "timing": {
+        "startTime": 1792614672828.2412,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.783,
+        "responseStart": 3.429,
+        "responseEnd": 8.574
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.125Z",
+      "timing": {
+        "startTime": 1792614674118.194,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.177,
+        "responseStart": 2.248,
+        "responseEnd": 4.446
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.134Z",
+      "timing": {
+        "startTime": 1792614674127.077,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.186,
+        "responseStart": 1.482,
+        "responseEnd": 3.851
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.166Z",
+      "timing": {
+        "startTime": 1792614674156.194,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.207,
+        "responseStart": 3.893,
+        "responseEnd": 6.915
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.624Z",
+      "timing": {
+        "startTime": 1792614674619.195,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.22,
+        "responseStart": 2.091,
+        "responseEnd": 5.376
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.642Z",
+      "timing": {
+        "startTime": 1792614674636.5361,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.169,
+        "responseStart": 1.974,
+        "responseEnd": 4.22
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:14.692Z",
+      "timing": {
+        "startTime": 1792614674684.277,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.308,
+        "responseStart": 2.966,
+        "responseEnd": 9.159
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:15.732Z",
+      "timing": {
+        "startTime": 1792614675726.643,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.109,
+        "responseStart": 3.111,
+        "responseEnd": 9.573
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:15.735Z",
+      "timing": {
+        "startTime": 1792614675725.936,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.389,
+        "responseStart": 6.302,
+        "responseEnd": 10.613
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:15.777Z",
+      "timing": {
+        "startTime": 1792614675773.608,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.201,
+        "responseStart": 1.566,
+        "responseEnd": 3.668
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:16.231Z",
+      "timing": {
+        "startTime": 1792614676224.596,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.232,
+        "responseStart": 1.35,
+        "responseEnd": 4.152
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:16.237Z",
+      "timing": {
+        "startTime": 1792614676228.663,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.161,
+        "responseStart": 2.301,
+        "responseEnd": 5.768
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:16.256Z",
+      "timing": {
+        "startTime": 1792614676252.1501,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.24,
+        "responseStart": 1.728,
+        "responseEnd": 3.789
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.037Z",
+      "timing": {
+        "startTime": 1792614677031.511,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.199,
+        "responseStart": 1.529,
+        "responseEnd": 3.889
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.044Z",
+      "timing": {
+        "startTime": 1792614677039.2202,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.255,
+        "responseStart": 1.916,
+        "responseEnd": 5.34
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.090Z",
+      "timing": {
+        "startTime": 1792614677086.233,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.174,
+        "responseStart": 1.929,
+        "responseEnd": 4
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.634Z",
+      "timing": {
+        "startTime": 1792614677629.822,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.471,
+        "responseStart": 2.195,
+        "responseEnd": 5.071
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.641Z",
+      "timing": {
+        "startTime": 1792614677634.959,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.17,
+        "responseStart": 1.566,
+        "responseEnd": 3.916
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:17.671Z",
+      "timing": {
+        "startTime": 1792614677667.3271,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.248,
+        "responseStart": 1.745,
+        "responseEnd": 4.542
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:18.636Z",
+      "timing": {
+        "startTime": 1792614678632.631,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.197,
+        "responseStart": 1.517,
+        "responseEnd": 3.985
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:18.639Z",
+      "timing": {
+        "startTime": 1792614678636.3389,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.141,
+        "responseStart": 1.364,
+        "responseEnd": 4.015
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:18.656Z",
+      "timing": {
+        "startTime": 1792614678649.7822,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.188,
+        "responseStart": 1.527,
+        "responseEnd": 5.686
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:19.642Z",
+      "timing": {
+        "startTime": 1792614679637.703,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.194,
+        "responseStart": 2.005,
+        "responseEnd": 4.907
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:19.646Z",
+      "timing": {
+        "startTime": 1792614679638.8901,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.202,
+        "responseStart": 3.261,
+        "responseEnd": 6.132
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:19.653Z",
+      "timing": {
+        "startTime": 1792614679647.38,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.224,
+        "responseStart": 1.886,
+        "responseEnd": 4.564
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:20.443Z",
+      "timing": {
+        "startTime": 1792614680437.556,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.192,
+        "responseStart": 2.734,
+        "responseEnd": 7.224
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:20.447Z",
+      "timing": {
+        "startTime": 1792614680439.935,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 3.9,
+        "responseStart": 5.083,
+        "responseEnd": 8.149
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:20.460Z",
+      "timing": {
+        "startTime": 1792614680455.56,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.235,
+        "responseStart": 1.79,
+        "responseEnd": 5.26
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:21.349Z",
+      "timing": {
+        "startTime": 1792614681343.333,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.583,
+        "responseStart": 2.204,
+        "responseEnd": 6.561
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:21.354Z",
+      "timing": {
+        "startTime": 1792614681349.615,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.227,
+        "responseStart": 1.5,
+        "responseEnd": 4.172
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:21.384Z",
+      "timing": {
+        "startTime": 1792614681375.9448,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.193,
+        "responseStart": 1.584,
+        "responseEnd": 3.964
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.255Z",
+      "timing": {
+        "startTime": 1792614682248.248,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.271,
+        "responseStart": 2.14,
+        "responseEnd": 4.451
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.261Z",
+      "timing": {
+        "startTime": 1792614682256.297,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.192,
+        "responseStart": 1.716,
+        "responseEnd": 4.413
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.311Z",
+      "timing": {
+        "startTime": 1792614682305.1428,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.216,
+        "responseStart": 1.55,
+        "responseEnd": 4.201
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.855Z",
+      "timing": {
+        "startTime": 1792614682851.034,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.216,
+        "responseStart": 1.562,
+        "responseEnd": 3.885
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.908Z",
+      "timing": {
+        "startTime": 1792614682898.253,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.953,
+        "responseStart": 5.472,
+        "responseEnd": 8.956
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:22.951Z",
+      "timing": {
+        "startTime": 1792614682943.437,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.253,
+        "responseStart": 1.702,
+        "responseEnd": 6.916
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:23.560Z",
+      "timing": {
+        "startTime": 1792614683552.8901,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.213,
+        "responseStart": 1.736,
+        "responseEnd": 5.44
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:23.589Z",
+      "timing": {
+        "startTime": 1792614683582.9658,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.216,
+        "responseStart": 1.709,
+        "responseEnd": 4.386
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:23.635Z",
+      "timing": {
+        "startTime": 1792614683630.2368,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.3,
+        "responseStart": 1.769,
+        "responseEnd": 5.471
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.065Z",
+      "timing": {
+        "startTime": 1792614684057.6409,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.192,
+        "responseStart": 2.784,
+        "responseEnd": 7.24
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.094Z",
+      "timing": {
+        "startTime": 1792614684090.396,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.199,
+        "responseStart": 1.32,
+        "responseEnd": 3.523
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.142Z",
+      "timing": {
+        "startTime": 1792614684138.829,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.293,
+        "responseStart": 1.688,
+        "responseEnd": 4.769
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.759Z",
+      "timing": {
+        "startTime": 1792614684754.724,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.295,
+        "responseStart": 1.802,
+        "responseEnd": 4.272
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.760Z",
+      "timing": {
+        "startTime": 1792614684756.226,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.182,
+        "responseStart": 2.422,
+        "responseEnd": 4.751
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:24.814Z",
+      "timing": {
+        "startTime": 1792614684805.6719,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.182,
+        "responseStart": 2.239,
+        "responseEnd": 9.461
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:25.362Z",
+      "timing": {
+        "startTime": 1792614685356.748,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.222,
+        "responseStart": 1.562,
+        "responseEnd": 4.729
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:25.393Z",
+      "timing": {
+        "startTime": 1792614685389.0479,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.237,
+        "responseStart": 1.583,
+        "responseEnd": 4.152
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:25.446Z",
+      "timing": {
+        "startTime": 1792614685438.1091,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.18,
+        "responseStart": 2.088,
+        "responseEnd": 5.38
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:38.214Z",
+      "timing": {
+        "startTime": 1792614698208.159,
+        "domainLookupStart": 0.239,
+        "domainLookupEnd": 0.322,
+        "connectStart": 0.322,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.257,
+        "requestStart": 1.396,
+        "responseStart": 3.085,
+        "responseEnd": 5.547
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:38.226Z",
+      "timing": {
+        "startTime": 1792614698221.453,
+        "domainLookupStart": 0.164,
+        "domainLookupEnd": 0.173,
+        "connectStart": 0.173,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.002,
+        "requestStart": 1.085,
+        "responseStart": 2.019,
+        "responseEnd": 4.424
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:31:38.278Z",
+      "timing": {
+        "startTime": 1792614698273.03,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.196,
+        "responseStart": 2.902,
+        "responseEnd": 9.61
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:32:01.968Z",
+      "timing": {
+        "startTime": 1792614721550.833,
+        "domainLookupStart": 0.709,
+        "domainLookupEnd": 0.799,
+        "connectStart": 0.799,
+        "secureConnectionStart": -1,
+        "connectEnd": 2.221,
+        "requestStart": 2.784,
+        "responseStart": 4.675,
+        "responseEnd": 9.01
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:32:12.195Z",
+      "timing": {
+        "startTime": 1792614731846.055,
+        "domainLookupStart": 0.212,
+        "domainLookupEnd": 0.283,
+        "connectStart": 0.283,
+        "secureConnectionStart": -1,
+        "connectEnd": 1.847,
+        "requestStart": 2.15,
+        "responseStart": 4.103,
+        "responseEnd": 6.542
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:32:13.093Z",
+      "timing": {
+        "startTime": 1792614733086.435,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.247,
+        "responseStart": 1.939,
+        "responseEnd": 4.37
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T20:32:13.191Z",
+      "timing": {
+        "startTime": 1792614733187.2852,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.226,
+        "responseStart": 1.534,
+        "responseEnd": 3.872
+      }
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "intentAudit": [
+    {
+      "mode": "join",
+      "requestId": "7b435482-3ce3-4c13-ae65-84194e4d4bc8",
+      "intentSequence": 1,
+      "roundId": "469bbd8c-5ff4-45d8-95e8-9bfcbbfcaa8c"
+    },
+    {
+      "mode": "join",
+      "requestId": "d838cb1c-b30e-4144-b1f8-d339dc96d86b",
+      "intentSequence": 2,
+      "roundId": "668c54bc-b337-4742-adb0-5410b3dd99e2"
+    },
+    {
+      "mode": "leave",
+      "requestId": "5e37dda8-e772-4263-91bb-4096d77ea81e",
+      "intentSequence": 3,
+      "roundId": "668c54bc-b337-4742-adb0-5410b3dd99e2"
+    },
+    {
+      "mode": "join",
+      "requestId": "1d46bc5c-5855-4321-a207-432627844b03",
+      "intentSequence": 4,
+      "roundId": "668c54bc-b337-4742-adb0-5410b3dd99e2"
+    },
+    {
+      "mode": "leave",
+      "requestId": "9be7c3ed-47ce-4b75-8dad-aed226af22ef",
+      "intentSequence": 5,
+      "roundId": "668c54bc-b337-4742-adb0-5410b3dd99e2"
+    }
+  ],
+  "status": "PASS",
+  "finishedAt": "2026-10-21T20:32:18.636Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "923e5a57617710dbc14341182c4552275c28a6b8de0c8145df722ce5285cf027",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

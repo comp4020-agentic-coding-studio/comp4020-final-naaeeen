@@ -1,0 +1,1225 @@
+{
+  "label": "admission-modal-v2",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Actual production two-context ordinary admission and modal regression only. No observer tab, CSS override, WebSocket interception or injected fault. No human/physical-device result.",
+  "mode": "admission-modal",
+  "evaluatorVersion": 2,
+  "invocation": {
+    "argv": [
+      "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs",
+      "--label",
+      "admission-modal-v2",
+      "--admission-modal"
+    ],
+    "cwd": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+    "nodeExecutable": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "requestedArguments": [
+      "--label",
+      "admission-modal-v2",
+      "--admission-modal"
+    ]
+  },
+  "rendererOptions": {
+    "launch": {
+      "headless": true,
+      "chromiumSandbox": true,
+      "executablePath": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "args": [
+        "--use-angle=swiftshader"
+      ]
+    },
+    "ownerContext": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1
+    },
+    "peerContext": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "hasTouch": true,
+      "isMobile": false,
+      "deviceScaleFactor": 1
+    },
+    "actualLaunchOccurred": true
+  },
+  "instrumentation": {
+    "interceptors": [],
+    "passiveObservers": [
+      {
+        "kind": "response-event-listener",
+        "target": "owner"
+      },
+      {
+        "kind": "response-event-listener",
+        "target": "peer"
+      }
+    ],
+    "additionalTabs": []
+  },
+  "admissions": [
+    {
+      "kind": "create",
+      "boundary": "native submit click start -> live status AND visible canvas with self coordinate",
+      "budgetMs": 10000,
+      "startedWall": "2026-10-21T21:12:52.358Z",
+      "startedMonotonicMs": 996.927372,
+      "ownerPanelState": null,
+      "steps": [
+        {
+          "name": "submit-click",
+          "startedElapsedMs": 0.08235700000000179,
+          "timeoutMs": 9999,
+          "finishedElapsedMs": 602.958195
+        },
+        {
+          "name": "live-status",
+          "startedElapsedMs": 603.16882,
+          "timeoutMs": 9396,
+          "finishedElapsedMs": 947.196489
+        },
+        {
+          "name": "canvas-visible",
+          "startedElapsedMs": 947.2075960000001,
+          "timeoutMs": 9052,
+          "finishedElapsedMs": 1330.355795
+        },
+        {
+          "name": "canvas-self-coordinate-ready",
+          "startedElapsedMs": 1330.375716,
+          "timeoutMs": 8669,
+          "finishedElapsedMs": 1347.0432769999998
+        }
+      ],
+      "outcome": "PASS",
+      "elapsedMs": 1347.1602859999998
+    },
+    {
+      "kind": "join",
+      "boundary": "native submit click start -> live status AND visible canvas with self coordinate",
+      "budgetMs": 10000,
+      "startedWall": "2026-10-21T21:12:53.782Z",
+      "startedMonotonicMs": 3159.908783,
+      "ownerPanelState": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "house",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": null
+      },
+      "steps": [
+        {
+          "name": "submit-click",
+          "startedElapsedMs": 0.03505100000029415,
+          "timeoutMs": 9999,
+          "finishedElapsedMs": 419.91246200000023
+        },
+        {
+          "name": "live-status",
+          "startedElapsedMs": 419.9453430000003,
+          "timeoutMs": 9580,
+          "finishedElapsedMs": 2827.916781
+        },
+        {
+          "name": "canvas-visible",
+          "startedElapsedMs": 2827.9342340000003,
+          "timeoutMs": 7172,
+          "finishedElapsedMs": 3088.1405540000005
+        },
+        {
+          "name": "canvas-self-coordinate-ready",
+          "startedElapsedMs": 3088.159195,
+          "timeoutMs": 6911,
+          "finishedElapsedMs": 3103.9662820000003
+        }
+      ],
+      "outcome": "PASS",
+      "elapsedMs": 3103.973857
+    }
+  ],
+  "startedAt": "2026-10-21T21:12:51.662Z",
+  "protocolSHA256": "df85cd52854e5049bee000c66bc66bdf78de5a0365e4cdefb2f45c75260c8b44",
+  "runnerSHA256": "83213154853ec70eeee928ce1d676144621ebfdd4107487c4f87c2a5cb349d39",
+  "sourceSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [
+    {
+      "name": "ordinary House-open admission met one composite submit-to-live-and-canvas deadline",
+      "at": "2026-10-21T21:12:56.886Z"
+    },
+    {
+      "name": "options modal focus/scroll/exits/world isolation at 1920x1080",
+      "at": "2026-10-21T21:12:59.594Z"
+    },
+    {
+      "name": "house modal focus/scroll/exits/world isolation at 1920x1080",
+      "at": "2026-10-21T21:13:01.745Z"
+    },
+    {
+      "name": "options modal focus/scroll/exits/world isolation at 390x844",
+      "at": "2026-10-21T21:13:03.142Z"
+    },
+    {
+      "name": "house modal focus/scroll/exits/world isolation at 390x844",
+      "at": "2026-10-21T21:13:04.333Z"
+    },
+    {
+      "name": "options modal focus/scroll/exits/world isolation at 844x390",
+      "at": "2026-10-21T21:13:05.524Z"
+    },
+    {
+      "name": "house modal focus/scroll/exits/world isolation at 844x390",
+      "at": "2026-10-21T21:13:06.954Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/ordinary-owner-house-open.png",
+      "sha256": "d7e74c0536b275b5124b9230f8e6cbd9be93758958f212389a7d8d44413d290d",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/ordinary-peer-ready.png",
+      "sha256": "9674f2c5504f5aaa54fe192ac561e887eced42bee3d6506008de281faf13b53e",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/options-1920x1080-footer-and-close.png",
+      "sha256": "900bead7cb9354cb6138f32fe29b37edf6386b39d600b50ebce5b4a5eea226a1",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/house-1920x1080-footer-and-close.png",
+      "sha256": "2f51cd7e7395436ca08c7ee72e1e15f115a1c2930c93bf2f739d4aa1e96bc547",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/options-390x844-footer-and-close.png",
+      "sha256": "fff7833b1714be71f12785336778dfb0ff99391ab4366053ad49a227e3ad94cd",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/house-390x844-footer-and-close.png",
+      "sha256": "14d0328bc6b45d5191bbd2aa4816ff7307cd71c8adee63f25940954d4787db72",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/options-844x390-footer-and-close.png",
+      "sha256": "ff55e2e31566f6b7b7bc58d37c405bdbadcc0fff1a788cb42644b4fb9135c30e",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-modal-v2/house-844x390-footer-and-close.png",
+      "sha256": "e0998a23d47d1a47d9c3180be4004da1ee0925585a9b775ed1080c8a508a8410",
+      "width": 844,
+      "height": 390,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T21:12:52.053Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T21:12:52.222Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T21:12:52.966Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T21:12:53.263Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T21:12:54.202Z"
+    },
+    {
+      "event": "join live",
+      "at": "2026-10-21T21:12:56.886Z"
+    }
+  ],
+  "network": [
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:52.248Z",
+      "timing": {
+        "startTime": 1792617172224.541,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.281,
+        "responseStart": 17.165,
+        "responseEnd": 20.824
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:52.272Z",
+      "timing": {
+        "startTime": 1792617172220.199,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.195,
+        "responseStart": 1.288,
+        "responseEnd": 15.296
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T21:12:52.280Z",
+      "timing": {
+        "startTime": 1792617172272.956,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.167,
+        "responseStart": 5.148,
+        "responseEnd": 8.299
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:52.286Z",
+      "timing": {
+        "startTime": 1792617172282.5361,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.209,
+        "responseStart": 1.478,
+        "responseEnd": 4.568
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:52.946Z",
+      "timing": {
+        "startTime": 1792617172483.298,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.26,
+        "responseStart": 1.881,
+        "responseEnd": 4.068
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:12:53.297Z",
+      "timing": {
+        "startTime": 1792617173235.533,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.28,
+        "responseStart": 1.558,
+        "responseEnd": 5.132
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:53.297Z",
+      "timing": {
+        "startTime": 1792617173236.006,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.141,
+        "responseStart": 3.302,
+        "responseEnd": 7.779
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:53.497Z",
+      "timing": {
+        "startTime": 1792617173471.596,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.215,
+        "responseStart": 18.865,
+        "responseEnd": 23.09
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:54.199Z",
+      "timing": {
+        "startTime": 1792617174195.675,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.237,
+        "responseStart": 1.629,
+        "responseEnd": 5.855
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/command",
+      "status": 200,
+      "at": "2026-10-21T21:12:54.221Z",
+      "timing": {
+        "startTime": 1792617174205.841,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.446,
+        "responseStart": 11.947,
+        "responseEnd": 14.647
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:54.226Z",
+      "timing": {
+        "startTime": 1792617174222.5752,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.171,
+        "responseStart": 1.598,
+        "responseEnd": 8.005
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:12:54.271Z",
+      "timing": {
+        "startTime": 1792617174258.2979,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.2,
+        "responseStart": 3.732,
+        "responseEnd": 12.125
+      }
+    },
+    {
+      "page": "peer",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:56.870Z",
+      "timing": {
+        "startTime": 1792617175825.799,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.274,
+        "responseStart": 2.154,
+        "responseEnd": 5.143
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:12:59.817Z",
+      "timing": {
+        "startTime": 1792617179762.413,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.341,
+        "responseStart": 2.025,
+        "responseEnd": 7.535
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:12:59.817Z",
+      "timing": {
+        "startTime": 1792617179764.018,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 5.718,
+        "responseStart": 8.327,
+        "responseEnd": 12.771
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:01.120Z",
+      "timing": {
+        "startTime": 1792617181069.287,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.19,
+        "responseStart": 5.874,
+        "responseEnd": 10.158
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:01.120Z",
+      "timing": {
+        "startTime": 1792617181069.0962,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.3,
+        "responseStart": 8.085,
+        "responseEnd": 12.347
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:01.384Z",
+      "timing": {
+        "startTime": 1792617181335.909,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.24,
+        "responseStart": 1.958,
+        "responseEnd": 4.979
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:01.384Z",
+      "timing": {
+        "startTime": 1792617181340.593,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.209,
+        "responseStart": 2.514,
+        "responseEnd": 8.977
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:03.277Z",
+      "timing": {
+        "startTime": 1792617183248.4739,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.486,
+        "responseStart": 2.414,
+        "responseEnd": 6.067
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:03.277Z",
+      "timing": {
+        "startTime": 1792617183249.227,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.264,
+        "responseStart": 4.76,
+        "responseEnd": 7.991
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:03.990Z",
+      "timing": {
+        "startTime": 1792617183972.001,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.283,
+        "responseStart": 2.484,
+        "responseEnd": 8.182
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:03.990Z",
+      "timing": {
+        "startTime": 1792617183972.527,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.132,
+        "responseStart": 6.604,
+        "responseEnd": 9.56
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:04.169Z",
+      "timing": {
+        "startTime": 1792617184159.069,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.384,
+        "responseStart": 2.676,
+        "responseEnd": 5.862
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:04.169Z",
+      "timing": {
+        "startTime": 1792617184159.781,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.181,
+        "responseStart": 4.534,
+        "responseEnd": 8.57
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:05.627Z",
+      "timing": {
+        "startTime": 1792617185597.4211,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.331,
+        "responseStart": 2.427,
+        "responseEnd": 6.897
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:05.627Z",
+      "timing": {
+        "startTime": 1792617185598.1873,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.133,
+        "responseStart": 3.435,
+        "responseEnd": 6.764
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:06.536Z",
+      "timing": {
+        "startTime": 1792617186524.8179,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.279,
+        "responseStart": 2.137,
+        "responseEnd": 7.665
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:06.536Z",
+      "timing": {
+        "startTime": 1792617186526.236,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.147,
+        "responseStart": 3.815,
+        "responseEnd": 8.249
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/removed-members",
+      "status": 200,
+      "at": "2026-10-21T21:13:06.750Z",
+      "timing": {
+        "startTime": 1792617186740.9712,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.186,
+        "responseStart": 1.808,
+        "responseEnd": 4.463
+      }
+    },
+    {
+      "page": "owner",
+      "path": "/api/house/me",
+      "status": 200,
+      "at": "2026-10-21T21:13:06.750Z",
+      "timing": {
+        "startTime": 1792617186741.3472,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.129,
+        "responseStart": 3.529,
+        "responseEnd": 5.93
+      }
+    }
+  ],
+  "modalCases": [
+    {
+      "kind": "options",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "openedFrom": "pause-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "true"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "options",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "true"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 961.328125,
+        "y": 765.484375,
+        "width": 107.28125,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 1136,
+        "y": 274.515625,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 0,
+        "height": 611,
+        "scrollHeight": 611
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    },
+    {
+      "kind": "house",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "openedFrom": "house-code-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "false"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "house",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "false"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 740,
+        "y": 937.5625,
+        "width": 195.34375,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 1136,
+        "y": 45,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 168,
+        "height": 1038,
+        "scrollHeight": 1206
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    },
+    {
+      "kind": "options",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openedFrom": "pause-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "true"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "options",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "true"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 37,
+        "y": 715.078125,
+        "width": 107.28125,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 309,
+        "y": 84.921875,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 0,
+        "height": 738,
+        "scrollHeight": 738
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    },
+    {
+      "kind": "house",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openedFrom": "house-code-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "false"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "house",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "false"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 37,
+        "y": 713.53125,
+        "width": 195.34375,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 309,
+        "y": 33,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 545,
+        "height": 818,
+        "scrollHeight": 1363
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    },
+    {
+      "kind": "options",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "openedFrom": "pause-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "true"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "options",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "true"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 423.328125,
+        "y": 288.96875,
+        "width": 107.28125,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 598,
+        "y": 45,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 263,
+        "height": 348,
+        "scrollHeight": 611
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    },
+    {
+      "kind": "house",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "openedFrom": "house-code-button",
+      "rendererWhileOpen": {
+        "x": "-0.325",
+        "z": "4.650",
+        "zone": "lounge",
+        "animation": "idle",
+        "suspended": "false"
+      },
+      "shell": {
+        "visibility": "visible",
+        "panel": {
+          "hidden": false,
+          "tool": "house",
+          "ariaModal": "true"
+        },
+        "backdrop": {
+          "hidden": false,
+          "filter": "none"
+        },
+        "rendererSuspendedFlag": "false"
+      },
+      "inert": {
+        "world": true,
+        "game-controls": true,
+        "entry": true,
+        "chat-window": true
+      },
+      "nativeReverseForwardTrap": true,
+      "keyboardWorldIsolation": true,
+      "footer": {
+        "x": 202,
+        "y": 247.5625,
+        "width": 195.34375,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "closeAfterFooterScroll": {
+        "x": 598,
+        "y": 45,
+        "width": 44,
+        "height": 44,
+        "fullyExposed": true,
+        "clips": []
+      },
+      "scroll": {
+        "top": 858,
+        "height": 348,
+        "scrollHeight": 1206
+      },
+      "nativeScrollBackToTop": true,
+      "escapeRestoredLauncher": true,
+      "closeRestoredLauncher": true,
+      "backdropOutcome": "remained-open",
+      "pointerWorldIsolation": true
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "status": "PASS",
+  "finishedAt": "2026-10-21T21:13:07.184Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "HARNESS_BOUND_FAIL",
+  "scope": "No puzzle acceptance; actual peer was Together, live by preserved screenshot",
+  "registeredExpectedUIBoundMs": 10000,
+  "actualUnconfiguredMatcherBoundMs": 5000,
+  "productionEdits": false,
+  "rootServiceStopped": false
+}

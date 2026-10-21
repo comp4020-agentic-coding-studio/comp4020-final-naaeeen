@@ -1,0 +1,437 @@
+{
+  "scope": "One bounded open/closed/open diagnostic, not causal or general performance proof",
+  "outcomes": [
+    "FAIL",
+    "PASS",
+    "FAIL"
+  ],
+  "rows": [
+    {
+      "condition": "open",
+      "outcome": "FAIL",
+      "failedStep": "peer Join to live predicate",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:07.218Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:08.198Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:08.736Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:09.299Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:10.951Z"
+        }
+      ],
+      "measuredFinishedAt": "2026-10-21T20:45:20.320Z",
+      "pageErrors": [],
+      "owner": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 54,
+        "maxRafGapMs": 616.7,
+        "longTaskDurationsMs": [
+          172,
+          84
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615507244,
+            "performanceMs": 20.30000001192093
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615507393,
+            "performanceMs": 169.90000000596046
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615508444,
+            "performanceMs": 1220.6000000089407
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615508458,
+            "performanceMs": 1235.1000000089407
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615508633,
+            "performanceMs": 1410.1000000089407
+          }
+        ]
+      },
+      "peer": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 12,
+        "maxRafGapMs": 13449.5,
+        "longTaskDurationsMs": [
+          8326,
+          5384
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615509327,
+            "performanceMs": 24.599999994039536
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615509529,
+            "performanceMs": 227.29999999701977
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615511013,
+            "performanceMs": 1710.5999999940395
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615511028,
+            "performanceMs": 1725.7999999970198
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615518722,
+            "performanceMs": 10056.09999999404
+          }
+        ]
+      },
+      "peerApi": [
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 20.626
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 5.007
+        },
+        {
+          "path": "/api/house/command",
+          "status": 200,
+          "responseEndMs": 20.202
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 8.914
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 4.655
+        }
+      ]
+    },
+    {
+      "condition": "closed",
+      "outcome": "PASS",
+      "failedStep": null,
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:28.023Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:28.433Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:28.659Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:29.315Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:30.903Z"
+        },
+        {
+          "event": "join live",
+          "at": "2026-10-21T20:45:32.985Z"
+        }
+      ],
+      "measuredFinishedAt": "2026-10-21T20:45:32.985Z",
+      "pageErrors": [],
+      "owner": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 71,
+        "maxRafGapMs": 383.39999999999986,
+        "longTaskDurationsMs": [
+          100,
+          66
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615528068,
+            "performanceMs": 39.099999994039536
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615528248,
+            "performanceMs": 219.09999999403954
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615528463,
+            "performanceMs": 434.5
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615528474,
+            "performanceMs": 445.59999999403954
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615528578,
+            "performanceMs": 550.0999999940395
+          }
+        ]
+      },
+      "peer": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 9,
+        "maxRafGapMs": 1899.9,
+        "longTaskDurationsMs": [
+          1300,
+          650
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615529345,
+            "performanceMs": 24.700000002980232
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615529522,
+            "performanceMs": 201.20000000298023
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615530951,
+            "performanceMs": 1630.4000000059605
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615530971,
+            "performanceMs": 1650.300000011921
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615532274,
+            "performanceMs": 2953.300000011921
+          }
+        ]
+      },
+      "peerApi": [
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 21.669
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 5.598
+        },
+        {
+          "path": "/api/house/command",
+          "status": 200,
+          "responseEndMs": 15.193
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 8.28
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 4.186
+        }
+      ]
+    },
+    {
+      "condition": "open",
+      "outcome": "FAIL",
+      "failedStep": "peer Join to live predicate",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:34.614Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:35.075Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:35.312Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:36.054Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:38.317Z"
+        }
+      ],
+      "measuredFinishedAt": "2026-10-21T20:45:48.321Z",
+      "pageErrors": [],
+      "owner": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 66,
+        "maxRafGapMs": 433.2999999999993,
+        "longTaskDurationsMs": [
+          101,
+          75
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615534663,
+            "performanceMs": 37.099999994039536
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615534910,
+            "performanceMs": 283.70000000298023
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615535105,
+            "performanceMs": 478.5
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615535115,
+            "performanceMs": 489.29999999701977
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615535222,
+            "performanceMs": 595.5999999940395
+          }
+        ]
+      },
+      "peer": {
+        "statusBeforeCapture": "Together, live",
+        "visibility": "visible",
+        "rafCount": 13,
+        "maxRafGapMs": 12966.2,
+        "longTaskDurationsMs": [
+          8230,
+          4953
+        ],
+        "connectionEvents": [
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615536088,
+            "performanceMs": 26.100000008940697
+          },
+          {
+            "kind": "connection-status",
+            "value": "Your evening awaits",
+            "at": 1792615536311,
+            "performanceMs": 249.20000000298023
+          },
+          {
+            "kind": "connection-status",
+            "value": "Opening your house\u2026",
+            "at": 1792615538396,
+            "performanceMs": 2334.4000000059605
+          },
+          {
+            "kind": "connection-status",
+            "value": "Reconnecting\u2026",
+            "at": 1792615538408,
+            "performanceMs": 2346.800000011921
+          },
+          {
+            "kind": "connection-status",
+            "value": "Together, live",
+            "at": 1792615546640,
+            "performanceMs": 10578.90000000596
+          }
+        ]
+      },
+      "peerApi": [
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 24.631
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 7.853
+        },
+        {
+          "path": "/api/house/command",
+          "status": 200,
+          "responseEndMs": 11.976
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 8.777
+        },
+        {
+          "path": "/api/house/me",
+          "status": 200,
+          "responseEndMs": 7.291
+        }
+      ]
+    }
+  ],
+  "sourceStable": true,
+  "rootServerStopped": false,
+  "ownedBrowsersClosed": true
+}

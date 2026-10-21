@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "mode": "admission-modal",
+  "runnerSHA256": "83213154853ec70eeee928ce1d676144621ebfdd4107487c4f87c2a5cb349d39",
+  "protocolSHA256": "df85cd52854e5049bee000c66bc66bdf78de5a0365e4cdefb2f45c75260c8b44",
+  "uiSHA256": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+  "cssSHA256": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+  "offlineControls": {
+    "file": "picture-ui-native-deadline-v2-offline-controls/result.json",
+    "exit": 0,
+    "controls": 3
+  },
+  "plannedCommand": "/home/lizhi/.local/bin/mise exec -- node tools/post-crit-picture-browser.mjs --label admission-modal-v2 --admission-modal",
+  "nativeLaunchedForThisFollowup": false
+}

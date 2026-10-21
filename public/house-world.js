@@ -13,7 +13,7 @@ const typing = target => target instanceof HTMLElement && (target.matches('input
 /**
  * A renderer of actual authorised zone state, with transient local prediction.
  * @param {HTMLElement} container
- * @param {{onMove?:(motion:{x:number,z:number,heading:number,animation:string})=>void|false|Promise<MotionReceipt>,onInteract?:(target:object)=>void,onSelectPlacement?:(id:string)=>void,onHint?:(text:string)=>void,onCameraModeChange?:(mode:string)=>void}} callbacks
+ * @param {{onMove?:(motion:{x:number,z:number,heading:number,animation:string})=>void|false|Promise<MotionReceipt>,onInteract?:(target:object)=>void,onSelectPlacement?:(id:string)=>void,onHint?:(text:string)=>void,onMovementIntent?:()=>void,onCameraModeChange?:(mode:string)=>void}} callbacks
  */
 export function createHouseWorld(container, callbacks = {}) {
   const canvas = document.createElement('canvas'); canvas.className = 'house-world-canvas'; canvas.id = 'house-world'; canvas.tabIndex = 0; canvas.setAttribute('aria-label', 'Shared study house. Move with WASD or arrow keys. Press E to interact nearby.');
@@ -604,7 +604,7 @@ export function createHouseWorld(container, callbacks = {}) {
     if (event.isComposing || composing || typing(event.target) || !canControl()) return;
     if (event.target instanceof HTMLElement && event.target !== canvas && event.target.closest('#chat-window,#panel,#board-workspace,[role=slider],[role=spinbutton]')) return;
     const key = KEY[event.key] ? event.key : event.key.toLowerCase();
-    if (KEY[key]) { event.preventDefault(); walkingIntent(); keys.add(key); }
+    if (KEY[key]) { event.preventDefault(); callbacks.onMovementIntent?.(); walkingIntent(); keys.add(key); }
     else if (key === 'e' && !event.repeat) { event.preventDefault(); interact(); }
   }
   function keyup(event) { const key = KEY[event.key] ? event.key : event.key.toLowerCase(); keys.delete(key); }
@@ -678,7 +678,7 @@ export function createHouseWorld(container, callbacks = {}) {
     setLabelSafeArea(value) { const nextArea = value ? { viewport: value.viewport ? { ...value.viewport } : null, safeRects: (value.safeRects ?? []).map(rect => ({ ...rect })) } : null; if (pendingEditFraming || JSON.stringify(nextArea) !== JSON.stringify(safeArea)) { safeArea = nextArea; configureCamera(); if (pendingEditFraming) { cameraRig.reset(); pendingEditFraming = false; } updateCamera(0); layoutDirty = true; } },
     setRoomPreview(placements) { previewPlacements = placements === null ? null : placements.map(p => ({ ...p })); if (live?.durable.room) rebuild(); },
     getPosition: () => ({ ...own }),
-    setDirection(x, z) { if (suspended || !Number.isFinite(x) || !Number.isFinite(z)) return; if (x || z) { if (!canControl()) return; canvas.focus({ preventScroll: true }); walkingIntent(); } route = []; routeTarget = null; direction = { x: Math.max(-1, Math.min(1, x)), z: Math.max(-1, Math.min(1, z)) }; },
+    setDirection(x, z) { if (suspended || !Number.isFinite(x) || !Number.isFinite(z)) return; if (x || z) { if (!canControl()) return; canvas.focus({ preventScroll: true }); callbacks.onMovementIntent?.(); walkingIntent(); } route = []; routeTarget = null; direction = { x: Math.max(-1, Math.min(1, x)), z: Math.max(-1, Math.min(1, z)) }; },
     setInputEnabled(value) { inputEnabled = !!value; if (!inputEnabled) clearInput(); },
     setEditing(value) { const changed = editing !== !!value; editing = !!value; clearInput(); if (changed) {
         if (editing) { pendingEditFraming = false; cameraRig.setMode('inspection'); }

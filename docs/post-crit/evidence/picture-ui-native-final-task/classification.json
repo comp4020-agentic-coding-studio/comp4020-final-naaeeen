@@ -1,0 +1,10 @@
+{
+  "status": "HARNESS_PAUSED_METADATA_FAIL",
+  "scope": "13 core actual gates passed on current UI232527; overall attempt remains failed",
+  "fault": {
+    "heldRealRoomFrames": 2,
+    "delayMs": 489
+  },
+  "observation": "Options remained open; canvas metadata was absent while view was deliberately suspended. No page errors.",
+  "evaluatorCorrection": "Assert accepted shell live/location with Options still open; verify renderer canvas zone only after resuming view. No production edit."
+}

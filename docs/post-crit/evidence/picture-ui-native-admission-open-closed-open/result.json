@@ -1,0 +1,2313 @@
+{
+  "label": "admission-open-closed-open",
+  "origin": "http://127.0.0.1:4108",
+  "scope": "Bounded counterbalanced actual-app admission diagnostic: open/closed/open House settings, same browser, fresh two-context pair each trial, fixed ten-second live bound. Passive DOM/visibility/RAF/long-task evidence; screenshots only after the measured outcome. Not picture acceptance or causal proof.",
+  "startedAt": "2026-10-21T20:45:06.796Z",
+  "protocolSHA256": "a9bfc4e4d2ce8acac238c796b2f3434f5450b1e0fe6693a12ad6f92fc44cdfab",
+  "runnerSHA256": "e652b185e55160844ca1c90ab69f59b39cab0c7be847379f138d58496781d27f",
+  "sourceSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  },
+  "checks": [],
+  "screenshots": [
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-1-open-owner.png",
+      "sha256": "e5a94fea8661d7d8090ff462e92d7224f01d4f4ea1777665e8e06b2e81fce909",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-1-open-peer.png",
+      "sha256": "ffc0852273638399b4811deab74c06f8600ed37a2b8d102feeb8f3e024eeda41",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-2-closed-owner.png",
+      "sha256": "cd81bf67f06e060f0043b626b7438e8d7e8af85d8299d5024276c26d53c62b97",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-2-closed-peer.png",
+      "sha256": "b539aa565310206ce5254341ea3f05ae3a71b3571003d8a60272d30ec3a0bf20",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-3-open-owner.png",
+      "sha256": "7561be25a83ecc2bac1da7099cf5634415f65cd80cb795e16d2a03ccf20f00b1",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    },
+    {
+      "file": "docs/post-crit/evidence/picture-ui-native-admission-open-closed-open/admission-3-open-peer.png",
+      "sha256": "d775edf5a4d7fa2df24910957d2aad43ceb67d6d03e4acbc12ecaf277c6ccd3d",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "nearBlackPixels": 0
+    }
+  ],
+  "metrics": [],
+  "pageErrors": [],
+  "faults": [],
+  "timings": [
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:45:07.218Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:45:08.198Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:45:08.736Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:45:09.299Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:45:10.951Z"
+    },
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:45:28.023Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:45:28.433Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:45:28.659Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:45:29.315Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:45:30.903Z"
+    },
+    {
+      "event": "join live",
+      "at": "2026-10-21T20:45:32.985Z"
+    },
+    {
+      "event": "create admission start",
+      "at": "2026-10-21T20:45:34.614Z"
+    },
+    {
+      "event": "create submitted",
+      "at": "2026-10-21T20:45:35.075Z"
+    },
+    {
+      "event": "create live",
+      "at": "2026-10-21T20:45:35.312Z"
+    },
+    {
+      "event": "join admission start",
+      "at": "2026-10-21T20:45:36.054Z"
+    },
+    {
+      "event": "join submitted",
+      "at": "2026-10-21T20:45:38.317Z"
+    }
+  ],
+  "network": [],
+  "trials": [
+    {
+      "index": 1,
+      "condition": "open",
+      "startedAt": "2026-10-21T20:45:06.966Z",
+      "network": [
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:07.392Z",
+          "timing": {
+            "startTime": 1792615507367.053,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.159,
+            "responseStart": 16.914,
+            "responseEnd": 20.852
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:08.419Z",
+          "timing": {
+            "startTime": 1792615508195.902,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.224,
+            "responseStart": 1.347,
+            "responseEnd": 4.087
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:08.431Z",
+          "timing": {
+            "startTime": 1792615508422.919,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.214,
+            "responseStart": 6.13,
+            "responseEnd": 9.56
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:08.438Z",
+          "timing": {
+            "startTime": 1792615508433.575,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.182,
+            "responseStart": 1.757,
+            "responseEnd": 5.207
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:08.730Z",
+          "timing": {
+            "startTime": 1792615508634.299,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.373,
+            "responseStart": 2.062,
+            "responseEnd": 4.111
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/removed-members",
+          "status": 200,
+          "at": "2026-10-21T20:45:09.279Z",
+          "timing": {
+            "startTime": 1792615509210.763,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.31,
+            "responseStart": 2.049,
+            "responseEnd": 5.31
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:09.279Z",
+          "timing": {
+            "startTime": 1792615509211.289,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.109,
+            "responseStart": 4.33,
+            "responseEnd": 7.891
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:09.526Z",
+          "timing": {
+            "startTime": 1792615509490.7698,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.211,
+            "responseStart": 11.426,
+            "responseEnd": 20.626
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:10.973Z",
+          "timing": {
+            "startTime": 1792615510948.217,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.204,
+            "responseStart": 1.565,
+            "responseEnd": 5.007
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:10.996Z",
+          "timing": {
+            "startTime": 1792615510974.573,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.398,
+            "responseStart": 14.939,
+            "responseEnd": 20.202
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:11.002Z",
+          "timing": {
+            "startTime": 1792615510997.77,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.211,
+            "responseStart": 2.495,
+            "responseEnd": 8.914
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/removed-members",
+          "status": 200,
+          "at": "2026-10-21T20:45:11.073Z",
+          "timing": {
+            "startTime": 1792615511063.597,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 1.089,
+            "responseStart": 6.025,
+            "responseEnd": 9.697
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:24.117Z",
+          "timing": {
+            "startTime": 1792615518722.559,
+            "domainLookupStart": 0.371,
+            "domainLookupEnd": 0.464,
+            "connectStart": 0.464,
+            "secureConnectionStart": -1,
+            "connectEnd": 1.016,
+            "requestStart": 1.171,
+            "responseStart": 2.157,
+            "responseEnd": 4.655
+          }
+        }
+      ],
+      "pageErrors": [],
+      "ownerPanel": {
+        "hidden": false,
+        "tool": "house"
+      },
+      "outcome": "FAIL",
+      "failure": {
+        "message": "expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Your evening awaits\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    2 × locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n      - unexpected value \"Your evening awaits\"\n",
+        "stack": "Error: expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Your evening awaits\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    2 × locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n      - unexpected value \"Your evening awaits\"\n\n    at captureRawStack (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toHaveText (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at live (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:22:76)\n    at admission (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:23:537)\n    at async admissionSeries (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:48:314)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:61:41"
+      },
+      "measuredFinishedAt": "2026-10-21T20:45:20.320Z",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:07.218Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:08.198Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:08.736Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:09.299Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:10.951Z"
+        }
+      ],
+      "passiveBeforeCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615507223.9,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615507244,
+                "performanceMs": 20.30000001192093
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615507393,
+                "performanceMs": 169.90000000596046
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615508444,
+                "performanceMs": 1220.6000000089407
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615508458,
+                "performanceMs": 1235.1000000089407
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615508633,
+                "performanceMs": 1410.1000000089407
+              }
+            ],
+            "frames": {
+              "count": 54,
+              "maxGapMs": 616.7,
+              "samples": [
+                {
+                  "at": 1792615507472,
+                  "performanceMs": 246.6
+                },
+                {
+                  "at": 1792615507545,
+                  "performanceMs": 313.3
+                },
+                {
+                  "at": 1792615507558,
+                  "performanceMs": 330
+                },
+                {
+                  "at": 1792615508187,
+                  "performanceMs": 946.7
+                },
+                {
+                  "at": 1792615508188,
+                  "performanceMs": 963.3
+                },
+                {
+                  "at": 1792615508417,
+                  "performanceMs": 1163.3
+                },
+                {
+                  "at": 1792615508420,
+                  "performanceMs": 1180
+                },
+                {
+                  "at": 1792615508421,
+                  "performanceMs": 1196.6
+                },
+                {
+                  "at": 1792615508461,
+                  "performanceMs": 1229.9
+                },
+                {
+                  "at": 1792615508634,
+                  "performanceMs": 1246.6
+                },
+                {
+                  "at": 1792615508723,
+                  "performanceMs": 1480
+                },
+                {
+                  "at": 1792615508735,
+                  "performanceMs": 1496.6
+                },
+                {
+                  "at": 1792615509048,
+                  "performanceMs": 1813.3
+                },
+                {
+                  "at": 1792615509192,
+                  "performanceMs": 1963.3
+                },
+                {
+                  "at": 1792615509341,
+                  "performanceMs": 2113.2
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1238.2000000029802,
+                "duration": 172
+              },
+              {
+                "startTime": 1410.4000000059605,
+                "duration": 84
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615520322
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615509302.4,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615509327,
+                "performanceMs": 24.599999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615509529,
+                "performanceMs": 227.29999999701977
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615511013,
+                "performanceMs": 1710.5999999940395
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615511028,
+                "performanceMs": 1725.7999999970198
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615518722,
+                "performanceMs": 10056.09999999404
+              }
+            ],
+            "frames": {
+              "count": 12,
+              "maxGapMs": 13449.5,
+              "samples": [
+                {
+                  "at": 1792615509342,
+                  "performanceMs": 34.6
+                },
+                {
+                  "at": 1792615509365,
+                  "performanceMs": 51.3
+                },
+                {
+                  "at": 1792615509370,
+                  "performanceMs": 68
+                },
+                {
+                  "at": 1792615509647,
+                  "performanceMs": 334.7
+                },
+                {
+                  "at": 1792615509773,
+                  "performanceMs": 468
+                },
+                {
+                  "at": 1792615509792,
+                  "performanceMs": 484.6
+                },
+                {
+                  "at": 1792615510297,
+                  "performanceMs": 984.7
+                },
+                {
+                  "at": 1792615510938,
+                  "performanceMs": 1301.3
+                },
+                {
+                  "at": 1792615510939,
+                  "performanceMs": 1634.6
+                },
+                {
+                  "at": 1792615510964,
+                  "performanceMs": 1651.3
+                },
+                {
+                  "at": 1792615518724,
+                  "performanceMs": 1984.6
+                },
+                {
+                  "at": 1792615524114,
+                  "performanceMs": 15434.1
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1729.7999999970198,
+                "duration": 8326
+              },
+              {
+                "startTime": 10056.70000000298,
+                "duration": 5384
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615524123
+        }
+      },
+      "passiveAfterCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615507223.9,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615507244,
+                "performanceMs": 20.30000001192093
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615507393,
+                "performanceMs": 169.90000000596046
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615508444,
+                "performanceMs": 1220.6000000089407
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615508458,
+                "performanceMs": 1235.1000000089407
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615508633,
+                "performanceMs": 1410.1000000089407
+              }
+            ],
+            "frames": {
+              "count": 78,
+              "maxGapMs": 616.7,
+              "samples": [
+                {
+                  "at": 1792615507472,
+                  "performanceMs": 246.6
+                },
+                {
+                  "at": 1792615507545,
+                  "performanceMs": 313.3
+                },
+                {
+                  "at": 1792615507558,
+                  "performanceMs": 330
+                },
+                {
+                  "at": 1792615508187,
+                  "performanceMs": 946.7
+                },
+                {
+                  "at": 1792615508188,
+                  "performanceMs": 963.3
+                },
+                {
+                  "at": 1792615508417,
+                  "performanceMs": 1163.3
+                },
+                {
+                  "at": 1792615508420,
+                  "performanceMs": 1180
+                },
+                {
+                  "at": 1792615508421,
+                  "performanceMs": 1196.6
+                },
+                {
+                  "at": 1792615508461,
+                  "performanceMs": 1229.9
+                },
+                {
+                  "at": 1792615508634,
+                  "performanceMs": 1246.6
+                },
+                {
+                  "at": 1792615508723,
+                  "performanceMs": 1480
+                },
+                {
+                  "at": 1792615508735,
+                  "performanceMs": 1496.6
+                },
+                {
+                  "at": 1792615509048,
+                  "performanceMs": 1813.3
+                },
+                {
+                  "at": 1792615509192,
+                  "performanceMs": 1963.3
+                },
+                {
+                  "at": 1792615509341,
+                  "performanceMs": 2113.2
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1238.2000000029802,
+                "duration": 172
+              },
+              {
+                "startTime": 1410.4000000059605,
+                "duration": 84
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615527518
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615509302.4,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615509327,
+                "performanceMs": 24.599999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615509529,
+                "performanceMs": 227.29999999701977
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615511013,
+                "performanceMs": 1710.5999999940395
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615511028,
+                "performanceMs": 1725.7999999970198
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615518722,
+                "performanceMs": 10056.09999999404
+              }
+            ],
+            "frames": {
+              "count": 24,
+              "maxGapMs": 13449.5,
+              "samples": [
+                {
+                  "at": 1792615509342,
+                  "performanceMs": 34.6
+                },
+                {
+                  "at": 1792615509365,
+                  "performanceMs": 51.3
+                },
+                {
+                  "at": 1792615509370,
+                  "performanceMs": 68
+                },
+                {
+                  "at": 1792615509647,
+                  "performanceMs": 334.7
+                },
+                {
+                  "at": 1792615509773,
+                  "performanceMs": 468
+                },
+                {
+                  "at": 1792615509792,
+                  "performanceMs": 484.6
+                },
+                {
+                  "at": 1792615510297,
+                  "performanceMs": 984.7
+                },
+                {
+                  "at": 1792615510938,
+                  "performanceMs": 1301.3
+                },
+                {
+                  "at": 1792615510939,
+                  "performanceMs": 1634.6
+                },
+                {
+                  "at": 1792615510964,
+                  "performanceMs": 1651.3
+                },
+                {
+                  "at": 1792615518724,
+                  "performanceMs": 1984.6
+                },
+                {
+                  "at": 1792615524114,
+                  "performanceMs": 15434.1
+                },
+                {
+                  "at": 1792615524138,
+                  "performanceMs": 15467.4
+                },
+                {
+                  "at": 1792615524450,
+                  "performanceMs": 15784.1
+                },
+                {
+                  "at": 1792615524850,
+                  "performanceMs": 16184.1
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1729.7999999970198,
+                "duration": 8326
+              },
+              {
+                "startTime": 10056.70000000298,
+                "duration": 5384
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615527522
+        }
+      }
+    },
+    {
+      "index": 2,
+      "condition": "closed",
+      "startedAt": "2026-10-21T20:45:27.815Z",
+      "network": [
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:28.244Z",
+          "timing": {
+            "startTime": 1792615528216.182,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.221,
+            "responseStart": 17.663,
+            "responseEnd": 20.977
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:28.435Z",
+          "timing": {
+            "startTime": 1792615528429.044,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.178,
+            "responseStart": 1.546,
+            "responseEnd": 3.273
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:28.452Z",
+          "timing": {
+            "startTime": 1792615528443.433,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.286,
+            "responseStart": 5.807,
+            "responseEnd": 8.444
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:28.459Z",
+          "timing": {
+            "startTime": 1792615528453.373,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.271,
+            "responseStart": 2.523,
+            "responseEnd": 5.4
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:28.650Z",
+          "timing": {
+            "startTime": 1792615528579.1162,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.202,
+            "responseStart": 1.332,
+            "responseEnd": 3.579
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/removed-members",
+          "status": 200,
+          "at": "2026-10-21T20:45:29.052Z",
+          "timing": {
+            "startTime": 1792615528988.335,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.301,
+            "responseStart": 1.715,
+            "responseEnd": 3.795
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:29.052Z",
+          "timing": {
+            "startTime": 1792615528988.935,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.288,
+            "responseStart": 2.86,
+            "responseEnd": 4.905
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:29.518Z",
+          "timing": {
+            "startTime": 1792615529491.8872,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.214,
+            "responseStart": 18.725,
+            "responseEnd": 21.669
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:30.907Z",
+          "timing": {
+            "startTime": 1792615530897.138,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.265,
+            "responseStart": 3.118,
+            "responseEnd": 5.598
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:30.933Z",
+          "timing": {
+            "startTime": 1792615530920.328,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.292,
+            "responseStart": 7.758,
+            "responseEnd": 15.193
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:30.950Z",
+          "timing": {
+            "startTime": 1792615530936.947,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.409,
+            "responseStart": 3.673,
+            "responseEnd": 8.28
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:32.946Z",
+          "timing": {
+            "startTime": 1792615532274.831,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.261,
+            "responseStart": 1.649,
+            "responseEnd": 4.186
+          }
+        }
+      ],
+      "pageErrors": [],
+      "ownerPanel": {
+        "hidden": true,
+        "tool": "house"
+      },
+      "outcome": "PASS",
+      "measuredFinishedAt": "2026-10-21T20:45:32.985Z",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:28.023Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:28.433Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:28.659Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:29.315Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:30.903Z"
+        },
+        {
+          "event": "join live",
+          "at": "2026-10-21T20:45:32.985Z"
+        }
+      ],
+      "passiveBeforeCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615528028.9,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615528068,
+                "performanceMs": 39.099999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615528248,
+                "performanceMs": 219.09999999403954
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615528463,
+                "performanceMs": 434.5
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615528474,
+                "performanceMs": 445.59999999403954
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615528578,
+                "performanceMs": 550.0999999940395
+              }
+            ],
+            "frames": {
+              "count": 71,
+              "maxGapMs": 383.39999999999986,
+              "samples": [
+                {
+                  "at": 1792615528085,
+                  "performanceMs": 54.5
+                },
+                {
+                  "at": 1792615528114,
+                  "performanceMs": 71.1
+                },
+                {
+                  "at": 1792615528128,
+                  "performanceMs": 87.8
+                },
+                {
+                  "at": 1792615528133,
+                  "performanceMs": 104.5
+                },
+                {
+                  "at": 1792615528199,
+                  "performanceMs": 154.5
+                },
+                {
+                  "at": 1792615528200,
+                  "performanceMs": 171.1
+                },
+                {
+                  "at": 1792615528219,
+                  "performanceMs": 187.7
+                },
+                {
+                  "at": 1792615528242,
+                  "performanceMs": 204.4
+                },
+                {
+                  "at": 1792615528258,
+                  "performanceMs": 221.1
+                },
+                {
+                  "at": 1792615528270,
+                  "performanceMs": 237.8
+                },
+                {
+                  "at": 1792615528284,
+                  "performanceMs": 254.5
+                },
+                {
+                  "at": 1792615528339,
+                  "performanceMs": 304.4
+                },
+                {
+                  "at": 1792615528356,
+                  "performanceMs": 321.1
+                },
+                {
+                  "at": 1792615528367,
+                  "performanceMs": 337.7
+                },
+                {
+                  "at": 1792615528396,
+                  "performanceMs": 354.4
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 449.69999998807907,
+                "duration": 100
+              },
+              {
+                "startTime": 550.2999999970198,
+                "duration": 66
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615532988
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615529321.1,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615529345,
+                "performanceMs": 24.700000002980232
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615529522,
+                "performanceMs": 201.20000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615530951,
+                "performanceMs": 1630.4000000059605
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615530971,
+                "performanceMs": 1650.300000011921
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615532274,
+                "performanceMs": 2953.300000011921
+              }
+            ],
+            "frames": {
+              "count": 9,
+              "maxGapMs": 1899.9,
+              "samples": [
+                {
+                  "at": 1792615529661,
+                  "performanceMs": 328.9
+                },
+                {
+                  "at": 1792615529670,
+                  "performanceMs": 345.5
+                },
+                {
+                  "at": 1792615529693,
+                  "performanceMs": 362.2
+                },
+                {
+                  "at": 1792615529978,
+                  "performanceMs": 645.5
+                },
+                {
+                  "at": 1792615530883,
+                  "performanceMs": 1045.5
+                },
+                {
+                  "at": 1792615530904,
+                  "performanceMs": 1578.8
+                },
+                {
+                  "at": 1792615530920,
+                  "performanceMs": 1595.5
+                },
+                {
+                  "at": 1792615532275,
+                  "performanceMs": 1695.5
+                },
+                {
+                  "at": 1792615532950,
+                  "performanceMs": 3595.4
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1653.1000000089407,
+                "duration": 1300
+              },
+              {
+                "startTime": 2953.6000000089407,
+                "duration": 650
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615532995
+        }
+      },
+      "passiveAfterCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615528028.9,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615528068,
+                "performanceMs": 39.099999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615528248,
+                "performanceMs": 219.09999999403954
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615528463,
+                "performanceMs": 434.5
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615528474,
+                "performanceMs": 445.59999999403954
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615528578,
+                "performanceMs": 550.0999999940395
+              }
+            ],
+            "frames": {
+              "count": 92,
+              "maxGapMs": 383.39999999999986,
+              "samples": [
+                {
+                  "at": 1792615528085,
+                  "performanceMs": 54.5
+                },
+                {
+                  "at": 1792615528114,
+                  "performanceMs": 71.1
+                },
+                {
+                  "at": 1792615528128,
+                  "performanceMs": 87.8
+                },
+                {
+                  "at": 1792615528133,
+                  "performanceMs": 104.5
+                },
+                {
+                  "at": 1792615528199,
+                  "performanceMs": 154.5
+                },
+                {
+                  "at": 1792615528200,
+                  "performanceMs": 171.1
+                },
+                {
+                  "at": 1792615528219,
+                  "performanceMs": 187.7
+                },
+                {
+                  "at": 1792615528242,
+                  "performanceMs": 204.4
+                },
+                {
+                  "at": 1792615528258,
+                  "performanceMs": 221.1
+                },
+                {
+                  "at": 1792615528270,
+                  "performanceMs": 237.8
+                },
+                {
+                  "at": 1792615528284,
+                  "performanceMs": 254.5
+                },
+                {
+                  "at": 1792615528339,
+                  "performanceMs": 304.4
+                },
+                {
+                  "at": 1792615528356,
+                  "performanceMs": 321.1
+                },
+                {
+                  "at": 1792615528367,
+                  "performanceMs": 337.7
+                },
+                {
+                  "at": 1792615528396,
+                  "performanceMs": 354.4
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 449.69999998807907,
+                "duration": 100
+              },
+              {
+                "startTime": 550.2999999970198,
+                "duration": 66
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615534220
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615529321.1,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615529345,
+                "performanceMs": 24.700000002980232
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615529522,
+                "performanceMs": 201.20000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615530951,
+                "performanceMs": 1630.4000000059605
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615530971,
+                "performanceMs": 1650.300000011921
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615532274,
+                "performanceMs": 2953.300000011921
+              }
+            ],
+            "frames": {
+              "count": 21,
+              "maxGapMs": 1899.9,
+              "samples": [
+                {
+                  "at": 1792615529661,
+                  "performanceMs": 328.9
+                },
+                {
+                  "at": 1792615529670,
+                  "performanceMs": 345.5
+                },
+                {
+                  "at": 1792615529693,
+                  "performanceMs": 362.2
+                },
+                {
+                  "at": 1792615529978,
+                  "performanceMs": 645.5
+                },
+                {
+                  "at": 1792615530883,
+                  "performanceMs": 1045.5
+                },
+                {
+                  "at": 1792615530904,
+                  "performanceMs": 1578.8
+                },
+                {
+                  "at": 1792615530920,
+                  "performanceMs": 1595.5
+                },
+                {
+                  "at": 1792615532275,
+                  "performanceMs": 1695.5
+                },
+                {
+                  "at": 1792615532950,
+                  "performanceMs": 3595.4
+                },
+                {
+                  "at": 1792615533087,
+                  "performanceMs": 3762.1
+                },
+                {
+                  "at": 1792615533101,
+                  "performanceMs": 3778.7
+                },
+                {
+                  "at": 1792615533259,
+                  "performanceMs": 3928.8
+                },
+                {
+                  "at": 1792615533424,
+                  "performanceMs": 4095.4
+                },
+                {
+                  "at": 1792615533610,
+                  "performanceMs": 4278.7
+                },
+                {
+                  "at": 1792615533726,
+                  "performanceMs": 4395.3
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 1653.1000000089407,
+                "duration": 1300
+              },
+              {
+                "startTime": 2953.6000000089407,
+                "duration": 650
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615534224
+        }
+      }
+    },
+    {
+      "index": 3,
+      "condition": "open",
+      "startedAt": "2026-10-21T20:45:34.366Z",
+      "network": [
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:34.898Z",
+          "timing": {
+            "startTime": 1792615534877.414,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.169,
+            "responseStart": 14.783,
+            "responseEnd": 17.196
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.071Z",
+          "timing": {
+            "startTime": 1792615535067.61,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.208,
+            "responseStart": 1.382,
+            "responseEnd": 4.216
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.089Z",
+          "timing": {
+            "startTime": 1792615535074.268,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.189,
+            "responseStart": 7.131,
+            "responseEnd": 9.58
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.101Z",
+          "timing": {
+            "startTime": 1792615535090.88,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.208,
+            "responseStart": 2.272,
+            "responseEnd": 9.09
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.302Z",
+          "timing": {
+            "startTime": 1792615535222.7021,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.222,
+            "responseStart": 1.681,
+            "responseEnd": 4.451
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/removed-members",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.962Z",
+          "timing": {
+            "startTime": 1792615535940.104,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.24,
+            "responseStart": 2.672,
+            "responseEnd": 6.655
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:35.963Z",
+          "timing": {
+            "startTime": 1792615535940.572,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.196,
+            "responseStart": 6.096,
+            "responseEnd": 9.191
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:36.307Z",
+          "timing": {
+            "startTime": 1792615536276.961,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.994,
+            "responseStart": 19.259,
+            "responseEnd": 24.631
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:38.366Z",
+          "timing": {
+            "startTime": 1792615538314.3362,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.583,
+            "responseStart": 2.518,
+            "responseEnd": 7.853
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/command",
+          "status": 200,
+          "at": "2026-10-21T20:45:38.379Z",
+          "timing": {
+            "startTime": 1792615538369.568,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.408,
+            "responseStart": 5.648,
+            "responseEnd": 11.976
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:38.388Z",
+          "timing": {
+            "startTime": 1792615538383.498,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.322,
+            "responseStart": 2.122,
+            "responseEnd": 8.777
+          }
+        },
+        {
+          "page": "owner",
+          "path": "/api/house/removed-members",
+          "status": 200,
+          "at": "2026-10-21T20:45:38.401Z",
+          "timing": {
+            "startTime": 1792615538396.0479,
+            "domainLookupStart": -1,
+            "domainLookupEnd": -1,
+            "connectStart": -1,
+            "secureConnectionStart": -1,
+            "connectEnd": -1,
+            "requestStart": 0.237,
+            "responseStart": 2.769,
+            "responseEnd": 6.988
+          }
+        },
+        {
+          "page": "peer",
+          "path": "/api/house/me",
+          "status": 200,
+          "at": "2026-10-21T20:45:50.971Z",
+          "timing": {
+            "startTime": 1792615546641.458,
+            "domainLookupStart": 0.444,
+            "domainLookupEnd": 0.547,
+            "connectStart": 0.547,
+            "secureConnectionStart": -1,
+            "connectEnd": 2.136,
+            "requestStart": 2.311,
+            "responseStart": 4.072,
+            "responseEnd": 7.291
+          }
+        }
+      ],
+      "pageErrors": [],
+      "ownerPanel": {
+        "hidden": false,
+        "tool": "house"
+      },
+      "outcome": "FAIL",
+      "failure": {
+        "message": "expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Your evening awaits\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    2 × locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n      - unexpected value \"Your evening awaits\"\n",
+        "stack": "Error: expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#connection-status')\nExpected: \"Together, live\"\nReceived: \"Your evening awaits\"\nTimeout:  10000ms\n\nCall log:\n  - Expect \"toHaveText\" locator('#connection-status') with timeout 10000ms\n  - waiting for locator('#connection-status')\n    2 × locator resolved to <small role=\"status\" id=\"connection-status\">Your evening awaits</small>\n      - unexpected value \"Your evening awaits\"\n\n    at captureRawStack (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toHaveText (/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at live (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:22:76)\n    at admission (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:23:537)\n    at async admissionSeries (/home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:48:314)\n    at async file:///home/lizhi/comp4020/comp4020-final-naaeeen/tools/post-crit-picture-browser.mjs:61:41"
+      },
+      "measuredFinishedAt": "2026-10-21T20:45:48.321Z",
+      "timings": [
+        {
+          "event": "create admission start",
+          "at": "2026-10-21T20:45:34.614Z"
+        },
+        {
+          "event": "create submitted",
+          "at": "2026-10-21T20:45:35.075Z"
+        },
+        {
+          "event": "create live",
+          "at": "2026-10-21T20:45:35.312Z"
+        },
+        {
+          "event": "join admission start",
+          "at": "2026-10-21T20:45:36.054Z"
+        },
+        {
+          "event": "join submitted",
+          "at": "2026-10-21T20:45:38.317Z"
+        }
+      ],
+      "passiveBeforeCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615534626.7,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615534663,
+                "performanceMs": 37.099999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615534910,
+                "performanceMs": 283.70000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615535105,
+                "performanceMs": 478.5
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615535115,
+                "performanceMs": 489.29999999701977
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615535222,
+                "performanceMs": 595.5999999940395
+              }
+            ],
+            "frames": {
+              "count": 66,
+              "maxGapMs": 433.2999999999993,
+              "samples": [
+                {
+                  "at": 1792615534719,
+                  "performanceMs": 89.7
+                },
+                {
+                  "at": 1792615534755,
+                  "performanceMs": 123.1
+                },
+                {
+                  "at": 1792615534769,
+                  "performanceMs": 139.7
+                },
+                {
+                  "at": 1792615534784,
+                  "performanceMs": 156.4
+                },
+                {
+                  "at": 1792615534880,
+                  "performanceMs": 239.7
+                },
+                {
+                  "at": 1792615534883,
+                  "performanceMs": 256.3
+                },
+                {
+                  "at": 1792615534904,
+                  "performanceMs": 273.1
+                },
+                {
+                  "at": 1792615534922,
+                  "performanceMs": 289.7
+                },
+                {
+                  "at": 1792615534939,
+                  "performanceMs": 306.4
+                },
+                {
+                  "at": 1792615534950,
+                  "performanceMs": 323
+                },
+                {
+                  "at": 1792615534995,
+                  "performanceMs": 356.3
+                },
+                {
+                  "at": 1792615535001,
+                  "performanceMs": 373
+                },
+                {
+                  "at": 1792615535017,
+                  "performanceMs": 389.7
+                },
+                {
+                  "at": 1792615535039,
+                  "performanceMs": 406.4
+                },
+                {
+                  "at": 1792615535051,
+                  "performanceMs": 423
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 494.20000000298023,
+                "duration": 101
+              },
+              {
+                "startTime": 595.8999999910593,
+                "duration": 75
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615548323
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615536062,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615536088,
+                "performanceMs": 26.100000008940697
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615536311,
+                "performanceMs": 249.20000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615538396,
+                "performanceMs": 2334.4000000059605
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615538408,
+                "performanceMs": 2346.800000011921
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615546640,
+                "performanceMs": 10578.90000000596
+              }
+            ],
+            "frames": {
+              "count": 13,
+              "maxGapMs": 12966.2,
+              "samples": [
+                {
+                  "at": 1792615536103,
+                  "performanceMs": 37.7
+                },
+                {
+                  "at": 1792615536144,
+                  "performanceMs": 54.3
+                },
+                {
+                  "at": 1792615536231,
+                  "performanceMs": 154.3
+                },
+                {
+                  "at": 1792615536626,
+                  "performanceMs": 554.3
+                },
+                {
+                  "at": 1792615537008,
+                  "performanceMs": 937.7
+                },
+                {
+                  "at": 1792615537028,
+                  "performanceMs": 954.3
+                },
+                {
+                  "at": 1792615537661,
+                  "performanceMs": 1321
+                },
+                {
+                  "at": 1792615537666,
+                  "performanceMs": 1604.3
+                },
+                {
+                  "at": 1792615538006,
+                  "performanceMs": 1937.6
+                },
+                {
+                  "at": 1792615538299,
+                  "performanceMs": 2220.9
+                },
+                {
+                  "at": 1792615538301,
+                  "performanceMs": 2237.6
+                },
+                {
+                  "at": 1792615546642,
+                  "performanceMs": 2554.2
+                },
+                {
+                  "at": 1792615550966,
+                  "performanceMs": 15520.4
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 2348.9000000059605,
+                "duration": 8230
+              },
+              {
+                "startTime": 10579.40000000596,
+                "duration": 4953
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615550975
+        }
+      },
+      "passiveAfterCapture": {
+        "owner": {
+          "state": {
+            "timeOrigin": 1792615534626.7,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615534663,
+                "performanceMs": 37.099999994039536
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615534910,
+                "performanceMs": 283.70000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615535105,
+                "performanceMs": 478.5
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615535115,
+                "performanceMs": 489.29999999701977
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615535222,
+                "performanceMs": 595.5999999940395
+              }
+            ],
+            "frames": {
+              "count": 93,
+              "maxGapMs": 433.2999999999993,
+              "samples": [
+                {
+                  "at": 1792615534719,
+                  "performanceMs": 89.7
+                },
+                {
+                  "at": 1792615534755,
+                  "performanceMs": 123.1
+                },
+                {
+                  "at": 1792615534769,
+                  "performanceMs": 139.7
+                },
+                {
+                  "at": 1792615534784,
+                  "performanceMs": 156.4
+                },
+                {
+                  "at": 1792615534880,
+                  "performanceMs": 239.7
+                },
+                {
+                  "at": 1792615534883,
+                  "performanceMs": 256.3
+                },
+                {
+                  "at": 1792615534904,
+                  "performanceMs": 273.1
+                },
+                {
+                  "at": 1792615534922,
+                  "performanceMs": 289.7
+                },
+                {
+                  "at": 1792615534939,
+                  "performanceMs": 306.4
+                },
+                {
+                  "at": 1792615534950,
+                  "performanceMs": 323
+                },
+                {
+                  "at": 1792615534995,
+                  "performanceMs": 356.3
+                },
+                {
+                  "at": 1792615535001,
+                  "performanceMs": 373
+                },
+                {
+                  "at": 1792615535017,
+                  "performanceMs": 389.7
+                },
+                {
+                  "at": 1792615535039,
+                  "performanceMs": 406.4
+                },
+                {
+                  "at": 1792615535051,
+                  "performanceMs": 423
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 494.20000000298023,
+                "duration": 101
+              },
+              {
+                "startTime": 595.8999999910593,
+                "duration": 75
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615554487
+        },
+        "peer": {
+          "state": {
+            "timeOrigin": 1792615536062,
+            "initialVisibility": "visible",
+            "events": [
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615536088,
+                "performanceMs": 26.100000008940697
+              },
+              {
+                "kind": "connection-status",
+                "value": "Your evening awaits",
+                "at": 1792615536311,
+                "performanceMs": 249.20000000298023
+              },
+              {
+                "kind": "connection-status",
+                "value": "Opening your house…",
+                "at": 1792615538396,
+                "performanceMs": 2334.4000000059605
+              },
+              {
+                "kind": "connection-status",
+                "value": "Reconnecting…",
+                "at": 1792615538408,
+                "performanceMs": 2346.800000011921
+              },
+              {
+                "kind": "connection-status",
+                "value": "Together, live",
+                "at": 1792615546640,
+                "performanceMs": 10578.90000000596
+              }
+            ],
+            "frames": {
+              "count": 25,
+              "maxGapMs": 12966.2,
+              "samples": [
+                {
+                  "at": 1792615536103,
+                  "performanceMs": 37.7
+                },
+                {
+                  "at": 1792615536144,
+                  "performanceMs": 54.3
+                },
+                {
+                  "at": 1792615536231,
+                  "performanceMs": 154.3
+                },
+                {
+                  "at": 1792615536626,
+                  "performanceMs": 554.3
+                },
+                {
+                  "at": 1792615537008,
+                  "performanceMs": 937.7
+                },
+                {
+                  "at": 1792615537028,
+                  "performanceMs": 954.3
+                },
+                {
+                  "at": 1792615537661,
+                  "performanceMs": 1321
+                },
+                {
+                  "at": 1792615537666,
+                  "performanceMs": 1604.3
+                },
+                {
+                  "at": 1792615538006,
+                  "performanceMs": 1937.6
+                },
+                {
+                  "at": 1792615538299,
+                  "performanceMs": 2220.9
+                },
+                {
+                  "at": 1792615538301,
+                  "performanceMs": 2237.6
+                },
+                {
+                  "at": 1792615546642,
+                  "performanceMs": 2554.2
+                },
+                {
+                  "at": 1792615550966,
+                  "performanceMs": 15520.4
+                },
+                {
+                  "at": 1792615550979,
+                  "performanceMs": 15553.7
+                },
+                {
+                  "at": 1792615551289,
+                  "performanceMs": 15853.7
+                }
+              ]
+            },
+            "longTasks": [
+              {
+                "startTime": 2348.9000000059605,
+                "duration": 8230
+              },
+              {
+                "startTime": 10579.40000000596,
+                "duration": 4953
+              }
+            ]
+          },
+          "status": "Together, live",
+          "visibility": "visible",
+          "at": 1792615554494
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "deviceScaleFactor": 1
+  },
+  "status": "DIAGNOSTIC_COMPLETE",
+  "finishedAt": "2026-10-21T20:45:54.936Z",
+  "sourceAfterSHA256": {
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-game-ui.js": "90f48bcc9f7a28b20d47f5c4ea731ee14419cd7ad2033277224c519b118077f1",
+    "public/house-puzzle-ui.js": "17f86d342618fc1bb93df1d21689d41e91e6bb9609ed1158917150376cca6c03",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "public/house.css": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+    "public/house.html": "a7bddfd83d9580a20c46143b0df45001cdb56406885aae69c95687599999de12",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+  }
+}

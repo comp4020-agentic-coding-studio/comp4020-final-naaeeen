@@ -1,0 +1,13 @@
+{
+  "status": "CONFIRMED_PRODUCT_LAYOUT_FAIL",
+  "sourceCssSHA256": "00a431b6c5878ad0124f17418e5101c5d7e82157db39e27ee0258dad409f97b6",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "observed": "Existing movable chat is beneath nonmodal game panel and panel-close intercepts chat-close; original image shows conversation occluded. Landscape board extends from y255 to455.6875, below390 viewport.",
+  "evaluatorRefinement": "Prior text geometry check lacked occlusion and returned a false positive readable=true. Future check also requires center-hit exposure for real message/send/close and full landscape board/tray.",
+  "productionEdits": false,
+  "ownedBrowserClosed": true,
+  "rootServerStopped": false
+}

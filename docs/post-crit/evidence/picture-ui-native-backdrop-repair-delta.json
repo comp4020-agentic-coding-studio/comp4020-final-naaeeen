@@ -1,0 +1,13 @@
+{
+  "scope": "One CSS value; full-viewport modal dim stays, blur removed",
+  "priorCSS": "f091f643dd0410593002210229e5518596bfdb8e9ba0845f1be03b8b02aec068",
+  "currentCSS": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+  "before": "backdrop-filter:blur(4px)",
+  "after": "backdrop-filter:none",
+  "reversingOnlyValueReproducesPrior": true,
+  "evidence": [
+    "picture-ui-native-admission-open-closed-open/result.json",
+    "picture-ui-native-admission-backdrop-css-response/result.json"
+  ],
+  "boundedConclusion": "In this local two-context software-GPU stack, changing only blur to none changed the fixed-deadline owner-open admission outcome from FAIL to PASS. No general or physical-device performance claim."
+}

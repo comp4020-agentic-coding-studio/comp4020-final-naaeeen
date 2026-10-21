@@ -45,6 +45,6 @@ container=$(docker create --init --user "$(id -u):$(id -g)" \
   --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
   --env PW_OUTPUT_DIR=.local/browser-results/run \
   --env PW_REPORT_DIR=.local/browser-report/html \
-  "$image_id" bash -c 'node tools/ci-browser-sandbox.mjs && exec node node_modules/@playwright/test/cli.js test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts tests/e2e/board.spec.ts tests/e2e/title-dialog.spec.ts tests/e2e/break-and-voice.spec.ts')
+  "$image_id" bash -c 'node tools/ci-browser-sandbox.mjs && exec node node_modules/@playwright/test/cli.js test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts tests/e2e/board.spec.ts tests/e2e/title-dialog.spec.ts tests/e2e/break-and-voice.spec.ts tests/e2e/picture-table.spec.ts tests/e2e/board-receipt-recovery.spec.ts')
 node tools/ci-browser-sandbox.mjs --inspect "$container" "$image_id" "$restriction"
 docker start --attach "$container"

@@ -1,0 +1,8 @@
+{
+  "status": "HARNESS_CSP_SETUP_FAIL",
+  "scope": "Both cases stopped before peer admission; no blur-vs-dim admission outcome",
+  "observed": "Current style-src self CSP blocked addStyleTag inline style as intended",
+  "CSPOrSandboxChanged": false,
+  "productionFilesChanged": false,
+  "correction": "Route same-origin house.css in each owner browser context and append only the registered filter property value; preserve policy and server source"
+}

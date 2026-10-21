@@ -56,12 +56,24 @@ Saving a next step leaves the card active; closing records the author's choice.
 Every desk opens your own My work card, including when you visit a friend. Bedroom
 chairs and adjustable lighting make the room usable for studying as well as decorating.
 
-The lounge has shared study seats, a sofa corner and an optional Four-in-a-row
-table. Two players choose Join and Ready; up to four friends can watch. Turns are
-untimed. Closing the panel keeps your place, while Leave or Return to My work
-withdraws without a loss. After a disconnect, both players choose Resume before
-continuing. Waiting and idle tables eventually clear so a break cannot occupy
-the space indefinitely.
+The lounge has shared study seats, a sofa corner and a break table. At the picture
+table, up to six housemates can assemble one shared illustration. Pick a loose
+piece, then choose its place; keyboard and touch use the same board. Opening the
+table lets you watch. Start creates a picture, and Join is a separate choice.
+Progress stays when someone leaves. Reconnecting returns you as a watcher until
+you choose Join again, and finishing the picture releases everyone's participation.
+
+Four-in-a-row is another choice at the table. Two players choose Join and Ready;
+other housemates can watch. Turns are untimed. Closing the panel keeps your place,
+while Leave withdraws without a loss. After a disconnect, both players choose
+Resume before continuing. Waiting and idle rounds eventually clear.
+
+Return to my room leaves the activity and walks your avatar home. The room shows
+your saved goal and next step, with a separate Open my work button that keeps newer
+unsaved drafts. This gives the bedroom a role between shared breaks: a familiar
+place to pick up your own task, with your arrangement, chair and lighting. My work
+also stays directly available from the toolbelt. The card is visible to housemates;
+room access and Quiet remain separate choices.
 
 The house owner can add an existing Discord invite or server-channel link in
 House settings. Voice options opens that destination in a separate tab; call
