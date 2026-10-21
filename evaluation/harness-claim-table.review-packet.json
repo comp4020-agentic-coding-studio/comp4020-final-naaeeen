@@ -1,0 +1,287 @@
+{
+  "instructions": "Grade factual correctness and acceptance scope for each output against its supplied task. Names are neutral; do not infer treatment. Do not read protocol/results or earlier verdicts. Score decisions and substance, not formatting. Return missing critical facts, invented facts, false acceptance or false rejection per response; both supported and incomplete tasks must be handled.",
+  "criteria": [
+    "Correct local acceptance on both legitimate and incomplete packages",
+    "Correct publication scope",
+    "Accurate source/time/verification attribution",
+    "Every material contradiction identified; no invented diagnosis or participant proof",
+    "No rejection of legitimate technical acceptance solely for absent human preference"
+  ],
+  "fixtures": [
+    {
+      "id": "task-room",
+      "request": "Close the local bedroom-lighting subsection if its complete owner/visitor task is verified. Logical local commits allowed. Do not publish. This task changes lighting, not group games.",
+      "candidate": "room-r17",
+      "observations": [
+        "Current files match manifest room-r17; implementation and acceptance source SHA-256 equality was checked.",
+        "Owner chooses cosy lighting; same-house allowed visitor sees it; reloading and server restart retain it.",
+        "Non-owner lighting changes, foreign-house IDs, stale room revisions, and unauthorized room entry are rejected without mutation. 37 affected tests pass; current typecheck and required suite pass.",
+        "Original furniture, room permissions and archives match before/after comparison. No study-card or willingness behavior changes.",
+        "Fresh reviewer had no previous conversation and received source/requirements; one draft-overwrite finding was independently reproduced, repaired, and its affected regression plus owner/visitor paths rerun on room-r17. Contextual recheck resolves the finding.",
+        "Native two-context journeys on 1920x1080, 390x844 and844x390 pass on room-r17; console errors zero. Old pre-repair failure remains in evidence.",
+        "Required300-second registered workload on room-r17 passes all original gates. Protocol/workload/limits unchanged. This is a local synthetic runtime result.",
+        "Final diff and secret scan pass. Proposed local commit has not yet been created.",
+        "No classmates, physical phone, WAN, CI release or deployment were tested. Human preference is outside this lighting subsection's local technical acceptance."
+      ]
+    },
+    {
+      "id": "task-group",
+      "request": "Accept the local new group-break capability only when 3–6 residents actively participate, safe recovery is shown, and required resource acceptance matches current production source. Logical local commits allowed. Do not publish.",
+      "candidate": "group-r22",
+      "observations": [
+        "Current source is group-r22; src/board-store.ts changed after the300-second resource run. The recorded resource result binds group-r21; RSS passes and all21 original gates are true for that older run.",
+        "Current house has six real connected identities. Two players made accepted moves; four received the public game board and watched. No3–6-active game task was run.",
+        "Six residents occupied six distinct study seats in one bounded case and six rest seats in a second case. They did not complete one uninterrupted six-person journey.",
+        "A recovery grader reports PASS because pending count changed1→0. The recorded receipt for original UUID shows ok:false, code:NOT_CONTROLLER; no successful accepted receipt or matching durable effect is recorded.",
+        "A full-size six-renderer route timed out after45seconds; route internals were not captured. A later smaller-view, paused-peer case passed. No controlled root-cause comparison exists.",
+        "Current unit/type checks pass. Raw combined-workload data says total SQLite/WAL/SHM grew174.11MiB; board operation receipts dominate bytes. Current game-table state is1044bytes. No lifetime storage cap is enforced.",
+        "A shell tool returned normally with nested exit_code:1 for the final diff check. A subsequent commit command was not run; no new commit hash exists.",
+        "No human usability or distributed-device tests. Reviewer has not yet checked the revised group-r22 storage code."
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "id": "river",
+      "task": "task-room",
+      "output": {
+        "localAcceptance": "ACCEPT",
+        "publication": "NOT_AUTHORIZED",
+        "claims": [
+          {
+            "topic": "Acceptance source identity",
+            "status": "SUPPORTED",
+            "evidence": "Current files match room-r17; implementation and acceptance source SHA-256 equality was checked.",
+            "reason": "Acceptance evidence applies to the current candidate."
+          },
+          {
+            "topic": "Complete owner and visitor lighting task",
+            "status": "SUPPORTED",
+            "evidence": "Owner selects cosy lighting; an allowed same-house visitor sees it; reload and server restart retain it.",
+            "reason": "Selection, shared visibility and persistence are verified."
+          },
+          {
+            "topic": "Authorization and stale-state protection",
+            "status": "SUPPORTED",
+            "evidence": "Non-owner changes, foreign-house IDs, stale revisions and unauthorized entry are rejected without mutation.",
+            "reason": "The observed negative paths preserve protected state."
+          },
+          {
+            "topic": "Preservation of existing behavior",
+            "status": "SUPPORTED",
+            "evidence": "Before/after comparison preserves original furniture, room permissions and archives; study-card and willingness behavior are unchanged.",
+            "reason": "The evidence supports the lighting-only scope."
+          },
+          {
+            "topic": "Automated checks and independent review",
+            "status": "SUPPORTED",
+            "evidence": "37 affected tests, current typecheck and required suite pass. A fresh reviewer’s draft-overwrite finding was reproduced, repaired and contextually resolved after affected regression and owner/visitor reruns.",
+            "reason": "The identified defect is resolved on room-r17."
+          },
+          {
+            "topic": "Local interactive and workload acceptance",
+            "status": "SUPPORTED",
+            "evidence": "Native two-context journeys pass at 1920x1080, 390x844 and 844x390 with zero console errors. The required 300-second registered workload passes unchanged original gates and limits.",
+            "reason": "These establish local technical acceptance; the workload remains synthetic. The pre-repair failure is preserved."
+          },
+          {
+            "topic": "Local commit readiness and completion",
+            "status": "SUPPORTED",
+            "evidence": "Final diff and secret scan pass; logical local commits are authorized; the proposed commit has not been created.",
+            "reason": "The candidate is ready for a local commit, but commit completion cannot be claimed."
+          },
+          {
+            "topic": "Human, physical-device and released experience",
+            "status": "UNSUPPORTED",
+            "evidence": "No classmates, physical phone, WAN, CI release or deployment were tested.",
+            "reason": "Those outcomes remain unverified. Human preference is outside this subsection’s local technical acceptance."
+          },
+          {
+            "topic": "Publication permission",
+            "status": "UNSUPPORTED",
+            "evidence": "The request explicitly says not to publish.",
+            "reason": "Local acceptance grants no publication authorization."
+          }
+        ],
+        "nextAction": "Close the local bedroom-lighting subsection and create the authorized logical local commit, retaining room-r17 evidence and the historical failure. Do not publish."
+      }
+    },
+    {
+      "id": "cedar",
+      "task": "task-room",
+      "output": {
+        "localAcceptance": "ACCEPT",
+        "publication": "NOT_AUTHORIZED",
+        "claims": [
+          {
+            "topic": "Acceptance source identity",
+            "status": "SUPPORTED",
+            "evidence": "Current files match room-r17; implementation and acceptance SHA-256 equality was checked.",
+            "reason": "The observations bind acceptance to the current candidate. No source mismatch is reported; conclusions apply to room-r17."
+          },
+          {
+            "topic": "Complete owner/visitor lighting task",
+            "status": "SUPPORTED",
+            "evidence": "Owner-selected cosy lighting appears for an allowed same-house visitor and survives reload and server restart.",
+            "reason": "These observations cover selection, authorized viewing and persistence. No contradictory current observation remains within the requested local task."
+          },
+          {
+            "topic": "Authorization and concurrency boundaries",
+            "status": "SUPPORTED",
+            "evidence": "Non-owner changes, foreign-house IDs, stale revisions and unauthorized entry are rejected without mutation.",
+            "reason": "Observed rejection supports these tested boundaries. It does not establish security against untested attacks."
+          },
+          {
+            "topic": "Preservation of existing behavior",
+            "status": "SUPPORTED",
+            "evidence": "Before/after comparison preserves furniture, permissions and archives; study-card and willingness behavior are unchanged.",
+            "reason": "The observations support the lighting-only scope without claiming new group-game behavior."
+          },
+          {
+            "topic": "Checks and repaired review finding",
+            "status": "SUPPORTED",
+            "evidence": "37 affected tests, current typecheck and required suite pass. A fresh reviewer’s reproduced overwrite finding was repaired; affected regression and owner/visitor paths were rerun on room-r17.",
+            "reason": "The contextual recheck resolves the finding. The retained pre-repair failure remains historical evidence rather than a current unresolved failure."
+          },
+          {
+            "topic": "Local interactive and workload acceptance",
+            "status": "SUPPORTED",
+            "evidence": "Native two-context journeys pass at 1920x1080, 390x844 and 844x390 with zero console errors. The registered 300-second workload passes unchanged original gates.",
+            "reason": "These results support local technical acceptance. Physical-phone, WAN, classmate and human-preference evidence is missing and is not required for this subsection."
+          },
+          {
+            "topic": "Commit and publication state",
+            "status": "SUPPORTED",
+            "evidence": "Final diff and secret scan pass; the proposed local commit is uncreated. Logical local commits are allowed; publication is prohibited. No CI release or deployment was tested.",
+            "reason": "The subsection can close locally, but neither a completed commit nor published acceptance can be claimed."
+          }
+        ],
+        "nextAction": "Close the local lighting subsection for room-r17 and create the authorized logical local commit, retaining the repaired-failure evidence and explicit local-only verification limits. Do not publish."
+      }
+    },
+    {
+      "id": "stone",
+      "task": "task-group",
+      "output": {
+        "localAcceptance": "OPEN",
+        "publication": "NOT_AUTHORIZED",
+        "claims": [
+          {
+            "topic": "Three-to-six active residents",
+            "status": "UNSUPPORTED",
+            "evidence": "Six identities connected; two made accepted moves and four watched. No qualifying active-participation task ran.",
+            "reason": "Connected spectators do not establish three-to-six active participants."
+          },
+          {
+            "topic": "Study and rest seat capacity",
+            "status": "SUPPORTED",
+            "evidence": "Six residents occupied distinct study seats and, in a separate bounded case, six rest seats.",
+            "reason": "Both individual capacity cases passed. An uninterrupted six-person journey remains unverified."
+          },
+          {
+            "topic": "Safe recovery",
+            "status": "UNSUPPORTED",
+            "evidence": "Pending count fell from one to zero, but the original UUID receipt returned ok:false with NOT_CONTROLLER. No accepted receipt or matching durable effect exists.",
+            "reason": "Queue clearance alone does not demonstrate successful recovery; the grader PASS does not satisfy acceptance."
+          },
+          {
+            "topic": "Current-source resource acceptance",
+            "status": "UNSUPPORTED",
+            "evidence": "The 300-second run passed RSS and all 21 original gates for group-r21. Current source is group-r22, with board-store.ts changed afterward.",
+            "reason": "The recorded result does not establish resource acceptance for current production source."
+          },
+          {
+            "topic": "Six-renderer route",
+            "status": "INCONCLUSIVE",
+            "evidence": "The full-size route timed out after 45 seconds. A smaller-view, paused-peer variant passed; route internals were not captured.",
+            "reason": "Preserve both outcomes. The legitimate variant establishes only its tested conditions; no controlled comparison explains the timeout."
+          },
+          {
+            "topic": "Storage behavior",
+            "status": "SUPPORTED",
+            "evidence": "Combined SQLite/WAL/SHM growth was 174.11 MiB, dominated by board receipts. Current game-table state is 1044 bytes; no lifetime cap exists.",
+            "reason": "Small current game state does not establish bounded cumulative storage. Revised storage code remains independently unreviewed."
+          },
+          {
+            "topic": "Checks and local commit",
+            "status": "SUPPORTED",
+            "evidence": "Current unit/type checks pass. The final diff check returned nested exit_code:1 despite normal shell return. No subsequent commit ran or new hash exists.",
+            "reason": "Passing checks are partial evidence; the failed diff check and absent commit must remain explicit."
+          },
+          {
+            "topic": "Human and distributed-device experience",
+            "status": "INCONCLUSIVE",
+            "evidence": "No human usability or distributed-device tests ran.",
+            "reason": "Neither experience nor cross-device acceptance is established."
+          }
+        ],
+        "nextAction": "Review group-r22 storage changes, resolve the failed diff check, demonstrate three-to-six active participants and receipt-plus-durable-effect recovery, then rerun required resource acceptance against the unchanged current source. Investigate the full-size timeout with controlled comparisons. Record results and optionally create an authorized logical local commit. Do not publish."
+      }
+    },
+    {
+      "id": "reed",
+      "task": "task-group",
+      "output": {
+        "localAcceptance": "OPEN",
+        "publication": "NOT_AUTHORIZED",
+        "claims": [
+          {
+            "topic": "Current-source resource acceptance",
+            "status": "INCONCLUSIVE",
+            "evidence": "The 300-second run passed RSS and all 21 original gates for group-r21. Current source is group-r22; src/board-store.ts changed afterward.",
+            "reason": "The older result does not establish resource acceptance for the current candidate."
+          },
+          {
+            "topic": "Three to six active participants",
+            "status": "UNSUPPORTED",
+            "evidence": "Six real identities connected, but only two made accepted moves; four watched the public board. No three-to-six-active task ran.",
+            "reason": "Connection and observation do not satisfy the requested active-participation threshold."
+          },
+          {
+            "topic": "Six-person seat capacity",
+            "status": "SUPPORTED",
+            "evidence": "Six residents occupied distinct study seats in one bounded case and rest seats in another.",
+            "reason": "Both capacity variants are supported individually; an uninterrupted six-person journey remains unverified."
+          },
+          {
+            "topic": "Safe recovery",
+            "status": "UNSUPPORTED",
+            "evidence": "The grader passed on pending count 1→0, but the original UUID receipt recorded ok:false, NOT_CONTROLLER. No accepted receipt or matching durable effect exists.",
+            "reason": "Queue clearance does not demonstrate successful recovery."
+          },
+          {
+            "topic": "Full-size route completion",
+            "status": "INCONCLUSIVE",
+            "evidence": "The six-renderer route timed out after 45 seconds. A smaller-view, paused-peer case passed; internals and a controlled comparison are missing.",
+            "reason": "The variant demonstrates only its bounded success. It neither validates the failed configuration nor identifies its cause."
+          },
+          {
+            "topic": "Storage behavior",
+            "status": "INCONCLUSIVE",
+            "evidence": "Raw combined-workload growth was 174.11 MiB, dominated by board receipts. Current game-table state is 1044 bytes; no lifetime cap is enforced.",
+            "reason": "Small current table state does not establish bounded total or lifetime storage."
+          },
+          {
+            "topic": "Checks, review and local commit",
+            "status": "INCONCLUSIVE",
+            "evidence": "Current unit/type checks pass. The final diff check returned nested exit_code:1 despite normal tool completion. Revised storage code lacks reviewer inspection; no commit command ran or hash exists.",
+            "reason": "Passing checks are supported, but final review and commit completion remain open. Logical local commits are permitted."
+          },
+          {
+            "topic": "Human and distributed-device experience",
+            "status": "INCONCLUSIVE",
+            "evidence": "Neither human usability nor distributed-device tests ran.",
+            "reason": "No experience or cross-device acceptance conclusion is supported."
+          },
+          {
+            "topic": "Publication",
+            "status": "UNSUPPORTED",
+            "evidence": "The request explicitly prohibits publishing.",
+            "reason": "Local commit permission does not authorize publication."
+          }
+        ],
+        "nextAction": "Resolve the diff-check failure and obtain storage review; verify current-source resource behavior, three-to-six-active participation and successful recovery with receipt/effect evidence. Preserve the route timeout and scope variant results separately. Commit locally after verification; do not publish."
+      }
+    }
+  ]
+}

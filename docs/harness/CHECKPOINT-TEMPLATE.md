@@ -18,6 +18,13 @@ when each retains its own findings/evidence. Owner-required throughout all phase
 - Parent verification/reconciliation, correction and affected rerun.
 - Acceptance/current status; remaining gap and next concrete action.
 - Actual commit/compare link; future-maintenance consequence.
+- For a harness change: targeted failure, changed factor, prediction/contradiction,
+  measured cost or explicitly NOT MEASURED (separate output-length proxies),
+  adopt/revise/reject/unchanged decision, scope and retirement condition.
+- For an agent trial: planned attempts and every status, output/protocol identity,
+  actual evaluator isolation, and the independent grading boundary.
+- For a diagnosed failure: applicable invariant, trace step/artifact, observation,
+  competing cause and discriminating recheck; distinguish cause from symptom.
 
 For a retrospective revisit, say so and distinguish old evidence from checks run
 now. If comparison is unnecessary, give the decision-specific reason. An unresolved

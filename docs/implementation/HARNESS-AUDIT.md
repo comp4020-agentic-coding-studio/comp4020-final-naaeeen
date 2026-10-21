@@ -431,3 +431,36 @@ mode and migration findings and refined explicit contracts. Contextual recheck a
 production acceptance remain pending. The owner permits effort selection within
 Sol high–ultra and Astra high–max. Direct new WSL execution succeeds under the
 current host policy; no old-terminal workaround is needed.
+
+## 22 October company-method refresh and actual diagnostic
+
+The owner again prioritized AI-agent practice. Parent reopened active REPORT,
+comparison/research methods, checkpoint template and actual source before updating
+requirements. Source researcher and decision/review agents began without prior chat;
+execution workers have bounded ownership and shared-workspace warnings.
+
+[Company-method comparison](../harness/COMPANY-METHODS-2026-10-22.md) records primary
+Google Harness2/Anthropic/OpenAI/Microsoft evidence and limits. Four actual fresh
+matched Sol/high responses test an added explicit-contradiction instruction, with
+same tasks/schema/model/effort. Parent and a blinded Astra/high grader find all four
+correct. Existing default stays unchanged. This is extraction/calibration on two
+synthetic cases, not repository investigation, coding performance or human A/B.
+
+The method-record reviewer found imprecise factor wording, one irrelevant migration
+expectation, overstrong storage wording, procedural-isolation ambiguity and missing
+cost handling. Parent corrected active prose and annotated original expectations
+without changing frozen protocol or output content. Contextual recheck and the
+record checker pass; two positive and five corrupt controls distinguish structure
+from semantics. No measurements of latency/tokens/cost were fabricated.
+
+Existing methods produced useful separate application evidence: the storage reviewer
+found that a UTF8-only comparison increases some UTF16 records. Parent reproduced
+that case before implementation. The group reviewer identified stale Join retries
+and same-lounge takeover as missing consent boundaries before backend work. These
+are verified review contributions; we do not attribute them causally to a newly
+read company paper without a suitable comparison.
+
+Local validation is committed at8b22fa4. The staged whitespace failure stopped the
+commit, and a secret-hook false positive was verified as a public locale asset path;
+only JSON serialization changed, with identical parsed content and the hook intact.
+Native/source/resource evidence retains its original scope. No new push or release.

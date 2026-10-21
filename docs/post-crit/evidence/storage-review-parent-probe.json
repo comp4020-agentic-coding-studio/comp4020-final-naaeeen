@@ -1,0 +1,12 @@
+{
+  "method": "Parent independent in-memory discriminating probe; no persistent database or server changed",
+  "script": "import { gzipSync, gunzipSync } from 'node:zlib';\nimport { DatabaseSync } from 'node:sqlite';\nlet seed=17;\nconst text=Array.from({length:4000},()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return String.fromCodePoint(0x4e00+seed%20902)}).join('');\nconst receipt={ok:true,id:'11111111-1111-4111-8111-111111111111',houseId:'22222222-2222-4222-8222-222222222222',sequence:1,message:{id:'33333333-3333-4333-8333-333333333333',authorId:'44444444-4444-4444-8444-444444444444',name:'Example',text,at:1792600000000,sequence:1}};\nconst raw=JSON.stringify(receipt), zipped=gzipSync(raw,{level:1});\nconst db=new DatabaseSync(':memory:'); db.exec(\"PRAGMA encoding='UTF-16le';CREATE TABLE t(v TEXT)\");db.prepare('INSERT INTO t VALUES(?)').run(raw);\nconst native=db.prepare('SELECT length(CAST(v AS BLOB)) bytes FROM t').get().bytes;\nlet trailingRejected=false;try{gunzipSync(Buffer.concat([zipped,gzipSync('')]),{maxOutputLength:2097408,rejectGarbageAfterEnd:true})}catch{trailingRejected=true}\nconsole.log(JSON.stringify({node:process.version,utf8Bytes:Buffer.byteLength(raw),utf16Bytes:native,gzipBytes:zipped.length,utf8OnlyWouldGrowUTF16:zipped.length<Buffer.byteLength(raw)&&zipped.length>native,extraGzipMemberRejected:trailingRejected}));db.close();",
+  "result": {
+    "node": "v24.21.0",
+    "utf8Bytes": 12282,
+    "utf16Bytes": 8564,
+    "gzipBytes": 8982,
+    "utf8OnlyWouldGrowUTF16": true,
+    "extraGzipMemberRejected": true
+  }
+}

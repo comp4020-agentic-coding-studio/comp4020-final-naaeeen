@@ -5,6 +5,30 @@ post-crit-improvements. Root PLAN.md is the project index. Earlier Crit evidence
 retains its original scope. Production edits follow fresh review of this plan. See REVIEW-AND-REFINEMENT.md
 for the initial findings and their reconciliation. The contracts below govern P1/P2.
 
+## Active extension and acceptance reopening
+
+The [owner addendum](OWNER-FEEDBACK.md#group-participation-and-personal-room-clarification-22-october)
+requires three to six active participants in a shared break activity. Reopen the
+choice described below: the implemented two-player game plus spectators is a
+completed earlier slice, not acceptance of this addition. Research and independently
+review a bounded group interaction before changing its domain, authority and UI.
+Revisit the personal room's distinct value without calling the existing shared
+study card private or inferring willingness from room location.
+
+The full original and combined resource trials now pass their registered gates.
+Their [acceptance record](evidence/resource-acceptance.md) also exposes substantial
+board receipt disk growth. Treat storage as an open subsection: preserve exact
+replay and personal exports while comparing a lower-cost representation and an
+explicit lifetime policy. Do not lower visual quality to solve a receipt problem.
+Production changes invalidate the affected resource source binding and require
+new affected checks. Existing accepted artifacts remain historical evidence.
+
+The owner makes AI-agent practice a primary process outcome. Research Google
+Harness2 and other primary company methods, compare with our active REPORT, then
+apply only changes with a stated prediction, bounded check and adoption decision.
+Fresh independent review and parent verification remain required; benchmark claims
+and method counts cannot substitute for project results.
+
 ## Purpose and complete task
 
 A personal study house for 2–6 familiar friends: choose a place, work or ask for
@@ -291,9 +315,15 @@ P5 stores an owner-configured Discord destination and uses an explicit external
 link, with schema4 after game schema3. No media provider or capture is created.
 See [voice contract](VOICE-CONTRACT.md). Source review and parent regressions cover
 owner/control/revision/pending/identity boundaries; current native UI acceptance
-is in progress.
+and the maintained break/voice task are recorded in local commit 8b22fa4.
 
-P6 remains open: full required tests, maintained native core, six-person current
-flow, original300-second resource task and a separately frozen combined game/board
-task, final source review and documentation reconciliation. Runtime changes do not
-inherit old acceptance. No new publication or deployment has occurred.
+P6 for the earlier slice is recorded in local commit 8b22fa4: full required tests,
+maintained native core/break/voice, six-resident bounded cases, original and combined
+300-second workloads and fresh validation review. New storage and group production
+changes must obtain their own affected acceptance. No new publication occurred.
+
+The [storage contract](STORAGE-CONTRACT.md) is independently reviewed and enters
+red-green implementation. The [group/room extension](GROUP-ACTIVITY-CONTRACT.md)
+remains under contract refinement and one-illustration responsive prototyping.
+The [company-method record](../harness/COMPANY-METHODS-2026-10-22.md) explains the
+actual diagnostic and why an extra universal instruction was not adopted.

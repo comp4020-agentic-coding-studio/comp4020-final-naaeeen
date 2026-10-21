@@ -192,18 +192,18 @@ supersede old release task status while preserving historical evidence.
 | ID | Subsection | Current evidence and remaining gate |
 | --- | --- | --- |
 | PC.0.1 | Owner scope / canonical checkout | Eight feedback items and baseline recorded; local commits authorized. |
-| PC.0.2 | RAM versus persistent storage | Actual idle read shows disk headroom; concurrent resource acceptance pending. |
+| PC.0.2 | RAM versus persistent storage | Original/combined workloads pass at their source bindings; measured receipt disk growth opens the storage contract. |
 | PC.0.3 | Product/library/voice alternatives | Primary research and exact source limits recorded; live trials unrun. |
-| PC.1.1 | Camera control modes | Actual red pan-to-walk test; mode contract revised after fresh review. |
-| PC.1.2 | Camera framing / recovery / input | A/B/C protocol; native trials and implementation pending. |
-| PC.1.3 | Chair target activation | Source maps placement IDs to authoritative seats; behavior test/fix pending. |
-| PC.2.1 | Furnished presets / safe adoption | Versioned allocation and owner replacement contract; implementation pending. |
-| PC.2.2 | Room settings / migration | v2 lighting/origin contract; legacy/rollback/archive verification pending. |
-| PC.2.3 | My work visibility / ordering | Separate self projection and lounge cursor; real client/authority tests pending. |
-| PC.3 | Lounge layout / rest / compatibility | Same-content comparison and interaction inventory; trials pending. |
-| PC.4 | Game selection / lifecycle / authority | Bounded prototype gate; lifecycle freeze before production. |
-| PC.5 | External voice destination | Source-backed Discord handoff; member/owner boundaries and UI pending. |
-| PC.6 | Integrated workload / browser / review | Original criteria retained, combined test declared later; unrun. |
+| PC.1.1 | Camera control modes | Implemented and locally accepted; centered Follow, explicit Look/Overview and recovery have source-bound checks. |
+| PC.1.2 | Camera framing / recovery / input | A/B/C and readability comparisons, native viewports and fresh/contextual refinements recorded; human comfort untested. |
+| PC.1.3 | Chair target activation | Desk/chair interactions and readable seated poses checked; P2 UI evidence records the source scope. |
+| PC.2.1 | Furnished presets / safe adoption | Six distinct presets and safe explicit adoption implemented; old empty/customized rooms preserved. |
+| PC.2.2 | Room settings / migration | Additive v2 room fields and later v4 voice/game schema verified; original archives preserved. |
+| PC.2.3 | My work visibility / ordering | Separate own-work cursor, draft and receipt ordering tested; new room-return purpose is a separate open extension. |
+| PC.3 | Lounge layout / rest / compatibility | Expanded layout selected by matched comparison; study/rest six-resident capabilities checked in bounded cases. |
+| PC.4 | Game selection / lifecycle / authority | Two-player game implemented/reviewed/native checked; new 3–6 contributor requirement reopens activity design. |
+| PC.5 | External voice destination | Optional external link authority and native recovery pass; no actual audio/provider call claimed. |
+| PC.6 | Integrated workload / browser / review | Original21 and combined23 gates pass; new source/storage/group work must receive new affected acceptance. |
 
 
 ### PC.2 foundation review closure
@@ -253,3 +253,22 @@ task and final affected shell checks have separate source bindings. See
 - PC.6 verification/resources: full required suite in progress; original300s task
   and separately registered game/board extension remain held until browser lanes
   close. No inherited old-resource or new-deployment claim.
+
+## Methods refresh and new scope, 22 October
+
+The current rows above are reconciled with local validation commit `8b22fa4`.
+Earlier checkpoint paragraphs retain their historical dates and source scopes.
+
+| ID | Subsection | Evidence, decision and next gate |
+| --- | --- | --- |
+| PC.H1 | Company-method research | Google Harness2, Anthropic, OpenAI and Microsoft primary sources checked; existing comparison/review methods retained with scoped adoption/failure records. [Report](../harness/COMPANY-METHODS-2026-10-22.md). |
+| PC.H2 | Additional contradiction instruction | Two synthetic tasks × two fresh arms; all four correct. Independent blind grades agree; no default expansion. Original protocol/expectation wording defects remain annotated. |
+| PC.H3 | Method-record calibration and review | Two valid/five invalid record controls pass; semantic grading stays separate. Fresh review corrections verified and contextual recheck clear. No tool-isolation or general reliability claim. |
+| PC.H4 | Commit/evidence orchestration | Staged diff check stopped four line-ending defects; original bytes preserved. Hook caught a verified public locale-chunk path; JSON-only escaping preserved parsed source manifest, hook intact. Actual local commit 8b22fa4. |
+| PC.6.1 | Maintained native task | Real two-context break/voice/return passes; first no-listener infrastructure attempt retained. Parent496hashes/image and fresh review pass. |
+| PC.6.2 | Sustained resource scope | Original21/21 and combined23/23 pass; every source/protocol/failedattempt remains bound. Sampled WSLprocessRSS is not Fly enforcement. |
+| PC.6.3 | Retained receipt storage | Full workload reveals174.11MiB logicalgrowth. Losslesscodec contract reviewed; parent reproduces UTF16counterexample. Implementation and new sustained acceptance OPEN. |
+| PC.7.1 | Group activity choice | Fresh comparison selects picture-table prototype, clue circle alternative. Actual3–6contributors required; watchers insufficient. Contract/lifecycle review and one-illustration prototype in progress. |
+| PC.7.2 | Participation/identity/retry | Review identifies old queuedJoin and same-zone takeover gaps. Freeze consent/participation authority and cleanup before backend/UI work. |
+| PC.7.3 | Shared surface/access/content | Compare actual portrait/landscape tray layouts; one original24pieceillustration first. Phone/keyboard checks planned; human contribution balance untested. |
+| PC.2.4 | Personal work home base | Existing card remains house-visible and viewer-owned. Prefer deliberate room return then My work, with empty-room fallback and preserved drafts; implementation OPEN. |

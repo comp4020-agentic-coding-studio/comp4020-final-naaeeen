@@ -1,7 +1,9 @@
 # Active post-Crit task, 22 October 2026
 
 Work on local branch post-crit-improvements in the canonical WSL repository.
-Follow docs/post-crit/OWNER-FEEDBACK.md and docs/post-crit/PLAN.md. The owner requests
+Follow docs/post-crit/OWNER-FEEDBACK.md and docs/post-crit/PLAN.md. The latest addendum
+reopens 3–6 active group play, personal-room purpose and measured receipt storage.
+Use the company-method refresh in docs/harness/REPORT.md for method changes. The owner requests
 GPT-6 Astra (high to max) for decisions/fresh reviews and GPT-6.1 Sol (high to
 ultra) for execution. Choose effort by uncertainty and consequence; use max for
 architecture, permissions and migrations. Make logical intermediate LOCAL commits

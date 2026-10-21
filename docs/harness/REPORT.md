@@ -1,6 +1,6 @@
 # A3 AI-agent research and working methods
 
-Active Final Project guidance. Updated12October2026. Read this report at the start
+Active Final Project guidance. Updated 22 October 2026. Read this report at the start
 of every new/resumed A3 work task and return to its applicable sections throughout
 research, design, implementation, verification and refinement. The owner explicitly
 requires recurring checks for each phase, section and substantial subsection.
@@ -427,3 +427,24 @@ identity change during neutral export stranded every view; an explicit current
 identity title now has a regression. Sources and results are linked from
 ../post-crit/REVIEW-AND-REFINEMENT.md. These are observed corrections, not additional
 rituals or a reason to repeat already-resolved green checks.
+
+## Company-method refresh, 22 October
+
+The owner makes effective AI-agent practice a primary project outcome. Read
+[the company-method comparison](COMPANY-METHODS-2026-10-22.md) when changing the
+harness or making an effectiveness claim. It checks Google Harness2, Anthropic,
+OpenAI and Microsoft against this project's existing method. Keep the recurring
+subsection loop; do not accumulate requirements just because a company uses them.
+
+For a consequential harness change, add the observed failure, single changed
+factor, predicted effect, contrary evidence, measured cost (or explicitly NOT MEASURED) and adopt/revise/reject/
+unchanged decision to its checkpoint. Reuse a lesson only in its stated conditions;
+record a falsifier or retirement condition. Agent trials keep every planned attempt
+and state the real evaluator/isolation boundary. Four matched diagnostic responses
+found no added correctness benefit from the additional explicit-contradiction
+instruction in these two fixtures; that extra instruction stays optional. This is a limited local observation, not a universal negative result.
+
+For failures, separate the first observable violated condition from a causal
+explanation; record the trace step/artifact, applicability, competing explanation
+and discriminating recheck. Preserve an unresolved cause when instrumentation is
+missing. Existing project tests and owner constraints outrank a model's selection.

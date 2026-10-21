@@ -6,6 +6,9 @@ Work in the canonical WSL checkout on `post-crit-improvements`, based on `8cdad6
 and [review/refinement](docs/post-crit/REVIEW-AND-REFINEMENT.md) govern this task.
 Local staged commits are authorized; new release/provider work is separate.
 Earlier acceptance sections below retain their exact historical source scope.
+The 22 October addendum reopens 3–6 active group participation, personal-room
+purpose, board receipt storage and company-informed agent-method refinement.
+See the post-Crit plan and current handoff for scoped results and remaining work.
 
 # Current acceptance: verified game, board and server policy
 
