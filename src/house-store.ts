@@ -5,22 +5,24 @@ import { validatePlacements } from "../public/house-geometry.js";
 import { ROOM_LIGHTS, getRoomPreset, instantiateRoomPreset, roomPresetForSlot } from "../public/house-room-content.js";
 import { emptyGameTable, advanceGameTime, applyGameAction, applyGameEvent, projectGame, INACTIVITY_MS } from "../public/house-game-rules.js";
 import type { GameTable, GameRound, GameAction, GameEvent } from "../public/house-game-rules.js";
+import { emptyPuzzleTable, startPuzzle, placePuzzlePiece, validPuzzleTable } from "../public/house-puzzle-rules.js";
+import type { PuzzleTable } from "../public/house-puzzle-rules.js";
 import { HouseError } from "./house-contract.ts";
-import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, HouseGameControl, Me, Placement, Profile, Resident, RoomLight } from "./house-contract.ts";
+import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, HouseGameControl, HouseExecution, PuzzleCommittedEffect, Me, Placement, Profile, Resident, RoomLight } from "./house-contract.ts";
 
 export const HOUSE_SESSION_SECONDS = 30 * 24 * 60 * 60;
 const CHAT_RETENTION_MS = 7 * 24 * 60 * 60 * 1000;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const TOKEN = /^[A-Za-z0-9_-]{43}$/;
 const COLOURS: readonly string[] = ["amber", "sage", "rose", "blue", "lavender", "peach"];
-const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "room.starter", "room.light", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate", "house.voice", "game.join", "game.ready", "game.move", "game.resume", "game.leave"];
+const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "room.starter", "room.light", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate", "house.voice", "game.join", "game.ready", "game.move", "game.resume", "game.leave", "puzzle.start", "puzzle.place"];
 type IdentityRow = { id: string; name: string; colour: Colour; revision: number };
 type HomeRow = { id: string; capacity: number; owner_id: string; code: string | null; status: string };
 type Membership = HomeRow & { slot: number; bedroom_id: string };
 type RoomRow = { id: string; house_id: string; owner_id: string; slot: number; revision: number; open: number; palette: Colour; placements: string; archived: number; light: RoomLight; origin_preset_id: string | null; origin_preset_version: number | null };
 type CardRow = { id: string; house_id: string; author_id: string; small_goal: string; question: string; resource_url: string; next_step: string; help_requested: number; state: Card["state"]; revision: number; inactive_sequence: number | null };
 type ReceiptRow = { command_hash: string; response: string; room_id: string | null };
-type Outcome = { streamId: string; entityRevision: number; result?: Record<string, unknown>; roomId?: string; sequence?: number };
+type Outcome = { streamId: string; entityRevision: number; result?: Record<string, unknown>; roomId?: string; sequence?: number; effect?: PuzzleCommittedEffect };
 
 export function houseSessionDigest(token: string): string { return createHash("sha256").update(token).digest("hex"); }
 function fail(code: string, message: string): never { throw new HouseError(code, message); }
@@ -46,7 +48,7 @@ function colour(value: unknown): Colour {
   return value as Colour;
 }
 function uuid(value: unknown): string {
-  if (typeof value !== "string" || !UUID.test(value)) return fail("INVALID_INPUT", "A valid UUID is required.");
+  if (typeof value !== "string" || value.length !== 36 || !UUID.test(value)) return fail("INVALID_INPUT", "A valid UUID is required.");
   return value.toLowerCase();
 }
 function revision(value: unknown): number {
@@ -177,7 +179,7 @@ export class HouseStore {
     try {
       this.db.exec("PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;");
       const version = (this.prepared("PRAGMA user_version").get() as { user_version: number }).user_version;
-      if (version !== 0 && version !== 1 && version !== 2 && version !== 3 && version !== 4) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
+      if (![0,1,2,3,4,5].includes(version)) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
       if (version === 0) this.transaction(() => this.db.exec(`
         CREATE TABLE identities (id TEXT PRIMARY KEY, name TEXT NOT NULL, colour TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);
         CREATE TABLE sessions (token_digest TEXT PRIMARY KEY, identity_id TEXT NOT NULL REFERENCES identities(id), expires_at INTEGER NOT NULL);
@@ -213,6 +215,10 @@ export class HouseStore {
       if (version < 4) this.transaction(() => this.db.exec(`
         CREATE TABLE house_voice (house_id TEXT PRIMARY KEY REFERENCES houses(id), url TEXT, revision INTEGER NOT NULL CHECK(revision>=0));
         PRAGMA user_version=4;
+      `));
+      if (version < 5) this.transaction(() => this.db.exec(`
+        CREATE TABLE puzzle_tables (house_id TEXT PRIMARY KEY REFERENCES houses(id), ruleset INTEGER NOT NULL CHECK(ruleset=1), state TEXT NOT NULL CHECK(length(state)<=8192));
+        PRAGMA user_version=5;
       `));
       // A new process cannot inherit former sockets or their recovery consent.
       const restartAt=Date.now();
@@ -266,6 +272,19 @@ export class HouseStore {
   private saveGame(houseId: string, state: GameTable, bump = false): void {
     this.prepared("INSERT INTO game_tables(house_id,ruleset,state,next_due_at) VALUES (?,?,?,?) ON CONFLICT(house_id) DO UPDATE SET ruleset=excluded.ruleset,state=excluded.state,next_due_at=excluded.next_due_at").run(houseId,GAME_RULESET,JSON.stringify(state),gameDeadline(state));
     if(bump) this.bump("lounge:"+houseId);
+  }
+  private puzzle(houseId: string): PuzzleTable {
+    const row = this.prepared("SELECT ruleset,state FROM puzzle_tables WHERE house_id=?").get(houseId) as { ruleset: number; state: string } | undefined;
+    if (!row) return emptyPuzzleTable();
+    if (row.ruleset !== 1 || Buffer.byteLength(row.state) > 8192) fail("STORAGE_UNAVAILABLE", "Unsupported saved picture table.");
+    const value: unknown = JSON.parse(row.state);
+    if (!validPuzzleTable(value)) fail("STORAGE_UNAVAILABLE", "The saved picture table is invalid.");
+    return value;
+  }
+  private savePuzzle(houseId: string, state: PuzzleTable): void {
+    const json = JSON.stringify(state);
+    if (Buffer.byteLength(json) > 8192 || !validPuzzleTable(state)) fail("STORAGE_UNAVAILABLE", "The picture table exceeds its saved-state contract.");
+    this.prepared("INSERT INTO puzzle_tables(house_id,ruleset,state) VALUES (?,1,?) ON CONFLICT(house_id) DO UPDATE SET state=excluded.state").run(houseId, json);
   }
   /** Due housekeeping commits independently, even if the next player command fails. */
   maintainGames(now=Date.now()): boolean {
@@ -379,6 +398,16 @@ export class HouseStore {
     } catch (error) { return storageError(error); }
   }
 
+  /** Read-only access preflight, deliberately independent of game maintenance.
+   * Realtime validates a requested authority transition before withdrawing consent.
+   */
+  authorizeZone(id: string, zoneId = "lounge"): void {
+    try { this.transaction(() => {
+      this.identity(id); this.requireHome(id);
+      if (zoneId !== "lounge") this.access(id, uuid(zoneId));
+    }); } catch (error) { return storageError(error); }
+  }
+
   snapshot(id: string, zoneId = "lounge"): HouseSnapshot {
     try { this.maintainGames(); return this.transaction(() => {
       const h = this.requireHome(id); this.identity(id);
@@ -389,7 +418,7 @@ export class HouseStore {
       const ownCard = this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
       const voice = this.prepared("SELECT url,revision FROM house_voice WHERE house_id=?").get(h.id) as { url: string | null; revision: number } | undefined;
       const ownWork = { streamId: "lounge:" + h.id, sequence: this.sequence("lounge:" + h.id), card: ownCard ? card(ownCard) : null };
-      return { voice: voice ?? { url: null, revision: 0 }, schemaVersion: 2, game: privateRoom ? null : projectGame(this.game(h.id)), selfId: id, ownWork, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
+      return { puzzle: privateRoom ? null : this.puzzle(h.id), voice: voice ?? { url: null, revision: 0 }, schemaVersion: 2, game: privateRoom ? null : projectGame(this.game(h.id)), selfId: id, ownWork, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
     }); } catch (error) { return storageError(error); }
   }
 
@@ -402,12 +431,16 @@ export class HouseStore {
   }
 
   execute(id: string, untrusted: unknown, control?: HouseGameControl): HouseReceipt {
+    return this.executeWithEffects(id, untrusted, control).receipt;
+  }
+  /** Internal committed facts let realtime reconcile memory without reading after COMMIT. */
+  executeWithEffects(id: string, untrusted: unknown, control?: HouseGameControl): HouseExecution {
     try {
       const now=Date.now(); this.maintainGames(now);
       const command = parseCommand(untrusted), hash = houseSessionDigest(id + "\n" + canonical(command));
       return this.transaction(() => {
         this.identity(id);
-        if(command.type.startsWith("game.")) {
+        if(command.type.startsWith("game.") || command.type.startsWith("puzzle.")) {
           if(!control?.isController) fail("NOT_CONTROLLER","Enter the table with current lounge control.");
           if(control.zoneId!=="lounge") fail("STALE_ZONE","Return to the lounge table.");
           const h=this.requireHome(id);if(uuid(command.houseId)!==h.id)fail("FORBIDDEN","This queued action belongs to another house.");
@@ -416,12 +449,14 @@ export class HouseStore {
         if (previous) {
           if (previous.command_hash !== hash) fail("COMMAND_ID_REUSED", "This command ID was already used for another action.");
           if (previous.room_id) this.access(id, previous.room_id);
-          return JSON.parse(previous.response) as HouseReceipt;
+          return { receipt: JSON.parse(previous.response) as HouseReceipt, effect: null };
         }
         const outcome = this.apply(id, command, control, now);
         const receipt: HouseReceipt = { ok: true, commandId: command.commandId, streamId: outcome.streamId, sequence: outcome.sequence ?? this.bump(outcome.streamId), entityRevision: outcome.entityRevision, ...(outcome.result ? { result: outcome.result } : {}) };
-        this.prepared("INSERT INTO receipts(actor_id,command_id,command_hash,response,room_id) VALUES (?,?,?,?,?)").run(id, command.commandId, hash, JSON.stringify(receipt), outcome.roomId ?? null);
-        return receipt;
+        const response = JSON.stringify(receipt);
+        if (command.type.startsWith("puzzle.") && Buffer.byteLength(response) > 512) fail("STORAGE_UNAVAILABLE", "The picture receipt exceeds its supported bound.");
+        this.prepared("INSERT INTO receipts(actor_id,command_id,command_hash,response,room_id) VALUES (?,?,?,?,?)").run(id, command.commandId, hash, response, outcome.roomId ?? null);
+        return { receipt, effect: outcome.effect ?? null };
       });
     } catch (error) { return storageError(error); }
   }
@@ -493,6 +528,7 @@ export class HouseStore {
       return { streamId: lounge, entityRevision: currentRevision + 1 };
     }
     if(c.type.startsWith("game.")) {
+      if (c.type === "game.join" && control?.puzzle?.memberIds.includes(id)) fail("ACTIVITY_ACTIVE", "Leave the picture table before joining Four-in-a-row.");
       const state=this.game(h.id), type=c.type.slice(5);
       const fields=type==="join" || type==="leave" ? ["roundId"] : type==="ready" ? ["roundId","rosterRevision"] : type==="resume" ? ["roundId","resumeRevision"] : ["roundId","column"];
       keys(p,fields,fields);
@@ -511,6 +547,40 @@ export class HouseStore {
       if(!transition.ok)fail("GAME_"+transition.code.toUpperCase(),"The table changed or this action is unavailable. Reread its current state.");
       if(transition.changed)this.saveGame(h.id,transition.state);
       return {streamId:lounge,entityRevision:transition.state.revision,result:{roundId,code:transition.code},...(!transition.changed ? {sequence:this.sequence(lounge)} : {})};
+    }
+    if (c.type === "puzzle.start" || c.type === "puzzle.place") {
+      const state = this.puzzle(h.id), trusted = control?.puzzle;
+      if (!trusted) fail("NOT_CONTROLLER", "Use current lounge control for the picture table.");
+      if (c.type === "puzzle.start") {
+        keys(p, ["expectedRoundId", "illustrationId", "illustrationVersion", "confirmUnfinished", "authority", "expectedRoster"], ["expectedRoundId", "illustrationId", "illustrationVersion", "confirmUnfinished", "authority", "expectedRoster"]);
+        const expectedRoundId = p.expectedRoundId === null ? null : uuid(p.expectedRoundId);
+        if (typeof p.confirmUnfinished !== "boolean") fail("INVALID_INPUT", "Confirm whether this replaces an unfinished picture.");
+        const original = record(p.authority), roster = record(p.expectedRoster);
+        keys(original, ["serverEpoch", "accessGeneration", "generation"], ["serverEpoch", "accessGeneration", "generation"]);
+        keys(roster, ["serverEpoch", "revision"], ["serverEpoch", "revision"]);
+        uuid(original.serverEpoch); revision(original.accessGeneration); revision(original.generation); uuid(roster.serverEpoch); revision(roster.revision);
+        if (original.serverEpoch !== trusted.authority.serverEpoch || original.accessGeneration !== trusted.authority.accessGeneration || original.generation !== trusted.authority.generation) fail("STALE_GENERATION", "Control changed. Review the current picture before starting.");
+        this.requireRevision(c.expectedRevision, state.revision);
+        if (expectedRoundId !== (state.current?.id ?? null)) fail("PUZZLE_STALE_ROUND", "The picture changed. Review the current table.");
+        if (state.current && !state.current.completed) {
+          if (h.owner_id !== id) fail("FORBIDDEN", "Only the owner may replace an unfinished picture.");
+          if (!p.confirmUnfinished || trusted.roundId !== state.current.id || roster.serverEpoch !== trusted.authority.serverEpoch || roster.revision !== trusted.rosterRevision || trusted.memberIds.some(member => member !== id)) fail("PUZZLE_RESET_CHANGED", "The picture or participants changed. Review and confirm again.");
+        }
+        const transition = startPuzzle(state, randomUUID(), p.illustrationId, p.illustrationVersion);
+        if (!transition.ok) fail(transition.code, "Choose a supported picture.");
+        this.savePuzzle(h.id, transition.state);
+        const roundId = transition.state.current!.id;
+        return { streamId: lounge, entityRevision: transition.state.revision, result: { roundId, puzzleRevision: transition.state.revision }, effect: { houseId: h.id, roundId, completed: false } };
+      }
+      keys(p, ["roundId", "participationId", "pieceId", "destination"], ["roundId", "participationId", "pieceId", "destination"]);
+      if (Object.hasOwn(c, "expectedRevision")) fail("INVALID_INPUT", "Piece placement does not use a table revision.");
+      const roundId = uuid(p.roundId), participationId = uuid(p.participationId);
+      if (trusted.roundId !== roundId || trusted.participationId !== participationId || !trusted.memberIds.includes(id)) fail("PUZZLE_NOT_JOINED", "Join this picture explicitly before placing a piece.");
+      const transition = placePuzzlePiece(state, { roundId, pieceId: p.pieceId, destination: p.destination }, id);
+      if (!transition.ok) fail(transition.code, "This piece or destination is unavailable. Keep your selection and review the picture.");
+      this.savePuzzle(h.id, transition.state);
+      const completed = transition.state.current!.completed;
+      return { streamId: lounge, entityRevision: transition.state.revision, result: { roundId, puzzleRevision: transition.state.revision, pieceId: p.pieceId, destination: p.destination, completed }, ...(completed ? { effect: { houseId: h.id, roundId, completed: true } } : {}) };
     }
     if (c.type === "chat.send") {
       keys(p, ["zoneId", "text"], ["zoneId", "text"]);

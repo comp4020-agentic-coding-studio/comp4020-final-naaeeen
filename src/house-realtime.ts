@@ -2,7 +2,8 @@ import { createHash, randomUUID } from "node:crypto";
 import type { Server as HttpServer, IncomingMessage } from "node:http";
 import { Server, type Socket } from "socket.io";
 import { HouseError } from "./house-contract.ts";
-import type { HouseCommand, HouseReceipt, HouseSnapshot, HouseGameControl, LiveSnapshot, Me, Player } from "./house-contract.ts";
+import type { HouseCommand, HouseReceipt, HouseSnapshot, HouseGameControl, HouseExecution, PuzzleControl, LiveSnapshot, Me, Player } from "./house-contract.ts";
+import { PuzzlePresence } from "./house-puzzle-presence.ts";
 import { HOUSE_WORLD_VERSION, createLayout, bedroomLayout, validPosition, slide } from "../public/house-geometry.js";
 import { activityMetadata } from "./activity-log.ts";
 
@@ -10,12 +11,14 @@ export interface HouseAuthority {
   session(digest: string): { id: string } | undefined;
   me(id: string): Me;
   snapshot(id: string, zoneId?: string): HouseSnapshot;
+  authorizeZone?(id: string, zoneId?: string): void;
   execute(id: string, command: HouseCommand, control?: HouseGameControl): HouseReceipt;
+  executeWithEffects?(id: string, command: HouseCommand, control?: HouseGameControl): HouseExecution;
   maintainGames?(now?: number): boolean;
   gameLifecycle?(id: string, event: "disconnect" | "left_lounge"): boolean;
 }
 interface Options { origin?: string; secureCookies?: boolean; log?: (record: Record<string, unknown>) => void }
-interface Context { legacyReadonly: boolean; socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number }
+interface Context { legacyReadonly: boolean; socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number; puzzleIntent: { sequence: number; hash: string; outcome: Record<string, unknown> } | null }
 interface Lease { id: string; digest: string; houseId: string; token: string; socketId: string | null; generation: number; expiresAt: number; zoneId: string; x: number; z: number; heading: number; animation: "idle" | "walk" | "sit"; seatId: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; sequence: number; lastMoveAt: number; motionCredit: number }
 const LEASE_MS = 30_000, MAX_FRAME_BYTES = 1024 * 1024, MAX_BYTES = 2 * 1024 * 1024, MAX_CONNECTIONS = 12;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
@@ -66,6 +69,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   const contexts = new Map<string, Context>();
   const leases = new Map<string, Lease>();
   const pendingGameDisconnects = new Set<string>();
+  const puzzlePresence = new PuzzlePresence();
   let nextGeneration = 0, nextAccessGeneration = 0;
   let closed = false, motionDirty = false, sessionSweepAt = 0;
   const log = (id: string, action: string, outcome: string, metadata: Record<string, unknown> = {}) => { try { options.log?.({ ...metadata, at: Date.now(), actor: id, action, outcome }); } catch { /* Instruments must not change command success. */ } };
@@ -76,13 +80,24 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       : receipt.streamId.startsWith("bedroom:") ? command.houseId : undefined;
     return { ...activityMetadata(command), houseId, commandId: receipt.commandId, sequence: receipt.sequence };
   }
+  function clearPuzzleConnection(socketId: string) { if (puzzlePresence.clearConnection(socketId)) queueRefresh(); }
   function release(lease: Lease) { lease.seatId = null; lease.animation = "idle"; }
   function disconnect(context: Context, code: string) { log(context.id, "connection.close", code); context.socket.conn.close(true); }
   function requireSession(context: Context) {
-    if (closed || store.session(context.digest)?.id !== context.id) throw new HouseError("UNAUTHENTICATED", "Your session changed. Reload to continue.");
+    if (closed || store.session(context.digest)?.id !== context.id) {
+      clearPuzzleConnection(context.socket.id);
+      throw new HouseError("UNAUTHENTICATED", "Your session changed. Reload to continue.");
+    }
   }
   function authorised(context: Context) { requireSession(context); return store.snapshot(context.id, context.zoneId); }
+  function preflightZone(context: Context, zoneId: string): HouseSnapshot | undefined {
+    requireSession(context);
+    if (store.authorizeZone) { store.authorizeZone(context.id, zoneId); return undefined; }
+    // Compatibility for existing authority adapters; production has the narrow preflight.
+    return store.snapshot(context.id, zoneId);
+  }
   function resetZone(lease: Lease, snapshot: HouseSnapshot) {
+    if (lease.socketId) clearPuzzleConnection(lease.socketId);
     if(lease.zoneId==="lounge" && snapshot.zoneId!=="lounge") store.gameLifecycle?.(lease.id,"left_lounge");
     release(lease); lease.zoneId = snapshot.zoneId;
     const layout = snapshot.room ? bedroomLayout(snapshot.room.placements) : createLayout(snapshot.house.capacity);
@@ -118,9 +133,41 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       if(lease.houseId===current.houseId && lease.zoneId==="lounge" && peer?.subscribed && peer.zoneId==="lounge" && store.session(peer.digest)?.id===lease.id && store.me(lease.id).home?.id===current.houseId) controlledInLounge.push(lease.id);
     }
     if(context.zoneId!=="lounge") throw new HouseError("STALE_ZONE","Return to the lounge table.");
-    return {isController:true,zoneId:"lounge",controlledInLounge};
+    return {isController:true,zoneId:"lounge",controlledInLounge,puzzle:puzzleControl(context, authorised(context))};
+  }
+  function puzzleControl(context: Context, durable: HouseSnapshot): PuzzleControl {
+    const roundId = durable.puzzle?.current?.id ?? null;
+    const roster = puzzlePresence.prune(durable.house.id, roundId, participant => {
+      const peer = contexts.get(participant.socketId), lease = leases.get(participant.actorId);
+      return participant.roundId === roundId && !durable.puzzle?.current?.completed &&
+        durable.residents.some(resident => resident.id === participant.actorId) && !!peer?.subscribed &&
+        peer.zoneId === "lounge" && peer.accessGeneration === participant.accessGeneration &&
+        store.session(peer.digest)?.id === participant.actorId && lease?.socketId === participant.socketId &&
+        lease.houseId === durable.house.id && lease.zoneId === "lounge" && lease.generation === participant.generation;
+    });
+    return { authority: { serverEpoch, accessGeneration: context.accessGeneration, generation: leases.get(context.id)?.generation ?? 0 },
+      roundId, rosterRevision: roster.revision, memberIds: [...roster.participants.keys()], participationId: roster.participants.get(context.id)?.socketId === context.socket.id ? roster.participants.get(context.id)!.participationId : null };
+  }
+  function retainPuzzleHouses() {
+    const houses = new Set<string>();
+    for (const context of contexts.values()) {
+      const lease = leases.get(context.id);
+      if (context.subscribed && lease) houses.add(lease.houseId);
+    }
+    puzzlePresence.retainHouses(houses);
+  }
+  function execute(context: Context | undefined, id: string, command: HouseCommand): HouseReceipt {
+    const control = (command.type.startsWith("game.") || command.type.startsWith("puzzle.")) && context ? gameControl(context) : undefined;
+    if (store.executeWithEffects) {
+      const outcome = store.executeWithEffects(id, command, control);
+      // No database work, await, user hook or fallible authority check after COMMIT.
+      puzzlePresence.committed(outcome.effect);
+      return outcome.receipt;
+    }
+    return store.execute(id, command, control);
   }
   function switchToLounge(context: Context, code: string) {
+    clearPuzzleConnection(context.socket.id);
     context.zoneId = "lounge"; context.accessGeneration = ++nextAccessGeneration;
     context.revoked = { serverEpoch, accessGeneration: context.accessGeneration, zoneId: "lounge", code };
     context.pendingSnapshot = true;
@@ -132,6 +179,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   function pruneLeases() {
     for (const [id, lease] of leases) {
       if (store.session(lease.digest)?.id !== id || store.me(id).home?.id !== lease.houseId || (!lease.socketId && lease.expiresAt <= Date.now())) {
+        if (lease.socketId) clearPuzzleConnection(lease.socketId);
         // Preserve the controlling-disconnect fact before removing its lease.
         // Membership departure has already ended a game in the store transaction.
         if(lease.socketId && lease.zoneId==="lounge") {
@@ -150,7 +198,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         durable = authorised(context);
       } else throw error;
     }
-    if (context.legacyReadonly) return { worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: false, generation: 0, durable, players: [] };
+    if (context.legacyReadonly) return { puzzleRoster: null, worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: false, generation: 0, durable, players: [] };
     pruneLeases();
     const layout = durable.room ? bedroomLayout(durable.room.placements) : createLayout(durable.house.capacity);
     for (const lease of leases.values()) {
@@ -169,7 +217,9 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       return value;
     });
     const lease = leases.get(context.id);
-    return { worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: lease?.socketId === context.socket.id, generation: lease?.generation ?? 0, durable, players };
+    if (durable.zoneId === "lounge") puzzleControl(context, durable);
+    retainPuzzleHouses();
+    return { puzzleRoster: durable.zoneId === "lounge" ? puzzlePresence.project(serverEpoch, durable.house.id, durable.puzzle?.current?.id ?? null, context.socket.id) : null, worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: lease?.socketId === context.socket.id, generation: lease?.generation ?? 0, durable, players };
   }
   function queueRefresh() { if (closed) return; for (const context of contexts.values()) if (context.subscribed) context.pendingSnapshot = true; }
   function send(context: Context, event: string, value: unknown, volatile = false): boolean {
@@ -191,10 +241,13 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     if (now - sessionSweepAt >= 1000) {
       sessionSweepAt = now;
       try {
+        // Known revoked consent is removed before game maintenance can fail.
+        for (const context of contexts.values()) if (store.session(context.digest)?.id !== context.id) {
+          clearPuzzleConnection(context.socket.id); disconnect(context, "UNAUTHENTICATED");
+        }
+        pruneLeases();
         flushGameDisconnects();
         if(store.maintainGames?.(now)) queueRefresh();
-        pruneLeases();
-        for (const context of contexts.values()) if (store.session(context.digest)?.id !== context.id) disconnect(context, "UNAUTHENTICATED");
       } catch { /* An action/projection reports storage failure; the next sweep retries due housekeeping. */ }
     }
     for (const [id, lease] of leases) {
@@ -218,6 +271,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   }
   function cleanup(context: Context) {
     if (!contexts.delete(context.socket.id)) return;
+    clearPuzzleConnection(context.socket.id);
     if (!closed) log(context.id, "connection.disconnect", "offline");
     const lease = leases.get(context.id);
     if (lease?.socketId === context.socket.id) {
@@ -226,7 +280,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         try { flushGameDisconnects(); } catch { log(context.id,"game.disconnect","STORAGE_UNAVAILABLE"); }
       }
       lease.socketId = null; lease.expiresAt = Date.now() + LEASE_MS; lease.animation = lease.seatId ? "sit" : "idle"; }
-    queueRefresh();
+    retainPuzzleHouses(); queueRefresh();
   }
   io.use((socket, next) => {
     try {
@@ -238,7 +292,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       if (declaredVersion && socket.handshake.auth.worldVersion !== HOUSE_WORLD_VERSION) throw new HouseError("CLIENT_UPDATE_REQUIRED", "The house has changed. Download unsent drafts, then reload to update.");
       if (contexts.size >= MAX_CONNECTIONS) throw new HouseError("LOAD_LIMIT", "This server has twelve connections. Close an unused tab and retry.");
       if ([...contexts.values()].filter(context => context.id === identity.id).length >= 2) throw new HouseError("TAB_LIMIT", "Use one controlling tab and one observer.");
-      const context: Context = { legacyReadonly, socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetAt: Date.now(), events: 0 };
+      const context: Context = { puzzleIntent: null, legacyReadonly, socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetAt: Date.now(), events: 0 };
       contexts.set(socket.id, context);
       socket.conn.once("close", () => cleanup(context));
       next();
@@ -272,6 +326,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       }
       if (!force && lease?.socketId === socket.id) return lease;
       if (lease) {
+        if (lease.socketId) clearPuzzleConnection(lease.socketId);
         if(lease.zoneId==="lounge" && snapshot.zoneId!=="lounge") store.gameLifecycle?.(lease.id,"left_lounge");
         release(lease);
       }
@@ -280,8 +335,10 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       resetZone(lease, snapshot); leases.set(context.id, lease); return lease;
     }
     handle("house.subscribe", body => {
-      if (typeof body.zoneId !== "string" || (body.zoneId !== "lounge" && !uuid.test(body.zoneId)) || typeof body.controllerToken !== "string" || !uuid.test(body.controllerToken)) throw new HouseError("INVALID_INPUT", "Choose an available room and a current tab token.");
-      const snapshot = store.snapshot(context.id, body.zoneId);
+      if (Object.keys(body).length !== 2 || typeof body.zoneId !== "string" || (body.zoneId !== "lounge" && (body.zoneId.length !== 36 || !uuid.test(body.zoneId))) || typeof body.controllerToken !== "string" || body.controllerToken.length !== 36 || !uuid.test(body.controllerToken)) throw new HouseError("INVALID_INPUT", "Choose an available room and a current tab token.");
+      const checked = preflightZone(context, body.zoneId);
+      if (leases.get(context.id)?.socketId === socket.id) clearPuzzleConnection(socket.id);
+      const snapshot = checked ?? store.snapshot(context.id, body.zoneId);
       const alreadySubscribed = context.subscribed;
       context.accessGeneration = ++nextAccessGeneration;
       context.zoneId = body.zoneId; context.subscribed = true; context.revoked = null;
@@ -300,8 +357,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     });
     handle("house.takeover", body => {
       if (context.legacyReadonly) throw new HouseError("CLIENT_UPDATE_REQUIRED", "This older tab is read-only. Copy available drafts or export Pending before reloading.");
-      const snapshot = authorised(context);
+      if (Object.keys(body).some(key => key !== "controllerToken") || (Object.hasOwn(body, "controllerToken") && (typeof body.controllerToken !== "string" || body.controllerToken.length !== 36 || !uuid.test(body.controllerToken)))) throw new HouseError("INVALID_INPUT", "Use a current tab control token.");
       if (!context.subscribed) throw new HouseError("NOT_SUBSCRIBED", "Enter the house first.");
+      const checked = preflightZone(context, context.zoneId);
+      const former = leases.get(context.id);
+      if (former?.socketId) clearPuzzleConnection(former.socketId);
+      const snapshot = checked ?? authorised(context);
       const token = typeof body.controllerToken === "string" && uuid.test(body.controllerToken) ? body.controllerToken : randomUUID();
       acquire(token, snapshot, true); queueRefresh(); log(context.id, "control.takeover", "ok");
       return { ok: true, snapshot: project(context) };
@@ -353,12 +414,50 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       if (body.zoneId !== context.zoneId || lease.zoneId !== body.zoneId) throw new HouseError("STALE_ZONE", "This draft belongs to a different room.");
       const command = inputObject(body.command) as unknown as HouseCommand;
       validateCommandZone(command, context.zoneId);
-      const receipt = store.execute(context.id, command, command.type.startsWith("game.") ? gameControl(context) : undefined); queueRefresh(); log(context.id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "socket" }); return receipt;
+      const receipt = execute(context, context.id, command); queueRefresh(); log(context.id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "socket" }); return receipt;
+    });
+    handle("house.puzzle.intent", body => {
+      const fields = ["generation", "zoneId", "serverEpoch", "accessGeneration", "intentSequence", "requestId", "roundId", "mode"];
+      if (Object.keys(body).length !== fields.length || fields.some(key => !Object.hasOwn(body, key)) ||
+          typeof body.requestId !== "string" || body.requestId.length !== 36 || !uuid.test(body.requestId) || typeof body.roundId !== "string" || body.roundId.length !== 36 || !uuid.test(body.roundId) ||
+          !Number.isSafeInteger(body.generation) || (body.generation as number) < 0 ||
+          !Number.isSafeInteger(body.intentSequence) || (body.intentSequence as number) < 0 || !["join", "leave"].includes(body.mode as string) ||
+          !Number.isSafeInteger(body.accessGeneration) || (body.accessGeneration as number) < 0 || typeof body.serverEpoch !== "string" || body.serverEpoch.length !== 36 || !uuid.test(body.serverEpoch)) throw new HouseError("INVALID_INPUT", "Use a complete picture participation intent.");
+      const lease = controller(context, body.generation);
+      if (body.zoneId !== "lounge" || context.zoneId !== "lounge" || lease.zoneId !== "lounge") throw new HouseError("STALE_ZONE", "Return to the lounge picture table.");
+      if (body.serverEpoch !== serverEpoch || body.accessGeneration !== context.accessGeneration) throw new HouseError("STALE_GENERATION", "Control changed. Choose Join again explicitly.");
+      const identity = { requestId: body.requestId, intentSequence: body.intentSequence };
+      const hash = createHash("sha256").update(JSON.stringify(fields.map(key => body[key]))).digest("hex");
+      if (context.puzzleIntent && (body.intentSequence as number) < context.puzzleIntent.sequence) return { ok: false, ...identity, code: "STALE_INTENT", message: "A newer participation choice already replaced this one." };
+      if (context.puzzleIntent && body.intentSequence === context.puzzleIntent.sequence) return hash === context.puzzleIntent.hash ? context.puzzleIntent.outcome : { ok: false, ...identity, code: "INTENT_ID_REUSED", message: "Use a new intent sequence for a new choice." };
+      let outcome: Record<string, unknown>;
+      try {
+        const durable = authorised(context), control = puzzleControl(context, durable), round = durable.puzzle?.current;
+        if (!round) throw new HouseError("PUZZLE_UNAVAILABLE", "Start a picture before joining.");
+        if (round.id !== body.roundId) throw new HouseError("PUZZLE_STALE_ROUND", "The picture changed. Review the current table.");
+        if (body.mode === "leave") {
+          const rosterRevision = puzzlePresence.leave(durable.house.id, round.id, context.id);
+          outcome = { ok: true, ...identity, mode: "leave", roundId: round.id, participationId: null, rosterRevision };
+        } else {
+          if (round.completed) throw new HouseError("PUZZLE_COMPLETE", "This picture is complete. A new picture needs a deliberate Start.");
+          if (control.memberIds.includes(context.id)) throw new HouseError("ALREADY_JOINED", "You already joined this picture.");
+          if (durable.game?.current?.players.includes(context.id)) throw new HouseError("ACTIVITY_ACTIVE", "Leave Four-in-a-row before joining the picture table.");
+          if (control.memberIds.length >= 6) throw new HouseError("SPACE_FULL", "The picture table has six active participants.");
+          const participant = puzzlePresence.join(durable.house.id, round.id, { actorId: context.id, socketId: socket.id, generation: lease.generation, accessGeneration: context.accessGeneration });
+          outcome = { ok: true, ...identity, mode: "join", roundId: round.id, participationId: participant.participationId, rosterRevision: puzzlePresence.current(durable.house.id, round.id).revision };
+        }
+      } catch (error) {
+        // Domain denials consume this deliberate intent; storage faults remain retryable.
+        if (!(error instanceof HouseError) || !["PUZZLE_UNAVAILABLE", "PUZZLE_STALE_ROUND", "PUZZLE_COMPLETE", "ALREADY_JOINED", "ACTIVITY_ACTIVE", "SPACE_FULL"].includes(error.code)) throw error;
+        outcome = { ...failure(error), ...identity };
+      }
+      context.puzzleIntent = { sequence: body.intentSequence as number, hash, outcome };
+      queueRefresh(); return outcome;
     });
   });
   function validateCommandZone(command: HouseCommand, zoneId: string) {
     if (typeof command.type !== "string" || !command.payload || typeof command.payload !== "object" || Array.isArray(command.payload)) throw new HouseError("INVALID_INPUT", "A valid command payload is required.");
-    if(command.type.startsWith("game.") && zoneId!=="lounge") throw new HouseError("STALE_ZONE","Return to the lounge table.");
+    if((command.type.startsWith("game.") || command.type.startsWith("puzzle.")) && zoneId!=="lounge") throw new HouseError("STALE_ZONE","Return to the lounge table.");
     if (command.type === "chat.send" && command.payload.zoneId !== zoneId) throw new HouseError("STALE_ZONE", "Send this message only in its original room.");
     if ((["room.configure", "room.placements", "room.starter", "room.light"].includes(command.type)) && command.payload.roomId !== zoneId) throw new HouseError("STALE_ZONE", "This room edit belongs to a different room.");
   }
@@ -367,6 +466,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     io,
     refresh: queueRefresh,
     revokeIdentity(id: string) {
+      puzzlePresence.clearActor(id);
       const lease = leases.get(id);
       if(lease?.socketId && lease.zoneId==="lounge") {
         pendingGameDisconnects.add(id); try { flushGameDisconnects(); } catch { log(id,"game.disconnect","STORAGE_UNAVAILABLE"); }
@@ -386,12 +486,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         validateCommandZone(command, context.zoneId);
       }
       const activeLease=leases.get(id), activeContext=activeLease?.socketId ? contexts.get(activeLease.socketId) : undefined;
-      const receipt = store.execute(id, command, command.type.startsWith("game.") && activeContext ? gameControl(activeContext) : undefined); queueRefresh(); log(id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "http" }); return receipt;
+      const receipt = execute(activeContext, id, command); queueRefresh(); log(id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "http" }); return receipt;
     },
     async close(): Promise<void> {
       if (closed) return; closed = true; clearInterval(timer);
       for (const context of contexts.values()) context.socket.conn.close(true);
-      contexts.clear(); leases.clear();
+      contexts.clear(); leases.clear(); puzzlePresence.clear();
       await new Promise<void>(resolve => io.close(() => resolve()));
     },
   };

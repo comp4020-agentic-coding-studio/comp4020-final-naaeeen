@@ -1,1 +1,1 @@
-export const HOUSE_WORLD_VERSION: "lounge-2";
+export const HOUSE_WORLD_VERSION: "lounge-3";

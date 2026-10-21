@@ -1,0 +1,101 @@
+{
+  "scope": "Client transport/reducer/outbox only; mocked Socket.IO acknowledgements, no running service/browser/load.",
+  "runtime": {
+    "bridge": "Windows PowerShell to Ubuntu WSL lizhi",
+    "node": "24.21.0",
+    "pnpm": "11.9.0"
+  },
+  "sourceHashes": {
+    "public/house-client.js": "bed5e09e1873657f99dce5d5fc64c77e95c3117ed4d9bd0e355bffc8ce70664b",
+    "spec/house-client.test.ts": "a82f87b4f6f9c7bd03572f47dfba511c75ed3e9fa68cbde0b6b50ab89928ebd0",
+    "spec/house-puzzle-client.test.ts": "f9404331edde0c4a2b7fa5ede12d376eccc6842d77bd050b94806bd24433d775",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "vitest.house.config.ts": "da59cd3fe2b69ac43739e9f611199ef8ae6b57f6a189104ce9b4e6da03f4be5b",
+    "docs/post-crit/GROUP-API.md": "a58909dd084ad5588a22337100942a3a94bcace90b228f05d37934df059afe48"
+  },
+  "baselineRedSourceReconstruction": {
+    "method": "Baseline client from git HEAD (only this worker changed this owned file); initial test content is current file before boundary-refinement describe block. These hashes are reconstructed after first run, not a prospective binding.",
+    "clientSha256": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+    "testSha256": "43fbbba4dd6e3285658df345e7284006dd95e0badd82f613f8d5e3726022fc68"
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 381,
+        "covered": 373,
+        "skipped": 0,
+        "pct": 97.9
+      },
+      "statements": {
+        "total": 686,
+        "covered": 633,
+        "skipped": 0,
+        "pct": 92.27
+      },
+      "functions": {
+        "total": 109,
+        "covered": 107,
+        "skipped": 0,
+        "pct": 98.16
+      },
+      "branches": {
+        "total": 678,
+        "covered": 619,
+        "skipped": 0,
+        "pct": 91.29
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-client.js": {
+      "lines": {
+        "total": 381,
+        "covered": 373,
+        "skipped": 0,
+        "pct": 97.9
+      },
+      "functions": {
+        "total": 109,
+        "covered": 107,
+        "skipped": 0,
+        "pct": 98.16
+      },
+      "statements": {
+        "total": 686,
+        "covered": 633,
+        "skipped": 0,
+        "pct": 92.27
+      },
+      "branches": {
+        "total": 678,
+        "covered": 619,
+        "skipped": 0,
+        "pct": 91.29
+      }
+    }
+  },
+  "focused": {
+    "passed": 120,
+    "failed": 0,
+    "files": [
+      "spec/house-client.test.ts",
+      "spec/house-puzzle-client.test.ts"
+    ]
+  },
+  "typecheck": {
+    "firstAttempt": "FAIL outside owned paths; no client or client-test diagnostics.",
+    "diagnostics": "Already up to date\nDone in 51ms using pnpm v11.9.0\n$ tsc --noEmit\nspec/house-puzzle-backend.test.ts(28,63): error TS2345: Argument of type '{ isController: true; zoneId: \"lounge\"; controlledInLounge: string[]; puzzle: { authority: { serverEpoch: `${string}-${string}-${string}-${string}-${string}`; accessGeneration: number; generation: number; }; rosterRevision: number; memberIds: string[]; participationId: string | null; }; }' is not assignable to parameter of type 'HouseGameControl'.\n  Types of property 'puzzle' are incompatible.\n    Property 'roundId' is missing in type '{ authority: { serverEpoch: `${string}-${string}-${string}-${string}-${string}`; accessGeneration: number; generation: number; }; rosterRevision: number; memberIds: string[]; participationId: string | null; }' but required in type 'PuzzleControl'.\nspec/house-puzzle-backend.test.ts(35,54): error TS2345: Argument of type '{ isController: true; zoneId: \"lounge\"; controlledInLounge: string[]; puzzle: { authority: { serverEpoch: `${string}-${string}-${string}-${string}-${string}`; accessGeneration: number; generation: number; }; rosterRevision: number; memberIds: string[]; participationId: string | null; }; }' is not assignable to parameter of type 'HouseGameControl'.\n  Types of property 'puzzle' are incompatible.\n    Property 'roundId' is missing in type '{ authority: { serverEpoch: `${string}-${string}-${string}-${string}-${string}`; accessGeneration: number; generation: number; }; rosterRevision: number; memberIds: string[]; participationId: string | null; }' but required in type 'PuzzleControl'.\nspec/house-puzzle-ui.test.ts(11,328): error TS2554: Expected 0 arguments, but got 2.\nspec/house-realtime.test.ts(29,5): error TS2741: Property 'puzzle' is missing in type '{ voice: { url: null; revision: number; }; game: null; schemaVersion: 2; selfId: string; house: Home; residents: { id: string; name: string; colour: \"sage\"; revision: number; slot: number; bedroomId: `${string}-${string}-${string}-${string}-${string}`; open: boolean; }[]; ... 6 more ...; ownWork: { ...; }; }' but required in type 'HouseSnapshot'.\n[ELIFECYCLE] Command failed with exit code 2.\n"
+  },
+  "independentReview": "Pending parent-owned fresh review; this is a review-ready handoff, not final integration acceptance.",
+  "notRun": [
+    "native browser",
+    "running Socket.IO service",
+    "physical device/human accessibility",
+    "combined resource workload",
+    "deployment"
+  ]
+}

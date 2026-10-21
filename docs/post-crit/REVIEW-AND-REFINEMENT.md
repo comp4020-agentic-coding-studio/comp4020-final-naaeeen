@@ -278,3 +278,33 @@ inspected final code/hashes and ran the integrated 1,037-test suite. See
 [evidence/storage-codec-review-closure.json](evidence/storage-codec-review-closure.json).
 This qualifies a local implementation milestone, with native and sustained storage
 acceptance still pending. Earlier passing workload results do not accept this source.
+
+
+## P7 picture authority and client foundation
+
+The actual prototype comparison selected a 12-piece page over a scrolling tray for
+inventory visibility on the small view. It has a keyboard navigation tradeoff;
+scripted activation counts are not solving time or user preference. A fresh review
+caught a clipped transcript despite passing form checks. The affected landscape
+repair retains separate source bindings from the full six-case prototype run.
+The original illustration and immutable 24-piece mapping were then frozen.
+
+Backend review traced rejected actions through consent cleanup. A revoked-bedroom
+observer's denied takeover could remove the legitimate lounge controller from the
+picture. A real access regression and malformed-input negatives now require
+read-only preflight before cleanup, while preserving timely cleanup when later
+housekeeping fails. All 203 affected tests and the contextual review pass; parent
+recomputed all 12 source entries and inspected the actual authority path.
+
+Client review found a different liveness boundary: a legitimately returned lounge
+head could have exactly the same roster revision after bedroom revocation. The
+client now admits that unchanged safe head under fresh authority without restoring
+old consent. Its bounded comparison key retains prior member IDs until identity,
+house or terminal disposal changes; it is not a secret or a reconstructed roster.
+The original four-case reproduction and all 127 maintained client cases pass on
+the repaired source. Parent checked source identities and integrated version scope.
+
+See GROUP-BACKEND-NOTES.md, GROUP-CLIENT-NOTES.md and their linked failed/green
+records. This foundation does not inherit the prototype's native layout result.
+The real app's first landscape run separately exposed chat occlusion and clipping;
+those fixes and three/six-browser participation remain native integration gates.

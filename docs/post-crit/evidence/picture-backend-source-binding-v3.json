@@ -1,0 +1,68 @@
+{
+  "recordedAtUTC": "2026-10-21T19:44:50.664646+00:00",
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "sqlite": "3.53.4",
+    "bridge": "Windows PowerShell to Ubuntu WSL2 / lizhi"
+  },
+  "source": {
+    "public/house-puzzle-rules.js": {
+      "bytes": 4963,
+      "sha256": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397"
+    },
+    "src/house-puzzle-presence.ts": {
+      "bytes": 3566,
+      "sha256": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e"
+    },
+    "src/house-contract.ts": {
+      "bytes": 3962,
+      "sha256": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe"
+    },
+    "src/house-store.ts": {
+      "bytes": 57539,
+      "sha256": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef"
+    },
+    "src/house-realtime.ts": {
+      "bytes": 38608,
+      "sha256": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c"
+    },
+    "src/server.ts": {
+      "bytes": 25206,
+      "sha256": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+    },
+    "spec/house-puzzle-rules.test.ts": {
+      "bytes": 5513,
+      "sha256": "5ee61f6cbc6db5e2ce3faaebf77ab32a604a337eb639150f5e8adcbf14af5a8f"
+    },
+    "spec/house-puzzle-backend.test.ts": {
+      "bytes": 10973,
+      "sha256": "30596d93d83a30a88726e48fdffb0d85a8df724fa02b71b66877eb4b0e9483a0"
+    },
+    "spec/house-puzzle-realtime.test.ts": {
+      "bytes": 23562,
+      "sha256": "07b3256bf951a252a7a57d0fa202d53e12376bfc9c8715425237076b53150bd4"
+    },
+    "spec/house-realtime.test.ts": {
+      "bytes": 35742,
+      "sha256": "5522636980a1992e57bf46cecebc315d168f29d20547a72f115f0fd22399bf47"
+    },
+    "public/house-puzzle-content.js": {
+      "bytes": 4547,
+      "sha256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc"
+    },
+    "public/assets/pictures/rainy-nook-v1.svg": {
+      "bytes": 8445,
+      "sha256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+    }
+  },
+  "verification": "picture-backend-verification-v3.json",
+  "coverage": "picture-backend-coverage-v3/coverage-summary.json",
+  "boundaries": [
+    "Local automated pure/store/real Socket.IO/HTTP evidence only",
+    "Independent review pending parent",
+    "Native browser/resource/real human checks owned by parent",
+    "No push deployment or commit from backend worker"
+  ],
+  "refinement": "Access preflight before takeover/resubscribe consent cleanup; strict shapes; original failure-path cleanup publication retained"
+}

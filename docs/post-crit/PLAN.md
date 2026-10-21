@@ -322,8 +322,12 @@ maintained native core/break/voice, six-resident bounded cases, original and com
 300-second workloads and fresh validation review. New storage and group production
 changes must obtain their own affected acceptance. No new publication occurred.
 
-The [storage contract](STORAGE-CONTRACT.md) is independently reviewed and enters
-red-green implementation. The [group/room extension](GROUP-ACTIVITY-CONTRACT.md)
-remains under contract refinement and one-illustration responsive prototyping.
+The [storage contract](STORAGE-CONTRACT.md) is implemented and independently
+reviewed in local commit `64f619c`; current native and sustained acceptance is open.
+The [group/room extension](GROUP-ACTIVITY-CONTRACT.md) has completed the responsive
+prototype comparison and backend/client/UI implementation. Authority and client
+review findings are repaired. The first integrated native task exposed short-
+landscape chat occlusion and clipping, now under affected repair/recheck. Three/six
+browser contributors and current workload acceptance remain required.
 The [company-method record](../harness/COMPANY-METHODS-2026-10-22.md) explains the
 actual diagnostic and why an extra universal instruction was not adopted.

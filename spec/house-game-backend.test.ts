@@ -24,8 +24,8 @@ const error=(code:string)=>expect.objectContaining({code});
 describe("durable Four-in-a-row adapter",()=>{
  test("migrates v2 additively and preserves old receipts",()=>{
   const f=fixture(),before=f.store.snapshot(f.people[0]!.id),old=f.command("chat.send",{zoneId:"lounge",text:"retained"}),receipt=f.store.execute(f.people[0]!.id,old);
-  f.store.close();const db=new DatabaseSync(f.path);db.exec("DROP TABLE house_voice; DROP TABLE game_tables; PRAGMA user_version=2");db.close();
-  const next=new HouseStore(f.path);cleanups.push(()=>next.close());expect(next.db.prepare("PRAGMA user_version").get()).toEqual({user_version:4});
+  f.store.close();const db=new DatabaseSync(f.path);db.exec("DROP TABLE puzzle_tables; DROP TABLE house_voice; DROP TABLE game_tables; PRAGMA user_version=2");db.close();
+  const next=new HouseStore(f.path);cleanups.push(()=>next.close());expect(next.db.prepare("PRAGMA user_version").get()).toEqual({user_version:5});
   expect(next.snapshot(f.people[0]!.id).residents).toEqual(before.residents);expect(next.execute(f.people[0]!.id,old)).toEqual(receipt);
   expect(next.snapshot(f.people[0]!.id).game).toEqual({revision:0,rosterRevision:0,current:null,latestResult:null});
  });

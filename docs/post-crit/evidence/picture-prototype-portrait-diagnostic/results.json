@@ -1,0 +1,2872 @@
+{
+  "kind": "native local UI technical comparison; no human or network trial",
+  "label": "portrait-diagnostic",
+  "startedAt": "2026-10-21T18:58:48.156Z",
+  "sourceSHA256": {
+    "index.html": "9cac850ed3be57593d4fe469f332e39b320eb412f06cb91f14dc22503b85e099",
+    "style.css": "2fe3f00402533f7ef4674020813f1c62112243c7c7edf0a3cf7801cc7067bde7",
+    "app.js": "244153befbb9a097ff17ba63e8f0d619fd91e0c5a43dea904b457d60aa73d024",
+    "rainy-nook.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "README.md": "d174e9db63f1da222d8b8c5a68d9026b37bba5a1ddf982a4e79e18aa11a5f35b"
+  },
+  "protocolSHA256": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+  "runnerSHA256": "ee309c786d7ed13fca56a55667d43e070f75f141b93014f1a430242cfa442ecf",
+  "cases": [
+    {
+      "name": "portrait",
+      "mode": "pages",
+      "input": "software touch dispatch/tap plus native keyboard",
+      "actions": {
+        "pointerOrTap": 30,
+        "tab": 18,
+        "keyActivation": 7,
+        "arrowOrHome": 8,
+        "pageNavigation": 1,
+        "trayScrollGestures": 0,
+        "syntheticPeerEvents": 1
+      },
+      "screenshots": [
+        {
+          "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/portrait-pages-initial.png",
+          "width": 390,
+          "height": 844,
+          "sha256": "8624e65f616ed402868d9f01a1919bca88ef1d578588d567110d97c1aef55ed3",
+          "nearBlackPixels": 0,
+          "nonOpaquePixels": 0
+        },
+        {
+          "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/portrait-pages-reference.png",
+          "width": 390,
+          "height": 844,
+          "sha256": "d68bad742fe8415058e7bc5efb6d9ee18a9bd3d27de4e956f6cbea52ff26ac73",
+          "nearBlackPixels": 0,
+          "nonOpaquePixels": 0
+        },
+        {
+          "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/portrait-pages-chat.png",
+          "width": 390,
+          "height": 844,
+          "sha256": "671a55bec644477b0da3ca1619896dd7ed223b8c3e375613ec1951435892f801",
+          "nearBlackPixels": 0,
+          "nonOpaquePixels": 0
+        },
+        {
+          "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/portrait-pages-before-exit.png",
+          "width": 390,
+          "height": 844,
+          "sha256": "fe5acd7f4bced0b5d99a4637fe6319655879ee9c4753cf101dc3c74e74283c2d",
+          "nearBlackPixels": 0,
+          "nonOpaquePixels": 0
+        },
+        {
+          "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/portrait-pages-after-reopen.png",
+          "width": 390,
+          "height": 844,
+          "sha256": "46bbd60f71cb75b5e081d31b00c1e219de4c30fd6c3a88e7e6c9e44f69d377a9",
+          "nearBlackPixels": 0,
+          "nonOpaquePixels": 0
+        },
+        {
+          "failedScreenshot": true
+        }
+      ],
+      "checks": {
+        "initialFit": true,
+        "wrongPlacementRetainsSelection": true,
+        "referenceAndChat": true,
+        "peerFocusAndSelection": true,
+        "keyboardSelectionPlacement": true,
+        "exitReopenRetainsLocalProgress": true
+      },
+      "initial": {
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "shell": 0,
+          "visual": {
+            "top": 0,
+            "left": 0,
+            "pageTop": 0,
+            "width": 390,
+            "height": 844
+          }
+        },
+        "content": [
+          {
+            "class": "instruction",
+            "x": 21,
+            "y": 469.375,
+            "width": 348,
+            "height": 11,
+            "bottom": 480.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "selected-summary",
+            "x": 21,
+            "y": 686.375,
+            "width": 348,
+            "height": 54,
+            "bottom": 740.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "feedback",
+            "x": 9,
+            "y": 791,
+            "width": 372,
+            "height": 44,
+            "bottom": 835,
+            "right": 381,
+            "inViewport": true
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 1
+        },
+        "document": {
+          "width": 390,
+          "height": 844
+        },
+        "board": {
+          "x": 24,
+          "y": 234,
+          "width": 342,
+          "height": 230.375,
+          "bottom": 464.375,
+          "right": 366
+        },
+        "tray": {
+          "x": 21,
+          "y": 517.375,
+          "width": 348,
+          "height": 125,
+          "bottom": 642.375,
+          "right": 369
+        },
+        "trayScrollHeight": 123,
+        "controls": [
+          {
+            "id": "exit",
+            "x": 242.359375,
+            "y": 27.5,
+            "width": 126.640625,
+            "height": 44,
+            "bottom": 71.5,
+            "right": 369,
+            "inViewport": true,
+            "name": "Back to my room ↗"
+          },
+          {
+            "id": "reference-toggle",
+            "x": 21,
+            "y": 88,
+            "width": 113.859375,
+            "height": 44,
+            "bottom": 132,
+            "right": 134.859375,
+            "inViewport": true,
+            "name": "Picture reference"
+          },
+          {
+            "id": "chat-toggle",
+            "x": 140.859375,
+            "y": 88,
+            "width": 68.203125,
+            "height": 44,
+            "bottom": 132,
+            "right": 209.0625,
+            "inViewport": true,
+            "name": "Chat 1"
+          },
+          {
+            "id": "join",
+            "x": 21,
+            "y": 157,
+            "width": 122.3125,
+            "height": 44,
+            "bottom": 201,
+            "right": 143.3125,
+            "inViewport": true,
+            "name": "Join local demo"
+          },
+          {
+            "id": "peer",
+            "x": 263.859375,
+            "y": 157,
+            "width": 105.140625,
+            "height": 44,
+            "bottom": 201,
+            "right": 369,
+            "inViewport": true,
+            "name": "Simulate peer"
+          },
+          {
+            "id": "cell-0",
+            "x": 29,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, left edge"
+          },
+          {
+            "id": "cell-1",
+            "x": 84.828125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, top row, second spot"
+          },
+          {
+            "id": "cell-2",
+            "x": 140.65625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, third spot"
+          },
+          {
+            "id": "cell-3",
+            "x": 196.484375,
+            "y": 239,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 291.84375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, fourth spot"
+          },
+          {
+            "id": "cell-4",
+            "x": 252.328125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, top row, fifth spot"
+          },
+          {
+            "id": "cell-5",
+            "x": 308.15625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, right edge"
+          },
+          {
+            "id": "cell-6",
+            "x": 29,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, left edge"
+          },
+          {
+            "id": "cell-7",
+            "x": 84.828125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, second spot"
+          },
+          {
+            "id": "cell-8",
+            "x": 140.65625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, third spot"
+          },
+          {
+            "id": "cell-9",
+            "x": 196.484375,
+            "y": 294.84375,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 347.6875,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fourth spot"
+          },
+          {
+            "id": "cell-10",
+            "x": 252.328125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fifth spot"
+          },
+          {
+            "id": "cell-11",
+            "x": 308.15625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, right edge"
+          },
+          {
+            "id": "cell-12",
+            "x": 29,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, left edge"
+          },
+          {
+            "id": "cell-13",
+            "x": 84.828125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, third row, second spot"
+          },
+          {
+            "id": "cell-14",
+            "x": 140.65625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, third row, third spot"
+          },
+          {
+            "id": "cell-15",
+            "x": 196.484375,
+            "y": 350.6875,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 403.53125,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fourth spot"
+          },
+          {
+            "id": "cell-16",
+            "x": 252.328125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fifth spot"
+          },
+          {
+            "id": "cell-17",
+            "x": 308.15625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, third row, right edge"
+          },
+          {
+            "id": "cell-18",
+            "x": 29,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, left edge"
+          },
+          {
+            "id": "cell-19",
+            "x": 84.828125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, second spot"
+          },
+          {
+            "id": "cell-20",
+            "x": 140.65625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, third spot"
+          },
+          {
+            "id": "cell-21",
+            "x": 196.484375,
+            "y": 406.53125,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 459.375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fourth spot"
+          },
+          {
+            "id": "cell-22",
+            "x": 252.328125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fifth spot"
+          },
+          {
+            "id": "cell-23",
+            "x": 308.15625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, right edge"
+          },
+          {
+            "id": "piece-notebook",
+            "x": 26,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Green notebook with a red pencil"
+          },
+          {
+            "id": "piece-paper-star",
+            "x": 83.15625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Paper star with the window curve"
+          },
+          {
+            "id": "piece-slippers",
+            "x": 140.328125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Pair of red slippers below the desk"
+          },
+          {
+            "id": "piece-star-curtain",
+            "x": 197.5,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Rainy glass beside the folded curtain"
+          },
+          {
+            "id": "piece-teal-cup",
+            "x": 254.65625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Teal cup and saucer on the desk"
+          },
+          {
+            "id": "piece-honey-cap",
+            "x": 311.828125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Honey lamp cap with wall stitches"
+          },
+          {
+            "id": "piece-chair-leg",
+            "x": 26,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Angled chair leg across the woven rug"
+          },
+          {
+            "id": "piece-ivy-bell",
+            "x": 83.15625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Ivy leaves beside a little brass bell"
+          },
+          {
+            "id": "piece-lamp-base",
+            "x": 140.328125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Brass lamp base at the desk end"
+          },
+          {
+            "id": "piece-red-teapot",
+            "x": 197.5,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Round red teapot and its curved spout"
+          },
+          {
+            "id": "piece-woven-basket",
+            "x": 254.65625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Woven basket beside the rug corner"
+          },
+          {
+            "id": "piece-fern-rain",
+            "x": 311.828125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Fern fronds beside the rainy glass"
+          },
+          {
+            "id": "previous",
+            "x": 21,
+            "y": 642.375,
+            "width": 76.71875,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 97.71875,
+            "inViewport": true,
+            "name": "Previous"
+          },
+          {
+            "id": "next",
+            "x": 304,
+            "y": 642.375,
+            "width": 65,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 369,
+            "inViewport": true,
+            "name": "Next"
+          }
+        ],
+        "minPiece": 52.15625,
+        "minCell": 52.828125
+      },
+      "chatGeometry": [
+        {
+          "id": "chat-close",
+          "width": 75.546875,
+          "height": 44,
+          "reachable": true
+        },
+        {
+          "id": "message",
+          "width": 330,
+          "height": 44,
+          "reachable": true
+        }
+      ],
+      "beforeExit": {
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "shell": 0,
+          "visual": {
+            "top": 0,
+            "left": 0,
+            "pageTop": 0,
+            "width": 390,
+            "height": 844
+          }
+        },
+        "content": [
+          {
+            "class": "instruction",
+            "x": 21,
+            "y": 469.375,
+            "width": 348,
+            "height": 11,
+            "bottom": 480.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "selected-summary",
+            "x": 21,
+            "y": 686.375,
+            "width": 348,
+            "height": 54,
+            "bottom": 740.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "feedback",
+            "x": 9,
+            "y": 791,
+            "width": 372,
+            "height": 44,
+            "bottom": 835,
+            "right": 381,
+            "inViewport": true
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 1
+        },
+        "document": {
+          "width": 390,
+          "height": 844
+        },
+        "board": {
+          "x": 24,
+          "y": 234,
+          "width": 342,
+          "height": 230.375,
+          "bottom": 464.375,
+          "right": 366
+        },
+        "tray": {
+          "x": 21,
+          "y": 517.375,
+          "width": 348,
+          "height": 125,
+          "bottom": 642.375,
+          "right": 369
+        },
+        "trayScrollHeight": 123,
+        "controls": [
+          {
+            "id": "exit",
+            "x": 242.359375,
+            "y": 27.5,
+            "width": 126.640625,
+            "height": 44,
+            "bottom": 71.5,
+            "right": 369,
+            "inViewport": true,
+            "name": "Back to my room ↗"
+          },
+          {
+            "id": "reference-toggle",
+            "x": 21,
+            "y": 88,
+            "width": 113.859375,
+            "height": 44,
+            "bottom": 132,
+            "right": 134.859375,
+            "inViewport": true,
+            "name": "Picture reference"
+          },
+          {
+            "id": "chat-toggle",
+            "x": 140.859375,
+            "y": 88,
+            "width": 68.203125,
+            "height": 44,
+            "bottom": 132,
+            "right": 209.0625,
+            "inViewport": true,
+            "name": "Chat 2"
+          },
+          {
+            "id": "join",
+            "x": 21,
+            "y": 157,
+            "width": 148.109375,
+            "height": 44,
+            "bottom": 201,
+            "right": 169.109375,
+            "inViewport": true,
+            "name": "Leave participation"
+          },
+          {
+            "id": "peer",
+            "x": 263.859375,
+            "y": 157,
+            "width": 105.140625,
+            "height": 44,
+            "bottom": 201,
+            "right": 369,
+            "inViewport": true,
+            "name": "Simulate peer"
+          },
+          {
+            "id": "cell-0",
+            "x": 29,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, left edge"
+          },
+          {
+            "id": "cell-1",
+            "x": 84.828125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, top row, second spot"
+          },
+          {
+            "id": "cell-2",
+            "x": 140.65625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, third spot"
+          },
+          {
+            "id": "cell-3",
+            "x": 196.484375,
+            "y": 239,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 291.84375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, fourth spot"
+          },
+          {
+            "id": "cell-4",
+            "x": 252.328125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, placed by You, top row, fifth spot"
+          },
+          {
+            "id": "cell-5",
+            "x": 308.15625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, right edge"
+          },
+          {
+            "id": "cell-6",
+            "x": 29,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, left edge"
+          },
+          {
+            "id": "cell-7",
+            "x": 84.828125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, second spot"
+          },
+          {
+            "id": "cell-8",
+            "x": 140.65625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, third spot"
+          },
+          {
+            "id": "cell-9",
+            "x": 196.484375,
+            "y": 294.84375,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 347.6875,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fourth spot"
+          },
+          {
+            "id": "cell-10",
+            "x": 252.328125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fifth spot"
+          },
+          {
+            "id": "cell-11",
+            "x": 308.15625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, right edge"
+          },
+          {
+            "id": "cell-12",
+            "x": 29,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, left edge"
+          },
+          {
+            "id": "cell-13",
+            "x": 84.828125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, placed by You, third row, second spot"
+          },
+          {
+            "id": "cell-14",
+            "x": 140.65625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, placed by Finch, third row, third spot"
+          },
+          {
+            "id": "cell-15",
+            "x": 196.484375,
+            "y": 350.6875,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 403.53125,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fourth spot"
+          },
+          {
+            "id": "cell-16",
+            "x": 252.328125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fifth spot"
+          },
+          {
+            "id": "cell-17",
+            "x": 308.15625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, third row, right edge"
+          },
+          {
+            "id": "cell-18",
+            "x": 29,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, left edge"
+          },
+          {
+            "id": "cell-19",
+            "x": 84.828125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, second spot"
+          },
+          {
+            "id": "cell-20",
+            "x": 140.65625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, third spot"
+          },
+          {
+            "id": "cell-21",
+            "x": 196.484375,
+            "y": 406.53125,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 459.375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fourth spot"
+          },
+          {
+            "id": "cell-22",
+            "x": 252.328125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fifth spot"
+          },
+          {
+            "id": "cell-23",
+            "x": 308.15625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, right edge"
+          },
+          {
+            "id": "piece-cat-book",
+            "x": 26,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, already placed"
+          },
+          {
+            "id": "piece-shelf-leaves",
+            "x": 83.15625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, already placed"
+          },
+          {
+            "id": "piece-rug-leaf",
+            "x": 140.328125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border"
+          },
+          {
+            "id": "piece-lamp-shade",
+            "x": 197.5,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge"
+          },
+          {
+            "id": "piece-bird-string",
+            "x": 254.65625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string"
+          },
+          {
+            "id": "piece-yarn-coil",
+            "x": 311.828125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread"
+          },
+          {
+            "id": "piece-book-spines",
+            "x": 26,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf"
+          },
+          {
+            "id": "piece-biscuits",
+            "x": 83.15625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate"
+          },
+          {
+            "id": "piece-crescent-arch",
+            "x": 140.328125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch"
+          },
+          {
+            "id": "piece-desk-leg",
+            "x": 197.5,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe"
+          },
+          {
+            "id": "piece-rain-roof",
+            "x": 254.65625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof"
+          },
+          {
+            "id": "piece-cat-tail",
+            "x": 311.828125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, already placed"
+          },
+          {
+            "id": "previous",
+            "x": 21,
+            "y": 642.375,
+            "width": 76.71875,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 97.71875,
+            "inViewport": true,
+            "name": "Previous"
+          },
+          {
+            "id": "next",
+            "x": 304,
+            "y": 642.375,
+            "width": 65,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 369,
+            "inViewport": true,
+            "name": "Next"
+          }
+        ],
+        "minPiece": 52.15625,
+        "minCell": 52.828125
+      },
+      "afterReopen": {
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "shell": 0,
+          "visual": {
+            "top": 0,
+            "left": 0,
+            "pageTop": 0,
+            "width": 390,
+            "height": 844
+          }
+        },
+        "content": [
+          {
+            "class": "instruction",
+            "x": 21,
+            "y": 469.375,
+            "width": 348,
+            "height": 11,
+            "bottom": 480.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "selected-summary",
+            "x": 21,
+            "y": 686.375,
+            "width": 348,
+            "height": 54,
+            "bottom": 740.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "feedback",
+            "x": 9,
+            "y": 791,
+            "width": 372,
+            "height": 44,
+            "bottom": 835,
+            "right": 381,
+            "inViewport": true
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 1
+        },
+        "document": {
+          "width": 390,
+          "height": 844
+        },
+        "board": {
+          "x": 24,
+          "y": 234,
+          "width": 342,
+          "height": 230.375,
+          "bottom": 464.375,
+          "right": 366
+        },
+        "tray": {
+          "x": 21,
+          "y": 517.375,
+          "width": 348,
+          "height": 125,
+          "bottom": 642.375,
+          "right": 369
+        },
+        "trayScrollHeight": 123,
+        "controls": [
+          {
+            "id": "exit",
+            "x": 242.359375,
+            "y": 27.5,
+            "width": 126.640625,
+            "height": 44,
+            "bottom": 71.5,
+            "right": 369,
+            "inViewport": true,
+            "name": "Back to my room ↗"
+          },
+          {
+            "id": "reference-toggle",
+            "x": 21,
+            "y": 88,
+            "width": 113.859375,
+            "height": 44,
+            "bottom": 132,
+            "right": 134.859375,
+            "inViewport": true,
+            "name": "Picture reference"
+          },
+          {
+            "id": "chat-toggle",
+            "x": 140.859375,
+            "y": 88,
+            "width": 68.203125,
+            "height": 44,
+            "bottom": 132,
+            "right": 209.0625,
+            "inViewport": true,
+            "name": "Chat 2"
+          },
+          {
+            "id": "join",
+            "x": 21,
+            "y": 157,
+            "width": 122.3125,
+            "height": 44,
+            "bottom": 201,
+            "right": 143.3125,
+            "inViewport": true,
+            "name": "Join local demo"
+          },
+          {
+            "id": "peer",
+            "x": 263.859375,
+            "y": 157,
+            "width": 105.140625,
+            "height": 44,
+            "bottom": 201,
+            "right": 369,
+            "inViewport": true,
+            "name": "Simulate peer"
+          },
+          {
+            "id": "cell-0",
+            "x": 29,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, left edge"
+          },
+          {
+            "id": "cell-1",
+            "x": 84.828125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, top row, second spot"
+          },
+          {
+            "id": "cell-2",
+            "x": 140.65625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, third spot"
+          },
+          {
+            "id": "cell-3",
+            "x": 196.484375,
+            "y": 239,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 291.84375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, top row, fourth spot"
+          },
+          {
+            "id": "cell-4",
+            "x": 252.328125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, placed by You, top row, fifth spot"
+          },
+          {
+            "id": "cell-5",
+            "x": 308.15625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, top row, right edge"
+          },
+          {
+            "id": "cell-6",
+            "x": 29,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, left edge"
+          },
+          {
+            "id": "cell-7",
+            "x": 84.828125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, second spot"
+          },
+          {
+            "id": "cell-8",
+            "x": 140.65625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, third spot"
+          },
+          {
+            "id": "cell-9",
+            "x": 196.484375,
+            "y": 294.84375,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 347.6875,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fourth spot"
+          },
+          {
+            "id": "cell-10",
+            "x": 252.328125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, second row, fifth spot"
+          },
+          {
+            "id": "cell-11",
+            "x": 308.15625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, second row, right edge"
+          },
+          {
+            "id": "cell-12",
+            "x": 29,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, left edge"
+          },
+          {
+            "id": "cell-13",
+            "x": 84.828125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, placed by You, third row, second spot"
+          },
+          {
+            "id": "cell-14",
+            "x": 140.65625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, placed by Finch, third row, third spot"
+          },
+          {
+            "id": "cell-15",
+            "x": 196.484375,
+            "y": 350.6875,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 403.53125,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fourth spot"
+          },
+          {
+            "id": "cell-16",
+            "x": 252.328125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, third row, fifth spot"
+          },
+          {
+            "id": "cell-17",
+            "x": 308.15625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, third row, right edge"
+          },
+          {
+            "id": "cell-18",
+            "x": 29,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, left edge"
+          },
+          {
+            "id": "cell-19",
+            "x": 84.828125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, second spot"
+          },
+          {
+            "id": "cell-20",
+            "x": 140.65625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, third spot"
+          },
+          {
+            "id": "cell-21",
+            "x": 196.484375,
+            "y": 406.53125,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 459.375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fourth spot"
+          },
+          {
+            "id": "cell-22",
+            "x": 252.328125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, fifth spot"
+          },
+          {
+            "id": "cell-23",
+            "x": 308.15625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Empty picture place, bottom row, right edge"
+          },
+          {
+            "id": "piece-cat-book",
+            "x": 26,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, already placed"
+          },
+          {
+            "id": "piece-shelf-leaves",
+            "x": 83.15625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, already placed"
+          },
+          {
+            "id": "piece-rug-leaf",
+            "x": 140.328125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border"
+          },
+          {
+            "id": "piece-lamp-shade",
+            "x": 197.5,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge"
+          },
+          {
+            "id": "piece-bird-string",
+            "x": 254.65625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string"
+          },
+          {
+            "id": "piece-yarn-coil",
+            "x": 311.828125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread"
+          },
+          {
+            "id": "piece-book-spines",
+            "x": 26,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf"
+          },
+          {
+            "id": "piece-biscuits",
+            "x": 83.15625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate"
+          },
+          {
+            "id": "piece-crescent-arch",
+            "x": 140.328125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch"
+          },
+          {
+            "id": "piece-desk-leg",
+            "x": 197.5,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe"
+          },
+          {
+            "id": "piece-rain-roof",
+            "x": 254.65625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof"
+          },
+          {
+            "id": "piece-cat-tail",
+            "x": 311.828125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, already placed"
+          },
+          {
+            "id": "previous",
+            "x": 21,
+            "y": 642.375,
+            "width": 76.71875,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 97.71875,
+            "inViewport": true,
+            "name": "Previous"
+          },
+          {
+            "id": "next",
+            "x": 304,
+            "y": 642.375,
+            "width": 65,
+            "height": 44,
+            "bottom": 686.375,
+            "right": 369,
+            "inViewport": true,
+            "name": "Next"
+          }
+        ],
+        "minPiece": 52.15625,
+        "minCell": 52.828125
+      },
+      "completed": {
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "shell": 0,
+          "visual": {
+            "top": 0,
+            "left": 0,
+            "pageTop": 0,
+            "width": 390,
+            "height": 844
+          }
+        },
+        "content": [
+          {
+            "class": "instruction",
+            "x": 21,
+            "y": 469.375,
+            "width": 348,
+            "height": 11,
+            "bottom": 480.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "selected-summary",
+            "x": 21,
+            "y": 683.40625,
+            "width": 348,
+            "height": 54,
+            "bottom": 737.40625,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "feedback",
+            "x": 9,
+            "y": 791,
+            "width": 372,
+            "height": 44,
+            "bottom": 835,
+            "right": 381,
+            "inViewport": true
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 1
+        },
+        "document": {
+          "width": 390,
+          "height": 844
+        },
+        "board": {
+          "x": 24,
+          "y": 234,
+          "width": 342,
+          "height": 230.375,
+          "bottom": 464.375,
+          "right": 366
+        },
+        "tray": {
+          "x": 21,
+          "y": 517.375,
+          "width": 348,
+          "height": 122.03125,
+          "bottom": 639.40625,
+          "right": 369
+        },
+        "trayScrollHeight": 120,
+        "controls": [
+          {
+            "id": "exit",
+            "x": 242.359375,
+            "y": 27.5,
+            "width": 126.640625,
+            "height": 44,
+            "bottom": 71.5,
+            "right": 369,
+            "inViewport": true,
+            "name": "Back to my room ↗"
+          },
+          {
+            "id": "reference-toggle",
+            "x": 21,
+            "y": 88,
+            "width": 113.859375,
+            "height": 44,
+            "bottom": 132,
+            "right": 134.859375,
+            "inViewport": true,
+            "name": "Picture reference"
+          },
+          {
+            "id": "chat-toggle",
+            "x": 140.859375,
+            "y": 88,
+            "width": 68.203125,
+            "height": 44,
+            "bottom": 132,
+            "right": 209.0625,
+            "inViewport": true,
+            "name": "Chat 2"
+          },
+          {
+            "id": "join",
+            "x": 21,
+            "y": 157,
+            "width": 148.109375,
+            "height": 44,
+            "bottom": 201,
+            "right": 169.109375,
+            "inViewport": true,
+            "name": "Leave participation"
+          },
+          {
+            "id": "peer",
+            "x": 263.859375,
+            "y": 157,
+            "width": 105.140625,
+            "height": 44,
+            "bottom": 201,
+            "right": 369,
+            "inViewport": true,
+            "name": "Simulate peer"
+          },
+          {
+            "id": "cell-0",
+            "x": 29,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Ivy leaves beside a little brass bell, placed by Finch, top row, left edge"
+          },
+          {
+            "id": "cell-1",
+            "x": 84.828125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch, placed by Finch, top row, second spot"
+          },
+          {
+            "id": "cell-2",
+            "x": 140.65625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Paper star with the window curve, placed by Finch, top row, third spot"
+          },
+          {
+            "id": "cell-3",
+            "x": 196.484375,
+            "y": 239,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 291.84375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string, placed by Finch, top row, fourth spot"
+          },
+          {
+            "id": "cell-4",
+            "x": 252.328125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, placed by You, top row, fifth spot"
+          },
+          {
+            "id": "cell-5",
+            "x": 308.15625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Honey lamp cap with wall stitches, placed by Finch, top row, right edge"
+          },
+          {
+            "id": "cell-6",
+            "x": 29,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Fern fronds beside the rainy glass, placed by Finch, second row, left edge"
+          },
+          {
+            "id": "cell-7",
+            "x": 84.828125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof, placed by Finch, second row, second spot"
+          },
+          {
+            "id": "cell-8",
+            "x": 140.65625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Rainy glass beside the folded curtain, placed by Finch, second row, third spot"
+          },
+          {
+            "id": "cell-9",
+            "x": 196.484375,
+            "y": 294.84375,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 347.6875,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf, placed by Finch, second row, fourth spot"
+          },
+          {
+            "id": "cell-10",
+            "x": 252.328125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Round red teapot and its curved spout, placed by Finch, second row, fifth spot"
+          },
+          {
+            "id": "cell-11",
+            "x": 308.15625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge, placed by Finch, second row, right edge"
+          },
+          {
+            "id": "cell-12",
+            "x": 29,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Teal cup and saucer on the desk, placed by Finch, third row, left edge"
+          },
+          {
+            "id": "cell-13",
+            "x": 84.828125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, placed by You, third row, second spot"
+          },
+          {
+            "id": "cell-14",
+            "x": 140.65625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, placed by Finch, third row, third spot"
+          },
+          {
+            "id": "cell-15",
+            "x": 196.484375,
+            "y": 350.6875,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 403.53125,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Green notebook with a red pencil, placed by Finch, third row, fourth spot"
+          },
+          {
+            "id": "cell-16",
+            "x": 252.328125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate, placed by Finch, third row, fifth spot"
+          },
+          {
+            "id": "cell-17",
+            "x": 308.15625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Brass lamp base at the desk end, placed by Finch, third row, right edge"
+          },
+          {
+            "id": "cell-18",
+            "x": 29,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border, placed by Finch, bottom row, left edge"
+          },
+          {
+            "id": "cell-19",
+            "x": 84.828125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Angled chair leg across the woven rug, placed by Finch, bottom row, second spot"
+          },
+          {
+            "id": "cell-20",
+            "x": 140.65625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe, placed by Finch, bottom row, third spot"
+          },
+          {
+            "id": "cell-21",
+            "x": 196.484375,
+            "y": 406.53125,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 459.375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Pair of red slippers below the desk, placed by Finch, bottom row, fourth spot"
+          },
+          {
+            "id": "cell-22",
+            "x": 252.328125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread, placed by Finch, bottom row, fifth spot"
+          },
+          {
+            "id": "cell-23",
+            "x": 308.15625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Woven basket beside the rug corner, placed by Finch, bottom row, right edge"
+          },
+          {
+            "id": "piece-cat-book",
+            "x": 26,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, already placed"
+          },
+          {
+            "id": "piece-shelf-leaves",
+            "x": 83.15625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, already placed"
+          },
+          {
+            "id": "piece-rug-leaf",
+            "x": 140.328125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border, already placed"
+          },
+          {
+            "id": "piece-lamp-shade",
+            "x": 197.5,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge, already placed"
+          },
+          {
+            "id": "piece-bird-string",
+            "x": 254.65625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string, already placed"
+          },
+          {
+            "id": "piece-yarn-coil",
+            "x": 311.828125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread, already placed"
+          },
+          {
+            "id": "piece-book-spines",
+            "x": 26,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf, already placed"
+          },
+          {
+            "id": "piece-biscuits",
+            "x": 83.15625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate, already placed"
+          },
+          {
+            "id": "piece-crescent-arch",
+            "x": 140.328125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch, already placed"
+          },
+          {
+            "id": "piece-desk-leg",
+            "x": 197.5,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe, already placed"
+          },
+          {
+            "id": "piece-rain-roof",
+            "x": 254.65625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof, already placed"
+          },
+          {
+            "id": "piece-cat-tail",
+            "x": 311.828125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, already placed"
+          },
+          {
+            "id": "previous",
+            "x": 21,
+            "y": 639.40625,
+            "width": 76.71875,
+            "height": 44,
+            "bottom": 683.40625,
+            "right": 97.71875,
+            "inViewport": true,
+            "name": "Previous"
+          },
+          {
+            "id": "next",
+            "x": 304,
+            "y": 639.40625,
+            "width": 65,
+            "height": 44,
+            "bottom": 683.40625,
+            "right": 369,
+            "inViewport": true,
+            "name": "Next"
+          }
+        ],
+        "minPiece": 52.15625,
+        "minCell": 52.828125
+      },
+      "status": "FAIL",
+      "error": {
+        "message": "Reject unexpected transparent compositor pixels in native PNG\n\n96360 !== 0\n",
+        "code": "ERR_ASSERTION"
+      },
+      "failureMetrics": {
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "shell": 0,
+          "visual": {
+            "top": 0,
+            "left": 0,
+            "pageTop": 0,
+            "width": 390,
+            "height": 844
+          }
+        },
+        "content": [
+          {
+            "class": "instruction",
+            "x": 21,
+            "y": 469.375,
+            "width": 348,
+            "height": 11,
+            "bottom": 480.375,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "selected-summary",
+            "x": 21,
+            "y": 683.40625,
+            "width": 348,
+            "height": 54,
+            "bottom": 737.40625,
+            "right": 369,
+            "inViewport": true
+          },
+          {
+            "class": "feedback",
+            "x": 9,
+            "y": 791,
+            "width": 372,
+            "height": 44,
+            "bottom": 835,
+            "right": 381,
+            "inViewport": true
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "devicePixelRatio": 1
+        },
+        "document": {
+          "width": 390,
+          "height": 844
+        },
+        "board": {
+          "x": 24,
+          "y": 234,
+          "width": 342,
+          "height": 230.375,
+          "bottom": 464.375,
+          "right": 366
+        },
+        "tray": {
+          "x": 21,
+          "y": 517.375,
+          "width": 348,
+          "height": 122.03125,
+          "bottom": 639.40625,
+          "right": 369
+        },
+        "trayScrollHeight": 120,
+        "controls": [
+          {
+            "id": "exit",
+            "x": 242.359375,
+            "y": 27.5,
+            "width": 126.640625,
+            "height": 44,
+            "bottom": 71.5,
+            "right": 369,
+            "inViewport": true,
+            "name": "Back to my room ↗"
+          },
+          {
+            "id": "reference-toggle",
+            "x": 21,
+            "y": 88,
+            "width": 113.859375,
+            "height": 44,
+            "bottom": 132,
+            "right": 134.859375,
+            "inViewport": true,
+            "name": "Picture reference"
+          },
+          {
+            "id": "chat-toggle",
+            "x": 140.859375,
+            "y": 88,
+            "width": 68.203125,
+            "height": 44,
+            "bottom": 132,
+            "right": 209.0625,
+            "inViewport": true,
+            "name": "Chat 2"
+          },
+          {
+            "id": "join",
+            "x": 21,
+            "y": 157,
+            "width": 148.109375,
+            "height": 44,
+            "bottom": 201,
+            "right": 169.109375,
+            "inViewport": true,
+            "name": "Leave participation"
+          },
+          {
+            "id": "peer",
+            "x": 263.859375,
+            "y": 157,
+            "width": 105.140625,
+            "height": 44,
+            "bottom": 201,
+            "right": 369,
+            "inViewport": true,
+            "name": "Simulate peer"
+          },
+          {
+            "id": "cell-0",
+            "x": 29,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Ivy leaves beside a little brass bell, placed by Finch, top row, left edge"
+          },
+          {
+            "id": "cell-1",
+            "x": 84.828125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch, placed by Finch, top row, second spot"
+          },
+          {
+            "id": "cell-2",
+            "x": 140.65625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Paper star with the window curve, placed by Finch, top row, third spot"
+          },
+          {
+            "id": "cell-3",
+            "x": 196.484375,
+            "y": 239,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 291.84375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string, placed by Finch, top row, fourth spot"
+          },
+          {
+            "id": "cell-4",
+            "x": 252.328125,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, placed by You, top row, fifth spot"
+          },
+          {
+            "id": "cell-5",
+            "x": 308.15625,
+            "y": 239,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 291.828125,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Honey lamp cap with wall stitches, placed by Finch, top row, right edge"
+          },
+          {
+            "id": "cell-6",
+            "x": 29,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Fern fronds beside the rainy glass, placed by Finch, second row, left edge"
+          },
+          {
+            "id": "cell-7",
+            "x": 84.828125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof, placed by Finch, second row, second spot"
+          },
+          {
+            "id": "cell-8",
+            "x": 140.65625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Rainy glass beside the folded curtain, placed by Finch, second row, third spot"
+          },
+          {
+            "id": "cell-9",
+            "x": 196.484375,
+            "y": 294.84375,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 347.6875,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf, placed by Finch, second row, fourth spot"
+          },
+          {
+            "id": "cell-10",
+            "x": 252.328125,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Round red teapot and its curved spout, placed by Finch, second row, fifth spot"
+          },
+          {
+            "id": "cell-11",
+            "x": 308.15625,
+            "y": 294.84375,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 347.671875,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge, placed by Finch, second row, right edge"
+          },
+          {
+            "id": "cell-12",
+            "x": 29,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Teal cup and saucer on the desk, placed by Finch, third row, left edge"
+          },
+          {
+            "id": "cell-13",
+            "x": 84.828125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, placed by You, third row, second spot"
+          },
+          {
+            "id": "cell-14",
+            "x": 140.65625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, placed by Finch, third row, third spot"
+          },
+          {
+            "id": "cell-15",
+            "x": 196.484375,
+            "y": 350.6875,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 403.53125,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Green notebook with a red pencil, placed by Finch, third row, fourth spot"
+          },
+          {
+            "id": "cell-16",
+            "x": 252.328125,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate, placed by Finch, third row, fifth spot"
+          },
+          {
+            "id": "cell-17",
+            "x": 308.15625,
+            "y": 350.6875,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 403.515625,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Brass lamp base at the desk end, placed by Finch, third row, right edge"
+          },
+          {
+            "id": "cell-18",
+            "x": 29,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 81.828125,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border, placed by Finch, bottom row, left edge"
+          },
+          {
+            "id": "cell-19",
+            "x": 84.828125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 137.65625,
+            "inViewport": true,
+            "name": "Angled chair leg across the woven rug, placed by Finch, bottom row, second spot"
+          },
+          {
+            "id": "cell-20",
+            "x": 140.65625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 193.484375,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe, placed by Finch, bottom row, third spot"
+          },
+          {
+            "id": "cell-21",
+            "x": 196.484375,
+            "y": 406.53125,
+            "width": 52.84375,
+            "height": 52.84375,
+            "bottom": 459.375,
+            "right": 249.328125,
+            "inViewport": true,
+            "name": "Pair of red slippers below the desk, placed by Finch, bottom row, fourth spot"
+          },
+          {
+            "id": "cell-22",
+            "x": 252.328125,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 305.15625,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread, placed by Finch, bottom row, fifth spot"
+          },
+          {
+            "id": "cell-23",
+            "x": 308.15625,
+            "y": 406.53125,
+            "width": 52.828125,
+            "height": 52.828125,
+            "bottom": 459.359375,
+            "right": 360.984375,
+            "inViewport": true,
+            "name": "Woven basket beside the rug corner, placed by Finch, bottom row, right edge"
+          },
+          {
+            "id": "piece-cat-book",
+            "x": 26,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sleeping cat face against a blue book, already placed"
+          },
+          {
+            "id": "piece-shelf-leaves",
+            "x": 83.15625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Trailing leaves above the small shelf, already placed"
+          },
+          {
+            "id": "piece-rug-leaf",
+            "x": 140.328125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Pale leaf on the indigo rug border, already placed"
+          },
+          {
+            "id": "piece-lamp-shade",
+            "x": 197.5,
+            "y": 522.375,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 574.53125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Amber lampshade with a scalloped edge, already placed"
+          },
+          {
+            "id": "piece-bird-string",
+            "x": 254.65625,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Red bird hanging from a string, already placed"
+          },
+          {
+            "id": "piece-yarn-coil",
+            "x": 311.828125,
+            "y": 522.375,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 574.546875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Ochre yarn coil and its loose thread, already placed"
+          },
+          {
+            "id": "piece-book-spines",
+            "x": 26,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 78.15625,
+            "inViewport": true,
+            "name": "Sage and ochre book spines on a shelf, already placed"
+          },
+          {
+            "id": "piece-biscuits",
+            "x": 83.15625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 135.328125,
+            "inViewport": true,
+            "name": "Three biscuits on a cream plate, already placed"
+          },
+          {
+            "id": "piece-crescent-arch",
+            "x": 140.328125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 192.5,
+            "inViewport": true,
+            "name": "Gold crescent in the window arch, already placed"
+          },
+          {
+            "id": "piece-desk-leg",
+            "x": 197.5,
+            "y": 579.546875,
+            "width": 52.15625,
+            "height": 52.15625,
+            "bottom": 631.703125,
+            "right": 249.65625,
+            "inViewport": true,
+            "name": "Wooden desk leg with a gold rug stripe, already placed"
+          },
+          {
+            "id": "piece-rain-roof",
+            "x": 254.65625,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 306.828125,
+            "inViewport": true,
+            "name": "Rain streaks over a tiny blue roof, already placed"
+          },
+          {
+            "id": "piece-cat-tail",
+            "x": 311.828125,
+            "y": 579.546875,
+            "width": 52.171875,
+            "height": 52.171875,
+            "bottom": 631.71875,
+            "right": 364,
+            "inViewport": true,
+            "name": "Striped cat tail curling over the desk, already placed"
+          },
+          {
+            "id": "previous",
+            "x": 21,
+            "y": 639.40625,
+            "width": 76.71875,
+            "height": 44,
+            "bottom": 683.40625,
+            "right": 97.71875,
+            "inViewport": true,
+            "name": "Previous"
+          },
+          {
+            "id": "next",
+            "x": 304,
+            "y": 639.40625,
+            "width": 65,
+            "height": 44,
+            "bottom": 683.40625,
+            "right": 369,
+            "inViewport": true,
+            "name": "Next"
+          }
+        ],
+        "minPiece": 52.15625,
+        "minCell": 52.828125
+      }
+    }
+  ],
+  "pageErrors": [],
+  "origin": "http://127.0.0.1:43455",
+  "runtime": {
+    "node": "v24.21.0",
+    "chromium": "153.0.8010.12",
+    "revision": "1243",
+    "chromiumSandbox": true,
+    "args": [
+      "--use-angle=swiftshader"
+    ]
+  },
+  "originalArtwork": {
+    "file": "docs/post-crit/evidence/picture-prototype-portrait-diagnostic/original-artwork.png",
+    "width": 600,
+    "height": 400,
+    "sha256": "fc4f7d2646e3d6dab46ba643fd486b695fcf6f7a30e160164c0a67357ce4c6f0",
+    "nearBlackPixels": 0,
+    "nonOpaquePixels": 0
+  },
+  "status": "FAIL",
+  "closed": {
+    "browser": true,
+    "loopbackServer": true
+  },
+  "finishedAt": "2026-10-21T18:58:58.459Z"
+}

@@ -1,0 +1,14 @@
+{
+  "finding": "Fresh authorized lounge recovery may carry the unchanged roster revision when bedroom revocation removes no active picture participation.",
+  "baselineClientSha256": "bed5e09e1873657f99dce5d5fc64c77e95c3117ed4d9bd0e355bffc8ce70664b",
+  "redTestSha256": "9eedbc645bae87396f8a50ca8b7d7402d31cfdc6cc5b7c56cab5f6631723f7a8",
+  "acceptance": [
+    "authorized empty and peer-nonempty unchanged roster recovers lounge",
+    "stale access/control and lower roster rejected",
+    "equal-revision changed peers/round rejected after raw cache clearing",
+    "equal old self participation never restores after revoke"
+  ],
+  "source": "Fresh Astra review reproduction .local/picture-client-review-6n904xxm/spec/house-review.test.ts; examined before adding maintained cases.",
+  "method": "Focused regression and negative controls; no new agent, service, browser or load.",
+  "fixtureCorrection": "First attempt passed raw array rows to test.each, which spread members into callback arguments. Preserved fixture-first result; replaced rows with objects before the discriminating RED run."
+}

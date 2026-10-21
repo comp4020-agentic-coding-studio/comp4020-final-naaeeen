@@ -1,0 +1,18 @@
+{
+  "scope": "Exact narrow source delta from preserved v2 to landscape chat refinement",
+  "unchangedUIFilesAgainstV2": {
+    "index.html": true,
+    "app.js": true,
+    "rainy-nook.svg": true,
+    "README.md": true
+  },
+  "originalCSSSHA256": "5a8754bedeb8876a6b7a041d4ae37f8594d162dded42bf24a162ebd8e6e6f35f",
+  "originalCSSRecordedInV2": "5a8754bedeb8876a6b7a041d4ae37f8594d162dded42bf24a162ebd8e6e6f35f",
+  "originalExactCSSCopy": "picture-prototype-native-final-v2/style-bound-original.css",
+  "currentCSSSHA256": "375bb35ec9fe0b8e5bdc9e93176104e307e90f4938d040f0ad3077b4524a2973",
+  "appendedCSS": "\n/* Fresh review: preserve one complete local chat message in short landscape. */\n@media(max-height:500px) and (min-width:701px){\n .chat-panel ol{min-height:80px;margin:2px 0 6px}\n .chat-panel form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}\n .chat-panel label{grid-column:1/-1;font-size:11px;line-height:13px;margin:0}\n .chat-panel form button{margin:0;font-size:12px;min-height:44px;padding:8px 12px}\n .chat-panel input{height:44px;min-width:0}\n .chat-panel>p{font-size:10px;line-height:13px;margin:4px 0 0}\n}\n",
+  "affectedMediaRule": "max-height:500px and min-width:701px",
+  "actualAffectedRequestedViewport": "844x390",
+  "notReRun": "1920x1080 and390x844; outside changed CSS media rule",
+  "originalResultUnchanged": true
+}

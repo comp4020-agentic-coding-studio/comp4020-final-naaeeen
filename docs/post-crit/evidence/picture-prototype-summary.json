@@ -1,0 +1,174 @@
+{
+  "scope": "local native CSS viewport technical comparison; no real peers or human study",
+  "result": "SCOPED_PASS",
+  "run": "picture-prototype-native-final-v2/results.json",
+  "sourceSHA256": {
+    "index.html": "9182f67e8ba12b28d5b8fbd927be71bf169555bd2643227f2eeba4f45c23eb5f",
+    "style.css": "5a8754bedeb8876a6b7a041d4ae37f8594d162dded42bf24a162ebd8e6e6f35f",
+    "app.js": "804790bb49815c6fdd1b361f610cf7c457b7f645b529206f1c935f3af4012900",
+    "rainy-nook.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "README.md": "d174e9db63f1da222d8b8c5a68d9026b37bba5a1ddf982a4e79e18aa11a5f35b"
+  },
+  "protocolSHA256": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+  "amendmentSHA256": "b321530d2a5884447ef6a67e4c2d1fbe52460234f6810fd921517fd8e2e1294c",
+  "sourceStable": true,
+  "artworkBytes": 8445,
+  "cases": [
+    {
+      "viewport": "desktop",
+      "tray": "scroll",
+      "status": "PASS",
+      "boardTargetPx": 106.33,
+      "pieceTargetPx": 74.75,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 3,
+      "pageNavigations": 0,
+      "taskTabs": 14,
+      "taskArrowsOrHome": 14,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    },
+    {
+      "viewport": "desktop",
+      "tray": "pages",
+      "status": "PASS",
+      "boardTargetPx": 106.33,
+      "pieceTargetPx": 74.75,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 0,
+      "pageNavigations": 1,
+      "taskTabs": 18,
+      "taskArrowsOrHome": 8,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    },
+    {
+      "viewport": "portrait",
+      "tray": "pages",
+      "status": "PASS",
+      "boardTargetPx": 53.33,
+      "pieceTargetPx": 49.66,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 0,
+      "pageNavigations": 1,
+      "taskTabs": 18,
+      "taskArrowsOrHome": 8,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    },
+    {
+      "viewport": "portrait",
+      "tray": "scroll",
+      "status": "PASS",
+      "boardTargetPx": 53.33,
+      "pieceTargetPx": 49.66,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 2,
+      "pageNavigations": 0,
+      "taskTabs": 14,
+      "taskArrowsOrHome": 12,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    },
+    {
+      "viewport": "landscape",
+      "tray": "scroll",
+      "status": "PASS",
+      "boardTargetPx": 47.66,
+      "pieceTargetPx": 48.33,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 2,
+      "pageNavigations": 0,
+      "taskTabs": 14,
+      "taskArrowsOrHome": 12,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    },
+    {
+      "viewport": "landscape",
+      "tray": "pages",
+      "status": "PASS",
+      "boardTargetPx": 47.66,
+      "pieceTargetPx": 48.33,
+      "taskPointerActivations": 8,
+      "fieldFillOperations": 1,
+      "completionPointerActivations": 21,
+      "trayScrollGestures": 0,
+      "pageNavigations": 1,
+      "taskTabs": 18,
+      "taskArrowsOrHome": 8,
+      "keyActivations": 7,
+      "syntheticPeerEvents": 1,
+      "inventoryPieces": 24
+    }
+  ],
+  "countInterpretation": "The raw pointerOrTap counter includes one programmatic fill. Summary separates it and 21 mock completion activations. Page navigation is separate; counts are scripted operations, not solving time.",
+  "closed": {
+    "browser": true,
+    "loopbackServer": true
+  },
+  "humanPilot": "NOT RUN",
+  "physicalPhone": "NOT RUN",
+  "screenReader": "NOT RUN",
+  "backendNetworkLifecycle": "NOT IMPLEMENTED in prototype",
+  "independentReview": "Parent fresh reviewer reviewed source/artifacts, found transcript/criteria gaps; bounded fixes and rechecks complete. Final parent reconciliation owns acceptance.",
+  "validationScopes": [
+    {
+      "run": "picture-prototype-native-final-v2/results.json",
+      "cases": 6,
+      "limitation": "Fresh review found landscape transcript visibility was omitted; not complete chat acceptance. Raw result remains unchanged."
+    },
+    {
+      "run": "picture-prototype-landscape-chat-bound-v4/results.json",
+      "cases": 2,
+      "scope": "Both landscape tray modes after appended landscape-only chat CSS; author/body clipping and min80px list checked.",
+      "transcriptVisiblePx": 98,
+      "representativeMessagePx": 57,
+      "criteriaStable": true,
+      "sourceStable": true
+    }
+  ],
+  "latestAffectedSourceSHA256": {
+    "index.html": "9182f67e8ba12b28d5b8fbd927be71bf169555bd2643227f2eeba4f45c23eb5f",
+    "style.css": "375bb35ec9fe0b8e5bdc9e93176104e307e90f4938d040f0ad3077b4524a2973",
+    "app.js": "804790bb49815c6fdd1b361f610cf7c457b7f645b529206f1c935f3af4012900",
+    "rainy-nook.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "README.md": "d174e9db63f1da222d8b8c5a68d9026b37bba5a1ddf982a4e79e18aa11a5f35b"
+  },
+  "latestCriteriaBindings": {
+    "entry": {
+      "picture-prototype-protocol.md": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+      "picture-prototype-amendment.md": "b321530d2a5884447ef6a67e4c2d1fbe52460234f6810fd921517fd8e2e1294c",
+      "picture-prototype-chat-refinement.md": "0d025d20bf1b1b4c13eaa7082461fcaf14e8f31d7278fab6eebe0d300026f33f"
+    },
+    "entryCopies": [
+      "criteria/picture-prototype-protocol.md",
+      "criteria/picture-prototype-amendment.md",
+      "criteria/picture-prototype-chat-refinement.md"
+    ],
+    "exit": {
+      "picture-prototype-protocol.md": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+      "picture-prototype-amendment.md": "b321530d2a5884447ef6a67e4c2d1fbe52460234f6810fd921517fd8e2e1294c",
+      "picture-prototype-chat-refinement.md": "0d025d20bf1b1b4c13eaa7082461fcaf14e8f31d7278fab6eebe0d300026f33f"
+    },
+    "stable": true
+  },
+  "sourceDeltaEvidence": "picture-prototype-chat-source-delta.json",
+  "v2RetrospectiveBinding": "picture-prototype-native-final-v2/retrospective-criteria-binding.json",
+  "recommendation": "12-per-page, conditional integration choice; human preference remains unmeasured."
+}

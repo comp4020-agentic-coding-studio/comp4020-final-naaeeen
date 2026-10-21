@@ -7,9 +7,17 @@ const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-
 const bytes = value => new TextEncoder().encode(JSON.stringify(value)).length;
 const clone = value => JSON.parse(JSON.stringify(value));
 const lobbyTypes = new Set(['house.create', 'house.join', 'profile.set']);
+const puzzleTypes = new Set(['puzzle.start', 'puzzle.place']);
 const flightsByStorage = new WeakMap();
 const boundedId = value => typeof value === 'string' && value.length > 0 && value.length <= 128;
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const nonnegative = value => Number.isSafeInteger(value) && value >= 0;
+const capturedAuthority = value => plainObject(value) && boundedId(value.serverEpoch) && nonnegative(value.accessGeneration) && nonnegative(value.generation);
+const capturedRoster = value => plainObject(value) && boundedId(value.serverEpoch) && nonnegative(value.revision);
+// Ordering proof only: never project or reconstruct a roster from this normalized key.
+const rosterMemberKey = roster => JSON.stringify([...roster.memberIds].sort());
+const sameRoster = (left, right) => left.roundId === right.roundId && left.selfParticipationId === right.selfParticipationId
+  && left.memberIds.length === right.memberIds.length && left.memberIds.every(id => right.memberIds.includes(id));
 const domainProblem = Symbol('house problem');
 const problem = (code, message) => Object.assign(new Error(message), { code, [domainProblem]: true });
 const safeStorage = () => { try { return globalThis.sessionStorage; } catch { return undefined; } };
@@ -18,11 +26,18 @@ const safeStorage = () => { try { return globalThis.sessionStorage; } catch { re
 export function createSnapshotReducer(onSnapshot = () => {}) {
   let current = null, epoch = null, accessGeneration = -1, generation = -1, desiredZone = 'lounge';
   let identityId = null, houseId = null, ownWork = null, voice = null, roomStreamId = null, roomSequence = -1;
+  // Roster revisions are independent of durable stream cursors and survive hidden UI.
+  let rosterHigh = null, rosterCache = null;
   const retired = new Set();
   return {
     // Clear displayed private content, retaining only same-identity/house ordering in memory.
     selectZone(zoneId) { desiredZone = zoneId; current = null; onSnapshot(null); },
     clear() { current = null; onSnapshot(null); },
+    clearPrivate(forgetRosterOrdering = false) {
+      ownWork = null; voice = null; rosterCache = null;
+      if (forgetRosterOrdering) rosterHigh = null;
+      current = null; onSnapshot(null);
+    },
     revoke(message) {
       if (!message || typeof message.serverEpoch !== 'string' || !Number.isSafeInteger(message.accessGeneration)) return false;
       if (retired.has(message.serverEpoch) || (epoch === message.serverEpoch && message.accessGeneration < accessGeneration)) return false;
@@ -30,7 +45,8 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
         if (epoch) retired.add(epoch);
         identityId = null; houseId = null; generation = -1;
       }
-      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null; voice = null; roomStreamId = null; roomSequence = -1;
+      if (['UNAUTHENTICATED', 'IDENTITY_REVOKED'].includes(message.code)) rosterHigh = null;
+      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null; voice = null; rosterCache = null; roomStreamId = null; roomSequence = -1;
       desiredZone = 'lounge'; current = null; onSnapshot(null); return true;
     },
     motion(incoming) {
@@ -40,6 +56,15 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
     accept(incoming) {
       if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !boundedId(incoming.durable.selfId) || !boundedId(incoming.durable.house?.id) || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
       const durable = incoming.durable, projection = durable.ownWork;
+      const roster = incoming.puzzleRoster;
+      if (durable.zoneId !== 'lounge' && (roster != null || durable.puzzle != null)) return false;
+      if (roster != null && (!plainObject(roster) || roster.serverEpoch !== incoming.serverEpoch || roster.houseId !== durable.house.id
+        || roster.roundId !== (durable.puzzle?.current?.id ?? null) || !Number.isSafeInteger(roster.revision) || roster.revision < 0
+        || !Array.isArray(roster.memberIds) || roster.memberIds.length > 6 || roster.memberIds.some(id => !boundedId(id))
+        || new Set(roster.memberIds).size !== roster.memberIds.length
+        || (roster.selfParticipationId !== null && (typeof roster.selfParticipationId !== 'string' || !uuid.test(roster.selfParticipationId)
+          || !roster.memberIds.includes(durable.selfId) || !incoming.controller))
+        || (roster.roundId === null && (roster.memberIds.length > 0 || roster.selfParticipationId !== null)))) return false;
       const incomingVoice = durable.voice;
       if (incomingVoice !== undefined && (!plainObject(incomingVoice) || !Number.isSafeInteger(incomingVoice.revision) || incomingVoice.revision < 0
         || (incomingVoice.url !== null && (typeof incomingVoice.url !== 'string' || incomingVoice.url.length > 512)))) return false;
@@ -58,6 +83,18 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
         }
       }
       const changedScope = epoch !== incoming.serverEpoch || identityId !== durable.selfId || houseId !== durable.house.id;
+      let nextHigh = changedScope ? null : rosterHigh;
+      if (roster != null && nextHigh) {
+        if (roster.revision < nextHigh.revision) return false;
+        if (roster.revision === nextHigh.revision) {
+          const sameMembers = roster.roundId === nextHigh.roundId && rosterMemberKey(roster) === nextHigh.memberKey;
+          const sameParticipation = rosterCache ? sameRoster(roster, rosterCache)
+            : roster.selfParticipationId === null && !nextHigh.hadSelfParticipation;
+          if (!sameMembers || !sameParticipation) return false;
+        }
+      }
+      if (roster != null) nextHigh = { revision: roster.revision, roundId: roster.roundId,
+        memberKey: rosterMemberKey(roster), hadSelfParticipation: roster.selfParticipationId !== null };
       let nextWork = changedScope ? null : ownWork;
       let nextVoice = changedScope ? null : voice;
       if (incomingVoice !== undefined && (!nextVoice || incomingVoice.revision > nextVoice.revision)) nextVoice = clone(incomingVoice);
@@ -66,8 +103,10 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
       if (epoch && epoch !== incoming.serverEpoch) retired.add(epoch);
       epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; generation = incoming.generation;
       identityId = durable.selfId; houseId = durable.house.id; ownWork = nextWork; voice = nextVoice;
+      rosterHigh = nextHigh; rosterCache = roster != null ? clone(roster) : null;
       roomStreamId = durable.streamId; roomSequence = durable.sequence;
       current = ownWork || voice ? { ...incoming, durable: { ...durable, ...(ownWork ? { ownWork: clone(ownWork) } : {}), ...(voice ? { voice: clone(voice) } : {}) } } : incoming;
+      if (roster != null) current = { ...current, puzzleRoster: clone(rosterCache) };
       onSnapshot(current); return true;
     },
   };
@@ -75,7 +114,7 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
 
 /** @typedef {{commandId:string,type:string,houseId?:string,expectedRevision?:number,payload:Record<string,any>}} PendingCommand */
 /** @typedef {{command:PendingCommand,identityId:string,zoneId:string,houseId?:string,createdAt:number}} OutboxEntry */
-/** @typedef {{commandId:string,type:string,createdAt:number,houseId:string|null,zoneId:string,state:'pending'|'expired',command:PendingCommand,canRetry:boolean}} PendingRow */
+/** @typedef {{commandId:string,type:string,createdAt:number,houseId:string|null,zoneId:string,state:'pending'|'expired',label:string,command:PendingCommand,canRetry:boolean}} PendingRow */
 /** @typedef {{getItem:(key:string)=>string|null,setItem:(key:string,value:string)=>void}} OutboxStorage */
 /** A sessionStorage outbox is a bounded pending draft, never a saved acknowledgement.
  * Corrupt storage is retained and reported, rather than replaced with a fresh queue.
@@ -87,7 +126,9 @@ export function createCommandOutbox(storage) {
   function validCommand(command) {
     return plainObject(command) && typeof command.commandId === 'string' && uuid.test(command.commandId)
       && typeof command.type === 'string' && command.type.length > 0 && command.type.length <= 64
+      && command.type !== 'house.puzzle.intent' && (!command.type.startsWith('puzzle.') || puzzleTypes.has(command.type))
       && plainObject(command.payload) && (command.houseId === undefined || boundedId(command.houseId))
+      && (!puzzleTypes.has(command.type) || boundedId(command.houseId))
       && bytes(command) <= 12 * 1024;
   }
   function read() {
@@ -99,12 +140,17 @@ export function createCommandOutbox(storage) {
     try {
       if (new TextEncoder().encode(raw).length > 32 * 1024) throw new Error('oversized');
       const parsed = JSON.parse(raw);
-      const seen = new Set();
+      const seen = new Set(), puzzleCounts = new Map();
       if (!Array.isArray(parsed) || parsed.length > 16 || parsed.some(entry => {
         if (!plainObject(entry) || !validCommand(entry.command) || !boundedId(entry.identityId) || !boundedId(entry.zoneId)
-          || entry.houseId !== entry.command.houseId || (entry.command.type === 'chat.send' && entry.command.payload.zoneId !== entry.zoneId) || !Number.isSafeInteger(entry.createdAt) || entry.createdAt < 0
+          || entry.houseId !== entry.command.houseId || (puzzleTypes.has(entry.command.type) && entry.zoneId !== 'lounge') || (entry.command.type === 'chat.send' && entry.command.payload.zoneId !== entry.zoneId) || !Number.isSafeInteger(entry.createdAt) || entry.createdAt < 0
           || seen.has(entry.command.commandId)) return true;
-        seen.add(entry.command.commandId); return false;
+        seen.add(entry.command.commandId);
+        if (puzzleTypes.has(entry.command.type)) {
+          const scope = JSON.stringify([entry.identityId, entry.houseId]), count = (puzzleCounts.get(scope) ?? 0) + 1;
+          if (count > 2) return true; puzzleCounts.set(scope, count);
+        }
+        return false;
       })) throw new Error('invalid');
       entries = parsed;
     } catch { throw problem('OUTBOX_CORRUPT', 'Stored pending drafts are invalid or exceed this tab’s limits. They were kept unchanged.'); }
@@ -120,7 +166,7 @@ export function createCommandOutbox(storage) {
       let copy;
       try { copy = clone(command); }
       catch { throw problem('INVALID_INPUT', 'This command needs a valid UUID and bounded payload.'); }
-      if (!validCommand(copy) || !boundedId(identityId) || !boundedId(zoneId) || !Number.isSafeInteger(createdAt) || createdAt < 0) throw problem('INVALID_INPUT', 'This command needs a valid UUID and bounded payload.');
+      if (!validCommand(copy) || !boundedId(identityId) || !boundedId(zoneId) || (puzzleTypes.has(copy.type) && zoneId !== 'lounge') || !Number.isSafeInteger(createdAt) || createdAt < 0) throw problem('INVALID_INPUT', 'This command needs a valid UUID and bounded payload.');
       const existing = entries.find(entry => entry.command.commandId === copy.commandId);
       if (existing) {
         if (existing.identityId !== identityId || existing.zoneId !== zoneId || JSON.stringify(existing.command) !== JSON.stringify(copy)) throw problem('COMMAND_ID_REUSED', 'This UUID already belongs to another draft.');
@@ -128,6 +174,9 @@ export function createCommandOutbox(storage) {
       }
       if (copy.type.startsWith('game.') && entries.filter(entry => entry.identityId === identityId && entry.houseId === copy.houseId && entry.command.type.startsWith('game.')).length >= 2) {
         throw problem('GAME_PENDING_LIMIT', 'Resolve a pending game action before adding another. Your study drafts are still available.');
+      }
+      if (puzzleTypes.has(copy.type) && entries.filter(entry => entry.identityId === identityId && entry.houseId === copy.houseId && puzzleTypes.has(entry.command.type)).length >= 2) {
+        throw problem('PUZZLE_PENDING_LIMIT', 'Resolve a pending picture action before adding another. Your study drafts are still available.');
       }
       const entry = { command: copy, identityId, zoneId, houseId: copy.houseId, createdAt };
       if (entries.length >= 16 || bytes([...entries, entry]) > 32 * 1024) throw problem('OUTBOX_FULL', 'Inspect and resolve a pending draft before adding another.');
@@ -150,8 +199,8 @@ async function fetchHouseIdentity() {
   return me;
 }
 
-/** @param {{onSnapshot?:(snapshot:any|null)=>void,onDisconnect?:(reason:string)=>void,onError?:(error:any)=>void,onUpdateRequired?:(error:any)=>void,storage?:OutboxStorage,fetchMe?:()=>Promise<any>,expectedIdentityId?:string}} [callbacks] */
-export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => {}, onError = () => {}, onUpdateRequired = () => {}, storage = safeStorage(), fetchMe = fetchHouseIdentity, expectedIdentityId } = {}) {
+/** @param {{onSnapshot?:(snapshot:any|null)=>void,onDisconnect?:(reason:string)=>void,onError?:(error:any)=>void,onUpdateRequired?:(error:any)=>void,onPuzzleIntent?:(pending:any|null)=>void,storage?:OutboxStorage,fetchMe?:()=>Promise<any>,expectedIdentityId?:string}} [callbacks] */
+export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => {}, onError = () => {}, onUpdateRequired = () => {}, onPuzzleIntent = () => {}, storage = safeStorage(), fetchMe = fetchHouseIdentity, expectedIdentityId } = {}) {
   const outbox = createCommandOutbox(storage);
   // Rotate on construction/full reload. Reconnects reuse only this in-memory token.
   const controllerToken = globalThis.crypto.randomUUID();
@@ -162,10 +211,20 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   const inFlight = storage ? flightsByStorage.get(storage) : new Map();
   const inspected = new Set();
   let motionFlight = null, motionGeneration = 0, motionAuthority = null, updateRequired = null;
+  let puzzlePending = null, puzzleSequence = 0, connectionGeneration = 0, revokedWithoutHead = false;
+  const puzzleScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
+    snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.zoneId, snapshot.durable.puzzle?.current?.id ?? null]) : null;
+  function pendingPuzzleIntent() {
+    if (!puzzlePending) return null;
+    return { ...puzzlePending.body, state: puzzlePending.state, canRetry: puzzlePending.state === 'pending' && !puzzlePending.flight
+      && !closed && !updateRequired && socket?.connected === true && puzzlePending.connection === connectionGeneration && puzzlePending.scope === puzzleScope(latestLive) };
+  }
+  function clearPuzzleIntent() { if (puzzlePending) { puzzlePending = null; onPuzzleIntent(null); } }
   const motionScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
     snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.streamId, snapshot.durable.zoneId,
     snapshot.players.find(player => player.id === snapshot.durable.selfId)?.seatId ?? null]) : null;
   const reducer = createSnapshotReducer(snapshot => {
+    if (puzzleScope(snapshot) !== puzzleScope(latestLive)) clearPuzzleIntent();
     if (motionScope(snapshot) !== motionScope(latestLive)) { motionGeneration++; motionFlight = null; motionAuthority = null; }
     latestLive = snapshot;
     const player = snapshot?.players.find(player => player.id === snapshot.durable.selfId);
@@ -182,14 +241,16 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     requestGeneration++; motionGeneration++; motionFlight = null;
     // Notify before clearing the display so the UI can copy available unsent drafts.
     onUpdateRequired(updateRequired);
-    reducer.clear(); socket?.disconnect();
+    reducer.clearPrivate(true); socket?.disconnect();
     const waiting = connectWait; connectWait = null; waiting?.reject(updateRequired);
     report(updateRequired); return updateRequired;
   }
   function acceptLive(incoming) {
     if (updateRequired || closed) return false;
     if (incoming?.worldVersion !== HOUSE_WORLD_VERSION) { suspendForUpdate(incoming?.worldVersion); return false; }
-    return reducer.accept(incoming);
+    const accepted = reducer.accept(incoming);
+    if (accepted) revokedWithoutHead = false;
+    return accepted;
   }
   const hasCompatibleHead = () => !updateRequired && latestLive?.worldVersion === HOUSE_WORLD_VERSION;
   function settle(reply) {
@@ -230,6 +291,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     if (typeof globalThis.io !== 'function') throw problem('TRANSPORT_UNAVAILABLE', 'The house connection script did not load.');
     socket = globalThis.io({ auth: { worldVersion: HOUSE_WORLD_VERSION }, autoConnect: false, transports: ['websocket'], reconnection: true, reconnectionDelay: 500, reconnectionDelayMax: 3000 });
     socket.on('connect', () => {
+      connectionGeneration++; puzzleSequence = 0; clearPuzzleIntent();
       const waiting = connectWait; connectWait = null;
       subscribe(selectedZone).then(value => waiting?.resolve(value)).catch(error => waiting?.reject(error));
     });
@@ -237,10 +299,16 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     socket.on('house.motion', motion => { if (closed || updateRequired) return; if (motion?.worldVersion !== HOUSE_WORLD_VERSION) { suspendForUpdate(motion?.worldVersion); return; } if (hasCompatibleHead()) reducer.motion(motion); });
     socket.on('house.revoked', message => {
       if (closed || !reducer.revoke(message)) return;
+      revokedWithoutHead = true;
       requestGeneration++; selectedZone = 'lounge'; sequence = 0;
       report(problem(message.code ?? 'FORBIDDEN', 'Room access changed. Private room content was cleared.'));
     });
-    socket.on('disconnect', reason => { if (closed) return; requestGeneration++; reducer.clear(); onDisconnect(reason); });
+    socket.on('disconnect', reason => {
+      if (closed) return; requestGeneration++;
+      // Membership loss uses revoked -> disconnect. A normal room fallback sends a fresh head.
+      if (revokedWithoutHead) reducer.clearPrivate(true); else reducer.clear();
+      revokedWithoutHead = false; onDisconnect(reason);
+    });
     socket.on('connect_error', error => {
       if (closed) return;
       // Socket.IO namespace middleware carries domain failures in Error.data.
@@ -248,6 +316,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
         ? problem(error.data.code, typeof error.message === 'string' ? error.message : 'The house connection could not start.')
         : error;
       if (failure?.code === 'CLIENT_UPDATE_REQUIRED') { suspendForUpdate(null); return; }
+      if (['UNAUTHENTICATED', 'IDENTITY_REVOKED'].includes(failure?.code)) reducer.clearPrivate(true);
       report(failure); const waiting = connectWait; connectWait = null; waiting?.reject(failure);
     });
   }
@@ -316,6 +385,26 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
       if (!latestLive?.durable.house?.id) throw report(problem('NOT_CONTROLLER', 'Enter the original house before creating this draft.'));
       next.houseId = latestLive.durable.house.id;
     }
+    if (puzzleTypes.has(next.type)) {
+      const original = outbox.all().find(entry => entry.command.commandId === next.commandId)?.command;
+      if (!plainObject(next.payload)) throw report(problem('INVALID_INPUT', 'This picture action needs its original context.'));
+      if (next.type === 'puzzle.start') {
+        if (next.payload.confirmUnfinished === true && (!capturedAuthority(next.payload.authority) || !capturedRoster(next.payload.expectedRoster)
+          || typeof next.payload.expectedRoundId !== 'string' || !uuid.test(next.payload.expectedRoundId) || !nonnegative(next.expectedRevision))) {
+          throw report(problem('INVALID_INPUT', 'Confirm the unfinished picture using its original table, round and participant context.'));
+        }
+        if (next.payload.authority === undefined || next.payload.expectedRoster === undefined) {
+          if (!original && latestLive?.durable.puzzle?.current && !latestLive.durable.puzzle.current.completed) throw report(problem('INVALID_INPUT', 'Confirm the unfinished picture before starting a replacement.'));
+          if (!original && (!hasCompatibleHead() || !latestLive?.controller || latestLive.durable.zoneId !== 'lounge' || !latestLive.puzzleRoster)) throw report(problem('NOT_CONTROLLER', 'Open the current picture table before starting a picture.'));
+          next.payload.authority ??= clone(original?.payload.authority ?? { serverEpoch: latestLive.serverEpoch, accessGeneration: latestLive.accessGeneration, generation: latestLive.generation });
+          next.payload.expectedRoster ??= clone(original?.payload.expectedRoster ?? { serverEpoch: latestLive.puzzleRoster.serverEpoch, revision: latestLive.puzzleRoster.revision });
+        }
+      } else if (next.payload.participationId === undefined) {
+        const participationId = original?.payload.participationId ?? latestLive?.puzzleRoster?.selfParticipationId;
+        if (!participationId || (!original && (latestLive?.durable.zoneId !== 'lounge' || latestLive?.puzzleRoster?.roundId !== next.payload.roundId))) throw report(problem('PUZZLE_NOT_JOINED', 'Join this picture before placing a piece.'));
+        next.payload.participationId = participationId;
+      }
+    }
     let identityId = latestLive?.durable.selfId;
     if (!identityId) {
       const context = await identityContext(); assertActive(request); identityId = context.identityId;
@@ -340,6 +429,61 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
       }
     } catch (error) { report(error); }
     finally { flushing = false; }
+  }
+  function sendPuzzleIntent(pending) {
+    if (pending.flight) return pending.flight;
+    const current = () => puzzlePending === pending && pending.connection === connectionGeneration && pending.scope === puzzleScope(latestLive)
+      && !closed && !updateRequired && socket?.connected;
+    pending.state = 'sending'; onPuzzleIntent(pendingPuzzleIntent());
+    const work = (async () => {
+      try {
+        let reply;
+        try { reply = await socket.timeout(5000).emitWithAck('house.puzzle.intent', pending.body); }
+        catch { throw problem('PENDING', 'Participation acknowledgement timed out. Retry this same request or choose Leave.'); }
+        if (reply?.code === 'CLIENT_UPDATE_REQUIRED') throw suspendForUpdate(null);
+        if (!current()) throw updateRequired ?? problem('STALE_INTENT', 'A newer action or house connection replaced this participation request.');
+        const body = pending.body;
+        if ((reply?.requestId !== undefined && reply.requestId !== body.requestId)
+          || (reply?.intentSequence !== undefined && reply.intentSequence !== body.intentSequence)) throw problem('PENDING', 'Participation acknowledgement could not be matched. Retry this same request.');
+        settle(reply);
+        if (reply.requestId !== body.requestId || reply.intentSequence !== body.intentSequence || reply.mode !== body.mode || reply.roundId !== body.roundId
+          || !Number.isSafeInteger(reply.rosterRevision) || reply.rosterRevision < 0
+          || (body.mode === 'leave' ? reply.participationId !== null : typeof reply.participationId !== 'string' || !uuid.test(reply.participationId))) {
+          throw problem('PENDING', 'Participation acknowledgement could not be matched. Retry this same request.');
+        }
+        // Historical ACKs resolve only their request. Accepted snapshots own participation.
+        clearPuzzleIntent(); return reply;
+      } catch (error) {
+        if (!current()) throw updateRequired ?? problem('STALE_INTENT', 'A newer action or house connection replaced this participation request.');
+        if (error.code === 'PENDING') pending.state = 'pending'; else clearPuzzleIntent();
+        report(error); throw error;
+      } finally {
+        pending.flight = null;
+        if (puzzlePending === pending) onPuzzleIntent(pendingPuzzleIntent());
+      }
+    })();
+    pending.flight = work; return work;
+  }
+  async function puzzleIntent(mode, roundId) {
+    requireCompatible();
+    if (closed) throw report(problem('CLOSED', 'This house connection is closed.'));
+    if (!socket?.connected) throw report(problem('PENDING', 'Connection unavailable. Participation was not sent.'));
+    if (!hasCompatibleHead() || !latestLive?.controller || latestLive.durable.zoneId !== 'lounge') throw report(problem('NOT_CONTROLLER', 'Take control in the lounge before joining or leaving the picture table.'));
+    assertIdentity(latestLive.durable.selfId);
+    if (!['join', 'leave'].includes(mode) || typeof roundId !== 'string' || !uuid.test(roundId) || puzzleSequence >= Number.MAX_SAFE_INTEGER) throw report(problem('INVALID_INPUT', 'Choose Join or Leave for the current picture.'));
+    const body = Object.freeze({ generation: latestLive.generation, zoneId: 'lounge', serverEpoch: latestLive.serverEpoch,
+      accessGeneration: latestLive.accessGeneration, intentSequence: ++puzzleSequence, requestId: globalThis.crypto.randomUUID(), roundId, mode });
+    puzzlePending = { body, scope: puzzleScope(latestLive), connection: connectionGeneration, state: 'sending', flight: null };
+    return sendPuzzleIntent(puzzlePending);
+  }
+  async function retryPuzzleIntent() {
+    requireCompatible();
+    const pending = puzzlePending;
+    if (!pending) throw report(problem('PENDING_NOT_FOUND', 'There is no pending participation request. Choose Join or Leave deliberately.'));
+    if (pending.scope !== puzzleScope(latestLive) || pending.connection !== connectionGeneration || !socket?.connected || closed) {
+      clearPuzzleIntent(); throw report(problem('STALE_INTENT', 'The original participation authority changed. Choose Join or Leave again.'));
+    }
+    return sendPuzzleIntent(pending);
   }
   function controlled(event, body = {}) {
     if (updateRequired) return Promise.reject(updateRequired);
@@ -372,7 +516,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     inspected.clear();
     for (const entry of own) inspected.add(identityId + ':' + entry.command.commandId);
     return {
-      entries: own.map(entry => ({ commandId: entry.command.commandId, type: entry.command.type, createdAt: entry.createdAt,
+      entries: own.map(entry => ({ commandId: entry.command.commandId, type: entry.command.type, label: entry.command.type === 'puzzle.start' ? 'Start picture' : entry.command.type === 'puzzle.place' ? 'Place picture piece' : entry.command.type, createdAt: entry.createdAt,
         houseId: entry.houseId ?? null, zoneId: entry.zoneId, state: now - entry.createdAt > DAY ? 'expired' : 'pending',
         command: entry.command, canRetry: now >= entry.createdAt && !inFlight.has(entry.command.commandId) && retryScope(entry, identityId) === null })),
       otherIdentityCount: all.length - own.length, total: all.length,
@@ -409,6 +553,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   }
   return {
     connect, subscribe, command, getPending, retryPending, discardPending, discardOtherIdentities, exportPending,
+    puzzleIntent, retryPuzzleIntent, pendingPuzzleIntent,
     move(position) {
       if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected || motionFlight) return false;
       const request = requestGeneration, lifecycle = motionGeneration, scope = motionScope(latestLive);
@@ -435,7 +580,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     close() {
       if (closed) return; closed = true; requestGeneration++;
       connectWait?.reject(problem('CLOSED', 'The house connection closed.')); connectWait = null;
-      socket?.disconnect(); reducer.clear();
+      socket?.disconnect(); reducer.clearPrivate(true);
     },
   };
 }

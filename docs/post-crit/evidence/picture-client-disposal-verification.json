@@ -1,0 +1,89 @@
+{
+  "sourceHashes": {
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "spec/house-client.test.ts": "a82f87b4f6f9c7bd03572f47dfba511c75ed3e9fa68cbde0b6b50ab89928ebd0",
+    "spec/house-puzzle-client.test.ts": "729f21c64cb5418fa20f29aa9234b6b537f8f8e5ee828bb9ff75054ae0546390",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "vitest.house.config.ts": "da59cd3fe2b69ac43739e9f611199ef8ae6b57f6a189104ce9b4e6da03f4be5b",
+    "docs/post-crit/GROUP-API.md": "a58909dd084ad5588a22337100942a3a94bcace90b228f05d37934df059afe48"
+  },
+  "priorP1RepairSourceSha256": "d8ab8b74529728d6b76d6fe697b058aa73d6e4d4dc62136f3739075abc205e6d",
+  "red": {
+    "numPassedTests": 47,
+    "numFailedTests": 2,
+    "numTotalTests": 49
+  },
+  "green": {
+    "numPassedTests": 127,
+    "numFailedTests": 0,
+    "numTotalTests": 127
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 394,
+        "covered": 386,
+        "skipped": 0,
+        "pct": 97.96
+      },
+      "statements": {
+        "total": 702,
+        "covered": 649,
+        "skipped": 0,
+        "pct": 92.45
+      },
+      "functions": {
+        "total": 110,
+        "covered": 108,
+        "skipped": 0,
+        "pct": 98.18
+      },
+      "branches": {
+        "total": 691,
+        "covered": 631,
+        "skipped": 0,
+        "pct": 91.31
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-client.js": {
+      "lines": {
+        "total": 394,
+        "covered": 386,
+        "skipped": 0,
+        "pct": 97.96
+      },
+      "functions": {
+        "total": 110,
+        "covered": 108,
+        "skipped": 0,
+        "pct": 98.18
+      },
+      "statements": {
+        "total": 702,
+        "covered": 649,
+        "skipped": 0,
+        "pct": 92.45
+      },
+      "branches": {
+        "total": 691,
+        "covered": 631,
+        "skipped": 0,
+        "pct": 91.31
+      }
+    }
+  },
+  "typecheck": {
+    "status": "PASS",
+    "output": "Already up to date\nDone in 47ms using pnpm v11.9.0\n$ tsc --noEmit\n"
+  },
+  "ownerContractRefinement": "A normalized sorted member-set key retains previously authorized member IDs. It is bounded same-identity/house ordering metadata, not a cryptographic fingerprint or total data erasure. It is never projected, reconstructed into a roster or used for participation authority; actual participation UUID caches clear. Scope changes and terminal loss/disposal clear the comparison record.",
+  "terminalLossHandling": "UNAUTHENTICATED/IDENTITY_REVOKED revocation or connect error forgets roster ordering; house.revoked followed by disconnect before a fresh accepted head also clears it. A normal room revocation followed by a valid authorized lounge head retains its same-scope comparison record. close/version disposal also forgets ordering. Existing epoch/access/controller guards remain.",
+  "reviewStatus": "Ready for original Astra reviewer contextual recheck and parent independent reproduction.",
+  "boundaries": "Owned client/spec/notes/evidence only. Mock transport tests; no service, agent, browser, load, commit or publication."
+}

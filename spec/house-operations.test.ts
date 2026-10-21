@@ -201,7 +201,7 @@ describe("actual service storage operations", () => {
     const first = await start(dataDir);
     expect(existsSync(join(dataDir, "house.sqlite"))).toBe(true);
     // The new house schema is independent of the unchanged Crit8 v1 database.
-    expect(first.app.houseStore.db.prepare("PRAGMA user_version").get()).toEqual({ user_version: 4 });
+    expect(first.app.houseStore.db.prepare("PRAGMA user_version").get()).toEqual({ user_version: 5 });
     expect(legacyRows(first.app.store.db)).toEqual(before);
     expect(await read<State>(first.base, "/api/state", `night_session=${saved.identity.token}`)).toEqual(saved.state);
     const resident = first.app.houseStore.ensureSession();

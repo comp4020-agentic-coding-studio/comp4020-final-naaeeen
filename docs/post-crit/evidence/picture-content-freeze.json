@@ -1,0 +1,16 @@
+{
+  "scope": "Parent accepts one original illustration and crop identity for backend foundation; final tray/chat integration and human experience remain open.",
+  "source": "prototypes/picture-table/rainy-nook.svg",
+  "asset": "public/assets/pictures/rainy-nook-v1.svg",
+  "bytes": 8445,
+  "sha256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+  "pieces": 24,
+  "prototypeEvidence": "docs/post-crit/evidence/picture-prototype-native-final-v2/results.json",
+  "parentInspection": [
+    "portrait-pages-completed.png",
+    "portrait-scroll-initial.png",
+    "landscape-pages-chat.png",
+    "crop-inspection-53px.png"
+  ],
+  "openFinding": "Landscape chat text is clipped; prototype worker is refining affected two cases. No claim of full conversation/human acceptance."
+}

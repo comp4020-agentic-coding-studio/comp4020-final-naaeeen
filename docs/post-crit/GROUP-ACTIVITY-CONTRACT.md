@@ -1,6 +1,6 @@
 # Shared picture table and personal work return
 
-22 October 2026. Proposed bounded extension; independent contract review precedes
+22 October 2026. Reviewed bounded extension; independent contract review preceded
 production edits. Owner requirement: three to six friends can contribute, not just
 watch two players. The earlier Four-in-a-row implementation remains available.
 
@@ -34,8 +34,9 @@ establish reference mechanisms, not evidence that our implementation is enjoyabl
 
 ## Bounded first implementation
 
-A 24-piece, 6-column by 4-row picture table uses three original locally authored SVG
-illustrations. Fixed orientation and one unfinished puzzle per house avoid a second
+A 24-piece, 6-column by 4-row picture table starts with one original locally authored
+SVG illustration. Two additional illustrations are content extensions after the
+representative prototype works. Fixed orientation and one unfinished puzzle per house avoid a second
 3D editor. No game package, image provider, upload service, hidden cards or physics
 engine is required. The existing Three.js table is its spatial entry; the playable
 surface is native DOM/SVG. Keep total new illustration bytes below 80 KiB and the
@@ -44,7 +45,8 @@ serialized puzzle projection below 8 KiB; measure actual values.
 Opening a break menu or the picture table does not enroll anyone. Join explicitly
 opts the current lounge controller in. A member can join midway. Everyone may
 place any available piece; distinct-piece commands should not conflict merely
-because the global revision advanced. Correct pieces stay fixed. Wrong destinations
+because the global revision advanced. Correct pieces stay fixed. Completion clears current participation once while
+keeping the picture viewable; no new round or rejoining occurs automatically. Wrong destinations
 leave progress unchanged, retain the selected piece and give clear feedback.
 There is no score, leaderboard, countdown, streak or automatic next round.
 
@@ -62,7 +64,8 @@ observe a successful contribution from each identity, not only connected avatars
 
 Implement a separate pure puzzle module, not a widened two-player GameTable.
 The existing turn/ready/departure rules retain their own meaning. New house schema 5
-adds one puzzle-table row per house; old records, receipts, rooms and archives are
+adds one durable puzzle-table row per house; live participation stays in bounded
+process memory, like current seats and presence; old records, receipts, rooms and archives are
 preserved. Empty state is allocated on first deliberate creation, not every join.
 Wire fields are additive and the current-client version gate must cover the new
 capability. Freeze exact command/projection types before parallel backend/UI work.
@@ -70,33 +73,57 @@ capability. Freeze exact command/projection types before parallel backend/UI wor
 - Server-generated round UUID, ruleset/version, illustration ID, bounded progress
   for 24 unique pieces, and monotonic table revision. The server knows each correct
   destination; no competitive secrecy or anti-cheat claim is needed.
-- Explicit join/leave and placement commands use existing house binding, command
-  UUID/hash, authority generation, controller/zone validation and atomic receipts.
-  Progress and its receipt commit together before publication.
-- Check current participation before a new placement. Same-piece contention gives
-  one accepted effect; other clients see the committed result. Different pieces
-  can both succeed without a global expected-revision collision. Round identity
-  prevents a delayed placement from affecting a replacement puzzle.
-- Exact duplicate successful commands replay their original receipt without a new
-  effect. A replayed old Join receipt must not re-enroll a disconnected resident.
-  Snapshot authority determines current participation, not optimistic receipt text.
-- Keep accepted placement receipts small: reference round/piece/result/revision,
-  not repeated SVGs or full puzzle history. Retained command count remains separate
-  from the 8 KiB current-state bound; measure receipts and WAL in acceptance.
-- Completed puzzles may be deliberately replaced by a participating member.
-  Replacement clears old participation; the initiator's explicit new-puzzle action
-  enrolls only that person. Others decide whether to join the new round.
-- An unfinished replacement is owner-only, explicitly confirmed, and allowed only
-  when no other active participant remains. Use expected table revision and check
-  current participation in the same transaction; a racing join/place prevents an
-  unnoticed reset. A spectator opening a panel cannot reset anything.
-- Removed/foreign members cannot read or mutate the projection. Bedroom snapshots
-  omit the lounge puzzle, using existing zone/privacy rules. Restarts clear active
-  intent and preserve progress. No periodic idle timer or automatic deletion.
+- Explicit Join/Leave are direct connection-scoped events, absent from the durable
+  outbox. A per-connection monotonic intent sequence, original authority tuple and
+  latest request/outcome support bounded retries without reviving an old Join.
+  A newer Leave for the current round supersedes older unresolved intents even
+  when the Join acknowledgement and participation UUID have not arrived.
+- Durable start/place commands keep house binding, UUID/hash and atomic receipts.
+  Current identity/house/controller/zone authorization precedes receipt lookup.
+  Exact successful replay has no new effect; only first execution checks current
+  participation or replacement consent. New placements carry the original
+  participation UUID and round, never acquire permission from a later rejoin.
+- Correct different-piece placements can both succeed without a global revision
+  collision. A same-piece loser and a wrong destination are rejected without a
+  durable effect. Original duplicate successful commands return their original
+  receipt after current identity/house/controller/zone validation.
+- Opening an empty or completed table allows any current lounge controller to
+  deliberately start a picture. Start never enrolls anyone. Join is a second
+  explicit action after a current round is visible, not an automatic ACK callback.
+- Unfinished replacement is owner-only, explicitly confirmed, with no other active
+  participant. Bind original authority, expected round/table revision and expected
+  roster epoch/revision. A join followed by a leave still invalidates old confirmation.
+  Start/replacement uses current store state, not stale cached progress.
+- Reconcile the roster to the current committed round after a new replacement.
+  Never clear today's participants merely because an old Start receipt replayed.
+  Each effective membership/intent/lifecycle/round change advances the roster
+  revision. Use a process-global monotonic allocation so eviction cannot reset it
+  to a previously accepted value. Keep maps bounded by connected/subscribed houses.
+- Disconnect, successful takeover, zone exit, session/membership revocation and
+  restart clear matching current participation without SQLite writes. Observer
+  disconnect does nothing. Clear known lost-control intent before unrelated game
+  housekeeping that can fail; old cleanup cannot erase a newer participation.
+- Every projection and first effect filters stale round, membership and controller
+  context. Validate live roster, run the synchronous store transaction and reconcile
+  memory without an await/deferred callback. This authority is one process; a future
+  multi-process deployment needs a different shared-presence contract.
+- One active break activity per person. Puzzle Join checks the durable Four-in-a-row
+  roster, including paused slots. New game.join checks current puzzle participation
+  after receipt lookup. Watching either is allowed; switching requires an explicit
+  Leave. Historical successful receipts resolve without forcing withdrawal.
+- Accepted durable puzzle responses are <=512 UTF-8 bytes; do not repeat art or
+  full puzzle history. Join/Leave make no durable receipt rows. Bounded state does
+  not bound repeated accepted placement receipts: measure rows/WAL separately.
+- Bedroom/revoked snapshots omit puzzle and roster. A separate client high-water
+  mark binds roster to server epoch/house/round/revision; equal durable sequences
+  must not permit stale participation rollback. Motion cannot restore it.
+- Restored state validation checks ruleset, immutable illustration version/digest,
+  piece mapping, unique valid placements and bounded revision/data. Future art
+  updates retain old content identities; never reuse an ID for changed crops.
 
-Logical participation transitions may be committed like the existing game lifecycle;
-connection coordinates and selections do not belong in SQLite. The implementation
-must specify and test its cleanup path before claiming absence of ghost players.
+The exact payload/ordering record is [GROUP-API](GROUP-API.md). Current SQL schema,
+wire schema, world compatibility version, ruleset and illustration version are
+separate identities. No periodic idle timer, cursor persistence or automatic deletion.
 
 ## Interaction and personal-room purpose
 
@@ -123,11 +150,12 @@ break. Existing desk interaction opens the same house-visible card, including wh
 visiting a friend's room. Do not label it private or create a second task database.
 
 A return control must preserve newer drafts and pending intent, withdraw from the
-activity without blocking navigation, then follow an ordinary reachable route.
+activity without blocking navigation, then offer the deliberate two-step **Return to my room -> Open my work** route.
 Current camera/door/seat authority applies. Do not imply a saved card proves actual
 concentration. Entering a bedroom never changes Quiet/Can chat, door access or task
-completion. If automatic chaining fights user movement or keyboard focus, keep a
-clear two-step Return to my room -> Open my work instead of a fragile scripted tour.
+completion. If seated, handle Stand explicitly before routing; user movement cancels routing.
+If a route is unavailable, My work remains immediately reachable. Empty rooms are
+valid, so recovering work never requires a desk to exist.
 A private notebook remains a separately justified future capability.
 
 ## Implementation order and acceptance
@@ -143,7 +171,7 @@ A private notebook remains a separately justified future capability.
    pending recovery and explicit exit. It consumes the frozen backend contract.
    Review the current room-return path and saved-card visibility before changing it.
 4. Run real separate-browser tasks: at least three active contributors, then six;
-   a native phone and keyboard-only participant; join midway, leave while others
+   a native-browser phone viewport with touch input and a keyboard-only participant; join midway, leave while others
    continue, disconnect/rejoin, save/reload and return to own work. Record boundaries
    if one-host software rendering requires bounded cases; do not call watchers players.
 5. Independently review changed sections, reproduce findings and rerun affected
@@ -156,3 +184,21 @@ extension is conditional on human preference or a demonstrated access problem;
 this is a staged choice, not a promise to implement a catalogue. A real friend pilot
 should examine contribution balance, ease of leaving, pressure to finish, enjoyment
 and return-to-work discovery. These human questions remain untested.
+
+## Fresh review and design revision
+
+The first history-free Astra/max reviewer required clearer consent/retry/reset,
+input/content, return and version contracts. Parent checked actual automatic outbox
+flush and same-lounge takeover source, then challenged durable participation as
+unnecessary for current-connection intent. A contextual architecture comparison
+preferred a transient roster, while finding stale intent, reset-confirmation ABA,
+old Start replay, exclusive-activity and equal-sequence projection hazards. The
+revised contract above addressed these before code; current implementation and
+review results are recorded in GROUP-BACKEND-NOTES.md and GROUP-CLIENT-NOTES.md.
+Real browser and resource acceptance remains open.
+
+The prototype must show one detailed, distinguishable illustration before a larger
+art set. Scripted six-person contributions prove capability, not natural engagement.
+A later unscripted pilot is needed for enjoyment/contribution-balance claims; lack
+of that pilot is recorded rather than replaced by agent opinions. No compulsory
+piece quota or turn lock is added just to manufacture equal participation.

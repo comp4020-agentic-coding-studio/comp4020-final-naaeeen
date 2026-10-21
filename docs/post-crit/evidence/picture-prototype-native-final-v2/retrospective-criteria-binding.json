@@ -1,0 +1,11 @@
+{
+  "scope": "Retrospective association only; not run-time verification. Original raw result is unchanged.",
+  "originalResultSHA256": "cbf94770aa1635e0ef874d7d890bb79ff9b08e9ca7d3b2d6baae57b55dd183e2",
+  "originalProtocolSHA256RecordedAtRun": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+  "originalProtocolCurrentFileSHA256": "fe5731cee10514b1927c0001cc2b5744759fde7cd2cce8f65f536c37b5bb9ba1",
+  "amendmentSHA256Retrospective": "b321530d2a5884447ef6a67e4c2d1fbe52460234f6810fd921517fd8e2e1294c",
+  "amendmentExactCopy": "amendment-retrospective-copy.md",
+  "amendmentCopySHA256": "b321530d2a5884447ef6a67e4c2d1fbe52460234f6810fd921517fd8e2e1294c",
+  "runtimeAmendmentBinding": "NOT RUN in v2",
+  "recordedAt": "2026-10-22"
+}
