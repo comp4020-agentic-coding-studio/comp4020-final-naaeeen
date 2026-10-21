@@ -1,0 +1,768 @@
+{
+  "kind": "native-input-and-hit-target-regressions",
+  "scriptSha256": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+  "oldSourceRed": {
+    "sourceHashes": {
+      "house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+      "house-world.js": "764b19d86c1c5097cb6b2982d9fca1f649bb7d497d8c05ed4fce6dd731513c43",
+      "house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "house.css": "432c35e8d850521cf7940f0090e985353eed0a63fc9751b6749280170ded6bbf"
+    },
+    "browserVersion": "153.0.8010.12",
+    "results": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "actualViewport": {
+          "width": 1920,
+          "height": 1080,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 29,
+                "y": 153,
+                "width": 63.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 842,
+                "width": 158,
+                "height": 158,
+                "top": 842,
+                "right": 180,
+                "bottom": 1000,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": [
+          "walking blocked at camera-hud-follow",
+          "walking blocked at pause-button"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "actualViewport": {
+          "width": 390,
+          "height": 844,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 17,
+                "y": 145,
+                "width": 56.515625,
+                "height": 44
+              },
+              "movement": {
+                "x": 12,
+                "y": 526,
+                "width": 158,
+                "height": 158,
+                "top": 526,
+                "right": 170,
+                "bottom": 684,
+                "left": 12
+              }
+            }
+          }
+        ],
+        "failures": [
+          "walking blocked at camera-hud-follow",
+          "walking blocked at pause-button"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "actualViewport": {
+          "width": 844,
+          "height": 390,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0
+          },
+          {
+            "movementOpen": {
+              "clear": false,
+              "hitId": "movement-controls",
+              "follow": {
+                "x": 17,
+                "y": 153,
+                "width": 57.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 152,
+                "width": 158,
+                "height": 158,
+                "top": 152,
+                "right": 180,
+                "bottom": 310,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": [
+          "walking blocked at camera-hud-follow",
+          "walking blocked at pause-button",
+          "Follow hidden behind movement-controls"
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "firstNewSourceAttempt": {
+    "sourceHashes": {
+      "house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+      "house-world.js": "4d22ff773e20f80bb9604433d8683ff4943aafaa6f144d05ab7ac4ba096fccb0",
+      "house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "browserVersion": "153.0.8010.12",
+    "results": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "actualViewport": {
+          "width": 1920,
+          "height": 1080,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0.4765091814435478
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 29,
+                "y": 153,
+                "width": 63.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 842,
+                "width": 158,
+                "height": 158,
+                "top": 842,
+                "right": 180,
+                "bottom": 1000,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": [
+          "walking blocked at pause-button"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "actualViewport": {
+          "width": 390,
+          "height": 844,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0.649555232447557
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0.649555232447557
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 17,
+                "y": 145,
+                "width": 56.515625,
+                "height": 44
+              },
+              "movement": {
+                "x": 12,
+                "y": 526,
+                "width": 158,
+                "height": 158,
+                "top": 526,
+                "right": 170,
+                "bottom": 684,
+                "left": 12
+              }
+            }
+          }
+        ],
+        "failures": []
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "actualViewport": {
+          "width": 844,
+          "height": 390,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "distance": 0.6501730538864249
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "distance": 0.5633409269705157
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 638.75,
+                "y": 81,
+                "width": 57.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 152,
+                "width": 158,
+                "height": 158,
+                "top": 152,
+                "right": 180,
+                "bottom": 310,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": []
+      }
+    ],
+    "errors": []
+  },
+  "frameSynchronizedNewSourceGreen": {
+    "sourceHashes": {
+      "house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+      "house-world.js": "4d22ff773e20f80bb9604433d8683ff4943aafaa6f144d05ab7ac4ba096fccb0",
+      "house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "browserVersion": "153.0.8010.12",
+    "results": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "actualViewport": {
+          "width": 1920,
+          "height": 1080,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": 0.254,
+              "z": 2.845
+            },
+            "distance": 0.736387126449125
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": 0.254,
+              "z": 2.845
+            },
+            "after": {
+              "x": -0.052,
+              "z": 3.086
+            },
+            "distance": 0.3895086648586907
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 29,
+                "y": 153,
+                "width": 63.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 842,
+                "width": 158,
+                "height": 158,
+                "top": 842,
+                "right": 180,
+                "bottom": 1000,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": []
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "actualViewport": {
+          "width": 390,
+          "height": 844,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": 0.186,
+              "z": 2.899
+            },
+            "distance": 0.649555232447557
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": 0.186,
+              "z": 2.899
+            },
+            "after": {
+              "x": -0.291,
+              "z": 3.273
+            },
+            "distance": 0.6061394229053247
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 17,
+                "y": 145,
+                "width": 56.515625,
+                "height": 44
+              },
+              "movement": {
+                "x": 12,
+                "y": 526,
+                "width": 158,
+                "height": 158,
+                "top": 526,
+                "right": 170,
+                "bottom": 684,
+                "left": 12
+              }
+            }
+          }
+        ],
+        "failures": []
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "actualViewport": {
+          "width": 844,
+          "height": 390,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": 0.152,
+              "z": 2.925
+            },
+            "distance": 0.6067569529885916
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": 0.152,
+              "z": 2.925
+            },
+            "after": {
+              "x": -0.393,
+              "z": 3.353
+            },
+            "distance": 0.6929711393701763
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 638.75,
+                "y": 81,
+                "width": 57.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 152,
+                "width": 158,
+                "height": 158,
+                "top": 152,
+                "right": 180,
+                "bottom": 310,
+                "left": 22
+              }
+            }
+          }
+        ],
+        "failures": []
+      }
+    ],
+    "errors": []
+  },
+  "currentNativeTouchAndFocusGreen": {
+    "sourceHashes": {
+      "house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+      "house-world.js": "4d22ff773e20f80bb9604433d8683ff4943aafaa6f144d05ab7ac4ba096fccb0",
+      "house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "browserVersion": "153.0.8010.12",
+    "results": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "actualViewport": {
+          "width": 1920,
+          "height": 1080,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": -0.052,
+              "z": 3.086
+            },
+            "distance": 0.34687894141904896
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": -0.052,
+              "z": 3.086
+            },
+            "after": {
+              "x": -0.461,
+              "z": 3.407
+            },
+            "distance": 0.5199249945905661
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 29,
+                "y": 153,
+                "width": 63.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 842,
+                "width": 158,
+                "height": 158,
+                "top": 842,
+                "right": 180,
+                "bottom": 1000,
+                "left": 22
+              }
+            }
+          },
+          {
+            "nativeCanvasTouch": {
+              "meshWithMovementOpen": true,
+              "temporaryPan": true,
+              "directionRecovery": true,
+              "directionCancel": true,
+              "canvasCancel": true
+            }
+          }
+        ],
+        "failures": []
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "actualViewport": {
+          "width": 390,
+          "height": 844,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": 0.152,
+              "z": 2.925
+            },
+            "distance": 0.6067569529885916
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": 0.152,
+              "z": 2.925
+            },
+            "after": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "distance": 0.6067569529885916
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 17,
+                "y": 145,
+                "width": 56.515625,
+                "height": 44
+              },
+              "movement": {
+                "x": 12,
+                "y": 526,
+                "width": 158,
+                "height": 158,
+                "top": 526,
+                "right": 170,
+                "bottom": 684,
+                "left": 12
+              }
+            }
+          },
+          {
+            "nativeCanvasTouch": {
+              "meshWithMovementOpen": true,
+              "temporaryPan": true,
+              "directionRecovery": true,
+              "directionCancel": true,
+              "canvasCancel": true
+            }
+          }
+        ],
+        "failures": []
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "actualViewport": {
+          "width": 844,
+          "height": 390,
+          "coarse": true
+        },
+        "checks": [
+          {
+            "launcher": "follow",
+            "focus": "camera-hud-follow",
+            "focusAfter": "camera-hud-follow",
+            "before": {
+              "x": -0.325,
+              "z": 3.3
+            },
+            "after": {
+              "x": 0.22,
+              "z": 2.872
+            },
+            "distance": 0.6929711393701761
+          },
+          {
+            "launcher": "pause",
+            "focus": "pause-button",
+            "focusAfter": "pause-button",
+            "before": {
+              "x": 0.22,
+              "z": 2.872
+            },
+            "after": {
+              "x": -0.257,
+              "z": 3.247
+            },
+            "distance": 0.6067569529885916
+          },
+          {
+            "movementOpen": {
+              "clear": true,
+              "hitId": "camera-hud-follow",
+              "follow": {
+                "x": 638.75,
+                "y": 81,
+                "width": 57.640625,
+                "height": 44
+              },
+              "movement": {
+                "x": 22,
+                "y": 152,
+                "width": 158,
+                "height": 158,
+                "top": 152,
+                "right": 180,
+                "bottom": 310,
+                "left": 22
+              }
+            }
+          },
+          {
+            "nativeCanvasTouch": {
+              "meshWithMovementOpen": true,
+              "temporaryPan": true,
+              "directionRecovery": true,
+              "directionCancel": true,
+              "canvasCancel": true
+            }
+          }
+        ],
+        "failures": []
+      }
+    ],
+    "errors": []
+  },
+  "samplingRefinement": "The first new-source attempt preserved one zero-distance desktop pause observation. Code inspection plus unchanged-source two-RAF before/after recheck support a sample-boundary explanation; that individual row does not isolate its exact cause. No production change accompanied the recheck."
+}

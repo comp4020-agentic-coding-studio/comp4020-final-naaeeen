@@ -10,3 +10,7 @@ body[data-reduced-motion=true] *{scroll-behavior:auto!important;transition:none!
 .chat-window[data-compact=true] .chat-body #chat-privacy{display:none}.chat-window[data-compact=true] .chat-body #chat-panel{min-height:0}.chat-window[data-compact=true] .chat-body #quick-chat{padding:7px 10px 10px}.chat-window[data-compact=true] .chat-body textarea{min-height:44px;height:48px;max-height:70px}.chat-window[data-compact=true] .composer-actions span{max-width:160px}.chat-window[data-compact=true] .composer-actions button{min-height:32px;padding:5px 10px}
 
 #context-hint:empty{display:none}
+
+.camera-hud{position:absolute;left:24px;top:148px;display:flex;gap:3px;padding:4px;z-index:3}.camera-hud button{min-height:44px;padding:8px 12px;border-color:transparent;background:transparent;font-size:12px}.camera-hud button[aria-pressed=true]{background:#e8ba69;color:#283d35}.camera-hud button:hover{background:#566f60}.camera-hud button[aria-pressed=true]:hover{background:#f5cc85}
+@media(max-width:700px){.camera-hud{left:12px;top:140px}.camera-hud button{padding:8px 10px;font-size:11px}}
+@media(max-height:450px){.camera-hud{left:auto;right:12px;top:76px}.camera-hud button{min-height:44px;padding:7px 9px}}

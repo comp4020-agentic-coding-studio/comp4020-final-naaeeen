@@ -1,5 +1,7 @@
 /** Transient fixed-orientation framing. Inputs/outputs are camera-view coordinates, not player authority. */
 const finite = value => typeof value === 'number' && Number.isFinite(value);
+// Centered Follow is the reviewed default; explicit Overview supplies stable room framing.
+const FOLLOW_DEAD_ZONE = 0;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
@@ -35,9 +37,9 @@ export function cameraPlayArea(width, height, viewport = null, safeRects = []) {
 }
 
 
-/** Zoom is a transient multiplier; panning enters inspection until explicitly recentered. */
+/** Camera state is local. Canvas panning is temporary; explicit Look owns inspection. */
 export function createHouseCamera({ reducedMotion = false } = {}) {
-  let config = null, centre = null, mode = 'play', reset = true, previous = null;
+  let config = null, centre = null, mode = 'play', inspectionLocked = false, reset = true, previous = null;
   let zoom = 1, overviewBaseSpan = null, inspectionBaseSpan = null, followTarget = null, previousSelf = null, reframeSelf = false, activeFollowArea = null;
   function configure(value) {
     const changedExtent = !config || value.width !== config.width || value.height !== config.height ||
@@ -52,7 +54,7 @@ export function createHouseCamera({ reducedMotion = false } = {}) {
     if (value === 'play') reset = true;
     if (value === 'overview') { zoom = 1; overviewBaseSpan = null; reset = true; }
     if (value === 'inspection' && mode !== value) inspectionBaseSpan = previous ? (previous.top - previous.bottom) * zoom : null;
-    mode = value; followTarget = null; return true;
+    mode = value; inspectionLocked = value === 'inspection'; followTarget = null; return true;
   }
   function setZoom(value) {
     if (!finite(value)) return false;
@@ -62,14 +64,15 @@ export function createHouseCamera({ reducedMotion = false } = {}) {
   }
   function pan(dx, dy) {
     if (!previous || !finite(dx) || !finite(dy)) return false;
-    setMode('inspection');
+    if (mode === 'play') { setMode('inspection'); inspectionLocked = false; }
     centre.x -= dx / previous.pxPerUnit; centre.y += dy / previous.pxPerUnit;
     return true;
   }
   return {
-    configure, setMode, getMode: () => mode, setZoom, getZoom: () => zoom, pan,
+    configure, setMode, getMode: () => mode, isInspectionLocked: () => inspectionLocked, setZoom, getZoom: () => zoom, pan,
     setReducedMotion(value) { reducedMotion = !!value; },
     recenter() { return setMode('play'); },
+    walkingIntent() { return mode === 'inspection' && !inspectionLocked ? setMode('play') : false; },
     reset() { centre = null; reset = true; previous = null; previousSelf = null; followTarget = null; activeFollowArea = null; overviewBaseSpan = null; inspectionBaseSpan = null; },
     /** @param {{x:number,y:number}} self @param {number} elapsed @param {boolean} editing
      * @param {{minX:number,maxX:number,minY:number,maxY:number}|null} selfExtents */
@@ -124,8 +127,8 @@ export function createHouseCamera({ reducedMotion = false } = {}) {
         if (moving) {
           const screen = screenPoint();
           const focus = { x: followArea.x + followArea.w / 2, y: followArea.y + followArea.h / 2 };
-          const deadW = Math.max(0, Math.min(followArea.w * 0.4, safe.maxX - safe.minX));
-          const deadH = Math.max(0, Math.min(followArea.h * 0.4, safe.maxY - safe.minY));
+          const deadW = Math.max(0, Math.min(followArea.w * FOLLOW_DEAD_ZONE, safe.maxX - safe.minX));
+          const deadH = Math.max(0, Math.min(followArea.h * FOLLOW_DEAD_ZONE, safe.maxY - safe.minY));
           const minX = clamp(focus.x - deadW / 2, safe.minX, safe.maxX), maxX = clamp(focus.x + deadW / 2, safe.minX, safe.maxX);
           const minY = clamp(focus.y - deadH / 2, safe.minY, safe.maxY), maxY = clamp(focus.y + deadH / 2, safe.minY, safe.maxY);
           const dx = screen.x - clamp(screen.x, minX, maxX), dy = screen.y - clamp(screen.y, minY, maxY);

@@ -1,0 +1,269 @@
+{
+  "finalRuntime": {
+    "base": "d95055b",
+    "policy": "B centered Follow default; explicit Look and Overview",
+    "files": {
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-world.js": "b4e88e4bbf8f10684a7ff8afba06986ef4edd43d340411b46c2a148cf0352299",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "tests": {
+      "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+      "spec/house-world.test.ts": "1c8c9c0266ea1c55a99c0424423904aac0e7302566ff8d5b421b65dafbbf5688",
+      "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+      "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+    },
+    "protocol": {
+      "P1-B-READABILITY-PROTOCOL.md": "e9c7aa0fa42d32aa021a04fdbe219c6a8fcab38b96f68b40fdef6f8185bae1fe",
+      "camera-browser.mjs": "f5a672362b8cdbea130759678ed4c374ab73d284a88fb96b872eae1e29dc1b2f",
+      "camera-focus-browser.mjs": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+      "camera-copresence-browser.mjs": "1596307fa354283946532160209cc948a654815254d53f0b9f37cbc098529dc0"
+    },
+    "delta": "Measure authorized peer bodies before optional self-only diagnostics; type-only test annotations; camera factor, geometry, controls and packing algorithm unchanged."
+  },
+  "priorFullBSource": {
+    "base": "d95055b",
+    "policy": "B centered Follow default; explicit Look and Overview",
+    "files": {
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-world.js": "aaafa3dfbed3115b19a6f5d51b088291d1ff350cbbf6cc9f26ec059503174219",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "tests": {
+      "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+      "spec/house-world.test.ts": "05934a7a8126958e8fd7c4dcb917218d693c8f79e3b87ca79c065a14adc3945e",
+      "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+      "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+    },
+    "protocol": {
+      "P1-B-READABILITY-PROTOCOL.md": "e9c7aa0fa42d32aa021a04fdbe219c6a8fcab38b96f68b40fdef6f8185bae1fe",
+      "camera-browser.mjs": "f5a672362b8cdbea130759678ed4c374ab73d284a88fb96b872eae1e29dc1b2f",
+      "camera-focus-browser.mjs": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+      "camera-copresence-browser.mjs": "5635d4c482bef30e81b0fa3f4ab49f0e8ccfbe1d083e9c5362e93dfed76bb3ce"
+    }
+  },
+  "frozenOriginalComparisonSources": {
+    "camera-comparison-source/house-camera-A.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+    "camera-comparison-source/house-world.js": "764b19d86c1c5097cb6b2982d9fca1f649bb7d497d8c05ed4fce6dd731513c43",
+    "camera-comparison-source/house-camera-C.js": "80e0c3d8f506223ae3d79848abe58c1e06a6dac6b7bd3ea3400cf80c097638bd",
+    "camera-comparison-source/house.css": "432c35e8d850521cf7940f0090e985353eed0a63fc9751b6749280170ded6bbf",
+    "camera-comparison-source/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+    "camera-comparison-source/camera-browser.mjs": "6a58671a3af326c819ea208cee5bcf974dd226562c0e23108c1122a0db94d72d",
+    "camera-comparison-source/house-camera-B.js": "c796b58257c0fc8a9297a38becd19e7e239a11c93db9ababfae40fe699e7fc62",
+    "camera-comparison-source/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+    "camera-comparison-source/house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b"
+  },
+  "currentTests": {
+    "files": 4,
+    "passed": 168,
+    "failed": 0,
+    "logSha256": "b10a2fda761ce6d0ef5d2efdb75a2f4df80c7bba9a09f0b3ff8fc03b4e39418e"
+  },
+  "typecheck": {
+    "result": "PASS",
+    "actualExitCode": 0,
+    "logSha256": "240b133cd3500cb61806cb897a59626b2026e324d92eec83d2eabbccb801dea6",
+    "priorFinding": "Parent relayed actual game-worker TS7006 for untyped rect/index in the new test; explicit annotations fixed it. Exact prior exit code/log is owned by parent."
+  },
+  "coverageCheckpointBeforeObserverReorder": {
+    "worldSource": "aaafa3dfbed3115b19a6f5d51b088291d1ff350cbbf6cc9f26ec059503174219",
+    "testCount": 167,
+    "coverage": {
+      "total": {
+        "lines": {
+          "total": 1048,
+          "covered": 1015,
+          "skipped": 0,
+          "pct": 96.85
+        },
+        "statements": {
+          "total": 2709,
+          "covered": 2410,
+          "skipped": 0,
+          "pct": 88.96
+        },
+        "functions": {
+          "total": 332,
+          "covered": 286,
+          "skipped": 0,
+          "pct": 86.14
+        },
+        "branches": {
+          "total": 1694,
+          "covered": 1393,
+          "skipped": 0,
+          "pct": 82.23
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-camera.js": {
+        "lines": {
+          "total": 104,
+          "covered": 104,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 27,
+          "covered": 27,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 176,
+          "covered": 174,
+          "skipped": 0,
+          "pct": 98.86
+        },
+        "branches": {
+          "total": 128,
+          "covered": 124,
+          "skipped": 0,
+          "pct": 96.87
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-label-layout.js": {
+        "lines": {
+          "total": 45,
+          "covered": 45,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 21,
+          "covered": 21,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 93,
+          "covered": 92,
+          "skipped": 0,
+          "pct": 98.92
+        },
+        "branches": {
+          "total": 76,
+          "covered": 70,
+          "skipped": 0,
+          "pct": 92.1
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-ui.js": {
+        "lines": {
+          "total": 420,
+          "covered": 400,
+          "skipped": 0,
+          "pct": 95.23
+        },
+        "functions": {
+          "total": 147,
+          "covered": 112,
+          "skipped": 0,
+          "pct": 76.19
+        },
+        "statements": {
+          "total": 1244,
+          "covered": 1026,
+          "skipped": 0,
+          "pct": 82.47
+        },
+        "branches": {
+          "total": 737,
+          "covered": 553,
+          "skipped": 0,
+          "pct": 75.03
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-world.js": {
+        "lines": {
+          "total": 479,
+          "covered": 466,
+          "skipped": 0,
+          "pct": 97.28
+        },
+        "functions": {
+          "total": 137,
+          "covered": 126,
+          "skipped": 0,
+          "pct": 91.97
+        },
+        "statements": {
+          "total": 1196,
+          "covered": 1118,
+          "skipped": 0,
+          "pct": 93.47
+        },
+        "branches": {
+          "total": 753,
+          "covered": 646,
+          "skipped": 0,
+          "pct": 85.79
+        }
+      }
+    },
+    "note": "Coverage percentage is scoped to this pre-reorder source; final 168-test source has not been given an invented refreshed percentage."
+  },
+  "rawLogs": {
+    "b-label-red.log": "275e2f40039d7bf7689920efe1c08a6662975508cd066441b2f987ab8a81522e",
+    "b-label-green-first.log": "882b7ff1f8051e7fbb162c5f5f90fbaf2dffb8551e8ef86a104be527a7d915b2",
+    "b-label-green.log": "f87f3e64e4be5a5e4051b3712b7b0ddab53c3ca5bf73efcc06e73ddadbecc62c",
+    "b-observer-red.log": "13e4e38808c5f8bc65d946925ed0bcf6de62a3cb2b04453acb7f905460437b41",
+    "b-final-green.log": "b10a2fda761ce6d0ef5d2efdb75a2f4df80c7bba9a09f0b3ff8fc03b4e39418e",
+    "b-final-typecheck.log": "240b133cd3500cb61806cb897a59626b2026e324d92eec83d2eabbccb801dea6",
+    "native-current-b.log": "8e421ab05ca7330dcf26a9271368ea96dc5ee056f7e113dce54baea6f218ce2f",
+    "b-touch-native-green.log": "5d64122735da505545840c14499766ef87cfe3a35167808539704f641e28cc4d",
+    "b-copresence.log": "542dc81bac2c8ec485aecdf8b62502a83bf2f8ef5cb68aecef283d55d222ae66",
+    "b-copresence-short-names.log": "fd99b319bc2e4f216184e6cecf30e70f0acbe749418f6933cfe606dab102a1a0",
+    "b-observer-no-self.log": "2d27601c8096705689fbbd8bf0fbc7b317f3142c70a30e18cc58eec7abf74f58"
+  },
+  "resultsSha256": "2fdc8ba4d994a7911781620e808dcb808e2ca7e467822962bbca12eff41de48a",
+  "screenshots": {
+    "camera-B-controller-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "cb4ecfd1349f34cc699b03c8829f3b6ec26b1141fe5cfb427f0ac18573512927",
+      "scope": "aaafa3df full B workflow"
+    },
+    "camera-B-long-names-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "7052f2cba08200bdd1491d24527ce36e5267437fc4a3bf6a94902a9bb4a6a2aa",
+      "scope": "aaafa3df actual long shared-prefix identities"
+    },
+    "camera-B-two-peers-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "e26ceac9fa57993b179d7356838cb03ca8d21ba9ba7a6d0143f6a8fea9209340",
+      "scope": "aaafa3df actual Robin/Taylor identities; parent visually inspected"
+    },
+    "camera-B-two-peers-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "83f125bc64d01df29d0c0d40d4810e0396d8b83db9e7315030fa0a2d464cb137",
+      "scope": "aaafa3df actual Robin/Taylor identities"
+    },
+    "camera-B-observer-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "a648de0c79d74d7c0b16d27236955283fa08a3f94ebbcbd240e446bb69e8d596",
+      "scope": "b4e88e4b actual observer; self controller in bedroom"
+    },
+    "camera-B-observer-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "43f0c522aee65b47dc5bf296ea9e89e1a49621f8d6aee34435e71e8d9703208f",
+      "scope": "b4e88e4b actual observer; self controller in bedroom"
+    }
+  }
+}

@@ -9,14 +9,16 @@ P0 research/resource audit and first fresh Astra review are recorded. Revised
 camera modes, independent own-work cursor and v2 room fields passed contextual
 recheck. P2 backend/client ordering foundation passed fresh Astra review plus contextual
 fix verification (140 isolated checks) and parent typecheck; it is ready for its
-local commit. P1 controls/input/native checks pass, but a fresh visual decision
-selects centered B and requires avatar-label occlusion repair before final P1
-acceptance. Camera worker owns that refinement. Game spike is complete; fresh
+local commit. P1 controls/input and centered B/readability refinements are accepted for local
+commit after independent/contextual review, 168 checks, direct typecheck and scoped
+native evidence. Latest world b4e88e4b includes the absent-self observer correction.
+P1 worker has released UI/world ownership. Parent stages/commits P1, then sends
+explicit GO to /root/postcrit_rooms_ui (prepared plan/red cases, no edits yet). Game spike is complete; fresh
 Astra selects untimed Four-in-a-row conditionally on complete visible feedback,
 real multiplayer authority/lifecycle and actual Return-to-work. Root must record
 that decision; original fixture PASS does not establish the full production task.
 
-P2 UI follows P1 world/UI handoff. Read the room helper API and updated projection
+P2 UI is next after the P1 commit. Read the room helper API and updated projection
 contract. Generic bedroom chair visual rotation needs +pi relative to its stored
 seat heading; Rose desk preset is already fixed. P3 lounge/compatibility candidate
 is in ../post-crit/LOUNGE-CONTRACT.md; fresh review exposed old multi-draft recovery

@@ -1,0 +1,253 @@
+{
+  "base": "d95055b",
+  "initialRuntime": {
+    "base": "d95055b",
+    "files": {
+      "public/house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+      "public/house-world.js": "764b19d86c1c5097cb6b2982d9fca1f649bb7d497d8c05ed4fce6dd731513c43",
+      "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "public/house.css": "432c35e8d850521cf7940f0090e985353eed0a63fc9751b6749280170ded6bbf"
+    }
+  },
+  "currentRuntime": {
+    "base": "d95055b",
+    "policy": "B centered Follow default; explicit Look and Overview",
+    "files": {
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-world.js": "b4e88e4bbf8f10684a7ff8afba06986ef4edd43d340411b46c2a148cf0352299",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+      "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+      "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+    },
+    "tests": {
+      "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+      "spec/house-world.test.ts": "1c8c9c0266ea1c55a99c0424423904aac0e7302566ff8d5b421b65dafbbf5688",
+      "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+      "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+    },
+    "protocol": {
+      "P1-B-READABILITY-PROTOCOL.md": "e9c7aa0fa42d32aa021a04fdbe219c6a8fcab38b96f68b40fdef6f8185bae1fe",
+      "camera-browser.mjs": "f5a672362b8cdbea130759678ed4c374ab73d284a88fb96b872eae1e29dc1b2f",
+      "camera-focus-browser.mjs": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+      "camera-copresence-browser.mjs": "1596307fa354283946532160209cc948a654815254d53f0b9f37cbc098529dc0"
+    },
+    "delta": "Measure authorized peer bodies before optional self-only diagnostics; type-only test annotations; camera factor, geometry, controls and packing algorithm unchanged."
+  },
+  "currentTests": {
+    "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+    "spec/house-world.test.ts": "1c8c9c0266ea1c55a99c0424423904aac0e7302566ff8d5b421b65dafbbf5688",
+    "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+    "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+  },
+  "preservedRawLogs": {
+    "red.log": "ef11d4dbe7aec3af87da2b28fa55d4e58afe31c82b9f28310865166484c9086f",
+    "green-first.log": "71fa78ad51a2e2244a4981728336735f404a09c5e6092fe5dd9475dc56e740d5",
+    "green.log": "3bc0c30a251530a0fa3fac3bb5b3c9e6e9cc97142d5cd75097e3213a233c549a",
+    "chair-ray-red.log": "836c5807ed1cf82b953823b9b3a3ce1d032fd47a5dbce747c92b223237e10d8b",
+    "review-red.log": "13d430de2b3c1fc7bdd07fefb5ccffb72e6c1a7365bf3fd2e34da3f6fe496493",
+    "review-green-coverage.log": "358616b5f0ad19a0ae79f352ed6628e5640d8980135df6e5f8cf20e8abd7334c",
+    "native.log": "8033749a0462f3d9e3808c4eab52baade7bcf0782a71b6a9da9a8588fc20f339",
+    "native-repro.log": "359c5ba86a02e10d4f940e40caeb646a4ac2e610699f138a7de6c24948102452",
+    "native-full.log": "7b172b317074e1111f0fb8faa92dc8576cfb413bf100d82fd2fd4e9452b55bd9",
+    "native-final.log": "692e2daeddb8fe7f4581932bf0d5d1e09de3f0e9626df4e6615e6791dfc78d76",
+    "native-verified.log": "1f97373ac52247e20bb72c6c7aa93b2d680adc5b33d88e8939b2825144f4c84a",
+    "focus-red.log": "886d0f128712e886fc42c9d5f9d1c97deb0381d6988bb7cf22e36af28bb1b3db",
+    "focus-green-attempt1.log": "1c6cebcce454c2a9c2510d67e13dc97ce66aa4a2a43313280a2f0d7c793dc007",
+    "focus-green.log": "b3fe3ac68ccb5b21b66b3c51d00ef09be0ffb87f29d2a9e1a1d200e3b0f4732b",
+    "native-current-a.log": "33295ccdd7b7ec99c03affadd7c560b64ec6dd4fcd4413d8405b9f3786503015",
+    "touch-native-green.log": "51be60924ecb3d942bab3e4fbe3d57702f50e41daeb0cd145da5cc0de3301c37",
+    "typecheck.log": "a41e115034ff5db109b7169feea953b9d1fbbb90c94a587571e6a26bdc405da7"
+  },
+  "artifactFiles": {
+    "camera-comparison.results.json": "6abbf09bcae83483b37f7a89bbc555d68da84c869526fc9677d2047575f1a117",
+    "camera-current.results.json": "e786deac1a7d8dc88349155c15c859cda243e6c1d1493ced9cd049c6e0bdaf94",
+    "camera-focus.results.json": "52b381e60d85f974a9c98b69cbf576f0f0d40767b1766b77d7c47e95dbe3d75e",
+    "camera-b-readability.results.json": "2fdc8ba4d994a7911781620e808dcb808e2ca7e467822962bbca12eff41de48a",
+    "camera-b-final-source-manifest.json": "f783b158a0e15e9265e1dc9fdbd17f8e5f21a31998dfe6ad73f2e672bd932836"
+  },
+  "screenshots": {
+    "camera-A-current-1920x1080.png": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e63a2845656e2c6caca8b2ee51bf119b124182df937bacc03a00b4ac6280b2c9"
+    },
+    "camera-A-current-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "6b38961e080e099726b5d455a9ec4a02a27427ff13c37e49669b9d0ab70d7ab7"
+    },
+    "camera-A-current-844x390.png": {
+      "width": 844,
+      "height": 390,
+      "sha256": "03d9f75277176b08d044fc7f1e5e5e4eefd1e77454dd477eea7ea77c83614a8a"
+    },
+    "camera-C-comparison-390x844.png": {
+      "width": 390,
+      "height": 844,
+      "sha256": "e88ef91e2514ed8aea7ee4f32694c9ab2a54f9d23061ac7ad5dd5360d2e7ddd7"
+    }
+  },
+  "priorBindings": {
+    "aAfterHudReview": {
+      "runtime": {
+        "base": "d95055b",
+        "files": {
+          "public/house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+          "public/house-world.js": "4d22ff773e20f80bb9604433d8683ff4943aafaa6f144d05ab7ac4ba096fccb0",
+          "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+          "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+          "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+        }
+      },
+      "tests": {
+        "spec/house-camera.test.ts": "e7153854d021e5edee314c521cee2b92107634b3421b41af3584b87eb2445416",
+        "spec/house-world.test.ts": "b24774f4962fded45fe58d3e679eb899aaa08934685c26c556d779342efc07ee",
+        "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+      },
+      "coverage": {
+        "total": {
+          "lines": {
+            "total": 994,
+            "covered": 961,
+            "skipped": 0,
+            "pct": 96.68
+          },
+          "statements": {
+            "total": 2600,
+            "covered": 2300,
+            "skipped": 0,
+            "pct": 88.46
+          },
+          "functions": {
+            "total": 307,
+            "covered": 261,
+            "skipped": 0,
+            "pct": 85.01
+          },
+          "branches": {
+            "total": 1600,
+            "covered": 1303,
+            "skipped": 0,
+            "pct": 81.43
+          },
+          "branchesTrue": {
+            "total": 0,
+            "covered": 0,
+            "skipped": 0,
+            "pct": "Unknown"
+          }
+        },
+        "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-camera.js": {
+          "lines": {
+            "total": 103,
+            "covered": 103,
+            "skipped": 0,
+            "pct": 100
+          },
+          "functions": {
+            "total": 27,
+            "covered": 27,
+            "skipped": 0,
+            "pct": 100
+          },
+          "statements": {
+            "total": 175,
+            "covered": 173,
+            "skipped": 0,
+            "pct": 98.85
+          },
+          "branches": {
+            "total": 128,
+            "covered": 124,
+            "skipped": 0,
+            "pct": 96.87
+          }
+        },
+        "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-ui.js": {
+          "lines": {
+            "total": 420,
+            "covered": 400,
+            "skipped": 0,
+            "pct": 95.23
+          },
+          "functions": {
+            "total": 147,
+            "covered": 112,
+            "skipped": 0,
+            "pct": 76.19
+          },
+          "statements": {
+            "total": 1244,
+            "covered": 1026,
+            "skipped": 0,
+            "pct": 82.47
+          },
+          "branches": {
+            "total": 737,
+            "covered": 553,
+            "skipped": 0,
+            "pct": 75.03
+          }
+        },
+        "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-world.js": {
+          "lines": {
+            "total": 471,
+            "covered": 458,
+            "skipped": 0,
+            "pct": 97.23
+          },
+          "functions": {
+            "total": 133,
+            "covered": 122,
+            "skipped": 0,
+            "pct": 91.72
+          },
+          "statements": {
+            "total": 1181,
+            "covered": 1101,
+            "skipped": 0,
+            "pct": 93.22
+          },
+          "branches": {
+            "total": 735,
+            "covered": 626,
+            "skipped": 0,
+            "pct": 85.17
+          }
+        }
+      }
+    },
+    "fullBBeforeObserver": {
+      "base": "d95055b",
+      "policy": "B centered Follow default; explicit Look and Overview",
+      "files": {
+        "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+        "public/house-world.js": "aaafa3dfbed3115b19a6f5d51b088291d1ff350cbbf6cc9f26ec059503174219",
+        "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+        "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+        "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+        "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+      },
+      "tests": {
+        "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+        "spec/house-world.test.ts": "05934a7a8126958e8fd7c4dcb917218d693c8f79e3b87ca79c065a14adc3945e",
+        "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+        "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+      },
+      "protocol": {
+        "P1-B-READABILITY-PROTOCOL.md": "e9c7aa0fa42d32aa021a04fdbe219c6a8fcab38b96f68b40fdef6f8185bae1fe",
+        "camera-browser.mjs": "f5a672362b8cdbea130759678ed4c374ab73d284a88fb96b872eae1e29dc1b2f",
+        "camera-focus-browser.mjs": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+        "camera-copresence-browser.mjs": "5635d4c482bef30e81b0fa3f4ab49f0e8ccfbe1d083e9c5362e93dfed76bb3ce"
+      }
+    }
+  },
+  "currentVerification": {
+    "focusedTestsPassed": 168,
+    "typecheckActualExitCode": 0,
+    "independentObserverRecheck": "ACCEPTED, no implementation blockers; parent also inspected original observer and controller PNGs",
+    "nativeScope": "Latest b4e88 observer portrait/landscape plus controller co-presence smoke; earlier full B4/reduced/touch remains explicitly bound to aaafa3df."
+  }
+}

@@ -1,0 +1,554 @@
+{
+  "kind": "local-native-technical-camera-policy-comparison",
+  "runtimeBase": "d95055b",
+  "runtimeProductionFiles": {
+    "public/house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+    "public/house-world.js": "764b19d86c1c5097cb6b2982d9fca1f649bb7d497d8c05ed4fce6dd731513c43",
+    "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+    "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+    "public/house.css": "432c35e8d850521cf7940f0090e985353eed0a63fc9751b6749280170ded6bbf"
+  },
+  "scriptSha256": "6a58671a3af326c819ea208cee5bcf974dd226562c0e23108c1122a0db94d72d",
+  "registeredProtocolSha256": "0b9f3f1569f44b44855ef3aaa520ce1c35f46f4018c504a3a3fdc11db870b092",
+  "result": {
+    "runtimeBase": "d95055b",
+    "cameraSource": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+    "results": [
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 128,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": 35.400000005960464
+            },
+            {
+              "pixels": 7,
+              "delay": 0.29999999701976776
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "nativeResize": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 7.5
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": 0.5
+            }
+          ],
+          "cameraTravelCssPx": 46.19999999999999,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 78,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 17
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": 0.29999999701976776
+            }
+          ],
+          "cameraTravelCssPx": 42.300000000000004,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 390,
+          "height": 520
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": 3.0999999940395355
+            },
+            {
+              "pixels": 7,
+              "delay": 0.7999999970197678
+            }
+          ],
+          "cameraTravelCssPx": 36.39999999999998,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "B",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "sourceSha256": "c796b58257c0fc8a9297a38becd19e7e239a11c93db9ababfae40fe699e7fc62",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 128,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 40.3999999910593
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": 0.4000000059604645
+            }
+          ],
+          "cameraTravelCssPx": 490.5320290856365,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "B",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "sourceSha256": "c796b58257c0fc8a9297a38becd19e7e239a11c93db9ababfae40fe699e7fc62",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "nativeResize": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 4.0999999940395355
+            },
+            {
+              "pixels": 5,
+              "delay": 2.5
+            },
+            {
+              "pixels": 7,
+              "delay": 0.29999999701976776
+            }
+          ],
+          "cameraTravelCssPx": 249,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "B",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "sourceSha256": "c796b58257c0fc8a9297a38becd19e7e239a11c93db9ababfae40fe699e7fc62",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 78,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": 5.899999991059303
+            },
+            {
+              "pixels": 7,
+              "delay": 0.4000000059604645
+            }
+          ],
+          "cameraTravelCssPx": 269.9,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "B",
+        "viewport": {
+          "width": 390,
+          "height": 520
+        },
+        "sourceSha256": "c796b58257c0fc8a9297a38becd19e7e239a11c93db9ababfae40fe699e7fc62",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": 10
+            },
+            {
+              "pixels": 7,
+              "delay": 0.5
+            }
+          ],
+          "cameraTravelCssPx": 248.3,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "C",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "sourceSha256": "80e0c3d8f506223ae3d79848abe58c1e06a6dac6b7bd3ea3400cf80c097638bd",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 73.81,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": null
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "C",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "sourceSha256": "80e0c3d8f506223ae3d79848abe58c1e06a6dac6b7bd3ea3400cf80c097638bd",
+        "checks": {
+          "phone64px": false,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "nativeResize": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 21.24,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": null
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "C",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "sourceSha256": "80e0c3d8f506223ae3d79848abe58c1e06a6dac6b7bd3ea3400cf80c097638bd",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 18.45,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": null
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "C",
+        "viewport": {
+          "width": 390,
+          "height": 520
+        },
+        "sourceSha256": "80e0c3d8f506223ae3d79848abe58c1e06a6dac6b7bd3ea3400cf80c097638bd",
+        "checks": {
+          "phone64px": false,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 11.33,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": null
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "reducedMotion": true,
+        "checks": {
+          "recovery": true,
+          "stationary": true,
+          "containment": true
+        }
+      }
+    ],
+    "errors": []
+  },
+  "limitations": [
+    "One controlled native-browser identity, no human or physical-phone comparison",
+    "Initial helper focuses the canvas for walking; later focus regressions separately expose and repair missing ordinary HUD focus behavior",
+    "A/B default-policy choice remains open; camera travel alone does not determine subjective quality",
+    "Brief parent backend/client checks overlapped parts of the run; mechanical observations are local source-bound checks, not isolated GPU/latency benchmarks"
+  ]
+}

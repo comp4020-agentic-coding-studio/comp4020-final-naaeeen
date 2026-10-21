@@ -1,0 +1,25 @@
+{
+  "base": "d95055b",
+  "policy": "B centered Follow default; explicit Look and Overview",
+  "files": {
+    "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+    "public/house-world.js": "b4e88e4bbf8f10684a7ff8afba06986ef4edd43d340411b46c2a148cf0352299",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+    "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+    "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+  },
+  "tests": {
+    "spec/house-camera.test.ts": "3e23a799f02a26ab0310a74daad8033014433c8f2ac7b5aff5adb46dfd63b5e8",
+    "spec/house-world.test.ts": "1c8c9c0266ea1c55a99c0424423904aac0e7302566ff8d5b421b65dafbbf5688",
+    "spec/house-label-layout.test.ts": "b1bf9a86ebcc33bc888e3cfe11f9a91b2a4643e696a027734417209e5c84992c",
+    "spec/house-ui.test.ts": "85a71770d362d65322023777364bb386449e37667822e636e9ce30606254e2a4"
+  },
+  "protocol": {
+    "P1-B-READABILITY-PROTOCOL.md": "e9c7aa0fa42d32aa021a04fdbe219c6a8fcab38b96f68b40fdef6f8185bae1fe",
+    "camera-browser.mjs": "f5a672362b8cdbea130759678ed4c374ab73d284a88fb96b872eae1e29dc1b2f",
+    "camera-focus-browser.mjs": "ff3c380d7283b77962629083a6a162903cb1a4ff5d31572c3a1640c9072757e1",
+    "camera-copresence-browser.mjs": "1596307fa354283946532160209cc948a654815254d53f0b9f37cbc098529dc0"
+  },
+  "delta": "Measure authorized peer bodies before optional self-only diagnostics; type-only test annotations; camera factor, geometry, controls and packing algorithm unchanged."
+}

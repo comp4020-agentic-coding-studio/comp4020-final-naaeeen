@@ -28,10 +28,10 @@ describe('transient fixed-angle camera', () => {
   const larger = rig.frame({ x: 0, y: 0 }, 0)!;
   expect(larger.pxPerUnit).toBe(initial.pxPerUnit);
  });
- it('follows only outside the dead zone and settles without idle drift', () => {
+ it('centers with damping and settles without idle drift', () => {
   const rig = createHouseCamera(); rig.configure(portrait);
   const first = rig.frame({ x: 0, y: 0 }, 0)!;
-  expect(rig.frame({ x: 0.3, y: 0 }, 1 / 60)!.changed).toBe(false);
+  expect(rig.frame({ x: 0.3, y: 0 }, 1 / 60)!.changed).toBe(true);
   const moved = { x: 5.5, y: 3.5 };
   let value = rig.frame(moved, 1 / 60)!; expect(value.changed).toBe(true);
   for (let i = 0; i < 300; i++) value = rig.frame(moved, 1 / 60)!;
@@ -157,4 +157,18 @@ it('refits overview when only the visual viewport changes while retaining HUD-on
   const p=screen(resized,{x,y});expect(p.x).toBeGreaterThanOrEqual(resized.area.x);expect(p.x).toBeLessThanOrEqual(resized.area.x+resized.area.w);
   expect(p.y).toBeGreaterThanOrEqual(resized.area.y);expect(p.y).toBeLessThanOrEqual(resized.area.y+resized.area.h);
  }
+});
+
+it('distinguishes temporary pan from locked Look and does not infer intent from frame positions',()=>{
+ const rig=createHouseCamera();rig.configure(portrait);rig.frame({x:0,y:0},0);rig.pan(7,0);
+ expect(rig.isInspectionLocked()).toBe(false);rig.frame({x:4,y:2},.1);expect(rig.getMode()).toBe('inspection');expect(rig.walkingIntent()).toBe(true);expect(rig.getMode()).toBe('play');
+ rig.setMode('inspection');rig.pan(7,0);expect(rig.isInspectionLocked()).toBe(true);expect(rig.walkingIntent()).toBe(false);expect(rig.getMode()).toBe('inspection');
+ rig.setMode('overview');rig.pan(7,0);expect(rig.walkingIntent()).toBe(false);expect(rig.getMode()).toBe('overview');rig.recenter();expect(rig.getMode()).toBe('play');
+});
+
+it('centers the default follow policy for small deliberate displacement without a dead zone',()=>{
+ const rig=createHouseCamera({reducedMotion:true});rig.configure(portrait);const first=rig.frame({x:0,y:0},0)!;
+ const moved={x:.3,y:.2},next=rig.frame(moved,1/60)!;expect(next.changed).toBe(true);
+ const p=screen(next,moved);expect(p.x).toBeCloseTo(next.area.x+next.area.w/2,7);expect(p.y).toBeCloseTo(next.area.y+next.area.h/2,7);
+ expect(next.left).not.toBe(first.left);
 });

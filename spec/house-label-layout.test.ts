@@ -62,3 +62,10 @@ describe('bounded delivered speech',()=>{
   feed.ingest('private',[message(1400,'p1')],options,50);expect(feed.visible(50)).toEqual([]);
  });
 });
+
+it('treats current avatar bodies as exclusions for retained and new labels, hiding crowded fallbacks',()=>{
+ const viewport={left:0,top:0,right:390,bottom:250},body={x:140,y:80,w:70,h:100};
+ const items=[{id:'name',anchor:{x:175,y:100},w:108,h:34,previous:{x:130,y:75,w:108,h:34}}];
+ const placed=layoutLabels(items,viewport,[body])[0];expect(placed.hidden).toBe(false);expect(overlap(placed.rect,body)).toBe(false);
+ expect(layoutLabels(items,viewport,[{x:0,y:0,w:390,h:250}])[0].hidden).toBe(true);
+});

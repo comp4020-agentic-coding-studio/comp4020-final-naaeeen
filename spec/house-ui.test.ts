@@ -278,3 +278,10 @@ it("keeps the full current location title and clears it at an identity boundary"
  await vi.waitFor(()=>expect(el("title-screen").hidden).toBe(false));
  expect(el("place-label").title).toBe(el("place-label").textContent);expect(el("place-label").title).not.toContain("Robin");
 });
+
+it('keeps Follow, Look and Overview reachable in the world HUD without opening Options',async()=>{
+ await setup();expect(el('camera-hud').closest('[hidden]')).toBeNull();expect(el('panel').hidden).toBe(true);
+ el('camera-hud-look').click();expect(camera.setCameraMode).toHaveBeenLastCalledWith('inspection');expect(el('camera-hud-look').getAttribute('aria-pressed')).toBe('true');
+ el('camera-hud-overview').click();expect(camera.setCameraMode).toHaveBeenLastCalledWith('overview');
+ el('camera-hud-follow').click();expect(camera.setCameraMode).toHaveBeenLastCalledWith('play');expect(el('panel').hidden).toBe(true);
+});

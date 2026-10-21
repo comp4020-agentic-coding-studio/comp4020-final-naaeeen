@@ -214,3 +214,14 @@ and cursor loss during cleared display; both were reproduced, fixed and
 contextually verified (140 isolated checks). Parent typecheck/diff inspection pass.
 See ../post-crit/REVIEW-AND-REFINEMENT.md and the separate refinement artifacts.
 This closes the backend/client foundation, not PC.2 UI/native/resource acceptance.
+
+
+### PC.1 local closure
+
+Camera control/input/native regressions, A/B/C comparison, centered default choice,
+label/body readability and absent-self observer checks now have separate records
+in ../post-crit/evidence/P1-CAMERA.md and P1-B-READABILITY.md. Fresh source review,
+a separate fresh policy review, contextual fixes and parent original-image checks
+are reconciled in ../post-crit/REVIEW-AND-REFINEMENT.md. Final168checks/typecheckpass;
+full-B and finalobserver sources remain separately bound. P2 full-app integration,
+six-user gathering, physical phones and human comfort remain open.

@@ -5,7 +5,7 @@ import { createMovableWindow, createModalFocus } from "./house-shell.js";
 const $ = id => document.getElementById(id);
 function setPlaceLabel(text){const label=$("place-label");label.textContent=text;label.title=text;}
 setPlaceLabel($("place-label").textContent||"");
-const HUD_SAFE_SELECTOR=".world-status,#resident-disclosure,.availability,.toolbelt,#chat-window,.movement,.touch-toggle,.context-hint,#panel,#notice,#takeover";
+const HUD_SAFE_SELECTOR=".world-status,#resident-disclosure,.availability,#camera-hud,.toolbelt,#chat-window,.movement,.touch-toggle,.context-hint,#panel,#notice,#takeover";
 let live = null, me = null, world = null, client = null, activePanel = null;
 let cardDirty = false, cardBase = null, cardProjection=null, roomDraft = null, suspendedDrafts = null;
 let lastScope="", lastIdentityScope="", lastHouseKey="", inspector=null, pendingRequest=0, privacyGeneration=0,bootstrapRequest=0,keyIssuance=null;
@@ -86,8 +86,8 @@ function queueSafeArea(){
  });
 }
 function renderCameraMode(mode=world?.getCameraMode?.()||"play"){
- $("camera-overview").setAttribute("aria-pressed",String(mode==="overview"));
- const ready=Boolean(live&&world?.setCameraMode);for(const id of ["camera-overview","camera-recenter","camera-zoom"])$(id).disabled=!ready;
+ for(const [id,value] of [["camera-hud-follow","play"],["camera-hud-look","inspection"],["camera-hud-overview","overview"],["camera-look","inspection"],["camera-overview","overview"]])$(id).setAttribute("aria-pressed",String(mode===value&&(value!=="inspection"||world?.isCameraLookLocked?.()!==false)));
+ const ready=Boolean(live&&world?.setCameraMode);for(const id of ["camera-overview","camera-look","camera-recenter","camera-zoom","camera-hud-follow","camera-hud-look","camera-hud-overview"])$(id).disabled=!ready||activePanel==="room";
  const zoom=world?.getCameraZoom?.()||1;$("camera-zoom").value=String(zoom);$("camera-zoom-value").textContent=Math.round(zoom*100)+"%";
  $("camera-controls").hidden=activePanel!=="options";$("game-settings").hidden=!live;$("resume-game").hidden=!live;$("return-title").hidden=!live;
  $("pause-description").textContent=live?"Game paused. Your house connection stays live.":"Choose your comfort settings before entering the house.";
@@ -386,8 +386,8 @@ for(const button of document.querySelectorAll("[data-panel]"))button.addEventLis
 $("house-code-button").addEventListener("click",()=>openPanel("house"));
 $("recover-open").addEventListener("click",()=>openPanel("recovery"));
 $("recovery-form").addEventListener("submit",protectedAction(async()=>{await api("/api/house/recover",{proof:$("recovery-proof").value.trim()});invalidateIdentityView();await bootstrap();notice("Your room and saved work are back. Create a new recovery key.");}));
-$("camera-overview").addEventListener("click",()=>{world?.setCameraMode?.("overview");renderCameraMode();queueSafeArea();});
-$("camera-recenter").addEventListener("click",()=>{if(world?.recenterCamera)world.recenterCamera();else world?.setCameraMode?.("play");renderCameraMode();queueSafeArea();});
+for(const [id,mode] of [["camera-overview","overview"],["camera-hud-overview","overview"],["camera-look","inspection"],["camera-hud-look","inspection"]])$(id).addEventListener("click",()=>{world?.setCameraMode?.(mode);renderCameraMode();queueSafeArea();});
+for(const id of ["camera-recenter","camera-hud-follow"])$(id).addEventListener("click",()=>{if(world?.recenterCamera)world.recenterCamera();else world?.setCameraMode?.("play");renderCameraMode();queueSafeArea();});
 $("takeover").addEventListener("click",protectedAction(()=>client.takeover()));
 $("interact").addEventListener("click",()=>world?.interact());
 for(const [id,x,z] of [["move-up",0,-1],["move-down",0,1],["move-left",-1,0],["move-right",1,0]]){

@@ -29,7 +29,7 @@ export function createHouseWorld(container, callbacks = {}) {
   const cameraRig = createHouseCamera({ reducedMotion: reduced });
   let cameraBounds = null, cameraCorners = [], cameraUprightHeight = 1, selfFrameGeometry = null;
   let scene, camera, layout = createLayout(4), live = null, own = { ...layout.spawn }, heading = 0;
-  let inputEnabled = true, editing = false, composing = false, suspended = false, previousEditMode = null, pendingEditFraming = false, gesture = null, direction = { x: 0, z: 0 }, route = [], routeTarget = null;
+  let inputEnabled = true, editing = false, composing = false, suspended = false, pendingEditFraming = false, gesture = null, direction = { x: 0, z: 0 }, route = [], routeTarget = null;
   let lastFrame = null, lastSent = -Infinity, sent = null, renderKey = '', frame = 0, disposed = false, pendingStand = false;
   let motionFlight = null, motionGeneration = 0, acknowledged = false, predictionDistance = 0, motionAnchor = { ...own }, lastSettled = -Infinity;
   let renderDirty = true, lastRender = -Infinity;
@@ -64,7 +64,7 @@ export function createHouseWorld(container, callbacks = {}) {
   function clearScene() {
     selfFrameGeometry = null; renderDirty = true;
     scene?.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); if (o.isLight) o.shadow?.dispose(); });
-    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
+    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; delete canvas.dataset.avatarMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
   }
   function plant(parent, x = 0, z = 0, scale = 1) {
     const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(scale); parent.add(g);
@@ -168,7 +168,7 @@ export function createHouseWorld(container, callbacks = {}) {
       box(2, 0.44, 3, 0, 0.25, 0, '#a98b69', g); box(1.86, 0.26, 2.83, 0, 0.6, 0, '#f0e6d2', g); box(1.86, 0.11, 1.77, 0, 0.78, 0.48, accent, g);
       box(2, 0.96, 0.13, 0, 0.51, -1.43, '#a98b69', g); box(1.01, 0.13, 0.57, 0, 0.8, -0.96, '#faf1df', g);
     }
-    pickable(g, { type: 'placement', id: p.id });
+    pickable(g, { type: 'placement', id: p.id, ...(p.kind === 'chair' ? { seatId: p.id } : {}) });
   }
   function bedroom() {
     roomPlacements().forEach(furniture);
@@ -247,7 +247,8 @@ export function createHouseWorld(container, callbacks = {}) {
     cameraRig.configure({ width: Math.max(container.clientWidth, 1), height: Math.max(container.clientHeight, 1), bounds: cameraBounds, uprightHeight: cameraUprightHeight, viewport: safeArea?.viewport, safeRects: safeArea?.safeRects ?? [] });
   }
   function cameraModeChanged() { callbacks.onCameraModeChange?.(cameraRig.getMode()); }
-  function setCameraMode(mode) { if (cameraRig.setMode(mode)) { updateCamera(0); cameraModeChanged(); } }
+  function walkingIntent() { if (cameraRig.walkingIntent()) { updateCamera(0); cameraModeChanged(); } }
+  function setCameraMode(mode) { if (editing) return; if (cameraRig.setMode(mode)) { updateCamera(0); cameraModeChanged(); } }
   function updateCamera(dt) {
     if (!camera) return;
     const seated = !!self()?.seatId || self()?.animation === 'sit';
@@ -259,7 +260,7 @@ export function createHouseWorld(container, callbacks = {}) {
     camera.left = value.left; camera.right = value.right; camera.top = value.top; camera.bottom = value.bottom; camera.updateProjectionMatrix();
     if (changed) renderDirty = true;
     if (value.changed) layoutDirty = true;
-    canvas.dataset.cameraMode = value.mode; canvas.dataset.cameraZoom = String(value.zoom); canvas.dataset.cameraPlayArea = JSON.stringify(value.area);
+    canvas.dataset.cameraMode = value.mode; canvas.dataset.cameraInspection = value.mode === 'inspection' ? (cameraRig.isInspectionLocked() ? 'locked' : 'temporary') : 'none'; canvas.dataset.cameraZoom = String(value.zoom); canvas.dataset.cameraPlayArea = JSON.stringify(value.area);
     const projected = cameraCorners.map(p => ({ x: (p.x - camera.left) * value.pxPerUnit, y: (camera.top - p.y) * value.pxPerUnit }));
     canvas.dataset.worldLeft = Math.min(...projected.map(p => p.x)).toFixed(1); canvas.dataset.worldRight = Math.max(...projected.map(p => p.x)).toFixed(1);
     canvas.dataset.worldTop = Math.min(...projected.map(p => p.y)).toFixed(1); canvas.dataset.worldBottom = Math.max(...projected.map(p => p.y)).toFixed(1);
@@ -293,6 +294,7 @@ export function createHouseWorld(container, callbacks = {}) {
     if (!canControl() || self()?.seatId) return false;
     const target = targets().find(t => t.type === request.type && (request.slot === undefined || t.slot === request.slot) && (request.seatId === undefined || t.seatId === request.seatId));
     if (!target) return false;
+    walkingIntent();
     const found = findRoute(layout, own, target.point); if (!found) return false;
     route = found; routeTarget = target; keys.clear(); direction = { x: 0, z: 0 }; return true;
   }
@@ -450,6 +452,21 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function recordProjection() {
     canvas.dataset.pickTargets = JSON.stringify(pickTargets.map(entry => { const point = entry.point.clone().project(camera); return { target: entry.target, x: (point.x * 0.5 + 0.5) * container.clientWidth, y: (-point.y * 0.5 + 0.5) * container.clientHeight, visible: point.x >= -1 && point.x <= 1 && point.y >= -1 && point.y <= 1 && point.z >= -1 && point.z <= 1 }; }));
+    // Reuse self framing, then measure at most five peers in this same articulated frame.
+    const scaleX = container.clientWidth / (camera.right - camera.left), scaleY = container.clientHeight / (camera.top - camera.bottom), bodies = [];
+    for (const [id, actor] of avatars) {
+      const geometry = id === live?.durable.selfId ? selfFrameGeometry ?? measureSelfGeometry() : measureAvatarGeometry(actor);
+      if (!geometry) continue;
+      const bounds = geometry.mesh, rect = {
+        x: (bounds.minX - camera.left) * scaleX, y: (camera.top - bounds.maxY) * scaleY,
+        w: (bounds.maxX - bounds.minX) * scaleX, h: (bounds.maxY - bounds.minY) * scaleY,
+      };
+      if (!actor.screenBodyRect || ['x', 'y', 'w', 'h'].some(key => Math.abs(rect[key] - actor.screenBodyRect[key]) > 0.001)) layoutDirty = true;
+      actor.screenBodyRect = rect;
+      const body = { id, left: rect.x, top: rect.y, right: rect.x + rect.w, bottom: rect.y + rect.h }; bodies.push(body);
+      if (id === live?.durable.selfId) canvas.dataset.selfMeshBounds = JSON.stringify({ left: body.left, top: body.top, right: body.right, bottom: body.bottom });
+    }
+    canvas.dataset.avatarMeshBounds = JSON.stringify(bodies);
     const entry = avatars.get(live?.durable.selfId);
     if (!entry) { for (const key of ['selfScreenX', 'selfScreenY', 'selfAvatarHeight', 'selfMeshBounds']) delete canvas.dataset[key]; return; }
     const head = new THREE.Vector3(entry.x, AVATAR_HEIGHT + entry.root.position.y, entry.z).project(camera);
@@ -457,19 +474,9 @@ export function createHouseWorld(container, callbacks = {}) {
     canvas.dataset.selfScreenX = ((head.x * 0.5 + 0.5) * container.clientWidth).toFixed(2);
     canvas.dataset.selfScreenY = (((-head.y - foot.y) * 0.25 + 0.5) * container.clientHeight).toFixed(2);
     canvas.dataset.selfAvatarHeight = (Math.abs(head.y - foot.y) * container.clientHeight / 2).toFixed(2);
-    // Reuse the exact camera-view mesh pass used by framing in this same posed frame.
-    const geometry = selfFrameGeometry ?? measureSelfGeometry();
-    if (!geometry) { delete canvas.dataset.selfMeshBounds; return; }
-    const scaleX = container.clientWidth / (camera.right - camera.left), scaleY = container.clientHeight / (camera.top - camera.bottom);
-    const bounds = geometry.mesh;
-    canvas.dataset.selfMeshBounds = JSON.stringify({
-      left: (bounds.minX - camera.left) * scaleX, right: (bounds.maxX - camera.left) * scaleX,
-      top: (camera.top - bounds.maxY) * scaleY, bottom: (camera.top - bounds.minY) * scaleY,
-    });
   }
-  function measureSelfGeometry() {
-    const entry = avatars.get(live?.durable.selfId);
-    if (!entry || !camera) { selfFrameGeometry = null; return null; }
+  function measureAvatarGeometry(entry) {
+    if (!entry || !camera) return null;
     entry.root.updateMatrixWorld(true);
     const view = camera.matrixWorldInverse;
     const centre = new THREE.Vector3(entry.x, AVATAR_HEIGHT / 2 + entry.root.position.y, entry.z).applyMatrix4(view);
@@ -485,12 +492,14 @@ export function createHouseWorld(container, callbacks = {}) {
         mesh.minY = Math.min(mesh.minY, vertex.y); mesh.maxY = Math.max(mesh.maxY, vertex.y);
       }
     });
-    // The contract includes actual limbs/ring and the upright head/foot diagnostic.
     const extents = {
       minX: Math.min(mesh.minX, head.x, foot.x) - centre.x, maxX: Math.max(mesh.maxX, head.x, foot.x) - centre.x,
       minY: Math.min(mesh.minY, head.y, foot.y) - centre.y, maxY: Math.max(mesh.maxY, head.y, foot.y) - centre.y,
     };
-    selfFrameGeometry = { centre, mesh, extents }; return selfFrameGeometry;
+    return { centre, mesh, extents };
+  }
+  function measureSelfGeometry() {
+    selfFrameGeometry = measureAvatarGeometry(avatars.get(live?.durable.selfId)); return selfFrameGeometry;
   }
   function updateSpeech(now) {
     const visible = speech.visible(now), byAuthor = new Map(visible.map((preview, index) => [preview.authorId, { ...preview, rank: index }]));
@@ -510,19 +519,20 @@ export function createHouseWorld(container, callbacks = {}) {
     // Batched dimension reads happen only after text/style changes, never once per label per frame.
     const measurements = labels.filter(item => item.sizeDirty && !item.el.hidden).map(item => ({ item, rect: item.el.getBoundingClientRect() }));
     for (const { item, rect } of measurements) { if (rect.width > 0 && rect.height > 0) item.size = { w: rect.width, h: rect.height }; item.sizeDirty = false; }
-    const people = [], blockers = [...(safeArea?.safeRects ?? [])];
+    const bodies = [...avatars.values()].map(actor => actor.screenBodyRect).filter(Boolean);
+    const people = [], blockers = [...(safeArea?.safeRects ?? []), ...bodies];
     for (const item of labels) {
       const vector = typeof item.point === 'function' ? item.point() : item.point.clone(); vector.project(camera);
       const x = (vector.x * 0.5 + 0.5) * width, y = (-vector.y * 0.5 + 0.5) * height;
-      const dynamic = item.kind === 'avatar' || item.kind === 'chat-bubble';
+      const dynamic = item.kind === 'avatar' || item.kind === 'chat-bubble' || item.kind === 'context';
       if (dynamic) {
         if (item.el.hidden || vector.z < -1 || vector.z > 1 || vector.x < -1 || vector.x > 1 || vector.y < -1 || vector.y > 1) { item.el.style.visibility = 'hidden'; item.line.style.display = 'none'; continue; }
-        people.push({ id: item.kind + ':' + item.el.dataset.playerId, item, anchor: { x, y }, ...item.size, priority: item.kind === 'avatar' ? 100 : 50 - Number(item.el.dataset.rank ?? 0), previous: item.previous && item.previousAnchor ? { ...item.previous, x: item.previous.x + x - item.previousAnchor.x + (item.previous.w - item.size.w) / 2, y: item.previous.y + y - item.previousAnchor.y + item.previous.h - item.size.h, ...item.size } : null });
+        people.push({ id: item.kind + ':' + (item.el.dataset.playerId ?? 'self'), item, anchor: { x, y }, ...item.size, priority: item.kind === 'context' ? 110 : item.kind === 'avatar' ? 100 : 50 - Number(item.el.dataset.rank ?? 0), previous: item.previous && item.previousAnchor ? { ...item.previous, x: item.previous.x + x - item.previousAnchor.x + (item.previous.w - item.size.w) / 2, y: item.previous.y + y - item.previousAnchor.y + item.previous.h - item.size.h, ...item.size } : null });
       } else {
         const left = Math.max(item.size.w / 2 + 8, Math.min(width - item.size.w / 2 - 8, x));
         item.el.style.left = left + 'px'; item.el.style.top = y + 'px';
         const rect = { x: left - item.size.w / 2, y: y - item.size.h, ...item.size }, clip = safeArea?.viewport ?? { left: 8, top: 65, right: width - 8, bottom: height - 65 };
-        const occluded = (safeArea?.safeRects ?? []).some(control => rect.x < control.x + control.w + 5 && rect.x + rect.w + 5 > control.x && rect.y < control.y + control.h + 5 && rect.y + rect.h + 5 > control.y);
+        const occluded = [...(safeArea?.safeRects ?? []), ...bodies].some(control => rect.x < control.x + control.w + 5 && rect.x + rect.w + 5 > control.x && rect.y < control.y + control.h + 5 && rect.y + rect.h + 5 > control.y);
         const visible = !item.el.hidden && vector.z >= -1 && vector.z <= 1 && vector.x >= -1 && vector.x <= 1 && vector.y >= -1 && vector.y <= 1 && rect.x >= clip.left && rect.y >= clip.top && rect.x + rect.w <= clip.right && rect.y + rect.h <= clip.bottom && !occluded;
         item.el.style.visibility = visible ? 'visible' : 'hidden';
         if (visible && ['door', 'own-door', 'board', 'exit', 'context'].includes(item.kind)) blockers.push(rect);
@@ -539,15 +549,19 @@ export function createHouseWorld(container, callbacks = {}) {
       item.el.style.left = placed.rect.x + placed.rect.w / 2 + 'px'; item.el.style.top = placed.rect.y + placed.rect.h + 'px';
       item.el.dataset.labelX = placed.rect.x.toFixed(1); item.el.dataset.labelY = placed.rect.y.toFixed(1);
       const endX = placed.rect.x + placed.rect.w / 2, endY = placed.rect.y + placed.rect.h;
-      const shifted = !placed.hidden && Math.hypot(endX - placed.anchor.x, endY - placed.anchor.y) > 8;
+      const lineRect = { x: Math.min(endX, placed.anchor.x), y: Math.min(endY, placed.anchor.y), w: Math.max(0.001, Math.abs(endX - placed.anchor.x)), h: Math.max(0.001, Math.abs(endY - placed.anchor.y)) };
+      // A conservative segment box prevents leader strokes painting across a body.
+      const crossesBody = bodies.some(body => lineRect.x < body.x + body.w && lineRect.x + lineRect.w > body.x && lineRect.y < body.y + body.h && lineRect.y + lineRect.h > body.y);
+      const shifted = !placed.hidden && !crossesBody && Math.hypot(endX - placed.anchor.x, endY - placed.anchor.y) > 8;
       item.line.style.display = shifted ? '' : 'none'; item.line.setAttribute('x1', String(endX)); item.line.setAttribute('y1', String(endY)); item.line.setAttribute('x2', String(placed.anchor.x)); item.line.setAttribute('y2', String(placed.anchor.y));
     }
     layoutDirty = false; lastLabelLayout = time;
   }
   function keydown(event) {
     if (event.isComposing || composing || typing(event.target) || !canControl()) return;
+    if (event.target instanceof HTMLElement && event.target !== canvas && event.target.closest('#chat-window,#panel,#board-workspace,[role=slider],[role=spinbutton]')) return;
     const key = KEY[event.key] ? event.key : event.key.toLowerCase();
-    if (KEY[key]) { event.preventDefault(); keys.add(key); }
+    if (KEY[key]) { event.preventDefault(); walkingIntent(); keys.add(key); }
     else if (key === 'e' && !event.repeat) { event.preventDefault(); interact(); }
   }
   function keyup(event) { const key = KEY[event.key] ? event.key : event.key.toLowerCase(); keys.delete(key); }
@@ -565,10 +579,11 @@ export function createHouseWorld(container, callbacks = {}) {
       if (selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); renderDirty = true; }
       const placement = roomPlacements().find(p => p.id === target.id); if (!placement) return;
       const rect = footprint(placement); selection = new THREE.Mesh(new THREE.BoxGeometry(rect.w + 0.1, 0.025, rect.d + 0.1), new THREE.MeshBasicMaterial({ color: '#fff1bd', wireframe: true })); selection.position.set(rect.x, 0.08, rect.z); scene.add(selection); renderDirty = true;
-    } else if (!editing && target.type !== 'placement') approach(target);
+    } else if (!editing && target.type === 'placement' && target.seatId) approach({ type: 'seat', seatId: target.seatId });
+    else if (!editing && target.type !== 'placement') approach(target);
   }
   function pointerdown(event) {
-    if (suspended || !live || composing || (event.button !== undefined && ![0, 1, 2].includes(event.button))) return;
+    if (gesture || event.isPrimary === false || suspended || !live || composing || (event.button !== undefined && ![0, 1, 2].includes(event.button))) return;
     canvas.focus({ preventScroll: true });
     gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, startX: event.clientX, startY: event.clientY, dragging: event.button === 1 || event.button === 2 };
     canvas.setPointerCapture?.(event.pointerId);
@@ -587,7 +602,11 @@ export function createHouseWorld(container, callbacks = {}) {
     if (canvas.hasPointerCapture?.(event.pointerId)) canvas.releasePointerCapture?.(event.pointerId);
     if (click) pick(event);
   }
-  function pointercancel() { gesture = null; }
+  function pointercancel(event) {
+    if (!gesture || event && event.pointerId !== gesture.id) return;
+    const id = gesture.id; gesture = null;
+    if (canvas.hasPointerCapture?.(id)) canvas.releasePointerCapture?.(id);
+  }
   function wheel(event) {
     if (suspended || !live || composing) return;
     // Listener belongs to the canvas: wheel events on chat/settings never zoom the world.
@@ -596,34 +615,34 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function setSuspended(value) {
     if (suspended === !!value) return;
-    suspended = !!value; clearInput(); gesture = null; lastFrame = null;
+    suspended = !!value; clearInput(); pointercancel(); lastFrame = null;
     if (suspended) cancelAnimationFrame(frame);
     else if (!disposed) { renderDirty = true; frame = requestAnimationFrame(animate); }
     canvas.dataset.suspended = String(suspended);
   }
-  const listeners = [[window, 'keydown', keydown], [window, 'keyup', keyup], [window, 'blur', clearInput], [document, 'focusin', focusin], [document, 'visibilitychange', () => { if (document.hidden) clearInput(); }], [document, 'compositionstart', compositionstart], [document, 'compositionend', compositionend], [canvas, 'pointerdown', pointerdown], [canvas, 'pointermove', pointermove], [canvas, 'pointerup', pointerup], [canvas, 'pointercancel', pointercancel], [canvas, 'wheel', wheel], [canvas, 'contextmenu', event => event.preventDefault()], [window, 'resize', resize]];
+  const listeners = [[window, 'keydown', keydown], [window, 'keyup', keyup], [window, 'blur', clearInput], [document, 'focusin', focusin], [document, 'visibilitychange', () => { if (document.hidden) clearInput(); }], [document, 'compositionstart', compositionstart], [document, 'compositionend', compositionend], [canvas, 'pointerdown', pointerdown], [canvas, 'pointermove', pointermove], [canvas, 'pointerup', pointerup], [canvas, 'pointercancel', pointercancel], [canvas, 'lostpointercapture', pointercancel], [canvas, 'wheel', wheel], [canvas, 'contextmenu', event => event.preventDefault()], [window, 'resize', resize]];
   listeners.forEach(([element, type, listener]) => element.addEventListener(type, listener));
   const observer = new ResizeObserver(resize); observer.observe(container);
   rebuild(); frame = requestAnimationFrame(animate);
   return {
-    update, resize, interact, approach, setCameraMode, getCameraMode: () => cameraRig.getMode(),
+    update, resize, interact, approach, setCameraMode, getCameraMode: () => cameraRig.getMode(), isCameraLookLocked: () => cameraRig.isInspectionLocked(),
     setCameraZoom(value) { if (cameraRig.setZoom(value)) { updateCamera(0); layoutDirty = true; return true; } return false; },
     getCameraZoom: () => cameraRig.getZoom(),
-    recenterCamera() { cameraRig.recenter(); updateCamera(0); cameraModeChanged(); },
+    recenterCamera() { if (editing) return; cameraRig.recenter(); updateCamera(0); cameraModeChanged(); },
     setReducedMotion(value) { reduced = !!value; cameraRig.setReducedMotion(reduced); },
     setSuspended,
     setLabelSafeArea(value) { const nextArea = value ? { viewport: value.viewport ? { ...value.viewport } : null, safeRects: (value.safeRects ?? []).map(rect => ({ ...rect })) } : null; if (pendingEditFraming || JSON.stringify(nextArea) !== JSON.stringify(safeArea)) { safeArea = nextArea; configureCamera(); if (pendingEditFraming) { cameraRig.reset(); pendingEditFraming = false; } updateCamera(0); layoutDirty = true; } },
     setRoomPreview(placements) { previewPlacements = placements === null ? null : placements.map(p => ({ ...p })); if (live?.durable.room) rebuild(); },
     getPosition: () => ({ ...own }),
-    setDirection(x, z) { if (suspended || !Number.isFinite(x) || !Number.isFinite(z)) return; if ((x || z) && inputEnabled && live?.controller && !editing) canvas.focus({ preventScroll: true }); route = []; routeTarget = null; direction = { x: Math.max(-1, Math.min(1, x)), z: Math.max(-1, Math.min(1, z)) }; },
+    setDirection(x, z) { if (suspended || !Number.isFinite(x) || !Number.isFinite(z)) return; if (x || z) { if (!canControl()) return; canvas.focus({ preventScroll: true }); walkingIntent(); } route = []; routeTarget = null; direction = { x: Math.max(-1, Math.min(1, x)), z: Math.max(-1, Math.min(1, z)) }; },
     setInputEnabled(value) { inputEnabled = !!value; if (!inputEnabled) clearInput(); },
     setEditing(value) { const changed = editing !== !!value; editing = !!value; clearInput(); if (changed) {
-        if (editing) { pendingEditFraming = false; previousEditMode = cameraRig.getMode(); cameraRig.setMode('inspection'); }
+        if (editing) { pendingEditFraming = false; cameraRig.setMode('inspection'); }
         else {
-          const restoreMode = previousEditMode ?? 'play'; cameraRig.setMode(restoreMode);
+          cameraRig.setMode('play');
           // UI closes the editor before its next HUD measurement removes the panel.
           // Refitting belongs to that explicit editing handoff, not a movable chat window.
-          pendingEditFraming = restoreMode !== 'inspection'; previousEditMode = null;
+          pendingEditFraming = true;
         }
         updateCamera(0); cameraModeChanged();
       } if (!editing && selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); selection = null; renderDirty = true; } },

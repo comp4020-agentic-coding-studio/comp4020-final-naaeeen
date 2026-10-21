@@ -385,3 +385,16 @@ visible state. Room-route validity also does not establish furniture usability:
 new starter layouts need front-facing desk/chair assertions and rendered pose
 checks, beyond collision-free paths. Initial and corrected bindings remain in the
 post-Crit evidence; successful foundation checks do not accept the unfinished UI.
+
+
+### Observed P1 camera and evaluator corrections
+
+A test helper that always focuses the canvas can hide HUD-to-keyboard regressions;
+exercise ordinary focus transitions and expanded controls. A visible actor bounding
+box does not prove an unobscured character: inspect original-resolution images and
+measure labels against the actual posed bodies, including observer views with no
+self mesh. Synchronize projected native targets with RAF and wait for real seat/
+stand acknowledgements before chaining actions. Preserve failed/aborted attempts.
+Choose a camera for the user task, not minimum travel alone. Later narrow source
+fixes get affected checks with exact bindings; do not repeat every passing route
+or claim the earlier full run occurred on a newer hash.

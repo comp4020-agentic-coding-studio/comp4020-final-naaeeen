@@ -88,3 +88,42 @@ The first staged whitespace check flagged a literal blank context line in a froz
 unified-diff evidence file. Preserve that byte-exact patch and classify only these
 evidence patches in .gitattributes; do not trim its context or change runtime rules.
 The subsequent staged check must pass. Credential scanning remains unchanged.
+
+
+## P1 closure: control behavior, camera choice and readable people
+
+The first fresh Astra/xhigh source review found two regressions missed by the
+initial scripted task: focused HUD buttons prevented walking, and the expanded
+landscape movement pad covered Follow. Native negative cases reproduced both.
+The worker narrowed input isolation, preserved keyboard focus, moved short-height
+controls and tested real pointer IDs/cancellation. Contextual review accepted the
+fixes after inspecting current hashes and native results.
+
+A separate history-free Astra/max policy review examined original-resolution A/B/C
+images and measurements without the earlier preferred winner. It selected centered
+Follow B for the owner's requested player anchor. Both A/B had passed mechanics;
+less camera movement did not determine the choice. B's greater framing travel is
+an explicit cost. C remains Overview, with 21.24/11.33px portrait actors unsuitable
+for the declared default prominence target. No human preference was measured.
+
+Parent and policy reviewer also saw labels covering heads/torsos despite a passing
+72px bounding box. Predeclared body/label checks then failed. Actual posed body
+rectangles now constrain the existing label packer. A later no-self observer case
+exposed an early-return gap: two peer fixtures produced zero exclusions. The
+bounded correction measures peers before optional self diagnostics. The final
+168 tests and direct typecheck pass; fresh review plus contextual refinements find
+no remaining scoped implementation blocker.
+
+Full B four-view/reduced-motion and touch checks remain bound to world aaafa3df;
+the final observer-only change is world b4e88e4b. Its affected native observer cases
+pass portrait/landscape with 12 audited samples each and a current controller
+smoke. Parent inspected original-resolution Robin/Taylor and observer screenshots:
+bodies are clear and labels/messages attributable. Long shared-prefix names still
+need roster/full-text fallback. These are real independent browser identities,
+not human preference or physical-device trials. The final manifest keeps the two
+source scopes separate and preserves exact original comparison source bytes.
+
+P1 is accepted for a local commit and P2 UI handoff. Its isolated backend is d95055b;
+whole-app acceptance against the separately committed P2 backend and the future
+lounge/game remains open. No historical coverage percentage was relabelled as a
+new observer-run measurement. P2 retains the separate bedroom chair-pose correction.

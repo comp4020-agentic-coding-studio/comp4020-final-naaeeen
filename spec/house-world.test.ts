@@ -1,13 +1,13 @@
 import { JSDOM } from "jsdom";
 import { afterEach, expect, it, vi } from "vitest";
-import { Box3 } from "three";
+import { Box3, Raycaster, Vector3 } from "three";
 const rendered = vi.hoisted(()=>({ scene: null as any, camera: null as any, count: 0 }));
 vi.mock("three",async importOriginal=>{
  const actual=await importOriginal<any>();
  class Renderer { shadowMap:any={}; outputColorSpace:any; toneMapping:any; toneMappingExposure:any; setPixelRatio(){} setSize(){} render(scene:any,camera:any){rendered.scene=scene;rendered.camera=camera;rendered.count++;} dispose(){} }
  return {...actual,WebGLRenderer:Renderer};
 });
-import { createLayout, bedroomLayout, slide, footprint, CAMERA_ORIENTATION, SEATED_LIFT } from '../public/house-geometry.js';
+import { createLayout, bedroomLayout, slide, footprint, CAMERA_ORIENTATION, AVATAR_RADIUS, SEATED_LIFT } from '../public/house-geometry.js';
 import { createHouseWorld } from "../public/house-world.js";
 const cleanups: (()=>void)[]=[];
 afterEach(()=>{for(const f of cleanups.splice(0))f();vi.unstubAllGlobals();});
@@ -214,11 +214,10 @@ it('restores framing after the room editor closes before its next HUD report',()
   const f=speechFixture(width,height);f.world.update(f.snapshot);f.step(0);
   const canvas=f.container.querySelector<HTMLCanvasElement>('canvas')!;
   const base={viewport:{left:8,top:128,right:width-8,bottom:height===844?740:403},safeRects:[]};
-  f.world.setLabelSafeArea(base);f.world.setCameraMode(mode);f.step(100);
-  const beforeHeight=Number(canvas.dataset.selfAvatarHeight);
+  f.world.setLabelSafeArea(base);f.step(50);const beforeHeight=Number(canvas.dataset.selfAvatarHeight);f.world.setCameraMode(mode);f.step(100);
   f.world.setEditing(true);f.world.setLabelSafeArea({...base,safeRects:[{x:0,y:180,w:width,h:height-180}]});f.step(200);
   f.world.setEditing(false);f.world.setLabelSafeArea(base);f.step(300);
-  expect(f.world.getCameraMode()).toBe(mode);
+  expect(f.world.getCameraMode()).toBe('play');
   const mesh=JSON.parse(canvas.dataset.selfMeshBounds!),area=JSON.parse(canvas.dataset.cameraPlayArea!);
   expect(mesh.top,width+'x'+height+' '+mode+' top').toBeGreaterThanOrEqual(area.y-.001);
   expect(mesh.bottom,width+'x'+height+' '+mode+' bottom').toBeLessThanOrEqual(area.y+area.h+.001);
@@ -490,7 +489,7 @@ it('redraws projection controls and resize before the next idle draw is due',()=
  canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:120,clientY:300,button:2,bubbles:true}));
  canvas.dispatchEvent(new window.MouseEvent('pointermove',{clientX:170,clientY:300,button:2,bubbles:true}));
  canvas.dispatchEvent(new window.MouseEvent('pointerup',{clientX:170,clientY:300,button:2,bubbles:true}));
- f.step(30);expect(f.renders()).toBe(4);expect(f.world.getCameraMode()).toBe('inspection');
+ f.step(30);expect(f.renders()).toBe(4);expect(f.world.getCameraMode()).toBe('overview');
  Object.defineProperty(f.container,'clientWidth',{value:701,configurable:true});f.world.resize();f.step(40);expect(f.renders()).toBe(5);
  f.world.recenterCamera();f.step(50);expect(f.renders()).toBe(6);
 });
@@ -643,4 +642,144 @@ it('bounds prediction when transport is busy after a same-room authority correct
  for(let time=200;time<=1200;time+=100)f.step(time);
  expect(Math.hypot(f.world.getPosition().x-authority.x,f.world.getPosition().z-authority.z)).toBeLessThanOrEqual(.65001);
  busy=false;f.step(1300);expect(moves).toHaveLength(2);expect(Math.hypot(f.world.getPosition().x-authority.x,f.world.getPosition().z-authority.z)).toBeGreaterThan(.1);
+});
+
+it('resumes follow on intentional walking after a temporary primary drag',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const canvas=f.container.querySelector('canvas')!;
+ canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:120,clientY:300,button:0,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointermove',{clientX:127,clientY:300,button:0,bubbles:true}));
+ canvas.dispatchEvent(new window.MouseEvent('pointerup',{clientX:127,clientY:300,button:0,bubbles:true}));
+ expect(f.world.getCameraMode()).toBe('inspection');
+ f.world.setDirection(-1,0);f.step(100);
+ expect(f.world.getCameraMode()).toBe('play');
+});
+
+function temporaryPan(f:ReturnType<typeof speechFixture>, pixels=7){
+ const canvas=f.container.querySelector('canvas')!;
+ for(const [name,x] of [['pointerdown',120],['pointermove',120+pixels],['pointerup',120+pixels]] as const)canvas.dispatchEvent(new window.MouseEvent(name,{clientX:x,clientY:300,button:0,bubbles:true}));
+ return canvas;
+}
+it.each(['keyboard','touch','route'])('resumes temporary inspection on %s intent before any actual displacement',kind=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);temporaryPan(f);expect(f.world.getCameraMode()).toBe('inspection');
+ if(kind==='keyboard')window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true}));
+ if(kind==='touch')f.world.setDirection(-1,0);
+ if(kind==='route')expect(f.world.approach({type:'door',slot:0})).toBe(true);
+ expect(f.world.getCameraMode()).toBe('play');
+});
+it.each(['inspection','overview'])('retains explicit %s during walking and restores Follow after editing',mode=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);f.world.setCameraMode(mode);f.world.setDirection(-1,0);f.step(100);
+ expect(f.world.getCameraMode()).toBe(mode);f.world.setEditing(true);f.step(200);const before=f.container.querySelector('canvas')!.dataset.worldLeft;
+ f.world.setDirection(1,0);f.step(400);expect(f.container.querySelector('canvas')!.dataset.worldLeft).toBe(before);
+ f.world.setEditing(false);expect(f.world.getCameraMode()).toBe('play');
+});
+it.each(['correction','seat','takeover'])('does not treat a %s snapshot as walking intent',kind=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);temporaryPan(f);
+ const next=structuredClone(f.snapshot);if(kind==='correction')next.players[0].x=4;if(kind==='seat')Object.assign(next.players[0],{seatId:'seat-1',animation:'sit'});if(kind==='takeover')next.generation++;
+ f.world.update(next);f.step(100);expect(f.world.getCameraMode()).toBe('inspection');
+});
+it('releases cancelled pointer capture and ignores subsequent stale move/up events',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);const canvas=temporaryPan(f);
+ Object.defineProperty(canvas,'hasPointerCapture',{value:vi.fn(()=>true)});const release=vi.fn();Object.defineProperty(canvas,'releasePointerCapture',{value:release});
+ canvas.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:120,clientY:300,bubbles:true}));canvas.dispatchEvent(new window.MouseEvent('pointercancel',{bubbles:true}));
+ expect(release).toHaveBeenCalled();f.world.recenterCamera();canvas.dispatchEvent(new window.MouseEvent('pointermove',{clientX:240,clientY:300,bubbles:true}));expect(f.world.getCameraMode()).toBe('play');
+});
+it('chair placement clicks use the existing routed authoritative seat interaction',()=>{
+ const actions=vi.fn(),f=speechFixture(390,844,{onInteract:actions}),state=structuredClone(f.snapshot);
+ state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'chair-id',kind:'chair',x:0,z:0,rotation:0,colour:'sage'}]};
+ for(const p of state.players)Object.assign(p,{zoneId:'room0',x:0,z:3});f.world.update(state);f.step(0);
+ let picked:any;rendered.scene.traverse((o:any)=>{if(o.userData.target?.id==='chair-id')picked=o;});expect(picked).toBeTruthy();
+ const ray=vi.spyOn(Raycaster.prototype,'intersectObjects').mockReturnValue([{object:picked}] as any);
+ try{temporaryPan(f,0);for(let t=100;t<=3000;t+=100)f.step(t);expect(actions).toHaveBeenCalledWith({type:'seat',seatId:'chair-id'});}finally{ray.mockRestore();}
+});
+
+it('does not resume inspection or walk from typing, chat handle arrows or a disabled tool',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);temporaryPan(f);const before=f.world.getPosition();
+ const input=document.createElement('input');document.body.append(input);input.focus();input.dispatchEvent(new window.KeyboardEvent('keydown',{key:'a',bubbles:true}));f.world.setDirection(-1,0);f.step(100);
+ expect(f.world.getCameraMode()).toBe('inspection');expect(f.world.getPosition()).toEqual(before);
+ const handle=document.createElement('div');handle.id='chat-window';handle.tabIndex=0;document.body.append(handle);handle.focus();handle.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true}));f.step(200);
+ expect(f.world.getPosition()).toEqual(before);expect(f.world.getCameraMode()).toBe('inspection');f.world.setInputEnabled(false);f.world.setDirection(-1,0);f.step(300);expect(f.world.getCameraMode()).toBe('inspection');
+});
+it.each([0,5])('keeps a %spx primary gesture as a click without entering inspection',pixels=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);temporaryPan(f,pixels);expect(f.world.getCameraMode()).toBe('play');
+});
+
+it.each([0,1,2,3])('projects a solid clickable chair surface for actual ray picking at rotation %s',rotation=>{
+ const actions=vi.fn(),f=speechFixture(390,844,{onInteract:actions}),state=structuredClone(f.snapshot);
+ state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'chair-id',kind:'chair',x:-5,z:-3,rotation,colour:'sage'}]};
+ for(const p of state.players)Object.assign(p,{zoneId:'room0',x:0,z:3});f.world.update(state);f.world.setCameraMode('overview');f.step(0);
+ const canvas=f.container.querySelector('canvas')!;Object.defineProperty(canvas,'getBoundingClientRect',{value:()=>({left:0,top:0,width:390,height:844})});
+ const point=JSON.parse(canvas.dataset.pickTargets!).find((p:any)=>p.target.id==='chair-id');expect(point?.visible).toBe(true);
+ for(const name of ['pointerdown','pointerup'])canvas.dispatchEvent(new window.MouseEvent(name,{clientX:point.x,clientY:point.y,button:0,bubbles:true}));
+ for(let t=100;t<=10000;t+=100)f.step(t);expect(actions).toHaveBeenCalledWith({type:'seat',seatId:'chair-id'});
+});
+
+it.each(['camera-hud-follow','pause-button'])('accepts intentional walking from the ordinary %s HUD focus without stealing it',id=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);temporaryPan(f);
+ const button=document.createElement('button');button.id=id;document.body.append(button);button.focus();const before=f.world.getPosition();
+ button.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true,cancelable:true}));f.step(100);
+ expect(f.world.getCameraMode()).toBe('play');expect(f.world.getPosition()).not.toEqual(before);expect(document.activeElement).toBe(button);
+});
+
+it('resumes temporary Follow on a walking attempt blocked by both room boundaries',()=>{
+ const f=speechFixture(),layout=createLayout(6);Object.assign(f.snapshot.players[0],{x:layout.width/2-AVATAR_RADIUS,z:-layout.depth/2+AVATAR_RADIUS});
+ f.world.update(f.snapshot);f.step(0);temporaryPan(f);const before=f.world.getPosition();f.world.setDirection(1,0);f.step(100);
+ expect(f.world.getPosition()).toEqual(before);expect(f.world.getCameraMode()).toBe('play');
+});
+
+it('keeps one real pointer identity through secondary pointers, cancellation and stale releases',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);const canvas=f.container.querySelector('canvas')!;
+ const captured=new Set<number>(),release=vi.fn((id:number)=>captured.delete(id));Object.defineProperty(canvas,'setPointerCapture',{value:(id:number)=>captured.add(id)});Object.defineProperty(canvas,'hasPointerCapture',{value:(id:number)=>captured.has(id)});Object.defineProperty(canvas,'releasePointerCapture',{value:release});
+ const dispatch=(type:string,id:number,x=120)=>{const event=new window.MouseEvent(type,{clientX:x,clientY:300,button:0,bubbles:true});Object.defineProperty(event,'pointerId',{value:id});canvas.dispatchEvent(event);};
+ dispatch('pointerdown',41);dispatch('pointerdown',42);dispatch('pointermove',42,180);dispatch('pointerup',42);dispatch('pointercancel',42);
+ expect(f.world.getCameraMode()).toBe('play');expect(captured).toEqual(new Set([41]));dispatch('pointermove',41,127);expect(f.world.getCameraMode()).toBe('inspection');
+ dispatch('pointercancel',41);expect(release).toHaveBeenCalledWith(41);expect(captured.size).toBe(0);f.world.recenterCamera();dispatch('pointermove',41,200);dispatch('pointerup',41);expect(f.world.getCameraMode()).toBe('play');
+});
+
+function readableLabels(f:ReturnType<typeof speechFixture>){
+ const dimensions=new Map<HTMLElement,{w:number,h:number}>();
+ for(const el of f.container.querySelectorAll<HTMLElement>('.house-world-label')){
+  const size=el.classList.contains('chat-bubble')?{w:184,h:46}:el.classList.contains('house-avatar-name')?{w:108,h:34}:{w:130,h:28};dimensions.set(el,size);
+  Object.defineProperty(el,'getBoundingClientRect',{configurable:true,value:()=>({width:size.w,height:size.h})});
+ }
+ const bodies=()=>avatarRoots().map((root:any)=>{
+  root.updateMatrixWorld(true);const rect={x:Infinity,y:Infinity,w:0,h:0},v=new Vector3();let right=-Infinity,bottom=-Infinity;
+  root.traverse((mesh:any)=>{if(!mesh.isMesh||!mesh.visible)return;const positions=mesh.geometry.getAttribute('position');for(let i=0;i<positions.count;i++){
+   v.fromBufferAttribute(positions,i).applyMatrix4(mesh.matrixWorld).project(rendered.camera);const x=(v.x*.5+.5)*f.container.clientWidth,y=(-v.y*.5+.5)*f.container.clientHeight;
+   rect.x=Math.min(rect.x,x);rect.y=Math.min(rect.y,y);right=Math.max(right,x);bottom=Math.max(bottom,y);
+  }});rect.w=right-rect.x;rect.h=bottom-rect.y;return rect;
+ });
+ const assertClear=()=>{
+  const rectangles=bodies();expect(rectangles.length).toBeGreaterThan(0);let shown=0;
+  const published=JSON.parse(f.container.querySelector('canvas')!.dataset.avatarMeshBounds||'[]');expect(published).toHaveLength(rectangles.length);
+  rectangles.forEach((rect:{x:number,y:number,w:number,h:number},index:number)=>{expect(published[index].left).toBeCloseTo(rect.x,6);expect(published[index].top).toBeCloseTo(rect.y,6);expect(published[index].right).toBeCloseTo(rect.x+rect.w,6);expect(published[index].bottom).toBeCloseTo(rect.y+rect.h,6);});
+  for(const [el,size] of dimensions)if(!el.hidden&&el.style.visibility==='visible'){
+   shown++;const r={x:parseFloat(el.style.left)-size.w/2,y:parseFloat(el.style.top)-size.h,...size};
+   for(const body of rectangles)expect(r.x<body.x+body.w&&r.x+r.w>body.x&&r.y<body.y+body.h&&r.y+r.h>body.y,el.className+' covers posed actor').toBe(false);
+  }
+  expect(shown).toBeGreaterThan(0);
+  for(const label of f.container.querySelectorAll<HTMLElement>('.house-avatar-name'))expect(label.title).toContain(label.dataset.name);
+ };
+ return{assertClear};
+}
+it.each([2,6])('keeps visible names, bubbles and context clear of %s actual moving/seated bodies at every frame',count=>{
+ const f=speechFixture(),state=structuredClone(f.snapshot);state.players=state.players.slice(0,count);state.durable.residents=state.durable.residents.slice(0,count);
+ const seats=createLayout(6).seats;for(let i=0;i<count;i++)Object.assign(state.players[i],{x:(i%3-1)*.55,z:3+(i>=3?.5:0),availability:'chat'});
+ f.world.update(state);const labels=readableLabels(f);f.step(0);labels.assertClear();
+ const fresh=structuredClone(state);fresh.durable.sequence=count;fresh.durable.chat=Array.from({length:count},(_,i)=>({id:'body-message'+i,authorId:'p'+i,name:'Friend '+i,text:'A real attributed preview '+i,at:1,sequence:i+1}));
+ f.world.update(fresh);f.step(16);labels.assertClear();
+ for(let tick=2;tick<=12;tick++){
+  const moving=structuredClone(fresh);Object.assign(moving.players[1],{x:.55-tick*.06,z:3.2,heading:tick*.1,animation:'walk'});f.world.update(moving);f.step(tick*16);labels.assertClear();
+ }
+ const seated=structuredClone(fresh);for(let i=0;i<count;i++)Object.assign(seated.players[i],{x:seats[i].x,z:seats[i].z,heading:seats[i].heading,animation:'sit',seatId:seats[i].id});
+ f.world.update(seated);f.step(224);labels.assertClear();
+ for(const p of seated.players){delete (p as any).seatId;p.animation='idle';p.heading+=Math.PI/2;}f.world.update(seated);f.step(240);labels.assertClear();
+});
+
+it('protects all visible peer bodies in an observer room view whose controller is elsewhere',()=>{
+ const f=speechFixture(),state=structuredClone(f.snapshot);state.controller=false;state.durable.zoneId='room1';state.durable.streamId='bedroom:room1';state.durable.room={id:'room1',ownerId:'p1',revision:1,open:true,palette:'sage',placements:[]};state.durable.residents[1].open=true;
+ state.players=state.players.slice(0,3);for(const p of state.players.slice(1))Object.assign(p,{zoneId:'room1',x:0,z:3.3});
+ f.world.update(state);const labels=readableLabels(f);f.step(0);labels.assertClear();
+ const next=structuredClone(state);Object.assign(next.players[1],{x:.4,z:3.2,animation:'walk'});f.world.update(next);f.step(16);labels.assertClear();
+ expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(2);expect(f.container.querySelector('canvas')!.dataset.selfMeshBounds).toBeUndefined();
 });

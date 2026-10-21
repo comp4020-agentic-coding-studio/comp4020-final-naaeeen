@@ -1,0 +1,202 @@
+{
+  "kind": "current-P1-A-native-task-verification",
+  "runtimeBase": "d95055b",
+  "runtimeProductionFiles": {
+    "public/house-camera.js": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+    "public/house-world.js": "4d22ff773e20f80bb9604433d8683ff4943aafaa6f144d05ab7ac4ba096fccb0",
+    "public/house-ui.js": "93d9fa00229efbdb67abc539c565e9d48e0df7d865a2fed6419f8f8fb8eac792",
+    "public/house.html": "9037cc7e34e159aac3f71863ed39c919befab1a56423f31b8e41d277d19b7aa8",
+    "public/house.css": "9d085778140f08b1625381cf4e337831a53382a4ed20a755a5d3e2b50dde37c9"
+  },
+  "scriptSha256": "6081705fe692d63c3b67958e5a90a0a50aa2490761c9ff6dc33c1a59ab613211",
+  "result": {
+    "runtimeBase": "d95055b",
+    "cameraSource": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+    "results": [
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 128,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 14.600000008940697
+            },
+            {
+              "pixels": 5,
+              "delay": 45.29999999701977
+            },
+            {
+              "pixels": 7,
+              "delay": 0.4000000059604645
+            }
+          ],
+          "cameraTravelCssPx": 0,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "nativeResize": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 13.099999994039536
+            },
+            {
+              "pixels": 5,
+              "delay": null
+            },
+            {
+              "pixels": 7,
+              "delay": 0.29999999701976776
+            }
+          ],
+          "cameraTravelCssPx": 43.69999999999999,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 78,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": null
+            },
+            {
+              "pixels": 5,
+              "delay": 5.399999991059303
+            },
+            {
+              "pixels": 7,
+              "delay": 0.30000001192092896
+            }
+          ],
+          "cameraTravelCssPx": 58.699999999999996,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "viewport": {
+          "width": 390,
+          "height": 520
+        },
+        "sourceSha256": "52ff1371799c3098f7c576979b9843a2aafdbd3c3d86447b7e196cd21da6633b",
+        "checks": {
+          "phone64px": true,
+          "initialContainment": true,
+          "hudReachable": true,
+          "thresholdsAndIntent": true,
+          "stationary": true,
+          "explicitLook": true,
+          "nativeTouch": true,
+          "inputIsolation": true,
+          "loungeSeat": true,
+          "board": true,
+          "editExit": true,
+          "bedroomChair": true,
+          "completeTask": true
+        },
+        "measurements": {
+          "defaultHeight": 72,
+          "recovery": [
+            {
+              "pixels": 0,
+              "delay": 6.700000002980232
+            },
+            {
+              "pixels": 5,
+              "delay": 2.7999999970197678
+            },
+            {
+              "pixels": 7,
+              "delay": 0.3999999910593033
+            }
+          ],
+          "cameraTravelCssPx": 43.5,
+          "stationaryDriftCssPx": 0
+        },
+        "failures": []
+      },
+      {
+        "candidate": "A",
+        "reducedMotion": true,
+        "checks": {
+          "recovery": true,
+          "stationary": true,
+          "containment": true
+        }
+      }
+    ],
+    "errors": []
+  },
+  "scope": "Current bounded candidate after focused keyboard, pointer ownership and landscape HUD refinements; default policy still under fresh review"
+}
