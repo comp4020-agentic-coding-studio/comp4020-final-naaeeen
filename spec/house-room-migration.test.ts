@@ -64,7 +64,7 @@ describe("native v1 room migration", () => {
     const f = legacy();
     for (let run=0; run<3; run++) {
       const store=open(f.path);
-      expect(store.db.prepare("PRAGMA user_version").get()).toEqual({user_version:2});
+      expect(store.db.prepare("PRAGMA user_version").get()).toEqual({user_version:4});
       expect(store.snapshot(f.owner,f.custom).room).toMatchObject({placements:f.placement,palette:"peach",open:true,revision:7,light:"standard",originPresetId:null,originPresetVersion:null});
       expect(store.snapshot(f.emptyOwner,f.empty).room).toMatchObject({placements:[],light:"standard",originPresetId:null,originPresetVersion:null});
       expect(store.db.prepare("SELECT room FROM archives").get()).toEqual({room:f.archivedJSON});

@@ -1,3 +1,5 @@
+import { HOUSE_WORLD_VERSION } from './house-version.js';
+
 const OUTBOX_KEY = 'house.commandOutbox.v2';
 const TAB_KEY = 'house.controllerToken.v2';
 const DAY = 24 * 60 * 60 * 1000;
@@ -15,7 +17,7 @@ const safeStorage = () => { try { return globalThis.sessionStorage; } catch { re
 /** @param {(snapshot:any|null)=>void} [onSnapshot] */
 export function createSnapshotReducer(onSnapshot = () => {}) {
   let current = null, epoch = null, accessGeneration = -1, generation = -1, desiredZone = 'lounge';
-  let identityId = null, houseId = null, ownWork = null, roomStreamId = null, roomSequence = -1;
+  let identityId = null, houseId = null, ownWork = null, voice = null, roomStreamId = null, roomSequence = -1;
   const retired = new Set();
   return {
     // Clear displayed private content, retaining only same-identity/house ordering in memory.
@@ -28,7 +30,7 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
         if (epoch) retired.add(epoch);
         identityId = null; houseId = null; generation = -1;
       }
-      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null; roomStreamId = null; roomSequence = -1;
+      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null; voice = null; roomStreamId = null; roomSequence = -1;
       desiredZone = 'lounge'; current = null; onSnapshot(null); return true;
     },
     motion(incoming) {
@@ -38,6 +40,9 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
     accept(incoming) {
       if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !boundedId(incoming.durable.selfId) || !boundedId(incoming.durable.house?.id) || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
       const durable = incoming.durable, projection = durable.ownWork;
+      const incomingVoice = durable.voice;
+      if (incomingVoice !== undefined && (!plainObject(incomingVoice) || !Number.isSafeInteger(incomingVoice.revision) || incomingVoice.revision < 0
+        || (incomingVoice.url !== null && (typeof incomingVoice.url !== 'string' || incomingVoice.url.length > 512)))) return false;
       // The server contract requires ownWork. Missing legacy fixtures remain room-only;
       // never reconstruct private work from the shared cards list.
       if (projection !== undefined && (!plainObject(projection) || projection.streamId !== 'lounge:' + durable.house.id
@@ -54,13 +59,15 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
       }
       const changedScope = epoch !== incoming.serverEpoch || identityId !== durable.selfId || houseId !== durable.house.id;
       let nextWork = changedScope ? null : ownWork;
+      let nextVoice = changedScope ? null : voice;
+      if (incomingVoice !== undefined && (!nextVoice || incomingVoice.revision > nextVoice.revision)) nextVoice = clone(incomingVoice);
       if (projection !== undefined && (!nextWork || projection.sequence > nextWork.sequence)) nextWork = clone(projection);
       // Commit authority/cache only after every envelope and projection guard passed.
       if (epoch && epoch !== incoming.serverEpoch) retired.add(epoch);
       epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; generation = incoming.generation;
-      identityId = durable.selfId; houseId = durable.house.id; ownWork = nextWork;
+      identityId = durable.selfId; houseId = durable.house.id; ownWork = nextWork; voice = nextVoice;
       roomStreamId = durable.streamId; roomSequence = durable.sequence;
-      current = ownWork ? { ...incoming, durable: { ...durable, ownWork: clone(ownWork) } } : incoming;
+      current = ownWork || voice ? { ...incoming, durable: { ...durable, ...(ownWork ? { ownWork: clone(ownWork) } : {}), ...(voice ? { voice: clone(voice) } : {}) } } : incoming;
       onSnapshot(current); return true;
     },
   };
@@ -119,6 +126,9 @@ export function createCommandOutbox(storage) {
         if (existing.identityId !== identityId || existing.zoneId !== zoneId || JSON.stringify(existing.command) !== JSON.stringify(copy)) throw problem('COMMAND_ID_REUSED', 'This UUID already belongs to another draft.');
         return clone(existing);
       }
+      if (copy.type.startsWith('game.') && entries.filter(entry => entry.identityId === identityId && entry.houseId === copy.houseId && entry.command.type.startsWith('game.')).length >= 2) {
+        throw problem('GAME_PENDING_LIMIT', 'Resolve a pending game action before adding another. Your study drafts are still available.');
+      }
       const entry = { command: copy, identityId, zoneId, houseId: copy.houseId, createdAt };
       if (entries.length >= 16 || bytes([...entries, entry]) > 32 * 1024) throw problem('OUTBOX_FULL', 'Inspect and resolve a pending draft before adding another.');
       write([...entries, entry]); return clone(entry);
@@ -140,8 +150,8 @@ async function fetchHouseIdentity() {
   return me;
 }
 
-/** @param {{onSnapshot?:(snapshot:any|null)=>void,onDisconnect?:(reason:string)=>void,onError?:(error:any)=>void,storage?:OutboxStorage,fetchMe?:()=>Promise<any>,expectedIdentityId?:string}} [callbacks] */
-export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => {}, onError = () => {}, storage = safeStorage(), fetchMe = fetchHouseIdentity, expectedIdentityId } = {}) {
+/** @param {{onSnapshot?:(snapshot:any|null)=>void,onDisconnect?:(reason:string)=>void,onError?:(error:any)=>void,onUpdateRequired?:(error:any)=>void,storage?:OutboxStorage,fetchMe?:()=>Promise<any>,expectedIdentityId?:string}} [callbacks] */
+export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => {}, onError = () => {}, onUpdateRequired = () => {}, storage = safeStorage(), fetchMe = fetchHouseIdentity, expectedIdentityId } = {}) {
   const outbox = createCommandOutbox(storage);
   // Rotate on construction/full reload. Reconnects reuse only this in-memory token.
   const controllerToken = globalThis.crypto.randomUUID();
@@ -151,7 +161,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   if (storage && !flightsByStorage.has(storage)) flightsByStorage.set(storage, new Map());
   const inFlight = storage ? flightsByStorage.get(storage) : new Map();
   const inspected = new Set();
-  let motionFlight = null, motionGeneration = 0, motionAuthority = null;
+  let motionFlight = null, motionGeneration = 0, motionAuthority = null, updateRequired = null;
   const motionScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
     snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.streamId, snapshot.durable.zoneId,
     snapshot.players.find(player => player.id === snapshot.durable.selfId)?.seatId ?? null]) : null;
@@ -163,31 +173,53 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     onSnapshot(snapshot);
   });
   const report = error => { onError(error); return error; };
+  function requireCompatible() { if (updateRequired) throw updateRequired; }
+  function suspendForUpdate(receivedVersion) {
+    if (updateRequired) return updateRequired;
+    updateRequired = problem('CLIENT_UPDATE_REQUIRED', 'The house has changed. Download any unsent drafts, then reload to update.');
+    updateRequired.expectedVersion = HOUSE_WORLD_VERSION;
+    updateRequired.receivedVersion = typeof receivedVersion === 'string' ? receivedVersion.slice(0, 80) : null;
+    requestGeneration++; motionGeneration++; motionFlight = null;
+    // Notify before clearing the display so the UI can copy available unsent drafts.
+    onUpdateRequired(updateRequired);
+    reducer.clear(); socket?.disconnect();
+    const waiting = connectWait; connectWait = null; waiting?.reject(updateRequired);
+    report(updateRequired); return updateRequired;
+  }
+  function acceptLive(incoming) {
+    if (updateRequired || closed) return false;
+    if (incoming?.worldVersion !== HOUSE_WORLD_VERSION) { suspendForUpdate(incoming?.worldVersion); return false; }
+    return reducer.accept(incoming);
+  }
+  const hasCompatibleHead = () => !updateRequired && latestLive?.worldVersion === HOUSE_WORLD_VERSION;
   function settle(reply) {
     if (!reply || reply.ok !== true) throw problem(reply?.code ?? 'UNAVAILABLE', reply?.message ?? 'The house did not acknowledge this action.');
     return reply;
   }
   async function ask(event, body) {
+    requireCompatible();
     if (!socket?.connected) throw problem('PENDING', 'Connection unavailable. This action is not saved.');
-    try { return settle(await socket.timeout(5000).emitWithAck(event, body)); }
+    try { const reply = await socket.timeout(5000).emitWithAck(event, body); if (reply?.code === 'CLIENT_UPDATE_REQUIRED') throw suspendForUpdate(null); return settle(reply); }
     catch (error) { if (error?.[domainProblem]) throw error; throw problem('PENDING', 'Acknowledgement timed out. This action is pending.'); }
   }
   async function subscribe(zoneId = selectedZone) {
+    requireCompatible();
     if (closed) throw problem('CLOSED', 'This house connection is closed.');
     const request = ++requestGeneration;
     selectedZone = zoneId; sequence = 0; reducer.selectZone(zoneId);
     try {
       const reply = await ask('house.subscribe', { zoneId, controllerToken });
       if (request !== requestGeneration || closed) throw problem('STALE_ZONE', 'A newer room request replaced this one.');
-      reducer.accept(reply.snapshot); void flush(); return reply;
+      if (!acceptLive(reply.snapshot)) throw updateRequired ?? problem('STALE_ZONE', 'The house has not confirmed this room yet.');
+      void flush(); return reply;
     } catch (error) {
-      if (!closed && request === requestGeneration) {
+      if (!closed && !updateRequired && request === requestGeneration) {
         const fallbackRequest = ++requestGeneration;
         selectedZone = 'lounge'; sequence = 0; reducer.selectZone('lounge');
         if (zoneId !== 'lounge' && socket?.connected && ['FORBIDDEN', 'INVALID_INPUT'].includes(error.code)) {
           try {
             const fresh = await ask('house.subscribe', { zoneId: 'lounge', controllerToken });
-            if (!closed && fallbackRequest === requestGeneration) { reducer.accept(fresh.snapshot); void flush(); }
+            if (!closed && fallbackRequest === requestGeneration && acceptLive(fresh.snapshot)) void flush();
           } catch { /* A denied fallback stays cleared until a later authorised subscription. */ }
         }
       }
@@ -196,13 +228,13 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   }
   function makeSocket() {
     if (typeof globalThis.io !== 'function') throw problem('TRANSPORT_UNAVAILABLE', 'The house connection script did not load.');
-    socket = globalThis.io({ autoConnect: false, transports: ['websocket'], reconnection: true, reconnectionDelay: 500, reconnectionDelayMax: 3000 });
+    socket = globalThis.io({ auth: { worldVersion: HOUSE_WORLD_VERSION }, autoConnect: false, transports: ['websocket'], reconnection: true, reconnectionDelay: 500, reconnectionDelayMax: 3000 });
     socket.on('connect', () => {
       const waiting = connectWait; connectWait = null;
       subscribe(selectedZone).then(value => waiting?.resolve(value)).catch(error => waiting?.reject(error));
     });
-    socket.on('house.snapshot', snapshot => { if (closed) return; if (reducer.accept(snapshot)) void flush(); });
-    socket.on('house.motion', motion => { if (!closed) reducer.motion(motion); });
+    socket.on('house.snapshot', snapshot => { if (closed) return; if (acceptLive(snapshot)) void flush(); });
+    socket.on('house.motion', motion => { if (closed || updateRequired) return; if (motion?.worldVersion !== HOUSE_WORLD_VERSION) { suspendForUpdate(motion?.worldVersion); return; } if (hasCompatibleHead()) reducer.motion(motion); });
     socket.on('house.revoked', message => {
       if (closed || !reducer.revoke(message)) return;
       requestGeneration++; selectedZone = 'lounge'; sequence = 0;
@@ -215,10 +247,12 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
       const failure = typeof error?.data?.code === 'string'
         ? problem(error.data.code, typeof error.message === 'string' ? error.message : 'The house connection could not start.')
         : error;
+      if (failure?.code === 'CLIENT_UPDATE_REQUIRED') { suspendForUpdate(null); return; }
       report(failure); const waiting = connectWait; connectWait = null; waiting?.reject(failure);
     });
   }
   function connect() {
+    if (updateRequired) return Promise.reject(updateRequired);
     if (closed) return Promise.reject(problem('CLOSED', 'This house connection is closed.'));
     if (!socket) makeSocket();
     if (socket.connected) return subscribe(selectedZone);
@@ -235,6 +269,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     if (expectedIdentityId !== undefined && identityId !== expectedIdentityId) throw problem('IDENTITY_CHANGED', 'Your house identity changed. Restore the original identity before using this draft.');
   }
   async function sendEntry(entry) {
+    requireCompatible();
     const request = requestGeneration; assertActive(request); assertIdentity(entry.identityId);
     if (inFlight.has(entry.command.commandId)) {
       const reply = await inFlight.get(entry.command.commandId); assertActive(request); return reply;
@@ -244,7 +279,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     if (JSON.stringify(stored) !== JSON.stringify(entry)) throw problem('COMMAND_ID_REUSED', 'This UUID already belongs to another draft.');
     const work = (async () => {
       let reply;
-      if (latestLive?.controller && socket?.connected) {
+      if (hasCompatibleHead() && latestLive?.controller && socket?.connected) {
         if (entry.identityId !== latestLive.durable.selfId || entry.zoneId !== latestLive.durable.zoneId || (entry.houseId && entry.houseId !== latestLive.durable.house.id)) throw problem('STALE_ZONE', 'This pending draft belongs to another identity or room.');
         reply = await ask('house.command', { generation: latestLive.generation, zoneId: entry.zoneId, command: entry.command });
       } else {
@@ -264,7 +299,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     inFlight.set(entry.command.commandId, work);
     try { return await work; }
     catch (error) {
-      if (error.code && !['PENDING', 'STORAGE_UNAVAILABLE', 'NOT_CONTROLLER', 'STALE_ZONE', 'CLOSED', 'IDENTITY_CHANGED'].includes(error.code)) {
+      if (error.code && !['PENDING', 'STORAGE_UNAVAILABLE', 'NOT_CONTROLLER', 'STALE_ZONE', 'CLOSED', 'IDENTITY_CHANGED', 'CLIENT_UPDATE_REQUIRED'].includes(error.code)) {
         try { outbox.remove(entry.command.commandId); } catch (cleanupError) { report(cleanupError); }
       }
       throw error;
@@ -272,6 +307,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     finally { inFlight.delete(entry.command.commandId); }
   }
   async function command(intent) {
+    requireCompatible();
     const request = requestGeneration; assertActive(request);
     let next;
     try { next = clone({ ...intent, commandId: intent.commandId ?? globalThis.crypto.randomUUID() }); }
@@ -291,22 +327,23 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     try { const reply = await sendEntry(entry); assertActive(request); return reply; } catch (error) { report(error); throw error; }
   }
   async function flush() {
-    if (flushing || closed || !latestLive?.controller || !socket?.connected) return;
+    if (flushing || closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) return;
     flushing = true;
     try {
       const queuedIds = outbox.eligible(latestLive.durable.selfId, latestLive.durable.zoneId, Date.now(), latestLive.durable.house.id).map(entry => entry.command.commandId);
       for (const commandId of queuedIds) {
-        if (closed || !latestLive?.controller || !socket?.connected) break;
+        if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) break;
         // A previous ACK can take seconds; discard, expiry and scope may have changed.
         const entry = outbox.eligible(latestLive.durable.selfId, latestLive.durable.zoneId, Date.now(), latestLive.durable.house.id).find(value => value.command.commandId === commandId);
         if (!entry) continue;
-        try { await sendEntry(entry); } catch (error) { report(error); if (['PENDING', 'STORAGE_UNAVAILABLE', 'STALE_ZONE', 'NOT_CONTROLLER'].includes(error.code)) break; }
+        try { await sendEntry(entry); } catch (error) { report(error); if (['PENDING', 'STORAGE_UNAVAILABLE', 'STALE_ZONE', 'NOT_CONTROLLER', 'CLIENT_UPDATE_REQUIRED'].includes(error.code)) break; }
       }
     } catch (error) { report(error); }
     finally { flushing = false; }
   }
   function controlled(event, body = {}) {
-    if (!latestLive?.controller) return Promise.reject(report(problem('NOT_CONTROLLER', 'Take control in this tab first.')));
+    if (updateRequired) return Promise.reject(updateRequired);
+    if (!hasCompatibleHead() || !latestLive?.controller) return Promise.reject(report(problem('NOT_CONTROLLER', 'Take control in this tab first.')));
     return ask(event, { generation: latestLive.generation, ...body }).catch(error => { report(error); throw error; });
   }
   async function identityContext() {
@@ -318,8 +355,9 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     return { identityId, request };
   }
   function retryScope(entry, identityId) {
+    if (updateRequired) return updateRequired;
     if (closed) return problem('CLOSED', 'This house connection is closed.');
-    if (latestLive?.controller && socket?.connected) {
+    if (hasCompatibleHead() && latestLive?.controller && socket?.connected) {
       if (identityId !== latestLive.durable.selfId || entry.zoneId !== latestLive.durable.zoneId || (entry.houseId && entry.houseId !== latestLive.durable.house.id)) return problem('STALE_ZONE', 'Return to the original house and room before retrying this draft.');
       return null;
     }
@@ -372,7 +410,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
   return {
     connect, subscribe, command, getPending, retryPending, discardPending, discardOtherIdentities, exportPending,
     move(position) {
-      if (closed || !latestLive?.controller || !socket?.connected || motionFlight) return false;
+      if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected || motionFlight) return false;
       const request = requestGeneration, lifecycle = motionGeneration, scope = motionScope(latestLive);
       const body = { generation: latestLive.generation, sequence: ++sequence, x: position.x, z: position.z, heading: position.heading };
       const current = () => !closed && socket?.connected && request === requestGeneration && lifecycle === motionGeneration && scope === motionScope(latestLive);
@@ -390,7 +428,9 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     claimSeat: seatId => controlled('house.seat', { seatId }),
     stand: () => controlled('house.stand'),
     async takeover() {
-      const reply = await ask('house.takeover', { controllerToken }); sequence = 0; reducer.accept(reply.snapshot); return reply;
+      requireCompatible(); const reply = await ask('house.takeover', { controllerToken }); sequence = 0;
+      if (!acceptLive(reply.snapshot)) throw updateRequired ?? problem('STALE_ZONE', 'The house has not confirmed control yet.');
+      return reply;
     },
     close() {
       if (closed) return; closed = true; requestGeneration++;

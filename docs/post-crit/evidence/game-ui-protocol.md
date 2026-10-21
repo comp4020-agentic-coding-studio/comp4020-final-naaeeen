@@ -1,0 +1,9 @@
+# P4 game UI protocol
+
+22 October 2026. Source starts at 8b7e425 plus shared local work. UI ownership: public/house-ui.js, house.html, house.css, new house-game-ui.js, focused UI specs and game-ui evidence. Preserve other lanes; no commit or publication.
+
+Acceptance: Watch on deliberate open; two-player explicit Join/Ready; untimed legal moves with visible shapes/text and last move; waiting/readiness/recovery/inactivity labelled as housekeeping, not a turn clock. Close keeps membership and Reopen/Leave. Leave and actual My work return close immediately without waiting for ACK. Existing canonical card/next step and Quiet/doors remain unchanged. Block new gameplay while a game action is uncertain, preserve original outbox identity/body/lounge scope, leave capacity reserved.
+
+Implementation comparison: existing shared panel versus another movable window. Both must preserve explicit consent, stable keyboard focus, whole board/turn/last move/Leave at 390x844, 844x390 and 1920x1080. Retain the existing panel shell to reuse close/navigation and avoid another window lifecycle. The game view is non-modal with explicit Close to world; all active panels already suppress movement. Game keyboard propagation is also isolated. This is an implementation tradeoff, not human preference evidence.
+
+Before integration: focused failing module tests for no auto-join, payload/revision binding, real board update/focus retention, pending guard and immediate exit. Then house UI integration tests and native source-bound browser acceptance booked through parent. Native devices and real friend preference NOT RUN. Fresh Astra/high review gets factual source/schema/rubric without this decision narrative; reproduce findings and rerun affected checks. Stop when these acceptance criteria pass or hand off precise remaining gaps.

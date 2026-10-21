@@ -235,3 +235,21 @@ chair poses are implemented. Fresh review/refinement covers ACK/draft/observer a
 outbox settlement boundaries. Parent77UIchecks pass; the full3-viewport/2-identity
 task and final affected shell checks have separate source bindings. See
 ../post-crit/evidence/P2-ROOM-UI.md and ../post-crit/REVIEW-AND-REFINEMENT.md.
+
+## Post-Crit integration checkpoint, 22 October
+
+- PC.3 geometry/fixtures/sofa seating/arrivals/Places:115 scoped checks, matched
+  native6cases, fresh review/refinement and parent image/hash verification; committedf11eb13.
+- PC.4 rules/IDs/consent/persistence/recovery: pure48 and adapter70 source-bound
+  checks; fresh review corrected recycledID, expiry pause and recovered broadcast.
+- PC.4 UI/withdrawal/focus/navigation: source-bound99checks and actual two-client
+  three-viewport journey; deferred Join exit resolves its original receipt. Parent
+  simplified deadline copy; current integrated acceptance remains P6.
+- PC.3 cutover: frozen8cdad6a source and genuine lostACK/native same-port migration,
+  immutable hash/receipt graders corrected through review;7negative controls.
+- PC.5 voice authority/URL/order: schema4, scoped tests and independent real-socket
+  probes pass; media remains external. UI/source review's two findings reproduced
+  and fixed,87parent tests +5contextual review cases; nativeUI pending.
+- PC.6 verification/resources: full required suite in progress; original300s task
+  and separately registered game/board extension remain held until browser lanes
+  close. No inherited old-resource or new-deployment claim.

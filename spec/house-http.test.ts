@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -52,7 +53,7 @@ it("places real arrivals apart in safe lounge and bedroom positions", async()=>{
  expect(joined.status).toBe(200);
  const sockets:any[]=[];
  async function arrive(authCookie:string){
-  const socket=io(base,{transports:["websocket"],reconnection:false,extraHeaders:{Cookie:authCookie,Origin:base}});
+  const socket=io(base, { auth: { worldVersion: HOUSE_WORLD_VERSION },transports:["websocket"],reconnection:false,extraHeaders:{Cookie:authCookie,Origin:base}});
   sockets.push(socket);await new Promise<void>((resolve,reject)=>{socket.once("connect",resolve);socket.once("connect_error",reject);});
   const controllerToken=randomUUID();
   const reply=await socket.timeout(3000).emitWithAck("house.subscribe",{zoneId:"lounge",controllerToken});

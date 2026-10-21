@@ -1,16 +1,39 @@
 # Active post-Crit work, 22 October 2026
 
-Current checkpoint: P1 committed1699d44; P2 UI is accepted for its local commit
-(320 scoped checks, parent77UIchecks, native full+affected source-bound records).
-P2 worker is stopped and has released all source ownership. Canonical4102 test
-services are closed; a current parent read found no4093 listener. Do not treat old
-preview-running statements as live state. Start any preview deliberately later.
+Local commits: d95055b plan,1671cec room persistence,1699d44 camera,
+8b7e425 room UI,16404ea game rules, f11eb13 expanded lounge. Branch remains
+post-crit-improvements; no new push or release. Root owns all runtime paths now.
+P4 game authority/UI and P5 voice/update recovery are implemented, reviewed and
+await their combined local milestone commit. English README now explains them.
 
-Game comparison chose untimedFour-in-a-row. Pure rules are frozen and independently
-reviewed; parentreadactualmodule and48current-format tests pass. They are still
-uncommitted and not integrated. P3 lounge/compatibility and P4 authority/UI/P5voice/
-P6integratedresource work remain. No automatic source-level acceptance inheritance.
+Current required verification: build:board/typecheck/evidence pass; full857tests
+PASS in evidence/p6-required-green.json. Earlier851PASS/5FAIL is preserved: one
+resource-grader negative control, two extraction-fixture dependencies, and two
+old house-schema/cursor assertions. All repaired without weakening privacy/data
+or resource criteria. Voice/update UI review's two actual defects were separately
+RED and fixed (87UI +5contextual checks). Current runtime is frozen for native work.
 
+Active agents: postcrit_game_ui owns only tools/post-crit-voice-update-browser.mjs,
+six-browser runner and their evidence, using the sole nativeGPU lane. It is closing
+current voice/update replay then doing a genuine6identity task. postcrit_resource_acceptance
+owns resource instrument/protocol/results/specs; approved separate combined300s
+scenario, fresh review fixed hash validation,22focusedchecks pass. HEAVY RESOURCE
+GO IS STILL HELD until browser lanes close. Both original/combined runs are NOT RUN.
+Root next: maintained9case browsercore after worker releasesGPU, then stop isolated
+4108validation service and give resourceGO. Current4108service PID is in
+.local/post-crit/p6-checks/server.pid; do not kill unrelated processes. No4093preview
+is running at the last read. After finalchecks, preserve originalpreviewdata and
+start deliberatepreview, reconcile docs, finaldiff/review and localcommits.
+
+Frozen8cdad6a native cutover COMPLETE: actualv1→v4 preservation, lost-ACK exact
+UUID/body/receipt replay, legacyreadonly/noavatars, permissionrevocation and manual
+reload. Earlier fixture failure and insufficientPASS retained with7negativegrader
+controls. Its copied-source UI later changed, so do not inherit newUI acceptance.
+See compat-browser-checks.md and manifest. All its browsers/services are closed.
+
+All task files stay in canonical WSL. New ordinary exec and freshsession polling
+work under current fullaccess/neverapproval; never reuseoldPTY40567. No new
+publication, provider provision or personalmemory edit is inferred.
 
 Canonical Ubuntu/lizhi checkout: /home/lizhi/comp4020/comp4020-final-naaeeen.
 Branch post-crit-improvements, baseline 8cdad6a. Current scope is all eight owner

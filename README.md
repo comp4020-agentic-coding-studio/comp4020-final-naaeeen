@@ -38,8 +38,12 @@ to the same identity; keep a recovery key private if you want another way back.
 Offline members keep their bedroom. Capacity counts residents, not browser tabs.
 
 Move with WASD, arrows or touch controls. E uses the nearby door, seat or board.
-Follow keeps your avatar in view; Overview and drag inspection give you room
-context. Each person can decorate their bedroom with a bounded furniture set.
+Follow keeps your avatar centred. Walking resumes Follow after a temporary camera
+drag; Look and Overview remain deliberate viewing choices. Places routes you to
+study seats, the rest corner, the break table, the board or your own room. New
+bedrooms start with different furnished arrangements. Existing rooms keep their
+contents; My room offers a preview before applying a starter arrangement. Each
+person can decorate their bedroom with a bounded furniture set.
 Bedrooms start closed. Opening one admits current housemates and exposes retained
 room chat; visiting does not grant decorating rights. Quiet does not hide your
 name, connection or coarse room location.
@@ -49,6 +53,21 @@ It also works at [/board/](/board/) independently. Board conversation is house-w
 separate from room chat. Peers see shared canvas edits and pointer/selection
 awareness; each person controls their view. Study cards remain author-controlled.
 Saving a next step leaves the card active; closing records the author's choice.
+Every desk opens your own My work card, including when you visit a friend. Bedroom
+chairs and adjustable lighting make the room usable for studying as well as decorating.
+
+The lounge has shared study seats, a sofa corner and an optional Four-in-a-row
+table. Two players choose Join and Ready; up to four friends can watch. Turns are
+untimed. Closing the panel keeps your place, while Leave or Return to My work
+withdraws without a loss. After a disconnect, both players choose Resume before
+continuing. Waiting and idle tables eventually clear so a break cannot occupy
+the space indefinitely.
+
+The house owner can add an existing Discord invite or server-channel link in
+House settings. Voice options opens that destination in a separate tab; call
+participation and microphone controls stay in Discord. The house's Quiet choice,
+text chat and shared board continue independently.
+
 
 ## What we check and what we still need to learn
 
@@ -64,6 +83,7 @@ explain the alternatives and checks.
 Built with Three.js, Socket.IO, SQLite and the MIT-licensed Excalidraw editor.
 Use the pinned Linux toolchain: pnpm build:board, pnpm start, and pnpm check.
 [Permissions and logging](docs/crit-10/PERMISSIONS-AND-LOGGING.md),
-[plan](PLAN.md) and [validation](docs/implementation/REDESIGN-VALIDATION.md)
+[plan](PLAN.md), [post-Crit improvements](docs/post-crit/PLAN.md) and
+[earlier validation](docs/implementation/REDESIGN-VALIDATION.md)
 record development details. Research and drafting were assisted by AI;
 the project record is in PROCESS.md.

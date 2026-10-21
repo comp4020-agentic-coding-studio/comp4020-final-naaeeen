@@ -102,3 +102,17 @@ a separate combined board/new-actions workload. Report RAM, persistent disk,
 transfer and client rendering independently. Fresh independent review and parent
 reproduction must attach actual evidence before implementation acceptance; this
 protocol document alone is not a PASS.
+
+
+## Executed game spike and independent decision
+
+The source-bound [spike record](evidence/game-comparison.md) now contains actual
+rule, pointer/keyboard and separate emulated-touch results. The parent and fresh
+Astra reviewer inspected native images. A shared-padding refinement removes the
+initial chess target miss; this was a shell constraint. Fresh review also found
+that the move-feedback/keyboard task was under-checked, so the raw PASS labels
+remain limited to their implemented assertions. See [production decision and
+acceptance](GAME-CONTRACT.md). Four-in-a-row is selected for voluntary interruption
+and public progress, not test count or a claim that chess/cards are infeasible.
+No human preference, true multiplayer authority or SQLite restart was established
+by these fixtures.

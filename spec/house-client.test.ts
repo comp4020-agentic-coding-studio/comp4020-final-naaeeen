@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { afterEach, describe, expect, test, vi } from "vitest";
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { createSnapshotReducer, createCommandOutbox, createHouseClient, createPendingInspector } from "../public/house-client.js";
 
-const snapshot = (accessGeneration = 1, sequence = 1, zoneId = "lounge", serverEpoch = "epoch-a", generation = 1) => ({ serverEpoch, accessGeneration, generation, controller: true, durable: { house: { id: "house-a" }, selfId: "person", streamId: zoneId, sequence, zoneId, residents: [], chat: [], cards: [], room: zoneId === "lounge" ? null : { id: zoneId } }, players: [] });
+const snapshot = (accessGeneration = 1, sequence = 1, zoneId = "lounge", serverEpoch = "epoch-a", generation = 1) => ({ worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration, generation, controller: true, durable: { house: { id: "house-a" }, selfId: "person", streamId: zoneId, sequence, zoneId, residents: [], chat: [], cards: [], room: zoneId === "lounge" ? null : { id: zoneId } }, players: [] });
 const memoryStorage = () => { const values = new Map<string, string>(); return { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value); }, removeItem: (key: string) => { values.delete(key); } }; };
 afterEach(() => vi.unstubAllGlobals());
 describe("house snapshot reducer", () => {
@@ -710,4 +711,82 @@ test("retains the room cursor before a same-room subscribe ACK and rejects a del
   const fresh = workSnapshot({ access: 3, roomSequence: 10, workSequence: 5, card: workCard("fresh") }); fresh.durable.streamId = "bedroom:private";
   acknowledge({ ok: true, snapshot: fresh }); await subscribing;
   expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "fresh" } }); client.close();
+});
+
+
+describe("bounded break-game intent", () => {
+  test("caps game entries per identity and house while preserving study capacity and original retries", () => {
+    const box = createCommandOutbox(memoryStorage());
+    const move = { commandId: randomUUID(), type: "game.move", houseId: "house-a", expectedRevision: 4, payload: { roundId: "round-a", column: 2 } };
+    const leave = { commandId: randomUUID(), type: "game.leave", houseId: "house-a", payload: { roundId: "round-a" } };
+    box.add(move, "person", "lounge", 1000); box.add(leave, "person", "lounge", 1001);
+    expect(() => box.add({ ...move, commandId: randomUUID() }, "person", "lounge", 1002)).toThrow(/pending game/i);
+    expect(box.add(move, "person", "lounge", 1003).command).toEqual(move);
+    box.add({ commandId: randomUUID(), type: "card.put", houseId: "house-a", payload: { smallGoal: "Return to this" } }, "person", "lounge", 1004);
+    box.add({ ...move, commandId: randomUUID(), houseId: "house-b" }, "person", "lounge", 1005);
+    expect(box.all()).toHaveLength(4);
+  });
+});
+
+
+describe("loaded world version boundary", () => {
+  test.each([undefined, "old-world", 2])("never flushes into a mismatched subscription head (%s) and keeps inspection alive", async version => {
+    const incoming: any = snapshot(); incoming.worldVersion = version;
+    const transport = mockTransport(incoming); const storage = memoryStorage();
+    const intent = { commandId: randomUUID(), type: "card.save", houseId: "house-a", payload: { smallGoal: "Uncertain original", helpRequested: false } };
+    createCommandOutbox(storage).add(intent, "person", "lounge");
+    const updates: any[] = []; const views: any[] = [];
+    const client = createHouseClient({ storage, onSnapshot: value => views.push(value), onUpdateRequired: error => updates.push(error), fetchMe: async () => ({ identity: { id: "person" } }) });
+    await expect(client.connect()).rejects.toMatchObject({ code: "CLIENT_UPDATE_REQUIRED" });
+    expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(0);
+    expect(views.every(view => view === null)).toBe(true); expect(updates).toHaveLength(1);
+    expect(transport.socket.connected).toBe(false);
+    expect((await client.getPending()).entries[0]).toMatchObject({ command: intent, canRetry: false });
+    expect((await client.exportPending())[0].command).toEqual(intent);
+    await expect(client.takeover()).rejects.toMatchObject({ code: "CLIENT_UPDATE_REQUIRED" });
+    await expect(client.connect()).rejects.toMatchObject({ code: "CLIENT_UPDATE_REQUIRED" });
+    client.close();
+  });
+  test("rejects a mismatched pushed head before installing pose and does not reconnect automatically", async () => {
+    const transport = mockTransport(); const views: any[] = []; const updates: any[] = [];
+    const client = createHouseClient({ onSnapshot: value => views.push(value), onUpdateRequired: error => updates.push(error) });
+    await client.connect();
+    const mismatch = { ...snapshot(2, 2), worldVersion: "future-world", players: [{ id: "person", x: 999, z: 999 }] };
+    transport.emit("house.snapshot", mismatch);
+    expect(updates).toHaveLength(1); expect(views.at(-1)).toBeNull();
+    expect(views.some(view => view?.players?.[0]?.x === 999)).toBe(false);
+    expect(client.move({ x: 1, z: 2, heading: 0 })).toBe(false);
+    await expect(client.claimSeat("seat-1")).rejects.toMatchObject({ code: "CLIENT_UPDATE_REQUIRED" });
+    client.close();
+  });
+  test("retains an original command when a current server reports an update while it is in flight", async () => {
+    const transport = mockTransport(); const storage = memoryStorage();
+    const client = createHouseClient({ storage, fetchMe: async () => ({ identity: { id: "person" } }) }); await client.connect();
+    transport.reply(async () => ({ ok: false, code: "CLIENT_UPDATE_REQUIRED", message: "Update the house." }));
+    const intent = { commandId: randomUUID(), type: "game.move", houseId: "house-a", expectedRevision: 7, payload: { roundId: "round", column: 3 } };
+    await expect(client.command(intent)).rejects.toMatchObject({ code: "CLIENT_UPDATE_REQUIRED" });
+    expect((await client.exportPending())[0].command).toEqual(intent);
+    expect(transport.socket.connected).toBe(false); client.close();
+  });
+  test("a matching version alone cannot flush a head rejected for the requested zone", async () => {
+    const transport = mockTransport(snapshot(1, 1, "private")); const storage = memoryStorage();
+    createCommandOutbox(storage).add({ commandId: randomUUID(), type: "card.save", houseId: "house-a", payload: { smallGoal: "Kept" } }, "person", "lounge");
+    const client = createHouseClient({ storage });
+    await expect(client.connect()).rejects.toMatchObject({ code: "STALE_ZONE" });
+    expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(0);
+    expect(client.move({ x: 1, z: 2, heading: 0 })).toBe(false); client.close();
+  });
+});
+
+
+describe("house-wide voice ordering", () => {
+  test("a delayed bedroom head cannot restore an older invitation after it was cleared", () => {
+    const views: any[] = [], reducer = createSnapshotReducer(value => views.push(value)); reducer.selectZone("private");
+    reducer.accept({ ...workSnapshot({ roomSequence: 3, workSequence: 5 }), durable: { ...workSnapshot({ roomSequence: 3, workSequence: 5 }).durable, voice: { url: null, revision: 2 } } });
+    reducer.accept({ ...workSnapshot({ roomSequence: 4, workSequence: 4 }), durable: { ...workSnapshot({ roomSequence: 4, workSequence: 4 }).durable, voice: { url: "https://discord.gg/old", revision: 1 } } });
+    expect(views.at(-1).durable.voice).toEqual({ url: null, revision: 2 });
+    reducer.revoke({ serverEpoch: "epoch-a", accessGeneration: 2 });
+    const next = workSnapshot({ access: 2, zone: "lounge", workSequence: 1 }); next.durable.voice = { url: "https://discord.gg/new", revision: 1 };
+    expect(reducer.accept(next)).toBe(true); expect(views.at(-1).durable.voice).toEqual(next.durable.voice);
+  });
 });

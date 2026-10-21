@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { randomUUID } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { createServer } from "node:http";
@@ -29,7 +30,7 @@ async function fixture() {
   const origin = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
   cleanup.push(() => { if (!root.startsWith(join(tmpdir(), "house-control-"))) throw new Error("Invalid fixture cleanup target"); rmSync(root, { recursive: true, force: true }); }, () => store.close(), () => realtime.close());
   async function connect(person: typeof owner) {
-    const socket = io(origin, { forceNew: true, reconnection: false, transports: ["websocket"], extraHeaders: { Origin: origin, Cookie: `house_session=${person.token}` } });
+    const socket = io(origin, { auth: { worldVersion: HOUSE_WORLD_VERSION }, forceNew: true, reconnection: false, transports: ["websocket"], extraHeaders: { Origin: origin, Cookie: `house_session=${person.token}` } });
     cleanup.push(() => { socket.disconnect(); });
     await new Promise<void>((resolve, reject) => { socket.once("connect", resolve); socket.once("connect_error", reject); });
     expect((await socket.timeout(1500).emitWithAck("house.subscribe", { zoneId: "lounge", controllerToken: randomUUID() })).ok).toBe(true);

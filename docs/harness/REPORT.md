@@ -413,3 +413,17 @@ insufficient. The maintained browser helper now owns the bounded RAF wait and
 placement-ID match. Test visible exits at the bottom of long forms, and inspect
 seated poses in Follow at readable scale, not just an Overview thumbnail. A later
 functional pass does not explain an earlier uninstrumented short-hold failure.
+
+## Post-Crit observed method corrections, 22 October
+
+Three checks improved the actual work. First, a renderer fixture must replace a
+snapshot before changing pose fields: mutating an object already held by the world
+can invent a failed seat transition. Preserve that diagnostic instead of changing
+production collision rules to satisfy it. Second, disappearance from an outbox is
+not by itself an accepted save: a cutover grader now requires the original command,
+successful receipt and unchanged durable revision, calibrated with negative cases.
+Third, privacy clearing must leave a reachable next screen. A fresh reviewer found
+identity change during neutral export stranded every view; an explicit current
+identity title now has a regression. Sources and results are linked from
+../post-crit/REVIEW-AND-REFINEMENT.md. These are observed corrections, not additional
+rituals or a reason to repeat already-resolved green checks.

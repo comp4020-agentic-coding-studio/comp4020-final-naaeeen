@@ -214,8 +214,10 @@ P3: lounge comparison/layout/destinations; capacities 2–6 paths, six-person br
 scenario, independent review and local commit.
 P4: before production, freeze ready/start consent, panel close versus resignation,
 leaving lounge, disconnect/abandonment, replacement/rejoin and restart. A lost ACK
-must not trap someone at the table; a leave/resign command needs a durable retry
-scope that remains valid after moving to a bedroom. Record precise terminal
+must not trap someone at the table. Keep the original round/UUID intent; leaving
+the lounge withdraws server-side and retries retain their original lounge scope.
+Return to the lounge to resolve an uncertain original command; do not rebase it
+onto a new round or block navigation. Record precise terminal
 reasons and a bounded way to release abandoned tables. Then game spike/selection
 and complete authority/UI; concurrent/duplicate/stale/
 observer/disconnect/restart/removal/return-to-work, review and local commit.
@@ -262,3 +264,36 @@ and HCI preference need real devices/people. No fake human A/B or benchmark quot
 Each subsection records requirement→evidence→alternatives→decision→refinement→checks.
 Fresh Astra review receives facts/source/rubric without prior verdicts; parent
 reproduces findings, refines and rechecks before acceptance/commit.
+
+
+## Current implementation decisions
+
+P1 camera is committed1699d44; P2 persistence1671cec and integrated room UI8b7e425.
+Centered Follow keeps the player anchor while posed-body exclusions keep name/chat
+labels off the models. Seeded rooms, safe starter adoption, meaningful desk/chair/
+light actions and canonical My work are implemented. See source-bound evidence in
+P1-CAMERA.md, P1-B-READABILITY.md and P2-ROOM-UI.md under evidence/.
+
+P3 expanded lounge is committedf11eb13. Both layouts passed the same renderer task;
+expanded separates study/rest/game areas and increases walking. Follow keeps the
+same actor size; optional phone Overview is distant in both. Places and direct
+My work support orientation. Geometry/source acceptance is separate from final
+six-person integrated acceptance. See [lounge contract](LOUNGE-CONTRACT.md) and
+evidence/lounge-comparison.md.
+
+P4 pure rules/spike are committed16404ea; real SQLite authority and game UI are
+implemented and independently reviewed. Native two-client Join/Ready/play/Resume/
+return-to-work passed three viewports on its recorded source. Later voice/update
+UI additions have their own verification. The [game contract](GAME-CONTRACT.md)
+and [exact API](GAME-API.md) preserve voluntary departure and original UUIDs.
+
+P5 stores an owner-configured Discord destination and uses an explicit external
+link, with schema4 after game schema3. No media provider or capture is created.
+See [voice contract](VOICE-CONTRACT.md). Source review and parent regressions cover
+owner/control/revision/pending/identity boundaries; current native UI acceptance
+is in progress.
+
+P6 remains open: full required tests, maintained native core, six-person current
+flow, original300-second resource task and a separately frozen combined game/board
+task, final source review and documentation reconciliation. Runtime changes do not
+inherit old acceptance. No new publication or deployment has occurred.

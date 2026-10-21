@@ -2,18 +2,20 @@ import { createHash, randomUUID } from "node:crypto";
 import type { Server as HttpServer, IncomingMessage } from "node:http";
 import { Server, type Socket } from "socket.io";
 import { HouseError } from "./house-contract.ts";
-import type { HouseCommand, HouseReceipt, HouseSnapshot, LiveSnapshot, Me, Player } from "./house-contract.ts";
-import { createLayout, bedroomLayout, validPosition, slide } from "../public/house-geometry.js";
+import type { HouseCommand, HouseReceipt, HouseSnapshot, HouseGameControl, LiveSnapshot, Me, Player } from "./house-contract.ts";
+import { HOUSE_WORLD_VERSION, createLayout, bedroomLayout, validPosition, slide } from "../public/house-geometry.js";
 import { activityMetadata } from "./activity-log.ts";
 
 export interface HouseAuthority {
   session(digest: string): { id: string } | undefined;
   me(id: string): Me;
   snapshot(id: string, zoneId?: string): HouseSnapshot;
-  execute(id: string, command: HouseCommand): HouseReceipt;
+  execute(id: string, command: HouseCommand, control?: HouseGameControl): HouseReceipt;
+  maintainGames?(now?: number): boolean;
+  gameLifecycle?(id: string, event: "disconnect" | "left_lounge"): boolean;
 }
 interface Options { origin?: string; secureCookies?: boolean; log?: (record: Record<string, unknown>) => void }
-interface Context { socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number }
+interface Context { legacyReadonly: boolean; socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number }
 interface Lease { id: string; digest: string; houseId: string; token: string; socketId: string | null; generation: number; expiresAt: number; zoneId: string; x: number; z: number; heading: number; animation: "idle" | "walk" | "sit"; seatId: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; sequence: number; lastMoveAt: number; motionCredit: number }
 const LEASE_MS = 30_000, MAX_FRAME_BYTES = 1024 * 1024, MAX_BYTES = 2 * 1024 * 1024, MAX_CONNECTIONS = 12;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
@@ -63,6 +65,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   const serverEpoch = randomUUID();
   const contexts = new Map<string, Context>();
   const leases = new Map<string, Lease>();
+  const pendingGameDisconnects = new Set<string>();
   let nextGeneration = 0, nextAccessGeneration = 0;
   let closed = false, motionDirty = false, sessionSweepAt = 0;
   const log = (id: string, action: string, outcome: string, metadata: Record<string, unknown> = {}) => { try { options.log?.({ ...metadata, at: Date.now(), actor: id, action, outcome }); } catch { /* Instruments must not change command success. */ } };
@@ -80,21 +83,42 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   }
   function authorised(context: Context) { requireSession(context); return store.snapshot(context.id, context.zoneId); }
   function resetZone(lease: Lease, snapshot: HouseSnapshot) {
+    if(lease.zoneId==="lounge" && snapshot.zoneId!=="lounge") store.gameLifecycle?.(lease.id,"left_lounge");
     release(lease); lease.zoneId = snapshot.zoneId;
     const layout = snapshot.room ? bedroomLayout(snapshot.room.placements) : createLayout(snapshot.house.capacity);
     const resident = snapshot.residents.find(member => member.id === lease.id);
     if (!resident) throw new HouseError("FORBIDDEN", "Your permanent bedroom is unavailable.");
     const arrival = { x: .65 * (resident.slot - (snapshot.house.capacity - 1) / 2), z: 3.3 };
-    const spawn = validPosition(layout, arrival) ? arrival : layout.spawn;
+    const spawn = snapshot.room ? (validPosition(layout, arrival) ? arrival : layout.spawn) : (layout.arrivals?.[resident.slot] ?? layout.spawn);
     lease.x = spawn.x; lease.z = spawn.z; lease.heading = 0; lease.sequence = 0; lease.lastMoveAt = Date.now(); lease.motionCredit = 0;
   }
   function controller(context: Context, generation: unknown): Lease {
+    requireSession(context);
+    if (context.legacyReadonly) throw new HouseError("NOT_CONTROLLER", "This older tab is read-only. Copy available drafts or export Pending, then reload to update.");
     authorised(context);
     const lease = leases.get(context.id);
     if (!lease || lease.socketId !== context.socket.id) throw new HouseError("NOT_CONTROLLER", "This tab is observing. Take control to act.");
     if (generation !== lease.generation) throw new HouseError("STALE_GENERATION", "Control changed. Use the latest house state.");
     if (lease.zoneId !== context.zoneId) throw new HouseError("STALE_ZONE", "Return to the current controlled room.");
     return lease;
+  }
+  function flushGameDisconnects() {
+    for(const id of pendingGameDisconnects) {
+      if(store.gameLifecycle?.(id,"disconnect")) queueRefresh();
+      pendingGameDisconnects.delete(id);
+    }
+  }
+  function gameControl(context: Context): HouseGameControl {
+    // A delayed failure cannot let a reconnected controller skip pause consent.
+    flushGameDisconnects();
+    const current=leases.get(context.id)!;
+    const controlledInLounge: string[]=[];
+    for(const lease of leases.values()) {
+      const peer=lease.socketId ? contexts.get(lease.socketId) : undefined;
+      if(lease.houseId===current.houseId && lease.zoneId==="lounge" && peer?.subscribed && peer.zoneId==="lounge" && store.session(peer.digest)?.id===lease.id && store.me(lease.id).home?.id===current.houseId) controlledInLounge.push(lease.id);
+    }
+    if(context.zoneId!=="lounge") throw new HouseError("STALE_ZONE","Return to the lounge table.");
+    return {isController:true,zoneId:"lounge",controlledInLounge};
   }
   function switchToLounge(context: Context, code: string) {
     context.zoneId = "lounge"; context.accessGeneration = ++nextAccessGeneration;
@@ -108,6 +132,11 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   function pruneLeases() {
     for (const [id, lease] of leases) {
       if (store.session(lease.digest)?.id !== id || store.me(id).home?.id !== lease.houseId || (!lease.socketId && lease.expiresAt <= Date.now())) {
+        // Preserve the controlling-disconnect fact before removing its lease.
+        // Membership departure has already ended a game in the store transaction.
+        if(lease.socketId && lease.zoneId==="lounge") {
+          pendingGameDisconnects.add(id); flushGameDisconnects();
+        }
         release(lease); leases.delete(id); queueRefresh();
       }
     }
@@ -121,6 +150,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         durable = authorised(context);
       } else throw error;
     }
+    if (context.legacyReadonly) return { worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: false, generation: 0, durable, players: [] };
     pruneLeases();
     const layout = durable.room ? bedroomLayout(durable.room.placements) : createLayout(durable.house.capacity);
     for (const lease of leases.values()) {
@@ -139,7 +169,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       return value;
     });
     const lease = leases.get(context.id);
-    return { serverEpoch, accessGeneration: context.accessGeneration, controller: lease?.socketId === context.socket.id, generation: lease?.generation ?? 0, durable, players };
+    return { worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: context.accessGeneration, controller: lease?.socketId === context.socket.id, generation: lease?.generation ?? 0, durable, players };
   }
   function queueRefresh() { if (closed) return; for (const context of contexts.values()) if (context.subscribed) context.pendingSnapshot = true; }
   function send(context: Context, event: string, value: unknown, volatile = false): boolean {
@@ -161,9 +191,11 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     if (now - sessionSweepAt >= 1000) {
       sessionSweepAt = now;
       try {
+        flushGameDisconnects();
+        if(store.maintainGames?.(now)) queueRefresh();
         pruneLeases();
         for (const context of contexts.values()) if (store.session(context.digest)?.id !== context.id) disconnect(context, "UNAUTHENTICATED");
-      } catch { /* An action/projection reports storage failure; sweeps never write durable state. */ }
+      } catch { /* An action/projection reports storage failure; the next sweep retries due housekeeping. */ }
     }
     for (const [id, lease] of leases) {
       if (!lease.socketId && lease.expiresAt <= now) { release(lease); leases.delete(id); queueRefresh(); }
@@ -171,12 +203,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     }
     const dirty = motionDirty; motionDirty = false;
     for (const context of contexts.values()) {
-      if (!context.subscribed || (!context.pendingSnapshot && !context.revoked && !dirty)) continue;
+      if (!context.subscribed || (!context.pendingSnapshot && !context.revoked && (!dirty || context.legacyReadonly))) continue;
       try {
         const snapshot = project(context); // Recheck membership/access before each delivery.
         if (context.revoked) { if (send(context, "house.revoked", context.revoked)) context.revoked = null; continue; }
         if (context.pendingSnapshot) { if (send(context, "house.snapshot", snapshot)) context.pendingSnapshot = false; }
-        else if (dirty) send(context, "house.motion", { serverEpoch, accessGeneration: snapshot.accessGeneration, generation: snapshot.generation, zoneId: snapshot.durable.zoneId, players: snapshot.players }, true);
+        else if (dirty && !context.legacyReadonly) send(context, "house.motion", { worldVersion: HOUSE_WORLD_VERSION, serverEpoch, accessGeneration: snapshot.accessGeneration, generation: snapshot.generation, zoneId: snapshot.durable.zoneId, players: snapshot.players }, true);
       } catch (error) {
         context.subscribed = false;
         try { send(context, "house.revoked", { serverEpoch, accessGeneration: (context.accessGeneration = ++nextAccessGeneration), zoneId: "lounge", code: failure(error).code }); } catch { /* No authorised delivery after identity revocation. */ }
@@ -188,7 +220,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     if (!contexts.delete(context.socket.id)) return;
     if (!closed) log(context.id, "connection.disconnect", "offline");
     const lease = leases.get(context.id);
-    if (lease?.socketId === context.socket.id) { lease.socketId = null; lease.expiresAt = Date.now() + LEASE_MS; lease.animation = lease.seatId ? "sit" : "idle"; }
+    if (lease?.socketId === context.socket.id) {
+      if(!closed && lease.zoneId==="lounge") {
+        pendingGameDisconnects.add(context.id);
+        try { flushGameDisconnects(); } catch { log(context.id,"game.disconnect","STORAGE_UNAVAILABLE"); }
+      }
+      lease.socketId = null; lease.expiresAt = Date.now() + LEASE_MS; lease.animation = lease.seatId ? "sit" : "idle"; }
     queueRefresh();
   }
   io.use((socket, next) => {
@@ -196,9 +233,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       const digest = digestCookie(socket.request.headers.cookie);
       const identity = digest ? store.session(digest) : undefined;
       if (!digest || !identity) throw new HouseError("UNAUTHENTICATED", "Open the house page to establish your identity.");
+      const declaredVersion = Object.prototype.hasOwnProperty.call(socket.handshake.auth ?? {}, "worldVersion");
+      const legacyReadonly = !declaredVersion;
+      if (declaredVersion && socket.handshake.auth.worldVersion !== HOUSE_WORLD_VERSION) throw new HouseError("CLIENT_UPDATE_REQUIRED", "The house has changed. Download unsent drafts, then reload to update.");
       if (contexts.size >= MAX_CONNECTIONS) throw new HouseError("LOAD_LIMIT", "This server has twelve connections. Close an unused tab and retry.");
       if ([...contexts.values()].filter(context => context.id === identity.id).length >= 2) throw new HouseError("TAB_LIMIT", "Use one controlling tab and one observer.");
-      const context: Context = { socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetAt: Date.now(), events: 0 };
+      const context: Context = { legacyReadonly, socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetAt: Date.now(), events: 0 };
       contexts.set(socket.id, context);
       socket.conn.once("close", () => cleanup(context));
       next();
@@ -222,6 +262,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       });
     }
     function acquire(token: string, snapshot: HouseSnapshot, force = false): Lease {
+      if (context.legacyReadonly) throw new HouseError("NOT_CONTROLLER", "Reload this older tab after copying or exporting its available drafts.");
       let lease = leases.get(context.id);
       if (!force && lease?.socketId && lease.socketId !== socket.id) return lease;
       if (!force && lease && !lease.socketId && lease.expiresAt > Date.now() && lease.token === token && lease.houseId === snapshot.house.id) {
@@ -230,7 +271,10 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         return lease;
       }
       if (!force && lease?.socketId === socket.id) return lease;
-      if (lease) release(lease);
+      if (lease) {
+        if(lease.zoneId==="lounge" && snapshot.zoneId!=="lounge") store.gameLifecycle?.(lease.id,"left_lounge");
+        release(lease);
+      }
       const generation = ++nextGeneration;
       lease = { id: context.id, digest: context.digest, houseId: snapshot.house.id, token, socketId: socket.id, generation, expiresAt: Infinity, zoneId: snapshot.zoneId, x: 0, z: 0, heading: 0, animation: "idle", seatId: null, availability: "quiet", availabilitySetAt: Date.now(), sequence: 0, lastMoveAt: Date.now(), motionCredit: 0 };
       resetZone(lease, snapshot); leases.set(context.id, lease); return lease;
@@ -241,6 +285,10 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       const alreadySubscribed = context.subscribed;
       context.accessGeneration = ++nextAccessGeneration;
       context.zoneId = body.zoneId; context.subscribed = true; context.revoked = null;
+      if (context.legacyReadonly) {
+        log(context.id, "zone.subscribe", "recovery");
+        return { ok: true, snapshot: project(context) };
+      }
       const lease = acquire(body.controllerToken, snapshot);
       if (lease.socketId === socket.id) {
         if (alreadySubscribed) lease.generation = ++nextGeneration;
@@ -251,6 +299,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       return { ok: true, snapshot: project(context) };
     });
     handle("house.takeover", body => {
+      if (context.legacyReadonly) throw new HouseError("CLIENT_UPDATE_REQUIRED", "This older tab is read-only. Copy available drafts or export Pending before reloading.");
       const snapshot = authorised(context);
       if (!context.subscribed) throw new HouseError("NOT_SUBSCRIBED", "Enter the house first.");
       const token = typeof body.controllerToken === "string" && uuid.test(body.controllerToken) ? body.controllerToken : randomUUID();
@@ -304,11 +353,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
       if (body.zoneId !== context.zoneId || lease.zoneId !== body.zoneId) throw new HouseError("STALE_ZONE", "This draft belongs to a different room.");
       const command = inputObject(body.command) as unknown as HouseCommand;
       validateCommandZone(command, context.zoneId);
-      const receipt = store.execute(context.id, command); queueRefresh(); log(context.id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "socket" }); return receipt;
+      const receipt = store.execute(context.id, command, command.type.startsWith("game.") ? gameControl(context) : undefined); queueRefresh(); log(context.id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "socket" }); return receipt;
     });
   });
   function validateCommandZone(command: HouseCommand, zoneId: string) {
     if (typeof command.type !== "string" || !command.payload || typeof command.payload !== "object" || Array.isArray(command.payload)) throw new HouseError("INVALID_INPUT", "A valid command payload is required.");
+    if(command.type.startsWith("game.") && zoneId!=="lounge") throw new HouseError("STALE_ZONE","Return to the lounge table.");
     if (command.type === "chat.send" && command.payload.zoneId !== zoneId) throw new HouseError("STALE_ZONE", "Send this message only in its original room.");
     if ((["room.configure", "room.placements", "room.starter", "room.light"].includes(command.type)) && command.payload.roomId !== zoneId) throw new HouseError("STALE_ZONE", "This room edit belongs to a different room.");
   }
@@ -317,7 +367,11 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
     io,
     refresh: queueRefresh,
     revokeIdentity(id: string) {
-      const lease = leases.get(id); if (lease) release(lease); leases.delete(id);
+      const lease = leases.get(id);
+      if(lease?.socketId && lease.zoneId==="lounge") {
+        pendingGameDisconnects.add(id); try { flushGameDisconnects(); } catch { log(id,"game.disconnect","STORAGE_UNAVAILABLE"); }
+      }
+      if (lease) release(lease); leases.delete(id);
       for (const context of contexts.values()) if (context.id === id) disconnect(context, "IDENTITY_REVOKED");
       queueRefresh();
     },
@@ -331,7 +385,8 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
         if (zoneId !== context.zoneId) throw new HouseError("STALE_ZONE", "This draft belongs to a different room.");
         validateCommandZone(command, context.zoneId);
       }
-      const receipt = store.execute(id, command); queueRefresh(); log(id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "http" }); return receipt;
+      const activeLease=leases.get(id), activeContext=activeLease?.socketId ? contexts.get(activeLease.socketId) : undefined;
+      const receipt = store.execute(id, command, command.type.startsWith("game.") && activeContext ? gameControl(activeContext) : undefined); queueRefresh(); log(id, command.type, "accepted", { ...receiptMetadata(command, receipt), transport: "http" }); return receipt;
     },
     async close(): Promise<void> {
       if (closed) return; closed = true; clearInterval(timer);

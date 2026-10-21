@@ -1,4 +1,5 @@
 import { createHouseClient, createPendingInspector } from "./house-client.js";
+import { createHouseGameUI } from "./house-game-ui.js";
 import { createHouseWorld } from "./house-world.js";
 import { ROOM_PRESETS, getRoomPreset } from "./house-room-content.js";
 import { validatePlacements, footprint } from "./house-geometry.js";
@@ -6,8 +7,9 @@ import { createMovableWindow, createModalFocus } from "./house-shell.js";
 const $ = id => document.getElementById(id);
 function setPlaceLabel(text){const label=$("place-label");label.textContent=text;label.title=text;}
 setPlaceLabel($("place-label").textContent||"");
-const HUD_SAFE_SELECTOR=".world-status,#resident-disclosure,.availability,#camera-hud,.toolbelt,#chat-window,.movement,.touch-toggle,.context-hint,#panel,#notice,#takeover";
+const HUD_SAFE_SELECTOR=".world-status,#resident-disclosure,.availability,#camera-hud,.toolbelt,#chat-window,.movement,#game-table-status,.touch-toggle,.context-hint,#panel,#notice,#takeover";
 let live = null, me = null, world = null, client = null, activePanel = null;
+let voiceDraft=null,updateRecovery=null,voicePendingRows=[],voicePendingScope="",voicePendingError="";
 let cardDirty = false, cardBase = null, cardProjection=null, roomDraft = null, suspendedDrafts = null;
 let lastScope="", lastIdentityScope="", lastHouseKey="", inspector=null, pendingRequest=0, privacyGeneration=0,bootstrapRequest=0,keyIssuance=null;
 const unreadStreams=new Map();
@@ -15,12 +17,14 @@ let adminRequest=0,safeAreaFrame=null;
 let lastDurableKey = "", noticeTimer, chatVersion=0, cardVersion=0, checkingMembership=false;
 const pending = new Map(), pendingZones = new Map(), saveFlights = new Set();
 let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null;
+let gamePendingRows=[],gamePendingRequest=0,gameRefreshKey="",plannedPlace=null;
+const gameUI=createHouseGameUI($("game-panel"),{send:sendGame,resolveJoin:retryOriginalGameJoin,onLeave:closePanel,onReturn:()=>openPanel("board"),onPending:()=>openPanel("pending"),onError:message=>{if(activePanel!=="game")notice(message,true);}});
 const panelFocus=createModalFocus($("panel")),boardFocus=createModalFocus($("board-workspace"));
 const chatWindow=createMovableWindow({window,element:$("chat-window"),handle:$("chat-handle"),body:$("chat-body"),collapse:$("chat-collapse"),resize:$("chat-resize"),onChange:state=>{if(state.shown&&!state.collapsed&&chatReadable())markChatRead();queueSafeArea();}});
 let reducedMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||false;
 try{const saved=window.localStorage.getItem("night-neighbourhood.reduced-motion");if(saved!==null)reducedMotion=saved==="true";}catch{/* A blocked preference store does not block play. */}
 $("reduced-motion").checked=reducedMotion;document.body.dataset.reducedMotion=String(reducedMotion);
-function setShellInert(){const modal=Boolean(embeddedFrame||activePanel&&activePanel!=="room");for(const id of ["world","game-controls","entry","chat-window"])$(id).inert=modal;}
+function setShellInert(){const modal=Boolean(embeddedFrame||activePanel&&!["room","game"].includes(activePanel));for(const id of ["world","game-controls","entry","chat-window"])$(id).inert=modal;}
 function renderTitle(){
  $("lobby-export").hidden=!me?.archiveCount;$("archive-count").hidden=!me?.archiveCount;$("archive-count").textContent=me?.archiveCount?me.archiveCount+" private room archive"+(me.archiveCount===1?"":"s")+" available in your download.":"";
  entered=false;$("title-screen").hidden=false;$("lobby").hidden=true;$("game-controls").hidden=true;document.body.dataset.screen="title";
@@ -31,7 +35,7 @@ function openAdmission(kind){if(me?.home){notice("Continue your saved home first
 function closeBoard(){if(!embeddedFrame)return;embeddedFrame.remove();embeddedFrame=null;embeddedContext="";$("board-workspace").hidden=true;$("board-status").textContent="";setShellInert();applyInput();boardFocus.close();if(boardLauncher?.isConnected&&!boardLauncher.closest("[hidden]"))boardLauncher.focus();boardLauncher=null;queueSafeArea();}
 function openBoard(){if(!live){notice("Waiting for the house connection.");return;}closePanel();chatWindow.close();boardLauncher=document.activeElement;embeddedContext=privateContext();embeddedFrame=document.createElement("iframe");embeddedFrame.id="board-frame";embeddedFrame.title="Collaborative shared board";embeddedFrame.src="/board/?embedded=1";const ownedFrame=embeddedFrame;embeddedFrame.addEventListener("load",()=>{if(embeddedFrame===ownedFrame&&embeddedContext===privateContext())$("board-status").textContent="House-wide workspace";});$("board-frame-host").replaceChildren(embeddedFrame);$("board-workspace").hidden=false;$("board-status").textContent="Opening the shared workspace…";setShellInert();applyInput();boardFocus.open(boardLauncher);}
 
-const RETAIN_INTENT_CODES=new Set(["TIMEOUT","PENDING","STORAGE_UNAVAILABLE","NOT_CONTROLLER","STALE_ZONE","CLOSED","IDENTITY_CHANGED","INSPECTION_REQUIRED"]);
+const RETAIN_INTENT_CODES=new Set(["TIMEOUT","PENDING","STORAGE_UNAVAILABLE","NOT_CONTROLLER","STALE_ZONE","CLOSED","IDENTITY_CHANGED","INSPECTION_REQUIRED","CLIENT_UPDATE_REQUIRED"]);
 function node(tag, text, className) { const e=document.createElement(tag); if(text!==undefined)e.textContent=text; if(className)e.className=className; return e; }
 function notice(message,persistent=false){
  clearTimeout(noticeTimer);const target=activePanel?$("panel-feedback"):!$("title-screen").hidden?$("title-feedback"):!$("lobby").hidden?$("lobby-feedback"):$("notice");for(const id of ["notice","panel-feedback","lobby-feedback","title-feedback"])$(id).hidden=true;target.textContent=message;target.hidden=false;queueSafeArea();
@@ -49,6 +53,7 @@ async function api(path, body) {
 function command(type,payload,expectedRevision) { return {commandId:crypto.randomUUID(),type,payload,...(live?{houseId:live.durable.house.id}:{}),...(expectedRevision===undefined?{}:{expectedRevision})}; }
 async function save(type,payload,expectedRevision) {
  if(!live?.controller)throw Object.assign(new Error("Take control in this tab before saving."),{code:"NOT_CONTROLLER"});
+ if(type.startsWith("game.")&&type!=="game.leave"&&gamePendingIntents().length)throw Object.assign(new Error("A game action is pending, not confirmed saved. Inspect Pending drafts before another game action. Leave and Return remain available."),{code:"PENDING"});
  const key=JSON.stringify([live.durable.house.id,live.durable.selfId,type,payload,expectedRevision]);
  if(pending.has(key)&&pendingZones.get(key)!==live.durable.zoneId)throw Object.assign(new Error("This pending action belongs to its original room. Return there or inspect Pending drafts to retry the original action."),{code:"STALE_ZONE"});
  const intent=pending.get(key)||command(type,payload,expectedRevision);pending.set(key,intent);pendingZones.set(key,live.durable.zoneId);saveFlights.add(intent.commandId);
@@ -59,7 +64,7 @@ async function save(type,payload,expectedRevision) {
  } catch(error) {
   if(error.code&&!RETAIN_INTENT_CODES.has(error.code)){pending.delete(key);pendingZones.delete(key);}
   throw error;
- } finally {saveFlights.delete(intent.commandId);if(activePanel==="pending")void protectedAction(renderPending)();}
+ } finally {saveFlights.delete(intent.commandId);if(type.startsWith("game."))void refreshGamePending();if(activePanel==="pending")void protectedAction(renderPending)();}
 }
 function showConnectionLimit(error){
  if(!["LOAD_LIMIT","TAB_LIMIT"].includes(error.code))return false;
@@ -108,18 +113,20 @@ function renderCameraMode(mode=world?.getCameraMode?.()||"play"){
 function applyInput(){world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
 function closePanel(){adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("modal-backdrop").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();if(chatReadable())markChatRead();panelFocus.close();queueSafeArea();}
 function openPanel(name){
+ if(name==="game"&&live?.durable.zoneId!=="lounge"){notice("Walk to the break table in the lounge to open it.");return;}
  if(name==="chat"){if(!live){notice("Waiting for the house connection.");return;}if(chatWindow.isOpen())chatWindow.close();else {chatWindow.open(document.activeElement);renderTranscript();markChatRead();}return;}
  if(!["recovery","pending","options","about"].includes(name)&&!live){notice("Waiting for the house connection.");return;}
  if(embeddedFrame)return;
- const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(name!=="room"));$("modal-backdrop").hidden=name==="room";$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
- for(const key of ["board","room","house","recovery","pending","options","about"])$(key+"-panel").hidden=key!==name;
- $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood"}[name];
+ const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(!["room","game"].includes(name)));$("modal-backdrop").hidden=["room","game"].includes(name);$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
+ for(const key of ["board","room","house","recovery","pending","options","about","game","places","voice"])$(key+"-panel").hidden=key!==name;
+ $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood",game:"Four-in-a-row",places:"Places",voice:"Optional voice"}[name];
  applyInput();
  if(name==="pending")void protectedAction(renderPending)();
  if(name==="board"){renderCards();if(!cardDirty)fillCard();}
  if(name==="room"){renderRoom();void protectedAction(refreshRoomPending)();}
- if(name==="house")renderHouse();
- panelFocus.open();queueSafeArea();
+ if(name==="house"){renderHouse();void protectedAction(inspectVoicePending)();}
+ if(name==="voice")renderVoice();
+ if(name==="game"){panelFocus.close();$("panel-close").focus();renderGame();}else panelFocus.open();queueSafeArea();
 }
 function updateWorld(snapshot){
  if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
@@ -127,6 +134,7 @@ function updateWorld(snapshot){
 }
 async function interact(target){
  if(!live||!target)return;
+ if(target.kind==="game"||target.type==="game"){openPanel("game");return;}
  if(target.type==="door"){
   const resident=live.durable.residents.find(p=>p.slot===target.slot||p.bedroomId===target.roomId);
   if(!resident){notice("This bedroom is waiting for a new housemate.");return;}
@@ -153,11 +161,12 @@ function roomScope(){const room=ownRoom();return room?scopeKey(live)+":"+room.id
 function cardValues(){return Object.fromEntries(["small-goal","question","resource","next-step"].map(id=>[id,$(id).value]).concat([["help-requested",$("help-requested").checked]]));}
 function restoreCard(values){for(const [id,value] of Object.entries(values))if(id==="help-requested")$(id).checked=value;else $(id).value=value;}
 function clearPrivateDOM(){
- setPlaceLabel("");
+ setPlaceLabel("");gameUI.update(null);$("game-table-status").hidden=true;
  for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries"])$(id).replaceChildren();
- for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","room-light","starter-preset","recovery-proof"])$(id).value="";
+ for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","room-light","starter-preset","recovery-proof","voice-url"])$(id).value="";
  for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count","starter-summary","starter-status","light-status"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
  $("chat-draft-status").textContent="Enter for a new line · Ctrl / ⌘ Enter to send";$("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
+ $("voice-link").hidden=true;$("voice-link").removeAttribute("href");$("voice-destination").textContent="";$("voice-form").hidden=true;
  $("starter-preview").replaceChildren();world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
 }
 function onSnapshot(snapshot){
@@ -168,7 +177,7 @@ function onSnapshot(snapshot){
   setPlaceLabel("Waiting for the house connection");
   $("house-code-button").disabled=true;
   for(const button of document.querySelectorAll("[data-panel]"))button.disabled=!["pending","options","about"].includes(button.dataset.panel);
-  $("connection-status").textContent="Reconnecting…";$("quick-chat").querySelector("button").disabled=true;
+  $("connection-status").textContent=updateRecovery?"Update needed":"Reconnecting…";$("quick-chat").querySelector("button").disabled=true;
   applyInput();if(activePanel)closePanel();return;
  }
  const reconnect=!live, previousScope=lastScope, previousIdentity=lastIdentityScope, retainedCard=suspendedDrafts?.identity===identityScope(snapshot)?suspendedDrafts.card:cardValues();
@@ -197,9 +206,11 @@ function onSnapshot(snapshot){
  updateUnread(snapshot,reconnect||previousScope!==lastScope);renderRoster();updateWorld(snapshot);
  const key=JSON.stringify([snapshot.durable.streamId,snapshot.durable.sequence,workCursor()?.streamId,workCursor()?.sequence,snapshot.controller]);
  if(key!==lastDurableKey){lastDurableKey=key;renderTranscript();if(activePanel==="board"){renderCards();if(!cardDirty)fillCard();}}
- const houseKey=JSON.stringify([snapshot.durable.house,snapshot.durable.residents,snapshot.durable.selfId]);
- if(houseKey!==lastHouseKey){lastHouseKey=houseKey;adminRequest++;if(activePanel==="house")renderHouse();}
+ const houseKey=JSON.stringify([snapshot.durable.house,snapshot.durable.residents,snapshot.durable.selfId,snapshot.durable.voice,snapshot.controller]);
+ if(houseKey!==lastHouseKey){lastHouseKey=houseKey;adminRequest++;if(activePanel==="house")renderHouse();else if(activePanel==="voice")renderVoice();}
  if(activePanel==="room")renderRoom();
+ renderGame();const gameKey=JSON.stringify([identityScope(live),live.durable.zoneId,live.controller,live.durable.game?.revision]);if(reconnect||gameKey!==gameRefreshKey){gameRefreshKey=gameKey;void refreshGamePending();}
+ if(plannedPlace&&snapshot.durable.zoneId==="lounge"){const place=plannedPlace;plannedPlace=null;queueMicrotask(()=>walkToPlace(place));}
 
 }
 function unreadKey(){return live?live.durable.house.id+":"+live.durable.selfId+":"+live.durable.streamId:"";}
@@ -299,6 +310,7 @@ function roomWritable(){return Boolean(live?.controller&&!(roomDraft?.awaitingSt
 function forgetPending(commandId,receipt){
  for(const [key,intent] of pending){
   if(intent.commandId!==commandId)continue;pending.delete(key);pendingZones.delete(key);
+  if(intent.type.startsWith("game."))gamePendingRows=gamePendingRows.filter(row=>row.commandId!==commandId);
   if(intent.type==="room.starter"&&roomDraft&&ownRoom()?.id===intent.payload.roomId){
    roomDraft.starterAttempt=null;roomDraft.starterMessage=receipt?"Original starter acknowledged.":"Local pending starter discarded. Its server status is unknown; review your saved room.";
    if(receipt?.entityRevision){roomDraft.awaitingStarter=receipt.entityRevision;roomDraft.ackRevision=Math.max(roomDraft.ackRevision,receipt.entityRevision);}
@@ -306,6 +318,7 @@ function forgetPending(commandId,receipt){
  }
 }
 function reconcilePendingMemory(result){
+ voicePendingRows=result.entries.filter(entry=>entry.type==="house.voice");voicePendingScope=identityScope(live);voicePendingError="";
  const retained=new Set(result.entries.map(entry=>entry.commandId));
  for(const intent of [...pending.values()])if(!saveFlights.has(intent.commandId)&&!retained.has(intent.commandId))forgetPending(intent.commandId);
 }
@@ -390,8 +403,58 @@ async function renderRemoved(after="",append=false){
   if(result.nextCursor){const more=node("button","More removed residents","more-removed");more.addEventListener("click",()=>{void renderRemoved(result.nextCursor,true);});$("removed-members").append(more);}
  }catch(error){if(request===adminRequest&&activePanel==="house"&&live?.durable.house.id===houseId&&live.durable.selfId===ownerId&&live.durable.house.ownerId===ownerId)notice(error.message);}
 }
-function renderHouse(){
+function pendingVoice(){return Boolean(live&&([...pending.values()].some(intent=>intent.type==="house.voice"&&intent.houseId===live.durable.house.id)||voicePendingRows.some(entry=>entry.houseId===live.durable.house.id)));}
+async function inspectVoicePending(){
+ const context=privateContext(),scope=identityScope(live);voicePendingScope="";voicePendingError="";renderVoice();
+ try{const result=await pendingSource().getPending();if(context!==privateContext()||scope!==identityScope(live))return;reconcilePendingMemory(result);renderVoice();}
+ catch(error){if(context===privateContext()&&scope===identityScope(live)){voicePendingError=error.message;renderVoice();}throw error;}
+}
+function renderVoice(){
  if(!live)return;
+ const saved=live.durable.voice||{url:null,revision:0},scope=identityScope(live),owner=live.durable.house.ownerId===live.durable.selfId;
+ $("voice-link").hidden=!saved.url;$("voice-empty").hidden=Boolean(saved.url);$("voice-destination").textContent=saved.url||"";
+ if(saved.url)$("voice-link").href=saved.url;else $("voice-link").removeAttribute("href");
+ $("voice-form").hidden=!owner;
+ if(!owner)return;
+ if(!voiceDraft||voiceDraft.scope!==scope)voiceDraft={scope,baseRevision:saved.revision,value:saved.url||"",version:0,dirty:false,saving:false,message:""};
+ if(!voiceDraft.dirty&&!voiceDraft.saving&&saved.revision>=voiceDraft.baseRevision){voiceDraft.baseRevision=saved.revision;voiceDraft.value=saved.url||"";}
+ $("voice-url").value=voiceDraft.value;
+ const uncertain=pendingVoice(),unchecked=voicePendingScope!==scope;
+ for(const field of $("voice-form").querySelectorAll("button"))field.disabled=!live.controller||voiceDraft.saving||uncertain||unchecked;
+ $("voice-url").disabled=!live.controller;
+ $("voice-status").textContent=unchecked?(voicePendingError||"Checking pending link changes…"):uncertain&&!voiceDraft.saving?"The link change is pending. Inspect Pending drafts to resolve it.":voiceDraft.message||(voiceDraft.dirty&&saved.revision>voiceDraft.baseRevision?"The saved link changed. Your edit is still here; Use saved link to reload it.":saved.url?"Your housemates can open this Discord destination.":"Voice is optional. Add a link when your group wants one.");
+}
+async function saveVoice(){
+ if(!live?.controller||live.durable.house.ownerId!==live.durable.selfId)throw new Error("Only the house owner in the controlling tab can change this link.");
+ renderVoice();if(voicePendingScope!==identityScope(live)||pendingVoice())throw Object.assign(new Error("Inspect and resolve pending link changes before saving another."),{code:"PENDING"});if(voiceDraft.saving)return;const draft=voiceDraft,scope=identityScope(live),version=draft.version,value=draft.value,base=draft.baseRevision;
+ draft.saving=true;draft.message="Saving Discord link…";renderVoice();
+ try{const receipt=await save("house.voice",{url:value},base);if(voiceDraft!==draft||identityScope(live)!==scope)return;draft.baseRevision=receipt.entityRevision;
+  if(draft.version===version){draft.dirty=false;draft.message="Discord link saved.";}else draft.message="Submitted link saved; your newer edit is still here.";
+ }catch(error){if(voiceDraft===draft)draft.message=error.message;throw error;}finally{if(voiceDraft===draft){draft.saving=false;renderVoice();}}
+}
+function showUpdateRequired(){
+ if(!updateRecovery){const held=suspendedDrafts,zoneId=live?.durable.zoneId||lastScope.split(":").at(-1)||"lounge";
+  updateRecovery=JSON.parse(JSON.stringify({format:"house-local-drafts-v1",identityId:live?.durable.selfId||me?.identity.id,houseId:live?.durable.house.id||me?.home?.id,zoneId,
+   chat:{text:live?$("chat-input").value:held?.chat||"",zoneId,version:chatVersion},work:{values:live?cardValues():held?.card||cardValues(),base:cardBase,dirty:cardDirty,version:cardVersion},room:roomDraft,voice:voiceDraft}));
+ }
+ $("update-required").hidden=false;$("update-status").textContent="Your available drafts stay in this tab until you reload.";queueSafeArea();
+}
+$("voice-url").addEventListener("input",()=>{if(!voiceDraft)return;voiceDraft.value=$("voice-url").value;voiceDraft.version++;voiceDraft.dirty=true;voiceDraft.message="";});
+$("voice-form").addEventListener("submit",protectedAction(saveVoice));
+$("voice-clear").addEventListener("click",protectedAction(async()=>{if(!voiceDraft)return;voiceDraft.value="";voiceDraft.version++;voiceDraft.dirty=true;await saveVoice();}));
+$("voice-reload").addEventListener("click",()=>{voiceDraft=null;renderVoice();});
+$("update-pending").addEventListener("click",()=>openPanel("pending"));
+$("update-reload").addEventListener("click",()=>window.location.reload());
+$("update-download").addEventListener("click",protectedAction(async()=>{
+ const retained=updateRecovery;if(!retained)return;const current=await api("/api/house/me");
+ if(updateRecovery!==retained)return;
+ if(current.identity.id!==retained.identityId){invalidateIdentityView();me=current;renderTitle();notice("Your identity changed. Continue with your current identity.",true);return;}
+ const pendingDrafts=await pendingSource().exportPending();if(updateRecovery!==retained)return;
+ const url=URL.createObjectURL(new Blob([JSON.stringify({...retained,pending:pendingDrafts},null,2)],{type:"application/json"}));const link=node("a");link.href=url;link.download="my-local-house-drafts.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$("update-status").textContent="Local drafts downloaded.";
+}));
+
+function renderHouse(){
+ if(!live)return;renderVoice();
  const d=live.durable;$("join-code-display").textContent=d.house.code;
  $("capacity-status").textContent=d.residents.length+" of "+d.house.capacity+" permanent bedrooms claimed. Offline friends keep their rooms.";
  $("membership-actions").replaceChildren();$("removed-members").replaceChildren();
@@ -416,9 +479,9 @@ async function checkMembership(){
 }
 function setRecoveryBusy(busy){for(const id of ["recovery-key","lobby-recovery-key"])$(id).disabled=busy;}
 function invalidateIdentityView(){
- privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;
+ privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;gamePendingRequest++;gamePendingRows=[];plannedPlace=null;
  client?.close();client=null;inspector?.close();inspector=null;live=null;
- roomDraft=null;suspendedDrafts=null;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
+ roomDraft=null;suspendedDrafts=null;voiceDraft=null;updateRecovery=null;voicePendingRows=[];voicePendingScope="";voicePendingError="";$("update-required").hidden=true;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
  lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();pendingZones.clear();keyIssuance=null;setRecoveryBusy(false);
  closeBoard();chatWindow.reset();clearPrivateDOM();closePanel();world?.update(null);world?.setInputEnabled(false);$("notice").textContent="";$("notice").hidden=true;
  $("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;$("connection-limit-pending").hidden=true;
@@ -441,7 +504,7 @@ async function bootstrap(enter=false){
  entered=true;$("title-screen").hidden=true;$("lobby").hidden=true;$("game-controls").hidden=false;$("connection-status").textContent="Opening your house…";$("title-status").textContent="Opening your saved home…";
  if(!client){
   const actorId=me.identity.id;let ownedClient;
-  ownedClient=createHouseClient({expectedIdentityId:actorId,onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
+  ownedClient=createHouseClient({expectedIdentityId:actorId,onUpdateRequired:error=>{if(client===ownedClient)showUpdateRequired(error);},onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
   client=ownedClient;await ownedClient.connect();
  }
 }
@@ -572,6 +635,34 @@ $("export-own").addEventListener("click",protectedAction(async()=>{
  const context=privateContext(),data=await api("/api/house/export",{});if(context!==privateContext())return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));
  const link=node("a");link.href=url;link.download="my-study-house.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }));
+function sendGame(type,payload,revision){
+ const task=save(type,payload,revision);if(type==="game.join"&&live){const key=JSON.stringify([live.durable.house.id,live.durable.selfId,type,payload,revision]),intent=pending.get(key);if(intent)task.gameJoinIntent={scope:identityScope(live),command:structuredClone(intent)};}return task;
+}
+async function retryOriginalGameJoin(intent){
+ if(!live?.controller||live.durable.zoneId!=="lounge"||intent.type!=="game.join"||intent.houseId!==live.durable.house.id)throw Object.assign(new Error("Return to lounge control to inspect the original Join."),{code:"NOT_CONTROLLER"});
+ const receipt=await client.command(intent);forgetPending(intent.commandId,receipt);void refreshGamePending();return receipt;
+}
+function gamePendingIntents(){
+ if(!live)return [];const rows=new Map(gamePendingRows.filter(row=>row.houseId===live.durable.house.id).map(row=>[row.commandId,row]));
+ for(const intent of pending.values())if(intent.houseId===live.durable.house.id&&intent.type.startsWith("game."))rows.set(intent.commandId,intent);return [...rows.values()];
+}
+function renderGame(){
+ const rows=gamePendingIntents(),round=live?.durable.game?.current,participant=Boolean(round?.players.includes(live.durable.selfId));gameUI.update(live,{pendingCount:rows.length});
+ $("game-table-status").hidden=!live||(!participant&&!rows.length);$("game-table-label").textContent=rows.some(row=>row.type==="game.leave")?"Withdrawal pending":participant?"At break table · "+round.status:"Game action pending";$("game-table-leave").hidden=!participant;$("game-table-reopen").disabled=live?.durable.zoneId!=="lounge";queueSafeArea();
+}
+async function refreshGamePending(){
+ if(!live||!client)return;const request=++gamePendingRequest,context=identityScope(live);
+ try{const result=await client.getPending();if(request!==gamePendingRequest||context!==identityScope(live))return;for(const intent of [...pending.values()])if(intent.type.startsWith("game.")&&!saveFlights.has(intent.commandId)&&!result.entries.some(row=>row.commandId===intent.commandId))forgetPending(intent.commandId);gamePendingRows=result.entries.filter(row=>row.type.startsWith("game."));renderGame();}catch{/* Storage/transport problems remain visible through the action or Pending drafts. */}
+}
+function walkToPlace(place){
+ if(!live?.controller){notice("Take control in this tab before walking.");return;}
+ closePanel();
+ if(live.durable.zoneId!=="lounge"&&(place!=="room"||!ownRoom())){plannedPlace=place;if(!world?.approach({type:"exit"})){plannedPlace=null;notice("Stand up before returning to the lounge.");}return;}
+ if(!world?.routeTo?.(place))notice(place==="room"&&ownRoom()?"You are already in your room.":"That place is unavailable right now. Stand up and try again.");
+}
+$("game-table-reopen").addEventListener("click",()=>openPanel("game"));
+$("game-table-leave").addEventListener("click",()=>gameUI.leave());
+for(const button of document.querySelectorAll("[data-place]"))button.addEventListener("click",()=>walkToPlace(button.dataset.place));
 function pendingSource(){return client||(inspector ||= createPendingInspector({expectedIdentityId:me?.identity.id,fetchMe:()=>api("/api/house/me")}));}
 async function renderPending(){
  const request=++pendingRequest, identity=live?.durable.selfId||me?.identity.id;
@@ -601,7 +692,7 @@ const hudResizeObserver=typeof window.ResizeObserver==="function"?new window.Res
 for(const element of document.querySelectorAll(HUD_SAFE_SELECTOR))hudResizeObserver?.observe(element);
 window.addEventListener("resize",queueSafeArea);
 window.visualViewport?.addEventListener("resize",queueSafeArea);window.visualViewport?.addEventListener("scroll",queueSafeArea);
-window.addEventListener("pagehide",()=>{clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
+window.addEventListener("pagehide",()=>{clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();gameUI.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
 bootstrap().catch(error=>{if(showConnectionLimit(error))return;notice(error.message,true);$("connection-status").textContent="Could not open the house";$("title-status").textContent="Could not check your saved home. Reload to retry.";});
 
 $("walk-room").addEventListener("click",()=>{const resident=live?.durable.residents.find(r=>r.id===live.durable.selfId);closePanel();if(resident&&!world?.approach({type:"door",slot:resident.slot}))notice("Stand up before walking to your room.");});

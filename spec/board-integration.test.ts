@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { mkdtempSync, readdirSync, readlinkSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -86,7 +87,7 @@ test("a full retained long-Unicode room transcript can be subscribed without dis
   const durable=service.houseStore.snapshot(actor.id,"lounge");
   expect(Buffer.byteLength(JSON.stringify(durable))).toBeGreaterThan(512*1024);
   expect(Buffer.byteLength(JSON.stringify(durable))).toBeLessThan(1024*1024);
-  const socket=io(base,{forceNew:true,transports:["websocket"],reconnection:false,extraHeaders:{Origin:base,Cookie:`house_session=${actor.token}`}});
+  const socket=io(base, { auth: { worldVersion: HOUSE_WORLD_VERSION },forceNew:true,transports:["websocket"],reconnection:false,extraHeaders:{Origin:base,Cookie:`house_session=${actor.token}`}});
   cleanups.push(async()=>{socket.disconnect();});
   await new Promise<void>((resolve,reject)=>{socket.once("connect",resolve);socket.once("connect_error",reject);});
   const reply=await socket.timeout(2000).emitWithAck("house.subscribe",{zoneId:"lounge",controllerToken:randomUUID()});

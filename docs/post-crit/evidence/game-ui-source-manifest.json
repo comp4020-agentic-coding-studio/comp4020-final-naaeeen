@@ -1,0 +1,31 @@
+{
+  "kind": "UI lane final source and evidence hashes; parent later edits require affected rechecks",
+  "sources": {
+    "public/house-game-ui.js": "c8acde6cc6414441e6c5acebd75be2382f6ec848affee974a61465c9c60a2b41",
+    "public/house-ui.js": "6d76e03db5abbb512c9f19da4c4fec5a9099c667b74e71fd01c1b23d163f0497",
+    "public/house.html": "1e1f2088e4909dc7cb7aa35767e98fe0f07152c6fd7ffb5f3f0faff11330aa3b",
+    "public/house.css": "8bc6e8a26a5bec5c5f8c0391f8ac7eadb78537b3357458e62b363d7126bdcba9",
+    "spec/house-game-ui.test.ts": "f6b03dd8ccb3fe71c807e9caf49892249e36d1c58a77dd26fd8dd92f7a6691b5",
+    "spec/house-ui.test.ts": "c5cf3a7a9310b76edb405148b348c27fc3b0b9be9a27e0a5c86efdf2c6a23c09",
+    "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+    "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
+    "docs/post-crit/evidence/game-ui-browser.mjs": "bf54740a4f9b806209cd1dac98edddbfdb8485fbc2b1454d02e359f127d00d09"
+  },
+  "images": {
+    "game-ui-active-1920x1080.png": {
+      "sha256": "230ccf29052dfe5594d366ff292598e19005f8ba56a0abd3053096b3ec10ace5",
+      "width": 1920,
+      "height": 1080
+    },
+    "game-ui-active-390x844.png": {
+      "sha256": "27643962e0a1ae994aa0a94fc40266bff49ebe69793d046caa684e876d0a3be0",
+      "width": 390,
+      "height": 844
+    },
+    "game-ui-active-844x390.png": {
+      "sha256": "a1230f1097fc0e6a78de2e697e810fec7f7fcb984c41d7e274522d4dfcb8d7b9",
+      "width": 844,
+      "height": 390
+    }
+  }
+}

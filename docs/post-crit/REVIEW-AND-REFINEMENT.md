@@ -166,3 +166,50 @@ coverage is 96.29% lines / 81.85% branches; UI branch/function gaps remain state
 the worker record. Fresh/contextual review has no actionable scoped finding.
 P2 is accepted locally; full six-resident integration, sustained resource gates,
 physical devices and real-friend judgment remain P6 work. No release is claimed.
+
+## P3/P4 and compatibility checkpoints, 22 October
+
+The parent selected expanded20x14 after inspecting original-resolution matched
+images and measured routes. All115 scoped geometry/world checks and six isolated
+renderer cases passed. A fresh review's peer fallback-arrival finding was repaired.
+A native seat failure came from the test mutating an already-held snapshot; the
+corrected immutable fixture, retained diagnostic and negative distinction are in
+lounge-review.md. Parent verified all declared source hashes before commitf11eb13.
+
+P4 backend independently reviewed70 checks. Reproduced fixes prevent recycled
+round IDs, pause an expired controlling session before lease deletion, and deliver
+a pause persisted after transient storage failure. One captured operation time
+prevents crossing maintenance expiry between validation and application. The UI
+review found delayed Join/Return could retain a slot, focus on a newly-full column
+could be lost, and inspecting Pending on motion would issue excessive HTTP reads.
+Fixes bind deferred withdrawal to the original Join receipt and refresh on relevant
+authority/game changes. Actual two-client native play, both-party Resume, keyboard,
+touch and real My work return passed allthree viewports. See game-backend-* and
+game-ui-* evidence for exact source/check scopes.
+
+A fresh Astra/max compatibility/voice review ran132 focused checks and real-socket
+voice/legacy probes; no actionable assigned-boundary issue remained. Parent's
+new-version boundary tests reproduced9 failures before the gate;121 combined
+client/server checks then passed. Legacy recovery never installs avatars/acquires
+control. New clients latch mismatches while inspection/export remains available.
+The independent frozen8cdad6a browser lane retains both a fixture failure and an
+insufficient firstPASS: review required successful original ACK evidence, not only
+an empty pending queue, and immutable old served hashes. The corrected cutover run
+verifies exact lost-ACK replay and v1→v4 preservation;7 grader negative controls
+pass. Later UI edits retain separate source scope. See compat-browser-checks.md.
+
+## P5 update/voice UI refinements
+
+Owner voice configuration uses a validated external destination and independent
+revision. Newer local edits survive ACKs, cleared invitations cannot reappear via
+old bedroom snapshots, and activity metadata omits URLs. Neutral update export
+captures available local drafts before the display is cleared, with identity,
+house, zone and revision context; Pending remains inspectable without reconnect.
+
+Fresh Astra/max UI review reproduced two defects beyond the passing initial tests:
+expired persisted voice intents did not block a freshUUID save, and changing
+identity during export cleared every screen without presenting a next action.
+Parent reproduced both as85PASS/2FAIL, then added inspected-outbox guards and an
+explicit current-identity title transition. All87UI tests pass; contextual review
+passes5 targeted cases with no remaining scoped issue. Native current UI is the
+next independent gate. No model judgement or screenshot is called human validation.

@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { randomUUID } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -64,7 +65,7 @@ async function joinHouse(f: Fixture, actor: Actor, home: Home, name = "Finch") {
 }
 
 async function takeControl(f: Fixture, actor: Actor, zoneId = "lounge"): Promise<Control> {
-  const socket = io(f.base, {
+  const socket = io(f.base, { auth: { worldVersion: HOUSE_WORLD_VERSION },
     transports: ["websocket"], reconnection: false, timeout: 2000,
     extraHeaders: { Cookie: actor.cookie, Origin: f.base },
   });
@@ -147,6 +148,10 @@ it.each(["closed", "foreign"] as const)(
     const control = await takeControl(f, peer);
     const valid = await post(f, peer, command("chat.send", { zoneId: "lounge", text: "Allowed lounge message" }, home.id), control);
     expect(valid.status).toBe(200);
+    // The permitted lounge message advances the house-wide work cursor, while
+    // every private room field remains unchanged before the denied attempts.
+    const afterAllowed = f.app.houseStore.snapshot(roomOwner.id, roomId);
+    expect(afterAllowed).toEqual({ ...before, ownWork: { ...before.ownWork, sequence: before.ownWork.sequence + (boundary === "closed" ? 1 : 0) } });
     const read = await fetch(f.base + "/api/house/snapshot?zone=" + roomId, { headers: { Cookie: peer.cookie } });
     expect(read.status).toBe(403);
     expect(await read.json()).toMatchObject({ ok: false, code: "FORBIDDEN" });
@@ -157,7 +162,7 @@ it.each(["closed", "foreign"] as const)(
       expect(denied.status).toBe(409);
       expect(await denied.json()).toMatchObject({ ok: false, code: "STALE_ZONE" });
     }
-    expect(f.app.houseStore.snapshot(roomOwner.id, roomId)).toEqual(before);
+    expect(f.app.houseStore.snapshot(roomOwner.id, roomId)).toEqual(afterAllowed);
     expect(f.app.houseStore.snapshot(peer.id).chat.map(message => message.text)).toEqual(["Allowed lounge message"]);
   },
 );

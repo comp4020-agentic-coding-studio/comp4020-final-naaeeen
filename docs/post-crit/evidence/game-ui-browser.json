@@ -1,0 +1,305 @@
+{
+  "manifest": {
+    "kind": "real local createService SQLite/Socket.IO, two independent Chromium identities, emulated touch; no physical device, WAN, Fly or human preference",
+    "runner": "bf54740a4f9b806209cd1dac98edddbfdb8485fbc2b1454d02e359f127d00d09",
+    "sources": {
+      "public/house-ui.js": "6d76e03db5abbb512c9f19da4c4fec5a9099c667b74e71fd01c1b23d163f0497",
+      "public/house-game-ui.js": "c8acde6cc6414441e6c5acebd75be2382f6ec848affee974a61465c9c60a2b41",
+      "public/house.html": "1e1f2088e4909dc7cb7aa35767e98fe0f07152c6fd7ffb5f3f0faff11330aa3b",
+      "public/house.css": "8bc6e8a26a5bec5c5f8c0391f8ac7eadb78537b3357458e62b363d7126bdcba9",
+      "public/house-client.js": "010215636ef8d881855fea4f4a59e3458012a43434689b8774cf993d91375d48",
+      "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+      "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+      "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
+      "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65"
+    }
+  },
+  "checks": {
+    "ownerPlaceRoute": {
+      "before": {
+        "x": -0.325,
+        "z": 4.65
+      },
+      "after": {
+        "x": -4.75,
+        "z": 3.3
+      }
+    },
+    "peerPlaceRoute": {
+      "before": {
+        "x": 0.325,
+        "z": 4.65
+      },
+      "after": {
+        "x": -4.75,
+        "z": 3.3
+      }
+    },
+    "explicitWatch": true,
+    "explicitConsent": true,
+    "nativeKeyboardAndFocus": true,
+    "touchCount": 3,
+    "bothExplicitResume": true,
+    "textualBoard": true,
+    "realReturnAndNeutralLeave": true,
+    "complete": true
+  },
+  "rows": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": false,
+      "allVisible": true,
+      "cells": 42,
+      "board": {
+        "left": 688,
+        "top": 367.28125,
+        "right": 1232,
+        "bottom": 639.28125,
+        "width": 544,
+        "height": 272
+      },
+      "leave": {
+        "left": 688,
+        "top": 740.03125,
+        "right": 779.90625,
+        "bottom": 784.03125,
+        "width": 91.90625,
+        "height": 44
+      },
+      "columns": [
+        {
+          "left": 688,
+          "top": 319.28125,
+          "right": 762.28125,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        },
+        {
+          "left": 766.28125,
+          "top": 319.28125,
+          "right": 840.5625,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        },
+        {
+          "left": 844.5625,
+          "top": 319.28125,
+          "right": 918.84375,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        },
+        {
+          "left": 922.84375,
+          "top": 319.28125,
+          "right": 997.140625,
+          "bottom": 363.28125,
+          "width": 74.296875,
+          "height": 44
+        },
+        {
+          "left": 1001.140625,
+          "top": 319.28125,
+          "right": 1075.421875,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        },
+        {
+          "left": 1079.421875,
+          "top": 319.28125,
+          "right": 1153.703125,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        },
+        {
+          "left": 1157.703125,
+          "top": 319.28125,
+          "right": 1231.984375,
+          "bottom": 363.28125,
+          "width": 74.28125,
+          "height": 44
+        }
+      ],
+      "last": "Last move: ◆ B, row 6, column 4."
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "allVisible": true,
+      "cells": 42,
+      "board": {
+        "left": 25,
+        "top": 244.859375,
+        "right": 365,
+        "bottom": 510.859375,
+        "width": 340,
+        "height": 266
+      },
+      "leave": {
+        "left": 25,
+        "top": 611.609375,
+        "right": 192,
+        "bottom": 655.609375,
+        "width": 167,
+        "height": 44
+      },
+      "columns": [
+        {
+          "left": 25,
+          "top": 196.859375,
+          "right": 70.140625,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 74.140625,
+          "top": 196.859375,
+          "right": 119.28125,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 123.28125,
+          "top": 196.859375,
+          "right": 168.421875,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 172.421875,
+          "top": 196.859375,
+          "right": 217.5625,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 221.5625,
+          "top": 196.859375,
+          "right": 266.703125,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 270.703125,
+          "top": 196.859375,
+          "right": 315.84375,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        },
+        {
+          "left": 319.84375,
+          "top": 196.859375,
+          "right": 364.984375,
+          "bottom": 240.859375,
+          "width": 45.140625,
+          "height": 44
+        }
+      ],
+      "last": "Last move: ◆ B, row 6, column 4."
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "overflow": false,
+      "allVisible": true,
+      "cells": 42,
+      "board": {
+        "left": 30,
+        "top": 169,
+        "right": 423.84375,
+        "bottom": 358,
+        "width": 393.84375,
+        "height": 189
+      },
+      "leave": {
+        "left": 439.84375,
+        "top": 148.5625,
+        "right": 531.75,
+        "bottom": 192.5625,
+        "width": 91.90625,
+        "height": 44
+      },
+      "columns": [
+        {
+          "left": 30,
+          "top": 121,
+          "right": 83.6875,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        },
+        {
+          "left": 86.6875,
+          "top": 121,
+          "right": 140.375,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        },
+        {
+          "left": 143.375,
+          "top": 121,
+          "right": 197.0625,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        },
+        {
+          "left": 200.0625,
+          "top": 121,
+          "right": 253.765625,
+          "bottom": 165,
+          "width": 53.703125,
+          "height": 44
+        },
+        {
+          "left": 256.765625,
+          "top": 121,
+          "right": 310.453125,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        },
+        {
+          "left": 313.453125,
+          "top": 121,
+          "right": 367.140625,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        },
+        {
+          "left": 370.140625,
+          "top": 121,
+          "right": 423.828125,
+          "bottom": 165,
+          "width": 53.6875,
+          "height": 44
+        }
+      ],
+      "last": "Last move: ◆ B, row 6, column 4."
+    }
+  ],
+  "errors": [],
+  "identityReads": 38
+}

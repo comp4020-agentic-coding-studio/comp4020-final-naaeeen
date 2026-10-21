@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -128,7 +129,7 @@ test("socket bedroom receipts correlate to the house, not the bedroom stream ID"
   const f = await fixture(); await f.post("/api/house/command", f.create());
   const home = f.app.houseStore.me(f.owner.id).home!;
   const room = f.app.houseStore.snapshot(f.owner.id).residents.find(row => row.id === f.owner.id)!.bedroomId;
-  const socket = io(f.origin, { transports: ["websocket"], reconnection: false,
+  const socket = io(f.origin, { auth: { worldVersion: HOUSE_WORLD_VERSION }, transports: ["websocket"], reconnection: false,
     extraHeaders: { Cookie: "house_session=" + f.owner.token, Origin: f.origin } });
   sockets.push(socket);
   await new Promise<void>((resolve, reject) => { socket.once("connect", resolve); socket.once("connect_error", reject); });

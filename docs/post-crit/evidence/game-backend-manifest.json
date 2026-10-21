@@ -1,0 +1,178 @@
+{
+  "createdAt": "2026-10-21T16:30:03.881431+00:00",
+  "baselineCommit": "16404ea178edc08abdc6fef51e3b7a68126442ce",
+  "branch": "post-crit-improvements",
+  "runtime": {
+    "node": "v24.21.0",
+    "pnpm": "11.9.0"
+  },
+  "sourceSHA256": {
+    "src/house-contract.ts": "a322158634176235ed83280e62fc791545e2fcc7db510e4792c863370e8e8357",
+    "src/house-store.ts": "6bcede2a56e5388c9fd9b073a8143b11489266b34f6de086b674a5db997aae01",
+    "src/house-realtime.ts": "d7af35144cac875a64388e2c3193a5d5e04b4551ba07fe12a1c52bd91f8297fd",
+    "public/house-game-rules.js": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+    "public/house-game-rules.d.ts": "36aa435f97476bafc495d39e082a6e20a60591acb529c60d9b69bd4f15886758",
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-geometry.d.ts": "816d1a80f6d76105a0ce6c43498630fc7fb87a8640daf59fa4b853e8cb14665a",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "spec/house-game-backend.test.ts": "2af3bd95a8e8d0825ea5378b398453eddf9b5d39620cd2f5a74de83c12a871ec",
+    "spec/house-game-realtime.test.ts": "4fe1d529ca4c8e8803269b13288f821c311f3a7d1f38ce1b41da70d75ffba28e",
+    "spec/house-store.test.ts": "f9f99c6256df0f090b79d732eb042ddd953ce8f74a59d10f4118635cc1c54667",
+    "spec/house-room-migration.test.ts": "21807d16525115ba04db0edd28115fded90c2b3234b39f98806d90975b0e84a3",
+    "spec/house-realtime.test.ts": "bdd228e1d4c054ee3366dde5d70b901581f52c9592e6f85e9ac7e4e4bc21bbcc",
+    "docs/post-crit/GAME-API.md": "a8271f86ef6947e516c8e29ebe9764c732be94c42793651532bb98822ff1e2a9"
+  },
+  "results": {
+    "game-backend-coverage-checks": {
+      "sha256": "ca60475932f71cce6dfaf5de60664835bc6a77b2bf371cb756d7c017d07c1640",
+      "passed": 66,
+      "failed": 0,
+      "pending": 0
+    },
+    "game-backend-final-green": {
+      "sha256": "fc0d76ad249660203a8ffcdb8b0d3fc1899ef3abe4f741feb39b407ee0a9db13",
+      "passed": 70,
+      "failed": 0,
+      "pending": 0
+    },
+    "game-backend-green-initial": {
+      "sha256": "490fe00775f2a0488eaeff7ba2857df4bb355bc537a5b5e131020e0f99b5ae13",
+      "passed": 7,
+      "failed": 0,
+      "pending": 0
+    },
+    "game-backend-green": {
+      "sha256": "e0601fa26f8c703acfb9fb80fe7bf3e6f51daa6b8ac0a7709fbc0c7303308837",
+      "passed": 66,
+      "failed": 0,
+      "pending": 0
+    },
+    "game-backend-integration-initial": {
+      "sha256": "28712dcc7f95ced4899668a927c3ed7b1737d174603f7ec62bbb903310b54e6d",
+      "passed": 53,
+      "failed": 8,
+      "pending": 0
+    },
+    "game-backend-recovery-red": {
+      "sha256": "d16cfaa67778fda4d700ed6230ff3178d9d9ac748cad12e66ff51db352add872",
+      "passed": 6,
+      "failed": 1,
+      "pending": 0
+    },
+    "game-backend-red": {
+      "sha256": "18a99ae9d778a7e4846dd680898c3b2f122c039f0470c59a431bb8cb0e86a9fe",
+      "passed": 0,
+      "failed": 7,
+      "pending": 0
+    },
+    "game-backend-review-green": {
+      "sha256": "a15f0767823dab9cba5a7eb62303dac2333e90e1096ffa033c07f772ed1c8120",
+      "passed": 69,
+      "failed": 0,
+      "pending": 0
+    },
+    "game-backend-review-red": {
+      "sha256": "7da73802b429bd60be502fec82fc55172c8825d2d05ef284461e350f7714e673",
+      "passed": 12,
+      "failed": 3,
+      "pending": 0
+    },
+    "game-backend-socket-initial": {
+      "sha256": "3a84cdc39f6b561e33ea45e611d3c1301c93cc7a4526815f4f8e9ab141ab4178",
+      "passed": 11,
+      "failed": 1,
+      "pending": 0
+    }
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 678,
+        "covered": 660,
+        "skipped": 0,
+        "pct": 97.34
+      },
+      "statements": {
+        "total": 1099,
+        "covered": 1004,
+        "skipped": 0,
+        "pct": 91.35
+      },
+      "functions": {
+        "total": 158,
+        "covered": 156,
+        "skipped": 0,
+        "pct": 98.73
+      },
+      "branches": {
+        "total": 926,
+        "covered": 809,
+        "skipped": 0,
+        "pct": 87.36
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-realtime.ts": {
+      "lines": {
+        "total": 270,
+        "covered": 254,
+        "skipped": 0,
+        "pct": 94.07
+      },
+      "functions": {
+        "total": 53,
+        "covered": 52,
+        "skipped": 0,
+        "pct": 98.11
+      },
+      "statements": {
+        "total": 473,
+        "covered": 408,
+        "skipped": 0,
+        "pct": 86.25
+      },
+      "branches": {
+        "total": 385,
+        "covered": 310,
+        "skipped": 0,
+        "pct": 80.51
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-store.ts": {
+      "lines": {
+        "total": 408,
+        "covered": 406,
+        "skipped": 0,
+        "pct": 99.5
+      },
+      "functions": {
+        "total": 105,
+        "covered": 104,
+        "skipped": 0,
+        "pct": 99.04
+      },
+      "statements": {
+        "total": 626,
+        "covered": 596,
+        "skipped": 0,
+        "pct": 95.2
+      },
+      "branches": {
+        "total": 541,
+        "covered": 499,
+        "skipped": 0,
+        "pct": 92.23
+      }
+    }
+  },
+  "preparedSQLCallSites": 69,
+  "sourceScope": "Backend source frozen before parent world-version authorization gate. Later changes require affected verification; no forward acceptance.",
+  "browser": "NOT RUN by backend lane",
+  "resourceWorkload": "NOT RUN by backend lane",
+  "human": "NOT RUN"
+}

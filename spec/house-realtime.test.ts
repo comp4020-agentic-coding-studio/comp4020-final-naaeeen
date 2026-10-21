@@ -1,3 +1,4 @@
+import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
 import { createServer } from "node:http";
 import { createHash, randomUUID } from "node:crypto";
 import { io, type Socket } from "socket.io-client";
@@ -25,7 +26,7 @@ class Authority {
   me(id: string): Me { return { identity: { id, name: this.names[this.ids.indexOf(id)]!, colour: "sage", revision: 1 }, home: this.absent.has(id) ? null : { id: this.houseId, capacity: this.capacity, ownerId: this.ids[0]!, code: "ABCD1234" }, archiveCount: 0 }; }
   snapshot(id: string, zoneId = "lounge"): HouseSnapshot {
     if (this.absent.has(id) || (zoneId !== "lounge" && (!this.open && id !== this.ids[0] || zoneId !== this.bedroomId))) throw new HouseError("FORBIDDEN", "This zone is unavailable.");
-    return { schemaVersion: 2, selfId: id, house: this.me(id).home!, residents: this.ids.slice(0, this.capacity).filter(x => !this.absent.has(x)).map(member => ({ id: member, name: this.names[this.ids.indexOf(member)]!, colour: "sage", revision: 1, slot: this.ids.indexOf(member), bedroomId: this.bedroomIds[this.ids.indexOf(member)]!, open: this.open })), streamId: this.houseId + ":" + zoneId, sequence: 1, zoneId, room: zoneId === "lounge" ? null : { id: this.bedroomId, ownerId: this.ids[0]!, revision: 1, open: this.open, palette: "sage", placements: this.placements, light: "standard", originPresetId: null, originPresetVersion: null }, cards: [], chat: [], ownWork: {streamId: "lounge:" + this.houseId, sequence: 1, card: null} };
+    return { voice: { url: null, revision: 0 }, game: null, schemaVersion: 2, selfId: id, house: this.me(id).home!, residents: this.ids.slice(0, this.capacity).filter(x => !this.absent.has(x)).map(member => ({ id: member, name: this.names[this.ids.indexOf(member)]!, colour: "sage", revision: 1, slot: this.ids.indexOf(member), bedroomId: this.bedroomIds[this.ids.indexOf(member)]!, open: this.open })), streamId: this.houseId + ":" + zoneId, sequence: 1, zoneId, room: zoneId === "lounge" ? null : { id: this.bedroomId, ownerId: this.ids[0]!, revision: 1, open: this.open, palette: "sage", placements: this.placements, light: "standard", originPresetId: null, originPresetVersion: null }, cards: [], chat: [], ownWork: {streamId: "lounge:" + this.houseId, sequence: 1, card: null} };
   }
   execute(_id: string, command: HouseCommand) { return { ok: true as const, commandId: command.commandId, streamId: this.houseId, sequence: 1, entityRevision: 1 }; }
 }
@@ -40,7 +41,7 @@ async function setup(options = {}) {
   const url = `http://127.0.0.1:${address.port}`;
   cleanups.push(() => realtime.close());
   async function client(n = 0, origin = url, cookie = "a".repeat(42) + n) {
-    const socket = io(url, { transports: ["websocket"], reconnection: false, extraHeaders: { Origin: origin, Cookie: `house_session=${cookie}` } });
+    const socket = io(url, { auth: { worldVersion: HOUSE_WORLD_VERSION }, transports: ["websocket"], reconnection: false, extraHeaders: { Origin: origin, Cookie: `house_session=${cookie}` } });
     cleanups.push(async () => { socket.disconnect(); });
     await new Promise<void>((resolve, reject) => { socket.once("connect", resolve); socket.once("connect_error", reject); });
     return socket;
@@ -79,7 +80,7 @@ describe("house realtime authority", () => {
       const layout = state.durable.room ? bedroomLayout(state.durable.room.placements) : createLayout(capacity);
       const occupants = state.players.filter((player: any) => player.connected && player.zoneId === state.durable.zoneId);
       expect(occupants).toHaveLength(capacity);
-      for (const player of occupants) { expect(validPosition(layout, player)).toBe(true); expect(player.z).toBe(3.3); }
+      for (const player of occupants) { expect(validPosition(layout, player)).toBe(true); expect(player.z).toBe(state.durable.room ? 3.3 : layout.arrivals![f.store.ids.indexOf(player.id)]!.z); }
       for (let a = 0; a < occupants.length; a++) for (let b = a + 1; b < occupants.length; b++) expect(Math.hypot(occupants[a].x - occupants[b].x, occupants[a].z - occupants[b].z)).toBeGreaterThanOrEqual(.6);
     }
     verify(latest);
@@ -356,7 +357,7 @@ async function durableSetup() {
   const url="http://127.0.0.1:"+(server.address() as {port:number}).port;
   cleanups.push(()=>realtime.close());
   async function client(identity=a) {
-    const socket=io(url,{transports:["websocket"],reconnection:false,extraHeaders:{Origin:url,Cookie:"house_session="+identity.token}});
+    const socket=io(url, { auth: { worldVersion: HOUSE_WORLD_VERSION },transports:["websocket"],reconnection:false,extraHeaders:{Origin:url,Cookie:"house_session="+identity.token}});
     cleanups.push(async()=>{socket.disconnect();});
     await new Promise<void>((resolve,reject)=>{socket.once("connect",resolve);socket.once("connect_error",reject);});
     return socket;

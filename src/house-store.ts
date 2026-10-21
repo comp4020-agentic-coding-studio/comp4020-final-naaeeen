@@ -1,16 +1,19 @@
+import { parseDiscordDestination } from "./house-voice.ts";
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { DatabaseSync, type StatementSync } from "node:sqlite";
 import { validatePlacements } from "../public/house-geometry.js";
 import { ROOM_LIGHTS, getRoomPreset, instantiateRoomPreset, roomPresetForSlot } from "../public/house-room-content.js";
+import { emptyGameTable, advanceGameTime, applyGameAction, applyGameEvent, projectGame, INACTIVITY_MS } from "../public/house-game-rules.js";
+import type { GameTable, GameRound, GameAction, GameEvent } from "../public/house-game-rules.js";
 import { HouseError } from "./house-contract.ts";
-import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, Me, Placement, Profile, Resident, RoomLight } from "./house-contract.ts";
+import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, HouseGameControl, Me, Placement, Profile, Resident, RoomLight } from "./house-contract.ts";
 
 export const HOUSE_SESSION_SECONDS = 30 * 24 * 60 * 60;
 const CHAT_RETENTION_MS = 7 * 24 * 60 * 60 * 1000;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const TOKEN = /^[A-Za-z0-9_-]{43}$/;
 const COLOURS: readonly string[] = ["amber", "sage", "rose", "blue", "lavender", "peach"];
-const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "room.starter", "room.light", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate"];
+const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "room.starter", "room.light", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate", "house.voice", "game.join", "game.ready", "game.move", "game.resume", "game.leave"];
 type IdentityRow = { id: string; name: string; colour: Colour; revision: number };
 type HomeRow = { id: string; capacity: number; owner_id: string; code: string | null; status: string };
 type Membership = HomeRow & { slot: number; bedroom_id: string };
@@ -76,6 +79,83 @@ function home(row: HomeRow): Home { return { id: row.id, capacity: row.capacity,
 function room(row: RoomRow): Bedroom { return { id: row.id, ownerId: row.owner_id, revision: row.revision, open: row.open === 1, palette: row.palette, placements: JSON.parse(row.placements) as Placement[], light: row.light, originPresetId: row.origin_preset_id, originPresetVersion: row.origin_preset_version }; }
 function card(row: CardRow): Card { return { id: row.id, authorId: row.author_id, smallGoal: row.small_goal, question: row.question, resourceUrl: row.resource_url, nextStep: row.next_step, helpRequested: row.help_requested === 1, state: row.state, revision: row.revision }; }
 
+const GAME_RULESET = 1;
+type GameRow = { house_id: string; ruleset: number; state: string; next_due_at: number | null };
+/** Reject unsupported/corrupt persisted input before the pure rules can use it. */
+function restoredGame(row: GameRow): GameTable {
+  if (row.ruleset !== GAME_RULESET || row.state.length > 8192) fail("STORAGE_UNAVAILABLE", "Unsupported saved table rules.");
+  const value: unknown = JSON.parse(row.state);
+  const check = (condition: boolean) => { if (!condition) fail("STORAGE_UNAVAILABLE", "The saved table is invalid."); };
+  const object = (v: unknown, fields: string[]) => {
+    check(!!v && typeof v === "object" && !Array.isArray(v));
+    const r = v as Record<string, unknown>;
+    check(Object.keys(r).length === fields.length && fields.every(k => Object.hasOwn(r,k)));
+    return r;
+  };
+  const integer = (v: unknown, minimum = 0): v is number => Number.isSafeInteger(v) && (v as number) >= minimum && (v as number) <= Number.MAX_SAFE_INTEGER - INACTIVITY_MS;
+  const identifier = (v: unknown) => typeof v === "string" && UUID.test(v);
+  const tuple = (v: unknown): v is unknown[] => Array.isArray(v) && v.length === 2;
+  const board = (v: unknown) => {
+    check(Array.isArray(v) && v.length === 42);
+    const cells = v as unknown[];
+    check(cells.every(c => c === null || c === 0 || c === 1));
+    const counts = [cells.filter(c=>c===0).length,cells.filter(c=>c===1).length];
+    check(counts[0] === counts[1] || counts[0] === counts[1]! + 1);
+    for (let c=0;c<7;c++) for (let r=0;r<5;r++) if (cells[r*7+c] !== null) check(cells[(r+1)*7+c] !== null);
+    return counts;
+  };
+  const wins = (cells: unknown[], slot: number) => cells.some((cell,i) => cell===slot && [[0,1],[1,0],[1,1],[1,-1]].some(([dr,dc]) => [1,2,3].every(n => {
+    const r=Math.floor(i/7)+dr!*n,c=i%7+dc!*n; return r>=0&&r<6&&c>=0&&c<7&&cells[r*7+c]===slot;
+  })));
+  const lastMove = (v: unknown, cells: unknown[], counts: number[]) => {
+    if (v === null) { check(counts[0] === 0 && counts[1] === 0); return; }
+    const m=object(v,["row","column","slot"]);
+    check(integer(m.row) && m.row<6 && integer(m.column) && m.column<7 && (m.slot===0 || m.slot===1));
+    const row=m.row as number,column=m.column as number;
+    check(cells[row*7+column]===m.slot && (row===0 || cells[(row-1)*7+column]===null));
+    check(m.slot === (counts[0] === counts[1] ? 1 : 0));
+  };
+  const table=object(value,["revision","rosterRevision","current","latestResult"]);
+  check(integer(table.revision) && integer(table.rosterRevision) && (table.rosterRevision as number) <= (table.revision as number));
+  if (table.current !== null) {
+    const r=object(table.current,["roundId","status","players","ready","cells","turn","lastMove","waitingDeadlineAt","startedAt","lastMoveAt","recoveryDeadlineAt","resumeRevision","resume"]);
+    check(identifier(r.roundId) && ["waiting","active","paused"].includes(r.status as string));
+    check(tuple(r.players) && r.players.every(v=>v===null || identifier(v)) && r.players.some(v=>v!==null) && (r.players[0]===null || r.players[0]!==r.players[1]));
+    check(tuple(r.ready) && tuple(r.resume) && r.resume.every(v=>typeof v==="boolean") && integer(r.resumeRevision) && r.resumeRevision <= (table.revision as number));
+    check(integer(r.waitingDeadlineAt) && (r.turn===0 || r.turn===1));
+    const cells=r.cells as unknown[], counts=board(cells); lastMove(r.lastMove,cells,counts); check(!wins(cells,0) && !wins(cells,1));
+    if (r.status === "waiting") {
+      check(counts[0]===0 && counts[1]===0 && r.turn===0 && r.startedAt===null && r.lastMoveAt===null && r.recoveryDeadlineAt===null && r.resumeRevision===0 && (r.resume as boolean[]).every(v=>!v));
+      (r.ready as unknown[]).forEach((v,slot)=>{if(v!==null){const ready=object(v,["rosterRevision","expiresAt"]);check((r.players as unknown[])[slot]!==null && (r.players as unknown[]).every(p=>p!==null) && ready.rosterRevision===table.rosterRevision && integer(ready.expiresAt) && ready.expiresAt <= (r.waitingDeadlineAt as number));}});
+    } else {
+      check((r.players as unknown[]).every(identifier) && integer(r.startedAt) && integer(r.lastMoveAt) && r.lastMoveAt >= r.startedAt && (r.ready as unknown[]).every(v=>v===null) && cells.some(v=>v===null));
+      check(r.turn === (counts[0]===counts[1] ? 0 : 1));
+      if (r.status==="active") check(r.recoveryDeadlineAt===null && (r.resume as boolean[]).every(v=>!v));
+      else check(integer(r.recoveryDeadlineAt) && (r.resumeRevision as number)>0 && !(r.resume as boolean[]).every(Boolean));
+    }
+  }
+  if (table.latestResult !== null) {
+    const r=object(table.latestResult,["roundId","players","cells","lastMove","startedAt","endedAt","reason","winner"]);
+    check(identifier(r.roundId) && tuple(r.players) && r.players.every(identifier) && r.players[0]!==r.players[1]);
+    check(integer(r.startedAt) && integer(r.endedAt) && r.endedAt >= r.startedAt);
+    check(["win","draw","player_left","left_lounge","member_removed","recovery_expired","inactive"].includes(r.reason as string));
+    const cells=r.cells as unknown[],counts=board(cells);lastMove(r.lastMove,cells,counts);
+    if(r.reason==="win") check((r.winner===0 || r.winner===1) && wins(cells,r.winner) && !wins(cells,1-r.winner) && (r.lastMove as {slot:number}).slot===r.winner);
+    else check(r.winner===null && !wins(cells,0) && !wins(cells,1));
+    if(r.reason==="draw") check(cells.every(v=>v!==null)); else if(r.reason!=="win") check(cells.some(v=>v===null));
+    check(table.current===null || (table.current as GameRound).roundId!==r.roundId);
+  }
+  const state=value as GameTable;
+  check(gameDeadline(state) === row.next_due_at);
+  return state;
+}
+function gameDeadline(state: GameTable): number | null {
+  const r=state.current;
+  if(!r) return null;
+  if(r.status==="waiting") return Math.min(r.waitingDeadlineAt,...r.ready.filter(v=>v!==null).map(v=>v!.expiresAt));
+  return Math.min(r.lastMoveAt!+INACTIVITY_MS,r.recoveryDeadlineAt ?? Infinity);
+}
+
 /** One SQLite authority. State, zone cursor and receipt are committed before execute returns. */
 export class HouseStore {
   readonly db!: DatabaseSync;
@@ -97,7 +177,7 @@ export class HouseStore {
     try {
       this.db.exec("PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;");
       const version = (this.prepared("PRAGMA user_version").get() as { user_version: number }).user_version;
-      if (version !== 0 && version !== 1 && version !== 2) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
+      if (version !== 0 && version !== 1 && version !== 2 && version !== 3 && version !== 4) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
       if (version === 0) this.transaction(() => this.db.exec(`
         CREATE TABLE identities (id TEXT PRIMARY KEY, name TEXT NOT NULL, colour TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);
         CREATE TABLE sessions (token_digest TEXT PRIMARY KEY, identity_id TEXT NOT NULL REFERENCES identities(id), expires_at INTEGER NOT NULL);
@@ -125,6 +205,24 @@ export class HouseStore {
         ALTER TABLE bedrooms ADD COLUMN origin_preset_version INTEGER;
         PRAGMA user_version=2;
       `));
+      if (version < 3) this.transaction(() => this.db.exec(`
+        CREATE TABLE game_tables (house_id TEXT PRIMARY KEY REFERENCES houses(id), ruleset INTEGER NOT NULL, state TEXT NOT NULL, next_due_at INTEGER);
+        CREATE INDEX game_tables_due ON game_tables(next_due_at) WHERE next_due_at IS NOT NULL;
+        PRAGMA user_version=3;
+      `));
+      if (version < 4) this.transaction(() => this.db.exec(`
+        CREATE TABLE house_voice (house_id TEXT PRIMARY KEY REFERENCES houses(id), url TEXT, revision INTEGER NOT NULL CHECK(revision>=0));
+        PRAGMA user_version=4;
+      `));
+      // A new process cannot inherit former sockets or their recovery consent.
+      const restartAt=Date.now();
+      this.maintainGames(restartAt);
+      this.transaction(() => {
+        for (const row of this.prepared("SELECT house_id,ruleset,state,next_due_at FROM game_tables WHERE next_due_at IS NOT NULL").all() as GameRow[]) {
+          const transition=applyGameEvent(restoredGame(row),{type:"restart"},restartAt);
+          if (transition.changed) this.saveGame(row.house_id,transition.state,true);
+        }
+      });
       this.transaction(() => this.prepared("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS));
       this.prepared("SELECT id FROM identities LIMIT 1").get();
     } catch (error) { this.closed = true; this.statements.clear(); this.db.close(); storageError(error); }
@@ -160,6 +258,41 @@ export class HouseStore {
   private bump(streamId: string): number {
     this.prepared("INSERT INTO streams(id,sequence) VALUES (?,1) ON CONFLICT(id) DO UPDATE SET sequence=sequence+1").run(streamId);
     return this.sequence(streamId);
+  }
+  private game(houseId: string): GameTable {
+    const row=this.prepared("SELECT house_id,ruleset,state,next_due_at FROM game_tables WHERE house_id=?").get(houseId) as GameRow | undefined;
+    return row ? restoredGame(row) : emptyGameTable();
+  }
+  private saveGame(houseId: string, state: GameTable, bump = false): void {
+    this.prepared("INSERT INTO game_tables(house_id,ruleset,state,next_due_at) VALUES (?,?,?,?) ON CONFLICT(house_id) DO UPDATE SET ruleset=excluded.ruleset,state=excluded.state,next_due_at=excluded.next_due_at").run(houseId,GAME_RULESET,JSON.stringify(state),gameDeadline(state));
+    if(bump) this.bump("lounge:"+houseId);
+  }
+  /** Due housekeeping commits independently, even if the next player command fails. */
+  maintainGames(now=Date.now()): boolean {
+    try { return this.transaction(() => {
+      let changed=false;
+      for(const row of this.prepared("SELECT house_id,ruleset,state,next_due_at FROM game_tables WHERE next_due_at<=?").all(now) as GameRow[]) {
+        const transition=advanceGameTime(restoredGame(row),now);
+        if(transition.changed){this.saveGame(row.house_id,transition.state,true);changed=true;}
+      }
+      return changed;
+    }); } catch(error) { return storageError(error); }
+  }
+  /** Only the generation-filtered realtime authority calls these process events. */
+  gameLifecycle(id: string, event: "disconnect" | "left_lounge"): boolean {
+    try {
+      const now=Date.now(); this.maintainGames(now);
+      return this.transaction(() => {
+        const h=this.active(id); if(!h) return false;
+        return this.gameEvent(h.id,event==="disconnect" ? {type:"disconnect",actorId:id} : {type:"depart",actorId:id,reason:"left_lounge"},true,now);
+      });
+    } catch(error){return storageError(error);}
+  }
+  private gameEvent(houseId: string,event: GameEvent,bump=false,now=Date.now()): boolean {
+    const transition=applyGameEvent(this.game(houseId),event,now);
+    if(!transition.ok) fail("STORAGE_UNAVAILABLE","Table housekeeping is required.");
+    if(transition.changed)this.saveGame(houseId,transition.state,bump);
+    return transition.changed;
   }
   private setProfile(id: string, payload: Record<string, unknown>): number {
     const name = text(payload.name, 40, true), nextColour = colour(payload.colour);
@@ -247,15 +380,16 @@ export class HouseStore {
   }
 
   snapshot(id: string, zoneId = "lounge"): HouseSnapshot {
-    try { return this.transaction(() => {
+    try { this.maintainGames(); return this.transaction(() => {
       const h = this.requireHome(id); this.identity(id);
       const privateRoom = zoneId === "lounge" ? null : this.access(id, uuid(zoneId));
       const streamId = privateRoom ? "bedroom:" + privateRoom.id : "lounge:" + h.id;
       const residents = this.prepared("SELECT i.*,m.slot,m.bedroom_id,b.open FROM members m JOIN identities i ON i.id=m.identity_id JOIN bedrooms b ON b.id=m.bedroom_id WHERE m.house_id=? AND m.status='active' ORDER BY m.slot").all(h.id) as (IdentityRow & { slot: number; bedroom_id: string; open: number })[];
       const chats = this.prepared("SELECT id,author_id AS authorId,name,text,at,sequence FROM (SELECT * FROM chat WHERE zone_id=? AND at>=? ORDER BY sequence DESC LIMIT 100) ORDER BY sequence").all(streamId, Date.now() - CHAT_RETENTION_MS) as unknown as Chat[];
       const ownCard = this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
+      const voice = this.prepared("SELECT url,revision FROM house_voice WHERE house_id=?").get(h.id) as { url: string | null; revision: number } | undefined;
       const ownWork = { streamId: "lounge:" + h.id, sequence: this.sequence("lounge:" + h.id), card: ownCard ? card(ownCard) : null };
-      return { schemaVersion: 2, selfId: id, ownWork, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
+      return { voice: voice ?? { url: null, revision: 0 }, schemaVersion: 2, game: privateRoom ? null : projectGame(this.game(h.id)), selfId: id, ownWork, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
     }); } catch (error) { return storageError(error); }
   }
 
@@ -267,18 +401,24 @@ export class HouseStore {
     }); } catch (error) { return storageError(error); }
   }
 
-  execute(id: string, untrusted: unknown): HouseReceipt {
+  execute(id: string, untrusted: unknown, control?: HouseGameControl): HouseReceipt {
     try {
+      const now=Date.now(); this.maintainGames(now);
       const command = parseCommand(untrusted), hash = houseSessionDigest(id + "\n" + canonical(command));
       return this.transaction(() => {
         this.identity(id);
+        if(command.type.startsWith("game.")) {
+          if(!control?.isController) fail("NOT_CONTROLLER","Enter the table with current lounge control.");
+          if(control.zoneId!=="lounge") fail("STALE_ZONE","Return to the lounge table.");
+          const h=this.requireHome(id);if(uuid(command.houseId)!==h.id)fail("FORBIDDEN","This queued action belongs to another house.");
+        }
         const previous = this.prepared("SELECT command_hash,response,room_id FROM receipts WHERE actor_id=? AND command_id=?").get(id, command.commandId) as ReceiptRow | undefined;
         if (previous) {
           if (previous.command_hash !== hash) fail("COMMAND_ID_REUSED", "This command ID was already used for another action.");
           if (previous.room_id) this.access(id, previous.room_id);
           return JSON.parse(previous.response) as HouseReceipt;
         }
-        const outcome = this.apply(id, command);
+        const outcome = this.apply(id, command, control, now);
         const receipt: HouseReceipt = { ok: true, commandId: command.commandId, streamId: outcome.streamId, sequence: outcome.sequence ?? this.bump(outcome.streamId), entityRevision: outcome.entityRevision, ...(outcome.result ? { result: outcome.result } : {}) };
         this.prepared("INSERT INTO receipts(actor_id,command_id,command_hash,response,room_id) VALUES (?,?,?,?,?)").run(id, command.commandId, hash, JSON.stringify(receipt), outcome.roomId ?? null);
         return receipt;
@@ -289,9 +429,10 @@ export class HouseStore {
   private trimCards(houseId: string): void {
     this.prepared("DELETE FROM cards WHERE house_id=? AND state!='active' AND id NOT IN (SELECT id FROM cards WHERE house_id=? AND state!='active' ORDER BY inactive_sequence DESC,id DESC LIMIT 12)").run(houseId, houseId);
   }
-  private depart(target: string, h: HomeRow, removed: boolean, sequence: number): void {
+  private depart(target: string, h: HomeRow, removed: boolean, sequence: number, now: number): void {
     const member = this.prepared("SELECT bedroom_id FROM members WHERE house_id=? AND identity_id=? AND status='active'").get(h.id, target) as { bedroom_id: string } | undefined;
     if (!member) fail("FORBIDDEN", "This person is not an active member.");
+    this.gameEvent(h.id,{type:"depart",actorId:target,reason:removed ? "member_removed" : "left_lounge"},false,now);
     const r = this.bedroom(member.bedroom_id);
     this.prepared("UPDATE cards SET state='ownerLeft',revision=revision+1,inactive_sequence=? WHERE house_id=? AND author_id=? AND state='active'").run(sequence, h.id, target);
     const ownCards = (this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? ORDER BY id").all(h.id, target) as CardRow[]).map(card);
@@ -302,7 +443,7 @@ export class HouseStore {
     this.trimCards(h.id);
   }
 
-  private apply(id: string, c: HouseCommand): Outcome {
+  private apply(id: string, c: HouseCommand, control: HouseGameControl | undefined, now: number): Outcome {
     const p = c.payload;
     if (c.type === "house.create") {
       keys(p, ["capacity", "name", "colour"], ["capacity", "name", "colour"]);
@@ -341,6 +482,36 @@ export class HouseStore {
 
     const h = this.requireHome(id), lounge = "lounge:" + h.id;
     if (uuid(c.houseId) !== h.id) fail("FORBIDDEN", "This queued action belongs to a different house.");
+    if (c.type === "house.voice") {
+      keys(p, ["url"], ["url"]);
+      if (h.owner_id !== id) fail("FORBIDDEN", "Only the house owner can set the shared Discord destination.");
+      const url = parseDiscordDestination(p.url);
+      const previous = this.prepared("SELECT url,revision FROM house_voice WHERE house_id=?").get(h.id) as { url: string | null; revision: number } | undefined;
+      const currentRevision = previous?.revision ?? 0;
+      this.requireRevision(c.expectedRevision, currentRevision);
+      this.prepared("INSERT INTO house_voice(house_id,url,revision) VALUES (?,?,?) ON CONFLICT(house_id) DO UPDATE SET url=excluded.url,revision=excluded.revision").run(h.id, url, currentRevision + 1);
+      return { streamId: lounge, entityRevision: currentRevision + 1 };
+    }
+    if(c.type.startsWith("game.")) {
+      const state=this.game(h.id), type=c.type.slice(5);
+      const fields=type==="join" || type==="leave" ? ["roundId"] : type==="ready" ? ["roundId","rosterRevision"] : type==="resume" ? ["roundId","resumeRevision"] : ["roundId","column"];
+      keys(p,fields,fields);
+      if(!["join","move"].includes(type) && Object.hasOwn(c,"expectedRevision")) fail("INVALID_INPUT","This table action does not use a position revision.");
+      if(type==="join" && (state.current ? p.roundId===null : p.roundId!==null)) fail("GAME_WRONG_ROUND","Choose the current table round; new rounds use a server ID.");
+      const roundId=type==="join" && p.roundId===null ? randomUUID() : uuid(p.roundId);
+      let action: GameAction;
+      if(type==="join" || type==="move") {
+        const expectedRevision=revision(c.expectedRevision);
+        if(type==="move" && (!Number.isInteger(p.column) || (p.column as number)<0 || (p.column as number)>6))fail("INVALID_INPUT","Choose a column from one to seven.");
+        action=type==="join" ? {type,roundId,expectedRevision} : {type,roundId,expectedRevision,column:p.column as number};
+      } else if(type==="ready") action={type,roundId,rosterRevision:revision(p.rosterRevision)};
+      else if(type==="resume") action={type,roundId,resumeRevision:revision(p.resumeRevision)};
+      else action={type:"leave",roundId};
+      const transition=applyGameAction(state,action,{actorId:id,isMember:true,isController:!!control?.isController,inLounge:control?.zoneId==="lounge",controlledInLounge:control?.controlledInLounge ?? []},now);
+      if(!transition.ok)fail("GAME_"+transition.code.toUpperCase(),"The table changed or this action is unavailable. Reread its current state.");
+      if(transition.changed)this.saveGame(h.id,transition.state);
+      return {streamId:lounge,entityRevision:transition.state.revision,result:{roundId,code:transition.code},...(!transition.changed ? {sequence:this.sequence(lounge)} : {})};
+    }
     if (c.type === "chat.send") {
       keys(p, ["zoneId", "text"], ["zoneId", "text"]);
       const value = text(p.text, 2000, true), zoneId = p.zoneId === "lounge" ? "lounge" : uuid(p.zoneId);
@@ -421,7 +592,7 @@ export class HouseStore {
       keys(p, []);
       const count = this.prepared("SELECT COUNT(*) AS count FROM members WHERE house_id=? AND status='active'").get(h.id) as { count: number };
       if (h.owner_id === id && count.count > 1) fail("FORBIDDEN", "Transfer ownership before leaving this house.");
-      const sequence = this.bump(lounge); this.depart(id, h, false, sequence);
+      const sequence = this.bump(lounge); this.depart(id, h, false, sequence, now);
       if (count.count === 1) this.prepared("UPDATE houses SET status='archived',code=NULL WHERE id=?").run(h.id);
       return { streamId: lounge, sequence, entityRevision: 0, result: { houseId: h.id, archived: count.count === 1 } };
     }
@@ -438,7 +609,7 @@ export class HouseStore {
       this.prepared("UPDATE houses SET owner_id=? WHERE id=?").run(target, h.id);
       return { streamId: lounge, entityRevision: 0, result: { memberId: target } };
     }
-    const sequence = this.bump(lounge); this.depart(target, h, true, sequence);
+    const sequence = this.bump(lounge); this.depart(target, h, true, sequence, now);
     this.prepared("UPDATE houses SET code=? WHERE id=?").run(this.newCode(h.code!), h.id);
     return { streamId: lounge, sequence, entityRevision: 0, result: { memberId: target } };
   }
