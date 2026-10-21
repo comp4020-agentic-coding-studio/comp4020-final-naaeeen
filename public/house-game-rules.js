@@ -27,6 +27,14 @@ function checkTime(now) {
     throw new RangeError('Server time must be a non-negative safe millisecond timestamp.');
   }
 }
+// A wall-clock correction cannot make a saved move/end precede its round.
+// Infer a time floor from durable fields; no extra state or periodic writes.
+function roundTime(round, now) {
+  if (!round) return now;
+  return Math.max(now, round.waitingDeadlineAt - WAITING_MS, round.startedAt ?? 0, round.lastMoveAt ?? 0,
+    round.recoveryDeadlineAt === null ? 0 : round.recoveryDeadlineAt - RECOVERY_MS,
+    ...round.ready.map(ready => ready ? ready.expiresAt - READY_MS : 0));
+}
 function idleDeadline(round) { return round.lastMoveAt + INACTIVITY_MS; }
 function maintenanceDue(round, now) {
   if (!round) return false;
@@ -82,6 +90,7 @@ function hasFour(cells, row, column, slot) {
 /** Cleanup is explicit and idempotent. No write is needed while no deadline is due. */
 export function advanceGameTime(state, now) {
   checkTime(now);
+  now = roundTime(state.current, now);
   const round = state.current;
   if (!maintenanceDue(round, now)) return response(state, 'unchanged');
   const next = clone(state);
@@ -107,6 +116,7 @@ export function advanceGameTime(state, now) {
  */
 export function applyGameAction(state, action, authority, now) {
   checkTime(now);
+  now = roundTime(state.current, now);
   if (!authority || authority.isMember !== true) return reject(state, 'member_required');
   if (authority.isController !== true) return reject(state, 'controller_required');
   if (authority.inLounge !== true) return reject(state, 'lounge_required');
@@ -199,6 +209,7 @@ export function applyGameAction(state, action, authority, now) {
  */
 export function applyGameEvent(state, event, now) {
   checkTime(now);
+  now = roundTime(state.current, now);
   if (!event || !['disconnect', 'depart', 'restart'].includes(event.type)) return reject(state, 'invalid_event');
   if (event.type === 'depart' && !['left_lounge', 'member_removed'].includes(event.reason)) return reject(state, 'invalid_event');
   if (maintenanceDue(state.current, now)) return reject(state, 'maintenance_required');
