@@ -419,3 +419,15 @@ were reproduced before correction and rechecked. Actual source-bound results and
 the preserved failed resource trial are linked in acceptance. Old C9 passes do
 not accept new source; no code/CI/provider publication is inferred from local
 checks. Current NO COMMIT/PUSH/DEPLOYMENT supersedes earlier commit defaults.
+
+
+## Post-Crit entry audit, 22 October
+
+Read current AGENTS/CLAUDE/PLAN, active method report and actual handoff/source.
+Current task status is now at the top of PLAN and CURRENT-HANDOFF, avoiding stale
+release instructions. Primary research, live resource measurement and a fresh
+Astra plan review have separate records in ../post-crit/. Parent confirmed cursor,
+mode and migration findings and refined explicit contracts. Contextual recheck and
+production acceptance remain pending. The owner permits effort selection within
+Sol high–ultra and Astra high–max. Direct new WSL execution succeeds under the
+current host policy; no old-terminal workaround is needed.

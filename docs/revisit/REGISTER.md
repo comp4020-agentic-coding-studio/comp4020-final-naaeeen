@@ -182,3 +182,25 @@ Final evidence-only publication requires ownCI; no recursive success commits.
 No measured agent A/B or human preference result is claimed. Contextual follow-ups
 remain distinct from first fresh reviews. The new rate-clock correction is a
 technical refinement, not the reflection's central design argument.
+
+
+## Post-Crit subsection revisit, 22 October
+
+Current [plan](../post-crit/PLAN.md) and [review/refinement](../post-crit/REVIEW-AND-REFINEMENT.md)
+supersede old release task status while preserving historical evidence.
+
+| ID | Subsection | Current evidence and remaining gate |
+| --- | --- | --- |
+| PC.0.1 | Owner scope / canonical checkout | Eight feedback items and baseline recorded; local commits authorized. |
+| PC.0.2 | RAM versus persistent storage | Actual idle read shows disk headroom; concurrent resource acceptance pending. |
+| PC.0.3 | Product/library/voice alternatives | Primary research and exact source limits recorded; live trials unrun. |
+| PC.1.1 | Camera control modes | Actual red pan-to-walk test; mode contract revised after fresh review. |
+| PC.1.2 | Camera framing / recovery / input | A/B/C protocol; native trials and implementation pending. |
+| PC.1.3 | Chair target activation | Source maps placement IDs to authoritative seats; behavior test/fix pending. |
+| PC.2.1 | Furnished presets / safe adoption | Versioned allocation and owner replacement contract; implementation pending. |
+| PC.2.2 | Room settings / migration | v2 lighting/origin contract; legacy/rollback/archive verification pending. |
+| PC.2.3 | My work visibility / ordering | Separate self projection and lounge cursor; real client/authority tests pending. |
+| PC.3 | Lounge layout / rest / compatibility | Same-content comparison and interaction inventory; trials pending. |
+| PC.4 | Game selection / lifecycle / authority | Bounded prototype gate; lifecycle freeze before production. |
+| PC.5 | External voice destination | Source-backed Discord handoff; member/owner boundaries and UI pending. |
+| PC.6 | Integrated workload / browser / review | Original criteria retained, combined test declared later; unrun. |

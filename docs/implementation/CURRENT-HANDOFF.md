@@ -1,3 +1,23 @@
+# Active post-Crit work, 22 October 2026
+
+Canonical Ubuntu/lizhi checkout: /home/lizhi/comp4020/comp4020-final-naaeeen.
+Branch post-crit-improvements, baseline 8cdad6a. Current scope is all eight owner
+feedback items in ../post-crit/OWNER-FEEDBACK.md. Read ../post-crit/PLAN.md,
+RESEARCH.md, COMPARISONS.md and REVIEW-AND-REFINEMENT.md before continuing.
+
+P0 research/resource audit and first fresh Astra review are recorded. Revised
+camera modes, independent own-work cursor and v2 room fields passed contextual
+recheck. P1 camera and P2 backend are RUNNING under disjoint Sol/ultra ownership.
+A Sol/high worker runs isolated game comparisons. Coordinate browser slots and do
+not run a heavy workload concurrently. Keep production/red-test changes out of the
+P0 documentation-only commit. P1–P6 acceptance remains open.
+
+Current host is full access/never approval. Ordinary new Windows-to-WSL commands
+work; do not reuse the former outside-sandbox session 40567. Deliver English files,
+use Sol high–ultra for execution and Astra high–max for decisions/review, and make
+local milestone commits. No new push, deployment or paid provider is inferred.
+Prior release snapshots below are history, not acceptance for this new task.
+
 # Current release verified; final evidence checkpoint
 
 CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source d2dcf5f

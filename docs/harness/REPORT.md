@@ -358,3 +358,19 @@ ignored. Preserve the owner's PROCESS section deletion and reflection edit.
 Verify the exact pushed head, actual CI and deployed behavior; local source hashes
 and past passes alone do not establish a release. Classroom two-person use is
 still a human activity, separate from automated technical rehearsal.
+
+
+## Post-Crit active scope and review corrections, 22 October
+
+Current work uses ../post-crit/PLAN.md and its subsection review record. The owner
+requests intermediate local commits; earlier release authorization is historical.
+Use GPT-6.1 Sol high–ultra for execution and GPT-6 Astra high–max for decisions and
+fresh review. Match effort to consequence; do not turn model choice into evidence.
+
+The first fresh plan review found a biased common camera criterion, an unordered
+cross-zone work projection and unspecified migration defaults. Define comparable
+tasks without requiring an alternative to adopt the preferred mechanism. Separate
+ordering domains when a snapshot combines state from different streams. Freeze
+replacement/default/archive behavior before persistence changes. Preserve all
+resource gates and distinguish live idle disk/RSS from sustained concurrency.
+These are source-backed corrections; implementation verification remains pending.

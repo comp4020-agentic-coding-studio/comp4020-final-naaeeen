@@ -1,3 +1,12 @@
+# Active post-Crit improvements, 22 October 2026
+
+Work in the canonical WSL checkout on `post-crit-improvements`, based on `8cdad6a`.
+[Current plan](docs/post-crit/PLAN.md), [owner requirements](docs/post-crit/OWNER-FEEDBACK.md),
+[research](docs/post-crit/RESEARCH.md), [comparisons](docs/post-crit/COMPARISONS.md)
+and [review/refinement](docs/post-crit/REVIEW-AND-REFINEMENT.md) govern this task.
+Local staged commits are authorized; new release/provider work is separate.
+Earlier acceptance sections below retain their exact historical source scope.
+
 # Current acceptance: verified game, board and server policy
 
 Source `d2dcf5f` passes actual CI `37722868698` at `2723796`: 504 checks, nine
@@ -436,3 +445,12 @@ ignored. Preserve the owner's PROCESS section deletion and reflection edit.
 Verify the exact pushed head, actual CI and deployed behavior; local source hashes
 and past passes alone do not establish a release. Classroom two-person use is
 still a human activity, separate from automated technical rehearsal.
+
+## Active post-Crit improvements, 22 October2026
+
+[Owner feedback](docs/post-crit/OWNER-FEEDBACK.md) preserves eight new requests.
+[Detailed plan](docs/post-crit/PLAN.md) and resource-baseline.json govern the local
+post-crit-improvements branch. Earlier Crit10 release is historical. Astra max
+decisions/fresh reviews and Sol execution are owner requested. Record meaningful
+comparisons and per-subsection evidence before implementation. Local commits are
+authorized; no new push/deploy or paid service is inferred.

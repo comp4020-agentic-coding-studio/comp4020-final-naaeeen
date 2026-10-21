@@ -1,3 +1,14 @@
+# Active post-Crit task, 22 October 2026
+
+Work on local branch post-crit-improvements in the canonical WSL repository.
+Follow docs/post-crit/OWNER-FEEDBACK.md and docs/post-crit/PLAN.md. The owner requests
+GPT-6 Astra (high to max) for decisions/fresh reviews and GPT-6.1 Sol (high to
+ultra) for execution. Choose effort by uncertainty and consequence; use max for
+architecture, permissions and migrations. Make logical intermediate LOCAL commits
+and deliver English material. The 19 October
+push/deploy permission applied to Crit10; no new release or paid service is inferred.
+Preserve existing data and frozen evidence. Plan and review before production edits.
+
 # Crit 10 release authorization
 
 19 October 2026. The owner now authorizes logical commits and a push to main,

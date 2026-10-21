@@ -1,0 +1,97 @@
+{
+  "checkedAt": "2026-10-21T13:12:21.996Z",
+  "scope": "Read-only live idle snapshot, not a load benchmark",
+  "health": 200,
+  "machine": {
+    "state": "started",
+    "region": "syd",
+    "guest": {
+      "cpu_kind": "shared",
+      "cpus": 1,
+      "memory_mb": 256
+    },
+    "mounts": [
+      {
+        "path": "/data"
+      }
+    ]
+  },
+  "node": "v24.21.0",
+  "processes": [
+    {
+      "pid": 643,
+      "argv": [
+        "node",
+        "--max-semi-space-size=12",
+        "src/server.ts"
+      ],
+      "rssKiB": 99520,
+      "peakKiB": 103200,
+      "swapKiB": 0
+    }
+  ],
+  "volumeSpace": {
+    "blockSize": 4096,
+    "totalBytes": 1021005824,
+    "usedBytes": 7598080,
+    "availableBytes": 943783936
+  },
+  "rootSpace": {
+    "blockSize": 4096,
+    "totalBytes": 8350298112,
+    "usedBytes": 33832960,
+    "availableBytes": 7870193664
+  },
+  "dataFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "logicalBytes": 98304,
+      "allocatedBytes": 98304
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    },
+    {
+      "name": "house.sqlite",
+      "logicalBytes": 319488,
+      "allocatedBytes": 323584
+    },
+    {
+      "name": "house.sqlite-wal",
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    },
+    {
+      "name": "board.sqlite",
+      "logicalBytes": 724992,
+      "allocatedBytes": 729088
+    },
+    {
+      "name": "board.sqlite-wal",
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    }
+  ],
+  "backupDirectoryCount": 13,
+  "backupAllocatedBytes": 6324224,
+  "publicAllocatedBytes": 26066944,
+  "productionNodeModulesAllocatedBytes": 32010240,
+  "cgroup": {}
+}
