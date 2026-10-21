@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { createHash, randomUUID } from "node:crypto";
 import { io, type Socket } from "socket.io-client";
 import { afterEach, describe, expect, test, vi } from "vitest";
+import { HouseStore } from "../src/house-store.ts";
 import { attachHouseRealtime } from "../src/house-realtime.ts";
 import { HouseError } from "../src/house-contract.ts";
 import { createHouseClient } from "../public/house-client.js";
@@ -24,7 +25,7 @@ class Authority {
   me(id: string): Me { return { identity: { id, name: this.names[this.ids.indexOf(id)]!, colour: "sage", revision: 1 }, home: this.absent.has(id) ? null : { id: this.houseId, capacity: this.capacity, ownerId: this.ids[0]!, code: "ABCD1234" }, archiveCount: 0 }; }
   snapshot(id: string, zoneId = "lounge"): HouseSnapshot {
     if (this.absent.has(id) || (zoneId !== "lounge" && (!this.open && id !== this.ids[0] || zoneId !== this.bedroomId))) throw new HouseError("FORBIDDEN", "This zone is unavailable.");
-    return { schemaVersion: 2, selfId: id, house: this.me(id).home!, residents: this.ids.slice(0, this.capacity).filter(x => !this.absent.has(x)).map(member => ({ id: member, name: this.names[this.ids.indexOf(member)]!, colour: "sage", revision: 1, slot: this.ids.indexOf(member), bedroomId: this.bedroomIds[this.ids.indexOf(member)]!, open: this.open })), streamId: this.houseId + ":" + zoneId, sequence: 1, zoneId, room: zoneId === "lounge" ? null : { id: this.bedroomId, ownerId: this.ids[0]!, revision: 1, open: this.open, palette: "sage", placements: this.placements }, cards: [], chat: [] };
+    return { schemaVersion: 2, selfId: id, house: this.me(id).home!, residents: this.ids.slice(0, this.capacity).filter(x => !this.absent.has(x)).map(member => ({ id: member, name: this.names[this.ids.indexOf(member)]!, colour: "sage", revision: 1, slot: this.ids.indexOf(member), bedroomId: this.bedroomIds[this.ids.indexOf(member)]!, open: this.open })), streamId: this.houseId + ":" + zoneId, sequence: 1, zoneId, room: zoneId === "lounge" ? null : { id: this.bedroomId, ownerId: this.ids[0]!, revision: 1, open: this.open, palette: "sage", placements: this.placements, light: "standard", originPresetId: null, originPresetVersion: null }, cards: [], chat: [], ownWork: {streamId: "lounge:" + this.houseId, sequence: 1, card: null} };
   }
   execute(_id: string, command: HouseCommand) { return { ok: true as const, commandId: command.commandId, streamId: this.houseId, sequence: 1, entityRevision: 1 }; }
 }
@@ -338,4 +339,88 @@ describe('actual client movement recovery against isolated realtime authority',(
   expect(view.x).toBeCloseTo(authority.x+.26,6);expect(view.x-authority.x).toBeGreaterThan(.2);
  });
 
+});
+
+
+async function durableSetup() {
+  const store = new HouseStore(":memory:");
+  cleanups.push(async () => store.close());
+  const a=store.ensureSession(), b=store.ensureSession();
+  store.execute(a.id,{commandId:randomUUID(),type:"house.create",payload:{capacity:2,name:"Ada",colour:"sage"}});
+  const home=store.me(a.id).home!;
+  store.execute(b.id,{commandId:randomUUID(),type:"house.join",payload:{code:home.code,name:"Lin",colour:"blue"}});
+  const roomId=store.snapshot(a.id).residents.find(r=>r.id===a.id)!.bedroomId;
+  store.execute(a.id,{commandId:randomUUID(),houseId:home.id,type:"room.configure",expectedRevision:0,payload:{roomId,open:true,palette:"sage"}});
+  const server=createServer((_req,res)=>res.end("fixture")), realtime=attachHouseRealtime(server,store);
+  await new Promise<void>(resolve=>server.listen(0,"127.0.0.1",resolve));
+  const url="http://127.0.0.1:"+(server.address() as {port:number}).port;
+  cleanups.push(()=>realtime.close());
+  async function client(identity=a) {
+    const socket=io(url,{transports:["websocket"],reconnection:false,extraHeaders:{Origin:url,Cookie:"house_session="+identity.token}});
+    cleanups.push(async()=>{socket.disconnect();});
+    await new Promise<void>((resolve,reject)=>{socket.once("connect",resolve);socket.once("connect_error",reject);});
+    return socket;
+  }
+  const command=(type:string,payload:Record<string,unknown>,expectedRevision?:number):HouseCommand =>
+    ({commandId:randomUUID(),houseId:home.id,type,payload,...(expectedRevision===undefined?{}:{expectedRevision})});
+  return {store,a,b,home,roomId,realtime,client,command};
+}
+
+describe("durable room socket integration",()=>{
+  test("delivers self-only ownWork create-close-new snapshots in a bedroom with the lounge cursor",async()=>{
+    const f=await durableSetup(), owner=await f.client(), guest=await f.client(f.b);
+    const initial=(await subscribe(owner,randomUUID(),f.roomId)).snapshot;
+    await subscribe(guest,randomUUID(),f.roomId);
+    const sequence=initial.durable.sequence;
+    async function closeCard(command:HouseCommand) {
+      const own=nextSnapshot(owner,s=>s.durable.ownWork.sequence>initial.durable.ownWork.sequence && s.durable.ownWork.card===null);
+      const other=nextSnapshot(guest,s=>s.durable.ownWork.sequence>initial.durable.ownWork.sequence);
+      const receipt=await ask(owner,"house.command",{generation:initial.generation,zoneId:f.roomId,command});
+      expect(receipt.ok).toBe(true);
+      const [mine,theirs]=await Promise.all([own,other]);
+      expect(mine.durable).toMatchObject({sequence,cards:[],ownWork:{streamId:"lounge:"+f.home.id,sequence:receipt.sequence}});
+      expect(theirs.durable).toMatchObject({cards:[],ownWork:{streamId:"lounge:"+f.home.id,sequence:receipt.sequence,card:null}});
+      initial.durable.ownWork.sequence=receipt.sequence;
+      return mine.durable.ownWork.card;
+    }
+    // UUID is allocated by the real store, so register delivery before the command and inspect its current active card.
+    const save=f.command("card.save",{smallGoal:"First work",helpRequested:false},0);
+    const delivered=nextSnapshot(owner,s=>s.durable.ownWork.card?.smallGoal==="First work");
+    const guestDelivery=nextSnapshot(guest,s=>s.durable.ownWork.sequence>initial.durable.ownWork.sequence);
+    const first=await ask(owner,"house.command",{generation:initial.generation,zoneId:f.roomId,command:save});
+    const [mine,theirs]=await Promise.all([delivered,guestDelivery]);
+    expect(mine.durable).toMatchObject({sequence,cards:[],ownWork:{sequence:first.sequence,card:{id:first.result.cardId,authorId:f.a.id}}});
+    expect(theirs.durable.ownWork).toEqual({streamId:"lounge:"+f.home.id,sequence:first.sequence,card:null});
+    initial.durable.ownWork.sequence=first.sequence;
+    await closeCard(f.command("card.close",{cardId:first.result.cardId},1));
+    const next=nextSnapshot(owner,s=>s.durable.ownWork.card?.smallGoal==="New work");
+    const second=await ask(owner,"house.command",{generation:initial.generation,zoneId:f.roomId,command:f.command("card.save",{smallGoal:"New work",helpRequested:false},0)});
+    const fresh=await next;
+    expect(fresh.durable.ownWork.card.id).toBe(second.result.cardId);
+    expect(fresh.durable.ownWork.card.id).not.toBe(first.result.cardId);
+    expect(fresh.durable.cards).toEqual([]);
+  });
+
+  test.each(["room.starter","room.light"])("%s preserves socket/HTTP controller, zone, owner and stale-revision boundaries",async type=>{
+    const f=await durableSetup(), owner=await f.client(), guest=await f.client(f.b), observer=await f.client();
+    const token=randomUUID(), state=(await subscribe(owner,token,f.roomId)).snapshot;
+    const other=(await subscribe(guest,randomUUID(),f.roomId)).snapshot;
+    await subscribe(observer,randomUUID(),f.roomId);
+    const extra=type==="room.starter"?{presetId:"peach-nook"}:{light:"dim"};
+    const command=f.command(type,{roomId:f.roomId,...extra},1);
+    expect((await ask(observer,"house.command",{generation:state.generation,zoneId:f.roomId,command})).code).toBe("NOT_CONTROLLER");
+    expect((await ask(guest,"house.command",{generation:other.generation,zoneId:f.roomId,command})).code).toBe("FORBIDDEN");
+    const wrong=f.command(type,{roomId:randomUUID(),...extra},1);
+    expect((await ask(owner,"house.command",{generation:state.generation,zoneId:f.roomId,command:wrong})).code).toBe("STALE_ZONE");
+    expect(()=>f.realtime.executeHttp(f.a.id,wrong,state.generation,f.roomId,token)).toThrowError(expect.objectContaining({code:"STALE_ZONE"}));
+    const seen=nextSnapshot(guest,s=>s.durable.room?.revision===2);
+    expect((await ask(owner,"house.command",{generation:state.generation,zoneId:f.roomId,command})).ok).toBe(true);
+    expect((await seen).durable.room).toMatchObject({open:true,revision:2,...(type==="room.light"?{light:"dim"}:{originPresetId:"peach-nook"})});
+    const current=(await subscribe(owner,token,f.roomId)).snapshot;
+    expect((await ask(owner,"house.command",{generation:current.generation,zoneId:f.roomId,command:f.command(type,{roomId:f.roomId,...extra},1)})).code).toBe("REVISION_CONFLICT");
+    const takeover=(await ask(observer,"house.takeover",{controllerToken:randomUUID()})).snapshot;
+    expect(takeover.controller).toBe(true);
+    expect((await ask(owner,"house.command",{generation:current.generation,zoneId:f.roomId,command})).code).toBe("NOT_CONTROLLER");
+    expect(()=>f.realtime.executeHttp(f.a.id,command,current.generation,f.roomId,token)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
+  });
 });

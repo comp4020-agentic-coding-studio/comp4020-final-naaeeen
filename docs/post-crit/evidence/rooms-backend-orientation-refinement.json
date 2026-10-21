@@ -1,0 +1,88 @@
+{
+  "recordedAt": "2026-10-21T14:14:12.105057+00:00",
+  "initialRecord": "rooms-backend-checks.json",
+  "finding": {
+    "source": "Parent-delivered fresh GPT-6 Astra review",
+    "confirmedFrom": "public/house-world.js monitor accent normal is local +Z; world Y rotation is placement.rotation*pi/2",
+    "preset": "rose-alcove",
+    "previousDeskRotation": 1,
+    "chairSideDotBefore": -1.5,
+    "deskRotationNow": 3,
+    "chairSideDotAfter": 1.5,
+    "scope": "Only the Rose desk rotation changes; its 1-by-2 footprint, all item positions, DB/commands and chair renderer are unchanged."
+  },
+  "files": {
+    "public/house-room-content.js": {
+      "sha256": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "gitBlob": "76399c93351f8bafec04c15bc0d3635526571357"
+    },
+    "public/house-room-content.d.ts": {
+      "sha256": "eedf274cfe56ae00e76f18a687e1d53524133dd15a02ae587b4a1362a3156ff9",
+      "gitBlob": "9068c62cc6be8b29d731807143ac4063d340a9e7"
+    },
+    "src/house-store.ts": {
+      "sha256": "30101855b8d90b043755747fd81b49185b83f3e80bee360e06a0b1d6f077ccc9",
+      "gitBlob": "b117a4cc6cdbe7458e737ce957e0e21abf73eabd"
+    },
+    "src/house-contract.ts": {
+      "sha256": "e1996bbed5770f22d5873ce83ecf81b349ac1b8e279c0a8e33258961d2eb38ef",
+      "gitBlob": "967599f806008d3379701f2ece7be706dae54df6"
+    },
+    "src/house-realtime.ts": {
+      "sha256": "a11d0860eb5890cd3397eb928f3baa9467ba756805a1ec53b4615db18bb183ef",
+      "gitBlob": "2323aa029e18ff952e1e1776bc67fac983f2ab4e"
+    },
+    "spec/house-store.test.ts": {
+      "sha256": "f9f99c6256df0f090b79d732eb042ddd953ce8f74a59d10f4118635cc1c54667",
+      "gitBlob": "466b7b3382467364a9dc9b16015b1f2495879bec"
+    },
+    "spec/house-realtime.test.ts": {
+      "sha256": "1537f84c668337f3a83cfadd0fb61c2a5ac10b1d3f98e005b5739e364f83162e",
+      "gitBlob": "e2b78cfbc416e104d6ede92d4bf9173c91c68f48"
+    },
+    "spec/house-room-content.test.ts": {
+      "sha256": "1a93d5a3abee77650f5e2b78655111577411d66f9dd756a7f2d64d680b938058",
+      "gitBlob": "4c0b2ca9d17b8707f3b1e58cec67f47cbf4a2d1d"
+    },
+    "spec/house-room-migration.test.ts": {
+      "sha256": "c930e041e9050927cfdafdf6d3f0c7704cbafe6d97b04e1b5d427ad733f2f643",
+      "gitBlob": "7eb35a5542cf49f443148823f9d51dab2b59c711"
+    },
+    "spec/house-room-settings.test.ts": {
+      "sha256": "7d766fc1676362bb1c2c287c2c64a908888e60bd6eeb31d3ff4aec3c78976606",
+      "gitBlob": "3ed8dc63c3f8287de537317b3fc5f397cd02a95a"
+    }
+  },
+  "checks": [
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-room-content.test.ts --maxWorkers=1 --fileParallelism=false --testNamePattern=faces",
+      "stage": "red",
+      "exitCode": 1,
+      "failed": 1,
+      "passed": 5,
+      "filteredOut": 31,
+      "reportedStarted": "01:13:04",
+      "result": "Rose alone failed front-side dot -1.5 > 0; other five preset desk/chair pairs passed."
+    },
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-room-content.test.ts spec/house-store.test.ts spec/house-room-settings.test.ts spec/house-room-migration.test.ts --maxWorkers=1 --fileParallelism=false",
+      "stage": "green",
+      "exitCode": 0,
+      "passed": 70,
+      "files": 4,
+      "reportedStarted": "01:13:23",
+      "durationSeconds": 7.48,
+      "result": "All six orientation cases and every preset/capacity route case pass, plus affected allocation/command/migration/store tests."
+    }
+  ],
+  "queryCatalogue": {
+    "exercisedDistinct": 57,
+    "cap": 96
+  },
+  "notRerun": [
+    "Coverage: original report remains bound to original hashes",
+    "Realtime: authority code unchanged",
+    "Final integrated typecheck: parent-owned"
+  ],
+  "reviewStatus": "Fresh review finding reproduced and repaired; contextual recheck pending parent review."
+}

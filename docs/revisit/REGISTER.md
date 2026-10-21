@@ -204,3 +204,13 @@ supersede old release task status while preserving historical evidence.
 | PC.4 | Game selection / lifecycle / authority | Bounded prototype gate; lifecycle freeze before production. |
 | PC.5 | External voice destination | Source-backed Discord handoff; member/owner boundaries and UI pending. |
 | PC.6 | Integrated workload / browser / review | Original criteria retained, combined test declared later; unrun. |
+
+
+### PC.2 foundation review closure
+
+Six presets and additive v2 persistence, own-work projection and client ordering
+have current source-bound checks. Fresh Astra review found Rose desk orientation
+and cursor loss during cleared display; both were reproduced, fixed and
+contextually verified (140 isolated checks). Parent typecheck/diff inspection pass.
+See ../post-crit/REVIEW-AND-REFINEMENT.md and the separate refinement artifacts.
+This closes the backend/client foundation, not PC.2 UI/native/resource acceptance.

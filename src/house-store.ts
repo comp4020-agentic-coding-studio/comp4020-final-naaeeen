@@ -1,19 +1,20 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { DatabaseSync, type StatementSync } from "node:sqlite";
 import { validatePlacements } from "../public/house-geometry.js";
+import { ROOM_LIGHTS, getRoomPreset, instantiateRoomPreset, roomPresetForSlot } from "../public/house-room-content.js";
 import { HouseError } from "./house-contract.ts";
-import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, Me, Placement, Profile, Resident } from "./house-contract.ts";
+import type { Bedroom, Card, Chat, Colour, Home, HouseCommand, HouseIdentity, HouseReceipt, HouseSnapshot, Me, Placement, Profile, Resident, RoomLight } from "./house-contract.ts";
 
 export const HOUSE_SESSION_SECONDS = 30 * 24 * 60 * 60;
 const CHAT_RETENTION_MS = 7 * 24 * 60 * 60 * 1000;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const TOKEN = /^[A-Za-z0-9_-]{43}$/;
 const COLOURS: readonly string[] = ["amber", "sage", "rose", "blue", "lavender", "peach"];
-const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate"];
+const TYPES = ["house.create", "house.join", "profile.set", "chat.send", "room.configure", "room.placements", "room.starter", "room.light", "card.save", "card.close", "house.transfer", "house.leave", "house.remove", "house.reinstate"];
 type IdentityRow = { id: string; name: string; colour: Colour; revision: number };
 type HomeRow = { id: string; capacity: number; owner_id: string; code: string | null; status: string };
 type Membership = HomeRow & { slot: number; bedroom_id: string };
-type RoomRow = { id: string; house_id: string; owner_id: string; slot: number; revision: number; open: number; palette: Colour; placements: string; archived: number };
+type RoomRow = { id: string; house_id: string; owner_id: string; slot: number; revision: number; open: number; palette: Colour; placements: string; archived: number; light: RoomLight; origin_preset_id: string | null; origin_preset_version: number | null };
 type CardRow = { id: string; house_id: string; author_id: string; small_goal: string; question: string; resource_url: string; next_step: string; help_requested: number; state: Card["state"]; revision: number; inactive_sequence: number | null };
 type ReceiptRow = { command_hash: string; response: string; room_id: string | null };
 type Outcome = { streamId: string; entityRevision: number; result?: Record<string, unknown>; roomId?: string; sequence?: number };
@@ -72,7 +73,7 @@ function parseCommand(value: unknown): HouseCommand {
 }
 function profile(row: IdentityRow): Profile { return { id: row.id, name: row.name, colour: row.colour, revision: row.revision }; }
 function home(row: HomeRow): Home { return { id: row.id, capacity: row.capacity, ownerId: row.owner_id, code: row.code! }; }
-function room(row: RoomRow): Bedroom { return { id: row.id, ownerId: row.owner_id, revision: row.revision, open: row.open === 1, palette: row.palette, placements: JSON.parse(row.placements) as Placement[] }; }
+function room(row: RoomRow): Bedroom { return { id: row.id, ownerId: row.owner_id, revision: row.revision, open: row.open === 1, palette: row.palette, placements: JSON.parse(row.placements) as Placement[], light: row.light, originPresetId: row.origin_preset_id, originPresetVersion: row.origin_preset_version }; }
 function card(row: CardRow): Card { return { id: row.id, authorId: row.author_id, smallGoal: row.small_goal, question: row.question, resourceUrl: row.resource_url, nextStep: row.next_step, helpRequested: row.help_requested === 1, state: row.state, revision: row.revision }; }
 
 /** One SQLite authority. State, zone cursor and receipt are committed before execute returns. */
@@ -96,7 +97,7 @@ export class HouseStore {
     try {
       this.db.exec("PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;");
       const version = (this.prepared("PRAGMA user_version").get() as { user_version: number }).user_version;
-      if (version !== 0 && version !== 1) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
+      if (version !== 0 && version !== 1 && version !== 2) fail("STORAGE_UNAVAILABLE", "Unsupported house database version.");
       if (version === 0) this.transaction(() => this.db.exec(`
         CREATE TABLE identities (id TEXT PRIMARY KEY, name TEXT NOT NULL, colour TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);
         CREATE TABLE sessions (token_digest TEXT PRIMARY KEY, identity_id TEXT NOT NULL REFERENCES identities(id), expires_at INTEGER NOT NULL);
@@ -117,6 +118,12 @@ export class HouseStore {
         CREATE TABLE archives (id TEXT PRIMARY KEY, identity_id TEXT NOT NULL REFERENCES identities(id), house_id TEXT NOT NULL REFERENCES houses(id), room TEXT NOT NULL, cards TEXT NOT NULL, at INTEGER NOT NULL);
         CREATE TABLE receipts (actor_id TEXT NOT NULL REFERENCES identities(id), command_id TEXT NOT NULL, command_hash TEXT NOT NULL, response TEXT NOT NULL, room_id TEXT, PRIMARY KEY(actor_id,command_id));
         PRAGMA user_version=1;
+      `));
+      if (version < 2) this.transaction(() => this.db.exec(`
+        ALTER TABLE bedrooms ADD COLUMN light TEXT NOT NULL DEFAULT 'standard' CHECK(light IN ('standard','cosy','dim'));
+        ALTER TABLE bedrooms ADD COLUMN origin_preset_id TEXT;
+        ALTER TABLE bedrooms ADD COLUMN origin_preset_version INTEGER;
+        PRAGMA user_version=2;
       `));
       this.transaction(() => this.prepared("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS));
       this.prepared("SELECT id FROM identities LIMIT 1").get();
@@ -169,8 +176,8 @@ export class HouseStore {
     return fail("STORAGE_UNAVAILABLE", "A unique invitation could not be allocated. Please retry.");
   }
   private claim(id: string, h: HomeRow, slot: number): string {
-    const roomId = randomUUID();
-    this.prepared("INSERT INTO bedrooms(id,house_id,owner_id,slot,palette,placements) VALUES (?,?,?,?,?,?)").run(roomId, h.id, id, slot, this.identity(id).colour, "[]");
+    const roomId = randomUUID(), starter = instantiateRoomPreset(roomPresetForSlot(slot).id, () => randomUUID());
+    this.prepared("INSERT INTO bedrooms(id,house_id,owner_id,slot,palette,placements,light,origin_preset_id,origin_preset_version) VALUES (?,?,?,?,?,?,?,?,?)").run(roomId, h.id, id, slot, starter.palette, JSON.stringify(starter.placements), starter.light, starter.originPresetId, starter.originPresetVersion);
     this.prepared("INSERT INTO members(house_id,identity_id,slot,bedroom_id,status) VALUES (?,?,?,?,'active') ON CONFLICT(house_id,identity_id) DO UPDATE SET slot=excluded.slot,bedroom_id=excluded.bedroom_id,status='active'").run(h.id, id, slot, roomId);
     this.prepared("INSERT INTO streams(id,sequence) VALUES (?,0)").run("bedroom:" + roomId);
     return roomId;
@@ -246,7 +253,9 @@ export class HouseStore {
       const streamId = privateRoom ? "bedroom:" + privateRoom.id : "lounge:" + h.id;
       const residents = this.prepared("SELECT i.*,m.slot,m.bedroom_id,b.open FROM members m JOIN identities i ON i.id=m.identity_id JOIN bedrooms b ON b.id=m.bedroom_id WHERE m.house_id=? AND m.status='active' ORDER BY m.slot").all(h.id) as (IdentityRow & { slot: number; bedroom_id: string; open: number })[];
       const chats = this.prepared("SELECT id,author_id AS authorId,name,text,at,sequence FROM (SELECT * FROM chat WHERE zone_id=? AND at>=? ORDER BY sequence DESC LIMIT 100) ORDER BY sequence").all(streamId, Date.now() - CHAT_RETENTION_MS) as unknown as Chat[];
-      return { schemaVersion: 2, selfId: id, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
+      const ownCard = this.prepared("SELECT * FROM cards WHERE house_id=? AND author_id=? AND state='active'").get(h.id, id) as CardRow | undefined;
+      const ownWork = { streamId: "lounge:" + h.id, sequence: this.sequence("lounge:" + h.id), card: ownCard ? card(ownCard) : null };
+      return { schemaVersion: 2, selfId: id, ownWork, house: home(h), residents: residents.map(r => ({ ...profile(r), slot: r.slot, bedroomId: r.bedroom_id, open: r.open === 1 } satisfies Resident)), streamId, sequence: this.sequence(streamId), zoneId: privateRoom?.id ?? "lounge", room: privateRoom ? room(privateRoom) : null, cards: privateRoom ? [] : (this.prepared("SELECT * FROM cards WHERE house_id=? ORDER BY CASE WHEN state='active' THEN 0 ELSE 1 END,inactive_sequence DESC,id").all(h.id) as CardRow[]).map(card), chat: chats };
     }); } catch (error) { return storageError(error); }
   }
 
@@ -341,6 +350,22 @@ export class HouseStore {
       this.prepared("DELETE FROM chat WHERE at<?").run(Date.now() - CHAT_RETENTION_MS);
       this.prepared("DELETE FROM chat WHERE zone_id=? AND id NOT IN (SELECT id FROM chat WHERE zone_id=? ORDER BY sequence DESC LIMIT 100)").run(streamId, streamId);
       return { streamId, sequence, entityRevision: 0, result: { chatId }, ...(r ? { roomId: r.id } : {}) };
+    }
+    if (c.type === "room.starter" || c.type === "room.light") {
+      const fields = c.type === "room.starter" ? ["roomId", "presetId"] : ["roomId", "light"];
+      keys(p, fields, fields);
+      const r = this.access(id, uuid(p.roomId));
+      if (r.owner_id !== id) fail("FORBIDDEN", "Only the resident may edit their bedroom.");
+      this.requireRevision(c.expectedRevision, r.revision);
+      if (c.type === "room.starter") {
+        if (typeof p.presetId !== "string" || !getRoomPreset(p.presetId)) fail("INVALID_INPUT", "Choose a supported starter room.");
+        const starter = instantiateRoomPreset(p.presetId, () => randomUUID());
+        this.prepared("UPDATE bedrooms SET placements=?,palette=?,light=?,origin_preset_id=?,origin_preset_version=?,revision=revision+1 WHERE id=?").run(JSON.stringify(starter.placements), starter.palette, starter.light, starter.originPresetId, starter.originPresetVersion, r.id);
+      } else {
+        if (typeof p.light !== "string" || !ROOM_LIGHTS.includes(p.light as RoomLight)) fail("INVALID_INPUT", "Choose a supported room light.");
+        this.prepared("UPDATE bedrooms SET light=?,revision=revision+1 WHERE id=?").run(p.light, r.id);
+      }
+      return { streamId: "bedroom:" + r.id, roomId: r.id, entityRevision: r.revision + 1, result: { roomId: r.id } };
     }
     if (c.type === "room.configure" || c.type === "room.placements") {
       keys(p, c.type === "room.configure" ? ["roomId", "open", "palette"] : ["roomId", "placements"], c.type === "room.configure" ? ["roomId", "open", "palette"] : ["roomId", "placements"]);

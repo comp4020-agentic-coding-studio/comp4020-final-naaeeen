@@ -14,16 +14,21 @@ const safeStorage = () => { try { return globalThis.sessionStorage; } catch { re
 
 /** @param {(snapshot:any|null)=>void} [onSnapshot] */
 export function createSnapshotReducer(onSnapshot = () => {}) {
-  let current = null, epoch = null, accessGeneration = -1, desiredZone = 'lounge';
+  let current = null, epoch = null, accessGeneration = -1, generation = -1, desiredZone = 'lounge';
+  let identityId = null, houseId = null, ownWork = null, roomStreamId = null, roomSequence = -1;
   const retired = new Set();
   return {
+    // Clear displayed private content, retaining only same-identity/house ordering in memory.
     selectZone(zoneId) { desiredZone = zoneId; current = null; onSnapshot(null); },
     clear() { current = null; onSnapshot(null); },
     revoke(message) {
       if (!message || typeof message.serverEpoch !== 'string' || !Number.isSafeInteger(message.accessGeneration)) return false;
       if (retired.has(message.serverEpoch) || (epoch === message.serverEpoch && message.accessGeneration < accessGeneration)) return false;
-      if (epoch && epoch !== message.serverEpoch) retired.add(epoch);
-      epoch = message.serverEpoch; accessGeneration = message.accessGeneration;
+      if (epoch !== message.serverEpoch) {
+        if (epoch) retired.add(epoch);
+        identityId = null; houseId = null; generation = -1;
+      }
+      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null; roomStreamId = null; roomSequence = -1;
       desiredZone = 'lounge'; current = null; onSnapshot(null); return true;
     },
     motion(incoming) {
@@ -31,12 +36,32 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
       current = { ...current, players: incoming.players }; onSnapshot(current); return true;
     },
     accept(incoming) {
-      if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
+      if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !boundedId(incoming.durable.selfId) || !boundedId(incoming.durable.house?.id) || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
+      const durable = incoming.durable, projection = durable.ownWork;
+      // The server contract requires ownWork. Missing legacy fixtures remain room-only;
+      // never reconstruct private work from the shared cards list.
+      if (projection !== undefined && (!plainObject(projection) || projection.streamId !== 'lounge:' + durable.house.id
+        || !Number.isSafeInteger(projection.sequence) || projection.sequence < 0
+        || (projection.card !== null && (!plainObject(projection.card) || !boundedId(projection.card.id)
+          || projection.card.authorId !== durable.selfId || projection.card.state !== 'active')))) return false;
       if (epoch === incoming.serverEpoch) {
         if (incoming.accessGeneration < accessGeneration) return false;
-        if (current && incoming.accessGeneration === accessGeneration && (incoming.generation < current.generation || (incoming.durable.streamId === current.durable.streamId && incoming.durable.sequence < current.durable.sequence))) return false;
-      } else { if (epoch) retired.add(epoch); accessGeneration = -1; }
-      epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; current = incoming; onSnapshot(incoming); return true;
+        if (incoming.accessGeneration === accessGeneration) {
+          // Authority survives current=null during zone selection and reconnection.
+          if (incoming.generation < generation || (identityId !== null && (identityId !== durable.selfId || houseId !== durable.house.id))) return false;
+          if (durable.streamId === roomStreamId && durable.sequence < roomSequence) return false;
+        }
+      }
+      const changedScope = epoch !== incoming.serverEpoch || identityId !== durable.selfId || houseId !== durable.house.id;
+      let nextWork = changedScope ? null : ownWork;
+      if (projection !== undefined && (!nextWork || projection.sequence > nextWork.sequence)) nextWork = clone(projection);
+      // Commit authority/cache only after every envelope and projection guard passed.
+      if (epoch && epoch !== incoming.serverEpoch) retired.add(epoch);
+      epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; generation = incoming.generation;
+      identityId = durable.selfId; houseId = durable.house.id; ownWork = nextWork;
+      roomStreamId = durable.streamId; roomSequence = durable.sequence;
+      current = ownWork ? { ...incoming, durable: { ...durable, ownWork: clone(ownWork) } } : incoming;
+      onSnapshot(current); return true;
     },
   };
 }

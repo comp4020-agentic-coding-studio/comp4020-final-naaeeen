@@ -1,0 +1,17 @@
+{
+  "sourceCommit": "d95055b",
+  "sourceSHA256": {
+    "public/house-client.js": "2cf9cda38686a0f968364dd2ed2a47e0c7e75701ea91daf3a5c270951df659c5",
+    "spec/house-client.test.ts": "90ecac041eba747478f54d22a5de2a82171637aad81ef61c91f1a1a9ed6d7f05"
+  },
+  "patchSHA256": "dc89c8a949284b478fe747cb76e623269803292eccbabc34ecbdc495d0fa8c53",
+  "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-client.test.ts --maxWorkers=1 -t \"retains the accepted room cursor|uses the latest accepted stream cursor|retains the room cursor before\"",
+  "exitCode": 1,
+  "testsFailed": 4,
+  "testsPassed": 1,
+  "testsExcludedByFilter": 65,
+  "vitestDurationMs": 332,
+  "overlap": "Bounded focused logic tests authorized during the camera native timing lane; maxWorkers=1; no coverage or broader load.",
+  "scope": "Fresh-review source-level regression with mocked client transport; not a real browser or real Socket.IO delivery trial",
+  "rawLocalLog": ".local/work-projection-review-red.log"
+}

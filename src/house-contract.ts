@@ -5,10 +5,12 @@ export interface Profile { id: string; name: string; colour: Colour; revision: n
 export interface Home { id: string; capacity: number; ownerId: string; code: string }
 export interface Resident extends Profile { slot: number; bedroomId: string; open: boolean }
 export interface Placement { id: string; kind: string; x: number; z: number; rotation: number; colour: Colour }
-export interface Bedroom { id: string; ownerId: string; revision: number; open: boolean; palette: Colour; placements: Placement[] }
+export type RoomLight = "standard" | "cosy" | "dim";
+export interface Bedroom { id: string; ownerId: string; revision: number; open: boolean; palette: Colour; placements: Placement[]; light: RoomLight; originPresetId: string | null; originPresetVersion: number | null }
 export interface Card { id: string; authorId: string; smallGoal: string; question: string; resourceUrl: string; nextStep: string; helpRequested: boolean; state: "active" | "closed" | "ownerLeft"; revision: number }
 export interface Chat { id: string; authorId: string; name: string; text: string; at: number; sequence: number }
-export interface HouseSnapshot { schemaVersion: 2; selfId: string; house: Home; residents: Resident[]; streamId: string; sequence: number; zoneId: string; room: Bedroom | null; cards: Card[]; chat: Chat[] }
+export interface OwnWork { streamId: string; sequence: number; card: Card | null }
+export interface HouseSnapshot { schemaVersion: 2; selfId: string; house: Home; residents: Resident[]; streamId: string; sequence: number; zoneId: string; room: Bedroom | null; cards: Card[]; chat: Chat[]; ownWork: OwnWork }
 export interface Me { identity: Profile; home: Home | null; archiveCount: number }
 export interface HouseCommand { commandId: string; type: string; houseId?: string; expectedRevision?: number; payload: Record<string, unknown> }
 export interface HouseReceipt { ok: true; commandId: string; streamId: string; sequence: number; entityRevision: number; result?: Record<string, unknown> }

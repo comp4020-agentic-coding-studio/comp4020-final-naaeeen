@@ -1,0 +1,303 @@
+diff --git a/public/house-client.js b/public/house-client.js
+index fd81517..351a9fb 100644
+--- a/public/house-client.js
++++ b/public/house-client.js
+@@ -14,16 +14,21 @@ const safeStorage = () => { try { return globalThis.sessionStorage; } catch { re
+ 
+ /** @param {(snapshot:any|null)=>void} [onSnapshot] */
+ export function createSnapshotReducer(onSnapshot = () => {}) {
+-  let current = null, epoch = null, accessGeneration = -1, desiredZone = 'lounge';
++  let current = null, epoch = null, accessGeneration = -1, generation = -1, desiredZone = 'lounge';
++  let identityId = null, houseId = null, ownWork = null;
+   const retired = new Set();
+   return {
++    // Clear displayed private content, retaining only same-identity/house ordering in memory.
+     selectZone(zoneId) { desiredZone = zoneId; current = null; onSnapshot(null); },
+     clear() { current = null; onSnapshot(null); },
+     revoke(message) {
+       if (!message || typeof message.serverEpoch !== 'string' || !Number.isSafeInteger(message.accessGeneration)) return false;
+       if (retired.has(message.serverEpoch) || (epoch === message.serverEpoch && message.accessGeneration < accessGeneration)) return false;
+-      if (epoch && epoch !== message.serverEpoch) retired.add(epoch);
+-      epoch = message.serverEpoch; accessGeneration = message.accessGeneration;
++      if (epoch !== message.serverEpoch) {
++        if (epoch) retired.add(epoch);
++        identityId = null; houseId = null; generation = -1;
++      }
++      epoch = message.serverEpoch; accessGeneration = message.accessGeneration; ownWork = null;
+       desiredZone = 'lounge'; current = null; onSnapshot(null); return true;
+     },
+     motion(incoming) {
+@@ -31,12 +36,31 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
+       current = { ...current, players: incoming.players }; onSnapshot(current); return true;
+     },
+     accept(incoming) {
+-      if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
++      if (!incoming || typeof incoming.serverEpoch !== 'string' || !Number.isSafeInteger(incoming.accessGeneration) || !Number.isSafeInteger(incoming.generation) || !incoming.durable || !Number.isSafeInteger(incoming.durable.sequence) || incoming.durable.zoneId !== desiredZone || !boundedId(incoming.durable.selfId) || !boundedId(incoming.durable.house?.id) || !Array.isArray(incoming.players) || incoming.players.length > 6 || retired.has(incoming.serverEpoch)) return false;
++      const durable = incoming.durable, projection = durable.ownWork;
++      // The server contract requires ownWork. Missing legacy fixtures remain room-only;
++      // never reconstruct private work from the shared cards list.
++      if (projection !== undefined && (!plainObject(projection) || projection.streamId !== 'lounge:' + durable.house.id
++        || !Number.isSafeInteger(projection.sequence) || projection.sequence < 0
++        || (projection.card !== null && (!plainObject(projection.card) || !boundedId(projection.card.id)
++          || projection.card.authorId !== durable.selfId || projection.card.state !== 'active')))) return false;
+       if (epoch === incoming.serverEpoch) {
+         if (incoming.accessGeneration < accessGeneration) return false;
+-        if (current && incoming.accessGeneration === accessGeneration && (incoming.generation < current.generation || (incoming.durable.streamId === current.durable.streamId && incoming.durable.sequence < current.durable.sequence))) return false;
+-      } else { if (epoch) retired.add(epoch); accessGeneration = -1; }
+-      epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; current = incoming; onSnapshot(incoming); return true;
++        if (incoming.accessGeneration === accessGeneration) {
++          // Authority survives current=null during zone selection and reconnection.
++          if (incoming.generation < generation || (identityId !== null && (identityId !== durable.selfId || houseId !== durable.house.id))) return false;
++          if (current && durable.streamId === current.durable.streamId && durable.sequence < current.durable.sequence) return false;
++        }
++      }
++      const changedScope = epoch !== incoming.serverEpoch || identityId !== durable.selfId || houseId !== durable.house.id;
++      let nextWork = changedScope ? null : ownWork;
++      if (projection !== undefined && (!nextWork || projection.sequence > nextWork.sequence)) nextWork = clone(projection);
++      // Commit authority/cache only after every envelope and projection guard passed.
++      if (epoch && epoch !== incoming.serverEpoch) retired.add(epoch);
++      epoch = incoming.serverEpoch; accessGeneration = incoming.accessGeneration; generation = incoming.generation;
++      identityId = durable.selfId; houseId = durable.house.id; ownWork = nextWork;
++      current = ownWork ? { ...incoming, durable: { ...durable, ownWork: clone(ownWork) } } : incoming;
++      onSnapshot(current); return true;
+     },
+   };
+ }
+diff --git a/spec/house-client.test.ts b/spec/house-client.test.ts
+index 86bd22d..2625672 100644
+--- a/spec/house-client.test.ts
++++ b/spec/house-client.test.ts
+@@ -39,6 +39,166 @@ describe("house snapshot reducer", () => {
+     expect(reducer.accept(snapshot(3, 1))).toBe(true);
+   });
+ });
++const workCard = (id: string, authorId = "person") => ({ id, authorId, smallGoal: id, question: "", resourceUrl: "", nextStep: "", helpRequested: false, state: "active", revision: 1 });
++const workSnapshot = ({ access = 1, roomSequence = 1, zone = "private", epoch = "epoch-a", generation = 1, selfId = "person", houseId = "house-a", workSequence = 1, card = null, controller = true }: any = {}): any => {
++  const base = snapshot(access, roomSequence, zone, epoch, generation);
++  return { ...base, controller, durable: { ...base.durable, house: { id: houseId }, selfId,
++    room: zone === "lounge" ? null : { id: zone, revision: roomSequence },
++    ownWork: { streamId: `lounge:${houseId}`, sequence: workSequence, card } } };
++};
++
++describe("own-work projection ordering", () => {
++  test("delivers newer work at the same bedroom cursor without copying lounge cards", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    expect(reducer.accept(workSnapshot({ roomSequence: 7, workSequence: 3 }))).toBe(true);
++    expect(reducer.accept(workSnapshot({ roomSequence: 7, workSequence: 4, card: workCard("created") }))).toBe(true);
++    expect(states.at(-1).durable).toMatchObject({ sequence: 7, cards: [], ownWork: { sequence: 4, card: { id: "created" } } });
++  });
++  test("updates a newer bedroom while preserving newer work and leaving the source envelope unchanged", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ roomSequence: 7, workSequence: 9, card: workCard("current") }));
++    const delayed = workSnapshot({ roomSequence: 8, workSequence: 8, card: workCard("old") });
++    expect(reducer.accept(delayed)).toBe(true);
++    expect(states.at(-1).durable).toMatchObject({ sequence: 8, room: { revision: 8 }, ownWork: { sequence: 9, card: { id: "current" } } });
++    expect(delayed.durable.ownWork.card.id).toBe("old");
++    expect(reducer.accept(workSnapshot({ roomSequence: 8, workSequence: 9, card: workCard("equal-cursor-old") }))).toBe(true);
++    expect(states.at(-1).durable.ownWork.card.id).toBe("current");
++  });
++  test("rejects an older room envelope before its newer work can poison the cache", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    const current = workSnapshot({ roomSequence: 9, workSequence: 4 }); current.players = [{ id: "person", x: 2 }]; reducer.accept(current);
++    const delayed = workSnapshot({ roomSequence: 8, workSequence: 99, card: workCard("unreachable newer work") }); delayed.players = [{ id: "person", x: 1 }];
++    expect(reducer.accept(delayed)).toBe(false);
++    expect(states.at(-1)).toMatchObject({ players: [{ x: 2 }], durable: { sequence: 9, room: { revision: 9 }, ownWork: { sequence: 4, card: null } } });
++    reducer.accept(workSnapshot({ roomSequence: 10, workSequence: 5, card: workCard("new work") }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "new work" } });
++  });
++  test("preserves the same-scope work cursor through zone exit, null state and delayed reentry", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 8, card: workCard("old") }));
++    reducer.selectZone("lounge"); expect(states.at(-1)).toBeNull();
++    reducer.accept(workSnapshot({ access: 2, zone: "lounge", workSequence: 9 }));
++    reducer.selectZone("private"); expect(states.at(-1)).toBeNull();
++    expect(reducer.accept(workSnapshot({ access: 3, workSequence: 8, card: workCard("old") }))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 9, card: null });
++    expect(reducer.accept(workSnapshot({ access: 2, workSequence: 99, card: workCard("forbidden late") }))).toBe(false);
++    reducer.selectZone("lounge"); reducer.accept(workSnapshot({ access: 4, zone: "lounge", workSequence: 8, card: workCard("old") }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 9, card: null });
++  });
++  test("retains work and authority across a connection clear without displaying cached private content", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ access: 3, generation: 4, workSequence: 10, card: workCard("latest") }));
++    reducer.clear(); expect(states.at(-1)).toBeNull();
++    expect(reducer.accept(workSnapshot({ access: 2, generation: 5, workSequence: 99 }))).toBe(false);
++    expect(reducer.accept(workSnapshot({ access: 3, generation: 3, workSequence: 99 }))).toBe(false);
++    expect(states.at(-1)).toBeNull();
++    expect(reducer.accept(workSnapshot({ access: 3, generation: 4, workSequence: 9 }))).toBe(true);
++    expect(states.at(-1).durable.ownWork.card.id).toBe("latest");
++  });
++  test.each(["clear", "reselect", "unacknowledged-zone-roundtrip"])("retains the accepted room cursor while %s clears displayed state", clearMode => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    const original = workSnapshot({ roomSequence: 9, workSequence: 4 }); original.durable.streamId = "bedroom:private"; reducer.accept(original);
++    if (clearMode === "clear") reducer.clear();
++    else if (clearMode === "reselect") reducer.selectZone("private");
++    else { reducer.selectZone("lounge"); reducer.selectZone("private"); }
++    expect(states.at(-1)).toBeNull();
++    const stale = workSnapshot({ roomSequence: 8, workSequence: 99, card: workCard("stale poison") }); stale.durable.streamId = "bedroom:private";
++    expect(reducer.accept(stale)).toBe(false); expect(states.at(-1)).toBeNull();
++    const next = workSnapshot({ roomSequence: 10, workSequence: 5, card: workCard("fresh") }); next.durable.streamId = "bedroom:private";
++    expect(reducer.accept(next)).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "fresh" } });
++  });
++  test("uses the latest accepted stream cursor across server-issued zone access generations", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    const bedroom = workSnapshot({ roomSequence: 9, workSequence: 10 }); bedroom.durable.streamId = "bedroom:private"; reducer.accept(bedroom);
++    reducer.selectZone("lounge");
++    const lounge = workSnapshot({ access: 2, zone: "lounge", roomSequence: 10, workSequence: 10 }); lounge.durable.streamId = "lounge:house-a";
++    expect(reducer.accept(lounge)).toBe(true);
++    reducer.selectZone("private");
++    // house.subscribe allocates newer access; separate room and lounge cursors are incomparable.
++    const returned = workSnapshot({ access: 3, roomSequence: 9, workSequence: 11, card: workCard("returned") }); returned.durable.streamId = "bedroom:private";
++    expect(reducer.accept(returned)).toBe(true);
++    const oldLounge = workSnapshot({ access: 2, zone: "lounge", roomSequence: 100, workSequence: 100 }); oldLounge.durable.streamId = "lounge:house-a";
++    expect(reducer.accept(oldLounge)).toBe(false);
++    expect(states.at(-1).durable).toMatchObject({ streamId: "bedroom:private", sequence: 9, ownWork: { sequence: 11, card: { id: "returned" } } });
++  });
++  test("keeps null, create, close and replacement ordered so delayed cards cannot resurrect", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 0 }));
++    reducer.accept(workSnapshot({ workSequence: 1, card: workCard("first") }));
++    reducer.accept(workSnapshot({ workSequence: 2 }));
++    reducer.accept(workSnapshot({ workSequence: 1, card: workCard("first") }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 2, card: null });
++    reducer.accept(workSnapshot({ workSequence: 3, card: workCard("second") }));
++    reducer.accept(workSnapshot({ workSequence: 2 }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 3, card: { id: "second" } });
++  });
++  test("allows a new server epoch to reset work while rejecting its retired predecessor before cache changes", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 50, generation: 9, card: workCard("before restart") }));
++    expect(reducer.accept(workSnapshot({ epoch: "epoch-b", workSequence: 0 }))).toBe(true);
++    expect(reducer.accept(workSnapshot({ epoch: "epoch-a", access: 99, workSequence: 99, card: workCard("retired") }))).toBe(false);
++    reducer.accept(workSnapshot({ epoch: "epoch-b", roomSequence: 2, workSequence: 1, card: workCard("after restart") }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 1, card: { id: "after restart" } });
++  });
++  test("revocation clears work instead of carrying it into a newly authorized membership", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value));
++    reducer.accept(workSnapshot({ zone: "lounge", workSequence: 10, card: workCard("revoked") }));
++    expect(reducer.revoke({ serverEpoch: "epoch-a", accessGeneration: 2 })).toBe(true); expect(states.at(-1)).toBeNull();
++    expect(reducer.accept(workSnapshot({ zone: "lounge", workSequence: 99, card: workCard("late") }))).toBe(false);
++    expect(reducer.accept(workSnapshot({ access: 2, zone: "lounge", workSequence: 1 }))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 1, card: null });
++    expect(reducer.revoke({ serverEpoch: "epoch-a", accessGeneration: 1 })).toBe(false);
++    reducer.accept(workSnapshot({ access: 2, zone: "lounge", workSequence: 0, card: workCard("late") }));
++    expect(states.at(-1).durable.ownWork.card).toBeNull();
++  });
++  test("rejects stale access and controller envelopes before either can poison a newer work cursor", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ access: 3, generation: 4, workSequence: 4, card: workCard("current") }));
++    expect(reducer.accept(workSnapshot({ access: 2, generation: 5, workSequence: 100 }))).toBe(false);
++    expect(reducer.accept(workSnapshot({ access: 3, generation: 3, workSequence: 100 }))).toBe(false);
++    reducer.accept(workSnapshot({ access: 3, generation: 4, roomSequence: 2, workSequence: 5, card: workCard("new") }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "new" } });
++  });
++  test.each(["identity", "house"])("resets on an authorized %s change and rejects delayed cross-scope content while current is null", change => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 30, card: workCard("old scope") })); reducer.clear();
++    const scope = change === "identity" ? { selfId: "other" } : { houseId: "house-b" };
++    expect(reducer.accept(workSnapshot({ ...scope, workSequence: 100 }))).toBe(false);
++    expect(reducer.accept(workSnapshot({ ...scope, access: 2, workSequence: 1 }))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 1, card: null });
++    reducer.selectZone("lounge");
++    expect(reducer.accept(workSnapshot({ access: 2, zone: "lounge", workSequence: 100, card: workCard("delayed old scope") }))).toBe(false);
++    expect(reducer.accept(workSnapshot({ ...scope, access: 3, zone: "lounge", workSequence: 2, card: workCard("new scope", scope.selfId ?? "person") }))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 2, card: { id: "new scope" } });
++  });
++  test.each([
++    { streamId: "lounge:other" }, { sequence: -1 }, { sequence: 1.5 }, { sequence: Number.MAX_SAFE_INTEGER + 1 },
++    { card: workCard("foreign", "other") }, { card: { ...workCard("closed"), state: "closed" } }, { card: [] },
++  ])("rejects a malformed work projection before changing authority or high-water: %j", invalid => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 4, card: workCard("current") }));
++    const malformed = workSnapshot({ access: 9, generation: 9, workSequence: 99 }); Object.assign(malformed.durable.ownWork, invalid);
++    expect(reducer.accept(malformed)).toBe(false);
++    expect(reducer.accept(workSnapshot({ roomSequence: 2, workSequence: 5, card: workCard("new") }))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "new" } });
++  });
++  test("treats an absent additive fixture field as room-only without deriving work from cards", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    const legacy = snapshot(1, 1, "private"); legacy.durable.cards.push(workCard("not projected") as never);
++    expect(reducer.accept(legacy)).toBe(true); expect(states.at(-1).durable.ownWork).toBeUndefined();
++    reducer.accept(workSnapshot({ roomSequence: 2, workSequence: 5, card: workCard("projected") }));
++    expect(reducer.accept(snapshot(1, 3, "private"))).toBe(true);
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "projected" } });
++  });
++  test("keeps the private cache separate from callback edits", () => {
++    const states: any[] = []; const reducer = createSnapshotReducer(value => states.push(value)); reducer.selectZone("private");
++    reducer.accept(workSnapshot({ workSequence: 5, card: workCard("saved") }));
++    states.at(-1).durable.ownWork.sequence = 100; states.at(-1).durable.ownWork.card.smallGoal = "edited copy";
++    reducer.selectZone("lounge"); reducer.accept(workSnapshot({ access: 2, zone: "lounge", workSequence: 4 }));
++    expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { smallGoal: "saved" } });
++  });
++});
+ describe("bounded durable outbox", () => {
+   test("retries original UUID only for the original identity/zone before24hours", () => {
+     const storage = memoryStorage(); const box = createCommandOutbox(storage);
+@@ -489,10 +649,65 @@ describe('acknowledged transient movement',()=>{
+   const pending=client.move({x:.26,z:3.3,heading:0});expect(pending).toBeInstanceOf(Promise);
+   const sent=transport.calls.find(call=>call.event==='house.move')!;
+   if(change==='closed')client.close();else{
+-   const next=snapshot(change==='room'?2:1,1,change==='room'?'private':'lounge',change==='epoch'?'epoch-b':'epoch-a',change==='control'?2:1);
++   const next=snapshot(change==='room'||change==='identity'?2:1,1,change==='room'?'private':'lounge',change==='epoch'?'epoch-b':'epoch-a',change==='control'?2:1);
+    next.players.push({id:change==='identity'?'other':'person',x:5,z:3.3} as never);if(change==='identity')next.durable.selfId='other';
+    if(change==='room'){transport.state(next);await client.subscribe('private');}else transport.emit('house.snapshot',next);
+   }
+   settle({ok:true,sequence:sent.value.sequence});await expect(pending).resolves.toMatchObject({stale:true});client.close();
+  });
+ });
++
++
++describe("own-work projection transport boundaries", () => {
++  test("retains ordering through actual zone/disconnect calls while observers read without saving or persisting the projection", async () => {
++    const storage = memoryStorage(); const transport = mockTransport(workSnapshot({ zone: "lounge", workSequence: 5, card: workCard("current") }));
++    const states: any[] = []; const client = createHouseClient({ storage, onSnapshot: value => states.push(value) }); await client.connect();
++    transport.state(workSnapshot({ access: 2, zone: "private", workSequence: 4, card: workCard("delayed") })); await client.subscribe("private");
++    expect(states.at(-1).durable.ownWork.card.id).toBe("current");
++    transport.emit("disconnect", "transport close"); expect(states.at(-1)).toBeNull();
++    transport.state(workSnapshot({ access: 3, generation: 2, controller: false, workSequence: 6, card: workCard("observer work") }));
++    transport.emit("connect", undefined); await vi.waitFor(() => expect(states.at(-1)?.durable.ownWork.sequence).toBe(6));
++    expect(states.at(-1).controller).toBe(false);
++    await expect(client.command({ type: "card.put", payload: { smallGoal: "observer draft" } })).rejects.toMatchObject({ code: "NOT_CONTROLLER" });
++    expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(0);
++    transport.emit("house.snapshot", workSnapshot({ access: 2, generation: 9, workSequence: 100 }));
++    transport.emit("house.snapshot", workSnapshot({ access: 3, generation: 1, workSequence: 100 }));
++    expect(states.at(-1).durable.ownWork.sequence).toBe(6);
++    transport.emit("house.snapshot", workSnapshot({ access: 3, generation: 3, workSequence: 7, card: workCard("controlling work") }));
++    await vi.waitFor(() => expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(1));
++    expect(transport.calls.find(call => call.event === "house.command")!.value).toMatchObject({ generation: 3, zoneId: "private", command: { payload: { smallGoal: "observer draft" } } });
++    expect(states.at(-1).durable.ownWork.card.id).toBe("controlling work");
++    expect(storage.getItem("house.ownWork")).toBeNull();
++    expect(storage.getItem(OUTBOX_STORAGE_KEY) ?? "").not.toContain("controlling work"); client.close();
++  });
++  test("does not retarget an uncertain card command when its work projection follows the actor into a bedroom", async () => {
++    const storage = memoryStorage(); const transport = mockTransport(workSnapshot({ zone: "lounge", workSequence: 1 }));
++    const client = createHouseClient({ storage, fetchMe: fetchPerson }); await client.connect();
++    transport.reply(async () => { throw new Error("ACK lost"); });
++    await expect(client.command({ type: "card.put", payload: { smallGoal: "Original lounge draft" } })).rejects.toMatchObject({ code: "PENDING" });
++    const original = transport.calls.find(call => call.event === "house.command")!.value.command;
++    transport.state(workSnapshot({ access: 2, zone: "private", workSequence: 2, card: workCard("canonical") })); await client.subscribe("private");
++    const pending = await client.getPending(); expect(pending.entries[0]).toMatchObject({ commandId: original.commandId, zoneId: "lounge", canRetry: false, command: original });
++    await expect(client.retryPending(original.commandId)).rejects.toMatchObject({ code: "STALE_ZONE" });
++    expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(1);
++    transport.state(workSnapshot({ access: 3, zone: "lounge", workSequence: 2, card: workCard("canonical") })); transport.reply(async () => ({ ok: true })); await client.subscribe("lounge");
++    await vi.waitFor(() => expect(transport.calls.filter(call => call.event === "house.command")).toHaveLength(2));
++    expect(transport.calls.filter(call => call.event === "house.command")[1]!.value.command).toEqual(original); client.close();
++  });
++});
++
++
++test("retains the room cursor before a same-room subscribe ACK and rejects a delayed snapshot before work mutation", async () => {
++  const states: any[] = []; const transport = mockTransport(workSnapshot({ zone: "lounge", workSequence: 4, roomSequence: 4 }));
++  const client = createHouseClient({ onSnapshot: value => states.push(value) }); await client.connect();
++  const bedroom = workSnapshot({ access: 2, roomSequence: 9, workSequence: 4 }); bedroom.durable.streamId = "bedroom:private";
++  transport.state(bedroom); await client.subscribe("private");
++  let acknowledge!: (reply: any) => void;
++  transport.socket.emitWithAck = () => new Promise(resolve => { acknowledge = resolve; });
++  const subscribing = client.subscribe("private"); expect(states.at(-1)).toBeNull();
++  const stale = workSnapshot({ access: 2, roomSequence: 8, workSequence: 99, card: workCard("stale poison") }); stale.durable.streamId = "bedroom:private";
++  transport.emit("house.snapshot", stale); expect(states.at(-1)).toBeNull();
++  const fresh = workSnapshot({ access: 3, roomSequence: 10, workSequence: 5, card: workCard("fresh") }); fresh.durable.streamId = "bedroom:private";
++  acknowledge({ ok: true, snapshot: fresh }); await subscribing;
++  expect(states.at(-1).durable.ownWork).toMatchObject({ sequence: 5, card: { id: "fresh" } }); client.close();
++});

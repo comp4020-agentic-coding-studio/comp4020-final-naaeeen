@@ -7,10 +7,22 @@ RESEARCH.md, COMPARISONS.md and REVIEW-AND-REFINEMENT.md before continuing.
 
 P0 research/resource audit and first fresh Astra review are recorded. Revised
 camera modes, independent own-work cursor and v2 room fields passed contextual
-recheck. P1 camera and P2 backend are RUNNING under disjoint Sol/ultra ownership.
-A Sol/high worker runs isolated game comparisons. Coordinate browser slots and do
-not run a heavy workload concurrently. Keep production/red-test changes out of the
-P0 documentation-only commit. P1–P6 acceptance remains open.
+recheck. P2 backend/client ordering foundation passed fresh Astra review plus contextual
+fix verification (140 isolated checks) and parent typecheck; it is ready for its
+local commit. P1 controls/input/native checks pass, but a fresh visual decision
+selects centered B and requires avatar-label occlusion repair before final P1
+acceptance. Camera worker owns that refinement. Game spike is complete; fresh
+Astra selects untimed Four-in-a-row conditionally on complete visible feedback,
+real multiplayer authority/lifecycle and actual Return-to-work. Root must record
+that decision; original fixture PASS does not establish the full production task.
+
+P2 UI follows P1 world/UI handoff. Read the room helper API and updated projection
+contract. Generic bedroom chair visual rotation needs +pi relative to its stored
+seat heading; Rose desk preset is already fixed. P3 lounge/compatibility candidate
+is in ../post-crit/LOUNGE-CONTRACT.md; fresh review exposed old multi-draft recovery
+limits and rejected a blanket HTTP version gate. No P3 production edits yet.
+Coordinate browser slots and do not run a heavy resource workload concurrently.
+P1–P6 integrated acceptance remains open.
 
 Current host is full access/never approval. Ordinary new Windows-to-WSL commands
 work; do not reuse the former outside-sandbox session 40567. Deliver English files,

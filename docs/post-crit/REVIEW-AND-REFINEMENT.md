@@ -55,3 +55,36 @@ and Discord Activities overview. They support the recorded course, scale and
 embedding distinctions. Native evidence check passed (three Crit reflections, seven
 resolving PROCESS commit citations); whitespace check passed. That documentation
 check does not accept the intentionally failing P1 regression or new runtime.
+
+
+## P2 foundation: implementation review and two refinements
+
+A new history-free Astra/max reviewer inspected the frozen store/content/realtime
+and client reducer changes against the factual persistence/ordering contract. It
+found two actionable issues. The parent checked both against actual source.
+
+| Finding | Reproduction and correction | Recheck |
+| --- | --- | --- |
+| Rose desk faces away from its chair | A general front-facing test failed Rose (-1.5 dot product) while five controls passed. Rotate only that desk from 1 to 3; footprint unchanged. | All six facing assertions and all arrival/target routes pass; 70 affected checks. |
+| Clearing visible state loses the room cursor | Four new cases failed after clear/same-zone reselection/unacknowledged roundtrip, including the actual subscribe-before-ACK callback; one control passed. | Retain last accepted room stream/sequence independently of current display, reject stale envelopes before own-work mutation. All 70 client cases pass. |
+
+The same reviewer contextually checked both final fixes and ran one isolated,
+single-concurrency suite: 140 checks across five files passed. All four supplied
+fix hashes matched before and after its run; no scoped blocker remained. Parent
+inspected the final diff and reran native typecheck successfully. The current SQL
+catalogue remains 57 constant statements under the existing 96 bound. Correctness
+runs overlapped camera work; they are not resource or camera timing measurements.
+Original source bindings remain unchanged in initial evidence; final bindings are
+in `evidence/rooms-backend-orientation-refinement.json` and
+`evidence/work-projection-review-refinement.json`.
+
+Foundation acceptance permits a local implementation commit. P2 is not complete:
+static module serving, My work/light/starter UI, dirty-draft conflict behavior,
+actual multiuser room journeys and resource checks remain open. Parent and reviewer
+also confirmed a pre-existing bedroom chair/backrest orientation mismatch; correct
+its renderer convention and inspect actual seated poses during P2 UI integration.
+
+The first staged whitespace check flagged a literal blank context line in a frozen
+unified-diff evidence file. Preserve that byte-exact patch and classify only these
+evidence patches in .gitattributes; do not trim its context or change runtime rules.
+The subsequent staged check must pass. Credential scanning remains unchanged.

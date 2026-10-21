@@ -12,3 +12,7 @@ public/assets/kaykit/LICENSE.txt -whitespace
 
 # Preserve the byte-frozen historical evaluator and its recorded CRLF digest.
 docs/crit-9/round-2/evidence/delivery-probe/first-run-precomputed-calibration/probe.mjs -text whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# Frozen unified-diff evidence uses a single space for blank context lines.
+# Preserve its bytes; normal source whitespace and credential checks still apply.
+docs/post-crit/evidence/*.patch -text whitespace=-blank-at-eol

@@ -310,7 +310,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
   function validateCommandZone(command: HouseCommand, zoneId: string) {
     if (typeof command.type !== "string" || !command.payload || typeof command.payload !== "object" || Array.isArray(command.payload)) throw new HouseError("INVALID_INPUT", "A valid command payload is required.");
     if (command.type === "chat.send" && command.payload.zoneId !== zoneId) throw new HouseError("STALE_ZONE", "Send this message only in its original room.");
-    if ((command.type === "room.configure" || command.type === "room.placements") && command.payload.roomId !== zoneId) throw new HouseError("STALE_ZONE", "This room edit belongs to a different room.");
+    if ((["room.configure", "room.placements", "room.starter", "room.light"].includes(command.type)) && command.payload.roomId !== zoneId) throw new HouseError("STALE_ZONE", "This room edit belongs to a different room.");
   }
   const timer = setInterval(tick, 100); timer.unref();
   return {

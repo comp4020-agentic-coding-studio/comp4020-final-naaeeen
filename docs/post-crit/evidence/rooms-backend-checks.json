@@ -1,0 +1,210 @@
+{
+  "recordedAt": "2026-10-21T14:04:11.221472+00:00",
+  "base": "8cdad6ad17e698d5b02896d570afb7892f365351",
+  "branch": "post-crit-improvements",
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "sqlite": "3.53.4"
+  },
+  "files": {
+    "public/house-room-content.js": {
+      "sha256": "f95908ce136520c7b47b20bd31912c94bc5cce6f07493d989195c1ed3509d434",
+      "gitBlob": "05f806a798ec1168ce541b1f6edbd60379897a68"
+    },
+    "public/house-room-content.d.ts": {
+      "sha256": "eedf274cfe56ae00e76f18a687e1d53524133dd15a02ae587b4a1362a3156ff9",
+      "gitBlob": "9068c62cc6be8b29d731807143ac4063d340a9e7"
+    },
+    "src/house-store.ts": {
+      "sha256": "30101855b8d90b043755747fd81b49185b83f3e80bee360e06a0b1d6f077ccc9",
+      "gitBlob": "b117a4cc6cdbe7458e737ce957e0e21abf73eabd"
+    },
+    "src/house-contract.ts": {
+      "sha256": "e1996bbed5770f22d5873ce83ecf81b349ac1b8e279c0a8e33258961d2eb38ef",
+      "gitBlob": "967599f806008d3379701f2ece7be706dae54df6"
+    },
+    "src/house-realtime.ts": {
+      "sha256": "a11d0860eb5890cd3397eb928f3baa9467ba756805a1ec53b4615db18bb183ef",
+      "gitBlob": "2323aa029e18ff952e1e1776bc67fac983f2ab4e"
+    },
+    "spec/house-store.test.ts": {
+      "sha256": "f9f99c6256df0f090b79d732eb042ddd953ce8f74a59d10f4118635cc1c54667",
+      "gitBlob": "466b7b3382467364a9dc9b16015b1f2495879bec"
+    },
+    "spec/house-realtime.test.ts": {
+      "sha256": "1537f84c668337f3a83cfadd0fb61c2a5ac10b1d3f98e005b5739e364f83162e",
+      "gitBlob": "e2b78cfbc416e104d6ede92d4bf9173c91c68f48"
+    },
+    "spec/house-room-content.test.ts": {
+      "sha256": "d1e5f86e4e5630d4bef6c2f04548f33ebe41fd8b214a63be2b0c1cc7f9964ed9",
+      "gitBlob": "8ba204427c5ee451e5b3bcaf61b16a9f7eb1fca4"
+    },
+    "spec/house-room-migration.test.ts": {
+      "sha256": "c930e041e9050927cfdafdf6d3f0c7704cbafe6d97b04e1b5d427ad733f2f643",
+      "gitBlob": "7eb35a5542cf49f443148823f9d51dab2b59c711"
+    },
+    "spec/house-room-settings.test.ts": {
+      "sha256": "7d766fc1676362bb1c2c287c2c64a908888e60bd6eeb31d3ff4aec3c78976606",
+      "gitBlob": "3ed8dc63c3f8287de537317b3fc5f397cd02a95a"
+    }
+  },
+  "checks": [
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-room-settings.test.ts",
+      "stage": "red",
+      "exitCode": 1,
+      "tests": 5,
+      "failed": 5,
+      "reason": "Missing presets, command types and ownWork projection"
+    },
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-room-migration.test.ts",
+      "stage": "red-after-fixture-correction",
+      "exitCode": 1,
+      "tests": 3,
+      "failed": 2,
+      "passed": 1,
+      "reason": "v1 remained v1; ALTER injection did not run; future-version rejection passed"
+    },
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-store.test.ts spec/house-room-settings.test.ts spec/house-room-migration.test.ts spec/house-room-content.test.ts spec/house-realtime.test.ts --coverage --coverage.include=src/house-store.ts --coverage.include=src/house-realtime.ts --coverage.include=public/house-room-content.js --coverage.reportsDirectory=.local/post-crit/rooms-coverage",
+      "exitCode": 0,
+      "tests": 92,
+      "files": 5,
+      "durationSeconds": 9.23,
+      "reportedStarted": "01:01:29",
+      "timingUse": "Not comparative timing; possibly overlapped camera lane"
+    },
+    {
+      "command": "mise exec -- pnpm typecheck",
+      "exitCode": 0,
+      "scope": "Passed before final receipt-rollback/catalogue test additions; parent must rerun final integrated typecheck"
+    }
+  ],
+  "queryCatalogue": {
+    "exercisedDistinct": 57,
+    "cap": 96,
+    "changedCap": false
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 555,
+        "covered": 539,
+        "skipped": 0,
+        "pct": 97.11
+      },
+      "statements": {
+        "total": 899,
+        "covered": 822,
+        "skipped": 0,
+        "pct": 91.43
+      },
+      "functions": {
+        "total": 126,
+        "covered": 125,
+        "skipped": 0,
+        "pct": 99.2
+      },
+      "branches": {
+        "total": 671,
+        "covered": 588,
+        "skipped": 0,
+        "pct": 87.63
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-room-content.js": {
+      "lines": {
+        "total": 19,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 94.73
+      },
+      "functions": {
+        "total": 9,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 29,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 96.55
+      },
+      "branches": {
+        "total": 17,
+        "covered": 17,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-realtime.ts": {
+      "lines": {
+        "total": 242,
+        "covered": 229,
+        "skipped": 0,
+        "pct": 94.62
+      },
+      "functions": {
+        "total": 51,
+        "covered": 50,
+        "skipped": 0,
+        "pct": 98.03
+      },
+      "statements": {
+        "total": 434,
+        "covered": 375,
+        "skipped": 0,
+        "pct": 86.4
+      },
+      "branches": {
+        "total": 333,
+        "covered": 266,
+        "skipped": 0,
+        "pct": 79.87
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-store.ts": {
+      "lines": {
+        "total": 294,
+        "covered": 292,
+        "skipped": 0,
+        "pct": 99.31
+      },
+      "functions": {
+        "total": 66,
+        "covered": 66,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 436,
+        "covered": 419,
+        "skipped": 0,
+        "pct": 96.1
+      },
+      "branches": {
+        "total": 321,
+        "covered": 305,
+        "skipped": 0,
+        "pct": 95.01
+      }
+    }
+  },
+  "notRun": [
+    "Fresh implementation review",
+    "UI/client integration",
+    "Native browser acceptance",
+    "Sustained or combined load",
+    "Physical device and human studies",
+    "New publication/deployment"
+  ]
+}

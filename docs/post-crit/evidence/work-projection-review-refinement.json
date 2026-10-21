@@ -1,0 +1,38 @@
+{
+  "sourceSHA256": {
+    "public/house-client.js": "9aba6302b448921100898ef38bfc080ba35359da0a978c37e2d4635d17abd5d0",
+    "spec/house-client.test.ts": "90ecac041eba747478f54d22a5de2a82171637aad81ef61c91f1a1a9ed6d7f05"
+  },
+  "refinement": "Retain the last accepted room stream and sequence independent of displayed current; compare before any own-work or authority mutation.",
+  "commands": [
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-client.test.ts --maxWorkers=1",
+      "exitCode": 0,
+      "testsPassed": 70,
+      "testsFailed": 0,
+      "testsSkipped": 0,
+      "vitestDurationMs": 678,
+      "testBodyMs": 337
+    },
+    {
+      "command": "git diff --check -- public/house-client.js spec/house-client.test.ts",
+      "exitCode": 0
+    }
+  ],
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "vitest": "5.0.1"
+  },
+  "overlap": "Parent authorized bounded focused logic tests while the camera native timing lane was active. Only maxWorkers=1 was used; no coverage, broad suite, load or browser job ran in this worker.",
+  "coverage": "NOT RERUN after this refinement. Prior work-projection-verification.json coverage is evidence of the earlier 2cf9cda client source only.",
+  "independentReview": "Fresh Astra finding reproduced and fixed; parent-arranged contextual review recheck pending.",
+  "remainingAcceptance": [
+    "real Socket.IO delivery/authorization integration",
+    "My work/desk UI",
+    "broader required checks",
+    "native desktop/phone flow",
+    "human acceptance"
+  ],
+  "commit": "No commit made by this worker"
+}

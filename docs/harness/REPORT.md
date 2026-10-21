@@ -374,3 +374,14 @@ ordering domains when a snapshot combines state from different streams. Freeze
 replacement/default/archive behavior before persistence changes. Preserve all
 resource gates and distinguish live idle disk/RSS from sustained concurrency.
 These are source-backed corrections; implementation verification remains pending.
+
+
+### Observed P2 foundation corrections
+
+A same-transaction projection still needs ordering metadata when the displayed
+snapshot is cleared: test disconnect/zone-request callbacks, not only reducer
+calls with a non-null current value. Preserve an accepted cursor separately from
+visible state. Room-route validity also does not establish furniture usability:
+new starter layouts need front-facing desk/chair assertions and rendered pose
+checks, beyond collision-free paths. Initial and corrected bindings remain in the
+post-Crit evidence; successful foundation checks do not accept the unfinished UI.

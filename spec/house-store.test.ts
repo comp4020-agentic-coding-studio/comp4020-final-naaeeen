@@ -1,6 +1,7 @@
 import { mkdtempSync, rmSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { DatabaseSync } from "node:sqlite";
 import { randomUUID } from "node:crypto";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { HouseStore } from "../src/house-store.ts";
@@ -423,4 +424,39 @@ it("bounds native preparation work while repeated reads and changed permissions 
  f.store.execute(f.a.id,command("profile.set",{name:"Renamed owner",colour:"rose"},f.store.me(f.a.id).identity.revision));
  expect(f.store.snapshot(f.b.id).residents.find(r=>r.id===f.a.id)?.name).toBe("Renamed owner");
  f.store.close();expect(f.store.ready()).toBe(false);
+});
+
+
+it("keeps the exercised query catalogue below 96 across room, card, recovery and membership lifecycles",()=>{
+  const nativePrepare=vi.spyOn(DatabaseSync.prototype,"prepare"),f=pair(6),id=f.a.id;
+  const roomId=f.store.snapshot(id).residents.find(r=>r.id===id)!.bedroomId;
+  f.store.ready();f.store.me(id);f.store.session(f.a.digest);f.store.exportOwn(id);f.store.removedResidents(id);
+  const recovered=f.store.recover(f.store.issueRecovery(id));expect(f.store.session(recovered.digest)?.id).toBe(id);
+  f.store.execute(id,command("profile.set",{name:"New name",colour:"rose"},f.store.me(id).identity.revision));
+  f.store.execute(id,command("room.configure",{roomId,open:true,palette:"sage"},0));
+  f.store.snapshot(f.b.id,roomId);
+  f.store.execute(id,command("room.starter",{roomId,presetId:"peach-nook"},1));
+  f.store.execute(id,command("room.light",{roomId,light:"dim"},2));
+  f.store.execute(id,command("room.placements",{roomId,placements:[]},3));
+  f.store.execute(id,command("chat.send",{zoneId:"lounge",text:"Lounge"}));
+  f.store.execute(id,command("chat.send",{zoneId:roomId,text:"Bedroom"}));
+  const first=f.store.execute(id,command("card.save",card("Work"),0));
+  f.store.execute(id,command("card.save",{...card("Revised"),cardId:first.result!.cardId},1));
+  f.store.execute(id,command("card.close",{cardId:first.result!.cardId},2));
+  f.store.execute(f.b.id,command("card.save",card("Retained"),0));
+  f.store.execute(id,command("house.remove",{memberId:f.b.id}));
+  f.store.removedResidents(id);f.store.removedResidents(id,f.b.id);
+  f.store.execute(id,command("house.reinstate",{memberId:f.b.id}));
+  const home=f.store.me(id).home!;
+  const join=command("house.join",{code:home.code,name:"Rejoined",colour:"blue"});
+  f.store.execute(f.b.id,join);f.store.execute(f.b.id,join);
+  f.store.execute(id,command("house.transfer",{memberId:f.b.id}));
+  f.store.execute(id,command("house.leave"));f.store.exportOwn(id);
+  f.store.execute(f.b.id,command("house.leave"));f.store.exportOwn(f.b.id);
+  const plans=nativePrepare.mock.calls.length;
+  const sql=new Set(nativePrepare.mock.calls.map(([sql])=>sql));
+  expect(plans).toBe(sql.size);expect(plans).toBeLessThan(96);
+  for(let n=0;n<20;n++){f.store.me(id);f.store.exportOwn(id);f.store.session(recovered.digest);}
+  expect(nativePrepare.mock.calls.length).toBe(plans);
+  console.info("Exercised house query catalogue:",plans,"of 96 constant plans.");
 });

@@ -1,0 +1,19 @@
+{
+  "baselineCommit": "d95055bd3a830d08ac14c25411b57fabda7d87bf",
+  "clientSHA256": "4281ff8c1bb111b0417c273fabc20f7923b2ffeb44f472041fca16f7f047fdea",
+  "redTestSHA256": "25564a2ae9704b944402c176ec7379f3f6602b8d79e6bc2c29ccfcb1adf0cfe5",
+  "redPatchSHA256": "aac988d38c1e19de6788e3b0856f1add59307f7fa8bbaa0a6bc7d8532319a2fc",
+  "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-client.test.ts -t \"own-work projection\"",
+  "exitCode": 1,
+  "testFilesFailed": 1,
+  "testsFailed": 17,
+  "testsPassed": 5,
+  "testsExcludedByFilter": 43,
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "vitest": "5.0.1"
+  },
+  "rawLocalLog": ".local/work-projection-red.log",
+  "scope": "Node tests through Windows-to-WSL bridge; no browser, deployed or human acceptance"
+}

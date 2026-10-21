@@ -1,0 +1,78 @@
+{
+  "sourceCommitBeforeWork": "d95055b",
+  "sourceSHA256": {
+    "public/house-client.js": "2cf9cda38686a0f968364dd2ed2a47e0c7e75701ea91daf3a5c270951df659c5",
+    "spec/house-client.test.ts": "87730f55d29abc8cbdfb6a778ee57bcfabca7f5debfd241c16877f24020414d0"
+  },
+  "commands": [
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-client.test.ts",
+      "exitCode": 0,
+      "testsPassed": 65,
+      "testsFailed": 0,
+      "testsSkipped": 0,
+      "durationMs": 620
+    },
+    {
+      "command": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-client.test.ts --coverage --coverage.include=public/house-client.js --coverage.reportsDirectory=.local/work-projection-coverage",
+      "exitCode": 0,
+      "testsPassed": 65,
+      "testsFailed": 0,
+      "testsSkipped": 0,
+      "durationMs": 587,
+      "coverage": {
+        "lines": {
+          "total": 262,
+          "covered": 256,
+          "skipped": 0,
+          "pct": 97.7
+        },
+        "statements": {
+          "total": 477,
+          "covered": 441,
+          "skipped": 0,
+          "pct": 92.45
+        },
+        "functions": {
+          "total": 85,
+          "covered": 81,
+          "skipped": 0,
+          "pct": 95.29
+        },
+        "branches": {
+          "total": 385,
+          "covered": 343,
+          "skipped": 0,
+          "pct": 89.09
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      }
+    },
+    {
+      "command": "git diff --check -- public/house-client.js spec/house-client.test.ts docs/post-crit/evidence/work-projection-red.json docs/post-crit/evidence/work-projection-red-tests.patch",
+      "exitCode": 0
+    }
+  ],
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "vitest": "5.0.1"
+  },
+  "environment": "Ubuntu/lizhi, Windows-to-WSL bridge",
+  "independentReview": "Pending parent-arranged fresh Astra review",
+  "notRun": [
+    "browser",
+    "UI acceptance",
+    "real Socket.IO delivery acceptance in this lane",
+    "full required suite",
+    "typecheck",
+    "load/resource workload",
+    "human or physical-device use"
+  ],
+  "commit": "No commit made by this worker"
+}
