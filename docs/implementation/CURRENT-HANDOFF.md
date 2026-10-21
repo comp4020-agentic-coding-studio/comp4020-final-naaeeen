@@ -1,749 +1,87 @@
-# Current post-Crit work, 22 October 2026
-
-Canonical checkout: Ubuntu / lizhi,
-`/home/lizhi/comp4020/comp4020-final-naaeeen`. Branch `post-crit-improvements`;
-HEAD `d766b2a` before the next local implementation milestone. The broad goal is
-ACTIVE. Local commits are authorized; no new push, deployment, paid service or
-personal-memory change is inferred. All delivered project material stays English.
-
-Read the active REPORT, root PLAN, docs/post-crit/PLAN.md and OWNER-FEEDBACK.md.
-The latest requirements are 3–6 actual contributors, useful personal-room return,
-measured receipt storage and effective, recorded AI-agent methods.
-
-## Implemented and current verification
-
-- Earlier camera, six furnished presets, meaningful desks/chairs/lighting, larger
-  lounge, Four-in-a-row, external Discord link and neutral update/recovery are in
-  local commits through ff949bc. Evidence is committed at8b22fa4 and methods atd766b2a.
-- Company research and four-response matched method diagnostic are complete. Both
-  arms extracted correct decisions; no extra default requirement was adopted.
-- Receipt codec/storage schema2 is implemented; wire remains1. Exact replay and
-  canonical historical migration preserve data. CHECK/mixed-case trigger findings
-  are repaired and contextually closed on board-store hash5cd264ab / codec6bbe6f5c.
-  All213board checks pass. Native/sustained acceptance remains open.
-- Picture-table prototype accepted12-per-page with one original24-pieceSVG. Full6
-  native cases and later2 landscape-chat checks have separate source bindings.
-  Earlier incomplete images/alpha defects and the withdrawn explanation remain.
-- Actual picture backend, client and UI are implemented but not yet committed.
-  House schema5, worldVersionlounge-3, bounded transient participation, explicit
-  Start then Join, durable progress, exact retry and cross-game consent are defined
-  in GROUP-API.md. Backend203/client127/UI217 scoped checks and contextual reviews
-  close their reported findings. See GROUP-*-NOTES.md and exact manifests.
-- The parent's integrated working-tree build/typecheck passed and all1,037required
-  tests passed with zero skips in p7-required-first.json. This includes uncommitted
-  group work; it is not a claim about the codec-only commit in isolation. Later
-  pause-copy/CSS edits need their own affected checks.
-
-## Active lanes and boundaries
-
-Root owns integration, current docs, commits and service4108. The isolated process
-was PID98214 at this checkpoint, launched from .local/post-crit/p7-integrated with
-fresh synthetic data and --max-semi-space-size=12. Verify process identity before
-signalling it. Its initial absent-data-directory startup failure is preserved;
-only the new fixture directory was created. Original user data is untouched.
-
-picture_ui_integration owns the sole native browser lane and current CSS repair.
-The first actual two-context task passed seven gates, then found landscape chat
-under the Break panel and the board clipped below390px. Original images/results
-are in picture-ui-native-task-first. Geometry-only chat acceptance was false;
-new checks require actual visibility and pointer reachability. Only the worker's
-owned CSS/necessary UI is unfrozen for repair. No resource workload overlaps it.
-
-Several10-second peer-admission failures with the owner's House-settings panel
-open remain unexplained. One ordinary closed-panel case passed; this is not causal
-proof or permission to relax the deadline. A bounded counterbalanced diagnostic
-is planned. Preserve all attempts, including the earlier mismatched5-second expect.
-
-postcrit_resource_acceptance is preparing only: instrument/protocol/grader, no heavy
-runs or extra service. Root reviews the frozen instrument before GO. Keep the
-original300-second workload unchanged, then a separate combined extension retaining
-124game actions/733targets and adding62picture actions/372targets (two houses,
-six real socket participants each). Storage target is <=16MiB retained board+house
-receipt-response growth under this workload; exact response digests are checked
-post-run after server exit. Main/WAL/SHM and allocated/logical bytes stay distinct.
-Do not inherit old resource acceptance or claim a lifetime storage bound.
-
-## Next actions
-
-1. Commit the reviewed codec slice with scoped213-test/implementation evidence.
-2. Repair/recheck native landscape/chat, investigate admission within its registered
-   bound, then verify3 and6 actual browser contributors and personal-room return.
-3. Recheck maintained browser flows, current board replay/export and migration as
-   affected; inspect/commit the picture foundation and UI in logical milestones.
-4. Freeze final production/protocol, close native browsers and stop root4108, then
-   run original and combined300-second workloads sequentially. Preserve all gates,
-   failures, source identities and storage observations.
-5. Reconcile plans/research/review/audit/README, inspect final diff/secrets, and restore
-   a deliberate local preview. No publication is claimed or newly authorized.
-
-Original4093preview is stopped. Original.local/implementation-s1 data is untouched;
-verified backup is .local/post-crit/preview-backup-20261021T170653Z/. Do not overwrite
-or reseed it. Use current full-access ordinary WSL exec; never reuse old outside-
-sandbox PTY40567 or pass sandbox_permissions. Use followup_task to resume completed
-workers; a send_message alone does not restart execution.
-
-## Historical release records
-
-The sections below are historical release evidence, not acceptance for this branch.
-The preceding post-Crit status is preserved in
-`docs/post-crit/evidence/handoff-before-method-refresh.md`.
-
-# Current release verified; final evidence checkpoint
-
-CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source d2dcf5f
-semi16 plusmotion5c/storeda3/tool7cce verifiedat2723796 byCI37722868698 SUCCESS:
-504/29,native9,allresource300s/process+secrets/privatebackup/deploy/HTTPS PASS.
-Artifactb07a8915,proto4f8feadb/manifestdaec2567/script7cce match. RSS202.17,
-heap36.8,p956.757,7188patches/skips0,all24views,pending0/disconnect0,reject0.
-Actualserver16arg+8codehashes match; Oct8T03:39:01.833Z probeNode24.21/sharedCPU1/
-256MB/data; RSS103920KiB onepoint,cgroupnull. Changedcurrentlivegame21.4/room33.6/
-board8.8/recovery3.0PASS. All4flowsrerun onactualconfigureddeployment.
-
-Semi8fullCI workloadFAIL/skips3+pointer<18 andearlierRSSFAILs stayexactarchives;
-privatehost-interruptedpairinvalid/unqualified.16acceptedforthisregistered
-attempt, notuniversaloptimality/causality/physicalstress/humanproof. Original
-preview4093data.local/implementation-s1/session71630preserved; C8/checkpointrefs
-unchanged. Allsourcefrozen,workers/tests/GPU/load complete. CurrentJSON usesdeep
-copies forhistoricalproofs; prioraliasfindingfixed fromimmutablecommit.
-
-Nextroot: boundedfinalevidence review, commit+approvedpush recordsONLY, inspect
-thatfinalCI once. IfPASS/sourceunchanged, markgoalcomplete/reportEnglishtrylinks;
-doNOTrecursivelycreateanotherstatusonlycommit. Newgenuinefailuremustbe preserved
-andaffectedgate reopened, notwaived. Existingphysical/human/coverage/offvolume/
-studentwriting limits separate. Rootownsfinalpublication; noimplementation gap
-confirmedinownerR0–R4scope. SERVER-BUDGET-EVIDENCE/exactJSONcurrentclosure.
-
-# Historical source-specific checkpoints
-
-# Semi16 candidate local pass; full controlled CI pending
-
-Source d2dcf5f changesonly4coupledbudgetvalues8→16. Tool7cce andstore8612 unchanged.
-MeaningfulRED5/6→GREEN6, type/diff/contextualparamrecheckPASS; root504/29 and
-localcurrentnativeboard7.8/recovery2.1/game15.6PASS. Preview4093originaldata
-session71630 runningsemi16. No GPU/load/workerwritesactive. GoalACTIVE.
-
-Semi8CI377213/a6 failedONLYworkload (3skips +pointer17.9<18) despiteRSS181.41
-andallothergatestrue; Node8NOTQUALIFIED/no deploy. ExactFAIL/v4proto retained.
-Semi16 prospectiveall300s gates required; no raisedlimits, no GCcausalityclaim.
-Rootnext commitscurrentdocs/archive, approvedpush, actualfullCI504/native9/resource/
-backups/deploy; eightlivehashes+actual16flag, changedruntimecore/board/roomflows.
-C8/checkpoint/originaldata preserved. Priorunflaggedaee release remainsdeployed.
-CurrentSERVER-BUDGET-EVIDENCE/exactJSON record candidatehashes/criteria/limits.
-
-# Historical source-specific checkpoints
-
-# Semi8 controlled trial failed workload; single-factor16 candidate next
-
-CI37721319415 sourcea6b5fcc FAIL ONLYworkload: RSS181.410<210,heap32.990,
-7185patches/skips3,p9528.543/max611.793,allnormalinputs0reject,all24views/
-targetdelivered/recoverytrue,othergatestrue. Node8NOTQUALIFIED/deploySKIPPED.
-Exactfullartifact semi8-ci-fail andprotocolv4 archived. No claimskipssolelyGC.
-Prospective16semi candidatebalancescapacity/collection; allcriteria/workload/
-oldspace/generator remainunchanged. GoalACTIVE.
-
-Worker server_young_budget ownsONLYconstant16/DockerCMD/package.start/spec
-expectedArgs tinyupdate; existingtoolimport/fork unchanged. Need focusedchecks
-/contextualparamrecheck/freeze. Rootownsproto canonical sourcebindings/docs/CI.
-Currentstore8612/motion4281/world7b8 untouched; preview4093 atoriginaldata/
-session59746 currentlysemi8. No otherloads/GPU/writes. Nextfrozen16, preview
-restart/checksource/coupling, code+recordcommit/push, fullnewcontrolled300CI
-beforeadoption/deploy. Priorunflaggedaee assetrelease remainsdeployed/liveproof.
-
-# Historical source-specific checkpoints
-
-# Prospective server budget: local pass, controlled CI pending
-
-Source4e83db6 appliesonlyserver--max-semi-space-size=8 toDocker/directstart/resource
-child; sharedreadonlypolicy andcoupling/probe tests. Generatorunflagged, oldspace/
-Nodeversion/API/data/criteriaunchanged. MeaningfulRED3; focused16+type/diff and
-freshreviewPASS. Root504/29 build/type/spec andnativeboard7.8/1.9/game19.8PASS
-on originalpreview4093session59746. No qualification/performance claim yet.
-
-Latest18a/377193 FAILONLYRSS216.191>210; heap63.046,p956.534 andallothergatestrue.
-ExactFAIL archived +protocolv3 kept. PrivateNode8interrupted/unpaireddiagnostic
-remainsunqualified; thisnewcandidate mustpass itsownstablefull300 CIbeforedeploy.
-Serverbudgetevidence andexactJSON recordsource/limits. Currentproto5c0270fc /
-manifest5a435102 /script7cce6f96 includeDocker/package/sharedpolicy; firstunsorted
-metadatafailcorrectedbeforeload, allcriteria/scheduleblocks unchanged.
-
-Nextroot: commitdocs/archive/harness, approvedpush; actualCI504/native9/resource
-allgates/privatebackup/deploy; exacteightcodehashes+actualflag8 probe, affectedlive
-core/board/room flows. GoalACTIVE/currentacceptanceOPEN. No workerwrites/checks/
-GPU/load active. Oldsourceaee release remainsdeployed; originaldata/tag preserved.
-
-# Historical source-specific checkpoints
-
-# Latest RSS gate reopened: prospective explicit young-space budget
-
-CI37719301016 docs-only18a FAILONLYrss216.191>210; heapPeak63.046 (priorpass~49),
-normalp956.534,7188patches/skips0,pointerreject0,all24views,no lost/disconnect,
-allothergatestrue. ExactFAIL archivedasset-rss-publication-fail andprotocolv3.
-Previousaee/377177 fullrelease/native/liveboard9.7/3.4 remains its own proof.
-GoalACTIVE/latestacceptanceOPEN. No raise210 orblindrerun.
-
-Worker server_young_budget owns Docker/package(startonly), new src/server-runtime.ts,
-resourceimport/forkargv andnewlaunchspecONLY. PROVISIONAL --max-semi-space-size=8
-forserverbothproduction+syntheticchild; generatorunflagged/no globalNode_OPTIONS.
-Need meaningfullaunchercouplingRED/actualNodeargs, freshreview, parentchecks,
-thenstableGitHubfull300 allgates beforedeployment. Priorprivate8trialhostsuspend
-invalidbaseline/unpairedcandidatesubstantivefailures remainsNOTQUALIFIED; new
-trial muststandonown controlled full evidence. Oldspace/Nodeversion/APIs/quotas/
-timers/210/inputs unchanged. Rootownsprotocol/sourcehash rebind/docs/publication.
-
-Currentstore8612/motion4281/world7b8 unchanged; preview4093 originaldata/session97222
-alive. No otherload/GPU/writers. FrozenCrit8/checkpointrefs preserved. Nextworker
-freeze/review thenparentrequired/native/sourcevalidation, code+recordcommit/push,
-actualCI/fullresource/privatebackup/deploy andlivecontrolledsource/flows.
-
-# Historical source-specific checkpoints
-
-# Current release verified; final evidence publication checkpoint
-
-8Oct2026 canonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen.
-Storeda3d7ec/motion5c/evaluator e54 verifiedataee040c byCI37717775859 SUCCESS:
-498/28, native9, allresource300.002s gates, process/secrets/privatebackup/deploy/
-HTTPS PASS. Resourceartifactfb49546c, protocol9acf2031, manifestf9d4ad86, script
- ec3301bf match; RSS202.54MiB,p959.282ms,24views,7188patches/skips0,pending0/
-disconnect0. ExactPASSasset-ci artifact andnewclosureJSON committed-next.
-
-Seven deployedsourcehashes includingstore8612adba match; probeOct8T02:38:03.540Z
-Node24.21.0/sharedCPU1/256MB/data; appRSS102228KiB singlepoint,cgroupnull. Actual
-changed liveboardcore9.7/recovery3.4PASS. Motion/world/UI/server unchanged; prior
-scoped livegame19.2/room30.9 andcurrentimage9PASSretained. Physical/human/WAN/
-physicalstress/offvolume/overallboardcoverage/studentwriting limits unchanged.
-
-Sourceasset tests2RED/26GREEN +actualSQLiteownership/lifetime +freshreview;
-root498required/currentnativeboard2PASS. Node8prototypecrossedhostsleep:
-invalidpair/unpaireddiagnosticfailedinteractiongates, NOTADOPTED. No Nodeflag or
-acceptancechange. RSSFAIL376050 +protocolv2 andallolderfailures preserved.
-Originalpreview4093 DATA_DIRexact.local/implementation-s1 session97222 alive;
-no tests/GPU/load/workerwrites running. Frozencrit8/checkpointrefs unchanged.
-
-Nextroot: boundedfinalevidencecheck, commit+approvedpush recordsONLY; inspect
-thatfinalCI once. IfPASS andsourceunchanged, markgoalcomplete/reportconciseEnglish
-links; do NOT recursivelycommitto restatePASS. Ifa newfailure, preserveit and
-reopenactualaffectedgate ratherthanwaivingcriteria/replayinginvalidtrials.
-
-# Historical source-specific checkpoints
-
-# Asset allocation refinement: local pass, release pending
-
-8 October. Runtime/store commit da3d7ec removes unused BLOB selection and an extra
-image download copy. Source store8612adba; fresh source/API ownership review and
-26 store tests pass. Root498/28 build/type/spec PASS; current native board2 PASS
-9.0/2.5s on restarted preview4093, originaldata preserved, exec97222. Node flags,
-permissions and every resource criterion remain unchanged. ASSET-ALLOCATION-EVIDENCE
-and exactJSON record source/protocol/manifest and limits.
-
-Latest CI37605048981/bef fails ONLYRSS212.363>210. Previous daef/376032 deploy/live
-proof remainsvaliditsownscope. ExactRSSFAIL andprotocolv2 archived. PrivateNode8
-comparison crossedhostsuspend; baselinecompromised, candidateunpaired hadsubstantive
-pointer/skipped failures, NOTADOPTED. No winner/causality claim. All trial jobsended.
-Current protocol9acf2031 /manifestf9d4ad86 /instrumentec3301bf preserve allcriteria.
-
-Nextroot: commitcurrentevidence/archives/harness, approvedmainpush; actualnewCI498/
-native9/resource300/backup/deploy; downloadverifyallsource/gates; actualdeployed
-store7fileprobe +affectedliveboardflows; finalscopedreleaseproof. GoalACTIVE and
-currentgateOPEN. No tests/GPU/load/workerwrites running. FrozenCrit8 andcheckpoint
-refs unchanged; localoriginalDATA_DIRexact.local/implementation-s1. Do notwaive
-RSS210, replayinvalidtrials ascomparison, orcountmissing/incomplete reviewslanes.
-
-# Historical source-specific checkpoints
-
-# Current gate reopened: RSS headroom
-
-Finaldocs-onlybef0fb8 CI37605048981 resource300s FAIL ONLYrss212.363MiB>210.
-Allothergatestrue:7188patches/skips0,708chat,pointer18.173-18.42Hz,all24views,
-no pending/unexpecteddisconnect/reject,normalp9516.35ms. DeploySKIPPED. Previous
-daef/376032 fullyverifiedruntime5c+tracker e54 remainsdeployed/live19.2/30.9PASS;
-currentgoalACTIVE andlatestacceptanceOPEN. Do notwaive210 orrepeatblindly.
-ExactFAIL archivedevaluation/board-resource.rss-publication-fail.results.json;
-currentprotocol98 keptasv2.
-
-Read-onlyruntime_memory_analysis: FAILheapPeak49.003<priorPASS49.625, external/
-arraysnearlysame. RSSresidency sensitivity, NOTprovenheapleak/host/youngcause.
-UnflaggedDocker/start andresourceforkexecArgv[]; syntheticheaplimit4288MiB,
-fixedFly256MB. Node24docs explainyoungcap3xsemi andmemory/throughputtradeoff.
-Worker memory_budget_trial ownsONLY.local/runtime-memory-trial: onecontrolled
-120sbaseline vschild--max-semi-space-size=8 pair, generatorunflagged, actualfull
-fixture/24wires/original65sfault; original300s criteria stayintact soNOTfullPASS.
-Privatecopies/protocol frozen andheapTotal/V8spaces telemetry added. NoGPU/load
-elsewhere; preview4093originaldata/process748 preserved. Rootownsproduction
-policy decision/review/tests/docs/protocol/CI; do notchangelaunchersbeforetrial
-evidence. Candidate mustapplyfairlyBOTHproduction andresourcechild, nottestonly.
-Nextgetexacttrialmetrics, choosesafevalidatedsharedbudget, meaningfultests/
-freshreview/sourcefreeze, actual300CI/live thencompletion. Priorsourceproofs
-remain scopedhistory, no currentclosureverdict fromincompleteaudits.
-
-# Historical verified source checkpoints
-
-# Current release verified; final evidence publication checkpoint
-
-CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Runtime5c40545,
-evaluator e54a694 verified atdaef80c byCI37603266802 terminalSUCCESS. Actual495/28
-required/native9/300sresource/process+secrets/privatebackup/Fly+HTTPS allPASS.
-Resource protocol98e62217/instrumentec3301bf/source545d79c3 match; allgatestrue,
-RSS204.85MiB,p9510.658ms,24finaltransports,7188patches/skips0,pending0/disconnect0.
-ExactPASS indexed-ci artifactad745f1c committed; oldFAIL376007 andv1protocol kept.
-
-Liveprobe2026-10-07T10:00:08.176Z matches6codehashes (includesactualmotionclient),
-Node24.21.0/sharedCPU1/256MB/data. RSS101188KiB onepoint,cgroupnull. Currentlive
-core19.2s/room30.9s PASS; boardJS/CSSmatchescurrentbytes plusimageboard2PASS,
-prioridenticalboardliveproofretained. MOVEMENT-RECONCILIATION exactJSON iscurrent
-closure; earlierFINAL-RELEASE/b95JSON remainsitsownhistoricalscope.
-
-Sourceclient4281ff8c/world7b8e9acf unchanged since5c; crit8remote351722/6dc79,
-checkpointf5a25f2 andoriginalpreview4093 .local/implementation-s1 preserved. No
-workerwrites/tests/GPU/load active. Allchangedmotion/tracker code receivedfresh
-reviews thenparent checks. Broadcontextualfull-objective recheckincomplete and
-notcountedascurrentclosure. Physical/human/WAN/stress/offvolume/boardcoverage/
-studentwriting limits unchanged.
-
-Nextroot: boundedfinalevidence review, commit+approvedpush records ONLY, inspect
-that finalactualCI once; ifPASS andruntimeunchanged, markgoalcomplete andreport
-conciseEnglishtrylinks. Do NOT recursivelypublishanotherdocjusttorestatePASS.
-Newfailuresreopenactualaffectedgate; don'tblindrerun orwaivecriteria.
-
-# Historical source-specific checkpoints
-
-# Indexed evaluator: local pass, full release pending
-
-Application5c40545 staysfrozen; sourcee54a694 updatesonlyresourceinstrument/test/
-protocolmetadata. Fullledger preserved; per-view unresolvedtargets indexavoids
-completedhistory scans. Freshreview+contextualtestfollowup no findings;10tests,
-5selfcheck/8checkpointPASS. Parent495/28requiredbuild/type/specPASS. Microcomparison
-fullstate/latenciesequivalent; visits2443392/19368/5736, pending48 preserved.
-No sustainedperformance/rootcauseclaim. RESOURCE-TRACKER-EVIDENCE.md recordsproof.
-
-Protocol98e62217, instrumentec3301bf, backendmanifest545d79c3; alloriginalprotocol
-criteria andtimer/gatebytesunchanged. OriginalFAIL37600728762 +protocolv1archived.
-Nextroot: commitcurrentdocs/PROCESS/archive, approvedpush, oneactualnewCI495/native9/
-resource300/backup/deploy, downloadverifyartifacthashes/gates, livedeployedclient+
-world/sourceprobe andaffectedflows, finalrequirementaudit. GoalACTIVE, no waiver.
-No workerwrites/tests/load; preview4093process748 exact.local/implementation-s1
-preserved. OriginalCrit8tagremote351722/6dc79 andcheckpointf5a25f2 unchanged.
-
-# Previous source-specific checkpoints
-
-# Resource evaluator workload gate reopened
-
-CI37600728762/71ec3a7 required485 +maintainednative9 PASS. Resource300.001s FAIL
-onlyworkload: skippedpatches10, boardpointer16.283-16.617Hz<18. Allothergatestrue,
-RSS204.97MiB,p95118.948ms,zero missingtargets/unexpecteddisconnect. DeploySKIPPED.
-Fullfailed artifact archived in evaluation/board-resource.motion-publication-fail.results.json
-and old exactprotocol in board-resource.protocol.v1.json. GoalACTIVE; no blindretry
-or waivedthresholds. Priorproductionb95 remains.
-
-Readonlydiagnosis found reflect scanning cumulativecompletehistory on everyboard
-event and six times everyHTTPwrite; current7,886records. Causal effect unproven.
-Workerpending_delivery_tracker ownstool+relevantresource specs ONLY; rootowns
-protocol/instrument rebind/archive/docs/checks/CI/live/publication. Preserve full
-all-delivery Map and actualpending/slow/crosshouse/canonical/currentepoch semantics,
-originaltimestamps and alltimers/acceptance. Need red/equivalence/operationcount
-comparison and freshreview before fullnewinstrument attempt. NoGPU/load running;
-4093process748 originaldata preserved. CurrentuncommittedPROCESS/provenance docs
-ownedbyroot. Nextfrozenworkerresult thenparenttestcheck/protocolsamecriteria,
-logicalcommits/push andactualCI/resource/deploy/live.
-
-# Previous source-specific checkpoints
-
-# Current movement correction: local pass, remote pending
-
-CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Source5c40545
-commits client4281ff8c/world7b8e9acf and three affected specs. CI37596250446 at
-61e297e failed peer-motion divergence while eight cases passed. Exact initial
-packet rejection/drop is unproven; do not weaken thresholds/limits/retries.
-
-One volatile motion ACK flight/no replay,1000ms timeout,.65 outstanding travel,
-validated emitted chord/wallcomponent/bounded shortenings, held-input recovery
-and scoped stale guards implemented. Server/geometry/UI/resources unchanged.
-Fresh reviewer reproduced plant-corner .030633659 gap; worker reproduced/refined;
-contextual recheck126 PASS/no further findings. Worker184 affected PASS; root485
-required/build/type in27files PASS. Coverageclient93.39/88.31 world92.42/82.88.
-Unmodified nativecore20.5s +room29.6s PASS; process evidence/diff PASS.
-MOVEMENT-RECONCILIATION.md/exactJSON record scope and limitations.
-
-No worker tests/writes/services remain. Preview4093 existing process748 exact
-.local/implementation-s1, originaldata/cookies preserved. Parent ownsdocs review,
-logical evidencecommit, approvedmainpush, actualnewCI9/resource/backup/deploy,
-then exact deployedcodehash/affectedlive flows and requirement audit. GoalACTIVE.
-Priorb95 release scopes below are history; latestremote acceptanceOPEN.
-
-# Historical release checkpoints
-
-# Verified implementation and release handoff
-
-7 October2026. Runtimeee40225/world737f4... is deployed and VERIFIED atb95d9a1 by
-actualCI37594001833 check+deploy:465requiredchecks/native9/registeredresource300.001s/
-process+secrets/privatebackup/Fly+HTTPS PASS. Root confirms source/protocol hashes,
-allgatestrue,200.87MiB RSSpeak,11.86ms normalp95,24finaltransports,zero pending or
-unexpecteddisconnect. Revised livegame19.2s/room35.1s PASS. Five deployedcodehashes
-andboardJS/CSSbytes match; currentimageboard2PASS plus unchanged-source priorlive
-editor12.8s evidence retained.1sharedCPU/256MB/data mount checked. FINAL-RELEASE.md
-and evaluation/final-release.results.json are the requirement-level closure.
-
-Implementation fulfilled. Final evidence-onlypublication follows, with identical
-runtime; root checks that separate remoteCI outcome before markinggoalcomplete.
-Do not recursivelycommit another status solely to restate its success. Future
-work inspects current HEAD/CI and starts from owner feedback, preserving all prior
-source-specific failures and successfulgates. Board69.85/67.67 andReact0%unit scope,
-physical/human/physicalstress/offvolume/studentwriting gaps remain explicit.
-
-CanonicalUbuntu/lizhi /home/lizhi/comp4020/comp4020-final-naaeeen. Preview4093 exact
-.local/implementation-s1,exec55499, originaldata/cookies preserved. FrozenCrit8 refs
-351722.../6dc79c5 andcheckpointf5a25f2 unchanged. No native/test/load job currently
-running; root owns final publication checkpoint. Reopen active REPORT/CLAUDE/PLAN
-at meaningful section entry; fresh packets include literalWSL path/currenthashes.
-
-# Historical checkpoints
-
-All earlier OPEN/pending/not-pushed labels below describe their checkpoint times;
-they are superseded by the verified release above and preserved as history.
-
-# Current GPU-budget refinement handoff
-
-Localsourceee40225 (not yet pushed) implements reviewed GPU-only idlebudget. Remote
-38148c8 CI37587377555 fails peer admission/lobby10s; other8cases pass. Filtered own
-trace confirms joinHTTP2005.674ms +me2001.608ms, UI titleclick8.684s; browser/render
-scheduling supported, soleGPUcause unproven. Earlierd693CI/resource/deploy/live
-results and failed381/03b/bc3 remain scoped history; latestacceptance OPEN.
-
-Finalworld737f4b78f2652da6c9f1789b58b9ab4b34a80fcdc7a6f125263a04bbddc9712a;
-spec99f4f88f6e2f62b36f7d8ac493413b912bba5dc0436eb6d93c06cfc0eaf00a97.
-IdleGPU draws<=10Hz; active rendering and all logic/input/realtime/speech/labels
-remainRAF. Dirty/projection/pose/resume redraw immediate; novisual/deadline/retry/
-server change. Freshreview47PASS; parent465required/build/typecheck PASS27files.
-Worldcoverage92.95stmt/83.81branch. Native strictgame19.6s/room33.2s PASS; parent
-rendered owned-room inspection. Fixed-order native pair baselinejoin9861ms versus
-candidate257ms; task duration differs and cache/host confounds remain explicit.
-ExactIDLE-RENDER-EVIDENCE.md +evaluation/idle-render.results.json.
-
-Preview4093 remains on exact.local/implementation-s1, exec55499 afterWSLrestart,
-data preserved. Latestnative71460DONE2PASS; check6795DONE465PASS; coverageDONE47PASS.
-No browser/load/test worker remains running. Worker lanescomplete; root next:
-commit scoped records/harness path correction, approvedpush, actualCI9/resource/
-backup/deploy, refined live source and affectedflows, finalcompletionaudit. Do not
-substitute earlierPASS or blindlyretry; neverwaive10s startup orprovidedCI gates.
-
-# Current startup refinement handoff
-
-Main local99bac82 (not yet pushed) commits reviewed incremental world +36world
-tests. Remotebc3e4a9; CI37581974214/37582431626 fail only peer startup at16.288/11.539s.
-Previous d693d06 CI/resource/deploy/live3PASS remain scoped historical release;
-latest acceptance OPEN. Parent454required/build/typecheck in27files PASS; final
-strictgame30.6s and seat/room/DIY/access48.8s PASS, unchangedbudgets. One matched
-current-host nativepair baselinejoin8204ms/candidate4951ms, owner3→2rebuilds;
-earlierdifferent-uptime11253ms FAIL preserved. Not a generalreliability claim.
-
-Final world289709170486ab54524da38ac234181912a6700e67008d6d6801b2b20dd2b189;
-spec13cd354242d60f36e78d58e9e4cb28abee10aa7579022739747dadb3ff1d2bf3.
-Fresh33testreview +contextualnarrowroute recheck; worker36 thenparent454 PASS.
-Only world/spec runtimecandidate changes; renderer/shadows/FPS/config/server/
-protocol untouched. Static metadata/colour/label/pick refresh, private lifecycle
-rebuild, own-roomdraft retention and stale-door-route cancellation are covered.
-Exactscope: STARTUP-REFINEMENT.md and evaluation/startup-refinement.results.json.
-
-WSL Ubuntu/lizhi canonicalrepo /home/lizhi/comp4020/comp4020-final-naaeeen. Afteractual
-WSL restart, preview4093 restored with exact.local/implementation-s1, exec55499;
-no reseed/delete. Worker lanes COMPLETE; root owns GPU/server/release. Lastnative
-24683 DONE2PASS; check84796 DONE454PASS. No browser/load job is still running.
-Root next: privacy/link/source diffaudit, commit docs, approvedpushmain, actualCI
-9/resource/backups/deploy; refined live source/affectedflows; completionaudit.
-Do not add evidence-only followup commits after successful final CI without a new
-material gap; remote run identity is authoritative for publication. Preserve old
-results/tag/data and explicit human/phone/unitcoverage/resource scope limitations.
-
-# Current R4 released application handoff
-
-7 October 2026. The owner approved the public checkpoint/main pushes and existing
-CI/Fly release. Run37579809454 passed at d693d06: Docker build, 411 required checks,
-nine maintained browser cases, registered300s resource workload, evidence/secret
-checks, private exact-candidate mounted backup, deployment and HTTP smoke.
-
-Live HTTPS game core PASS30.9s; seat/room/DIY/access flow PASS49.5s; full standalone
-board core PASS12.8s. Exact server/board/world/UI/package hashes match deployment;
-one shared CPU/256MB machine and /data mount verified. One-point server RSS105668KiB;
-cgroup telemetry unavailable. Source bindings and scopes:
-[evaluation/redesign-release.results.json](../../evaluation/redesign-release.results.json)
-and [RELEASE-STATUS.md](RELEASE-STATUS.md).
-
-Resource current result PASS, all gates true, 202.59MiB peak RSS, 8.862ms normalp95,
-no unexpected disconnect, 24finaltransports. Protocol1ef47348 / manifest545d79c3 /
-instrument6130e233 unchanged. Exact pre-CI FAIL and its history remain archived;
-this is synthetic Ubuntu process acceptance, not actual Fly stress/WAN evidence.
-
-Final publication contains fixture-only exact-app live opt-in and23new controls
-(commit670b235), plus final evidence; no runtime source change. Root first ran controls
-without default8080 fixture (NOT RUN), then correct4093 fixture:23PASS. Typecheck,
-scoped fresh review and unchanged nine-case collection pass. Existing main CI will
-recheck that commit; preserve its separate run identity. Board unit statement/branch
-coverage69.85/67.67%, main.jsx0%; house86.28/80.03%. No human/physical-phone/value/
-grade or student-reflection proof. These gaps do not become PASS through release.
-
-Canonical WSL /home/lizhi/comp4020/comp4020-final-naaeeen. Original preview restored
-at http://localhost:4093 (PID917, exec48949), exact .local/implementation-s1, health
-passes WindowsIPv4. Preserve its data/cookies. Previous4099 test process stopped
-with the interruption; its .local/redesign-preview/data remains preserved. Do not
-reseed/delete either. Crit8 tag remains frozen; logical main history and public
-redesign-game-board checkpoint are preserved. Read active REPORT/PLAN/CLAUDE before
-new work; use subsection comparisons/fresh review/refinement where useful.
-
-Implementation and the approved application release are complete. The final
-evidence/fixture commit runs existing main CI again; its remote run is the source
-of truth for that publication checkpoint, without a recursive evidence-only commit.
-At this record creation, root still needs to confirm that final run after pushing.
-New work must inspect current HEAD/remote CI first and preserve these successful
-application results. Future feature work begins from owner feedback and explicit
-scope, not a restart of completed lanes.
-
-# Historical redesign checkpoint
-
-The following interrupted checkpoint is preserved as history; its process IDs,
-RUNNING/HELD labels and pending checks do not describe the current state.
-
-
-
-7 October 2026. Goal ACTIVE: game title/HUD/options, improved room/actor/camera,
-and a full standalone shared whiteboard with movable chat. Canonical WSL:
-/home/lizhi/comp4020/comp4020-final-naaeeen, Ubuntu/lizhi, native mise Node24.21/pnpm11.9.
-English UI/docs/source; research any language. Local work/commits authorised,
-new publication not performed. Original crit-8 tag/data remain intact.
-
-Read root PLAN/CLAUDE/AGENTS, active REPORT and owner redesign brief. R0 planning
-commit5af0812; [phases](REDESIGN-PLAN.md), [18 checkpoints](../revisit/REDESIGN-REGISTER.md),
-[research](../research/2026-10-07-game-and-board-redesign.md). Fresh reviewers receive
-fact-only packets, not this verdict-bearing handoff. All implementations reviewed
-fresh initially; later rechecks labelled contextual. Host slot limits recorded.
-
-R1: title/Create/Join/Continue, compact dock, separate movable multiline chat,
-Options/suspension, identity/draft guards. 64 affected UI/shell tests after Options
-safeRects regression. Native 15-case run:12PASS3FAIL; failures preserved.
-R2:16x11lounge/14x10bedroom, saved coordinates unchanged; 90routes, matched camera
-comparison. Native failures sustained after10s strictpoll: Options counted as world
-blocker cached tiny Overview; actual actor mesh larger than approximation. World
-worker owns camera/world and ONLY HUD-predicate in UI; gameshell owns57UItests and
-e2e adapters. Red/green fixes done; targeted3-camera native recheck currentlyRUNNING,
-sourcefrozen for that runner. Do not infer usability from pure tests.
-
-R3: BoardStore/contract/service69actualtestsPASS after large-bootstrap repair;
-separateboard.sqlite with membership/epoch/receipt/image guards. Finalclienthash
-bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1.
-Mainhash dddcac608947fad90b2f659f18cde7a062947a0ce5f3d8153a0c483fa0e9d6b8.
-42client/helperchecksPASS; final native2D+full-house cold recoveryPASS, noGameimports.
-Fresh integrated review reproduced lost-image/text; repair retaineddirty then native
-found React185 unchanged-callback feedback; fixed onlynotifyactualdelta/filedata.
-Independent contextual recheck reproduced mirror/latefile/noFalseSaved and42PASS.
-Private key onlymemory, serialized/capturedintent, clearonclose/revoke; no secrets
-captured/logged. Own contribution export remains distinctfrom full canvas export.
-
-R4: Parent realcreateService4casesPASS covers scopediframe/cache/assets/auth/restart,
-three-quiescentSQLite WALbackups+startupcleanup. Firstfixtures omitted actualcreate
-fields/revision/status; correctedagainstsource, notproductionbugs. Fixed-name entry
-cache had actualred(public3600 vsno-cache), repaired and4PASS. Full gate335PASS before
-latestrepairs; firstattemptNOTRUN becauseIomittedAPP_URL8080. Final gate must use
-APP_URL=http://127.0.0.1:4099, native pnpmchecknow includesboardbuild.
-Dependencies pinned React18.3.1 (React19 peers mismatched); fullaudit+peer+lockedinstall
-PASS after actualpublishedpatchedtransitives; unusedoptionalSasswatcher false,
-esbuild true; hooksstill.githooks. Neverstage generatedassets/.local/data/logs/secrets.
-
-Runtime: parentpreview4099 execsession99645 uses.local/redesign-preview/data.
-It preservesprototype testdata; doesNOTyetloadlastlarge-bootstrapservicepatch until
-nextverifiedrestart. Userprevious4093 uses.local/implementation-s1; preserveitsdata
-andcookies whenfinallyupgradinguserpreview. Browser cookies sharehostacrossports:
-use127.0.0.1forparentinspection, independentnativecontextsforfixtures.
-GameShellnativecamera runner currentlyGPUowner; allotherbrowser/loadjobsHELD.
-Boardfinal2Drunnersclosed. Resourceworker owns tools/board-resource/protocol/results;
-registered24engines (12game+12board,2sixmemberhouses),1.78MiBscene/maxchat/two1.93MiB
-images perhouse,300s,noautoretry,210MiBlocalRSS,realpaired65sTCPpause/allviewaccounting.
-HELD: parentinspectlatestinstrument/protocolhashes; classifyEnginepingwithoutdata;
-retainseed/tombstone/peerobjects inrecoverygrade. Nofullrunstarted, explicitGOrequired.
-Parentownsserver/package/build, integrationtests,README/docs/commits/finalacceptance.
-
-Next: acceptorrepairtargeted3cameraresults, currentnativeboardrecoveryreviewcomplete,
-inspect/freeze/GO one300sresource whenGPUidle, preserveanyFAIL/calibration history;
-maintainboardbrowsercoverage/CI, accurateJSXcoveragegap; rewriteREADME/architecture/
-validation/ledger, artifact/secret/diffchecks,focusedcommits. Finaluserpreview should
-restartverified4093serverwithits ORIGINALdata, notreplaceuserswithfreshtestdatabase.
-Dockerimage/Fly/TLS/redeploy,physicalphone/IME/humanpreference/value andstudentPROCESS/
-reflections remainseparateNOTRUN. Do notclaimanHD oruniversalencryption/reliability.
-
-# Prior local-core handoff (historical source)
-
-# Current A3 handoff
-
-Updated 7 October 2026. The authorised S1–S4 local core is implemented and verified.
-The canonical repository is `/home/lizhi/comp4020/comp4020-final-naaeeen`, Ubuntu,
-user lizhi. Use native Node 24.21.0 and pnpm 11.9.0 through `mise exec`.
-Deliverables are English; research may use any language.
-
-## Entry points and working methods
-
-Read root AGENTS, CLAUDE and PLAN, the active [method report](../harness/REPORT.md),
-and relevant subsection evidence at entry, after changed assumptions or findings,
-and before acceptance. The [register](../revisit/REGISTER.md) contains 43 distinct
-capability/failure-path checkpoints. Earlier findings remain historical; later
-repairs have their own source, checks and scope.
-
-Windows and WSL personal instructions and the `evidence-driven-work` skill are
-installed and byte-matched. The desktop injected the updated instructions into
-this chat. [Installation and limits](../harness/global-extraction/INSTALLATION-AND-REVIEW.md)
-record backups, discovery and review. No memory, model, sandbox, hook, credential
-or plugin settings changed. Web/mobile account synchronisation was not performed.
-Fresh reviewers receive factual packets and skip this verdict-bearing handoff.
-
-## Local milestones
-
-- `ea60440`: playable owned houses, bounded DIY, real movement/text and close camera.
-- `5548bb1`: maintained native gameplay, lifecycle and bounded production-cookie CI.
-- `2c120a1`: calibrated sustained workloads, exact measured sources and retained results.
-- `d469e38`: close-camera comparison, provenance qualification and native screenshots.
-- `b61706c`: bounded SQL plans with fresh-authority and close/error regressions.
-- `bf7c801`: reusable methods and protected fresh-review routing.
-
-The annotated `crit-8` tag still peels to
-`6dc79c5ec6cc5610a867d653892d2b827ee94536`. Legacy data and public rehearsal remain
-separate from the additive private-house database. Nothing in this local checkpoint
-claims a new remote push or deployment.
-
-## Current verification
-
-Required `pnpm check`: 195 tests in 14 files and typecheck PASS. Expanded house
-coverage: 163 tests, 93.43% lines, 84.27% statements, 77.47% branches and 86.37%
-functions. Branch coverage is below the 80% target; UI, world and shared HTTP gaps
-are disclosed. Production audit reported no known vulnerabilities.
-
-Nineteen maintained browser cases passed across scoped runs: four house journeys,
-two lifecycle/recovery/export journeys, eight camera/readability cases and five
-core/legacy CI cases. Matching Chrome 153.0.8010.12 was verified for the final CI
-and lifecycle environment. This is local native evidence, not one combined run or
-human testing. Final contextual review checked 73 client/UI cases and actual-client
-late-ACK replay with one command UUID and one durable effect.
-
-One exact sequential 30-minute L1/L2 attempt passed every declared local synthetic
-gate. RSS was 165.160/169.031 MiB; visibility p95 was 101.968/103.042 ms. Each run
-accounted for 2,160 deliveries and twelve slow-reader cycles. Slow catch-up maxima
-near 60 seconds remain included. Original RSS failures and v2 motion-input failures
-are retained. Read [load refinement](../revisit/LOAD-PACING-REFINEMENT.md).
-
-All thirteen measured hashes matched at exit. After releasing the freeze, only the
-calibration tool's default fixture path changed. The exact recorded grader remains
-`evaluation/house-load-calibration.v3-measured.mjs`; all fourteen controls passed
-again. No app, generator, package or geometry bytes changed. No full rerun occurred.
-
-## Failure and evidence limits
-
-Earlier busy-host recovery/join failures remain UNCONFIRMED. Registered real/stub
-probes and unchanged maintained cases later passed; renderer startup timing does
-not prove every earlier failure's cause. No deadline was raised. Old toast and
-spawn-coordinate test assumptions were corrected against actual visible/persisted
-state. Failures remain in isolated ignored outputs.
-
-Camera production modules match the measured manifest. A recorded label-test hash
-no longer matches the current test file; the historical record is retained and
-qualified in [camera evidence](CAMERA-EVIDENCE.md). Current tests passed the required
-and expanded checks. Cropped six-person views use roster, Overview and Chat for
-context; physical keyboard/IME and human preference were not observed.
-
-[Validation](VALIDATION.md), [architecture](../architecture/SHARED-HOUSE-IMPLEMENTATION.md),
-[course alignment](COURSE-ALIGNMENT.md), [process evidence](PROCESS-EVIDENCE-MAP.md)
-and the [release runbook](RELEASE-RUNBOOK.md) distinguish the remaining gates.
-
-## Continuation
-
-Local evidence/document reconciliation is complete. Production
-Docker/entrypoint, Fly TLS/volume/restart/redeploy, real phones/IME, familiar-friend
-value/next-day study and C9/C10 live group demonstrations remain NOT RUN. The student
-must write and defend their PROCESS/reflections from real evidence. Their existing
-old PROCESS links passing the sensor do not establish a current narrative.
-
-Prepare a concrete release candidate before handling any uncovered publication
-authorisation. Preserve both databases and the Crit 8 tag. New content, account
-systems, drawing/uploads and larger catalogues need their own bounded phases.
-
-Final artifact validation checked 33 Markdown files and 187 local file links,
-54 PNG signatures/dimensions, 22 JSON documents, all 16 matched camera capture
-hashes/dimensions and the 43-row register. No missing local file links were found.
-The fresh final consistency review and contextual affected-document recheck have
-no remaining actionable issue within their assigned scope. Existing secret hooks
-remain enabled; final diffs are checked before each focused local commit.
-
-Parent additionally verified Windows IPv4 health with curl -4 localhost. Default
-.NET localhost timed out; no app/network/sandbox configuration changed. Browser
-control initialization is blocked by host ACLs after supported retry/reset; the
-app-open request is queued and visible user-browser rendering is not confirmed.
-
-## 12 October Crit 9 design research handoff
-
-The owner requested HCI/user-goal tradeoffs rather than a bug-fix-led argument.
-Read docs/crit-9/round-3/RECOMMENDATION.md and EVIDENCE-AND-REVIEW.md.
-Latest discussion choice: quiet company with voluntary approachability, separate
-from connection/location/door access. Full-board mode is the strongest owner-led
-alternative. Earlier rounds remain supporting records. Runtime/CI/providers
-unchanged; board recovery/locality gaps and student/user/live checks remain open.
-Default Quiet is not a personal choice; timestamps include initialization.
-Public cue and private house previews are coupled; no whole-app DND is promised.
-
-## Crit 9 submitted release, 12 October
-
-Core writing/copy commit e8ca2d5 and acceptance milestone42f7c50 are public.
-CI38187166613 passed checks/native/resource/secret scans and Flybackup/deploy.
-New README and board-awareness copy were verified live; post-release two-browser
-availability/Quiet/transcript task passed. Details: docs/crit-9/submission/ACCEPTANCE.md.
-One final evidence-only commit records actual outcomes; do not recursively commit
-new success records. Student's own pod demo/defence and real-friend value study
-remain separate. Superseded release NOT RUN text above is historical.
-
-## 12 October second reflection and memory release
-
-Current runtime00328b0 uses server-onlysemi12; reflection9e80cdc has287bodywords
-and the owner-requested causalHCI argument without repaircomparison/draftingfooter.
-Firstreflection exists in e8ca2d5 and firstActions38187166613 completed11:23:11
-Sydney before noon. ActualsecondCI38190973611/resource/Fly/source/flag and native
-pair pass; [full record](../crit-9/submission/evidence/second-release.json).
-Original212RSSfailure and175same-source16reproduction preserved; no causalfix or
-optimality claim. Newfailedlivefixture cleaned through its ownowner. Older initial
-prewritingfixturecleanupgap remains historical, not silently resolved. Chinese
-readingcopy is private .local/crit9-submission/CHINESE-READING.md.
-Finalevidence-onlypublication keepsruntime unchanged; verifyitsactualCI, thenstop
-withoutfurtherstatus-onlycommits. Humanpoddefence/valueevaluation remain separate.
-
-## Current Crit 10 local candidate, 19 October
-
-Owner currently prohibits commit/push; no deployment is performed. HEAD stays
-6bbc4d227f49add4bfb01c182dc0797da37ec2b0. All new work is in this WSL checkout.
-[Acceptance](../crit-10/ACCEPTANCE.md) links the English reflection/current PROCESS,
-permission rationale, actual tests, browser run4 and resource refinement. Logging
-adds allowlisted actor/action/outcome/context/receipt metadata and HTTP denials;
-accepted retries do not imply new writes. Permission semantics and former-member
-personal export remain intentional.
-
-Fresh code review caught a stream-kind/house-ID correlation defect, reproduced
-then repaired. A full resource trial failed pointer inputs despite passing memory;
-actual socket rollback/burst controls justified using a monotonic pointer-budget
-clock without weakening20/1000. Both trial bindings and original failure remain.
-Read the final acceptance status rather than assuming the second trial passed.
-
-Three history-free discovery agents informed the selected reflection argument:
-shared outcome and personal submitted versions diverge. Parent followed it into
-the UI; former-board export is absent after reload. No human comfort/learning
-claim, complete exit portability, publication or classroom trial is implied.
-Future work: identity-scoped prior-house export discovery, clearly labelled partial
-versions/asset portability; research with real friends, not another editor tool
-merely because it is available. Stop only owned local rehearsal resources.
-
-Final local closeout:569 tests/33 files, board build/typecheck/native evidence,
-opt-in native browser run4 and the second full300s resource trial PASS. The latter
-has21 gates true,201.46875 MiB peak RSS,7188patches/708chats/zero normal input
-rejects or write skips. Failed first trial remains preserved. Exact current-source
-facts and remaining user/publication lanes: ../crit-10/ACCEPTANCE.md. Owned local
-candidate45305 closed, preview4093 untouched, HEAD/remote6bbc4d2 and index unchanged.
-
-## Crit 10 publication authorized, 19 October
-
-The owner now authorizes commit and push, including the existing CI/Fly release.
-Earlier no-commit/no-push/local-only text records the preparation boundary and is
-superseded. Publish new content in English; private Chinese reading copies remain
-ignored. Preserve the owner's PROCESS section deletion and reflection edit.
-Verify the exact pushed head, actual CI and deployed behavior; local source hashes
-and past passes alone do not establish a release. Classroom two-person use is
-still a human activity, separate from automated technical rehearsal.
+# Post-Crit local checkpoint, 22 October 2026
+
+Canonical checkout: Ubuntu/lizhi,
+`/home/lizhi/comp4020/comp4020-final-naaeeen`, branch `post-crit-improvements`.
+The local implementation and acceptance work is complete. Evidence is committed
+at `ea37a0f`; the following documentation closeout changes no runtime source.
+No new push, deployment, paid service or personal-memory change is included.
+Keep delivered material English and preserve existing user data.
+
+Read AGENTS, CLAUDE, root PLAN and docs/harness/REPORT.md when resuming. Then use
+[acceptance](../post-crit/ACCEPTANCE.md), the applicable post-Crit contract and the
+[detailed subsection register](../revisit/REGISTER.md). Historical release notes
+are preserved verbatim in [the archive](HANDOFF-RELEASE-HISTORY-2026-10-22.md);
+they do not grant new publication permission or accept changed source.
+
+## Completed local milestones
+
+- Camera, furnished room presets, work/light/seat interactions, expanded lounge,
+  Four-in-a-row, external Discord and compatibility work: commits through
+  `ff949bc`; earlier verification milestone `8b22fa4`.
+- Company-method research and four matched fresh diagnostic responses: `d766b2a`.
+  The extra contradiction instruction stays optional; no general benefit claimed.
+- Compact lossless board receipts and migration: `64f619c`.
+- Picture authority/client/prototype: `ff9d153`; integrated UI/return/modals and
+  maintained native cases: `ed66db7`.
+- Patched test toolchain: `c55d5e0`. Vitest/coverage 5.0.3 and Vite 8.3.3 have exact
+  pins. Production dependencies and all 475 rebuilt public files are unchanged.
+- Final native/resource evidence and calibrated tools: `ea37a0f`.
+
+House schema 5, board schema 2, board wire 1, world version `lounge-3`.
+Node 24.21.0 / pnpm 11.9.0; preserve server semi-space 12 and fixed hosting shape.
+Personal work remains one house-visible, author-owned card. Existing rooms are
+preserved; owners explicitly preview/apply a furnished starter. Picture progress
+is durable; participation is transient and requires explicit Join after return.
+
+## Acceptance and source scope
+
+Full required verification: 1,071 tests, typecheck, build and evidence checks pass;
+full/production dependency audits report zero known advisories. Picture component
+coverage is 83.33% branches, not whole-application coverage.
+
+The maintained local native selection passes 13/13 in 149.938 seconds under its
+unchanged 300-second budget. A separate six-context run passes 30 checks with
+24 attributed placements, departure, peer continuation, reload and fresh consent.
+Inactive worlds were ordinarily paused. The six-context run precedes two completion
+UI expressions; the current solo completion case covers that delta. Earlier native
+runs retain their dependency manifests. This is not actual GitHub/Docker CI.
+
+Current original/combined loads pass 23/23 and 27/27: peak server RSS 190.45/193.91
+MiB, response growth 4.53/4.57 MiB, 8,142 exact receipt matches after each exit.
+Combined includes 124 game and 62 picture actions. Fixed monotonic durations are
+300.001 seconds; differing UTC spans remain documented without a causal diagnosis.
+Read-only same-dataset accounting finds 97.1568% smaller receipt representation,
+excluding RAM, total disk, WAL, scenes and assets. All measured processes closed.
+
+Fresh and contextual reviews close reported implementation/acceptance findings.
+Parent verification and original failed attempts are linked from acceptance.
+Current-editor export proves restored objects; overlapping screenshots do not
+prove both texts are simultaneously readable. Reversible JSON serialization and
+two exact-path Git attributes preserve frozen evidence under the unchanged hook.
+
+## Preview left running for the owner
+
+URL: http://localhost:4093/ . Verified process PID 119678 uses the migrated copy
+`.local/post-crit/preview-restored-20261021T211400Z/` and semi-space 12.
+Log/launch record: `.local/post-crit/preview-launch-20261021T221500Z/`.
+Verify actual PID identity before any later signal. Linux and Windows health/page
+requests pass; six served asset hashes match. Codex panel opening was queued.
+
+Original `.local/implementation-s1/` and verified backup
+`.local/post-crit/preview-backup-20261021T170653Z/` remain untouched. Schema-only
+validation preserves every original field/row. Normal real-clock startup expires
+245 old chat messages in the copy under the existing seven-day policy; the backup
+retains them. Never replace the original with the synthetic workload fixtures.
+
+## Next work when requested
+
+Use real friends and physical phones to judge comfort, shared-break value and
+return-to-work usability. Test WAN/media behavior before considering in-app voice;
+current voice is an explicit external Discord destination. New content should use
+versioned catalogues and existing authority rules. Reopen affected checks after a
+meaningful change; do not repeat green suites merely to increase their count.
+
+A production release needs new scoped authorization and its actual CI/Fly/backup
+verification. Local process RSS is not Fly cgroup enforcement. The current runtime
+source is frozen and no resource job, browser worker or background retry remains.
+Use fresh full-access WSL commands; do not reuse historical terminal 40567.

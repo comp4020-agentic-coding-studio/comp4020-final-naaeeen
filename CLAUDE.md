@@ -1,4 +1,9 @@
-# Active post-Crit task, 22 October 2026
+# Post-Crit local checkpoint, 22 October 2026
+
+The local improvement milestone is accepted; final evidence is committed at
+`ea37a0f`. Read docs/post-crit/ACCEPTANCE.md and the current handoff before resuming.
+The following owner constraints continue to govern new work on this branch.
+
 
 Work on local branch post-crit-improvements in the canonical WSL repository.
 Follow docs/post-crit/OWNER-FEEDBACK.md and docs/post-crit/PLAN.md. The latest addendum

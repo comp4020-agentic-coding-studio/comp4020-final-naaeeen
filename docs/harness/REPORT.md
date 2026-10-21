@@ -462,3 +462,32 @@ and pointer occlusion as well as bounds, and inspect original screenshots. A tra
 must actually be visible with its controls; an element's presence or a positive
 bounding box does not establish that task. Apply this to overlapping UI. These checks
 do not establish readability preference or explain an unrelated admission timeout.
+
+### P7 observed evidence and maintenance corrections
+
+For current-editor recovery, inspect an ordinary editor export or rendered state;
+a server snapshot alone does not verify renderer rehydration. If objects overlap,
+a screenshot cannot establish simultaneous readability. For native navigation,
+check the installed driver's lifecycle semantics before requiring a high-level
+socket event; preserve actual connection/authority outcomes and unexpected-close
+denials. Paused-renderer metadata is not a current server authority signal.
+
+Validate evaluator source bindings as complete and nonempty. Calibrate permission,
+generation and persisted-ruleset checks with legitimate reconnect positives and
+malformed negatives. Inspect factual review packets, including archived preimages,
+for historical verdicts; disclose exposure instead of calling it blinded.
+
+A package command's exit0 did not update the vulnerable required peer here. Verify
+resolved manifest/lock/installed versions and affected dependency/build boundaries.
+Separate startup retention from schema migration in preservation checks, and keep
+an untouched backup. These corrections apply to the demonstrated failure modes;
+retire them if their driver, storage or dependency assumptions no longer hold.
+See ../post-crit/REVIEW-AND-REFINEMENT.md for source-bound outcomes. No extra general
+A/B or mandatory rerun is inferred from a successful local correction.
+
+When committing byte-frozen evidence, compare staged blob bytes as well as working
+files. Git's newline conversion changed two archived protocol hashes here; narrowly
+scoped attributes and targeted renormalization retained the original bytes. Keep
+normal source/credential checks active and document reversible JSON serialization
+for a verified public-path false positive. This applies to immutable evidence,
+not a general reason to disable formatting or secret checks.

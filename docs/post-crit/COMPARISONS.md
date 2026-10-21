@@ -1,5 +1,9 @@
 # Declared comparisons and evidence status
 
+This document preserves the original comparison protocols and their then-current
+statuses. Executed outcomes are indexed below and in [ACCEPTANCE](ACCEPTANCE.md);
+old NOT RUN wording is not the current completion status.
+
 22 October 2026. Task criteria precede trials. This record supports
 [PLAN.md](PLAN.md) and [RESEARCH.md](RESEARCH.md); it does not select winners by
 counting features. In every lane preserve source revision, protocol, viewport,
@@ -116,3 +120,24 @@ acceptance](GAME-CONTRACT.md). Four-in-a-row is selected for voluntary interrupt
 and public progress, not test count or a claim that chess/cards are infeasible.
 No human preference, true multiplayer authority or SQLite restart was established
 by these fixtures.
+
+## Current outcome index, 22 October
+
+- Camera: matched candidates and readability/observer refinements are recorded in
+  [P1-CAMERA](evidence/P1-CAMERA.md) and [P1-B-READABILITY](evidence/P1-B-READABILITY.md).
+- Lounge: [paired layout result](evidence/lounge-comparison.md) compares identical
+  functional content and records the expanded layout's circulation/travel tradeoff.
+- Group participation: [group contract](GROUP-ACTIVITY-CONTRACT.md) and
+  [group UI](GROUP-UI-NOTES.md) bind the tray prototype comparison, native six-person
+  capability and later affected repairs. Two-player game spectators do not satisfy
+  the separate group requirement.
+- Admission: open/closed/open diagnosis and the matched blur/dim-only comparison
+  informed one CSS change; ordinary native modal/admission checks then passed.
+- Receipt storage: representation comparison protects exact accepted meaning and
+  current-editor recovery; final sustained outcomes are separate acceptance gates.
+- Agent method: [four matched diagnostic responses](../harness/COMPANY-METHODS-2026-10-22.md)
+  support retaining the existing default, with no general reliability claim.
+- Voice: external destination selected; no in-app media or real call trial claimed.
+
+These are technical/design comparisons, model reviews and browser observations.
+No real-human preference A/B study was performed.

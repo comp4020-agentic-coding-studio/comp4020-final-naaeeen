@@ -153,3 +153,30 @@ allocated disk, not browser GPU memory or compressed image size. Preserve the
 existing 300-second workload, RSS <=210 MiB and p95 <=1000 ms gates; add a
 separately declared combined workload after changes. Do not delete backups or
 reduce visual quality based on an approximate 300 MB recollection.
+
+
+## Reopened admission diagnosis: a live canvas behind a modal
+
+22 October, before the next diagnostic. Several native peer admissions exceeded
+10 seconds while the owner's House settings remained open. One closed-panel case
+passed. These observations establish a task failure and a candidate factor, not
+its cause. Parent source inspection found that `.modal-backdrop` blurs the full
+viewport by 4 px while the house renderer continues animating; closing the panel
+removes that layer. Options separately suspends the renderer.
+
+[Google's backdrop-filter guide](https://web.dev/articles/backdrop-filter), updated
+26 July 2019 and read 22 October 2026, explains the separate filter/colour layers
+and recommends measuring performance. [WebKit's implementation introduction](https://webkit.org/blog/3632/introducing-backdrop-filters/),
+10 August 2015, describes filtering the content behind a layer and compositing it
+back, with extra rendering passes. These are mechanism/background sources, not
+measurements of our installed Chromium 153 or evidence that a browser bug caused
+our timeout. A discovered Chromium issue could not be read beyond its sign-in page,
+so its search summary is not used as a diagnosis.
+
+Complete the registered open/closed/open admission series on unchanged source.
+If the association persists, a useful next comparison keeps the modal open and
+varies only blur versus the existing dim colour, holding viewports, content,
+controls and deadlines fixed. Keep original failures, registration and passive
+frame/network timing. A dim-only candidate must preserve focus, contrast and
+controls. No latency improvement or causal attribution is claimed before that
+comparison. This client rendering question is separate from server RAM/storage.

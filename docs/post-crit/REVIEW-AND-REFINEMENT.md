@@ -308,3 +308,90 @@ See GROUP-BACKEND-NOTES.md, GROUP-CLIENT-NOTES.md and their linked failed/green
 records. This foundation does not inherit the prototype's native layout result.
 The real app's first landscape run separately exposed chat occlusion and clipping;
 those fixes and three/six-browser participation remain native integration gates.
+
+## P7 integrated UI and native verification
+
+The first landscape task exposed actual chat occlusion beneath the activity panel,
+then clipped message text inside a positive-sized transcript container. Native
+pointer/paint and text-range checks drove a bounded CSS/layout repair. Source
+presence and wrapper dimensions were insufficient acceptance evidence.
+
+Fresh return-flow review found newer Options/work surfaces could be replaced by
+an asynchronous room arrival or denied-Stand fallback. Effect-time guards now
+preserve the newer surface and discard the old journey. Targeted red/green cases,
+extracted real-function controls and affected native return checks close the
+findings. Failed attempts remain failed; later narrow checks retain their scope.
+
+Admission with owner settings open/closed/open produced FAIL/PASS/FAIL. Source
+inspection identified the full-viewport backdrop blur. A controlled pair with
+House open in both conditions changed only blur4px versus none: FAIL/PASS. The
+production dim-only backdrop then passed ordinary unmodified admission. A fresh
+review required one shared monotonic submit-to-ready deadline and actual mode/
+interceptor provenance. Three evaluator controls and seven native admission/modal
+checks pass; focus wrapping/restoration, scrolling, pointer/keyboard isolation and
+Options pause/resume were checked at desktop, portrait and landscape. This local
+SwiftShader comparison does not establish hardware-device performance.
+
+The six-identity picture task preserves two driver failures: Leave closes the
+panel, and document navigation can retire Playwright's WebSocket map before a
+high-level close event is observable. Parent inspected production behavior and
+installed Playwright1.63 source. The revised protocol observes actual document/
+socket generations, peer-roster withdrawal, continued contributions and fresh
+consent. Thirty final native checks pass with 24 placements by six identities.
+A completed-round redundant Leave control was then reproduced with three failing
+component cases, repaired in two expressions and checked by the maintained solo
+completion case. Earlier six-context evidence retains its older component hash.
+
+The maintained 13-case selection passed within the unchanged300-second budget.
+A fresh read-only Astra/high reviewer confirmed receipt replay, author export and
+both authors' restoration into the current editor scene. Parent inspected the PNG:
+peer text covers the original note, so neither the screenshot nor the record is
+used to claim both texts are simultaneously visible. Current-editor download,
+rather than a server read alone, supplies that restoration evidence.
+
+## P7 instrument and toolchain refinement
+
+Fresh resource review found an empty source binding could appear ready, picture
+normalization missed authority fields, and persisted grading ignored rulesets.
+Parent reproduced these false-positive controls before accepting exact complete
+bindings, current subscribe authority and strict persisted validation. The same
+reviewer's contextual recheck closed all three. Initial incidental verdict-history
+exposure is recorded, so that review is not described as fully blinded. The fixed
+original gates and combined124game/62picture actions remain unchanged.
+
+Dependency audit identified test-toolchain advisories. The documented bare Vite
+update exited0 without changing the vulnerable installed required peer. Parent
+checked actual package metadata and added the patched explicit dev peer. Final
+pins, lock, installed versions, all1,071 checks, focused coverage, zero-advisory
+audits and byte-identical production build were independently reconciled. The
+reviewer's initial command prediction was corrected by actual resolution evidence.
+See TEST-TOOLCHAIN-PATCH.md; no broad runtime refactor followed a dev-only finding.
+
+Preview-copy validation first failed full-row equality because normal startup
+expired245chat messages. Source inspection confirmed the existing seven-day policy
+already existed in the prior release. A separate frozen-clock schema-only control
+isolated migration from retention and preserved all original fields. The actual
+preview candidate uses the real clock; originals/backups remain unchanged.
+
+## Final local acceptance and publication boundary
+
+Fresh Astra/high acceptance review reconciled raw native, current required checks,
+25 bound runtime/tool files and both full workload results. It narrowed one claim:
+the completion repair changed UI behavior while leaving server authority and client
+ordering unchanged. Parent corrected the wording and verified all56 resource
+manifest artifacts, current source hashes, every gate and closed process identity.
+The contextual follow-up independently checked the same-dataset byte arithmetic,
+all four reversible JSON preimages,17 native export hashes and four decoded
+attachments. It reran no application tests or load.
+
+Git staging then exposed two archived protocol files whose single CRLF sequence
+would be normalized. An initial ordinary re-add did not refresh their cached
+entries. Targeted -text attributes and renormalization now preserve exact bytes;
+all134 staged files matched working bytes, whitespace checks and the unchanged
+secret hook passed before local commit ea37a0f. See p7-index-byte-preservation.json
+under evidence/. This is evidence preservation, not a runtime or performance change.
+
+The local4093 preview runs on the verified migrated copy with Windows reachability
+and six served-source hashes checked. All load/validation processes are closed.
+Current outcomes are indexed in ACCEPTANCE.md. No new remote publication or paid
+provider was performed; real-friend/device acceptance remains future work.

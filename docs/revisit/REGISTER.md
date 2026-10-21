@@ -283,3 +283,32 @@ Earlier checkpoint paragraphs retain their historical dates and source scopes.
   suite passes 1,037. See ../post-crit/evidence/storage-codec-review-closure.json.
 - Remaining: current native board task and unchanged sustained gates plus prospectively
   registered storage growth. This entry does not close the full resource subsection.
+
+### Current P7 subsection reconciliation, 22 October
+
+This table supersedes the earlier OPEN checkpoint rows only for the stated local
+scope. [Acceptance](../post-crit/ACCEPTANCE.md) links complete source-bound records.
+
+| Subsection | Evidence, decision and refinement | Current boundary |
+| --- | --- | --- |
+| PC.6.3a receipt representation | Lossless codec64f619c; legacy TEXT, actual-encoding fallback and exact retry/export tests. | Current native editor recovery reviewed; original23-gate load passes. |
+| PC.6.3b migration | CHECK/trigger/mixed-case negatives reproduced then repaired; preview schema-only control preserves all prior fields. | Real-clock startup retains the existing7-day chat cleanup; untouched original/backup preserved. |
+| PC.7.1 activity choice | Public cooperative24-piece picture selected; one original SVG, paged12-piece inventory with explicit keyboard tradeoff. | Prototype comparison is separate from human preference. |
+| PC.7.2a backend consent | Read-only access preflight before cleanup, controller/generation and current participation checks. |203 affected checks and fresh/contextual review; denied observer cannot revoke a legitimate contributor. |
+| PC.7.2b client recovery | Same-revision safe lounge head can return under fresh authority without resurrecting consent. |127 maintained client cases; real reload returns Watch then requires newJoin. |
+| PC.7.3a shared UI | Native landscape occlusion/text clipping drove bounded CSS/geometry repairs. | Original failed runs preserved; affected current tasks pass. |
+| PC.7.3b group capability |30 native checks,6 authenticated contributors,24 attributed placements and departure/rejoin. | Paused inactive renderers; not6smooth simultaneous worlds or human participation balance. |
+| PC.7.3c completion | Three new red cases expose redundant Leave and lateACK copy; two-expression repair. |23component tests and maintained solo24-piece completion pass. Earlier group source unchanged in its record. |
+| PC.2.4a personal-room purpose | Break -> own room -> same My work card, preserving Quiet and newer drafts. | House-visible author-owned card; no new private notebook claim. |
+| PC.2.4b async return | Effect-time panel/workspace guards preserve a newer surface; discard stale journey. | Fresh/contextual review, extracted controls and affected native checks pass. |
+| PC.7.4 modal admission | Open/closed/open diagnosis; matched blur4/none comparison; dim-only source repair. | One shared monotonic10s submit-to-ready bound;7ordinary native checks plus3oracle controls. |
+| PC.7.5 maintained native |13local cases,149.938s,0skips/failures/flaky; current-editor export verifies restored objects. | Not actual Docker/GitHubCI; overlapping screenshot does not show both notes. |
+| PC.7.6 toolchain | Failed bare-update assumption corrected by actual required-peer resolution; exact patched pins. |1,071full tests, build/type/evidence, audits0;475publicfiles byte-identical. |
+| PC.H5 method adoption | Four matched fresh responses + independent grading; added contradiction instruction unchanged/optional. | Two synthetic fixtures, procedural isolation, costs unmeasured; no universal effectiveness claim. |
+| PC.H6 evaluator authority | Reproduce emptymanifest, wrong generation/access/controller and persistedruleset false positives, then repair. | Focused positives/negatives and contextual recheck pass; fixed workload acceptance remains separately measured. |
+
+Current resource closure: original23/23 and combined27/27, both300.001monotonic
+seconds. Each verifies8,142accepted receipts after exit; combined adds124game and
+62pictureactions. Source/hash/clock limitations and final fresh review are linked
+from acceptance. No historical P6 pass is inherited by new code. Local4093 preview
+uses the verified migrated copy; original and backup remain preserved.

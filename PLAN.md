@@ -1,4 +1,4 @@
-# Active post-Crit improvements, 22 October 2026
+# Post-Crit local checkpoint, 22 October 2026
 
 Work in the canonical WSL checkout on `post-crit-improvements`, based on `8cdad6a`.
 [Current plan](docs/post-crit/PLAN.md), [owner requirements](docs/post-crit/OWNER-FEEDBACK.md),
@@ -8,9 +8,11 @@ Local staged commits are authorized; new release/provider work is separate.
 Earlier acceptance sections below retain their exact historical source scope.
 The 22 October addendum reopens 3–6 active group participation, personal-room
 purpose, board receipt storage and company-informed agent-method refinement.
-See the post-Crit plan and current handoff for scoped results and remaining work.
+Local implementation and acceptance are complete through evidence commit `ea37a0f`.
+See [acceptance](docs/post-crit/ACCEPTANCE.md) and the current handoff for exact
+source scopes, the restored preview and remaining human/device/release work.
 
-# Current acceptance: verified game, board and server policy
+# Historical acceptance: verified game, board and server policy
 
 Source `d2dcf5f` passes actual CI `37722868698` at `2723796`: 504 checks, nine
 native cases, every unchanged 300-second resource criterion, backups and release.
@@ -21,7 +23,7 @@ The 8 MiB failure, RSS failures and invalid interrupted comparison remain scoped
 history. Physical/human/coverage/student-writing gaps remain explicit. Final
 evidence publication has unchanged runtime and receives its separate CI result.
 
-# Current acceptance: verified allocation release
+# Historical acceptance: verified allocation release
 
 Store `da3d7ec`, motion `5c40545` and evaluator `e54a694` pass actual CI
 `37717775859` at `aee040c`: 498 checks, nine native cases, all unchanged 300-second
@@ -32,7 +34,7 @@ The RSS failure and invalid runtime comparison remain preserved; physical/human/
 coverage/student-writing limits remain explicit. Final evidence publication has
 unchanged runtime. Earlier sections describe their own source checkpoints.
 
-# Current acceptance: verified movement and evaluator release
+# Historical acceptance: verified movement and evaluator release
 
 Runtime `5c40545` and evaluator `e54a694` pass actual CI `37603266802` at
 `daef80c`: 495 required checks, nine native cases, unchanged 300-second resource
@@ -457,3 +459,14 @@ post-crit-improvements branch. Earlier Crit10 release is historical. Astra max
 decisions/fresh reviews and Sol execution are owner requested. Record meaningful
 comparisons and per-subsection evidence before implementation. Local commits are
 authorized; no new push/deploy or paid service is inferred.
+
+## Post-Crit local implementation and evidence index
+
+The current [acceptance index](docs/post-crit/ACCEPTANCE.md) maps each feedback
+item to its implementation, source-bound checks and remaining human/device/release
+work. It supersedes earlier pending status for completed local subsections while
+preserving those historical records. The new picture table supports three to six
+actual contributors; bedroom return leads to the same authored work card. Receipt
+storage, browser acceptance and resource measurement have distinct recorded gates.
+Continue through [the current handoff](docs/implementation/CURRENT-HANDOFF.md), not
+an older release's source or publication permission.

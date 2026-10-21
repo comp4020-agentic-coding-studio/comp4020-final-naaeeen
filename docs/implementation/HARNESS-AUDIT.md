@@ -479,3 +479,41 @@ worker did not restart its turn. The parent used followup_task and verified runn
 status before depending on the repair. Future handoffs must distinguish dispatched,
 running and completed work. This is a correction to observed orchestration, not a
 claim that more agents or another paper caused better product outcomes.
+
+## P7 integration and acceptance audit, 22 October
+
+Reopened active REPORT, contracts, comparison records and actual source at UI,
+resource and commit boundaries. Separate fresh reviews found actionable return,
+modal-evaluator and resource-grader gaps. Parent checked real function paths and
+negative controls, including the installed Playwright navigation behavior. Repairs
+retain original failures/source bindings and contextual rechecks. Native text and
+pointer checks replaced positive-container bounds as evidence for visible chat.
+
+The maintained13-case local selection passes. A separate fresh read-only reviewer
+verified receipt recovery through the current editor's exported scene; an overlapping
+screenshot is explicitly insufficient for simultaneous note visibility. A dev-only
+Vite update command returned0 without repairing the required peer; installed and
+lockfile checks, explicit patched peer, full1,071verification, zero-advisory audits
+and identical public build establish the correction. No unrelated green tests were
+repeated to increase a count. The separate resource lane preserves all fixed gates.
+
+Preview restoration uses a validated copy, with migration and existing retention
+separated through a schema-only control. No original data, release permission,
+AI-effectiveness claim or student reflection was rewritten. Current artifacts and
+outcomes are indexed in ../post-crit/ACCEPTANCE.md; any final resource/preview state
+must be reconciled there and in CURRENT-HANDOFF before the goal is closed.
+
+Final reconciliation: current original23/23 and combined27/27 resource gates pass;
+fresh final review and parent56-file/hash/gate checks close local acceptance.
+Raw UTC versus monotonic timing differences remain explicit. Same-dataset response
+byte accounting is independently checked and kept separate from RAM/full-volume
+claims. The native public bundle retains each original source scope. Git index
+comparison caught two CRLF-normalized historical files before commit; exact-path
+attributes and targeted renormalization preserve their recorded bytes. Credential
+and whitespace hooks remain active. Final evidence commit is ea37a0f.
+
+The active handoff now routes directly to acceptance and the live local preview.
+Its41,364-byte historical release tail was preserved verbatim in the adjacent
+archive (SHA2560368759fa7562024d9575b031243257349536f4d9781d1ea13f8a628d69e98c9).
+This reduces competing historical instructions without claiming a measured agent
+performance improvement. No student PROCESS/reflection was rewritten in this slice.
