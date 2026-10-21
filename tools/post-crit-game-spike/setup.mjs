@@ -1,0 +1,11 @@
+import {mkdir,writeFile,copyFile,readFile} from 'node:fs/promises';
+import {spawnSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+assert.equal(process.version,'v24.21.0');
+const local=new URL('../../.local/post-crit/game-spike/',import.meta.url);await mkdir(local,{recursive:true});
+await writeFile(new URL('package.json',local),JSON.stringify({name:'post-crit-game-spike-local',private:true,type:'module',dependencies:{'chess.js':'1.4.0'}},null,2)+'\n');
+const pnpm='/home/lizhi/.local/share/mise/installs/pnpm/11.9.0/pnpm';
+const result=spawnSync(pnpm,['--ignore-workspace','install','--ignore-scripts'],{cwd:local,stdio:'inherit'});assert.equal(result.status,0);
+const manifest=JSON.parse(await readFile(new URL('node_modules/chess.js/package.json',local)));assert.equal(manifest.version,'1.4.0');assert.equal(manifest.license,'BSD-2-Clause');
+await copyFile(new URL('node_modules/chess.js/LICENSE',local),new URL('chess-LICENSE.txt',import.meta.url));
+console.log(JSON.stringify({node:process.version,pnpm:'11.9.0',chess:manifest.version,license:manifest.license}));

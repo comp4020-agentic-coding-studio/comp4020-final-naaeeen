@@ -1,0 +1,571 @@
+{
+  "at": "2026-10-21T14:04:56.278Z",
+  "runtime": "v24.21.0",
+  "scope": "pure in-memory fixture; no persistence/network/authentication acceptance",
+  "protocolSHA256": "6f302839bb33fe4632fd7806aa2504a5af6896a905eb1d93a5f6cea1175df1fd",
+  "sources": {
+    "engine.mjs": {
+      "sha256": "44fbc18b85002c02f5d2a80751cc0dc7fd273420602f514425ba46bd319174c6",
+      "bytes": 6652,
+      "lines": 111
+    },
+    "probe.mjs": {
+      "sha256": "b58d21bc7973b9f5784d181098a1e97af8366656e052c391ca97251c7b0c3b72",
+      "bytes": 9363,
+      "lines": 52
+    },
+    "app.mjs": {
+      "sha256": "84f72fe7f6e10eef8fafb3419909c4f52bd99281ff8127ad978c4253c4b8227c",
+      "bytes": 6448,
+      "lines": 21
+    },
+    "index.html": {
+      "sha256": "50862e2ef5d2b542cdffad19868ba63b13098fdf24d4023bade3632f14bef5ad",
+      "bytes": 1322,
+      "lines": 0
+    },
+    "style.css": {
+      "sha256": "a9230d295967e9c9862d6ef072b3495da0f55f8e256588dbf6ac2c99fe8948fb",
+      "bytes": 1934,
+      "lines": 3
+    },
+    "server.mjs": {
+      "sha256": "ee926d019d685c0927569f0cb09e8e25d11635997629928e6e46947fe5788241",
+      "bytes": 922,
+      "lines": 6
+    },
+    "browser.mjs": {
+      "sha256": "26cea101a6c3552a2bc39bd4d49b876956f1f22925b7b45bf0e7646712be6769",
+      "bytes": 6756,
+      "lines": 47
+    },
+    "setup.mjs": {
+      "sha256": "6166890ce55736cb82787bb76d62b8d6b72f5965964760767c4cc3b1e5e7395f",
+      "bytes": 1096,
+      "lines": 11
+    },
+    "chess-LICENSE.txt": {
+      "sha256": "0b3a3c2b4432a26bb18f9d06f5bba4de015bcc980306b7db28b06025495e2186",
+      "bytes": 1315,
+      "lines": 23
+    }
+  },
+  "sizes": [
+    {
+      "label": "four/2",
+      "command": 87,
+      "public": 335,
+      "privateP1": 335,
+      "fullWithoutReceipts": 349,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "four/6",
+      "command": 87,
+      "public": 355,
+      "privateP1": 355,
+      "fullWithoutReceipts": 369,
+      "active": 2,
+      "watchers": 4
+    },
+    {
+      "label": "chess/2",
+      "command": 107,
+      "public": 188,
+      "privateP1": 188,
+      "fullWithoutReceipts": 202,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "chess/6",
+      "command": 107,
+      "public": 208,
+      "privateP1": 208,
+      "fullWithoutReceipts": 222,
+      "active": 2,
+      "watchers": 4
+    },
+    {
+      "label": "cards/2",
+      "command": 99,
+      "public": 206,
+      "privateP1": 230,
+      "fullWithoutReceipts": 461,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "cards/6",
+      "command": 76,
+      "public": 274,
+      "privateP1": 298,
+      "fullWithoutReceipts": 529,
+      "active": 6,
+      "watchers": 0
+    }
+  ],
+  "stateSamples": [
+    {
+      "kind": "four",
+      "count": 2,
+      "actions": 22,
+      "result": {
+        "reason": "four",
+        "winner": "p2"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 363,
+        "private": 363,
+        "full": 2930,
+        "command": 88
+      },
+      "receipts": 22
+    },
+    {
+      "kind": "four",
+      "count": 6,
+      "actions": 22,
+      "result": {
+        "reason": "four",
+        "winner": "p2"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 383,
+        "private": 383,
+        "full": 2950,
+        "command": 88
+      },
+      "receipts": 22
+    },
+    {
+      "kind": "chess",
+      "count": 2,
+      "actions": 477,
+      "result": {
+        "reason": "library-draw"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 11709,
+        "private": 11709,
+        "full": 81681,
+        "command": 126
+      },
+      "receipts": 477
+    },
+    {
+      "kind": "chess",
+      "count": 6,
+      "actions": 477,
+      "result": {
+        "reason": "library-draw"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 11729,
+        "private": 11729,
+        "full": 81701,
+        "command": 126
+      },
+      "receipts": 477
+    },
+    {
+      "kind": "cards",
+      "count": 2,
+      "actions": 38,
+      "result": {
+        "reason": "empty-hand",
+        "winner": "p2"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 240,
+        "private": 262,
+        "full": 4999,
+        "command": 101
+      },
+      "receipts": 38
+    },
+    {
+      "kind": "cards",
+      "count": 6,
+      "actions": 49,
+      "result": {
+        "reason": "blocked-draw"
+      },
+      "stoppingBound": 512,
+      "maxBytes": {
+        "public": 296,
+        "private": 346,
+        "full": 6199,
+        "command": 101
+      },
+      "receipts": 49
+    }
+  ],
+  "budgetObservations": [
+    {
+      "kind": "four",
+      "count": 2,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": true
+    },
+    {
+      "kind": "four",
+      "count": 6,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": true
+    },
+    {
+      "kind": "chess",
+      "count": 2,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": false
+    },
+    {
+      "kind": "chess",
+      "count": 6,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": false
+    },
+    {
+      "kind": "cards",
+      "count": 2,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": true
+    },
+    {
+      "kind": "cards",
+      "count": 6,
+      "sampledCommandWithin1KiB": true,
+      "sampledPublicWithin8KiB": true
+    }
+  ],
+  "productionAcceptance": "NOT RUN",
+  "chessESMBytes": 107052,
+  "chessESMSHA256": "76c7c34f0e2e9ab076521a5d6fe786a9cce537bb1b6f29d32a9c9970b5b232d2",
+  "results": [
+    {
+      "name": "four/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 watcher move denied",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 watcher move denied",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "four horizontal win",
+      "status": "PASS"
+    },
+    {
+      "name": "four full column rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "chess checkmate fixture and terminal detection",
+      "status": "PASS"
+    },
+    {
+      "name": "chess promotion choices and roundtrip repetition history",
+      "status": "PASS"
+    },
+    {
+      "name": "chess clocks authoritative elapsed and timeout visible",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 actor-specific hidden projection",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 actor-specific hidden projection",
+      "status": "PASS"
+    },
+    {
+      "name": "cards wild suit required / empty hand result",
+      "status": "PASS"
+    },
+    {
+      "name": "cards draw remains turn / empty stock pass / blocked draw",
+      "status": "PASS"
+    },
+    {
+      "name": "chess repetition history retained beyond FEN",
+      "status": "PASS"
+    },
+    {
+      "name": "cards arbitrary actor input cannot select another hand",
+      "status": "PASS"
+    }
+  ],
+  "passed": 79,
+  "failed": 0
+}

@@ -1,0 +1,389 @@
+{
+  "at": "2026-10-21T13:54:24.042Z",
+  "runtime": "v24.21.0",
+  "scope": "pure in-memory fixture; no persistence/network/authentication acceptance",
+  "protocolSHA256": "6f302839bb33fe4632fd7806aa2504a5af6896a905eb1d93a5f6cea1175df1fd",
+  "sources": {
+    "engine.mjs": {
+      "sha256": "44fbc18b85002c02f5d2a80751cc0dc7fd273420602f514425ba46bd319174c6",
+      "bytes": 6652,
+      "lines": 111
+    },
+    "probe.mjs": {
+      "sha256": "bc68e16b5a5eedb8c1748533f9c2b908297eed073ff9c4e6c6b85ffe8e74692d",
+      "bytes": 6626,
+      "lines": 37
+    }
+  },
+  "sizes": [
+    {
+      "label": "four/2",
+      "command": 87,
+      "public": 335,
+      "privateP1": 335,
+      "fullWithoutReceipts": 349,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "four/6",
+      "command": 87,
+      "public": 355,
+      "privateP1": 355,
+      "fullWithoutReceipts": 369,
+      "active": 2,
+      "watchers": 4
+    },
+    {
+      "label": "chess/2",
+      "command": 107,
+      "public": 188,
+      "privateP1": 188,
+      "fullWithoutReceipts": 202,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "chess/6",
+      "command": 107,
+      "public": 208,
+      "privateP1": 208,
+      "fullWithoutReceipts": 222,
+      "active": 2,
+      "watchers": 4
+    },
+    {
+      "label": "cards/2",
+      "command": 99,
+      "public": 206,
+      "privateP1": 230,
+      "fullWithoutReceipts": 461,
+      "active": 2,
+      "watchers": 0
+    },
+    {
+      "label": "cards/6",
+      "command": 87,
+      "public": 298,
+      "privateP1": 298,
+      "fullWithoutReceipts": 529,
+      "active": 6,
+      "watchers": 0
+    }
+  ],
+  "results": [
+    {
+      "name": "four/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "four/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 watcher move denied",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "four/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 watcher move denied",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "chess/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 legal move",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 session",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 duplicate and changed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 JSON restart preserves projection/receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 legal move",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "cards/6 spectator",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 observer",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 scope",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 session",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 stale",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 turn",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 duplicate and changed payload",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- true\n"
+    },
+    {
+      "name": "cards/6 JSON restart preserves projection/receipt",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- true\n"
+    },
+    {
+      "name": "cards/6 immediate departure and terminal",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 illegal leaves original unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "four horizontal win",
+      "status": "PASS"
+    },
+    {
+      "name": "four full column rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "chess checkmate fixture and terminal detection",
+      "status": "PASS"
+    },
+    {
+      "name": "chess promotion choices and roundtrip repetition history",
+      "status": "PASS"
+    },
+    {
+      "name": "chess clocks authoritative elapsed and timeout visible",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/2 actor-specific hidden projection",
+      "status": "PASS"
+    },
+    {
+      "name": "cards/6 actor-specific hidden projection",
+      "status": "PASS"
+    },
+    {
+      "name": "cards wild suit required / empty hand result",
+      "status": "PASS"
+    },
+    {
+      "name": "cards draw remains turn / empty stock pass / blocked draw",
+      "status": "PASS"
+    }
+  ],
+  "passed": 74,
+  "failed": 3
+}

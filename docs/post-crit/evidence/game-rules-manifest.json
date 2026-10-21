@@ -1,0 +1,103 @@
+{
+  "recordedAt": "2026-10-21T15:03:00.266Z",
+  "head": "1671cec29429ebbb24752521e88c72f51ac456d2",
+  "branch": "post-crit-improvements",
+  "node": "v24.21.0",
+  "pnpm": "11.9.0",
+  "scope": "Pure immutable domain only; store, SQLite, receipts, transport, UI, browser, physical and human acceptance not established.",
+  "sources": [
+    {
+      "path": "public/house-game-rules.js",
+      "sha256": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb"
+    },
+    {
+      "path": "public/house-game-rules.d.ts",
+      "sha256": "36aa435f97476bafc495d39e082a6e20a60591acb529c60d9b69bd4f15886758"
+    },
+    {
+      "path": "spec/house-game-rules.test.ts",
+      "sha256": "9feadb8bf68653ddaa8bd7722cf4d15cfe1870c9903300af0abd18bdbdd365ab"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-protocol.md",
+      "sha256": "636b0783b696e909945fe69047208314cc326ba586e1539e4980a5300317a51f"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-inspect.mjs",
+      "sha256": "a881aab4f105a6ec84bc68922be19cfbe294c979c8c128b187156742d857c5eb"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-checks.md",
+      "sha256": "c55a70bf469fd4f87022d08911d0ce744a43c4a970e729b836da0d86e295d807"
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-review.md",
+      "sha256": "175c4672f164219bd249b378a82e88502a5a6d51faf13cc3cbf8ff02a9b21f58"
+    }
+  ],
+  "normalization": [
+    {
+      "path": "public/house-game-rules.js",
+      "testedOrReviewedSha256": "f1c1f5be55fab0e8c6d2174e1f502cd86a91f2d49e40ab0977a8d3cbe371f890",
+      "currentSha256": "949106d688dba07f6d9bd41bc0cd6ab5d1dde57da93a4403e2d8451e9609a2eb",
+      "matchesPriorHash": true,
+      "normalizedMatchesCurrent": true
+    },
+    {
+      "path": "public/house-game-rules.d.ts",
+      "testedOrReviewedSha256": "d4d524b8e458a3bb792c1b805de32b3bc3fc97ea0d802339786afe257c566dcb",
+      "currentSha256": "36aa435f97476bafc495d39e082a6e20a60591acb529c60d9b69bd4f15886758",
+      "matchesPriorHash": true,
+      "normalizedMatchesCurrent": true
+    },
+    {
+      "path": "spec/house-game-rules.test.ts",
+      "testedOrReviewedSha256": "9b73613b07da191ad7cad4d99a9e7cae174f835bf35fb7882525473bae26d33a",
+      "currentSha256": "9feadb8bf68653ddaa8bd7722cf4d15cfe1870c9903300af0abd18bdbdd365ab",
+      "matchesPriorHash": true,
+      "normalizedMatchesCurrent": true
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/post-crit/evidence/game-rules-red.json",
+      "sha256": "68369a7a7ae9b787b80b17ab7be522666570b9cbc62ac5b6c598195749152952",
+      "total": 41,
+      "passed": 0,
+      "failed": 41,
+      "pending": 0
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-green-initial.json",
+      "sha256": "0997545ec9e4517d5d5313503800aaf6a6c61ce374b53dabb386263cd53324f4",
+      "total": 41,
+      "passed": 41,
+      "failed": 0,
+      "pending": 0
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-recovery-red.json",
+      "sha256": "a2ccf3007f02d9d88476fe0df491b75f5fccdce4366fccef1435995d73a80f3c",
+      "total": 47,
+      "passed": 46,
+      "failed": 1,
+      "pending": 0
+    },
+    {
+      "path": "docs/post-crit/evidence/game-rules-green.json",
+      "sha256": "060a82d10592aab55cf75407b0a0cc5f96b9fd853c8407c1eb09d9a96f2a65f5",
+      "total": 48,
+      "passed": 48,
+      "failed": 0,
+      "pending": 0
+    }
+  ],
+  "projection": {
+    "bytes": 3716,
+    "limitBytes": 8192,
+    "currentCells": 42,
+    "latestResultCells": 42,
+    "idLength": 80,
+    "idCase": "JSON-escaped control characters, both full rosters"
+  }
+}

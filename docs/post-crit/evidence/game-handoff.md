@@ -1,0 +1,11 @@
+# Game spike handoff
+
+22 October 2026. Owner: bounded game comparison lane. Parent owns game selection, fresh review, production integration and all commits. No commit/push/provider/production data change by this lane. Shared-workspace unrelated edits preserved.
+
+COMPLETE: rules/package research; original-style tiny matched shells; pure fixture79checksPASS; bounded serialized-state/receipt-growth samples; initial12andrefined12sandboxed Chromium pointer/key tracesPASS plus6separatelygradedemulatedtouch tracesPASS across390x844/1920x1080 and2/6residents. Pure output is not persistence/authentication acceptance. Phone initial chess42.5px misses44px target; fullpagePNG height differs from viewport. Raw-history chess public projection11,729B exceeds8KiB in one legal trace. These are specific prototype defects/costs, not human or intrinsic game rankings.
+
+COMPLETE refinement: shared phone panelpadding12→4px gives chess44.5px, four50.86x44px, cards52x72px; all12target44gatesPASS, desktopunchanged, nohorizontaloverflow. All6touch traces capture real TouchEvents/pointerType=touch in emulatedphonecontexts. PhysicalphoneNOTRUN. Wholechessboard still needs scroll (40/64squares initiallyvisible). Original fullpage evidence and refined actual390x844PNGs/hashes retained. Browser/serverclosed; GPUreleased toparent. A default resized image preview looked misleading; reopening exactPNG at original resolution confirmed intactcontrols/DOMframing. No new app or screenshot defect was established and noextraGPUrunoccurred.
+
+REVIEW: independent fresh review parent-owned, NOT RUN by this lane. Factual packet: source/protocol/JSON artifacts; exclude game-comparison recommendation section and other verdicts. Parent should reproduce actionable findings. No physical phone, human preference, real multiplayer, existing-study-card integration, SQLite transaction, timer-downtime/revocation/abandonment acceptance.
+
+NEXT: parent fresh review and selection; this bounded prototype lane is complete. Reproduce actionable findings before production planning. No more broad trials are required by this spike. Current source/setup/probe commands are in tools/post-crit-game-spike/README.md. Scoped code syntax, localdoclinks, PNG dimensions/hashes and gitdiff--check passed. No owned server or browser process remains running.

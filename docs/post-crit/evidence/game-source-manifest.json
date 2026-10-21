@@ -1,0 +1,86 @@
+{
+  "at": "2026-10-21T14:21:46.062357+00:00",
+  "branch": "post-crit-improvements",
+  "HEAD": "d95055bd3a830d08ac14c25411b57fabda7d87bf",
+  "scope": "owned comparison files only; no production acceptance",
+  "sources": {
+    "tools/post-crit-game-spike/README.md": {
+      "bytes": 2444,
+      "lines": 21,
+      "sha256": "c096a9206a02a37c71ccde13105048df7bc1e7f4d3b736a75e25b703bc972fad"
+    },
+    "tools/post-crit-game-spike/app.mjs": {
+      "bytes": 6448,
+      "lines": 21,
+      "sha256": "84f72fe7f6e10eef8fafb3419909c4f52bd99281ff8127ad978c4253c4b8227c"
+    },
+    "tools/post-crit-game-spike/browser.mjs": {
+      "bytes": 8994,
+      "lines": 62,
+      "sha256": "ae87b8baa7b3fb6bda74826ac71b800e093dc27689d5204656bca4f5a2d4549b"
+    },
+    "tools/post-crit-game-spike/chess-LICENSE.txt": {
+      "bytes": 1315,
+      "lines": 23,
+      "sha256": "0b3a3c2b4432a26bb18f9d06f5bba4de015bcc980306b7db28b06025495e2186"
+    },
+    "tools/post-crit-game-spike/engine.mjs": {
+      "bytes": 6652,
+      "lines": 111,
+      "sha256": "44fbc18b85002c02f5d2a80751cc0dc7fd273420602f514425ba46bd319174c6"
+    },
+    "tools/post-crit-game-spike/index.html": {
+      "bytes": 1322,
+      "lines": 1,
+      "sha256": "50862e2ef5d2b542cdffad19868ba63b13098fdf24d4023bade3632f14bef5ad"
+    },
+    "tools/post-crit-game-spike/probe.mjs": {
+      "bytes": 9363,
+      "lines": 52,
+      "sha256": "b58d21bc7973b9f5784d181098a1e97af8366656e052c391ca97251c7b0c3b72"
+    },
+    "tools/post-crit-game-spike/server.mjs": {
+      "bytes": 922,
+      "lines": 6,
+      "sha256": "ee926d019d685c0927569f0cb09e8e25d11635997629928e6e46947fe5788241"
+    },
+    "tools/post-crit-game-spike/setup.mjs": {
+      "bytes": 1096,
+      "lines": 11,
+      "sha256": "6166890ce55736cb82787bb76d62b8d6b72f5965964760767c4cc3b1e5e7395f"
+    },
+    "tools/post-crit-game-spike/style.css": {
+      "bytes": 1934,
+      "lines": 3,
+      "sha256": "a9230d295967e9c9862d6ef072b3495da0f55f8e256588dbf6ac2c99fe8948fb"
+    },
+    "docs/post-crit/evidence/game-protocol.md": {
+      "bytes": 2965,
+      "sha256": "6f302839bb33fe4632fd7806aa2504a5af6896a905eb1d93a5f6cea1175df1fd"
+    },
+    "docs/post-crit/evidence/game-refinement-protocol.md": {
+      "bytes": 1646,
+      "sha256": "bb31fab408812e85b57cd2702ff49b1f285d269006db49b6ef73209c88dc0ed4"
+    },
+    "docs/post-crit/evidence/game-probe.json": {
+      "bytes": 12037,
+      "sha256": "38cf3a276b2f040749ba435d51b53273fb47d3e3d3b252ee25164c731423aee8"
+    },
+    "docs/post-crit/evidence/game-probe-initial-fail.json": {
+      "bytes": 8170,
+      "sha256": "168055bc61be7752369dd248cc206498f2c4730002c6605baee3dccccadbe5e7"
+    },
+    "docs/post-crit/evidence/game-browser-initial.json": {
+      "bytes": 93635,
+      "sha256": "a3b1ac045762ee2cba0a48edd378ff2d61f68120b25c096a2b35f2fa127b564b"
+    },
+    "docs/post-crit/evidence/game-browser-refined.json": {
+      "bytes": 98468,
+      "sha256": "b4813c86242a2da32e5253be532072d82de14cf66d862fb47aaedea2a2ea64ee"
+    },
+    "docs/post-crit/evidence/game-style-initial.css": {
+      "bytes": 1888,
+      "sha256": "2cdb422cd5fb8e3d3076699b55331b39bd7251cf0cc72a550a8091269e21b2d9"
+    }
+  }
+}

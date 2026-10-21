@@ -1,0 +1,4032 @@
+{
+  "at": "2026-10-21T13:57:25.319Z",
+  "runtime": "v24.21.0",
+  "status": "PASS",
+  "scope": "scripted Chromium localhost DOM shell; no physical phone/human/multiplayer acceptance",
+  "runs": [
+    {
+      "kind": "four",
+      "count": 2,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 25,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 73.578125,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 122.15625,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 170.734375,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 219.3125,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 267.890625,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 316.46875,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 48.578125,
+        "height": 44
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/four-2-390.png",
+      "screenshotSHA256": "354fd6422a5f1e17d85923e7438d0d189525cf07c7647ff6b0eecda8eb2fa0c2",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "four",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "four",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "board": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "p1",
+            "p2",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 1",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 2",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 1055,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 7,
+      "initialTargetCount": 7
+    },
+    {
+      "kind": "chess",
+      "count": 2,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        }
+      ],
+      "minTarget": {
+        "width": 42.5,
+        "height": 42.5
+      },
+      "target44": false,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/chess-2-390.png",
+      "screenshotSHA256": "d5856ee9d6dd70d761ea42b99db83573d1d36afb2d237411a4aacb8d0f336b49",
+      "pointerMoveActivations": 2,
+      "keyboardMoveActivations": 2,
+      "final": {
+        "kind": "chess",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "chess",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "initialFen": null,
+          "moves": [
+            {
+              "from": "e2",
+              "to": "e4"
+            },
+            {
+              "from": "e7",
+              "to": "e5"
+            }
+          ],
+          "clocks": [
+            179000,
+            179000
+          ],
+          "turnStartedAt": 2000
+        },
+        "metrics": {
+          "pointerActivations": 8,
+          "keyActivations": 2,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "e2 w p",
+              "method": "pointer"
+            },
+            {
+              "label": "e4",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "e7 b p",
+              "method": "keyboard"
+            },
+            {
+              "label": "e5",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 1136,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 40,
+      "initialTargetCount": 64
+    },
+    {
+      "kind": "cards",
+      "count": 2,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 25,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 85,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 145,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 205,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 265,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 52,
+        "height": 72
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/cards-2-390.png",
+      "screenshotSHA256": "7c79b84f3c960500c922f340f315eae1b84fddd4721446e92d7153f197e755f9",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "cards",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "cards",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "top": "2C",
+          "activeSuit": "C",
+          "passes": 0,
+          "counts": {
+            "p1": 4,
+            "p2": 4
+          },
+          "stockCount": 41,
+          "hand": []
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "A\u2663",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "2\u2663",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 946,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 5,
+      "initialTargetCount": 5
+    },
+    {
+      "kind": "four",
+      "count": 6,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 25,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 73.578125,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 122.15625,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 170.734375,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 219.3125,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 267.890625,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 48.578125,
+          "height": 44,
+          "x": 316.46875,
+          "y": 546.5,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 48.578125,
+        "height": 44
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/four-6-390.png",
+      "screenshotSHA256": "1d21e22e667b242f876bbcda196682cf07745576463b1167fdeb6eb018850be5",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "four",
+        "count": 6,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "four",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "board": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "p1",
+            "p2",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 1",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 2",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 1055,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 7,
+      "initialTargetCount": 7
+    },
+    {
+      "kind": "chess",
+      "count": 6,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 592.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 635.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 677.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 720.375,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 762.875,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 805.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 847.875,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 25,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 67.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 110,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 152.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 195,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 237.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 280,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        },
+        {
+          "target": "chess",
+          "width": 42.5,
+          "height": 42.5,
+          "x": 322.5,
+          "y": 890.375,
+          "fullyInInitialViewport": false
+        }
+      ],
+      "minTarget": {
+        "width": 42.5,
+        "height": 42.5
+      },
+      "target44": false,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/chess-6-390.png",
+      "screenshotSHA256": "2d7e5e113b86faa06257f6889503859420cffd03989ff40e594798c7bb3356cb",
+      "pointerMoveActivations": 2,
+      "keyboardMoveActivations": 2,
+      "final": {
+        "kind": "chess",
+        "count": 6,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "chess",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "initialFen": null,
+          "moves": [
+            {
+              "from": "e2",
+              "to": "e4"
+            },
+            {
+              "from": "e7",
+              "to": "e5"
+            }
+          ],
+          "clocks": [
+            179000,
+            179000
+          ],
+          "turnStartedAt": 2000
+        },
+        "metrics": {
+          "pointerActivations": 8,
+          "keyActivations": 2,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "e2 w p",
+              "method": "pointer"
+            },
+            {
+              "label": "e4",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "e7 b p",
+              "method": "keyboard"
+            },
+            {
+              "label": "e5",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 1136,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 40,
+      "initialTargetCount": 64
+    },
+    {
+      "kind": "cards",
+      "count": 6,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "visualWidth": 390,
+        "visualHeight": 844
+      },
+      "targets": [
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 25,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 85,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 145,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 205,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 265,
+          "y": 653.25,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 52,
+        "height": 72
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/cards-6-390.png",
+      "screenshotSHA256": "494b72ce8899acc8152173991cb16dc5a3305fe2d5e1bdf0b4a60d3ae7d6db30",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "cards",
+        "count": 6,
+        "actor": "p1",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p1"
+        },
+        "projection": {
+          "kind": "cards",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "turn": 1,
+          "result": {
+            "reason": "member-left",
+            "actor": "p1"
+          },
+          "top": "6H",
+          "activeSuit": "H",
+          "passes": 0,
+          "counts": {
+            "p1": 5,
+            "p2": 5,
+            "p3": 5,
+            "p4": 5,
+            "p5": 5,
+            "p6": 5
+          },
+          "stockCount": 20,
+          "hand": []
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Draw one",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "6\u2665",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 390,
+        "height": 946,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 5,
+      "initialTargetCount": 5
+    },
+    {
+      "kind": "four",
+      "count": 2,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 736,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 800,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 864,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 928,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 992,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 1056,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 1120,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 64,
+        "height": 44
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/four-2-1920.png",
+      "screenshotSHA256": "64b5a28feb5c68ab42721ba6523036e0a5c1e2b904fa49017d660661e55fb469",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "four",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "four",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "board": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "p1",
+            "p2",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 1",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 2",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1097,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 7,
+      "initialTargetCount": 7
+    },
+    {
+      "kind": "chess",
+      "count": 2,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 56,
+        "height": 56
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/chess-2-1920.png",
+      "screenshotSHA256": "206af076c1709cab2c8d4569751957bcba9d460fdd734886c3d8f2afce28f815",
+      "pointerMoveActivations": 2,
+      "keyboardMoveActivations": 2,
+      "final": {
+        "kind": "chess",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "chess",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "initialFen": null,
+          "moves": [
+            {
+              "from": "e2",
+              "to": "e4"
+            },
+            {
+              "from": "e7",
+              "to": "e5"
+            }
+          ],
+          "clocks": [
+            179000,
+            179000
+          ],
+          "turnStartedAt": 2000
+        },
+        "metrics": {
+          "pointerActivations": 8,
+          "keyActivations": 2,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "e2 w p",
+              "method": "pointer"
+            },
+            {
+              "label": "e4",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "e7 b p",
+              "method": "keyboard"
+            },
+            {
+              "label": "e5",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1147,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 64,
+      "initialTargetCount": 64
+    },
+    {
+      "kind": "cards",
+      "count": 2,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 525,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 585,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 645,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 705,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 765,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 52,
+        "height": 72
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/cards-2-1920.png",
+      "screenshotSHA256": "7283e5bb15db6c95c406a031fd4819314bef09dfbf301c2a1a4d90374146d57d",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "cards",
+        "count": 2,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "cards",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "top": "2C",
+          "activeSuit": "C",
+          "passes": 0,
+          "counts": {
+            "p1": 4,
+            "p2": 4
+          },
+          "stockCount": 41,
+          "hand": []
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "A\u2663",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "2\u2663",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1080,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 5,
+      "initialTargetCount": 5
+    },
+    {
+      "kind": "four",
+      "count": 6,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 736,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 800,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 864,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 928,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 992,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 1056,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "four",
+          "width": 64,
+          "height": 44,
+          "x": 1120,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 64,
+        "height": 44
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/four-6-1920.png",
+      "screenshotSHA256": "1fce665da0dca1e35555511fc51186749441d8167b4fcc14202c66b86a5e6ee7",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "four",
+        "count": 6,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "four",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "board": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "p1",
+            "p2",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 1",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "Drop column 2",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1097,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 7,
+      "initialTargetCount": 7
+    },
+    {
+      "kind": "chess",
+      "count": 6,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 472.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 528.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 584.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 640.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 696.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 752.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 808.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 736,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 792,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 848,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 904,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 960,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1016,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1072,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "chess",
+          "width": 56,
+          "height": 56,
+          "x": 1128,
+          "y": 864.125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 56,
+        "height": 56
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/chess-6-1920.png",
+      "screenshotSHA256": "adb63aa1f95c6a6090b0e70582253b8c71ce99ae7d5c6661369777b3c400ce82",
+      "pointerMoveActivations": 2,
+      "keyboardMoveActivations": 2,
+      "final": {
+        "kind": "chess",
+        "count": 6,
+        "actor": "p2",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p2"
+        },
+        "projection": {
+          "kind": "chess",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2"
+          ],
+          "turn": 0,
+          "result": {
+            "reason": "member-left",
+            "actor": "p2"
+          },
+          "initialFen": null,
+          "moves": [
+            {
+              "from": "e2",
+              "to": "e4"
+            },
+            {
+              "from": "e7",
+              "to": "e5"
+            }
+          ],
+          "clocks": [
+            179000,
+            179000
+          ],
+          "turnStartedAt": 2000
+        },
+        "metrics": {
+          "pointerActivations": 8,
+          "keyActivations": 2,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "e2 w p",
+              "method": "pointer"
+            },
+            {
+              "label": "e4",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "e7 b p",
+              "method": "keyboard"
+            },
+            {
+              "label": "e5",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1147,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 64,
+      "initialTargetCount": 64
+    },
+    {
+      "kind": "cards",
+      "count": 6,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "PASS",
+      "actualViewport": {
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1,
+        "visualWidth": 1920,
+        "visualHeight": 1080
+      },
+      "targets": [
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 525,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 585,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 645,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 705,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        },
+        {
+          "target": "cards",
+          "width": 52,
+          "height": 72,
+          "x": 765,
+          "y": 509.3125,
+          "fullyInInitialViewport": true
+        }
+      ],
+      "minTarget": {
+        "width": 52,
+        "height": 72
+      },
+      "target44": true,
+      "horizontalOverflow": false,
+      "screenshot": ".local/post-crit/game-spike/screenshots/cards-6-1920.png",
+      "screenshotSHA256": "4e7605f0f63c94e1f43225da4394ff6ad1ad7389dee2b704d79053e309db27ee",
+      "pointerMoveActivations": 1,
+      "keyboardMoveActivations": 1,
+      "final": {
+        "kind": "cards",
+        "count": 6,
+        "actor": "p1",
+        "joined": false,
+        "revision": 3,
+        "result": {
+          "reason": "member-left",
+          "actor": "p1"
+        },
+        "projection": {
+          "kind": "cards",
+          "session": "round-1",
+          "revision": 3,
+          "members": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "players": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "turn": 1,
+          "result": {
+            "reason": "member-left",
+            "actor": "p1"
+          },
+          "top": "6H",
+          "activeSuit": "H",
+          "passes": 0,
+          "counts": {
+            "p1": 5,
+            "p2": 5,
+            "p3": 5,
+            "p4": 5,
+            "p5": 5,
+            "p6": 5
+          },
+          "stockCount": 20,
+          "hand": []
+        },
+        "metrics": {
+          "pointerActivations": 7,
+          "keyActivations": 1,
+          "actions": [
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Draw one",
+              "method": "pointer"
+            },
+            {
+              "label": "Fixture: next actor",
+              "method": "pointer"
+            },
+            {
+              "label": "6\u2665",
+              "method": "keyboard"
+            },
+            {
+              "label": "Watch",
+              "method": "pointer"
+            },
+            {
+              "label": "Join",
+              "method": "pointer"
+            },
+            {
+              "label": "Leave",
+              "method": "pointer"
+            },
+            {
+              "label": "Return to My work",
+              "method": "pointer"
+            }
+          ]
+        }
+      },
+      "screenshotPixels": {
+        "width": 1920,
+        "height": 1080,
+        "capture": "fullPage; may exceed viewport height"
+      },
+      "initialTargetsFullyVisible": 5,
+      "initialTargetCount": 5
+    }
+  ],
+  "errors": [],
+  "browser": "153.0.8010.12",
+  "launch": {
+    "executablePath": "/home/lizhi/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "chromiumSandbox": true,
+    "args": [
+      "--use-angle=swiftshader"
+    ],
+    "headless": true
+  },
+  "protocolSHA256": "6f302839bb33fe4632fd7806aa2504a5af6896a905eb1d93a5f6cea1175df1fd",
+  "sources": {
+    "engine.mjs": "44fbc18b85002c02f5d2a80751cc0dc7fd273420602f514425ba46bd319174c6",
+    "app.mjs": "84f72fe7f6e10eef8fafb3419909c4f52bd99281ff8127ad978c4253c4b8227c",
+    "index.html": "50862e2ef5d2b542cdffad19868ba63b13098fdf24d4023bade3632f14bef5ad",
+    "style.css": "2cdb422cd5fb8e3d3076699b55331b39bd7251cf0cc72a550a8091269e21b2d9",
+    "server.mjs": "ee926d019d685c0927569f0cb09e8e25d11635997629928e6e46947fe5788241",
+    "browser.mjs": "5d3a7f629b2455c31ba3a526fa7399ad81f2cf2aa75a1f8010ffd5d2c1090dc9"
+  },
+  "provenanceNote": "Source hashes added immediately after run from unchanged owned shell files; style snapshot retained for bounded refinement."
+}
