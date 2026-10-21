@@ -1,33 +1,39 @@
 {
   "schemaVersion": 1,
-  "registeredAtUTC": "2026-10-07T01:17:56.243779+00:00",
-  "status": "READY_HELD_FOR_PARENT_GO",
+  "registeredAtUTC": "2026-10-21T20:15:28.112510+00:00",
+  "status": "PREPARED_HELD_FOR_PARENT_RUNTIME_FREEZE_REVIEW_AND_GO",
   "scope": "Controlled synthetic resource exercise; actual runtime host is recorded.",
   "durationSeconds": 300,
   "automaticRetry": false,
   "sourceHashes": {
     "Dockerfile": "db320fd8913c0ac2921e08c5ce3231ddfaba7b4f6cf7d2d19a9bb3b240bf4743",
-    "package.json": "190c691350392ff018fc08241c50a5f06a9f5527cb82a5f1a72aa0b1e1b65a09",
-    "pnpm-lock.yaml": "00daf7036a60683951034eb4fefd87bf09436353300eca61aab8338ddbacfedd",
+    "package.json": "21dd1a20d18203af9e23447cfd762d342267b7929f33a0a510c7ea4b5f0db194",
+    "pnpm-lock.yaml": "6533eca480d56d61cc2ab55cf2ff5591accbf17ccfe038756a5f9f7ce43080a8",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
     "public/house-game-rules.js": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf",
     "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
     "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
-    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
     "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
     "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
     "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
-    "src/board-store.ts": "8612adbaec2e436d894a175a9cf7e88eac74f832238ded3f1a03675141223025",
+    "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
     "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
-    "src/house-contract.ts": "cc699ad35afe66b4845230db6c87a1cd42cc0f4d74bd06a2df4c3c2ddb850778",
-    "src/house-realtime.ts": "ae737e65025b8eb5a3183bd7272d2f0f2f9aac4eb9dccd5550218db4b9901e9f",
-    "src/house-store.ts": "fcbb3ffc89b8168b82e4cd5613ad05068a707a15c9078971894b8462cd9072b4",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
     "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
     "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
-    "src/server.ts": "eaddea1ff50da84d4b0d07ca3ca28a9b835c64e6f37f3602adf9cec52c73ee65",
-    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a",
+    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+    "tools/board-resource-p7.mjs": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f"
   },
-  "sourceManifestSHA256": "5abf0f71155ed7648547dda309886f1136caf542fc06b9cd2549941e8236a01b",
-  "instrumentSHA256": "8dd77f0717121776839aa1a8cb4ad69cd28b87154dcdae4ffd1135064e37c6d1",
+  "sourceManifestSHA256": "1116e2a4263e8ffc33c425477c7269e3adec213eec89e1ed785dead88e5301b9",
+  "instrumentSHA256": "c23f8375e8f68dd79c7e9e64741b3fc6242f192eab07c17962a3d6aad1ed623d",
   "configuration": {
     "houses": 2,
     "membersPerHouse": 6,
@@ -131,56 +137,60 @@
     "run": "mise exec -- node tools/board-resource.mjs --run --go <protocolSHA256> --freeze <sourceManifestSHA256>",
     "selfCheck": "mise exec -- node tools/board-resource.mjs --self-check"
   },
-  "review": {
-    "kind": "Context-retaining independent instrument review",
-    "reviewer": "redesign_integrated_review",
-    "confirmedFindings": "Original reflection/deadline/protocol defects were reproduced and repaired. Later source controls found a feasible moving snapshot cutoff and compressed normal pointer arrivals after a 93 ms ACK; the specific historical failures remain unattributed. Quota-only matched diagnostics supported removing whole-scene patch churn. Real-service queued ping controls reproduced a false close below unchanged queue bounds. Contextual independent review checked exact quota/control/cutoff sources and actual controls; six stale-completion controls passed. All runtime bounds and full workload gates remain unchanged. Real current-subscription pressure fixture proved a large ACK plus legal transient presence filled the eight-packet queue below four MiB. Presence now coalesces while busy and flushes latest current-authorized state only to that view; reliable ACK/patch/chat packet and byte bounds are unchanged. Matching real house heartbeat controls support the same typed control-packet accounting. Fresh source review accepted authorization/epoch/listener cleanup, with strengthened automatic-drain grading required.",
-    "execution": "Original and quota-only shortened diagnostics, interrupted full candidate and explicit quiet-host retry remain preserved FAIL/DIAGNOSTIC. New candidate fixes confirmed transient presence pressure and current-connection pending state, generalizes only host reporting, and preserves all acceptance gates. Final local native/check gates and one controlled CI runner execution are pending; no local full retry is authorised."
+  "sourceFiles": [
+    "Dockerfile",
+    "package.json",
+    "pnpm-lock.yaml",
+    "public/assets/pictures/rainy-nook-v1.svg",
+    "public/house-game-rules.js",
+    "public/house-geometry.js",
+    "public/house-puzzle-content.js",
+    "public/house-puzzle-rules.js",
+    "public/house-room-content.js",
+    "public/house-version.js",
+    "src/activity-log.ts",
+    "src/board-contract.ts",
+    "src/board-receipt-codec.ts",
+    "src/board-service.ts",
+    "src/board-store.ts",
+    "src/domain.ts",
+    "src/house-contract.ts",
+    "src/house-puzzle-presence.ts",
+    "src/house-realtime.ts",
+    "src/house-store.ts",
+    "src/house-voice.ts",
+    "src/server-runtime.ts",
+    "src/server.ts",
+    "src/store.ts",
+    "tools/board-resource-p7.mjs"
+  ],
+  "sourceBinding": {
+    "status": "FROZEN_PARENT_AUTHORIZED",
+    "boundAtUTC": "2026-10-21T21:55:43.063224+00:00",
+    "head": "c55d5e01ad5cd86aa5634a79c2b0b5bf751d8e0f",
+    "reason": "Parent confirmed final native/service closure and explicit sequential sustained resource GO; current package/lock including dev-only security update bound. No criterion or cadence changes.",
+    "requiredFiles": 25,
+    "node": "v24.21.0",
+    "vitest": "5.0.3",
+    "coverage": "5.0.3",
+    "vite": "8.3.3"
   },
-  "instrumentRevision": {
-    "number": 2,
-    "registeredAtUTC": "2026-10-07T09:47:38.786845+00:00",
-    "previousProtocolSHA256": "1ef473487e69243cfc338710246354da125dcbdce4356ec93a8b15824eddb540",
-    "previousInstrumentSHA256": "6130e233edeb296c15dbf028103ea5a362de373ecf62b9d5539f7a0df1c71454",
-    "change": "Per-view unresolved delivery index; full delivery ledger, observation semantics, scheduling, bounds and workload criteria preserved.",
-    "review": "Fresh no-history source review; exact equivalence/negative controls and technical operation-count comparison. Full resource performance not yet verified."
+  "storageAcceptance": {
+    "registeredAtUTC": "2026-10-21T20:15:28.112510+00:00",
+    "maximumGrowthBytes": 16777216,
+    "scope": "Sum board+house retained receipt response octet_length growth from post-bootstrap/pre-measurement baseline through final live sample; includes tagged BLOB and actual SQLite TEXT encoding. New stricter engineering target, not lifetime disk/spare volume/billing proof.",
+    "measurement": "Baseline/final type/count/actual stored byte sums; every100ms sample records each of3DB main/WAL/SHM logical+allocated bytes and sampled maxima, plus after-server-close/pre-decode and post-decode file snapshots. No decoded JSON size substituted for stored/allocation bytes.",
+    "exactReplay": "Capture every successful boardACK from original actor/request/body by actor+commandID digest; identical duplicates dedup, different ACK never overwrites. Timed captures hash only after original receipt/reflection observation points. After server exit, bounded64-row read-only batches validate stored metadata, decode via actual codec and compare original digest; full distinct row coverage required. No full response history retained in memory.",
+    "maximumLedgerEntries": 10000,
+    "decodeBatchMaximum": 64,
+    "originalGateChanges": "None. Original21gate executable line, cadence/deadline/fault/duration/capacity/visibility/RSS inputs remain unchanged. Two independent prospective storage/exact-replay gates are added."
   },
-  "assetAllocationRevision": {
-    "registeredAtUTC": "2026-10-08T02:22:27.966765+00:00",
-    "previousProtocolSHA256": "98e62217a1b8482ba18e8005993888895f6231ee71af514db157ec298b29fe23",
-    "change": "Metadata-only existing asset lookup; exactly bounded view of independently owned native SQLite BLOB. Node flags, workload and every acceptance criterion unchanged.",
-    "evidence": "Node24.21.0 primary implementation, native lifetime/isolation controls and fresh review; sustained RSS benefit not yet verified."
+  "p7Preparation": {
+    "preparedAtUTC": "2026-10-21T20:15:28.112510+00:00",
+    "priorEvidence": "docs/post-crit/evidence/p7-resource-preimage-manifest.json",
+    "phase": "PREPARE_ONLY; no services or300s run launched. Parent will refresh runtime source manifest and independently review before explicit GO.",
+    "runtimeBudget": "Existing server-only semi12, generator unflagged.",
+    "expectedGateCount": 23
   },
-  "serverRuntimeRevision": {
-    "date": "2026-10-12",
-    "setting": "server-only --max-semi-space-size=12",
-    "status": "prospective candidate; full CI required",
-    "reason": "16MiB produced real RSS212.195MiB against210;8MiB previously met memory but failed pacing.12MiB is a single-factor intermediate candidate, not a verified repair.",
-    "preserved": "all workload/duration/210MiB/input/delivery/queue/zero-skips criteria unchanged; generator unflagged"
-  },
-  "postCritResourceRevision": {
-    "registeredAtUTC": "2026-10-21T16:50:22.085029+00:00",
-    "status": "PREPARED_HELD_FOR_FINAL_RUNTIME_FREEZE_AND_PARENT_GO",
-    "previousProtocolSHA256": "1f2cf6b4312f02552a802fbf481f739a661aeab4485ea3c1f4d52d3ee2b3a414",
-    "preservationManifest": "docs/post-crit/evidence/resource-pre-adaptation-manifest.json",
-    "change": "Exact current house clients send auth.worldVersion; board subscription remains independent. Source manifest adds game rules, room content, world version and voice. One instrument accepts an explicit alternate protocol; default workload and all original criteria unchanged.",
-    "review": "Fresh no-history Astra/high review plus contextual hash-shape/test-capture recheck complete;22 focused tests PASS. Live game orchestration/storage remains for full combined run.",
-    "runtime": "Actual server-only --max-semi-space-size=12; generator unflagged.",
-    "runtimeRebinding": {
-      "reboundAtUTC": "2026-10-21T17:16:18.841595+00:00",
-      "previousSourceManifestSHA256": "b7bba826b52f17efb97682460816fe4e50532e6b8a9e8ee06ff1dde0caa157d1",
-      "changedSources": [
-        "public/house-game-rules.js"
-      ],
-      "reason": "Parent-owned per-round timestamp floor prevents persisted lastMoveAt preceding startedAt after civil-clock rollback; no schema/deadline/criteria change. Parent reports six meaningful RED controls followed by affected rules/store/socket GREEN."
-    }
-  },
-  "combinedCommandBindingRepair": {
-    "registeredAtUTC": "2026-10-21T17:52:29.614615+00:00",
-    "previousInstrumentSHA256": "7584bce6e3814ea0d5da7e967cf44e9ce6d10a5dd6483788c3faa18ea37cd517",
-    "previousCombinedProtocolSHA256": "4af229e040f1a44a93c4d5e838c576942fa38e0b5c0b7608c74ba6ecfc64e76f",
-    "change": "Sole instrument edit adds required houseId:h.id to the combined-only game command. Original default path, runtime source, all original and game criteria, and scheduling unchanged.",
-    "originalAcceptedRecord": "docs/post-crit/evidence/resource-original-pass.protocol.json and resource-original-pass.results.json retain exact7584-instrument baseline PASS. Current binding is prospective; not a claim that the revised instrument repeated that original run.",
-    "status": "PREPARED_HELD_FOR_TARGETED_REVIEW_AND_EXPLICIT_PARENT_GO"
-  }
+  "baseWorkloadRegisteredAtUTC": "2026-10-07T01:17:56.243779+00:00"
 }

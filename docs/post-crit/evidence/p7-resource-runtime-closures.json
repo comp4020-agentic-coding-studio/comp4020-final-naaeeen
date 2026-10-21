@@ -1,0 +1,28 @@
+{
+  "checkedAtUTC": "2026-10-21T22:12:49.033736+00:00",
+  "activeResourceProcesses": 0,
+  "closures": [
+    {
+      "scenario": "p7-original",
+      "launchedAtUTC": "2026-10-21T21:56:40.430286+00:00",
+      "generatorPID": 119019,
+      "serverPID": 119043,
+      "protocolSHA256": "bf34c4c20aa83d2e6951c63fe7cfec85e6e7e200d9f4379c028eb103028c2890",
+      "exitCode": 0,
+      "checkedAtUTC": "2026-10-21T22:01:41.589062+00:00",
+      "generatorProcExists": false,
+      "serverProcExists": false
+    },
+    {
+      "scenario": "p7-combined",
+      "launchedAtUTC": "2026-10-21T22:03:03.169698+00:00",
+      "generatorPID": 119213,
+      "serverPID": 119238,
+      "protocolSHA256": "530686461dd3b91a558a3dc33c92eb8e549de362dd90ccb9ccfaa81fe18bedc2",
+      "exitCode": 0,
+      "checkedAtUTC": "2026-10-21T22:08:04.563415+00:00",
+      "generatorProcExists": false,
+      "serverProcExists": false
+    }
+  ]
+}

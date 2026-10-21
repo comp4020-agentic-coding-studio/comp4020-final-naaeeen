@@ -16,3 +16,8 @@ docs/crit-9/round-2/evidence/delivery-probe/first-run-precomputed-calibration/pr
 # Frozen unified-diff evidence uses a single space for blank context lines.
 # Preserve its bytes; normal source whitespace and credential checks still apply.
 docs/post-crit/evidence/*.patch -text whitespace=-blank-at-eol
+
+# Preserve the recorded bytes of these two archived protocol preparation files.
+# Ordinary source, whitespace and secret checks remain enabled.
+docs/post-crit/evidence/picture-group-native-preparation-v1/preparation.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+docs/post-crit/evidence/picture-group-native-preparation-v1/protocol.md -text whitespace=trailing-space,space-before-tab,cr-at-eol

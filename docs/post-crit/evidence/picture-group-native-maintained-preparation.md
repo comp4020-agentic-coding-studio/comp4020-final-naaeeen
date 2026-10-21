@@ -1,0 +1,16 @@
+# Compact maintained three-contributor regression preparation
+
+Ownership extension from root: tests/e2e/picture-table.spec.ts only. The case follows existing configured baseURL, pinned Playwright/browser configuration and house-journey admission/settings/close helpers. It creates three real identities in a three-capacity house, opens Watch, explicitly Starts/Joins, accepts one ordinary piece per authenticated author, explicitly Leaves the third participant, natively reopens the nearby table with E, then accepts another peer's fourth piece while the leaver stays Watch. Authenticated read-only snapshots bind self/house/piece/destination/actor and preserve earlier placements. Successful attribution JSON is attached through the ordinary test artifact API.
+
+Inactive views use the ordinary Pause and options UI while preserving sessions/consent; the current peer uses Resume/Reopen. Two1280x800 pages and a390x844 touch page use native controls. This is a compact capability regression, not rendering performance. The real six-identity reload/completion task is already recorded separately; reload is intentionally omitted from the60s maintained case. Based on the proven first-three admissions/routes plus Leave/peer continuation, expected scope is roughly40–50s on the same host; this is an estimate, not an executed maintained-test duration.
+
+No timeout override is added: existing60s per-test/current10s expectations and30s physical table arrival remain. Snapshot GETs explicitly bound10s. The global CI300s setting, browser flags, cohort selection and production are unchanged by this worker. Root owns tools/ci-browser.sh selection and actual cohort execution.
+
+Preparation only: Node24 `--check tests/e2e/picture-table.spec.ts` passed, and git diff --check passed. Typecheck/browser execution are NOT RUN while the UI worker owns the sole native lane. Root may now review/typecheck or release an execution slot. No further browser was launched after the final six-person task closed.
+
+
+## Separate solo-completion regression preparation
+
+Prior three-contributor-only spec SHA256: 3bb4ec639a7331b2af67ffd30c8d565ab8b530b79e44b611e93bd847bef2a523. Its native task is preserved; only the shared snapshot type gains the actual completed field. The new single-resident case is separate and uses one real identity in a two-capacity house, ordinary admission/Places/Start/Join and all24 native piece placements through the same helper/paging. There is no API seeding or fake participant. It verifies the server completed flag/all24 same-author placements, visible completed board with24 placed cells and decoded illustration, visible completion copy/Watching0, hidden Join/Leave and visible enabled Return. Its attribution JSON is attached as a soloUI regression artifact, distinct from six-contributor evidence.
+
+No test timeout override, config/cohort/global300 change, production change or browser launch was made. The existing60s/10s/30s bounds remain. Root owns execution and may run typecheck with other prepared changes. Current two-case spec SHA256: 65482db587bddc78c561931126a2d8cf498345cd65fa71a0f73b9a7b050bb034. This preparation record preserves the prior estimate and prior unexecuted scope above; execution claims will come only from the parent's actual maintained cohort.

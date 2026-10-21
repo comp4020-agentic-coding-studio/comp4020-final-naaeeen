@@ -1,0 +1,36 @@
+{
+  "startedAt": "2026-10-21T21:22:04.957313+00:00",
+  "finishedAt": "2026-10-21T21:24:33.694915+00:00",
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "playwright",
+    "test",
+    "tests/e2e/ci-core.spec.ts",
+    "tests/e2e/first-night.spec.ts",
+    "tests/e2e/board.spec.ts",
+    "tests/e2e/title-dialog.spec.ts",
+    "tests/e2e/break-and-voice.spec.ts",
+    "tests/e2e/picture-table.spec.ts",
+    "tests/e2e/board-receipt-recovery.spec.ts",
+    "--reporter=json"
+  ],
+  "CI": "true",
+  "appURL": "http://127.0.0.1:4108",
+  "exitCode": 0,
+  "stats": {
+    "startTime": "2026-10-21T21:22:07.344Z",
+    "duration": 149938.38999999998,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceStable": true,
+  "sourceFiles": 507,
+  "launcherPrefix": "\u2713 Lockfile passes supply-chain policies (verified 14d ago)\nLockfile is up to date, resolution step is skipped\nAlready up to date\n\n. prepare$ git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath .githooks || true\n. prepare: Done\nDone in 685ms using pnpm v11.9.0\n",
+  "launcherStdoutSHA256": "27c0cdb1547ff2ca2e919ab9bb1cf0c3d1ceed13656436765569954faf6ae9d7"
+}

@@ -1,0 +1,9 @@
+{
+  "classification": "INFRASTRUCTURE_FAILURE",
+  "stage": "isolated fixture startup",
+  "observed": "The configured data directory must already exist.",
+  "cause": "Parent created the launcher folder but omitted its new synthetic data subdirectory. The application correctly refused an absent data path.",
+  "applicationTests": "NOT_RUN",
+  "repair": "Created only .local/post-crit/p7-integrated/data; original preview and production data untouched.",
+  "firstPid": 98182
+}

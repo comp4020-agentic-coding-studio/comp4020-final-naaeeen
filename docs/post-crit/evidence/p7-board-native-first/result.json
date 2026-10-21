@@ -1,0 +1,197 @@
+{
+  "config": {
+    "argv": [
+      "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/node_modules/@playwright/test/cli.js",
+      "test",
+      "tests/e2e/board.spec.ts",
+      "tests/e2e/board-receipt-recovery.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/home/lizhi/comp4020/comp4020-final-naaeeen/playwright.config.ts",
+    "rootDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-board-native-first/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "board-receipt-recovery.spec.ts",
+      "file": "board-receipt-recovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a lost board reply replays its original receipt after a peer addition and keeps authored export",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5039,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T20:33:42.275Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "receipt-recovery-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY29wZSI6ICJUd28gbmF0aXZlIGJyb3dzZXIgaWRlbnRpdGllcywgY29udHJvbGxlZCBsb3N0IEhUVFAgcmVwbHksIHJlYWwgc2VydmljZSBhbmQgb3JkaW5hcnkgcmV0cnkvZXhwb3J0L3JlbG9hZC4gUGVlciBhZGRzIGEgc2VwYXJhdGUgbm90ZTsgc2FtZS1vYmplY3QgcmVwbGFjZW1lbnQgYW5kIGV4cGlyeSByZW1haW4gc3RvcmUvc2VydmljZSB0ZXN0cy4iLAogICJob3VzZUlkIjogIjc5YTlkYmFhLWFkZjYtNGFmOC1hZDg5LTM1YzcwN2Y3YzU3ZiIsCiAgImF1dGhvcklkIjogIjhjOGJjYWNjLTUwNTUtNDIwMy1iZDEyLTUwMWFlZTJjMjBjNCIsCiAgIm9yaWdpbmFsIjogewogICAgImlkIjogIjdlNDAyMjlmLTQ2OTQtNGQ0MC1hOTM5LTgzNDA4ZWJhYTY0YSIsCiAgICAiaG91c2VJZCI6ICI3OWE5ZGJhYS1hZGY2LTRhZjgtYWQ4OS0zNWM3MDdmN2M1N2YiLAogICAgImVsZW1lbnRzIjogWwogICAgICB7CiAgICAgICAgImlkIjogImJsdWxuUFJqem14ZnF5UTM1eS1taCIsCiAgICAgICAgInR5cGUiOiAicmVjdGFuZ2xlIiwKICAgICAgICAieCI6IC0xNDAsCiAgICAgICAgInkiOiAtMTEwLAogICAgICAgICJ3aWR0aCI6IDI4MCwKICAgICAgICAiaGVpZ2h0IjogMjIwLAogICAgICAgICJhbmdsZSI6IDAsCiAgICAgICAgInN0cm9rZUNvbG9yIjogIiNiNGE4ODciLAogICAgICAgICJiYWNrZ3JvdW5kQ29sb3IiOiAiI2ZmZjNiZiIsCiAgICAgICAgImZpbGxTdHlsZSI6ICJzb2xpZCIsCiAgICAgICAgInN0cm9rZVdpZHRoIjogMSwKICAgICAgICAic3Ryb2tlU3R5bGUiOiAic29saWQiLAogICAgICAgICJyb3VnaG5lc3MiOiAwLAogICAgICAgICJvcGFjaXR5IjogMTAwLAogICAgICAgICJncm91cElkcyI6IFtdLAogICAgICAgICJmcmFtZUlkIjogbnVsbCwKICAgICAgICAiaW5kZXgiOiAiYTAiLAogICAgICAgICJyb3VuZG5lc3MiOiB7CiAgICAgICAgICAidHlwZSI6IDMKICAgICAgICB9LAogICAgICAgICJzZWVkIjogMTE2OTA0MjE2MywKICAgICAgICAidmVyc2lvbiI6IDIsCiAgICAgICAgInZlcnNpb25Ob25jZSI6IDE0MDY0MzE2NzcsCiAgICAgICAgImlzRGVsZXRlZCI6IGZhbHNlLAogICAgICAgICJib3VuZEVsZW1lbnRzIjogWwogICAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJ0ZXh0IiwKICAgICAgICAgICAgImlkIjogIlp4VjVnYlNxQW9hX3FvblU2SDNGMiIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJ1cGRhdGVkIjogMTc5MjYxNDgyNTA1NywKICAgICAgICAibGluayI6IG51bGwsCiAgICAgICAgImxvY2tlZCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAiWnhWNWdiU3FBb2FfcW9uVTZIM0YyIiwKICAgICAgICAidHlwZSI6ICJ0ZXh0IiwKICAgICAgICAieCI6IC0xMzUsCiAgICAgICAgInkiOiAtMTA1LAogICAgICAgICJ3aWR0aCI6IDI0Mi41NzgxMjUsCiAgICAgICAgImhlaWdodCI6IDY5LAogICAgICAgICJhbmdsZSI6IDAsCiAgICAgICAgInN0cm9rZUNvbG9yIjogIiMzNTQyMzciLAogICAgICAgICJiYWNrZ3JvdW5kQ29sb3IiOiAidHJhbnNwYXJlbnQiLAogICAgICAgICJmaWxsU3R5bGUiOiAic29saWQiLAogICAgICAgICJzdHJva2VXaWR0aCI6IDIsCiAgICAgICAgInN0cm9rZVN0eWxlIjogInNvbGlkIiwKICAgICAgICAicm91Z2huZXNzIjogMSwKICAgICAgICAib3BhY2l0eSI6IDEwMCwKICAgICAgICAiZ3JvdXBJZHMiOiBbXSwKICAgICAgICAiZnJhbWVJZCI6IG51bGwsCiAgICAgICAgImluZGV4IjogImExIiwKICAgICAgICAicm91bmRuZXNzIjogbnVsbCwKICAgICAgICAic2VlZCI6IDE0NjI5MTYyNDMsCiAgICAgICAgInZlcnNpb24iOiAzLAogICAgICAgICJ2ZXJzaW9uTm9uY2UiOiA2MzMzNTg4OTksCiAgICAgICAgImlzRGVsZXRlZCI6IGZhbHNlLAogICAgICAgICJib3VuZEVsZW1lbnRzIjogbnVsbCwKICAgICAgICAidXBkYXRlZCI6IDE3OTI2MTQ4MjUwNjAsCiAgICAgICAgImxpbmsiOiBudWxsLAogICAgICAgICJsb2NrZWQiOiBmYWxzZSwKICAgICAgICAidGV4dCI6ICJLZWVwIHRoZSBhY2NlcHRlZCBpZGVhLlxuS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS5cbktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuIiwKICAgICAgICAiZm9udFNpemUiOiAyMCwKICAgICAgICAiZm9udEZhbWlseSI6IDIsCiAgICAgICAgInRleHRBbGlnbiI6ICJsZWZ0IiwKICAgICAgICAidmVydGljYWxBbGlnbiI6ICJ0b3AiLAogICAgICAgICJjb250YWluZXJJZCI6ICJibHVsblBSanpteGZxeVEzNXktbWgiLAogICAgICAgICJvcmlnaW5hbFRleHQiOiAiS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS5cbktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuXG5LZWVwIHRoZSBhY2NlcHRlZCBpZGVhLiIsCiAgICAgICAgImF1dG9SZXNpemUiOiB0cnVlLAogICAgICAgICJsaW5lSGVpZ2h0IjogMS4xNQogICAgICB9CiAgICBdCiAgfSwKICAiYWNjZXB0ZWQiOiB7CiAgICAib2siOiB0cnVlLAogICAgImlkIjogIjdlNDAyMjlmLTQ2OTQtNGQ0MC1hOTM5LTgzNDA4ZWJhYTY0YSIsCiAgICAiaG91c2VJZCI6ICI3OWE5ZGJhYS1hZGY2LTRhZjgtYWQ4OS0zNWM3MDdmN2M1N2YiLAogICAgInNlcXVlbmNlIjogMSwKICAgICJlbGVtZW50cyI6IFsKICAgICAgewogICAgICAgICJhbmdsZSI6IDAsCiAgICAgICAgImJhY2tncm91bmRDb2xvciI6ICIjZmZmM2JmIiwKICAgICAgICAiYm91bmRFbGVtZW50cyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImlkIjogIlp4VjVnYlNxQW9hX3FvblU2SDNGMiIsCiAgICAgICAgICAgICJ0eXBlIjogInRleHQiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAiZmlsbFN0eWxlIjogInNvbGlkIiwKICAgICAgICAiZnJhbWVJZCI6IG51bGwsCiAgICAgICAgImdyb3VwSWRzIjogW10sCiAgICAgICAgImhlaWdodCI6IDIyMCwKICAgICAgICAiaWQiOiAiYmx1bG5QUmp6bXhmcXlRMzV5LW1oIiwKICAgICAgICAiaW5kZXgiOiAiYTAiLAogICAgICAgICJpc0RlbGV0ZWQiOiBmYWxzZSwKICAgICAgICAibGluayI6IG51bGwsCiAgICAgICAgImxvY2tlZCI6IGZhbHNlLAogICAgICAgICJvcGFjaXR5IjogMTAwLAogICAgICAgICJyb3VnaG5lc3MiOiAwLAogICAgICAgICJyb3VuZG5lc3MiOiB7CiAgICAgICAgICAidHlwZSI6IDMKICAgICAgICB9LAogICAgICAgICJzZWVkIjogMTE2OTA0MjE2MywKICAgICAgICAic3Ryb2tlQ29sb3IiOiAiI2I0YTg4NyIsCiAgICAgICAgInN0cm9rZVN0eWxlIjogInNvbGlkIiwKICAgICAgICAic3Ryb2tlV2lkdGgiOiAxLAogICAgICAgICJ0eXBlIjogInJlY3RhbmdsZSIsCiAgICAgICAgInVwZGF0ZWQiOiAxNzkyNjE0ODI1MDU3LAogICAgICAgICJ2ZXJzaW9uIjogMiwKICAgICAgICAidmVyc2lvbk5vbmNlIjogMTQwNjQzMTY3NywKICAgICAgICAid2lkdGgiOiAyODAsCiAgICAgICAgIngiOiAtMTQwLAogICAgICAgICJ5IjogLTExMAogICAgICB9LAogICAgICB7CiAgICAgICAgImFuZ2xlIjogMCwKICAgICAgICAiYXV0b1Jlc2l6ZSI6IHRydWUsCiAgICAgICAgImJhY2tncm91bmRDb2xvciI6ICJ0cmFuc3BhcmVudCIsCiAgICAgICAgImJvdW5kRWxlbWVudHMiOiBudWxsLAogICAgICAgICJjb250YWluZXJJZCI6ICJibHVsblBSanpteGZxeVEzNXktbWgiLAogICAgICAgICJmaWxsU3R5bGUiOiAic29saWQiLAogICAgICAgICJmb250RmFtaWx5IjogMiwKICAgICAgICAiZm9udFNpemUiOiAyMCwKICAgICAgICAiZnJhbWVJZCI6IG51bGwsCiAgICAgICAgImdyb3VwSWRzIjogW10sCiAgICAgICAgImhlaWdodCI6IDY5LAogICAgICAgICJpZCI6ICJaeFY1Z2JTcUFvYV9xb25VNkgzRjIiLAogICAgICAgICJpbmRleCI6ICJhMSIsCiAgICAgICAgImlzRGVsZXRlZCI6IGZhbHNlLAogICAgICAgICJsaW5lSGVpZ2h0IjogMS4xNSwKICAgICAgICAibGluayI6IG51bGwsCiAgICAgICAgImxvY2tlZCI6IGZhbHNlLAogICAgICAgICJvcGFjaXR5IjogMTAwLAogICAgICAgICJvcmlnaW5hbFRleHQiOiAiS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS5cbktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuXG5LZWVwIHRoZSBhY2NlcHRlZCBpZGVhLiIsCiAgICAgICAgInJvdWdobmVzcyI6IDEsCiAgICAgICAgInJvdW5kbmVzcyI6IG51bGwsCiAgICAgICAgInNlZWQiOiAxNDYyOTE2MjQzLAogICAgICAgICJzdHJva2VDb2xvciI6ICIjMzU0MjM3IiwKICAgICAgICAic3Ryb2tlU3R5bGUiOiAic29saWQiLAogICAgICAgICJzdHJva2VXaWR0aCI6IDIsCiAgICAgICAgInRleHQiOiAiS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS5cbktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuXG5LZWVwIHRoZSBhY2NlcHRlZCBpZGVhLiIsCiAgICAgICAgInRleHRBbGlnbiI6ICJsZWZ0IiwKICAgICAgICAidHlwZSI6ICJ0ZXh0IiwKICAgICAgICAidXBkYXRlZCI6IDE3OTI2MTQ4MjUwNjAsCiAgICAgICAgInZlcnNpb24iOiAzLAogICAgICAgICJ2ZXJzaW9uTm9uY2UiOiA2MzMzNTg4OTksCiAgICAgICAgInZlcnRpY2FsQWxpZ24iOiAidG9wIiwKICAgICAgICAid2lkdGgiOiAyNDIuNTc4MTI1LAogICAgICAgICJ4IjogLTEzNSwKICAgICAgICAieSI6IC0xMDUKICAgICAgfQogICAgXQogIH0sCiAgInJlcGxheWVkIjogewogICAgIm9rIjogdHJ1ZSwKICAgICJpZCI6ICI3ZTQwMjI5Zi00Njk0LTRkNDAtYTkzOS04MzQwOGViYWE2NGEiLAogICAgImhvdXNlSWQiOiAiNzlhOWRiYWEtYWRmNi00YWY4LWFkODktMzVjNzA3ZjdjNTdmIiwKICAgICJzZXF1ZW5jZSI6IDEsCiAgICAiZWxlbWVudHMiOiBbCiAgICAgIHsKICAgICAgICAiYW5nbGUiOiAwLAogICAgICAgICJiYWNrZ3JvdW5kQ29sb3IiOiAiI2ZmZjNiZiIsCiAgICAgICAgImJvdW5kRWxlbWVudHMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJpZCI6ICJaeFY1Z2JTcUFvYV9xb25VNkgzRjIiLAogICAgICAgICAgICAidHlwZSI6ICJ0ZXh0IgogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgImZpbGxTdHlsZSI6ICJzb2xpZCIsCiAgICAgICAgImZyYW1lSWQiOiBudWxsLAogICAgICAgICJncm91cElkcyI6IFtdLAogICAgICAgICJoZWlnaHQiOiAyMjAsCiAgICAgICAgImlkIjogImJsdWxuUFJqem14ZnF5UTM1eS1taCIsCiAgICAgICAgImluZGV4IjogImEwIiwKICAgICAgICAiaXNEZWxldGVkIjogZmFsc2UsCiAgICAgICAgImxpbmsiOiBudWxsLAogICAgICAgICJsb2NrZWQiOiBmYWxzZSwKICAgICAgICAib3BhY2l0eSI6IDEwMCwKICAgICAgICAicm91Z2huZXNzIjogMCwKICAgICAgICAicm91bmRuZXNzIjogewogICAgICAgICAgInR5cGUiOiAzCiAgICAgICAgfSwKICAgICAgICAic2VlZCI6IDExNjkwNDIxNjMsCiAgICAgICAgInN0cm9rZUNvbG9yIjogIiNiNGE4ODciLAogICAgICAgICJzdHJva2VTdHlsZSI6ICJzb2xpZCIsCiAgICAgICAgInN0cm9rZVdpZHRoIjogMSwKICAgICAgICAidHlwZSI6ICJyZWN0YW5nbGUiLAogICAgICAgICJ1cGRhdGVkIjogMTc5MjYxNDgyNTA1NywKICAgICAgICAidmVyc2lvbiI6IDIsCiAgICAgICAgInZlcnNpb25Ob25jZSI6IDE0MDY0MzE2NzcsCiAgICAgICAgIndpZHRoIjogMjgwLAogICAgICAgICJ4IjogLTE0MCwKICAgICAgICAieSI6IC0xMTAKICAgICAgfSwKICAgICAgewogICAgICAgICJhbmdsZSI6IDAsCiAgICAgICAgImF1dG9SZXNpemUiOiB0cnVlLAogICAgICAgICJiYWNrZ3JvdW5kQ29sb3IiOiAidHJhbnNwYXJlbnQiLAogICAgICAgICJib3VuZEVsZW1lbnRzIjogbnVsbCwKICAgICAgICAiY29udGFpbmVySWQiOiAiYmx1bG5QUmp6bXhmcXlRMzV5LW1oIiwKICAgICAgICAiZmlsbFN0eWxlIjogInNvbGlkIiwKICAgICAgICAiZm9udEZhbWlseSI6IDIsCiAgICAgICAgImZvbnRTaXplIjogMjAsCiAgICAgICAgImZyYW1lSWQiOiBudWxsLAogICAgICAgICJncm91cElkcyI6IFtdLAogICAgICAgICJoZWlnaHQiOiA2OSwKICAgICAgICAiaWQiOiAiWnhWNWdiU3FBb2FfcW9uVTZIM0YyIiwKICAgICAgICAiaW5kZXgiOiAiYTEiLAogICAgICAgICJpc0RlbGV0ZWQiOiBmYWxzZSwKICAgICAgICAibGluZUhlaWdodCI6IDEuMTUsCiAgICAgICAgImxpbmsiOiBudWxsLAogICAgICAgICJsb2NrZWQiOiBmYWxzZSwKICAgICAgICAib3BhY2l0eSI6IDEwMCwKICAgICAgICAib3JpZ2luYWxUZXh0IjogIktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuXG5LZWVwIHRoZSBhY2NlcHRlZCBpZGVhLlxuS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS4iLAogICAgICAgICJyb3VnaG5lc3MiOiAxLAogICAgICAgICJyb3VuZG5lc3MiOiBudWxsLAogICAgICAgICJzZWVkIjogMTQ2MjkxNjI0MywKICAgICAgICAic3Ryb2tlQ29sb3IiOiAiIzM1NDIzNyIsCiAgICAgICAgInN0cm9rZVN0eWxlIjogInNvbGlkIiwKICAgICAgICAic3Ryb2tlV2lkdGgiOiAyLAogICAgICAgICJ0ZXh0IjogIktlZXAgdGhlIGFjY2VwdGVkIGlkZWEuXG5LZWVwIHRoZSBhY2NlcHRlZCBpZGVhLlxuS2VlcCB0aGUgYWNjZXB0ZWQgaWRlYS4iLAogICAgICAgICJ0ZXh0QWxpZ24iOiAibGVmdCIsCiAgICAgICAgInR5cGUiOiAidGV4dCIsCiAgICAgICAgInVwZGF0ZWQiOiAxNzkyNjE0ODI1MDYwLAogICAgICAgICJ2ZXJzaW9uIjogMywKICAgICAgICAidmVyc2lvbk5vbmNlIjogNjMzMzU4ODk5LAogICAgICAgICJ2ZXJ0aWNhbEFsaWduIjogInRvcCIsCiAgICAgICAgIndpZHRoIjogMjQyLjU3ODEyNSwKICAgICAgICAieCI6IC0xMzUsCiAgICAgICAgInkiOiAtMTA1CiAgICAgIH0KICAgIF0KICB9LAogICJhdHRlbXB0cyI6IFsKICAgIHsKICAgICAgImlkIjogIjdlNDAyMjlmLTQ2OTQtNGQ0MC1hOTM5LTgzNDA4ZWJhYTY0YSIsCiAgICAgICJyZXF1ZXN0RGlnZXN0IjogIjVlNTQzZGFhMjE0YTcxZDQzNjU5MmVmZDU4ZTNiYTNhMjdlYTRhMTQ2NGY5YzFmM2VhNzkzNmVjODljYmJiZDUiLAogICAgICAiZGVsaXZlcmVkIjogZmFsc2UsCiAgICAgICJyZXNwb25zZURpZ2VzdCI6ICI2M2I1ZWM1YjQzZDAzZWQyZGYxMzNhY2IwMTk4ZThkNmJhZWMyNDNmYWQ1YjRiNjJlYWM1NzI2NTY4OGJhNjVlIgogICAgfSwKICAgIHsKICAgICAgImlkIjogIjdlNDAyMjlmLTQ2OTQtNGQ0MC1hOTM5LTgzNDA4ZWJhYTY0YSIsCiAgICAgICJyZXF1ZXN0RGlnZXN0IjogIjVlNTQzZGFhMjE0YTcxZDQzNjU5MmVmZDU4ZTNiYTNhMjdlYTRhMTQ2NGY5YzFmM2VhNzkzNmVjODljYmJiZDUiLAogICAgICAiZGVsaXZlcmVkIjogdHJ1ZSwKICAgICAgInJlc3BvbnNlRGlnZXN0IjogIjYzYjVlYzViNDNkMDNlZDJkZjEzM2FjYjAxOThlOGQ2YmFlYzI0M2ZhZDViNGI2MmVhYzU3MjY1Njg4YmE2NWUiCiAgICB9CiAgXSwKICAic2VxdWVuY2VBZnRlclBlZXIiOiAyLAogICJleHBvcnRlZE93bk9iamVjdElkcyI6IFsKICAgICJibHVsblBSanpteGZxeVEzNXktbWgiLAogICAgIlp4VjVnYlNxQW9hX3FvblU2SDNGMiIKICBdLAogICJwYWdlRXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bce35cb3189cbe0a37bc-8b00612cce88ab848906",
+          "file": "board-receipt-recovery.spec.ts",
+          "line": 19,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "board.spec.ts",
+      "file": "board.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "standalone board core shares a saved canvas without the game",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6087,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T20:33:47.535Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8e2a3123a0c4552ab20a-5cf645d516e20f34a642",
+          "file": "board.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "standalone board identity recovers its original place in a full house",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T20:33:53.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8e2a3123a0c4552ab20a-da401e61e21971333ab9",
+          "file": "board.spec.ts",
+          "line": 157,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-21T20:33:41.814Z",
+    "duration": 14300.472000000002,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

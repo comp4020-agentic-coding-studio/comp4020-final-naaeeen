@@ -1,0 +1,41 @@
+{
+  "recordedAtUTC": "2026-10-21T20:44:59.799107+00:00",
+  "status": "READY_FROZEN_FOR_CONTEXTUAL_RECHECK_HELD_FOR_PRODUCTION_FREEZE_AND_GO",
+  "sourceBinding": "NOT_REFRESHED",
+  "initialReview": "No parent chat history, historical verdict exposure, NOT blind",
+  "originalCriteriaAndGateLineUnchanged": true,
+  "gamePictureStorageCriteriaUnchanged": true,
+  "allPreimagesUnchanged": true,
+  "servicesStarted": 0,
+  "heavyRunsStarted": 0,
+  "files": {
+    "tools/board-resource.mjs": {
+      "bytes": 87637,
+      "sha256": "c23f8375e8f68dd79c7e9e64741b3fc6242f192eab07c17962a3d6aad1ed623d"
+    },
+    "tools/board-resource-p7.mjs": {
+      "bytes": 19300,
+      "sha256": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f"
+    },
+    "spec/board-resource-p7.test.ts": {
+      "bytes": 24326,
+      "sha256": "e23920b2fe49c1c94a0ffb2cc095f9f266ad51a5a77c545e07c496791a5b912d"
+    },
+    "spec/board-resource-delivery.test.ts": {
+      "bytes": 28757,
+      "sha256": "f05b4799ef897ed3b6ee32a9edb0648be8142b4ad82cf3832f7b9854f28e93bc"
+    },
+    "spec/server-runtime.test.ts": {
+      "bytes": 7676,
+      "sha256": "150d474fcc7e3324e781eaf8930f95ae3792181dc33940543fda94c21f83b263"
+    },
+    "evaluation/board-resource.protocol.json": {
+      "bytes": 13509,
+      "sha256": "d0e39417fd78d2a9c0d00c3751cfbba0bf3c825a7dc25d050dfd25508ddae8fe"
+    },
+    "docs/post-crit/evidence/p7-combined-resource.protocol.json": {
+      "bytes": 18738,
+      "sha256": "5e31216e0a9d6ef9050ed7c1defab3f9553e54cfa9431d9edf81b5e9ddc7cc88"
+    }
+  }
+}

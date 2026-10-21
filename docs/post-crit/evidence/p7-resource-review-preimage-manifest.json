@@ -1,0 +1,36 @@
+{
+  "preservedAtUTC": "2026-10-21T20:35:54.723939+00:00",
+  "scope": "Exact P7 pre-review-repair bytes; all three evaluator findings preserved before repairs",
+  "files": {
+    "p7-resource-review-preimage-instrument.mjs": {
+      "originalPath": "tools/board-resource.mjs",
+      "bytes": 86801,
+      "sha256": "f534511008ecf449e498f8780c3d470a9bbefd9f01a09186f194bdd10ffe5636"
+    },
+    "p7-resource-review-preimage-helper.mjs": {
+      "originalPath": "tools/board-resource-p7.mjs",
+      "bytes": 15377,
+      "sha256": "4640af01a22aa2a02cecee4865cf2655353039e0aef059255513d96e978525ca"
+    },
+    "p7-resource-review-preimage-spec.ts": {
+      "originalPath": "spec/board-resource-p7.test.ts",
+      "bytes": 15523,
+      "sha256": "59abacfad4757c75b6890f3dcb198684977e0979450a6ad9e5e907806c0ebcb3"
+    },
+    "p7-resource-review-preimage.protocol.json": {
+      "originalPath": "evaluation/board-resource.protocol.json",
+      "bytes": 13509,
+      "sha256": "c14f92a6985de4bed936d27ae04fa1f0555f139c03cced6d5083944630b7e447"
+    },
+    "p7-combined-review-preimage.protocol.json": {
+      "originalPath": "docs/post-crit/evidence/p7-combined-resource.protocol.json",
+      "bytes": 18738,
+      "sha256": "0664e8ce528414764532829c31b1015a01535d139deae6b936cca071b8d8bbd5"
+    },
+    "p7-resource-review-preimage-preparation-manifest.json": {
+      "originalPath": "docs/post-crit/evidence/p7-resource-preparation-manifest.json",
+      "bytes": 1375,
+      "sha256": "9d80b07e9e84bda238effdc1946eb532f91d142d0841b59af8626ca3dd7bd870"
+    }
+  }
+}

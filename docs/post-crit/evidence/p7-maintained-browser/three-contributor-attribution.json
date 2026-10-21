@@ -1,0 +1,30 @@
+{
+  "houseId": "d604b748-d9c3-4301-8df0-4910bccc0da7",
+  "identities": [
+    "b5d06e82-c0c9-4553-8c4a-5e58a3bfaef1",
+    "6fc7d7a7-760d-46d3-af25-069add5635ec",
+    "92a9727d-5c12-4719-b2b1-517b62843ffb"
+  ],
+  "placements": [
+    {
+      "pieceId": "ivy-bell",
+      "destination": 0,
+      "actorId": "b5d06e82-c0c9-4553-8c4a-5e58a3bfaef1"
+    },
+    {
+      "pieceId": "crescent-arch",
+      "destination": 1,
+      "actorId": "6fc7d7a7-760d-46d3-af25-069add5635ec"
+    },
+    {
+      "pieceId": "paper-star",
+      "destination": 2,
+      "actorId": "92a9727d-5c12-4719-b2b1-517b62843ffb"
+    },
+    {
+      "pieceId": "bird-string",
+      "destination": 3,
+      "actorId": "6fc7d7a7-760d-46d3-af25-069add5635ec"
+    }
+  ]
+}

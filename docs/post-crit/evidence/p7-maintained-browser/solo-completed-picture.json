@@ -1,0 +1,134 @@
+{
+  "houseId": "179f40df-a432-4d9d-b3f2-a4fc6e108e75",
+  "identity": "4b62c132-3310-4508-9467-d02ce666521f",
+  "picture": {
+    "id": "dac5cc29-ee06-415c-ada7-cfc62e444ba4",
+    "ruleset": 1,
+    "illustrationId": "rainy-nook",
+    "illustrationVersion": 1,
+    "illustrationDigest": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "placements": [
+      {
+        "pieceId": "ivy-bell",
+        "destination": 0,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "crescent-arch",
+        "destination": 1,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "paper-star",
+        "destination": 2,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "bird-string",
+        "destination": 3,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "shelf-leaves",
+        "destination": 4,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "honey-cap",
+        "destination": 5,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "fern-rain",
+        "destination": 6,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "rain-roof",
+        "destination": 7,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "star-curtain",
+        "destination": 8,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "book-spines",
+        "destination": 9,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "red-teapot",
+        "destination": 10,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "lamp-shade",
+        "destination": 11,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "teal-cup",
+        "destination": 12,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "cat-tail",
+        "destination": 13,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "cat-book",
+        "destination": 14,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "notebook",
+        "destination": 15,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "biscuits",
+        "destination": 16,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "lamp-base",
+        "destination": 17,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "rug-leaf",
+        "destination": 18,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "chair-leg",
+        "destination": 19,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "desk-leg",
+        "destination": 20,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "slippers",
+        "destination": 21,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "yarn-coil",
+        "destination": 22,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      },
+      {
+        "pieceId": "woven-basket",
+        "destination": 23,
+        "actorId": "4b62c132-3310-4508-9467-d02ce666521f"
+      }
+    ],
+    "completed": true
+  }
+}

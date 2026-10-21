@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-10-21T21:16:11.802983+00:00",
+  "scope": "Actual legacy preview copies: real-clock startup and separate schema-only diagnostic; no services started. No original/backup row or field was changed.",
+  "candidateRelative": ".local/post-crit/preview-restored-20261021T211400Z",
+  "schemaOnlyRelative": ".local/post-crit/preview-schema-only-20261021T211611Z",
+  "versions": {
+    "neighbourhood.sqlite": {
+      "before": 1,
+      "after": 1
+    },
+    "house.sqlite": {
+      "before": 1,
+      "after": 5
+    },
+    "board.sqlite": {
+      "before": 1,
+      "after": 2
+    }
+  },
+  "schemaOnlyAllOriginalFieldsAndRowsPreserved": true,
+  "realClockPersistentStateAndReceiptsPreserved": true,
+  "realClockExistingRetention": {
+    "houseChatRowsExpired": 245,
+    "policyDays": 7,
+    "samePolicyPresentAt": "8cdad6a",
+    "allExpiredBeforeStartup": true,
+    "minimumAgeDaysAtStartup": 13.74
+  },
+  "originalAndVerifiedBackupRecheckedUnchanged": true,
+  "privateRecordRelative": ".local/post-crit/preview-restored-20261021T211400Z/migration-private.json",
+  "privateRecordSHA256": "0ffa4e3117d2fc87cf5f87f8fe5ed2c203568b73e85ef8b7a5790771ffd6698c",
+  "sourceSHA256": {
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042"
+  },
+  "initialFailure": "p7-preview-first-comparison.json"
+}

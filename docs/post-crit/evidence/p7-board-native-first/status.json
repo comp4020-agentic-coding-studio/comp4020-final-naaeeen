@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-21T20:33:40.054919+00:00",
+  "finishedAt": "2026-10-21T20:33:56.168353+00:00",
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "playwright",
+    "test",
+    "tests/e2e/board.spec.ts",
+    "tests/e2e/board-receipt-recovery.spec.ts",
+    "--reporter=json"
+  ],
+  "exitCode": 0,
+  "sourceStable": true,
+  "result": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-board-native-first/result.json"
+}

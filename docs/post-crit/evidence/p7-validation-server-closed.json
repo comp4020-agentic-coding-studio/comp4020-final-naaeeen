@@ -1,0 +1,7 @@
+{
+  "pid": 98214,
+  "command": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node --max-semi-space-size=12 /home/lizhi/comp4020/comp4020-final-naaeeen/.local/post-crit/p7-integrated/server.mjs ",
+  "gracefulSignal": "SIGTERM",
+  "closedOrExitedZombie": true,
+  "reason": "Native and required checks completed; no browsers remain. Release host for isolated sustained resource runs."
+}

@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "scope": "Offline pure raw-frame and closure guard calibration; no browser or network",
+  "runnerSHA256": "ea64ea37ce5eb3ddfdc0e822c3e0fa7c7d781b117abbff4a83521ee2259d0069",
+  "protocolSHA256": "b73288a2f56c15026b673a4c3442489020db573fbe70e933625a353741b38985",
+  "sourceManifestSHA256": "9416d8f511be1b258899c9926df2ad133911efb1a228e72ba5edca25e63d0e3a",
+  "checks": [
+    {
+      "name": "current exact-scope snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "named house.snapshot event accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "successful subscribe ACK snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "private zone rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "observer controller rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing access generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster round rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate roster member rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale access after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale generation after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale roster after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale durable stream after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "old socket after reload rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "higher ordered current roster accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unwrapped durable object ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong named event ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "failed ACK ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "arbitrary nested snapshot ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed JSON ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "intentional reload close accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unexpected close cannot pass",
+      "status": "PASS"
+    }
+  ],
+  "at": "2026-10-21T20:38:10.537Z"
+}

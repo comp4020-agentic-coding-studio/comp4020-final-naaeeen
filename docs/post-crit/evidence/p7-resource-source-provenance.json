@@ -1,0 +1,106 @@
+{
+  "head": "c55d5e01ad5cd86aa5634a79c2b0b5bf751d8e0f",
+  "scope": "Measured source identities at recorded local HEAD; owned helper/instrument exact bytes also preserved in measured copies",
+  "sources": {
+    "Dockerfile": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "db320fd8913c0ac2921e08c5ce3231ddfaba7b4f6cf7d2d19a9bb3b240bf4743"
+    },
+    "package.json": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "21dd1a20d18203af9e23447cfd762d342267b7929f33a0a510c7ea4b5f0db194"
+    },
+    "pnpm-lock.yaml": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "6533eca480d56d61cc2ab55cf2ff5591accbf17ccfe038756a5f9f7ce43080a8"
+    },
+    "public/assets/pictures/rainy-nook-v1.svg": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+    },
+    "public/house-game-rules.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "bdd02f77ab351a9856c10b2ec3bbc78562fc6042bdac2ad500a9aeabf2e8bedf"
+    },
+    "public/house-geometry.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30"
+    },
+    "public/house-puzzle-content.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc"
+    },
+    "public/house-puzzle-rules.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397"
+    },
+    "public/house-room-content.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522"
+    },
+    "public/house-version.js": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a"
+    },
+    "src/activity-log.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0"
+    },
+    "src/board-contract.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc"
+    },
+    "src/board-receipt-codec.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042"
+    },
+    "src/board-service.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a"
+    },
+    "src/board-store.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b"
+    },
+    "src/domain.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b"
+    },
+    "src/house-contract.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe"
+    },
+    "src/house-puzzle-presence.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e"
+    },
+    "src/house-realtime.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c"
+    },
+    "src/house-store.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef"
+    },
+    "src/house-voice.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902"
+    },
+    "src/server-runtime.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72"
+    },
+    "src/server.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a"
+    },
+    "src/store.ts": {
+      "matchesRecordedHead": true,
+      "sourceSHA256": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+    },
+    "tools/board-resource-p7.mjs": {
+      "matchesRecordedHead": false,
+      "sourceSHA256": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f"
+    }
+  }
+}

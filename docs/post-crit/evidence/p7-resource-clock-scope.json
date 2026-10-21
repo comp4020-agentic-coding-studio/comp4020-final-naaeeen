@@ -1,0 +1,37 @@
+{
+  "recordedAtUTC": "2026-10-21T22:12:49.030345+00:00",
+  "scope": "Unmodified raw result timestamp reconciliation; no causal clock diagnosis",
+  "sourceAssignments": {
+    "startedAt": "tools/board-resource.mjs:329, new Date before child/bootstrap",
+    "measurementStart": "tools/board-resource.mjs:858, performance.now after bootstrap",
+    "measurementEnd": "tools/board-resource.mjs:1049, performance.now after fixed while(now-start<300000)",
+    "duration": "tools/board-resource.mjs:1079, (end-start)/1000; unchanged duration gate>=300",
+    "preCloseLabel": "tools/board-resource.mjs:1088 and1137: result assembly Date after recovery is copied to measurementFinishedAtUTC; it is not a separately captured measurement-end instant",
+    "finalLabel": "tools/board-resource.mjs:1138, new Date after server closure and read-only verification"
+  },
+  "records": [
+    {
+      "scenario": "original",
+      "startedAt": "2026-10-21T21:56:41.057Z",
+      "preCloseResultAssemblyUTC": "2026-10-21T22:01:36.514Z",
+      "postVerificationResultUTC": "2026-10-21T22:01:37.233Z",
+      "civilLabelSpanSeconds": 296.176,
+      "monotonicWorkloadDurationSeconds": 300.001,
+      "firstRecordedRelativeMonotonicSampleSeconds": -2.769,
+      "lastRecordedRelativeMonotonicSampleSeconds": 299.472,
+      "recordedSampleCount": 301
+    },
+    {
+      "scenario": "combined",
+      "startedAt": "2026-10-21T22:03:03.786Z",
+      "preCloseResultAssemblyUTC": "2026-10-21T22:07:59.485Z",
+      "postVerificationResultUTC": "2026-10-21T22:08:00.150Z",
+      "civilLabelSpanSeconds": 296.364,
+      "monotonicWorkloadDurationSeconds": 300.001,
+      "firstRecordedRelativeMonotonicSampleSeconds": -2.838,
+      "lastRecordedRelativeMonotonicSampleSeconds": 299.464,
+      "recordedSampleCount": 301
+    }
+  ],
+  "interpretation": "The declared workload duration is monotonic300.001seconds in each run, supported by the fixed loop, cadence/counts and monotonic sample series. UTC label spans are296.176/296.364seconds and do not equal that duration. The reason for differing clock observations is not established. No result field was edited and no UTC span is presented as a300second civil-clock observation."
+}

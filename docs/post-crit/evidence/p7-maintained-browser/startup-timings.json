@@ -1,0 +1,25 @@
+{
+  "clock": "out-of-browser monotonic",
+  "startupTimings": [
+    {
+      "action": "create to first usable frame",
+      "milliseconds": 349,
+      "completed": true,
+      "budgetAccepted": true
+    },
+    {
+      "action": "join to first usable frame",
+      "milliseconds": 2287,
+      "completed": true,
+      "budgetAccepted": true
+    },
+    {
+      "action": "saved return to first usable frame",
+      "milliseconds": 1433,
+      "completed": true,
+      "budgetAccepted": true
+    }
+  ],
+  "complete": true,
+  "withinTenSeconds": true
+}

@@ -1,0 +1,31 @@
+{
+  "preservedAtUTC": "2026-10-21T20:00:44.395475+00:00",
+  "scope": "Exact P6 canonical preimages before P7 prospective instrument/protocol adaptation; production source binding deliberately deferred",
+  "files": {
+    "p7-resource-preimage-instrument.mjs": {
+      "originalPath": "tools/board-resource.mjs",
+      "bytes": 72843,
+      "sha256": "8dd77f0717121776839aa1a8cb4ad69cd28b87154dcdae4ffd1135064e37c6d1"
+    },
+    "p7-resource-preimage.protocol.json": {
+      "originalPath": "evaluation/board-resource.protocol.json",
+      "bytes": 17922,
+      "sha256": "11389933a44152e6920cc555420d721a64a594b7485450611e01f5ff31880a78"
+    },
+    "p7-resource-preimage.results.json": {
+      "originalPath": "evaluation/board-resource.results.json",
+      "bytes": 976856,
+      "sha256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244"
+    },
+    "p7-combined-preimage.protocol.json": {
+      "originalPath": "docs/post-crit/evidence/combined-resource.protocol.json",
+      "bytes": 19575,
+      "sha256": "741d4783ec461c2fe559d9cff2bb09269b7bc47489913871d39725509bc136c8"
+    },
+    "p7-combined-preimage.results.json": {
+      "originalPath": "docs/post-crit/evidence/combined-resource.results.json",
+      "bytes": 757445,
+      "sha256": "7bef828e42842b8781fde707e8d4d25c6b6b568e8c2074c3f9b4bc1f68c1aefa"
+    }
+  }
+}

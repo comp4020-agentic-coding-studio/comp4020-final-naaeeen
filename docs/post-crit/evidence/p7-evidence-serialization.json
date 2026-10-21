@@ -1,0 +1,40 @@
+{
+  "scope": "Verified public locale-module path false positive under unchanged secret hook. Only JSON string serialization changed; raw preimages can be recovered exactly. Referenced protocol/source-manifest values and artifact hashes remain unchanged. Raw result hashes in historical records refer to the beforeSHA256 here.",
+  "literalBase64": "c2stU0stQzVWVEtJTUstQklaQjNKRTcuanM=",
+  "replacementBase64": "XHUwMDczXHUwMDZiLVNLLUM1VlRLSU1LLUJJWkIzSkU3Lmpz",
+  "verifiedAssetSHA256": "ac8b3bae64946cde530987815d29f80bd2d40633d5be98d86d14c6c5b2a8316e",
+  "files": [
+    {
+      "path": "docs/post-crit/evidence/picture-group-native-leave-reopen/result.json",
+      "beforeSHA256": "fb2d426e0094e17deec796913b97586a06fbb3655937528f0faf8dc927d46bca",
+      "afterSHA256": "34de37d31c2d85c32679dc311f6e3464d152e9fe21c6a249a9f16df08ab08aab",
+      "replacements": 2,
+      "parsedJSONUnchanged": true,
+      "exactPreimageReconstructable": true
+    },
+    {
+      "path": "docs/post-crit/evidence/picture-group-native-navigation-aware/result.json",
+      "beforeSHA256": "c15673e0fdba2c864b1c1ab7af0753cbde2c976cba089976bb060453f4f316eb",
+      "afterSHA256": "4ae0a29257361ef073755ca03b8b9178979f1d720f39caae47f34e2f421f4b93",
+      "replacements": 2,
+      "parsedJSONUnchanged": true,
+      "exactPreimageReconstructable": true
+    },
+    {
+      "path": "docs/post-crit/evidence/picture-group-native-first/result.json",
+      "beforeSHA256": "eb22fe07e1a7216fc7667c3234a3e745af6e22166b98dfdc35b6d94f7f786335",
+      "afterSHA256": "b37e671faa94653b54fc70db150472a2859a8387bf2e08237c7e98118893a2fd",
+      "replacements": 2,
+      "parsedJSONUnchanged": true,
+      "exactPreimageReconstructable": true
+    },
+    {
+      "path": "docs/post-crit/evidence/p7-maintained-browser/source-before.json",
+      "beforeSHA256": "f8ad2770989e9d1c7ccd8608a8d945a627e473fab188a7060f6611230136e5ea",
+      "afterSHA256": "471d11ae01ae26cbe68b655bb3c5954cf674efae16e8411dd8530a744c421e66",
+      "replacements": 1,
+      "parsedJSONUnchanged": true,
+      "exactPreimageReconstructable": true
+    }
+  ]
+}

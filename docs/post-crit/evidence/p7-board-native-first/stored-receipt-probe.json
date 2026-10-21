@@ -1,0 +1,11 @@
+{
+  "script": "import {readFileSync} from 'node:fs';import {DatabaseSync} from 'node:sqlite';import {decodeBoardReceipt} from './src/board-receipt-codec.ts';\nconst e=JSON.parse(readFileSync('docs/post-crit/evidence/p7-board-native-first/receipt-recovery-observations.json','utf8'));const db=new DatabaseSync('.local/post-crit/p7-integrated/data/board.sqlite',{readOnly:true});try{const row=db.prepare('SELECT typeof(response) AS type,octet_length(response) AS storedBytes,CAST(response AS BLOB) AS bytes FROM receipts WHERE actor_id=? AND id=?').get(e.authorId,e.original.id);const encoding=db.prepare('PRAGMA encoding').get().encoding;const decoded=decodeBoardReceipt(row.bytes,row.type,encoding,{id:e.original.id,houseId:e.houseId,kind:'patch'});console.log(JSON.stringify({database:'isolated current validation fixture; read-only',encoding,type:row.type,storedBytes:row.storedBytes,wireJSONBytes:Buffer.byteLength(JSON.stringify(e.accepted)),exactAcceptedReceipt:JSON.stringify(decoded)===JSON.stringify(e.accepted)}));}finally{db.close();}",
+  "observed": {
+    "database": "isolated current validation fixture; read-only",
+    "encoding": "UTF-8",
+    "type": "blob",
+    "storedBytes": 647,
+    "wireJSONBytes": 1392,
+    "exactAcceptedReceipt": true
+  }
+}

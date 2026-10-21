@@ -1,0 +1,38 @@
+{
+  "preparedAtUTC": "2026-10-21T20:24:31.248896+00:00",
+  "status": "READY_FOR_PARENT_FRESH_REVIEW_HELD_FOR_SOURCE_FREEZE_AND_GO",
+  "productionSourceHashesRefreshed": false,
+  "servicesStarted": 0,
+  "heavyRunsStarted": 0,
+  "files": {
+    "tools/board-resource.mjs": {
+      "bytes": 86801,
+      "sha256": "f534511008ecf449e498f8780c3d470a9bbefd9f01a09186f194bdd10ffe5636"
+    },
+    "tools/board-resource-p7.mjs": {
+      "bytes": 15377,
+      "sha256": "4640af01a22aa2a02cecee4865cf2655353039e0aef059255513d96e978525ca"
+    },
+    "spec/board-resource-p7.test.ts": {
+      "bytes": 15523,
+      "sha256": "59abacfad4757c75b6890f3dcb198684977e0979450a6ad9e5e907806c0ebcb3"
+    },
+    "spec/board-resource-delivery.test.ts": {
+      "bytes": 28757,
+      "sha256": "f05b4799ef897ed3b6ee32a9edb0648be8142b4ad82cf3832f7b9854f28e93bc"
+    },
+    "spec/server-runtime.test.ts": {
+      "bytes": 7676,
+      "sha256": "150d474fcc7e3324e781eaf8930f95ae3792181dc33940543fda94c21f83b263"
+    },
+    "evaluation/board-resource.protocol.json": {
+      "bytes": 13509,
+      "sha256": "c14f92a6985de4bed936d27ae04fa1f0555f139c03cced6d5083944630b7e447"
+    },
+    "docs/post-crit/evidence/p7-combined-resource.protocol.json": {
+      "bytes": 18738,
+      "sha256": "0664e8ce528414764532829c31b1015a01535d139deae6b936cca071b8d8bbd5"
+    }
+  },
+  "immutablePreimagesVerified": true
+}

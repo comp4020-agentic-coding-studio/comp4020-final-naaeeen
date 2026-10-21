@@ -1,0 +1,334 @@
+{
+  "checkedAtUTC": "2026-10-21T22:02:49.241175+00:00",
+  "status": "PASS",
+  "durationSeconds": 300.001,
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": true,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": true,
+    "normalInputs": true,
+    "workload": true,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": true,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true
+  },
+  "rssPeakMiB": 190.4453125,
+  "deliveryP95Ms": 12.172,
+  "patchSaved": 7188,
+  "chatSaved": 708,
+  "patchSkipped": 0,
+  "chatSkipped": 0,
+  "errors": {},
+  "pending": 0,
+  "retainedResponseGrowthBytes": 4751202,
+  "retainedResponseGrowthMiB": 4.531099319458008,
+  "baselineBoardReceipts": {
+    "count": 246,
+    "storedBytes": 107082,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "blob",
+        "count": 246,
+        "storedBytes": 107082
+      }
+    ]
+  },
+  "finalBoardReceipts": {
+    "count": 8142,
+    "storedBytes": 4858284,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "blob",
+        "count": 8142,
+        "storedBytes": 4858284
+      }
+    ]
+  },
+  "baselineHouseReceipts": {
+    "count": 12,
+    "storedBytes": 3144,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "text",
+        "count": 12,
+        "storedBytes": 3144
+      }
+    ]
+  },
+  "finalHouseReceipts": {
+    "count": 12,
+    "storedBytes": 3144,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "text",
+        "count": 12,
+        "storedBytes": 3144
+      }
+    ]
+  },
+  "exactReplay": {
+    "compared": 8142,
+    "verified": 8142,
+    "missing": 0,
+    "metadataInvalid": 0,
+    "decodeErrors": 0,
+    "digestMismatches": 0,
+    "duplicates": 0,
+    "uniqueLedgerEntries": 8142,
+    "acknowledgements": 8142,
+    "conflicts": 0,
+    "seenEntries": 8142,
+    "actualRows": 8142,
+    "storedBytes": 4858284,
+    "encoding": "UTF-8",
+    "batchMaximum": 64,
+    "ledgerDigest": "4a2d941400ed950b61cf0f422b852e106bb287a33b06393049967227e56fd796"
+  },
+  "databaseFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "baselineLogicalBytes": 4096,
+      "baselineAllocatedBytes": 4096,
+      "sampledPeakLogicalBytes": 4096,
+      "sampledPeakAllocatedBytes": 4096,
+      "finalLiveLogicalBytes": 4096,
+      "finalLiveAllocatedBytes": 4096
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "baselineLogicalBytes": 70072,
+      "baselineAllocatedBytes": 73728,
+      "sampledPeakLogicalBytes": 70072,
+      "sampledPeakAllocatedBytes": 73728,
+      "finalLiveLogicalBytes": 70072,
+      "finalLiveAllocatedBytes": 73728
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    },
+    {
+      "name": "house.sqlite",
+      "baselineLogicalBytes": 4096,
+      "baselineAllocatedBytes": 4096,
+      "sampledPeakLogicalBytes": 4096,
+      "sampledPeakAllocatedBytes": 4096,
+      "finalLiveLogicalBytes": 4096,
+      "finalLiveAllocatedBytes": 4096
+    },
+    {
+      "name": "house.sqlite-wal",
+      "baselineLogicalBytes": 1054752,
+      "baselineAllocatedBytes": 1060864,
+      "sampledPeakLogicalBytes": 1054752,
+      "sampledPeakAllocatedBytes": 1060864,
+      "finalLiveLogicalBytes": 1054752,
+      "finalLiveAllocatedBytes": 1060864
+    },
+    {
+      "name": "house.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    },
+    {
+      "name": "board.sqlite",
+      "baselineLogicalBytes": 16998400,
+      "baselineAllocatedBytes": 16998400,
+      "sampledPeakLogicalBytes": 24530944,
+      "sampledPeakAllocatedBytes": 24530944,
+      "finalLiveLogicalBytes": 24530944,
+      "finalLiveAllocatedBytes": 24530944
+    },
+    {
+      "name": "board.sqlite-wal",
+      "baselineLogicalBytes": 6163552,
+      "baselineAllocatedBytes": 6164480,
+      "sampledPeakLogicalBytes": 6163552,
+      "sampledPeakAllocatedBytes": 6164480,
+      "finalLiveLogicalBytes": 6163552,
+      "finalLiveAllocatedBytes": 6164480
+    },
+    {
+      "name": "board.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    }
+  ],
+  "postCloseBeforeDecodeFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "exists": true,
+      "logicalBytes": 69632,
+      "allocatedBytes": 69632
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite",
+      "exists": true,
+      "logicalBytes": 192512,
+      "allocatedBytes": 192512
+    },
+    {
+      "name": "house.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite",
+      "exists": true,
+      "logicalBytes": 24547328,
+      "allocatedBytes": 24547328
+    },
+    {
+      "name": "board.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    }
+  ],
+  "postDecodeFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "exists": true,
+      "logicalBytes": 69632,
+      "allocatedBytes": 69632
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite",
+      "exists": true,
+      "logicalBytes": 192512,
+      "allocatedBytes": 192512
+    },
+    {
+      "name": "house.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite",
+      "exists": true,
+      "logicalBytes": 24547328,
+      "allocatedBytes": 24547328
+    },
+    {
+      "name": "board.sqlite-wal",
+      "exists": true,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "exists": true,
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    }
+  ],
+  "perFilePeakScope": "Each file maximum sampled100ms; sum of independent file maxima is not asserted as a simultaneous aggregate peak.",
+  "runtime": {
+    "node": "v24.21.0",
+    "host": {
+      "platform": "linux",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "runner": "WSL"
+    },
+    "execArgv": [
+      "--max-semi-space-size=12"
+    ],
+    "heapLimitMiB": 2096,
+    "constrainedMemoryBytes": 18446744073709552000,
+    "inboundBytes": 16384,
+    "cgroupMemoryMax": null,
+    "cgroupCpuMax": null
+  },
+  "protocolSHA256": "bf34c4c20aa83d2e6951c63fe7cfec85e6e7e200d9f4379c028eb103028c2890",
+  "sourceManifestSHA256": "1116e2a4263e8ffc33c425477c7269e3adec213eec89e1ed785dead88e5301b9",
+  "instrumentSHA256": "c23f8375e8f68dd79c7e9e64741b3fc6242f192eab07c17962a3d6aad1ed623d",
+  "resultSHA256": "6e8ea6ef23c41d75046e23834c6abbe7dba7aad0879435ad50a658cae341fbef",
+  "sourceGuardVerified": true,
+  "processClosure": {
+    "scenario": "p7-original",
+    "launchedAtUTC": "2026-10-21T21:56:40.430286+00:00",
+    "generatorPID": 119019,
+    "serverPID": 119043,
+    "protocolSHA256": "bf34c4c20aa83d2e6951c63fe7cfec85e6e7e200d9f4379c028eb103028c2890",
+    "exitCode": 0,
+    "checkedAtUTC": "2026-10-21T22:01:41.589062+00:00",
+    "generatorProcExists": false,
+    "serverProcExists": false
+  }
+}

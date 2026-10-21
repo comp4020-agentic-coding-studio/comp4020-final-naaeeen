@@ -1,0 +1,31 @@
+{
+  "preservedAtUTC": "2026-10-21T21:55:43.063224+00:00",
+  "scope": "Exact final prebinding protocol/result/instrument/helper bytes before authorized P7 sustained acceptance",
+  "files": {
+    "p7-resource-prebinding.protocol.json": {
+      "originalPath": "evaluation/board-resource.protocol.json",
+      "bytes": 13509,
+      "sha256": "d0e39417fd78d2a9c0d00c3751cfbba0bf3c825a7dc25d050dfd25508ddae8fe"
+    },
+    "p7-combined-prebinding.protocol.json": {
+      "originalPath": "docs/post-crit/evidence/p7-combined-resource.protocol.json",
+      "bytes": 18738,
+      "sha256": "5e31216e0a9d6ef9050ed7c1defab3f9553e54cfa9431d9edf81b5e9ddc7cc88"
+    },
+    "p7-resource-prebinding.results.json": {
+      "originalPath": "evaluation/board-resource.results.json",
+      "bytes": 976856,
+      "sha256": "7e7f69604a99b6dce651321f8d08c13eb199703ee72f2a6dd543504926ce8244"
+    },
+    "p7-resource-measured-instrument.mjs": {
+      "originalPath": "tools/board-resource.mjs",
+      "bytes": 87637,
+      "sha256": "c23f8375e8f68dd79c7e9e64741b3fc6242f192eab07c17962a3d6aad1ed623d"
+    },
+    "p7-resource-measured-helper.mjs": {
+      "originalPath": "tools/board-resource-p7.mjs",
+      "bytes": 19300,
+      "sha256": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f"
+    }
+  }
+}

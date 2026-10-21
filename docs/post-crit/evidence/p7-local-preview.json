@@ -1,0 +1,35 @@
+{
+  "startedAtUTC": "2026-10-21T22:14:49.626790+00:00",
+  "pid": 119678,
+  "port": 4093,
+  "url": "http://localhost:4093/",
+  "dataDirectoryRelative": ".local/post-crit/preview-restored-20261021T211400Z",
+  "logDirectoryRelative": ".local/post-crit/preview-launch-20261021T221500Z",
+  "node": "24.21.0",
+  "semiSpaceMiB": 12,
+  "scope": "Local preview on verified migrated copy; original and backup preserved. Intended to remain running for owner use.",
+  "health": {
+    "ok": true
+  },
+  "servedAssetsSHA256": {
+    "house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "house.css": "9dd7d7fb73c75fb785de8b891b33337e94078407bb5486e1ce35c0b7b79c8d4b",
+    "house-puzzle-ui.js": "3b9d84068dfae4e105816af1721a94c807a49f7f9973edb15bcc8e0a7e17fecf",
+    "house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+  },
+  "processCommandVerified": true,
+  "dataDirectoryEnvironmentVerified": true,
+  "windowsReachability": {
+    "healthStatus": 200,
+    "healthBody": {
+      "ok": true
+    },
+    "pageContainsTitleAndHouseScript": true,
+    "method": "Windows curl.exe max-time5, exit0; matched returned HTML lines inspected",
+    "initialPowerShellProbe": "No terminal result captured at initial tool yield; not counted as a pass or used for diagnosis."
+  },
+  "codexPanelOpen": "queued",
+  "windowsCheckedAtUTC": "2026-10-21T22:16:57.584500+00:00"
+}

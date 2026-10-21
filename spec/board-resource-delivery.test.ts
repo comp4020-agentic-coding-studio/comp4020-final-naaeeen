@@ -222,6 +222,16 @@ describe("registered resource delivery matching", () => {
     expect(t.pendingByView.size).toBe(0);
   });
 
+  test("receipt digest work follows the original reflected delivery timing point", async () => {
+    let release!: (value:any)=>void, captured=false;
+    const pending=new Promise<any>(done=>release=done);
+    const t=fixture(undefined,async()=>pending);
+    for(const v of t.views.slice(0,2))v.elements.set("text_0",element(5,90,"text_0"));
+    t.clock.now=100;const write=t.performWrite(t.views[0]);t.clock.now=700;
+    release({value:{ok:true,sequence:3,elements:[]},captureACK:()=>{captured=true;expect(t.latencies).toEqual({normal:[600],slow:[600]});t.clock.now=9000;}});
+    await write;expect(captured).toBe(true);expect(t.latencies).toEqual({normal:[600],slow:[600]});
+  });
+
   test("a board event before a late HTTP receipt records latency exactly once", async () => {
     let resolveReceipt!: (value: any) => void;
     const receipt = new Promise<any>(resolve => { resolveReceipt = resolve; });
@@ -340,7 +350,8 @@ function instrumentGameCommand(step: any, expected: any, houseId: string) {
 describe("combined resource command authority binding", () => {
   test("the sole instrument change is the combined-only command house field", () => {
     const measured = readFileSync(new URL("../docs/post-crit/evidence/resource-measured-instrument.mjs", import.meta.url), "utf8");
-    expect(source).toBe(measured.replace('const command = { commandId: randomUUID(), type: "game." + step.type, payload,', 'const command = { commandId: randomUUID(), type: "game." + step.type, houseId: h.id, payload,'));
+    const p6Repaired = readFileSync(new URL("../docs/post-crit/evidence/p7-resource-preimage-instrument.mjs", import.meta.url), "utf8");
+    expect(p6Repaired).toBe(measured.replace('const command = { commandId: randomUUID(), type: "game." + step.type, payload,', 'const command = { commandId: randomUUID(), type: "game." + step.type, houseId: h.id, payload,'));
     const failed = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.first-fail.protocol.json", import.meta.url), "utf8"));
     const current = JSON.parse(readFileSync(new URL("../docs/post-crit/evidence/combined-resource.protocol.json", import.meta.url), "utf8"));
     expect(current.gameScenario).toEqual(failed.gameScenario);

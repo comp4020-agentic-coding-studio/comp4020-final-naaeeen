@@ -13,6 +13,7 @@ import {setTimeout as timerDelay} from "node:timers/promises";
 import { crc32, deflateSync } from "node:zlib";
 import { Server } from "socket.io";
 import { io } from "socket.io-client";
+import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
 const arg = k => {
     const n = process.argv.indexOf(k);
     return n < 0 ? undefined : process.argv[n + 1];
@@ -32,6 +33,7 @@ const fail = code => {
 };
 function freeze(p, protocolHash) {
     if(hash(readFileSync(protocolPath))!==protocolHash)fail("PROTOCOL_FREEZE_CHANGED");
+    validateSourceBindings(p);
     if (hash(Buffer.from(JSON.stringify(Object.fromEntries(Object.entries(p.sourceHashes).sort())))) !== p.sourceManifestSHA256)
         fail("SOURCE_MANIFEST_INVALID");
     for (const [f, h] of Object.entries(p.sourceHashes))
@@ -115,29 +117,33 @@ async function serve() {
     const loop = monitorEventLoopDelay({ resolution: 10 });
     loop.enable();
     let rssPeak = 0, heapPeak = 0;
+    const filePeaks = new Map();
     function sample() {
         for (const c of connections)
             inspect(c);
         const m = process.memoryUsage();
         rssPeak = Math.max(rssPeak, m.rss);
         heapPeak = Math.max(heapPeak, m.heapUsed);
-        return { kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
+        const files = p.storageAcceptance ? databaseFiles(arg("--data")) : null;
+        if (files) for (const f of files) {
+            const prior = filePeaks.get(f.name) ?? { name:f.name, logicalBytes:0, allocatedBytes:0 };
+            prior.logicalBytes=Math.max(prior.logicalBytes,f.logicalBytes); prior.allocatedBytes=Math.max(prior.allocatedBytes,f.allocatedBytes); filePeaks.set(f.name,prior);
+        }
+        return { ...(files ? {databaseFiles:files,databaseFilePeaks:[...filePeaks.values()]} : {}), kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
     }
-    // Optional combined diagnostics read aggregate counts only; no authority method is replaced.
-    const storageQueries = p.gameScenario ? {
-        receipts: service.houseStore.db.prepare("SELECT count(*) AS count, coalesce(sum(length(response)),0) AS responseBytes FROM receipts"),
-        games: service.houseStore.db.prepare("SELECT count(*) AS rows, coalesce(sum(length(state)),0) AS stateBytes, coalesce(max(length(state)),0) AS maxStateBytes, coalesce(sum(CASE WHEN json_type(state,'$.current')!='null' THEN 1 ELSE 0 END),0) AS activeTables FROM game_tables")
+    // Read-only aggregate diagnostics; no authority or transport handler is replaced.
+    const storageQueries = p.storageAcceptance || p.gameScenario ? {
+        games: service.houseStore.db.prepare("SELECT count(*) AS rows,coalesce(sum(octet_length(state)),0) AS stateBytes,coalesce(max(octet_length(state)),0) AS maxStateBytes,coalesce(sum(CASE WHEN json_type(state,'$.current')!='null' THEN 1 ELSE 0 END),0) AS activeTables FROM game_tables"),
+        gameReceipts: service.houseStore.db.prepare("SELECT count(*) AS count,coalesce(sum(octet_length(response)),0) AS storedBytes FROM receipts WHERE json_type(response,'$.result.code')='text'"),
+        puzzleReceipts: p.pictureScenario ? service.houseStore.db.prepare("SELECT count(*) AS count,coalesce(sum(octet_length(response)),0) AS storedBytes FROM receipts WHERE json_type(response,'$.result.puzzleRevision')='integer'") : null,
+        puzzles: p.pictureScenario ? service.houseStore.db.prepare("SELECT count(*) AS rows,coalesce(max(octet_length(state)),0) AS maxStateBytes,coalesce(sum(json_extract(state,'$.current.completed')),0) AS completedTables,coalesce(sum(json_array_length(state,'$.current.placements')),0) AS placements FROM puzzle_tables") : null
     } : null;
     function storageSample() {
-        if (!storageQueries) fail("GAME_STORAGE_NOT_REGISTERED");
-        const files = [];
-        for (const name of ["neighbourhood.sqlite", "house.sqlite", "board.sqlite"])
-            for (const suffix of ["", "-wal", "-shm"])
-                try { const info = statSync(join(arg("--data"), name + suffix)); files.push({ name: name + suffix, logicalBytes: info.size, allocatedBytes: info.blocks * 512 }); } catch (e) { if (e.code !== "ENOENT") throw e; }
+        if (!storageQueries) fail("STORAGE_NOT_REGISTERED");
         const cgroup = {};
         for (const name of ["memory.current", "memory.peak", "memory.events", "memory.events.local"])
             try { cgroup[name] = readFileSync("/sys/fs/cgroup/" + name, "utf8").trim(); } catch {}
-        return { receipts: storageQueries.receipts.get(), gameTables: storageQueries.games.get(), files, cgroup };
+        return { receipts:receiptStorage(service.houseStore.db),boardReceipts:receiptStorage(service.boardStore.db),gameReceipts:storageQueries.gameReceipts.get(),gameTables:storageQueries.games.get(),...(p.pictureScenario ? {puzzleReceipts:storageQueries.puzzleReceipts.get(),puzzleTables:storageQueries.puzzles.get()} : {}),files:databaseFiles(arg("--data")),cgroup };
     }
     const timer = setInterval(() => process.send?.(sample()), 100);
     timer.unref();
@@ -325,6 +331,11 @@ async function run() {
     const child = fork(fileURLToPath(import.meta.url), ["--child", "--data", join(dir, "data"),"--protocol",protocolHash,"--protocol-file",protocolPath], { cwd: root, silent: true, execArgv: [...SERVER_NODE_ARGS], env: { ...process.env, NODE_ENV: "test" } });
     let origin, runtime, lastSample, phase = "startup", failure = null, closing = false, running = false, start = 0, end = 0, unexpectedDisconnects = 0, scopeErrors=0, staleFramesIgnored=0, stderrBytes = 0, stdoutBytes = 0;
     const gameEvidence = p.gameScenario ? { status: "NOT_RUN", actions: [], rounds: [], storage: [] } : null;
+    const pictureEvidence = p.pictureScenario ? {status:"NOT_RUN",actions:[],admissions:[],invalidFrames:0,conflictingFrames:0} : null;
+    const storageEvidence = p.storageAcceptance ? {baseline:null,final:null,verification:null} : null;
+    const boardACKLedger = p.storageAcceptance ? newBoardACKLedger() : null;
+    let finalResult = null;
+    const childExit = new Promise(done => child.once("exit",(code,signal)=>done({code,signal})));
     const httpCounts = new Map();
     const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), pendingByView = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
     let readyResolve, readyReject;
@@ -392,13 +403,20 @@ async function run() {
         });
     }
     async function http(path, m, body) {
+        const captureAfterReflection=running;
         if (m && path.startsWith("/api/board/"))
             countHttp(m, body !== undefined);
         const r = await fetch(origin + path, { method: body === undefined ? "GET" : "POST", headers: { Origin: origin, ...(m ? { Cookie: m.cookie, "X-House-Identity": m.identity } : {}), ...(body === undefined ? {} : { "Content-Type": "application/json" }) }, ...(body === undefined ? {} : { body: JSON.stringify(body) }), signal: AbortSignal.timeout(10000) });
         const value = await r.json();
         if (!r.ok)
             fail(value.code ?? "HTTP_" + r.status);
-        return { value, cookie: r.headers.get("set-cookie")?.split(";")[0] ?? m?.cookie };
+        let captureACK;
+        if (boardACKLedger && m && body !== undefined && value?.ok && ["/api/board/patch","/api/board/chat","/api/board/asset"].includes(path)) {
+            captureACK=()=>recordBoardACK(boardACKLedger,m.identity,path.slice("/api/board/".length),body,value);
+            // Bootstrap has no timed delivery intents. Timed writes capture only after reflect.
+            if (!captureAfterReflection) {captureACK();captureACK=undefined;}
+        }
+        return { value, cookie: r.headers.get("set-cookie")?.split(";")[0] ?? m?.cookie, captureACK };
     }
     function reflect(v, elements, chat, sequence, at = performance.now()) {
         if (elements)
@@ -431,6 +449,7 @@ async function run() {
     }
     async function connect(v) {
         v.ready = false;
+        if(p.pictureScenario&&v.role==="house"){v.pictureAuthority=null;v.pictureFrames=new Map();}
         // Pending volatile sends belong to the replaced connection, not this one.
         v.pointerPending = false;
         v.motionPending = false;
@@ -484,6 +503,7 @@ async function run() {
                 rememberGameProjection(v, r.durable.game);
             }
             v.snapshot = r;
+            if (p.pictureScenario) capturePicture(v,r);
             v.generation = r.generation;
             v.houseSnapshots++;
         });
@@ -522,6 +542,14 @@ async function run() {
                 fail("NOT_CONTROLLER");
             if(r.snapshot.durable.house.id!==houses[v.house].id||r.snapshot.durable.selfId!==v.identity)fail("HOUSE_SCOPE_MISMATCH");
             v.snapshot = r.snapshot;
+            v.serverEpoch=r.snapshot.serverEpoch; v.pictureIntentSequence=0;
+            if (p.pictureScenario) {
+                v.pictureAuthority=capturePictureAuthority(r.snapshot);
+                const admission={houseIndex:v.house,memberIndex:v.memberIndex,viewIndex:v.index,connectionOrdinal:v.connections,...pictureAuthorityEvidence(v.pictureAuthority)};
+                const previous=pictureEvidence.admissions.findIndex(a=>a.viewIndex===v.index);
+                if(previous<0)pictureEvidence.admissions.push(admission);else pictureEvidence.admissions[previous]=admission;
+                capturePicture(v,r.snapshot);
+            }
             if (p.gameScenario) rememberGameProjection(v, r.snapshot.durable.game);
             v.generation = r.snapshot.generation;
             const own = r.snapshot.players.find(a => a.id === v.identity);
@@ -565,8 +593,9 @@ async function run() {
     }
     async function performWrite(v, chat = false) {
         const h = houses[v.house], at = performance.now();
+        let response;
         if (chat) {
-            const id = randomUUID(), d = delivery(v.house, "chat", { messageId: id }, at), r = ok((await http("/api/board/chat", v, { id, houseId: h.id, text: ("Synthetic scheduled message " + h.chatSerial++).padEnd(4000, "c") })).value);
+            const id = randomUUID(), d = delivery(v.house, "chat", { messageId: id }, at), r = ok((response = await http("/api/board/chat", v, { id, houseId: h.id, text: ("Synthetic scheduled message " + h.chatSerial++).padEnd(4000, "c") })).value);
             stats.chatSaved++;
             h.expectedChat.set(id, r.sequence);
             h.receiptJournal.push({ type: "chat", id, sequence: r.sequence });
@@ -577,7 +606,7 @@ async function run() {
             next.originalText = next.text;
             const d = delivery(v.house, "patch", { elementId: next.id, version: next.version }, at);
             stats.patchScheduled++;
-            const r = ok((await http("/api/board/patch", v, { id: randomUUID(), houseId: h.id, elements: [next] })).value);
+            const r = ok((response = await http("/api/board/patch", v, { id: randomUUID(), houseId: h.id, elements: [next] })).value);
             stats.patchSaved++;
             v.saved++;
             h.expectedVersions.set(next.id, next.version);h.expectedElements.set(next.id,next);
@@ -586,6 +615,8 @@ async function run() {
         }
         for (const peer of views.filter(a => a.role === "board" && a.house === v.house))
             reflect(peer, null, null, peer.sequence);
+        // Preserve the existing HTTP/event reflection timing points before digest work.
+        response?.captureACK?.();
     }
     async function playGameRound(houseIndex, roundIndex) {
         const scenario = p.gameScenario, neutral = scenario.neutralRoundIndices.includes(roundIndex);
@@ -645,7 +676,76 @@ async function run() {
         }
         h.gameRevision = expected.revision; h.gameRosterRevision = expected.rosterRevision;
         gameEvidence.rounds.push({ houseIndex, roundIndex, outcome: neutral ? "player_left" : "win", actions: steps.length, finalRevision: expected.revision });
-        gameEvidence.storage.push({ phase: "round-finish", houseIndex, roundIndex, elapsedSeconds: round((performance.now() - start) / 1000), ...await rpc("storage") });
+        gameEvidence.storage.push({ phase: "round-finish", houseIndex, roundIndex, elapsedSeconds: round((performance.now() - start) / 1000), ...cleanSample(await rpc("storage")) });
+    }
+    function capturePicture(v,snapshot) {
+        if(!v.pictureAuthority)return;
+        const h=houses[v.house],frame=normalizePictureFrame(snapshot,{houseIndex:v.house,houseId:h.id,selfId:v.identity,memberIds:h.members.map(m=>m.identity),...v.pictureAuthority});
+        if(!frame.scopeValid||frame.placements.some(e=>e.memberIndex<0))pictureEvidence.invalidFrames++;
+        v.pictureFrames??=new Map();
+        const key=frame.roundHash+":"+frame.puzzleRevision+":"+frame.rosterRevision,prior=v.pictureFrames.get(key);
+        if(prior&&JSON.stringify(prior.frame)!==JSON.stringify(frame))pictureEvidence.conflictingFrames++;
+        if(!prior)v.pictureFrames.set(key,{frame,at:performance.now()});
+    }
+    async function observePicture(entry,expected,targets,at) {
+        const deadline=performance.now()+5000;
+        while(performance.now()<deadline) {
+            if(expected.rosterRevision===undefined) {
+                const candidate=[...(targets[0].pictureFrames?.values()??[])].find(o=>o.at>=at&&pictureFrameMatches(o.frame,expected));
+                if(candidate)expected.rosterRevision=candidate.frame.rosterRevision;
+            }
+            if(expected.rosterRevision!==undefined) {
+                const observed=targets.map(v=>({v,observation:[...(v.pictureFrames?.values()??[])].find(o=>o.at>=at&&pictureFrameMatches(o.frame,expected))}));
+                if(observed.every(o=>o.observation)) {
+                    entry.observed=observed.map(({v,observation})=>({viewIndex:v.index,latencyMs:round(observation.at-at),frame:observation.frame}));
+                    entry.rosterRevision=expected.rosterRevision;entry.status="VISIBLE";return;
+                }
+            }
+            await sleep(10);
+        }
+        fail("PICTURE_PROJECTION_TIMEOUT");
+    }
+    async function playPicture(houseIndex) {
+        const scenario=p.pictureScenario,h=houses[houseIndex],targets=Array.from({length:6},(_,m)=>views[houseIndex*12+2*m]);
+        const plan=picturePlan(scenario),participants=new Map(),selfHashes=Array(6).fill(null),placements=[];
+        let roundId=null,roundHash=null,rosterHead=null;
+        if(targets[0].snapshot.durable.puzzle?.current!==null||targets[0].snapshot.durable.puzzle?.revision!==0)fail("PICTURE_INITIAL_STATE");
+        for(const [stepIndex,step] of plan.entries()) {
+            while(performance.now()<start+step.atSeconds*1000)await timerDelay(Math.max(1,start+step.atSeconds*1000-performance.now()),undefined,{signal:cancellation.signal});
+            const at=performance.now(),sendLagMs=at-start-step.atSeconds*1000;
+            if(sendLagMs>scenario.maximumScheduleLagMs||step.type==="place"&&sendLagMs>=scenario.placementIntervalSeconds*1000)fail("PICTURE_ABSOLUTE_DEADLINE");
+            if(targets.some(v=>!v.ready||!v.socket.connected||v.intendedFault))fail("PICTURE_TARGET_UNAVAILABLE");
+            const actor=targets[step.memberIndex],entry={houseIndex,stepIndex,type:step.type,memberIndex:step.memberIndex,scheduledOffsetSeconds:step.atSeconds,sendLagMs:round(sendLagMs),status:"PENDING",observed:[]};
+            pictureEvidence.actions.push(entry);
+            const expected={houseIndex,puzzleRevision:1,roundHash,illustrationId:scenario.illustrationId,illustrationVersion:scenario.illustrationVersion,illustrationDigest:scenario.illustrationDigest,completed:false,placements,rosterMembers:[],selfHashes,rosterRevision:rosterHead,authorities:targets.map(v=>pictureAuthorityEvidence(v.pictureAuthority))};
+            if(step.type==="start") {
+                const snapshot=actor.snapshot;
+                entry.beforeRosterRevision=snapshot.puzzleRoster.revision;
+                const command={commandId:randomUUID(),houseId:h.id,type:"puzzle.start",expectedRevision:snapshot.durable.puzzle.revision,payload:{expectedRoundId:snapshot.durable.puzzle.current?.id??null,illustrationId:scenario.illustrationId,illustrationVersion:scenario.illustrationVersion,confirmUnfinished:false,authority:{serverEpoch:snapshot.serverEpoch,accessGeneration:snapshot.accessGeneration,generation:snapshot.generation},expectedRoster:{serverEpoch:snapshot.puzzleRoster.serverEpoch,revision:snapshot.puzzleRoster.revision}}};
+                const ack=ok(await actor.socket.timeout(5000).emitWithAck("house.command",{generation:actor.generation,zoneId:"lounge",command}));
+                if(ack.entityRevision!==1||ack.result?.puzzleRevision!==1||typeof ack.result.roundId!=="string")fail("PICTURE_START_ACK");
+                roundId=ack.result.roundId;roundHash=hash(Buffer.from(roundId));entry.ack={ok:true,entityRevision:ack.entityRevision,puzzleRevision:ack.result.puzzleRevision,roundHash};
+                Object.assign(expected,{roundHash,rosterRevision:undefined,minimumRosterRevision:entry.beforeRosterRevision});
+            } else if(step.type==="join") {
+                const snapshot=actor.snapshot,request={generation:actor.generation,zoneId:"lounge",serverEpoch:snapshot.serverEpoch,accessGeneration:snapshot.accessGeneration,intentSequence:++actor.pictureIntentSequence,requestId:randomUUID(),roundId,mode:"join"};
+                const ack=ok(await actor.socket.timeout(5000).emitWithAck("house.puzzle.intent",request));
+                entry.requestHash=hash(Buffer.from(request.requestId));entry.ack=puzzleIntentACK(ack,request);participants.set(step.memberIndex,ack.participationId);selfHashes[step.memberIndex]=entry.ack.participationHash;
+                if(entry.ack.rosterRevision<=rosterHead)fail("PICTURE_ROSTER_NOT_ADVANCED");
+                Object.assign(expected,{rosterRevision:entry.ack.rosterRevision,rosterMembers:Array.from({length:step.memberIndex+1},(_,i)=>i)});
+            } else {
+                const pieceIndex=stepIndex-7,revision=pieceIndex+2;
+                const command={commandId:randomUUID(),houseId:h.id,type:"puzzle.place",payload:{roundId,participationId:participants.get(step.memberIndex),pieceId:step.pieceId,destination:step.destination}};
+                const ack=ok(await actor.socket.timeout(5000).emitWithAck("house.command",{generation:actor.generation,zoneId:"lounge",command}));
+                if(ack.entityRevision!==revision||ack.result?.puzzleRevision!==revision||ack.result.roundId!==roundId||ack.result.pieceId!==step.pieceId||ack.result.destination!==step.destination||ack.result.completed!==(pieceIndex===23))fail("PICTURE_PLACEMENT_ACK");
+                entry.pieceId=step.pieceId;entry.destination=step.destination;entry.ack={ok:true,entityRevision:ack.entityRevision,puzzleRevision:ack.result.puzzleRevision,roundHash,pieceId:ack.result.pieceId,destination:ack.result.destination,completed:ack.result.completed};
+                placements.push({pieceId:step.pieceId,destination:step.destination,memberIndex:step.memberIndex});
+                Object.assign(expected,{puzzleRevision:revision,rosterMembers:[0,1,2,3,4,5]});
+                if(pieceIndex===23){expected.completed=true;expected.rosterMembers=[];expected.selfHashes=Array(6).fill(null);expected.rosterRevision=undefined;expected.minimumRosterRevision=rosterHead;}
+            }
+            entry.roundHash=roundHash;entry.status="ACCEPTED";
+            await observePicture(entry,expected,targets,at);
+            rosterHead=entry.rosterRevision;
+        }
     }
     const cancellation=new AbortController();
     let slowEvidence = null, negativeEvidence = null;
@@ -663,6 +763,7 @@ async function run() {
         for (let h = 0; h < 2; h++) {
             const members = [], house = { index: h, id: null, code: null, elements:scene(h), images:[png(101+h*100),png(102+h*100)], expectedVersions: new Map(), expectedElements:new Map(), expectedChat: new Map(), receiptJournal: [], seedChat: [], chatSerial: 0 };
             houses.push(house);
+            house.members=members;
             for (let n = 0; n < 6; n++) {
                 const opened = await http("/api/house/me"), member = { cookie: opened.cookie, identity: opened.value.identity.id, memberIndex: n };
                 await http("/api/house/command", member, { commandId: randomUUID(), type: n === 0 ? "house.create" : "house.join", payload: { ...(n === 0 ? { capacity: 6 } : { code: house.code }), name: "Synthetic resident " + n, colour: ["sage", "blue", "rose", "amber", "peach", "lavender"][n] } });
@@ -741,7 +842,11 @@ async function run() {
         negative.socket.disconnect();
         await connect(negative);
         negative.intendedFault = false;
-        if (p.gameScenario) gameEvidence.storage.push({ phase: "baseline", ...await rpc("storage") });
+        if (p.storageAcceptance || p.gameScenario) {
+            const baseline=cleanSample(await rpc("storage"));
+            if (storageEvidence) storageEvidence.baseline=baseline;
+            if (gameEvidence) gameEvidence.storage.push({phase:"baseline",...baseline});
+        }
         if (calibration) {
             phase = "calibration-finish";
             start = performance.now();
@@ -932,6 +1037,10 @@ async function run() {
                     for (let roundIndex = 0; roundIndex < p.gameScenario.roundStartsSeconds.length; roundIndex++) await playGameRound(houseIndex, roundIndex);
                 });
             }
+            if (p.pictureScenario) {
+                pictureEvidence.status="RUNNING";
+                for(let houseIndex=0;houseIndex<2;houseIndex++) launch(()=>playPicture(houseIndex));
+            }
             while (performance.now() - start < duration) {
                 if (failure)
                     break;
@@ -946,7 +1055,12 @@ async function run() {
             if(failure)fail(failure.code);
             await slowJob;
         }
-        if (p.gameScenario) { gameEvidence.storage.push({ phase: "final", ...await rpc("storage") }); gameEvidence.status = calibration ? "CALIBRATION_GAME_ACTIONS_NOT_RUN" : "COMPLETE"; }
+        if (p.storageAcceptance || p.gameScenario) {
+            const finalStorage=cleanSample(await rpc("storage"));
+            if(storageEvidence)storageEvidence.final=finalStorage;
+            if(gameEvidence){gameEvidence.storage.push({phase:"final",...finalStorage});gameEvidence.status=calibration?"CALIBRATION_GAME_ACTIONS_NOT_RUN":"COMPLETE";}
+        }
+        if(pictureEvidence)pictureEvidence.status=calibration?"CALIBRATION_PICTURE_NOT_RUN":"COMPLETE";
         phase = "recovery-check";
         for (const v of views)
             if (v.eligibleAt && v.ready && !v.intendedFault)
@@ -969,19 +1083,16 @@ async function run() {
         if (p.gameScenario) {
             gates.gameActionsAndVisibleRevisions = calibration ? null : gradeGameEvidence(p.gameScenario, p.slowReader, gameEvidence);
             const baseline = gameEvidence.storage[0], finalStorage = gameEvidence.storage.at(-1);
-            gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.receipts.count - baseline.receipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
+            gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.gameReceipts.count - baseline.gameReceipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
         }
-        const result = { ...(p.gameScenario ? { game: gameEvidence } : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
-        writeResult(result);
-        process.stdout.write(JSON.stringify({ status: result.status, durationSeconds: result.durationSeconds, rssMaxMiB: final.rssPeakMiB, normalP95Ms: result.delivery.normalP95Ms, gates }) + "\n");
-        if (!calibration && result.status !== "PASS")
-            process.exitCode = 1;
+        const result = { ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
+        finalResult=result;
+
     }
     catch (e) {
         failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE" };
         const status=failureStatus(failure.code);
-        writeResult({ ...(p.gameScenario ? { game: gameEvidence } : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations });
-        process.stdout.write(JSON.stringify({ status, phase, code: failure.code }) + "\n");
+        finalResult = { ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
         process.exitCode = 1;
     }
     finally {
@@ -992,8 +1103,42 @@ async function run() {
             clearInterval(t);
         for (const v of views)
             v.socket?.disconnect();
-        child.send?.({ kind: "stop" });
-        await Promise.race([new Promise(done => child.once("exit", done)), sleep(5000).then(() => child.kill("SIGTERM"))]);
+        if(child.connected)child.send({ kind: "stop" });
+        await Promise.race([childExit,sleep(5000).then(()=>child.kill("SIGTERM"))]);
+        if(child.exitCode===null&&child.signalCode===null)await Promise.race([childExit,sleep(2000).then(()=>child.kill("SIGKILL"))]);
+    }
+    // No codec verification is performed in the measured server or before its exit.
+    if(finalResult) {
+        finalResult.processClosure={generatorPID:process.pid,serverPID:child.pid,serverExitCode:child.exitCode,serverSignal:child.signalCode,serverClosed:child.exitCode!==null||child.signalCode!==null};
+        try {
+            freeze(p,protocolHash);
+            if(!finalResult.processClosure.serverClosed)fail("RESOURCE_SERVER_CLOSE_TIMEOUT");
+            if(child.exitCode!==0)fail("RESOURCE_SERVER_EXIT_FAILED");
+            if(storageEvidence && finalResult.gates) {
+                storageEvidence.beforeDecodeFiles=databaseFiles(join(dir,"data"));
+                storageEvidence.verification=verifyClosedBoardLedger(join(dir,"data/board.sqlite"),boardACKLedger);
+                storageEvidence.afterDecodeFiles=databaseFiles(join(dir,"data"));
+                finalResult.gates.receiptReplayExact=gradeReceiptReplay(storageEvidence.verification)&&storageEvidence.verification.actualRows===storageEvidence.final.boardReceipts.count;
+                finalResult.gates.receiptStoredGrowth=gradeReceiptGrowth(storageEvidence,p.storageAcceptance.maximumGrowthBytes);
+                if(p.pictureScenario) {
+                    finalResult.gates.pictureActionsAndDelivery=calibration?null:gradePictureEvidence(p.pictureScenario,pictureEvidence);
+                    pictureEvidence.persisted=verifyClosedPictureTables(join(dir,"data/house.sqlite"),houses,p.pictureScenario,pictureEvidence);
+                    const b=storageEvidence.baseline,f=storageEvidence.final;
+                    finalResult.gates.picturePersistenceAndReceipts=calibration?null:pictureEvidence.persisted.allMatch&&f.receipts.count-b.receipts.count===174&&f.puzzleReceipts.count-b.puzzleReceipts.count===50&&f.puzzleTables.rows===2&&f.puzzleTables.completedTables===2&&f.puzzleTables.placements===48&&f.puzzleTables.maxStateBytes<=8192;
+                }
+                finalResult.status=calibration?"CALIBRATION":Object.values(finalResult.gates).every(v=>v===true)?"PASS":"FAIL";
+            }
+            freeze(p,protocolHash);
+        } catch(e) {
+            const status=failureStatus(e.code??e.name);finalResult.status=status;
+            if(status==="ABORTED"){if(finalResult.failure)finalResult.preAbortFailure=finalResult.failure;finalResult.failure={phase:"post-close-verification",code:e.code??e.name};}
+            else finalResult.failure??={phase:"post-close-verification",code:e.code??e.name};
+        }
+        finalResult.measurementFinishedAtUTC=finalResult.finishedAt;
+        finalResult.finishedAt=new Date().toISOString();
+        writeResult(finalResult);
+        process.stdout.write(JSON.stringify({status:finalResult.status,durationSeconds:finalResult.durationSeconds,rssMaxMiB:finalResult.server?.rssPeakMiB,normalP95Ms:finalResult.delivery?.normalP95Ms,gates:finalResult.gates,...(finalResult.failure?{failure:finalResult.failure}:{})})+"\n");
+        if(!["PASS","CALIBRATION"].includes(finalResult.status))process.exitCode=1;
     }
 }
 function cleanSample(v) {
@@ -1038,8 +1183,8 @@ async function selfCheck(){
  try{const f=new Function("deliveries","pendingByView","latencies","performance","return ("+reflectSource+");")(new Map(),new Map(),{normal:[],slow:[]},{now:()=>0}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.suppliedIncomingApplied=v.elements.has("incoming_probe")&&v.sequence===1;}catch(e){outcomes.suppliedIncomingApplied=false;outcomes.reflectException=e.name;}
  try{const f=new Function("deliveries","pendingByView","latencies","performance","house","return ("+reflectSource+");")(new Map(),new Map(),{normal:[],slow:[]},{now:()=>0},{elements:[{id:"seed_probe",version:1,versionNonce:1}]}),v={elements:new Map(),chatIds:new Set(),sequence:0,house:0,index:0};f(v,[{id:"incoming_probe",version:2,versionNonce:1}],null,1);outcomes.seedCannotSubstituteIncoming=v.elements.has("incoming_probe")&&!v.elements.has("seed_probe");}catch{outcomes.seedCannotSubstituteIncoming=false;}
  let clock=14000,calls={patch:0,chat:0};const stats={patchSkipped:0,chatSkipped:0},v={role:"board",nextWrite:500,nextChat:5000,writePending:false,skipped:0,chatSkipped:0};const callback=new Function("performance","views","stats","launch","write","return ("+writeSource+");")({now:()=>clock},[v],stats,fn=>void fn(),async(_v,chat=false)=>{calls[chat?"chat":"patch"]++;});callback();await Promise.resolve();clock++;callback();await Promise.resolve();outcomes.collapsedDeadlinesCounted=stats.patchSkipped===27&&stats.chatSkipped===1&&v.nextWrite===14500&&v.nextChat===15000&&calls.patch===1&&calls.chat===1;
- const contents={"/fixture/runtime.ts":Buffer.from("runtime stable"),instrument:Buffer.from("instrument stable"),protocol:Buffer.from("changed criteria")},reads=[],sourceHashes={"runtime.ts":hash(contents["/fixture/runtime.ts"])},p={sourceHashes,sourceManifestSHA256:hash(Buffer.from(JSON.stringify(sourceHashes))),instrumentSHA256:hash(contents.instrument)};
- const f=new Function("hash","readFileSync","join","root","protocolPath","fail","return ("+freezeSource.replaceAll("fileURLToPath(import.meta.url)",JSON.stringify("instrument"))+");")(hash,path=>{reads.push(path);return contents[path];},join,"/fixture","protocol",code=>fail(code));try{f(p,hash(Buffer.from("original criteria")));outcomes.protocolDriftRejected=false;}catch(e){outcomes.protocolDriftRejected=e.code==="PROTOCOL_FREEZE_CHANGED";}outcomes.protocolActuallyRead=reads.includes("protocol");
+ const contents={"/fixture/runtime.ts":Buffer.from("runtime stable"),instrument:Buffer.from("instrument stable"),protocol:Buffer.from("changed criteria")},reads=[],sourceHashes={"runtime.ts":hash(contents["/fixture/runtime.ts"])},p={sourceFiles:Object.keys(sourceHashes),sourceHashes,sourceManifestSHA256:hash(Buffer.from(JSON.stringify(sourceHashes))),instrumentSHA256:hash(contents.instrument)};
+ const f=new Function("hash","readFileSync","join","root","protocolPath","fail","validateSourceBindings","return ("+freezeSource.replaceAll("fileURLToPath(import.meta.url)",JSON.stringify("instrument"))+");")(hash,path=>{reads.push(path);return contents[path];},join,"/fixture","protocol",code=>fail(code),validateSourceBindings);try{f(p,hash(Buffer.from("original criteria")));outcomes.protocolDriftRejected=false;}catch(e){outcomes.protocolDriftRejected=e.code==="PROTOCOL_FREEZE_CHANGED";}outcomes.protocolActuallyRead=reads.includes("protocol");
  const pass=outcomes.suppliedIncomingApplied&&outcomes.seedCannotSubstituteIncoming&&outcomes.collapsedDeadlinesCounted&&outcomes.protocolDriftRejected&&outcomes.protocolActuallyRead;process.stdout.write(JSON.stringify({status:pass?"SELF_CHECK_PASS":"SELF_CHECK_FAIL",outcomes})+"\n");if(!pass)process.exitCode=1;
 }
 if(process.argv.includes("--self-check"))await selfCheck();else if (process.argv.includes("--child"))
@@ -1047,8 +1192,10 @@ if(process.argv.includes("--self-check"))await selfCheck();else if (process.argv
 else if (process.argv.includes("--checkpoint-self-check")) await checkpointSelfCheck();
 else if (process.argv.includes("--inspect")) {
     const p = JSON.parse(readFileSync(protocolPath, "utf8"));
-    freeze(p,hash(readFileSync(protocolPath)));
-    process.stdout.write(JSON.stringify({ status: "READY", protocolSHA256: hash(readFileSync(protocolPath)), sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sceneBytes: Buffer.byteLength(JSON.stringify(scene())), imageBytes: [png(101).length, png(102).length] }) + "\n");
+    const sourceBound=validateSourceBindings(p,true);
+    if(!sourceBound)process.stdout.write(JSON.stringify({status:"HELD",reason:"SOURCE_BINDING_REQUIRED",protocolSHA256:hash(readFileSync(protocolPath)),instrumentSHA256:hash(readFileSync(fileURLToPath(import.meta.url))),requiredSourceFiles:p.sourceFiles?.length??0})+"\n");
+    else {freeze(p,hash(readFileSync(protocolPath)));
+    process.stdout.write(JSON.stringify({ status: "READY", protocolSHA256: hash(readFileSync(protocolPath)), sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sceneBytes: Buffer.byteLength(JSON.stringify(scene())), imageBytes: [png(101).length, png(102).length] }) + "\n");}
 }
 else
     await run();

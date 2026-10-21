@@ -1,0 +1,47 @@
+{
+  "recordedAt": "2026-10-21T20:29:47.101361+00:00",
+  "scope": "Parent independent bounded review probes; actual --inspect and current exported normalizer/matcher only. No service/browser/load.",
+  "sourceSHA256": {
+    "tools/board-resource.mjs": "f534511008ecf449e498f8780c3d470a9bbefd9f01a09186f194bdd10ffe5636",
+    "tools/board-resource-p7.mjs": "4640af01a22aa2a02cecee4865cf2655353039e0aef059255513d96e978525ca"
+  },
+  "emptyBinding": {
+    "requiredSourceFileCount": 25,
+    "boundFileCount": 0,
+    "exitCode": 0,
+    "stdout": "{\"status\":\"READY\",\"protocolSHA256\":\"94d4ca5855ea0b0edb7730d1370c44b0bbf5a85e73486a541eca8f7f8db70bb7\",\"sourceManifestSHA256\":\"44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a\",\"instrumentSHA256\":\"f534511008ecf449e498f8780c3d470a9bbefd9f01a09186f194bdd10ffe5636\",\"sceneBytes\":1865727,\"imageBytes\":[2018703,2018703]}"
+  },
+  "frameProbeScript": "import {normalizePictureFrame,pictureFrameMatches} from './tools/board-resource-p7.mjs';import {PUZZLE_ILLUSTRATIONS} from './public/house-puzzle-content.js';import {createHash} from 'node:crypto';\nconst id=n=>'00000000-0000-4000-8000-'+n.toString(16).padStart(12,'0'),art=PUZZLE_ILLUSTRATIONS[0],hash=x=>createHash('sha256').update(x).digest('hex');\nconst scope={houseIndex:0,houseId:id(1),selfId:id(2),serverEpoch:id(3),memberIds:[id(2),id(4),id(5),id(6),id(7),id(8)],generation:1,accessGeneration:1};\nconst snapshot={serverEpoch:id(3),generation:1,accessGeneration:1,controller:true,durable:{house:{id:id(1)},selfId:id(2),zoneId:'lounge',puzzle:{revision:1,current:{id:id(9),ruleset:1,illustrationId:art.id,illustrationVersion:art.version,illustrationDigest:art.digest,completed:false,placements:[]}}},puzzleRoster:{serverEpoch:id(3),houseId:id(1),roundId:id(9),revision:1,memberIds:[],selfParticipationId:null}};\nconst expected={houseIndex:0,puzzleRevision:1,roundHash:hash(id(9)),illustrationId:art.id,illustrationVersion:art.version,illustrationDigest:art.digest,completed:false,placements:[],rosterRevision:1,rosterMembers:[],selfHashes:Array(6).fill(null)};\nconst records=[];for(const change of ['valid','generation','accessGeneration','observer','ruleset','foreignHouse']){const bad=structuredClone(snapshot);if(change==='generation')bad.generation=99;if(change==='accessGeneration')bad.accessGeneration=99;if(change==='observer')bad.controller=false;if(change==='ruleset')bad.durable.puzzle.current.ruleset=99;if(change==='foreignHouse')bad.durable.house.id=id(99);const frame=normalizePictureFrame(bad,scope);records.push({change,scopeValid:frame.scopeValid,accepted:pictureFrameMatches(frame,expected)});}console.log(JSON.stringify(records));",
+  "frameResults": [
+    {
+      "change": "valid",
+      "scopeValid": true,
+      "accepted": true
+    },
+    {
+      "change": "generation",
+      "scopeValid": true,
+      "accepted": true
+    },
+    {
+      "change": "accessGeneration",
+      "scopeValid": true,
+      "accepted": true
+    },
+    {
+      "change": "observer",
+      "scopeValid": true,
+      "accepted": true
+    },
+    {
+      "change": "ruleset",
+      "scopeValid": true,
+      "accepted": true
+    },
+    {
+      "change": "foreignHouse",
+      "scopeValid": false,
+      "accepted": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "Same closed combined-run fixture, all retained response values, including bootstrap. JSON byte representation only; excludes indexes, user assets, current scene, WAL, filesystem overhead and RAM.",
+  "count": 8142,
+  "storedBytes": 4854559,
+  "decodedUTF8Bytes": 170744820,
+  "bytesSaved": 165890261,
+  "reductionPercent": 97.15683380614416,
+  "largestBatch": 64,
+  "mainDatabaseBeforeSHA256": "f4bdb753491702e4b6a84764c4c4015dd86a0ba6bae84f9574e2eb03d4a24a05",
+  "mainDatabaseAfterSHA256": "f4bdb753491702e4b6a84764c4c4015dd86a0ba6bae84f9574e2eb03d4a24a05",
+  "readOnly": true,
+  "recordedAtUTC": "2026-10-21T22:12:08.674407+00:00",
+  "scriptSHA256": "e1f9667c05ca2478d99e41ccbd82335c21a01cea4a7ce84cfce5d3e2bdba0d4a",
+  "runResultSHA256": "e345fab35f71822efd5fda049f8ef700a1548c83d3b1d37d5a3fa7d0bc6ee664",
+  "exitCode": 0,
+  "stderr": ""
+}

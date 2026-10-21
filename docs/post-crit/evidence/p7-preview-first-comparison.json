@@ -1,0 +1,13 @@
+{
+  "scope": "First copied-preview all-row equality assertion failed after actual-clock constructor startup; original/backup never migrated.",
+  "candidateRelative": ".local/post-crit/preview-restored-20261021T211400Z",
+  "failedAssertion": "house.sqlite original field/row changed",
+  "difference": {
+    "table": "chat",
+    "before": 245,
+    "after": 0,
+    "allBeforeRowsOlderThanExisting7DayPolicyAtStartup": true
+  },
+  "otherOriginalFieldsAndRowsPreserved": true,
+  "classification": "Existing startup chat-retention effect, separate from additive schema migration. The same DELETE statement exists at8cdad6a. No production change selected."
+}

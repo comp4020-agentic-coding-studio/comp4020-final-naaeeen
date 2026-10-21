@@ -1,0 +1,148 @@
+{
+  "exportedAtUTC": "2026-10-21T22:10:51.277228+00:00",
+  "scope": "Synthetic local maintained native selection; raw report/status preserved. No private service logs, databases, credentials or cookies exported. Known public locale path uses reversible JSON-only Unicode serialization. Original test paths/config retain their runtime values; copied screenshots and scene exports are under artifacts/.",
+  "files": [
+    {
+      "source": ".local/post-crit/p7-maintained-first/result.json",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/result.json",
+      "originalSHA256": "be6202517b16f713d5e639ea199426cd352a8fc531012f2c70eeebd88a5fc3e9",
+      "publishedSHA256": "be6202517b16f713d5e639ea199426cd352a8fc531012f2c70eeebd88a5fc3e9"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/status.json",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/status.json",
+      "originalSHA256": "db03e815eeb371cda61f19c6c19773c5137c4a3e546d467f180faebecf259dd8",
+      "publishedSHA256": "db03e815eeb371cda61f19c6c19773c5137c4a3e546d467f180faebecf259dd8"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/source-before.json",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/source-before.json",
+      "originalSHA256": "f8ad2770989e9d1c7ccd8608a8d945a627e473fab188a7060f6611230136e5ea",
+      "publishedSHA256": "471d11ae01ae26cbe68b655bb3c5954cf674efae16e8411dd8530a744c421e66"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-dialog-return.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-dialog-return.png",
+      "originalSHA256": "d23185d389ba94ecc1df2a9294635b8559af433ae7778dd2d8feadfd95c20b1f",
+      "bytes": 522734,
+      "publishedSHA256": "d23185d389ba94ecc1df2a9294635b8559af433ae7778dd2d8feadfd95c20b1f"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-about.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-about.png",
+      "originalSHA256": "3efdf3d5731d6119b5abb4a3fc3f0b0152312043e3d044aefd942ed437484c27",
+      "bytes": 420042,
+      "publishedSHA256": "3efdf3d5731d6119b5abb4a3fc3f0b0152312043e3d044aefd942ed437484c27"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-options.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-305c3-ble-and-usable-at-1920x1080/title-options.png",
+      "originalSHA256": "2d88fdcf082dfb48f916e5864ec836def99780a539d5f741fc6445f159f1d524",
+      "bytes": 427149,
+      "publishedSHA256": "2d88fdcf082dfb48f916e5864ec836def99780a539d5f741fc6445f159f1d524"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/break-and-voice-friends-ch-d6b10--external-voice-destination/shared-break-phone.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/break-and-voice-friends-ch-d6b10--external-voice-destination/shared-break-phone.png",
+      "originalSHA256": "001ac4f15674f2fa79449e92d009e22e10eb846fc4475d6f5bb9be2990744502",
+      "bytes": 65391,
+      "publishedSHA256": "001ac4f15674f2fa79449e92d009e22e10eb846fc4475d6f5bb9be2990744502"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/board-receipt-recovery-a-l-0e2af-n-and-keeps-authored-export/receipt-recovered-board.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/board-receipt-recovery-a-l-0e2af-n-and-keeps-authored-export/receipt-recovered-board.png",
+      "originalSHA256": "1351fe5239475f25ff549c2b1972444e31894ce9eaa21646eebd0f37e16298e7",
+      "bytes": 41068,
+      "publishedSHA256": "1351fe5239475f25ff549c2b1972444e31894ce9eaa21646eebd0f37e16298e7"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/first-night-two-browser-id-a8930-and-a-saved-visitor-returns/phone-room.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/first-night-two-browser-id-a8930-and-a-saved-visitor-returns/phone-room.png",
+      "originalSHA256": "b10600499b4b41f9be82cfac09f8f68af9796b22ddbfa0fa3377826eb6026efa",
+      "bytes": 73424,
+      "publishedSHA256": "b10600499b4b41f9be82cfac09f8f68af9796b22ddbfa0fa3377826eb6026efa"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/first-night-two-browser-id-a8930-and-a-saved-visitor-returns/desktop-room.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/first-night-two-browser-id-a8930-and-a-saved-visitor-returns/desktop-room.png",
+      "originalSHA256": "c303b16a98965d382fef633bddeae937a0d305436b192b05dad44eb582cfe3c1",
+      "bytes": 198729,
+      "publishedSHA256": "c303b16a98965d382fef633bddeae937a0d305436b192b05dad44eb582cfe3c1"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-desktop.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-desktop.png",
+      "originalSHA256": "086f2f8378e7d04273c62064c7d1bbf2b1b3533964992690880e226043000ab6",
+      "bytes": 78288,
+      "publishedSHA256": "086f2f8378e7d04273c62064c7d1bbf2b1b3533964992690880e226043000ab6"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.excalidraw",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.excalidraw",
+      "originalSHA256": "5d2a9b4d476614185a56ec607128658f7699bf4c078e7d901caf2a8a0e4a423f",
+      "bytes": 5931,
+      "publishedSHA256": "5d2a9b4d476614185a56ec607128658f7699bf4c078e7d901caf2a8a0e4a423f"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-phone.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-phone.png",
+      "originalSHA256": "9c98641ef21f7d70ffc2467bd4bf1b44a081a6426609da2b13f71ec336ea4275",
+      "bytes": 37324,
+      "publishedSHA256": "9c98641ef21f7d70ffc2467bd4bf1b44a081a6426609da2b13f71ec336ea4275"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.png",
+      "originalSHA256": "1e02f948928c40ea679c15e342eff32b0f49c4f21740d17da9232b84d5585b87",
+      "bytes": 23872,
+      "publishedSHA256": "1e02f948928c40ea679c15e342eff32b0f49c4f21740d17da9232b84d5585b87"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-dialog-return.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-dialog-return.png",
+      "originalSHA256": "1b44b7b83e646e7ff2c60d0824f643e9a0998485f9d69252e2c79d31ef99e617",
+      "bytes": 176412,
+      "publishedSHA256": "1b44b7b83e646e7ff2c60d0824f643e9a0998485f9d69252e2c79d31ef99e617"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-about.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-about.png",
+      "originalSHA256": "8cf5c75c7a675ca5919804fbab9dbf99df4892c9d3ab7adc1668460a54634452",
+      "bytes": 109405,
+      "publishedSHA256": "8cf5c75c7a675ca5919804fbab9dbf99df4892c9d3ab7adc1668460a54634452"
+    },
+    {
+      "source": ".local/post-crit/p7-maintained-first/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-options.png",
+      "destination": "docs/post-crit/evidence/p7-maintained-browser/artifacts/title-dialog-title-dialogs-are-visible-and-usable-at-390x844/title-options.png",
+      "originalSHA256": "59ae2835d9ccba75e6e7a1abf27fa70ce91544cd5a16b60e23be45e4ec655d9b",
+      "bytes": 74415,
+      "publishedSHA256": "59ae2835d9ccba75e6e7a1abf27fa70ce91544cd5a16b60e23be45e4ec655d9b"
+    }
+  ],
+  "inlineAttachmentExports": [
+    {
+      "name": "receipt-recovery-observations",
+      "test": "a lost board reply replays its original receipt after a peer addition and keeps authored export",
+      "path": "docs/post-crit/evidence/p7-maintained-browser/receipt-recovery-observations.json",
+      "decodedJSONEqual": true
+    },
+    {
+      "name": "startup-timings",
+      "test": "house browser core keeps two live identities and a saved authored next step",
+      "path": "docs/post-crit/evidence/p7-maintained-browser/startup-timings.json",
+      "decodedJSONEqual": true
+    },
+    {
+      "name": "three-contributor-attribution",
+      "test": "three friends explicitly contribute to a picture and continue after one leaves",
+      "path": "docs/post-crit/evidence/p7-maintained-browser/three-contributor-attribution.json",
+      "decodedJSONEqual": true
+    },
+    {
+      "name": "solo-completed-picture",
+      "test": "one resident completes a picture and releases participation controls",
+      "path": "docs/post-crit/evidence/p7-maintained-browser/solo-completed-picture.json",
+      "decodedJSONEqual": true
+    }
+  ]
+}

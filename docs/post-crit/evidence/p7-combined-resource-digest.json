@@ -1,0 +1,403 @@
+{
+  "checkedAtUTC": "2026-10-21T22:11:20.449950+00:00",
+  "status": "PASS",
+  "durationSeconds": 300.001,
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": true,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": true,
+    "normalInputs": true,
+    "workload": true,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": true,
+    "gameActionsAndVisibleRevisions": true,
+    "gameReceiptAndStateGrowth": true,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true,
+    "pictureActionsAndDelivery": true,
+    "picturePersistenceAndReceipts": true
+  },
+  "rssPeakMiB": 193.90625,
+  "deliveryP95Ms": 11.936,
+  "patchSaved": 7188,
+  "chatSaved": 708,
+  "patchSkipped": 0,
+  "chatSkipped": 0,
+  "errors": {},
+  "pending": 0,
+  "retainedResponseGrowthBytes": 4790319,
+  "retainedResponseGrowthMiB": 4.568404197692871,
+  "baselineBoardReceipts": {
+    "count": 246,
+    "storedBytes": 106864,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "blob",
+        "count": 246,
+        "storedBytes": 106864
+      }
+    ]
+  },
+  "finalBoardReceipts": {
+    "count": 8142,
+    "storedBytes": 4854559,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "blob",
+        "count": 8142,
+        "storedBytes": 4854559
+      }
+    ]
+  },
+  "baselineHouseReceipts": {
+    "count": 12,
+    "storedBytes": 3144,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "text",
+        "count": 12,
+        "storedBytes": 3144
+      }
+    ]
+  },
+  "finalHouseReceipts": {
+    "count": 186,
+    "storedBytes": 45768,
+    "encoding": "UTF-8",
+    "storageTypes": [
+      {
+        "type": "text",
+        "count": 186,
+        "storedBytes": 45768
+      }
+    ]
+  },
+  "exactReplay": {
+    "compared": 8142,
+    "verified": 8142,
+    "missing": 0,
+    "metadataInvalid": 0,
+    "decodeErrors": 0,
+    "digestMismatches": 0,
+    "duplicates": 0,
+    "uniqueLedgerEntries": 8142,
+    "acknowledgements": 8142,
+    "conflicts": 0,
+    "seenEntries": 8142,
+    "actualRows": 8142,
+    "storedBytes": 4854559,
+    "encoding": "UTF-8",
+    "batchMaximum": 64,
+    "ledgerDigest": "0ea9072af084c02036e33e726e899b309f4842fa33b2e1fb75c5b7b8872860eb"
+  },
+  "game": {
+    "actions": 124,
+    "types": {
+      "join": 24,
+      "ready": 24,
+      "move": 74,
+      "leave": 2
+    },
+    "targets": 733,
+    "visibilityP95Ms": 102.948,
+    "visibilityMaxMs": 114.141
+  },
+  "picture": {
+    "actions": 62,
+    "types": {
+      "start": 2,
+      "join": 12,
+      "place": 48
+    },
+    "targets": 372,
+    "visibilityP95Ms": 104.959,
+    "visibilityMaxMs": 111.539,
+    "scheduleMaxLagMs": 1.671,
+    "invalidFrames": 0,
+    "conflictingFrames": 0,
+    "gameReceiptGrowth": 124,
+    "pictureReceiptGrowth": 50,
+    "allHouseReceiptGrowth": 174,
+    "persisted": {
+      "houses": [
+        {
+          "houseIndex": 0,
+          "revision": 25,
+          "completed": true,
+          "placementCount": 24,
+          "contributions": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "match": true
+        },
+        {
+          "houseIndex": 1,
+          "revision": 25,
+          "completed": true,
+          "placementCount": 24,
+          "contributions": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "match": true
+        }
+      ],
+      "allMatch": true
+    }
+  },
+  "databaseFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "baselineLogicalBytes": 4096,
+      "baselineAllocatedBytes": 4096,
+      "sampledPeakLogicalBytes": 4096,
+      "sampledPeakAllocatedBytes": 4096,
+      "finalLiveLogicalBytes": 4096,
+      "finalLiveAllocatedBytes": 4096
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "baselineLogicalBytes": 70072,
+      "baselineAllocatedBytes": 73728,
+      "sampledPeakLogicalBytes": 70072,
+      "sampledPeakAllocatedBytes": 73728,
+      "finalLiveLogicalBytes": 70072,
+      "finalLiveAllocatedBytes": 73728
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    },
+    {
+      "name": "house.sqlite",
+      "baselineLogicalBytes": 4096,
+      "baselineAllocatedBytes": 4096,
+      "sampledPeakLogicalBytes": 266240,
+      "sampledPeakAllocatedBytes": 266240,
+      "finalLiveLogicalBytes": 266240,
+      "finalLiveAllocatedBytes": 266240
+    },
+    {
+      "name": "house.sqlite-wal",
+      "baselineLogicalBytes": 1054752,
+      "baselineAllocatedBytes": 1060864,
+      "sampledPeakLogicalBytes": 4148872,
+      "sampledPeakAllocatedBytes": 4153344,
+      "finalLiveLogicalBytes": 4148872,
+      "finalLiveAllocatedBytes": 4153344
+    },
+    {
+      "name": "house.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    },
+    {
+      "name": "board.sqlite",
+      "baselineLogicalBytes": 17006592,
+      "baselineAllocatedBytes": 17006592,
+      "sampledPeakLogicalBytes": 24440832,
+      "sampledPeakAllocatedBytes": 24440832,
+      "finalLiveLogicalBytes": 24440832,
+      "finalLiveAllocatedBytes": 24440832
+    },
+    {
+      "name": "board.sqlite-wal",
+      "baselineLogicalBytes": 6151192,
+      "baselineAllocatedBytes": 6152192,
+      "sampledPeakLogicalBytes": 6151192,
+      "sampledPeakAllocatedBytes": 6152192,
+      "finalLiveLogicalBytes": 6151192,
+      "finalLiveAllocatedBytes": 6152192
+    },
+    {
+      "name": "board.sqlite-shm",
+      "baselineLogicalBytes": 32768,
+      "baselineAllocatedBytes": 32768,
+      "sampledPeakLogicalBytes": 32768,
+      "sampledPeakAllocatedBytes": 32768,
+      "finalLiveLogicalBytes": 32768,
+      "finalLiveAllocatedBytes": 32768
+    }
+  ],
+  "postCloseBeforeDecodeFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "exists": true,
+      "logicalBytes": 69632,
+      "allocatedBytes": 69632
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite",
+      "exists": true,
+      "logicalBytes": 290816,
+      "allocatedBytes": 290816
+    },
+    {
+      "name": "house.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite",
+      "exists": true,
+      "logicalBytes": 24530944,
+      "allocatedBytes": 24530944
+    },
+    {
+      "name": "board.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    }
+  ],
+  "afterBoardDecodeFiles": [
+    {
+      "name": "neighbourhood.sqlite",
+      "exists": true,
+      "logicalBytes": 69632,
+      "allocatedBytes": 69632
+    },
+    {
+      "name": "neighbourhood.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "neighbourhood.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite",
+      "exists": true,
+      "logicalBytes": 290816,
+      "allocatedBytes": 290816
+    },
+    {
+      "name": "house.sqlite-wal",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "house.sqlite-shm",
+      "exists": false,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite",
+      "exists": true,
+      "logicalBytes": 24530944,
+      "allocatedBytes": 24530944
+    },
+    {
+      "name": "board.sqlite-wal",
+      "exists": true,
+      "logicalBytes": 0,
+      "allocatedBytes": 0
+    },
+    {
+      "name": "board.sqlite-shm",
+      "exists": true,
+      "logicalBytes": 32768,
+      "allocatedBytes": 32768
+    }
+  ],
+  "postDecodeScope": "after board-receipt verification, before the subsequent read-only house puzzle-state check; raw result unchanged",
+  "perFilePeakScope": "Each file maximum sampled100ms; sum of independent file maxima is not asserted as a simultaneous aggregate peak.",
+  "runtime": {
+    "node": "v24.21.0",
+    "host": {
+      "platform": "linux",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "runner": "WSL"
+    },
+    "execArgv": [
+      "--max-semi-space-size=12"
+    ],
+    "heapLimitMiB": 2096,
+    "constrainedMemoryBytes": 18446744073709552000,
+    "inboundBytes": 16384,
+    "cgroupMemoryMax": null,
+    "cgroupCpuMax": null
+  },
+  "protocolSHA256": "530686461dd3b91a558a3dc33c92eb8e549de362dd90ccb9ccfaa81fe18bedc2",
+  "sourceManifestSHA256": "1116e2a4263e8ffc33c425477c7269e3adec213eec89e1ed785dead88e5301b9",
+  "instrumentSHA256": "c23f8375e8f68dd79c7e9e64741b3fc6242f192eab07c17962a3d6aad1ed623d",
+  "resultSHA256": "e345fab35f71822efd5fda049f8ef700a1548c83d3b1d37d5a3fa7d0bc6ee664",
+  "sourceGuardVerified": true,
+  "processClosure": {
+    "scenario": "p7-combined",
+    "launchedAtUTC": "2026-10-21T22:03:03.169698+00:00",
+    "generatorPID": 119213,
+    "serverPID": 119238,
+    "protocolSHA256": "530686461dd3b91a558a3dc33c92eb8e549de362dd90ccb9ccfaa81fe18bedc2",
+    "exitCode": 0,
+    "checkedAtUTC": "2026-10-21T22:08:04.563415+00:00",
+    "generatorProcExists": false,
+    "serverProcExists": false
+  }
+}

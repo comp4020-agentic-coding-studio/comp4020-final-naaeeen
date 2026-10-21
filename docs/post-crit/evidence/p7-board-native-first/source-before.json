@@ -1,0 +1,19 @@
+{
+  "board/client.js": "bc78fe9ef17876a0162fb56c9d64a91420412016bdffe3ddc46d6cafb08628b1",
+  "board/main.jsx": "88e30aff311ad6e6edbccadffcc14b3829c21d2ab1cdce8ae3e24444c7238dd6",
+  "board/interaction.js": "4fadf77293c7ebc964e9f0b28554c83cdb48612690fe8b983d10d4a478ab2549",
+  "board/workspace.css": "8dc0b3bb35bfa61d1b0d9dbf322c83234dfed535d207031267e78ed65668dca5",
+  "public/board.html": "f979fc9137ab0b84cc756a50ed913cfd6400e6622fb8c124e6e1ad3b46fa80e9",
+  "public/board-assets/app.js": "7771387896dc02a7452645d0116044fde43d7287d46d062bcdc51f1da3643701",
+  "public/board-assets/app.css": "f3531d9f115267e11b70e49dad650fdb03ce7b19224e59069942b07134aa8268",
+  "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+  "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+  "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+  "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+  "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a",
+  "tests/e2e/board.spec.ts": "f15ac225524b160e90702fca934e648c4f8e66e2a3ad00e96ae755bdb129fb64",
+  "tests/e2e/board-receipt-recovery.spec.ts": "76994893569daea1455635474713f8c54e4e061ea216a623895397738b6fdb05",
+  "tests/e2e/board-journey.ts": "d5b1b26a687a25cd466c336330f23a90bb85c8fb9fe09ded7510c244baff1516",
+  "playwright.config.ts": "80f462cf6b300c80d50617eafb0b60d8288403389d1a3b71e6b0ad8728778e95",
+  "docs/post-crit/evidence/receipt-native-protocol.md": "0ce97438fb97794a5ee74dc11a697268042f12b4bf91cf7dc104f7597351f848"
+}

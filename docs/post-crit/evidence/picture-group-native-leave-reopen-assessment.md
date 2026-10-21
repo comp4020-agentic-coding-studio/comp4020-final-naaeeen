@@ -1,0 +1,11 @@
+# Corrected Leave attempt: reload-observer failure
+
+The frozen `picture-group-native-leave-reopen` attempt remains FAIL. Its production manifest418289866c901945c694f148c13fe63e73f0c09a0c22b840b5974d1454fb8bf8 was unchanged. All owned contexts/browser were closed and port4108 left untouched. Original result, protocol, runner and PNGs remain immutable.
+
+Native six-author contribution and the full six-name390x844 layout boundary passed again. The corrected ordinary Leave route passed: Watch5 with disabled controls, another contributor's accepted seventh piece, fresh explicit Join with a different participation UUID and accepted eighth piece.
+
+The next first failed assertion required exactly one high-level Playwright WebSocket close event from the original socket during a real page.reload, within10s. It received0. The original failure PNG shows the real saved-home title and /api/house/me returned200. The driver stopped before checking another peer's roster and before Continue/rejoin. These later lifecycle/completion gates remain NOT RUN. No product disconnect defect is inferred from this missing observer event.
+
+Read-only installed-source evidence: node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core/lib/coreBundle.js:23227 invokes _clearWebSockets(frame) during committed new-document navigation;23385–23388 clears the main-frame map;23423–23432 reports close only when the requestId is still mapped. Therefore a postcommit close can be invisible through the high-level object. This is a source-supported observability explanation, rather than a claimed trace of the exact CDP event order in this failed attempt. public/house-ui.js pagehide calls client.close, whose source disconnects Socket.IO.
+
+Proposed for root review, not applied: retain unexpected-close rejection, require exact native socket-open generations and no undeclared main-document navigation, and establish the planned reload through actual title/navigation, scoped peer roster removal, continued peer progress, same authenticated identity returning as Watch, and a fresh Join UUID. A raw read-only CDP close observer is an alternative if exact transport closure needs separate direct measurement. Both keep actualUI/durable authority, latency and full contribution gates. A new protocol/runner binding and root lane release are required before a new native attempt.

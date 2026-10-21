@@ -1,0 +1,22 @@
+{
+  "recordedAtUTC": "2026-10-21T22:19:07.236002+00:00",
+  "observation": "Git add normalized one CRLF sequence in each frozen archived Markdown file, changing recorded byte hashes.",
+  "firstCorrectionAttempt": "Adding exact-path attributes and ordinary git add did not refresh already-indexed unchanged files; explicit byte equality assertion failed before any commit.",
+  "decision": "Exact-path -text attributes plus targeted git add --renormalize retain original bytes. cr-at-eol recognizes preserved CRLF while ordinary trailing-space/space-before-tab and unchanged credential hook remain active. No source bytes or prior recorded hashes changed.",
+  "files": [
+    {
+      "path": "docs/post-crit/evidence/picture-group-native-preparation-v1/preparation.md",
+      "originalSHA256": "7dea45f582f09504069b022db74c4d5790e4d7be04cabf05710825310b353a7c",
+      "initialNormalizedIndexSHA256": "fad08439cce5a680c7e93e1f378ea722eaa122622120ebf3179e4a8820413b8c",
+      "CRLFSequences": 1,
+      "finalIndexSHA256": "7dea45f582f09504069b022db74c4d5790e4d7be04cabf05710825310b353a7c"
+    },
+    {
+      "path": "docs/post-crit/evidence/picture-group-native-preparation-v1/protocol.md",
+      "originalSHA256": "978da3ccb0dbda75c513a3c6afe6de051cc091e0827575434d222e5c225403bc",
+      "initialNormalizedIndexSHA256": "c2c125836c2cded740d67279db05d02493ba8dff0bfe95e8b468dcc3f37aaa45",
+      "CRLFSequences": 1,
+      "finalIndexSHA256": "978da3ccb0dbda75c513a3c6afe6de051cc091e0827575434d222e5c225403bc"
+    }
+  ]
+}

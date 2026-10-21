@@ -1,0 +1,34 @@
+{
+  "scope": "Actual native browser/real-service acceptance; source-stable board files. No deployment or resource result.",
+  "passed": 3,
+  "skipped": 0,
+  "unexpected": 0,
+  "exitCode": 0,
+  "protocol": "../receipt-native-protocol.md",
+  "launcherPrefix": "Already up to date\nDone in 49ms using pnpm v11.9.0\n",
+  "rawStdoutSHA256": "6a44af32b7108148b374f6f4bb4484724785f2f144b83c54f8cc03f10ad1be3c",
+  "artifactExtraction": "First parser expected pure JSON and rejected the harmless pnpm launcher prefix. Exact JSON suffix plus the recorded prefix reconstructs the original stdout. The browser command itself passed; no test was retried.",
+  "sourceStable": true,
+  "parentImageInspection": [
+    "Original1920x1080desktopcanvas/chat and390x844touchviewport: visible editor, saved status, standalone controls; no captured-image transparency anomaly observed."
+  ],
+  "storedReceipt": {
+    "database": "isolated current validation fixture; read-only",
+    "encoding": "UTF-8",
+    "type": "blob",
+    "storedBytes": 647,
+    "wireJSONBytes": 1392,
+    "exactAcceptedReceipt": true
+  },
+  "files": {
+    "result.json": "167c888e48b14566c4f31e645a8775377b05f0e7f78305dd7040461034f05721",
+    "receipt-recovery-observations.json": "9fcd4f5ffd9f8ad5036c408ced19f97e46840fdfaeb6a58a569a6e39256ade2c",
+    "board-desktop.png": "0c2b7f42b813bcf4f7c54c0193e47509a35fb27570096e453c5b8b595a3a7a3a",
+    "shared-board.excalidraw": "d850850bca75ee0be54c1fbed91562c7966e2e1ea1d4f247fdc30a840b06fd5d",
+    "stored-receipt-probe.json": "bcef6179aaab5add065cb14d486382b8802a6524ee646ffeb6e8dfa6244c95c2",
+    "board-phone.png": "26946d5676d4f48d9713767c8369aa2c4636973da5145c2fb90ae0499389f788",
+    "status.json": "8848509a9cd44bac446a471c8b9db50544ae74b33f6873a276700f5f32d5292a",
+    "shared-board.png": "c90420589cd241ac31085d327e5652a9ccdefb682d5c6b2a0a0fd1082bfbf3c1",
+    "source-before.json": "7671c90bb4f096bba3d2f41c90d6158420c715fecf1014f6ebff393a12bfe271"
+  }
+}

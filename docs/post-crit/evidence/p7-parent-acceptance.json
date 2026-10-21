@@ -1,0 +1,50 @@
+{
+  "checkedAtUTC": "2026-10-21T22:14:01.023695+00:00",
+  "scope": "Parent read-only artifact/gate/source consistency checks after fresh review; no repeated workload or browser execution. Source logic and clock domains inspected separately.",
+  "resourceManifestFilesChecked": 56,
+  "runs": [
+    {
+      "scenario": "original",
+      "gates": 23,
+      "resultSHA256": "6e8ea6ef23c41d75046e23834c6abbe7dba7aad0879435ad50a658cae341fbef",
+      "protocolSHA256": "bf34c4c20aa83d2e6951c63fe7cfec85e6e7e200d9f4379c028eb103028c2890",
+      "sourceFilesChecked": 25,
+      "currentSourcesMatch": true,
+      "monotonicDurationSeconds": 300.001,
+      "rawResultUnchanged": true
+    },
+    {
+      "scenario": "combined",
+      "gates": 27,
+      "resultSHA256": "e345fab35f71822efd5fda049f8ef700a1548c83d3b1d37d5a3fa7d0bc6ee664",
+      "protocolSHA256": "530686461dd3b91a558a3dc33c92eb8e549de362dd90ccb9ccfaa81fe18bedc2",
+      "sourceFilesChecked": 25,
+      "currentSourcesMatch": true,
+      "monotonicDurationSeconds": 300.001,
+      "rawResultUnchanged": true
+    }
+  ],
+  "ownedResourceAndValidationPIDsAbsent": true,
+  "receiptPNGInspected": "Peer note overlays original; current-editor scene export, not simultaneous text visibility, supports reload preservation.",
+  "freshReview": {
+    "agent": "p7_final_acceptance_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "history": "none for initial review; contextual arithmetic/export follow-up",
+    "findings": [
+      "Narrow completion repair claim to server authority/client ordering; UI behavior did change.",
+      "Replace pending combined/packaging checkpoint after closure."
+    ],
+    "resourceBlocker": false,
+    "clockLimitation": "UTC spans differ from monotonic300.001seconds; cause not isolated, raw timestamps retained.",
+    "contextualReceiptAccountingAndSerialization": "Exact arithmetic, all4reversibleJSONpreimages,17exportfilehashes and4attachment values verified by read-only review."
+  },
+  "receiptReview": {
+    "agent": "receipt_native_acceptance_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "history": "none",
+    "scope": "Parsed receipt replay, distinct peer addition, authored export and actual editor-scene restoration afterreload",
+    "outcome": "No actionable scoped defect; avoid simultaneous-visible-text, rawHTTPbyte or same-object-edit claims."
+  }
+}
