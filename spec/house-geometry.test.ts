@@ -4,12 +4,12 @@ import { createLayout, bedroomLayout, validPosition, slide, validatePlacements, 
 const piece = (id: string, kind: string, x: number, z: number, rotation = 0) => ({ id, kind, x, z, rotation, colour: 'sage' });
 
 describe('shared house collision geometry', () => {
-  test('all 90 door, seat and board route queries stay clear across capacities', () => {
+  test('all 170 door, seat and board route queries stay clear across capacities', () => {
     let queries = 0;
     for (let capacity = 2; capacity <= 6; capacity++) {
       const layout = createLayout(capacity);
-      expect(layout.width).toBe(16); expect(layout.depth).toBe(11);
-      expect(layout.doors).toHaveLength(capacity); expect(layout.seats).toHaveLength(capacity);
+      expect(layout.width).toBe(20); expect(layout.depth).toBe(14);
+      expect(layout.doors).toHaveLength(capacity); expect(layout.seats).toHaveLength(capacity + 8);
       expect(new Set(layout.doors.map((door: { slot: number }) => door.slot)).size).toBe(capacity);
       expect(validPosition(layout, layout.spawn)).toBe(true);
       const targets = [...layout.doors.map((door: { target: { x: number; z: number } }) => door.target), ...layout.seats.map((seat: { target: { x: number; z: number } }) => seat.target), layout.boardTarget];
@@ -25,20 +25,21 @@ describe('shared house collision geometry', () => {
         }
       }
     }
-    expect(queries).toBe(90);
-  });
+    expect(queries).toBe(170);
+  }, 30000);
 
   test('invalid numbers, furniture, walls and unsupported capacities are rejected', () => {
     const layout = createLayout(4);
-    for (const p of [{ x: NaN, z: 0 }, { x: 0, z: Infinity }, { x: 0, z: 0 }, { x: 8, z: 3 }]) expect(validPosition(layout, p)).toBe(false);
+    for (const p of [{ x: NaN, z: 0 }, { x: 0, z: Infinity }, { x: -1, z: -2 }, { x: 10, z: 3 }]) expect(validPosition(layout, p)).toBe(false);
     for (const n of [1, 7, 3.5, NaN]) expect(() => createLayout(n)).toThrow(RangeError);
     for (const o of layout.obstacles) expect(validPosition(layout, { x: o.x, z: o.z })).toBe(false);
   });
 
   test('substeps cannot tunnel through a table and preserve sliding along walls', () => {
     const layout = createLayout(2);
-    const result = slide(layout, { x: 0, z: -2.7 }, 0, 6);
-    expect(result.z).toBeLessThan(-1.13);
+    const table = layout.obstacles.find(o => o.id === 'table')!;
+    const result = slide(layout, { x: table.x + .8, z: table.z - 2.7 }, 0, 6);
+    expect(result.z).toBeLessThan(table.z - 1.13);
     expect(validPosition(layout, result)).toBe(true);
     const empty = bedroomLayout([]);
     const wall = slide(empty, { x: 5.7, z: 0 }, 20, 2);
@@ -47,7 +48,8 @@ describe('shared house collision geometry', () => {
   });
 
   test('off-grid route connectors do not cross a cabinet corner', () => {
-    const layout = createLayout(2), start = { x: -5.547, z: 2.429 };
+    const layout = createLayout(2), cabinet = layout.obstacles.find(o => o.id === 'tea-cabinet')!;
+    const start = { x: cabinet.x + cabinet.w / 2 + .05, z: cabinet.z - cabinet.d / 2 - .3 };
     expect(validPosition(layout, start)).toBe(true);
     const route = findRoute(layout, start, layout.boardTarget);
     expect(route).not.toBeNull();

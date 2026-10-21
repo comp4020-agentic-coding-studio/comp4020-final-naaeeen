@@ -1,0 +1,219 @@
+{
+  "kind": "deterministic path-length diagnostic, not user comfort or completion-time evidence",
+  "rows": [
+    {
+      "candidate": "compact",
+      "capacity": 6,
+      "dimensions": {
+        "width": 16,
+        "depth": 11
+      },
+      "floorArea": 176,
+      "routes": [
+        {
+          "id": "door-0",
+          "metres": 13.6
+        },
+        {
+          "id": "door-1",
+          "metres": 11.371
+        },
+        {
+          "id": "door-2",
+          "metres": 13.662
+        },
+        {
+          "id": "door-3",
+          "metres": 11.162
+        },
+        {
+          "id": "door-4",
+          "metres": 11.371
+        },
+        {
+          "id": "door-5",
+          "metres": 13.6
+        },
+        {
+          "id": "seat-1",
+          "metres": 2.162
+        },
+        {
+          "id": "seat-2",
+          "metres": 6.688
+        },
+        {
+          "id": "seat-3",
+          "metres": 9.688
+        },
+        {
+          "id": "seat-4",
+          "metres": 12.662
+        },
+        {
+          "id": "seat-5",
+          "metres": 8.393
+        },
+        {
+          "id": "seat-6",
+          "metres": 5.393
+        },
+        {
+          "id": "rest-seat-1",
+          "metres": 3.912
+        },
+        {
+          "id": "rest-seat-2",
+          "metres": 4.85
+        },
+        {
+          "id": "rest-seat-3",
+          "metres": 5.662
+        },
+        {
+          "id": "rest-seat-4",
+          "metres": 8.65
+        },
+        {
+          "id": "rest-seat-5",
+          "metres": 7.65
+        },
+        {
+          "id": "rest-seat-6",
+          "metres": 6.65
+        },
+        {
+          "id": "game-seat-1",
+          "metres": 8.65
+        },
+        {
+          "id": "game-seat-2",
+          "metres": 6.912
+        },
+        {
+          "id": "board",
+          "metres": 11.191
+        },
+        {
+          "id": "game",
+          "metres": 4.941
+        },
+        {
+          "id": "exit",
+          "metres": 1.6
+        }
+      ],
+      "longest": {
+        "id": "door-2",
+        "metres": 13.662
+      }
+    },
+    {
+      "candidate": "expanded",
+      "capacity": 6,
+      "dimensions": {
+        "width": 20,
+        "depth": 14
+      },
+      "floorArea": 280,
+      "routes": [
+        {
+          "id": "door-0",
+          "metres": 17.9
+        },
+        {
+          "id": "door-1",
+          "metres": 15.171
+        },
+        {
+          "id": "door-2",
+          "metres": 15.962
+        },
+        {
+          "id": "door-3",
+          "metres": 12.962
+        },
+        {
+          "id": "door-4",
+          "metres": 15.171
+        },
+        {
+          "id": "door-5",
+          "metres": 17.9
+        },
+        {
+          "id": "seat-1",
+          "metres": 4.85
+        },
+        {
+          "id": "seat-2",
+          "metres": 9.121
+        },
+        {
+          "id": "seat-3",
+          "metres": 12.121
+        },
+        {
+          "id": "seat-4",
+          "metres": 14.35
+        },
+        {
+          "id": "seat-5",
+          "metres": 10.121
+        },
+        {
+          "id": "seat-6",
+          "metres": 7.121
+        },
+        {
+          "id": "rest-seat-1",
+          "metres": 5.462
+        },
+        {
+          "id": "rest-seat-2",
+          "metres": 6.4
+        },
+        {
+          "id": "rest-seat-3",
+          "metres": 7.491
+        },
+        {
+          "id": "rest-seat-4",
+          "metres": 10.241
+        },
+        {
+          "id": "rest-seat-5",
+          "metres": 9.241
+        },
+        {
+          "id": "rest-seat-6",
+          "metres": 8.241
+        },
+        {
+          "id": "game-seat-1",
+          "metres": 10.421
+        },
+        {
+          "id": "game-seat-2",
+          "metres": 7.712
+        },
+        {
+          "id": "board",
+          "metres": 15.462
+        },
+        {
+          "id": "game",
+          "metres": 6.4
+        },
+        {
+          "id": "exit",
+          "metres": 1.65
+        }
+      ],
+      "longest": {
+        "id": "door-5",
+        "metres": 17.9
+      }
+    }
+  ]
+}

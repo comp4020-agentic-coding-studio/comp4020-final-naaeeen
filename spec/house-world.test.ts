@@ -797,3 +797,75 @@ it('P2 preserves legacy standard lighting and renders distinguishable cosy and d
 it.each(['desk','lamp'].flatMap(kind=>[0,1,2,3].map(rotation=>({kind,rotation}))))('P2 projects a solid $kind surface and uses its native raycast at rotation $rotation',({kind,rotation})=>{
  const actions=vi.fn(),f=speechFixture(390,844,{onInteract:actions}),state=structuredClone(f.snapshot);state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'object-id',kind,x:3.5,z:-3,rotation,colour:'sage'}]};for(const p of state.players)Object.assign(p,{zoneId:'room0',x:0,z:3});f.world.update(state);f.world.setCameraMode('overview');f.step(0);const canvas=f.container.querySelector('canvas')!;Object.defineProperty(canvas,'getBoundingClientRect',{value:()=>({left:0,top:0,width:390,height:844})});const point=JSON.parse(canvas.dataset.pickTargets!).find((p:any)=>p.target.id==='object-id');expect(point?.visible).toBe(true);for(const name of ['pointerdown','pointerup'])canvas.dispatchEvent(new window.MouseEvent(name,{clientX:point.x,clientY:point.y,button:0,bubbles:true}));for(let t=100;t<=10000;t+=100)f.step(t);expect(actions).toHaveBeenCalledWith({type:kind,id:'object-id'});
 });
+
+
+it('renders two collision-aligned sofas with six individually pickable 0.4m cushions',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);
+ const layout=createLayout(6),sofas:any[]=[];
+ rendered.scene.traverse((o:any)=>{if(o.userData.fixtureId?.startsWith('rest-sofa-'))sofas.push(o);});
+ expect(sofas).toHaveLength(2);
+ for(const sofa of sofas){const bounds=new Box3().setFromObject(sofa),fixture=layout.obstacles.find(o=>o.id===sofa.userData.fixtureId)!;
+  expect(bounds.min.x).toBeCloseTo(fixture.x-fixture.w/2,5);expect(bounds.max.x).toBeCloseTo(fixture.x+fixture.w/2,5);
+  expect(bounds.min.z).toBeCloseTo(fixture.z-fixture.d/2,5);expect(bounds.max.z).toBeCloseTo(fixture.z+fixture.d/2,5);}
+ const pickTargets=JSON.parse(f.container.querySelector('canvas')!.dataset.pickTargets!);
+ for(const seat of layout.seats.filter(s=>s.purpose==='rest')){
+  expect(pickTargets.filter((p:any)=>p.target.type==='seat'&&p.target.seatId===seat.id)).toHaveLength(1);
+  const objects:any[]=[];rendered.scene.traverse((o:any)=>{if(o.isMesh&&o.userData.target?.seatId===seat.id)objects.push(o);});
+  expect(objects).toHaveLength(1);expect(new Box3().setFromObject(objects[0]).max.y).toBeCloseTo(.4,5);
+ }
+ expect(f.container.querySelectorAll('.corner')).toHaveLength(1);expect(f.container.querySelector('.corner')!.textContent).toBe('Rest corner');
+});
+it('uses bounded colours and translates the study table, props and rug together',()=>{
+ const f=speechFixture();f.world.update(f.snapshot);f.step(0);const layout=createLayout(6),table=layout.obstacles.find(o=>o.id==='table')!;
+ const fixtures:any[]=[];rendered.scene.traverse((o:any)=>{if(o.userData.fixtureId==='table'||o.userData.fixtureId==='study-rug')fixtures.push(o);if(o.isMesh)expect(o.material.color).toBeDefined();});
+ expect(fixtures).toHaveLength(2);for(const fixture of fixtures){expect(fixture.position.x).toBe(table.x);expect(fixture.position.z).toBe(table.z);}
+ const light=rendered.scene.children.find((o:any)=>o.isDirectionalLight);expect(light.shadow.mapSize.x).toBe(512);expect(light.shadow.mapSize.y).toBe(512);
+ light.shadow.updateMatrices(light);
+ for(const x of [-layout.width/2,layout.width/2])for(const y of [0,2.6])for(const z of [-layout.depth/2,layout.depth/2]){
+  const q=new Vector3(x,y,z).applyMatrix4(light.shadow.camera.matrixWorldInverse);
+  expect(q.x).toBeGreaterThanOrEqual(light.shadow.camera.left);expect(q.x).toBeLessThanOrEqual(light.shadow.camera.right);
+  expect(q.y).toBeGreaterThanOrEqual(light.shadow.camera.bottom);expect(q.y).toBeLessThanOrEqual(light.shadow.camera.top);
+ }
+});
+it('routes Places by purpose and keeps game interaction separate from sitting',()=>{
+ const interactions:any[]=[];const f=speechFixture(390,844,{onInteract:(v:any)=>interactions.push(v)}),layout=createLayout(6);
+ const game=layout.gameTarget!;f.snapshot.players[0].x=game.x;f.snapshot.players[0].z=game.z;
+ f.world.update(f.snapshot);f.step(0);expect(f.world.routeTo('game')).toBe(true);for(let t=100;t<=1000;t+=100)f.step(t);
+ expect(interactions).toContainEqual({kind:'game'});expect(interactions.some(v=>v.type==='seat')).toBe(false);
+ expect(f.world.routeTo('rest')).toBe(true);expect(f.world.routeTo('study')).toBe(true);
+ f.snapshot.players[0].seatId='game-seat-1';f.snapshot.players[0].animation='sit';f.world.update(f.snapshot);f.world.interact();
+ expect(interactions.at(-1)).toEqual({type:'seat',seatId:'game-seat-1'});
+});
+it('uses current-layout permanent-slot arrivals when optional poses are absent',()=>{
+ const f=speechFixture();delete f.snapshot.players[0].x;delete f.snapshot.players[0].z;
+ f.snapshot.durable.residents[0].slot=5;f.snapshot.durable.residents=f.snapshot.durable.residents.slice(0,1);
+ f.world.update(f.snapshot);f.step(0);expect(f.world.getPosition()).toEqual(createLayout(6).arrivals![5]);
+ const room=structuredClone(f.snapshot);room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};
+ room.players[0].zoneId='room0';f.world.update(room);f.step(100);expect(f.world.getPosition()).toEqual({x:0,z:3});
+});
+
+it('keeps observer and peer optional poses at their own permanent-slot arrivals',()=>{
+ const f=speechFixture();f.snapshot.controller=false;
+ for(let i=0;i<f.snapshot.players.length;i++){if(i%2){f.snapshot.players[i].x=null;f.snapshot.players[i].z=null;}else{delete f.snapshot.players[i].x;delete f.snapshot.players[i].z;}}
+ f.world.update(f.snapshot);f.step(0);const layout=createLayout(6);
+ for(let i=0;i<6;i++){const label=f.container.querySelector<HTMLElement>(`.house-avatar-name[data-player-id="p${i}"]`)!;expect(+label.dataset.x!).toBeCloseTo(layout.arrivals![i].x,2);expect(+label.dataset.z!).toBeCloseTo(layout.arrivals![i].z,2);}
+ expect(f.world.getPosition()).toEqual(layout.arrivals![0]);
+ const room=structuredClone(f.snapshot);room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};room.players.forEach((p:any)=>p.zoneId='room0');
+ f.world.update(room);f.step(100);for(const label of f.container.querySelectorAll<HTMLElement>('.house-avatar-name')){expect(+label.dataset.x!).toBe(0);expect(+label.dataset.z!).toBe(3);}
+});
+it('matches actual rendered study and game chair footprints at every supported capacity',()=>{
+ const f=speechFixture();
+ for(let capacity=2;capacity<=6;capacity++){const snapshot=structuredClone(f.snapshot);snapshot.durable.house.capacity=capacity;snapshot.players=snapshot.players.slice(0,capacity);snapshot.durable.residents=snapshot.durable.residents.slice(0,capacity);f.world.update(snapshot);f.step(capacity*100);
+ const layout=createLayout(capacity);
+ for(const seat of layout.seats.filter(s=>s.purpose!=='rest')){const chair=rendered.scene.children.find((o:any)=>o.userData.target?.seatId===seat.id),bounds=new Box3().setFromObject(chair),obstacle=layout.obstacles.find(o=>o.id===seat.id)!;
+ for(const [actual,limit,direction] of [[bounds.min.x,obstacle.x-obstacle.w/2,1],[bounds.max.x,obstacle.x+obstacle.w/2,-1],[bounds.min.z,obstacle.z-obstacle.d/2,1],[bounds.max.z,obstacle.z+obstacle.d/2,-1]]){expect((actual-limit)*direction).toBeGreaterThanOrEqual(-1e-6);expect(Math.abs(actual-limit)).toBeLessThan(.16);}}}
+});
+
+it('raycasts every sofa cushion at its published projected native pick point',()=>{
+ const f=speechFixture(1920,1080);f.world.update(f.snapshot);f.step(0);f.world.setCameraMode('overview');f.step(1000);
+ const canvas=f.container.querySelector('canvas')!,targets=JSON.parse(canvas.dataset.pickTargets!);
+ for(const seat of createLayout(6).seats.filter(s=>s.purpose==='rest')){const target=targets.find((t:any)=>t.target.seatId===seat.id),ray=new Raycaster();
+ ray.setFromCamera({x:target.x/1920*2-1,y:1-target.y/1080*2} as any,rendered.camera);
+ const hit=ray.intersectObjects(rendered.scene.children,true).find((h:any)=>h.object.userData.target)?.object.userData.target;
+ expect(hit,seat.id).toEqual({type:'seat',seatId:seat.id});}
+});

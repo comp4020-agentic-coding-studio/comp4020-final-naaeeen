@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createLayout, bedroomLayout, slide, validPosition, findRoute, footprint, CAMERA_ORIENTATION, AVATAR_HEIGHT, SEATED_LIFT, FURNITURE_HEIGHTS } from './house-geometry.js';
+import { createLayout, bedroomLayout, slide, validPosition, findRoute, footprint, CAMERA_ORIENTATION, AVATAR_HEIGHT, SEATED_LIFT, FURNITURE_HEIGHTS, BEDROOM_ARRIVAL } from './house-geometry.js';
 import { layoutLabels, createBubbleFeed } from './house-label-layout.js';
 import { roomInteractionTarget } from './house-room-content.js';
 import { createHouseCamera } from './house-camera.js';
@@ -39,6 +39,10 @@ export function createHouseWorld(container, callbacks = {}) {
   const dimensionObserver = new ResizeObserver(entries => { for (const observed of entries) { const item = labelEntries.get(observed.target); if (!item) continue; const box = observed.borderBoxSize?.[0]; if (box && box.inlineSize > 0 && box.blockSize > 0) { if (Math.abs(item.size.w - box.inlineSize) > 0.1 || Math.abs(item.size.h - box.blockSize) > 0.1) { item.size = { w: box.inlineSize, h: box.blockSize }; layoutDirty = true; } item.sizeDirty = false; } else { item.sizeDirty = true; layoutDirty = true; } } });
   const fixed = id => layout.obstacles.find(item => item.id === id);
   const roomPlacements = () => previewPlacements ?? live?.durable.room?.placements ?? [];
+  function arrivalFor(playerId, zoneLayout = layout) {
+    const slot = live?.durable.residents.find(resident => resident.id === playerId)?.slot;
+    return live?.durable.room ? BEDROOM_ARRIVAL : zoneLayout.arrivals?.[slot] ?? zoneLayout.spawn;
+  }
 
   const colour = name => PALETTE[name] ?? PALETTE.amber;
   function mat(hex) { if (!materials.has(hex)) materials.set(hex, new THREE.MeshStandardMaterial({ color: hex, roughness: 0.91 })); return materials.get(hex); }
@@ -102,8 +106,10 @@ export function createHouseWorld(container, callbacks = {}) {
     box(0.14, 0.12, depth, side + 0.09, 0.05, 0, '#af8d66');
     box(0.1, 0.22, depth, width / 2 + 0.05, 0.02, 0, '#d4c2a2');
     // A local rug anchors the table without filling every metre of the larger room.
-    box(6.7, 0.025, 5.2, 0, 0.006, 0, colour(palette)); box(6.25, 0.012, 4.75, 0, 0.025, 0, '#dad2b9');
-    for (let x = -2.9; x < 3; x += 0.38) box(0.1, 0.014, 0.15, x, 0.034, 2.62, '#eee1bf');
+    const rug = new THREE.Group(), table = live?.durable.room ? null : fixed('table');
+    rug.position.set(table?.x ?? 0, 0, table?.z ?? 0); rug.userData.fixtureId = 'study-rug'; scene.add(rug);
+    box(6.7, 0.025, 5.2, 0, 0.006, 0, colour(palette), rug); box(6.25, 0.012, 4.75, 0, 0.025, 0, '#dad2b9', rug);
+    for (let x = -2.9; x < 3; x += 0.38) box(0.1, 0.014, 0.15, x, 0.034, 2.62, '#eee1bf', rug);
     canvas.dataset.roomWidth = String(width); canvas.dataset.roomDepth = String(depth);
   }
   function doorView(door) {
@@ -130,27 +136,45 @@ export function createHouseWorld(container, callbacks = {}) {
     }
     if (roomLabel) updateLabel(roomLabel, (live.durable.residents.find(r => r.id === live.durable.room.ownerId)?.name ?? 'Resident') + "'s room");
   }
+  function fixtureGroup(id) {
+    const fixture = fixed(id), group = new THREE.Group(); group.position.set(fixture.x, 0, fixture.z); group.userData.fixtureId = id; scene.add(group); return group;
+  }
   function lounge() {
     layout.doors.forEach(doorView);
-    layout.seats.forEach((seat, i) => {
-      const g = new THREE.Group(); g.position.set(seat.x, 0, seat.z); g.rotation.y = seat.heading + Math.PI; scene.add(g); chair(g, Object.values(PALETTE)[i]);
+    layout.seats.filter(seat => seat.purpose !== 'rest').forEach((seat, i) => {
+      const g = new THREE.Group(); g.position.set(seat.x, 0, seat.z); g.rotation.y = seat.heading + Math.PI; scene.add(g); chair(g, Object.values(PALETTE)[i % Object.keys(PALETTE).length]);
       pickable(g, { type: 'seat', seatId: seat.id });
     });
-    box(2.5, 0.15, 1.8, 0, FURNITURE_HEIGHTS.tableTop - 0.075, 0, '#b89469');
-    for (const x of [-1.03, 1.03]) for (const z of [-0.7, 0.7]) box(0.1, 0.57, 0.1, x, 0.29, z, '#8f724f');
-    box(0.65, 0.04, 0.45, -0.5, 0.765, 0.1, '#869578'); box(0.43, 0.03, 0.48, -0.41, 0.80, 0.07, '#efdfc0');
-    cylinder(0.12, 0.15, 0.7, 0.80, 0.1, '#e8d8b8');
-    const tea = new THREE.Group(); tea.position.set(fixed('tea-cabinet').x, 0, fixed('tea-cabinet').z); scene.add(tea);
+    const table = fixtureGroup('table');
+    box(2.5, 0.15, 1.8, 0, FURNITURE_HEIGHTS.tableTop - 0.075, 0, '#b89469', table);
+    for (const x of [-1.03, 1.03]) for (const z of [-0.7, 0.7]) box(0.1, 0.57, 0.1, x, 0.29, z, '#8f724f', table);
+    box(0.65, 0.04, 0.45, -0.5, 0.765, 0.1, '#869578', table); box(0.43, 0.03, 0.48, -0.41, 0.80, 0.07, '#efdfc0', table);
+    cylinder(0.12, 0.15, 0.7, 0.80, 0.1, '#e8d8b8', table);
+    const tea = fixtureGroup('tea-cabinet');
     box(1.7, 0.75, 0.6, 0, 0.375, 0, '#9a7d5c', tea); box(1.78, 0.08, 0.65, 0, 0.79, 0, '#c4a783', tea); cylinder(0.17, 0.29, -0.2, 0.98, 0, '#efe0c0', tea);
     const teaLamp = new THREE.Group(); teaLamp.position.set(-0.55, 0.84, 0); teaLamp.scale.setScalar(0.5); tea.add(teaLamp); lamp(teaLamp);
-    const books = new THREE.Group(); books.position.set(fixed('bookcase').x, 0, fixed('bookcase').z); scene.add(books); shelf(books, 1.5, 0.62);
-    plant(scene, fixed('rear-pot').x, fixed('rear-pot').z, 1); lamp(scene, fixed('rear-lamp').x, fixed('rear-lamp').z);
-    const couch = new THREE.Group(); couch.position.set(fixed('couch').x, 0, fixed('couch').z); scene.add(couch);
-    box(1.9, 0.38, 0.9, 0, 0.32, 0, '#b59680', couch); box(1.65, 0.2, 0.69, 0, 0.55, -0.03, '#c9ac95', couch); box(1.9, 0.61, 0.18, 0, 0.65, 0.38, '#bba088', couch);
-    for (const x of [-0.82, 0.82]) box(0.22, 0.39, 0.86, x, 0.58, 0, '#b99a85', couch);
-    box(0.43, 0.12, 0.46, -0.47, 0.75, 0.08, '#adc0a0', couch);
-    label('Conversation corner', new THREE.Vector3(fixed('couch').x, 1.17, fixed('couch').z), 'corner');
-    const board = new THREE.Group(); board.position.set(fixed('board').x, 0, fixed('board').z); board.rotation.y = -Math.PI / 2; scene.add(board);
+    const books = fixtureGroup('bookcase'); shelf(books, 1.5, 0.62);
+    plant(scene, fixed('rear-pot').x, fixed('rear-pot').z, 1); lamp(scene, fixed('rest-lamp').x, fixed('rest-lamp').z);
+    for (const id of ['rest-sofa-a', 'rest-sofa-b']) {
+      const sofa = fixtureGroup(id); if (id === 'rest-sofa-b') sofa.rotation.y = Math.PI / 2;
+      box(3.3, 0.28, 1, 0, 0.18, 0, '#b59680', sofa);
+      box(3.3, 0.63, 0.17, 0, 0.61, 0.415, '#bba088', sofa);
+      for (const x of [-1.55, 1.55]) box(.2, .46, 1, x, .43, 0, '#b99a85', sofa);
+    }
+    for (const seat of layout.seats.filter(seat => seat.purpose === 'rest')) {
+      const cushion = new THREE.Group(); cushion.position.set(seat.x, 0, seat.z); cushion.rotation.y = seat.heading + Math.PI; scene.add(cushion);
+      box(.86, .12, .68, 0, .34, 0, '#c9ac95', cushion); pickable(cushion, { type: 'seat', seatId: seat.id });
+    }
+    const restTable = fixtureGroup('rest-table'); box(1.3, .1, .8, 0, .45, 0, '#b79a78', restTable);
+    for (const x of [-.48, .48]) for (const z of [-.25, .25]) box(.08, .4, .08, x, .2, z, '#8f724f', restTable);
+    cylinder(.1, .12, .25, .56, 0, '#e8d8b8', restTable); box(.4, .035, .3, -.2, .52, 0, '#9cac91', restTable);
+    label('Rest corner', new THREE.Vector3(fixed('rest-sofa-a').x, 1.17, fixed('rest-sofa-a').z), 'corner');
+    const gameTable = fixtureGroup('game-table'); box(1.8, .14, 1.4, 0, FURNITURE_HEIGHTS.tableTop - .07, 0, '#a58464', gameTable);
+    for (const x of [-.7, .7]) for (const z of [-.5, .5]) box(.1, .59, .1, x, .29, z, '#80684e', gameTable);
+    box(1.24, .025, 1.04, 0, .75, 0, '#687f89', gameTable);
+    for (let row = 0; row < 6; row++) for (let column = 0; column < 7; column++) cylinder(.055, .012, (column - 3) * .16, .77, (row - 2.5) * .16, '#d3c5a7', gameTable);
+    pickable(gameTable, { type: 'game' }); label('Game table', new THREE.Vector3(fixed('game-table').x, 1.15, fixed('game-table').z), 'game');
+    const board = fixtureGroup('board'); board.rotation.y = -Math.PI / 2;
     box(2, 1.4, 0.1, 0, 1.5, 0, '#9c805e', board); box(1.82, 1.22, 0.11, 0, 1.5, 0.06, '#f3eee0', board);
     ['#e2cf96', '#c4d0b4', '#d7afa1'].forEach((hex, i) => box(0.43, 0.51, 0.025, (i - 1) * 0.52, 1.5 + (i % 2) * 0.14, 0.13, hex, board));
     pickable(board, { type: 'board' }); label('Shared board', new THREE.Vector3(fixed('board').x - 0.2, 2.33, fixed('board').z), 'board');
@@ -182,9 +206,13 @@ export function createHouseWorld(container, callbacks = {}) {
     const light = live?.durable.room?.light ?? 'standard';canvas.dataset.roomLight = light;
     scene.add(new THREE.HemisphereLight(light === 'cosy' ? '#efd4af' : '#e4d9c6', '#758096', light === 'dim' ? 0.34 : light === 'cosy' ? 0.66 : 1.05));
     const sun = new THREE.DirectionalLight(light === 'cosy' ? '#ffd29b' : '#ffe0ad', light === 'dim' ? 0.48 : light === 'cosy' ? 1.05 : 1.75); sun.position.set(0, 9, 5); sun.castShadow = true; sun.shadow.mapSize.set(512, 512);
-    sun.shadow.camera.left = -9; sun.shadow.camera.right = 9; sun.shadow.camera.top = 9; sun.shadow.camera.bottom = -9; sun.shadow.normalBias = 0.035; scene.add(sun);
+    sun.shadow.normalBias = 0.035; scene.add(sun);
     layout = live?.durable.room ? bedroomLayout(roomPlacements()) : createLayout(live?.durable.house.capacity ?? 4);
     if (live?.durable.room) roomObjectTargets = roomPlacements().filter(piece => ['desk', 'lamp'].includes(piece.kind)).map(piece => ({ type: piece.kind, id: piece.id, point: roomInteractionTarget(roomPlacements(), piece.id), text: piece.kind === 'desk' ? 'Open My work · house-visible' : live.durable.room.ownerId === live.durable.selfId ? 'Choose room lighting' : 'Owner controls this lamp' })).filter(target => target.point);
+    // Fit both room candidates' floor and wall extents in the fixed 512 shadow budget.
+    scene.updateMatrixWorld(true); sun.target.updateMatrixWorld(true); sun.shadow.updateMatrices(sun); const shadowBounds = new THREE.Box3();
+    for (const x of [-layout.width / 2, layout.width / 2]) for (const y of [0, 2.6]) for (const z of [-layout.depth / 2, layout.depth / 2]) shadowBounds.expandByPoint(new THREE.Vector3(x, y, z).applyMatrix4(sun.shadow.camera.matrixWorldInverse));
+    Object.assign(sun.shadow.camera, { left: shadowBounds.min.x - .5, right: shadowBounds.max.x + .5, bottom: shadowBounds.min.y - .5, top: shadowBounds.max.y + .5 }); sun.shadow.camera.updateProjectionMatrix();
     shell(live?.durable.room?.palette ?? 'sage'); if (live) { if (live.durable.room) bedroom(); else lounge(); }
     prompt = label('', () => new THREE.Vector3(own.x, 1.95, own.z), 'context'); prompt.hidden = true;
     resize(); if (live) syncPlayers(live);
@@ -218,7 +246,7 @@ export function createHouseWorld(container, callbacks = {}) {
     bubbleHeader.style.cssText = 'display:flex;gap:5px;align-items:center;height:16px;font:600 12px/16px system-ui;'; speaker.style.cssText = 'min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'; hint.className = 'house-bubble-hint'; hint.textContent = 'Chat ↗'; hint.style.cssText = 'flex:none;font:500 10px/16px system-ui;';
     bubbleText.className = 'house-bubble-text'; bubbleText.style.cssText = 'display:block;height:18px;line-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'; bubbleHeader.append(speaker, hint); bubble.append(bubbleHeader, bubbleText);
     const ring = new THREE.Mesh(new THREE.RingGeometry(0.32, 0.35, 24), new THREE.MeshBasicMaterial({ color: '#fff1cc', side: THREE.DoubleSide, transparent: true, opacity: 0.85 })); ring.rotation.x = -Math.PI / 2; ring.position.y = 0.05; root.add(ring); ring.visible = player.id === live.durable.selfId;
-    root.position.set(player.x ?? layout.spawn.x, 0, player.z ?? layout.spawn.z);
+    const arrival = arrivalFor(player.id); root.position.set(player.x ?? arrival.x, 0, player.z ?? arrival.z);
     const entry = { root, body, arms, legs, knees, garments, accent, name, nameDisplay, nameAvailability, nameText: '', bubble, speaker, bubbleText, previewId: null, player, x: root.position.x, z: root.position.z }; avatars.set(player.id, entry); return entry;
   }
   function sizeLabel(item) {
@@ -228,7 +256,7 @@ export function createHouseWorld(container, callbacks = {}) {
     if (item.kind === 'avatar') item.el.style.maxWidth = phone ? '100px' : '160px';
     if (item.kind === 'chat-bubble') { item.el.style.width = phone ? '184px' : '224px'; item.el.style.maxWidth = phone ? '184px' : '224px'; }
     if (item.kind === 'seat') { item.el.textContent = phone ? item.baseText.replace('Seat ', '') : item.baseText; item.el.setAttribute('aria-label', item.baseText); }
-    if (item.kind === 'corner') item.el.textContent = phone ? 'Conversation' : item.baseText;
+    if (item.kind === 'corner') item.el.textContent = item.baseText;
   }
   function resize() {
     const w = Math.max(container.clientWidth, 1), h = Math.max(container.clientHeight, 1);
@@ -278,13 +306,14 @@ export function createHouseWorld(container, callbacks = {}) {
     if (live.durable.room) return [{ type: 'exit', point: layout.exitTarget, text: 'Return to lounge' }, ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit in chair' })), ...roomObjectTargets];
     return [
       ...layout.doors.map(d => { const r = live.durable.residents.find(r => r.slot === d.slot); return { type: 'door', slot: d.slot, roomId: r?.bedroomId, point: d.target, text: r ? (r.id === live.durable.selfId ? 'Enter your room' : 'Visit ' + r.name) : 'Vacant room' }; }),
-      ...layout.seats.map((s, i) => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit at seat ' + (i + 1) })),
+      ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: s.purpose === 'study' ? 'Sit to study' : s.purpose === 'rest' ? 'Sit and rest' : 'Sit at game chair' })),
+      { type: 'game', point: layout.gameTarget, text: 'Open game table' },
       { type: 'board', point: layout.boardTarget, text: 'Open shared board' },
     ];
   }
   function action(target) {
     if (!canControl()) return false;
-    const { point, text, ...command } = target; callbacks.onInteract?.(command); return true;
+    const { point, text, ...command } = target; callbacks.onInteract?.(target.type === 'game' ? { kind: 'game' } : command); return true;
   }
   function interact() {
     if (!canControl()) return false;
@@ -300,6 +329,16 @@ export function createHouseWorld(container, callbacks = {}) {
     walkingIntent();
     const found = findRoute(layout, own, target.point); if (!found) return false;
     route = found; routeTarget = target; keys.clear(); direction = { x: 0, z: 0 }; return true;
+  }
+  /** Route deliberate Places choices through the same collision and occupancy targets. */
+  function routeTo(place) {
+    if (!canControl() || self()?.seatId || live.durable.room) return false;
+    if (place === 'game' || place === 'board') return approach({ type: place });
+    if (place === 'room') { const resident = live.durable.residents.find(r => r.id === live.durable.selfId); return resident ? approach({ type: 'door', slot: resident.slot }) : false; }
+    if (place !== 'study' && place !== 'rest') return false;
+    const occupied = new Set(live.players.filter(player => player.connected).map(player => player.seatId));
+    const seats = layout.seats.filter(seat => seat.purpose === place && !occupied.has(seat.id)).sort((a, b) => Math.hypot(own.x - a.target.x, own.z - a.target.z) - Math.hypot(own.x - b.target.x, own.z - b.target.z));
+    return seats.some(seat => approach({ type: 'seat', seatId: seat.id }));
   }
   function resetMotion() {
     motionGeneration++; motionFlight = null; predictionDistance = 0; motionAnchor = { ...own }; acknowledged = false; lastSent = -Infinity; lastSettled = -Infinity;
@@ -325,14 +364,14 @@ export function createHouseWorld(container, callbacks = {}) {
     } else recoverMotion(reply?.position ?? motionAnchor);
   }
   function update(next) {
-    if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { x: 0, z: 2.85 }; resetMotion(); rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
+    if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { ...createLayout(4).spawn }; resetMotion(); rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
     const previous = live, changedZone = previous?.durable.zoneId !== next.durable.zoneId || previous?.durable.streamId !== next.durable.streamId;
     const changedIdentity = previous?.serverEpoch !== next.serverEpoch || previous?.durable.house.id !== next.durable.house.id || previous?.durable.selfId !== next.durable.selfId;
     const changedControl = previous?.generation !== next.generation || previous?.controller !== next.controller || previous?.accessGeneration !== next.accessGeneration;
     live = next;
     const p = self();
     speech.ingest([next.serverEpoch, next.durable.selfId, next.durable.house.id, next.durable.zoneId, next.accessGeneration, next.generation].join('/'), next.durable.chat, { quiet: p?.availability !== 'chat', visibleAuthors: new Set(next.players.filter(player => player.connected && player.zoneId === next.durable.zoneId).map(player => player.id)) }, window.performance.now());
-    if (changedZone || changedIdentity || changedControl) { pendingEditFraming = false; if (changedZone || changedIdentity) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone || changedIdentity) previewPlacements = null; clearInput(); sent = null; pendingStand = false; own = { x: p?.x ?? (next.durable.room ? 0 : layout.spawn.x), z: p?.z ?? (next.durable.room ? 3 : 2.85) }; resetMotion(); }
+    if (changedZone || changedIdentity || changedControl) { pendingEditFraming = false; if (changedZone || changedIdentity) cameraRig.setMode('play'); cameraRig.reset(); if (changedZone || changedIdentity) previewPlacements = null; clearInput(); sent = null; pendingStand = false; const arrivalLayout = next.durable.room ? null : createLayout(next.durable.house.capacity); const arrival = arrivalFor(next.durable.selfId, arrivalLayout ?? layout); own = { x: p?.x ?? arrival.x, z: p?.z ?? arrival.z }; resetMotion(); }
     if (p && (previous?.players.find(q => q.id === previous.durable.selfId)?.seatId && !p.seatId || p.animation === 'sit' || p.seatId || !next.controller || !previous)) { own = { x: p.x ?? own.x, z: p.z ?? own.z }; resetMotion(); }
     if (!p?.seatId) pendingStand = false;
     if (p && next.controller && Number.isFinite(p.x) && Number.isFinite(p.z) && Math.hypot(p.x - own.x, p.z - own.z) > 1.15) { own = { x: p.x, z: p.z }; resetMotion(); sent = null; if (routeTarget) route = findRoute(layout, own, routeTarget.point) ?? []; }
@@ -417,7 +456,8 @@ export function createHouseWorld(container, callbacks = {}) {
     for (const [id, entry] of avatars) {
       const state = entry.player, local = id === live.durable.selfId && live.controller;
       const seated = state.animation === 'sit' || !!state.seatId;
-      const targetX = local ? own.x : state.x ?? layout.spawn.x, targetZ = local ? own.z : state.z ?? layout.spawn.z;
+      const arrival = arrivalFor(state.id);
+      const targetX = local ? own.x : state.x ?? arrival.x, targetZ = local ? own.z : state.z ?? arrival.z;
       const remaining = Math.hypot(targetX - entry.x, targetZ - entry.z);
       // Keep interpolation smooth through settling; subpixel tails use the idle draw.
       if (remaining > 0.000001) renderActive = true;
@@ -629,7 +669,7 @@ export function createHouseWorld(container, callbacks = {}) {
   const observer = new ResizeObserver(resize); observer.observe(container);
   rebuild(); frame = requestAnimationFrame(animate);
   return {
-    update, resize, interact, approach, setCameraMode, getCameraMode: () => cameraRig.getMode(), isCameraLookLocked: () => cameraRig.isInspectionLocked(),
+    update, resize, interact, approach, routeTo, setCameraMode, getCameraMode: () => cameraRig.getMode(), isCameraLookLocked: () => cameraRig.isInspectionLocked(),
     setCameraZoom(value) { if (cameraRig.setZoom(value)) { updateCamera(0); layoutDirty = true; return true; } return false; },
     getCameraZoom: () => cameraRig.getZoom(),
     recenterCamera() { if (editing) return; cameraRig.recenter(); updateCamera(0); cameraModeChanged(); },

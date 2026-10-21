@@ -1,12 +1,13 @@
+export { HOUSE_WORLD_VERSION } from './house-version.js';
 /** Browser/server shared geometry. Coordinates are metres; room dimensions and destination anchors are authoritative. */
 /** @typedef {{x:number,z:number}} Point */
 /** @typedef {{id?:string,x:number,z:number,w:number,d:number}} Obstacle */
-/** @typedef {{id:string,x:number,z:number,heading:number,target:Point}} Seat */
+/** @typedef {{id:string,x:number,z:number,heading:number,target:Point,purpose:'study'|'rest'|'game'|'bedroom',fixtureId?:string}} Seat */
 /** @typedef {{id:string,slot:number,x:number,z:number,wall:'rear'|'side',target:Point}} Door */
-/** @typedef {{width:number,depth:number,obstacles:Obstacle[],seats:Seat[],doors:Door[],spawn:Point,boardTarget:Point,exitTarget:Point}} Layout */
+/** @typedef {{width:number,depth:number,obstacles:Obstacle[],seats:Seat[],doors:Door[],spawn:Point,boardTarget:Point,exitTarget:Point,arrivals?:Point[],gameTarget?:Point}} Layout */
 export const AVATAR_RADIUS = 0.24;
 export const ROOM_DIMENSIONS = Object.freeze({
-  lounge: Object.freeze({ width: 16, depth: 11 }),
+  lounge: Object.freeze({ width: 20, depth: 14 }),
   bedroom: Object.freeze({ width: 14, depth: 10 }),
 });
 export const BEDROOM_ARRIVAL = Object.freeze({ x: 0, z: 3 });
@@ -22,34 +23,52 @@ export const FURNITURE = Object.freeze({
   plant: Object.freeze({ w: 0.6, d: 0.6 }), lamp: Object.freeze({ w: 0.5, d: 0.5 }),
 });
 
-/** @param {number} capacity @returns {Layout} */
-export function createLayout(capacity = 4) {
+/** Matched spatial candidates. Only the expanded layout is used by the production world. */
+export const LOUNGE_VARIANTS = Object.freeze({
+  compact: Object.freeze({ width: 16, depth: 11, doorSpacing: 2.3, spawnZ: 3.3,
+    table: [-0.6, -1.3], game: [-5.1, 2.35], restOffset: [0, 0],
+    tea: [-7, 4.85], books: [6.7, -3.55], pot: [-7.25, -4.7], lamp: [2.65, 4.8], board: [7.8, -1.1], boardApproach: [6.85, -1.1], exitZ: 4.7 }),
+  expanded: Object.freeze({ width: 20, depth: 14, doorSpacing: 2.8, spawnZ: 4.65,
+    table: [-1, -2], game: [-6.2, 3.3], restOffset: [1, 0.9],
+    tea: [-8.6, 5.8], books: [8.6, -4.7], pot: [-9.2, -6.2], lamp: [3.65, 5.7], board: [9.8, -1.7], boardApproach: [8.85, -1.7], exitZ: 6.2 }),
+});
+
+/** @param {number} capacity @param {'compact'|'expanded'} variant @returns {Layout} */
+export function createLayout(capacity = 4, variant = 'expanded') {
   if (!Number.isInteger(capacity) || capacity < 2 || capacity > 6) throw new RangeError('Capacity must be 2 to 6.');
-  const { width, depth } = ROOM_DIMENSIONS.lounge;
-  const rear = capacity <= 4 ? capacity : Math.ceil(capacity / 2);
-  const spacing = rear <= 3 ? 3.2 : 2.4;
-  const doors = Array.from({ length: capacity }, (_, slot) => slot < rear
-    ? { id: 'door-' + slot, slot, wall: /** @type {'rear'} */ ('rear'), x: (slot - (rear - 1) / 2) * spacing, z: -depth / 2 + 0.04, target: { x: (slot - (rear - 1) / 2) * spacing, z: -depth / 2 + 0.94 } }
-    : { id: 'door-' + slot, slot, wall: /** @type {'side'} */ ('side'), x: -width / 2 + 0.04, z: (slot - rear - (capacity - rear - 1) / 2) * 2.8, target: { x: -width / 2 + 0.96, z: (slot - rear - (capacity - rear - 1) / 2) * 2.8 } });
-  const seats = Array.from({ length: capacity }, (_, i) => {
+  if (!Object.hasOwn(LOUNGE_VARIANTS, variant)) throw new RangeError('Unknown lounge layout.');
+  const spec = LOUNGE_VARIANTS[variant], { width, depth } = spec;
+  const doors = Array.from({ length: capacity }, (_, slot) => {
+    const x = (slot - (capacity - 1) / 2) * spec.doorSpacing;
+    return { id: 'door-' + slot, slot, wall: /** @type {'rear'} */ ('rear'), x, z: -depth / 2 + 0.04, target: { x, z: -depth / 2 + 1.05 } };
+  });
+  const studySeats = Array.from({ length: capacity }, (_, i) => {
     const angle = Math.PI / 2 + i * Math.PI * 2 / capacity;
     const x = Math.cos(angle) * 2.15, z = Math.sin(angle) * 1.9;
-    return { id: 'seat-' + (i + 1), x, z, heading: Math.atan2(-x, -z), target: { x: Math.cos(angle) * 3.2, z: Math.sin(angle) * 3 } };
+    return { id: 'seat-' + (i + 1), purpose: /** @type {'study'} */ ('study'), x: spec.table[0] + x, z: spec.table[1] + z, heading: Math.atan2(-x, -z), target: { x: spec.table[0] + Math.cos(angle) * 3.2, z: spec.table[1] + Math.sin(angle) * 3 } };
   });
+  const restSeats = [
+    [3.8, 4, Math.PI, 3.4, 3.05], [4.8, 4, Math.PI, 4.5, 3.05], [5.8, 4, Math.PI, 5.6, 3.2],
+    [6.8, .5, -Math.PI / 2, 5.65, .5], [6.8, 1.5, -Math.PI / 2, 5.65, 1.5], [6.8, 2.5, -Math.PI / 2, 5.65, 2.5],
+  ].map(([x, z, heading, targetX, targetZ], i) => ({ id: 'rest-seat-' + (i + 1), purpose: /** @type {'rest'} */ ('rest'), fixtureId: i < 3 ? 'rest-sofa-a' : 'rest-sofa-b', x: x + spec.restOffset[0], z: z + spec.restOffset[1], heading, target: { x: targetX + spec.restOffset[0], z: targetZ + spec.restOffset[1] } }));
+  const gameSeats = [-1, 1].map((side, i) => ({ id: 'game-seat-' + (i + 1), purpose: /** @type {'game'} */ ('game'), x: spec.game[0], z: spec.game[1] + side * 1.55, heading: side === 1 ? Math.PI : 0, target: { x: spec.game[0], z: spec.game[1] + side * 2.6 } }));
+  const seats = [...studySeats, ...restSeats, ...gameSeats];
+  const fixture = (id, position, w, d) => ({ id, x: position[0], z: position[1], w, d });
   const obstacles = [
-    { id: 'table', x: 0, z: 0, w: 2.5, d: 1.8 },
-    { id: 'tea-cabinet', x: -6.25, z: 4.65, w: 1.78, d: 0.65 },
-    { id: 'bookcase', x: 6.7, z: -3.55, w: 1.5, d: 0.62 },
-    { id: 'couch', x: 5.8, z: 3.8, w: 1.9, d: 0.9 },
-    { id: 'rear-lamp', x: -4.8, z: -4.1, w: 0.5, d: 0.5 },
-    { id: 'rear-pot', x: -7.25, z: -4.7, w: 0.6, d: 0.6 },
-    { id: 'board', x: width / 2 - 0.2, z: 0.25, w: 0.3, d: 2 },
-    ...seats.map(seat => {
-      const yaw = Math.atan2(seat.x, seat.z), s = Math.sin(yaw), c = Math.cos(yaw);
-      return { id: seat.id, x: seat.x + s * 0.035, z: seat.z + c * 0.035, w: Math.abs(c) * 0.78 + Math.abs(s) * 0.8, d: Math.abs(s) * 0.78 + Math.abs(c) * 0.8 };
+    fixture('table', spec.table, 2.5, 1.8), fixture('game-table', spec.game, 1.8, 1.4),
+    fixture('rest-sofa-a', [4.8 + spec.restOffset[0], 4.1 + spec.restOffset[1]], 3.3, 1),
+    fixture('rest-sofa-b', [6.95 + spec.restOffset[0], 1.5 + spec.restOffset[1]], 1, 3.3),
+    fixture('rest-table', [4.55 + spec.restOffset[0], 1.5 + spec.restOffset[1]], 1.3, .8),
+    fixture('tea-cabinet', spec.tea, 1.78, .65), fixture('bookcase', spec.books, 1.5, .62),
+    fixture('rest-lamp', spec.lamp, .5, .5), fixture('rear-pot', spec.pot, .6, .6), fixture('board', spec.board, .3, 2),
+    ...seats.filter(seat => !seat.fixtureId).map(seat => {
+      const yaw = seat.heading + Math.PI, s = Math.sin(yaw), c = Math.cos(yaw);
+      return { id: seat.id, x: seat.x + s * .035, z: seat.z + c * .035, w: Math.abs(c) * .78 + Math.abs(s) * .8, d: Math.abs(s) * .78 + Math.abs(c) * .8 };
     }),
   ];
-  return { width, depth, doors, seats, obstacles, spawn: { x: 0, z: 2.85 }, boardTarget: { x: width / 2 - 1.15, z: 0.25 }, exitTarget: { x: 0, z: 4.7 } };
+  return { width, depth, doors, seats, obstacles, spawn: { x: 0, z: spec.spawnZ },
+    arrivals: Array.from({ length: capacity }, (_, slot) => ({ x: .65 * (slot - (capacity - 1) / 2), z: spec.spawnZ })),
+    boardTarget: { x: spec.boardApproach[0], z: spec.boardApproach[1] }, gameTarget: { x: spec.game[0] + 1.45, z: spec.game[1] }, exitTarget: { x: 0, z: spec.exitZ } };
 }
 
 /** @param {{kind:string,x:number,z:number,rotation:number,id:string}} placement @returns {Obstacle} */
@@ -91,7 +110,7 @@ export function bedroomLayout(placements = []) {
       return { x: p.x - Math.sin(angle) * radius, z: p.z - Math.cos(angle) * radius };
     }));
     const target = candidates.find(point => validPosition(room, point)) ?? candidates[0];
-    return { id: p.id, x: p.x, z: p.z, heading, target };
+    return { id: p.id, purpose: /** @type {'bedroom'} */ ('bedroom'), x: p.x, z: p.z, heading, target };
   });
   return room;
 }

@@ -1,0 +1,62 @@
+{
+  "branch": "post-crit-improvements",
+  "baseHead": "16404ea178edc08abdc6fef51e3b7a68126442ce",
+  "sources": {
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-geometry.d.ts": "816d1a80f6d76105a0ce6c43498630fc7fb87a8640daf59fa4b853e8cb14665a",
+    "public/house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+    "public/house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f",
+    "public/house-version.d.ts": "d7575c71a78b17fe53fcfc09dcdb7321579736c0143de0af3834a559e5db3fd5",
+    "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+    "spec/house-geometry.test.ts": "8bb0dcc27f1162282bc466e561a4c7f1c954590fca44ab17842cda8010004c19",
+    "spec/house-lounge-geometry.test.ts": "4f731eec432eab172c145a9586fca114c5525fe24e48a3913813fb5fbef95a83",
+    "spec/house-world.test.ts": "1355639c0049f5296df2b377f08abfe8e5b4659755dcf7bedba4c6158eceba0b",
+    "docs/post-crit/evidence/lounge-browser.mjs": "1a2df46c2045807a4b3471c2c07206f9b6ec46f517e26f00de9e6e32884fb197"
+  },
+  "nativeScope": "isolated Chromium/SwiftShader renderer with synthetic immutable snapshots/ACKs; no server authority, full shell, physical device, human preference, deployed resource acceptance",
+  "layoutRefinements": 0,
+  "nativeBindingMatchesCurrentSources": true,
+  "focusedTests": {
+    "numPassedTests": 115,
+    "numFailedTests": 0,
+    "success": true
+  },
+  "verification": {
+    "typecheck": "PASS: mise exec -- pnpm typecheck, exit0",
+    "diffCheck": "PASS: git diff --check, exit0",
+    "coverage": {
+      "lines": {
+        "total": 610,
+        "covered": 600,
+        "skipped": 0,
+        "pct": 98.36
+      },
+      "statements": {
+        "total": 1437,
+        "covered": 1353,
+        "skipped": 0,
+        "pct": 94.15
+      },
+      "functions": {
+        "total": 179,
+        "covered": 169,
+        "skipped": 0,
+        "pct": 94.41
+      },
+      "branches": {
+        "total": 939,
+        "covered": 830,
+        "skipped": 0,
+        "pct": 88.39
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "manifest": {
+    "kind": "native Chromium renderer with synthetic snapshots and movement/seat ACKs; no Socket.IO/HTTP authority, physical device or human evidence",
+    "sources": {
+      "house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f"
+    },
+    "geometryCandidates": {
+      "expanded": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30"
+    }
+  },
+  "rows": [
+    {
+      "candidate": "expanded",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true
+      },
+      "measurements": {
+        "defaultHeight": 128,
+        "overviewHeight": 74.35,
+        "visibleOverviewTargets": 22
+      },
+      "failures": [
+        "{\"type\":\"seat\",\"seatId\":\"rest-seat-3\"} page.waitForFunction: Timeout 10000ms exceeded."
+      ],
+      "failureLog": [
+        {
+          "type": "seat",
+          "seatId": "seat-1"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-1"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-2"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-2"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-3"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-3"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-4"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-4"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-5"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-5"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-6"
+        },
+        {
+          "type": "seat",
+          "seatId": "seat-6"
+        },
+        {
+          "type": "seat",
+          "seatId": "rest-seat-1"
+        },
+        {
+          "type": "seat",
+          "seatId": "rest-seat-1"
+        },
+        {
+          "type": "seat",
+          "seatId": "rest-seat-2"
+        },
+        {
+          "type": "seat",
+          "seatId": "rest-seat-2"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,153 @@
+{
+  "manifest": {
+    "kind": "native Chromium renderer with synthetic snapshots and movement/seat ACKs; no Socket.IO/HTTP authority, physical device or human evidence",
+    "runner": "1a2df46c2045807a4b3471c2c07206f9b6ec46f517e26f00de9e6e32884fb197",
+    "sources": {
+      "house-world.js": "0b693c1c88302ba0b3c00d7fde46b29688fea1f52eeec91b225170fe5866b39e",
+      "house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+      "house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "house-version.js": "330468a7f3b01b1cd5846a79b2600ca1e319862302c211e82bb1d2e4d6d5e02f"
+    },
+    "geometryCandidates": {
+      "compact": "58e9d3db03f92e5b33cbbcb984136855e8654eb586088924826a416e60c0edeb",
+      "expanded": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30"
+    }
+  },
+  "rows": [
+    {
+      "candidate": "compact",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 128,
+        "overviewHeight": 90.25,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 128
+      },
+      "failures": []
+    },
+    {
+      "candidate": "compact",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 72,
+        "overviewHeight": 21.24,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 72
+      },
+      "failures": []
+    },
+    {
+      "candidate": "compact",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 78,
+        "overviewHeight": 27.22,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 78
+      },
+      "failures": []
+    },
+    {
+      "candidate": "expanded",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 128,
+        "overviewHeight": 74.35,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 128
+      },
+      "failures": []
+    },
+    {
+      "candidate": "expanded",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 72,
+        "overviewHeight": 16.93,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 72
+      },
+      "failures": []
+    },
+    {
+      "candidate": "expanded",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "checks": {
+        "defaultFraming": true,
+        "overviewTargets": true,
+        "nativeSeatPicks": true,
+        "nativeGameBoard": true,
+        "sixRestPoses": true,
+        "complete": true
+      },
+      "measurements": {
+        "defaultHeight": 78,
+        "overviewHeight": 22.43,
+        "visibleOverviewTargets": 22,
+        "seatedHeight": 78
+      },
+      "failures": []
+    }
+  ],
+  "errors": []
+}
