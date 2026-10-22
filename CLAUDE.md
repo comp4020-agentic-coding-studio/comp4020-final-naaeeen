@@ -1,9 +1,10 @@
-# Active spatial redesign research
+# Active spatial redesign implementation
 
 The owner has reopened overall product/interaction design. Read
 [the current brief](docs/spatial-redesign/BRIEF.md) and
 [comparison framework](docs/spatial-redesign/COMPARISON-PROTOCOL.md), then
-[the refined plan](docs/spatial-redesign/PLAN.md), before further production changes. Research and compare purposeful alternatives, including major
+[the refined plan](docs/spatial-redesign/PLAN.md) and
+[implementation checkpoint](docs/spatial-redesign/IMPLEMENTATION.md), before further production changes. Research and compare purposeful alternatives, including major
 layout/interaction changes; two activity chairs, remote activation, shallow rest/
 study roles and the bedroom work-card concept are challenged. Previous technical
 passes retain their scope and do not settle this new product-design decision.

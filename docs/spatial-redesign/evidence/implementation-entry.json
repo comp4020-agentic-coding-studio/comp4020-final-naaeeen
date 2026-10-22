@@ -1,0 +1,10 @@
+{
+  "baseline": "93f8cfae17447d72fdd00d8f3f29ee8e08c24f0b",
+  "branch": "post-crit-improvements",
+  "canonical": "Ubuntu:/home/lizhi/comp4020/comp4020-final-naaeeen",
+  "authorization": "local implementation and commits; no push/deploy",
+  "date": "2026-10-23",
+  "goal": "purposeful house interactions and useful owned rooms",
+  "human_evaluation": "NOT RUN",
+  "initial_reviewer_dispatch": "HELD seven active slots; dispatch after execution lanes release"
+}

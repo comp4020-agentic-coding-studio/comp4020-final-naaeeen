@@ -1,7 +1,8 @@
 # A house whose places do useful things
 
-Status: research and design refinement; production redesign NOT IMPLEMENTED.
-The existing app remains at fb363cf runtime source. This plan replaces the spatial
+Status: local implementation in progress, authorized23 October2026. See
+[implementation checkpoint](IMPLEMENTATION.md) for slice ownership and current gates.
+The previous acceptance belongs to fb363cf runtime source. This plan replaces the spatial
 purpose assumptions of the previous post-Crit plan; its technical evidence remains
 historical and valid for the source it actually checked. Start with
 [owner brief](BRIEF.md), [research](RESEARCH-NOTES.md), [source audit](SOURCE-AUDIT.md)
