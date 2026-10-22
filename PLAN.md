@@ -1,3 +1,16 @@
+# Current local spatial implementation
+
+23October2026. The owner authorized applying the purposeful-house redesign on
+`post-crit-improvements`. [Spatial plan](docs/spatial-redesign/PLAN.md),
+[room decision](docs/spatial-redesign/ROOM-DECISION.md) and
+[implementation/evidence index](docs/spatial-redesign/IMPLEMENTATION.md) refine the
+current product contracts in this root plan. Personal-room reference/atmosphere
+replaces the primary My work card loop; saved work remains retained and accessible.
+Physical seat plus explicit consent replaces remote fresh activity effects.
+Study huddles use the existing independent board, with no synchronized viewport
+claim. Current local acceptance remains in progress; historical gates below retain
+the source and date they actually verified. No new publication is authorized.
+
 # Active spatial redesign research
 
 The owner has reopened overall product/interaction design. Read
@@ -480,3 +493,5 @@ actual contributors; bedroom return leads to the same authored work card. Receip
 storage, browser acceptance and resource measurement have distinct recorded gates.
 Continue through [the current handoff](docs/implementation/CURRENT-HANDOFF.md), not
 an older release's source or publication permission.
+
+Current implementation acceptance and open gates: [acceptance record](docs/spatial-redesign/ACCEPTANCE.md).

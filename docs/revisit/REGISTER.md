@@ -329,3 +329,34 @@ unchanged. Current records are in ../spatial-redesign/.
 | SP.6 transitions/privacy | Review separates room closure/member removal, huddle/board access, presenter freeze/claim and historical receipt replay. | Paper contradictions resolved; implementation/revocation tests not run. |
 | SP.7 resources/scope | Ten-day estimate corrected: excluded work is not contingency; real within-Delta cuts named. | No delivery promise or inherited new resource acceptance. |
 | SP.H methods | Harness2/Loop Engineering sources checked; fresh review plus contextual refinements and parent source checking recorded. | No new prompt-performance or human A/B claim. |
+
+## Spatial implementation, 23 October: current subsection ledger
+
+Earlier SP rows are the research checkpoint. These rows supersede only their
+implementation status, with source and limitations retained in each evidence file.
+
+| ID | Subsection and decision | Evidence/refinement | Remaining acceptance |
+| --- | --- | --- | --- |
+| SP.1a | Visible capacity2–6 -> same number of genuine game chairs | Geometry/occupied routes, core tests and real seat authority | Current six-browser occupied task pending |
+| SP.1b | Sitting and participating remain separate | Both HTTP/socket held-body ABA negatives; exact receipts inert | Final native group task pending |
+| SP.1c | Reads/Stand do not require unrelated maintenance writes | Fresh review -> real SQLite writer-lock regressions -> four pure deferred transactions | Focused165 checks/recheck; resource gate open |
+| SP.2a | Named Places routes, real chair arrival, explicit stand/reseat | UI/world integration and scoped native cases | Maintained current selection pending |
+| SP.2b | Full room remains legible and image remains in world | Actual native PNG inspection after studio closes | Human spatial usefulness untested |
+| SP.3a | Study chair offers voluntary huddle with ordinary board launch |48 module tests/contextual review, native two-identity board edit | No synchronized board viewport claim |
+| SP.3b | Leaving/removal clears huddle/frame/current privilege | Actual member removal while board open, final native case | Full board's independent permissions retained |
+| SP.4a | Sofa shares one explicit house-visible image copy | Owner upload/share, peer decoded image and real phone pointer | Human comparison with chat sharing open |
+| SP.4b | Follow is opt-in; lost presenter freezes until explicit claim | Deferred coalescing/zero coordinate/late join/withdrawal regressions | Current sustained workload pending |
+| SP.5a | Bedroom becomes resumable owner reference desk | ROOM-DECISION controlled design comparison; saved crop/store/export/visitor tests | Matched human toolbar comparison open |
+| SP.5b | Bounded PNG and archive preserve content within hosting limits | Strict codec64 checks, real ingress, additive migration/table digests | Sampled RSS gate failed; diagnosis ongoing |
+| SP.5c | Soundscape belongs to listener and stops on exit |69 UI checks plus actual AudioContext running -> closed | No acoustic quality or listening preference test |
+| SP.5d | Modal closure does not remove world reference | Preview11 controls + actual wall/desk screenshot, cleanup/refetch bounds | Browser evidence is technical only |
+| SP.6a | Chat drafts follow lounge/room audience | Native submit/read/exclusion plus scoped draft restoration | Physical phone/human readability open |
+| SP.6b | Recovery navigation cannot imply permission to send | Fresh review -> real client/service ACK tests ->2 native cases, SQLite receipt counts | Current-source cases pass; synthetic outbox setup explicit |
+| SP.6c | Preserve authored data when showing the update | Read-only backups, actual service migration of copies, original-table hashes | Restore user4093 preview on verified copy |
+| SP.7a | Current verification replaces inherited passes | Required64files/1,364tests, source hashes stable, dependency audit0 | Current browser/resource/final diff pending |
+| SP.7b | Keep210MiB threshold and actual connection cap | Invalid39-view candidate withdrawn before execution; mixed24-view calibration215.27MiB retained | Predeclared diagnostic ABBA; then300s gates |
+| SP.Ha | Fresh agents are useful but findings need source checking | Mock boundary missed subscribe flush; actual client regression added | Current integrated review read-only in progress |
+| SP.Hb | Evaluator validity is its own engineering task | Six-browser forbidden-frame/cleanup/redaction controls; actual DOM mapping calibration | Native run and parent image inspection pending |
+
+No row is a real-human A/B result. Technical comparisons, independent model review,
+controlled fault tests, native browser observations and human utility are separate.

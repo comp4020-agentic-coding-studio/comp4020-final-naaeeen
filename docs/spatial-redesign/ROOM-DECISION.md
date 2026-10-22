@@ -70,3 +70,25 @@ bring real material, can explain why it belongs in their room and choose to retu
 compare with opening the same image from a normal chat/board. If the room only adds
 walking, revise the interaction. Technical tests establish safe completion and
 continuity, not attachment, usefulness or market novelty.
+
+
+## Why this is a spatial design decision
+
+Harrison and Dourish's [CSCW1996 argument](https://dourish.com/~dourishc/publications/1996/cscw96-place.pdf)
+distinguishes geometric space from socially understood place. The author-hosted
+PDF is a draft, not a newly verified final proceedings copy. Its argument suggests
+our test: what would friends actually do here, and what would they expect to belong
+here? A visitor opening their own unrelated card from someone else's desk failed
+that mapping. An owner's chosen reference gives the desk a shared subject and the
+room a stable identity. Walking and furniture alone cannot establish that value.
+
+Erickson and Kellogg's [Social Translucence](https://smg.media.mit.edu/library/erickson2000.pdf)
+(TOCHI7(1),2000) connects visible activity, awareness and accountability. Applying
+that lens, an occupied chair should make presence legible while Join identifies
+willing participation. The two cues carry different information; disconnect and
+reconnect cannot silently turn the former back into the latter.
+
+These are design inferences from the papers, checked against concrete interaction
+contracts. Neither paper demonstrates that our reference desk, huddle or chosen
+layout is useful to this particular group. That still needs the return-and-visit
+task with real friends. Both primary PDFs were opened and checked23October2026.

@@ -63,3 +63,47 @@ Human task comparison remains separate and must not be described as completed.
 Execution in progress. Lane records are in `evidence/seat-core-*`,
 `evidence/studio-*`, `evidence/gathering-*` and `evidence/ui-apply-*`.
 Cross-module, browser and resource acceptance remain pending until recorded below.
+
+## First integration and fresh-review cycle
+
+- `397e3f5` commits the room comparison and implementation gates before acceptance.
+- The first `pnpm check` stopped at a new HTTP test's TypeScript header-union
+  typing error; the fixture was corrected. It is not an application acceptance run.
+- A separate first full suite completed1,287/1,294 tests. Seven failures comprised
+  four deliberate new epoch-boundary regressions, two old geometry assumptions
+  about exactly two game chairs, and the old resource fixture attempting games
+  while standing. Each is assigned for source/fixture correction, not skipped.
+- Fresh Astra seat review found Stand and historical replay still ran unrelated
+  database maintenance first. Parent checked those source paths and assigned
+  meaningful fault regressions before repair.
+- Real held-body HTTP tests reproduced late never-accepted Join after reseating
+  and same-token reconnect: both returned200 instead of409. Captured request
+  access/seat epochs must prevent this while exact historical receipts remain
+  inert. Server-derived current facts alone are insufficient for old intent.
+- Fresh UI review reproduced cancellation during an uncertain upload and rapid
+  presenter zoom divergence. Repairs require matched deferred-response tests.
+- The first detached WSL preview disappeared after its launcher ended. It was
+  rechecked through `/proc` and HTTP (connection refused), then replaced by a
+  retained foreground exec session. This was an environment lifecycle failure,
+  not an inferred application crash or a reason to change product code.
+
+Current browser observations show creation of a six-person house, six physical
+activity places, ordinary My room -> studio arrival, and a furnished bedroom in
+the actual in-app browser. These are intermediate observations only; image upload,
+visits, shared sessions, authority loss, phone and sustained resource acceptance
+are still pending in this checkpoint.
+
+
+## Existing-data rehearsal
+
+A read-only per-file backup copied the existing4093preview's three SQLite files
+into a new ignored local directory. All original table content digests matched.
+The actual current service opened and closed those copies successfully; every
+original table still matched afterward, all integrity/foreign-key checks passed,
+and all user_version values stayed unchanged. Only the four namespaced studio
+tables were added to house.sqlite. [Aggregate record](evidence/preview-copy-migration.json)
+contains no private database contents, credentials or raw identity identifiers.
+The original files were not opened for writing. The copied preview has not yet
+been started for the user; that follows final source and acceptance checks.
+
+Current implementation acceptance and open gates: [acceptance record](ACCEPTANCE.md).

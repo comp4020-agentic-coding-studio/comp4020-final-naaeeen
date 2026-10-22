@@ -89,34 +89,42 @@ Keep chat, board, settings and recovery accessible as appropriate independent to
 | --- | --- | --- | --- |
 | Approach | Show place/occupancy; no mutation authority. | Preview a shared item's identity; do not auto-follow. | Show owner and actual door access. |
 | Sit | Claim one real place and open choices; not automatically Join. | Ordinary sitting remains possible; Follow is explicit. | Owner/guest can sit without opening a task form. |
-| Explicit Join/Follow | Server validates current seat, connection, generation and consent. | Follow current presenter/item; local mute and stop-follow remain local. | Owner explicitly starts shared inspection; visitors opt in. |
+| Explicit Join/Follow | Server validates current seat, connection, generation and consent. | Follow current presenter/item; local mute and stop-follow remain local. | Owner selects the saved reference; visitors inspect it independently under the door policy. |
 | Close panel | Stay seated; show how to reopen. | Stop following the shared viewport; show the world. | Retain owner's last confirmed local inspection position. |
-| Stand/walk/seat switch | Revoke new-action eligibility immediately; release active role. | Stop following/control. An accepted handoff may continue; otherwise freeze the current item until a willing seated viewer explicitly takes control. | Leave the live inspection; do not change the owner's saved reference. |
-| Disconnect | No fresh effects; active picture consent clears. Chair alone may be visibly reserved for the existing30s lease. | Clear transient follow/pointer; handoff only to an explicitly willing remaining viewer. | End owner's shared follow session; saved owner context and existing door setting remain. |
+| Stand/walk/seat switch | Revoke new-action eligibility immediately; release active role. | Stop following/control. An accepted handoff may continue; otherwise freeze the current item until a willing seated viewer explicitly takes control. | Leave local inspection/sound; do not change the owner's saved reference. |
+| Disconnect | No fresh effects; active picture consent clears. Chair alone may be visibly reserved for the existing30s lease. | Clear transient follow/pointer; handoff only to an explicitly willing remaining viewer. | Clear local inspection/sound; saved owner context and existing door setting remain. |
 | Reconnect | Reserved physical pose does not re-enroll. Show Watch/Join and current progress. | Show current item, ask before following again. | Owner resumes saved context; visitors recheck current room access. |
 | Late arrival | Join a running cooperative toy only if legal actions remain; otherwise offer a clearly new round. | See current item and choose Follow; no history/queue obligation. | Door-open visitors may inspect selected material; no selected-person privacy claim. |
 | Bedroom closes | Do not change an otherwise authorized lounge member's game eligibility. | Do not remove an otherwise authorized house member from sofa viewing. | Revoke unauthorized room reference reads/live delivery and clear transient views; past copies cannot be recalled. |
 | House member removed | Revoke that identity's seat, participation and activity access. | Revoke that identity's participation, material reads and live delivery. | Revoke current room/reference access, preserving only separately authorized own-export behavior. |
-| All viewers leave | Keep promised durable game progress; no active participation. | End transient presenting/following; keep a shared item only under an explicit saved-content contract. | Keep owner-selected reference/bookmark; close ephemeral pointers. |
+| All viewers leave | Keep promised durable game progress; no active participation. | End transient presenting/following; keep a shared item only under an explicit saved-content contract. | Keep owner-selected reference/bookmark and optional preset; close local sound/inspection. |
 
 ### The study huddle has a separate, small lifecycle
 
-A huddle is a transient choice to explain a problem on the existing board, not a
-focus-management system. A resident claims a study seat, then chooses Join huddle.
-Someone explicitly chooses Share my view; others choose Follow the huddle. Free
-inspection and independent board editing remain available to authorized members.
-Closing the huddle view leaves huddle/following but keeps the ordinary seat. Reopen
-from that seat offers Join again. Stand, walking, room change, disconnect or control
-takeover removes huddle membership/following; reconnect never auto-follows.
+The implemented huddle records willing seated participants and a volunteer leader,
+then opens the existing independent collaborative board. It does not synchronize
+Excalidraw viewports. This is a deliberate first-slice boundary: the real shared
+canvas already preserves edits; a second canvas-controller protocol would add
+work without evidence that viewport following improves this task.
 
-A presenter can offer a handoff, completed only after a willing seated member
-accepts it. If the presenter leaves/closes without an accepted handoff, freeze the
-last shared viewport and release control; existing members may inspect it locally
-or explicitly claim Share my view. Do not pick an automatic successor. Use this
-same freeze/explicit-claim rule at the sofa. A new leader is visibly identified.
-Leaving either shared view does not revoke independent board access or alter Quiet.
-The huddle's smaller Close/Leave action is distinct from a game's Look around
-button, which retains game consent while seated; label the consequence clearly.
+Choose Join after claiming a study seat. Lead huddle identifies who is explaining;
+Follow huddle opens the independent board and does not control another editor.
+Opening that board preserves the huddle only while the same seat/controller/access
+context holds. Closing it returns to those choices. Closing the gathering leaves
+it but retains the ordinary seat. Stand, movement, room change, disconnect and
+control takeover invalidate participation; reconnect does not autojoin or follow.
+
+At the sofa, a presenter may publish one explicitly house-visible room reference.
+Followers opt in to its shared crop/pointer. When a presenter leaves, freeze the
+item/view and release control; a willing remaining seated member explicitly claims
+it. There is no automatic successor or implemented offer/accept handoff dialog.
+Leaving a view does not revoke independent board access or alter Quiet.
+
+Current joined-member polling renews the session's idle period, so ordinary study
+is not ended by a hard30-minute clock. Empty sessions expire after10minutes.
+Receipts are bounded; a full session rotates only after everyone leaves, retaining
+its inert historical receipts under a separately bounded expiry. Exact accepted
+retries cannot renew old consent. See [the implemented contract](GATHERING-API.md).
 
 For Four-in-a-row, retain its recorded pause/expiry/withdrawal rules during migration;
 new seat loss must have its own honest lifecycle event. It is not the whole-group
@@ -170,7 +178,9 @@ request limit; inspect its current bounded upload/chunking pattern instead of
 assuming a large JSON image request is allowed. Existing board image handling can
 inform the work but does not supply room-private authorization. An isolated PNG
 prototype can test interaction before a second asset system exists; production
-image support remains gated on the real authorization/resource contract.
+image support uses [the bounded studio contract](STUDIO-API.md). Its focused
+permissions/codec/HTTP checks are complete; current integrated resource acceptance
+remains a separate gate.
 
 ## Server and data boundaries
 
@@ -201,7 +211,7 @@ agents, not a completion guarantee. Re-estimate after the first integrated slice
 
 | Stage | Complete slice | Acceptance before moving on |
 | --- | --- | --- |
-| R0: research/prototypes | Compare Delta with North and the toolbar/chat counterfactual. Use a real reference; compare study huddle with/without a timer. | Owner/friend task observations distinguish useful audience/continuity from extra walking. Unknown preference stays unknown. |
+| R0: research/prototypes | Compare Delta with North and toolbar/chat alternatives; independently examine room use. The owner authorized implementation before friend fieldwork. | Source comparison and executable task contracts are available; friend usefulness and timer comparisons remain unrun. Implementation is not evidence of preference. |
 | R1: days1–2 | Navigate -> seat -> explicit Join -> contribute -> Stand/Leave. Include real capacity2–6 and reserved-seat display. | Both ingress paths, concurrent claim, denied remote/new effects, exact retry after stand, takeover/reconnect, six independent clients, keyboard/touch. |
 | R2: days3–4 | One inspection component: presenter/item/pointer/follow. Make sofa task complete with deliberate sharing and immediate exit. | No forced modal/audio on nonparticipants, independent local view, host departure, late entry, phone fit, no unauthorized material retrieval. |
 | R3: days5–6 | Owned reference and resume position; visitor sees owner's selected content under existing door policy. | Solo reopen, shared visit, guest cannot overwrite owner state, close/revoke clears stale delivery, source access/withdrawal/export explicit. |
@@ -223,10 +233,19 @@ allowance, extend/replan the schedule rather than reporting the excluded feature
 as savings. If selected-reference tasks fail their user comparison, change the place
 before spending the remaining budget on polish.
 
-## What this pass can accept
+## Current acceptance boundary
 
-It can accept source facts, a bounded mechanical fit result and a research-backed
-prototype plan after review. It cannot accept that friends enjoy these roles,
-that the bedroom beats a toolbar, or that a new production build is complete.
-Those are distinct next checks. [Review record](REVIEW-AND-REFINEMENT.md) preserves
-initial criticism, parent decisions, refinements and remaining gates.
+This plan now guides an authorized local implementation, not a completed release.
+[IMPLEMENTATION](IMPLEMENTATION.md) and its linked evidence own current per-slice
+status; historical research reviews remain at
+[REVIEW-AND-REFINEMENT](REVIEW-AND-REFINEMENT.md). The root PLAN is the project index.
+The one-image/independent-bedroom inspection, huddle leadership/independent board,
+and freeze/explicit-claim presenter choices above replace the earlier speculative
+synchronized bedroom/board and multi-step handoff language.
+
+Technical acceptance must follow the current source, permission/failure tests,
+actual browser journeys and valid registered resource profiles. Friend usefulness,
+human preference and physical-phone observations remain separate and unrun unless
+recorded. No local pass authorizes push/deployment under this task.
+
+Current implementation acceptance and open gates: [acceptance record](ACCEPTANCE.md).

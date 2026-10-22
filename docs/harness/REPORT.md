@@ -507,3 +507,52 @@ verified researchers' primary claims, added a minimum candidate after critique,
 and refined authorization/lifecycle/budget contradictions. Record these outcomes
 rather than claiming a new Harness2/Loop Engineering performance win. The research
 plan is conditional; real-friend utility and new production behavior remain open.
+
+
+## 23 October spatial implementation refinement
+
+The implementation cycle exposed a verification mistake worth retaining: a fault
+test that failed `gameLifecycle` did not exercise earlier snapshot maintenance.
+The UI could still appear to have a tested escape path while another earlier
+write prevented it. At consequential boundaries, trace the whole runtime call
+path and place the fault at the earliest realistic failing dependency; use real
+SQLite triggers/held HTTP bodies where that discriminates from a convenient mock.
+
+Likewise, comparing two freshly read server projections cannot prove a delayed
+request belongs to its originating visit. Test an unaccepted request across
+stand/reseat or reconnect, separately from replay of an already accepted UUID.
+These are observed project regressions and test improvements, not a claim that
+more agents or repeated identical checks improve every task. The source, findings,
+RED/GREEN refinements and current gaps are routed through
+[spatial implementation](../spatial-redesign/IMPLEMENTATION.md).
+
+
+Recovery review then exposed the same issue at a module boundary: a mocked
+`subscribe` made a Return action appear read-only, while the actual client flushed
+its outbox and could remove a seat-denied draft. Negative assertions about cross-
+module side effects need the real client/outbox boundary, not only a mock's call
+count. The selected-command hold, manual historical-receipt path and failed-chair-
+ACK ordering each require their own discriminating regression.
+
+Resource review also rejected an unrun39-connection fixture against the actual
+12-root admission cap and found a constructed actor/scheduler wiring mismatch.
+Keep the production cap and valid task; revise the fixture and declare a separate
+mixed-motion profile rather than widening admission to fit an invented workload.
+Source-equivalence checks cannot substitute for executing constructed actors
+through the actual scheduler and request envelope. Preserve the withdrawn setup,
+review and valid replacement protocol so later work does not count preparation as
+performance evidence.
+
+A later review called the avatar selector absent after reading its constructor.
+Parent and executor checked the update path and found `syncPlayers` adds that class
+and player ID at runtime. Trace construction *and subsequent synchronization* before
+calling a DOM contract impossible. Retain the corrected finding; an independent
+review is a source of hypotheses, not authority. A real production-DOM calibration
+can distinguish a missing selector from a review-reading error.
+
+A sampled RSS calibration exceeded the unchanged limit. Preserve the failure and
+localize the peak with existing high-frequency telemetry before choosing a memory
+optimization. RSS, heap and external bytes are overlapping/nonadditive measures;
+a long-lived aggregate phase label does not establish allocation causality.
+Predeclare order/attempt limits and keep every diagnostic outcome. Diagnostic
+bootstraps and a later favorable sample cannot replace sustained workload acceptance.

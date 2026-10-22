@@ -534,3 +534,25 @@ and real contingency cuts. Scoped contextual closure is not another independent
 trial or proof of utility. No production source, authored content, remote service or
 student reflection was changed. New behavior and intended-friend/device tests
 remain future gates; unchanged application suites were not rerun for a larger count.
+
+## Spatial implementation audit, 23 October
+
+Reopened AGENTS/CLAUDE, active REPORT, current plan and actual diff at module,
+failure, native and commit boundaries. The detailed SP ledger in
+[REGISTER](../revisit/REGISTER.md) covers each meaningful authority/UI/room/resource
+subsection. Sol execution owns narrow files; Astra decisions/reviews start without
+chat history. Parent verifies source findings and preserves rejected alternatives.
+
+Useful method corrections came from actual failures: mocked subscribe omitted the
+real client's automatic retry; real-client/service and native SQLite receipt checks
+now test the intended boundary. A readonly SQLite path still used IMMEDIATE and
+failed behind a real writer; deferred reads were verified rather than introducing
+a permission fallback. No reviewer opinion alone closed either issue.
+
+Full required check #3 passes1,364tests with stable source. The resource baseline
+and mixed zero-second calibrations have separate identities; mixed215.2695MiB
+exceeds210MiB. The gate remains open. A fresh decision review selected diagnostic
+telemetry and a predeclared four-run ABBA comparison before changing production.
+No raised budget, reduced fixture, forced GC or historical PASS substitution.
+A separate six-browser evaluator review is being checked against actual production
+DOM; its unexecuted fixture is not native evidence. Final acceptance remains open.
