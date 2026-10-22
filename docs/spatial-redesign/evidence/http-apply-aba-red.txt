@@ -1,0 +1,49 @@
+Already up to date
+Done in 46ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-spatial-http.test.ts [2m([22m[2m13 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 1991[2mms[22m[39m
+   [31m❯[39m spatial capabilities through real HTTP and Socket.IO authority [2m(13)[22m
+     [32m✓[39m enforces current cookie identity, same origin and the exact 16 KiB JSON boundary[32m 137[2mms[22m[39m
+     [32m✓[39m allows exact-bedroom owner control and blocks observers, stale secrets, wrong zones and guests[32m 87[2mms[22m[39m
+     [32m✓[39m rechecks door permission for metadata and PNG bytes after a permitted preview[32m 86[2mms[22m[39m
+     [32m✓[39m exports original-owner archived rooms with a bounded continuation and integrated first page[32m 97[2mms[22m[39m
+     [33m[2m✓[22m[39m requires actual study seating plus explicit Join and accepts Leave after Stand[33m 376[2mms[22m[39m
+     [33m[2m✓[22m[39m publishes an original-owner sofa PNG copy that survives closing the source door[33m 312[2mms[22m[39m
+     [32m✓[39m denies a late studio body after session revocation[32m 59[2mms[22m[39m
+     [32m✓[39m denies a late gathering body after session revocation[32m 66[2mms[22m[39m
+     [32m✓[39m denies a late studio body after controller-token takeover[32m 62[2mms[22m[39m
+     [32m✓[39m denies a late gathering body after controller-token takeover[32m 63[2mms[22m[39m
+[31m     [31m×[31m rejects a delayed unaccepted Join after stand/re-sit[39m[33m 353[2mms[22m[39m
+[31m     [31m×[31m rejects a delayed unaccepted Join after same-token reconnect[39m[32m 189[2mms[22m[39m
+     [32m✓[39m serves the spatial modules and refuses absent allowlisted assets[32m 101[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mrejects a delayed unaccepted Join after stand/re-sit
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mrejects a delayed unaccepted Join after same-token reconnect
+[31m[1mAssertionError[22m: expected 200 to be 409 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 409[39m
+[31m+ 200[39m
+
+[36m [2m❯[22m spec/house-spatial-http.test.ts:[2m230:27[22m[39m
+    [90m228|[39m     }
+    [90m229|[39m     held.finish(); const result = await held.result;
+    [90m230|[39m     expect(result.status).toBe(409); expect(result.body.ok).toBe(false…
+    [90m   |[39m                           [31m^[39m
+    [90m231|[39m     expect((await f.state("study")).selfJoined).toBe(false);
+    [90m232|[39m   });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m11 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 02:57:16
+[2m   Duration [22m 2.40s[2m (tests 86%, transform 10%, import 4%)[22m
+

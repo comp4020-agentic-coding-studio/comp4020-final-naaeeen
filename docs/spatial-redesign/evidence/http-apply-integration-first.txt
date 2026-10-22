@@ -1,0 +1,171 @@
+Already up to date
+Done in 108ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-spatial-http.test.ts [2m([22m[2m11 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[33m 1668[2mms[22m[39m
+   [31m❯[39m spatial capabilities through real HTTP and Socket.IO authority [2m(11)[22m
+     [32m✓[39m enforces current cookie identity, same origin and the exact 16 KiB JSON boundary[32m 256[2mms[22m[39m
+     [32m✓[39m allows exact-bedroom owner control and blocks observers, stale secrets, wrong zones and guests[32m 205[2mms[22m[39m
+[31m     [31m×[31m rechecks door permission for metadata and PNG bytes after a permitted preview[39m[32m 128[2mms[22m[39m
+     [32m✓[39m exports original-owner archived rooms with a bounded continuation and integrated first page[32m 137[2mms[22m[39m
+[31m     [31m×[31m requires actual study seating plus explicit Join and accepts Leave after Stand[39m[32m 187[2mms[22m[39m
+[31m     [31m×[31m publishes an original-owner sofa PNG copy that survives closing the source door[39m[32m 208[2mms[22m[39m
+     [32m✓[39m denies a late studio body after session revocation[32m 117[2mms[22m[39m
+     [32m✓[39m denies a late gathering body after session revocation[32m 129[2mms[22m[39m
+[31m     [31m×[31m denies a late studio body after controller-token takeover[39m[32m 107[2mms[22m[39m
+[31m     [31m×[31m denies a late gathering body after controller-token takeover[39m[32m 110[2mms[22m[39m
+[31m     [31m×[31m serves the spatial modules and refuses absent allowlisted assets[39m[32m 82[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mrechecks door permission for metadata and PNG bytes after a permitted preview
+[31m[1mAssertionError[22m: expected Buffer[ 137, 80, 78, 71, 13, 10, …(45) ] to deeply equal Buffer[ 137, 80, 78, 71, 13, 10, …(45) ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -40,11 +40,11 @@[39m
+[2m      73,[22m
+[2m      68,[22m
+[2m      65,[22m
+[2m      84,[22m
+[2m      120,[22m
+[32m-     156,[39m
+[31m+     218,[39m
+[2m      99,[22m
+[2m      144,[22m
+[2m      52,[22m
+[2m      242,[22m
+[2m      254,[22m
+[33m@@ -52,14 +52,14 @@[39m
+[2m      0,[22m
+[2m      2,[22m
+[2m      148,[22m
+[2m      1,[22m
+[2m      150,[22m
+[32m-     152,[39m
+[32m-     168,[39m
+[32m-     248,[39m
+[32m-     113,[39m
+[31m+     71,[39m
+[31m+     246,[39m
+[31m+     234,[39m
+[31m+     97,[39m
+[2m      0,[22m
+[2m      0,[22m
+[2m      0,[22m
+[2m      0,[22m
+[2m      73,[22m
+
+[36m [2m❯[22m spec/house-spatial-http.test.ts:[2m133:221[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mrequires actual study seating plus explicit Join and accepts Leave after Stand
+[31m[1mAssertionError[22m: expected { ok: false, …(2) } to match object { ok: true }
+(2 matching properties omitted from actual)[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ok": true,[39m
+[31m+   "ok": false,[39m
+[2m  }[22m
+
+[36m [2m❯[22m Object.sit spec/house-spatial-http.test.ts:[2m75:192[22m[39m
+
+[90m [2m❯[22m spec/house-spatial-http.test.ts:[2m166:125[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mpublishes an original-owner sofa PNG copy that survives closing the source door
+[31m[1mAssertionError[22m: expected Buffer[ 137, 80, 78, 71, 13, 10, …(45) ] to deeply equal Buffer[ 137, 80, 78, 71, 13, 10, …(45) ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -40,11 +40,11 @@[39m
+[2m      73,[22m
+[2m      68,[22m
+[2m      65,[22m
+[2m      84,[22m
+[2m      120,[22m
+[32m-     156,[39m
+[31m+     218,[39m
+[2m      99,[22m
+[2m      144,[22m
+[2m      52,[22m
+[2m      242,[22m
+[2m      254,[22m
+[33m@@ -52,14 +52,14 @@[39m
+[2m      0,[22m
+[2m      2,[22m
+[2m      148,[22m
+[2m      1,[22m
+[2m      150,[22m
+[32m-     152,[39m
+[32m-     168,[39m
+[32m-     248,[39m
+[32m-     113,[39m
+[31m+     71,[39m
+[31m+     246,[39m
+[31m+     234,[39m
+[31m+     97,[39m
+[2m      0,[22m
+[2m      0,[22m
+[2m      0,[22m
+[2m      0,[22m
+[2m      73,[22m
+
+[36m [2m❯[22m spec/house-spatial-http.test.ts:[2m185:163[22m[39m
+    [90m183|[39m     await f.configure(false);
+    [90m184|[39m     const response = await fetch(f.base + "/api/house/gathering/image?…
+    [90m185|[39m     expect(response.status).toBe(200); expect(response.headers.get("ca…
+    [90m   |[39m                                                                                                                                                                   [31m^[39m
+    [90m186|[39m     expect((await submit(owner, "clear", {})).status).toBe(200);
+    [90m187|[39m     expect((await fetch(f.base + "/api/house/gathering/image?kind=sofa…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mdenies a late studio body after controller-token takeover
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mdenies a late gathering body after controller-token takeover
+[31m[1mAssertionError[22m: expected 409 to be 403 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 403[39m
+[31m+ 409[39m
+
+[36m [2m❯[22m spec/house-spatial-http.test.ts:[2m204:61[22m[39m
+    [90m202|[39m     const held = await heldPost(f, capability === "studio" ? "/api/hou…
+    [90m203|[39m     expect(await ask(replacement.socket, "house.takeover", { controlle…
+    [90m204|[39m     const result = await held.result; expect(result.status).toBe(403);…
+    [90m   |[39m                                                             [31m^[39m
+    [90m205|[39m     expect(f.app.studio.state(f.owner.id, f.room).revision).toBe(0);
+    [90m206|[39m   });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-spatial-http.test.ts[2m > [22mspatial capabilities through real HTTP and Socket.IO authority[2m > [22mserves the spatial modules and refuses absent allowlisted assets
+[31m[1mError[22m: The configured data directory must already exist.[39m
+[36m [2m❯[22m createService src/server.ts:[2m69:71[22m[39m
+    [90m 67|[39m export function createService(options: ServiceOptions) {
+    [90m 68|[39m   const dataDir = resolve(options.dataDir);
+    [90m 69|[39m   if (!existsSync(dataDir) || !statSync(dataDir).isDirectory()) throw …
+    [90m   |[39m                                                                       [31m^[39m
+    [90m 70|[39m   const publicDir = resolve(options.publicDir ?? join(ROOT, "public"));
+    [90m 71|[39m   const readmePath = resolve(options.readmePath ?? join(ROOT, "README.…
+[90m [2m❯[22m spec/house-spatial-http.test.ts:[2m212:17[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m5 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 02:55:18
+[2m   Duration [22m 2.56s[2m (tests 70%, transform 19%, import 11%, worker 1%)[22m
+

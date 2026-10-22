@@ -13,12 +13,14 @@ import { HouseError } from "./house-contract.ts";
 import { attachHouseRealtime } from "./house-realtime.ts";
 import { BoardStore } from "./board-store.ts";
 import { attachBoardService } from "./board-service.ts";
+import { RoomStudioStore } from "./house-studio.ts";
+import { HouseGathering } from "./house-gathering.ts";
 import { createActivityLogger, activityMetadata, type ActivityRecord } from "./activity-log.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const COOKIE = "night_session";
 const BODY_LIMIT = 16 * 1024;
-const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, ACTIVITY_ACTIVE: 409, PUZZLE_UNAVAILABLE: 409, PUZZLE_COMPLETE: 409, PUZZLE_STALE_ROUND: 409, PUZZLE_NOT_JOINED: 409, PUZZLE_PIECE_TAKEN: 409, PUZZLE_WRONG_PLACE: 409, PUZZLE_RESET_CHANGED: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
+const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, ACTIVITY_ACTIVE: 409, ACTIVITY_SEAT_REQUIRED: 409, UPLOAD_EXPIRED: 409, UPLOAD_INCOMPLETE: 409, UPLOAD_CONFLICT: 409, STUDIO_LIMIT: 409, GATHERING_LIMIT: 409, GATHERING_NO_ITEM: 409, STALE_GATHERING: 409, GATHERING_SEAT_REQUIRED: 409, GATHERING_NOT_JOINED: 409, GATHERING_PRESENTER_BUSY: 409, GATHERING_NOT_PRESENTER: 409, PUZZLE_UNAVAILABLE: 409, PUZZLE_COMPLETE: 409, PUZZLE_STALE_ROUND: 409, PUZZLE_NOT_JOINED: 409, PUZZLE_PIECE_TAKEN: 409, PUZZLE_WRONG_PLACE: 409, PUZZLE_RESET_CHANGED: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
 const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
 export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
 interface Connection { response: ServerResponse; digest: string }
@@ -75,6 +77,18 @@ export function createService(options: ServiceOptions) {
   let boardStore: BoardStore;
   try { boardStore = new BoardStore(join(dataDir, "board.sqlite")); }
   catch (error) { houseStore.close(); store.close(); throw error; }
+  let studio: RoomStudioStore;
+  try {
+    studio = new RoomStudioStore(join(dataDir, "house.sqlite"), {
+      authorizeRead(actorId, roomId) {
+        houseStore.authorizeZone(actorId, roomId);
+        const room = houseStore.snapshot(actorId, roomId).room;
+        if (!room) throw new HouseError("FORBIDDEN", "Enter an available bedroom.");
+        return { ownerId: room.ownerId };
+      },
+      authorizeExport(actorId) { houseStore.me(actorId); },
+    });
+  } catch (error) { boardStore.close(); houseStore.close(); store.close(); throw error; }
   function setHouseCookie(response: ServerResponse, token: string): void { response.setHeader("Set-Cookie", `house_session=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_SECONDS}${secureCookies ? "; Secure" : ""}`); }
   function houseAuth(request: IncomingMessage): {id: string; digest: string} {
     const token = cookieToken(request, "house_session"); const digest = token ? sessionDigest(token) : "";
@@ -89,6 +103,11 @@ export function createService(options: ServiceOptions) {
     if (expected !== undefined && (typeof expected !== "string" || expected !== actorId)) {
       throw new HouseError("IDENTITY_CHANGED", "Your identity changed. Return to the original identity to review this pending action.");
     }
+  }
+  function authorityEpoch(request: IncomingMessage, header: string): number {
+    const raw = request.headers[header];
+    if (typeof raw !== "string" || !/^[1-9][0-9]{0,15}$/.test(raw) || !Number.isSafeInteger(Number(raw))) throw new HouseError("STALE_GENERATION", "Reopen this place from its current connection before changing it.");
+    return Number(raw);
   }
   const activity = createActivityLogger(options.activityLog);
   function actionLog(actor: string, action: string, outcome: string): void { activity({ actor, action, outcome, transport: "http" }); }
@@ -127,7 +146,7 @@ export function createService(options: ServiceOptions) {
   }
   function broadcast(): void { for (const connection of connections) deliver(connection); }
   function staticFile(pathname: string): string | undefined {
-    const pageFiles: Record<string, string> = { "/": existsSync(join(publicDir, "house.html")) ? "house.html" : "index.html", "/legacy/": "index.html", "/house.html": "house.html", "/house-ui.js": "house-ui.js", "/house-shell.js": "house-shell.js", "/board/": "board.html", "/board": "board.html", "/board.html": "board.html", "/house-world.js": "house-world.js", "/house-label-layout.js": "house-label-layout.js", "/house-camera.js": "house-camera.js", "/house-room-content.js": "house-room-content.js", "/house-puzzle-content.js": "house-puzzle-content.js", "/house-puzzle-rules.js": "house-puzzle-rules.js", "/house-puzzle-ui.js": "house-puzzle-ui.js", "/house-version.js": "house-version.js", "/house-game-ui.js": "house-game-ui.js", "/house-geometry.js": "house-geometry.js", "/house-client.js": "house-client.js", "/house.css": "house.css", "/index.html": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/readme.css": "readme.css", "/render-three.js": "render-three.js", "/render-iso.js": "render-iso.js", "/favicon.svg": "favicon.svg" };
+    const pageFiles: Record<string, string> = { "/": existsSync(join(publicDir, "house.html")) ? "house.html" : "index.html", "/legacy/": "index.html", "/house.html": "house.html", "/house-ui.js": "house-ui.js", "/house-shell.js": "house-shell.js", "/board/": "board.html", "/board": "board.html", "/board.html": "board.html", "/house-world.js": "house-world.js", "/house-label-layout.js": "house-label-layout.js", "/house-camera.js": "house-camera.js", "/house-room-content.js": "house-room-content.js", "/house-puzzle-content.js": "house-puzzle-content.js", "/house-puzzle-rules.js": "house-puzzle-rules.js", "/house-puzzle-ui.js": "house-puzzle-ui.js", "/house-version.js": "house-version.js", "/house-game-ui.js": "house-game-ui.js", "/house-geometry.js": "house-geometry.js", "/house-client.js": "house-client.js", "/house.css": "house.css", "/house-studio-ui.js": "house-studio-ui.js", "/house-studio-preview.js": "house-studio-preview.js", "/house-studio.css": "house-studio.css", "/house-ambience.js": "house-ambience.js", "/house-gathering-ui.js": "house-gathering-ui.js", "/house-gathering.css": "house-gathering.css", "/index.html": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/readme.css": "readme.css", "/render-three.js": "render-three.js", "/render-iso.js": "render-iso.js", "/favicon.svg": "favicon.svg" };
     if (pageFiles[pathname]) return confinedFile(publicDir, pageFiles[pathname]);
     if (pathname.startsWith("/board-assets/") && /\.(?:js|css|json|woff2?|ttf|txt|svg|png)$/.test(pathname)) return confinedFile(join(publicDir, "board-assets"), pathname.slice(14));
     if (pathname.startsWith("/assets/") && /\.(?:glb|gltf|png|jpe?g|webp|svg|bin)$/.test(pathname)) return confinedFile(join(publicDir, "assets"), pathname.slice(8));
@@ -176,7 +195,33 @@ export function createService(options: ServiceOptions) {
           setHouseCookie(response, actor.token); actionLog(actor.id, "identity.recover", "saved");
           json(response, 200, houseStore.me(actor.id)); return;
         }
-        const actor = houseAuth(request); houseActor = actor.id;
+        const actor = houseAuth(request); houseActor = actor.id; intendedHouseIdentity(request, actor.id);
+        if (request.method === "GET" && pathname === "/api/house/studio") {
+          rateLimit("studio-read:" + actor.digest);
+          const roomId = new URL(request.url ?? "/", "http://local.invalid").searchParams.get("roomId") ?? "";
+          json(response, 200, studio.state(actor.id, roomId)); return;
+        }
+        if (request.method === "GET" && pathname === "/api/house/studio/image") {
+          rateLimit("studio-image:" + actor.digest);
+          const params = new URL(request.url ?? "/", "http://local.invalid").searchParams;
+          const image = studio.image(actor.id, params.get("roomId") ?? "", params.get("imageId") ?? "");
+          response.writeHead(200, { "Content-Type": image.mime, "Content-Length": image.bytes.length, "Cache-Control": "no-store" });
+          response.end(image.bytes); return;
+        }
+        if (request.method === "GET" && pathname === "/api/house/gathering") {
+          rateLimit("gathering-read:" + actor.digest);
+          const kind = new URL(request.url ?? "/", "http://local.invalid").searchParams.get("kind");
+          if (kind !== "study" && kind !== "sofa") throw new HouseError("INVALID_INPUT", "Choose study or sofa.");
+          json(response, 200, gathering.state(actor.id, kind)); return;
+        }
+        if (request.method === "GET" && pathname === "/api/house/gathering/image") {
+          rateLimit("gathering-image:" + actor.digest);
+          const params = new URL(request.url ?? "/", "http://local.invalid").searchParams, kind = params.get("kind");
+          if (kind !== "sofa") throw new HouseError("INVALID_INPUT", "Choose the sofa image.");
+          const image = gathering.image(actor.id, kind, params.get("itemId") ?? "");
+          response.writeHead(200, { "Content-Type": image.mime, "Content-Length": image.bytes.length, "Cache-Control": "private, no-store" });
+          response.end(image.bytes); return;
+        }
         if (request.method === "GET" && pathname === "/api/house/removed-members") {
           const after = new URL(request.url ?? "/", "http://local.invalid").searchParams.get("after") ?? "";
           json(response, 200, houseStore.removedResidents(actor.id, after)); return;
@@ -188,15 +233,39 @@ export function createService(options: ServiceOptions) {
         if (request.method === "POST") {
           sameOrigin(request); intendedHouseIdentity(request, actor.id); rateLimit("house:" + actor.digest);
           const body = await readJson(request);
-          if (pathname === "/api/house/command") houseMetadata = { ...activityMetadata(body) };
+          if (["/api/house/command", "/api/house/studio/command", "/api/house/gathering"].includes(pathname)) houseMetadata = { ...activityMetadata(body) };
           const current = houseAuth(request); // body arrival may outlive a revoked session
           intendedHouseIdentity(request, current.id);
+          if (pathname === "/api/house/studio/command") {
+            houseAction = "studio.command";
+            const roomId = body && typeof body === "object" && !Array.isArray(body) ? (body as Record<string, unknown>).roomId : undefined;
+            if (typeof roomId !== "string") throw new HouseError("INVALID_INPUT", "Choose a bedroom for this action.");
+            const generation = request.headers["x-house-generation"], token = request.headers["x-house-controller-token"];
+            const accessGeneration = authorityEpoch(request, "x-house-access-generation");
+            const receipt = studio.execute(current.id, body, () => realtime.authorizeRoomHttp(current.id, roomId, typeof generation === "string" ? Number(generation) : undefined, typeof token === "string" ? token : undefined, accessGeneration));
+            activity({ actor: current.id, action: "studio.command", outcome: "saved", transport: "http", commandId: receipt.commandId }); json(response, 200, receipt); return;
+          }
+          if (pathname === "/api/house/gathering") {
+            houseAction = "gathering.command";
+            const generation = request.headers["x-house-generation"], token = request.headers["x-house-controller-token"];
+            const requestEpoch = { accessGeneration: authorityEpoch(request, "x-house-access-generation"), seatGeneration: authorityEpoch(request, "x-house-seat-generation") };
+            const result = gathering.execute(current.id, body, () => realtime.loungeHttpControl(current.id, typeof generation === "string" ? Number(generation) : undefined, typeof token === "string" ? token : undefined), requestEpoch);
+            activity({ actor: current.id, action: "gathering.command", outcome: "saved", transport: "http", commandId: result.receipt.commandId }); json(response, 200, result); return;
+          }
+          if (pathname === "/api/house/studio/export") {
+            if (!body || typeof body !== "object" || Array.isArray(body) || Object.keys(body).some(key => !["roomId", "cursor"].includes(key))) throw new HouseError("INVALID_INPUT", "Choose a room or export page.");
+            const value = body as {roomId?: unknown; cursor?: unknown};
+            if (value.roomId !== undefined && (typeof value.roomId !== "string" || value.cursor !== undefined)) throw new HouseError("INVALID_INPUT", "Choose one room to export.");
+            if (value.cursor !== undefined && typeof value.cursor !== "string") throw new HouseError("INVALID_INPUT", "Use the saved export cursor.");
+            const result = typeof value.roomId === "string" ? studio.exportRoom(current.id, value.roomId) : studio.exportOwn(current.id, value.cursor as string | undefined);
+            actionLog(current.id, "studio.export", "read"); json(response, 200, result); return;
+          }
           if (pathname === "/api/house/recovery-key") {
             const proof = houseStore.issueRecovery(current.id); actionLog(current.id, "identity.recovery-key", "issued");
             json(response, 200, {proof}); return;
           }
           if (pathname === "/api/house/export") {
-            actionLog(current.id, "identity.export", "read"); json(response, 200, houseStore.exportOwn(current.id)); return;
+            actionLog(current.id, "identity.export", "read"); json(response, 200, { ...houseStore.exportOwn(current.id), studio: studio.exportOwn(current.id) }); return;
           }
           if (pathname === "/api/house/command") {
             const generation = request.headers["x-house-generation"];
@@ -265,6 +334,20 @@ export function createService(options: ServiceOptions) {
   }
   const server = createServer((request, response) => { void handle(request, response); });
   const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
+  const gathering = new HouseGathering({
+    authorizeHouse(actorId) {
+      const snapshot = houseStore.snapshot(actorId, "lounge");
+      return { houseId: snapshot.house.id, residents: snapshot.residents.map(person => ({ id: person.id, name: person.name })) };
+    },
+    currentSeat(actorId) { return realtime.currentLoungeSeat(actorId); },
+    sourceImage(actorId, roomId) {
+      const state = studio.state(actorId, roomId);
+      if (state.ownerId !== actorId) throw new HouseError("FORBIDDEN", "Choose your own room reference to share.");
+      if (!state.image) throw new HouseError("GATHERING_NO_ITEM", "Choose an image in your own room first.");
+      const image = studio.image(actorId, roomId, state.image.id);
+      return { bytes: image.bytes, ownerId: state.ownerId, width: state.image.width, height: state.image.height, imageId: state.image.id };
+    },
+  });
   const board = attachBoardService(realtime.io, houseStore, boardStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
   server.requestTimeout = 15_000; server.headersTimeout = 10_000;
   const heartbeat = setInterval(() => {
@@ -285,9 +368,9 @@ export function createService(options: ServiceOptions) {
     server.closeIdleConnections();
     try { await realtimeClosing; } finally { clearTimeout(forceClose); }
     await new Promise<void>((done, reject) => { if (!server.listening) { done(); return; } server.close((error) => error ? reject(error) : done()); server.closeIdleConnections(); });
-    store.close(); houseStore.close(); boardStore.close();
+    gathering.close(); studio.close(); store.close(); houseStore.close(); boardStore.close();
   }
-  return { server, store, houseStore, boardStore, close };
+  return { server, store, houseStore, boardStore, studio, gathering, close };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

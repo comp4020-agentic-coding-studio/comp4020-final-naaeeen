@@ -1,0 +1,15 @@
+Already up to date
+Done in 46ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-spatial-http.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1486[2mms[22m[39m
+   [32m✓[39m spatial capabilities through real HTTP and Socket.IO authority [2m(11)[22m
+     [33m[2m✓[22m[39m requires actual study seating plus explicit Join and accepts Leave after Stand[33m 369[2mms[22m[39m
+     [33m[2m✓[22m[39m publishes an original-owner sofa PNG copy that survives closing the source door[33m 313[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m11 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 02:56:14
+[2m   Duration [22m 1.93s[2m (tests 81%, transform 13%, import 6%)[22m
+

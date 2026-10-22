@@ -1,0 +1,5 @@
+9086e99693e3dd08965b1cfaaef5a28f14d8a1ac6add34af62b78e4dec5d03f0  spec/house-spatial-http.test.ts
+1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1  src/server.ts
+b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d  src/house-realtime.ts
+5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f  src/house-gathering.ts
+54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4  src/house-contract.ts
