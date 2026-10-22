@@ -59,3 +59,17 @@ techniques to meaningful subsections, record evidence and refinement in project
 docs, and preserve fresh-context reviews and intermediate local commits. A research
 paper, framework name or agent agreement alone does not establish effectiveness.
 Do not replace working project checks or import a framework's runtime permissions.
+
+## Later holistic spatial-design correction
+
+The owner rejects the current overall design and permits major changes. Every
+substantial area should have an intentional, practical use and matching interaction.
+Specific counterexamples: only two activity chairs despite five/six participants;
+game activation should require sitting there; rest and central study seating need
+distinct useful interactions; the personal-room note/work-card idea feels unhelpful.
+These examples are only a small part of the concern. Research analogous games and
+take notes before redesigning. Continue critical use of AI-agent methods, including
+Harness2 and Loop Engineering; do not let the current code/plan constrain discovery.
+
+The active response is ../spatial-redesign/PLAN.md. Earlier implementation passes
+remain source-bound technical results, not acceptance of this new product direction.

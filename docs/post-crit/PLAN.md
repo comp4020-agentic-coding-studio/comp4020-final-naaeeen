@@ -1,3 +1,11 @@
+# Spatial-purpose assumptions reopened
+
+The owner's later holistic feedback supersedes this plan's spatial-purpose
+assumptions. Use [the current redesign plan](../spatial-redesign/PLAN.md) and
+[research notes](../spatial-redesign/RESEARCH-NOTES.md) before new production edits.
+The earlier technical implementation/results below keep their original scope;
+they do not settle the new design's usefulness.
+
 # Post-Crit improvement plan
 
 Reviewed implementation contract, 22 October 2026. Baseline 8cdad6a; branch

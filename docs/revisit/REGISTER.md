@@ -312,3 +312,20 @@ seconds. Each verifies8,142accepted receipts after exit; combined adds124game an
 62pictureactions. Source/hash/clock limitations and final fresh review are linked
 from acceptance. No historical P6 pass is inherited by new code. Local4093 preview
 uses the verified migrated copy; original and backup remain preserved.
+
+## Spatial-purpose reopening
+
+New owner feedback reopens product-design acceptance; prior technical results remain
+unchanged. Current records are in ../spatial-redesign/.
+
+| Subsection | Actual evidence and refinement | Current gate |
+| --- | --- | --- |
+| SP.0 goals/scope | Source audit and owner brief; compare three practices plus minimum Delta. | Conditional prototype direction; no product-value acceptance. |
+| SP.1 seats/activation | Two physical chairs versus six logical contributors confirmed; both ingress paths and replay ordering traced. | New seat-bound authority NOT IMPLEMENTED. |
+| SP.2 physical fit | One frozen ring candidate, capacities2–6 and six named controls; old global target blocked4/5 retained. | Mechanical feasibility only; rendered/occupied/mobile routes open. |
+| SP.3 study table | Independent review rejects timer-only justification; refine to optional board huddle and explicit lifecycle. | Compare with ordinary board access; no forced focus system. |
+| SP.4 sofa | Source-check no-sync gogh versus stronger Discord; propose bounded shared still-image inspection. | Same-image comparison and actual value open; video excluded. |
+| SP.5 bedroom | Remove visitor-own-global-card premise; propose owner context/resume under existing door access. | Matched toolbar/content/state/audience comparison remains required. |
+| SP.6 transitions/privacy | Review separates room closure/member removal, huddle/board access, presenter freeze/claim and historical receipt replay. | Paper contradictions resolved; implementation/revocation tests not run. |
+| SP.7 resources/scope | Ten-day estimate corrected: excluded work is not contingency; real within-Delta cuts named. | No delivery promise or inherited new resource acceptance. |
+| SP.H methods | Harness2/Loop Engineering sources checked; fresh review plus contextual refinements and parent source checking recorded. | No new prompt-performance or human A/B claim. |

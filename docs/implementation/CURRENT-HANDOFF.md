@@ -1,87 +1,71 @@
-# Post-Crit local checkpoint, 22 October 2026
+# Spatial-purpose research and conditional prototype plan
 
 Canonical checkout: Ubuntu/lizhi,
 `/home/lizhi/comp4020/comp4020-final-naaeeen`, branch `post-crit-improvements`.
-The local implementation and acceptance work is complete. Evidence is committed
-at `ea37a0f`; the following documentation closeout changes no runtime source.
-No new push, deployment, paid service or personal-memory change is included.
-Keep delivered material English and preserve existing user data.
+The owner rejects the overall spatial interaction design and permits major changes.
+Current work is research/planning, not a new production build. Source remains the
+runtime recorded at fb363cf; new local commits contain docs and an isolated spike.
+Research and mechanical evidence commit:11c5bd3; refinement is in the following
+documentation commit. No new publication/provider/global-settings change is inferred.
+English artifacts.
 
-Read AGENTS, CLAUDE, root PLAN and docs/harness/REPORT.md when resuming. Then use
-[acceptance](../post-crit/ACCEPTANCE.md), the applicable post-Crit contract and the
-[detailed subsection register](../revisit/REGISTER.md). Historical release notes
-are preserved verbatim in [the archive](HANDOFF-RELEASE-HISTORY-2026-10-22.md);
-they do not grant new publication permission or accept changed source.
+Read AGENTS/CLAUDE/root PLAN and docs/harness/REPORT.md, then:
+- [Owner brief](../spatial-redesign/BRIEF.md)
+- [Primary-source mechanism notes](../spatial-redesign/RESEARCH-NOTES.md)
+- [Current-source interaction audit](../spatial-redesign/SOURCE-AUDIT.md)
+- [Three alternatives plus minimal Delta](../spatial-redesign/ALTERNATIVES.md)
+- [Current conditional plan](../spatial-redesign/PLAN.md)
+- [Actual methods](../spatial-redesign/METHODS.md) and
+  [review/refinement](../spatial-redesign/REVIEW-AND-REFINEMENT.md)
 
-## Completed local milestones
+## Findings and provisional direction
 
-- Camera, furnished room presets, work/light/seat interactions, expanded lounge,
-  Four-in-a-row, external Discord and compatibility work: commits through
-  `ff949bc`; earlier verification milestone `8b22fa4`.
-- Company-method research and four matched fresh diagnostic responses: `d766b2a`.
-  The extra contradiction instruction stays optional; no general benefit claimed.
-- Compact lossless board receipts and migration: `64f619c`.
-- Picture authority/client/prototype: `ff9d153`; integrated UI/return/modals and
-  maintained native cases: `ed66db7`.
-- Patched test toolchain: `c55d5e0`. Vitest/coverage 5.0.3 and Vite 8.3.3 have exact
-  pins. Production dependencies and all 475 rebuilt public files are unchanged.
-- Final native/resource evidence and calibrated tools: `ea37a0f`.
+The game area has2chairs while picture consent allows6. Physical seats, logical
+participation and global work cards are parallel; study/rest currently share the
+same pose interaction. Every desk opens the visitor's own card. These are source
+facts, not evidence that previous technical tests failed.
 
-House schema 5, board schema 2, board wire 1, world version `lounge-3`.
-Node 24.21.0 / pnpm 11.9.0; preserve server semi-space 12 and fixed hosting shape.
-Personal work remains one house-visible, author-owned card. Existing rooms are
-preserved; owners explicitly preview/apply a furnished starter. Picture progress
-is durable; participation is transient and requires explicit Join after return.
+Fresh design review withheld product acceptance and requested concrete place tasks,
+complete lifecycles and a minimum alternative. Delta is now a conditional prototype
+direction: study-table board huddle, seated whole-group activity, public sofa item
+inspection and a resumable owner reference under existing door access. No new timer
+system, video queue, rich uploads or per-person invitation matrix in this scope.
+The room's value versus a toolbar remains explicitly unresolved.
 
-## Acceptance and source scope
+Contextual refinements separate room closure/member removal, specify huddle/follow
+and presenter succession, fix comparable PNG tasks and replace fake contingency
+cuts with genuine within-Delta reductions. All5 affected paper findings closed;
+no human-value, implementation or ten-day-fit acceptance is claimed.
 
-Full required verification: 1,071 tests, typecheck, build and evidence checks pass;
-full/production dependency audits report zero known advisories. Picture component
-coverage is 83.33% branches, not whole-application coverage.
+The isolated ring study uses one frozen1.55chair/2.60approach candidate for capacities
+2–6. Named physical/routes/claim-range gates and six controls pass; old global
+activation target is blocked4/5. A separate fresh technical review found no concrete
+falsepass/unsafe planned boundary. Some grader gates are source-reviewed rather
+than independently negatively calibrated. Production geometry is untouched.
 
-The maintained local native selection passes 13/13 in 149.938 seconds under its
-unchanged 300-second budget. A separate six-context run passes 30 checks with
-24 attributed placements, departure, peer continuation, reload and fresh consent.
-Inactive worlds were ordinarily paused. The six-context run precedes two completion
-UI expressions; the current solo completion case covers that delta. Earlier native
-runs retain their dependency manifests. This is not actual GitHub/Docker CI.
+## Next work and constraints
 
-Current original/combined loads pass 23/23 and 27/27: peak server RSS 190.45/193.91
-MiB, response growth 4.53/4.57 MiB, 8,142 exact receipt matches after each exit.
-Combined includes 124 game and 62 picture actions. Fixed monotonic durations are
-300.001 seconds; differing UTC spans remain documented without a causal diagnosis.
-Read-only same-dataset accounting finds 97.1568% smaller receipt representation,
-excluding RAM, total disk, WAL, scenes and assets. All measured processes closed.
+R0: compare the SAME PNG, saved view and audience controls in spatial and toolbar
+versions. Compare sofa shared selection/pointer with exchanging the same item in
+chat; inspect six-person puzzle contribution/late-arrival behavior. These friend/
+phone/interaction trials are NOT RUN. Prototype readiness does not mean the design
+satisfies the owner. Use the concrete acceptance/stopping rules in the plan.
 
-Fresh and contextual reviews close reported implementation/acceptance findings.
-Parent verification and original failed attempts are linked from acceptance.
-Current-editor export proves restored objects; overlapping screenshots do not
-prove both texts are simultaneously readable. Reversible JSON serialization and
-two exact-path Git attributes preserve frozen evidence under the unchanged hook.
+For implementation, fresh game effects must require trusted seat facts after exact
+accepted-receipt replay. Cover both HTTP and Socket.IO; cached picture Join ACKs
+cannot re-enroll. Stand/Leave must remain immediate and recoverable. Independent
+board authorization stays separate. New room-reference reads AND byte retrieval
+need actual room access checks. Preserve16KiB inbound and the fixed hosting shape.
 
-## Preview left running for the owner
+Earlier technical checkpoint:1,071tests;13native selection; original23/23 and
+combined27/27 resource gates. These retain their recorded old source, not new-design
+acceptance. See ../post-crit/ACCEPTANCE.md. Work cards and original databases stay
+preserved; removing primary card prompts must retain inspect/export capability.
 
-URL: http://localhost:4093/ . Verified process PID 119678 uses the migrated copy
-`.local/post-crit/preview-restored-20261021T211400Z/` and semi-space 12.
-Log/launch record: `.local/post-crit/preview-launch-20261021T221500Z/`.
-Verify actual PID identity before any later signal. Linux and Windows health/page
-requests pass; six served asset hashes match. Codex panel opening was queued.
-
-Original `.local/implementation-s1/` and verified backup
-`.local/post-crit/preview-backup-20261021T170653Z/` remain untouched. Schema-only
-validation preserves every original field/row. Normal real-clock startup expires
-245 old chat messages in the copy under the existing seven-day policy; the backup
-retains them. Never replace the original with the synthetic workload fixtures.
-
-## Next work when requested
-
-Use real friends and physical phones to judge comfort, shared-break value and
-return-to-work usability. Test WAN/media behavior before considering in-app voice;
-current voice is an explicit external Discord destination. New content should use
-versioned catalogues and existing authority rules. Reopen affected checks after a
-meaningful change; do not repeat green suites merely to increase their count.
-
-A production release needs new scoped authorization and its actual CI/Fly/backup
-verification. Local process RSS is not Fly cgroup enforcement. The current runtime
-source is frozen and no resource job, browser worker or background retry remains.
-Use fresh full-access WSL commands; do not reuse historical terminal 40567.
+Existing local preview http://localhost:4093/ remains the old design on verified
+copy .local/post-crit/preview-restored-20261021T211400Z/. Verified launchPID119678;
+check actual identity before any later signal. The temporary audit browser tab was
+closed. No new server/browser/load is left by this research pass.
+Previous handoff is preserved in local commitfb363cf; older release records remain
+in HANDOFF-RELEASE-HISTORY-2026-10-22.md. Future tasks must revisit affected research,
+comparisons and reviews, not rely on a one-time reading or repeat green checks.

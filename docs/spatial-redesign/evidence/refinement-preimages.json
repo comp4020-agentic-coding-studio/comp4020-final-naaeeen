@@ -1,0 +1,7 @@
+{
+  "recordedAtUTC": "2026-10-22T13:42:20.104311+00:00",
+  "firstAlternativePacketSHA256": "2c389e53a91b359f86fbbf198eae2061d09539af48b48937c12944f1e9f5922d",
+  "reviewedPlanRound2SHA256": "d052b9e81b60930ddcfca2ebadfc5815d0d979abc646913dd996756e0bf9d9e8",
+  "refinedPlanSHA256": "ee2a8611ae7524ddfc653509eff9414f510f55693f6140b96d6245e16bf3b732",
+  "scope": "Contextual refinement after fresh initial review; originals preserved. No humanvalidation or productionchange claimed."
+}

@@ -1,0 +1,30 @@
+{
+  "checkedAtUTC": "2026-10-22T13:49:02.128639+00:00",
+  "scope": "Documentation and prototype artifact integrity only; no application/browser/resource/human trial rerun.",
+  "filesInspected": 33,
+  "counts": {
+    "json": 7,
+    "markdown": 22,
+    "svg": 1
+  },
+  "syntaxCheckExit": 0,
+  "productionSourceHashesUnchanged": 10,
+  "prototypeSourceRunnerProtocolHashesMatch": true,
+  "comparisonFrameworkUnchanged": true,
+  "reviewPreimagesByteExact": true,
+  "sixControlsPassInRecordedRun": true,
+  "candidateCapacitiesPassInRecordedRun": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "legacyTargetBlockedCapacitiesRetained": [
+    4,
+    5
+  ],
+  "reviewedFinalPlanHashMatches": true,
+  "firstVerificationFailure": "Archived Markdown preimages under evidence/ changed their relative-link context. No commit occurred; moved byte-identical preimages to source-context .preimage.md paths and updated review links. Recheck passes.",
+  "remaining": "Product value, complete native interaction and new production behavior not accepted."
+}

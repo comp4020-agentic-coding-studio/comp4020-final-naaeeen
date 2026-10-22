@@ -517,3 +517,20 @@ Its41,364-byte historical release tail was preserved verbatim in the adjacent
 archive (SHA2560368759fa7562024d9575b031243257349536f4d9781d1ea13f8a628d69e98c9).
 This reduces competing historical instructions without claiming a measured agent
 performance improvement. No student PROCESS/reflection was rewritten in this slice.
+
+## Spatial-purpose research checkpoint
+
+The owner challenges the whole design, not just implementation defects. Source
+readback confirms that physical furniture, activity consent and global cards were
+separate; current tests intentionally encode some of that old behavior. Reopened
+product acceptance while preserving original technical results. Follow
+../spatial-redesign/PLAN.md and METHODS.md for the actual research/review loop.
+
+Fresh independent discovery/audit/research and later fresh design/technical reviews
+have separate scopes. Parent verified gogh ChatFAQ/WatchParty corrections, current
+seat and receipt paths, and prototype source/results. Design refinement added a
+minimal alternative, concrete place/audience lifecycles, fair reference comparison
+and real contingency cuts. Scoped contextual closure is not another independent
+trial or proof of utility. No production source, authored content, remote service or
+student reflection was changed. New behavior and intended-friend/device tests
+remain future gates; unchanged application suites were not rerun for a larger count.

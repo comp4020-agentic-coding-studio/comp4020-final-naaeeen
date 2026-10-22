@@ -491,3 +491,19 @@ scoped attributes and targeted renormalization retained the original bytes. Keep
 normal source/credential checks active and document reversible JSON serialization
 for a verified public-path false positive. This applies to immutable evidence,
 not a general reason to disable formatting or secret checks.
+
+## Owner-led spatial-design reopening
+
+The latest feedback reopens overall product purpose despite the previous technical
+milestone. Read ../spatial-redesign/BRIEF.md, PLAN.md and METHODS.md. For substantial
+place interactions, specify the task, useful effect, capacity, audience and full
+entry/exit/recovery lifecycle. Compare a credible minimum/global-tool alternative
+under the same material/state/permissions; do not require alternatives to copy a
+preferred mechanism. Passing old tests or receiving no code findings does not
+establish owner endorsement or place value. Preserve original technical evidence.
+
+The actual outer loop changed this acceptance contract after owner feedback,
+verified researchers' primary claims, added a minimum candidate after critique,
+and refined authorization/lifecycle/budget contradictions. Record these outcomes
+rather than claiming a new Harness2/Loop Engineering performance win. The research
+plan is conditional; real-friend utility and new production behavior remain open.
