@@ -1,6 +1,6 @@
 import { expect, test, type Browser, type BrowserContext, type Page, type TestInfo } from '@playwright/test';
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import type { HouseSnapshot } from '../../src/house-contract.ts';
 import type { StudioState } from '../../src/house-studio.ts';
 import type { GatheringState } from '../../src/house-gathering.ts';
@@ -156,6 +156,35 @@ async function evidence(page: Page, info: TestInfo, name: string) {
   await page.screenshot({ path: info.outputPath(`${name}.png`) });
   await info.attach(name, { path: info.outputPath(`${name}.png`), contentType: 'image/png' });
 }
+async function phoneCloseBounds(page: Page, info: TestInfo, scope: 'studio' | 'gathering') {
+  const observation = await page.locator('#panel-close').evaluate(button => {
+    const rect = (node: Element) => { const r = node.getBoundingClientRect(); return { x: r.left, y: r.top, width: r.width, height: r.height, right: r.right, bottom: r.bottom }; };
+    const target = rect(button), clips: string[] = [];
+    for (let parent = button.parentElement; parent; parent = parent.parentElement) {
+      const r = parent.getBoundingClientRect(), style = getComputedStyle(parent);
+      const left = r.left + parent.clientLeft, top = r.top + parent.clientTop;
+      if (/hidden|clip|auto|scroll/.test(style.overflowX) && (target.x < left || target.right > left + parent.clientWidth)) clips.push('horizontal');
+      if (/hidden|clip|auto|scroll/.test(style.overflowY) && (target.y < top || target.bottom > top + parent.clientHeight)) clips.push('vertical');
+    }
+    const points = [[target.x + target.width / 2, target.y + target.height / 2], [target.x + 2, target.y + target.height / 2], [target.right - 2, target.y + target.height / 2], [target.x + target.width / 2, target.y + 2], [target.x + target.width / 2, target.bottom - 2]];
+    const hits = points.map(([x, y]) => { const hit = document.elementFromPoint(x, y); return { x, y, ownOrDescendant: Boolean(hit && (hit === button || button.contains(hit))) }; });
+    const range = document.createRange(); range.selectNodeContents(button); const text = range.getBoundingClientRect();
+    return { viewport: { width: innerWidth, height: innerHeight }, panelTitle: document.querySelector('#panel-title')?.textContent, label: button.textContent, target, clips, hits,
+      targetWithinViewport: target.x >= 0 && target.y >= 0 && target.right <= innerWidth && target.bottom <= innerHeight,
+      labelBounds: { x: text.x, y: text.y, width: text.width, height: text.height, right: text.right, bottom: text.bottom },
+      labelWithinViewport: text.x >= 0 && text.y >= 0 && text.right <= innerWidth && text.bottom <= innerHeight,
+      labelWithinButton: text.x >= target.x && text.y >= target.y && text.right <= target.right && text.bottom <= target.bottom };
+  });
+  const name = `phone-${scope}-global-close-bounds`;
+  const path = info.outputPath(`${name}.json`);
+  await writeFile(path, JSON.stringify(observation, null, 2) + '\n');
+  await info.attach(name, { path, contentType: 'application/json' });
+  expect(observation.viewport).toEqual({ width: 390, height: 844 });
+  expect(observation.target.width).toBeGreaterThanOrEqual(44); expect(observation.target.height).toBeGreaterThanOrEqual(44);
+  expect(observation.targetWithinViewport).toBe(true); expect(observation.clips).toEqual([]);
+  expect(observation.hits.every(hit => hit.ownOrDescendant)).toBe(true);
+  expect(observation.labelWithinViewport).toBe(true); expect(observation.labelWithinButton).toBe(true);
+}
 async function audioObservation(page: Page) {
   // Observe actual native contexts. The proxy returns the unmodified real context and methods.
   await page.addInitScript(() => {
@@ -210,6 +239,7 @@ test('room reference survives owner return and a named phone visit loses bytes a
     expect(await imageUrlDecodes(peer, imageURL)).toBe(true);
     expect(await audioStates(peer)).toEqual([]);
     await studio(peer, 'zoom-in').click(); expect((await roomState(owner, uploaded.roomId)).view).toEqual(saved.view);
+    await phoneCloseBounds(peer, info, 'studio');
     await bounds(peer, '[data-studio-viewport]'); await evidence(peer, info, 'room-visit-phone');
     await studio(peer, 'chat').tap();
     await peer.getByLabel('Message this room', { exact: true }).fill('The gold square belongs to this bedroom.');
@@ -276,6 +306,7 @@ test('sofa keeps an off-centre crop across voluntary presenter handover and touc
       const point = await peer.locator('[data-gathering-pointer]').boundingBox();
       return Boolean(point && point.x >= peerViewport.x && point.y >= peerViewport.y && point.x + point.width <= peerViewport.x + peerViewport.width && point.y + point.height <= peerViewport.y + peerViewport.height);
     }).toBe(true);
+    await phoneCloseBounds(peer, info, 'gathering');
     await evidence(peer, info, 'sofa-follow-phone');
     await bounds(owner, '[data-gathering-viewport]'); await evidence(owner, info, 'sofa-presenter-desktop');
     const beforeDeparture = await shared(peer, 'sofa'), frozenTransform = await transform(peer);
