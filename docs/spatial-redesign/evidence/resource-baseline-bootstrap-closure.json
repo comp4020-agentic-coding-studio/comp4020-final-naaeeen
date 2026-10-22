@@ -1,0 +1,65 @@
+{
+  "status": "BASELINE_BOOTSTRAP_CALIBRATION_ONLY",
+  "recordedAtUTC": "2026-10-22T19:14:26.898844+00:00",
+  "execSession": 65725,
+  "execExitCode": 0,
+  "resultStatus": "CALIBRATION",
+  "resultSHA256": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319",
+  "resultPath": "docs/spatial-redesign/evidence/resource-baseline-bootstrap.results.json",
+  "protocolSHA256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448",
+  "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+  "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+  "all53SourceFilesUnchanged": true,
+  "defaultAndEvidenceProtocolByteIdentical": true,
+  "processClosure": {
+    "generatorPID": 23476,
+    "serverPID": 23500,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "processPostCheck": {
+    "generatorPID": {
+      "pid": 23476,
+      "existsAtPostCheck": false
+    },
+    "serverPID": {
+      "pid": 23500,
+      "existsAtPostCheck": false
+    }
+  },
+  "phase": null,
+  "failure": null,
+  "durationSeconds": 0,
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": null,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": null,
+    "normalInputs": true,
+    "workload": null,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": null,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true
+  },
+  "serverConnections": {
+    "houseViews": 12,
+    "boardViews": 12,
+    "activeEngines": 24
+  },
+  "interpretation": "One baseline bootstrap only. CALIBRATION is not a sustained resource/performance PASS. No mixed bootstrap or sustained run started; no automatic retry."
+}

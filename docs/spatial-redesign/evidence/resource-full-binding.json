@@ -1,0 +1,191 @@
+{
+  "status": "REGISTERED_READY_FULL_EXECUTION_NOT_RUN",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "sourceFiles": 53,
+  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "spatialInstrumentSHA256": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218",
+  "unchangedConditionHashes": {
+    "evaluation/board-resource.protocol.json": {
+      "schemaVersion": {
+        "old": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "new": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "equal": true
+      },
+      "durationSeconds": {
+        "old": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+        "new": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+        "equal": true
+      },
+      "automaticRetry": {
+        "old": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "new": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "equal": true
+      },
+      "configuration": {
+        "old": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+        "new": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+        "equal": true
+      },
+      "fixture": {
+        "old": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+        "new": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+        "equal": true
+      },
+      "workload": {
+        "old": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+        "new": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+        "equal": true
+      },
+      "slowReader": {
+        "old": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+        "new": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+        "equal": true
+      },
+      "negativeControls": {
+        "old": "3b314ffeac4b5fe4caa6f156efbe4f2d6ce737acb2e8dd77bcfd9351c51c7ab9",
+        "new": "3b314ffeac4b5fe4caa6f156efbe4f2d6ce737acb2e8dd77bcfd9351c51c7ab9",
+        "equal": true
+      },
+      "bounds": {
+        "old": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+        "new": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+        "equal": true
+      },
+      "measurement": {
+        "old": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+        "new": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+        "equal": true
+      },
+      "classification": {
+        "old": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+        "new": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+        "equal": true
+      },
+      "limitations": {
+        "old": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+        "new": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+        "equal": true
+      },
+      "storageAcceptance": {
+        "old": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+        "new": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+        "equal": true
+      },
+      "baseWorkloadRegisteredAtUTC": {
+        "old": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+        "new": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+        "equal": true
+      }
+    },
+    "docs/spatial-redesign/evidence/resource-mixed.protocol.json": {
+      "configuration": {
+        "old": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+        "new": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+        "equal": true
+      },
+      "fixture": {
+        "old": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+        "new": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+        "equal": true
+      },
+      "workload": {
+        "old": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+        "new": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+        "equal": true
+      },
+      "slowReader": {
+        "old": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+        "new": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+        "equal": true
+      },
+      "negativeControls": {
+        "old": "3b314ffeac4b5fe4caa6f156efbe4f2d6ce737acb2e8dd77bcfd9351c51c7ab9",
+        "new": "3b314ffeac4b5fe4caa6f156efbe4f2d6ce737acb2e8dd77bcfd9351c51c7ab9",
+        "equal": true
+      },
+      "bounds": {
+        "old": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+        "new": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+        "equal": true
+      },
+      "measurement": {
+        "old": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+        "new": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+        "equal": true
+      },
+      "storageAcceptance": {
+        "old": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+        "new": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+        "equal": true
+      },
+      "gameScenario": {
+        "old": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+        "new": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+        "equal": true
+      },
+      "pictureScenario": {
+        "old": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+        "new": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+        "equal": true
+      },
+      "spatialScenario": {
+        "old": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+        "new": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+        "equal": true
+      }
+    }
+  },
+  "allowedRegistrationKeys": [
+    "commands",
+    "instrumentSHA256",
+    "memoryDiagnosticRegistration",
+    "registeredAtUTC",
+    "sourceBinding",
+    "sourceFiles",
+    "sourceHashes",
+    "sourceManifestSHA256",
+    "status"
+  ],
+  "preimagePaths": {
+    "evaluation/board-resource.protocol.json": "docs/spatial-redesign/evidence/resource-full-prebinding-default.protocol.json",
+    "docs/spatial-redesign/evidence/resource-baseline.protocol.json": "docs/spatial-redesign/evidence/resource-full-prebinding-baseline-copy.protocol.json",
+    "docs/spatial-redesign/evidence/resource-mixed.protocol.json": "docs/spatial-redesign/evidence/resource-full-prebinding-mixed.protocol.json",
+    "evaluation/board-resource.results.json": "docs/spatial-redesign/evidence/resource-full-prebinding-default.results.json",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "docs/spatial-redesign/evidence/resource-full-prebinding-mixed.results.json"
+  },
+  "execution": "NOT_RUN",
+  "inspections": [
+    {
+      "path": "docs/spatial-redesign/evidence/resource-baseline.protocol.json",
+      "status": "READY",
+      "exitCode": 0,
+      "protocolSHA256": "9e0e1f565ba5b1ebe595ded1714f79e79de66666559e302f5c08365d9ebd0ce7"
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/resource-full-mixed.protocol.json",
+      "status": "READY",
+      "exitCode": 0,
+      "protocolSHA256": "5474adcab48e9d8ce56dece8bc2008cbc8a3aec27bf76d0f23b37dedb29ee97e"
+    }
+  ],
+  "defaultAndDocsByteIdentical": true,
+  "protectedHistoryUnchanged": true,
+  "oldResultsUnchanged": true,
+  "protectedHistoryFiles": 419,
+  "preimageSHA256": {
+    "docs/spatial-redesign/evidence/resource-full-prebinding-default.protocol.json": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7",
+    "docs/spatial-redesign/evidence/resource-full-prebinding-baseline-copy.protocol.json": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7",
+    "docs/spatial-redesign/evidence/resource-full-prebinding-mixed.protocol.json": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255",
+    "docs/spatial-redesign/evidence/resource-full-prebinding-default.results.json": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319",
+    "docs/spatial-redesign/evidence/resource-full-prebinding-mixed.results.json": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4"
+  },
+  "freshExecutionEntryPoints": {
+    "evaluation/board-resource.protocol.json": "docs/spatial-redesign/evidence/resource-baseline.protocol.json",
+    "docs/spatial-redesign/evidence/resource-mixed.protocol.json": "docs/spatial-redesign/evidence/resource-full-mixed.protocol.json"
+  },
+  "entrypointMetadata": "Copies share canonical protocol bytes/SHA. These explicit alternate CLI paths produce fresh results while canonical old results remain untouched.",
+  "fullRunCommands": [
+    "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-baseline.protocol.json --run --go 9e0e1f565ba5b1ebe595ded1714f79e79de66666559e302f5c08365d9ebd0ce7 --freeze 8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+    "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-full-mixed.protocol.json --run --go 5474adcab48e9d8ce56dece8bc2008cbc8a3aec27bf76d0f23b37dedb29ee97e --freeze 8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e"
+  ]
+}

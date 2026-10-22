@@ -1,0 +1,34 @@
+{
+  "status": "WITHDRAWN_INVALID_FIXTURE_NOT_RUN",
+  "recordedAtUTC": "2026-10-22T18:23:44.231862+00:00",
+  "execution": "No39connection bootstrap or sustained attempt was started. Focused23test calibration passed but did not exercise admission/scheduler wiring and does not validate the proposedfixture.",
+  "confirmedBlockers": [
+    {
+      "code": "ADMISSION_CAP",
+      "evidence": "src/house-realtime.ts MAX_CONNECTIONS12 and contexts.size admission guard; original12root contexts fill the cap; extra root admission would failLOAD_LIMIT."
+    },
+    {
+      "code": "MISSING_ACTOR_ROLE",
+      "evidence": "makeHouse constructed actors withoutrole; copiedplayGameRound selectsrolehouse then dereferences undefined."
+    }
+  ],
+  "decision": "Preserve productioncap12; keep original24view/fullstanding-motion300s baseline as separate workload. A new<=12root+12board seated/media mix requires its own reviewed protocol and explicitly different motion criterion. No loadGO.",
+  "preimages": {
+    "tools/spatial-resource.mjs": {
+      "preimage": "docs/spatial-redesign/evidence/resource-withdrawn-39-spatial-instrument.mjs",
+      "sha256": "0f7968c0e8632a2d388c702d47ecce194775c8e49e843092fcadda62fd983009"
+    },
+    "tools/board-resource.mjs": {
+      "preimage": "docs/spatial-redesign/evidence/resource-withdrawn-39-board-instrument.mjs",
+      "sha256": "ffc7cf25b76ffb1fa945edc8f40ad87a4e3df84f4b606f3ebd2e7d1f3da17478"
+    },
+    "docs/spatial-redesign/evidence/resource-spatial.protocol.json": {
+      "preimage": "docs/spatial-redesign/evidence/resource-withdrawn-39.protocol.json",
+      "sha256": "c71d6943c0bc0836c728e3c6fe96666e9f34c86e600a2f8b2d58a5d5813d0ddf"
+    },
+    "spec/spatial-resource.test.ts": {
+      "preimage": "docs/spatial-redesign/evidence/resource-withdrawn-39-calibration-spec.ts",
+      "sha256": "84870d8e9abe81c2f37a37cb2c59b4881dcb09bf5d75d4115c83287536281f6a"
+    }
+  }
+}

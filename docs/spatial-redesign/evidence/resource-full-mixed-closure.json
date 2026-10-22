@@ -1,0 +1,16 @@
+{
+  "exitCode": 1,
+  "elapsedSeconds": 14.512462615966797,
+  "reportedProcessIDsAbsent": true,
+  "reportedProcessIDs": {
+    "generatorPID": 52424,
+    "serverPID": 52449
+  },
+  "existingProcesses": {
+    "48130": "service",
+    "49044": "service"
+  },
+  "newOwnedProcessesRemaining": {},
+  "protocolUnchanged": true,
+  "sourceUnchanged": true
+}

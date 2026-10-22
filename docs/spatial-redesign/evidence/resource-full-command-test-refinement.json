@@ -1,0 +1,10 @@
+{
+  "scope": "TEST ONLY: fresh full-run output aliases and no further calibration command. Runtime53/protocol/instrument/conditions unchanged.",
+  "firstAttempt": "SETUP FAILURE: missing APP_URL defaulted to8080. No actual test ran; separate log preserved. Corrected to existing4108.",
+  "actualRedExit": 1,
+  "fullFileGreenExit": 0,
+  "preservedPreimage": "resource-full-command-test-preimage.ts",
+  "preimageSHA256": "45060f28ef8987e009654dfb5007d08aab0f807904b77ebabbd37cbe41cc97f7",
+  "newSpecSHA256": "6ac5387247a3a70c8a355c4f6dc114e3b5d78e9bde1898c3ec0fa4ad6cc98592",
+  "remainingAssertions": "Original14baseline/11mixedconditions,workload/fixtures/authority/storage/motiongradercontrols retained. Bothaliasbyteidentities asserted."
+}

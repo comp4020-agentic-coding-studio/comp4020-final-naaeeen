@@ -21,7 +21,14 @@ describe("spatial resource protocol and evaluator calibration",()=>{
     expect(protocol.gameScenario).toMatchObject({expectedActions:124,expectedReadableProjectionTargets:733,roundStartsSeconds:[5,45,105,145,185,225]});
     expect(protocol.pictureScenario).toMatchObject({expectedActions:62,expectedTargets:372,startSeconds:260,placementStartSeconds:269,placementIntervalSeconds:0.5});
     expect(protocol.p7Preparation.expectedGateCount).toBe(30);
-    for(const profile of ["resource-baseline","resource-mixed"]){const declared=JSON.parse(read("docs/spatial-redesign/evidence/"+profile+".protocol.json")),target=profile==="resource-baseline"?"evaluation/board-resource.protocol.json":"docs/spatial-redesign/evidence/resource-mixed.protocol.json";for(const command of ["inspect","calibration","run"])expect(declared.commands[command]).toContain("--protocol-file "+target);}
+    for(const profile of ["resource-baseline","resource-mixed"]){
+      const declared=JSON.parse(read("docs/spatial-redesign/evidence/"+profile+".protocol.json"));
+      const target="docs/spatial-redesign/evidence/"+(profile==="resource-baseline"?profile:"resource-full-mixed")+".protocol.json";
+      expect(Object.keys(declared.commands).sort()).toEqual(["inspect","run"]);
+      for(const command of ["inspect","run"])expect(declared.commands[command]).toContain("--protocol-file "+target);
+      expect(declared.commands.run).toContain("--run --go ");expect(declared.commands.run).not.toContain("--bootstrap-calibration");
+    }
+    expect(read("docs/spatial-redesign/evidence/resource-full-mixed.protocol.json")).toBe(read("docs/spatial-redesign/evidence/resource-mixed.protocol.json"));
     expect(read("docs/spatial-redesign/evidence/resource-baseline.protocol.json")).toBe(read("evaluation/board-resource.protocol.json"));
     const previousDefault=JSON.parse(read("docs/spatial-redesign/evidence/resource-registered-default-prebinding.protocol.json")),currentDefault=JSON.parse(read("evaluation/board-resource.protocol.json"));
     for(const key of ["schemaVersion","durationSeconds","automaticRetry","configuration","fixture","workload","slowReader","negativeControls","bounds","measurement","classification","limitations","storageAcceptance","baseWorkloadRegisteredAtUTC"])expect(currentDefault[key],"registered default "+key).toEqual(previousDefault[key]);

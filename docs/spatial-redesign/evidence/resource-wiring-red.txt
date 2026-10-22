@@ -1,0 +1,39 @@
+Already up to date
+Done in 126ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/spatial-resource-wiring.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 152[2mms[22m[39m
+[31m   [31m×[31m constructed actors reach the actual game scheduler's selected player slots[39m[32m 151[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-wiring.test.ts[2m > [22mconstructed actors reach the actual game scheduler's selected player slots
+[31m[1mAssertionError[22m: expected [ undefined, undefined ] to deeply equal [ 1, 2 ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  [[22m
+[32m-   1,[39m
+[32m-   2,[39m
+[31m+   undefined,[39m
+[31m+   undefined,[39m
+[2m  ][22m
+
+[36m [2m❯[22m spec/spatial-resource-wiring.test.ts:[2m26:65[22m[39m
+    [90m 24|[39m test("constructed actors reach the actual game scheduler's selected pl…
+    [90m 25|[39m   const fixture=await constructWithdrawnActors();
+    [90m 26|[39m   expect(fixture.selected.map((actor:any)=>actor?.memberIndex)).toEqua…
+    [90m   |[39m                                                                 [31m^[39m
+    [90m 27|[39m });
+    [90m 28|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m   Start at [22m 05:24:11
+[2m   Duration [22m 826ms[2m (import 50%, transform 28%, tests 22%, worker 1%)[22m
+

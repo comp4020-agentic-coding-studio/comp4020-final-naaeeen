@@ -1,0 +1,121 @@
+{
+  "status": "MIXED_BOOTSTRAP_CALIBRATION_ONLY",
+  "recordedAtUTC": "2026-10-22T19:16:35.538245+00:00",
+  "execSession": 11642,
+  "execExitCode": 0,
+  "resultStatus": "CALIBRATION",
+  "resultSHA256": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4",
+  "resultPath": "docs/spatial-redesign/evidence/resource-mixed-bootstrap.results.json",
+  "protocolSHA256": "000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576",
+  "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+  "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+  "all53SourceFilesUnchanged": true,
+  "processClosure": {
+    "generatorPID": 23600,
+    "serverPID": 23626,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "processPostCheck": {
+    "generatorPID": {
+      "pid": 23600,
+      "existsAtPostCheck": false
+    },
+    "serverPID": {
+      "pid": 23626,
+      "existsAtPostCheck": false
+    }
+  },
+  "phase": null,
+  "failure": null,
+  "durationSeconds": 0,
+  "serverConnections": {
+    "houseViews": 12,
+    "boardViews": 12,
+    "activeEngines": 24
+  },
+  "actualFourChairClaims": [
+    {
+      "houseIndex": 0,
+      "memberIndex": 1,
+      "viewIndex": 2,
+      "seatId": "game-seat-2",
+      "purpose": "game",
+      "seatGeneration": 13,
+      "atSeconds": null
+    },
+    {
+      "houseIndex": 1,
+      "memberIndex": 1,
+      "viewIndex": 14,
+      "seatId": "game-seat-2",
+      "purpose": "game",
+      "seatGeneration": 14,
+      "atSeconds": null
+    },
+    {
+      "houseIndex": 0,
+      "memberIndex": 2,
+      "viewIndex": 4,
+      "seatId": "game-seat-3",
+      "purpose": "game",
+      "seatGeneration": 15,
+      "atSeconds": null
+    },
+    {
+      "houseIndex": 1,
+      "memberIndex": 2,
+      "viewIndex": 16,
+      "seatId": "game-seat-3",
+      "purpose": "game",
+      "seatGeneration": 16,
+      "atSeconds": null
+    }
+  ],
+  "chairMappingMatches": true,
+  "aggregateServerMovementAndChairActions": {
+    "motion.start:walking": 4,
+    "seat.claim:ok": 4
+  },
+  "calibrationGates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": null,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": false,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": null,
+    "normalInputs": true,
+    "workload": false,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": null,
+    "gameActionsAndVisibleRevisions": null,
+    "gameReceiptAndStateGrowth": null,
+    "spatialLifecycle": false,
+    "spatialMotion": false,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true,
+    "pictureActionsAndDelivery": null,
+    "picturePersistenceAndReceipts": null,
+    "spatialPersistenceAndBounds": false
+  },
+  "priorMixedResultHistoryCount": 0,
+  "interpretation": "One mixed bootstrap only, statusCALIBRATION. Actual12root+12board and four authoritative chairs/movement are verified. SampledRSS215.26953125MiB exceeds unchanged210MiB; this material failed gate is preserved, not treated as performancePASS. Timed game/picture/media/motion stages NOT RUN. Both processes closed; no automatic rerun/rebind/source change.",
+  "sampledServerRSS": {
+    "peakMiB": 215.26953125,
+    "finalMiB": 181.359375,
+    "unchangedLimitMiB": 210,
+    "gatePassed": false
+  }
+}

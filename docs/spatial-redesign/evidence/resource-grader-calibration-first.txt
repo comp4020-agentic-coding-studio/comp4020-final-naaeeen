@@ -1,0 +1,132 @@
+Already up to date
+Done in 109ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.505Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"house.create","outcome":"accepted","commandId":"e0d16935-132b-4425-9e2c-c988b545e96e","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"http","sequence":1}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.571Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"zone.subscribe","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.634Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"motion.start","outcome":"walking","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.755Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"seat.claim","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.841Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"house.join","outcome":"accepted","commandId":"6784c2af-c798-4ce9-b6df-72ea5836f9fd","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"http","sequence":2}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.868Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"zone.subscribe","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:19.905Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"motion.start","outcome":"walking","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.083Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"seat.claim","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.215Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"house.create","outcome":"accepted","commandId":"c55576ec-120d-4019-886f-75866c2f1f73","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"http","sequence":1}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.237Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"zone.subscribe","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.249Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"motion.start","outcome":"walking","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.321Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"seat.claim","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.454Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"house.join","outcome":"accepted","commandId":"519a0c50-3530-4ca0-8041-8b917b759e5d","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"http","sequence":2}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.465Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"zone.subscribe","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.491Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"motion.start","outcome":"walking","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.688Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"seat.claim","outcome":"ok","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.747Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"house.command","outcome":"INVALID_INPUT","commandId":"71989603-d5f4-487a-973d-2d821a46f9ef","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.756Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"house.command","outcome":"FORBIDDEN","commandId":"8a0913a8-cba6-4ad9-8f04-b491a523c926","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket"}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.771Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.join","outcome":"accepted","commandId":"d834a04e-7f41-4337-9498-d9759c216f6f","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":3}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.809Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"game.join","outcome":"accepted","commandId":"d5621bef-7f1c-4697-a7d6-c31dae39a863","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":4}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:20.936Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.ready","outcome":"accepted","commandId":"096e204c-a590-40f3-aa76-66e57ffb306f","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":5}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.014Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"game.ready","outcome":"accepted","commandId":"a57f835f-61a8-46f8-a550-f233de8007e6","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":6}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.128Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.move","outcome":"accepted","commandId":"92dddaa5-401e-4cb5-ab9f-04e4efafd402","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":7}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.213Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"game.move","outcome":"accepted","commandId":"9e85efe1-f462-4246-aeea-e401dd853a62","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":8}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.312Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.move","outcome":"accepted","commandId":"a001abac-cd39-45f4-a9e6-1230cb2476ef","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":9}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.419Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"game.move","outcome":"accepted","commandId":"b3321330-b14c-4765-b39e-5261f75e250c","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":10}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.531Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.move","outcome":"accepted","commandId":"bb8f7f62-143f-4011-a266-d06713b01419","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":11}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.617Z","actor":"0086cb82-ff53-4bf6-9b94-1ec4ce7a4638","action":"game.move","outcome":"accepted","commandId":"8b22e9b5-3148-4af7-ada1-7c63548f08b5","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":12}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.718Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.move","outcome":"accepted","commandId":"7d6c2318-ba14-4354-8a03-f21e8b427c27","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":13}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.807Z","actor":"7753ca8e-c728-4f60-8ae6-206622d1e135","action":"game.join","outcome":"accepted","commandId":"d834a04e-7f41-4337-9498-d9759c216f6f","houseId":"7a8e520a-99c5-4aa4-8324-56e1d244b870","transport":"socket","sequence":3}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.819Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"game.join","outcome":"accepted","commandId":"828269ce-d90d-434a-aa1c-065842ce3e88","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":3}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:21.915Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"game.join","outcome":"accepted","commandId":"98a73ee5-cf86-43fe-8fd6-98a3f9fd019c","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":4}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.017Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"game.ready","outcome":"accepted","commandId":"4537fa97-002b-4ff3-9398-0b5052a752c8","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":5}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.114Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"game.ready","outcome":"accepted","commandId":"c92a0075-bb79-402c-a071-28312560ef77","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":6}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.220Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"game.move","outcome":"accepted","commandId":"78e3cbb4-f769-4e9c-a0e9-0b7a12cc34a3","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":7}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.321Z","actor":"a0b93f7f-ddf3-4280-a834-f70fdeb0ef23","action":"game.move","outcome":"accepted","commandId":"1aa9db06-c3f5-4568-b0f7-da3e7ca62b18","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":8}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.428Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"game.leave","outcome":"accepted","commandId":"82af5611-9f67-4134-bf59-76bcc914a855","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":9}
+
+[90mstdout[2m | spec/board-resource-delivery.test.ts[2m > [22m[2mcombined resource command authority binding[2m > [22m[2mreal socket authority rejects missing/foreign houses, saves complete games and replays original receipt
+[22m[39m{"at":"2026-10-22T18:09:22.513Z","actor":"721dd741-2c75-4c6f-902e-7bbf9944e349","action":"game.join","outcome":"accepted","commandId":"828269ce-d90d-434a-aa1c-065842ce3e88","houseId":"8f73d361-f5ed-4b77-9cdd-b838a3faa8dd","transport":"socket","sequence":3}
+
+ [32m✓[39m spec/board-resource-delivery.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 3330[2mms[22m[39m
+   [32m✓[39m combined resource command authority binding [2m(3)[22m
+     [33m[2m✓[22m[39m real socket authority rejects missing/foreign houses, saves complete games and replays original receipt[33m 3224[2mms[22m[39m
+ [32m✓[39m spec/spatial-resource.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1256[2mms[22m[39m
+   [32m✓[39m spatial resource protocol and evaluator calibration [2m(4)[22m
+     [33m[2m✓[22m[39m uses independently generated near-cap PNG bytes accepted unchanged by the real codec[33m 931[2mms[22m[39m
+     [33m[2m✓[22m[39m accepts complete evidence and rejects missing/wrong lifecycle, transport, seat, byte and cadence facts[33m 301[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m23 passed[39m[22m[90m (23)[39m
+[2m   Start at [22m 05:09:17
+[2m   Duration [22m 6.58s[2m (tests 73%, import 14%, transform 13%)[22m
+

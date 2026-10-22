@@ -1,0 +1,221 @@
+{
+  "status": "BOUND_ONLY_NO_EXECUTION",
+  "boundAtUTC": "2026-10-22T19:06:59.202477+00:00",
+  "runtimeHead": "8be15ef6df22b0bd0290e7d1fa03962160417d58",
+  "preimages": [
+    {
+      "source": "evaluation/board-resource.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/resource-registered-default-prebinding.protocol.json",
+      "bytes": 16147,
+      "sha256": "bf34c4c20aa83d2e6951c63fe7cfec85e6e7e200d9f4379c028eb103028c2890"
+    },
+    {
+      "source": "evaluation/board-resource.results.json",
+      "preimage": "docs/spatial-redesign/evidence/resource-registered-default-prebinding.results.json",
+      "bytes": 2304968,
+      "sha256": "6e8ea6ef23c41d75046e23834c6abbe7dba7aad0879435ad50a658cae341fbef"
+    }
+  ],
+  "allowedChangedTopLevelKeys": [
+    "commands",
+    "instrumentSHA256",
+    "p7Preparation",
+    "registeredAtUTC",
+    "scope",
+    "sourceBinding",
+    "sourceFiles",
+    "sourceHashes",
+    "sourceManifestSHA256",
+    "status"
+  ],
+  "actualChangedTopLevelKeys": [
+    "commands",
+    "instrumentSHA256",
+    "p7Preparation",
+    "registeredAtUTC",
+    "scope",
+    "sourceBinding",
+    "sourceFiles",
+    "sourceHashes",
+    "sourceManifestSHA256",
+    "status"
+  ],
+  "unchangedConditionKeys": [
+    "schemaVersion",
+    "durationSeconds",
+    "automaticRetry",
+    "configuration",
+    "fixture",
+    "workload",
+    "slowReader",
+    "negativeControls",
+    "bounds",
+    "measurement",
+    "classification",
+    "limitations",
+    "storageAcceptance",
+    "baseWorkloadRegisteredAtUTC"
+  ],
+  "invariantCanonicalSHA256": "ab9c7a6b13695ee0d3411e7df10a866998f7f2c105ec75335db02bde78b9c57a",
+  "defaultProtocolSHA256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448",
+  "baselineEvidenceCopySHA256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448",
+  "mixedProtocolSHA256": "000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576",
+  "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+  "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+  "boundSourceFiles": 53,
+  "zeroCRLF": true,
+  "defaultResultStatus": "HistoricalPASS bytes untouched and preserved; not a result for the new binding.",
+  "inspections": {
+    "default": {
+      "status": "READY",
+      "protocolSHA256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448",
+      "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+      "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    "mixed": {
+      "status": "READY",
+      "protocolSHA256": "000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576",
+      "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+      "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    }
+  },
+  "execution": "No bootstrap or sustained execution authorized/run.",
+  "defaultAndEvidenceProtocolByteIdentical": true,
+  "metadataValidation": "Parent authorized correcting only the obsolete baseline command-path assertion; resource-registration-check-first.txt retains RED and resource-registration-check-green.txt passes the one affected check. New assertions also verify exact default/docs bytes and every original baseline condition group against preserved preimage. No runtime/helper/performance criterion changed.",
+  "unchangedConditionHashes": {
+    "schemaVersion": {
+      "beforeSHA256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "afterSHA256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "equal": true
+    },
+    "durationSeconds": {
+      "beforeSHA256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "afterSHA256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "equal": true
+    },
+    "automaticRetry": {
+      "beforeSHA256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "afterSHA256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "equal": true
+    },
+    "configuration": {
+      "beforeSHA256": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "afterSHA256": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "equal": true
+    },
+    "fixture": {
+      "beforeSHA256": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "afterSHA256": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "equal": true
+    },
+    "workload": {
+      "beforeSHA256": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "afterSHA256": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "equal": true
+    },
+    "slowReader": {
+      "beforeSHA256": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "afterSHA256": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "equal": true
+    },
+    "negativeControls": {
+      "beforeSHA256": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "afterSHA256": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "equal": true
+    },
+    "bounds": {
+      "beforeSHA256": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "afterSHA256": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "equal": true
+    },
+    "measurement": {
+      "beforeSHA256": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "afterSHA256": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "equal": true
+    },
+    "classification": {
+      "beforeSHA256": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "afterSHA256": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "equal": true
+    },
+    "limitations": {
+      "beforeSHA256": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "afterSHA256": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "equal": true
+    },
+    "storageAcceptance": {
+      "beforeSHA256": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+      "afterSHA256": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+      "equal": true
+    },
+    "baseWorkloadRegisteredAtUTC": {
+      "beforeSHA256": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "afterSHA256": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "equal": true
+    }
+  },
+  "changedKeyDigests": {
+    "commands": {
+      "beforeSHA256": "892d8d2975078b2d94864aa8d72ebc25f4c41db5d5563e9877cdcda6cca1bfb3",
+      "afterSHA256": "cba07ae40a9559e33a978fc11546011301da56d07a1c3bf2729f09ce0bf40032"
+    },
+    "instrumentSHA256": {
+      "beforeSHA256": "896365d1b9e076cddbfc345234055bc406ce78917044263928140b50835e1e24",
+      "afterSHA256": "10f81a8fac68e43b25ceeeb9936bb9bc52458cc9207a25e895dfecd4dd9664c0"
+    },
+    "p7Preparation": {
+      "beforeSHA256": "7e29da847b5676fddd48241daeaa7ae2e6e02c055799bc3b8eb305d9b4360fbd",
+      "afterSHA256": "12eb481678b9d78c21db16dbb608582a8e512f78221d71f42bab9e5ed4a69127"
+    },
+    "registeredAtUTC": {
+      "beforeSHA256": "9a3c6ee5c0e8ae3a959e9918091a6473bed87efc7fb5bf37cdae2f31481f36cf",
+      "afterSHA256": "dba0221659fb107ee951e73c409b7959b49d542a488287fa67e6ded528275e74"
+    },
+    "scope": {
+      "beforeSHA256": "d264b40af1eb6d89f704b9867b172b14fde2a1ee699decaffd241cda5b30ca12",
+      "afterSHA256": "5e974d20a41d5ce4eae480d06572bb1bb21c4925c6cf67e28a8af2acbf3cb379"
+    },
+    "sourceBinding": {
+      "beforeSHA256": "eaa415f880eb055a3974cc9d995e9a32a51cdb35831f0df1d12713d39213af25",
+      "afterSHA256": "ed902eb13a747f5e57141e5495eb15d86b6d93632d9daf5ca2cf0158cd63e8a6"
+    },
+    "sourceFiles": {
+      "beforeSHA256": "fdaa561dc369dbcf91bf2bda6cd90eadc2a27d0786ea1bf2fe9d78138a29d0a1",
+      "afterSHA256": "39db30a607e8d0588a476b17213beb8e9fdcc59c1aef042477106f851fa5e4ec"
+    },
+    "sourceHashes": {
+      "beforeSHA256": "1116e2a4263e8ffc33c425477c7269e3adec213eec89e1ed785dead88e5301b9",
+      "afterSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d"
+    },
+    "sourceManifestSHA256": {
+      "beforeSHA256": "9ea2c67abd43f4663cb1d628caeb211f59f709935265c74b764bf947216beee1",
+      "afterSHA256": "bbafc76b354746dab263a2b2eb566704c3379e63d67d5ab20f15f5cd6cc86a80"
+    },
+    "status": {
+      "beforeSHA256": "32856b1e89760e4cce3cbe9e5809ff554552740f49ddb176a92bae22674d1e2c",
+      "afterSHA256": "cbf31bef72338a96aac729812736564e8073d8cecda355bb144d27a9be69fed0"
+    }
+  },
+  "readyCommands": {
+    "baseline": {
+      "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file evaluation/board-resource.protocol.json --inspect",
+      "bootstrapNotAuthorizedYet": "mise exec -- node tools/board-resource.mjs --protocol-file evaluation/board-resource.protocol.json --bootstrap-calibration",
+      "sustainedNotAuthorizedYet": "mise exec -- node tools/board-resource.mjs --protocol-file evaluation/board-resource.protocol.json --run --go 575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448 --freeze 766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d"
+    },
+    "mixed": {
+      "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --inspect",
+      "bootstrapNotAuthorizedYet": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --bootstrap-calibration",
+      "sustainedNotAuthorizedYet": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --run --go 000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576 --freeze 766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d"
+    }
+  }
+}

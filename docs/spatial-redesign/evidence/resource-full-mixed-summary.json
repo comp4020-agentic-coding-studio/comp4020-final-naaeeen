@@ -1,0 +1,16 @@
+{
+  "status": "FAIL",
+  "failure": {
+    "phase": "invalid-ack-negative",
+    "code": "RATE_LIMITED"
+  },
+  "protocolSHA256": "5474adcab48e9d8ce56dece8bc2008cbc8a3aec27bf76d0f23b37dedb29ee97e",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "stage": "spatial.prepare; coarse outerphaseinvalid-acknegative",
+  "completedSeatClaims": 2,
+  "actual300sMeasurement": "NOT_REACHED",
+  "exactACKMessage": "NOT_CAPTURED: no branch attribution or B2causalinference",
+  "closed": true,
+  "sourceUnchanged": true,
+  "nextDecision": "Astra read-only decision on bounded attribution versus independently justified elapsed-time robustness; no retry/currentprotocolchange authorized."
+}

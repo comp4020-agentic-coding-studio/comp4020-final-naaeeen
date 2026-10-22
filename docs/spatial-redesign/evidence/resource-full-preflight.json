@@ -1,0 +1,12 @@
+{
+  "status": "PURE_PREFLIGHT_PASS_NO_PROTOCOL_WRITES",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "baselineGroups": 14,
+  "mixedGroups": 11,
+  "allOtherNonRegistrationFieldsEqual": true,
+  "embeddedRunCommandsUseFreshEntryPoints": true,
+  "rateTraceOptInAbsent": true,
+  "fivePreimagePathsUnused": true,
+  "allTenExecutionOutputPathsUnused": true,
+  "reviewRefinement": "Before binding, changed embedded run commands to the fresh aliases so advertised commands cannot replace canonical historical results."
+}

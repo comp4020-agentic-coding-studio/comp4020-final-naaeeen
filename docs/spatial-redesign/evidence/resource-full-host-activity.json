@@ -1,0 +1,8 @@
+{
+  "scope": "First current full baseline only; raw result and criteria remain unchanged",
+  "wrapperStartedAtUTC": "2026-10-22T21:40:45.592598Z",
+  "otherActivity": "A previously launched104-control pure native-evaluator calibration completed at21:40:57.554Z. No application/browser/load was started by that calibration.",
+  "overlap": "The hold message arrived after the executor had launched its check. Exact command start/end was not captured by the result timestamp alone.",
+  "interpretation": "This baseline must not be described as an idle-host benchmark or a performance optimization comparison. Registered server-process measurements and workload gates retain their actual result. Do not attribute a failure or lower RSS to this activity without evidence.",
+  "refinement": "Require idle acknowledgement before the next exclusive execution phase. No automatic retry or result replacement."
+}
