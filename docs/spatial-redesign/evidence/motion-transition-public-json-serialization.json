@@ -1,0 +1,22 @@
+{
+  "status": "LOSSLESS_JSON_SERIALIZATION_ONLY",
+  "reason": "Only the k in the known public vendor Slovak locale basename uses a JSON Unicode escape. No secret/hook change. Raw originals retained.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/motion-transition-source-before.json",
+      "rawOriginal": ".local/spatial-motion-transition-first/before.json",
+      "originalSHA256": "c6524b0318dc0ea599ff288d55ace2a5f9ccc4eccffc78c7b5f59aaf50a1d550",
+      "serializedSHA256": "6691917b25a0e910e1b2a11aa0ccc2302bd4fb965ea46ac4c3a7cd76030be8ea",
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/motion-transition-source-after.json",
+      "rawOriginal": ".local/spatial-motion-transition-first/after.json",
+      "originalSHA256": "0a68728c60abb96fff87acfaedefad8c738a441bb4409daeb4a0630929b335ec",
+      "serializedSHA256": "16a907dcd6720739092cdc419f32cb8ec80a8f16d0e7fc481129a844ce34341f",
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    }
+  ]
+}

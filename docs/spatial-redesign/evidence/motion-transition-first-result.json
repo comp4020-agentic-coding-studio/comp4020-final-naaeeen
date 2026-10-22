@@ -1,0 +1,114 @@
+{
+  "status": "NATIVE_FUNCTIONAL_RED_PRESERVED_NO_RETRY",
+  "recordedAt": "2026-10-22T23:47:40.449207+00:00",
+  "sourceFiles": 519,
+  "sourceUnchanged": true,
+  "launchRecordUnchanged": true,
+  "launchPID": 66098,
+  "launchSourceCount": 35,
+  "execution": {
+    "exitCode": 1,
+    "durationSeconds": 26.42565418400045,
+    "startedAt": "2026-10-22T23:46:40.545716+00:00",
+    "endedAt": "2026-10-22T23:47:06.116229+00:00"
+  },
+  "frameworkCaseDurationSeconds": 21.8,
+  "flowComplete": true,
+  "observationsPath": ".local/spatial-motion-transition-first/results/motion-transition-native-h-5cb72-ical-Stand-and-room-arrival/motion-transition-observations.json",
+  "observationsSHA256": "1c126257164dd89d10e260e9ef250bfbb494d73b8affc1b9b9c4493ff8240640",
+  "rejections": [
+    {
+      "ordinal": 25,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_ZERO",
+      "sentMs": 5472.662,
+      "distanceDelta": 0,
+      "ackMs": 5473.083,
+      "ack": "INVALID_MOVE"
+    }
+  ],
+  "transitions": [
+    {
+      "cycle": 0,
+      "declaredFrameOffsetMs": 0,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 41.546,
+      "standAckToFirstMoveSendMs": 194.222,
+      "projectionToFirstMoveSendMs": 152.676,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 1,
+      "declaredFrameOffsetMs": 25,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 56.069,
+      "standAckToFirstMoveSendMs": 126.699,
+      "projectionToFirstMoveSendMs": 70.63,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 2,
+      "declaredFrameOffsetMs": 50,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 84.584,
+      "standAckToFirstMoveSendMs": 205.095,
+      "projectionToFirstMoveSendMs": 120.511,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 3,
+      "declaredFrameOffsetMs": 75,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 89.378,
+      "standAckToFirstMoveSendMs": 123.672,
+      "projectionToFirstMoveSendMs": 34.294,
+      "observedSub80AfterStandAck": false
+    }
+  ],
+  "coverage": {
+    "observedSub80SeatCycles": 0,
+    "declaredCycles": 4,
+    "unobservedSub80IsNotAClaimOfSafety": true
+  },
+  "zoneArrival": {
+    "subscribeAck": "ACK_OK",
+    "subscribeAckToFirstMoveSendMs": 142.656,
+    "firstMoveAck": "ACK_OK",
+    "noMoveInHeldWindow": false,
+    "nativeKeyCapture": {
+      "category": "ZONE_KEY_LANDED_ROOM",
+      "trusted": true,
+      "browserAtMs": 20328.800000000745
+    },
+    "browserClockIsSeparateFromNodeObservationClock": true
+  },
+  "health": {
+    "parseFailures": 0,
+    "pageErrors": 0
+  },
+  "contextCleanup": {
+    "contextClosed": true,
+    "cleanupErrors": 0
+  },
+  "browserPIDsAfter": [],
+  "originalCommandProcesses": [
+    {
+      "role": "wrapper",
+      "pid": 68659,
+      "present": false
+    },
+    {
+      "role": "Playwright command",
+      "pid": 68662,
+      "present": false
+    }
+  ],
+  "allObservedRequestsSettled": true,
+  "scope": "All declared native controls, four actual seat-held cycles and one own-room route completed; final zero-rejection assertion failed. No retry, production edit, injected socket command or raw wire capture. Timings remain client observations, not server elapsed instrumentation.",
+  "nativeLane": "IDLE; no test/browser/background command remains"
+}

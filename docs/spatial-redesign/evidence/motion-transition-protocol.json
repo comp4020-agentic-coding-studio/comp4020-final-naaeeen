@@ -1,0 +1,63 @@
+{
+  "status": "PREPARED_HELD_NO_EXECUTION",
+  "case": "native held movement keeps its ordinary cadence across physical Stand and room arrival",
+  "caseCount": 1,
+  "contexts": 1,
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "budgets": {
+    "caseMs": 60000,
+    "globalMs": 300000,
+    "retries": 0
+  },
+  "frameOffsetsMs": [
+    0,
+    25,
+    50,
+    75
+  ],
+  "nativeHeldWindowMs": 400,
+  "routeDeadlineMsEach": 20000,
+  "nativeTasks": [
+    "Authenticate one new capacity2 house through native admission; remain ordinary live controller.",
+    "Idle300ms negative control must emit no move/stand/seat/subscribe.",
+    "Clear ordinary400ms held-S positive control must obtain real nonzero ACK_OK movement.",
+    "Use Places\u2192Study and actual physical seat; hold W300ms while gathering panel blocks world input as negative control. No gathering consent Join.",
+    "Four fixed actual re-seat\u2192close panel\u2192world focus\u2192one observed RAF\u2192declared offset\u2192400ms held-W Stand/walk cycles. Only native keyboard and ordinary Places actions.",
+    "After quiet200ms, ordinary400ms held-S positive control.",
+    "Choose own room through native Places; arm one actual native held-W input on real successful room-subscription ACK, record whether it lands in lounge/own-room/other projection and whether motion emits. One room steady-walk control follows release. The later room steady-walk control explicitly closes any contextual tool before focusing the world; the earlier ACK-armed blocked/no-emit window is retained unchanged."
+  ],
+  "sourceHypothesis": [
+    {
+      "source": "public/house-world.js",
+      "lines": "354,385\u2013386,428,462",
+      "fact": "Seat/control/zone reset clears cadence timestamps to negative infinity; held movement initiates Stand then sends at next eligible frame."
+    },
+    {
+      "source": "src/house-realtime.ts",
+      "lines": "394,419,456",
+      "fact": "Subscribe and real Stand reset server movement elapsed anchor; nonzero movement under80ms is MOVE_INTERVAL rejected."
+    }
+  ],
+  "classificationControls": [
+    "ACK_OK",
+    "MOVE_INTERVAL exact current service message",
+    "ACTION_BUDGET exact current service message",
+    "RATE_UNKNOWN distinct message",
+    "INVALID_MOVE",
+    "MALFORMED_ACK"
+  ],
+  "privacy": "WS ACK IDs/bodies/identity and room IDs stay only in memory for correlation. Artifacts contain fixed categories plus relative monotonic timestamps/movement-distance deltas/counts. Automatic screenshots/trace/video and copy prompts disabled. No secrets/config inspection.",
+  "decision": "Complete and write all phase observations before intended zero-normal-rejections assertion. An actual MOVE_INTERVAL/ACTION_BUDGET/INVALID rejection is RED with phase and timing. If no first move is observed under80ms after Stand ACK, report missing sub80 coverage rather than excluding the hypothesis. Projection arrival vs ACK vs first send remain separate. Before final classification, all pre-cleanup observed requests must have settled ACKs in a bounded2s poll inside the same60s case. Unacknowledged movement cannot be silently omitted from rejection checks.",
+  "timingLimits": "Client-observed Playwright frame notification and native input-call monotonic timing, not server receipt/elapsed measurement. Four RAF offsets are intended phase variation only. Room ACK-armed key input can arrive after projection or be cleared; emit/no-emit and actual landed category are recorded. The visible DOM zone and trusted flag are captured by a read-only browser keydown listener at the actual native event; its browser clock is reported separately and is not subtracted from Node frame timestamps. Sub80-after-ACK coverage requires a nonnegative observed delta below80ms; negative ordering remains numeric evidence without that coverage claim.",
+  "command": "APP_URL=http://127.0.0.1:4108 CI=true PW_OUTPUT_DIR=.local/spatial-motion-transition-first/results PW_REPORT_DIR=.local/spatial-motion-transition-first/report /home/lizhi/.local/bin/mise exec -- pnpm exec playwright test tests/e2e/motion-transition.spec.ts --max-failures=1",
+  "specSHA256": "7d8e14a5b0d1527249e60b0c1c657e6eef281c0a9c526ee95249fcbbfac96e9c",
+  "executionPrerequisites": "Parent reviews source/protocol and gives separate ONE-run GO; current app/runtime source and launch binding before/after, actual context/browser/PID closure. No production/spec change during the attempt; preserve first result, no retry.",
+  "scopeExclusions": [
+    "Not a300s resource qualification, stress/soak test or reliability estimate.",
+    "No UI screenshot/pixel/human/physical-phone claim.",
+    "No source fix, server timing or injected command used."
+  ]
+}
