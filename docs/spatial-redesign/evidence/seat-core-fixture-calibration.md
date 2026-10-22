@@ -1,0 +1,13 @@
+# Picture transport fixture calibration
+
+The current second full run is preserved at .local/spatial-apply/required-current-2.log:1363 pass/1 fail. The failure was an initial second-client house.move ACK with ok=false in the picture fixture. Its previous matcher hid the response code and message. Those missing details cannot be reconstructed as INVALID_MOVE, RATE_LIMITED or another code.
+
+Before changing pacing, the fixture added diagnostics containing the actual response, actor index, motion sequence, segment endpoints and distance. The affected case then passed one initial run plus ten bounded scoped repetitions under the old80ms schedule. The original failure **was not reproduced**, so no production bug or exact fault cause is claimed from those passes.
+
+A current-geometry audit of all six arrival-to-chair-approach routes finds segment counts25/41/54/44/33/25 and maximum segment length0.25m for every route. The audit also measures self directly to route.slice(1)[0], including the off-grid prefix rather than only internal grid edges; actor1 first sends0.1030776406m and the prepended start equals self. An analytical model of the old80ms credit finds no invalid segment on those routes. The suggested0.354m diagonal therefore does not explain this recorded case from current source. This is a geometry/model comparison, not transport evidence for the missing ACK code.
+
+The bounded fixture refinement makes intended timing explicit: each walk uses a monotonic simulated clock, advancing each actual segment by max(80,ceil(distance/3.2*1000)+5)ms. This respects the unchanged3.2m/s server limit and80ms minimum spacing with5ms margin, while keeping incidental CPU work or host wall-clock adjustments out of movement credit. Real-time pacing resumes after each walk, so existing timeout/rate-maintenance tests still run normally. The real route, chair claim, room admission and revoked-takeover assertions remain. Move and seat-claim failures now report the full ACK and segment context.
+
+Affected verification passes **62/62 tests in three suites**: picture transport15, generic realtime30 and seat authority17. This includes existing speed/rate/sequence negative controls and remote/revoked authority checks. pnpm typecheck and scoped git diff --check pass. The named production files match committed8be15ef byte-for-byte; only the assigned fixture and this evidence were edited. Exact hashes, counts and logs are in seat-core-fixture-calibration.json.
+
+The original full-run failure remains scoped evidence. The parent owns broader validation with the improved diagnostics and the final stability decision. This worker ran no automatic full-suite rerun, browser, resource workload or commit.

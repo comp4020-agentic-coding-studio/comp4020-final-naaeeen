@@ -1,0 +1,244 @@
+{
+  "scope": "Four maintained cases across two source-bound runs on the same retained runtime; unchanged room case from final run, three affected cases from refinement run.",
+  "runtime": {
+    "origin": "http://127.0.0.1:4108",
+    "retainedSession": 85610,
+    "pid": 11867,
+    "playwright": "1.63.0",
+    "sandbox": true,
+    "renderer": "SwiftShader"
+  },
+  "tests": [
+    {
+      "title": "room reference survives owner return and a named phone visit loses bytes and sound when access ends",
+      "status": "passed",
+      "durationMs": 43070,
+      "report": ".local/spatial-native-final-report",
+      "facts": {
+        "saved-owner-reference": {
+          "houseId": "036ada31-2c05-40b8-88bb-5350ff88ab38",
+          "identities": [
+            "180e7548-3b40-4abb-8e26-d20dcf0437a7",
+            "a620424d-33b9-49c2-8bff-9742a70c5c55",
+            "2e7f400b-4ccb-4239-80d9-ec0d6c813639"
+          ],
+          "saved": {
+            "ok": true,
+            "roomId": "70bda67b-5414-484b-adfc-56140e78833b",
+            "ownerId": "180e7548-3b40-4abb-8e26-d20dcf0437a7",
+            "revision": 3,
+            "image": {
+              "id": "8ac64b6f-eb1d-4fa2-b874-b314923e7657",
+              "width": 320,
+              "height": 240,
+              "bytes": 2922
+            },
+            "view": {
+              "x": 0.5909090909090909,
+              "y": 0.5,
+              "zoom": 1.1
+            },
+            "soundscape": "rain",
+            "writable": true
+          },
+          "pngSHA256": "6d64aa71da481176b3aee1f039d5bb482d998482e84646714579214a5e4b0070",
+          "audio": [
+            "closed"
+          ]
+        }
+      }
+    },
+    {
+      "title": "sofa needs a real chair and Join before a deliberate house copy, follow and pointing",
+      "status": "passed",
+      "durationMs": 42000,
+      "report": ".local/spatial-native-refinement-final-report",
+      "facts": {
+        "sofa-saved-state": {
+          "houseId": "c6257884-2224-4daf-b9e9-2abed939ad3c",
+          "state": {
+            "ok": true,
+            "kind": "sofa",
+            "houseId": "c6257884-2224-4daf-b9e9-2abed939ad3c",
+            "sessionId": "9a8d63cd-65df-4bd9-9262-3e391dfc80ef",
+            "revision": 3,
+            "members": [
+              {
+                "actorId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+                "name": "Native Rowan"
+              },
+              {
+                "actorId": "2acdc29c-510d-4e32-a95f-b06f94914173",
+                "name": "Native Wren"
+              }
+            ],
+            "presenterId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+            "item": {
+              "id": "fddae86d-ca0e-49a8-9d47-b4b9576027aa",
+              "ownerId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+              "sourceImageId": "ceeb3afb-a8ef-4eae-bdd1-da51e857d431",
+              "width": 320,
+              "height": 240,
+              "bytes": 2922
+            },
+            "view": {
+              "x": 0.5,
+              "y": 0.5,
+              "zoom": 1
+            },
+            "pointer": null,
+            "selfJoined": true,
+            "selfParticipationId": "be382e6f-47c6-4235-8a5f-f404c30e122c"
+          },
+          "afterReseat": {
+            "ok": true,
+            "kind": "sofa",
+            "houseId": "c6257884-2224-4daf-b9e9-2abed939ad3c",
+            "sessionId": "9a8d63cd-65df-4bd9-9262-3e391dfc80ef",
+            "revision": 6,
+            "members": [
+              {
+                "actorId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+                "name": "Native Rowan"
+              }
+            ],
+            "presenterId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+            "item": {
+              "id": "fddae86d-ca0e-49a8-9d47-b4b9576027aa",
+              "ownerId": "11a8f9ec-40b1-45c9-8fbd-ed45ebcc2b1d",
+              "sourceImageId": "ceeb3afb-a8ef-4eae-bdd1-da51e857d431",
+              "width": 320,
+              "height": 240,
+              "bytes": 2922
+            },
+            "view": {
+              "x": 0.5,
+              "y": 0.5,
+              "zoom": 1.25
+            },
+            "pointer": {
+              "x": 0.5,
+              "y": 0.497265625
+            },
+            "selfJoined": false,
+            "selfParticipationId": null
+          }
+        }
+      }
+    },
+    {
+      "title": "study huddle keeps explicit consent across its independent board and clears on membership loss",
+      "status": "passed",
+      "durationMs": 34341,
+      "report": ".local/spatial-native-refinement-final-report",
+      "facts": {
+        "study-consent-and-access-loss": {
+          "houseId": "2ef484eb-ece6-4040-a23a-7c9457fd10dd",
+          "identities": [
+            "d6842054-517d-461c-8c72-d913ca234909",
+            "547add11-e1f8-4969-a8c9-ac26b910cd0e"
+          ],
+          "stateBeforeRemoval": {
+            "ok": true,
+            "kind": "study",
+            "houseId": "2ef484eb-ece6-4040-a23a-7c9457fd10dd",
+            "sessionId": "43aa00b6-c82b-48e9-8fa2-4e25a257f040",
+            "revision": 4,
+            "members": [
+              {
+                "actorId": "d6842054-517d-461c-8c72-d913ca234909",
+                "name": "Native Rowan"
+              }
+            ],
+            "presenterId": "d6842054-517d-461c-8c72-d913ca234909",
+            "item": null,
+            "view": {
+              "x": 0.5,
+              "y": 0.5,
+              "zoom": 1
+            },
+            "pointer": null,
+            "selfJoined": false,
+            "selfParticipationId": null
+          },
+          "boardClearedAfterRemoval": true
+        }
+      }
+    },
+    {
+      "title": "chat drafts keep both room scopes through a real bedroom exit and return",
+      "status": "passed",
+      "durationMs": 30739,
+      "report": ".local/spatial-native-refinement-final-report",
+      "facts": {
+        "retained-scoped-drafts": {
+          "houseId": "8d8ecb5a-0b06-41b0-ba06-eeb323729926",
+          "identity": "6a5fac52-10bb-412b-8c5b-97fdb4c6b351",
+          "roomId": "de76336f-2d6a-4b30-878d-3bf91eb2396d",
+          "loungeDraft": "Lounge draft stays in lounge",
+          "bedroomDraft": "Bedroom draft stays in bedroom"
+        }
+      }
+    }
+  ],
+  "images": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-room-studio-desktop.png",
+      "sha256": "0b014874d34240c19336c4630e18a12319389b124cf57f43a960fd1019230466",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 201022
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-room-reference-world-after-close.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 203745
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-room-visit-phone.png",
+      "sha256": "95297a89fecce44c394a5c79020d1c0cf17e3ddccaf1ef40dad03d5c70766eb3",
+      "dimensions": [
+        390,
+        844
+      ],
+      "bytes": 58164
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-sofa-follow-phone.png",
+      "sha256": "f8d60837f1a65863bfbbe92dd8bf6deb14277bae7ad56aaa82af73c77a7f1332",
+      "dimensions": [
+        390,
+        844
+      ],
+      "bytes": 79562
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-sofa-presenter-desktop.png",
+      "sha256": "c5cd99705ad8be3c5f65413d40b48f7df71c226f9a1033a34a6f9564da7bcc9a",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "bytes": 274378
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-study-chat-phone.png",
+      "sha256": "db5e0c58903c64242b231d586b0f7cc80eb276c5e3982ef8fed48f7d9f03109d",
+      "dimensions": [
+        390,
+        844
+      ],
+      "bytes": 92118
+    }
+  ],
+  "limits": [
+    "Headless Chromium mutes audible output; native AudioContext graph start/close mechanics were checked.",
+    "Not a physical-device, human-usefulness, WAN or Fly resource result."
+  ]
+}

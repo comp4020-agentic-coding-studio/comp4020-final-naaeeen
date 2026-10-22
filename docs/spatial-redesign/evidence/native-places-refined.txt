@@ -1,0 +1,133 @@
+Already up to date
+Done in 48ms using pnpm v11.9.0
+
+Running 3 tests using 1 worker
+
+  ✘  1 tests/e2e/spatial-places.spec.ts:155:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends (40.6s)
+  ✓  2 tests/e2e/spatial-places.spec.ts:217:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing (59.8s)
+  ✘  3 tests/e2e/spatial-places.spec.ts:253:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room (1.0m)
+
+
+  1) tests/e2e/spatial-places.spec.ts:155:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends 
+
+    Error: page.evaluate: TypeError: Failed to fetch
+        at eval (eval at evaluate (:311:30), <anonymous>:1:21)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:311:30), <anonymous>:1:21)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:188:23
+
+    attachment #1: room-studio-desktop (image/png) ─────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-studio-desktop-b67e08eb7341171ca5f0586d85006e933aa0d883.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: room-reference-world-after-close (image/png) ────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-reference-world-after-close-678f01fabc5019af1b480cf54e61712e409959ba.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/error-context.md
+
+    attachment #7: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-refined/spatial-places-room-refere-c5f87--and-sound-when-access-ends/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/spatial-places.spec.ts:253:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(locator).not.toHaveAttribute(expected) failed
+
+    Locator:  locator('.house-world-canvas')
+    Expected: not "lounge"
+    Received: "lounge"
+
+    Call log:
+      - Expect "not toHaveAttribute" locator('.house-world-canvas') with timeout 30000ms
+      - waiting for locator('.house-world-canvas')
+        3 × locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-1.000" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-95.4" data-world-top="-385.7" data-world-right="2551.0" class="house-world-canvas" data-room-light="standard" data-world-bottom="1315.2" data-self-animation="idle" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="512.14" da…></canvas>
+          - unexpected value "lounge"
+        2 × locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-1.380" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="162.2" data-world-top="-344.8" data-world-right="2808.7" class="house-world-canvas" data-room-light="standard" data-world-bottom="1356.1" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="538.49" da…></canvas>
+          - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.000" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-11.9" data-world-top="-343.0" data-world-right="2634.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1357.9" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="516.49" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.500" data-zone-id="lounge" data-world-left="30.7" data-suspended="false" data-camera-mode="play" data-world-top="-321.1" data-world-right="2677.1" class="house-world-canvas" data-room-light="standard" data-world-bottom="1379.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="519.24" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.000" data-zone-id="lounge" data-world-left="72.4" data-suspended="false" data-camera-mode="play" data-world-top="-302.1" data-world-right="2718.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1398.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="519.07" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.500" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="113.3" data-world-top="-283.5" data-world-right="2759.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1417.4" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.48" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="0.750" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="126.1" data-world-top="-261.7" data-world-right="2772.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1439.2" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.50" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="0.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-zone-id="lounge" data-world-left="78.6" data-suspended="false" data-camera-mode="play" data-world-top="-225.7" data-world-right="2725.0" class="house-world-canvas" data-room-light="standard" data-world-bottom="1475.2" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.99" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-0.500" data-zone-id="lounge" data-world-left="50.9" data-suspended="false" data-camera-mode="play" data-world-top="-205.2" data-world-right="2697.3" class="house-world-canvas" data-room-light="standard" data-world-bottom="1495.7" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="514.01" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-1.000" data-zone-id="lounge" data-world-left="12.4" data-suspended="false" data-camera-mode="play" data-world-top="-177.0" data-world-right="2658.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1523.9" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.87" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-1.750" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-30.9" data-world-top="-145.1" data-world-right="2615.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1555.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="513.14" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-2.250" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-71.9" data-world-top="-115.0" data-world-right="2574.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1585.9" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.89" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-3.217" data-zone-id="lounge" data-world-top="-75.1" data-suspended="false" data-camera-mode="play" data-world-left="-126.2" data-world-right="2520.2" class="house-world-canvas" data-room-light="standard" data-world-bottom="1625.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="511.66" d…></canvas>
+        - unexpected value "lounge"
+      - Test ended.
+
+
+      70 |   await page.locator(`#places-panel [data-place="${name}"]`).click();
+      71 |   if (name === 'room') {
+    > 72 |     await expect(canvas(page)).not.toHaveAttribute('data-zone-id', 'lounge', { timeout: 30_000 });
+         |                                    ^
+      73 |     await page.getByRole('button', { name: 'Room studio', exact: true }).click();
+      74 |     await expect(page.locator('#studio-panel')).toBeVisible();
+      75 |   } else {
+        at place (/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:72:36)
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:290:5
+
+    attachment #1: study-chat-phone (image/png) ────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/attachments/study-chat-phone-c72a0eaf9d5cdb5456fd5b6f8b60ceb9468bb1b1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/error-context.md
+
+    attachment #6: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-refined/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/spatial-places.spec.ts:155:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends 
+    tests/e2e/spatial-places.spec.ts:253:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 
+  1 passed (2.8m)

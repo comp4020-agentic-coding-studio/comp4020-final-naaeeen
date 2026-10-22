@@ -18,7 +18,7 @@ export async function continueSavedHome(page: Page) {
 }
 
 export async function closeTool(page: Page) {
-  if (await page.locator('#panel').isVisible()) await page.getByRole('button', { name: 'Close panel', exact: true }).click();
+  if (await page.locator('#panel').isVisible()) await page.locator('#panel-close').click();
 }
 
 export async function showResidents(page: Page) {
@@ -40,8 +40,9 @@ export async function openHouseSettings(page: Page) {
 
 export async function openStudyNotes(page: Page) {
   await closeTool(page);
-  await page.getByRole('button', { name: 'My work', exact: true }).click();
-  await expect(page.locator('#panel-title')).toHaveText('My work');
+  await page.getByRole('button', { name: 'Pause and options', exact: true }).click();
+  await page.getByRole('button', { name: 'Saved work', exact: true }).click();
+  await expect(page.locator('#panel-title')).toHaveText('Saved work');
 }
 
 export async function openMyRoom(page: Page) {

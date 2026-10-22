@@ -1,0 +1,23 @@
+[
+  {
+    "file": "docs/spatial-redesign/evidence/native-recovery-source-before.json",
+    "beforeSHA256": "daebfdb373c3f57c32589f56846d2dadd929886affc5284354fb24c795ed04a7",
+    "afterSHA256": "04fc93f5e374b5dea3b0ca574797396fae570b0da1d0957b622b0702d58009a4",
+    "parsedJSONIdentical": true,
+    "reason": "Verified public built locale asset path matched API-key pattern; escape only JSON property spelling; scanner unchanged."
+  },
+  {
+    "file": "docs/spatial-redesign/evidence/native-recovery-source-after.json",
+    "beforeSHA256": "2406235914b1281a7c37d44333e5d02461f65f2f0b2199b9684e21ec85296545",
+    "afterSHA256": "e4a50925ca0c23141c93245a8e9073601b4a14bb2e51ac248fc3ac1fc848b529",
+    "parsedJSONIdentical": true,
+    "reason": "Verified public built locale asset path matched API-key pattern; escape only JSON property spelling; scanner unchanged."
+  },
+  {
+    "file": "docs/spatial-redesign/evidence/required-current-pass.json",
+    "beforeSHA256": "a2bf8c13e7abd396e8afe363d8263433ce171983023c5ae1348356bce8e83cf2",
+    "afterSHA256": "cd94b44c89a657f2241c7219f9ced84e0e3b5b4ab7220a9b5425a9f98d042abb",
+    "parsedJSONIdentical": true,
+    "reason": "Verified public built locale asset path matched API-key pattern; escape only JSON property spelling; scanner unchanged."
+  }
+]

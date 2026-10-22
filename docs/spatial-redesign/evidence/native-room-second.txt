@@ -1,0 +1,8 @@
+Already up to date
+Done in 45ms using pnpm v11.9.0
+
+Running 1 test using 1 worker
+
+  ✓  1 tests/e2e/spatial-places.spec.ts:177:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends (42.9s)
+
+  1 passed (43.6s)

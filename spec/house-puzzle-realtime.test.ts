@@ -32,11 +32,23 @@ async function fixture() {
  }
  type Client=Awaited<ReturnType<typeof connect>>;
  async function sit(c:Client){
-  vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
-  const layout=createLayout(6),self=c.state.players.find(player=>player.id===people[c.n]!.id)!,seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(c.n+1))!;
-  const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route).not.toBeNull();let sequence=0;
-  for(const point of route!.slice(1)){offset+=80;expect(await ask(c.socket,"house.move",{generation:c.state.generation,sequence:++sequence,...point,heading:0})).toMatchObject({ok:true});}
-  motion.set(c.socket,sequence);positions.set(c.socket,{x:seat.x,z:seat.z});expect(await ask(c.socket,"house.seat",{generation:c.state.generation,seatId:seat.id})).toMatchObject({ok:true});
+  // Walk on a monotonic fixture clock: CPU scheduling and host wall-clock
+  // adjustments must not supply (or remove) the movement credit this route needs.
+  let walkingNow=realNow()+offset;vi.spyOn(Date,"now").mockImplementation(()=>walkingNow);
+  try {
+   const layout=createLayout(6),self=c.state.players.find(player=>player.id===people[c.n]!.id)!,seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(c.n+1))!;
+   const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route).not.toBeNull();let sequence=0,previous={x:self.x!,z:self.z!};
+   for(const point of route!.slice(1)){
+    const distance=Math.hypot(point.x-previous.x,point.z-previous.z),advanceMs=Math.max(80,Math.ceil(distance/3.2*1000)+5);
+    walkingNow+=advanceMs;
+    const response=await ask(c.socket,"house.move",{generation:c.state.generation,sequence:++sequence,...point,heading:0});
+    expect(response.ok,JSON.stringify({phase:"seat-approach",actor:c.n,sequence,from:previous,to:point,distance,advanceMs,response})).toBe(true);previous=point;
+   }
+   motion.set(c.socket,sequence);positions.set(c.socket,{x:seat.x,z:seat.z});
+   const response=await ask(c.socket,"house.seat",{generation:c.state.generation,seatId:seat.id});expect(response.ok,JSON.stringify({phase:"seat-claim",actor:c.n,seatId:seat.id,response})).toBe(true);
+  } finally {
+   offset=walkingNow-realNow();vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
+  }
  }
 
  const command=(type:string,payload:Record<string,unknown>,expectedRevision?:number):HouseCommand=>({commandId:randomUUID(),type,houseId:home.id,payload,...(expectedRevision===undefined?{}:{expectedRevision})});

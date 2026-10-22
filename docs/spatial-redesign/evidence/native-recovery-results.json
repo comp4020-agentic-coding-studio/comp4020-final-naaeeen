@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "cases": 2,
+  "reportedTotalSeconds": 38.4,
+  "caseDurationsSeconds": [
+    13.8,
+    22.7
+  ],
+  "runtimeFilesBound": 503,
+  "runtimeChangedFiles": [],
+  "serverLaunchRecordUnchanged": true,
+  "observations": [
+    {
+      "actor": "Recovery Rowan",
+      "sqliteReceiptCounts": [
+        0,
+        0,
+        1
+      ],
+      "commandSha256": "52dc7668b7c94210332903d97e87329c90d2ab21c05c9bdd24b22b3e51e7be9d",
+      "precondition": "synthetic recent production outbox draft; actual UI identity and room",
+      "route": "lounge to own bedroom",
+      "generation": [
+        1,
+        2
+      ],
+      "accessGeneration": [
+        1,
+        2
+      ],
+      "commandSendsBeforeRetry": 0,
+      "commandSendsAfterRetry": 1,
+      "chatCounts": [
+        0,
+        0,
+        1
+      ],
+      "roomSequences": [
+        0,
+        0,
+        1
+      ],
+      "acknowledgedReceipts": 1,
+      "originalPayloadPreserved": true,
+      "outboxRemoved": true
+    },
+    {
+      "actor": "Recovery Rowan",
+      "sqliteReceiptCounts": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "commandSha256": "42bd71ae167d5a6aede4a1aa744ce8abe0f229a632e3ee3f8ce7773f9b2139fd",
+      "precondition": "synthetic recent production outbox draft; actual UI identity and real table revision",
+      "route": "own bedroom to actual lounge game chair",
+      "generation": [
+        4,
+        5
+      ],
+      "accessGeneration": [
+        4,
+        5
+      ],
+      "chairAcknowledged": true,
+      "sendsBeforeRetry": 0,
+      "sendsAfterFirstRetry": 1,
+      "sendsAfterAcceptedReceiptReplay": 2,
+      "equalAcceptedReceipts": true,
+      "gameRevisions": [
+        0,
+        1,
+        2
+      ],
+      "standingReplayDidNotRejoin": true,
+      "outboxRemoved": true
+    }
+  ],
+  "physicalPhoneOrHumanUtility": "NOT RUN"
+}

@@ -1,0 +1,5 @@
+Already up to date
+Done in 80ms using pnpm v11.9.0
+$ tsc --noEmit
+spec/house-studio-preview.test.ts(8,624): error TS2554: Expected 0 arguments, but got 1.
+[ELIFECYCLE] Command failed with exit code 2.

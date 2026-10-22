@@ -1,0 +1,128 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+
+Running 2 tests using 1 worker
+
+  ✘  1 tests/e2e/spatial-places.spec.ts:197:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing (1.0m)
+  ✘  2 tests/e2e/spatial-places.spec.ts:234:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room (1.0m)
+
+
+  1) tests/e2e/spatial-places.spec.ts:197:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --use-angle=swiftshader --user-data-dir=/tmp/playwright_chromiumdev_profile-2FLkHM --remote-debugging-pipe --no-startup-window
+    <launched> pid=6533
+    [pid=6533][err] [1023/050752.808979:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1660] drmGetDevices2() has not found any devices
+    [pid=6533][err] [1023/050752.814113:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+    [pid=6533] <gracefully close start>
+    [pid=6533][err] [1023/050856.828529:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.838915:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.840317:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.841809:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.847058:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.848152:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.848784:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.849412:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.856996:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.858470:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.887423:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.895701:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.897876:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.900305:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.901400:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=6533][err] [1023/050856.901838:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+
+      229 |     await info.attach('sofa-saved-state', { body: JSON.stringify({ houseId: group.houseId, state, afterReseat: await shared(peer, 'sofa') }, null, 2), contentType: 'application/json' });
+      230 |     expect(group.errors).toEqual([]);
+    > 231 |   } finally { await Promise.all(group.contexts.map(context => context.close())); }
+          |               ^
+      232 | });
+      233 |
+      234 | test('study huddle keeps explicit consent across its independent board and chat drafts stay in their room', async ({ browser, baseURL }, info) => {
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:231:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-first/spatial-places-sofa-needs--267db-se-copy-follow-and-pointing/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/spatial-places.spec.ts:234:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --use-angle=swiftshader --user-data-dir=/tmp/playwright_chromiumdev_profile-4xTNJC --remote-debugging-pipe --no-startup-window
+    <launched> pid=7575
+    [pid=7575][err] [1023/050858.794761:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1660] drmGetDevices2() has not found any devices
+    [pid=7575][err] [1023/050858.797767:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+    [pid=7575] <gracefully close start>
+    [pid=7575][err] [1023/051003.328929:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.336850:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.338634:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.344323:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.345379:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.345769:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.346325:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.353890:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.355427:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.356820:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.381564:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.382684:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+    [pid=7575][err] [1023/051003.383086:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:254] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.
+
+      273 |     await info.attach('study-consent-and-scoped-drafts', { body: JSON.stringify({ houseId: group.houseId, identities: group.identities, state: await shared(peer, 'study'), bedroomId: roomId }, null, 2), contentType: 'application/json' });
+      274 |     expect(group.errors).toEqual([]);
+    > 275 |   } finally { await Promise.all(group.contexts.map(context => context.close())); }
+          |               ^
+      276 | });
+      277 |
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:275:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-first/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/spatial-places.spec.ts:197:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing 
+    tests/e2e/spatial-places.spec.ts:234:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 

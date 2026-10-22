@@ -1,0 +1,94 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/spatial-places.spec.ts:275:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room (1.0m)
+
+
+  1) tests/e2e/spatial-places.spec.ts:275:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(locator).not.toHaveAttribute(expected) failed
+
+    Locator:  locator('.house-world-canvas')
+    Expected: not "lounge"
+    Received: "lounge"
+
+    Call log:
+      - Expect "not toHaveAttribute" locator('.house-world-canvas') with timeout 30000ms
+      - waiting for locator('.house-world-canvas')
+        2 × locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-1.000" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-top="-370.1" data-world-left="-113.9" data-world-right="2532.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1330.8" data-self-animation="idle" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="527.72" d…></canvas>
+          - unexpected value "lounge"
+        2 × locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-1.250" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="231.8" data-world-top="-334.7" data-world-right="2878.3" class="house-world-canvas" data-room-light="standard" data-world-bottom="1366.2" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="553.56" da…></canvas>
+          - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-1.500" data-zone-id="lounge" data-world-left="46.9" data-suspended="false" data-camera-mode="play" data-world-top="-349.6" data-world-right="2693.4" class="house-world-canvas" data-room-light="standard" data-world-bottom="1351.3" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="529.04" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.250" data-world-left="8.4" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-top="-332.0" data-world-right="2654.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1368.9" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.97" data…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.750" data-zone-id="lounge" data-world-left="49.7" data-suspended="false" data-camera-mode="play" data-world-top="-312.5" data-world-right="2696.1" class="house-world-canvas" data-room-light="standard" data-world-bottom="1388.4" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.30" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.250" data-zone-id="lounge" data-world-left="90.5" data-suspended="false" data-camera-mode="play" data-world-top="-293.9" data-world-right="2736.9" class="house-world-canvas" data-room-light="standard" data-world-bottom="1407.0" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.70" dat…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="1.000" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="132.6" data-world-top="-274.8" data-world-right="2779.1" class="house-world-canvas" data-room-light="standard" data-world-bottom="1426.1" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.67" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-self-z="0.500" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="112.2" data-world-top="-250.8" data-world-right="2758.7" class="house-world-canvas" data-room-light="standard" data-world-bottom="1450.1" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.25" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-0.087" data-zone-id="lounge" data-world-left="80.4" data-suspended="false" data-camera-mode="play" data-world-top="-227.0" data-world-right="2726.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1473.9" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="512.41" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-0.500" data-zone-id="lounge" data-world-left="48.3" data-suspended="false" data-camera-mode="play" data-world-top="-203.4" data-world-right="2694.8" class="house-world-canvas" data-room-light="standard" data-world-bottom="1497.5" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="515.85" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-1.250" data-zone-id="lounge" data-world-left="-2.0" data-suspended="false" data-camera-mode="play" data-world-top="-166.4" data-world-right="2644.4" class="house-world-canvas" data-room-light="standard" data-world-bottom="1534.5" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="516.28" da…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-2.043" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-53.5" data-world-top="-128.6" data-world-right="2593.0" class="house-world-canvas" data-room-light="standard" data-world-bottom="1572.3" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="515.40" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-2.500" data-zone-id="lounge" data-suspended="false" data-camera-mode="play" data-world-left="-88.1" data-world-top="-103.1" data-world-right="2558.4" class="house-world-canvas" data-room-light="standard" data-world-bottom="1597.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.56" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-3.000" data-zone-id="lounge" data-world-top="-79.1" data-suspended="false" data-camera-mode="play" data-world-left="-120.7" data-world-right="2525.7" class="house-world-canvas" data-room-light="standard" data-world-bottom="1621.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.19" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.750" data-self-z="-3.500" data-zone-id="lounge" data-world-top="-54.1" data-suspended="false" data-camera-mode="play" data-world-left="-154.7" data-world-right="2491.7" class="house-world-canvas" data-room-light="standard" data-world-bottom="1646.8" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="518.78" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-3.250" data-self-z="-3.750" data-zone-id="lounge" data-world-top="-55.2" data-suspended="false" data-camera-mode="play" data-world-left="-207.9" data-world-right="2438.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1645.7" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="524.64" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.750" data-self-z="-3.924" data-zone-id="lounge" data-world-top="-72.9" data-suspended="false" data-camera-mode="play" data-world-left="-256.0" data-world-right="2390.5" class="house-world-canvas" data-room-light="standard" data-world-bottom="1628.0" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.61" d…></canvas>
+        - unexpected value "lounge"
+        - locator resolved to <canvas tabindex="0" width="1920" height="1080" id="house-world" data-room-width="20" data-room-depth="14" data-camera-zoom="1" data-self-x="-2.750" data-self-z="-4.500" data-zone-id="lounge" data-world-top="-44.6" data-suspended="false" data-camera-mode="play" data-world-left="-304.1" data-world-right="2342.3" class="house-world-canvas" data-room-light="standard" data-world-bottom="1656.3" data-self-animation="walk" data-engine="three.js r186" data-studio-preview="false" data-self-screen-y="517.87" d…></canvas>
+        - unexpected value "lounge"
+      - Test ended.
+
+
+      70 |   await page.locator(`#places-panel [data-place="${name}"]`).click();
+      71 |   if (name === 'room') {
+    > 72 |     await expect(canvas(page)).not.toHaveAttribute('data-zone-id', 'lounge', { timeout: 30_000 });
+         |                                    ^
+      73 |     await page.getByRole('button', { name: 'Room studio', exact: true }).click();
+      74 |     await expect(page.locator('#studio-panel')).toBeVisible();
+      75 |   } else {
+        at place (/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:72:36)
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:313:5
+
+    attachment #1: study-chat-phone (image/png) ────────────────────────────────────────────────────
+    .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/attachments/study-chat-phone-a44ad3f0956e213018831870112009fd44d31a32.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-study-context/spatial-places-study-huddl-ed644-t-drafts-stay-in-their-room/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/spatial-places.spec.ts:275:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room 

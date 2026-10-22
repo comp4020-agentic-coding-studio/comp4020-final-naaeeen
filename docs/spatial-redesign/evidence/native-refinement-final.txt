@@ -1,0 +1,10 @@
+Already up to date
+Done in 44ms using pnpm v11.9.0
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/e2e/spatial-places.spec.ts:239:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing (42.0s)
+  ✓  2 tests/e2e/spatial-places.spec.ts:287:1 › study huddle keeps explicit consent across its independent board and clears on membership loss (34.3s)
+  ✓  3 tests/e2e/spatial-places.spec.ts:329:1 › chat drafts keep both room scopes through a real bedroom exit and return (30.7s)
+
+  3 passed (1.8m)

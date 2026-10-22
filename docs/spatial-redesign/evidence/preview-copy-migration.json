@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-23",
+  "scope": "Read-only backup of existing private preview; real createService open/close against copied files only",
+  "sourceModified": false,
+  "privateDatabaseFilesCommitted": false,
+  "allOriginalTableContentDigestsUnchanged": true,
+  "files": [
+    {
+      "name": "neighbourhood.sqlite",
+      "changedOriginalTables": [],
+      "addedTables": [],
+      "integrity": "ok",
+      "foreignKeyFailures": 0,
+      "userVersionUnchanged": true,
+      "bytesBeforeMigration": 69632,
+      "originalTableCount": 6,
+      "originalRowCount": 1
+    },
+    {
+      "name": "house.sqlite",
+      "changedOriginalTables": [],
+      "addedTables": [
+        "room_studio_meta",
+        "room_studio_receipts",
+        "room_studio_rooms",
+        "room_studio_uploads"
+      ],
+      "integrity": "ok",
+      "foreignKeyFailures": 0,
+      "userVersionUnchanged": true,
+      "bytesBeforeMigration": 774144,
+      "originalTableCount": 15,
+      "originalRowCount": 1810
+    },
+    {
+      "name": "board.sqlite",
+      "changedOriginalTables": [],
+      "addedTables": [],
+      "integrity": "ok",
+      "foreignKeyFailures": 0,
+      "userVersionUnchanged": true,
+      "bytesBeforeMigration": 106496,
+      "originalTableCount": 6,
+      "originalRowCount": 69
+    }
+  ],
+  "runtimePreview": "NOT_STARTED; final source restart pending",
+  "limitations": "Per-file copies; no claim of cross-file atomic backup under concurrent writers. Source preview port4093 had no listener during copy."
+}

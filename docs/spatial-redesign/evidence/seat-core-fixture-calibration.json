@@ -1,0 +1,193 @@
+{
+  "scope": "spec/house-puzzle-realtime.test.ts only; no production edits",
+  "productionBaseline": "8be15ef",
+  "sourceSha256": {
+    "spec/house-puzzle-realtime.test.ts": "3242263a9dd2568decb18df6fc77d90eb7a4347cb3d62f27aeb987c083edaffb"
+  },
+  "productionBytesEqualBaseline": {
+    "src/house-realtime.ts": true,
+    "src/house-store.ts": true,
+    "src/house-contract.ts": true,
+    "public/house-geometry.js": true,
+    "public/house-version.js": true
+  },
+  "originalFailure": {
+    "log": ".local/spatial-apply/required-current-2.log",
+    "reportedCounts": {
+      "passed": 1363,
+      "failed": 1
+    },
+    "site": "observer takeover denied by revoked bedroom access preserves lounge controller participation: initial second-client movement in sit helper",
+    "observed": "house.move ACK ok=false; matcher hid response code/message",
+    "responseCode": "UNKNOWN; not reconstructed from missing data"
+  },
+  "diagnosticReproduction": {
+    "change": "Keep old80ms pacing; include actual response code/message, actor, sequence, segment endpoints/distance in assertion",
+    "initialLog": ".local/seat-core-fixture-diag-current.log",
+    "initialPass": 1,
+    "boundedAttempts": 10,
+    "logs": [
+      ".local/seat-core-fixture-diag-1.log",
+      ".local/seat-core-fixture-diag-2.log",
+      ".local/seat-core-fixture-diag-3.log",
+      ".local/seat-core-fixture-diag-4.log",
+      ".local/seat-core-fixture-diag-5.log",
+      ".local/seat-core-fixture-diag-6.log",
+      ".local/seat-core-fixture-diag-7.log",
+      ".local/seat-core-fixture-diag-8.log",
+      ".local/seat-core-fixture-diag-9.log",
+      ".local/seat-core-fixture-diag-10.log"
+    ],
+    "passed": 10,
+    "failed": 0,
+    "conclusion": "Scoped old-pacing runs did not reproduce the original failure; do not claim an actual INVALID_MOVE or RATE_LIMITED code"
+  },
+  "actualRouteAudit": {
+    "capacity": 6,
+    "start": "layout.arrivals[actor]",
+    "destination": "game-seat-(actor+1).target",
+    "segmentCounts": [
+      25,
+      41,
+      54,
+      44,
+      33,
+      25
+    ],
+    "maximumSegmentMetres": [
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "old80msModelViolations": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scope": "Analytical source/geometry model only, not a reproduction of the failed ACK",
+    "conclusion": "The proposed0.354m diagonal explanation is not supported by these current arrival routes",
+    "actualSelfToFirstSentSegments": [
+      {
+        "actor": 0,
+        "self": {
+          "x": -1.625,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": -1.75,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.160078105935821,
+        "prependedStartMatchesSelf": true
+      },
+      {
+        "actor": 1,
+        "self": {
+          "x": -0.9750000000000001,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": -1,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.10307764064044114,
+        "prependedStartMatchesSelf": true
+      },
+      {
+        "actor": 2,
+        "self": {
+          "x": -0.325,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": -0.25,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.12499999999999974,
+        "prependedStartMatchesSelf": true
+      },
+      {
+        "actor": 3,
+        "self": {
+          "x": 0.325,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": 0.25,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.12499999999999974,
+        "prependedStartMatchesSelf": true
+      },
+      {
+        "actor": 4,
+        "self": {
+          "x": 0.9750000000000001,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": 1,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.10307764064044114,
+        "prependedStartMatchesSelf": true
+      },
+      {
+        "actor": 5,
+        "self": {
+          "x": 1.625,
+          "z": 4.65
+        },
+        "firstSent": {
+          "x": 1.5,
+          "z": 4.75
+        },
+        "firstSentDistance": 0.160078105935821,
+        "prependedStartMatchesSelf": true
+      }
+    ],
+    "prefixAudit": "Each first sent point is route.slice(1)[0]; distances are measured directly from the self position passed to findRoute, not merely between internal grid points."
+  },
+  "calibration": {
+    "clock": "During each walk Date.now uses monotonically advanced walkingNow; after walk restore real time using adjusted offset",
+    "advanceMs": "max(80,ceil(distance/3.2*1000)+5)",
+    "speedMetresPerSecond": 3.2,
+    "minimumEventSpacingMs": 80,
+    "marginMs": 5,
+    "purpose": "Supply explicit authorized travel credit independent of CPU work/host wall-clock adjustment; preserve actual route, seat claims and permission assertions",
+    "diagnostics": "Retain exact move and seat-claim ACK diagnostics",
+    "productionLimits": "Unchanged"
+  },
+  "verification": [
+    {
+      "log": ".local/seat-core-fixture-calibrated.log",
+      "exit": 0,
+      "filesPassed": 3,
+      "testsPassed": 62,
+      "skipped": 0,
+      "specs": [
+        "house-puzzle-realtime.test.ts:15",
+        "house-realtime.test.ts:30 including finite/speed/sequence/rate negative controls",
+        "house-seat-authority.test.ts:17 including remote and revoked authority checks"
+      ]
+    },
+    {
+      "log": ".local/seat-core-fixture-types.log",
+      "exit": 0,
+      "command": "pnpm typecheck"
+    }
+  ],
+  "diffCheck": "Scoped git diff --check passed",
+  "environment": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi"
+  },
+  "remaining": "Original failed response code remains unknown; parent owns any broader rerun with new diagnostic and final acceptance. No automatic full-suite rerun, browser, resource test or commit performed."
+}

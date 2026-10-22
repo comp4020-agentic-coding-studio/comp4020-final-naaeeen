@@ -1,0 +1,56 @@
+Already up to date
+Done in 45ms using pnpm v11.9.0
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/spatial-places.spec.ts:140:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends (28.3s)
+
+
+  1) tests/e2e/spatial-places.spec.ts:140:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#connection-status')
+    Expected: "Together, live"
+    Received: "Reconnecting…"
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#connection-status') with timeout 10000ms
+      - waiting for locator('#connection-status')
+
+
+      25 | }
+      26 | async function live(page: Page) {
+    > 27 |   await expect(page.locator('#connection-status')).toHaveText('Together, live');
+         |                                                    ^
+      28 |   await expect(canvas(page)).toHaveAttribute('data-self-x', /^-?\d/);
+      29 | }
+      30 | async function friends(browser: Browser, baseURL: string | undefined) {
+        at live (/home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:27:52)
+        at /home/lizhi/comp4020/comp4020-final-naaeeen/tests/e2e/spatial-places.spec.ts:144:109
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace .local/spatial-native-development/spatial-places-room-refere-c5f87--and-sound-when-access-ends/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/spatial-places.spec.ts:140:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends 

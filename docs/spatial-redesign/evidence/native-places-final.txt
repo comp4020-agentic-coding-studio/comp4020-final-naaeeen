@@ -1,0 +1,10 @@
+Already up to date
+Done in 50ms using pnpm v11.9.0
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/e2e/spatial-places.spec.ts:177:1 › room reference survives owner return and a named phone visit loses bytes and sound when access ends (43.1s)
+  ✓  2 tests/e2e/spatial-places.spec.ts:239:1 › sofa needs a real chair and Join before a deliberate house copy, follow and pointing (41.0s)
+  ✓  3 tests/e2e/spatial-places.spec.ts:275:1 › study huddle keeps explicit consent across its independent board and chat drafts stay in their room (51.2s)
+
+  3 passed (2.3m)

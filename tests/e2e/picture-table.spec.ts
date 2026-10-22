@@ -135,11 +135,18 @@ test('three friends explicitly contribute to a picture and continue after one le
 
     await late.locator('[data-puzzle-action="leave"]').tap();
     await expect(late.locator('#game-panel')).toBeHidden();
-    await expect(late.locator('#context-hint')).toContainText('Open game table');
-    await late.keyboard.press('e'); // Leave closed the panel; the actor is already at the table.
+    await expect(late.locator('.house-world-canvas')).toHaveAttribute('data-self-animation', 'sit');
+    await expect(late.locator('#context-hint')).toContainText('Stand up');
+    await late.locator('#game-table-reopen').tap(); // Withdrawal keeps the actual chair.
     await expect(late.locator('#game-panel')).toBeVisible();
     await watch(late, 2, 3);
     expect((await savedPicture(late)).puzzle.current!.placements).toEqual(three.puzzle.current!.placements);
+    await late.locator('#game-panel-stand').tap();
+    await expect(late.locator('#game-panel')).toBeHidden();
+    await expect(late.locator('.house-world-canvas')).not.toHaveAttribute('data-self-animation', 'sit');
+    await pictureTable(late);
+    await expect(late.locator('.house-world-canvas')).toHaveAttribute('data-self-animation', 'sit');
+    await watch(late, 2, 3); // A new chair does not renew participation.
 
     await peer.locator('#resume-game').click();
     await expect(peer.locator('.house-world-canvas')).toHaveAttribute('data-suspended', 'false');
