@@ -1,0 +1,10 @@
+{
+  "status": "PARENT_CONFIRMED_CONCURRENT_CANONICAL_RESULT_PROMOTION",
+  "oldSHA256": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319",
+  "currentSHA256": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+  "canonicalMatchesActualFullBaseline": true,
+  "authorization": "Parent explicitly confirmed canonical promotion from the actual baseline PASS after its own Git812dd66 source verification. No change performed by this worker.",
+  "allOtherPreservedProtocolResultFilesUnchanged": true,
+  "otherPreservedFiles": 9,
+  "oldBytesPreserved": true
+}

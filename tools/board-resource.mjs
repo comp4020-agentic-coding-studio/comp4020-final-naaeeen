@@ -13,7 +13,7 @@ import {setTimeout as timerDelay} from "node:timers/promises";
 import { crc32, deflateSync } from "node:zlib";
 import { Server } from "socket.io";
 import { io } from "socket.io-client";
-import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES } from "./spatial-resource.mjs";
+import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES, failResourceAck, resourceFailureCategory } from "./spatial-resource.mjs";
 import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
 const arg = k => {
     const n = process.argv.indexOf(k);
@@ -31,7 +31,7 @@ const fail = code => {
     throw Object.assign(new Error(code), { code });
 }, ok = r => {
     if (!r?.ok)
-        fail(r?.code ?? "NO_ACK");
+        failResourceAck(r, "NO_ACK");
     return r;
 };
 function freeze(p, protocolHash) {
@@ -603,7 +603,7 @@ async function run() {
     function launch(fn) {
         const job = Promise.resolve().then(fn).catch(e => {
             error(e.code ?? "WORKLOAD_FAILURE");
-            failure ??= { phase, code: e.code ?? "WORKLOAD_FAILURE" };
+            failure ??= { phase, code: e.code ?? "WORKLOAD_FAILURE", ackCategory: resourceFailureCategory(e) };
         }).finally(() => jobs.delete(job));
         jobs.add(job);
         return job;
@@ -1178,7 +1178,7 @@ async function run() {
 
     }
     catch (e) {
-        failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE" };
+        failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE", ackCategory: resourceFailureCategory(e) };
         const status=failureStatus(failure.code);
         finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
         process.exitCode = 1;

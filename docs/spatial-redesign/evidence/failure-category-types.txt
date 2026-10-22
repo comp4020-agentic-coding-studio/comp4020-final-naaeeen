@@ -1,0 +1,22 @@
+Already up to date
+Done in 51ms using pnpm v11.9.0
+spec/board-resource-delivery.test.ts(366,124): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.
+spec/house-elapsed-clock.test.ts(16,98): error TS2345: Argument of type 'ActivityRecord' is not assignable to parameter of type 'Record<string, unknown>'.
+  Index signature for type 'string' is missing in type 'ActivityRecord'.
+spec/house-elapsed-clock.test.ts(41,134): error TS2345: Argument of type '(shift: 0 | 5000 | -5000) => Promise<void>' is not assignable to parameter of type '(...args: [-5000, "rollback"] | [0, "stalled"] | [5000, "forward"]) => Awaitable<void>'.
+  Types of parameters 'shift' and 'args' are incompatible.
+    Type '[-5000, "rollback"] | [0, "stalled"] | [5000, "forward"]' is not assignable to type '[shift: 0 | 5000 | -5000]'.
+      Type '[-5000, "rollback"]' is not assignable to type '[shift: 0 | 5000 | -5000]'.
+        Source has 2 element(s) but target allows only 1.
+spec/house-elapsed-clock.test.ts(44,133): error TS2345: Argument of type '(shift: 0 | 1001 | -5000) => Promise<void>' is not assignable to parameter of type '(...args: [-5000, "rollback"] | [0, "stalled"] | [1001, "forward"]) => Awaitable<void>'.
+  Types of parameters 'shift' and 'args' are incompatible.
+    Type '[-5000, "rollback"] | [0, "stalled"] | [1001, "forward"]' is not assignable to type '[shift: 0 | 1001 | -5000]'.
+      Type '[-5000, "rollback"]' is not assignable to type '[shift: 0 | 1001 | -5000]'.
+        Source has 2 element(s) but target allows only 1.
+spec/house-game-realtime.test.ts(25,69): error TS2353: Object literal may only specify known properties, and 'elapsedNow' does not exist in type 'Options'.
+spec/house-puzzle-realtime.test.ts(16,84): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.
+spec/house-realtime.test.ts(39,57): error TS2353: Object literal may only specify known properties, and 'elapsedNow' does not exist in type 'Options'.
+spec/house-recovery-service.test.ts(23,203): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.
+spec/house-seat-authority.test.ts(18,95): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.
+spec/house-spatial-http.test.ts(31,96): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.
+spec/spatial-resource-rate.test.ts(50,96): error TS2353: Object literal may only specify known properties, and 'houseElapsedNow' does not exist in type 'ServiceOptions'.

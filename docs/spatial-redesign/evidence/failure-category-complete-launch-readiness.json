@@ -1,0 +1,16 @@
+{
+  "status": "FOCUSED_COMPLETE_LAUNCH_CONTROL_PASS",
+  "specSHA256": "f3d6ea9692dc6188fdc2aabadaf09f3f8b93049260e47c4fbe386e205ceedb65",
+  "instrumentHashes": {
+    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb"
+  },
+  "newFocusedResult": {
+    "passed": 1,
+    "skipped": 11,
+    "log": "failure-category-complete-launch-green.txt"
+  },
+  "scope": "Executes actual extracted whole launch(): Promise.resolve().then(fn), its rejection catch and finally jobs.delete(job). First trusted rejected ACK records original RATE_LIMITED/ACTION_BUDGET; a later MOVE_INTERVAL rejection retains the same first failure; both jobs leave the Set after settlement.",
+  "priorEvidence": "Original11/11 and59/59 logs and prior readiness remain untouched. They predate this added test; no combined60-test result is claimed.",
+  "limits": "No application/service/socket drain or process cleanup was executed by this test. No instrument edits, binding, load or broad test run."
+}

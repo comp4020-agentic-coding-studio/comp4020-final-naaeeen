@@ -1,0 +1,36 @@
+{
+  "status": "INSTRUMENTS_FROZEN_PARENT_QUALIFICATION_PENDING",
+  "sourceHashes": {
+    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb",
+    "spec/spatial-resource-failure-category.test.ts": "62b90ffa7c80abb16e6ff9adbccc1b776342c25d33f26a7002ca296656dd90b9"
+  },
+  "scope": "Only safe failure category reporting; originalcode preserved and success timing/sends/routes/gates/cleanup unchanged.",
+  "schema": "failure.ackCategory is ACTION_BUDGET/MOVE_INTERVAL/OTHER from a private failure-only WeakMap; no raw ACK/error fields copied.",
+  "firstRed": {
+    "tests": 11,
+    "failed": 10,
+    "passed": 1,
+    "log": "failure-category-first-red.txt"
+  },
+  "green": {
+    "tests": 11,
+    "passed": 11,
+    "log": "failure-category-first-green.txt"
+  },
+  "pureRegressions": {
+    "tests": 59,
+    "passed": 59,
+    "files": 3,
+    "log": "failure-category-pure-regressions.txt"
+  },
+  "syntaxAndDiff": "PASS",
+  "wholeTypes": {
+    "status": "FAIL_UNOWNED_CONCURRENT_HOOK_FIXTURES",
+    "log": "failure-category-types.txt",
+    "followup": "Parent requires no rerun until core/fixture freeze. New resource category spec had no reported type errors."
+  },
+  "contextualReadOnlyReview": "CLEAR bound to these three hashes; parent has separately started fresh Astra review.",
+  "preservationResolution": "failure-category-preservation-resolution.json",
+  "bindingAndExecution": "NOT_RUN; old protocols retain old source bindings and results; parent owns future source qualification."
+}

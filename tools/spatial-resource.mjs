@@ -9,8 +9,8 @@ const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 const round = number => Math.round(number * 1000) / 1000;
 const sleep = milliseconds => timerDelay(milliseconds);
 const q = (values, percentile) => values.length ? [...values].sort((a,b)=>a-b)[Math.ceil(values.length*percentile)-1] : null;
-const fail = code => { throw Object.assign(new Error(code), { code }); };
-const ok = response => { if (!response?.ok) fail(response?.code ?? "SPATIAL_NO_ACK"); return response; };
+const fail = (code, ack) => { if (ack !== undefined) failResourceAck(ack, code); throw Object.assign(new Error(code), { code }); };
+const ok = response => { if (!response?.ok) fail(response?.code ?? "SPATIAL_NO_ACK", response); return response; };
 const cleanSample = value => value;
 
 export const MEMORY_DIAGNOSTIC_PHASES = Object.freeze(["startup","bootstrap","invalid-ack-negative","calibration-finish","measurement","slow-reader","recovery-check"]);
@@ -52,6 +52,12 @@ export function classifyBootstrapRateAck(ack) {
   if(ack?.code==="RATE_LIMITED"&&ack.message==="Movement updates are limited to ten per second.")return "MOVE_INTERVAL";
   return "OTHER";
 }
+const ackFailureCategories = new WeakMap();
+export function failResourceAck(ack, fallbackCode) {
+  const code=ack?.code??fallbackCode,error=Object.assign(new Error(code),{code}),category=classifyBootstrapRateAck(ack);
+  ackFailureCategories.set(error,category==="ACTION_BUDGET"||category==="MOVE_INTERVAL"?category:"OTHER");throw error;
+}
+export function resourceFailureCategory(error) { return ackFailureCategories.get(error)??"OTHER"; }
 export const BOOTSTRAP_RATE_COLUMNS=Object.freeze(["actorIndex","step","motionSequenceContext","action","sendMonotonicMs","sendWallMs","ackMonotonicMs","ackWallMs","outcome","classification"]);
 export function newBootstrapRateTrace(config,clock=()=>({monotonicMs:performance.now(),wallMs:Date.now()})) {
   if(config?.maximumRows!==194||!Array.isArray(config.routes)||config.routes.length!==4||JSON.stringify(config.routes.map(row=>row.actorIndex).sort((a,b)=>a-b))!==JSON.stringify([2,4,14,16])||config.routes.some(row=>!Number.isSafeInteger(row.moves)||row.moves<1||row.seatActions!==1||! /^[a-f0-9]{64}$/.test(row.routeSHA256))||config.routes.reduce((total,row)=>total+row.moves+row.seatActions,0)!==194)fail("RATE_TRACE_BOUND_INVALID");
@@ -159,7 +165,7 @@ export function createSpatialWorkload({origin,scenario,signal,rpc,houses,views,o
   async function bootstrapAsk(actor,step,action,body) {
     if(!rateTrace)return ok(await ask(actor,"house."+action,body));
     const row=beginBootstrapRateAction(rateTrace,actor.index,step,actor.motionSequence,action),job=ask(actor,"house."+action,body);traceJobs.add(job);
-    try {const reply=await job;finishBootstrapRateAction(rateTrace,row,reply);if(reply?.ok!==true)fail(reply?.code??"NO_ACK");return reply;}
+    try {const reply=await job;finishBootstrapRateAction(rateTrace,row,reply);if(reply?.ok!==true)fail(reply?.code??"NO_ACK",reply);return reply;}
     catch(error){if(row[8]===0&&rateTrace.firstFailure?.outcome!=="CLOCK_INVALID"){const timedOut=error?.message==="operation has timed out";finishBootstrapRateAction(rateTrace,row,null,timedOut,!timedOut);fail(timedOut?"RATE_TRACE_ACK_TIMEOUT":"RATE_TRACE_ACK_TRANSPORT_ERROR");}throw error;}
     finally {traceJobs.delete(job);}
   }

@@ -1,0 +1,21 @@
+{
+  "checks": [
+    {
+      "file": "tools/board-resource.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "file": "tools/spatial-resource.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "check": "tracked diff whitespace",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "historicalProtocolAndResultsUnchanged": false,
+  "historicalFiles": 10
+}

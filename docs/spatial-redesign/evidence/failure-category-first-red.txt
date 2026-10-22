@@ -1,0 +1,223 @@
+Already up to date
+Done in 51ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/spatial-resource-failure-category.test.ts [2m([22m[2m11 tests[22m[2m | [22m[31m10 failed[39m[2m)[22m[33m 588[2mms[22m[39m
+   [31m❯[39m safe first rejected ACK category [2m(11)[22m
+[31m     [31m×[31m actual spatial/board throw reaches both real catch projections: { ok: false, …(2) }[39m[32m 89[2mms[22m[39m
+[31m     [31m×[31m actual spatial/board throw reaches both real catch projections: { ok: false, …(2) }[39m[32m 50[2mms[22m[39m
+[31m     [31m×[31m unknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, …(2) }[39m[32m 44[2mms[22m[39m
+[31m     [31m×[31m unknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, …(2) }[39m[32m 28[2mms[22m[39m
+[31m     [31m×[31m unknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, code: 'FORBIDDEN', …(1) }[39m[32m 27[2mms[22m[39m
+[31m     [31m×[31m unknown/non-rate/missing ACKs remain OTHER with original code: null[39m[32m 26[2mms[22m[39m
+     [32m✓[39m actual successful predicates preserve response identity[32m 97[2mms[22m[39m
+[31m     [31m×[31m real non-traced bootstrap keeps one existing ask and the 5000ms timeout[39m[32m 50[2mms[22m[39m
+[31m     [31m×[31m real traced rejection preserves its existing trace and categorizes the thrown ACK[39m[32m 75[2mms[22m[39m
+[31m     [31m×[31m transport and forged fields cannot impersonate a classified ACK[39m[32m 41[2mms[22m[39m
+[31m     [31m×[31m later errors cannot replace the first category in either catch[39m[32m 59[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m10 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 08:59:53
+[2m   Duration [22m 1.04s[2m (tests 63%, import 22%, transform 15%)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 10 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mactual spatial/board throw reaches both real catch projections: { ok: false, …(2) }
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "ACTION_BUDGET",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m85:25[22m[39m
+    [90m 83|[39m       for (const project of [projectOuter, projectLaunch]) {
+    [90m 84|[39m         const failure = project(error);
+    [90m 85|[39m         expect(failure).toEqual({ phase: "prepare", code: "RATE_LIMITE…
+    [90m   |[39m                         [31m^[39m
+    [90m 86|[39m         expect(JSON.stringify(failure)).not.toContain(sentinel);
+    [90m 87|[39m         expect(JSON.stringify(failure)).not.toContain(reply.message);
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mactual spatial/board throw reaches both real catch projections: { ok: false, …(2) }
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "MOVE_INTERVAL",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m85:25[22m[39m
+    [90m 83|[39m       for (const project of [projectOuter, projectLaunch]) {
+    [90m 84|[39m         const failure = project(error);
+    [90m 85|[39m         expect(failure).toEqual({ phase: "prepare", code: "RATE_LIMITE…
+    [90m   |[39m                         [31m^[39m
+    [90m 86|[39m         expect(JSON.stringify(failure)).not.toContain(sentinel);
+    [90m 87|[39m         expect(JSON.stringify(failure)).not.toContain(reply.message);
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22munknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, …(2) }
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22munknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, …(2) }
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "OTHER",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m99:21[22m[39m
+    [90m 97|[39m   ] as const)("unknown/non-rate/missing ACKs remain OTHER with origina…
+    [90m 98|[39m     const failure = projectOuter(rejected(actualOK(spatialSource), rep…
+    [90m 99|[39m     expect(failure).toEqual({ phase: "prepare", code, ackCategory: "OT…
+    [90m   |[39m                     [31m^[39m
+    [90m100|[39m     expect(JSON.stringify(failure)).not.toContain(sentinel);
+    [90m101|[39m   });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22munknown/non-rate/missing ACKs remain OTHER with original code: { ok: false, code: 'FORBIDDEN', …(1) }
+[31m[1mAssertionError[22m: expected { phase: 'prepare', code: 'FORBIDDEN' } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "OTHER",[39m
+[2m    "code": "FORBIDDEN",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m99:21[22m[39m
+    [90m 97|[39m   ] as const)("unknown/non-rate/missing ACKs remain OTHER with origina…
+    [90m 98|[39m     const failure = projectOuter(rejected(actualOK(spatialSource), rep…
+    [90m 99|[39m     expect(failure).toEqual({ phase: "prepare", code, ackCategory: "OT…
+    [90m   |[39m                     [31m^[39m
+    [90m100|[39m     expect(JSON.stringify(failure)).not.toContain(sentinel);
+    [90m101|[39m   });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22munknown/non-rate/missing ACKs remain OTHER with original code: null
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "OTHER",[39m
+[2m    "code": "SPATIAL_NO_ACK",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m99:21[22m[39m
+    [90m 97|[39m   ] as const)("unknown/non-rate/missing ACKs remain OTHER with origina…
+    [90m 98|[39m     const failure = projectOuter(rejected(actualOK(spatialSource), rep…
+    [90m 99|[39m     expect(failure).toEqual({ phase: "prepare", code, ackCategory: "OT…
+    [90m   |[39m                     [31m^[39m
+    [90m100|[39m     expect(JSON.stringify(failure)).not.toContain(sentinel);
+    [90m101|[39m   });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mreal non-traced bootstrap keeps one existing ask and the 5000ms timeout
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "MOVE_INTERVAL",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m111:34[22m[39m
+    [90m109|[39m     let caught: any;
+    [90m110|[39m     try { await fixture.run(); } catch (error) { caught = error; }
+    [90m111|[39m     expect(projectOuter(caught)).toEqual({ phase: "prepare", code: "RA…
+    [90m   |[39m                                  [31m^[39m
+    [90m112|[39m     expect(fixture.calls).toEqual([["timeout", 5000], ["house.move", {…
+    [90m113|[39m     expect(fixture.rateTrace).toBeNull();
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mreal traced rejection preserves its existing trace and categorizes the thrown ACK
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "ACTION_BUDGET",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m120:34[22m[39m
+    [90m118|[39m     let caught: any;
+    [90m119|[39m     try { await fixture.run(); } catch (error) { caught = error; }
+    [90m120|[39m     expect(projectOuter(caught)).toEqual({ phase: "prepare", code: "RA…
+    [90m   |[39m                                  [31m^[39m
+    [90m121|[39m     expect(spatial.bootstrapRateArtifact(fixture.rateTrace)).toMatchOb…
+    [90m122|[39m     expect(fixture.calls).toHaveLength(2);
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mtransport and forged fields cannot impersonate a classified ACK
+[31m[1mAssertionError[22m: expected { phase: 'prepare', …(1) } to deeply equal { phase: 'prepare', …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "ackCategory": "OTHER",[39m
+[2m    "code": "RATE_LIMITED",[22m
+[2m    "phase": "prepare",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m132:31[22m[39m
+    [90m130|[39m     expect(caught).toBe(transport);
+    [90m131|[39m     for (const project of [projectOuter, projectLaunch]) {
+    [90m132|[39m       expect(project(caught)).toEqual({ phase: "prepare", code: "RATE_…
+    [90m   |[39m                               [31m^[39m
+    [90m133|[39m       expect(JSON.stringify(project(caught))).not.toContain(sentinel);
+    [90m134|[39m     }
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-failure-category.test.ts[2m > [22msafe first rejected ACK category[2m > [22mlater errors cannot replace the first category in either catch
+[31m[1mAssertionError[22m: expected undefined to be 'ACTION_BUDGET' // Object.is equality[39m
+
+[32m- Expected:[39m
+"ACTION_BUDGET"
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m spec/spatial-resource-failure-category.test.ts:[2m142:31[22m[39m
+    [90m140|[39m     expect(projectOuter(later, first)).toBe(first);
+    [90m141|[39m     expect(projectLaunch(later, first)).toBe(first);
+    [90m142|[39m     expect(first.ackCategory).toBe("ACTION_BUDGET");
+    [90m   |[39m                               [31m^[39m
+    [90m143|[39m   });
+    [90m144|[39m });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯[22m[39m
+
