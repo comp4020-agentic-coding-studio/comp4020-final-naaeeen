@@ -113,8 +113,8 @@ export function createSnapshotReducer(onSnapshot = () => {}) {
 }
 
 /** @typedef {{commandId:string,type:string,houseId?:string,expectedRevision?:number,payload:Record<string,any>}} PendingCommand */
-/** @typedef {{command:PendingCommand,identityId:string,zoneId:string,houseId?:string,createdAt:number}} OutboxEntry */
-/** @typedef {{commandId:string,type:string,createdAt:number,houseId:string|null,zoneId:string,state:'pending'|'expired',label:string,command:PendingCommand,canRetry:boolean}} PendingRow */
+/** @typedef {{command:PendingCommand,identityId:string,zoneId:string,houseId?:string,createdAt:number,recoveryHeld?:boolean}} OutboxEntry */
+/** @typedef {{commandId:string,type:string,createdAt:number,houseId:string|null,zoneId:string,state:'pending'|'expired',label:string,command:PendingCommand,canRetry:boolean,recoveryHeld:boolean}} PendingRow */
 /** @typedef {{getItem:(key:string)=>string|null,setItem:(key:string,value:string)=>void}} OutboxStorage */
 /** A sessionStorage outbox is a bounded pending draft, never a saved acknowledgement.
  * Corrupt storage is retained and reported, rather than replaced with a fresh queue.
@@ -144,7 +144,7 @@ export function createCommandOutbox(storage) {
       if (!Array.isArray(parsed) || parsed.length > 16 || parsed.some(entry => {
         if (!plainObject(entry) || !validCommand(entry.command) || !boundedId(entry.identityId) || !boundedId(entry.zoneId)
           || entry.houseId !== entry.command.houseId || (puzzleTypes.has(entry.command.type) && entry.zoneId !== 'lounge') || (entry.command.type === 'chat.send' && entry.command.payload.zoneId !== entry.zoneId) || !Number.isSafeInteger(entry.createdAt) || entry.createdAt < 0
-          || seen.has(entry.command.commandId)) return true;
+          || (entry.recoveryHeld !== undefined && entry.recoveryHeld !== true) || seen.has(entry.command.commandId)) return true;
         seen.add(entry.command.commandId);
         if (puzzleTypes.has(entry.command.type)) {
           const scope = JSON.stringify([entry.identityId, entry.houseId]), count = (puzzleCounts.get(scope) ?? 0) + 1;
@@ -182,10 +182,18 @@ export function createCommandOutbox(storage) {
       if (entries.length >= 16 || bytes([...entries, entry]) > 32 * 1024) throw problem('OUTBOX_FULL', 'Inspect and resolve a pending draft before adding another.');
       write([...entries, entry]); return clone(entry);
     },
+    hold(commandId) {
+      read();const entry=entries.find(value=>value.command.commandId===commandId);
+      if(!entry)throw problem('PENDING_NOT_FOUND','This original draft is no longer pending.');
+      if(entry.recoveryHeld)return clone(entry);
+      const next=entries.map(value=>value===entry?{...value,recoveryHeld:true}:value);
+      if(bytes(next)>32*1024)throw problem('OUTBOX_FULL','This tab cannot preserve the recovery hold. The original draft was kept; free space before navigating.');
+      write(next);return clone(next.find(value=>value.command.commandId===commandId));
+    },
     all() { read(); return clone(entries); },
     eligible(identityId, zoneId, now = Date.now(), houseId = '') {
       read();
-      return clone(entries.filter(entry => entry.identityId === identityId && entry.zoneId === zoneId && (!entry.houseId || entry.houseId === houseId) && now >= entry.createdAt && now - entry.createdAt <= DAY));
+      return clone(entries.filter(entry => !entry.recoveryHeld && entry.identityId === identityId && entry.zoneId === zoneId && (!entry.houseId || entry.houseId === houseId) && now >= entry.createdAt && now - entry.createdAt <= DAY));
     },
     remove(commandId) { read(); write(entries.filter(entry => entry.command.commandId !== commandId)); },
     removeOtherIdentities(identityId) { read(); write(entries.filter(entry => entry.identityId === identityId)); },
@@ -272,7 +280,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
       const reply = await ask('house.subscribe', { zoneId, controllerToken });
       if (request !== requestGeneration || closed) throw problem('STALE_ZONE', 'A newer room request replaced this one.');
       if (!acceptLive(reply.snapshot)) throw updateRequired ?? problem('STALE_ZONE', 'The house has not confirmed this room yet.');
-      void flush(); return reply;
+      void flush(); return { ...reply, snapshot: clone(latestLive) };
     } catch (error) {
       if (!closed && !updateRequired && request === requestGeneration) {
         const fallbackRequest = ++requestGeneration;
@@ -368,7 +376,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     inFlight.set(entry.command.commandId, work);
     try { return await work; }
     catch (error) {
-      if (error.code && !['PENDING', 'STORAGE_UNAVAILABLE', 'NOT_CONTROLLER', 'STALE_ZONE', 'CLOSED', 'IDENTITY_CHANGED', 'CLIENT_UPDATE_REQUIRED'].includes(error.code)) {
+      if (error.code && !['PENDING', 'STORAGE_UNAVAILABLE', 'NOT_CONTROLLER', 'STALE_ZONE', 'CLOSED', 'IDENTITY_CHANGED', 'CLIENT_UPDATE_REQUIRED', 'ACTIVITY_SEAT_REQUIRED'].includes(error.code)) {
         try { outbox.remove(entry.command.commandId); } catch (cleanupError) { report(cleanupError); }
       }
       throw error;
@@ -412,8 +420,13 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     assertActive(request); assertIdentity(identityId);
     const zoneId = next.type === 'chat.send' ? next.payload?.zoneId : selectedZone;
     const entry = outbox.add(next, identityId, zoneId);
+    if(entry.recoveryHeld)throw report(problem('INSPECTION_REQUIRED','This original draft is held for recovery. Choose Retry in Pending drafts.'));
     if (Date.now() - entry.createdAt > DAY) throw report(problem('INSPECTION_REQUIRED', 'Inspect this expired draft and choose Retry in the pending-actions panel.'));
     try { const reply = await sendEntry(entry); assertActive(request); return reply; } catch (error) { report(error); throw error; }
+  }
+  function automaticSeatEligible(entry) {
+    if(entry.command.type==='game.leave'||!(/^(game|puzzle)\./.test(entry.command.type)))return true;
+    return Boolean(latestLive?.durable.zoneId==='lounge'&&latestLive.players.some(player=>player.id===latestLive.durable.selfId&&player.connected&&player.zoneId==='lounge'&&/^game-seat-[1-6]$/.test(player.seatId)));
   }
   async function flush() {
     if (flushing || closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) return;
@@ -424,7 +437,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
         if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) break;
         // A previous ACK can take seconds; discard, expiry and scope may have changed.
         const entry = outbox.eligible(latestLive.durable.selfId, latestLive.durable.zoneId, Date.now(), latestLive.durable.house.id).find(value => value.command.commandId === commandId);
-        if (!entry) continue;
+        if (!entry || !automaticSeatEligible(entry)) continue;
         try { await sendEntry(entry); } catch (error) { report(error); if (['PENDING', 'STORAGE_UNAVAILABLE', 'STALE_ZONE', 'NOT_CONTROLLER', 'CLIENT_UPDATE_REQUIRED'].includes(error.code)) break; }
       }
     } catch (error) { report(error); }
@@ -518,7 +531,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     return {
       entries: own.map(entry => ({ commandId: entry.command.commandId, type: entry.command.type, label: entry.command.type === 'puzzle.start' ? 'Start picture' : entry.command.type === 'puzzle.place' ? 'Place picture piece' : entry.command.type, createdAt: entry.createdAt,
         houseId: entry.houseId ?? null, zoneId: entry.zoneId, state: now - entry.createdAt > DAY ? 'expired' : 'pending',
-        command: entry.command, canRetry: now >= entry.createdAt && !inFlight.has(entry.command.commandId) && retryScope(entry, identityId) === null })),
+        command: entry.command, recoveryHeld:entry.recoveryHeld===true, canRetry: now >= entry.createdAt && !inFlight.has(entry.command.commandId) && retryScope(entry, identityId) === null })),
       otherIdentityCount: all.length - own.length, total: all.length,
     };
   }
@@ -527,6 +540,13 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     const entry = outbox.all().find(value => value.identityId === identityId && value.command.commandId === commandId);
     if (!entry) throw problem('PENDING_NOT_FOUND', 'This identity has no pending draft with that command ID.');
     return { identityId, entry, request };
+  }
+  async function holdPending(commandId) {
+    try {
+      const {entry,request}=await ownPending(commandId);assertActive(request);
+      if(inFlight.has(commandId))throw problem('PENDING_IN_FLIGHT','This action is already awaiting a reply. Wait before moving its recovery context.');
+      const held=outbox.hold(entry.command.commandId);assertActive(request);return {commandId:held.command.commandId,recoveryHeld:true};
+    }catch(error){report(error);throw error;}
   }
   async function retryPending(commandId) {
     try {
@@ -552,7 +572,12 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
     const pending = await getPending(); assertActive(request); return pending.entries;
   }
   return {
-    connect, subscribe, command, getPending, retryPending, discardPending, discardOtherIdentities, exportPending,
+    connect, subscribe, command, getPending, holdPending, retryPending, discardPending, discardOtherIdentities, exportPending,
+    getRoomHttpAuthority() {
+      if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) throw problem('NOT_CONTROLLER', 'Take control in the current room first.');
+      const self = latestLive.players.find(player => player.id === latestLive.durable.selfId);
+      return { generation: latestLive.generation, accessGeneration: latestLive.accessGeneration, controllerToken, zoneId: latestLive.durable.zoneId, seatId: self?.seatId ?? null, seatGeneration: self?.seatGeneration };
+    },
     puzzleIntent, retryPuzzleIntent, pendingPuzzleIntent,
     move(position) {
       if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected || motionFlight) return false;
@@ -591,7 +616,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () => 
  */
 export function createPendingInspector(options = {}) {
   const client = createHouseClient(options);
-  return { getPending: client.getPending, retryPending: client.retryPending, discardPending: client.discardPending,
+  return { getPending: client.getPending, holdPending:client.holdPending, retryPending: client.retryPending, discardPending: client.discardPending,
     discardOtherIdentities: client.discardOtherIdentities, exportPending: client.exportPending, command: client.command,
     close: client.close };
 }

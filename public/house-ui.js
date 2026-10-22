@@ -1,9 +1,12 @@
 import { createHouseClient, createPendingInspector } from "./house-client.js";
 import { createHouseGameUI } from "./house-game-ui.js";
+import { createHouseGatheringUI } from "./house-gathering-ui.js";
+import { createHouseStudioUI } from "./house-studio-ui.js";
+import { createHouseStudioPreview } from "./house-studio-preview.js";
 import { createHousePuzzleUI } from "./house-puzzle-ui.js";
 import { createHouseWorld } from "./house-world.js";
 import { ROOM_PRESETS, getRoomPreset } from "./house-room-content.js";
-import { validatePlacements, footprint } from "./house-geometry.js";
+import { validatePlacements, footprint, createLayout } from "./house-geometry.js";
 import { createMovableWindow, createModalFocus } from "./house-shell.js";
 const $ = id => document.getElementById(id);
 function setPlaceLabel(text){const label=$("place-label");label.textContent=text;label.title=text;}
@@ -13,20 +16,24 @@ let live = null, me = null, world = null, client = null, activePanel = null;
 let voiceDraft=null,updateRecovery=null,voicePendingRows=[],voicePendingScope="",voicePendingError="";
 let cardDirty = false, cardBase = null, cardProjection=null, roomDraft = null, suspendedDrafts = null;
 let lastScope="", lastIdentityScope="", lastHouseKey="", inspector=null, pendingRequest=0, privacyGeneration=0,bootstrapRequest=0,keyIssuance=null;
-const unreadStreams=new Map();
+const unreadStreams=new Map(), zoneDrafts=new Map(), roomDrafts=new Map();
+let pendingSeatChoice=null,plannedVisit=null,gatheringKind="study",pendingReturn=null;
 let adminRequest=0,safeAreaFrame=null;
 let lastDurableKey = "", noticeTimer, chatVersion=0, cardVersion=0, checkingMembership=false;
 const pending = new Map(), pendingZones = new Map(), saveFlights = new Set();
-let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null;
+let entered=false,embeddedFrame=null,embeddedContext="",boardLauncher=null,boardReturnGathering=null;
 let gamePendingRows=[],gamePendingRequest=0,gameRefreshKey="",plannedPlace=null,breakActivity="picture",returnJourney=null;
 const gameUI=createHouseGameUI($("four-game-panel"),{send:sendGame,resolveJoin:retryOriginalGameJoin,onLeave:closePanel,onReturn:()=>returnToMyRoom("four"),onPending:()=>openPanel("pending"),onError:message=>{if(activePanel!=="game")notice(message,true);}});
 const puzzleUI=createHousePuzzleUI($("picture-game-panel"),{send:save,intent:(mode,roundId)=>client.puzzleIntent(mode,roundId),retryIntent:()=>client.retryPuzzleIntent(),pendingIntent:()=>client?.pendingPuzzleIntent?.()||null,onLeave:closePanel,onReturn:()=>returnToMyRoom("picture"),onPending:()=>openPanel("pending"),onChat:()=>openPanel("chat")});
+const roomPreview=createHouseStudioPreview({document,onPreview:image=>world?.setStudioPreview?.(image)});
+const studioUI=createHouseStudioUI($("studio-panel"),{api:{state:roomId=>studioRequest("/api/house/studio?roomId="+encodeURIComponent(roomId),undefined,roomId),image:(roomId,imageId)=>studioRequest("/api/house/studio/image?roomId="+encodeURIComponent(roomId)+"&imageId="+encodeURIComponent(imageId),undefined,roomId,true),command:exactCommand=>studioRequest("/api/house/studio/command",exactCommand,exactCommand.roomId),export:value=>studioRequest("/api/house/studio/export",value,value.roomId||live?.durable.room?.id)},onClose:()=>{if(activePanel==="studio")closePanel();},onChat:()=>openPanel("chat"),onStatus:message=>{if(message&&activePanel==="studio")notice(message);}});
+const gatheringUI=createHouseGatheringUI($("gathering-panel"),{api:{state:kind=>gatheringRequest("/api/house/gathering?kind="+encodeURIComponent(kind),undefined,kind),action:(command,context)=>gatheringRequest("/api/house/gathering",command,command.kind,false,context),image:(kind,itemId)=>gatheringRequest("/api/house/gathering/image?kind="+encodeURIComponent(kind)+"&itemId="+encodeURIComponent(itemId),undefined,kind,true)},onOpenBoard:()=>openBoard({keepGathering:true}),onClose:()=>{if(activePanel==="gathering")closePanel();},onChat:()=>openPanel("chat")});
 const panelFocus=createModalFocus($("panel")),boardFocus=createModalFocus($("board-workspace"));
 const chatWindow=createMovableWindow({window,element:$("chat-window"),handle:$("chat-handle"),body:$("chat-body"),collapse:$("chat-collapse"),resize:$("chat-resize"),onChange:state=>{if(state.shown&&!state.collapsed&&chatReadable())markChatRead();queueSafeArea();}});
 let reducedMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||false;
 try{const saved=window.localStorage.getItem("night-neighbourhood.reduced-motion");if(saved!==null)reducedMotion=saved==="true";}catch{/* A blocked preference store does not block play. */}
 $("reduced-motion").checked=reducedMotion;document.body.dataset.reducedMotion=String(reducedMotion);
-function setShellInert(){const modal=Boolean(embeddedFrame||activePanel&&!["room","game"].includes(activePanel));for(const id of ["world","game-controls","entry","chat-window"])$(id).inert=modal;}
+function setShellInert(){const modal=Boolean(embeddedFrame||activePanel&&!["room","game","studio","gathering"].includes(activePanel));for(const id of ["world","game-controls","entry","chat-window"])$(id).inert=modal;}
 function renderTitle(){
  $("lobby-export").hidden=!me?.archiveCount;$("archive-count").hidden=!me?.archiveCount;$("archive-count").textContent=me?.archiveCount?me.archiveCount+" private room archive"+(me.archiveCount===1?"":"s")+" available in your download.":"";
  entered=false;$("title-screen").hidden=false;$("lobby").hidden=true;$("game-controls").hidden=true;document.body.dataset.screen="title";
@@ -34,23 +41,45 @@ function renderTitle(){
  $("title-status").textContent=me?.home?"Your saved home is ready.":"Create a house, or use a friend’s house code.";applyInput();
 }
 function openAdmission(kind){if(me?.home){notice("Continue your saved home first. House settings includes leaving it.");return;}$("title-screen").hidden=true;$("lobby").hidden=false;$("admission-title").textContent=kind==="create"?"Create your house":"Join your friends";$("create-form").hidden=kind!=="create";$("join-form").hidden=kind!=="join";$("name").focus();document.body.dataset.screen="admission";applyInput();}
-function closeBoard(){if(!embeddedFrame)return;embeddedFrame.remove();embeddedFrame=null;embeddedContext="";$("board-workspace").hidden=true;$("board-status").textContent="";setShellInert();applyInput();boardFocus.close();if(boardLauncher?.isConnected&&!boardLauncher.closest("[hidden]"))boardLauncher.focus();boardLauncher=null;queueSafeArea();}
-function openBoard(){if(!live){notice("Waiting for the house connection.");return;}closePanel();chatWindow.close();boardLauncher=document.activeElement;embeddedContext=privateContext();embeddedFrame=document.createElement("iframe");embeddedFrame.id="board-frame";embeddedFrame.title="Collaborative shared board";embeddedFrame.src="/board/?embedded=1";const ownedFrame=embeddedFrame;embeddedFrame.addEventListener("load",()=>{if(embeddedFrame===ownedFrame&&embeddedContext===privateContext())$("board-status").textContent="House-wide workspace";});$("board-frame-host").replaceChildren(embeddedFrame);$("board-workspace").hidden=false;$("board-status").textContent="Opening the shared workspace…";setShellInert();applyInput();boardFocus.open(boardLauncher);}
+function closeBoard(){
+ if(!embeddedFrame)return;embeddedFrame.remove();embeddedFrame=null;embeddedContext="";$("board-workspace").hidden=true;$("board-status").textContent="";
+ const retained=boardReturnGathering;boardReturnGathering=null;if(retained&&retained===gatheringAuthorityKey(gatheringContext())){activePanel="gathering";$("panel").hidden=false;$("panel").dataset.tool="gathering";}
+ setShellInert();applyInput();boardFocus.close();if(boardLauncher?.isConnected&&!boardLauncher.closest("[hidden]"))boardLauncher.focus();boardLauncher=null;queueSafeArea();
+}
+function openBoard({keepGathering=false}={}){
+ if(!live){notice("Waiting for the house connection.");return;}
+ if(keepGathering&&activePanel==="gathering"){boardReturnGathering=gatheringAuthorityKey(gatheringContext());activePanel=null;$("panel").hidden=true;}else{boardReturnGathering=null;closePanel();}
+ chatWindow.close();boardLauncher=document.activeElement;embeddedContext=privateContext();embeddedFrame=document.createElement("iframe");embeddedFrame.id="board-frame";embeddedFrame.title="Collaborative shared board";embeddedFrame.src="/board/?embedded=1";const ownedFrame=embeddedFrame;embeddedFrame.addEventListener("load",()=>{if(embeddedFrame===ownedFrame&&embeddedContext===privateContext())$("board-status").textContent=boardReturnGathering?"Independent board · huddle kept at your seat":"House-wide workspace";});$("board-frame-host").replaceChildren(embeddedFrame);$("board-workspace").hidden=false;$("board-status").textContent="Opening the shared workspace…";setShellInert();applyInput();boardFocus.open(boardLauncher);
+}
 
-const RETAIN_INTENT_CODES=new Set(["TIMEOUT","PENDING","STORAGE_UNAVAILABLE","NOT_CONTROLLER","STALE_ZONE","CLOSED","IDENTITY_CHANGED","INSPECTION_REQUIRED","CLIENT_UPDATE_REQUIRED"]);
+const RETAIN_INTENT_CODES=new Set(["TIMEOUT","PENDING","STORAGE_UNAVAILABLE","NOT_CONTROLLER","STALE_ZONE","CLOSED","IDENTITY_CHANGED","INSPECTION_REQUIRED","CLIENT_UPDATE_REQUIRED","ACTIVITY_SEAT_REQUIRED"]);
 function node(tag, text, className) { const e=document.createElement(tag); if(text!==undefined)e.textContent=text; if(className)e.className=className; return e; }
 function notice(message,persistent=false){
  clearTimeout(noticeTimer);const target=activePanel?$("panel-feedback"):!$("title-screen").hidden?$("title-feedback"):!$("lobby").hidden?$("lobby-feedback"):$("notice");for(const id of ["notice","panel-feedback","lobby-feedback","title-feedback"])$(id).hidden=true;target.textContent=message;target.hidden=false;queueSafeArea();
  if(!persistent)noticeTimer=setTimeout(()=>{target.hidden=true;queueSafeArea();},6500);
 }
-async function api(path, body) {
+async function api(path, body, extraHeaders={}) {
  const abort=new AbortController();let timer;
  const request=(async()=>{
-  const response=await fetch(path,{signal:abort.signal,...(body===undefined?{cache:"no-store"}:{method:"POST",headers:{"Content-Type":"application/json",...((live?.durable.selfId||me?.identity.id)?{"X-House-Identity":live?.durable.selfId||me.identity.id}:{})},body:JSON.stringify(body)})});
+  const response=await fetch(path,{signal:abort.signal,...(body===undefined?{cache:"no-store",headers:extraHeaders}:{method:"POST",headers:{"Content-Type":"application/json",...extraHeaders,...((live?.durable.selfId||me?.identity.id)?{"X-House-Identity":live?.durable.selfId||me.identity.id}:{})},body:JSON.stringify(body)})});
   const result=await response.json();if(!response.ok){const error=new Error(result.message||"The house is temporarily unavailable.");error.code=result.code;throw error;}return result;
  })();
  try{return await Promise.race([request,new Promise((_,reject)=>{timer=setTimeout(()=>{abort.abort();const error=new Error("The reply did not arrive. This action is pending, not confirmed saved. Keep its original draft for retry.");error.code="TIMEOUT";reject(error);},8000);})]);}
  finally{clearTimeout(timer);}
+}
+function studioContext(){const room=live?.durable.room;if(!room)return null;const owner=live.durable.residents.find(person=>person.id===room.ownerId);return {serverEpoch:live.serverEpoch,identityId:live.durable.selfId,houseId:live.durable.house.id,roomId:room.id,ownerId:room.ownerId,ownerName:owner?.name||"Resident",doorOpen:room.open,controller:live.controller,generation:live.generation,accessGeneration:live.accessGeneration,zoneId:live.durable.zoneId};}
+async function studioRequest(path,body,roomId,binary=false){
+ const scope=studioContext(),context=privateContext();if(!scope||scope.roomId!==roomId)throw Object.assign(new Error("Return to the permitted room before opening its studio."),{code:"STALE_ZONE"});
+ const headers={"X-House-Identity":scope.identityId};if(path==="/api/house/studio/command"){const authority=client.getRoomHttpAuthority();if(authority.zoneId!==scope.roomId)throw Object.assign(new Error("Return to the original room before retrying."),{code:"STALE_ZONE"});headers["X-House-Generation"]=String(scope.generation);headers["X-House-Access-Generation"]=String(scope.accessGeneration);headers["X-House-Controller-Token"]=authority.controllerToken;}
+ let result;if(binary){const response=await fetch(path,{cache:"no-store",headers});if(!response.ok){const error=await response.json();throw Object.assign(new Error(error.message||"This image is unavailable."),{code:error.code});}result=await response.blob();}else result=await api(path,body,headers);
+ const current=studioContext();if(context!==privateContext()||!current||JSON.stringify(scope)!==JSON.stringify(current))throw Object.assign(new Error("Room access changed. Reopen the current studio."),{code:"STALE_ZONE"});if(path==="/api/house/studio/command"&&["studio.upload.commit","studio.clear"].includes(body?.type))void roomPreview.refresh();return result;
+}
+function gatheringContext(kind=gatheringKind){if(!live)return null;const self=live.players.find(player=>player.id===live.durable.selfId);return {kind,houseId:live.durable.house.id,identityId:live.durable.selfId,controller:live.controller,generation:live.generation,accessGeneration:live.accessGeneration,zoneId:live.durable.zoneId,seatPurpose:self?.connected&&live.durable.zoneId==="lounge"?createLayout(live.durable.house.capacity).seats.find(seat=>seat.id===self.seatId)?.purpose||null:null,seatId:self?.seatId||null,seatGeneration:self?.seatGeneration,ownRoomId:live.durable.residents.find(person=>person.id===live.durable.selfId)?.bedroomId,residents:live.durable.residents.map(person=>({id:person.id,name:person.name}))};}
+function gatheringAuthorityKey(value){return JSON.stringify(value?[value.kind,value.houseId,value.identityId,value.controller,value.generation,value.accessGeneration,value.zoneId,value.seatPurpose,value.seatId,value.seatGeneration]:null);}
+async function gatheringRequest(path,body,kind,binary=false,captured=null){
+ const scope=gatheringContext(kind),context=privateContext();if(!scope||scope.zoneId!=="lounge"||(captured&&gatheringAuthorityKey(captured)!==gatheringAuthorityKey(scope)))throw Object.assign(new Error("Return to the original lounge place and reopen its choices."),{code:"STALE_ZONE"});const headers={"X-House-Identity":scope.identityId};if(body){const requested=captured||scope;if(!Number.isSafeInteger(requested.seatGeneration))throw Object.assign(new Error("Wait for the current chair authority, then reopen its choices."),{code:"STALE_ZONE"});const authority=client.getRoomHttpAuthority();headers["X-House-Generation"]=String(requested.generation);headers["X-House-Access-Generation"]=String(requested.accessGeneration);headers["X-House-Seat-Generation"]=String(requested.seatGeneration);headers["X-House-Controller-Token"]=authority.controllerToken;}
+ let result;if(binary){const response=await fetch(path,{cache:"no-store",headers});if(!response.ok){const error=await response.json();throw Object.assign(new Error(error.message||"This shared item is unavailable."),{code:error.code});}result=await response.blob();}else result=await api(path,body,headers);
+ if(context!==privateContext()||gatheringAuthorityKey(scope)!==gatheringAuthorityKey(gatheringContext(kind)))throw Object.assign(new Error("Your place changed. Reopen its choices."),{code:"STALE_ZONE"});return result;
 }
 function command(type,payload,expectedRevision) { return {commandId:crypto.randomUUID(),type,payload,...(live?{houseId:live.durable.house.id}:{}),...(expectedRevision===undefined?{}:{expectedRevision})}; }
 async function save(type,payload,expectedRevision) {
@@ -112,42 +141,52 @@ function renderCameraMode(mode=world?.getCameraMode?.()||"play"){
  $("camera-controls").hidden=activePanel!=="options";$("game-settings").hidden=!live;$("resume-game").hidden=!live;$("return-title").hidden=!live;
  $("pause-description").textContent=live?"Your view is paused. Friends can keep moving and playing.":"Choose your comfort settings before entering the house.";
 }
-function applyInput(){document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
-function closePanel(){adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("modal-backdrop").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();if(chatReadable())markChatRead();panelFocus.close();queueSafeArea();}
+function applyInput(){document.body.dataset.panel=activePanel||"";document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";world?.setSuspended?.(Boolean(!entered||embeddedFrame||activePanel==="options"));world?.setInputEnabled(Boolean(live?.controller&&entered&&!activePanel&&!embeddedFrame&&$("lobby").hidden));renderCameraMode();setShellInert();}
+function closePanel(){activePanel=null;studioUI.close();gatheringUI.close({notify:false});adminRequest++;pendingRequest++;activePanel=null;$("panel").hidden=true;$("modal-backdrop").hidden=true;$("panel-feedback").hidden=true;world?.setEditing(false);world?.setRoomPreview?.(null);applyInput();if(chatReadable())markChatRead();panelFocus.close();queueSafeArea();}
 function openPanel(name){
+ if(name!=="pending")cancelPendingReturn();
  if(name==="game"&&live?.durable.zoneId!=="lounge"){notice("Walk to the break table in the lounge to open it.");return;}
+ if(name==="gathering"&&!["study","rest"].includes(gatheringContext()?.seatPurpose)){notice("Sit at the study table or sofa before opening its choices.");return;}
+ if(name==="studio"&&!live?.durable.room){notice("Enter a room to inspect its reference desk.");return;}
  if(name==="chat"){if(!live){notice("Waiting for the house connection.");return;}if(chatWindow.isOpen())chatWindow.close();else {chatWindow.open(document.activeElement);renderTranscript();markChatRead();}return;}
  if(!["recovery","pending","options","about"].includes(name)&&!live){notice("Waiting for the house connection.");return;}
  if(embeddedFrame)return;
- const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(!["room","game"].includes(name)));$("modal-backdrop").hidden=["room","game"].includes(name);$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
- for(const key of ["board","room","house","recovery","pending","options","about","game","places","voice"])$(key+"-panel").hidden=key!==name;
- $("panel-title").textContent={board:"My work",room:"My room",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood",game:"Break table",places:"Places",voice:"Optional voice"}[name];
+ if(activePanel==="gathering"&&name!=="gathering")closePanel();if(name!=="studio")studioUI.close();const visibleNotice=!$("notice").hidden?$("notice").textContent:!$("lobby-feedback").hidden?$("lobby-feedback").textContent:"";activePanel=name;$("panel").hidden=false;$("panel").dataset.tool=name;$("panel").setAttribute("aria-modal",String(!["room","game","studio","gathering"].includes(name)));$("modal-backdrop").hidden=["room","game","studio","gathering"].includes(name);$("panel-feedback").hidden=true;if(visibleNotice)notice(visibleNotice);
+ for(const key of ["board","room","studio","gathering","house","recovery","pending","options","about","game","places","voice"])$(key+"-panel").hidden=key!==name;
+ $("panel-close").textContent=name==="game"?"Look around":"Close";$("panel-close").setAttribute("aria-label",name==="game"?"Look around while seated":"Close panel");
+ $("panel-title").textContent={board:"Saved work",room:"My room",studio:"Room studio",gathering:gatheringKind==="study"?"Study huddle":"Sofa · shared inspection",house:"House settings",recovery:"Recover your identity",pending:"Pending drafts",options:live?"Game paused":"Options",about:"About the neighbourhood",game:"Break table",places:"Places",voice:"Optional voice"}[name];
  applyInput();
  if(name==="pending")void protectedAction(renderPending)();
  if(name==="board"){renderCards();if(!cardDirty)fillCard();}
+ if(name==="gathering"){gatheringUI.update(gatheringContext());gatheringUI.open(gatheringKind);}
+ if(name==="studio"){studioUI.update(studioContext());studioUI.open();}
  if(name==="room"){renderRoom();void protectedAction(refreshRoomPending)();}
+ if(name==="places")renderPlaces();
  if(name==="house"){renderHouse();void protectedAction(inspectVoicePending)();}
  if(name==="voice")renderVoice();
- if(name==="game"){panelFocus.close();$("panel-close").focus();renderGame();}else panelFocus.open();queueSafeArea();
+ if(["game","studio","gathering"].includes(name)){panelFocus.close();$("panel-close").focus();if(name==="game")renderGame();}else panelFocus.open();queueSafeArea();
 }
 function updateWorld(snapshot){
- if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onMovementIntent:()=>{returnJourney=null;plannedPlace=null;},onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
+ if(!world)world=createHouseWorld($("world"),{onMove:position=>client?.move(position),onMovementIntent:()=>{pendingReturn=null;returnJourney=null;plannedPlace=null;plannedVisit=null;pendingSeatChoice=null;},onInteract:protectedAction(interact),onSelectPlacement:id=>{$("placement").value=id;},onCameraModeChange:renderCameraMode,onHint:text=>$("context-hint").textContent=text});
  world.update(snapshot);world?.setReducedMotion?.(reducedMotion);applyInput();queueSafeArea();
 }
 async function interact(target){
  if(!live||!target)return;
- if(target.kind==="game"||target.type==="game"){openPanel("game");return;}
+ if(target.kind==="game"||target.type==="game"){if(atGameSeat())openPanel("game");else walkToPlace("game");return;}
  if(target.type==="door"){
   const resident=live.durable.residents.find(p=>p.slot===target.slot||p.bedroomId===target.roomId);
   if(!resident){notice("This bedroom is waiting for a new housemate.");return;}
-  closePanel();await client.subscribe(resident.bedroomId);
+  closePanel();await subscribeForPendingReturn(resident.bedroomId);
  }else if(target.type==="exit"){
-  closePanel();await client.subscribe("lounge");
+  closePanel();await subscribeForPendingReturn("lounge");
  }else if(target.type==="seat"){
   const self=live.players.find(p=>p.id===live.durable.selfId);
-  if(self?.seatId)await client.stand();else await client.claimSeat(target.seatId);
- }else if(target.type==="desk"){
-  openPanel("board");
+  if(self?.seatId){pendingSeatChoice=null;await client.stand();}else {
+   const kind=seatKind(target.seatId),choice=kind?{kind,seatId:target.seatId,scope:identityScope(live),generation:live.generation,accessGeneration:live.accessGeneration,serverEpoch:live.serverEpoch,ack:false}:null;pendingSeatChoice=choice;if(pendingReturn?.activity)pendingReturn.seatClaim=choice;
+   try{await client.claimSeat(target.seatId);if(choice&&pendingSeatChoice===choice&&seatChoiceCurrent(choice))choice.ack=true;reopenSeatedChoice();}catch(error){if(pendingReturn?.seatClaim===choice)pendingReturn=null;if(pendingSeatChoice===choice)pendingSeatChoice=null;throw error;}
+  }
+ }else if(["desk","studio","radio"].includes(target.type)){
+  openPanel("studio");if(target.type==="radio")$("studio-panel").querySelector("[data-studio-preset]")?.focus();
  }else if(target.type==="lamp"){
   if(!ownRoom()){notice("This lamp belongs to the room owner. Your own room has Lighting controls.");return;}
   openPanel("room");$("room-light").focus();$("light-form").scrollIntoView?.({block:"nearest"});
@@ -156,6 +195,12 @@ async function interact(target){
   openBoard();
  }
 }
+function seatKind(id){if(!live||live.durable.zoneId!=="lounge")return null;const purpose=createLayout(live.durable.house.capacity).seats.find(seat=>seat.id===id)?.purpose;return purpose==="rest"?"sofa":purpose||null;}
+function atGameSeat(){return Boolean(live?.controller&&live.durable.zoneId==="lounge"&&live.players.some(player=>player.id===live.durable.selfId&&player.connected&&player.zoneId==="lounge"&&/^game-seat-[1-6]$/.test(player.seatId)));}
+function seatChoiceCurrent(choice){return Boolean(live?.controller&&choice.scope===identityScope(live)&&choice.generation===live.generation&&choice.accessGeneration===live.accessGeneration&&choice.serverEpoch===live.serverEpoch);}
+function reopenSeatedChoice(){const choice=pendingSeatChoice;if(!choice||!live)return;if(!seatChoiceCurrent(choice)){if(pendingReturn?.seatClaim===choice)pendingReturn=null;pendingSeatChoice=null;return;}const self=live.players.find(player=>player.id===live.durable.selfId);if(choice.ack&&live.controller&&self?.connected&&self.seatId===choice.seatId&&seatKind(self.seatId)===choice.kind){pendingSeatChoice=null;if(pendingReturn){continuePendingReturn();return;}if(!activePanel&&!embeddedFrame){if(choice.kind==="game")openPanel("game");else{gatheringKind=choice.kind;openPanel("gathering");}}}}
+function retainZoneDrafts(snapshot){if(!snapshot)return;const cached=zoneDrafts.get(scopeKey(snapshot));if(!cached||cached.restoredVersion!==chatVersion||cached.chat!==$("chat-input").value)zoneDrafts.set(scopeKey(snapshot),{chat:$("chat-input").value,chatVersion});if(roomDraft)roomDrafts.set(roomDraft.scope,roomDraft);}
+function clearZoneDrafts(){zoneDrafts.clear();roomDrafts.clear();pendingSeatChoice=null;plannedVisit=null;cancelPendingReturn();}
 function privateContext(){return privacyGeneration+":"+(live?.durable.selfId||me?.identity.id||"");}
 function identityScope(snapshot){return snapshot?snapshot.durable.house.id+":"+snapshot.durable.selfId:"";}
 function scopeKey(snapshot){return snapshot?snapshot.durable.house.id+":"+snapshot.durable.selfId+":"+snapshot.durable.zoneId:"";}
@@ -163,18 +208,18 @@ function roomScope(){const room=ownRoom();return room?scopeKey(live)+":"+room.id
 function cardValues(){return Object.fromEntries(["small-goal","question","resource","next-step"].map(id=>[id,$(id).value]).concat([["help-requested",$("help-requested").checked]]));}
 function restoreCard(values){for(const [id,value] of Object.entries(values))if(id==="help-requested")$(id).checked=value;else $(id).value=value;}
 function clearPrivateDOM(){
- setPlaceLabel("");gameUI.update(null);puzzleUI.update(null);$("game-table-status").hidden=true;
- for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries"])$(id).replaceChildren();
+ boardReturnGathering=null;setPlaceLabel("");$("open-room-studio").hidden=true;roomPreview.update(null);studioUI.update(null);gatheringUI.update(null);gameUI.update(null);puzzleUI.update(null);$("game-table-status").hidden=true;
+ for(const id of ["roster","transcript","cards","membership-actions","removed-members","placement","pending-entries","resident-visits"])$(id).replaceChildren();
  for(const id of ["name","chat-input","small-goal","question","resource","next-step","palette","room-light","starter-preset","recovery-proof","voice-url"])$(id).value="";
  for(const id of ["join-code-display","capacity-status","room-status","layout-status","availability-freshness","recovery-output","lobby-recovery-output","pending-foreign","card-status","panel-feedback","lobby-feedback","title-feedback","archive-count","starter-summary","starter-status","light-status","room-saved-goal","room-saved-next"])$(id).textContent="";$("lobby-export").hidden=true;$("archive-count").hidden=true;
  $("chat-draft-status").textContent="Enter for a new line · Ctrl / ⌘ Enter to send";$("pending-discard-foreign").hidden=true;$("room-open").checked=false;$("help-requested").checked=false;$("layout-review").hidden=true;$("chat-count").textContent="";
  $("voice-link").hidden=true;$("voice-link").removeAttribute("href");$("voice-destination").textContent="";$("voice-form").hidden=true;
- $("starter-preview").replaceChildren();world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
+ $("game-place-occupancy").textContent="";$("starter-preview").replaceChildren();world?.setRoomPreview?.(null);closeBoard();chatWindow.reset();
 }
 function onSnapshot(snapshot){
  if(!snapshot){
-  privacyGeneration++;
-  if(live)suspendedDrafts={scope:scopeKey(live),identity:identityScope(live),chat:$("chat-input").value,chatVersion,card:cardValues()};
+  if(pendingReturn?.seatClaim)cancelPendingReturn();pendingSeatChoice=null;privacyGeneration++;
+  retainZoneDrafts(live);if(live)suspendedDrafts={scope:scopeKey(live),identity:identityScope(live),chat:$("chat-input").value,chatVersion,card:cardValues()};
   closeBoard();chatWindow.close();live=null;lastDurableKey="";lastHouseKey="";world?.update(null);world?.setInputEnabled(false);clearPrivateDOM();
   setPlaceLabel("Waiting for the house connection");
   $("house-code-button").disabled=true;
@@ -182,14 +227,18 @@ function onSnapshot(snapshot){
   $("connection-status").textContent=updateRecovery?"Update needed":"Reconnecting…";$("quick-chat").querySelector("button").disabled=true;
   applyInput();if(activePanel)closePanel();return;
  }
+ if(live&&scopeKey(live)!==scopeKey(snapshot))retainZoneDrafts(live);
  const reconnect=!live, previousScope=lastScope, previousIdentity=lastIdentityScope, retainedCard=suspendedDrafts?.identity===identityScope(snapshot)?suspendedDrafts.card:cardValues();
  live=snapshot;lastScope=scopeKey(snapshot);lastIdentityScope=identityScope(snapshot);
  if(previousScope&&previousScope!==lastScope){
   roomDraft=null;chatVersion++;clearPrivateDOM();
   if(previousIdentity===lastIdentityScope){if(cardDirty)restoreCard(retainedCard);}
-  else {privacyGeneration++;suspendedDrafts=null;cardDirty=false;cardBase=null;cardProjection=null;cardVersion++;unreadStreams.clear();}
+  else {privacyGeneration++;clearZoneDrafts();suspendedDrafts=null;cardDirty=false;cardBase=null;cardProjection=null;cardVersion++;unreadStreams.clear();}
  }
  if(roomDraft&&roomDraft.scope!==roomScope())roomDraft=null;
+ if(previousScope!==lastScope&&previousIdentity===lastIdentityScope&&snapshot.durable.residents.some(resident=>resident.id===snapshot.durable.selfId)){
+  const draft=zoneDrafts.get(lastScope);$("chat-input").value=draft?.chat||"";if(draft)draft.restoredVersion=chatVersion;if(ownRoom())roomDraft=roomDrafts.get(roomScope())||null;
+ }
  if(suspendedDrafts?.scope===lastScope){$("chat-input").value=suspendedDrafts.chat;restoreCard(suspendedDrafts.card);suspendedDrafts=null;}
  $("connection-limit-pending").hidden=true;$("title-screen").hidden=entered;$("lobby").hidden=true;document.body.dataset.screen=entered?"game":"title";$("game-controls").hidden=!entered;$("roster").hidden=false;$("house-code-button").hidden=false;
  $("connection-status").textContent=snapshot.controller?"Together, live":"Viewing · another tab controls";
@@ -205,15 +254,16 @@ function onSnapshot(snapshot){
  $("availability-freshness").replaceChildren();
  if(self?.availabilitySetAt){const time=node("time",new Date(self.availabilitySetAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}));time.dateTime=new Date(self.availabilitySetAt).toISOString();time.title=new Date(self.availabilitySetAt).toLocaleString();$("availability-freshness").append("Last set ",time);}
  else $("availability-freshness").textContent="Quiet by default · choose when ready";
- updateUnread(snapshot,reconnect||previousScope!==lastScope);renderRoster();updateWorld(snapshot);
+ gatheringUI.update(gatheringContext());if(activePanel==="studio"&&!snapshot.durable.room)closePanel();studioUI.update(studioContext());$("open-room-studio").hidden=!snapshot.durable.room;updateUnread(snapshot,reconnect||previousScope!==lastScope);renderRoster();updateWorld(snapshot);roomPreview.update(studioContext());
  const key=JSON.stringify([snapshot.durable.streamId,snapshot.durable.sequence,workCursor()?.streamId,workCursor()?.sequence,snapshot.controller]);
  if(key!==lastDurableKey){lastDurableKey=key;renderTranscript();if(activePanel==="board"){renderCards();if(!cardDirty)fillCard();}}
  const houseKey=JSON.stringify([snapshot.durable.house,snapshot.durable.residents,snapshot.durable.selfId,snapshot.durable.voice,snapshot.controller]);
  if(houseKey!==lastHouseKey){lastHouseKey=houseKey;adminRequest++;if(activePanel==="house")renderHouse();else if(activePanel==="voice")renderVoice();}
  if(activePanel==="room")renderRoom();
- continueRoomReturn();
+ continueRoomReturn();reopenSeatedChoice();continuePendingReturn();if(activePanel==="places")renderPlaces();
  renderGame();const gameKey=JSON.stringify([identityScope(live),live.durable.zoneId,live.controller,live.durable.game?.revision,live.durable.puzzle?.revision]);if(reconnect||gameKey!==gameRefreshKey){gameRefreshKey=gameKey;void refreshGamePending();}
- if(plannedPlace&&snapshot.durable.zoneId==="lounge"){const place=plannedPlace;plannedPlace=null;if(returnJourney){returnJourney.started=false;queueMicrotask(continueRoomReturn);}else queueMicrotask(()=>walkToPlace(place));}
+ if(plannedVisit&&snapshot.durable.zoneId==="lounge"&&!pendingReturn?.transition){const residentId=plannedVisit;plannedVisit=null;queueMicrotask(()=>visitResident(residentId));}
+ if(plannedPlace&&snapshot.durable.zoneId==="lounge"&&!pendingReturn?.transition){const place=plannedPlace;plannedPlace=null;if(returnJourney){returnJourney.started=false;queueMicrotask(continueRoomReturn);}else queueMicrotask(()=>walkToPlace(place));}
 
 }
 function unreadKey(){return live?live.durable.house.id+":"+live.durable.selfId+":"+live.durable.streamId:"";}
@@ -225,7 +275,7 @@ function updateUnread(snapshot,history){
  if(chatReadable())state.unread=0;unreadStreams.set(key,state);$("chat-count").textContent=state.unread?String(state.unread):"";
  $("chat-count").setAttribute("aria-label",state.unread+" unread messages here");
 }
-function chatReadable(){return entered&&!activePanel&&!embeddedFrame&&chatWindow.isReadable();}
+function chatReadable(){return entered&&(!activePanel||["game","studio","gathering"].includes(activePanel))&&!embeddedFrame&&!$("chat-window").inert&&chatWindow.isReadable();}
 function markChatRead(){const state=unreadStreams.get(unreadKey());if(state)state.unread=0;$("chat-count").textContent="";$("chat-count").setAttribute("aria-label","0 unread messages here");}
 
 function renderRoster(){
@@ -235,12 +285,24 @@ function renderRoster(){
   const eligible=connected&&player.zoneId==="lounge"&&player.availability==="chat";
   const where=connected?(player.zoneId==="lounge"?"lounge":"in a room"):"offline";
   const status=connected?(player.availability==="chat"?"Can chat":"Quiet"):"";
-  const chip=node("span",resident.name+(resident.id===live.durable.selfId?" · you":"")+" · "+where+(status?" · "+status:""),"resident");
+  const chip=node("button",resident.name+(resident.id===live.durable.selfId?" · you":"")+" · "+where+(status?" · "+status:""),"resident");
   if(player?.availabilitySetAt){const time=node("time"," · set "+new Date(player.availabilitySetAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}));time.dateTime=new Date(player.availabilitySetAt).toISOString();chip.append(time);}
-  chip.dataset.playerId=resident.id;chip.dataset.willing=String(eligible);chip.dataset.availability=player?.availability||"quiet";
+  chip.type="button";chip.dataset.visitResident=resident.id;chip.setAttribute("aria-label","Visit "+resident.name+" · "+(resident.id===live.durable.selfId?"your room":resident.open?"door open":"door closed"));chip.addEventListener("click",()=>visitResident(resident.id));chip.dataset.playerId=resident.id;chip.dataset.willing=String(eligible);chip.dataset.availability=player?.availability||"quiet";
   if(player?.x!==undefined){chip.dataset.x=String(player.x);chip.dataset.z=String(player.z);chip.dataset.animation=player.animation||"idle";}
   $("roster").append(chip);
  }
+}
+function renderPlaces(){
+ $("resident-visits").replaceChildren();for(const resident of live?.durable.residents||[]){const button=node("button","Visit "+resident.name+(resident.id===live.durable.selfId?" · your room":resident.open?" · door open":" · door closed"));button.dataset.visitResident=resident.id;button.addEventListener("click",()=>visitResident(resident.id));$("resident-visits").append(button);}
+ const seats=live?.players.filter(player=>/^game-seat-[1-6]$/.test(player.seatId)&&(player.connected||player.seatReservedUntil>Date.now()))||[];$("game-place-occupancy").textContent=live?Array.from({length:live.durable.house.capacity},(_,index)=>{const occupant=seats.find(player=>player.seatId==="game-seat-"+(index+1));return "Game place "+(index+1)+" · "+(occupant?(occupant.connected?occupant.name:"Reconnecting: "+occupant.name):"Free");}).join("; "):"";
+}
+function visitResident(id){
+ const resident=live?.durable.residents.find(person=>person.id===id);if(!resident)return;
+ if(id!==live.durable.selfId&&!resident.open){notice(resident.name+"’s door is closed. Ask them to open it when they want a visit.");return;}
+ if(!live.controller){notice("Take control before walking to a room.");return;}
+ if(live.durable.zoneId===resident.bedroomId){notice("You are already in "+resident.name+"’s room.");return;}
+ closePanel();if(live.durable.zoneId!=="lounge"){plannedVisit=id;if(!world?.approach({type:"exit"})){plannedVisit=null;notice("Stand up before walking to a room.");}return;}
+ if(!world?.approach({type:"door",slot:resident.slot,roomId:resident.bedroomId}))notice("Stand up before walking to "+resident.name+"’s room.");
 }
 function renderTranscript(){
  const transcript=$("transcript"),atEnd=transcript.scrollHeight-transcript.scrollTop-transcript.clientHeight<40,previous=transcript.scrollTop,messages=live?.durable.chat||[];
@@ -253,7 +315,7 @@ function renderCards(){
  $("cards").replaceChildren();
  if(!live)return;
  $("card-form").hidden=false;
- $("work-visibility").textContent="Your current card is house-visible to current housemates in the lounge. Every desk opens your own work, including when you visit a friend.";
+ $("work-visibility").textContent="Your current card is house-visible to current housemates in the lounge. Saved cards remain available here independently of room desks.";
  for(const control of $("card-form").querySelectorAll("input,textarea,button"))control.disabled=!live.controller;
  $("close-card").disabled=!live.controller||cardDirty||!effectiveCard();
  const cards=live.durable.zoneId==="lounge"?live.durable.cards:(effectiveCard()?[{...effectiveCard(),authorId:live.durable.selfId,state:"active"}]:[]);
@@ -285,7 +347,7 @@ function ensureRoomDraft(){
 }
 function renderRoom(){
  const saved=currentCard();$("room-saved-goal").textContent=saved?.smallGoal||"No saved goal yet.";$("room-saved-next").textContent=saved?.nextStep||"No saved next step yet.";$("open-room-work").disabled=!live;
- const room=ownRoom();$("walk-room").hidden=Boolean(room);$("return-lounge").hidden=!live?.durable.room;$("walk-room").disabled=!live?.controller;$("return-lounge").disabled=!live;
+ $("room-studio-entry").textContent=live?.durable.room?"Inspect this room’s studio":"Walk to my room studio";const room=ownRoom();$("walk-room").hidden=Boolean(room);$("return-lounge").hidden=!live?.durable.room;$("walk-room").disabled=!live?.controller;$("return-lounge").disabled=!live;
  $("room-form").hidden=!room;$("furniture-editor").hidden=!room;$("light-form").hidden=!room;$("starter-editor").hidden=!room;
  $("room-instructions").textContent=room?"Your changes affect this bedroom. Keep the arrival path clear; choose up to ten pieces.":"Walk through your named door to arrange your bedroom. Friends can visit when you open it.";
  world?.setEditing(Boolean(room));if(!room)return;
@@ -485,7 +547,7 @@ function setRecoveryBusy(busy){for(const id of ["recovery-key","lobby-recovery-k
 function invalidateIdentityView(){
  privacyGeneration++;bootstrapRequest++;adminRequest++;pendingRequest++;gamePendingRequest++;gamePendingRows=[];plannedPlace=null;returnJourney=null;
  client?.close();client=null;inspector?.close();inspector=null;live=null;
- roomDraft=null;suspendedDrafts=null;voiceDraft=null;updateRecovery=null;voicePendingRows=[];voicePendingScope="";voicePendingError="";$("update-required").hidden=true;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
+ clearZoneDrafts();roomDraft=null;suspendedDrafts=null;voiceDraft=null;updateRecovery=null;voicePendingRows=[];voicePendingScope="";voicePendingError="";$("update-required").hidden=true;cardProjection=null;cardDirty=false;cardBase=null;cardVersion++;chatVersion++;
  lastScope="";lastIdentityScope="";lastHouseKey="";lastDurableKey="";unreadStreams.clear();pending.clear();pendingZones.clear();keyIssuance=null;setRecoveryBusy(false);
  closeBoard();chatWindow.reset();clearPrivateDOM();closePanel();world?.update(null);world?.setInputEnabled(false);$("notice").textContent="";$("notice").hidden=true;
  $("game-controls").hidden=true;$("roster").hidden=true;$("house-code-button").hidden=true;$("connection-limit-pending").hidden=true;
@@ -508,7 +570,7 @@ async function bootstrap(enter=false){
  entered=true;$("title-screen").hidden=true;$("lobby").hidden=true;$("game-controls").hidden=false;$("connection-status").textContent="Opening your house…";$("title-status").textContent="Opening your saved home…";
  if(!client){
   const actorId=me.identity.id;let ownedClient;
-  ownedClient=createHouseClient({expectedIdentityId:actorId,onUpdateRequired:error=>{if(client===ownedClient)showUpdateRequired(error);},onPuzzleIntent:()=>{if(client===ownedClient)renderGame();},onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
+  ownedClient=createHouseClient({expectedIdentityId:actorId,onUpdateRequired:error=>{if(client===ownedClient)showUpdateRequired(error);},onPuzzleIntent:()=>{if(client===ownedClient)renderGame();},onSnapshot:snapshot=>{if(client===ownedClient)onSnapshot(snapshot);},onDisconnect:()=>{if(client!==ownedClient)return;cancelPendingReturn();onSnapshot(null);void checkMembership();},onError:error=>{if(client!==ownedClient||(live?.durable.selfId||me?.identity.id)!==actorId)return;if(showConnectionLimit(error))return;notice(error.message||String(error));if(["FORBIDDEN","NO_HOUSE","UNAUTHENTICATED"].includes(error.code))void checkMembership();}});
   client=ownedClient;await ownedClient.connect();
  }
 }
@@ -530,6 +592,7 @@ $("quick-chat").addEventListener("submit",protectedAction(async()=>{
  const submittedVersion=chatVersion,submittedScope=scopeKey(live),submittedText=$("chat-input").value,submittedZone=live.durable.zoneId;
  await save("chat.send",{zoneId:submittedZone,text});
  if(chatVersion===submittedVersion&&scopeKey(live)===submittedScope&&$("chat-input").value===submittedText){$("chat-input").value="";$("chat-draft-status").textContent="Message saved · Enter for a new line";}
+ const retained=zoneDrafts.get(submittedScope);if(retained?.chatVersion===submittedVersion&&retained.chat===submittedText){if(scopeKey(live)===submittedScope&&chatVersion===retained.restoredVersion&&$("chat-input").value===submittedText)$("chat-input").value="";retained.chat="";}
  if(suspendedDrafts?.scope===submittedScope&&suspendedDrafts.chatVersion===submittedVersion&&suspendedDrafts.chat===submittedText)suspendedDrafts.chat="";
 }));
 for(const radio of document.querySelectorAll("input[name=availability]"))radio.addEventListener("change",protectedAction(()=>client.setAvailability(radio.value)));
@@ -635,10 +698,13 @@ async function issueRecoveryKey(outputId){
  }finally{if(keyIssuance===request){keyIssuance=null;setRecoveryBusy(false);}}
 }
 $("recovery-key").addEventListener("click",protectedAction(()=>issueRecoveryKey("recovery-output")));
-$("export-own").addEventListener("click",protectedAction(async()=>{
- const context=privateContext(),data=await api("/api/house/export",{});if(context!==privateContext())return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));
- const link=node("a");link.href=url;link.download="my-study-house.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}));
+function downloadJSON(data,filename){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));const link=node("a");link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+async function exportOwnHouse(){
+ const context=privateContext(),data=await api("/api/house/export",{});if(context!==privateContext())return;downloadJSON(data,"my-study-house.json");
+ let page=data.studio,index=1;const seen=new Set();while(page?.nextCursor){const cursor=page.nextCursor;if(typeof cursor!=="string"||seen.has(cursor))throw new Error("Studio export stopped at an invalid continuation. Your previous files are downloaded; try again.");seen.add(cursor);page=await api("/api/house/studio/export",{cursor});if(context!==privateContext())return;downloadJSON(page,"my-room-studios-"+(++index)+".json");}
+ if(index>1)notice("Saved data downloaded in "+index+" files. Keep all files together for your room references.");
+}
+$("export-own").addEventListener("click",protectedAction(exportOwnHouse));
 function sendGame(type,payload,revision){
  if(type==="game.join"&&(live?.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.()?.mode==="join"))throw Object.assign(new Error("Leave picture-table participation before joining Four-in-a-row. Watching is always available."),{code:"ACTIVITY_ACTIVE"});
  const task=save(type,payload,revision);if(type==="game.join"&&live){const key=JSON.stringify([live.durable.house.id,live.durable.selfId,type,payload,revision]),intent=pending.get(key);if(intent)task.gameJoinIntent={scope:identityScope(live),command:structuredClone(intent)};}return task;
@@ -657,10 +723,11 @@ function puzzlePendingIntents(){
 function chooseBreak(activity){breakActivity=activity;renderGame();}
 function renderGame(){
  const rows=gamePendingIntents(),puzzleRows=puzzlePendingIntents(),round=live?.durable.game?.current,participant=Boolean(round?.players.includes(live.durable.selfId)),puzzleParticipant=Boolean(live?.puzzleRoster?.selfParticipationId),direct=client?.pendingPuzzleIntent?.();gameUI.update(live,{pendingCount:rows.length});puzzleUI.update(live,{pendingCount:puzzleRows.length});
- $("four-game-panel").hidden=breakActivity!=="four";$("picture-game-panel").hidden=breakActivity!=="picture";$("panel").dataset.breakActivity=breakActivity;document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";
+ $("game-panel-stand").hidden=!atGameSeat();$("four-game-panel").hidden=breakActivity!=="four";$("picture-game-panel").hidden=breakActivity!=="picture";$("panel").dataset.breakActivity=breakActivity;document.body.dataset.breakActivity=activePanel==="game"?breakActivity:"";
  $("break-picture").setAttribute("aria-pressed",String(breakActivity==="picture"));$("break-four").setAttribute("aria-pressed",String(breakActivity==="four"));$("break-picture-count").textContent=(live?.puzzleRoster?.memberIds.length||0)+" / 6 active";$("break-four-count").textContent=(round?.players.filter(Boolean).length||0)+" / 2 active";
  $("break-exclusive").textContent=puzzleParticipant?"You joined the picture table. Leave participation before joining Four-in-a-row; you can watch either.":participant?"You hold a Four-in-a-row slot. Leave that table before joining the picture table; you can watch either.":"Watching never joins. Choose Start if needed, then Join separately. Leave your activity before joining the other.";
- $("game-table-status").hidden=!live||(!participant&&!puzzleParticipant&&!rows.length&&!puzzleRows.length&&!direct);$("game-table-label").textContent=direct?.mode==="leave"?"Picture withdrawal pending":puzzleParticipant?"At picture table · "+(live.durable.puzzle?.current?.placements.length||0)+" / 24":participant?"At break table · "+round.status:rows.some(row=>row.type==="game.leave")?"Withdrawal pending":"Break action pending";$("game-table-leave").hidden=!participant&&!puzzleParticipant&&!direct;$("game-table-reopen").disabled=live?.durable.zoneId!=="lounge";queueSafeArea();
+ const seated=Boolean(live?.players.find(player=>player.id===live.durable.selfId&&player.connected)?.seatId);$("game-table-stand").hidden=!seated;$("game-table-go").hidden=atGameSeat();
+ $("game-table-status").hidden=!live||(!seated&&!participant&&!puzzleParticipant&&!rows.length&&!puzzleRows.length&&!direct);$("game-table-label").textContent=direct?.mode==="leave"?"Picture withdrawal pending":puzzleParticipant?"At picture table · "+(live.durable.puzzle?.current?.placements.length||0)+" / 24":participant?"At break table · "+round.status:rows.some(row=>row.type==="game.leave")?"Withdrawal pending":(seated?"Seated · Look around keeps your chair":"Break action pending");$("game-table-leave").hidden=!participant&&!puzzleParticipant&&!direct;$("game-table-reopen").hidden=!seated||live?.durable.zoneId!=="lounge";$("game-table-reopen").disabled=!live?.controller;queueSafeArea();
 }
 async function refreshGamePending(){
  if(!live||!client)return;const request=++gamePendingRequest,context=identityScope(live);
@@ -673,14 +740,14 @@ function returnToMyRoom(source){
  if(source!=="four"&&(live.durable.game?.current?.players.includes(live.durable.selfId)||gamePendingIntents().some(row=>row.type==="game.join")))gameUI.leave();
  if(source!=="picture"&&(live.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.()?.mode==="join"))puzzleUI.leave();
  closePanel();const journey={scope:identityScope(live),waitingStand:Boolean(live.players.find(player=>player.id===live.durable.selfId)?.seatId),started:false};returnJourney=journey;
- if(ownRoom()){returnJourney=null;openPanel("room");$("open-room-work").focus();return;}
+ if(ownRoom()){returnJourney=null;openPanel("studio");return;}
  if(!live.controller){fallbackToWork("Take control to walk to your room.");return;}
  if(journey.waitingStand){notice("Standing before walking to your room. My work stays available from the toolbelt.");void client.stand().catch(error=>{if(returnJourney===journey)fallbackToWork(error.message||"Standing was not confirmed.");});return;}
  continueRoomReturn();
 }
 function continueRoomReturn(){
  const journey=returnJourney;if(!journey||!live)return;if(journey.scope!==identityScope(live)||!live.controller){returnJourney=null;plannedPlace=null;return;}
- if(ownRoom()){returnJourney=null;plannedPlace=null;queueMicrotask(()=>{if(live&&identityScope(live)===journey.scope&&ownRoom()&&!activePanel&&!embeddedFrame){openPanel("room");$("open-room-work").focus();}});return;}
+ if(ownRoom()){returnJourney=null;plannedPlace=null;queueMicrotask(()=>{if(live&&identityScope(live)===journey.scope&&ownRoom()&&!activePanel&&!embeddedFrame){openPanel("studio");}});return;}
  if(journey.waitingStand){if(live.players.find(player=>player.id===live.durable.selfId)?.seatId)return;journey.waitingStand=false;}
  if(journey.started)return;journey.started=true;
  if(live.durable.zoneId!=="lounge"){plannedPlace="room";if(!world?.approach?.({type:"exit"}))fallbackToWork("The route home is unavailable.");return;}
@@ -692,11 +759,69 @@ function walkToPlace(place){
  if(live.durable.zoneId!=="lounge"&&(place!=="room"||!ownRoom())){plannedPlace=place;if(!world?.approach({type:"exit"})){plannedPlace=null;notice("Stand up before returning to the lounge.");}return;}
  if(!world?.routeTo?.(place))notice(place==="room"&&ownRoom()?"You are already in your room.":"That place is unavailable right now. Stand up and try again.");
 }
-$("game-table-reopen").addEventListener("click",()=>openPanel("game"));
+for(const id of ["game-table-stand","game-panel-stand"])$(id).addEventListener("click",protectedAction(async()=>{pendingSeatChoice=null;closePanel();await client.stand();}));
+$("game-table-go").addEventListener("click",()=>walkToPlace("game"));
+$("game-table-reopen").addEventListener("click",()=>{const kind=seatKind(live?.players.find(player=>player.id===live.durable.selfId)?.seatId);if(kind==="game")openPanel("game");else if(kind){gatheringKind=kind;openPanel("gathering");}});
 $("game-table-leave").addEventListener("click",()=>{if(live?.puzzleRoster?.selfParticipationId||client?.pendingPuzzleIntent?.())puzzleUI.leave();else gameUI.leave();});
 $("break-picture").addEventListener("click",()=>chooseBreak("picture"));$("break-four").addEventListener("click",()=>chooseBreak("four"));
+$("open-room-studio").addEventListener("click",()=>openPanel("studio"));
+$("room-studio-entry").addEventListener("click",()=>{if(live?.durable.room)openPanel("studio");else returnToMyRoom("room");});
 $("open-room-work").addEventListener("click",()=>{returnJourney=null;plannedPlace=null;openPanel("board");});
 for(const button of document.querySelectorAll("[data-place]"))button.addEventListener("click",()=>walkToPlace(button.dataset.place));
+function pendingDestination(entry){
+ const houseId=entry.houseId||entry.command?.houseId,activity=/^(game|puzzle)\./.test(entry.type)&&entry.zoneId==="lounge",sameHouse=Boolean(live&&houseId===live.durable.house.id),resident=sameHouse?live.durable.residents.find(person=>person.bedroomId===entry.zoneId):null;
+ let label=entry.zoneId==="lounge"?(activity?"Activity table in the lounge":"Shared lounge"):resident?(resident.id===live.durable.selfId?"Your room":resident.name+"’s room"):"Your earlier room",reason="";
+ if(!houseId){label="House admission";reason="Continue the original house admission here, or inspect and export this draft.";}
+ else if(!sameHouse)reason="This draft belongs to an earlier house. Inspect or export it here; this house cannot reopen that room.";
+ else if(entry.zoneId!=="lounge"&&!resident)reason="This earlier room is not a current house bedroom. Its original draft remains available for export.";
+ else if(resident&&resident.id!==live.durable.selfId&&!resident.open)reason=resident.name+"’s room is closed. Ask them to open it when they want a visit. Your original draft can still be inspected or exported.";
+ return {houseId,sameHouse,resident,activity,label,reason};
+}
+function pendingRouteAuthority(){return live?JSON.stringify([identityScope(live),live.serverEpoch,live.generation,live.accessGeneration,live.durable.zoneId,live.controller]):"";}
+async function returnToPendingDestination(entry){
+ const target=pendingDestination(entry);if(target.reason){notice(target.reason,true);return;}if(!live?.controller){notice("Take control in this tab, then choose Return. Your original draft is kept.",true);return;}
+ if(live.players.find(player=>player.id===live.durable.selfId)?.seatId&&!(entry.zoneId===live.durable.zoneId&&(!target.activity||atGameSeat()))){notice("Stand up first, then return to this original draft. Pending drafts keeps the same action.",true);return;}
+ const context=privateContext(),authority=pendingRouteAuthority(),request=pendingRequest;await pendingSource().holdPending(entry.commandId);if(context!==privateContext()||!live?.controller||authority!==pendingRouteAuthority()||activePanel!=="pending"||request!==pendingRequest)return;
+ const currentTarget=pendingDestination(entry);if(currentTarget.reason){notice(currentTarget.reason,true);return;}
+ returnJourney=null;plannedPlace=null;plannedVisit=null;pendingReturn={scope:identityScope(live),serverEpoch:live.serverEpoch,generation:live.generation,accessGeneration:live.accessGeneration,seatClaim:null,transition:null,zoneId:entry.zoneId,activity:target.activity,commandId:entry.commandId};
+ if(entry.zoneId===live.durable.zoneId&&(!target.activity||atGameSeat())){continuePendingReturn();return;}
+ if(target.activity){walkToPlace("game");return;}
+ if(entry.zoneId==="lounge"){closePanel();if(!world?.approach({type:"exit"})){pendingReturn=null;notice("The lounge route is unavailable. Your original draft is kept.",true);}return;}
+ visitResident(target.resident.id);
+}
+function cancelPendingReturn(journey=pendingReturn){if(journey&&pendingReturn===journey){pendingReturn=null;plannedPlace=null;plannedVisit=null;}}
+function pendingArrivalKey(snapshot){return snapshot?JSON.stringify([identityScope(snapshot),snapshot.serverEpoch,snapshot.generation,snapshot.accessGeneration,snapshot.durable.zoneId,snapshot.controller]):"";}
+async function subscribeForPendingReturn(zoneId){
+ const journey=pendingReturn;
+ const intended=journey&&!journey.seatClaim&&live&&journey.scope===identityScope(live)&&journey.serverEpoch===live.serverEpoch&&journey.generation===live.generation&&(zoneId===journey.zoneId||zoneId==="lounge"&&live.durable.zoneId!=="lounge");
+ const transition=intended?{zoneId,departureGeneration:live.generation,departureAccess:live.accessGeneration,candidate:null}:null;
+ if(journey){if(transition)journey.transition=transition;else cancelPendingReturn(journey);}
+ try{
+  const reply=await client.subscribe(zoneId);
+  if(transition&&pendingReturn===journey&&journey.transition===transition){
+   const arrival=reply?.snapshot;
+   if(!arrival?.controller||arrival.durable.zoneId!==zoneId||identityScope(arrival)!==journey.scope||arrival.serverEpoch!==journey.serverEpoch||arrival.generation<=transition.departureGeneration||arrival.accessGeneration<=transition.departureAccess||pendingArrivalKey(arrival)!==pendingArrivalKey(live)||transition.candidate&&transition.candidate!==pendingArrivalKey(arrival)){cancelPendingReturn(journey);return reply;}
+   journey.generation=arrival.generation;journey.accessGeneration=arrival.accessGeneration;journey.transition=null;
+   if(plannedVisit&&live.durable.zoneId==="lounge"){const residentId=plannedVisit;plannedVisit=null;queueMicrotask(()=>{if(pendingReturn===journey&&pendingArrivalKey(live)===pendingArrivalKey(arrival))visitResident(residentId);});}
+   else if(plannedPlace&&live.durable.zoneId==="lounge"){const place=plannedPlace;plannedPlace=null;queueMicrotask(()=>{if(pendingReturn===journey&&pendingArrivalKey(live)===pendingArrivalKey(arrival))walkToPlace(place);});}
+   continuePendingReturn();
+  }
+  return reply;
+ }catch(error){if(pendingReturn===journey)cancelPendingReturn(journey);throw error;}
+}
+function continuePendingReturn(){
+ const journey=pendingReturn;if(!journey||!live)return;
+ if(journey.scope!==identityScope(live)||!live.controller||journey.serverEpoch!==live.serverEpoch){cancelPendingReturn(journey);return;}
+ if(journey.transition){
+  const transition=journey.transition,key=pendingArrivalKey(live);
+  if(live.durable.zoneId!==transition.zoneId||live.generation<=transition.departureGeneration||live.accessGeneration<=transition.departureAccess||transition.candidate&&transition.candidate!==key){cancelPendingReturn(journey);return;}
+  transition.candidate=key;return;
+ }
+ if(journey.generation!==live.generation||journey.accessGeneration!==live.accessGeneration){cancelPendingReturn(journey);return;}
+ if(journey.activity&&(!journey.seatClaim?.ack||!seatChoiceCurrent(journey.seatClaim)||!atGameSeat()||live.players.find(player=>player.id===live.durable.selfId)?.seatId!==journey.seatClaim.seatId))return;
+ if(live.durable.zoneId!==journey.zoneId||activePanel||embeddedFrame)return;
+ cancelPendingReturn(journey);queueMicrotask(()=>{if(live&&identityScope(live)===journey.scope&&live.serverEpoch===journey.serverEpoch&&live.generation===journey.generation&&live.accessGeneration===journey.accessGeneration&&live.durable.zoneId===journey.zoneId&&(!journey.activity||journey.seatClaim?.ack&&seatChoiceCurrent(journey.seatClaim)&&atGameSeat())&&!activePanel&&!embeddedFrame)openPanel("pending");});
+}
 function pendingSource(){return client||(inspector ||= createPendingInspector({expectedIdentityId:me?.identity.id,fetchMe:()=>api("/api/house/me")}));}
 async function renderPending(){
  const request=++pendingRequest, identity=live?.durable.selfId||me?.identity.id;
@@ -705,12 +830,15 @@ async function renderPending(){
  reconcilePendingMemory(result);$("pending-entries").replaceChildren();
  for(const entry of result.entries){
   const row=node("article",undefined,"pending-entry");row.dataset.commandId=entry.commandId;
-  row.append(node("strong",(entry.label||entry.type)+" · "+(entry.state==="expired"?"Expired automatic retry":"Pending reply")),node("p","Saved status unknown · original "+(entry.zoneId||"house admission")+" · "+new Date(entry.createdAt).toLocaleString(),"subtle"));
+  const destination=pendingDestination(entry);row.append(node("strong",(entry.label||entry.type)+" · "+(entry.state==="expired"?"Expired automatic retry":"Pending reply")),node("p","Saved status unknown · original "+destination.label+" · "+new Date(entry.createdAt).toLocaleString(),"subtle"));
   const details=node("details"),summary=node("summary","My original draft"),body=node("pre",JSON.stringify(entry.command.payload,null,2));details.append(summary,body);row.append(details);
   const actions=node("div",undefined,"button-row"),retry=node("button",entry.state==="expired"?"Retry expired draft":"Retry original action");retry.dataset.action="retry";retry.disabled=!entry.canRetry;
   retry.addEventListener("click",protectedAction(async()=>{const context=privateContext(),receipt=await pendingSource().retryPending(entry.commandId);if(context!==privateContext())return;forgetPending(entry.commandId,receipt);notice("Original action acknowledged. Check its saved result.");await bootstrap();if(activePanel==="pending")void protectedAction(renderPending)();}));
+  if(destination.houseId&&(!entry.canRetry||destination.activity&&!atGameSeat())){const go=node("button",destination.activity?"Go to activity table":entry.zoneId==="lounge"?"Return to lounge":"Return to original room");go.dataset.action="return-original";go.disabled=!destination.sameHouse||!live?.controller||entry.zoneId!=="lounge"&&!destination.resident;go.addEventListener("click",protectedAction(()=>returnToPendingDestination(entry)));actions.append(go);}
+  if(destination.sameHouse&&!live.controller){const control=node("button","Take control in this tab");control.dataset.action="take-control";control.addEventListener("click",protectedAction(async()=>{const context=privateContext();await pendingSource().holdPending(entry.commandId);if(context!==privateContext())return;await client.takeover();if(context===privateContext()&&activePanel==="pending")await renderPending();}));actions.append(control);}
   const discard=node("button","Discard local draft");discard.addEventListener("click",protectedAction(async()=>{if(!confirm("Discard this local pending draft? Its server save status is unknown."))return;const context=privateContext();await pendingSource().discardPending(entry.commandId);if(context!==privateContext())return;forgetPending(entry.commandId);void protectedAction(renderPending)();}));actions.append(retry,discard);row.append(actions);
-  if(!entry.canRetry)row.append(node("p","Retry needs control in the original house and room. Export or discard is available here.","subtle"));
+  if(entry.recoveryHeld)row.append(node("p","Automatic retry is paused for this original draft. Choose Retry when you are ready.","subtle"));
+  if(destination.reason)row.append(node("p",destination.reason,"subtle"));else if(!entry.canRetry)row.append(node("p","Take control and return to the named destination, then retry the same original action. Inspect and export remain available here.","subtle"));else if(destination.activity&&!atGameSeat())row.append(node("p","An unaccepted activity action needs a game chair. An already accepted receipt can still be reconciled here.","subtle"));
   $("pending-entries").append(row);
  }
  if(!result.entries.length)$("pending-entries").append(node("p","No pending drafts for this identity.","subtle"));
@@ -726,12 +854,12 @@ const hudResizeObserver=typeof window.ResizeObserver==="function"?new window.Res
 for(const element of document.querySelectorAll(HUD_SAFE_SELECTOR))hudResizeObserver?.observe(element);
 window.addEventListener("resize",queueSafeArea);
 window.visualViewport?.addEventListener("resize",queueSafeArea);window.visualViewport?.addEventListener("scroll",queueSafeArea);
-window.addEventListener("pagehide",()=>{privacyGeneration++;live=null;returnJourney=null;plannedPlace=null;clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();gameUI.dispose();puzzleUI.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
+window.addEventListener("pagehide",()=>{privacyGeneration++;live=null;returnJourney=null;plannedPlace=null;clearTimeout(noticeTimer);hudResizeObserver?.disconnect();if(safeAreaFrame!==null){if(window.cancelAnimationFrame)window.cancelAnimationFrame(safeAreaFrame);else clearTimeout(safeAreaFrame);}closeBoard();chatWindow.dispose();gameUI.dispose();puzzleUI.dispose();roomPreview.dispose();studioUI.dispose();gatheringUI.dispose();panelFocus.dispose();boardFocus.dispose();client?.close();world?.dispose();});
 bootstrap().catch(error=>{if(showConnectionLimit(error))return;notice(error.message,true);$("connection-status").textContent="Could not open the house";$("title-status").textContent="Could not check your saved home. Reload to retry.";});
 
 $("walk-room").addEventListener("click",()=>{const resident=live?.durable.residents.find(r=>r.id===live.durable.selfId);closePanel();if(resident&&!world?.approach({type:"door",slot:resident.slot}))notice("Stand up before walking to your room.");});
 $("return-lounge").addEventListener("click",()=>{closePanel();if(!world?.approach({type:"exit"}))notice("Stand up before returning to the lounge.");});
 $("walk-seat").addEventListener("click",()=>{closePanel();if(live?.durable.zoneId!=="lounge"){notice("Return to the lounge for the shared study table.");return;}if(!world?.approach({type:"seat"}))notice("Stand up before choosing another seat.");});
 
-$("lobby-export").addEventListener("click",protectedAction(async()=>{const context=privateContext(),data=await api("/api/house/export",{});if(context!==privateContext())return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));const link=node("a");link.href=url;link.download="my-study-house.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}));
+$("lobby-export").addEventListener("click",protectedAction(exportOwnHouse));
 $("lobby-recovery-key").addEventListener("click",protectedAction(()=>issueRecoveryKey("lobby-recovery-output")));

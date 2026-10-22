@@ -1,0 +1,18 @@
+Already up to date
+Done in 102ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-recovery-client.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+ [32m✓[39m spec/house-puzzle-client.test.ts [2m([22m[2m50 tests[22m[2m)[22m[32m 121[2mms[22m[39m
+ [32m✓[39m spec/house-client.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 376[2mms[22m[39m
+ [32m✓[39m spec/house-recovery-service.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 2991[2mms[22m[39m
+   [33m[2m✓[22m[39m real service adopts only the intended bedroom subscription ACK generation and reopens the held original[33m 1173[2mms[22m[39m
+   [33m[2m✓[22m[39m real service returns bedroom to lounge, confirms a physical chair ACK, then retries the same held UUID once[33m 1085[2mms[22m[39m
+   [33m[2m✓[22m[39m real service rejects a delayed intended arrival ACK after an unrelated control takeover[33m 732[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m139 passed[39m[22m[90m (139)[39m
+[2m   Start at [22m 05:58:19
+[2m   Duration [22m 4.90s[2m (tests 58%, transform 26%, import 17%)[22m
+

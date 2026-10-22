@@ -312,7 +312,7 @@ it('rebuilds geometry for room, capacity and privacy changes and clears prior zo
  f.world.update(room);f.step(100);
  expect(rendered.scene===loungeScene).toBe(false);expect(loungeDispose).toHaveBeenCalledTimes(1);
  expect(f.container.querySelectorAll('.door,.own-door')).toHaveLength(0);expect(f.container.querySelectorAll('.house-avatar-name')).toHaveLength(2);
- expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toHaveLength(0);
+ expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toEqual(expect.arrayContaining([expect.objectContaining({target:{type:'exit'}}),expect.objectContaining({target:{type:'studio'}}),expect.objectContaining({target:{type:'radio'}})]));
  const roomScene=rendered.scene,roomDispose=vi.spyOn(sceneMeshes()[0].geometry,'dispose');
  const renamed=structuredClone(room);renamed.durable.residents[0].name='Updated owner';renamed.players[0].name='Updated owner';
  f.world.update(renamed);f.step(200);
@@ -392,7 +392,7 @@ it.each(['id','ownerId','revision','open','palette','placements'] as const)('reb
  expect(rendered.scene===scene).toBe(false);expect(dispose).toHaveBeenCalledTimes(1);
  expect(f.container.querySelectorAll('.door,.own-door')).toHaveLength(0);
  if(field==='ownerId')expect(f.container.querySelector('.room')?.textContent).toBe("Friend 1's room");
- if(field==='placements')expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toEqual([expect.objectContaining({target:{type:'placement',id:'plant'}})]);
+ if(field==='placements')expect(JSON.parse(f.container.querySelector<HTMLCanvasElement>('canvas')!.dataset.pickTargets!)).toEqual(expect.arrayContaining([expect.objectContaining({target:{type:'placement',id:'plant'}}),expect.objectContaining({target:{type:'exit'}})]));
 });
 
 
@@ -831,7 +831,7 @@ it('routes Places by purpose and keeps game interaction separate from sitting',(
  const interactions:any[]=[];const f=speechFixture(390,844,{onInteract:(v:any)=>interactions.push(v)}),layout=createLayout(6);
  const game=layout.gameTarget!;f.snapshot.players[0].x=game.x;f.snapshot.players[0].z=game.z;
  f.world.update(f.snapshot);f.step(0);expect(f.world.routeTo('game')).toBe(true);for(let t=100;t<=1000;t+=100)f.step(t);
- expect(interactions).toContainEqual({kind:'game'});expect(interactions.some(v=>v.type==='seat')).toBe(false);
+ expect(interactions.some(v=>v.type==='seat'&&v.seatId.startsWith('game-seat-'))).toBe(true);expect(interactions).not.toContainEqual({kind:'game'});
  expect(f.world.routeTo('rest')).toBe(true);expect(f.world.routeTo('study')).toBe(true);
  f.snapshot.players[0].seatId='game-seat-1';f.snapshot.players[0].animation='sit';f.world.update(f.snapshot);f.world.interact();
  expect(interactions.at(-1)).toEqual({type:'seat',seatId:'game-seat-1'});
@@ -871,3 +871,15 @@ it('raycasts every sofa cushion at its published projected native pick point',()
 });
 
 it('reports manual movement intent while picture controls and routes remain isolated',()=>{const movement=vi.fn(),f=speechFixture(390,844,{onMovementIntent:movement});f.world.update(f.snapshot);f.step(0);expect(f.world.routeTo('room')).toBe(true);f.step(100);expect(movement).not.toHaveBeenCalled();const panel=document.createElement('section');panel.id='panel';const piece=document.createElement('button');piece.dataset.puzzlePiece='notebook';panel.append(piece);document.body.append(panel);piece.focus();piece.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));f.step(200);expect(movement).not.toHaveBeenCalled();const canvas=f.container.querySelector('canvas')!;canvas.focus();canvas.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));expect(movement).toHaveBeenCalledOnce();canvas.dispatchEvent(new window.KeyboardEvent('keyup',{key:'ArrowRight',bubbles:true}));f.world.setDirection(1,0);expect(movement).toHaveBeenCalledTimes(2);});
+
+
+it('spatial makes the visible bedroom exit rug a real native pointer destination',()=>{
+ const actions=vi.fn(),f=speechFixture(390,844,{onInteract:actions}),state=structuredClone(f.snapshot);state.durable.zoneId='room0';state.durable.streamId='bedroom:room0';state.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[]};for(const p of state.players)Object.assign(p,{zoneId:'room0',x:0,z:0});f.world.update(state);f.world.setCameraMode('overview');f.step(0);const canvas=f.container.querySelector('canvas')!;Object.defineProperty(canvas,'getBoundingClientRect',{value:()=>({left:0,top:0,width:390,height:844})});const point=JSON.parse(canvas.dataset.pickTargets!).find((p:any)=>p.target.type==='exit');expect(point?.visible).toBe(true);for(const name of ['pointerdown','pointerup'])canvas.dispatchEvent(new window.MouseEvent(name,{clientX:point.x,clientY:point.y,button:0,bubbles:true}));for(let t=100;t<=10000;t+=100)f.step(t);expect(actions).toHaveBeenCalledWith({type:'exit'});
+});
+it('spatial routes the game through a free physical place and skips reconnect reservations',()=>{
+ const actions=vi.fn(),f=speechFixture(390,844,{onInteract:actions}),layout=createLayout(6);const seats=layout.seats.filter(s=>s.purpose==='game');for(let i=1;i<6;i++)Object.assign(f.snapshot.players[i],{connected:i!==1,seatId:seats[i-1].id,seatReservedUntil:Date.now()+30000});Object.assign(f.snapshot.players[0],seats[5].target);f.world.update(f.snapshot);f.step(0);expect(f.world.routeTo('game')).toBe(true);for(let t=100;t<=1000;t+=100)f.step(t);expect(actions).toHaveBeenCalledWith({type:'seat',seatId:seats[5].id});expect(actions).not.toHaveBeenCalledWith({kind:'game'});
+});
+
+it('spatial clears the authenticated desk preview texture on access or zone loss',()=>{
+ const f=speechFixture(),room=structuredClone(f.snapshot);room.durable.zoneId='room0';room.durable.streamId='bedroom:room0';room.durable.room={id:'room0',ownerId:'p0',revision:1,open:true,palette:'sage',placements:[{id:'desk',kind:'desk',x:3,z:-2,rotation:0,colour:'sage'}]};for(const p of room.players)p.zoneId='room0';f.world.update(room);f.step(0);f.world.setStudioPreview(document.createElement('img'));f.step(16);let texture:any;rendered.scene.traverse((object:any)=>{if(object.material?.map)texture=object.material.map;});expect(texture).toBeTruthy();const disposal=vi.spyOn(texture,'dispose');f.world.setRoomPreview(null);f.step(24);let rebuilt:any;rendered.scene.traverse((object:any)=>{if(object.material?.map)rebuilt=object.material.map;});expect(rebuilt).toBe(texture);expect(disposal).not.toHaveBeenCalled();const revoked=structuredClone(room);revoked.accessGeneration++;f.world.update(revoked);f.step(32);expect(disposal).toHaveBeenCalledOnce();expect(f.container.querySelector('canvas')!.dataset.studioPreview).toBe('false');let retained=false;rendered.scene.traverse((object:any)=>{if(object.material?.map)retained=true;});expect(retained).toBe(false);
+});

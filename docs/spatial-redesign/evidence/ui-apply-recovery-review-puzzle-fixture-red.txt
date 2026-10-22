@@ -1,0 +1,98 @@
+Already up to date
+Done in 45ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-puzzle-client.test.ts [2m([22m[2m49 tests[22m[2m | [22m[31m2 failed[39m[2m | [22m[33m47 skipped[39m[2m)[22m[33m 2017[2mms[22m[39m
+   [2m[90m↓[39m[22m picture roster ordering in the full snapshot reducer [2m(14)[22m
+     [2m[90m↓[39m[22m accepts newer roster at equal durable sequence and rejects a backwards roster before poisoning authority
+     [2m[90m↓[39m[22m retains independent roster high-water after clear display clearing
+     [2m[90m↓[39m[22m retains independent roster high-water after zone display clearing
+     [2m[90m↓[39m[22m orders round replacement with the same house-wide roster revision watermark
+     [2m[90m↓[39m[22m rejects malformed or contradictory round roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory epoch roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory house roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory duplicate roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory foreign-self roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory negative roster without advancing access
+     [2m[90m↓[39m[22m rejects malformed or contradictory equal-changed roster without advancing access
+     [2m[90m↓[39m[22m rejects private roster injection and motion cannot restore participation
+     [2m[90m↓[39m[22m rejects old access and retired epoch while permitting authorized identity scope reset
+     [2m[90m↓[39m[22m membership revocation clears cached private content and does not recover it from an omitted roster
+   [2m[90m↓[39m[22m direct picture participation intent [2m(10)[22m
+     [2m[90m↓[39m[22m retries an uncertain original request exactly, with cloned notifications and no durable queue
+     [2m[90m↓[39m[22m newer Leave supersedes unresolved Join and a late Join ACK cannot replace it or the roster
+     [2m[90m↓[39m[22m access change clears retry but retains connection sequence
+     [2m[90m↓[39m[22m generation change clears retry but retains connection sequence
+     [2m[90m↓[39m[22m observer change clears retry but retains connection sequence
+     [2m[90m↓[39m[22m explicit same-zone subscription and takeover invalidate retry without resetting sequence
+     [2m[90m↓[39m[22m disconnect/reconnect never replays Join, resets only the new connection counter, and cannot queue offline
+     [2m[90m↓[39m[22m concurrent retries share a flight; deterministic denial settles and requires a new action
+     [2m[90m↓[39m[22m a mismatched success ACK remains uncertain and never adopts its participation
+     [2m[90m↓[39m[22m direct intent works without durable storage, but updates and revocation clear it
+   [31m❯[39m durable picture command capture and recovery [2m(10)[22m
+     [2m[90m↓[39m[22m puzzle pending cap is per identity/house, separate from game drafts and within16/32KiB
+     [2m[90m↓[39m[22m puzzle.join cannot become a durable draft or restored outbox
+     [2m[90m↓[39m[22m puzzle.leave cannot become a durable draft or restored outbox
+     [2m[90m↓[39m[22m house.puzzle.intent cannot become a durable draft or restored outbox
+     [2m[90m↓[39m[22m puzzle.future cannot become a durable draft or restored outbox
+[31m     [31m×[31m captures non-destructive Start authority and roster once, then reuses original defaults for the same pending UUID[39m[33m 1012[2mms[22m[39m
+     [2m[90m↓[39m[22m missing unfinished-reset confirmation context is rejected before queueing; supplied stale context remains exact
+[31m     [31m×[31m captures initial participation and preserves round/UUID/body through a later Join and historical receipt[39m[33m 1004[2mms[22m[39m
+     [2m[90m↓[39m[22m expired puzzle draft inspection has readable type, immutable capture and explicit manual retry
+     [2m[90m↓[39m[22m missing durable storage never emits a placement and a missing participation is not guessed
+   [2m[90m↓[39m[22m picture client boundary refinements [2m(8)[22m
+     [2m[90m↓[39m[22m equal roster revision compares member content semantically rather than object or member order
+     [2m[90m↓[39m[22m direct intent checks the expected identity before emission
+     [2m[90m↓[39m[22m malformed unfinished-reset confirmation context is rejected before queueing: {"authority":{},"expectedRoster":{}}
+     [2m[90m↓[39m[22m malformed unfinished-reset confirmation context is rejected before queueing: {"authority":{"serverEpoch":"epoch-a","accessGeneration":-1,"generation":1},"expectedRoster":{"serverEpoch":"epoch-a","revision":1}}
+     [2m[90m↓[39m[22m malformed unfinished-reset confirmation context is rejected before queueing: {"authority":{"serverEpoch":"epoch-a","accessGeneration":1,"generation":1},"expectedRoster":{"serverEpoch":"epoch-a","revision":-1}}
+     [2m[90m↓[39m[22m convenience Start capture does not turn an unfinished table into current reset consent
+     [2m[90m↓[39m[22m restored puzzle caps and lounge/house scope are validated without overwriting raw storage
+     [2m[90m↓[39m[22m puzzle drafts still obey the shared32KiB UTF-8 limit
+   [2m[90m↓[39m[22m authorized picture-roster recovery after private-room revocation [2m(5)[22m
+     [2m[90m↓[39m[22m fresh authorized unchanged roster {"members":[]} restores the lounge after bedroom access revocation
+     [2m[90m↓[39m[22m fresh authorized unchanged roster {"members":["f5613cae-45f7-4031-bc42-bed16007a887"]} restores the lounge after bedroom access revocation
+     [2m[90m↓[39m[22m stale authority and a genuinely older roster cannot recover the revoked display
+     [2m[90m↓[39m[22m contradictory same-revision peer membership and round remain rejected after raw roster clearing
+     [2m[90m↓[39m[22m revocation never restores a prior participation UUID from an equal-revision head
+   [2m[90m↓[39m[22m terminal private-roster ordering disposal [2m(2)[22m
+     [2m[90m↓[39m[22m confirmed session loss clears old membership comparison state while retaining stale-authority rejection
+     [2m[90m↓[39m[22m revocation followed by disconnect disposes membership metadata before a fresh authenticated connection
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-client.test.ts[2m > [22mdurable picture command capture and recovery[2m > [22mcaptures non-destructive Start authority and roster once, then reuses original defaults for the same pending UUID
+[31m[1mAssertionError[22m: expected [ { event: 'house.command', …(1) } ] to have a length of 2 but got 1[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 1[39m
+
+[36m [2m❯[22m spec/house-puzzle-client.test.ts:[2m172:128[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-client.test.ts[2m > [22mdurable picture command capture and recovery[2m > [22mcaptures initial participation and preserves round/UUID/body through a later Join and historical receipt
+[31m[1mAssertionError[22m: expected [ { event: 'house.command', …(1) } ] to have a length of 2 but got 1[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 1[39m
+
+[36m [2m❯[22m spec/house-puzzle-client.test.ts:[2m186:134[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[33m47 skipped[39m[90m (49)[39m
+[2m   Start at [22m 05:57:53
+[2m   Duration [22m 2.20s[2m (tests 96%, transform 3%, import 1%)[22m
+

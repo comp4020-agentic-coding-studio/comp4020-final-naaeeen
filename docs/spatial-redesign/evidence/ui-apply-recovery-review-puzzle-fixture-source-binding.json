@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-23",
+  "changedSpec": {
+    "path": "spec/house-puzzle-client.test.ts",
+    "sha256": "a7cfee4d5110ec31c0a4c0ed140bdfdbf1e8a761259a7800018a029b3b88b2cd"
+  },
+  "unchangedProductionBeforeAndAfter": {
+    "public/house-client.js": "18015bedfc25e1cba0e1dbf8b909c8c3fb304e5770f5c3f55f4b5b312943e767",
+    "public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb"
+  },
+  "checks": {
+    "affectedTests": "139/139 PASS",
+    "wholeCheckoutTypecheck": "PASS",
+    "specDiffWhitespace": "PASS"
+  },
+  "parentFullFailure": "1361 PASS / 2 FAIL before fixture calibration; parent original log preserved",
+  "finalFullCheck": "parent-owned; not rerun by this worker"
+}

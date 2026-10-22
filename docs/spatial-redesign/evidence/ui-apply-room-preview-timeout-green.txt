@@ -1,0 +1,12 @@
+Already up to date
+Done in 44ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-studio-preview.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 131[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m11 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 05:10:32
+[2m   Duration [22m 600ms[2m (import 67%, tests 25%, transform 7%, worker 1%)[22m
+

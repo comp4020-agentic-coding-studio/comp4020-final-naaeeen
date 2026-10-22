@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-23",
+  "baselineHead": "498e72e1b2cb7dd35a89e72a35da6ae1cb1bbe3d",
+  "files": {
+    "public/house-client.js": "18015bedfc25e1cba0e1dbf8b909c8c3fb304e5770f5c3f55f4b5b312943e767",
+    "public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    "spec/house-client.test.ts": "52f5b10e3413d74fda720aa3b96e194e1f550df4e75f373a097e97e9eebb4c3e",
+    "spec/house-ui.test.ts": "cee6e3cf1ed3d6ea61b573261b7f1286a58eb1db367799840b22474eb26038db",
+    "spec/house-recovery-client.test.ts": "65ad0911d9be02e537afbfbbf939c83d389f955ed4f0821cad6e0063f26fd8a6",
+    "spec/house-recovery-service.test.ts": "31e438b53dceb76fe2c2359df04c139b845ef0347de6a04b748b35443865a13a"
+  },
+  "checks": {
+    "affectedTests": "222/222 PASS",
+    "wholeCheckoutTypecheck": "PASS",
+    "ownedDiffWhitespace": "PASS"
+  },
+  "runtimeEvidence": "actual createService SQLite + Socket.IO + real createHouseClient + production UI source; world routing renderer stubbed, physical seat movement validated by real server",
+  "boundaries": {
+    "nativeBrowser": "parent owns final affected native acceptance",
+    "testServices": "ephemeral localhost service fixtures started and closed by tests",
+    "persistentServices": "none started",
+    "commits": "none",
+    "load": "not run"
+  }
+}

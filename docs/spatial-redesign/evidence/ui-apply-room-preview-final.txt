@@ -1,0 +1,66 @@
+Already up to date
+Done in 62ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-studio-preview.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 209[2mms[22m[39m
+ [32m✓[39m spec/house-world.test.ts [2m([22m[2m105 tests[22m[2m)[22m[33m 19715[2mms[22m[39m
+   [33m[2m✓[22m[39m uses elapsed time for the same walking speed at fast and slow render rates[33m 424[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves actual authorised players through DIY rebuilds and keeps observer/IME input isolated[33m 334[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps each rotated DIY mesh inside its authoritative footprint[33m 1018[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the actual animated self mesh and ring inside short HUD-free play space[33m 2384[2mms[22m[39m
+   [33m[2m✓[22m[39m restores framing after the room editor closes before its next HUD report[33m 449[2mms[22m[39m
+   [33m[2m✓[22m[39m renders remote walking and interpolation at every RAF then returns to the static budget[33m 369[2mms[22m[39m
+   [33m[2m✓[22m[39m replans a rejected automatic approach and sends swept chords around furniture after delayed receipts[33m 801[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 routes to the selected desk and lamp identity rather than the first object of that kind[33m 1253[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 projects a solid desk surface and uses its native raycast at rotation 0[33m 312[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial makes the visible bedroom exit rug a real native pointer destination[33m 358[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m119 tests[22m[2m)[22m[33m 33333[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer card typing when an earlier submitted version is acknowledged[33m 660[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the next chat draft while the preceding message acknowledgement arrives[33m 311[2mms[22m[39m
+   [33m[2m✓[22m[39m returns a removed resident to the lobby with their private export reachable[33m 308[2mms[22m[39m
+   [33m[2m✓[22m[39m does not expose a private tool or crash when room controls are used during reconnection[33m 320[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer furniture edits after its own layout ACK and sends the receipt revision[33m 396[2mms[22m[39m
+   [33m[2m✓[22m[39m does not rebase an old furniture draft when current metadata is saved[33m 339[2mms[22m[39m
+   [33m[2m✓[22m[39m shows pending drafts in the lobby without exposing other-identity payloads[33m 350[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps an unsaved shared card when visiting a room and returning to the same house[33m 305[2mms[22m[39m
+   [33m[2m✓[22m[39m purges an already displayed lobby proof when recovery changes to another lobby identity[33m 324[2mms[22m[39m
+   [33m[2m✓[22m[39m serializes recovery key issuance across the house and lobby buttons[33m 361[2mms[22m[39m
+   [33m[2m✓[22m[39m closes and recreates the pending inspector across a lobby-to-lobby recovery epoch[33m 356[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 548[2mms[22m[39m
+   [33m[2m✓[22m[39m tears down embedded board and private chat when the identity changes[33m 339[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the full current location title and clears it at an identity boundary[33m 301[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 observer submission cannot queue work, light or starter writes and updates unchanged-cursor controls[33m 399[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 keeps the original pending starter UUID, revision and preset when a later room snapshot arrives[33m 354[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 light is independent of dirty room settings and advances only its matching layout base[33m 302[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 light does not rebase a previously stale layout and late ACK cannot restore revoked room DOM[33m 323[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 starter ACK preserves newer settings, layout and lighting drafts instead of rebasing them[33m 322[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 prevents moving an uncertain work command to a different room and retains the original retry[33m 488[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 restores a same-identity bedroom work draft through disconnect without exposing it before authorization[33m 362[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 review reconciles UI pending room intents after Pending drafts discard[33m 415[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 review reconciles UI pending room intents after Pending drafts retry[33m 433[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 review reconciles an automatically settled outbox when the Pending list is empty[33m 414[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 lets a stale lighting draft explicitly use saved lighting without discarding room settings[33m 374[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 does not forget an active room intent during pending inspection[33m 336[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 ignores a late pending reconciliation after identity changes and keeps private room DOM clear[33m 356[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 Return routes to the room studio while keeping earlier saved work separately available[33m 315[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 moving snapshots do not repeatedly inspect the persistent outbox[33m 681[2mms[22m[39m
+   [33m[2m✓[22m[39m shows optional Discord as an external destination and preserves newer owner edits[33m 332[2mms[22m[39m
+   [33m[2m✓[22m[39m an old door subscription continuation does not close a newly opened panel[32m 300[2mms[22m[39m
+   [33m[2m✓[22m[39m an active Return keeps Options opened after the real null subscription callback and preserves work[33m 442[2mms[22m[39m
+   [33m[2m✓[22m[39m an active Return does not replace newly opened work at the queued arrival effect[33m 383[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial retains separate lounge and room chat drafts after authorized zone returns[33m 429[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial retains dirty furniture and lighting through an ordinary leave and return[33m 349[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial game choices wait for a real connected game-seat snapshot after claim ACK[33m 340[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial clears all zone draft caches after identity revocation[33m 303[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial clears only the acknowledged original chat draft cached in an absent zone[33m 414[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial opens study only after its chair ACK and keeps explicit Join, board and Close meanings[33m 334[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial opens sofa only after its chair ACK and keeps explicit Join, board and Close meanings[33m 399[2mms[22m[39m
+   [33m[2m✓[22m[39m spatial studio mutations bind the current captured room access generation[33m 310[2mms[22m[39m
+   [33m[2m✓[22m[39m room world reference stays painted after the studio panel closes and clears immediately on room exit[33m 327[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m234 passed[39m[22m[90m (234)[39m
+[2m   Start at [22m 05:08:59
+[2m   Duration [22m 34.43s[2m (tests 95%, import 3%, transform 2%)[22m
+

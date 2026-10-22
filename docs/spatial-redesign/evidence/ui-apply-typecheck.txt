@@ -1,0 +1,12 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+$ tsc --noEmit
+spec/house-game-realtime.test.ts(87,45): error TS2345: Argument of type 'string' is not assignable to parameter of type '`${string}-${string}-${string}-${string}-${string}`'.
+spec/house-game-realtime.test.ts(88,54): error TS2345: Argument of type 'string' is not assignable to parameter of type '`${string}-${string}-${string}-${string}-${string}`'.
+spec/house-seat-authority.test.ts(83,27): error TS7034: Variable 'clients' implicitly has type 'any[]' in some locations where its type cannot be determined.
+spec/house-seat-authority.test.ts(87,63): error TS7005: Variable 'clients' implicitly has an 'any[]' type.
+spec/house-seat-authority.test.ts(87,94): error TS7006: Parameter 'p' implicitly has an 'any' type.
+spec/house-seat-authority.test.ts(88,49): error TS7005: Variable 'clients' implicitly has an 'any[]' type.
+spec/house-seat-authority.test.ts(88,80): error TS7006: Parameter 'p' implicitly has an 'any' type.
+spec/house-ui.test.ts(357,105): error TS2339: Property 'animation' does not exist on type '{ id: string; name: string; colour: string; connected: boolean; zoneId: string; x: number; z: number; availability: string; generation: number; }'.
+[ELIFECYCLE] Command failed with exit code 2.

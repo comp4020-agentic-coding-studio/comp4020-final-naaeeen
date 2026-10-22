@@ -1,0 +1,20 @@
+{
+  "baselineHead": "498e72e1b2cb7dd35a89e72a35da6ae1cb1bbe3d",
+  "date": "2026-10-23",
+  "files": {
+    "public/house-client.js": "be166b1dec76c262267352a87432d7dd1ff679009eab7995645ec70451c13fac",
+    "public/house-ui.js": "41fa6d2121d8447fbb5270ef2d16d3c235728ca4f4d04f65d51b4dc741e7ea5f",
+    "spec/house-client.test.ts": "52f5b10e3413d74fda720aa3b96e194e1f550df4e75f373a097e97e9eebb4c3e",
+    "spec/house-ui.test.ts": "5e07d075f3da389fc495cbc8731ffea7983d6de2c09a0ef9402d17bce9f42b22",
+    "spec/house-recovery-client.test.ts": "a6700c5b2e05ff18181c7f2fa05078b08586699dd1e2be3b25ff25043a9a505d"
+  },
+  "checks": {
+    "broadBeforeLastGuard": "215/215 PASS",
+    "finalFocusedAfterGuard": "20/20 PASS",
+    "typecheck": "PASS",
+    "diffWhitespace": "PASS"
+  },
+  "native": "parent owns affected current native check; previous native results predate these repairs",
+  "commits": "none",
+  "services": "none"
+}

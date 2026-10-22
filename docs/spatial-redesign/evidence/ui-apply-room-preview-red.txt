@@ -1,0 +1,111 @@
+Already up to date
+Done in 60ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-studio-preview.test.ts [2m([22m[2m10 tests[22m[2m | [22m[31m10 failed[39m[2m)[22m[32m 154[2mms[22m[39m
+[31m   [31m×[31m loads an authenticated room thumbnail independently and does not refetch on ordinary snapshots[39m[32m 72[2mms[22m[39m
+[31m   [31m×[31m polls permission every15s while retaining one decoded image and URL for unchanged material[39m[32m 12[2mms[22m[39m
+[31m   [31m×[31m clears a deleted or denied reference on the next authorized metadata check[39m[32m 8[2mms[22m[39m
+[31m   [31m×[31m null authorization immediately clears the image, aborts outstanding bytes and ignores their late reply[39m[32m 7[2mms[22m[39m
+[31m   [31m×[31m an access/control boundary clears synchronously and a late decode cannot repaint the old room[39m[32m 9[2mms[22m[39m
+[31m   [31m×[31m a hidden page releases bytes and URLs immediately and revalidates on visible return[39m[32m 11[2mms[22m[39m
+[31m   [31m×[31m dispose clears its current URL, aborts requests and prevents future polling or repaint[39m[32m 7[2mms[22m[39m
+[31m   [31m×[31m rejects metadata from a different owner before retrieving any image bytes[39m[32m 8[2mms[22m[39m
+[31m   [31m×[31m rejects oversized/non-PNG bytes and decoded dimensions while cleaning temporary URLs[39m[32m 10[2mms[22m[39m
+[31m   [31m×[31m coalesces an explicit save refresh while a metadata request is outstanding[39m[32m 9[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 10 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mloads an authenticated room thumbnail independently and does not refetch on ordinary snapshots
+[31m[1mAssertionError[22m: expected undefined to match object { naturalWidth: 2 }[39m
+
+[32m- Expected:[39m
+{
+  "naturalWidth": 2,
+}
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m10:203[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mpolls permission every15s while retaining one decoded image and URL for unchanged material
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '0')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m11:179[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mclears a deleted or denied reference on the next authorized metadata check
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '0')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m12:199[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mnull authorization immediately clears the image, aborts outstanding bytes and ignores their late reply
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '1')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m13:346[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22man access/control boundary clears synchronously and a late decode cannot repaint the old room
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '0')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m14:332[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22ma hidden page releases bytes and URLs immediately and revalidates on visible return
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '0')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m15:255[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mdispose clears its current URL, aborts requests and prevents future polling or repaint
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading '0')[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m16:188[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mrejects metadata from a different owner before retrieving any image bytes
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called once, but got 0 times[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m17:167[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mrejects oversized/non-PNG bytes and decoded dimensions while cleaning temporary URLs
+[31m[1mAssertionError[22m: expected undefined to be null[39m
+
+[32m- Expected:[39m
+null
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m18:364[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22mcoalesces an explicit save refresh while a metadata request is outstanding
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called once, but got 0 times[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m19:268[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m10 failed[39m[22m[90m (10)[39m
+[2m   Start at [22m 05:06:07
+[2m   Duration [22m 722ms[2m (import 66%, tests 25%, transform 8%, worker 1%)[22m
+

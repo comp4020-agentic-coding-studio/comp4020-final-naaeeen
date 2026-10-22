@@ -24,7 +24,8 @@ export function createHouseWorld(container, callbacks = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.02;
-  const materials = new Map(), keys = new Set(), labels = [], avatars = new Map(), doors = new Map(), labelEntries = new WeakMap(), speech = createBubbleFeed();
+  let studioTexture=null;const studioScreens=[];
+  const materials = new Map(), keys = new Set(), labels = [], avatars = new Map(), doors = new Map(), seatLabels = new Map(), labelEntries = new WeakMap(), speech = createBubbleFeed();
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2(), pickTargets = [];
   let reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cameraRig = createHouseCamera({ reducedMotion: reduced });
@@ -67,9 +68,9 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function pickable(group, target) { group.traverse(o => { o.userData.target = target; }); pickTargets.push({ point: new THREE.Box3().setFromObject(group).getCenter(new THREE.Vector3()), target }); }
   function clearScene() {
-    selfFrameGeometry = null; roomObjectTargets = []; renderDirty = true;
+    selfFrameGeometry = null; roomObjectTargets = []; studioScreens.length=0; renderDirty = true;
     scene?.traverse(o => { o.geometry?.dispose(); if (o.material?.isMeshBasicMaterial) o.material.dispose(); if (o.isLight) o.shadow?.dispose(); });
-    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; delete canvas.dataset.avatarMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
+    dimensionObserver.disconnect(); pickTargets.length = 0; delete canvas.dataset.pickTargets; delete canvas.dataset.selfMeshBounds; delete canvas.dataset.avatarMeshBounds; labels.length = 0; avatars.clear(); doors.clear(); seatLabels.clear(); roomLabel = null; leaderLayer.replaceChildren(); overlay.replaceChildren(leaderLayer); selection = null; layoutDirty = true;
   }
   function plant(parent, x = 0, z = 0, scale = 1) {
     const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(scale); parent.add(g);
@@ -144,12 +145,13 @@ export function createHouseWorld(container, callbacks = {}) {
     layout.seats.filter(seat => seat.purpose !== 'rest').forEach((seat, i) => {
       const g = new THREE.Group(); g.position.set(seat.x, 0, seat.z); g.rotation.y = seat.heading + Math.PI; scene.add(g); chair(g, Object.values(PALETTE)[i % Object.keys(PALETTE).length]);
       pickable(g, { type: 'seat', seatId: seat.id });
+      if (seat.purpose === 'game') seatLabels.set(seat.id, label('', new THREE.Vector3(seat.x, 1.12, seat.z), 'seat'));
     });
     const table = fixtureGroup('table');
     box(2.5, 0.15, 1.8, 0, FURNITURE_HEIGHTS.tableTop - 0.075, 0, '#b89469', table);
     for (const x of [-1.03, 1.03]) for (const z of [-0.7, 0.7]) box(0.1, 0.57, 0.1, x, 0.29, z, '#8f724f', table);
     box(0.65, 0.04, 0.45, -0.5, 0.765, 0.1, '#869578', table); box(0.43, 0.03, 0.48, -0.41, 0.80, 0.07, '#efdfc0', table);
-    cylinder(0.12, 0.15, 0.7, 0.80, 0.1, '#e8d8b8', table);
+    cylinder(0.12, 0.15, 0.7, 0.80, 0.1, '#e8d8b8', table);pickable(table,{type:'study'});
     const tea = fixtureGroup('tea-cabinet');
     box(1.7, 0.75, 0.6, 0, 0.375, 0, '#9a7d5c', tea); box(1.78, 0.08, 0.65, 0, 0.79, 0, '#c4a783', tea); cylinder(0.17, 0.29, -0.2, 0.98, 0, '#efe0c0', tea);
     const teaLamp = new THREE.Group(); teaLamp.position.set(-0.55, 0.84, 0); teaLamp.scale.setScalar(0.5); tea.add(teaLamp); lamp(teaLamp);
@@ -168,7 +170,7 @@ export function createHouseWorld(container, callbacks = {}) {
     const restTable = fixtureGroup('rest-table'); box(1.3, .1, .8, 0, .45, 0, '#b79a78', restTable);
     for (const x of [-.48, .48]) for (const z of [-.25, .25]) box(.08, .4, .08, x, .2, z, '#8f724f', restTable);
     cylinder(.1, .12, .25, .56, 0, '#e8d8b8', restTable); box(.4, .035, .3, -.2, .52, 0, '#9cac91', restTable);
-    label('Rest corner', new THREE.Vector3(fixed('rest-sofa-a').x, 1.17, fixed('rest-sofa-a').z), 'corner');
+    pickable(restTable,{type:'rest'});label('Rest corner', new THREE.Vector3(fixed('rest-sofa-a').x, 1.17, fixed('rest-sofa-a').z), 'corner');
     const gameTable = fixtureGroup('game-table'); box(1.8, .14, 1.4, 0, FURNITURE_HEIGHTS.tableTop - .07, 0, '#a58464', gameTable);
     for (const x of [-.7, .7]) for (const z of [-.5, .5]) box(.1, .59, .1, x, .29, z, '#80684e', gameTable);
     box(1.24, .025, 1.04, 0, .75, 0, '#687f89', gameTable);
@@ -187,7 +189,8 @@ export function createHouseWorld(container, callbacks = {}) {
     if (p.kind === 'shelf') shelf(g, 1.5, 0.5, accent);
     if (p.kind === 'desk') {
       box(2, 0.12, 1, 0, FURNITURE_HEIGHTS.deskTop - 0.06, 0, '#b89a75', g); for (const x of [-0.83, 0.83]) for (const z of [-0.34, 0.34]) box(0.1, 0.64, 0.1, x, 0.32, z, '#927758', g);
-      box(0.65, 0.42, 0.06, 0.12, 0.96, -0.23, '#53625b', g); box(0.57, 0.34, 0.065, 0.12, 0.96, -0.19, accent, g); box(0.46, 0.03, 0.25, 0.12, 0.77, 0.09, '#e9dcc0', g);
+      box(0.65, 0.42, 0.06, 0.12, 0.96, -0.23, '#53625b', g); box(0.57, 0.34, 0.065, 0.12, 0.96, -0.19, accent, g);
+      const screen = new THREE.Mesh(new THREE.PlaneGeometry(.55,.32),new THREE.MeshBasicMaterial({color:studioTexture?'#fff9e7':accent,map:studioTexture,side:THREE.DoubleSide}));screen.position.set(.12,.96,-.153);screen.userData.studioColour=accent;g.add(screen);studioScreens.push(screen); box(0.46, 0.03, 0.25, 0.12, 0.77, 0.09, '#e9dcc0', g);
     }
     if (p.kind === 'bed') {
       box(2, 0.44, 3, 0, 0.25, 0, '#a98b69', g); box(1.86, 0.26, 2.83, 0, 0.6, 0, '#f0e6d2', g); box(1.86, 0.11, 1.77, 0, 0.78, 0.48, accent, g);
@@ -197,7 +200,13 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function bedroom() {
     roomPlacements().forEach(furniture);
-    box(1.5, 0.027, 0.65, layout.exitTarget.x, 0.038, layout.exitTarget.z + 0.15, '#b3a891');
+    // Wall-mounted studio controls keep legacy empty rooms usable without changing collision geometry.
+    const studioFrame=new THREE.Group();scene.add(studioFrame);box(1.55,1.08,.10,0,1.65,-layout.depth/2+.20,'#a78c68',studioFrame);
+    const studioScreen=new THREE.Mesh(new THREE.PlaneGeometry(1.38,.9),new THREE.MeshBasicMaterial({color:studioTexture?'#fff9e7':'#7d8f79',map:studioTexture,side:THREE.DoubleSide}));studioScreen.position.set(0,1.65,-layout.depth/2+.26);studioScreen.userData.studioColour='#7d8f79';studioFrame.add(studioScreen);studioScreens.push(studioScreen);pickable(studioFrame,{type:'studio'});
+    const radio=new THREE.Group();scene.add(radio);box(.55,.32,.22,1.3,1.38,-layout.depth/2+.24,'#9a7d5c',radio);pickable(radio,{type:'radio'});
+    label('Reference desk',new THREE.Vector3(0,2.42,-layout.depth/2+.28),'studio');label('Room soundscape',new THREE.Vector3(1.4,.95,-layout.depth/2+.28),'studio');
+    const exitRug = box(1.5, 0.027, 0.65, layout.exitTarget.x, 0.038, layout.exitTarget.z + 0.15, '#b3a891');
+    pickable(exitRug, { type: 'exit' });
     label('Return to lounge', new THREE.Vector3(layout.exitTarget.x, 0.85, layout.exitTarget.z + 0.17), 'exit');
     roomLabel = label((live.durable.residents.find(r => r.id === live.durable.room.ownerId)?.name ?? 'Resident') + "'s room", new THREE.Vector3(-2.8, 2.28, -layout.depth / 2 + 0.9), 'room');
   }
@@ -208,7 +217,7 @@ export function createHouseWorld(container, callbacks = {}) {
     const sun = new THREE.DirectionalLight(light === 'cosy' ? '#ffd29b' : '#ffe0ad', light === 'dim' ? 0.48 : light === 'cosy' ? 1.05 : 1.75); sun.position.set(0, 9, 5); sun.castShadow = true; sun.shadow.mapSize.set(512, 512);
     sun.shadow.normalBias = 0.035; scene.add(sun);
     layout = live?.durable.room ? bedroomLayout(roomPlacements()) : createLayout(live?.durable.house.capacity ?? 4);
-    if (live?.durable.room) roomObjectTargets = roomPlacements().filter(piece => ['desk', 'lamp'].includes(piece.kind)).map(piece => ({ type: piece.kind, id: piece.id, point: roomInteractionTarget(roomPlacements(), piece.id), text: piece.kind === 'desk' ? 'Open My work · house-visible' : live.durable.room.ownerId === live.durable.selfId ? 'Choose room lighting' : 'Owner controls this lamp' })).filter(target => target.point);
+    if (live?.durable.room) roomObjectTargets = roomPlacements().filter(piece => ['desk', 'lamp'].includes(piece.kind)).map(piece => ({ type: piece.kind, id: piece.id, point: roomInteractionTarget(roomPlacements(), piece.id), text: piece.kind === 'desk' ? 'Inspect room desk' : live.durable.room.ownerId === live.durable.selfId ? 'Choose room lighting' : 'Owner controls this lamp' })).filter(target => target.point);
     // Fit both room candidates' floor and wall extents in the fixed 512 shadow budget.
     scene.updateMatrixWorld(true); sun.target.updateMatrixWorld(true); sun.shadow.updateMatrices(sun); const shadowBounds = new THREE.Box3();
     for (const x of [-layout.width / 2, layout.width / 2]) for (const y of [0, 2.6]) for (const z of [-layout.depth / 2, layout.depth / 2]) shadowBounds.expandByPoint(new THREE.Vector3(x, y, z).applyMatrix4(sun.shadow.camera.matrixWorldInverse));
@@ -303,11 +312,11 @@ export function createHouseWorld(container, callbacks = {}) {
   function clearInput() { keys.clear(); direction = { x: 0, z: 0 }; route = []; routeTarget = null; }
   function targets() {
     if (!live) return [];
-    if (live.durable.room) return [{ type: 'exit', point: layout.exitTarget, text: 'Return to lounge' }, ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit in chair' })), ...roomObjectTargets];
+    if (live.durable.room) return [{ type: 'exit', point: layout.exitTarget, text: 'Return to lounge' }, ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: 'Sit in chair' })), ...roomObjectTargets,{type:'studio',point:{x:0,z:-layout.depth/2+1.2},text:'Inspect room reference'},{type:'radio',point:{x:1.3,z:-layout.depth/2+1.2},text:'Choose room soundscape'}];
     return [
       ...layout.doors.map(d => { const r = live.durable.residents.find(r => r.slot === d.slot); return { type: 'door', slot: d.slot, roomId: r?.bedroomId, point: d.target, text: r ? (r.id === live.durable.selfId ? 'Enter your room' : 'Visit ' + r.name) : 'Vacant room' }; }),
       ...layout.seats.map(s => ({ type: 'seat', seatId: s.id, point: s.target, text: s.purpose === 'study' ? 'Sit to study' : s.purpose === 'rest' ? 'Sit and rest' : 'Sit at game chair' })),
-      { type: 'game', point: layout.gameTarget, text: 'Open game table' },
+      { type: 'game', point: layout.gameTarget, text: 'Choose a game place' },
       { type: 'board', point: layout.boardTarget, text: 'Open shared board' },
     ];
   }
@@ -324,6 +333,7 @@ export function createHouseWorld(container, callbacks = {}) {
   }
   function approach(request) {
     if (!canControl() || self()?.seatId) return false;
+    if (['game','study','rest'].includes(request.type)) return routeTo(request.type);
     const target = targets().find(t => t.type === request.type && (request.slot === undefined || t.slot === request.slot) && (request.seatId === undefined || t.seatId === request.seatId) && (request.id === undefined || t.id === request.id));
     if (!target) return false;
     walkingIntent();
@@ -333,10 +343,10 @@ export function createHouseWorld(container, callbacks = {}) {
   /** Route deliberate Places choices through the same collision and occupancy targets. */
   function routeTo(place) {
     if (!canControl() || self()?.seatId || live.durable.room) return false;
-    if (place === 'game' || place === 'board') return approach({ type: place });
+    if (place === 'board') return approach({ type: place });
     if (place === 'room') { const resident = live.durable.residents.find(r => r.id === live.durable.selfId); return resident ? approach({ type: 'door', slot: resident.slot }) : false; }
-    if (place !== 'study' && place !== 'rest') return false;
-    const occupied = new Set(live.players.filter(player => player.connected).map(player => player.seatId));
+    if (!['study', 'rest', 'game'].includes(place)) return false;
+    const occupied = new Set(live.players.filter(player => player.connected || player.seatReservedUntil > Date.now()).map(player => player.seatId));
     const seats = layout.seats.filter(seat => seat.purpose === place && !occupied.has(seat.id)).sort((a, b) => Math.hypot(own.x - a.target.x, own.z - a.target.z) - Math.hypot(own.x - b.target.x, own.z - b.target.z));
     return seats.some(seat => approach({ type: 'seat', seatId: seat.id }));
   }
@@ -364,10 +374,11 @@ export function createHouseWorld(container, callbacks = {}) {
     } else recoverMotion(reply?.position ?? motionAnchor);
   }
   function update(next) {
-    if (!next) { pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { ...createLayout(4).spawn }; resetMotion(); rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
+    if (!next) { setStudioPreview(null); pendingEditFraming = false; cameraRig.setMode('play'); cameraRig.reset(); speech.clear(); live = null; inputEnabled = false; previewPlacements = null; renderKey = ''; clearInput(); sent = null; pendingStand = false; own = { ...createLayout(4).spawn }; resetMotion(); rebuild(); callbacks.onHint?.(''); lastHint = ''; for (const key of ['selfX', 'selfZ', 'zoneId', 'selfAnimation']) delete canvas.dataset[key]; return; }
     const previous = live, changedZone = previous?.durable.zoneId !== next.durable.zoneId || previous?.durable.streamId !== next.durable.streamId;
     const changedIdentity = previous?.serverEpoch !== next.serverEpoch || previous?.durable.house.id !== next.durable.house.id || previous?.durable.selfId !== next.durable.selfId;
     const changedControl = previous?.generation !== next.generation || previous?.controller !== next.controller || previous?.accessGeneration !== next.accessGeneration;
+    if(changedZone||changedIdentity||changedControl)setStudioPreview(null);
     live = next;
     const p = self();
     speech.ingest([next.serverEpoch, next.durable.selfId, next.durable.house.id, next.durable.zoneId, next.accessGeneration, next.generation].join('/'), next.durable.chat, { quiet: p?.availability !== 'chat', visibleAuthors: new Set(next.players.filter(player => player.connected && player.zoneId === next.durable.zoneId).map(player => player.id)) }, window.performance.now());
@@ -381,7 +392,19 @@ export function createHouseWorld(container, callbacks = {}) {
     if (key !== renderKey) { renderKey = key; rebuild(); }
     // A queued visit belongs to the bedroom chosen when the route began.
     if (routeTarget?.type === 'door' && routeTarget.roomId !== next.durable.residents.find(r => r.slot === routeTarget.slot)?.bedroomId) { route = []; routeTarget = null; }
-    syncResidents(); syncPlayers(next);
+    syncResidents(); syncPlayers(next); syncSeatLabels();
+  }
+  function setStudioPreview(image) {
+    studioTexture?.dispose();studioTexture=image&&live?.durable.room?new THREE.Texture(image):null;
+    if(studioTexture){studioTexture.colorSpace=THREE.SRGBColorSpace;studioTexture.needsUpdate=true;}
+    for(const screen of studioScreens){screen.material.map=studioTexture;screen.material.color.set(studioTexture?'#fff9e7':screen.userData.studioColour);screen.material.needsUpdate=true;}
+    renderDirty=true;canvas.dataset.studioPreview=String(Boolean(studioTexture));
+  }
+  function syncSeatLabels() {
+    for (const [id, el] of seatLabels) {
+      const occupant = live.players.find(player => player.seatId === id && (player.connected || player.seatReservedUntil > Date.now()));
+      updateLabel(el, 'Game place ' + id.split('-').at(-1) + ' · ' + (occupant ? (occupant.connected ? occupant.name : 'Reconnecting: ' + occupant.name) : 'Free'));
+    }
   }
   function syncPlayers(next) {
     const visible = next.players.filter(p => p.connected && p.zoneId === next.durable.zoneId);
@@ -676,6 +699,7 @@ export function createHouseWorld(container, callbacks = {}) {
     setReducedMotion(value) { reduced = !!value; cameraRig.setReducedMotion(reduced); },
     setSuspended,
     setLabelSafeArea(value) { const nextArea = value ? { viewport: value.viewport ? { ...value.viewport } : null, safeRects: (value.safeRects ?? []).map(rect => ({ ...rect })) } : null; if (pendingEditFraming || JSON.stringify(nextArea) !== JSON.stringify(safeArea)) { safeArea = nextArea; configureCamera(); if (pendingEditFraming) { cameraRig.reset(); pendingEditFraming = false; } updateCamera(0); layoutDirty = true; } },
+    setStudioPreview,
     setRoomPreview(placements) { previewPlacements = placements === null ? null : placements.map(p => ({ ...p })); if (live?.durable.room) rebuild(); },
     getPosition: () => ({ ...own }),
     setDirection(x, z) { if (suspended || !Number.isFinite(x) || !Number.isFinite(z)) return; if (x || z) { if (!canControl()) return; canvas.focus({ preventScroll: true }); callbacks.onMovementIntent?.(); walkingIntent(); } route = []; routeTarget = null; direction = { x: Math.max(-1, Math.min(1, x)), z: Math.max(-1, Math.min(1, z)) }; },
@@ -690,6 +714,6 @@ export function createHouseWorld(container, callbacks = {}) {
         }
         updateCamera(0); cameraModeChanged();
       } if (!editing && selection) { scene.remove(selection); selection.geometry.dispose(); selection.material.dispose(); selection = null; renderDirty = true; } },
-    dispose() { if (disposed) return; disposed = true; speech.clear(); cancelAnimationFrame(frame); observer.disconnect(); dimensionObserver.disconnect(); listeners.forEach(([element, type, listener]) => element.removeEventListener(type, listener)); clearScene(); for (const material of materials.values()) material.dispose(); renderer.dispose(); canvas.remove(); overlay.remove(); },
+    dispose() { if (disposed) return; disposed = true; setStudioPreview(null); speech.clear(); cancelAnimationFrame(frame); observer.disconnect(); dimensionObserver.disconnect(); listeners.forEach(([element, type, listener]) => element.removeEventListener(type, listener)); clearScene(); for (const material of materials.values()) material.dispose(); renderer.dispose(); canvas.remove(); overlay.remove(); },
   };
 }

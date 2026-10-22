@@ -1,0 +1,18 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-recovery-client.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m spec/house-client.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 312[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m129 tests[22m[2m)[22m[33m 21552[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer card typing when an earlier submitted version is acknowledged[33m 477[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 373[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 moving snapshots do not repeatedly inspect the persistent outbox[33m 328[2mms[22m[39m
+   [33m[2m✓[22m[39m recovery review holds the selected original before any return navigation and blocks safely on storage failure[33m 309[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m215 passed[39m[22m[90m (215)[39m
+[2m   Start at [22m 05:34:59
+[2m   Duration [22m 22.25s[2m (tests 95%, transform 3%, import 2%)[22m
+

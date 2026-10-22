@@ -12,7 +12,7 @@ export function createHousePuzzleUI(element,{send,intent,retryIntent=()=>Promise
  const round=()=>snapshot?.durable.puzzle?.current;
  const participating=()=>Boolean(snapshot?.puzzleRoster?.selfParticipationId&&snapshot.puzzleRoster.roundId===round()?.id&&snapshot.puzzleRoster.memberIds.includes(snapshot.durable.selfId));
  const exclusive=()=>Boolean(snapshot?.durable.game?.current?.players.includes(snapshot.durable.selfId));
- const writable=()=>Boolean(snapshot?.controller&&snapshot.durable.zoneId==="lounge"&&snapshot.durable.puzzle);
+ const writable=()=>Boolean(snapshot?.controller&&snapshot.durable.zoneId==="lounge"&&snapshot.durable.puzzle&&snapshot.players?.some(player=>player.id===snapshot.durable.selfId&&player.connected&&player.zoneId==="lounge"&&/^game-seat-[1-6]$/.test(player.seatId)));
  const placed=()=>new Map((round()?.placements||[]).map(placement=>[placement.pieceId,placement]));
  const say=text=>{message=text;render();};
  function crop(node,piece){node.style.backgroundImage='url("'+art.url+'")';node.style.backgroundPosition=(piece.destination%6)*20+"% "+Math.floor(piece.destination/6)*100/3+"%";}
@@ -26,25 +26,25 @@ export function createHousePuzzleUI(element,{send,intent,retryIntent=()=>Promise
  }
  function roving(){for(let index=0;index<cells.length;index++)cells[index].tabIndex=index===boardFocus?0:-1;const visible=pieces.filter(piece=>!pieceButtons.get(piece.id).hidden);if(!visible.some(piece=>piece.id===trayFocus))trayFocus=visible[0]?.id;for(const [id,item] of pieceButtons)item.tabIndex=id===trayFocus?0:-1;}
  function select(id){
-  if(!participating()||withdrawing){say("Join the picture table before choosing a piece. Watching keeps your place free.");return;}
+  if(!writable()||!participating()||withdrawing){say("Join the picture table before choosing a piece. Watching keeps your place free.");return;}
   if(placed().has(id)){say("That piece is already placed. Choose another loose piece.");return;}
   selected=id;say("Selected: "+art.pieces.find(piece=>piece.id===id).description+". Choose a picture place.");
  }
  async function durable(type,payload,revision){
-  if(disposed||!snapshot||busy||pendingCount){if(pendingCount)say("A picture action is pending, not confirmed saved. Inspect Pending drafts before placing again.");return;}
+  if(disposed||!snapshot||!writable()||busy||pendingCount){if(pendingCount)say("A picture action is pending, not confirmed saved. Inspect Pending drafts before placing again.");return;}
   const ownContext=context(),ownRound=round()?.id,token=++operation,flight=++durableToken;busy=true;say("Sending… this action is not confirmed saved.");
   try{await send(type,payload,revision);if(disposed||token!==operation||context()!==ownContext||round()?.id!==ownRound)return;say(type==="puzzle.start"?"Start acknowledged. Watch the new picture, then choose Join separately.":"Placement acknowledged. Waiting for the saved picture if its update is delayed.");}
   catch(error){if(disposed||token!==operation||context()!==ownContext||round()?.id!==ownRound)return;say(error.code==="PUZZLE_WRONG_PLACE"?"That place does not match. Your piece is still selected; try another place.":["PENDING","TIMEOUT","STORAGE_UNAVAILABLE"].includes(error.code)?"Picture action pending, not confirmed saved. Inspect Pending drafts; Leave and Return remain available.":error.message||"The action was rejected. Check the current picture and try again.");}
   finally{if(flight===durableToken){busy=false;render();}}
  }
  function place(destination){
-  if(!participating()||withdrawing){say("Join the picture table before placing a piece.");return;}
+  if(!writable()||!participating()||withdrawing){say("Join the picture table before placing a piece.");return;}
   if(!selected){say("Choose a loose piece first.");return;}
   if(placed().has(selected)){selected=null;say("That piece has already been placed. Choose another.");return;}
   const current=round();void durable("puzzle.place",{roundId:current.id,participationId:snapshot.puzzleRoster.selfParticipationId,pieceId:selected,destination},undefined);
  }
  async function participation(mode,retry=false){
-  const current=round();if(!current||disposed)return;
+  const current=round();if(!current||disposed||(mode==="join"&&!retry&&!writable()))return;
   const ownContext=context(),ownRound=current.id,token=++operation;if(mode==="join"){joinStarted=true;withdrawing=false;}else withdrawing=true;
   say(mode==="leave"?"Withdrawal pending. You can return to your room now.":"Joining… participation is not confirmed yet.");
   try{await (retry?retryIntent():intent(mode,current.id));if(disposed||token!==operation||context()!==ownContext||round()?.id!==ownRound)return;say(mode==="leave"?"Withdrawal acknowledged.":round()?.completed?"The picture is complete. A new picture needs a fresh Start and Join.":"Join acknowledged. Waiting for current participation; watching until it arrives.");}
@@ -54,7 +54,7 @@ export function createHousePuzzleUI(element,{send,intent,retryIntent=()=>Promise
  function leave(toRoom=false){const uncertain=pendingIntent();if(round()&&(participating()||joinStarted||uncertain?.mode==="join"))void participation("leave");selected=null;confirmation=null;render();(toRoom?onReturn:onLeave)();}
  function captureStart(confirmUnfinished){const table=snapshot.durable.puzzle,roster=snapshot.puzzleRoster;return {revision:table.revision,payload:{expectedRoundId:table.current?.id??null,illustrationId:art.id,illustrationVersion:art.version,confirmUnfinished,authority:{serverEpoch:snapshot.serverEpoch,accessGeneration:snapshot.accessGeneration,generation:snapshot.generation},expectedRoster:{serverEpoch:roster.serverEpoch,revision:roster.revision}}};}
  button("start").addEventListener("click",()=>{if(!writable()||!snapshot.puzzleRoster)return;const unfinished=round()&&!round().completed;if(unfinished){if(snapshot.durable.house.ownerId!==snapshot.durable.selfId||snapshot.puzzleRoster.memberIds.some(id=>id!==snapshot.durable.selfId))return;confirmation=captureStart(true);render();button("confirm").focus();}else{const captured=captureStart(false);void durable("puzzle.start",captured.payload,captured.revision);}});
- button("confirm").addEventListener("click",()=>{if(!confirmation)return;const captured=confirmation;confirmation=null;void durable("puzzle.start",captured.payload,captured.revision);});
+ button("confirm").addEventListener("click",()=>{if(!confirmation||!writable())return;const captured=confirmation;confirmation=null;void durable("puzzle.start",captured.payload,captured.revision);});
  button("cancel").addEventListener("click",()=>{confirmation=null;render();button("start").focus();});
  button("join").addEventListener("click",()=>{if(!writable()||exclusive()||participating()||round()?.completed)return;void participation("join");});
  button("leave").addEventListener("click",()=>leave(false));button("return").addEventListener("click",()=>leave(true));button("pending").addEventListener("click",onPending);button("chat").addEventListener("click",onChat);
@@ -85,7 +85,7 @@ export function createHousePuzzleUI(element,{send,intent,retryIntent=()=>Promise
   button("leave").hidden=complete||(!joined&&!joinStarted&&!pendingDirect);button("leave").disabled=false;button("return").disabled=false;
   button("start").textContent=unfinished?"Replace unfinished picture":current?"Start new picture":"Start picture";button("start").disabled=!canWrite||!roster||busy||pendingCount>0||Boolean(unfinished&&(snapshot.durable.house.ownerId!==snapshot.durable.selfId||roster.memberIds.some(id=>id!==snapshot.durable.selfId)));
   button("retry").hidden=!pendingDirect;button("retry").disabled=!pendingDirect?.canRetry;button("retry").textContent=pendingDirect?.state==="sending"?"Participation action sending…":"Retry original "+(pendingDirect?.mode||"participation");button("pending").hidden=!pendingCount;
-  get('[data-puzzle-reset]').hidden=!confirmation;get('[data-puzzle-feedback]').textContent=!validArt?"This picture version is unavailable. Reload to get matching content; saved progress is kept.":exclusive()?"Leave Four-in-a-row before joining the picture table. You can watch either activity.":message||(pendingCount?"A picture action is pending, not confirmed saved. Inspect Pending drafts.":complete?"Completed together. The image stays here after everyone leaves.":joined?"Choose any loose piece. Closing keeps participation; Leave or Return whenever you choose.":"Watching does not join. Start a picture if needed, then explicitly Join to contribute.");
+  get('[data-puzzle-reset]').hidden=!confirmation;get('[data-puzzle-feedback]').textContent=!validArt?"This picture version is unavailable. Reload to get matching content; saved progress is kept.":exclusive()?"Leave Four-in-a-row before joining the picture table. You can watch either activity.":message||(pendingCount?"A picture action is pending, not confirmed saved. Inspect Pending drafts.":complete?"Completed together. The image stays here after everyone leaves.":joined?"Choose any loose piece. Closing keeps participation; Leave or Return whenever you choose.":"Sit in a game chair, then Start if needed and explicitly Join to contribute. Watching does not join.");
   get('[data-puzzle-reference-image]').src=art.url;get('[data-puzzle-reference-image]').alt=art.title;get('[data-puzzle-description]').textContent=art.reference;roving();
  }
  return {leave:()=>leave(false),update(next,options={}){const oldContext=context(),oldRound=round()?.id,oldSelected=selected;snapshot=next;pendingCount=options.pendingCount||0;if(oldContext!==context()||oldRound!==round()?.id){selected=null;message="";busy=false;joinStarted=false;withdrawing=false;operation++;durableToken++;if(oldContext!==context()){confirmation=null;get('[data-puzzle-reference]').hidden=true;}}else if(oldSelected&&placed().has(oldSelected)){const placement=placed().get(oldSelected),name=snapshot.durable.residents.find(person=>person.id===placement.actorId)?.name||"A housemate";selected=null;message=name+" placed the piece you had selected. Focus stays here; choose another piece.";}if(!participating())selected=null;render();},dispose(){disposed=true;operation++;element.removeEventListener("keydown",keys);element.removeEventListener("keyup",up);}};

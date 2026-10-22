@@ -1,0 +1,36 @@
+Already up to date
+Done in 74ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-studio-preview.test.ts [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m | [22m[33m10 skipped[39m[2m)[22m[32m 72[2mms[22m[39m
+   [2m[90m↓[39m[22m loads an authenticated room thumbnail independently and does not refetch on ordinary snapshots
+   [2m[90m↓[39m[22m polls permission every15s while retaining one decoded image and URL for unchanged material
+   [2m[90m↓[39m[22m clears a deleted or denied reference on the next authorized metadata check
+   [2m[90m↓[39m[22m null authorization immediately clears the image, aborts outstanding bytes and ignores their late reply
+   [2m[90m↓[39m[22m an access/control boundary clears synchronously and a late decode cannot repaint the old room
+   [2m[90m↓[39m[22m a hidden page releases bytes and URLs immediately and revalidates on visible return
+   [2m[90m↓[39m[22m dispose clears its current URL, aborts requests and prevents future polling or repaint
+   [2m[90m↓[39m[22m rejects metadata from a different owner before retrieving any image bytes
+   [2m[90m↓[39m[22m rejects oversized/non-PNG bytes and decoded dimensions while cleaning temporary URLs
+   [2m[90m↓[39m[22m coalesces an explicit save refresh while a metadata request is outstanding
+[31m   [31m×[31m a timed-out decode cannot repaint and does not block the next permission check[39m[32m 71[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-preview.test.ts[2m > [22ma timed-out decode cannot repaint and does not block the next permission check
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 'blob:room-preview' ][90m
+
+Number of calls: [1m0[22m
+[31m[39m
+[36m [2m❯[22m spec/house-studio-preview.test.ts:[2m21:291[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[33m10 skipped[39m[90m (11)[39m
+[2m   Start at [22m 05:10:05
+[2m   Duration [22m 673ms[2m (import 77%, tests 13%, transform 9%, worker 1%)[22m
+

@@ -1,0 +1,24 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-client.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 332[2mms[22m[39m
+ [32m✓[39m spec/house-game-ui.test.ts [2m([22m[2m21 tests[22m[2m)[22m[33m 1195[2mms[22m[39m
+ [32m✓[39m spec/house-puzzle-ui.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 1737[2mms[22m[39m
+ [32m✓[39m spec/house-world.test.ts [2m([22m[2m105 tests[22m[2m)[22m[33m 9673[2mms[22m[39m
+   [33m[2m✓[22m[39m uses elapsed time for the same walking speed at fast and slow render rates[33m 407[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps each rotated DIY mesh inside its authoritative footprint[33m 543[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the actual animated self mesh and ring inside short HUD-free play space[33m 1218[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 routes to the selected desk and lamp identity rather than the first object of that kind[33m 444[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m117 tests[22m[2m)[22m[33m 19522[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer card typing when an earlier submitted version is acknowledged[33m 603[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the next chat draft while the preceding message acknowledgement arrives[33m 356[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 373[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 moving snapshots do not repeatedly inspect the persistent outbox[33m 335[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m5 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[32m348 passed[39m[22m[90m (348)[39m
+[2m   Start at [22m 02:54:03
+[2m   Duration [22m 20.44s[2m (tests 90%, import 7%, transform 4%)[22m
+

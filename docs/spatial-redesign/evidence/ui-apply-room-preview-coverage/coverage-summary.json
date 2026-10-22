@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":51,"covered":47,"skipped":0,"pct":92.15},"statements":{"total":131,"covered":116,"skipped":0,"pct":88.54},"functions":{"total":23,"covered":16,"skipped":0,"pct":69.56},"branches":{"total":108,"covered":99,"skipped":0,"pct":91.66},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
+,"/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-studio-preview.js": {"lines":{"total":51,"covered":47,"skipped":0,"pct":92.15},"functions":{"total":23,"covered":16,"skipped":0,"pct":69.56},"statements":{"total":131,"covered":116,"skipped":0,"pct":88.54},"branches":{"total":108,"covered":99,"skipped":0,"pct":91.66}}
+}

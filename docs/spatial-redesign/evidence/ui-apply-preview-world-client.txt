@@ -1,0 +1,143 @@
+Already up to date
+Done in 48ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-client.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 315[2mms[22m[39m
+ [31m❯[39m spec/house-world.test.ts [2m([22m[2m105 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 8745[2mms[22m[39m
+   [33m[2m✓[22m[39m uses elapsed time for the same walking speed at fast and slow render rates[33m 336[2mms[22m[39m
+   [32m✓[39m does not replay retained history as speech even when the wall clock is skewed[32m 128[2mms[22m[39m
+   [32m✓[39m bounds six fresh speakers, keeps a two-line safe Unicode preview and clears revocation[32m 109[2mms[22m[39m
+   [32m✓[39m preserves actual authorised players through DIY rebuilds and keeps observer/IME input isolated[32m 142[2mms[22m[39m
+   [32m✓[39m suppresses static destination text behind active controls in a clipped visual viewport[32m 56[2mms[22m[39m
+   [32m✓[39m keeps six actual seat poses attributed while packing nearby person labels[32m 48[2mms[22m[39m
+   [32m✓[39m retains the full forty-character name on wrapped bounded labels and avoids observer takeover rectangles[32m 55[2mms[22m[39m
+   [32m✓[39m keeps the controlled avatar prominent in portrait play while preserving world coordinates[32m 49[2mms[22m[39m
+   [32m✓[39m keeps chosen overview during movement and keeps DIY inspection camera stable[32m 68[2mms[22m[39m
+   [32m✓[39m applies phone foreground sizing to newly joined and rebuilt authorised actors without a resize[32m 79[2mms[22m[39m
+   [32m✓[39m suspends world movement and resumes the same camera position and zoom[32m 53[2mms[22m[39m
+   [32m✓[39m keeps one camera orientation across the responsive threshold[32m 52[2mms[22m[39m
+   [32m✓[39m lets a deliberate canvas drag take focus after chat typing without moving the actor[32m 50[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps each rotated DIY mesh inside its authoritative footprint[33m 612[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps the actual animated self mesh and ring inside short HUD-free play space[33m 1145[2mms[22m[39m
+   [32m✓[39m restores framing after the room editor closes before its next HUD report[32m 173[2mms[22m[39m
+   [32m✓[39m retains existing lounge geometry and shadows when a peer joins a vacant bedroom slot[32m 40[2mms[22m[39m
+   [32m✓[39m refreshes resident labels, door targets and avatar colours in place, then removes only the departed avatar[32m 55[2mms[22m[39m
+   [32m✓[39m rebuilds geometry for room, capacity and privacy changes and clears prior zone content[32m 91[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct serverEpoch lifecycle change in the same zone[32m 70[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct house lifecycle change in the same zone[32m 72[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct self lifecycle change in the same zone[32m 79[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct access lifecycle change in the same zone[32m 79[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct generation lifecycle change in the same zone[32m 66[2mms[22m[39m
+   [32m✓[39m rebuilds the scene across a direct stream lifecycle change in the same zone[32m 72[2mms[22m[39m
+   [32m✓[39m keeps static resources across player motion, availability and disconnect while retaining the permanent room owner[32m 43[2mms[22m[39m
+   [32m✓[39m updates an active speech speaker after a resident rename without replacing the bubble or replaying history[32m 45[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room id change[32m 44[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room ownerId change[32m 39[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room revision change[32m 44[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room open change[32m 44[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room palette change[32m 39[2mms[22m[39m
+   [32m✓[39m rebuilds actual bedroom geometry for a direct room placements change[32m 45[2mms[22m[39m
+   [32m✓[39m cancels only a queued door approach when its bedroom occupant changes: replace[32m 49[2mms[22m[39m
+   [32m✓[39m cancels only a queued door approach when its bedroom occupant changes: remove[32m 44[2mms[22m[39m
+   [32m✓[39m keeps a queued door approach across changes to the same occupant name, colour and door state[32m 50[2mms[22m[39m
+   [32m✓[39m renders the first usable frame and bounds static GPU draws while RAF and speech keep running[32m 88[2mms[22m[39m
+   [32m✓[39m renders local walking at every RAF while preserving elapsed movement and realtime sends[32m 45[2mms[22m[39m
+   [32m✓[39m renders remote walking and interpolation at every RAF then returns to the static budget[32m 190[2mms[22m[39m
+   [32m✓[39m renders a settling follow camera every RAF after the avatar stops[32m 44[2mms[22m[39m
+   [32m✓[39m redraws scene membership and material changes before the next idle draw is due[32m 43[2mms[22m[39m
+   [32m✓[39m redraws projection controls and resize before the next idle draw is due[32m 46[2mms[22m[39m
+   [32m✓[39m redraws DIY preview and actual selection changes before the next idle draw is due[32m 43[2mms[22m[39m
+   [32m✓[39m does not draw while suspended and forces the updated scene on the first resumed RAF[32m 39[2mms[22m[39m
+   [32m✓[39m redraws stationary remote heading and seating changes and the final idle limb pose[32m 44[2mms[22m[39m
+   [32m✓[39m keeps stationary walking limbs at RAF cadence with reduced motion enabled[32m 47[2mms[22m[39m
+   [32m✓[39m forces a resumed frame even without intervening scene changes[32m 33[2mms[22m[39m
+   [32m✓[39m bounds unacknowledged prediction, rolls back rejected motion and keeps held manual intent[32m 45[2mms[22m[39m
+   [32m✓[39m keeps normal acknowledged walking at2.6units per second and ignores a former room receipt[32m 65[2mms[22m[39m
+   [32m✓[39m waits80ms after a delayed receipt and keeps at most ten dispatches per second[32m 40[2mms[22m[39m
+   [32m✓[39m keeps coalesced curved manual motion reachable by a single server sweep from its acknowledged anchor[32m 36[2mms[22m[39m
+   [32m✓[39m ignores pending world correction after a seat lifecycle boundary[32m 39[2mms[22m[39m
+   [32m✓[39m ignores pending world correction after a epoch lifecycle boundary[32m 64[2mms[22m[39m
+   [32m✓[39m ignores pending world correction after a control lifecycle boundary[32m 63[2mms[22m[39m
+   [32m✓[39m ignores pending world correction after a closed lifecycle boundary[32m 38[2mms[22m[39m
+   [32m✓[39m replans a rejected automatic approach and sends swept chords around furniture after delayed receipts[32m 225[2mms[22m[39m
+   [32m✓[39m emits a server-sweepable endpoint when collision sliding is non-idempotent at a plant corner[32m 30[2mms[22m[39m
+   [32m✓[39m bounds prediction when transport is busy after a same-room authority correction and retains held intent[32m 50[2mms[22m[39m
+   [32m✓[39m resumes follow on intentional walking after a temporary primary drag[32m 41[2mms[22m[39m
+   [32m✓[39m resumes temporary inspection on keyboard intent before any actual displacement[32m 33[2mms[22m[39m
+   [32m✓[39m resumes temporary inspection on touch intent before any actual displacement[32m 37[2mms[22m[39m
+   [32m✓[39m resumes temporary inspection on route intent before any actual displacement[32m 45[2mms[22m[39m
+   [32m✓[39m retains explicit inspection during walking and restores Follow after editing[32m 34[2mms[22m[39m
+   [32m✓[39m retains explicit overview during walking and restores Follow after editing[32m 40[2mms[22m[39m
+   [32m✓[39m does not treat a correction snapshot as walking intent[32m 34[2mms[22m[39m
+   [32m✓[39m does not treat a seat snapshot as walking intent[32m 41[2mms[22m[39m
+   [32m✓[39m does not treat a takeover snapshot as walking intent[32m 63[2mms[22m[39m
+   [32m✓[39m releases cancelled pointer capture and ignores subsequent stale move/up events[32m 54[2mms[22m[39m
+   [32m✓[39m chair placement clicks use the existing routed authoritative seat interaction[32m 103[2mms[22m[39m
+   [32m✓[39m does not resume inspection or walk from typing, chat handle arrows or a disabled tool[32m 41[2mms[22m[39m
+   [32m✓[39m keeps a 0px primary gesture as a click without entering inspection[32m 54[2mms[22m[39m
+   [32m✓[39m keeps a 5px primary gesture as a click without entering inspection[32m 51[2mms[22m[39m
+   [32m✓[39m projects a solid clickable chair surface for actual ray picking at rotation 0[32m 89[2mms[22m[39m
+   [32m✓[39m projects a solid clickable chair surface for actual ray picking at rotation 1[32m 85[2mms[22m[39m
+   [32m✓[39m projects a solid clickable chair surface for actual ray picking at rotation 2[32m 87[2mms[22m[39m
+   [32m✓[39m projects a solid clickable chair surface for actual ray picking at rotation 3[32m 88[2mms[22m[39m
+   [32m✓[39m accepts intentional walking from the ordinary camera-hud-follow HUD focus without stealing it[32m 35[2mms[22m[39m
+   [32m✓[39m accepts intentional walking from the ordinary pause-button HUD focus without stealing it[32m 38[2mms[22m[39m
+   [32m✓[39m resumes temporary Follow on a walking attempt blocked by both room boundaries[32m 35[2mms[22m[39m
+   [32m✓[39m keeps one real pointer identity through secondary pointers, cancellation and stale releases[32m 40[2mms[22m[39m
+   [32m✓[39m keeps visible names, bubbles and context clear of 2 actual moving/seated bodies at every frame[32m 54[2mms[22m[39m
+   [32m✓[39m keeps visible names, bubbles and context clear of 6 actual moving/seated bodies at every frame[32m 74[2mms[22m[39m
+   [32m✓[39m protects all visible peer bodies in an observer room view whose controller is elsewhere[32m 19[2mms[22m[39m
+   [32m✓[39m P2 aligns the visible bedroom chair back opposite its authoritative seated facing[32m 22[2mms[22m[39m
+   [33m[2m✓[22m[39m P2 routes to the selected desk and lamp identity rather than the first object of that kind[33m 414[2mms[22m[39m
+   [32m✓[39m P2 preserves legacy standard lighting and renders distinguishable cosy and dim settings[32m 75[2mms[22m[39m
+   [32m✓[39m P2 projects a solid desk surface and uses its native raycast at rotation 0[32m 87[2mms[22m[39m
+   [32m✓[39m P2 projects a solid desk surface and uses its native raycast at rotation 1[32m 86[2mms[22m[39m
+   [32m✓[39m P2 projects a solid desk surface and uses its native raycast at rotation 2[32m 83[2mms[22m[39m
+   [32m✓[39m P2 projects a solid desk surface and uses its native raycast at rotation 3[32m 89[2mms[22m[39m
+   [32m✓[39m P2 projects a solid lamp surface and uses its native raycast at rotation 0[32m 88[2mms[22m[39m
+   [32m✓[39m P2 projects a solid lamp surface and uses its native raycast at rotation 1[32m 84[2mms[22m[39m
+   [32m✓[39m P2 projects a solid lamp surface and uses its native raycast at rotation 2[32m 83[2mms[22m[39m
+   [32m✓[39m P2 projects a solid lamp surface and uses its native raycast at rotation 3[32m 86[2mms[22m[39m
+   [32m✓[39m renders two collision-aligned sofas with six individually pickable 0.4m cushions[32m 37[2mms[22m[39m
+   [32m✓[39m uses bounded colours and translates the study table, props and rug together[32m 36[2mms[22m[39m
+   [32m✓[39m routes Places by purpose and keeps game interaction separate from sitting[32m 67[2mms[22m[39m
+   [32m✓[39m uses current-layout permanent-slot arrivals when optional poses are absent[32m 40[2mms[22m[39m
+   [32m✓[39m keeps observer and peer optional poses at their own permanent-slot arrivals[32m 45[2mms[22m[39m
+   [32m✓[39m matches actual rendered study and game chair footprints at every supported capacity[32m 108[2mms[22m[39m
+[31m   [31m×[31m raycasts every sofa cushion at its published projected native pick point[39m[32m 47[2mms[22m[39m
+   [32m✓[39m reports manual movement intent while picture controls and routes remain isolated[32m 48[2mms[22m[39m
+   [32m✓[39m spatial makes the visible bedroom exit rug a real native pointer destination[32m 93[2mms[22m[39m
+   [32m✓[39m spatial routes the game through a free physical place and skips reconnect reservations[32m 41[2mms[22m[39m
+   [32m✓[39m spatial clears the authenticated desk preview texture on access or zone loss[32m 46[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-world.test.ts[2m > [22mraycasts every sofa cushion at its published projected native pick point
+[31m[1mAssertionError[22m: rest-seat-1: expected { type: 'rest' } to deeply equal { type: 'seat', seatId: 'rest-seat-1' }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "seatId": "rest-seat-1",[39m
+[32m-   "type": "seat",[39m
+[31m+   "type": "rest",[39m
+[2m  }[22m
+
+[36m [2m❯[22m spec/house-world.test.ts:[2m870:22[22m[39m
+    [90m868|[39m  ray.setFromCamera({x:target.x/1920*2-1,y:1-target.y/1080*2} as any,re…
+    [90m869|[39m  const hit=ray.intersectObjects(rendered.scene.children,true).find((h:…
+    [90m870|[39m  expect(hit,seat.id).toEqual({type:'seat',seatId:seat.id});}
+    [90m   |[39m                      [31m^[39m
+    [90m871|[39m });
+    [90m872|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m183 passed[39m[22m[90m (184)[39m
+[2m   Start at [22m 02:48:14
+[2m   Duration [22m 9.59s[2m (tests 90%, import 5%, transform 4%)[22m
+

@@ -6,11 +6,11 @@ import { createCommandOutbox, createHouseClient, createSnapshotReducer } from ".
 const HOUSE = randomUUID(), PERSON = randomUUID(), OTHER = randomUUID(), ROUND = randomUUID(), NEXT_ROUND = randomUUID(), PARTICIPATION = randomUUID();
 const KEY = "house.commandOutbox.v2", DAY = 86_400_000;
 const memoryStorage = () => { const values = new Map<string, string>(); return { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value); } }; };
-function head({ access = 1, generation = 1, sequence = 1, epoch = "epoch-a", house = HOUSE, self = PERSON, round = ROUND, revision = 1, participation = null, members = [], zone = "lounge", controller = true }: any = {}): any {
+function head({ access = 1, generation = 1, sequence = 1, epoch = "epoch-a", house = HOUSE, self = PERSON, round = ROUND, revision = 1, participation = null, members = [], zone = "lounge", controller = true, seated = false }: any = {}): any {
   return { worldVersion: HOUSE_WORLD_VERSION, serverEpoch: epoch, accessGeneration: access, generation, controller,
     durable: { house: { id: house }, selfId: self, streamId: zone + ":" + house, sequence, zoneId: zone, residents: [], cards: [], chat: [], room: zone === "lounge" ? null : { id: zone },
       puzzle: zone === "lounge" ? { revision: 1, current: round ? { id: round, ruleset: 1, illustrationId: "rainy-nook", illustrationVersion: 1, illustrationDigest: "digest", placements: [], completed: false } : null } : null },
-    puzzleRoster: zone === "lounge" ? { serverEpoch: epoch, houseId: house, roundId: round, revision, memberIds: members, selfParticipationId: participation } : null, players: [] };
+    puzzleRoster: zone === "lounge" ? { serverEpoch: epoch, houseId: house, roundId: round, revision, memberIds: members, selfParticipationId: participation } : null, players: seated ? [{ id: self, connected: true, zoneId: zone, seatId: "game-seat-1", seatGeneration: 1 }] : [] };
 }
 function transport(initial = head()) {
   let state = initial, respond: (event: string, body: any) => Promise<any> = async (_event, body) => ({ ok: true, requestId: body.requestId, intentSequence: body.intentSequence, mode: body.mode, roundId: body.roundId, participationId: body.mode === "join" ? PARTICIPATION : null, rosterRevision: 2 });
@@ -165,11 +165,11 @@ describe("durable picture command capture and recovery", () => {
     expect(() => outbox.all()).toThrowError(expect.objectContaining({ code: "OUTBOX_CORRUPT" })); expect(storage.getItem(KEY)).toBe(raw);
   });
   test("captures non-destructive Start authority and roster once, then reuses original defaults for the same pending UUID", async () => {
-    const wire = transport(head({ round: null, revision: 4 })), storage = memoryStorage(), client = createHouseClient({ storage, fetchMe: fetchPerson }); await client.connect();
+    const wire = transport(head({ round: null, revision: 4, seated: true })), storage = memoryStorage(), client = createHouseClient({ storage, fetchMe: fetchPerson }); await client.connect();
     wire.reply(async () => { throw new Error("timeout"); }); const command = start({ expectedRoundId: null });
     await expect(client.command(command)).rejects.toMatchObject({ code: "PENDING" }); const original = wire.commands()[0]!.body.command;
     expect(original.payload).toMatchObject({ authority: { serverEpoch: "epoch-a", accessGeneration: 1, generation: 1 }, expectedRoster: { serverEpoch: "epoch-a", revision: 4 } });
-    wire.emit("house.snapshot", head({ access: 2, round: null, revision: 5 })); await vi.waitFor(() => expect(wire.commands()).toHaveLength(2));
+    wire.emit("house.snapshot", head({ access: 2, round: null, revision: 5, seated: true })); await vi.waitFor(() => expect(wire.commands()).toHaveLength(2));
     await expect(client.command(command)).rejects.toMatchObject({ code: "PENDING" }); expect(wire.commands().every(call => JSON.stringify(call.body.command) === JSON.stringify(original))).toBe(true); client.close();
   });
   test("missing unfinished-reset confirmation context is rejected before queueing; supplied stale context remains exact", async () => {
@@ -179,11 +179,11 @@ describe("durable picture command capture and recovery", () => {
     await expect(client.command(captured)).rejects.toMatchObject({ code: "PENDING" }); expect(wire.commands()[0]!.body.command).toEqual(captured); client.close();
   });
   test("captures initial participation and preserves round/UUID/body through a later Join and historical receipt", async () => {
-    const views: any[] = [], wire = transport(head({ participation: PARTICIPATION, members: [PERSON] })), storage = memoryStorage(), client = createHouseClient({ storage, fetchMe: fetchPerson, onSnapshot: value => views.push(value) }); await client.connect();
+    const views: any[] = [], wire = transport(head({ participation: PARTICIPATION, members: [PERSON], seated: true })), storage = memoryStorage(), client = createHouseClient({ storage, fetchMe: fetchPerson, onSnapshot: value => views.push(value) }); await client.connect();
     wire.reply(async () => { throw new Error("timeout"); }); const command: any = place(); delete command.payload.participationId;
     await expect(client.command(command)).rejects.toMatchObject({ code: "PENDING" }); const original = wire.commands()[0]!.body.command; expect(original.payload.participationId).toBe(PARTICIPATION);
     wire.reply(async () => ({ ok: true, result: { roundId: ROUND, puzzleRevision: 2, pieceId: "ivy-bell", destination: 0, completed: false } }));
-    wire.emit("house.snapshot", head({ access: 2, round: NEXT_ROUND, revision: 3 })); await vi.waitFor(() => expect(wire.commands()).toHaveLength(2));
+    wire.emit("house.snapshot", head({ access: 2, round: NEXT_ROUND, revision: 3, seated: true })); await vi.waitFor(() => expect(wire.commands()).toHaveLength(2));
     expect(wire.commands()[1]!.body.command).toEqual(original); await vi.waitFor(() => expect(createCommandOutbox(storage).all()).toEqual([])); expect(views.at(-1).puzzleRoster.selfParticipationId).toBeNull(); client.close();
   });
   test("expired puzzle draft inspection has readable type, immutable capture and explicit manual retry", async () => {
@@ -281,4 +281,19 @@ describe("terminal private-roster ordering disposal", () => {
     wire.emit("house.revoked", { serverEpoch: "epoch-a", accessGeneration: 2, code: "FORBIDDEN" }); wire.socket.connected = false; wire.emit("disconnect", "transport close"); expect(views.at(-1)).toBeNull();
     wire.state(head({ access: 3, generation: 2, revision: 8, members: [] })); await expect(client.connect()).resolves.toMatchObject({ ok: true }); expect(views.at(-1).puzzleRoster.memberIds).toEqual([]); client.close();
   });
+});
+
+
+test("recent standing picture drafts skip automatic replay while manual historical receipt preserves original round and body", async () => {
+  const views: any[] = [], wire = transport(head({ round: NEXT_ROUND })), storage = memoryStorage(), original = place();
+  createCommandOutbox(storage).add(original, PERSON, "lounge");
+  wire.reply(async () => ({ ok: true, result: { roundId: ROUND, puzzleRevision: 2, pieceId: "ivy-bell", destination: 0, completed: false } }));
+  const client = createHouseClient({ storage, fetchMe: fetchPerson, onSnapshot: value => views.push(value) }); await client.connect();
+  wire.emit("house.snapshot", head({ access: 2, round: NEXT_ROUND, revision: 3 }));
+  for (let n = 0; n < 20; n++) await Promise.resolve();
+  expect(wire.commands()).toHaveLength(0); expect(createCommandOutbox(storage).all()[0]!.command).toEqual(original);
+  expect((await client.getPending()).entries[0]).toMatchObject({ commandId: original.commandId, canRetry: true });
+  await client.retryPending(original.commandId); expect(wire.commands()).toHaveLength(1); expect(wire.commands()[0]!.body.command).toEqual(original);
+  expect(views.at(-1).durable.puzzle.current.id).toBe(NEXT_ROUND); expect(views.at(-1).puzzleRoster.selfParticipationId).toBeNull();
+  expect(createCommandOutbox(storage).all()).toEqual([]); client.close();
 });

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-23",
+  "environment": "Windows-to-WSL bridge; Ubuntu/lizhi; Linux mise pnpm",
+  "baselineHead": "93f8cfae17447d72fdd00d8f3f29ee8e08c24f0b",
+  "branch": "post-crit-improvements",
+  "files": {
+    "public/house-ui.js": "61118fddbd9367d7c54e73943fa5c14a9113a8653bdb5110a2cf0b4d6b1e20c0",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    "public/house.css": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00",
+    "public/house-game-ui.js": "1fbf5a5bcc1d357773609b7994bd806363997b6096dc626f913c3688900ec2e7",
+    "public/house-puzzle-ui.js": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab",
+    "public/house-client.js": "b8e209905d344b92b6c5a90a8ea97d5dd17b1290c21e97e35a1656f6e702b72d",
+    "spec/house-ui.test.ts": "8f7ae19db3d079f2b604250e8d4e7343385ffe55240b2c9064c360b8782bd108",
+    "spec/house-world.test.ts": "fff999e86f5e254467fb4a185cc31594980e6ac212d7449740aafeacfb7e9715",
+    "spec/house-game-ui.test.ts": "e778ad287c54524949d4219eef6ec5c583ebe40119912ebc73ee0c6c4ed368e2",
+    "spec/house-puzzle-ui.test.ts": "24c6879a6f7b506ac2820a76fb3af82fafaf9ef96c75df42ae30e8499ec7739f",
+    "spec/house-client.test.ts": "52f5b10e3413d74fda720aa3b96e194e1f550df4e75f373a097e97e9eebb4c3e"
+  },
+  "boundaries": {
+    "browser": "NOT RUN by this lane; parent owns native acceptance",
+    "services": "none started",
+    "commits": "none",
+    "independentReview": "parent scheduled after source freeze",
+    "humanStudy": "NOT RUN"
+  },
+  "latestChecks": {
+    "fullBeforeEpochHeaders": "348/348 PASS",
+    "epochHeadersFocused": "15/15 PASS",
+    "typecheckAfterHeaders": "Already up to date\nDone in 45ms using pnpm v11.9.0\n$ tsc --noEmit",
+    "coverageBeforeEpochHeaders": {
+      "statements": 87.08,
+      "branches": 78.88,
+      "lines": 94.08,
+      "functions": 84.57
+    }
+  }
+}

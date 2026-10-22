@@ -1,0 +1,21 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-recovery-client.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m spec/house-client.test.ts [2m([22m[2m79 tests[22m[2m)[22m[33m 319[2mms[22m[39m
+ [32m✓[39m spec/house-recovery-service.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1825[2mms[22m[39m
+   [33m[2m✓[22m[39m real service adopts only the intended bedroom subscription ACK generation and reopens the held original[33m 620[2mms[22m[39m
+   [33m[2m✓[22m[39m real service returns bedroom to lounge, confirms a physical chair ACK, then retries the same held UUID once[33m 683[2mms[22m[39m
+   [33m[2m✓[22m[39m real service rejects a delayed intended arrival ACK after an unrelated control takeover[33m 520[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m133 tests[22m[2m)[22m[33m 21935[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer card typing when an earlier submitted version is acknowledged[33m 487[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 374[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 moving snapshots do not repeatedly inspect the persistent outbox[33m 337[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m222 passed[39m[22m[90m (222)[39m
+[2m   Start at [22m 05:49:30
+[2m   Duration [22m 22.71s[2m (tests 92%, import 5%, transform 3%)[22m
+

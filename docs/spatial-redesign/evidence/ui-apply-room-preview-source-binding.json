@@ -1,0 +1,25 @@
+{
+  "baselineHead": "087c88f1a266ca226283d9467ce0b854361690d4",
+  "date": "2026-10-23",
+  "files": {
+    "public/house-studio-preview.js": "86a9bf5bfe31d79f435c0ce2c76f7ce24fb355445a9e3b678c1ce3e63943d1cd",
+    "public/house-ui.js": "3448f3719114c0559f1f67d1a9c95337191abcd4962556c29dd1918973dd5ad7",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "spec/house-studio-preview.test.ts": "3908cb9a3c9865ecab7484973b5d08340ca9a6be808c75254ba4130fc60b0c50",
+    "spec/house-ui.test.ts": "0cd05374bf3c285778739a96ccc0794d6464c5ad7b038345c014d632c24f1562",
+    "spec/house-world.test.ts": "32dd7f907ac8a97264daad32d88bb713e05ff1a356c2de4e0ba55510722afafd"
+  },
+  "checks": {
+    "affectedSuites": "240/240 PASS",
+    "typecheck": "PASS",
+    "newLoaderCoverage": {
+      "statements": 97.03,
+      "branches": 92.79,
+      "functions": 86.95,
+      "lines": 100
+    }
+  },
+  "nativeBrowser": "NOT RUN by worker; parent executor owns screenshots/acceptance",
+  "services": "none started",
+  "commits": "none"
+}

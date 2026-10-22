@@ -1,0 +1,16 @@
+Already up to date
+Done in 109ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-studio-preview.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 252[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m119 tests[22m[2m | [22m[33m116 skipped[39m[2m)[22m[33m 2306[2mms[22m[39m
+   [33m[2m✓[22m[39m never restores a room draft for a different owner or house[33m 1040[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 813[2mms[22m[39m
+   [33m[2m✓[22m[39m room world reference stays painted after the studio panel closes and clears immediately on room exit[33m 449[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m13 passed[39m[22m[2m | [22m[33m116 skipped[39m[90m (129)[39m
+[2m   Start at [22m 05:08:16
+[2m   Duration [22m 3.71s[2m (tests 51%, import 34%, transform 14%)[22m
+

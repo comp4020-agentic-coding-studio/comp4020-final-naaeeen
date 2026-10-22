@@ -1,0 +1,22 @@
+Already up to date
+Done in 50ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m spec/house-studio-preview.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 202[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m124 tests[22m[2m | [22m[33m123 skipped[39m[2m)[22m[33m 696[2mms[22m[39m
+   [33m[2m✓[22m[39m room world reference stays painted after the studio panel closes and clears immediately on room exit[33m 694[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m12 passed[39m[22m[2m | [22m[33m123 skipped[39m[90m (135)[39m
+[2m   Start at [22m 05:15:49
+[2m   Duration [22m 1.59s[2m (import 45%, tests 39%, transform 14%, worker 2%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   97.03 |    92.79 |   86.95 |     100 |                   
+ ...dio-preview.js |   97.03 |    92.79 |   86.95 |     100 | ...32-36,40,49,52 
+-------------------|---------|----------|---------|---------|-------------------

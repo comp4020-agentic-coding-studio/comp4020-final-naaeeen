@@ -790,3 +790,7 @@ describe("house-wide voice ordering", () => {
     expect(reducer.accept(next)).toBe(true); expect(views.at(-1).durable.voice).toEqual(next.durable.voice);
   });
 });
+
+test("spatial room HTTP authority uses the active in-memory controller and disappears on disconnect/observer",async()=>{
+ const transport=mockTransport();const client=createHouseClient();expect(()=>client.getRoomHttpAuthority()).toThrow();await client.connect();const authority=client.getRoomHttpAuthority();expect(authority).toMatchObject({generation:1,accessGeneration:1,zoneId:'lounge',seatId:null});expect(authority.controllerToken).toBe(transport.calls.find(call=>call.event==='house.subscribe')!.value.controllerToken);transport.emit('disconnect','transport close');expect(()=>client.getRoomHttpAuthority()).toThrow();client.close();const observer=mockTransport({...snapshot(),controller:false});const other=createHouseClient();await other.connect();expect(()=>other.getRoomHttpAuthority()).toThrow();other.close();
+});

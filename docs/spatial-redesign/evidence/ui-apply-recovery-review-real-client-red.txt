@@ -1,0 +1,88 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-recovery-client.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[32m 17[2mms[22m[39m
+[31m   [31m×[31m recovery calibration: entering the lounge does not automatically dispatch or delete an unseated activity draft[39m[32m 10[2mms[22m[39m
+[31m   [31m×[31m a persisted selected recovery hold survives reload, room subscribe and real seat ACK until explicit original retry[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m holding one selected activity draft does not pause unrelated room chat[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m manual standing replay can retrieve an accepted historical receipt without new seat consent[39m[32m 1[2mms[22m[39m
+[31m   [31m×[31m an activity-seat rejection preserves the unchanged original draft for another explicit retry[39m[32m 3[2mms[22m[39m
+[31m   [31m×[31m a failed recovery-hold storage write leaves the original outbox untouched[39m[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22mrecovery calibration: entering the lounge does not automatically dispatch or delete an unseated activity draft
+[31m[1mAssertionError[22m: expected [ { event: 'house.command', …(1) } ] to have a length of +0 but got 1[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0[39m
+[31m+ 1[39m
+
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m15:220[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22ma persisted selected recovery hold survives reload, room subscribe and real seat ACK until explicit original retry
+[31m[1mTypeError[22m: f.client.holdPending is not a function[39m
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m18:171[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22mholding one selected activity draft does not pause unrelated room chat
+[31m[1mTypeError[22m: f.client.holdPending is not a function[39m
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m21:349[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22mmanual standing replay can retrieve an accepted historical receipt without new seat consent
+[31m[1mAssertionError[22m: expected [ { event: 'house.command', …(1) } ] to have a length of +0 but got 1[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0[39m
+[31m+ 1[39m
+
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m24:161[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22man activity-seat rejection preserves the unchanged original draft for another explicit retry
+[31m[1mAssertionError[22m: expected Error: Take control in the original house… { code: '…' } to match object { code: 'ACTIVITY_SEAT_REQUIRED' }
+(1 matching property omitted from actual)[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- {[39m
+[32m-   "code": "ACTIVITY_SEAT_REQUIRED",[39m
+[31m+ Error {[39m
+[31m+   "code": "NOT_CONTROLLER",[39m
+[2m  }[22m
+
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m27:196[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-client.test.ts[2m > [22ma failed recovery-hold storage write leaves the original outbox untouched
+[31m[1mTypeError[22m: f.client.holdPending is not a function[39m
+[36m [2m❯[22m spec/house-recovery-client.test.ts:[2m30:399[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[90m (6)[39m
+[2m   Start at [22m 05:32:06
+[2m   Duration [22m 188ms[2m (transform 65%, tests 19%, import 13%, worker 3%)[22m
+

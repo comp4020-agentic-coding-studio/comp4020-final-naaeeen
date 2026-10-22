@@ -53,27 +53,41 @@ It also works at [/board/](/board/) independently. Board conversation is house-w
 separate from room chat. Peers see shared canvas edits and pointer/selection
 awareness; each person controls their view. Study cards remain author-controlled.
 Saving a next step leaves the card active; closing records the author's choice.
-Every desk opens your own My work card, including when you visit a friend. Bedroom
-chairs and adjustable lighting make the room usable for studying as well as decorating.
+A bedroom desk opens its owner's Room studio. Keep one reference image there,
+save the crop you were inspecting, and return to it later. It can be a diagram,
+a design or something you want a visiting friend to see. The image stays visible
+on the room's desk and wall after the inspection panel closes. Guests inspect it
+locally; only the owner changes the saved reference and view. Choose a PNG; the
+upload prepares it within the room's image limit.
 
-The lounge has shared study seats, a sofa corner and a break table. At the picture
-table, up to six housemates can assemble one shared illustration. Pick a loose
-piece, then choose its place; keyboard and touch use the same board. Opening the
-table lets you watch. Start creates a picture, and Join is a separate choice.
-Progress stays when someone leaves. Reconnecting returns you as a watcher until
-you choose Join again, and finishing the picture releases everyone's participation.
+Room atmosphere offers Rain, Fire or Night. The owner saves a preset, and each
+visitor chooses Listen here and their own volume. Leaving the studio stops that
+local sound. An open bedroom makes its chosen reference available to current
+housemates alongside its furniture and retained room chat.
 
-Four-in-a-row is another choice at the table. Two players choose Join and Ready;
-other housemates can watch. Turns are untimed. Closing the panel keeps your place,
-while Leave withdraws without a loss. After a disconnect, both players choose
-Resume before continuing. Waiting and idle rounds eventually clear.
+The lounge's places support different ways of spending an evening. At a study
+seat, Join huddle when you want to work through something together. A volunteer
+can Lead huddle; the independent shared board keeps each person's own viewport.
+At a sofa seat, Join and deliberately share your room reference with the house.
+Others can inspect independently or Follow the presenter’s crop and pointer. That published copy is house-visible until the shared session clears it,
+even if its source bedroom closes. Closing the shared view leaves participation
+and keeps your ordinary seat.
 
-Return to my room leaves the activity and walks your avatar home. The room shows
-your saved goal and next step, with a separate Open my work button that keeps newer
-unsaved drafts. This gives the bedroom a role between shared breaks: a familiar
-place to pick up your own task, with your arrangement, chair and lighting. My work
-also stays directly available from the toolbelt. The card is visible to housemates;
-room access and Quiet remain separate choices.
+The activity table has one physical chair per resident. Sit, then choose Watch
+or explicitly Join. At the picture table, up to six friends assemble one shared
+illustration: select a loose piece, then its place. Start and Join are separate
+choices. Progress stays when someone leaves. Reconnecting returns you to Watch;
+finishing releases everyone's participation.
+
+Four-in-a-row is another choice at that table. Two players Join and Ready while
+others can watch. Turns are untimed. Look around keeps your chair; Stand releases
+it and activity participation. After a disconnect, both players choose Resume
+before continuing. Waiting and idle rounds eventually clear.
+
+Return to my room leaves the activity and walks home to your reference desk.
+Earlier authored cards remain under Options -> Saved work, including saved goals,
+next steps and newer unsent drafts. Cards remain house-visible and author-controlled;
+they are separate from the bedroom's chosen reference and door access.
 
 The house owner can add an existing Discord invite or server-channel link in
 House settings. Voice options opens that destination in a separate tab; call
@@ -95,7 +109,8 @@ explain the alternatives and checks.
 Built with Three.js, Socket.IO, SQLite and the MIT-licensed Excalidraw editor.
 Use the pinned Linux toolchain: pnpm build:board, pnpm start, and pnpm check.
 [Permissions and logging](docs/crit-10/PERMISSIONS-AND-LOGGING.md),
-[plan](PLAN.md), [post-Crit improvements](docs/post-crit/PLAN.md) and
+[plan](PLAN.md), [spatial implementation](docs/spatial-redesign/IMPLEMENTATION.md),
+[post-Crit improvements](docs/post-crit/PLAN.md) and
 [earlier validation](docs/implementation/REDESIGN-VALIDATION.md)
 record development details. Research and drafting were assisted by AI;
 the project record is in PROCESS.md.

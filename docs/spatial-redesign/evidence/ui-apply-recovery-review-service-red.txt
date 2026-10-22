@@ -1,0 +1,42 @@
+Already up to date
+Done in 51ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-recovery-service.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 2280[2mms[22m[39m
+[31m   [31m×[31m real service adopts only the intended bedroom subscription ACK generation and reopens the held original[39m[33m 1644[2mms[22m[39m
+[31m   [31m×[31m real service returns bedroom to lounge, confirms a physical chair ACK, then retries the same held UUID once[39m[33m 635[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-service.test.ts[2m > [22mreal service adopts only the intended bedroom subscription ACK generation and reopens the held original
+[31m[1mAssertionError[22m: expected true to be false // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- false[39m
+[31m+ true[39m
+
+[36m [2m❯[22m spec/house-recovery-service.test.ts:[2m38:468[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-recovery-service.test.ts[2m > [22mreal service returns bedroom to lounge, confirms a physical chair ACK, then retries the same held UUID once
+[31m[1mAssertionError[22m: expected 'game' to be 'pending' // Object.is equality[39m
+
+Expected: [32m"pending"[39m
+Received: [31m"game"[39m
+
+[36m [2m❯[22m spec/house-recovery-service.test.ts:[2m43:252[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m   Start at [22m 05:43:43
+[2m   Duration [22m 3.19s[2m (tests 73%, import 16%, transform 11%)[22m
+

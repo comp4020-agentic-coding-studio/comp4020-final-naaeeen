@@ -52,3 +52,9 @@ body:is([data-break-activity=picture],[data-break-activity=four]) .chat-window[d
 body:is([data-break-activity=picture],[data-break-activity=four]) .chat-window[data-compact=true] .chat-body .composer-actions span{display:none}
 body:is([data-break-activity=picture],[data-break-activity=four]) .chat-window[data-compact=true] .chat-body .composer-actions button{grid-column:2;grid-row:1;min-height:44px}
 body:is([data-break-activity=picture],[data-break-activity=four]) .chat-window[data-compact=true] .chat-body textarea{grid-column:1;grid-row:1;min-width:0;min-height:44px;height:44px;max-height:60px;resize:none}
+
+/* The resident disclosure and Places share native keyboard visit actions. */
+button.resident{text-align:left;white-space:normal;min-height:44px;cursor:pointer}#resident-visits button{text-align:left}#game-place-occupancy{white-space:pre-line}#game-table-status{flex-wrap:wrap;max-width:calc(100% - 24px)}
+#game-panel-stand{float:right;margin:0 0 6px 10px;font-size:11px}.panel[data-tool=game] .panel-heading #panel-close{width:auto;min-width:44px;padding:7px 10px;font-size:12px}#game-panel-stand + .break-menu{clear:both}
+body[data-panel=studio] .chat-window{z-index:14}.panel[data-tool=studio]{width:min(1050px,calc(100% - 24px));max-height:calc(100dvh - 28px)}
+body[data-panel=gathering] .chat-window{z-index:14}.panel[data-tool=gathering]{width:min(1050px,calc(100% - 24px));max-height:calc(100dvh - 28px)}

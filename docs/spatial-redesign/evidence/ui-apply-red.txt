@@ -1,0 +1,406 @@
+Already up to date
+Done in 132ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-game-ui.test.ts [2m([22m[2m21 tests[22m[2m | [22m[31m4 failed[39m[2m | [22m[33m17 skipped[39m[2m)[22m[32m 244[2mms[22m[39m
+   [2m[90m↓[39m[22m opens as Watch without implicitly joining and describes bounded reservation
+   [2m[90m↓[39m[22m binds Ready to the displayed round and roster, and Resume to recovery consent
+   [2m[90m↓[39m[22m uses current table revision for moves and keeps all 42 cells and focused column
+   [2m[90m↓[39m[22m blocks new game actions while pending but never traps Leave or actual work return
+   [2m[90m↓[39m[22m keeps leave revision independent and exits before the acknowledgement
+   [2m[90m↓[39m[22m isolates arrow keys and permits native Tab discovery without replacing controls
+   [2m[90m↓[39m[22m labels untimed turns and recovery/inactivity without presenting a turn clock
+   [2m[90m↓[39m[22m renders terminal withdrawal neutrally and requires new Join consent
+   [2m[90m↓[39m[22m explains a full column instead of sending an illegal move, keeping it discoverable by Tab
+   [2m[90m↓[39m[22m binds a delayed Join withdrawal to its original receipt round even after another round appears
+   [2m[90m↓[39m[22m does not promise a retained draft when control or storage preflight rejected the action
+   [2m[90m↓[39m[22m describes an empty table accurately when a watcher inspects a column
+   [2m[90m↓[39m[22m reconciles a lost Join acknowledgement after reload using its original UUID and receipt round
+   [2m[90m↓[39m[22m a new explicit Join cancels an older deferred withdrawal before its receipt returns
+   [2m[90m↓[39m[22m retries a resolved withdrawal after a new controller generation, not every motion snapshot
+   [2m[90m↓[39m[22m preserves an unresolved exact Join through stale generation then reconciles only on new authority
+   [2m[90m↓[39m[22m reconsiders a newer controller snapshot arriving before the previous Join retry rejects
+[31m   [31m×[31m spatial disables fresh game effects from non-game place undefined[39m[32m 138[2mms[22m[39m
+[31m   [31m×[31m spatial disables fresh game effects from non-game place study-seat-1[39m[32m 41[2mms[22m[39m
+[31m   [31m×[31m spatial disables fresh game effects from non-game place rest-seat-1[39m[32m 33[2mms[22m[39m
+[31m   [31m×[31m spatial removes action authority on a disconnected reserved game place[39m[32m 29[2mms[22m[39m
+ [31m❯[39m spec/house-puzzle-ui.test.ts [2m([22m[2m26 tests[22m[2m | [22m[31m3 failed[39m[2m | [22m[33m23 skipped[39m[2m)[22m[32m 254[2mms[22m[39m
+   [2m[90m↓[39m[22m opens as Watch, gives an honest active count and never joins from a Join ACK
+   [2m[90m↓[39m[22m starts a round separately from explicit Join
+   [2m[90m↓[39m[22m preserves stable slots, pages twelve pieces and supports roving keyboard navigation
+   [2m[90m↓[39m[22m keeps a wrong-place selection and captures participation with each placement
+   [2m[90m↓[39m[22m clears a peer-solved selected piece without removing focus or stable DOM
+   [2m[90m↓[39m[22m ignores late placement replies after a new round and new selection
+   [2m[90m↓[39m[22m begins newer Leave before immediate Return even while Join is unresolved
+   [2m[90m↓[39m[22m shows uncertain original retry and does not allow an ACK to enroll
+   [2m[90m↓[39m[22m requires leaving Four-in-a-row before joining the picture table
+   [2m[90m↓[39m[22m captures unfinished-reset authority and roster when confirmation opens
+   [2m[90m↓[39m[22m does not offer unfinished replacement to a nonowner or with another participant
+   [2m[90m↓[39m[22m keeps the complete image viewable after consent clears and gives a descriptive reference
+   [2m[90m↓[39m[22m isolates puzzle keys from world movement
+   [2m[90m↓[39m[22m cancels a destructive confirmation when controller authority changes
+   [2m[90m↓[39m[22m stops local placement immediately after Leave while the old roster is still visible
+   [2m[90m↓[39m[22m settles a placement flight after Leave without freezing a later explicit participation
+   [2m[90m↓[39m[22m exposes pending durable inspection and preserves uncertain participation copy
+   [2m[90m↓[39m[22m keeps saved progress safe when content identity is unavailable
+   [2m[90m↓[39m[22m offers cancellation and restores reference focus without propagating Escape
+   [2m[90m↓[39m[22m retains a newer withdrawal through an unjoined snapshot followed by a delayed joined roster
+   [2m[90m↓[39m[22m hides Leave after normal Join, accepted participation and same-round completion
+   [2m[90m↓[39m[22m a delayed Join ACK after peer completion does not claim participation is still arriving
+   [2m[90m↓[39m[22m completed rounds keep original pending retry and immediate Return without an active Leave control
+[31m   [31m×[31m spatial requires a real game chair for Start and Join from undefined[39m[32m 159[2mms[22m[39m
+[31m   [31m×[31m spatial requires a real game chair for Start and Join from study-seat-1[39m[32m 48[2mms[22m[39m
+[31m   [31m×[31m spatial requires a real game chair for Start and Join from rest-seat-1[39m[32m 45[2mms[22m[39m
+ [31m❯[39m spec/house-world.test.ts [2m([22m[2m104 tests[22m[2m | [22m[31m2 failed[39m[2m | [22m[33m102 skipped[39m[2m)[22m[33m 445[2mms[22m[39m
+   [2m[90m↓[39m[22m uses elapsed time for the same walking speed at fast and slow render rates
+   [2m[90m↓[39m[22m does not replay retained history as speech even when the wall clock is skewed
+   [2m[90m↓[39m[22m bounds six fresh speakers, keeps a two-line safe Unicode preview and clears revocation
+   [2m[90m↓[39m[22m preserves actual authorised players through DIY rebuilds and keeps observer/IME input isolated
+   [2m[90m↓[39m[22m suppresses static destination text behind active controls in a clipped visual viewport
+   [2m[90m↓[39m[22m keeps six actual seat poses attributed while packing nearby person labels
+   [2m[90m↓[39m[22m retains the full forty-character name on wrapped bounded labels and avoids observer takeover rectangles
+   [2m[90m↓[39m[22m keeps the controlled avatar prominent in portrait play while preserving world coordinates
+   [2m[90m↓[39m[22m keeps chosen overview during movement and keeps DIY inspection camera stable
+   [2m[90m↓[39m[22m applies phone foreground sizing to newly joined and rebuilt authorised actors without a resize
+   [2m[90m↓[39m[22m suspends world movement and resumes the same camera position and zoom
+   [2m[90m↓[39m[22m keeps one camera orientation across the responsive threshold
+   [2m[90m↓[39m[22m lets a deliberate canvas drag take focus after chat typing without moving the actor
+   [2m[90m↓[39m[22m keeps each rotated DIY mesh inside its authoritative footprint
+   [2m[90m↓[39m[22m keeps the actual animated self mesh and ring inside short HUD-free play space
+   [2m[90m↓[39m[22m restores framing after the room editor closes before its next HUD report
+   [2m[90m↓[39m[22m retains existing lounge geometry and shadows when a peer joins a vacant bedroom slot
+   [2m[90m↓[39m[22m refreshes resident labels, door targets and avatar colours in place, then removes only the departed avatar
+   [2m[90m↓[39m[22m rebuilds geometry for room, capacity and privacy changes and clears prior zone content
+   [2m[90m↓[39m[22m rebuilds the scene across a direct serverEpoch lifecycle change in the same zone
+   [2m[90m↓[39m[22m rebuilds the scene across a direct house lifecycle change in the same zone
+   [2m[90m↓[39m[22m rebuilds the scene across a direct self lifecycle change in the same zone
+   [2m[90m↓[39m[22m rebuilds the scene across a direct access lifecycle change in the same zone
+   [2m[90m↓[39m[22m rebuilds the scene across a direct generation lifecycle change in the same zone
+   [2m[90m↓[39m[22m rebuilds the scene across a direct stream lifecycle change in the same zone
+   [2m[90m↓[39m[22m keeps static resources across player motion, availability and disconnect while retaining the permanent room owner
+   [2m[90m↓[39m[22m updates an active speech speaker after a resident rename without replacing the bubble or replaying history
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room id change
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room ownerId change
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room revision change
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room open change
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room palette change
+   [2m[90m↓[39m[22m rebuilds actual bedroom geometry for a direct room placements change
+   [2m[90m↓[39m[22m cancels only a queued door approach when its bedroom occupant changes: replace
+   [2m[90m↓[39m[22m cancels only a queued door approach when its bedroom occupant changes: remove
+   [2m[90m↓[39m[22m keeps a queued door approach across changes to the same occupant name, colour and door state
+   [2m[90m↓[39m[22m renders the first usable frame and bounds static GPU draws while RAF and speech keep running
+   [2m[90m↓[39m[22m renders local walking at every RAF while preserving elapsed movement and realtime sends
+   [2m[90m↓[39m[22m renders remote walking and interpolation at every RAF then returns to the static budget
+   [2m[90m↓[39m[22m renders a settling follow camera every RAF after the avatar stops
+   [2m[90m↓[39m[22m redraws scene membership and material changes before the next idle draw is due
+   [2m[90m↓[39m[22m redraws projection controls and resize before the next idle draw is due
+   [2m[90m↓[39m[22m redraws DIY preview and actual selection changes before the next idle draw is due
+   [2m[90m↓[39m[22m does not draw while suspended and forces the updated scene on the first resumed RAF
+   [2m[90m↓[39m[22m redraws stationary remote heading and seating changes and the final idle limb pose
+   [2m[90m↓[39m[22m keeps stationary walking limbs at RAF cadence with reduced motion enabled
+   [2m[90m↓[39m[22m forces a resumed frame even without intervening scene changes
+   [2m[90m↓[39m[22m bounds unacknowledged prediction, rolls back rejected motion and keeps held manual intent
+   [2m[90m↓[39m[22m keeps normal acknowledged walking at2.6units per second and ignores a former room receipt
+   [2m[90m↓[39m[22m waits80ms after a delayed receipt and keeps at most ten dispatches per second
+   [2m[90m↓[39m[22m keeps coalesced curved manual motion reachable by a single server sweep from its acknowledged anchor
+   [2m[90m↓[39m[22m ignores pending world correction after a seat lifecycle boundary
+   [2m[90m↓[39m[22m ignores pending world correction after a epoch lifecycle boundary
+   [2m[90m↓[39m[22m ignores pending world correction after a control lifecycle boundary
+   [2m[90m↓[39m[22m ignores pending world correction after a closed lifecycle boundary
+   [2m[90m↓[39m[22m replans a rejected automatic approach and sends swept chords around furniture after delayed receipts
+   [2m[90m↓[39m[22m emits a server-sweepable endpoint when collision sliding is non-idempotent at a plant corner
+   [2m[90m↓[39m[22m bounds prediction when transport is busy after a same-room authority correction and retains held intent
+   [2m[90m↓[39m[22m resumes follow on intentional walking after a temporary primary drag
+   [2m[90m↓[39m[22m resumes temporary inspection on keyboard intent before any actual displacement
+   [2m[90m↓[39m[22m resumes temporary inspection on touch intent before any actual displacement
+   [2m[90m↓[39m[22m resumes temporary inspection on route intent before any actual displacement
+   [2m[90m↓[39m[22m retains explicit inspection during walking and restores Follow after editing
+   [2m[90m↓[39m[22m retains explicit overview during walking and restores Follow after editing
+   [2m[90m↓[39m[22m does not treat a correction snapshot as walking intent
+   [2m[90m↓[39m[22m does not treat a seat snapshot as walking intent
+   [2m[90m↓[39m[22m does not treat a takeover snapshot as walking intent
+   [2m[90m↓[39m[22m releases cancelled pointer capture and ignores subsequent stale move/up events
+   [2m[90m↓[39m[22m chair placement clicks use the existing routed authoritative seat interaction
+   [2m[90m↓[39m[22m does not resume inspection or walk from typing, chat handle arrows or a disabled tool
+   [2m[90m↓[39m[22m keeps a 0px primary gesture as a click without entering inspection
+   [2m[90m↓[39m[22m keeps a 5px primary gesture as a click without entering inspection
+   [2m[90m↓[39m[22m projects a solid clickable chair surface for actual ray picking at rotation 0
+   [2m[90m↓[39m[22m projects a solid clickable chair surface for actual ray picking at rotation 1
+   [2m[90m↓[39m[22m projects a solid clickable chair surface for actual ray picking at rotation 2
+   [2m[90m↓[39m[22m projects a solid clickable chair surface for actual ray picking at rotation 3
+   [2m[90m↓[39m[22m accepts intentional walking from the ordinary camera-hud-follow HUD focus without stealing it
+   [2m[90m↓[39m[22m accepts intentional walking from the ordinary pause-button HUD focus without stealing it
+   [2m[90m↓[39m[22m resumes temporary Follow on a walking attempt blocked by both room boundaries
+   [2m[90m↓[39m[22m keeps one real pointer identity through secondary pointers, cancellation and stale releases
+   [2m[90m↓[39m[22m keeps visible names, bubbles and context clear of 2 actual moving/seated bodies at every frame
+   [2m[90m↓[39m[22m keeps visible names, bubbles and context clear of 6 actual moving/seated bodies at every frame
+   [2m[90m↓[39m[22m protects all visible peer bodies in an observer room view whose controller is elsewhere
+   [2m[90m↓[39m[22m P2 aligns the visible bedroom chair back opposite its authoritative seated facing
+   [2m[90m↓[39m[22m P2 routes to the selected desk and lamp identity rather than the first object of that kind
+   [2m[90m↓[39m[22m P2 preserves legacy standard lighting and renders distinguishable cosy and dim settings
+   [2m[90m↓[39m[22m P2 projects a solid desk surface and uses its native raycast at rotation 0
+   [2m[90m↓[39m[22m P2 projects a solid desk surface and uses its native raycast at rotation 1
+   [2m[90m↓[39m[22m P2 projects a solid desk surface and uses its native raycast at rotation 2
+   [2m[90m↓[39m[22m P2 projects a solid desk surface and uses its native raycast at rotation 3
+   [2m[90m↓[39m[22m P2 projects a solid lamp surface and uses its native raycast at rotation 0
+   [2m[90m↓[39m[22m P2 projects a solid lamp surface and uses its native raycast at rotation 1
+   [2m[90m↓[39m[22m P2 projects a solid lamp surface and uses its native raycast at rotation 2
+   [2m[90m↓[39m[22m P2 projects a solid lamp surface and uses its native raycast at rotation 3
+   [2m[90m↓[39m[22m renders two collision-aligned sofas with six individually pickable 0.4m cushions
+   [2m[90m↓[39m[22m uses bounded colours and translates the study table, props and rug together
+   [2m[90m↓[39m[22m routes Places by purpose and keeps game interaction separate from sitting
+   [2m[90m↓[39m[22m uses current-layout permanent-slot arrivals when optional poses are absent
+   [2m[90m↓[39m[22m keeps observer and peer optional poses at their own permanent-slot arrivals
+   [2m[90m↓[39m[22m matches actual rendered study and game chair footprints at every supported capacity
+   [2m[90m↓[39m[22m raycasts every sofa cushion at its published projected native pick point
+   [2m[90m↓[39m[22m reports manual movement intent while picture controls and routes remain isolated
+[31m   [31m×[31m spatial makes the visible bedroom exit rug a real native pointer destination[39m[32m 278[2mms[22m[39m
+[31m   [31m×[31m spatial routes the game through a free physical place and skips reconnect reservations[39m[32m 166[2mms[22m[39m
+ [31m❯[39m spec/house-ui.test.ts [2m([22m[2m109 tests[22m[2m | [22m[31m4 failed[39m[2m | [22m[33m104 skipped[39m[2m)[22m[33m 1007[2mms[22m[39m
+   [2m[90m↓[39m[22m keeps newer card typing when an earlier submitted version is acknowledged
+   [2m[90m↓[39m[22m keeps the next chat draft while the preceding message acknowledgement arrives
+   [2m[90m↓[39m[22m returns a removed resident to the lobby with their private export reachable
+   [2m[90m↓[39m[22m does not expose a private tool or crash when room controls are used during reconnection
+   [2m[90m↓[39m[22m keeps newer furniture edits after its own layout ACK and sends the receipt revision
+   [2m[90m↓[39m[22m preserves same-owner room draft through reconnect while clearing private DOM
+   [2m[90m↓[39m[22m never restores a room draft for a different owner or house
+   [2m[90m↓[39m[22m does not rebase an old furniture draft when current metadata is saved
+   [2m[90m↓[39m[22m keeps newer room metadata edits while an earlier save is acknowledged
+   [2m[90m↓[39m[22m rerenders house code and owner authority while the private stream cursor is unchanged
+   [2m[90m↓[39m[22m counts only delivered new non-self chat once, including Quiet, and clears on transcript open
+   [2m[90m↓[39m[22m shows explicit server willingness freshness and actionable retention copy
+   [2m[90m↓[39m[22m shows pending drafts in the lobby without exposing other-identity payloads
+   [2m[90m↓[39m[22m rebases newer card typing only to its own receipt, never a later external snapshot
+   [2m[90m↓[39m[22m bounds a hanging identity request without claiming the action was saved
+   [2m[90m↓[39m[22m keeps the original uncertain admission UUID when the lobby action is retried
+   [2m[90m↓[39m[22m drops an old owner pagination reply after house ownership changes
+   [2m[90m↓[39m[22m keeps a conflicted furniture preview through saved review until an explicit reset
+   [2m[90m↓[39m[22m provides an explicit saved-settings reset without discarding the furniture draft
+   [2m[90m↓[39m[22m keeps an unsaved shared card when visiting a room and returning to the same house
+   [2m[90m↓[39m[22m keeps an acknowledged arrangement while its durable snapshot is delayed
+   [2m[90m↓[39m[22m keeps acknowledged room metadata while its durable snapshot is delayed
+   [2m[90m↓[39m[22m keeps an acknowledged card while its durable snapshot is delayed
+   [2m[90m↓[39m[22m does not display an old identity recovery key after the current identity changes
+   [2m[90m↓[39m[22m does not download an old identity export after the current identity changes
+   [2m[90m↓[39m[22m keeps newer card typing when its own save is acknowledged during reconnection
+   [2m[90m↓[39m[22m keeps newer author typing as a new draft when an earlier close is acknowledged
+   [2m[90m↓[39m[22m purges an already displayed lobby proof when recovery changes to another lobby identity
+   [2m[90m↓[39m[22m serializes recovery key issuance across the house and lobby buttons
+   [2m[90m↓[39m[22m clears only the acknowledged suspended chat draft before reconnect can resend it
+   [2m[90m↓[39m[22m preserves newer suspended chat typing when the preceding send is acknowledged
+   [2m[90m↓[39m[22m closes and recreates the pending inspector across a lobby-to-lobby recovery epoch
+   [2m[90m↓[39m[22m offers native camera controls in Options and restores the game on close
+   [2m[90m↓[39m[22m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry
+   [2m[90m↓[39m[22m does not clear another identity's newer draft when an old action reports identity changed
+   [2m[90m↓[39m[22m shows an explicit blocked connection and pending recovery for LOAD_LIMIT without an automatic loop
+   [2m[90m↓[39m[22m shows an explicit blocked connection and pending recovery for TAB_LIMIT without an automatic loop
+   [2m[90m↓[39m[22m presents an explicit saved-home title gate before opening the game connection
+   [2m[90m↓[39m[22m opens game pause with Escape, traps focus and restores its launcher
+   [2m[90m↓[39m[22m keeps multiline chat drafts through collapse and close without opening a modal
+   [2m[90m↓[39m[22m accepts board close messages only from the actual same-origin iframe and resumes the same world
+   [2m[90m↓[39m[22m tears down embedded board and private chat when the identity changes
+   [2m[90m↓[39m[22m uses separate native create and join admission tasks from the title
+   [2m[90m↓[39m[22m clears embedded board immediately during a disconnect
+   [2m[90m↓[39m[22m preserves a same-identity chat draft across returning to title and continuing
+   [2m[90m↓[39m[22m counts unread messages when chat is collapsed or blocked by a modal
+   [2m[90m↓[39m[22m preserves transcript reading position when another message arrives
+   [2m[90m↓[39m[22m opens title Options before admission and keeps local reduced-motion preferences
+   [2m[90m↓[39m[22m changes camera zoom through the native Options slider
+   [2m[90m↓[39m[22m submits multiline chat with Ctrl Enter while retaining ordinary Enter as a new line
+   [2m[90m↓[39m[22m opens the shared canvas from the actual world interaction callback
+   [2m[90m↓[39m[22m requires a recognised profile name before a new-house command
+   [2m[90m↓[39m[22m copies the current house invite code through the native control
+   [2m[90m↓[39m[22m adds and removes a selected catalogue piece only inside the owned-room preview
+   [2m[90m↓[39m[22m retains existing transcript nodes when a new plain-text message arrives
+   [2m[90m↓[39m[22m retains unread messages when an obscured chat is constrained during modal viewport resize
+   [2m[90m↓[39m[22m excludes the paused Options sheet from world safe rectangles while retaining the room editor
+   [2m[90m↓[39m[22m keeps the full current location title and clears it at an identity boundary
+   [2m[90m↓[39m[22m keeps Follow, Look and Overview reachable in the world HUD without opening Options
+   [2m[90m↓[39m[22m P2 opens own house-visible work at a visited desk and refreshes independently of the bedroom cursor
+   [2m[90m↓[39m[22m P2 waits on the own-work cursor and closes the acknowledged revision before its snapshot arrives
+   [2m[90m↓[39m[22m P2 keeps newer bedroom work drafts through a delayed ACK, close and a new card
+   [2m[90m↓[39m[22m P2 observer submission cannot queue work, light or starter writes and updates unchanged-cursor controls
+   [2m[90m↓[39m[22m P2 starter preview uses real geometry without replacing a dirty draft and requires explicit discard
+   [2m[90m↓[39m[22m P2 keeps the original pending starter UUID, revision and preset when a later room snapshot arrives
+   [2m[90m↓[39m[22m P2 light is independent of dirty room settings and advances only its matching layout base
+   [2m[90m↓[39m[22m P2 light does not rebase a previously stale layout and late ACK cannot restore revoked room DOM
+   [2m[90m↓[39m[22m P2 starter ACK preserves newer settings, layout and lighting drafts instead of rebasing them
+   [2m[90m↓[39m[22m P2 prevents moving an uncertain work command to a different room and retains the original retry
+   [2m[90m↓[39m[22m P2 restores a same-identity bedroom work draft through disconnect without exposing it before authorization
+   [2m[90m↓[39m[22m P2 review blocks old room contents after a starter ACK until the corresponding saved snapshot arrives
+   [2m[90m↓[39m[22m P2 review reconciles UI pending room intents after Pending drafts discard
+   [2m[90m↓[39m[22m P2 review reconciles UI pending room intents after Pending drafts retry
+   [2m[90m↓[39m[22m P2 review reconciles an automatically settled outbox when the Pending list is empty
+   [2m[90m↓[39m[22m P2 lets a stale lighting draft explicitly use saved lighting without discarding room settings
+   [2m[90m↓[39m[22m P2 does not forget an active room intent during pending inspection
+   [2m[90m↓[39m[22m P2 ignores a late pending reconciliation after identity changes and keeps private room DOM clear
+   [2m[90m↓[39m[22m P4 opens Watch from the world without Join and closing retains Reopen/Leave
+   [2m[90m↓[39m[22m P4 Return routes to the room before explicitly opening saved work while withdrawal is uncertain
+   [2m[90m↓[39m[22m P4 pending game guard leaves room for withdrawal and immediate navigation
+   [2m[90m↓[39m[22m P4 moving snapshots do not repeatedly inspect the persistent outbox
+   [2m[90m↓[39m[22m P4 Places routes from another resident bedroom through lounge to My room
+   [2m[90m↓[39m[22m shows optional Discord as an external destination and preserves newer owner edits
+   [2m[90m↓[39m[22m lets housemates open the saved Discord link but gives them no owner editor
+   [2m[90m↓[39m[22m captures available unsent work for a persistent manual update and exports without saving
+   [2m[90m↓[39m[22m clears captured update drafts after an identity change instead of downloading another identity
+   [2m[90m↓[39m[22m blocks a fresh Discord save until a persisted expired action is resolved
+   [2m[90m↓[39m[22m shows saved room work separately from a newer draft even in an empty room
+   [2m[90m↓[39m[22m stands before routing home using the accepted unseated snapshot
+   [2m[90m↓[39m[22m manual movement cancels a waiting room return
+   [2m[90m↓[39m[22m opens My work immediately when the home route is unavailable
+   [2m[90m↓[39m[22m ignores an unsettled UI action after pagehide instead of reopening feedback
+   [2m[90m↓[39m[22m keeps saved work readable from an empty own room in an observer tab
+   [2m[90m↓[39m[22m withdraws Four-in-a-row when Return is chosen while watching the picture table
+   [2m[90m↓[39m[22m withdraws picture participation when Return is chosen while watching Four-in-a-row
+   [2m[90m↓[39m[22m keeps the return work entry open after its actual door subscription resolves
+   [2m[90m↓[39m[22m manual door entry does not open the work-entry panel automatically
+   [2m[90m↓[39m[22m a failed door subscription keeps the authorized view and the newer work draft
+   [2m[90m↓[39m[22m an old door subscription continuation does not close a newly opened panel
+   [2m[90m↓[39m[22m an old exit subscription continuation does not close a newly opened panel
+   [2m[90m↓[39m[22m an active Return keeps Options opened after the real null subscription callback and preserves work
+   [2m[90m↓[39m[22m an active Return does not replace newly opened work at the queued arrival effect
+   [2m[90m↓[39m[22m a denied Stand during Return falls back to the readable work draft
+   [2m[90m↓[39m[22m a denied Stand fallback during active Return preserves newer Options
+[31m   [31m×[31m spatial retains separate lounge and room chat drafts after authorized zone returns[39m[33m 439[2mms[22m[39m
+[31m   [31m×[31m spatial retains dirty furniture and lighting through an ordinary leave and return[39m[32m 213[2mms[22m[39m
+[31m   [31m×[31m spatial offers named permission-aware visiting without subscribing or changing a closed door[39m[32m 114[2mms[22m[39m
+[31m   [31m×[31m spatial game choices wait for a real connected game-seat snapshot after claim ACK[39m[32m 102[2mms[22m[39m
+   [32m✓[39m spatial clears all zone draft caches after identity revocation[32m 139[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 13 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-game-ui.test.ts[2m > [22mspatial disables fresh game effects from non-game place undefined
+[41m[1m FAIL [22m[49m spec/house-game-ui.test.ts[2m > [22mspatial disables fresh game effects from non-game place study-seat-1
+[41m[1m FAIL [22m[49m spec/house-game-ui.test.ts[2m > [22mspatial disables fresh game effects from non-game place rest-seat-1
+[31m[1mAssertionError[22m: expected "vi.fn()" to not be called at all, but actually been called 1 times[90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m    Array [
+      "game.move",
+      Object {
+        "column": 2,
+        "roundId": "round-one",
+      },
+      4,
+    ]
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2m❯[22m spec/house-game-ui.test.ts:[2m33:324[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-game-ui.test.ts[2m > [22mspatial removes action authority on a disconnected reserved game place
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-game-ui.test.ts:[2m34:270[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mspatial requires a real game chair for Start and Join from undefined
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mspatial requires a real game chair for Start and Join from study-seat-1
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mspatial requires a real game chair for Start and Join from rest-seat-1
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m43:288[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-ui.test.ts[2m > [22mspatial retains separate lounge and room chat drafts after authorized zone returns
+[31m[1mAssertionError[22m: expected '' to be 'Lounge draft' // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- Lounge draft[39m
+
+[36m [2m❯[22m spec/house-ui.test.ts:[2m434:292[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-ui.test.ts[2m > [22mspatial retains dirty furniture and lighting through an ordinary leave and return
+[31m[1mAssertionError[22m: expected 'lamp · -4, -2' to contain '-3.5'[39m
+
+Expected: [32m"-3.5"[39m
+Received: [31m"lamp · -4, -2"[39m
+
+[36m [2m❯[22m spec/house-ui.test.ts:[2m437:281[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-ui.test.ts[2m > [22mspatial offers named permission-aware visiting without subscribing or changing a closed door
+[31m[1mAssertionError[22m: expected null to be truthy[39m
+
+[32m- Expected:[39m
+true
+
+[31m+ Received:[39m
+null
+
+[36m [2m❯[22m spec/house-ui.test.ts:[2m440:286[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-ui.test.ts[2m > [22mspatial game choices wait for a real connected game-seat snapshot after claim ACK
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 'game' ][90m
+
+Number of calls: [1m0[22m
+[31m[39m
+[36m [2m❯[22m spec/house-ui.test.ts:[2m443:86[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-world.test.ts[2m > [22mspatial makes the visible bedroom exit rug a real native pointer destination
+[31m[1mAssertionError[22m: expected undefined to be true // Object.is equality[39m
+
+[32m- Expected:[39m
+true
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m spec/house-world.test.ts:[2m877:671[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-world.test.ts[2m > [22mspatial routes the game through a free physical place and skips reconnect reservations
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ { type: 'seat', …(1) } ][90m
+
+Number of calls: [1m0[22m
+[31m[39m
+[36m [2m❯[22m spec/house-world.test.ts:[2m880:467[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m4 failed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[31m13 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[2m | [22m[33m246 skipped[39m[90m (260)[39m
+[2m   Start at [22m 02:35:06
+[2m   Duration [22m 2.23s[2m (import 54%, tests 30%, transform 15%)[22m
+
