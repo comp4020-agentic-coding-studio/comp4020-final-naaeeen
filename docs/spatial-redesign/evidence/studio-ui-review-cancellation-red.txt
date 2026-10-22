@@ -1,0 +1,115 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-studio-ui.test.ts [2m([22m[2m43 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 1606[2mms[22m[39m
+   [32m✓[39m loads the real owner reference and audience without starting saved ambience[32m 173[2mms[22m[39m
+   [32m✓[39m lets a guest inspect independently but exposes no upload/save/clear/preset controls[32m 66[2mms[22m[39m
+   [32m✓[39m does not admit owner edits from an observer or a mismatched current zone[32m 53[2mms[22m[39m
+   [32m✓[39m immediately clears URLs, previews and sound on access revocation and ignores delayed image bytes[32m 48[2mms[22m[39m
+   [32m✓[39m rejects stale room, identity and controller response contexts[32m 51[2mms[22m[39m
+   [32m✓[39m preserves newer local inspection when a saved-view ACK arrives late[32m 73[2mms[22m[39m
+   [32m✓[39m retains exactly the original command UUID and payload on uncertain retry[32m 49[2mms[22m[39m
+   [32m✓[39m never reports a rejected save as saved and retains inspection[32m 47[2mms[22m[39m
+   [32m✓[39m uploads bounded stable commands and keeps old image until the commit succeeds[32m 92[2mms[22m[39m
+   [32m✓[39m prevents in-flight selection from becoming writable after a room change[32m 66[2mms[22m[39m
+   [32m✓[39m starts audio only from explicit Listen and stops it on close and document hiding[32m 37[2mms[22m[39m
+   [32m✓[39m downloads authenticated current bytes and separate room export without sending a command[32m 33[2mms[22m[39m
+   [32m✓[39m clears a null reference update and ignores a poll after close[32m 32[2mms[22m[39m
+   [32m✓[39m isolates keys and offers Escape without a focus trap[32m 25[2mms[22m[39m
+   [32m✓[39m rejects invalid source bytes before browser decoding[32m 19[2mms[22m[39m
+   [32m✓[39m keeps a visitor's local crop through owner metadata polling[32m 25[2mms[22m[39m
+   [32m✓[39m still publishes the loaded preview when same-image metadata refreshes before decode[32m 38[2mms[22m[39m
+   [32m✓[39m resets a saved view explicitly and resumes the confirmed owner view on return[32m 38[2mms[22m[39m
+   [32m✓[39m revokes the previous preview immediately when bytes or metadata fail authorization[32m 21[2mms[22m[39m
+   [32m✓[39m clears a decode failure and reports it without losing room metadata[32m 19[2mms[22m[39m
+   [32m✓[39m retries an uncertain upload chunk with the original UUID then completes remaining chunks[32m 44[2mms[22m[39m
+   [32m✓[39m cancels a staged upload and aborts its temporary bytes without replacing the saved image[32m 47[2mms[22m[39m
+   [32m✓[39m keeps a rejected upload source available and never reaches commit[32m 41[2mms[22m[39m
+   [32m✓[39m ignores a delayed exported private file after access changes[32m 21[2mms[22m[39m
+   [32m✓[39m saves a room preset without playing audio; local volume, mute and stop remain independent[32m 28[2mms[22m[39m
+   [32m✓[39m performs no reads or URL creation while hidden or after disposal[32m 17[2mms[22m[39m
+   [32m✓[39m polls only a visible visitor and releases polling on close[32m 20[2mms[22m[39m
+   [32m✓[39m bounds pixels and strips source bytes by Canvas re-encoding[32m 9[2mms[22m[39m
+   [32m✓[39m reduces encoded PNG dimensions repeatedly until the byte cap fits[32m 12[2mms[22m[39m
+   [32m✓[39m refuses excessive file or source dimensions before decode[32m 12[2mms[22m[39m
+   [32m✓[39m releases decoded pixels when Canvas encoding or drawing fails[32m 12[2mms[22m[39m
+   [32m✓[39m stops after the bounded PNG encoding attempts and preserves the source[32m 15[2mms[22m[39m
+   [32m✓[39m reports PNG decode failure without changing the selected source[32m 10[2mms[22m[39m
+   [32m✓[39m uses pointer panning and all native directional controls without saving implicitly[32m 43[2mms[22m[39m
+   [32m✓[39m withdraws a chosen reference only after accepted clear, leaving the preset intact[32m 31[2mms[22m[39m
+   [32m✓[39m shows file preparation failures and keeps the native source selection[32m 27[2mms[22m[39m
+   [32m✓[39m releases native download URLs on disposal and invokes chat separately[32m 21[2mms[22m[39m
+   [32m✓[39m does not let an earlier room state replace a later selected image[32m 19[2mms[22m[39m
+   [32m✓[39m reports byte/export read errors without claiming a save and disables absent-preset playback[32m 40[2mms[22m[39m
+   [32m✓[39m releases decoded pixels when the browser has no Canvas context[32m 11[2mms[22m[39m
+[31m   [31m×[31m does not resurrect cancelled upload retry after a deferred chunk times out and preserves a newer local draft[39m[32m 40[2mms[22m[39m
+[31m   [31m×[31m disables cancellation once commit can have applied and reconciles the accepted current reference[39m[32m 35[2mms[22m[39m
+[31m   [31m×[31m keeps an uncertain commit non-cancellable, refreshes actual durable state and retries the same final UUID[39m[32m 43[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m > [22mdoes not resurrect cancelled upload retry after a deferred chunk times out and preserves a newer local draft
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m70:53[22m[39m
+    [90m 68|[39m  expect(api.command.mock.calls.at(-1)[0].type).toBe("studio.upload.chu…
+    [90m 69|[39m  chunk.reject(Object.assign(new Error("late timeout"),{code:"TIMEOUT"}…
+    [90m 70|[39m  expect(get('[data-studio-action="retry"]').hidden).toBe(true);expect(…
+    [90m   |[39m                                                     [31m^[39m
+    [90m 71|[39m  expect(get("[data-studio-zoom]").textContent).toBe("110%");expect(get…
+    [90m 72|[39m  click("save-view");await tick();expect(api.command.mock.calls.at(-1)[…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m > [22mdisables cancellation once commit can have applied and reconciles the accepted current reference
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m81:86[22m[39m
+    [90m 79|[39m  get("[data-studio-file]").dispatchEvent(new dom.window.Event("change"…
+    [90m 80|[39m  expect(api.command.mock.calls.at(-1)[0].type).toBe("studio.upload.com…
+    [90m 81|[39m  expect((get('[data-studio-action="cancel-upload"]') as HTMLButtonElem…
+    [90m   |[39m                                                                                      [31m^[39m
+    [90m 82|[39m  click("cancel-upload");expect(get("[data-studio-feedback]").textConte…
+    [90m 83|[39m  commit.resolve({ok:true,roomId:room,revision:3,result:{imageId:"image…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m > [22mkeeps an uncertain commit non-cancellable, refreshes actual durable state and retries the same final UUID
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m93:86[22m[39m
+    [90m 91|[39m  get("[data-studio-file]").dispatchEvent(new dom.window.Event("change"…
+    [90m 92|[39m  const original=api.command.mock.calls.at(-1)[0];expect(original.type)…
+    [90m 93|[39m  expect((get('[data-studio-action="cancel-upload"]') as HTMLButtonElem…
+    [90m   |[39m                                                                                      [31m^[39m
+    [90m 94|[39m  expect(get("[data-studio-feedback]").textContent).toMatch(/may alread…
+    [90m 95|[39m  expect(api.image).toHaveBeenLastCalledWith(room,"committed-image");cl…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m40 passed[39m[22m[90m (43)[39m
+[2m   Start at [22m 05:01:39
+[2m   Duration [22m 2.31s[2m (tests 73%, import 23%, transform 4%)[22m
+

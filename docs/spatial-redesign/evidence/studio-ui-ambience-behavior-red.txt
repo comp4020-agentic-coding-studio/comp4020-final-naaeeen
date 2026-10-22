@@ -1,0 +1,61 @@
+Already up to date
+Done in 130ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-ambience.test.ts [2m([22m[2m23 tests[22m[2m | [22m[31m1 failed[39m[2m | [22m[33m22 skipped[39m[2m)[22m[32m 10[2mms[22m[39m
+   [31m❯[39m explicit local house ambience [2m(23)[22m
+     [2m[90m↓[39m[22m constructing and changing local controls stays off without allocating audio
+     [2m[90m↓[39m[22m explicit Listen starts bounded original rain audio
+     [2m[90m↓[39m[22m explicit Listen starts bounded original fire audio
+     [2m[90m↓[39m[22m explicit Listen starts bounded original night audio
+     [2m[90m↓[39m[22m volume is clamped and mute preserves the chosen volume
+     [2m[90m↓[39m[22m Stop marks off immediately, fades, then releases sources and context
+     [2m[90m↓[39m[22m Stop and Dispose are idempotent and a disposed adapter cannot restart
+     [2m[90m↓[39m[22m Stop closes a pending resume and settles Listen before resume finishes
+     [2m[90m↓[39m[22m a newer Listen wins over an earlier pending resume
+     [2m[90m↓[39m[22m an old rejected resume cannot replace a newer result or reject unhandled
+     [2m[90m↓[39m[22m unsupported audio reports unavailable without allocating or throwing
+     [2m[90m↓[39m[22m constructor failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m createBuffer failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m createBufferSource failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m createGain failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m connect failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m start failure is honest and releases any partial graph
+     [2m[90m↓[39m[22m a rejected resume closes the context and permits a later explicit retry
+[31m     [31m×[31m a resume that remains suspended is not reported as playing[39m[32m 8[2mms[22m[39m
+     [2m[90m↓[39m[22m unexpected audio interruption stops and reports a retryable error
+     [2m[90m↓[39m[22m rapid preset changes keep at most one retiring context and cannot be revived by local controls
+     [2m[90m↓[39m[22m Off and invalid presets cannot leave earlier audio running
+     [2m[90m↓[39m[22m callback failures and mutated status snapshots cannot change audio state
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-ambience.test.ts[2m > [22mexplicit local house ambience[2m > [22ma resume that remains suspended is not reported as playing
+[31m[1mAssertionError[22m: expected { preset: 'off', state: 'off', …(3) } to match object { state: 'error' }
+(4 matching properties omitted from actual)[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "state": "error",[39m
+[31m+   "state": "off",[39m
+[2m  }[22m
+
+[36m [2m❯[22m spec/house-ambience.test.ts:[2m206:41[22m[39m
+    [90m204|[39m     AudioContextMock.runningOnResume = false;
+    [90m205|[39m     const audio = adapter();
+    [90m206|[39m     expect(await audio.listen("night")).toMatchObject({ state: "error"…
+    [90m   |[39m                                         [31m^[39m
+    [90m207|[39m     expect(AudioContextMock.instances[0]!.sources).toHaveLength(0);
+    [90m208|[39m     expect(AudioContextMock.instances[0]!.close).toHaveBeenCalledOnce(…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[33m22 skipped[39m[90m (23)[39m
+[2m   Start at [22m 02:45:00
+[2m   Duration [22m 179ms[2m (transform 61%, import 18%, tests 14%, worker 6%)[22m
+

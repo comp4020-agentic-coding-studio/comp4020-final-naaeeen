@@ -1,0 +1,20 @@
+Already up to date
+Done in 43ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m spec/house-ambience.test.ts [2m([22m[2m23 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m23 passed[39m[22m[90m (23)[39m
+[2m   Start at [22m 02:47:02
+[2m   Duration [22m 228ms[2m (tests 50%, transform 33%, worker 9%, import 8%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |    94.8 |    87.64 |   95.23 |   95.79 |                   
+ house-ambience.js |    94.8 |    87.64 |   95.23 |   95.79 | 45-46,131-132,141 
+-------------------|---------|----------|---------|---------|-------------------

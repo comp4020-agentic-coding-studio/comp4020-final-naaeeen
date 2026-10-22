@@ -1,0 +1,2 @@
+f19303e3b3f7e66339d586fbd18383024c6fe4e6c2f395433df5e7064402975f  public/house-studio-ui.js
+3fbcfe800eed1274b513758c90a423a47b2ff55fd02650daa374be15edf4a566  spec/house-studio-ui.test.ts

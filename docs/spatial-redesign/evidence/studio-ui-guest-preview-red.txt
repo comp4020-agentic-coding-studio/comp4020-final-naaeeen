@@ -1,0 +1,81 @@
+Already up to date
+Done in 45ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-studio-ui.test.ts [2m([22m[2m33 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 1027[2mms[22m[39m
+   [32m✓[39m loads the real owner reference and audience without starting saved ambience[32m 118[2mms[22m[39m
+   [32m✓[39m lets a guest inspect independently but exposes no upload/save/clear/preset controls[32m 38[2mms[22m[39m
+   [32m✓[39m does not admit owner edits from an observer or a mismatched current zone[32m 35[2mms[22m[39m
+   [32m✓[39m immediately clears URLs, previews and sound on access revocation and ignores delayed image bytes[32m 31[2mms[22m[39m
+   [32m✓[39m rejects stale room, identity and controller response contexts[32m 36[2mms[22m[39m
+   [32m✓[39m preserves newer local inspection when a saved-view ACK arrives late[32m 54[2mms[22m[39m
+   [32m✓[39m retains exactly the original command UUID and payload on uncertain retry[32m 39[2mms[22m[39m
+   [32m✓[39m never reports a rejected save as saved and retains inspection[32m 31[2mms[22m[39m
+   [32m✓[39m uploads bounded stable commands and keeps old image until the commit succeeds[32m 66[2mms[22m[39m
+   [32m✓[39m prevents in-flight selection from becoming writable after a room change[32m 49[2mms[22m[39m
+   [32m✓[39m starts audio only from explicit Listen and stops it on close and document hiding[32m 30[2mms[22m[39m
+   [32m✓[39m downloads authenticated current bytes and separate room export without sending a command[32m 24[2mms[22m[39m
+   [32m✓[39m clears a null reference update and ignores a poll after close[32m 22[2mms[22m[39m
+   [32m✓[39m isolates keys and offers Escape without a focus trap[32m 20[2mms[22m[39m
+   [32m✓[39m rejects invalid source bytes before browser decoding[32m 14[2mms[22m[39m
+[31m   [31m×[31m keeps a visitor's local crop through owner metadata polling[39m[32m 25[2mms[22m[39m
+[31m   [31m×[31m still publishes the loaded preview when same-image metadata refreshes before decode[39m[32m 35[2mms[22m[39m
+   [32m✓[39m resets a saved view explicitly and resumes the confirmed owner view on return[32m 34[2mms[22m[39m
+   [32m✓[39m revokes the previous preview immediately when bytes or metadata fail authorization[32m 20[2mms[22m[39m
+   [32m✓[39m clears a decode failure and reports it without losing room metadata[32m 21[2mms[22m[39m
+   [32m✓[39m retries an uncertain upload chunk with the original UUID then completes remaining chunks[32m 45[2mms[22m[39m
+   [32m✓[39m cancels a staged upload and aborts its temporary bytes without replacing the saved image[32m 55[2mms[22m[39m
+   [32m✓[39m keeps a rejected upload source available and never reaches commit[32m 28[2mms[22m[39m
+   [32m✓[39m ignores a delayed exported private file after access changes[32m 20[2mms[22m[39m
+   [32m✓[39m saves a room preset without playing audio; local volume, mute and stop remain independent[32m 25[2mms[22m[39m
+   [32m✓[39m performs no reads or URL creation while hidden or after disposal[32m 17[2mms[22m[39m
+   [32m✓[39m polls only a visible visitor and releases polling on close[32m 21[2mms[22m[39m
+   [32m✓[39m bounds pixels and strips source bytes by Canvas re-encoding[32m 10[2mms[22m[39m
+   [32m✓[39m reduces encoded PNG dimensions repeatedly until the byte cap fits[32m 14[2mms[22m[39m
+   [32m✓[39m refuses excessive file or source dimensions before decode[32m 11[2mms[22m[39m
+   [32m✓[39m releases decoded pixels when Canvas encoding or drawing fails[32m 10[2mms[22m[39m
+   [32m✓[39m stops after the bounded PNG encoding attempts and preserves the source[32m 11[2mms[22m[39m
+   [32m✓[39m reports PNG decode failure without changing the selected source[32m 15[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m > [22mkeeps a visitor's local crop through owner metadata polling
+[31m[1mAssertionError[22m: expected '200%' to be '110%' // Object.is equality[39m
+
+Expected: [32m"[7m11[27m0%"[39m
+Received: [31m"[7m20[27m0%"[39m
+
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m31:295[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m > [22mstill publishes the loaded preview when same-image metadata refreshes before decode
+[31m[1mAssertionError[22m: expected last "vi.fn()" call to have been called with [ HTMLImageElement{ …(1) } ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  [[22m
+[32m-   <img[39m
+[32m-     alt="Room owner's chosen reference"[39m
+[32m-     data-studio-image=""[39m
+[32m-     draggable="false"[39m
+[32m-     src="blob:one"[39m
+[32m-     style="transform: translate(0%,0%) scale(1);"[39m
+[32m-   />,[39m
+[31m+   null,[39m
+[2m  ][22m
+
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m32:250[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m31 passed[39m[22m[90m (33)[39m
+[2m   Start at [22m 02:48:30
+[2m   Duration [22m 1.59s[2m (tests 68%, import 27%, transform 5%)[22m
+

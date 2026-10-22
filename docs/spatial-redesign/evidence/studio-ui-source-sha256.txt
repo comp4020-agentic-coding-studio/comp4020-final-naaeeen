@@ -1,0 +1,5 @@
+e2f78046ef6275d82cc6f171a5f84197e502a94c3bbdb4c09a04a39d59518f0a  public/house-studio-ui.js
+4c382064492e7e49f15351f870a9074d6f2746fbc7a27f8cc67ce24214a49527  public/house-studio.css
+d16198bf0b17d95ba935b212dc739234c5f27251ca55a471ba5d14ce2dd2bd17  public/house-ambience.js
+97a194c0e237422c3ef769b9aa3c21f868871d42e1ab2124975fc833ff98f770  spec/house-studio-ui.test.ts
+ed606becda7cc0a22c9295e179e9bdafde6d1f8262118bb62b1ee65292dca469  spec/house-ambience.test.ts

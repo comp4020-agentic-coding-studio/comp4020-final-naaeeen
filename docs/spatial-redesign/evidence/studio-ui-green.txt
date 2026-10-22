@@ -1,0 +1,22 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m spec/house-ambience.test.ts [2m([22m[2m23 tests[22m[2m)[22m[32m 76[2mms[22m[39m
+ [32m✓[39m spec/house-studio-ui.test.ts [2m([22m[2m40 tests[22m[2m)[22m[33m 1974[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m63 passed[39m[22m[90m (63)[39m
+[2m   Start at [22m 02:49:35
+[2m   Duration [22m 2.72s[2m (tests 76%, import 18%, transform 5%, worker 1%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |    92.5 |    83.15 |    93.4 |   98.28 |                   
+ house-ambience.js |    94.8 |    87.64 |   95.23 |   95.79 | 45-46,131-132,141 
+ ...e-studio-ui.js |   91.82 |     82.1 |   92.85 |   99.56 | 39                
+-------------------|---------|----------|---------|---------|-------------------

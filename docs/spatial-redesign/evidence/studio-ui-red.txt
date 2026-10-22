@@ -1,0 +1,27 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-studio-ui.test.ts [2m([22m[2m0 test[22m[2m)[22m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-studio-ui.test.ts[2m [ spec/house-studio-ui.test.ts ][22m
+[31m[1mError[22m: Cannot find module '../public/house-studio-ui.js' imported from /home/lizhi/comp4020/comp4020-final-naaeeen/spec/house-studio-ui.test.ts[39m
+[36m [2m❯[22m spec/house-studio-ui.test.ts:[2m3:1[22m[39m
+    [90m  1|[39m import { JSDOM } from "jsdom";
+    [90m  2|[39m import { beforeEach, afterEach, it, expect, vi } from "vitest";
+    [90m  3|[39m import { createHouseStudioUI, prepareStudioPng } from "../public/house…
+    [90m   |[39m [31m^[39m
+    [90m  4|[39m let dom:JSDOM,host:HTMLElement,ui:any,api:any,preview:any,audio:any,do…
+    [90m  5|[39m const room="00000000-0000-4000-8000-000000000001",other="00000000-0000…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [2mno tests[22m
+[2m   Start at [22m 02:43:16
+[2m   Duration [22m 566ms[2m (worker 95%, environment 5%)[22m
+
