@@ -1,0 +1,124 @@
+✓ Lockfile passes supply-chain policies (verified 22h ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath .githooks || true
+. prepare: Done
+Done in 572ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/spatial-resource-memory.test.ts [2m([22m[2m30 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 640[2mms[22m[39m
+   [32m✓[39m pure memory diagnostic capture calibration [2m(11)[22m
+     [32m✓[39m retains a 500ms RSS spike between unchanged one-second current-RSS selections[32m 3[2mms[22m[39m
+     [32m✓[39m encodes each fixed phase and boundary numerically and remembers the last boundary[32m 2[2mms[22m[39m
+     [32m✓[39m preserves current and cumulative memory counters with OS lifetime maxRSS as a separate value[32m 0[2mms[22m[39m
+     [32m✓[39m accepts simultaneous monotonic timestamps, unchanged peaks and zero counters[32m 0[2mms[22m[39m
+     [32m✓[39m rejects missing or malformed nested metadata without retaining raw input[32m 1[2mms[22m[39m
+     [32m✓[39m rejects missing, nonnumeric, nonfinite and negative numeric fields[32m 8[2mms[22m[39m
+     [32m✓[39m rejects fractional counts and duplicate, skipped or regressing sequences[32m 2[2mms[22m[39m
+     [32m✓[39m rejects time and sampled or OS peak regressions while preserving accepted rows[32m 1[2mms[22m[39m
+     [32m✓[39m rejects any sampled peak below its current memory value[32m 1[2mms[22m[39m
+     [32m✓[39m unknown phase and boundary strings invalidate capture without retaining those strings[32m 0[2mms[22m[39m
+     [32m✓[39m retains only fixed primitive columns and bounded allowlisted errors through JSON round trips[32m 2[2mms[22m[39m
+   [32m✓[39m actual memory diagnostic instrument wiring with pure fixtures [2m(4)[22m
+     [32m✓[39m keeps the existing child 100ms timer and one-second parent selector unchanged[32m 137[2mms[22m[39m
+     [32m✓[39m executes the actual parent callback: every 100ms sample is captured before the one-second selector[32m 30[2mms[22m[39m
+     [32m✓[39m actual parent callback turns invalid samples into a failure even inside the one-second skip interval[32m 17[2mms[22m[39m
+     [32m✓[39m actual child sampler emits contiguous sequence, sampled peaks and Linux OS KiB conversion separately[32m 19[2mms[22m[39m
+   [32m✓[39m actual post-close memory diagnostic failure promotion [2m(4)[22m
+     [32m✓[39m late invalid sample after recovery.after changes an already built CALIBRATION or PASS to FAIL[32m 74[2mms[22m[39m
+     [32m✓[39m the preserved pre-guard post-close path reproduces the late-invalid false success[32m 78[2mms[22m[39m
+     [32m✓[39m empty capture invalidates the compact artifact and promotes an already built result to FAIL[32m 68[2mms[22m[39m
+     [32m✓[39m valid capture preserves successful statuses and a late invalid capture preserves an earlier failure[32m 68[2mms[22m[39m
+   [31m❯[39m complete memory diagnostic stream and exact measurement prefix [2m(11)[22m
+     [32m✓[39m accepts a full contiguous terminal and rejects every sample after terminal[32m 0[2mms[22m[39m
+[31m     [31m×[31m rejects dropped interior, tail and terminal events instead of completing the diagnostic[39m[32m 7[2mms[22m[39m
+[31m     [31m×[31m the preserved preterminal artifact falsely accepts an omitted final produced sample[39m[32m 7[2mms[22m[39m
+[31m     [31m×[31m rejects invalid or duplicate terminal counters and does not repair a rejected marker[39m[32m 1[2mms[22m[39m
+     [32m✓[39m separates the original gate prefix from a larger shutdown RSS and independent OS lifetime peak[32m 27[2mms[22m[39m
+     [32m✓[39m requires an exact finite measurement cutoff and matching observed and cumulative RSS peaks[32m 1[2mms[22m[39m
+     [32m✓[39m actual parent ACK is sent only for a validated terminal and records exact RPC sample identity[32m 23[2mms[22m[39m
+     [32m✓[39m actual recovery cutoff uses the returned RPC identity before health awaits and later samples[32m 25[2mms[22m[39m
+     [32m✓[39m flush sends only its terminal marker and accepts only the exact ACK with listener cleanup[32m 0[2mms[22m[39m
+     [32m✓[39m wrong, missing, callback-error and throwing-send terminal ACK paths fail closed and clean listeners[32m 22[2mms[22m[39m
+     [32m✓[39m actual child stop flushes the existing final sample counter after service close without another sample[32m 13[2mms[22m[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  spec/spatial-resource-memory.test.ts > complete memory diagnostic stream and exact measurement prefix > rejects dropped interior, tail and terminal events instead of completing the diagnostic
+AssertionError: expected { schemaVersion: 1, …(17) } to match object { status: 'INVALID', …(1) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "failureCode": "MEMORY_DIAGNOSTIC_INCOMPLETE_STREAM",
++   "failureCode": "MEMORY_DIAGNOSTIC_TERMINAL_COUNT",
+    "status": "INVALID",
+  }
+
+ ❯ spec/spatial-resource-memory.test.ts:513:52
+    511|     const tail = capturedSeries(2);
+    512|     expect(captureMemoryDiagnosticTerminal(tail, 3)).toEqual({ ok: fal…
+    513|     expect(finalizeMemoryDiagnostic(tail, 2, 100)).toMatchObject({ sta…
+       |                                                    ^
+    514|     const missingTerminal = capturedSeries();
+    515|     expect(finalizeMemoryDiagnostic(missingTerminal, 2, 100)).toMatchO…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  spec/spatial-resource-memory.test.ts > complete memory diagnostic stream and exact measurement prefix > the preserved preterminal artifact falsely accepts an omitted final produced sample
+AssertionError: expected { schemaVersion: 1, …(17) } to match object { status: 'INVALID', …(1) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "failureCode": "MEMORY_DIAGNOSTIC_INCOMPLETE_STREAM",
++   "failureCode": "MEMORY_DIAGNOSTIC_TERMINAL_COUNT",
+    "status": "INVALID",
+  }
+
+ ❯ spec/spatial-resource-memory.test.ts:529:55
+    527|     expect(oldArtifact(capture).status).toBe("VALID");
+    528|     expect(captureMemoryDiagnosticTerminal(capture, 3)).toEqual({ ok: …
+    529|     expect(finalizeMemoryDiagnostic(capture, 2, 100)).toMatchObject({ …
+       |                                                       ^
+    530|   });
+    531|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  spec/spatial-resource-memory.test.ts > complete memory diagnostic stream and exact measurement prefix > rejects invalid or duplicate terminal counters and does not repair a rejected marker
+AssertionError: expected { schemaVersion: 1, …(17) } to match object { status: 'INVALID', …(1) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "failureCode": "MEMORY_DIAGNOSTIC_INCOMPLETE_STREAM",
++   "failureCode": "MEMORY_DIAGNOSTIC_DUPLICATE_TERMINAL",
+    "status": "INVALID",
+  }
+
+ ❯ spec/spatial-resource-memory.test.ts:541:57
+    539|     expect(captureMemoryDiagnosticTerminal(duplicate, 3)).toEqual({ ok…
+    540|     expect(captureMemoryDiagnosticTerminal(duplicate, 3)).toEqual({ ok…
+    541|     expect(finalizeMemoryDiagnostic(duplicate, 2, 100)).toMatchObject(…
+       |                                                         ^
+    542|     const rejectedMarker = capturedSeries();
+    543|     expect(captureMemoryDiagnosticTerminal(rejectedMarker, 4).ok).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m27 passed[39m[22m[90m (30)[39m
+[2m   Start at [22m 06:53:53
+[2m   Duration [22m 1.03s[2m (tests 67%, import 18%, transform 14%)[22m
+
+EXIT_CODE=1

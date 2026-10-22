@@ -1,0 +1,334 @@
+--- preserved/tools/board-resource.mjs
++++ current/tools/board-resource.mjs
+@@ -4,7 +4,7 @@
+ import { createHash, randomUUID } from "node:crypto";
+ import { mkdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
+ import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
+-import { dirname, join, resolve } from "node:path";
++import { dirname, join, resolve, relative } from "node:path";
+ import { fileURLToPath } from "node:url";
+ import { monitorEventLoopDelay, performance } from "node:perf_hooks";
+ import { getHeapStatistics } from "node:v8";
+@@ -13,7 +13,7 @@
+ import { crc32, deflateSync } from "node:zlib";
+ import { Server } from "socket.io";
+ import { io } from "socket.io-client";
+-import { createSpatialWorkload } from "./spatial-resource.mjs";
++import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES } from "./spatial-resource.mjs";
+ import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
+ const arg = k => {
+     const n = process.argv.indexOf(k);
+@@ -23,6 +23,7 @@
+ const protocolPath = resolve(root, arg("--protocol-file") ?? "evaluation/board-resource.protocol.json");
+ if (!protocolPath.endsWith(".protocol.json")) throw new Error("A .protocol.json file is required");
+ const resultPath = protocolPath.replace(/\.protocol\.json$/, ".results.json");
++const memoryDiagnosticPath = protocolPath.replace(/\.protocol\.json$/, ".memory-diagnostic.json");
+ const hash = b => createHash("sha256").update(b).digest("hex"), sleep = ms => new Promise(r => setTimeout(r, ms));
+ const q = (a, p) => a.length ? [...a].sort((a, b) => a - b)[Math.max(0, Math.ceil(a.length * p) - 1)] : null, round = n => n === null ? null : Math.round(n * 1000) / 1000;
+ const fail = code => {
+@@ -118,19 +119,23 @@
+     const loop = monitorEventLoopDelay({ resolution: 10 });
+     loop.enable();
+     let rssPeak = 0, heapPeak = 0;
++    let memorySampleSequence = 0, heapTotalPeak = 0, externalPeak = 0, arrayBuffersPeak = 0;
+     const filePeaks = new Map();
+-    function sample() {
++    function sample(memoryBoundary = null) {
+         for (const c of connections)
+             inspect(c);
+-        const m = process.memoryUsage();
++        const m = process.memoryUsage(), monotonicMs = performance.now(), osMaxRSSMiB = process.resourceUsage().maxRSS / 1024;
+         rssPeak = Math.max(rssPeak, m.rss);
+         heapPeak = Math.max(heapPeak, m.heapUsed);
++        heapTotalPeak = Math.max(heapTotalPeak, m.heapTotal);
++        externalPeak = Math.max(externalPeak, m.external);
++        arrayBuffersPeak = Math.max(arrayBuffersPeak, m.arrayBuffers);
+         const files = p.storageAcceptance ? databaseFiles(arg("--data")) : null;
+         if (files) for (const f of files) {
+             const prior = filePeaks.get(f.name) ?? { name:f.name, logicalBytes:0, allocatedBytes:0 };
+             prior.logicalBytes=Math.max(prior.logicalBytes,f.logicalBytes); prior.allocatedBytes=Math.max(prior.allocatedBytes,f.allocatedBytes); filePeaks.set(f.name,prior);
+         }
+-        return { ...(files ? {databaseFiles:files,databaseFilePeaks:[...filePeaks.values()]} : {}), kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
++        return { ...(files ? {databaseFiles:files,databaseFilePeaks:[...filePeaks.values()]} : {}), memoryDiagnostic: {sequence:++memorySampleSequence,monotonicMs,heapTotalMiB:m.heapTotal/1024**2,heapTotalPeakMiB:heapTotalPeak/1024**2,externalPeakMiB:externalPeak/1024**2,arrayBuffersPeakMiB:arrayBuffersPeak/1024**2,osMaxRSSMiB,boundary:memoryBoundary}, kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
+     }
+     // Read-only aggregate diagnostics; no authority or transport handler is replaced.
+     const storageQueries = p.storageAcceptance || p.gameScenario ? {
+@@ -161,13 +166,14 @@
+             else if (m?.kind === "storage")
+                 process.send?.({ kind: "storage", requestId: m.requestId, ...storageSample() });
+             else if (m?.kind === "sample")
+-                process.send?.({ ...sample(), kind: "reply", requestId: m.requestId });
++                process.send?.({ ...sample(m.memoryBoundary ?? null), kind: "reply", requestId: m.requestId });
+             else if (m?.kind === "stop" && !closing) {
+                 closing = true;
+                 clearInterval(timer);
+                 process.send?.(sample());
+                 loop.disable();
+                 await service.close();
++                if(!await flushMemoryDiagnosticTerminal(process,memorySampleSequence))process.exit(1);
+                 process.exit(0);
+             }
+         }
+@@ -334,6 +340,9 @@
+     const gameEvidence = p.gameScenario ? { status: "NOT_RUN", actions: [], rounds: [], storage: [] } : null;
+     const pictureEvidence = p.pictureScenario ? {status:"NOT_RUN",actions:[],admissions:[],invalidFrames:0,conflictingFrames:0} : null;
+     const storageEvidence = p.storageAcceptance ? {baseline:null,final:null,verification:null} : null;
++    const memoryDiagnostic = newMemoryDiagnosticCapture();
++    const memorySampleSequences = new WeakMap();
++    let memoryMeasurementEndSequence=null,memoryMeasurementGateRSSPeakMiB=null;
+     const boardACKLedger = p.storageAcceptance ? newBoardACKLedger() : null;
+     let finalResult = null;
+     let spatial = null;
+@@ -352,6 +361,12 @@
+             readyResolve();
+         }
+         if (["sample", "reply", "ready"].includes(v?.kind)) {
++            const captured = captureMemoryDiagnostic(memoryDiagnostic,v,phase);
++            if(!captured.ok) failure ??= {phase,code:captured.code};
++            // The old one-second series/grader sees exactly its prior fields.
++            const {memoryDiagnostic: ignoredMemoryDiagnostic,...regularSample}=v;
++            if(captured.ok)memorySampleSequences.set(regularSample,v.memoryDiagnostic.sequence);
++            v=regularSample;
+             lastSample = v;
+             if (!samples.length || performance.now() - samples.at(-1).parentAt >= 1000)
+                 samples.push({ ...v, parentAt: performance.now(), phase });
+@@ -362,6 +377,14 @@
+         }
+         if (v?.kind === "childFailure")
+             failure ??= { phase, code: v.code };
++        if(v?.kind==="memoryDiagnosticTerminal") {
++            const terminal=captureMemoryDiagnosticTerminal(memoryDiagnostic,v.lastSequence);
++            if(!terminal.ok)failure??={phase,code:terminal.code};
++            else {
++                const ackFailed=()=>{memoryDiagnostic.terminalError="MEMORY_DIAGNOSTIC_TERMINAL_ACK_FAILED";failure??={phase,code:"MEMORY_DIAGNOSTIC_TERMINAL_ACK_FAILED"};};
++                try {child.send({kind:"memoryDiagnosticTerminalAck",lastSequence:v.lastSequence},error=>{if(error)ackFailed();});} catch {ackFailed();}
++            }
++        }
+     });
+     child.on("error", () => {
+         readyReject(new Error("CHILD_PROCESS_ERROR"));
+@@ -403,6 +426,14 @@
+             });
+             child.send({ kind, requestId, ...body });
+         });
++    }
++    async function memoryBoundary(name) {
++        const index=MEMORY_DIAGNOSTIC_BOUNDARIES.indexOf(name);
++        if(index<0)fail("MEMORY_DIAGNOSTIC_BOUNDARY");
++        const before=performance.now(),value=await rpc("sample",{memoryBoundary:name});
++        memoryDiagnostic.boundaryAwaitOverhead.push([index,performance.now()-before]);
++        if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
++        return value;
+     }
+     async function http(path, m, body) {
+         const captureAfterReflection=running;
+@@ -754,6 +785,7 @@
+     let motionTimer, pointerTimer, writeTimer, freezeTimer, progressTimer;
+     try {
+         await Promise.race([ready, sleep(15000).then(() => fail("STARTUP_TIMEOUT"))]);
++        if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
+         phase = "bootstrap";
+         if (!(await http("/healthz")).value.ok)
+             fail("HEALTH_START");
+@@ -766,6 +798,7 @@
+             const members = [], house = { index: h, id: null, code: null, elements:scene(h), images:[png(101+h*100),png(102+h*100)], expectedVersions: new Map(), expectedElements:new Map(), expectedChat: new Map(), receiptJournal: [], seedChat: [], chatSerial: 0 };
+             houses.push(house);
+             house.members=members;
++            await memoryBoundary("fixture.seed.before");
+             for (let n = 0; n < 6; n++) {
+                 const opened = await http("/api/house/me"), member = { cookie: opened.cookie, identity: opened.value.identity.id, memberIndex: n };
+                 await http("/api/house/command", member, { commandId: randomUUID(), type: n === 0 ? "house.create" : "house.join", payload: { ...(n === 0 ? { capacity: 6 } : { code: house.code }), name: "Synthetic resident " + n, colour: ["sage", "blue", "rose", "amber", "peach", "lavender"][n] } });
+@@ -778,6 +811,7 @@
+             }
+             for (let n = 0; n < 2; n++)
+                 ok((await http("/api/board/asset", members[n], { id: randomUUID(), houseId: house.id, file: { id: "resource_png_" + n, mimeType: "image/png", dataURL: "data:image/png;base64," + house.images[n].toString("base64") } })).value);
++            await memoryBoundary("fixture.assets.after");
+             let batch = [], batches = 0;
+             async function submit() {
+                 if (!batch.length)
+@@ -794,21 +828,27 @@
+                 batch.push(e);
+             }
+             await submit();
++            await memoryBoundary("fixture.elements.after");
+             for (let n = 0; n < 100; n++)
+                 ok((await http("/api/board/chat", members[n % 6], { id: randomUUID(), houseId: house.id, text: ("Synthetic retained message " + n).padEnd(4000, "c") })).value);
++            await memoryBoundary("fixture.chat.after");
+             const saved = (await http("/api/board/snapshot?houseId=" + house.id, members[0])).value;
+             house.seedChat = saved.chat.map(m => ({ id: m.id, sequence: m.sequence }));
+             house.fixture = { elements: elements.length, sceneBytes, chatMessages: saved.chat.length, chatBytes: Buffer.byteLength(JSON.stringify(saved.chat)), files: saved.files.length, snapshotBytes: Buffer.byteLength(JSON.stringify(saved)), imageBytes: house.images.map(b => b.length), imageSHA256: house.images.map(hash), patchBatches: batches };
+             if (saved.chat.length !== 100 || saved.files.length !== 2 || saved.files.some(f => Object.hasOwn(f, "dataURL")))
+                 fail("FIXTURE_SNAPSHOT_MISMATCH");
++            await memoryBoundary("fixture.snapshot.after");
++            await memoryBoundary("subscriptions.before");
+             for (const m of members) {
+                 const controller = newView(m, h, "house");
+                 await connect(controller);
+                 ok(await controller.socket.timeout(3000).emitWithAck("house.availability", { generation: controller.generation, value: "chat" }));
+                 await connect(newView(m, h, "board"));
+             }
++            await memoryBoundary("subscriptions.after");
+         }
+         const boardViews = views.filter(v => v.role === "board");
++        await memoryBoundary("asset-fanout.before");
+         await Promise.all(boardViews.map(async (v) => {
+             for (let n = 0; n < 2; n++) {
+                 countHttp(v, false);
+@@ -823,10 +863,11 @@
+             }
+         }));
+         await sleep(100);
+-        const initial = await rpc("sample");
++        const initial = await memoryBoundary("asset-fanout.after");
+         if (initial.houseViews !== 12 || initial.boardViews !== 12 || initial.activeEngines !== 24 || views.some(v => !v.socket.connected))
+             fail("INITIAL_VIEW_COUNT");
+         phase = "invalid-ack-negative";
++        await memoryBoundary("invalid-ack.before");
+         const negative = boardViews.at(-1);
+         negative.intendedFault = true;
+         const prior = negative.disconnects;
+@@ -837,13 +878,15 @@
+         }
+         for (let n = 0; n < 40 && negative.socket.connected; n++)
+             await sleep(25);
+-        const negativeSample = await rpc("sample");
++        const negativeSample = await memoryBoundary("invalid-ack.after");
+         negativeEvidence = { requests: 100, transportFault: "server writable=false diagnostic", closed: negative.disconnects > prior, queuePacketsPeak: negativeSample.queues.board.packets, queueBytesPeak: negativeSample.queues.board.bytes };
+         if (!negativeEvidence.closed || negativeEvidence.queuePacketsPeak > 8 || negativeEvidence.queueBytesPeak > 4194304)
+             fail("INVALID_ACK_BOUND_FAILURE");
++        await memoryBoundary("rejoin.before");
+         negative.socket.disconnect();
+         await connect(negative);
+         negative.intendedFault = false;
++        await memoryBoundary("rejoin.after");
+         if (p.spatialScenario) {
+             spatial = createSpatialWorkload({ origin, scenario:p.spatialScenario, signal:cancellation.signal, rpc, houses, views,
+                 onSubscribe(v,snapshot) {
+@@ -867,7 +910,9 @@
+                     await connect(v);v.intendedFault=false;
+                 }
+             });
++            await memoryBoundary("spatial.prepare.before");
+             await spatial.prepare();
++            await memoryBoundary("spatial.prepare.after");
+         }
+         if (p.storageAcceptance || p.gameScenario) {
+             const baseline=cleanSample(await rpc("storage"));
+@@ -1097,6 +1142,7 @@
+         }
+         if(pictureEvidence)pictureEvidence.status=calibration?"CALIBRATION_PICTURE_NOT_RUN":"COMPLETE";
+         phase = "recovery-check";
++        await memoryBoundary("recovery.before");
+         for (const v of views)
+             if (v.eligibleAt && v.ready && !v.intendedFault)
+                 v.eligibleMs += performance.now() - v.eligibleAt;
+@@ -1107,7 +1153,9 @@
+             recovery.push({ houseIndex: h.index, allSeedIds:h.elements.every(e=>actualElements.has(e.id)), allUnmodifiedElements:h.elements.filter(e=>!h.expectedVersions.has(e.id)).every(e=>canonical(actualElements.get(e.id))===canonical(e)),allLatestPayloads:[...h.expectedElements].every(([id,e])=>canonical(actualElements.get(id))===canonical(e)),tombstones:saved.elements.filter(e=>e.isDeleted).length, allLatestVersions: [...h.expectedVersions].every(([id, ver]) => (versions.get(id) ?? 0) >= ver), allScheduledChat: [...h.expectedChat].sort((a, b) => a[1] - b[1]).slice(-100).every(([id]) => saved.chat.some(m => m.id === id)), files: saved.files.length, metadataOnly: saved.files.every(f => !Object.hasOwn(f, "dataURL")), elements: saved.elements.length, chat: saved.chat.length });
+         }
+         await sleep(300);
+-        const final = await rpc("sample");
++        const final = await memoryBoundary("recovery.after");
++        memoryMeasurementEndSequence=memorySampleSequences.get(final);
++        memoryMeasurementGateRSSPeakMiB=final.rssPeakMiB;
+         lastSample = final;
+         const health = (await http("/healthz")).value.ok === true;
+         freeze(p, protocolHash);
+@@ -1149,6 +1197,10 @@
+         finalResult.processClosure={generatorPID:process.pid,serverPID:child.pid,serverExitCode:child.exitCode,serverSignal:child.signalCode,serverClosed:child.exitCode!==null||child.signalCode!==null};
+         try {
+             freeze(p,protocolHash);
++            if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
++            if(!memoryDiagnostic.rows.length)fail("MEMORY_DIAGNOSTIC_EMPTY_CAPTURE");
++            const completion=finalizeMemoryDiagnostic(memoryDiagnostic,memoryMeasurementEndSequence,memoryMeasurementGateRSSPeakMiB);
++            if(completion.status!=="VALID")fail(completion.failureCode);
+             if(!finalResult.processClosure.serverClosed)fail("RESOURCE_SERVER_CLOSE_TIMEOUT");
+             if(child.exitCode!==0)fail("RESOURCE_SERVER_EXIT_FAILED");
+             if(storageEvidence && finalResult.gates) {
+@@ -1174,6 +1226,15 @@
+         }
+         finalResult.measurementFinishedAtUTC=finalResult.finishedAt;
+         finalResult.finishedAt=new Date().toISOString();
++        // Child closure precedes compact diagnostic serialization; the resource
++        // criteria and original one-second result series remain independent.
++        try {
++            const diagnostic={...finalizeMemoryDiagnostic(memoryDiagnostic,memoryMeasurementEndSequence,memoryMeasurementGateRSSPeakMiB),protocolSHA256:protocolHash,sourceManifestSHA256:p.sourceManifestSHA256,instrumentSHA256:p.instrumentSHA256,childClosed:finalResult.processClosure.serverClosed};
++            writeFileSync(memoryDiagnosticPath,JSON.stringify(diagnostic)+"\n");
++            finalResult.memoryDiagnostic={artifact:relative(root,memoryDiagnosticPath),sha256:hash(readFileSync(memoryDiagnosticPath)),status:diagnostic.status,samples:memoryDiagnostic.rows.length,invalidSamples:memoryDiagnostic.invalidSamples,boundaryAwaits:memoryDiagnostic.boundaryAwaitOverhead.length};
++        } catch {
++            finalResult.status="FAIL";finalResult.failure??={phase:"memory-diagnostic-artifact",code:"MEMORY_DIAGNOSTIC_WRITE_FAILED"};
++        }
+         writeResult(finalResult);
+         process.stdout.write(JSON.stringify({status:finalResult.status,durationSeconds:finalResult.durationSeconds,rssMaxMiB:finalResult.server?.rssPeakMiB,normalP95Ms:finalResult.delivery?.normalP95Ms,gates:finalResult.gates,...(finalResult.failure?{failure:finalResult.failure}:{})})+"\n");
+         if(!["PASS","CALIBRATION"].includes(finalResult.status))process.exitCode=1;
+--- preserved/tools/spatial-resource.mjs
++++ current/tools/spatial-resource.mjs
+@@ -12,6 +12,69 @@
+ const fail = code => { throw Object.assign(new Error(code), { code }); };
+ const ok = response => { if (!response?.ok) fail(response?.code ?? "SPATIAL_NO_ACK"); return response; };
+ const cleanSample = value => value;
++
++export const MEMORY_DIAGNOSTIC_PHASES = Object.freeze(["startup","bootstrap","invalid-ack-negative","calibration-finish","measurement","slow-reader","recovery-check"]);
++export const MEMORY_DIAGNOSTIC_BOUNDARIES = Object.freeze(["fixture.seed.before","fixture.assets.after","fixture.elements.after","fixture.chat.after","fixture.snapshot.after","subscriptions.before","subscriptions.after","asset-fanout.before","asset-fanout.after","invalid-ack.before","invalid-ack.after","rejoin.before","rejoin.after","spatial.prepare.before","spatial.prepare.after","recovery.before","recovery.after"]);
++export const MEMORY_DIAGNOSTIC_COLUMNS = Object.freeze(["sequence","serverMonotonicMs","phase","boundary","lastBoundary","rssMiB","heapUsedMiB","heapTotalMiB","externalMiB","arrayBuffersMiB","rssPeakMiB","heapUsedPeakMiB","heapTotalPeakMiB","externalPeakMiB","arrayBuffersPeakMiB","osMaxRSSMiB","houseViews","boardViews","activeEngines"]);
++export function newMemoryDiagnosticCapture() {
++  return { rows:[], errors:[], invalidSamples:0, lastSequence:0, lastMonotonicMs:-1, lastBoundary:-1, lastPeaks:null, boundaryAwaitOverhead:[],terminalSequence:null,terminalError:null };
++}
++/** Select fixed numeric fields only; never retain a raw IPC object or error value. */
++export function captureMemoryDiagnostic(capture,sample,phase) {
++  const meta=sample?.memoryDiagnostic;
++  const reject=code=>{capture.invalidSamples++;if(capture.errors.length<32)capture.errors.push({code,sequence:Number.isSafeInteger(meta?.sequence)&&meta.sequence>0?meta.sequence:null});return {ok:false,code};};
++  if(capture.terminalSequence!==null)return reject("MEMORY_DIAGNOSTIC_SAMPLE_AFTER_TERMINAL");
++  if(!meta||typeof meta!=="object"||Array.isArray(meta))return reject("MEMORY_DIAGNOSTIC_MISSING_SAMPLE");
++  if(!Number.isSafeInteger(meta.sequence)||meta.sequence!==capture.lastSequence+1)return reject("MEMORY_DIAGNOSTIC_SEQUENCE");
++  const phaseIndex=MEMORY_DIAGNOSTIC_PHASES.indexOf(phase),boundaryIndex=meta.boundary===null?-1:MEMORY_DIAGNOSTIC_BOUNDARIES.indexOf(meta.boundary);
++  if(phaseIndex<0)return reject("MEMORY_DIAGNOSTIC_PHASE");
++  if(meta.boundary!==null&&boundaryIndex<0)return reject("MEMORY_DIAGNOSTIC_BOUNDARY");
++  const values=[meta.monotonicMs,sample.rssMiB,sample.heapMiB,meta.heapTotalMiB,sample.externalMiB,sample.arrayBuffersMiB,sample.rssPeakMiB,sample.heapPeakMiB,meta.heapTotalPeakMiB,meta.externalPeakMiB,meta.arrayBuffersPeakMiB,meta.osMaxRSSMiB,sample.houseViews,sample.boardViews,sample.activeEngines];
++  if(values.some(value=>typeof value!=="number"||!Number.isFinite(value)||value<0))return reject("MEMORY_DIAGNOSTIC_NONFINITE_OR_NEGATIVE");
++  if([sample.houseViews,sample.boardViews,sample.activeEngines].some(value=>!Number.isSafeInteger(value)))return reject("MEMORY_DIAGNOSTIC_VIEW_COUNT");
++  if(meta.monotonicMs<capture.lastMonotonicMs)return reject("MEMORY_DIAGNOSTIC_TIME_REGRESSION");
++  const currents=[sample.rssMiB,sample.heapMiB,meta.heapTotalMiB,sample.externalMiB,sample.arrayBuffersMiB],peaks=[sample.rssPeakMiB,sample.heapPeakMiB,meta.heapTotalPeakMiB,meta.externalPeakMiB,meta.arrayBuffersPeakMiB,meta.osMaxRSSMiB];
++  if(currents.some((value,index)=>peaks[index]<value)||capture.lastPeaks&&peaks.some((value,index)=>value<capture.lastPeaks[index]))return reject("MEMORY_DIAGNOSTIC_PEAK_REGRESSION");
++  if(boundaryIndex>=0)capture.lastBoundary=boundaryIndex;
++  capture.rows.push([meta.sequence,meta.monotonicMs,phaseIndex,boundaryIndex,capture.lastBoundary,...values.slice(1)]);
++  capture.lastSequence=meta.sequence;capture.lastMonotonicMs=meta.monotonicMs;capture.lastPeaks=peaks;
++  return {ok:true};
++}
++export function memoryDiagnosticArtifact(capture) {
++  return {schemaVersion:1,status:capture.invalidSamples||!capture.rows.length?"INVALID":"VALID",scope:"DIAGNOSTIC_ONLY; every100ms sample plus read-only boundary RPC samples; OS maxRSS is separate from sampledRSS and unchanged210MiB gate",columns:MEMORY_DIAGNOSTIC_COLUMNS,phases:MEMORY_DIAGNOSTIC_PHASES,boundaries:MEMORY_DIAGNOSTIC_BOUNDARIES,rows:capture.rows,invalidSamples:capture.invalidSamples,errors:capture.rows.length?capture.errors:[...capture.errors,{code:"MEMORY_DIAGNOSTIC_EMPTY_CAPTURE",sequence:null}].slice(0,32),boundaryAwaitOverheadColumns:["boundary","durationMs"],boundaryAwaitOverhead:capture.boundaryAwaitOverhead};
++}
++
++/** A later produced-sequence marker is necessary to detect a missing suffix. */
++export function captureMemoryDiagnosticTerminal(capture,lastSequence) {
++  const reject=code=>{capture.terminalError=code;if(capture.errors.length<32)capture.errors.push({code,sequence:Number.isSafeInteger(lastSequence)&&lastSequence>0?lastSequence:null});return {ok:false,code};};
++  if(capture.terminalSequence!==null)return reject("MEMORY_DIAGNOSTIC_DUPLICATE_TERMINAL");
++  if(!Number.isSafeInteger(lastSequence)||lastSequence<1||lastSequence!==capture.lastSequence||lastSequence!==capture.rows.length||capture.invalidSamples)return reject("MEMORY_DIAGNOSTIC_TERMINAL_COUNT");
++  capture.terminalSequence=lastSequence;return {ok:true};
++}
++export function finalizeMemoryDiagnostic(capture,measurementEndSequence,measurementGateRSSPeakMiB) {
++  const artifact=memoryDiagnosticArtifact(capture);
++  let failureCode=null;
++  if(capture.invalidSamples)failureCode="MEMORY_DIAGNOSTIC_INVALID_SAMPLE";
++  else if(!capture.rows.length)failureCode="MEMORY_DIAGNOSTIC_EMPTY_CAPTURE";
++  else if(capture.terminalError)failureCode=capture.terminalError;
++  else if(capture.terminalSequence===null||capture.terminalSequence!==capture.lastSequence||capture.terminalSequence!==capture.rows.length)failureCode="MEMORY_DIAGNOSTIC_INCOMPLETE_STREAM";
++  else if(!Number.isSafeInteger(measurementEndSequence)||measurementEndSequence<1||measurementEndSequence>capture.lastSequence||!Number.isFinite(measurementGateRSSPeakMiB)||measurementGateRSSPeakMiB<0)failureCode="MEMORY_DIAGNOSTIC_MEASUREMENT_END";
++  const rssIndex=MEMORY_DIAGNOSTIC_COLUMNS.indexOf("rssMiB"),peakIndex=MEMORY_DIAGNOSTIC_COLUMNS.indexOf("rssPeakMiB"),osIndex=MEMORY_DIAGNOSTIC_COLUMNS.indexOf("osMaxRSSMiB");
++  const prefix=capture.rows.filter(row=>row[0]<=measurementEndSequence),prefixPeak=prefix.length?Math.max(...prefix.map(row=>row[rssIndex])):null;
++  if(!failureCode&&(prefix.at(-1)?.[0]!==measurementEndSequence||prefixPeak!==measurementGateRSSPeakMiB||prefix.at(-1)?.[peakIndex]!==measurementGateRSSPeakMiB))failureCode="MEMORY_DIAGNOSTIC_GATE_PREFIX_MISMATCH";
++  return {...artifact,status:failureCode?"INVALID":"VALID",failureCode,terminalSequence:capture.terminalSequence,measurementEndSequence:measurementEndSequence??null,measurementGateRSSPeakMiB:measurementGateRSSPeakMiB??null,measurementPrefixSampledRSSPeakMiB:prefixPeak,lifetimeSampledRSSPeakMiB:capture.rows.length?Math.max(...capture.rows.map(row=>row[rssIndex])):null,lifetimeOSMaxRSSMiB:capture.rows.length?Math.max(...capture.rows.map(row=>row[osIndex])):null};
++}
++/** No new sample: flush the final-produced counter, then await receiver validation. */
++export function flushMemoryDiagnosticTerminal(channel,lastSequence,timeoutMs=2000) {
++  return new Promise(resolve=>{
++    let finished=false;
++    const finish=value=>{if(finished)return;finished=true;clearTimeout(timer);channel.off("message",receive);resolve(value);};
++    const receive=message=>{if(message?.kind==="memoryDiagnosticTerminalAck")finish(message.lastSequence===lastSequence);};
++    const timer=setTimeout(()=>finish(false),timeoutMs);
++    channel.on("message",receive);
++    try {channel.send({kind:"memoryDiagnosticTerminal",lastSequence},error=>{if(error)finish(false);});} catch {finish(false);}
++  });
++}
+ 
+ /** Generated without application codec: canonical RGB PNG, filter zero, level nine. */
+ export function spatialPng(seed = 1927, side = 290) {

@@ -41,3 +41,6 @@ docs/spatial-redesign/evidence/lf-test-preimages/** -text whitespace=trailing-sp
 
 # Captured runner stdout retains table padding and terminal blank lines.
 docs/spatial-redesign/evidence/*.txt -text whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+
+# Unified-diff captures contain required space-prefixed empty context lines.
+docs/spatial-redesign/evidence/*.diff -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

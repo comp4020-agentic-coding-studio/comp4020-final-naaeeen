@@ -1,0 +1,29 @@
+{
+  "status": "PREIMAGE_BEFORE_ATTRIBUTION_EDIT",
+  "atUTC": "2026-10-22T20:18:32.712265+00:00",
+  "planSHA256": "e3b23bdff81f3e7e4006a9dd38af453dbc38df91988159548cf4a54b65b7b010",
+  "preimages": [
+    {
+      "source": "tools/board-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-preimage-board-instrument.mjs",
+      "sha256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8"
+    },
+    {
+      "source": "tools/spatial-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-preimage-spatial-instrument.mjs",
+      "sha256": "a20d56bcec2cac2fb21677451303c8a5ba09483e458e4f2d90580760d25be4b7"
+    },
+    {
+      "source": "evaluation/board-resource.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-preimage-baseline.protocol.json",
+      "sha256": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-mixed.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-preimage-mixed.protocol.json",
+      "sha256": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255"
+    }
+  ],
+  "ABBAProtocolsUnchanged": true,
+  "execution": "HELD; no apptrace or rebinding"
+}

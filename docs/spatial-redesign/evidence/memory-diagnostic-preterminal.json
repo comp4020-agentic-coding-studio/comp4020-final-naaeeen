@@ -1,0 +1,25 @@
+{
+  "status": "PRESERVED_BEFORE_COMPLETENESS_REPAIR",
+  "atUTC": "2026-10-22T19:48:47.275227+00:00",
+  "preimages": [
+    {
+      "source": "tools/board-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preterminal-board-instrument.mjs",
+      "sha256": "141976a1f2d8607fdbf2daf9537e4d3b1f9509c8a052f1fe46b4a29563eadc5b",
+      "bytes": 94150
+    },
+    {
+      "source": "tools/spatial-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preterminal-spatial-instrument.mjs",
+      "sha256": "1329049ffa6304205a393a834e328f2be44d35dc477fc3af9544ed5418bbb39d",
+      "bytes": 25303
+    },
+    {
+      "source": "spec/spatial-resource-memory.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preterminal-spec.ts",
+      "sha256": "a8323a4b19dff93eb54478dfdf06060b5752a3ff353b95f72f45da8872e4fa29",
+      "bytes": 26137
+    }
+  ],
+  "finding": "Receivedsequence checks detect interiorgap but not missingfinalsuffix; gateprefix also needs exactrecovery.after sequence."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "FRESH_REVIEW_CLEAR_BINDING_ONLY",
+  "reviewedFiles": {
+    "tools/board-resource.mjs": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+    "tools/spatial-resource.mjs": "a20d56bcec2cac2fb21677451303c8a5ba09483e458e4f2d90580760d25be4b7",
+    "spec/spatial-resource-memory.test.ts": "f29dc266ce5feff509bd219dc86989b2964c4683ff8f85e831045123f9526ae6"
+  },
+  "closedFindings": [
+    "Late invalid capture now promotes prebuilt CALIBRATION/PASS toFAIL, preserving earlierfailure",
+    "Missing suffix/terminal detected via final-produced count and matchingACK; fixedexactgateprefix separates laterlifetime peak"
+  ],
+  "independentEvidence": {
+    "completeFabricatedIPC": "exit0 VALID terminal3",
+    "omittedFinalSample": "exit1 INVALID TERMINAL_COUNT",
+    "omittedTerminalMarker": "exit1 INVALID INCOMPLETE_STREAM",
+    "gatePrefix": "ExactRPC seq2/prefix100MiB retained despite shutdownseq3/lifetime230MiB"
+  },
+  "pureChecks": "30/30 pass in memory-diagnostic-calibration-terminal-refinement-green.txt; initial27/30 preciseerrorcode assertion failures retained",
+  "syntaxTypesSelfchecks": "PASS",
+  "scope": "Service-free fabricated IPC and purecode validation only; no app/bootstrap/ABBA/performance result. Parent hasauthorized bindingONLY; native lane remainsactive."
+}

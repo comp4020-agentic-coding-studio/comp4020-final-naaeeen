@@ -1,0 +1,478 @@
+{
+  "schemaVersion": 1,
+  "registeredAtUTC": "2026-10-22T19:06:59.202477+00:00",
+  "status": "FROZEN_BOUND_HELD_FOR_EXECUTION_GO",
+  "scope": "New12root+12board mixed standing/seated profile. Same300s board pressure, budgets and faults; changed motion criterion explicitly grades standing10Hz periods and measured seated suppression. Original fullmotion baseline separately registered. NOT RUN.",
+  "durationSeconds": 300,
+  "automaticRetry": false,
+  "sourceHashes": {
+    ".gitattributes": "5e5f0b24ce3956b74744ac313b7f0b70a19b3c821a846bfc3c6ae6c0d856057a",
+    "Dockerfile": "db320fd8913c0ac2921e08c5ce3231ddfaba7b4f6cf7d2d19a9bb3b240bf4743",
+    "fly.toml": "98af3ea95b42cdbb79cccd0c21767538e9d4d34afad870e4a77ddc801262e2bc",
+    "mise.toml": "0c4e116a0c56313f88ec484258052ec35311247c1ba9f01f72ff2196890dfefb",
+    "package.json": "21dd1a20d18203af9e23447cfd762d342267b7929f33a0a510c7ea4b5f0db194",
+    "pnpm-lock.yaml": "6533eca480d56d61cc2ab55cf2ff5591accbf17ccfe038756a5f9f7ce43080a8",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "public/house-ambience.js": "2600c35403db5ebf0f69cb9a3d19ef2d470048205c98e07223c5b2ad2c2f24b1",
+    "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+    "public/house-client.js": "18015bedfc25e1cba0e1dbf8b909c8c3fb304e5770f5c3f55f4b5b312943e767",
+    "public/house-game-rules.d.ts": "9b2381b15fb4c17b2bdf5d2773f45209e1f72b9793cd9cf0e608b9d85f19b685",
+    "public/house-game-rules.js": "511dae4db7fdff9f0b65291c00404ffd23d09a2356d92ac76f692e5c1bda9342",
+    "public/house-game-ui.js": "1fbf5a5bcc1d357773609b7994bd806363997b6096dc626f913c3688900ec2e7",
+    "public/house-gathering-ui.js": "4261b43f18e6ecdcdb8b7cd5e0f226ecd821b1ac949f24976b8970ce0c363318",
+    "public/house-gathering.css": "08418e522caf3f6d3a833143402a2f86f9db9ea1b2a38dcc87a3628412aa4ad6",
+    "public/house-geometry.d.ts": "816d1a80f6d76105a0ce6c43498630fc7fb87a8640daf59fa4b853e8cb14665a",
+    "public/house-geometry.js": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa",
+    "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+    "public/house-puzzle-ui.js": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab",
+    "public/house-room-content.d.ts": "eedf274cfe56ae00e76f18a687e1d53524133dd15a02ae587b4a1362a3156ff9",
+    "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+    "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+    "public/house-studio-preview.js": "86a9bf5bfe31d79f435c0ce2c76f7ce24fb355445a9e3b678c1ce3e63943d1cd",
+    "public/house-studio-ui.js": "9ce9ba28abad46215efbb5244ba61bf79f878b1d1302c9a23c3a773c0fa83699",
+    "public/house-studio.css": "8b6bab8b42605607fcb4f73109a824a2327217591475ef13e8a1dccdd3816c1d",
+    "public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    "public/house-version.d.ts": "1cc80775232e290162c50f1a8ca09fd55551b41b0adde8c5fdb37250d6090567",
+    "public/house-version.js": "dad0d5427a7176e1c08f2b90b8ae34406eb2c1a92454feedf00ff48cf2aaf959",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "public/house.css": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00",
+    "public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+    "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+    "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
+    "src/house-gathering.ts": "5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/house-store.ts": "53916a46e9b540d2904000c22c23eed13d062b28072d7fe73ab8f63b29b6b246",
+    "src/house-studio-codec.ts": "054c8a6028f1d314f0f2f89f98cd97b8eaa40c9d4aff5332dc7762763613b270",
+    "src/house-studio.ts": "87c7ef0b5c9dd53fa705450a1275b4448a7209d4f0c24835c5bfb9ea6f3754f1",
+    "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+    "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+    "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1",
+    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
+    "tools/board-resource-p7.mjs": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f",
+    "tools/board-resource.mjs": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+    "tools/spatial-resource.mjs": "4358075bcf2eef9808daf82570d42eeda43703ad916ddf2b30fe27f6b5ca4f78"
+  },
+  "sourceManifestSHA256": "766a0c5eada4fae3bce4452fe2284d71da93bd00aeccf4e9e4096a5bc747204d",
+  "instrumentSHA256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7",
+  "configuration": {
+    "houses": 2,
+    "membersPerHouse": 6,
+    "gameControllers": 12,
+    "boardViews": 12,
+    "physicalEngines": 24,
+    "forceNewBoardManagers": true,
+    "capacitySource": "Existing per-process 12 house contexts and 12 board views; distinct Socket.IO managers as production frontend"
+  },
+  "fixture": {
+    "sceneMinBytes": 1677721,
+    "sceneMaxBytes": 1992294,
+    "sceneDescription": "80 bound sticky rectangles/text pairs (11000 chars text plus originalText each), 10 arrows, 10 freehand elements with64 pressure points,20 persistent tombstones,2image elements:202 objects perhouse; sorted bounded integer fractional indices",
+    "elementMaxBytes": 32768,
+    "patchMaxBytes": 131072,
+    "seedPatchTargetBytes": 110000,
+    "retainedBoardChat": 100,
+    "chatCharacters": 4000,
+    "imageCountPerHouse": 2,
+    "imageSidePixels": 820,
+    "imageMinBytes": 1945600,
+    "imageMaxBytes": 2097152,
+    "imageDescription": "CRC-correct deterministic xorshift RGB PNG seeds101/102 inhouse0 and201/202 inhouse1; near2MiB entropy, authenticated exactbinary reload byall12boardviews; onlymetadata insnapshots.",
+    "bootstrap": "Actual GET house/me, HTTP create/join6 permanent members eachhouse, real asset/patch/chat HTTP writes distributed across6 identities;12actual root subscriptions and12 forceNew board subscriptions; initial andfinal count24; solefullsnapshot ACK expected; asset reads validate exactSHA256",
+    "houseDistinction": "Seed notes and updatedpayloads carry distincthouse/member prefixes atfixedlength; eachhouse has distinctimagebytes, so crosshouse routing orsharedstorage cannot pass from identical fixtures."
+  },
+  "workload": {
+    "motionTargetHzPerReadableController": 10,
+    "motionPolicy": "Valid stationary actual server-projected arrival coordinates; each frame executes real membership/control/geometry/dirty tick. Staggered deadlines/single-flight normal ACK; no replay bursts. Pause fault continues nominal stationary sends until transport disconnection, counts them separately from readable cadence. No production movement-limit relaxation.",
+    "motionMeasuredRangeHz": [
+      9.5,
+      10.2
+    ],
+    "pointerMaximumHzPerReadableView": 20,
+    "pointerPolicy": "At least 50 ms between generator sends, single-flight normal ACK, and at least 50 ms after a normal ACK before the next send. Captured socket/subscription guard prevents stale completion from releasing a new send. The paused-reader fault keeps its nominal 20 Hz send policy. Supplied current subscriptionId, bounded coordinates and one actual selected element ID. Maximum requested 20 Hz; achieved readable 18..20.5 Hz remains required. A fresh connection resets only volatile pending flags/deadlines; held old completions cannot block or release its current send.",
+    "sceneWritesHzPerActor": 2,
+    "sceneWriteDescription": "Each actor updates one of six independent ~22KiB notes perhouse with higher version/fixedlength text; fresh mutationUUID and captured original identity/house; one outstanding HTTP patch peractor, skippeddeadline counted andfails workload gate",
+    "chatWritesPerActorPerMinute": 12,
+    "httpBudget": "Scene120+chat12=132writes/minute/actor plus <=25bootstrap writes withinfirstminute; reads/downloads counted separately; never raise240/session/min endpoint bounds",
+    "minimumSavedPatches": 6800,
+    "minimumSavedChat": 680,
+    "expectedNominalPatches": 7188,
+    "expectedNominalChat": 708,
+    "measurements": "Send-to-actual Socket.IO visibility, sender plus all6boardviews/house; every intent target remains pending until observed orrecovered. Higher observed objectversion satisfiesearlier savedversion. Paused65s chatbacklog is about78 messages andfits100retention. Finalrecovery compareslatest100 scheduledchat IDsbycommitted receiptsequence; olderretiredchat iscounted asintentdelivery butnotincorrectlyrequired toremain forever.",
+    "deadlineAccounting": "Collapsed scene and chat deadlines are counted as skipped and fail the workload gate. Send at most one current intent after a late callback; do not burst catch-up chats. At 14 seconds with scene deadline 500 ms and chat deadline 5000 ms, count 27 skipped scene slots and one skipped chat slot."
+  },
+  "slowReader": {
+    "residentCount": 1,
+    "transports": 2,
+    "pauseAtSeconds": 30,
+    "pauseSeconds": 65,
+    "mechanism": "Real ws.WebSocket.pause invokes actual TCP readable pause on one resident root game and forceNew board transport; verify _socket.isPaused; notcallbackdelay",
+    "expiry": "Wait through heartbeat/backpressure close and30-second game leaseexpiry. Initial gameavailability is Canchat; freshgame subscription must advance generation andreturnQuiet. Board fresh subscription mustcarrycurrentepoch andallcommittedversions/chat. Every disconnect attributed intentionalversusunexpected.",
+    "sendPolicy": "Nominal10Hz stationary/20Hz pointer duringfault until transportdisconnect; expected suppressed ACKtime outs counted separately; readable cadence excludeswholefaultinterval; HTTPdurable writescontinueunderoriginalcookie/house"
+  },
+  "negativeControls": {
+    "stalledInvalidPointerACK": "Afterfullfixture bootstrap, one existing boardtransport server writable=false (diagnostic synthetic fault, distinct from later realTCPpause);100 invalidpointer requests withACK; verify close and\u22648packets/4MiB using same actualservice handler; restore freshboard view beforemeasurement",
+    "grader": "All24views tracked individually acrossinitial/final/reconnect. Missing target, skippedwrite, shortened duration orchanged frozen source preventsPASS. No90secondsmoke substitutes300seconds."
+  },
+  "bounds": {
+    "rssMaxMiB": 210,
+    "reserveWithinFixed256MiB": 46,
+    "normalDeliveryP95Ms": 1000,
+    "boardQueuePackets": 8,
+    "boardQueueBytes": 4194304,
+    "houseQueuePackets": 4,
+    "houseQueueBytes": 2097152,
+    "eventLoopP95Ms": 50,
+    "eventLoopP99Ms": 100,
+    "gameInboundBytes": 16384,
+    "eventLoopThresholdScope": "Predeclared local diagnostic criteria; not a rewritten legacy180MiB acceptance record",
+    "houseFrameBytes": 1048576,
+    "houseBudgetRevision": "New valid Unicode-transcript allowance: 1 MiB encoded frame and 2 MiB combined queue, four packets, unchanged 16 KiB inbound. The historical 180 MiB / 512 KiB legacy trials remain unchanged."
+  },
+  "measurement": {
+    "server": "Fresh child process invoking real createService; processRSS/heap/external/arrayBuffers, monitorEventLoopDelay andCPU sampled100ms; save sanitized one-second series plus maxima; clients/generatorRSS excluded",
+    "queues": "Read-only wrappers inspect actual Engine.IO writeBuffer/ws bufferedAmount immediately before and after every sendPacket and at 100 ms samples. Known control packets without data contribute header overhead; unknown payload types fail telemetry. Neither authority nor transport handlers are replaced.",
+    "sourceFreeze": "Check runtime source hashes, exact protocol bytes and instrument before start, in the child, every 10 seconds and at finish. Protocol/instrument/runtime drift all produce ABORTED consistently in file and console. Documentation or HEAD changes outside the source manifest do not change runtime identity.",
+    "privacy": "No rawactor IDs, cookies, invitationcodes, command text, sceneJSON orserverlogs committed. Per-viewindices/counts, aggregateoutcomes, numeric telemetry andsource/contenthashes only; rawtempSQLite ignored .local",
+    "httpBudget": "Record per-actor aggregate totals andmaximum rolling60second boardHTTP read/writecounts, includingbootstrap, assetdownloads andfinalreads; never outputidentity/cookie/request text. <=240/lane gate.",
+    "recovery": "Final recovery verifies all 202 seed IDs, 20 tombstones, exact untouched and latest payloads, latest 100 retained scheduled chats by receipt sequence and two metadata-only files per house. Immediate slow-recovery grading captures the actual immutable subscribe cursor and snapshot, awaits only HTTP writes already started before its ACK, then grades the per-receipt version journal and latest 100 seed/scheduled chats through that cursor. Future writes cannot invalidate that snapshot, and missing cutoff state cannot pass.",
+    "inbound": "Read actual Engine.IO maxHttpBufferSize from the isolated running service; it must remain 16384 bytes.",
+    "scopes": "Check every board envelope schemaVersion1/currentsubscriptionId/actualhouseId and every initialgame self/home; discarded staleepochs counted separately, wrongcurrentepoch/house fails. Never persist raw IDs."
+  },
+  "classification": {
+    "FULL_PASS": "All declared gatestrue after>=300seconds, complete24views andslowrecovery; anygatefail=FAIL; noautomaticretry",
+    "CALIBRATION": "Bootstrap-only diagnostic initializesvalidfullfixture,12+12views andassetreload/invalidACK; no sustainedworkload/slowexpiry claim, cannotPASSfullacceptance",
+    "NOT_RUN": "ParentGO/GPUidle/sourcefreeze notyet supplied",
+    "ABORTED": "Changed frozen source cancels the paused-reader timer, stops workload and produces ABORTED, not a shortened PASS."
+  },
+  "limitations": [
+    "Synthetic host/cgroup constraints are measured and reported; no 256 MiB Fly memory enforcement.",
+    "No Flymachine,/data mountedvolume, Docker/WANorrealnetworkimpairment",
+    "No physicalphone, browserWebGL/Reactrendering, humanpreference/usability/valueorcoursegradeevidence",
+    "300seconds doesnotreplace legacy30-minute180MiB L1/L2history orprovelong-termmemory stability",
+    "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
+  ],
+  "commands": {
+    "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --inspect",
+    "calibration": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --bootstrap-calibration",
+    "run": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-mixed.protocol.json --run --go <protocolSHA256> --freeze <sourceManifestSHA256>",
+    "selfCheck": "mise exec -- node tools/board-resource.mjs --self-check"
+  },
+  "sourceFiles": [
+    ".gitattributes",
+    "Dockerfile",
+    "fly.toml",
+    "mise.toml",
+    "package.json",
+    "pnpm-lock.yaml",
+    "public/assets/pictures/rainy-nook-v1.svg",
+    "public/house-ambience.js",
+    "public/house-camera.js",
+    "public/house-client.js",
+    "public/house-game-rules.d.ts",
+    "public/house-game-rules.js",
+    "public/house-game-ui.js",
+    "public/house-gathering-ui.js",
+    "public/house-gathering.css",
+    "public/house-geometry.d.ts",
+    "public/house-geometry.js",
+    "public/house-label-layout.js",
+    "public/house-puzzle-content.js",
+    "public/house-puzzle-rules.js",
+    "public/house-puzzle-ui.js",
+    "public/house-room-content.d.ts",
+    "public/house-room-content.js",
+    "public/house-shell.js",
+    "public/house-studio-preview.js",
+    "public/house-studio-ui.js",
+    "public/house-studio.css",
+    "public/house-ui.js",
+    "public/house-version.d.ts",
+    "public/house-version.js",
+    "public/house-world.js",
+    "public/house.css",
+    "public/house.html",
+    "src/activity-log.ts",
+    "src/board-contract.ts",
+    "src/board-receipt-codec.ts",
+    "src/board-service.ts",
+    "src/board-store.ts",
+    "src/domain.ts",
+    "src/house-contract.ts",
+    "src/house-gathering.ts",
+    "src/house-puzzle-presence.ts",
+    "src/house-realtime.ts",
+    "src/house-store.ts",
+    "src/house-studio-codec.ts",
+    "src/house-studio.ts",
+    "src/house-voice.ts",
+    "src/server-runtime.ts",
+    "src/server.ts",
+    "src/store.ts",
+    "tools/board-resource-p7.mjs",
+    "tools/board-resource.mjs",
+    "tools/spatial-resource.mjs"
+  ],
+  "sourceBinding": {
+    "status": "FROZEN_PARENT_BINDING_ONLY",
+    "boundAtUTC": "2026-10-22T19:06:59.202477+00:00",
+    "runtimeHead": "8be15ef6df22b0bd0290e7d1fa03962160417d58",
+    "requiredFiles": 53,
+    "node": "v24.21.0",
+    "productionWorkingTreeClean": true,
+    "lineEnding": "All explicitly bound files have zeroCRLF byte pairs; .gitattributes bound.",
+    "instrumentScope": "Actual reviewed working-tree tools/board-resource.mjs and tools/spatial-resource.mjs are explicitly hashed; runtimeHead does not imply those uncommitted instrument edits were in that production commit.",
+    "authorization": "Parent authorized binding ONLY. No bootstrap, sustained run, deployment or new PASS inherited."
+  },
+  "storageAcceptance": {
+    "registeredAtUTC": "2026-10-21T20:15:28.112510+00:00",
+    "maximumGrowthBytes": 16777216,
+    "scope": "Sum board+house retained receipt response octet_length growth from post-bootstrap/pre-measurement baseline through final live sample; includes tagged BLOB and actual SQLite TEXT encoding. New stricter engineering target, not lifetime disk/spare volume/billing proof.",
+    "measurement": "Baseline/final type/count/actual stored byte sums; every100ms sample records each of3DB main/WAL/SHM logical+allocated bytes and sampled maxima, plus after-server-close/pre-decode and post-decode file snapshots. No decoded JSON size substituted for stored/allocation bytes.",
+    "exactReplay": "Capture every successful boardACK from original actor/request/body by actor+commandID digest; identical duplicates dedup, different ACK never overwrites. Timed captures hash only after original receipt/reflection observation points. After server exit, bounded64-row read-only batches validate stored metadata, decode via actual codec and compare original digest; full distinct row coverage required. No full response history retained in memory.",
+    "maximumLedgerEntries": 10000,
+    "decodeBatchMaximum": 64,
+    "originalGateChanges": "Explicit new mixed profile replaces only the workload gate house-motion portion with standing-period10Hz + measured seated durations; all board pressure/cadences, remaining original gates/bounds/faults stay. Original full-motion baseline remains separately registered unchanged. Two storage gates, two game gates, two picture gates and three spatial gates yield30total. Total house receipt delta is176:124game+50puzzle+2declared media room.configure."
+  },
+  "p7Preparation": {
+    "preparedAtUTC": "2026-10-22T19:06:59.202477+00:00",
+    "priorEvidence": "docs/spatial-redesign/evidence/resource-registered-default-prebinding.protocol.json and original historical results retain exact prior source scope.",
+    "phase": "FROZEN_BINDING_ONLY; no bootstrap or sustained executionGO yet.",
+    "runtimeBudget": "Existing server-only semi12, generator unflagged.",
+    "expectedGateCount": 30
+  },
+  "gameScenario": {
+    "registeredAtUTC": "2026-10-21T16:50:22.085734+00:00",
+    "roundStartsSeconds": [
+      5,
+      45,
+      105,
+      145,
+      185,
+      225
+    ],
+    "playerMemberIndices": [
+      1,
+      2
+    ],
+    "neutralRoundIndices": [
+      2
+    ],
+    "actionIntervalSeconds": 1,
+    "maximumScheduleLagMs": 1000,
+    "visibleP95Ms": 1000,
+    "expectedActions": 124,
+    "expectedCounts": {
+      "join": 24,
+      "ready": 24,
+      "move": 74,
+      "leave": 2,
+      "wins": 10,
+      "neutralWithdrawals": 2
+    },
+    "expectedReadableProjectionTargets": 733,
+    "policy": "Same124finite actions and733projection targets on originaltwohouses. Actualmembers1/2 perhouse stay in genuine game chairs. H1member0 is media owner, not gameplayer; its bedroom visits are18..before30 and285aftercompletedpicture, outside game actions. All originalgame projection criteria remain; slowreaderH0m0 excludedonly30..95 asbefore.",
+    "storage": "Read-only aggregate house receipts/response bytes, current game rows/state bytes and all three SQLite/WAL/SHM files sampled before measurement, after each round and at finish. Final receipt delta must be124, two bounded terminal tables, max8192 state bytes. No receipt deletion. cgroup accounting is diagnostic host data, not per-child Fly enforcement."
+  },
+  "pictureScenario": {
+    "registeredAtUTC": "2026-10-21T20:15:28.112510+00:00",
+    "startSeconds": 260,
+    "joinStartSeconds": 262,
+    "joinIntervalSeconds": 1,
+    "placementStartSeconds": 269,
+    "placementIntervalSeconds": 0.5,
+    "maximumScheduleLagMs": 1000,
+    "noCollapsedPlacementSlots": true,
+    "visibleP95Ms": 1000,
+    "illustrationId": "rainy-nook",
+    "illustrationVersion": 1,
+    "illustrationDigest": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "pieces": [
+      {
+        "pieceId": "ivy-bell",
+        "destination": 0
+      },
+      {
+        "pieceId": "crescent-arch",
+        "destination": 1
+      },
+      {
+        "pieceId": "paper-star",
+        "destination": 2
+      },
+      {
+        "pieceId": "bird-string",
+        "destination": 3
+      },
+      {
+        "pieceId": "shelf-leaves",
+        "destination": 4
+      },
+      {
+        "pieceId": "honey-cap",
+        "destination": 5
+      },
+      {
+        "pieceId": "fern-rain",
+        "destination": 6
+      },
+      {
+        "pieceId": "rain-roof",
+        "destination": 7
+      },
+      {
+        "pieceId": "star-curtain",
+        "destination": 8
+      },
+      {
+        "pieceId": "book-spines",
+        "destination": 9
+      },
+      {
+        "pieceId": "red-teapot",
+        "destination": 10
+      },
+      {
+        "pieceId": "lamp-shade",
+        "destination": 11
+      },
+      {
+        "pieceId": "teal-cup",
+        "destination": 12
+      },
+      {
+        "pieceId": "cat-tail",
+        "destination": 13
+      },
+      {
+        "pieceId": "cat-book",
+        "destination": 14
+      },
+      {
+        "pieceId": "notebook",
+        "destination": 15
+      },
+      {
+        "pieceId": "biscuits",
+        "destination": 16
+      },
+      {
+        "pieceId": "lamp-base",
+        "destination": 17
+      },
+      {
+        "pieceId": "rug-leaf",
+        "destination": 18
+      },
+      {
+        "pieceId": "chair-leg",
+        "destination": 19
+      },
+      {
+        "pieceId": "desk-leg",
+        "destination": 20
+      },
+      {
+        "pieceId": "slippers",
+        "destination": 21
+      },
+      {
+        "pieceId": "yarn-coil",
+        "destination": 22
+      },
+      {
+        "pieceId": "woven-basket",
+        "destination": 23
+      }
+    ],
+    "expectedActions": 62,
+    "expectedTargets": 372,
+    "expectedDurableReceipts": 50,
+    "expectedAllHouseReceiptIncrease": 176,
+    "contributionsPerMemberPerHouse": 4,
+    "schedule": "OriginalStart260/Join262..267/place269..280.5, using alloriginalsixidentities perhouse in actualgamechairs. Four scriptedplacements/member remainsdriverallocation. All12routeconcurrently through existing10Hzmotiontimer starting236, seatsacknowledgedby255.50durablepuzzlereceipts+124game+2media room.configure=176totalhouse receiptgrowth.",
+    "observation": "Every action requires all six current readable root clients, exact durable head and exact direct-roster head/own consent; every intermediate state is awaited before next absolute deadline. Never substitute a coalesced higher revision. Placement lag of at least one500ms slot fails, and no future deadline is slid.",
+    "privacy": "Only per-house/member/view indices, public catalogue IDs/destinations, hashed round/participation/request identities and sanitized actual projections are retained. No raw cookies, actor/house/round/participation UUIDs or database content in reports.",
+    "evidenceBoundary": "Four scripted correct placements per identity proves six technical contributors, not human balance, fairness, preference or engagement."
+  },
+  "baseWorkloadRegisteredAtUTC": "2026-10-07T01:17:56.243779+00:00",
+  "spatialScenario": {
+    "version": 2,
+    "profile": "REUSED12_ROOT_MIXED",
+    "rootViews": 12,
+    "boardViews": 12,
+    "steadyConnections": 24,
+    "newIdentities": 0,
+    "extraContexts": 0,
+    "expectedMediaReconnects": 1,
+    "gameMemberIndices": [
+      1,
+      2
+    ],
+    "mediaHouse": 1,
+    "mediaMemberIndices": [
+      0,
+      3,
+      4
+    ],
+    "walkers": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        5
+      ]
+    ],
+    "motion": {
+      "standingHzMin": 9.5,
+      "standingHzMax": 10.2,
+      "fourGameActorsSeatedSecondsMin": 290,
+      "fiveWalkersStandingSecondsMin": 160,
+      "ordinaryMotion": "The existing10Hz timer supplies normal zero-position and routed moves for standingactors. Only actual seatACK/snapshot seatfacts suppress sends; count these intervals/omitted sends separately. Existing motionPending serializes subscription/chair transitions; their standingtime remains in denominator. No seatedwalk permission orcapincrease.",
+      "baselineDifference": "The originalFullMotionWorkloadGate is recorded and expectedfalse because gameactorssit. New workload criterion retains allboard patch/chat/cadence checks and replaces only whole-duration house motionHz with measured standing-periodHz,290s/160s roleminimums and actual seat evidence. Full12actor10Hz pressure belongs to separate original baseline."
+    },
+    "media": {
+      "minimumPngBytes": 240000,
+      "pngSeeds": [
+        1927,
+        1928
+      ],
+      "side": 290,
+      "markerActionsPerPlace": 48,
+      "markerIntervalMs": 200,
+      "housePostsPerActorPer60sMax": 90,
+      "houseReadsPerActorPer60sMax": 90,
+      "expectedHouseCommands": 2,
+      "studioCurrentRows": 1,
+      "studioTemporaryUploadsAtFinish": 0,
+      "studioReceiptMaxBytes": 512,
+      "studioReceiptTotalMaxBytes": 32768,
+      "lifecycleChecks": 24,
+      "schedule": "Bootstrap actualmembers1/2 eachhouse gamechairs.18s mediaownerH1m0 subscribes ownroom, two nearcap PNGupload/read/replacement, replay, savedview/preset, guestclosed-open-revokedreads, abortpartialupload, returnlounge before30.30s H1m0/3/4 route/sitstudy, threeJoin, m3shares48markers, m3stands/freeze, m4claims/allleave.120s samethree sofa, ownerpublishes/leaves, m3claims48markers/leaves, m4claims, m3rejoins, m4rootdisconnectreplacedonlyafteroldcontextreleased, noautoconsent/freshJoin/m3claim/Clear/allLeave.236all12concurrentgameseatnavigation;255actualchairscheck;285ownerroomreturncontinuity.",
+      "budget": "Owner upload/control <=90housePOST/min; marker48/place distributed to m3, separated90seconds. No90limit raised. Actual aggregate peractor counts/rollingmax saved. BoardHTTP240lane remainsindependent."
+    },
+    "admission": "Use existing12root+12boardobjects; noadditionalidentity/house/socket. Declared media reconnect replaces an existing lease and waits for observed rootcount11 before reconnection; original24final and telemetry stayactual.",
+    "evidenceBoundary": "Prospective local synthetic process measurement under productionNode flags, noactualFly256MBcgroup/sharedCPU enforcement. GeneratorRSS excluded asoriginal. One explicitattempt afterreview/sourcefreeze/GO; failuresandabortsretained,noautomaticretry."
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "status": "STOPPED_AT_B2_FUNCTIONAL_FAILURE",
+  "plannedOrder": [
+    "A1 baseline",
+    "B1 mixed",
+    "B2 mixed",
+    "A2 baseline"
+  ],
+  "attemptedSlots": 3,
+  "completedCalibrations": 2,
+  "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+  "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+  "slots": [
+    {
+      "slot": "A1",
+      "profile": "baseline",
+      "status": "CALIBRATION",
+      "exitCode": 0,
+      "wallSeconds": 15.650577788000192,
+      "protocolSHA256": "b4286e395148222a8d936c696bd00949deb1ccb178fdb65a034ff0b4caa3a01a",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "resultSHA256": "2f2593655b0cbec1e37cb747018a1a346a1fbe7eb5699a1709b6a750a6f085eb",
+      "compactArtifactSHA256": "31cf41db95b5f558f6f975484e8774d6b77ebd46bbeaed875c3dedd938cde5a4",
+      "rssGate": true,
+      "gateLimitMiB": 210,
+      "gateRSSPeakMiB": 194.578125,
+      "measurementEndSequence": 54,
+      "terminalSequence": 55,
+      "fullLifetimeSampledRSSPeakMiB": 194.578125,
+      "separateOSMaxRSSMiB": 196.953125,
+      "peakSample": {
+        "sequence": 36,
+        "serverMonotonicMs": 2484.578508,
+        "rssMiB": 194.578125,
+        "heapUsedMiB": 43.76029968261719,
+        "heapTotalMiB": 66.40234375,
+        "externalMiB": 15.071942329406738,
+        "arrayBuffersMiB": 3.9650697708129883,
+        "rssPeakMiB": 194.578125,
+        "osMaxRSSMiB": 194.578125,
+        "houseViews": 11,
+        "boardViews": 10,
+        "activeEngines": 21,
+        "phase": "bootstrap",
+        "boundary": null,
+        "lastBoundary": "subscriptions.before"
+      },
+      "nextBoundary": "subscriptions.after",
+      "nearPeakSamples": [
+        {
+          "sequence": 35,
+          "serverMonotonicMs": 2383.829972,
+          "rssMiB": 194.4296875,
+          "heapUsedMiB": 47.940650939941406,
+          "heapTotalMiB": 66.40234375,
+          "externalMiB": 15.102714538574219,
+          "arrayBuffersMiB": 10.528289794921875,
+          "rssPeakMiB": 194.4296875,
+          "osMaxRSSMiB": 194.4296875,
+          "houseViews": 8,
+          "boardViews": 8,
+          "activeEngines": 16,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 36,
+          "serverMonotonicMs": 2484.578508,
+          "rssMiB": 194.578125,
+          "heapUsedMiB": 43.76029968261719,
+          "heapTotalMiB": 66.40234375,
+          "externalMiB": 15.071942329406738,
+          "arrayBuffersMiB": 3.9650697708129883,
+          "rssPeakMiB": 194.578125,
+          "osMaxRSSMiB": 194.578125,
+          "houseViews": 11,
+          "boardViews": 10,
+          "activeEngines": 21,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 37,
+          "serverMonotonicMs": 2558.66672,
+          "rssMiB": 192.65625,
+          "heapUsedMiB": 38.161354064941406,
+          "heapTotalMiB": 64.22265625,
+          "externalMiB": 15.070876121520996,
+          "arrayBuffersMiB": 3.964003562927246,
+          "rssPeakMiB": 194.578125,
+          "osMaxRSSMiB": 196.953125,
+          "houseViews": 12,
+          "boardViews": 12,
+          "activeEngines": 24,
+          "phase": "bootstrap",
+          "boundary": "subscriptions.after",
+          "lastBoundary": "subscriptions.after"
+        }
+      ],
+      "boundaryAwaitOverhead": {
+        "count": 22,
+        "totalMs": 23.35778499999958,
+        "maxMs": 4.036006000000043
+      },
+      "processClosure": {
+        "generatorPID": 32825,
+        "serverPID": 32849,
+        "serverExitCode": 0,
+        "serverSignal": null,
+        "serverClosed": true
+      },
+      "postCheck": {
+        "generatorPID": {
+          "pid": 32825,
+          "exists": false
+        },
+        "serverPID": {
+          "pid": 32849,
+          "exists": false
+        }
+      },
+      "allSourceAndProtocolBytesUnchanged": true,
+      "interpretation": "Bootstrap diagnostic only; not sustained acceptance or causal proof."
+    },
+    {
+      "slot": "B1",
+      "profile": "mixed",
+      "status": "CALIBRATION",
+      "exitCode": 0,
+      "wallSeconds": 15.654334111000026,
+      "protocolSHA256": "8d80b9c54347235b6e847b2757b50dfce95859dd1c841545e465c73c9874cc46",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "resultSHA256": "5d38a969b6f529df527cd9989fb56d8861ddea35c26d46fb094d7e5c1597135f",
+      "compactArtifactSHA256": "83038a94776157092919b0a8dadd6f3ce73d8283f117ad731748876b8735a452",
+      "rssGate": true,
+      "gateLimitMiB": 210,
+      "gateRSSPeakMiB": 191.69140625,
+      "measurementEndSequence": 111,
+      "terminalSequence": 112,
+      "fullLifetimeSampledRSSPeakMiB": 191.69140625,
+      "separateOSMaxRSSMiB": 193.94140625,
+      "peakSample": {
+        "sequence": 36,
+        "serverMonotonicMs": 2433.434742,
+        "rssMiB": 191.69140625,
+        "heapUsedMiB": 43.772979736328125,
+        "heapTotalMiB": 66.15234375,
+        "externalMiB": 15.160067558288574,
+        "arrayBuffersMiB": 4.053194999694824,
+        "rssPeakMiB": 191.69140625,
+        "osMaxRSSMiB": 191.69140625,
+        "houseViews": 11,
+        "boardViews": 10,
+        "activeEngines": 21,
+        "phase": "bootstrap",
+        "boundary": null,
+        "lastBoundary": "subscriptions.before"
+      },
+      "nextBoundary": "subscriptions.after",
+      "nearPeakSamples": [
+        {
+          "sequence": 35,
+          "serverMonotonicMs": 2333.121624,
+          "rssMiB": 178.56640625,
+          "heapUsedMiB": 20.114151000976562,
+          "heapTotalMiB": 53.07421875,
+          "externalMiB": 15.190900802612305,
+          "arrayBuffersMiB": 10.583073616027832,
+          "rssPeakMiB": 178.56640625,
+          "osMaxRSSMiB": 191.6171875,
+          "houseViews": 8,
+          "boardViews": 8,
+          "activeEngines": 16,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 36,
+          "serverMonotonicMs": 2433.434742,
+          "rssMiB": 191.69140625,
+          "heapUsedMiB": 43.772979736328125,
+          "heapTotalMiB": 66.15234375,
+          "externalMiB": 15.160067558288574,
+          "arrayBuffersMiB": 4.053194999694824,
+          "rssPeakMiB": 191.69140625,
+          "osMaxRSSMiB": 191.69140625,
+          "houseViews": 11,
+          "boardViews": 10,
+          "activeEngines": 21,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 37,
+          "serverMonotonicMs": 2502.070556,
+          "rssMiB": 189.67578125,
+          "heapUsedMiB": 38.277923583984375,
+          "heapTotalMiB": 64.47265625,
+          "externalMiB": 15.159062385559082,
+          "arrayBuffersMiB": 4.052189826965332,
+          "rssPeakMiB": 191.69140625,
+          "osMaxRSSMiB": 193.94140625,
+          "houseViews": 12,
+          "boardViews": 12,
+          "activeEngines": 24,
+          "phase": "bootstrap",
+          "boundary": "subscriptions.after",
+          "lastBoundary": "subscriptions.after"
+        }
+      ],
+      "boundaryAwaitOverhead": {
+        "count": 24,
+        "totalMs": 21.680882999999596,
+        "maxMs": 3.1395089999998618
+      },
+      "processClosure": {
+        "generatorPID": 32888,
+        "serverPID": 32912,
+        "serverExitCode": 0,
+        "serverSignal": null,
+        "serverClosed": true
+      },
+      "postCheck": {
+        "generatorPID": {
+          "pid": 32888,
+          "exists": false
+        },
+        "serverPID": {
+          "pid": 32912,
+          "exists": false
+        }
+      },
+      "allSourceAndProtocolBytesUnchanged": true,
+      "interpretation": "Bootstrap diagnostic only; not sustained acceptance or causal proof."
+    },
+    {
+      "slot": "B2",
+      "profile": "mixed",
+      "status": "FAIL",
+      "execExitCode": 1,
+      "failure": {
+        "phase": "invalid-ack-negative",
+        "code": "RATE_LIMITED"
+      },
+      "existingPhase": "invalid-ack-negative",
+      "lastAllowlistedBoundary": "spatial.prepare.before",
+      "protocolSHA256": "a6612bc1efe50df9a66c1aa81ac083744de2d0d6eab8007b41f497f7a2bc1ef3",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sourceHashesUnchanged": true,
+      "changedSources": [],
+      "resultSHA256": "9babf0bd89d52954105f530e0cae9e1fa4fbb738e481b0cb6326c018f8d40b0d",
+      "compactSHA256": "553c3ab9cf703cd32c864305f98cd96631a3b30d3ac18788bbbada1eceb8ffe0",
+      "terminal": {
+        "validContiguousCount": true,
+        "sequence": 75,
+        "capturedRows": 75,
+        "invalidSamples": 0
+      },
+      "artifactStatus": "INVALID",
+      "artifactFailure": "MEMORY_DIAGNOSTIC_MEASUREMENT_END",
+      "measurementEndSequence": null,
+      "gateRSSPeakMiB": null,
+      "availableSampledRSSPeakMiB": 191.9375,
+      "fullLifetimeSampledRSSPeakMiB": 191.9375,
+      "separateOSMaxRSSMiB": 194.1875,
+      "fourChairClaimsCompleted": 0,
+      "processClosure": {
+        "generatorPID": 32948,
+        "serverPID": 32972,
+        "serverExitCode": 0,
+        "serverSignal": null,
+        "serverClosed": true
+      },
+      "postCheck": {
+        "generatorPID": {
+          "pid": 32948,
+          "exists": false
+        },
+        "serverPID": {
+          "pid": 32972,
+          "exists": false
+        }
+      },
+      "interpretation": "Original first failure RATE_LIMITED preserved. Complete terminal stream, but no recovery.after/gate construction because bootstrap failed during spatial.prepare. Diagnostic INVALID MEASUREMENT_END is consequent missing endpoint, not replacement for primary failure. A2 NOT RUN; no retry/replacement/code/protocol change.",
+      "availablePeakSample": {
+        "sequence": 36,
+        "serverMonotonicMs": 2414.295757,
+        "rssMiB": 191.9375,
+        "heapUsedMiB": 43.763893127441406,
+        "heapTotalMiB": 66.15234375,
+        "externalMiB": 15.071942329406738,
+        "arrayBuffersMiB": 3.9650697708129883,
+        "rssPeakMiB": 191.9375,
+        "osMaxRSSMiB": 191.9375,
+        "houseViews": 11,
+        "boardViews": 10,
+        "activeEngines": 21,
+        "phase": "bootstrap",
+        "boundary": null,
+        "lastBoundary": "subscriptions.before"
+      },
+      "nearAvailablePeakSamples": [
+        {
+          "sequence": 35,
+          "serverMonotonicMs": 2313.804349,
+          "rssMiB": 191.890625,
+          "heapUsedMiB": 47.98003387451172,
+          "heapTotalMiB": 66.15234375,
+          "externalMiB": 15.102714538574219,
+          "arrayBuffersMiB": 10.528289794921875,
+          "rssPeakMiB": 191.890625,
+          "osMaxRSSMiB": 191.890625,
+          "houseViews": 8,
+          "boardViews": 8,
+          "activeEngines": 16,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 36,
+          "serverMonotonicMs": 2414.295757,
+          "rssMiB": 191.9375,
+          "heapUsedMiB": 43.763893127441406,
+          "heapTotalMiB": 66.15234375,
+          "externalMiB": 15.071942329406738,
+          "arrayBuffersMiB": 3.9650697708129883,
+          "rssPeakMiB": 191.9375,
+          "osMaxRSSMiB": 191.9375,
+          "houseViews": 11,
+          "boardViews": 10,
+          "activeEngines": 21,
+          "phase": "bootstrap",
+          "boundary": null,
+          "lastBoundary": "subscriptions.before"
+        },
+        {
+          "sequence": 37,
+          "serverMonotonicMs": 2485.025336,
+          "rssMiB": 189.91796875,
+          "heapUsedMiB": 38.14899444580078,
+          "heapTotalMiB": 64.47265625,
+          "externalMiB": 15.070876121520996,
+          "arrayBuffersMiB": 3.964003562927246,
+          "rssPeakMiB": 191.9375,
+          "osMaxRSSMiB": 194.1875,
+          "houseViews": 12,
+          "boardViews": 12,
+          "activeEngines": 24,
+          "phase": "bootstrap",
+          "boundary": "subscriptions.after",
+          "lastBoundary": "subscriptions.after"
+        }
+      ],
+      "boundaryAwaitOverhead": {
+        "count": 21,
+        "totalMs": 19.873784999999884,
+        "maxMs": 3.696770000000015
+      }
+    },
+    {
+      "slot": "A2",
+      "profile": "baseline",
+      "status": "NOT_RUN",
+      "reason": "Predeclared early stop after B2 RATE_LIMITED; no replacement or retry",
+      "resultLogAndCompactPathsUnused": true
+    }
+  ],
+  "interpretation": "IncompleteABBA. Two completed calibration gate peaks locate sampled maxima in bootstrap subscription interval. B2 provides partial memory data but no gate endpoint because functional RATE_LIMITED stopped spatial.prepare. Earlier215.26953125MiB observation remains preserved; these data establish no cause, no production repair, no sustained acceptance, and no actualFlycgroup enforcement.",
+  "allOwnedProcessesClosed": true,
+  "sourceProtocolOrThresholdEditsAfterGO": false
+}

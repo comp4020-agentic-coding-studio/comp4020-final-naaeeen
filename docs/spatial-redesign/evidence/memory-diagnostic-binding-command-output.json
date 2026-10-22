@@ -1,0 +1,193 @@
+{
+  "status": "BOUND_ONLY_NO_EXECUTION",
+  "atUTC": "2026-10-22T19:56:41.270221+00:00",
+  "head": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+  "candidateSHA256": "ca54450fce201057daacc41d9355fb988bff7bf87c4c28f598ff641711ab9974",
+  "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+  "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+  "preserved": [
+    {
+      "source": "evaluation/board-resource.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-prebinding-default.protocol.json",
+      "sha256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-mixed.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-prebinding-mixed.protocol.json",
+      "sha256": "000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576"
+    },
+    {
+      "source": "evaluation/board-resource.results.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-prebinding-default.results.json",
+      "sha256": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-mixed.results.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-prebinding-mixed.results.json",
+      "sha256": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4"
+    }
+  ],
+  "unchangedBaselineConditionGroups": [
+    "schemaVersion",
+    "durationSeconds",
+    "automaticRetry",
+    "configuration",
+    "fixture",
+    "workload",
+    "slowReader",
+    "negativeControls",
+    "bounds",
+    "measurement",
+    "classification",
+    "limitations",
+    "storageAcceptance",
+    "baseWorkloadRegisteredAtUTC"
+  ],
+  "baselineConditionHashes": {
+    "schemaVersion": {
+      "originalSHA256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "beforeSHA256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "afterSHA256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "equal": true
+    },
+    "durationSeconds": {
+      "originalSHA256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "beforeSHA256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "afterSHA256": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "equal": true
+    },
+    "automaticRetry": {
+      "originalSHA256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "beforeSHA256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "afterSHA256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "equal": true
+    },
+    "configuration": {
+      "originalSHA256": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "beforeSHA256": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "afterSHA256": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "equal": true
+    },
+    "fixture": {
+      "originalSHA256": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "beforeSHA256": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "afterSHA256": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "equal": true
+    },
+    "workload": {
+      "originalSHA256": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "beforeSHA256": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "afterSHA256": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "equal": true
+    },
+    "slowReader": {
+      "originalSHA256": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "beforeSHA256": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "afterSHA256": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "equal": true
+    },
+    "negativeControls": {
+      "originalSHA256": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "beforeSHA256": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "afterSHA256": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "equal": true
+    },
+    "bounds": {
+      "originalSHA256": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "beforeSHA256": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "afterSHA256": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "equal": true
+    },
+    "measurement": {
+      "originalSHA256": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "beforeSHA256": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "afterSHA256": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "equal": true
+    },
+    "classification": {
+      "originalSHA256": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "beforeSHA256": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "afterSHA256": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "equal": true
+    },
+    "limitations": {
+      "originalSHA256": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "beforeSHA256": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "afterSHA256": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "equal": true
+    },
+    "storageAcceptance": {
+      "originalSHA256": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+      "beforeSHA256": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+      "afterSHA256": "5a778dc341d6630044387361ef5b8654f16a234390e8a41abb6a639921bcc6b8",
+      "equal": true
+    },
+    "baseWorkloadRegisteredAtUTC": {
+      "originalSHA256": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "beforeSHA256": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "afterSHA256": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "equal": true
+    }
+  },
+  "allowedRegistrationKeys": [
+    "commands",
+    "instrumentSHA256",
+    "memoryDiagnosticRegistration",
+    "registeredAtUTC",
+    "sourceBinding",
+    "sourceFiles",
+    "sourceHashes",
+    "sourceManifestSHA256",
+    "status"
+  ],
+  "mixedUnchangedConditionKeys": [
+    "schemaVersion",
+    "scope",
+    "durationSeconds",
+    "automaticRetry",
+    "configuration",
+    "fixture",
+    "workload",
+    "slowReader",
+    "negativeControls",
+    "bounds",
+    "measurement",
+    "classification",
+    "limitations",
+    "storageAcceptance",
+    "p7Preparation",
+    "gameScenario",
+    "pictureScenario",
+    "baseWorkloadRegisteredAtUTC",
+    "spatialScenario"
+  ],
+  "defaultProtocolSHA256": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7",
+  "mixedProtocolSHA256": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255",
+  "defaultAndEvidenceByteIdentical": true,
+  "slots": [
+    {
+      "slot": "A1",
+      "profile": "baseline",
+      "path": "docs/spatial-redesign/evidence/memory-diagnostic-A1.protocol.json",
+      "protocolSHA256": "b4286e395148222a8d936c696bd00949deb1ccb178fdb65a034ff0b4caa3a01a"
+    },
+    {
+      "slot": "B1",
+      "profile": "mixed",
+      "path": "docs/spatial-redesign/evidence/memory-diagnostic-B1.protocol.json",
+      "protocolSHA256": "8d80b9c54347235b6e847b2757b50dfce95859dd1c841545e465c73c9874cc46"
+    },
+    {
+      "slot": "B2",
+      "profile": "mixed",
+      "path": "docs/spatial-redesign/evidence/memory-diagnostic-B2.protocol.json",
+      "protocolSHA256": "a6612bc1efe50df9a66c1aa81ac083744de2d0d6eab8007b41f497f7a2bc1ef3"
+    },
+    {
+      "slot": "A2",
+      "profile": "baseline",
+      "path": "docs/spatial-redesign/evidence/memory-diagnostic-A2.protocol.json",
+      "protocolSHA256": "228420f71ae6b6330fc4567459033b84137bc6f6e72090df56358a9674d9e7af"
+    }
+  ]
+}

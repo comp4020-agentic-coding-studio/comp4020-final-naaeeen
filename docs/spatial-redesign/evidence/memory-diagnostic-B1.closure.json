@@ -1,0 +1,113 @@
+{
+  "slot": "B1",
+  "profile": "mixed",
+  "status": "CALIBRATION",
+  "exitCode": 0,
+  "wallSeconds": 15.654334111000026,
+  "protocolSHA256": "8d80b9c54347235b6e847b2757b50dfce95859dd1c841545e465c73c9874cc46",
+  "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+  "resultSHA256": "5d38a969b6f529df527cd9989fb56d8861ddea35c26d46fb094d7e5c1597135f",
+  "compactArtifactSHA256": "83038a94776157092919b0a8dadd6f3ce73d8283f117ad731748876b8735a452",
+  "rssGate": true,
+  "gateLimitMiB": 210,
+  "gateRSSPeakMiB": 191.69140625,
+  "measurementEndSequence": 111,
+  "terminalSequence": 112,
+  "fullLifetimeSampledRSSPeakMiB": 191.69140625,
+  "separateOSMaxRSSMiB": 193.94140625,
+  "peakSample": {
+    "sequence": 36,
+    "serverMonotonicMs": 2433.434742,
+    "rssMiB": 191.69140625,
+    "heapUsedMiB": 43.772979736328125,
+    "heapTotalMiB": 66.15234375,
+    "externalMiB": 15.160067558288574,
+    "arrayBuffersMiB": 4.053194999694824,
+    "rssPeakMiB": 191.69140625,
+    "osMaxRSSMiB": 191.69140625,
+    "houseViews": 11,
+    "boardViews": 10,
+    "activeEngines": 21,
+    "phase": "bootstrap",
+    "boundary": null,
+    "lastBoundary": "subscriptions.before"
+  },
+  "nextBoundary": "subscriptions.after",
+  "nearPeakSamples": [
+    {
+      "sequence": 35,
+      "serverMonotonicMs": 2333.121624,
+      "rssMiB": 178.56640625,
+      "heapUsedMiB": 20.114151000976562,
+      "heapTotalMiB": 53.07421875,
+      "externalMiB": 15.190900802612305,
+      "arrayBuffersMiB": 10.583073616027832,
+      "rssPeakMiB": 178.56640625,
+      "osMaxRSSMiB": 191.6171875,
+      "houseViews": 8,
+      "boardViews": 8,
+      "activeEngines": 16,
+      "phase": "bootstrap",
+      "boundary": null,
+      "lastBoundary": "subscriptions.before"
+    },
+    {
+      "sequence": 36,
+      "serverMonotonicMs": 2433.434742,
+      "rssMiB": 191.69140625,
+      "heapUsedMiB": 43.772979736328125,
+      "heapTotalMiB": 66.15234375,
+      "externalMiB": 15.160067558288574,
+      "arrayBuffersMiB": 4.053194999694824,
+      "rssPeakMiB": 191.69140625,
+      "osMaxRSSMiB": 191.69140625,
+      "houseViews": 11,
+      "boardViews": 10,
+      "activeEngines": 21,
+      "phase": "bootstrap",
+      "boundary": null,
+      "lastBoundary": "subscriptions.before"
+    },
+    {
+      "sequence": 37,
+      "serverMonotonicMs": 2502.070556,
+      "rssMiB": 189.67578125,
+      "heapUsedMiB": 38.277923583984375,
+      "heapTotalMiB": 64.47265625,
+      "externalMiB": 15.159062385559082,
+      "arrayBuffersMiB": 4.052189826965332,
+      "rssPeakMiB": 191.69140625,
+      "osMaxRSSMiB": 193.94140625,
+      "houseViews": 12,
+      "boardViews": 12,
+      "activeEngines": 24,
+      "phase": "bootstrap",
+      "boundary": "subscriptions.after",
+      "lastBoundary": "subscriptions.after"
+    }
+  ],
+  "boundaryAwaitOverhead": {
+    "count": 24,
+    "totalMs": 21.680882999999596,
+    "maxMs": 3.1395089999998618
+  },
+  "processClosure": {
+    "generatorPID": 32888,
+    "serverPID": 32912,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "postCheck": {
+    "generatorPID": {
+      "pid": 32888,
+      "exists": false
+    },
+    "serverPID": {
+      "pid": 32912,
+      "exists": false
+    }
+  },
+  "allSourceAndProtocolBytesUnchanged": true,
+  "interpretation": "Bootstrap diagnostic only; not sustained acceptance or causal proof."
+}

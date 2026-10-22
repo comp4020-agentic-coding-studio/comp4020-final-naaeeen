@@ -1,0 +1,33 @@
+{
+  "status": "PREIMAGE_PRESERVED_BEFORE_INSTRUMENT_EDIT",
+  "recordedAtUTC": "2026-10-22T19:33:32.284562+00:00",
+  "runtimeHead": "8be15ef6df22b0bd0290e7d1fa03962160417d58",
+  "planSHA256": "ff8d3aee456661dce1a2ca010846736ffa4ffdc8e4ee8b0f9d96ca41bd72eb11",
+  "preimages": [
+    {
+      "source": "tools/board-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preimage-board-instrument.mjs",
+      "bytes": 90355,
+      "sha256": "a88edd2701ee7a66117517bf0a8fc56fef26b39f274016aeb58aade7521179e7"
+    },
+    {
+      "source": "tools/spatial-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preimage-spatial-instrument.mjs",
+      "bytes": 21129,
+      "sha256": "4358075bcf2eef9808daf82570d42eeda43703ad916ddf2b30fe27f6b5ca4f78"
+    },
+    {
+      "source": "evaluation/board-resource.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preimage-baseline.protocol.json",
+      "bytes": 20226,
+      "sha256": "575f29d12254006a022801b9ef17f8b30e5ef2fa8c154aed9aef7fb74e56a448"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-mixed.protocol.json",
+      "preimage": "docs/spatial-redesign/evidence/memory-diagnostic-preimage-mixed.protocol.json",
+      "bytes": 28929,
+      "sha256": "000c1e32300afbcc2453d3b381793415d4d0b32a78e2822b9a976e18a7c76576"
+    }
+  ],
+  "execution": "NOT_RUN; preparation only; no protocol rebinding"
+}

@@ -1,0 +1,91 @@
+{
+  "status": "ALL_SIX_READY_BINDING_ONLY",
+  "node": "v24.21.0",
+  "execution": "No bootstrap or sustained run started",
+  "inspections": [
+    {
+      "profile": "default",
+      "protocolPath": "evaluation/board-resource.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-default.json",
+      "status": "READY",
+      "protocolSHA256": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    {
+      "profile": "mixed",
+      "protocolPath": "docs/spatial-redesign/evidence/resource-mixed.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-mixed.json",
+      "status": "READY",
+      "protocolSHA256": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    {
+      "profile": "A1",
+      "protocolPath": "docs/spatial-redesign/evidence/memory-diagnostic-A1.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-A1.json",
+      "status": "READY",
+      "protocolSHA256": "b4286e395148222a8d936c696bd00949deb1ccb178fdb65a034ff0b4caa3a01a",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    {
+      "profile": "B1",
+      "protocolPath": "docs/spatial-redesign/evidence/memory-diagnostic-B1.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-B1.json",
+      "status": "READY",
+      "protocolSHA256": "8d80b9c54347235b6e847b2757b50dfce95859dd1c841545e465c73c9874cc46",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    {
+      "profile": "B2",
+      "protocolPath": "docs/spatial-redesign/evidence/memory-diagnostic-B2.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-B2.json",
+      "status": "READY",
+      "protocolSHA256": "a6612bc1efe50df9a66c1aa81ac083744de2d0d6eab8007b41f497f7a2bc1ef3",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    },
+    {
+      "profile": "A2",
+      "protocolPath": "docs/spatial-redesign/evidence/memory-diagnostic-A2.protocol.json",
+      "inspectPath": "docs/spatial-redesign/evidence/memory-diagnostic-inspect-A2.json",
+      "status": "READY",
+      "protocolSHA256": "228420f71ae6b6330fc4567459033b84137bc6f6e72090df56358a9674d9e7af",
+      "sourceManifestSHA256": "b55112cf8bbec5d3c4fdd19f9a391f5a1db43cd7684582db99e45768398bbbc3",
+      "instrumentSHA256": "1485ed11184db397ae9ebe0677cae769e5830ed3db177779495b35d4d50afec8",
+      "sceneBytes": 1865727,
+      "imageBytes": [
+        2018703,
+        2018703
+      ]
+    }
+  ]
+}
