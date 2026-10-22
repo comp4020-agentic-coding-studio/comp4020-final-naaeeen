@@ -13,7 +13,7 @@ function fixture() {
   store.execute(people[0]!.id, { commandId: randomUUID(), type: "house.create", payload: { name: "A", colour: "sage", capacity: 2 } });
   const house = store.me(people[0]!.id).home!;
   store.execute(people[1]!.id, { commandId: randomUUID(), type: "house.join", payload: { name: "B", colour: "rose", code: house.code } });
-  const control: HouseGameControl = { isController: true, zoneId: "lounge", controlledInLounge: people.map(person => person.id) };
+  const control: HouseGameControl = { isController: true, zoneId: "lounge", activitySeat: { seatId: "game-seat-1", purpose: "game" }, controlledAtActivityTable: people.map(person => person.id), controlledInLounge: people.map(person => person.id) };
   const game = () => store.snapshot(people[0]!.id).game!;
   const act = (who: number, type: string, payload: Record<string, unknown>, expectedRevision?: number) => store.execute(people[who]!.id, { commandId: randomUUID(), type, houseId: house.id, payload, ...(expectedRevision === undefined ? {} : { expectedRevision }) } satisfies HouseCommand, control);
   act(0, "game.join", { roundId: null }, 0); const roundId = game().current!.roundId;

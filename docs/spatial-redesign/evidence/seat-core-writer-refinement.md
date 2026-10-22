@@ -1,0 +1,11 @@
+# Seat authority: held-writer refinement
+
+This follows the earlier ten-suite163-test closure. Parent review confirmed a remaining lock boundary: the three pure authorization/geometry/receipt lookup paths still used the common BEGIN IMMEDIATE helper. A different SQLite connection could reserve the writer while committed-data SELECTs remained available, blocking Stand and exact retry unnecessarily.
+
+The real two-connection RED opens the same isolated house.sqlite using node:sqlite, holds BEGIN IMMEDIATE, and sets only the test reader's busy_timeout to5ms. Its direct SELECT positive control succeeds. Both HTTP and Socket.IO cases fail before repair. One socket case also reproduced the same writer reservation in HouseStore.me, called by the snapshot-failure current-authority guard. The parent explicitly approved that fourth pure-read correction.
+
+The transaction helper now accepts a read/write mode. Only authorizeZone, seatLayout, the first accepted-receipt auth/lookup, and me select deferred BEGIN. The default and all effectful command/receipt/state writes retain BEGIN IMMEDIATE. Authorization and exact hash/receipt reads remain together in a transaction; no authorization condition or assertion was relaxed.
+
+The strengthened green cases hold the second writer beyond a real120ms projection tick. The current controller remains connected; current zone/geometry reads, physical Stand and the original accepted receipt work. A fresh command remains blocked by the held writer. Removed-member and unknown-identity access remain FORBIDDEN; a removed actor cannot use the retained command receipt. Thus the check distinguishes available committed reads from unavailable fresh writes and verifies current authority.
+
+Final owned verification: **165/165 tests in ten suites**, zero skips; **pnpm typecheck PASS**; scoped git diff --check PASS. The structured adjacent JSON records source hashes, commands/logs, original RED and exact scope. Raw logs remain ignored under .local. Prior coverage stays bound to its earlier source. No worker commit, browser, persistent service or resource workload was run. The parent owns contextual review, unchanged resource validation and final whole-project acceptance.

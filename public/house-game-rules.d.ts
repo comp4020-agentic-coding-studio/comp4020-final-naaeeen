@@ -24,7 +24,7 @@ export interface GameRound {
   readonly resumeRevision: number;
   readonly resume: readonly [boolean, boolean];
 }
-export type GameEndReason = "win" | "draw" | "player_left" | "left_lounge" | "member_removed" | "recovery_expired" | "inactive";
+export type GameEndReason = "win" | "draw" | "player_left" | "left_lounge" | "member_removed" | "seat_lost" | "recovery_expired" | "inactive";
 export interface GameResult {
   readonly roundId: string;
   readonly players: readonly [string, string];
@@ -59,7 +59,7 @@ export type GameAction =
 /** Adapter-only, generation-filtered/deduplicated events; observers cannot emit these. */
 export type GameEvent =
   | { readonly type: "disconnect"; readonly actorId: string }
-  | { readonly type: "depart"; readonly actorId: string; readonly reason: "left_lounge" | "member_removed" }
+  | { readonly type: "depart"; readonly actorId: string; readonly reason: "left_lounge" | "member_removed" | "seat_lost" }
   | { readonly type: "restart" };
 export interface GameTransition {
   readonly ok: boolean;

@@ -6,10 +6,10 @@ for (const variant of ['compact', 'expanded'] as const) {
     for (let capacity = 2; capacity <= 6; capacity++) {
       const layout = createLayout(capacity, variant);
       expect([layout.width, layout.depth]).toEqual(variant === 'compact' ? [16, 11] : [20, 14]);
-      expect(layout.seats).toHaveLength(capacity + 8);
+      expect(layout.seats).toHaveLength(capacity * 2 + 6);
       expect(layout.seats.filter(seat => seat.purpose === 'study').map(seat => seat.id)).toEqual(Array.from({ length: capacity }, (_, i) => `seat-${i + 1}`));
       expect(layout.seats.filter(seat => seat.purpose === 'rest')).toHaveLength(6);
-      expect(layout.seats.filter(seat => seat.purpose === 'game')).toHaveLength(2);
+      expect(layout.seats.filter(seat => seat.purpose === 'game').map(seat => seat.id)).toEqual(Array.from({ length: capacity }, (_, i) => `game-seat-${i + 1}`));
       expect(layout.arrivals).toHaveLength(capacity);
       const ids = layout.obstacles.map(obstacle => obstacle.id);
       expect(new Set(ids).size).toBe(ids.length);

@@ -1,0 +1,76 @@
+{
+  "sourceSha256": {
+    "src/house-store.ts": "53916a46e9b540d2904000c22c23eed13d062b28072d7fe73ab8f63b29b6b246",
+    "spec/house-seat-authority.test.ts": "621f98b6265039dd249c7a8f4018ce0ca3f450a35aec68987e30f8a2d4392574"
+  },
+  "previousClosure": {
+    "files": 10,
+    "tests": 163,
+    "scope": "seat-core-review-refinement.md; earlier source before held-writer repair"
+  },
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "bridge": "Windows PowerShell to Ubuntu/lizhi WSL"
+  },
+  "scope": [
+    "HouseStore.authorizeZone",
+    "HouseStore.seatLayout",
+    "HouseStore early accepted-receipt auth/read",
+    "HouseStore.me used by snapshot-failure authority guard"
+  ],
+  "transactionMode": {
+    "namedReadPaths": "BEGIN deferred",
+    "allOtherTransactions": "BEGIN IMMEDIATE unchanged default"
+  },
+  "reproduction": {
+    "secondConnection": "node:sqlite DatabaseSync on same house.sqlite, BEGIN IMMEDIATE held",
+    "readerTimeout": "main HouseStore PRAGMA busy_timeout=5 in isolated test only",
+    "positiveControl": "direct committed-data SELECT succeeds",
+    "tickBoundaryMs": 120,
+    "assertions": [
+      "current zone and geometry readable",
+      "current controller remains connected beyond projection tick",
+      "physical Stand succeeds",
+      "exact accepted receipt returns unchanged through HTTP and Socket.IO",
+      "fresh command still blocked STORAGE_UNAVAILABLE",
+      "revoked member authorization and receipt request denied FORBIDDEN",
+      "unknown identity denied FORBIDDEN"
+    ]
+  },
+  "runs": [
+    {
+      "log": ".local/seat-core-writer-red.log",
+      "exit": 1,
+      "failed": 2,
+      "filterSkipped": 15,
+      "finding": "Direct SELECT succeeded but BEGIN IMMEDIATE read paths failed; one real socket also disconnected when me attempted a writer reservation in the projection guard"
+    },
+    {
+      "log": ".local/seat-core-writer-green.log",
+      "exit": 0,
+      "passed": 2,
+      "filterSkipped": 15
+    },
+    {
+      "log": ".local/seat-core-writer-closed.log",
+      "exit": 0,
+      "filesPassed": 10,
+      "passed": 165,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "log": ".local/seat-core-writer-types.log",
+      "exit": 0,
+      "command": "pnpm typecheck"
+    }
+  ],
+  "diffCheck": "Scoped git diff --check passed",
+  "remaining": [
+    "Parent contextual review",
+    "Parent unchanged resource workload",
+    "Parent final whole suite/native flows/local commit"
+  ],
+  "commits": "None by worker"
+}

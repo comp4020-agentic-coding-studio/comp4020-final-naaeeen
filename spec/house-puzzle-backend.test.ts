@@ -19,7 +19,7 @@ function fixture() {
   for (const person of people.slice(1)) store.execute(person.id, { commandId: randomUUID(), type: "house.join", payload: { code: home.code, name: "Friend", colour: "rose" } });
   const command = (type: string, payload: Record<string, unknown>, expectedRevision?: number): HouseCommand => ({ commandId: randomUUID(), type, houseId: home.id, payload, ...(expectedRevision === undefined ? {} : { expectedRevision }) });
   const authority = { serverEpoch: randomUUID(), accessGeneration: 1, generation: 1 };
-  const control = { isController: true as const, zoneId: "lounge" as const, controlledInLounge: people.map(p => p.id), puzzle: { authority, rosterRevision: 1, roundId: null as string | null, memberIds: [] as string[], participationId: null as string | null } };
+  const control = { isController: true as const, zoneId: "lounge" as const, activitySeat: { seatId: "game-seat-1", purpose: "game" as const }, controlledAtActivityTable: people.map(p => p.id), controlledInLounge: people.map(p => p.id), puzzle: { authority, rosterRevision: 1, roundId: null as string | null, memberIds: [] as string[], participationId: null as string | null } };
   const start = () => command("puzzle.start", { expectedRoundId: null, illustrationId: "rainy-nook", illustrationVersion: 1, confirmUnfinished: false, authority, expectedRoster: { serverEpoch: authority.serverEpoch, revision: 1 } }, 0);
   return { root, path, store, people, home, command, authority, control, start };
 }

@@ -1,7 +1,7 @@
 import { parseDiscordDestination } from "./house-voice.ts";
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { DatabaseSync, type StatementSync } from "node:sqlite";
-import { validatePlacements } from "../public/house-geometry.js";
+import { validatePlacements, createLayout, bedroomLayout } from "../public/house-geometry.js";
 import { ROOM_LIGHTS, getRoomPreset, instantiateRoomPreset, roomPresetForSlot } from "../public/house-room-content.js";
 import { emptyGameTable, advanceGameTime, applyGameAction, applyGameEvent, projectGame, INACTIVITY_MS } from "../public/house-game-rules.js";
 import type { GameTable, GameRound, GameAction, GameEvent } from "../public/house-game-rules.js";
@@ -140,7 +140,7 @@ function restoredGame(row: GameRow): GameTable {
     const r=object(table.latestResult,["roundId","players","cells","lastMove","startedAt","endedAt","reason","winner"]);
     check(identifier(r.roundId) && tuple(r.players) && r.players.every(identifier) && r.players[0]!==r.players[1]);
     check(integer(r.startedAt) && integer(r.endedAt) && r.endedAt >= r.startedAt);
-    check(["win","draw","player_left","left_lounge","member_removed","recovery_expired","inactive"].includes(r.reason as string));
+    check(["win","draw","player_left","left_lounge","member_removed","seat_lost","recovery_expired","inactive"].includes(r.reason as string));
     const cells=r.cells as unknown[],counts=board(cells);lastMove(r.lastMove,cells,counts);
     if(r.reason==="win") check((r.winner===0 || r.winner===1) && wins(cells,r.winner) && !wins(cells,1-r.winner) && (r.lastMove as {slot:number}).slot===r.winner);
     else check(r.winner===null && !wins(cells,0) && !wins(cells,1));
@@ -234,8 +234,8 @@ export class HouseStore {
     } catch (error) { this.closed = true; this.statements.clear(); this.db.close(); storageError(error); }
   }
 
-  private transaction<T>(action: () => T): T {
-    this.db.exec("BEGIN IMMEDIATE");
+  private transaction<T>(action: () => T, mode: "read" | "write" = "write"): T {
+    this.db.exec(mode === "read" ? "BEGIN" : "BEGIN IMMEDIATE");
     try { const result = action(); this.db.exec("COMMIT"); return result; }
     catch (error) { try { this.db.exec("ROLLBACK"); } catch { /* Preserve the original cause. */ } throw error; }
   }
@@ -298,12 +298,12 @@ export class HouseStore {
     }); } catch(error) { return storageError(error); }
   }
   /** Only the generation-filtered realtime authority calls these process events. */
-  gameLifecycle(id: string, event: "disconnect" | "left_lounge"): boolean {
+  gameLifecycle(id: string, event: "disconnect" | "left_lounge" | "seat_lost"): boolean {
     try {
       const now=Date.now(); this.maintainGames(now);
       return this.transaction(() => {
         const h=this.active(id); if(!h) return false;
-        return this.gameEvent(h.id,event==="disconnect" ? {type:"disconnect",actorId:id} : {type:"depart",actorId:id,reason:"left_lounge"},true,now);
+        return this.gameEvent(h.id,event==="disconnect" ? {type:"disconnect",actorId:id} : {type:"depart",actorId:id,reason:event},true,now);
       });
     } catch(error){return storageError(error);}
   }
@@ -363,7 +363,7 @@ export class HouseStore {
     try { return this.transaction(() => {
       const h = this.active(id), count = this.prepared("SELECT COUNT(*) AS count FROM archives WHERE identity_id=?").get(id) as { count: number };
       return { identity: profile(this.identity(id)), home: h ? home(h) : null, archiveCount: count.count };
-    }); } catch (error) { return storageError(error); }
+    }, "read"); } catch (error) { return storageError(error); }
   }
   /** Owner administration is paged separately from shared house snapshots. */
   removedResidents(id: string, after = ""): { members: { id: string; name: string }[]; nextCursor: string | null } {
@@ -405,7 +405,15 @@ export class HouseStore {
     try { this.transaction(() => {
       this.identity(id); this.requireHome(id);
       if (zoneId !== "lounge") this.access(id, uuid(zoneId));
-    }); } catch (error) { return storageError(error); }
+    }, "read"); } catch (error) { return storageError(error); }
+  }
+
+  /** Authorized physical escape geometry must not depend on activity housekeeping. */
+  seatLayout(id: string, zoneId = "lounge"): ReturnType<typeof createLayout> {
+    try { return this.transaction(() => {
+      this.identity(id); const h = this.requireHome(id);
+      return zoneId === "lounge" ? createLayout(h.capacity) : bedroomLayout(room(this.access(id, uuid(zoneId))).placements);
+    }, "read"); } catch (error) { return storageError(error); }
   }
 
   snapshot(id: string, zoneId = "lounge"): HouseSnapshot {
@@ -436,9 +444,8 @@ export class HouseStore {
   /** Internal committed facts let realtime reconcile memory without reading after COMMIT. */
   executeWithEffects(id: string, untrusted: unknown, control?: HouseGameControl): HouseExecution {
     try {
-      const now=Date.now(); this.maintainGames(now);
-      const command = parseCommand(untrusted), hash = houseSessionDigest(id + "\n" + canonical(command));
-      return this.transaction(() => {
+      const now=Date.now(), command = parseCommand(untrusted), hash = houseSessionDigest(id + "\n" + canonical(command));
+      const acceptedReceipt = (): HouseReceipt | null => {
         this.identity(id);
         if(command.type.startsWith("game.") || command.type.startsWith("puzzle.")) {
           if(!control?.isController) fail("NOT_CONTROLLER","Enter the table with current lounge control.");
@@ -446,10 +453,24 @@ export class HouseStore {
           const h=this.requireHome(id);if(uuid(command.houseId)!==h.id)fail("FORBIDDEN","This queued action belongs to another house.");
         }
         const previous = this.prepared("SELECT command_hash,response,room_id FROM receipts WHERE actor_id=? AND command_id=?").get(id, command.commandId) as ReceiptRow | undefined;
-        if (previous) {
-          if (previous.command_hash !== hash) fail("COMMAND_ID_REUSED", "This command ID was already used for another action.");
-          if (previous.room_id) this.access(id, previous.room_id);
-          return { receipt: JSON.parse(previous.response) as HouseReceipt, effect: null };
+        if (!previous) return null;
+        if (previous.command_hash !== hash) fail("COMMAND_ID_REUSED", "This command ID was already used for another action.");
+        if (previous.room_id) this.access(id, previous.room_id);
+        return JSON.parse(previous.response) as HouseReceipt;
+      };
+      // An authorized exact retry needs neither a current seat nor unrelated
+      // housekeeping. Keep auth, payload hash and receipt read in one read transaction.
+      const previous = this.transaction(acceptedReceipt, "read");
+      if (previous) return { receipt: previous, effect: null };
+      this.maintainGames(now);
+      control = control?.prepareActivity?.() ?? control;
+      if ((command.type.startsWith("game.") && command.type !== "game.leave") || command.type.startsWith("puzzle.")) control?.reconcileActivity?.();
+      return this.transaction(() => {
+        const raced = acceptedReceipt();
+        if (raced) return { receipt: raced, effect: null };
+        if ((command.type.startsWith("game.") && command.type !== "game.leave") || command.type.startsWith("puzzle.")) {
+          // Accepted receipts above resolve independently of current physical consent.
+          if (control?.activitySeat?.purpose !== "game") fail("ACTIVITY_SEAT_REQUIRED", "Sit at the activity table before choosing Join or making a new move.");
         }
         const outcome = this.apply(id, command, control, now);
         const receipt: HouseReceipt = { ok: true, commandId: command.commandId, streamId: outcome.streamId, sequence: outcome.sequence ?? this.bump(outcome.streamId), entityRevision: outcome.entityRevision, ...(outcome.result ? { result: outcome.result } : {}) };
@@ -535,6 +556,7 @@ export class HouseStore {
       if(!["join","move"].includes(type) && Object.hasOwn(c,"expectedRevision")) fail("INVALID_INPUT","This table action does not use a position revision.");
       if(type==="join" && (state.current ? p.roundId===null : p.roundId!==null)) fail("GAME_WRONG_ROUND","Choose the current table round; new rounds use a server ID.");
       const roundId=type==="join" && p.roundId===null ? randomUUID() : uuid(p.roundId);
+      if (type === "leave" && (!state.current || !state.current.players.includes(id))) return { streamId: lounge, entityRevision: state.revision, sequence: this.sequence(lounge), result: { roundId, code: "already_left" } };
       let action: GameAction;
       if(type==="join" || type==="move") {
         const expectedRevision=revision(c.expectedRevision);
@@ -543,7 +565,7 @@ export class HouseStore {
       } else if(type==="ready") action={type,roundId,rosterRevision:revision(p.rosterRevision)};
       else if(type==="resume") action={type,roundId,resumeRevision:revision(p.resumeRevision)};
       else action={type:"leave",roundId};
-      const transition=applyGameAction(state,action,{actorId:id,isMember:true,isController:!!control?.isController,inLounge:control?.zoneId==="lounge",controlledInLounge:control?.controlledInLounge ?? []},now);
+      const transition=applyGameAction(state,action,{actorId:id,isMember:true,isController:!!control?.isController,inLounge:control?.zoneId==="lounge",controlledInLounge:control?.controlledAtActivityTable ?? []},now);
       if(!transition.ok)fail("GAME_"+transition.code.toUpperCase(),"The table changed or this action is unavailable. Reread its current state.");
       if(transition.changed)this.saveGame(h.id,transition.state);
       return {streamId:lounge,entityRevision:transition.state.revision,result:{roundId,code:transition.code},...(!transition.changed ? {sequence:this.sequence(lounge)} : {})};

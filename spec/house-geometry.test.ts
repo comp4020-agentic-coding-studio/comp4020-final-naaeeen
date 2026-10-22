@@ -4,15 +4,15 @@ import { createLayout, bedroomLayout, validPosition, slide, validatePlacements, 
 const piece = (id: string, kind: string, x: number, z: number, rotation = 0) => ({ id, kind, x, z, rotation, colour: 'sage' });
 
 describe('shared house collision geometry', () => {
-  test('all 170 door, seat and board route queries stay clear across capacities', () => {
+  test('all capacity-matched door, seat and board route queries stay clear across capacities', () => {
     let queries = 0;
     for (let capacity = 2; capacity <= 6; capacity++) {
       const layout = createLayout(capacity);
       expect(layout.width).toBe(20); expect(layout.depth).toBe(14);
-      expect(layout.doors).toHaveLength(capacity); expect(layout.seats).toHaveLength(capacity + 8);
+      expect(layout.doors).toHaveLength(capacity); expect(layout.seats).toHaveLength(capacity * 2 + 6);
       expect(new Set(layout.doors.map((door: { slot: number }) => door.slot)).size).toBe(capacity);
       expect(validPosition(layout, layout.spawn)).toBe(true);
-      const targets = [...layout.doors.map((door: { target: { x: number; z: number } }) => door.target), ...layout.seats.map((seat: { target: { x: number; z: number } }) => seat.target), layout.boardTarget];
+      const targets = [...layout.doors.map((door: { target: { x: number; z: number } }) => door.target), ...layout.seats.map((seat: { target: { x: number; z: number } }) => seat.target), layout.boardTarget, layout.gameTarget!, layout.exitTarget];
       for (const target of targets) {
         for (const [start, end] of [[layout.spawn, target], [target, layout.spawn]]) {
           const route = findRoute(layout, start, end);
@@ -25,7 +25,7 @@ describe('shared house collision geometry', () => {
         }
       }
     }
-    expect(queries).toBe(170);
+    expect(queries).toBe(210);
   }, 30000);
 
   test('invalid numbers, furniture, walls and unsupported capacities are rejected', () => {
@@ -112,3 +112,5 @@ test('expands saved bedrooms additively and protects arrival while allowing cent
  expect(validatePlacements(ten)).toBe(true);
  const expanded=bedroomLayout(ten); expect(findRoute(expanded,expanded.spawn,expanded.exitTarget)).not.toBeNull();
 });
+
+ test.each([2,3,4,5,6])('capacity %i has reachable ring chairs and a safe spectator approach',capacity=>{const layout=createLayout(capacity),table=layout.obstacles.find(o=>o.id==='game-table')!,seats=layout.seats.filter(s=>s.purpose==='game');expect(seats).toHaveLength(capacity);expect(new Set(seats.map(s=>s.id)).size).toBe(capacity);for(const seat of seats){expect(Math.hypot(seat.x-table.x,seat.z-table.z)).toBeCloseTo(1.55);expect(Math.hypot(seat.target.x-table.x,seat.target.z-table.z)).toBeCloseTo(2.6);expect(Math.hypot(seat.x-seat.target.x,seat.z-seat.target.z)).toBeLessThanOrEqual(1.5);expect(findRoute(layout,layout.spawn,seat.target)).not.toBeNull();}expect(findRoute(layout,layout.spawn,layout.gameTarget!)).not.toBeNull();});

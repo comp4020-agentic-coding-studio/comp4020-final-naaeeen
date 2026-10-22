@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { io, type Socket } from "socket.io-client";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { createService } from "../src/server.ts";
-import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
+import { HOUSE_WORLD_VERSION, createLayout, findRoute } from "../public/house-geometry.js";
 import { PUZZLE_PIECES } from "../public/house-puzzle-content.js";
 import type { HouseCommand, LiveSnapshot } from "../src/house-contract.ts";
 const cleanup: (()=>unknown|Promise<unknown>)[]=[];
@@ -14,6 +14,8 @@ const ask=(socket:Socket,event:string,body:unknown={})=>socket.timeout(2000).emi
 async function fixture() {
  const directory=mkdtempSync(join(tmpdir(),"picture-wire-")); cleanup.push(()=>rmSync(directory,{recursive:true,force:true}));
  const app=createService({dataDir:directory,secureCookies:false,activityLog:()=>{}}); cleanup.push(()=>app.close());
+ const realNow=Date.now.bind(Date);let offset=0;vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
+ const positions=new WeakMap<Socket,{x:number,z:number}>(),motion=new WeakMap<Socket,number>();
  const store=app.houseStore, people=Array.from({length:7},()=>store.ensureSession());
  store.execute(people[0]!.id,{commandId:randomUUID(),type:"house.create",payload:{capacity:6,name:"Ada",colour:"sage"}});
  const home=store.me(people[0]!.id).home!;
@@ -24,9 +26,19 @@ async function fixture() {
   cleanup.push(()=>socket.disconnect()); await new Promise<void>((r,j)=>{socket.once("connect",r);socket.once("connect_error",j);});
   const response=await ask(socket,"house.subscribe",{zoneId:"lounge",controllerToken:token});
   const client={socket,token,n,state:response.snapshot as LiveSnapshot,sequence:0,response};
-  socket.on("house.snapshot",state=>{client.state=state;}); return client;
+  socket.on("house.snapshot",state=>{client.state=state;});
+  if(client.state?.controller && !client.state.players.find(player=>player.id===people[n]!.id)?.seatId)await sit(client);
+  return client;
  }
  type Client=Awaited<ReturnType<typeof connect>>;
+ async function sit(c:Client){
+  vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
+  const layout=createLayout(6),self=c.state.players.find(player=>player.id===people[c.n]!.id)!,seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(c.n+1))!;
+  const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route).not.toBeNull();let sequence=0;
+  for(const point of route!.slice(1)){offset+=80;expect(await ask(c.socket,"house.move",{generation:c.state.generation,sequence:++sequence,...point,heading:0})).toMatchObject({ok:true});}
+  motion.set(c.socket,sequence);positions.set(c.socket,{x:seat.x,z:seat.z});expect(await ask(c.socket,"house.seat",{generation:c.state.generation,seatId:seat.id})).toMatchObject({ok:true});
+ }
+
  const command=(type:string,payload:Record<string,unknown>,expectedRevision?:number):HouseCommand=>({commandId:randomUUID(),type,houseId:home.id,payload,...(expectedRevision===undefined?{}:{expectedRevision})});
  const submit=(c:Client,command:HouseCommand)=>ask(c.socket,"house.command",{generation:c.state.generation,zoneId:c.state.durable.zoneId,command});
  const table=()=>store.snapshot(people[0]!.id).puzzle!;
@@ -42,7 +54,7 @@ async function fixture() {
   const response=await fetch(base+"/api/house/command",{method:"POST",headers:{Cookie:"house_session="+people[c.n]!.token,Origin:base,"Content-Type":"application/json","X-House-Identity":people[c.n]!.id,"X-House-Generation":String(c.state.generation),"X-House-Zone":c.state.durable.zoneId,"X-House-Controller-Token":c.token,...headers},body:JSON.stringify(cmd)});
   return {status:response.status,body:await response.json()};
  }
- return {app,store,people,home,base,connect,command,submit,table,body,intent,startCommand,start,place,roster,http};
+ return {app,store,people,home,base,connect,command,submit,table,body,intent,startCommand,start,place,roster,http,sit};
 }
 describe("real Socket.IO and HTTP picture participation",()=>{
  test("three then six explicit participants each contribute; independent placements compose and same-piece race has one effect",async()=>{
@@ -84,7 +96,7 @@ describe("real Socket.IO and HTTP picture participation",()=>{
   expect((await ask(a.socket,"house.puzzle.intent",{...fresh,serverEpoch:randomUUID()})).code).toBe("STALE_GENERATION");
   expect((await ask(a.socket,"house.puzzle.intent",fresh)).ok).toBe(true);
   await new Promise(r=>setTimeout(r,1050));
-  for(let n=0;n<30;n++)await ask(a.socket,"house.stand",{generation:a.state.generation});
+  for(let n=0;n<30;n++)await ask(a.socket,"house.availability",{generation:a.state.generation,value:"quiet"});
   const limited=f.body(a,"leave");expect((await ask(a.socket,"house.puzzle.intent",limited)).code).toBe("RATE_LIMITED");
   await new Promise(r=>setTimeout(r,1050));expect((await ask(a.socket,"house.puzzle.intent",limited)).ok).toBe(true);
  });
@@ -131,11 +143,11 @@ describe("real Socket.IO and HTTP picture participation",()=>{
   const f=await fixture(),a=await f.connect(),b=await f.connect(1);await f.start(a);await f.intent(a,"join");await f.roster(b,[f.people[0]!.id]);
   const observer=await f.connect();observer.socket.disconnect();await new Promise(r=>setTimeout(r,30));expect(b.state.puzzleRoster!.memberIds).toEqual([f.people[0]!.id]);
   const replacement=await f.connect();replacement.state=(await ask(replacement.socket,"house.takeover",{controllerToken:replacement.token})).snapshot;
-  expect(replacement.state.puzzleRoster!.memberIds).toEqual([]);await f.intent(replacement,"join");a.socket.disconnect();await f.roster(b,[f.people[0]!.id]);
+  expect(replacement.state.puzzleRoster!.memberIds).toEqual([]);await f.sit(replacement);await f.intent(replacement,"join");a.socket.disconnect();await f.roster(b,[f.people[0]!.id]);
   const failing=vi.spyOn(f.store,"gameLifecycle").mockImplementation(()=>{throw new Error("injected game housekeeping failure");});
   const bedroom=f.store.snapshot(f.people[0]!.id).residents[0]!.bedroomId;
-  const exit=await ask(replacement.socket,"house.subscribe",{zoneId:bedroom,controllerToken:replacement.token});expect(exit.ok).toBe(false);await f.roster(b,[]);
-  failing.mockRestore();replacement.state=(await ask(replacement.socket,"house.subscribe",{zoneId:"lounge",controllerToken:replacement.token})).snapshot;await f.intent(replacement,"join");await f.roster(b,[f.people[0]!.id]);
+  const exit=await ask(replacement.socket,"house.subscribe",{zoneId:bedroom,controllerToken:replacement.token});expect(exit.ok).toBe(true);await f.roster(b,[]);
+  failing.mockRestore();replacement.state=(await ask(replacement.socket,"house.subscribe",{zoneId:"lounge",controllerToken:replacement.token})).snapshot;await f.sit(replacement);await f.intent(replacement,"join");await f.roster(b,[f.people[0]!.id]);
   vi.spyOn(f.store,"gameLifecycle").mockImplementation(()=>{throw new Error("injected game housekeeping failure");});replacement.socket.disconnect();await f.roster(b,[]);
  });
  test("old-round Leave and old participation cannot remove or use fresh consent after replacement",async()=>{

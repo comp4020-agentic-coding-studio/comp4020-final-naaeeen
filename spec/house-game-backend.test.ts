@@ -13,7 +13,7 @@ function fixture(){
  const store=new HouseStore(path);cleanups.push(()=>store.close());const people=[store.ensureSession(),store.ensureSession(),store.ensureSession()];
  store.execute(people[0]!.id,{commandId:randomUUID(),type:"house.create",payload:{capacity:3,name:"Ada",colour:"sage"}});
  const home=store.me(people[0]!.id).home!;for(const p of people.slice(1))store.execute(p.id,{commandId:randomUUID(),type:"house.join",payload:{code:home.code,name:"Friend",colour:"rose"}});
- const control:HouseGameControl={isController:true,zoneId:"lounge",controlledInLounge:people.map(p=>p.id)};
+ const control:HouseGameControl={isController:true,zoneId:"lounge",activitySeat:{seatId:"game-seat-1",purpose:"game"},controlledAtActivityTable:people.map(p=>p.id),controlledInLounge:people.map(p=>p.id)};
  const command=(type:string,payload:Record<string,unknown>,expectedRevision?:number):HouseCommand=>({commandId:randomUUID(),type,houseId:home.id,payload,...(expectedRevision===undefined?{}:{expectedRevision})});
  const game=()=>store.snapshot(people[0]!.id).game!;
  const act=(n:number,type:string,payload:Record<string,unknown>,rev?:number)=>store.execute(people[n]!.id,command(type,payload,rev),control);
@@ -83,3 +83,11 @@ describe("durable Four-in-a-row adapter",()=>{
   f.store.db.exec("UPDATE game_tables SET state='{}'");expect(()=>f.game()).toThrowError(error("STORAGE_UNAVAILABLE"));
  });
 });
+
+ test("seat loss ends the active role honestly while preserving saved cells, restart reads and original receipts",()=>{
+  const f=fixture(),roundId=f.start(),command=f.command("game.move",{roundId,column:0},f.game().revision),receipt=f.store.execute(f.people[0]!.id,command,f.control);
+  expect(f.store.gameLifecycle(f.people[0]!.id,"seat_lost")).toBe(true);const result=f.game().latestResult!;expect(result.reason).toBe("seat_lost");expect(result.cells.filter(cell=>cell!==null)).toHaveLength(1);
+  const standing={...f.control,activitySeat:undefined,controlledAtActivityTable:[]};expect(f.store.execute(f.people[0]!.id,command,standing)).toEqual(receipt);
+  expect(()=>f.store.execute(f.people[0]!.id,f.command("game.move",{roundId,column:1},f.game().revision),standing)).toThrowError(error("ACTIVITY_SEAT_REQUIRED"));
+  f.store.close();const restarted=new HouseStore(f.path);cleanups.push(()=>restarted.close());expect(restarted.snapshot(f.people[0]!.id).game!.latestResult).toEqual(result);
+ });

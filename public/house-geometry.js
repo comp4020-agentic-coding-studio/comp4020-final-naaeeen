@@ -51,7 +51,11 @@ export function createLayout(capacity = 4, variant = 'expanded') {
     [3.8, 4, Math.PI, 3.4, 3.05], [4.8, 4, Math.PI, 4.5, 3.05], [5.8, 4, Math.PI, 5.6, 3.2],
     [6.8, .5, -Math.PI / 2, 5.65, .5], [6.8, 1.5, -Math.PI / 2, 5.65, 1.5], [6.8, 2.5, -Math.PI / 2, 5.65, 2.5],
   ].map(([x, z, heading, targetX, targetZ], i) => ({ id: 'rest-seat-' + (i + 1), purpose: /** @type {'rest'} */ ('rest'), fixtureId: i < 3 ? 'rest-sofa-a' : 'rest-sofa-b', x: x + spec.restOffset[0], z: z + spec.restOffset[1], heading, target: { x: targetX + spec.restOffset[0], z: targetZ + spec.restOffset[1] } }));
-  const gameSeats = [-1, 1].map((side, i) => ({ id: 'game-seat-' + (i + 1), purpose: /** @type {'game'} */ ('game'), x: spec.game[0], z: spec.game[1] + side * 1.55, heading: side === 1 ? Math.PI : 0, target: { x: spec.game[0], z: spec.game[1] + side * 2.6 } }));
+  const gameSeats = Array.from({ length: capacity }, (_, i) => {
+    const angle = Math.PI / 2 + i * Math.PI * 2 / capacity, dx = Math.cos(angle), dz = Math.sin(angle);
+    return { id: 'game-seat-' + (i + 1), purpose: /** @type {'game'} */ ('game'), x: spec.game[0] + dx * 1.55, z: spec.game[1] + dz * 1.55,
+      heading: Math.atan2(-dx, -dz), target: { x: spec.game[0] + dx * 2.6, z: spec.game[1] + dz * 2.6 } };
+  });
   const seats = [...studySeats, ...restSeats, ...gameSeats];
   const fixture = (id, position, w, d) => ({ id, x: position[0], z: position[1], w, d });
   const obstacles = [
@@ -68,7 +72,7 @@ export function createLayout(capacity = 4, variant = 'expanded') {
   ];
   return { width, depth, doors, seats, obstacles, spawn: { x: 0, z: spec.spawnZ },
     arrivals: Array.from({ length: capacity }, (_, slot) => ({ x: .65 * (slot - (capacity - 1) / 2), z: spec.spawnZ })),
-    boardTarget: { x: spec.boardApproach[0], z: spec.boardApproach[1] }, gameTarget: { x: spec.game[0] + 1.45, z: spec.game[1] }, exitTarget: { x: 0, z: spec.exitZ } };
+    boardTarget: { x: spec.boardApproach[0], z: spec.boardApproach[1] }, gameTarget: { ...gameSeats[0].target }, exitTarget: { x: 0, z: spec.exitZ } };
 }
 
 /** @param {{kind:string,x:number,z:number,rotation:number,id:string}} placement @returns {Obstacle} */

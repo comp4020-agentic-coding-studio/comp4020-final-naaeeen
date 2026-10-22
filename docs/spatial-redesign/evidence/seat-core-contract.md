@@ -1,0 +1,28 @@
+# Seat authority implementation contract
+
+Implementation in progress on `post-crit-improvements`, baseline `93f8cfa`. This is the contract for parallel UI integration; technical acceptance is recorded separately.
+
+- Game chairs match permanent house capacity 2–6. IDs remain `game-seat-1` through capacity. Ring radii are 1.55 m for chair centres and 2.60 m for approaches. `gameTarget` becomes a valid existing chair approach for spectator navigation; Join still needs a claimed game chair.
+- `HouseGameControl.activitySeat` is a trusted optional `{ seatId: string, purpose: "game" }`; absence means no eligible chair. `controlledAtActivityTable` contains only connected, subscribed, authorized controllers with a currently valid game chair. These values are made by realtime, never accepted from command JSON.
+- Fresh `game.join/ready/move/resume`, `puzzle.start/place`, and picture Join intents fail with `ACTIVITY_SEAT_REQUIRED` unless the controller holds a current game chair. Exact authorized accepted command receipt lookup occurs before the fresh-effect seat check. A historical cached Join intent ACK resolves the old intent without restoring membership.
+- `game.leave` and picture Leave remain valid after standing. `house.stand` releases the chair and picture consent before fallible game housekeeping; movement cannot be trapped by a storage fault. Durable seat-loss housekeeping is queued and blocks fresh game effects until reconciled.
+- Physical stand, seat switch, takeover and geometry reset use the honest Four-in-a-row `seat_lost` departure reason. Existing disconnect keeps its pause/recovery rules; leaving the lounge keeps `left_lounge`. A seat loss releases a waiting slot or ends an active/paused round with the explicit saved reason. Saved cells and historical receipts remain inspectable.
+- Disconnect clears picture consent immediately. A reconnect-reserved physical chair never restores picture consent. `Player.seatReservedUntil?: number` plus pose/seat are projected for disconnected residents only during their live 30-second reservation. `connected` remains false. World and Places must count a connected occupant OR a reservation whose timestamp is in the future, and must not infer activity consent from either.
+- Existing `generation`, `accessGeneration`, controller token, intent sequence, request UUID and original round UUID rules remain. A new geometry/interaction version is `lounge-4`; older declared clients are update-denied under the existing boundary.
+- UI choices: seated interaction opens Watch/Join; Look around closes the panel without standing. Stand/Leave is separately reachable. Fresh controls use current connected self game seat as affordance only; server checks both Socket.IO and HTTP.
+- Board read/edit/export, room access, Quiet/Can chat, identity, work cards and existing content stay under their separate authority.
+
+## Read-only authority APIs for room/study/rest integration
+
+- `authorizeRoomHttp(id: string, roomId: string, generation: unknown, controllerToken: unknown, expectedAccessGeneration?: unknown): void` validates current compatible controller, token, generation, exact bedroom zone and current admission. The studio module still checks room ownership.
+- `loungeHttpControl(id: string, generation: unknown, controllerToken: unknown): LoungeControl` validates the controlling lease/token/generation/current lounge admission, returning trusted `{houseId, actorId, generation, seatId, seatPurpose}`. Purposes are study/rest/game or null. Standing returns null seat/purpose.
+- `currentLoungeSeat(id: string): LoungeControl | null` is a server-only projection for pruning. It requires a connected subscribed compatible controller, valid session/membership/lounge and exact current chair pose. Disconnected reserved chairs return null; standing controllers return a projection with null seat.
+- These helpers perform access preflight and membership reads without game housekeeping, command receipts or action mutations. Room/study/rest owners must recheck their own current content/audience and consent.
+
+Shared-view consent must bind both `accessGeneration` and `seatGeneration` from LoungeControl, in addition to controller generation and seat ID. Access generation changes on every subscription/reconnect; seat generation changes on physical seat transitions. A quick disconnect/reconnect or Stand/re-sit of the same chair therefore cannot restore an earlier follow/presenter membership even if the shared-view module never observed the intermediate absent state. Exact same-chair no-op claims preserve the seat generation.
+
+## Fresh-review closure
+
+Player.seatGeneration is projected for UI capture. Room HTTP authorization strictly checks expectedAccessGeneration when supplied; server routes require that epoch. Stand uses HouseStore.seatLayout for authorized maintenance-independent geometry. Exact accepted receipt authentication/hash/lookup precedes unrelated maintenance and full activity snapshot construction. Snapshot storage faults retain a pending refresh only when narrow current session/admission/membership authorization still succeeds, with no cached private delivery; revoked authority still disconnects. See seat-core-review-refinement.md and its source/run JSON.
+
+The held-writer refinement changes only four pure store read paths (zone preflight, escape geometry, initial accepted-receipt auth/lookup and me) to deferred BEGIN. Effectful transactions remain BEGIN IMMEDIATE. Current authority, Stand and exact retry remain available across another connection's writer reservation; fresh effects still require a writable transaction. See seat-core-writer-refinement.md and its source/run JSON.

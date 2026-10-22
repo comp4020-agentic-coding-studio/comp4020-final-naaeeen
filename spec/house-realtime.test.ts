@@ -425,3 +425,34 @@ describe("durable room socket integration",()=>{
     expect(()=>f.realtime.executeHttp(f.a.id,command,current.generation,f.roomId,token)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
   });
 });
+
+ test("room HTTP authority requires the current controller token, generation, exact bedroom and live admission",async()=>{
+  const f=await setup(),a=await f.client(),token=randomUUID();let state=(await subscribe(a,token,f.store.bedroomId)).snapshot;
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation,token)).not.toThrow();
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation,token,state.accessGeneration)).not.toThrow();
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation,token,state.accessGeneration-1)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation,randomUUID())).toThrowError(expect.objectContaining({code:"NOT_CONTROLLER"}));
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation-1,token)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,"lounge",state.generation,token)).toThrowError(expect.objectContaining({code:"STALE_ZONE"}));
+  const observer=await f.client(),observerToken=randomUUID();expect((await subscribe(observer,observerToken,f.store.bedroomId)).snapshot.controller).toBe(false);
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[0]!,f.store.bedroomId,state.generation,observerToken)).toThrowError(expect.objectContaining({code:"NOT_CONTROLLER"}));
+  const guest=await f.client(1),guestToken=randomUUID(),guestState=(await subscribe(guest,guestToken,f.store.bedroomId)).snapshot;
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[1]!,f.store.bedroomId,guestState.generation,guestToken)).not.toThrow();f.store.open=false;
+  expect(()=>f.realtime.authorizeRoomHttp(f.store.ids[1]!,f.store.bedroomId,guestState.generation,guestToken)).toThrowError(expect.objectContaining({code:"FORBIDDEN"}));
+ });
+
+ test("server lounge control projection derives actual seat purpose and rejects reservation or stale controllers",async()=>{
+  const f=await setup(),a=await f.client(),token=randomUUID(),state=(await subscribe(a,token)).snapshot;
+  const id=f.store.ids[0]!;
+  expect(f.realtime.loungeHttpControl(id,state.generation,token)).toMatchObject({houseId:f.store.houseId,actorId:id,generation:state.generation,seatId:null,seatPurpose:null});
+  expect(()=>f.realtime.loungeHttpControl(id,state.generation,randomUUID())).toThrowError(expect.objectContaining({code:"NOT_CONTROLLER"}));
+  expect(()=>f.realtime.loungeHttpControl(id,state.generation-1,token)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
+  const clock=vi.spyOn(Date,"now"),layout=createLayout(6),seat=layout.seats.find(s=>s.purpose==='study')!;await walkTo(a,state,layout,seat.target,clock);
+  expect((await ask(a,'house.seat',{generation:state.generation,seatId:seat.id})).ok).toBe(true);
+  const seated=f.realtime.currentLoungeSeat(id)!;expect(seated).toMatchObject({seatId:seat.id,seatPurpose:'study'});
+  expect((await ask(a,'house.seat',{generation:state.generation,seatId:seat.id})).ok).toBe(true);expect(f.realtime.currentLoungeSeat(id)!.seatGeneration).toBe(seated.seatGeneration);
+  expect((await ask(a,'house.stand',{generation:state.generation})).ok).toBe(true);expect(f.realtime.currentLoungeSeat(id)).toMatchObject({seatId:null,seatPurpose:null});
+  expect((await ask(a,'house.seat',{generation:state.generation,seatId:seat.id})).ok).toBe(true);expect(f.realtime.currentLoungeSeat(id)!.seatGeneration).toBeGreaterThan(seated.seatGeneration);
+  a.disconnect();await vi.waitFor(()=>expect(f.realtime.currentLoungeSeat(id)).toBeNull());
+  const returned=await f.client(),reconnected=(await subscribe(returned,token)).snapshot;expect(reconnected.generation).toBe(state.generation);expect(f.realtime.currentLoungeSeat(id)!.accessGeneration).toBeGreaterThan(seated.accessGeneration);
+ });

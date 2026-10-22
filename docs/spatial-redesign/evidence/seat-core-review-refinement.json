@@ -1,0 +1,98 @@
+{
+  "sourceSha256": {
+    "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
+    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/house-store.ts": "6c2f609e4a1a62aa833cd3f47851237331f6589f6fe92e1ae0cac068d10bea6c",
+    "spec/house-seat-authority.test.ts": "dd56cf1ade89acafcd1555f9d6cdc416b798e55805f2a2da913f84712edbfd7e",
+    "spec/house-realtime.test.ts": "365c31e3dcd316afba7895037eebbbc2dc937ec3bc0306ec5fd74f727647ba2f",
+    "spec/house-lounge-geometry.test.ts": "4186144174d19bf7b164b521458569212f95c37b391ac546bf9d66036d7e8de8"
+  },
+  "runtime": {
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi",
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "config": "vitest.house.config.ts"
+  },
+  "runs": [
+    {
+      "log": ".local/seat-core-review-red.log",
+      "exit": 1,
+      "failed": 4,
+      "filterSkipped": 10,
+      "interpretation": "Maintenance failure reproduces Stand/replay issue; initial SQL fixture invalid because next_due_at mismatched deadline"
+    },
+    {
+      "log": ".local/seat-core-review-red-calibrated.log",
+      "exit": 1,
+      "failed": 4,
+      "filterSkipped": 10,
+      "interpretation": "Corrected SQL fixture matches valid due deadline; maintenance writes hit actual UPDATE abort trigger"
+    },
+    {
+      "log": ".local/seat-core-review-green.log",
+      "exit": 1,
+      "passed": 64,
+      "failed": 1,
+      "interpretation": "Four new defect cases passed; old synthetic geometry reset fixture used profile.set without required revision"
+    },
+    {
+      "log": ".local/seat-core-review-geometry.log",
+      "exit": 1,
+      "failed": 1,
+      "filterSkipped": 13,
+      "interpretation": "Explicit successful-command assertion isolated invalid profile command; fixture changed authoritative capacity input and supplies actual profile revision"
+    },
+    {
+      "log": ".local/seat-core-review-final.log",
+      "exit": 1,
+      "passed": 161,
+      "failed": 1,
+      "interpretation": "Concurrent owned suites exposed storage-failed projection closing controller before HTTP retry"
+    },
+    {
+      "log": ".local/seat-core-review-tick-red.log",
+      "exit": 1,
+      "failed": 2,
+      "filterSkipped": 12,
+      "interpretation": "Strengthened failure cases wait120ms across actual projection tick; controller disconnect reproduced deterministically"
+    },
+    {
+      "log": ".local/seat-core-review-tick-green.log",
+      "exit": 0,
+      "passed": 4,
+      "filterSkipped": 10,
+      "interpretation": "Storage-failed projection retains only currently authorized lease, delivers no cached private state"
+    },
+    {
+      "log": ".local/seat-core-review-closed.log",
+      "exit": 0,
+      "filesPassed": 10,
+      "passed": 163,
+      "failed": 0,
+      "skipped": 0,
+      "interpretation": "Final complete owned selection including five fresh review regressions passes"
+    }
+  ],
+  "typecheck": [
+    {
+      "log": ".local/seat-core-review-types-final.log",
+      "exit": 0
+    },
+    {
+      "log": ".local/seat-core-review-types-closed.log",
+      "exit": 1,
+      "diagnostics": [
+        "spec/house-studio-preview.test.ts(8,624): Expected 0 arguments, but got 1"
+      ],
+      "interpretation": "New concurrent preview-test diagnostic only; no owned-file diagnostic"
+    }
+  ],
+  "diffCheck": "Scoped git diff --check passed",
+  "coverage": "Prior coverage is source-scoped historical evidence. No new coverage rerun; parent whole verification/resource run remains required.",
+  "remaining": [
+    "Parent contextual independent review",
+    "Parent final whole-suite/typecheck",
+    "Fixed unchanged resource and native browser validation",
+    "No commits by worker"
+  ]
+}

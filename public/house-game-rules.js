@@ -211,7 +211,7 @@ export function applyGameEvent(state, event, now) {
   checkTime(now);
   now = roundTime(state.current, now);
   if (!event || !['disconnect', 'depart', 'restart'].includes(event.type)) return reject(state, 'invalid_event');
-  if (event.type === 'depart' && !['left_lounge', 'member_removed'].includes(event.reason)) return reject(state, 'invalid_event');
+  if (event.type === 'depart' && !['left_lounge', 'member_removed', 'seat_lost'].includes(event.reason)) return reject(state, 'invalid_event');
   if (maintenanceDue(state.current, now)) return reject(state, 'maintenance_required');
   const round = state.current;
   if (!round) return response(state, 'unchanged');

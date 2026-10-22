@@ -8,6 +8,7 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import { HouseStore } from "../src/house-store.ts";
 import { attachHouseRealtime } from "../src/house-realtime.ts";
 import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
+import { createLayout, findRoute } from "../public/house-geometry.js";
 import type { HouseCommand, LiveSnapshot } from "../src/house-contract.ts";
 const cleanups: (()=>unknown|Promise<unknown>)[]=[];
 afterEach(async()=>{vi.restoreAllMocks();for(const fn of cleanups.splice(0).reverse())await fn();});
@@ -23,13 +24,28 @@ async function fixture(){
  const home=store.me(people[0]!.id).home!;for(const p of people.slice(1,3))store.execute(p.id,{commandId:randomUUID(),type:"house.join",payload:{code:home.code,name:"Friend",colour:"rose"}});
  const server=createServer(),live=attachHouseRealtime(server,store);await new Promise<void>(r=>server.listen(0,"127.0.0.1",r));cleanups.push(()=>live.close());
  const url="http://127.0.0.1:"+(server.address() as {port:number}).port;
- async function connect(n=0,zoneId="lounge",token=randomUUID()){
+ // Real time still advances so disconnected-save maintenance can retry without another command.
+ const layout=createLayout(3),realNow=Date.now.bind(Date);let clockOffset=0;vi.spyOn(Date,"now").mockImplementation(()=>realNow()+clockOffset);
+ type Client={socket:Socket;token:string;n:number;state:LiveSnapshot;response:any;motion:number};
+ async function connect(n=0,zoneId="lounge",token:string=randomUUID()):Promise<Client>{
   const socket=io(url,{auth:{worldVersion:HOUSE_WORLD_VERSION},transports:["websocket"],reconnection:false,extraHeaders:{Origin:url,Cookie:"house_session="+people[n]!.token}});
   cleanups.push(()=>{socket.disconnect();});await new Promise<void>((r,j)=>{socket.once("connect",r);socket.once("connect_error",j);});
-  const response=await ask(socket,"house.subscribe",{zoneId,controllerToken:token});return {socket,token,state:response.snapshot as LiveSnapshot,response};
+  const response=await ask(socket,"house.subscribe",{zoneId,controllerToken:token});
+  const client={socket,token,n,state:response.snapshot as LiveSnapshot,response,motion:0};
+  if(response.ok && client.state.controller && zoneId==="lounge")await sit(client);
+  return client;
  }
  const command=(type:string,payload:Record<string,unknown>,expectedRevision?:number):HouseCommand=>({commandId:randomUUID(),type,houseId:home.id,payload,...(expectedRevision===undefined?{}:{expectedRevision})});
- type Client=Awaited<ReturnType<typeof connect>>;
+ async function sit(client:Client){
+  const seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(client.n+1))!;
+  const self=client.state.players.find(player=>player.id===people[client.n]!.id)!;
+  if(self.seatId===seat.id)return;
+  const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route,"A controller must walk a valid route to their actual game chair").not.toBeNull();
+  for(const point of route!.slice(1)){
+   clockOffset+=100;expect(await ask(client.socket,"house.move",{generation:client.state.generation,sequence:++client.motion,...point,heading:0})).toMatchObject({ok:true});
+  }
+  expect(await ask(client.socket,"house.seat",{generation:client.state.generation,seatId:seat.id})).toMatchObject({ok:true});
+ }
  const submit=(c:Client,cmd:HouseCommand)=>ask(c.socket,"house.command",{generation:c.state.generation,zoneId:c.state.durable.zoneId,command:cmd});
  const act=(c:Client,type:string,payload:Record<string,unknown>,rev?:number)=>submit(c,command(type,payload,rev));
  const game=()=>store.snapshot(people[0]!.id).game!;
@@ -39,7 +55,7 @@ async function fixture(){
   const ready=await Promise.all([act(a,"game.ready",{roundId,rosterRevision}),act(b,"game.ready",{roundId,rosterRevision})]);expect(ready.every(r=>r.ok)).toBe(true);
   return roundId;
  }
- return {store,path,people,home,live,connect,command,submit,act,game,start};
+ return {store,path,people,home,live,connect,command,submit,act,game,start,sit};
 }
 describe("independent sockets and SQLite game authority",()=>{
  test("serializes simultaneous Join and composes same-roster consent; watchers and outsiders cannot act",async()=>{
@@ -53,19 +69,25 @@ describe("independent sockets and SQLite game authority",()=>{
   expect(ready.every(r=>r.ok)).toBe(true);expect(f.game().current!.status).toBe("active");
   const outsider=await f.connect(3);expect(outsider.response.code).toBe("FORBIDDEN");
  });
- test("observer subscriptions and stale-controller disconnect cannot withdraw the live controller",async()=>{
+ test("observer subscriptions preserve the live controller; takeover loses the seat and stale disconnect cannot withdraw a new round",async()=>{
   const f=await fixture(),a=await f.connect(),b=await f.connect(1),roundId=await f.start(a,b);
   const observer=await f.connect(),bedroom=f.store.snapshot(f.people[0]!.id).residents[0]!.bedroomId;
   await ask(observer.socket,"house.subscribe",{zoneId:bedroom,controllerToken:observer.token});observer.socket.disconnect();await new Promise(r=>setTimeout(r,25));
   expect(f.game().current!.status).toBe("active");const takeover=await f.connect();takeover.state=(await ask(takeover.socket,"house.takeover",{controllerToken:takeover.token})).snapshot;
-  expect((await f.act(a,"game.move",{roundId,column:0},4)).code).toBe("NOT_CONTROLLER");a.socket.disconnect();await new Promise(r=>setTimeout(r,25));expect(f.game().current!.status).toBe("active");
+  expect(f.game().current).toBeNull();expect(f.game().latestResult!.reason).toBe("seat_lost");
+  expect(takeover.state.players.find(player=>player.id===f.people[0]!.id)?.seatId).toBeNull();
+  expect((await f.act(a,"game.move",{roundId,column:0},4)).code).toBe("NOT_CONTROLLER");
+  expect((await f.act(takeover,"game.join",{roundId:null},f.game().revision)).code).toBe("ACTIVITY_SEAT_REQUIRED");
+  await f.sit(takeover);await f.start(takeover,b);
+  a.socket.disconnect();await new Promise(r=>setTimeout(r,25));expect(f.game().current!.status).toBe("active");
   const moved=await ask(takeover.socket,"house.subscribe",{zoneId:bedroom,controllerToken:takeover.token});expect(moved.ok).toBe(true);expect(moved.snapshot.durable.game).toBeNull();expect(f.game().latestResult!.reason).toBe("left_lounge");
  });
  test("waiting disconnect releases slot; active disconnect pauses and reconnect needs both explicit original players",async()=>{
   const f=await fixture(),a=await f.connect(),b=await f.connect(1);
   await f.act(a,"game.join",{roundId:null},0);a.socket.disconnect();await vi.waitFor(()=>expect(f.game().current).toBeNull());
-  const returned=await f.connect(0,"lounge",a.token),roundId=await f.start(returned,b);returned.socket.disconnect();await vi.waitFor(()=>expect(f.game().current!.status).toBe("paused"));
-  const paused=f.game(),r=await f.connect(0,"lounge",a.token);expect(f.game().current!.status).toBe("paused");
+  const returned=await f.connect(0,"lounge",a.token);expect(returned.state.players.find(player=>player.id===f.people[0]!.id)?.seatId).toBe("game-seat-1");
+  const roundId=await f.start(returned,b);returned.socket.disconnect();await vi.waitFor(()=>expect(f.game().current!.status).toBe("paused"));
+  const paused=f.game(),r=await f.connect(0,"lounge",a.token);expect(r.state.players.find(player=>player.id===f.people[0]!.id)?.seatId).toBe("game-seat-1");expect(f.game().current!.status).toBe("paused");
   expect((await f.act(r,"game.move",{roundId,column:0},paused.revision)).code).toBe("GAME_NOT_ACTIVE");
   await f.act(r,"game.resume",{roundId,resumeRevision:paused.current!.resumeRevision});expect(f.game().current!.status).toBe("paused");
   await f.act(b,"game.resume",{roundId,resumeRevision:paused.current!.resumeRevision});expect(f.game().current!.status).toBe("active");
@@ -78,6 +100,8 @@ describe("independent sockets and SQLite game authority",()=>{
   expect(()=>f.live.executeHttp(f.people[0]!.id,move,a.state.generation,bedroom,a.token)).toThrowError(expect.objectContaining({code:"STALE_ZONE"}));
   a.state=(await ask(a.socket,"house.subscribe",{zoneId:"lounge",controllerToken:a.token})).snapshot;
   expect(await f.submit(a,move)).toEqual(receipt);
+  expect((await f.act(a,"game.move",{roundId,column:1},4)).code).toBe("ACTIVITY_SEAT_REQUIRED");
+  a.motion=0;await f.sit(a);
   expect((await f.act(a,"game.move",{roundId,column:1},4)).code).toBe("GAME_WRONG_ROUND");
  });
  test("session expiry pauses before removing the current lease",async()=>{

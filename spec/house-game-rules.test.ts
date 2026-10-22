@@ -147,7 +147,7 @@ describe("voluntary departure and recovery",()=>{
     const initial=move(active(),0);
     const left=action(initial,{type:"leave",roundId:"round-one"},P0);
     expect(left.current).toBeNull(); expect(left.latestResult).toMatchObject({reason:"player_left",winner:null});
-    for(const reason of ["left_lounge","member_removed"] as const) {
+    for(const reason of ["left_lounge","member_removed","seat_lost"] as const) {
       const result=applyGameEvent(initial,{type:"depart",actorId:P1,reason},1);
       expect(result.state.current).toBeNull(); expect(result.state.latestResult).toMatchObject({reason,winner:null});
       expect(applyGameEvent(result.state,{type:"depart",actorId:P1,reason},1).changed).toBe(false);

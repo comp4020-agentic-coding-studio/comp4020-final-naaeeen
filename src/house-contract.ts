@@ -16,7 +16,8 @@ export interface OwnWork { streamId: string; sequence: number; card: Card | null
 export interface PuzzleAuthority { readonly serverEpoch: string; readonly accessGeneration: number; readonly generation: number }
 /** Trusted connection facts, captured synchronously before a store transaction. */
 export interface PuzzleControl { readonly authority: PuzzleAuthority; readonly rosterRevision: number; readonly memberIds: readonly string[]; readonly participationId: string | null; readonly roundId: string | null }
-export interface HouseGameControl { readonly isController: true; readonly zoneId: "lounge"; readonly controlledInLounge: readonly string[]; readonly puzzle?: PuzzleControl }
+export interface HouseGameControl { readonly isController: true; readonly zoneId: "lounge"; readonly controlledInLounge: readonly string[]; readonly activitySeat?: { readonly seatId: string; readonly purpose: "game" }; readonly controlledAtActivityTable?: readonly string[]; readonly prepareActivity?: () => HouseGameControl; readonly reconcileActivity?: () => void; readonly puzzle?: PuzzleControl }
+export interface LoungeControl { readonly houseId: string; readonly actorId: string; readonly generation: number; readonly accessGeneration: number; readonly seatGeneration: number; readonly seatId: string | null; readonly seatPurpose: "study" | "rest" | "game" | null }
 export interface PuzzleRoster { serverEpoch: string; houseId: string; roundId: string | null; revision: number; memberIds: string[]; selfParticipationId: string | null }
 export type PuzzleCommittedEffect = { houseId: string; roundId: string; completed: boolean };
 export interface HouseExecution { receipt: HouseReceipt; effect: PuzzleCommittedEffect | null }
@@ -25,7 +26,7 @@ export interface HouseSnapshot { puzzle: PuzzleTable | null; voice: HouseVoice; 
 export interface Me { identity: Profile; home: Home | null; archiveCount: number }
 export interface HouseCommand { commandId: string; type: string; houseId?: string; expectedRevision?: number; payload: Record<string, unknown> }
 export interface HouseReceipt { ok: true; commandId: string; streamId: string; sequence: number; entityRevision: number; result?: Record<string, unknown> }
-export interface Player { id: string; name: string; colour: Colour; connected: boolean; zoneId: string; x?: number; z?: number; heading?: number; animation?: "idle" | "walk" | "sit"; seatId?: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; generation: number }
+export interface Player { id: string; name: string; colour: Colour; connected: boolean; zoneId: string; x?: number; z?: number; heading?: number; animation?: "idle" | "walk" | "sit"; seatId?: string | null; seatGeneration?: number; seatReservedUntil?: number; availability: "quiet" | "chat"; availabilitySetAt: number; generation: number }
 export interface LiveSnapshot { puzzleRoster: PuzzleRoster | null; worldVersion: string; serverEpoch: string; accessGeneration: number; controller: boolean; generation: number; durable: HouseSnapshot; players: Player[] }
 export class HouseError extends Error {
   readonly code: string;

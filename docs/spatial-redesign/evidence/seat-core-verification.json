@@ -1,0 +1,281 @@
+{
+  "baseline": "93f8cfa",
+  "branch": "post-crit-improvements",
+  "environment": {
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi",
+    "root": "/home/lizhi/comp4020/comp4020-final-naaeeen",
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "runner": "mise exec node@24.21.0 pnpm@11.9.0 -- pnpm exec vitest",
+    "config": ".local/seat-core.vitest.config.ts"
+  },
+  "sourceSha256": {
+    "public/house-geometry.js": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa",
+    "public/house-version.js": "dad0d5427a7176e1c08f2b90b8ae34406eb2c1a92454feedf00ff48cf2aaf959",
+    "public/house-game-rules.js": "511dae4db7fdff9f0b65291c00404ffd23d09a2356d92ac76f692e5c1bda9342",
+    "public/house-game-rules.d.ts": "9b2381b15fb4c17b2bdf5d2773f45209e1f72b9793cd9cf0e608b9d85f19b685",
+    "src/house-contract.ts": "a942404d60058ca1339d9bdd4231430259aeafc4728bc9a32f8c938fe45178cf",
+    "src/house-realtime.ts": "b3649c10e58b27b3185ef1238873f8a7131b6d16edf625189bd713eae9e2fee2",
+    "src/house-store.ts": "0de761b2e68144d6e44582d783b2ca5d0144b849601674d40a0970a63a0a873b",
+    "spec/house-seat-authority.test.ts": "9592528c45819f43fd9a0f8e6615aedb83264a2f64476ae60d35114a09cc745d",
+    "spec/house-geometry.test.ts": "cf44f8832300ad360443ab3091a28d3ba3f230d8bdbbb32092255b4578eb4675",
+    "spec/house-game-backend.test.ts": "c79aa69af6ca9d75776c6e2c4009d436638d67f6992f126e151c9c2553e57411",
+    "spec/house-game-clock.test.ts": "e66ac680dcf590dd16fc126ee5c25cdf714d0ddfd0434a46570f82a75b9d11fd",
+    "spec/house-game-rules.test.ts": "94501115841fcc827c93e0a25eaae3f39deffb6673759dfe06c8fe7482caa42b",
+    "spec/house-puzzle-backend.test.ts": "a96ac8bc770b8bab68eea87f69d0d3d095452baad5f0036eb50ba75b29e54179",
+    "spec/house-puzzle-realtime.test.ts": "2132fbc2d49ddb7b2d396e646339a38500705dcf3ccbb12e504d4fce226be449",
+    "spec/house-game-realtime.test.ts": "1acf4e16ffea7f71d79ff7434594b40f79b2567bfdbb75156edba61aa6f81bbe",
+    "spec/house-realtime.test.ts": "7f790c83d217865f0396f8f2d2d79e3f2d01225e4d219ebcdeab077ebe51f29b"
+  },
+  "runs": [
+    {
+      "log": ".local/seat-core-red.log",
+      "exit": 1,
+      "filesFailed": 2,
+      "testsFailed": 11,
+      "testsPassed": 9,
+      "interpretation": "Red: missing seat authority, capacity mismatch, absent reservation projection and retained consent"
+    },
+    {
+      "log": ".local/seat-core-green-initial.log",
+      "exit": 1,
+      "testsFailed": 3,
+      "testsPassed": 17,
+      "interpretation": "First refinement exposed already-departed Leave reconciliation and nested SQLite lifecycle callback transaction"
+    },
+    {
+      "log": ".local/seat-core-focused.log",
+      "exit": 0,
+      "filesPassed": 6,
+      "testsPassed": 96,
+      "interpretation": "Earlier source checkpoint before added lounge control projection"
+    },
+    {
+      "log": ".local/seat-core-transport.log",
+      "exit": 1,
+      "testsFailed": 4,
+      "testsPassed": 50,
+      "interpretation": "Six-client clock advance crossed Socket.IO heartbeat expiry; fixture seat restoration and expected free exit needed correction"
+    },
+    {
+      "log": ".local/seat-core-transport-refined.log",
+      "exit": 1,
+      "testsFailed": 1,
+      "testsPassed": 24,
+      "interpretation": "Picture integration 15/15 passed; new reservation-expiry test waited only for seat ID, racing disconnect cleanup; strengthened to require offline and future reservation before advancing clock"
+    },
+    {
+      "log": ".local/seat-core-projection-red.log",
+      "exit": 1,
+      "testsFailed": 1,
+      "testsSkippedByFilter": 29,
+      "interpretation": "New trusted lounge projection API absent before implementation"
+    },
+    {
+      "log": ".local/seat-core-final.log",
+      "exit": 1,
+      "filesPassed": 7,
+      "testsPassed": 127,
+      "filesImportFailed": 2,
+      "interpretation": "HELD: other lane server import of unfinished house-studio.ts prevented seat-authority and picture ingress suites from importing"
+    },
+    {
+      "log": ".local/seat-core-owned-coverage.log",
+      "exit": 0,
+      "filesPassed": 7,
+      "testsPassed": 128,
+      "interpretation": "Latest owned source passes geometry, game rules/store/clock/realtime, puzzle store and generic realtime incl room/loungeseat authority + epochs"
+    }
+  ],
+  "coverageScope": [
+    "public/house-game-rules.js",
+    "public/house-geometry.js",
+    "src/house-contract.ts",
+    "src/house-realtime.ts",
+    "src/house-store.ts"
+  ],
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 1108,
+        "covered": 983,
+        "skipped": 0,
+        "pct": 88.71
+      },
+      "statements": {
+        "total": 1748,
+        "covered": 1442,
+        "skipped": 0,
+        "pct": 82.49
+      },
+      "functions": {
+        "total": 237,
+        "covered": 219,
+        "skipped": 0,
+        "pct": 92.4
+      },
+      "branches": {
+        "total": 1562,
+        "covered": 1217,
+        "skipped": 0,
+        "pct": 77.91
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-game-rules.js": {
+      "lines": {
+        "total": 152,
+        "covered": 152,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 26,
+        "covered": 26,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 213,
+        "covered": 209,
+        "skipped": 0,
+        "pct": 98.12
+      },
+      "branches": {
+        "total": 192,
+        "covered": 188,
+        "skipped": 0,
+        "pct": 97.91
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-geometry.js": {
+      "lines": {
+        "total": 101,
+        "covered": 101,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 26,
+        "covered": 26,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 165,
+        "covered": 159,
+        "skipped": 0,
+        "pct": 96.36
+      },
+      "branches": {
+        "total": 112,
+        "covered": 105,
+        "skipped": 0,
+        "pct": 93.75
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-contract.ts": {
+      "lines": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 1,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 3,
+        "covered": 3,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-realtime.ts": {
+      "lines": {
+        "total": 381,
+        "covered": 330,
+        "skipped": 0,
+        "pct": 86.61
+      },
+      "functions": {
+        "total": 71,
+        "covered": 65,
+        "skipped": 0,
+        "pct": 91.54
+      },
+      "statements": {
+        "total": 642,
+        "covered": 515,
+        "skipped": 0,
+        "pct": 80.21
+      },
+      "branches": {
+        "total": 614,
+        "covered": 445,
+        "skipped": 0,
+        "pct": 72.47
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-store.ts": {
+      "lines": {
+        "total": 473,
+        "covered": 399,
+        "skipped": 0,
+        "pct": 84.35
+      },
+      "functions": {
+        "total": 113,
+        "covered": 101,
+        "skipped": 0,
+        "pct": 89.38
+      },
+      "statements": {
+        "total": 725,
+        "covered": 556,
+        "skipped": 0,
+        "pct": 76.68
+      },
+      "branches": {
+        "total": 644,
+        "covered": 479,
+        "skipped": 0,
+        "pct": 74.37
+      }
+    }
+  },
+  "typecheck": [
+    {
+      "log": ".local/seat-core-types.log",
+      "exit": 0,
+      "interpretation": "Earlier checkpoint passed before studio integration imports"
+    },
+    {
+      "log": ".local/seat-core-types-final.log",
+      "exit": 1,
+      "interpretation": "HELD: missing studio backend/UI modules and inferred server callback types from concurrent lane; no owned diagnostic in this run"
+    }
+  ],
+  "remaining": [
+    "Parent rerun real HTTP/Socket picture+seat suites once studio module exists",
+    "Parent independent authority review and integration fixes",
+    "Parent whole suite, native browser, unchanged resource workload and secret/dependency checks",
+    "Human and physical device value checks not run"
+  ],
+  "commits": "None; parent owns local commits",
+  "services": "No persistent service/browser/load; temporary test servers closed by test cleanup"
+}
