@@ -1,0 +1,12 @@
+{
+  "frozenAt": "2026-10-22T13:27:16.520113+00:00",
+  "head": "fb363cfee37be556f14b0c7a567d020719305517",
+  "files": {
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "prototypes/spatial-table-fit/runner.mjs": "34bf77747b758dd129705116aac1f8e8f0c78e61f91ae537baa3ca65f78f012d",
+    "docs/spatial-redesign/evidence/table-fit-protocol-initial.md": "0167f45ccc1f29366234556bc66831966d7f006dd1ef63b2c4d507e8ff8cae03"
+  }
+}

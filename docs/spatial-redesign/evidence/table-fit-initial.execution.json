@@ -1,0 +1,13 @@
+{
+  "completedAt": "2026-10-22T13:27:30.384990+00:00",
+  "argv": [
+    "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "prototypes/spatial-table-fit/runner.mjs",
+    "initial",
+    "1.55",
+    "2.60",
+    "docs/spatial-redesign/evidence/table-fit-protocol-initial.md"
+  ],
+  "exit": 0,
+  "stderr": ""
+}

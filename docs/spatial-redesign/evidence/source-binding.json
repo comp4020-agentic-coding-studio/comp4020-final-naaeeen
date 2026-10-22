@@ -1,0 +1,46 @@
+{
+  "recordedAtUTC": "2026-10-22T13:22:54.424635+00:00",
+  "head": "fb363cfee37be556f14b0c7a567d020719305517",
+  "scope": "Read-only source audit and first-effect/replay-boundary trace; no new application-test pass or design validation inferred.",
+  "sourceSHA256": {
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f",
+    "public/house-ui.js": "2325272687a0a78ece77bbd61e798676ffa15ef14255e250494cd52dc93928f8",
+    "public/house-client.js": "a443a93a08c6c8b2312ace052d9da93598efd7368eabc37ab5f694c85be28511",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "src/house-store.ts": "71dc48671505404157a2e6fae8d9b63d7b410d81846c42ba7ebe79a234d9e5ef",
+    "src/house-contract.ts": "a2e15cb430972df56e2ab5ec348e091b7eeb41ca5a34fc86ea28c8969210bdfe",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/server.ts": "e37a2bb2466685b0b1d762347408f8343c60077e11d4173ce95a0773704ead2a",
+    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a"
+  },
+  "reviewers": [
+    {
+      "name": "spatial_redesign_code_audit",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "initialHistory": "none",
+      "followup": "contextual ingress/replay trace"
+    },
+    {
+      "name": "social_space_game_research",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "initialHistory": "none",
+      "followup": "contextual goghFAQ corrections"
+    },
+    {
+      "name": "spatial_product_alternatives",
+      "model": "gpt-6-astra",
+      "effort": "max",
+      "initialHistory": "none",
+      "scope": "Independent product alternatives, no source-history or verdict documents"
+    }
+  ],
+  "parentChecks": [
+    "actual geometry and world interaction dispatcher",
+    "server activity control and exact receipt lookup order",
+    "Sky/Gather/gogh/Discord/TeeKO/TowerUnite/Palia/KindWords2/WEBFISHING/Focusmate/FigJam primary pages",
+    "temporary native preview Overview inspected and tab closed"
+  ]
+}

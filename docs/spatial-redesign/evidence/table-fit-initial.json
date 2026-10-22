@@ -1,0 +1,7602 @@
+{
+  "label": "initial",
+  "study": "MECHANICAL STUDY; no human, pixel, performance or production acceptance claim",
+  "runtime": {
+    "binary": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+    "version": "v24.21.0",
+    "argv": [
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/prototypes/spatial-table-fit/runner.mjs",
+      "initial",
+      "1.55",
+      "2.60",
+      "docs/spatial-redesign/evidence/table-fit-protocol-initial.md"
+    ]
+  },
+  "sourceHashes": {
+    "public/house-geometry.js": "dd0ca1ce84fcc5581872500dc2e489106baffb690a7a93fff6a87b837fe92e30",
+    "public/house-version.js": "ce88b711b6fbe0311f9b8a23848c2dbd722a67aeacff90b1f77cf9655397e66a",
+    "src/house-realtime.ts": "e38f011490663ca31fbb8f8c3efead0a3d8b5b245826ee14663709608030966c",
+    "public/house-world.js": "117eadde3853a29ed740ce88dfb3a4c90cfbb44d1e948419b324446ad772296f"
+  },
+  "runnerHash": "34bf77747b758dd129705116aac1f8e8f0c78e61f91ae537baa3ca65f78f012d",
+  "protocol": {
+    "path": "docs/spatial-redesign/evidence/table-fit-protocol-initial.md",
+    "sha256": "0167f45ccc1f29366234556bc66831966d7f006dd1ef63b2c4d507e8ff8cae03"
+  },
+  "declaredGeometry": {
+    "radius": 1.55,
+    "approachRadius": 2.6,
+    "startAngle": "pi/2",
+    "centre": {
+      "x": -6.2,
+      "z": 3.3
+    }
+  },
+  "controls": {
+    "knownValidExpanded2": {
+      "pass": true,
+      "criteria": {
+        "capacity": true,
+        "uniqueSeatIds": true,
+        "fullChairBounds": true,
+        "fullChairNonoverlap": true,
+        "validApproaches": true,
+        "claimRange": true,
+        "gameRoutes": true,
+        "studyRestRoutes": true,
+        "boardRoute": true,
+        "doorRoutes": true,
+        "exitRoute": true,
+        "fixedGeometry": true
+      }
+    },
+    "bedroomFootprint": {
+      "pass": true,
+      "footprint": {
+        "id": "control-chair",
+        "x": -3,
+        "z": 0,
+        "w": 0.8,
+        "d": 0.8
+      }
+    },
+    "duplicateId": {
+      "pass": true,
+      "criteria": {
+        "capacity": true,
+        "uniqueSeatIds": false,
+        "fullChairBounds": true,
+        "fullChairNonoverlap": false,
+        "validApproaches": true,
+        "claimRange": true,
+        "gameRoutes": true,
+        "studyRestRoutes": true,
+        "boardRoute": true,
+        "doorRoutes": true,
+        "exitRoute": true,
+        "fixedGeometry": true
+      }
+    },
+    "targetInsideFixture": {
+      "pass": true,
+      "criteria": {
+        "capacity": true,
+        "uniqueSeatIds": true,
+        "fullChairBounds": true,
+        "fullChairNonoverlap": true,
+        "validApproaches": false,
+        "claimRange": false,
+        "gameRoutes": false,
+        "studyRestRoutes": true,
+        "boardRoute": true,
+        "doorRoutes": true,
+        "exitRoute": true,
+        "fixedGeometry": true
+      }
+    },
+    "outOfBoundsTarget": {
+      "pass": true,
+      "criteria": {
+        "capacity": true,
+        "uniqueSeatIds": true,
+        "fullChairBounds": true,
+        "fullChairNonoverlap": true,
+        "validApproaches": false,
+        "claimRange": false,
+        "gameRoutes": false,
+        "studyRestRoutes": true,
+        "boardRoute": true,
+        "doorRoutes": true,
+        "exitRoute": true,
+        "fixedGeometry": true
+      }
+    },
+    "enclosedValidTarget": {
+      "pass": true,
+      "valid": true,
+      "criteria": {
+        "capacity": true,
+        "uniqueSeatIds": true,
+        "fullChairBounds": true,
+        "fullChairNonoverlap": true,
+        "validApproaches": true,
+        "claimRange": true,
+        "gameRoutes": true,
+        "studyRestRoutes": true,
+        "boardRoute": false,
+        "doorRoutes": true,
+        "exitRoute": true,
+        "fixedGeometry": true
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "capacity": 2,
+      "baseline": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "candidate": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "layouts": {
+        "baseline": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 0,
+              "target": {
+                "x": -6.2,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.7800000000000002,
+              "d": 0.8000000000000003
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        },
+        "candidate": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 1.8369701987210297e-16,
+              "target": {
+                "x": -6.200000000000001,
+                "z": 0.6999999999999997
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        }
+      }
+    },
+    {
+      "capacity": 3,
+      "baseline": {
+        "criteria": {
+          "capacity": false,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": false,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "distance": 1.0627205653416145,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "distance": 1.062720565341614,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": 0,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "candidate": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 3,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-3",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "distance": 1.0627205653416145,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "distance": 1.062720565341614,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.451666049839542,
+              "z": 2.0000000000000004
+            },
+            "distance": 1.0500000000000005,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -3.9483339501604604,
+              "z": 1.9999999999999987
+            },
+            "distance": 1.0499999999999998,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.451666049839542,
+              "z": 2.0000000000000004
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -3.9483339501604604,
+              "z": 1.9999999999999987
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": 0,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "layouts": {
+        "baseline": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -2.8,
+              "z": -6.96,
+              "target": {
+                "x": -2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": 0,
+              "z": -6.96,
+              "target": {
+                "x": 0,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 2.8,
+              "z": -6.96,
+              "target": {
+                "x": 2.8,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -2.8619546181365436,
+              "z": -2.9499999999999993,
+              "heading": 1.0990089487712815,
+              "target": {
+                "x": -3.7712812921102046,
+                "z": -3.499999999999999
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": 0.8619546181365425,
+              "z": -2.950000000000001,
+              "heading": -1.0990089487712809,
+              "target": {
+                "x": 1.7712812921102028,
+                "z": -3.5000000000000013
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 0,
+              "target": {
+                "x": -6.2,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -2.8931311266282536,
+              "z": -2.9659067695735595,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109115
+            },
+            {
+              "id": "seat-3",
+              "x": 0.8931311266282523,
+              "z": -2.9659067695735613,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.7800000000000002,
+              "d": 0.8000000000000003
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.65,
+              "z": 4.65
+            },
+            {
+              "x": 0,
+              "z": 4.65
+            },
+            {
+              "x": 0.65,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        },
+        "candidate": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -2.8,
+              "z": -6.96,
+              "target": {
+                "x": -2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": 0,
+              "z": -6.96,
+              "target": {
+                "x": 0,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 2.8,
+              "z": -6.96,
+              "target": {
+                "x": 2.8,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -2.8619546181365436,
+              "z": -2.9499999999999993,
+              "heading": 1.0990089487712815,
+              "target": {
+                "x": -3.7712812921102046,
+                "z": -3.499999999999999
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": 0.8619546181365425,
+              "z": -2.950000000000001,
+              "heading": -1.0990089487712809,
+              "target": {
+                "x": 1.7712812921102028,
+                "z": -3.5000000000000013
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -7.542339375865881,
+              "z": 2.5250000000000004,
+              "heading": 1.047197551196598,
+              "target": {
+                "x": -8.451666049839542,
+                "z": 2.0000000000000004
+              }
+            },
+            {
+              "id": "game-seat-3",
+              "purpose": "game",
+              "x": -4.8576606241341205,
+              "z": 2.524999999999999,
+              "heading": -1.0471975511965972,
+              "target": {
+                "x": -3.9483339501604604,
+                "z": 1.9999999999999987
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -2.8931311266282536,
+              "z": -2.9659067695735595,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109115
+            },
+            {
+              "id": "seat-3",
+              "x": 0.8931311266282523,
+              "z": -2.9659067695735613,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "game-seat-2",
+              "x": -7.5726502649983365,
+              "z": 2.5075000000000003,
+              "w": 1.0828203230275508,
+              "d": 1.075499814951862
+            },
+            {
+              "id": "game-seat-3",
+              "x": -4.827349735001665,
+              "z": 2.507499999999999,
+              "w": 1.082820323027551,
+              "d": 1.0754998149518624
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.65,
+              "z": 4.65
+            },
+            {
+              "x": 0,
+              "z": 4.65
+            },
+            {
+              "x": 0.65,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        }
+      }
+    },
+    {
+      "capacity": 4,
+      "baseline": {
+        "criteria": {
+          "capacity": false,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": false,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.2,
+              "z": -1.9999999999999996
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 2.2,
+              "z": -2.000000000000001
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.2,
+              "z": -1.9999999999999996
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 2.2,
+              "z": -2.000000000000001
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "candidate": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 4,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-3",
+            "pass": true
+          },
+          {
+            "id": "game-seat-4",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.2,
+              "z": -1.9999999999999996
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 2.2,
+              "z": -2.000000000000001
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.8,
+              "z": 3.3000000000000003
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -3.6,
+              "z": 3.2999999999999994
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.2,
+              "z": -1.9999999999999996
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 2.2,
+              "z": -2.000000000000001
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.8,
+              "z": 3.3000000000000003
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -3.6,
+              "z": 3.2999999999999994
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": false,
+          "reachable": false
+        }
+      },
+      "layouts": {
+        "baseline": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": -4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": 4.199999999999999,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -3.15,
+              "z": -1.9999999999999998,
+              "heading": 1.5707963267948968,
+              "target": {
+                "x": -4.2,
+                "z": -1.9999999999999996
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": 1.15,
+              "z": -2.0000000000000004,
+              "heading": -1.5707963267948963,
+              "target": {
+                "x": 2.2,
+                "z": -2.000000000000001
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 0,
+              "target": {
+                "x": -6.2,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -3.185,
+              "z": -1.9999999999999998,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            },
+            {
+              "id": "seat-3",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "seat-4",
+              "x": 1.1849999999999998,
+              "z": -2.0000000000000004,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.7800000000000002,
+              "d": 0.8000000000000003
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.9750000000000001,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        },
+        "candidate": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": -4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": 4.199999999999999,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -3.15,
+              "z": -1.9999999999999998,
+              "heading": 1.5707963267948968,
+              "target": {
+                "x": -4.2,
+                "z": -1.9999999999999996
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": 1.15,
+              "z": -2.0000000000000004,
+              "heading": -1.5707963267948963,
+              "target": {
+                "x": 2.2,
+                "z": -2.000000000000001
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -7.75,
+              "z": 3.3,
+              "heading": 1.5707963267948968,
+              "target": {
+                "x": -8.8,
+                "z": 3.3000000000000003
+              }
+            },
+            {
+              "id": "game-seat-3",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 1.8369701987210297e-16,
+              "target": {
+                "x": -6.200000000000001,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-4",
+              "purpose": "game",
+              "x": -4.65,
+              "z": 3.2999999999999994,
+              "heading": -1.5707963267948963,
+              "target": {
+                "x": -3.6,
+                "z": 3.2999999999999994
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -3.185,
+              "z": -1.9999999999999998,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            },
+            {
+              "id": "seat-3",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "seat-4",
+              "x": 1.1849999999999998,
+              "z": -2.0000000000000004,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "game-seat-2",
+              "x": -7.785,
+              "z": 3.3,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            },
+            {
+              "id": "game-seat-3",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-4",
+              "x": -4.615,
+              "z": 3.2999999999999994,
+              "w": 0.8000000000000002,
+              "d": 0.7800000000000001
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.9750000000000001,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        }
+      }
+    },
+    {
+      "capacity": 5,
+      "baseline": {
+        "criteria": {
+          "capacity": false,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": false,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "seat-5",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.043380852144491,
+              "z": -1.0729490168751574
+            },
+            "distance": 1.0548769295763114,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -2.8809128073359145,
+              "z": -4.4270509831248415
+            },
+            "distance": 1.0829864558006497,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 0.8809128073359134,
+              "z": -4.427050983124843
+            },
+            "distance": 1.0829864558006506,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 2.043380852144492,
+              "z": -1.0729490168751585
+            },
+            "distance": 1.0548769295763119,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.043380852144491,
+              "z": -1.0729490168751574
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -2.8809128073359145,
+              "z": -4.4270509831248415
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 0.8809128073359134,
+              "z": -4.427050983124843
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 2.043380852144492,
+              "z": -1.0729490168751585
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -5.6,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 0,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-4",
+            "target": {
+              "x": 5.6,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "candidate": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 5,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "seat-5",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-3",
+            "pass": true
+          },
+          {
+            "id": "game-seat-4",
+            "pass": true
+          },
+          {
+            "id": "game-seat-5",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.043380852144491,
+              "z": -1.0729490168751574
+            },
+            "distance": 1.0548769295763114,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -2.8809128073359145,
+              "z": -4.4270509831248415
+            },
+            "distance": 1.0829864558006497,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 0.8809128073359134,
+              "z": -4.427050983124843
+            },
+            "distance": 1.0829864558006506,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 2.043380852144492,
+              "z": -1.0729490168751585
+            },
+            "distance": 1.0548769295763119,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.6727469423674,
+              "z": 4.1034441853748636
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -7.728241655960431,
+              "z": 1.1965558146251367
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -4.671758344039571,
+              "z": 1.1965558146251363
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-5",
+            "purpose": "game",
+            "target": {
+              "x": -3.7272530576326006,
+              "z": 4.103444185374863
+            },
+            "distance": 1.0500000000000003,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -4.043380852144491,
+              "z": -1.0729490168751574
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -2.8809128073359145,
+              "z": -4.4270509831248415
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": 0.8809128073359134,
+              "z": -4.427050983124843
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 2.043380852144492,
+              "z": -1.0729490168751585
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.6727469423674,
+              "z": 4.1034441853748636
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -7.728241655960431,
+              "z": 1.1965558146251367
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -4.671758344039571,
+              "z": 1.1965558146251363
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-5",
+            "purpose": "game",
+            "target": {
+              "x": -3.7272530576326006,
+              "z": 4.103444185374863
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -5.6,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": 0,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 2.8,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-4",
+            "target": {
+              "x": 5.6,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": false,
+          "reachable": false
+        }
+      },
+      "layouts": {
+        "baseline": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -5.6,
+              "z": -6.96,
+              "target": {
+                "x": -5.6,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -2.8,
+              "z": -6.96,
+              "target": {
+                "x": -2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 0,
+              "z": -6.96,
+              "target": {
+                "x": 0,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 2.8,
+              "z": -6.96,
+              "target": {
+                "x": 2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-4",
+              "slot": 4,
+              "wall": "rear",
+              "x": 5.6,
+              "z": -6.96,
+              "target": {
+                "x": 5.6,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -3.04477151003458,
+              "z": -1.4128677106875998,
+              "heading": 1.8504120649606495,
+              "target": {
+                "x": -4.043380852144491,
+                "z": -1.0729490168751574
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -2.263738292428817,
+              "z": -3.5371322893124,
+              "heading": 0.6880960426842352,
+              "target": {
+                "x": -2.8809128073359145,
+                "z": -4.4270509831248415
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": 0.26373829242881675,
+              "z": -3.5371322893124004,
+              "heading": -0.6880960426842349,
+              "target": {
+                "x": 0.8809128073359134,
+                "z": -4.427050983124843
+              }
+            },
+            {
+              "id": "seat-5",
+              "purpose": "study",
+              "x": 1.0447715100345802,
+              "z": -1.4128677106876004,
+              "heading": -1.850412064960649,
+              "target": {
+                "x": 2.043380852144492,
+                "z": -1.0729490168751585
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 0,
+              "target": {
+                "x": -6.2,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -3.0784121646444924,
+              "z": -1.4032081890940347,
+              "w": 0.9841985865974596,
+              "d": 0.9704950820166894
+            },
+            {
+              "id": "seat-3",
+              "x": -2.2859656587744888,
+              "z": -3.5641682687719145,
+              "w": 1.110570201570252,
+              "d": 1.1133179804924482
+            },
+            {
+              "id": "seat-4",
+              "x": 0.28596565877448843,
+              "z": -3.564168268771915,
+              "w": 1.110570201570252,
+              "d": 1.1133179804924482
+            },
+            {
+              "id": "seat-5",
+              "x": 1.078412164644493,
+              "z": -1.4032081890940353,
+              "w": 0.9841985865974594,
+              "d": 0.9704950820166893
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.7800000000000002,
+              "d": 0.8000000000000003
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -1.3,
+              "z": 4.65
+            },
+            {
+              "x": -0.65,
+              "z": 4.65
+            },
+            {
+              "x": 0,
+              "z": 4.65
+            },
+            {
+              "x": 0.65,
+              "z": 4.65
+            },
+            {
+              "x": 1.3,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        },
+        "candidate": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -5.6,
+              "z": -6.96,
+              "target": {
+                "x": -5.6,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -2.8,
+              "z": -6.96,
+              "target": {
+                "x": -2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": 0,
+              "z": -6.96,
+              "target": {
+                "x": 0,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 2.8,
+              "z": -6.96,
+              "target": {
+                "x": 2.8,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-4",
+              "slot": 4,
+              "wall": "rear",
+              "x": 5.6,
+              "z": -6.96,
+              "target": {
+                "x": 5.6,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -3.04477151003458,
+              "z": -1.4128677106875998,
+              "heading": 1.8504120649606495,
+              "target": {
+                "x": -4.043380852144491,
+                "z": -1.0729490168751574
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -2.263738292428817,
+              "z": -3.5371322893124,
+              "heading": 0.6880960426842352,
+              "target": {
+                "x": -2.8809128073359145,
+                "z": -4.4270509831248415
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": 0.26373829242881675,
+              "z": -3.5371322893124004,
+              "heading": -0.6880960426842349,
+              "target": {
+                "x": 0.8809128073359134,
+                "z": -4.427050983124843
+              }
+            },
+            {
+              "id": "seat-5",
+              "purpose": "study",
+              "x": 1.0447715100345802,
+              "z": -1.4128677106876004,
+              "heading": -1.850412064960649,
+              "target": {
+                "x": 2.043380852144492,
+                "z": -1.0729490168751585
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -7.674137600257488,
+              "z": 3.7789763412811683,
+              "heading": 1.884955592153876,
+              "target": {
+                "x": -8.6727469423674,
+                "z": 4.1034441853748636
+              }
+            },
+            {
+              "id": "game-seat-3",
+              "purpose": "game",
+              "x": -7.111067141053334,
+              "z": 2.0460236587188314,
+              "heading": 0.6283185307179588,
+              "target": {
+                "x": -7.728241655960431,
+                "z": 1.1965558146251367
+              }
+            },
+            {
+              "id": "game-seat-4",
+              "purpose": "game",
+              "x": -5.2889328589466675,
+              "z": 2.046023658718831,
+              "heading": -0.6283185307179584,
+              "target": {
+                "x": -4.671758344039571,
+                "z": 1.1965558146251363
+              }
+            },
+            {
+              "id": "game-seat-5",
+              "purpose": "game",
+              "x": -4.725862399742512,
+              "z": 3.778976341281168,
+              "heading": -1.8849555921538756,
+              "target": {
+                "x": -3.7272530576326006,
+                "z": 4.103444185374863
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -3.0784121646444924,
+              "z": -1.4032081890940347,
+              "w": 0.9841985865974596,
+              "d": 0.9704950820166894
+            },
+            {
+              "id": "seat-3",
+              "x": -2.2859656587744888,
+              "z": -3.5641682687719145,
+              "w": 1.110570201570252,
+              "d": 1.1133179804924482
+            },
+            {
+              "id": "seat-4",
+              "x": 0.28596565877448843,
+              "z": -3.564168268771915,
+              "w": 1.110570201570252,
+              "d": 1.1133179804924482
+            },
+            {
+              "id": "seat-5",
+              "x": 1.078412164644493,
+              "z": -1.4032081890940353,
+              "w": 0.9841985865974594,
+              "d": 0.9704950820166893
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "game-seat-2",
+              "x": -7.707424578327818,
+              "z": 3.7897919360842915,
+              "w": 1.0018784686485818,
+              "d": 0.9890376782101776
+            },
+            {
+              "id": "game-seat-3",
+              "x": -7.1316396248835705,
+              "z": 2.017708063915708,
+              "w": 1.1012614574464374,
+              "d": 1.105686092288087
+            },
+            {
+              "id": "game-seat-4",
+              "x": -5.268360375116431,
+              "z": 2.0177080639157077,
+              "w": 1.1012614574464377,
+              "d": 1.1056860922880871
+            },
+            {
+              "id": "game-seat-5",
+              "x": -4.692575421672182,
+              "z": 3.789791936084291,
+              "w": 1.0018784686485818,
+              "d": 0.9890376782101776
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -1.3,
+              "z": 4.65
+            },
+            {
+              "x": -0.65,
+              "z": 4.65
+            },
+            {
+              "x": 0,
+              "z": 4.65
+            },
+            {
+              "x": 0.65,
+              "z": 4.65
+            },
+            {
+              "x": 1.3,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        }
+      }
+    },
+    {
+      "capacity": 6,
+      "baseline": {
+        "criteria": {
+          "capacity": false,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": false,
+        "gameSeatCount": 2,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "seat-5",
+            "pass": true
+          },
+          {
+            "id": "seat-6",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102032,
+              "z": -0.4999999999999991
+            },
+            "distance": 1.0627205653416143,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "distance": 1.0627205653416145,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "distance": 1.062720565341614,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-6",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102037,
+              "z": -0.5
+            },
+            "distance": 1.0627205653416143,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102032,
+              "z": -0.4999999999999991
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-6",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102037,
+              "z": -0.5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -7,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-4",
+            "target": {
+              "x": 4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-5",
+            "target": {
+              "x": 7,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "candidate": {
+        "criteria": {
+          "capacity": true,
+          "uniqueSeatIds": true,
+          "fullChairBounds": true,
+          "fullChairNonoverlap": true,
+          "validApproaches": true,
+          "claimRange": true,
+          "gameRoutes": true,
+          "studyRestRoutes": true,
+          "boardRoute": true,
+          "doorRoutes": true,
+          "exitRoute": true,
+          "fixedGeometry": true
+        },
+        "pass": true,
+        "gameSeatCount": 6,
+        "bounds": [
+          {
+            "id": "seat-1",
+            "pass": true
+          },
+          {
+            "id": "seat-2",
+            "pass": true
+          },
+          {
+            "id": "seat-3",
+            "pass": true
+          },
+          {
+            "id": "seat-4",
+            "pass": true
+          },
+          {
+            "id": "seat-5",
+            "pass": true
+          },
+          {
+            "id": "seat-6",
+            "pass": true
+          },
+          {
+            "id": "game-seat-1",
+            "pass": true
+          },
+          {
+            "id": "game-seat-2",
+            "pass": true
+          },
+          {
+            "id": "game-seat-3",
+            "pass": true
+          },
+          {
+            "id": "game-seat-4",
+            "pass": true
+          },
+          {
+            "id": "game-seat-5",
+            "pass": true
+          },
+          {
+            "id": "game-seat-6",
+            "pass": true
+          }
+        ],
+        "collisions": [],
+        "approaches": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102032,
+              "z": -0.4999999999999991
+            },
+            "distance": 1.0627205653416143,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "distance": 1.0627205653416145,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "distance": 1.1,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "distance": 1.062720565341614,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "seat-6",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102037,
+              "z": -0.5
+            },
+            "distance": 1.0627205653416143,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "distance": 1.0307764064044156,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "distance": 0.9962429422585644,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "distance": 0.8246211251235319,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "distance": 1.1499999999999995,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "distance": 1.0500000000000007,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.45166604983954,
+              "z": 4.6000000000000005
+            },
+            "distance": 1.0499999999999998,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -8.451666049839542,
+              "z": 2.0000000000000004
+            },
+            "distance": 1.0500000000000005,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "distance": 1.05,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-5",
+            "purpose": "game",
+            "target": {
+              "x": -3.9483339501604604,
+              "z": 1.9999999999999987
+            },
+            "distance": 1.0499999999999998,
+            "valid": true,
+            "withinClaimRange": true
+          },
+          {
+            "id": "game-seat-6",
+            "purpose": "game",
+            "target": {
+              "x": -3.94833395016046,
+              "z": 4.6
+            },
+            "distance": 1.0499999999999996,
+            "valid": true,
+            "withinClaimRange": true
+          }
+        ],
+        "routes": [
+          {
+            "id": "seat-1",
+            "purpose": "study",
+            "target": {
+              "x": -0.9999999999999998,
+              "z": 1
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-2",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102032,
+              "z": -0.4999999999999991
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-3",
+            "purpose": "study",
+            "target": {
+              "x": -3.7712812921102046,
+              "z": -3.499999999999999
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-4",
+            "purpose": "study",
+            "target": {
+              "x": -1.0000000000000007,
+              "z": -5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-5",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102028,
+              "z": -3.5000000000000013
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "seat-6",
+            "purpose": "study",
+            "target": {
+              "x": 1.7712812921102037,
+              "z": -0.5
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-1",
+            "purpose": "rest",
+            "target": {
+              "x": 4.4,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-2",
+            "purpose": "rest",
+            "target": {
+              "x": 5.5,
+              "z": 3.9499999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-3",
+            "purpose": "rest",
+            "target": {
+              "x": 6.6,
+              "z": 4.1000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-4",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 1.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-5",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 2.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "rest-seat-6",
+            "purpose": "rest",
+            "target": {
+              "x": 6.65,
+              "z": 3.4
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-1",
+            "purpose": "game",
+            "target": {
+              "x": -6.2,
+              "z": 5.9
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-2",
+            "purpose": "game",
+            "target": {
+              "x": -8.45166604983954,
+              "z": 4.6000000000000005
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-3",
+            "purpose": "game",
+            "target": {
+              "x": -8.451666049839542,
+              "z": 2.0000000000000004
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-4",
+            "purpose": "game",
+            "target": {
+              "x": -6.200000000000001,
+              "z": 0.6999999999999997
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-5",
+            "purpose": "game",
+            "target": {
+              "x": -3.9483339501604604,
+              "z": 1.9999999999999987
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "game-seat-6",
+            "purpose": "game",
+            "target": {
+              "x": -3.94833395016046,
+              "z": 4.6
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "board",
+            "target": {
+              "x": 8.85,
+              "z": -1.7
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-0",
+            "target": {
+              "x": -7,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-1",
+            "target": {
+              "x": -4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-2",
+            "target": {
+              "x": -1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-3",
+            "target": {
+              "x": 1.4,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-4",
+            "target": {
+              "x": 4.199999999999999,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "door-5",
+            "target": {
+              "x": 7,
+              "z": -5.95
+            },
+            "valid": true,
+            "reachable": true
+          },
+          {
+            "id": "exit",
+            "target": {
+              "x": 0,
+              "z": 6.2
+            },
+            "valid": true,
+            "reachable": true
+          }
+        ],
+        "gameTargetDiagnostic": {
+          "target": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "valid": true,
+          "reachable": true
+        }
+      },
+      "layouts": {
+        "baseline": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -7,
+              "z": -6.96,
+              "target": {
+                "x": -7,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": -4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-4",
+              "slot": 4,
+              "wall": "rear",
+              "x": 4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": 4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-5",
+              "slot": 5,
+              "wall": "rear",
+              "x": 7,
+              "z": -6.96,
+              "target": {
+                "x": 7,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -2.8619546181365427,
+              "z": -1.0499999999999994,
+              "heading": 2.0425837048185125,
+              "target": {
+                "x": -3.7712812921102032,
+                "z": -0.4999999999999991
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -2.8619546181365436,
+              "z": -2.9499999999999993,
+              "heading": 1.0990089487712815,
+              "target": {
+                "x": -3.7712812921102046,
+                "z": -3.499999999999999
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "seat-5",
+              "purpose": "study",
+              "x": 0.8619546181365425,
+              "z": -2.950000000000001,
+              "heading": -1.0990089487712809,
+              "target": {
+                "x": 1.7712812921102028,
+                "z": -3.5000000000000013
+              }
+            },
+            {
+              "id": "seat-6",
+              "purpose": "study",
+              "x": 0.861954618136543,
+              "z": -1.05,
+              "heading": -2.042583704818512,
+              "target": {
+                "x": 1.7712812921102037,
+                "z": -0.5
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 0,
+              "target": {
+                "x": -6.2,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -2.8931311266282527,
+              "z": -1.0340932304264392,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "seat-3",
+              "x": -2.8931311266282536,
+              "z": -2.9659067695735595,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109115
+            },
+            {
+              "id": "seat-4",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "seat-5",
+              "x": 0.8931311266282523,
+              "z": -2.9659067695735613,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "seat-6",
+              "x": 0.8931311266282528,
+              "z": -1.0340932304264399,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109117
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-2",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.7800000000000002,
+              "d": 0.8000000000000003
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -1.625,
+              "z": 4.65
+            },
+            {
+              "x": -0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": 1.625,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        },
+        "candidate": {
+          "width": 20,
+          "depth": 14,
+          "doors": [
+            {
+              "id": "door-0",
+              "slot": 0,
+              "wall": "rear",
+              "x": -7,
+              "z": -6.96,
+              "target": {
+                "x": -7,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-1",
+              "slot": 1,
+              "wall": "rear",
+              "x": -4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": -4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-2",
+              "slot": 2,
+              "wall": "rear",
+              "x": -1.4,
+              "z": -6.96,
+              "target": {
+                "x": -1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-3",
+              "slot": 3,
+              "wall": "rear",
+              "x": 1.4,
+              "z": -6.96,
+              "target": {
+                "x": 1.4,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-4",
+              "slot": 4,
+              "wall": "rear",
+              "x": 4.199999999999999,
+              "z": -6.96,
+              "target": {
+                "x": 4.199999999999999,
+                "z": -5.95
+              }
+            },
+            {
+              "id": "door-5",
+              "slot": 5,
+              "wall": "rear",
+              "x": 7,
+              "z": -6.96,
+              "target": {
+                "x": 7,
+                "z": -5.95
+              }
+            }
+          ],
+          "seats": [
+            {
+              "id": "seat-1",
+              "purpose": "study",
+              "x": -0.9999999999999999,
+              "z": -0.10000000000000009,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -0.9999999999999998,
+                "z": 1
+              }
+            },
+            {
+              "id": "seat-2",
+              "purpose": "study",
+              "x": -2.8619546181365427,
+              "z": -1.0499999999999994,
+              "heading": 2.0425837048185125,
+              "target": {
+                "x": -3.7712812921102032,
+                "z": -0.4999999999999991
+              }
+            },
+            {
+              "id": "seat-3",
+              "purpose": "study",
+              "x": -2.8619546181365436,
+              "z": -2.9499999999999993,
+              "heading": 1.0990089487712815,
+              "target": {
+                "x": -3.7712812921102046,
+                "z": -3.499999999999999
+              }
+            },
+            {
+              "id": "seat-4",
+              "purpose": "study",
+              "x": -1.0000000000000004,
+              "z": -3.9,
+              "heading": 2.078676803815902e-16,
+              "target": {
+                "x": -1.0000000000000007,
+                "z": -5
+              }
+            },
+            {
+              "id": "seat-5",
+              "purpose": "study",
+              "x": 0.8619546181365425,
+              "z": -2.950000000000001,
+              "heading": -1.0990089487712809,
+              "target": {
+                "x": 1.7712812921102028,
+                "z": -3.5000000000000013
+              }
+            },
+            {
+              "id": "seat-6",
+              "purpose": "study",
+              "x": 0.861954618136543,
+              "z": -1.05,
+              "heading": -2.042583704818512,
+              "target": {
+                "x": 1.7712812921102037,
+                "z": -0.5
+              }
+            },
+            {
+              "id": "rest-seat-1",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 4.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 4.4,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-2",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 5.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 5.5,
+                "z": 3.9499999999999997
+              }
+            },
+            {
+              "id": "rest-seat-3",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-a",
+              "x": 6.8,
+              "z": 4.9,
+              "heading": 3.141592653589793,
+              "target": {
+                "x": 6.6,
+                "z": 4.1000000000000005
+              }
+            },
+            {
+              "id": "rest-seat-4",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 1.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 1.4
+              }
+            },
+            {
+              "id": "rest-seat-5",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 2.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 2.4
+              }
+            },
+            {
+              "id": "rest-seat-6",
+              "purpose": "rest",
+              "fixtureId": "rest-sofa-b",
+              "x": 7.8,
+              "z": 3.4,
+              "heading": -1.5707963267948966,
+              "target": {
+                "x": 6.65,
+                "z": 3.4
+              }
+            },
+            {
+              "id": "game-seat-1",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 4.85,
+              "heading": -3.141592653589793,
+              "target": {
+                "x": -6.2,
+                "z": 5.9
+              }
+            },
+            {
+              "id": "game-seat-2",
+              "purpose": "game",
+              "x": -7.54233937586588,
+              "z": 4.075,
+              "heading": 2.0943951023931957,
+              "target": {
+                "x": -8.45166604983954,
+                "z": 4.6000000000000005
+              }
+            },
+            {
+              "id": "game-seat-3",
+              "purpose": "game",
+              "x": -7.542339375865881,
+              "z": 2.5250000000000004,
+              "heading": 1.047197551196598,
+              "target": {
+                "x": -8.451666049839542,
+                "z": 2.0000000000000004
+              }
+            },
+            {
+              "id": "game-seat-4",
+              "purpose": "game",
+              "x": -6.2,
+              "z": 1.7499999999999998,
+              "heading": 1.8369701987210297e-16,
+              "target": {
+                "x": -6.200000000000001,
+                "z": 0.6999999999999997
+              }
+            },
+            {
+              "id": "game-seat-5",
+              "purpose": "game",
+              "x": -4.8576606241341205,
+              "z": 2.524999999999999,
+              "heading": -1.0471975511965972,
+              "target": {
+                "x": -3.9483339501604604,
+                "z": 1.9999999999999987
+              }
+            },
+            {
+              "id": "game-seat-6",
+              "purpose": "game",
+              "x": -4.8576606241341205,
+              "z": 4.075,
+              "heading": -2.0943951023931957,
+              "target": {
+                "x": -3.94833395016046,
+                "z": 4.6
+              }
+            }
+          ],
+          "obstacles": [
+            {
+              "id": "table",
+              "x": -1,
+              "z": -2,
+              "w": 2.5,
+              "d": 1.8
+            },
+            {
+              "id": "game-table",
+              "x": -6.2,
+              "z": 3.3,
+              "w": 1.8,
+              "d": 1.4
+            },
+            {
+              "id": "rest-sofa-a",
+              "x": 5.8,
+              "z": 5,
+              "w": 3.3,
+              "d": 1
+            },
+            {
+              "id": "rest-sofa-b",
+              "x": 7.95,
+              "z": 2.4,
+              "w": 1,
+              "d": 3.3
+            },
+            {
+              "id": "rest-table",
+              "x": 5.55,
+              "z": 2.4,
+              "w": 1.3,
+              "d": 0.8
+            },
+            {
+              "id": "tea-cabinet",
+              "x": -8.6,
+              "z": 5.8,
+              "w": 1.78,
+              "d": 0.65
+            },
+            {
+              "id": "bookcase",
+              "x": 8.6,
+              "z": -4.7,
+              "w": 1.5,
+              "d": 0.62
+            },
+            {
+              "id": "rest-lamp",
+              "x": 3.65,
+              "z": 5.7,
+              "w": 0.5,
+              "d": 0.5
+            },
+            {
+              "id": "rear-pot",
+              "x": -9.2,
+              "z": -6.2,
+              "w": 0.6,
+              "d": 0.6
+            },
+            {
+              "id": "board",
+              "x": 9.8,
+              "z": -1.7,
+              "w": 0.3,
+              "d": 2
+            },
+            {
+              "id": "seat-1",
+              "x": -0.9999999999999999,
+              "z": -0.06500000000000009,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "seat-2",
+              "x": -2.8931311266282527,
+              "z": -1.0340932304264392,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "seat-3",
+              "x": -2.8931311266282536,
+              "z": -2.9659067695735595,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109115
+            },
+            {
+              "id": "seat-4",
+              "x": -1.0000000000000004,
+              "z": -3.935,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "seat-5",
+              "x": 0.8931311266282523,
+              "z": -2.9659067695735613,
+              "w": 1.0670996303069973,
+              "d": 1.058374065210912
+            },
+            {
+              "id": "seat-6",
+              "x": 0.8931311266282528,
+              "z": -1.0340932304264399,
+              "w": 1.067099630306997,
+              "d": 1.0583740652109117
+            },
+            {
+              "id": "game-seat-1",
+              "x": -6.2,
+              "z": 4.885,
+              "w": 0.78,
+              "d": 0.8
+            },
+            {
+              "id": "game-seat-2",
+              "x": -7.572650264998336,
+              "z": 4.0925,
+              "w": 1.082820323027551,
+              "d": 1.0754998149518622
+            },
+            {
+              "id": "game-seat-3",
+              "x": -7.5726502649983365,
+              "z": 2.5075000000000003,
+              "w": 1.0828203230275508,
+              "d": 1.075499814951862
+            },
+            {
+              "id": "game-seat-4",
+              "x": -6.2,
+              "z": 1.7149999999999999,
+              "w": 0.7800000000000001,
+              "d": 0.8000000000000002
+            },
+            {
+              "id": "game-seat-5",
+              "x": -4.827349735001665,
+              "z": 2.507499999999999,
+              "w": 1.082820323027551,
+              "d": 1.0754998149518624
+            },
+            {
+              "id": "game-seat-6",
+              "x": -4.827349735001665,
+              "z": 4.0925,
+              "w": 1.082820323027551,
+              "d": 1.0754998149518624
+            }
+          ],
+          "spawn": {
+            "x": 0,
+            "z": 4.65
+          },
+          "arrivals": [
+            {
+              "x": -1.625,
+              "z": 4.65
+            },
+            {
+              "x": -0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": -0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.325,
+              "z": 4.65
+            },
+            {
+              "x": 0.9750000000000001,
+              "z": 4.65
+            },
+            {
+              "x": 1.625,
+              "z": 4.65
+            }
+          ],
+          "boardTarget": {
+            "x": 8.85,
+            "z": -1.7
+          },
+          "gameTarget": {
+            "x": -4.75,
+            "z": 3.3
+          },
+          "exitTarget": {
+            "x": 0,
+            "z": 6.2
+          }
+        }
+      }
+    }
+  ],
+  "pass": true,
+  "expectedExit": 0
+}
