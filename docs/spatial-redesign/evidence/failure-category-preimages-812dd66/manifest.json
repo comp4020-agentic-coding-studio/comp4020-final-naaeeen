@@ -1,0 +1,19 @@
+{
+  "status": "PRE_EDIT_BYTE_PREIMAGES",
+  "head": "812dd66051a81ba39ca9c0a9ec0ab6f5b8be7905",
+  "files": {
+    "tools/board-resource.mjs": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "tools/spatial-resource.mjs": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218",
+    "evaluation/board-resource.protocol.json": "9e0e1f565ba5b1ebe595ded1714f79e79de66666559e302f5c08365d9ebd0ce7",
+    "evaluation/board-resource.results.json": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319",
+    "docs/spatial-redesign/evidence/resource-baseline.protocol.json": "9e0e1f565ba5b1ebe595ded1714f79e79de66666559e302f5c08365d9ebd0ce7",
+    "docs/spatial-redesign/evidence/resource-baseline.results.json": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+    "docs/spatial-redesign/evidence/resource-mixed.protocol.json": "5474adcab48e9d8ce56dece8bc2008cbc8a3aec27bf76d0f23b37dedb29ee97e",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4",
+    "docs/spatial-redesign/evidence/resource-full-mixed.protocol.json": "5474adcab48e9d8ce56dece8bc2008cbc8a3aec27bf76d0f23b37dedb29ee97e",
+    "docs/spatial-redesign/evidence/resource-full-mixed.results.json": "7d6e6d2e557a720c67ffdfb2e3ce39fdff69f33133c07c560a2521e7e1b8d81f",
+    "docs/spatial-redesign/evidence/resource-full-mixed-summary.json": "ec7de6596bd0349be331591fb21f17c43d0686a2013ba7d10e47994326533487",
+    "docs/spatial-redesign/evidence/resource-full-mixed-closure.json": "d34e3ef7f915949189d27095c6ec4db32ad7046dac63ac184422f139ee1c48c2"
+  },
+  "scope": "Tools/protocols/first results copied byte-for-byte; no workload or acceptance rerun."
+}

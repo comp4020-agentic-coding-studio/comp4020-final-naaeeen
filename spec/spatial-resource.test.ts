@@ -23,13 +23,14 @@ describe("spatial resource protocol and evaluator calibration",()=>{
     expect(protocol.p7Preparation.expectedGateCount).toBe(30);
     for(const profile of ["resource-baseline","resource-mixed"]){
       const declared=JSON.parse(read("docs/spatial-redesign/evidence/"+profile+".protocol.json"));
-      const target="docs/spatial-redesign/evidence/"+(profile==="resource-baseline"?profile:"resource-full-mixed")+".protocol.json";
+      const target="docs/spatial-redesign/evidence/"+(profile==="resource-baseline"?"resource-final-baseline":"resource-final-mixed")+".protocol.json";
       expect(Object.keys(declared.commands).sort()).toEqual(["inspect","run"]);
       for(const command of ["inspect","run"])expect(declared.commands[command]).toContain("--protocol-file "+target);
       expect(declared.commands.run).toContain("--run --go ");expect(declared.commands.run).not.toContain("--bootstrap-calibration");
     }
-    expect(read("docs/spatial-redesign/evidence/resource-full-mixed.protocol.json")).toBe(read("docs/spatial-redesign/evidence/resource-mixed.protocol.json"));
+    expect(read("docs/spatial-redesign/evidence/resource-final-mixed.protocol.json")).toBe(read("docs/spatial-redesign/evidence/resource-mixed.protocol.json"));
     expect(read("docs/spatial-redesign/evidence/resource-baseline.protocol.json")).toBe(read("evaluation/board-resource.protocol.json"));
+    expect(read("docs/spatial-redesign/evidence/resource-final-baseline.protocol.json")).toBe(read("evaluation/board-resource.protocol.json"));
     const previousDefault=JSON.parse(read("docs/spatial-redesign/evidence/resource-registered-default-prebinding.protocol.json")),currentDefault=JSON.parse(read("evaluation/board-resource.protocol.json"));
     for(const key of ["schemaVersion","durationSeconds","automaticRetry","configuration","fixture","workload","slowReader","negativeControls","bounds","measurement","classification","limitations","storageAcceptance","baseWorkloadRegisteredAtUTC"])expect(currentDefault[key],"registered default "+key).toEqual(previousDefault[key]);
     for(const source of ["src/house-studio.ts","src/house-studio-codec.ts","src/house-gathering.ts","public/house-studio-preview.js","public/house-studio-ui.js","public/house-gathering-ui.js","public/house-ambience.js","tools/board-resource.mjs","tools/board-resource-p7.mjs","tools/spatial-resource.mjs"])expect(protocol.sourceFiles).toContain(source);

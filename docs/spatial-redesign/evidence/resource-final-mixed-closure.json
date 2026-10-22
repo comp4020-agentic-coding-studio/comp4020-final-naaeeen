@@ -1,0 +1,37 @@
+{
+  "status": "FAIL",
+  "profile": "mixed",
+  "protocolSHA256": "00c77a109bae47e2245dcd9db279a9f3e5d078c5f03e616fc28e30c41d1ce09c",
+  "sourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+  "durationSeconds": null,
+  "failure": {
+    "phase": "measurement",
+    "code": "SPATIAL_HTTP_409_STALE_ZONE",
+    "ackCategory": "OTHER"
+  },
+  "gates": null,
+  "processClosure": {
+    "generatorPID": 63110,
+    "serverPID": 63134,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "parentExecution": {
+    "exitCode": 1,
+    "elapsedSeconds": 32.39505457878113,
+    "reportedProcessIDsAbsent": true,
+    "reportedProcessIDs": {
+      "generatorPID": 63110,
+      "serverPID": 63134
+    },
+    "existingProcesses": {
+      "55373": "service",
+      "58795": "service"
+    },
+    "newOwnedProcessesRemaining": {},
+    "protocolUnchanged": true,
+    "sourceUnchanged": true
+  },
+  "scope": "Actual first final-layout run. Failed mixed has no complete300-second resource endpoint."
+}

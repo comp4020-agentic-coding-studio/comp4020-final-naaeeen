@@ -1,0 +1,40 @@
+{
+  "status": "READY_FOR_PARENT_EXECUTION_NO_LOAD_RUN",
+  "head": "1c041d34672ca4d3d1713c169e2c39c286f33e9c",
+  "protocolSHA256": {
+    "resource-final-baseline.protocol.json": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
+    "resource-final-mixed.protocol.json": "00c77a109bae47e2245dcd9db279a9f3e5d078c5f03e616fc28e30c41d1ce09c"
+  },
+  "sourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+  "all53WorkingAndGitHEADHashesMatch": true,
+  "conditions": {
+    "baselineGroups": 14,
+    "mixedGroups": 11,
+    "allNonNineRegistrationFieldsUnchanged": true
+  },
+  "metadataSpec": {
+    "preimagePath": "docs/spatial-redesign/evidence/resource-final-metadata-spec-preimage.ts",
+    "beforeSHA256": "eca126ae86a594acf010949f29f8f573b2aeabb2cc388f6b28630cd0c59159d3",
+    "currentSHA256": "7e48a0786228e8d8546f6b3c5b39fc4f2177c00ec6d93ef6a5468298640cad78",
+    "onlyChange": "Four expected elapsed-alias string occurrences changed to final aliases; assertions/gates otherwise identical.",
+    "testResult": "4/4 PASS",
+    "APP_URL": "http://127.0.0.1:4108",
+    "log": "resource-final-metadata-tests.txt"
+  },
+  "preimagesPreserved": 6,
+  "protectedHistoryFilesAtBinding": 528,
+  "freshOutputPathsUnused": [
+    "docs/spatial-redesign/evidence/resource-final-baseline.results.json",
+    "docs/spatial-redesign/evidence/resource-final-baseline.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-final-baseline.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-final-baseline.log",
+    "docs/spatial-redesign/evidence/resource-final-baseline.closure.json",
+    "docs/spatial-redesign/evidence/resource-final-mixed.results.json",
+    "docs/spatial-redesign/evidence/resource-final-mixed.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-final-mixed.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-final-mixed.log",
+    "docs/spatial-redesign/evidence/resource-final-mixed.closure.json"
+  ],
+  "load": "NOT_RUN",
+  "idleACK": "No owned active command, test, browser, service or resource process; files frozen, parent owns execution."
+}

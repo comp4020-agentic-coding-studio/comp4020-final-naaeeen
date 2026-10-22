@@ -1,0 +1,25 @@
+{
+  "status": "PARENT_READBACK_PASS_BEFORE_EXECUTION",
+  "head": "1c041d34672ca4d3d1713c169e2c39c286f33e9c",
+  "profiles": [
+    {
+      "profile": "baseline",
+      "protocolSHA256": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
+      "sourceFiles": 53,
+      "sourceAtGitHead": true,
+      "allNonRegistrationConditionsUnchanged": true,
+      "freshOutputs": true
+    },
+    {
+      "profile": "mixed",
+      "protocolSHA256": "00c77a109bae47e2245dcd9db279a9f3e5d078c5f03e616fc28e30c41d1ce09c",
+      "sourceFiles": 53,
+      "sourceAtGitHead": true,
+      "allNonRegistrationConditionsUnchanged": true,
+      "freshOutputs": true
+    }
+  ],
+  "canonicalCopiesByteIdentical": true,
+  "elapsedUnrunPreimagesUnchanged": true,
+  "execution": "NOT_RUN"
+}

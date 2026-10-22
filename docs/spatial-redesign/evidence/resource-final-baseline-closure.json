@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "profile": "baseline",
+  "protocolSHA256": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
+  "sourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+  "durationSeconds": 300,
+  "failure": null,
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": true,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": true,
+    "normalInputs": true,
+    "workload": true,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": true,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true
+  },
+  "processClosure": {
+    "generatorPID": 63031,
+    "serverPID": 63055,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "parentExecution": {
+    "exitCode": 0,
+    "elapsedSeconds": 296.2692503929138,
+    "reportedProcessIDsAbsent": true,
+    "reportedProcessIDs": {
+      "generatorPID": 63031,
+      "serverPID": 63055
+    },
+    "existingProcesses": {
+      "55373": "service",
+      "58795": "service"
+    },
+    "newOwnedProcessesRemaining": {},
+    "protocolUnchanged": true,
+    "sourceUnchanged": true
+  },
+  "scope": "Actual first final-layout run. Failed mixed has no complete300-second resource endpoint."
+}

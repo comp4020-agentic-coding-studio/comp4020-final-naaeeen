@@ -1,0 +1,9 @@
+{
+  "scope": "Only current fresh qualification command aliases/copy identities updated. All original14baseline/11mixedconditions and application/grader assertions unchanged. No production source change.",
+  "tests": 4,
+  "passed": 4,
+  "exitCode": 0,
+  "preimageSHA256": "6ac5387247a3a70c8a355c4f6dc114e3b5d78e9bde1898c3ec0fa4ad6cc98592",
+  "newSpecSHA256": "eca126ae86a594acf010949f29f8f573b2aeabb2cc388f6b28630cd0c59159d3",
+  "basis": "New source-specific post-clock registration; no extra bootstrap or result replacement."
+}

@@ -7,5 +7,10 @@
   },
   "remainingNewOwnedProcesses": {},
   "protocolUnchanged": true,
-  "sourceUnchanged": true
+  "sourceUnchanged": true,
+  "reportedProcessIDs": {
+    "generatorPID": 50370,
+    "serverPID": 50395
+  },
+  "reportedProcessIDsAbsent": true
 }

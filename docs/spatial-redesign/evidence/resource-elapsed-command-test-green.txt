@@ -1,0 +1,14 @@
+Already up to date
+Done in 47ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/spatial-resource.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 723[2mms[22m[39m
+   [32m✓[39m spatial resource protocol and evaluator calibration [2m(4)[22m
+     [33m[2m✓[22m[39m uses independently generated near-cap PNG bytes accepted unchanged by the real codec[33m 477[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 09:16:50
+[2m   Duration [22m 928ms[2m (tests 89%, transform 8%, import 3%)[22m
+

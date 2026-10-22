@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "registeredAtUTC": "2026-10-22T21:36:34.333666+00:00",
+  "registeredAtUTC": "2026-10-22T22:51:35.084243+00:00",
   "status": "FROZEN_CURRENT_FULL_RESOURCE_REGISTRATION_ONLY",
   "scope": "New12root+12board mixed standing/seated profile. Same300s board pressure, budgets and faults; changed motion criterion explicitly grades standing10Hz periods and measured seated suppression. Original fullmotion baseline separately registered. NOT RUN.",
   "durationSeconds": 300,
@@ -37,7 +37,7 @@
     "public/house-version.d.ts": "1cc80775232e290162c50f1a8ca09fd55551b41b0adde8c5fdb37250d6090567",
     "public/house-version.js": "dad0d5427a7176e1c08f2b90b8ae34406eb2c1a92454feedf00ff48cf2aaf959",
     "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
-    "public/house.css": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9",
+    "public/house.css": "93416803dd11cb80b372c67488c8be8f9b94f34f64b96f8bb706d8dd39a36325",
     "public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
     "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
     "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
@@ -48,20 +48,20 @@
     "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
     "src/house-gathering.ts": "5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f",
     "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
-    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
     "src/house-store.ts": "53916a46e9b540d2904000c22c23eed13d062b28072d7fe73ab8f63b29b6b246",
     "src/house-studio-codec.ts": "054c8a6028f1d314f0f2f89f98cd97b8eaa40c9d4aff5332dc7762763613b270",
     "src/house-studio.ts": "87c7ef0b5c9dd53fa705450a1275b4448a7209d4f0c24835c5bfb9ea6f3754f1",
     "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
     "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
-    "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1",
+    "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd",
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
     "tools/board-resource-p7.mjs": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f",
-    "tools/board-resource.mjs": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
-    "tools/spatial-resource.mjs": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218"
+    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb"
   },
-  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
-  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "sourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+  "instrumentSHA256": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
   "configuration": {
     "houses": 2,
     "membersPerHouse": 6,
@@ -160,8 +160,8 @@
     "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
   ],
   "commands": {
-    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-full-mixed.protocol.json --inspect",
-    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-full-mixed.protocol.json --run --go <protocolSHA256> --freeze 8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e"
+    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-final-mixed.protocol.json --inspect",
+    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-final-mixed.protocol.json --run --go <protocolSHA256> --freeze b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb"
   },
   "sourceFiles": [
     ".gitattributes",
@@ -220,15 +220,26 @@
   ],
   "sourceBinding": {
     "status": "FROZEN_PARENT_BINDING_ONLY",
-    "boundAtUTC": "2026-10-22T21:36:34.333666+00:00",
-    "head": "812dd66051a81ba39ca9c0a9ec0ab6f5b8be7905",
-    "runtimeScope": "Current final layout; unchanged17backend and reviewed rate/memory instruments",
+    "boundAtUTC": "2026-10-22T22:51:35.084243+00:00",
+    "head": "1c041d34672ca4d3d1713c169e2c39c286f33e9c",
+    "runtimeScope": "CSS-only final layout; elapsed-clock backend and failure-category instruments unchanged",
     "requiredFiles": 53,
     "node": "v24.21.0",
-    "priorProtocolSHA256": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255",
-    "currentSourceProofProtocolSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
-    "registrationScriptSHA256": "a9cc27514054279d659907b8d3397e5417111d38a48286fd7b2904a669835e62",
-    "authorization": "Registration and inspection only; parent owns separate full execution GO"
+    "priorProtocolSHA256": "cb7c9121ad96fdfe3093c0e06b98c8ea831d520b9bdc2322489e1e5d79b6e71d",
+    "priorSourceProofProtocolSHA256": "fed4f30bfcc83b04e95e46a528fea9e5bcdde5137451bf67784483a7797d8f93",
+    "priorSourceManifestSHA256": "9bf3f70d400881cebeb939fd21b6ed1c5525cecddb45c38cf57870fb75f537e8",
+    "approvedSourceChanges": {
+      "public/house.css": "93416803dd11cb80b372c67488c8be8f9b94f34f64b96f8bb706d8dd39a36325"
+    },
+    "registrationScriptSHA256": "bf5f5aa40d6f331820f312335335c7043aac59e8161d1e843df88c9b94ff471b",
+    "authorization": "Registration and inspection only; parent owns separate full execution GO",
+    "requiredCheckEvidence": {
+      "path": ".local/spatial-apply/required-current-10.json",
+      "sha256": "a16bd693c15bdb6967d68369eede5eb7e03bb7b81a8548cf23b30a0a09d406f7",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "coveredFiles": 48
+    }
   },
   "storageAcceptance": {
     "registeredAtUTC": "2026-10-21T20:15:28.112510+00:00",
@@ -476,7 +487,7 @@
   },
   "memoryDiagnosticRegistration": {
     "schemaVersion": 1,
-    "purpose": "One full300second profile; original100ms sampler and gates unchanged; no rate trace opt-in",
+    "purpose": "One NEW final-layout300second source qualification; original100ms sampler and gates unchanged; no rate trace opt-in",
     "execution": "NOT_RUN_REQUIRES_SEPARATE_PARENT_GO",
     "automaticRetry": false
   }
