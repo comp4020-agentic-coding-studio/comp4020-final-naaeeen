@@ -556,3 +556,9 @@ optimization. RSS, heap and external bytes are overlapping/nonadditive measures;
 a long-lived aggregate phase label does not establish allocation causality.
 Predeclare order/attempt limits and keep every diagnostic outcome. Diagnostic
 bootstraps and a later favorable sample cannot replace sustained workload acceptance.
+
+For runtime verification, prefer installed version commands and locked manifests.
+Local environment/configuration files may contain credentials; output only explicit
+allowlisted nonsecret fields, never the whole file or process environment. A source
+review does not require deployment tokens. Project AGENTS/CLAUDE carry this bounded
+rule; no permission setting, hook, credential or global configuration is changed.

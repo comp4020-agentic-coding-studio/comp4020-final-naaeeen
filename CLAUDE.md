@@ -1,3 +1,11 @@
+# Local configuration safety
+
+Local environment/configuration files can contain deployment credentials. Runtime
+verification must use installed version commands, locked manifests and explicitly
+allowlisted nonsecret fields. Never print whole `mise.local.toml`, `.env*`, process
+environments or credential files. Source reviewers do not need those files. Keep
+credential changes separate and obtain the owner's scoped authorization.
+
 # Active spatial redesign implementation
 
 The owner has reopened overall product/interaction design. Read
