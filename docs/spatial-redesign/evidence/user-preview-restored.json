@@ -1,0 +1,12 @@
+{
+  "status": "RUNNING_LOCAL_PREVIEW",
+  "url": "http://localhost:4093/",
+  "healthHTTP": 200,
+  "dataPreservation": "Original three SQLite files remain untouched; service uses verified per-file existing-data copy. The real service migration rehearsal preserved every original table digest.",
+  "migrationEvidence": "preview-copy-migration.json",
+  "runtimeSourceManifestSHA256": "0afe5b90dd5188df9cd1f59825a01fdc88edfe10aae24844cc4fc807cdb0b65d",
+  "runtimeSourceMatchesCurrent": true,
+  "nativeUIObservation": "In-app browser visibly loads current English Night Neighbourhood title with Create house/Join friends. New browser profile has no restored identity cookie; no original identity was replaced or deleted.",
+  "browserScope": "Title/health/source and checked copy. Separate actual multi-identity journeys cover owned-room/sofa/study; current six-person/resource gates are still pending.",
+  "exposure": "Local only; no push or deploy."
+}
