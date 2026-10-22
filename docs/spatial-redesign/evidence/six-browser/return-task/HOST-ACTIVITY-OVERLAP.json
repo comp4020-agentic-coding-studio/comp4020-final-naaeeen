@@ -1,0 +1,19 @@
+{
+  "status": "DISCLOSED_HOST_ACTIVITY_OVERLAP",
+  "resourceWrapperStartedAt": "2026-10-22T21:40:45.592598Z",
+  "calibrationRecordedAt": "2026-10-22T21:40:57.554Z",
+  "calibrationTimestampSource": "../calibration-return-task-paging-first.json at field, independently read by parent",
+  "command": "mise exec -- node --check docs/spatial-redesign/evidence/six-browser/return-runner.mjs; mise exec -- node docs/spatial-redesign/evidence/six-browser/return-runner.mjs --calibrate --label return-task-paging-first 2>&1 | tee .local/six-return-paging-first-calibration.log; mise exec -- node docs/spatial-redesign/evidence/six-browser/return-runner.mjs",
+  "exactCommandStartAt": "NOT_CAPTURED",
+  "exactCommandEndAt": "NOT_CAPTURED",
+  "toolElapsedSeconds": 2.9742933,
+  "durationScope": "Combined WSL command containing syntax check, pure calibration and source inspect; not an isolated calibration duration or exact wall-clock interval",
+  "existingStdoutLog": ".local/six-return-paging-first-calibration.log",
+  "existingToolChunk": "642dc9",
+  "reason": "The compound command was issued before the worker received the resource hold, but its observed calibration timestamp falls after the resource wrapper started.",
+  "productionSourceChanged": false,
+  "browserStartedByCalibration": false,
+  "rerunPerformed": false,
+  "claimBoundary": "Do not hide or replace the workload attempt, or infer uncontended host conditions/performance optimization. Parent annotates the resource result's actual scope.",
+  "subsequentAction": "All tests, inspect calls, native work and workload calls held until parent release; only static packet and replay documentation continue."
+}

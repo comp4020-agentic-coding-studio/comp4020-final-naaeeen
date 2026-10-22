@@ -1,0 +1,40 @@
+{
+  "status": "PREPARED_HELD_NO_BROWSER",
+  "noAssertionChanges": true,
+  "runnerReversePathReplacementByteEqual": true,
+  "helperComparisons": {
+    "runner.mjs": {
+      "v3SHA256": "62d5046da05862e734826d83dba8cec6fa3231a36ce87a66132324010615cd8b",
+      "v4SHA256": "2d99b2acec4508c4de5a041307a1493360dd3cd0d5df1f8280ef62e878095997",
+      "difference": "Capture/evidence paths only"
+    },
+    "fixture.mjs": {
+      "v3SHA256": "4b9b3d50e39b96aa2288132bc85621cdf56ea38d2738428ed7af7a9d2970e0ff",
+      "v4SHA256": "4b9b3d50e39b96aa2288132bc85621cdf56ea38d2738428ed7af7a9d2970e0ff",
+      "difference": "Byte-identical"
+    },
+    "guards.mjs": {
+      "v3SHA256": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+      "v4SHA256": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+      "difference": "Byte-identical"
+    },
+    "recovery-tasks.mjs": {
+      "v3SHA256": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+      "v4SHA256": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+      "difference": "Byte-identical"
+    },
+    "placement-block-guard.mjs": {
+      "v3SHA256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+      "v4SHA256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+      "difference": "Byte-identical"
+    }
+  },
+  "protocolOnlyChangedFields": [
+    "version",
+    "priorCandidate"
+  ],
+  "protocolCriteriaAfterRemovingProvenanceExactlyEqual": true,
+  "preservedV3ProtocolSHA256": "e5ac8ebe80908cf64ca824c9a3c6093cb44bad81b00354396956c7318c4088fb",
+  "preservedV3FirstResultSHA256": "881a6e740faa75d7333e0f63a8fcd78a1bede9e1a0c40d607d9d9253978654a2",
+  "priorPureControls": "V3 unchanged helper/fixture source has22guard,7baseline,4pending-block controls; not rerun because only capture/evidence paths and candidate CSS differ. New native result remains UNRUN."
+}

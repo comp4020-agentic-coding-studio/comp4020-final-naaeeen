@@ -1,0 +1,14 @@
+{
+  "status": "UNRUN_PRE_CLOCK_SOURCE_BINDING",
+  "priorPacket": "pre-clock-REVIEW-PACKET.json",
+  "priorManifest": "pre-clock-SOURCE-BINDING.json",
+  "nativeRunOccurred": false,
+  "reason": "Backend monotonic-clock source and retained launch changed before native execution. The prior packet remains historical and cannot accept the new backend.",
+  "newParentReportedLaunch": {
+    "pid": 55373,
+    "execSession": 20332,
+    "liveVerifiedByWorker": false
+  },
+  "finalBindingOrInspectPerformed": false,
+  "nextStep": "Wait for parent check9 and new baseline/mixed qualification closure, then one source-only inspect/rebinding and separate native GO."
+}

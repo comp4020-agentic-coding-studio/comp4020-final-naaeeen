@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Actual captured baseline production component plus the exact shared fixture in JSDOM at nominal1920x1080. DOM/callback/roving-handler wiring only; geometry, hit testing, native browser input and desktop layout NOT RUN.",
+  "checks": [
+    "same six long names reachable in baseline inline roster",
+    "baseline inline Return/Replace controls require no candidate disclosure",
+    "common native-button handlers page twelve stable pieces each way",
+    "common Reference, Escape/focus restore and Chat callback",
+    "shared tray/board roving handlers and placement callback payload use no candidate selector",
+    "shared Leave/watch/Join outcomes require explicit fixture roster after callback ACK",
+    "same Return outcome from existing baseline inline location"
+  ],
+  "newOnlySelectorQueries": 0,
+  "browserOrNetworkStarted": false,
+  "oldComponentSHA256": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab",
+  "fixtureSHA256": "57a9dd6b827538d49d422c392ded354079681d49c362467b659c66a49072dea5",
+  "controlSHA256": "025fe9852ce52434253a9572a3e0066952d414c8f546f931b00afc42de8685b7"
+}

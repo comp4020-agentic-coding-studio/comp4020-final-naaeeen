@@ -1,0 +1,486 @@
+{
+  "status": "FAIL",
+  "label": "current-compact-first",
+  "scope": "Matched synthetic component layout in actual Chromium. This is not six-user, server-persistence, human A/B, physical-phone, performance, or deployment acceptance.",
+  "startedAt": "2026-10-22T20:29:40.585Z",
+  "finishedAt": "2026-10-22T20:29:55.498Z",
+  "durationMs": 15919.422759000001,
+  "protocolSHA256": "9e571bd2da7864a1a00a55dbfbc106809c3d23bbf9fd46f525b998e77a1ecf52",
+  "runnerSHA256": "836cab298d5943e8997edf359de5f032c2f7080f9b8dbf4a4ce33074d4ff280e",
+  "sourceManifestSHA256": "7917f020069605bc460f64483c5e5ee84b4f0ee104f20f3e344bea606ea87216",
+  "sourceUnchanged": true,
+  "runtime": {
+    "node": "v24.21.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "angle": "swiftshader"
+  },
+  "cases": [
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "portrait",
+        "width": 390,
+        "height": 844,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "BASELINE_LAYOUT_FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "board",
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "secondPageLayout": {
+        "pass": false,
+        "failures": [
+          "board",
+          "action-reference",
+          "action-chat",
+          "wrapper-game-panel-stand",
+          "wrapper-break-picture",
+          "wrapper-break-four"
+        ]
+      },
+      "watchingLayout": {
+        "pass": false,
+        "failures": [
+          "board",
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 21,
+          "y": 32.78125,
+          "width": 157.984375,
+          "height": 98,
+          "right": 178.984375,
+          "bottom": 130.78125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": false
+        },
+        "pass": false
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 191.78125,
+            "width": 348,
+            "height": 44,
+            "right": 369,
+            "bottom": 235.78125,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 142.78125,
+            "width": 171.5,
+            "height": 44,
+            "right": 192.5,
+            "bottom": 186.78125,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-portrait-joined.png",
+          "sha256": "53aa9a0c5e5e1ee848b2ee285f59c99ba5481a174941bad38705f3b2409f0c2c",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "portrait",
+        "width": 390,
+        "height": 844,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "native-details",
+      "disclosurePresent": true,
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "native details keyboard toggle, six exact full names reachable, Return/Replace/Close targets44px",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-portrait-joined.png",
+          "sha256": "10db955593a60d10af68f377e896c9f56e75420c91252573ccc43017ebfcee9d",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-portrait-players.png",
+          "sha256": "4d3dec2035686c26289a1e2d77ee4d15771cc3c4c4bbac58dd86de8bb0a0bb42",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080,
+        "hasTouch": false,
+        "isMobile": false
+      },
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 371,
+          "y": 312.3125,
+          "width": 941.59375,
+          "height": 33.59375,
+          "right": 1312.59375,
+          "bottom": 345.90625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "pass": true
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 705.921875,
+            "y": 363.109375,
+            "width": 137.15625,
+            "height": 44,
+            "right": 843.078125,
+            "bottom": 407.109375,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 371,
+            "y": 363.109375,
+            "width": 183.578125,
+            "height": 44,
+            "right": 554.578125,
+            "bottom": 407.109375,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-desktop-joined.png",
+          "sha256": "ca8fa2d217695235e75f007393d809ffcee81250f9de5a0fd067da00170a1f22",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080,
+        "hasTouch": false,
+        "isMobile": false
+      },
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "native-details",
+      "disclosurePresent": true,
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "native details keyboard toggle, six exact full names reachable, Return/Replace/Close targets44px",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-desktop-joined.png",
+          "sha256": "afe4ca15bac1b329e0a97404b28251f9c9339e6ddfadd5ff39b39dbaa21913ca",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-desktop-players.png",
+          "sha256": "e920c9ba84ccf0ae60cbd116b4019d728ff03fd701faa8447d211d3713d0a7bb",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "landscape",
+        "width": 844,
+        "height": 390,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 21,
+          "y": 62,
+          "width": 394.375,
+          "height": 42,
+          "right": 415.375,
+          "bottom": 104,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "pass": true
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 296.109375,
+            "y": 105,
+            "width": 112.296875,
+            "height": 44,
+            "right": 408.40625,
+            "bottom": 149,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 105,
+            "width": 150.984375,
+            "height": 44,
+            "right": 171.984375,
+            "bottom": 149,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-landscape-joined.png",
+          "sha256": "d7df583321f2a1d7e9999f646e2a9cee534277ee5794cbee3717b625ee681510",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "landscape",
+        "width": 844,
+        "height": 390,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "board"
+        ]
+      },
+      "checks": [],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-landscape-joined.png",
+          "sha256": "69c177f5b29b1752996ae452d56f44c5f03c9c6db71149b22af24e7b1e5b22fd",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-landscape-failure.png",
+          "sha256": "69c177f5b29b1752996ae452d56f44c5f03c9c6db71149b22af24e7b1e5b22fd",
+          "published": false
+        }
+      ]
+    }
+  ],
+  "failure": {
+    "message": "New initial layout: board"
+  },
+  "cleanup": {
+    "contexts": [
+      {
+        "case": "old-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      }
+    ],
+    "errors": [],
+    "browserDisconnected": true,
+    "remainingContexts": 0
+  },
+  "rawDirectory": ".local/picture-layout-preflight/run-current-compact-first",
+  "nativePixelReview": "NOT_RUN",
+  "approvedPNGBytesCopied": false
+}

@@ -1,0 +1,266 @@
+{
+  "status": "PASS_VISUAL_REVIEW_PENDING",
+  "taskDurationMs": 188616.585479,
+  "deadlineMs": 240000,
+  "checks": 32,
+  "placements": 24,
+  "authors": 6,
+  "perAuthorCounts": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "sixPhysicalSeats": 6,
+  "visibleChairTargets": 6,
+  "authenticatedLabels": 6,
+  "posedMeshes": 6,
+  "frameRejections": [],
+  "bindingValid": true,
+  "sourceFiles": 512,
+  "sourceUnchanged": true,
+  "runnerUnchanged": true,
+  "protocolUnchanged": true,
+  "roomReturn": {
+    "identityPreserved": true,
+    "housePreserved": true,
+    "ownedRoomReached": true,
+    "ownerIsAuthenticatedSelf": true,
+    "controller": true,
+    "studioVisible": true,
+    "placementsUnchanged": true,
+    "placementCount": 24
+  },
+  "errorCounts": {
+    "page": 0,
+    "console": 1
+  },
+  "cleanup": {
+    "attempted": true,
+    "expectedContextCount": 6,
+    "contexts": [
+      {
+        "client": 0,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      },
+      {
+        "client": 1,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      },
+      {
+        "client": 2,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      },
+      {
+        "client": 3,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      },
+      {
+        "client": 4,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      },
+      {
+        "client": 5,
+        "closeResolved": true,
+        "closeEvent": true,
+        "stillPresent": false
+      }
+    ],
+    "browserDisconnected": true,
+    "remainingContexts": 0,
+    "errors": []
+  },
+  "originalPNGs": [
+    {
+      "client": 2,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/three-contributors.png",
+      "sha256": "04d5dd876726897f38205c1489d070c459ce706fcb7a683578b079248d1df251",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 74,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    },
+    {
+      "client": 5,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/six-contributors-touch.png",
+      "sha256": "df81ae1294d8da853c676a801c76b17dae96cf69aab39064f6ff12476f602259",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 25,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    },
+    {
+      "client": 0,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/six-physical-chairs-overview.png",
+      "sha256": "437f9cb3574130f2bbe31221e410eecab983baa8df4ffe91450a63b76f1dcf0b",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 77,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    },
+    {
+      "client": 0,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/complete-desktop.png",
+      "sha256": "e08c6e7253e206f23127d2756bccf09c3e35ab86dea9bb35daa732f0201eb566",
+      "width": 1920,
+      "height": 1080,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 67,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    },
+    {
+      "client": 5,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/complete-touch.png",
+      "sha256": "93dfdb6667ca43f1d0d205ac5d8cfa8c8f952252c7219d7b95e6330f448539be",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 31,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    },
+    {
+      "client": 5,
+      "file": ".local/spatial-six-browser/run-return-elapsed-first/return-owned-room-touch.png",
+      "sha256": "2db087a011fef17b4c4ad3704fedcc4d1e26dd42fa04384554372d729a514c8a",
+      "width": 390,
+      "height": 844,
+      "nonOpaquePixels": 0,
+      "crcCheckedChunks": 19,
+      "codeFreeBefore": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "codeFreeAfter": {
+        "inviteKnown": true,
+        "titleHidden": true,
+        "lobbyHidden": true,
+        "housePanelHidden": true,
+        "codeDisplayVisible": false,
+        "inviteTextVisible": false,
+        "inviteInputVisible": false
+      },
+      "published": false
+    }
+  ],
+  "privacy": {
+    "rawBodiesErrorsAndPNGsExcluded": true,
+    "nativePixelReview": "NOT_RUN",
+    "approvedPNGBytesCopied": false
+  },
+  "processAudit": {
+    "exitCode": 1,
+    "matches": 0
+  },
+  "nativePixelReview": "NOT_RUN",
+  "approvedPNGBytesCopied": false
+}

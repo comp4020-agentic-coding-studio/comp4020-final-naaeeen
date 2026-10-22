@@ -1,0 +1,10 @@
+{
+  "sourceSHA256": {
+    "public/house-puzzle-ui.js": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab",
+    "public/house.css": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00",
+    "public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    "public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+  }
+}

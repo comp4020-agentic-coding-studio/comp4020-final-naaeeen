@@ -1,0 +1,32 @@
+{
+  "status": "REGISTERED_READY_UNDER_ROOT_EXECUTION_GO",
+  "browserStarted": false,
+  "fixedDeadlineMs": 90000,
+  "retries": 0,
+  "contexts": 6,
+  "protocolSHA256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "runnerSHA256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "sourceBindingPath": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/source-binding.json",
+  "runCommand": "mise exec -- node .local/picture-layout-preflight-v5/runner.mjs --run --label current-menu-scroll-first --protocol d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d --freeze 2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942 --runner 093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "candidateExpectedSourceHashes": {
+    "public/house-puzzle-ui.js": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8",
+    "public/house.css": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a"
+  },
+  "preservedSourceCopies": {
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/runner.mjs": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/fixture.mjs": "a66a9378f2be3d58175adbbe43d7b7ab591a9ce2b5bc7206e768547dcfc81b96",
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/recovery-tasks.mjs": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/placement-block-guard.mjs": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+    ".local/picture-layout-preflight-v5/bound-after-baseline-provenance/protocol.json": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d"
+  },
+  "taskAssertionsUnchanged": true,
+  "verifiedDifferences": "Runner capture/evidence paths and binding-only source allowlist for the declared house-ui capacity-badge change; fixture explicitly adds capacity6 to both variants. Reversing exactly those changes recovers V4 bytes. Recovery/target/blocked-placement guard bytes and all90s/6context task criteria remain unchanged. Protocol changes only version/provenance.",
+  "currentInputSourceChanges": "Picture menu header/Close moved outside independent content scroller; CSS sticky header replaced with bounded separate scrolling content; component/global badge use validated2-6 house capacity. Exact three-file captured diff is CANDIDATE-SOURCE-CHANGE.diff.",
+  "preservedFailures": "V4 current-compact-anchor-first FAIL and all older actual/prepared packets remain unchanged.",
+  "checks": "Node syntax passed. Prior scoped controls retained; no new native result claimed.",
+  "nextStep": "Separate root GO after contextual source/preparation review. Whole-six and maintained13 remain held.",
+  "baselineProvenance": "BASELINE-PROVENANCE.json proves old7592dd equals actual fbdc853 Git blob and original six first-failure baseline; optional capture replay is now deterministic from Git. Global controller is not booted by fixture."
+}

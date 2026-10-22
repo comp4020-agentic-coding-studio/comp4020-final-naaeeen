@@ -1,0 +1,24 @@
+Already up to date
+Done in 57ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+[90mstdout[2m | docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22m[2mmaps six actual production avatar display-name children and preserves mesh IDs
+[22m[39m{"scope":"Offline actual production DOM construction; GPU and host layout mocked","structuralLabels":6,"mappedIds":["00000000-0000-4000-8000-000000000001","00000000-0000-4000-8000-000000000002","00000000-0000-4000-8000-000000000003","00000000-0000-4000-8000-000000000004","00000000-0000-4000-8000-000000000005","00000000-0000-4000-8000-000000000006"],"legacyAliasLabels":6,"legacyPlayerIdAttributes":6}
+
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mmaps six actual production avatar display-name children and preserves mesh IDs[33m 327[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mdoes not depend on legacy class/playerId aliases when removed[32m 142[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mdoes not depend on legacy class/playerId aliases when spoofed[32m 67[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects a production label with missing-child[32m 74[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects a production label with unknown-name[32m 66[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects a production label with duplicate-name[32m 62[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects a production label with wrong-self-suffix[32m 57[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects ambiguous authenticated mapping input: duplicate-name[32m 51[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects ambiguous authenticated mapping input: duplicate-id[32m 57[2mms[22m[39m
+ [32m✓[39m docs/spatial-redesign/evidence/six-browser/dom-calibration.test.mjs[2m > [22mrejects ambiguous authenticated mapping input: unknown-self[32m 43[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 06:38:52
+[2m   Duration [22m 1.94s[2m (tests 51%, import 41%, transform 7%)[22m
+

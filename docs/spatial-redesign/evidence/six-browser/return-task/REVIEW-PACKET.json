@@ -1,0 +1,42 @@
+{
+  "status": "READY_HELD_FOR_RESOURCE_RELEASE_AND_NARROW_ROOT_REVIEW",
+  "scope": "Real six-browser task amendment plus targeted maintained-spec semantics. No native run or integrated acceptance yet.",
+  "runner": "../return-runner.mjs",
+  "protocol": "../return-protocol.md",
+  "runnerSHA256": "8cfbd93c99d39de8e77cf9d21841f4b3f05ccc9db0e699c8185dcb112aa63a02",
+  "protocolSHA256": "450489fdc02b69bda67ee550f008e0d4f6ffa4d92e533aab6e7380e27f05482e",
+  "sourceManifestSHA256": "9bccfc1b061a8ecc24b62453c60b6d314c13ca488ded617ec44efcecb002bea8",
+  "sourceFiles": 512,
+  "helperSHA256": "fb7673f9c5513eb9b3ec06c9af2b9118c522dc70ca5c303ee50fb10dcc40e3e3",
+  "maintainedSpecSHA256": "303296add9f07fd202eda6788f42cae1ef73a99673129de2e4f7f3f21ee62184",
+  "preservedOriginalRunnerSHA256": "e825f2806eccf356620d9702f5483bd259a6b87b8eb2f73a9eb190647f5f44f5",
+  "preservedOriginalProtocolSHA256": "bfb409d664fdeaacfbdee8fe38b898ed449eb9c7e8d87368a7dbc2e6622346c0",
+  "checks": {
+    "syntax": "PASS",
+    "pureControls": 104,
+    "previousPureControlsRetained": 82,
+    "newOwnRoomAndRosterControls": 19,
+    "typecheck": "PASS",
+    "browserOrNetworkStarted": false,
+    "newPagingControls": 3,
+    "controlTimingScope": "The104-control/inspect compound command briefly overlapped resource wrapper start; see HOST-ACTIVITY-OVERLAP.json. No further checks during load.",
+    "typecheckScope": "Maintained spec unchanged since prior passing typecheck; no typecheck rerun during resource load."
+  },
+  "invariants": "240seconds,6contexts,24uniqueplacements/fourperidentity,actualchairs/mesh/labels,Leave/Stand/reseat/noautoJoin,reload/newconsent,privacy,rawcaptureboundary,sourcefreezeandconfirmedcleanup unchanged. Routes retain30seconds inside240.",
+  "declaredChanges": [
+    "Names verified in exact authenticated ID/name rows instead of status/count text; stale hidden rows still fail.",
+    "Native labelled disclosure exposes44px Return; primary Leave/Stand stay44px upfront. After all6completion proofs, phone actually returns to authenticated owned bedroom and proves same identity/house and unchanged24pieces.",
+    "Only one authenticated own-room scope may be declared after accepted completed24-piece/zero-consent snapshot. Foreign/premature/identity/owner/epoch/privateprojection/currentbacktolounge failures remain fatal.",
+    "Maintained3and2capacitycases use actual admitted house.capacity; existing completion/placement/consent assertions stay. Completed Return now actually navigates and verifies owned room/currentidentity andsaved24pieces."
+  ],
+  "runtimeLaunch": {
+    "pid": 48130,
+    "startedAt": 1792704180.6464345,
+    "sourceFiles": 35,
+    "sourceSHA256": "fc871d6d5c291dc599c5b00a29a73a6cbb6b9bdd7bcd260366574e873942d68a"
+  },
+  "nextStep": "Parent fresh read-only source review, then separate root native GO. No service/resource/fullsuite operations.",
+  "runCommand": "mise exec -- node docs/spatial-redesign/evidence/six-browser/return-runner.mjs --run --label current-disclosure-return-first --go 450489fdc02b69bda67ee550f008e0d4f6ffa4d92e533aab6e7380e27f05482e --freeze 9bccfc1b061a8ecc24b62453c60b6d314c13ca488ded617ec44efcecb002bea8 --runner 8cfbd93c99d39de8e77cf9d21841f4b3f05ccc9db0e699c8185dcb112aa63a02",
+  "pagingRefinement": "Assert captured Previous and Next each present once, exposed and44px before opening disclosure; occluded Next and undersized Previous negative controls. User task/deadline unchanged; pre-paging packet preserved UNRUN.",
+  "sourceBindingScope": "Existing recorded source inspect; no new inspection during active resource load. Live freeze must be rechecked after release."
+}

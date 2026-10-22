@@ -1,0 +1,10 @@
+{
+  "status": "READY_HELD",
+  "origin": "http://127.0.0.1:4108",
+  "protocolSHA256": "53f7c72623f36df1af0c5e7ee56036fff4f09996a270cfc97fccc2031a331017",
+  "runnerSHA256": "668715101986485b82ff5410d3034857ee7828b735d79a742596661390ed7023",
+  "sourceManifestSHA256": "d6eb431988847dc20c6de8d551ad4e6f71e19d59d78bd55d670694e1eebd5af8",
+  "sourceFiles": 505,
+  "networkOrBrowserStarted": false,
+  "required": "Root review and explicit GO; then --run --label FRESH --go PROTOCOL_SHA --freeze SOURCE_MANIFEST_SHA --runner RUNNER_SHA"
+}

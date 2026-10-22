@@ -1,0 +1,16 @@
+{
+  "status": "PASS_SOURCE_SCOPED_COMPONENT",
+  "mechanicalResult": "result-current-menu-scroll-first.json",
+  "retainedAutomaticStatus": "PASS_COMPONENT_LAYOUT_VISUAL_REVIEW_PENDING",
+  "separateVisualRecord": "PARENT-VISUAL-APPROVAL.json",
+  "approvedOriginalImages": 4,
+  "otherOriginalsApprovedOrCopied": false,
+  "sourceProtocolSHA256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "sourceRunnerSHA256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "nativeDurationMs": 23075.742902,
+  "boundInputsUnchanged": 23,
+  "contextsConfirmedClosed": 6,
+  "replay": "replay/README.md",
+  "exclusions": ["Authenticated six-user acceptance", "Server persistence acceptance", "Physical-phone performance", "Full accessibility audit", "Human preference or usefulness", "Resource benchmark acceptance"]
+}

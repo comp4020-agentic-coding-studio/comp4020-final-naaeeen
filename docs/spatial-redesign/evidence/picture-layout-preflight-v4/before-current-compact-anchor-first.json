@@ -1,0 +1,8 @@
+{
+  "status": "PASS_PREFLIGHT_SOURCE_CHECK",
+  "filesVerified": 23,
+  "runnerAndProtocolMatchBinding": true,
+  "evaluatorAssertionsUnchanged": true,
+  "sourceManifestSHA256": "8cd39bb41fc194a13d1e2c687ecece431dbba3f84a4cd984ebaf59451261dbc4",
+  "browserStarted": false
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "Read-only audit of frozen failed whole-six native observer; no browser, evaluator or protocol mutation.",
+  "runnerSHA256": "e825f2806eccf356620d9702f5483bd259a6b87b8eb2f73a9eb190647f5f44f5",
+  "protocolSHA256": "bfb409d664fdeaacfbdee8fe38b898ed449eb9c7e8d87368a7dbc2e6622346c0",
+  "sourcePoints": {
+    "surfaceInspector": "runner.mjs:199",
+    "phoneLayoutAssertions": "runner.mjs:235",
+    "currentReturnMechanism": "public/house-puzzle-ui.js:7"
+  },
+  "cornerProxyPresent": false,
+  "existingContainerHit": "One actual center point; accepts only node or descendant. No3px decorative-corner samples and no ancestor acceptance.",
+  "existingTargets": "All24cells and12current-page pieces retain positive in-frame/non-clipped center-hit exposure and44px dimensions. These are existing center checks, not5point checks.",
+  "cornerAmendment": "Not required for this frozen observer because the diagnosed false proxy is absent. Any stronger sampling would be a separately reviewed strengthening.",
+  "separateMechanismAssumption": "Phone line235 still demands immediately exposed Return. The reviewed current HUD places Return inside native Players/options. This mismatch needs explicit review before re-registration; no silent assertion weakening.",
+  "possibleNarrowReviewDecision": "Retain immediate44px Leave/Stand exit checks; explicitly open native Players/options and verify actual44px Return reachability/action as the reviewed HUD supports, or retain original immediate Return requirement and revise the product. Parent decides before any integrated GO.",
+  "originalFailedAttempt": "Preserved unchanged. No whole-six acceptance inferred."
+}

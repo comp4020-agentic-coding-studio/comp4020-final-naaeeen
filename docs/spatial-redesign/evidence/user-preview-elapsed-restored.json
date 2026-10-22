@@ -1,0 +1,33 @@
+{
+  "status": "RUNNING_CURRENT_ELAPSED_SOURCE",
+  "url": "http://localhost:4093/",
+  "healthHTTP": 200,
+  "boundSourceFiles": 498,
+  "sourceMatchesCurrent": true,
+  "sourceManifestSHA256": "2f6771c3da5fe86fbdcaed29c9f34a0527214a28413a8f67f9942ff04f693bce",
+  "preservation": "Verified ownedpreviousprocess closed normally; allthreecurrentpreviewdatabases backedupread-only, alloriginaltablehashes/FKs/integritymatch. SamecheckeddataCOPYreopened, originalsourcefilesuntouched.",
+  "databases": [
+    {
+      "database": "neighbourhood.sqlite",
+      "tableCount": 6,
+      "allTableDigestsEqual": true,
+      "integrity": "ok",
+      "foreignKeys": "ok"
+    },
+    {
+      "database": "house.sqlite",
+      "tableCount": 19,
+      "allTableDigestsEqual": true,
+      "integrity": "ok",
+      "foreignKeys": "ok"
+    },
+    {
+      "database": "board.sqlite",
+      "tableCount": 6,
+      "allTableDigestsEqual": true,
+      "integrity": "ok",
+      "foreignKeys": "ok"
+    }
+  ],
+  "runtimeScope": "Current84e0/ce4elapsedbackend, unchangedpictureUI8cd/57eb/254. No newdeployment or externalservice."
+}

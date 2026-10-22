@@ -1,0 +1,40 @@
+{
+  "status": "REGISTERED_UNDER_CONDITIONAL_ROOT_GO",
+  "label": "return-elapsed-first",
+  "head": "0e5c37bc2ebdff7a6ed7a2941deaedb5c2569918",
+  "runnerSHA256": "8cfbd93c99d39de8e77cf9d21841f4b3f05ccc9db0e699c8185dcb112aa63a02",
+  "protocolSHA256": "450489fdc02b69bda67ee550f008e0d4f6ffa4d92e533aab6e7380e27f05482e",
+  "sourceManifestSHA256": "7860e6f6188507c437cda22fcb9445eb98c817bd18393f4aa30424bbfbe7ff0b",
+  "sourceFiles": 512,
+  "approvedNativeBindingDelta": [
+    {
+      "path": ".local/spatial-apply/server-current-source.json",
+      "before": "47cba3e9e2ec3b5747bd3ae8c5fc642d491d087f549759dc4c2d7baae88dcfe6",
+      "current": "95907c168209458f7fe54800b6a26dcb14439269e1d8b4b9fc460ca6a8a650a6"
+    },
+    {
+      "path": "src/house-realtime.ts",
+      "before": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+      "current": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5"
+    },
+    {
+      "path": "src/server.ts",
+      "before": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1",
+      "current": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd"
+    }
+  ],
+  "resourceToolsOutsideNativeManifest": {
+    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb"
+  },
+  "launch": {
+    "pid": 55373,
+    "startedAt": 1792706761.0903552,
+    "sourceFiles": 35,
+    "allLaunchHashesMatch": true
+  },
+  "unchangedTask": "240seconds,6contexts,24pieces/foureach,44pxtargets/paging/menu,exactrosterIDs/names,narrowownedReturn,reload/reseat/newJoin,privacy and confirmedcleanup. No retry or source edit.",
+  "otherRunsAuthorized": false,
+  "originalFailureAndPriorUnrunBindings": "Preserved unchanged.",
+  "command": "mise exec -- node docs/spatial-redesign/evidence/six-browser/return-runner.mjs --run --label return-elapsed-first --go 450489fdc02b69bda67ee550f008e0d4f6ffa4d92e533aab6e7380e27f05482e --freeze 7860e6f6188507c437cda22fcb9445eb98c817bd18393f4aa30424bbfbe7ff0b --runner 8cfbd93c99d39de8e77cf9d21841f4b3f05ccc9db0e699c8185dcb112aa63a02"
+}

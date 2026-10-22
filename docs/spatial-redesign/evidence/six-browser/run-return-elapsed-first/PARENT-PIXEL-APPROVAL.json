@@ -1,0 +1,64 @@
+{
+  "status": "PARENT_APPROVED_ORIGINAL_PIXELS",
+  "parentViewedAllSixOriginals": true,
+  "scope": "Parent inspected six actual seated bodies/chairs, phone board/tray/paging and completion, and actual owned-room result. Source-scoped scripted native rehearsal only.",
+  "imageEdits": false,
+  "originalMechanicalStatusUnchanged": true,
+  "copies": [
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/three-contributors.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/three-contributors.png",
+      "sha256": "04d5dd876726897f38205c1489d070c459ce706fcb7a683578b079248d1df251",
+      "width": 1920,
+      "height": 1080,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/six-contributors-touch.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/six-contributors-touch.png",
+      "sha256": "df81ae1294d8da853c676a801c76b17dae96cf69aab39064f6ff12476f602259",
+      "width": 390,
+      "height": 844,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/six-physical-chairs-overview.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/six-physical-chairs-overview.png",
+      "sha256": "437f9cb3574130f2bbe31221e410eecab983baa8df4ffe91450a63b76f1dcf0b",
+      "width": 1920,
+      "height": 1080,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/complete-desktop.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/complete-desktop.png",
+      "sha256": "e08c6e7253e206f23127d2756bccf09c3e35ab86dea9bb35daa732f0201eb566",
+      "width": 1920,
+      "height": 1080,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/complete-touch.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/complete-touch.png",
+      "sha256": "93dfdb6667ca43f1d0d205ac5d8cfa8c8f952252c7219d7b95e6330f448539be",
+      "width": 390,
+      "height": 844,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-six-browser/run-return-elapsed-first/return-owned-room-touch.png",
+      "curated": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/images/return-owned-room-touch.png",
+      "sha256": "2db087a011fef17b4c4ad3704fedcc4d1e26dd42fa04384554372d729a514c8a",
+      "width": 390,
+      "height": 844,
+      "byteIdentical": true
+    }
+  ],
+  "exclusions": [
+    "Human trial or enjoyment",
+    "Six smoothly rendered simultaneous worlds",
+    "Physical-phone performance",
+    "Full accessibility audit",
+    "Resource qualification"
+  ]
+}

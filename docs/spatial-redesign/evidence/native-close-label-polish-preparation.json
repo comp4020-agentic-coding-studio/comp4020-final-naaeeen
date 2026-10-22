@@ -1,0 +1,20 @@
+{
+  "status": "PREPARED_UNRUN",
+  "preimage": "docs/spatial-redesign/evidence/native-close-label-polish-before.spec.ts",
+  "preimageSHA256": "c0583c448e421685d7645c83f059a05f2b427816f94bf7dd3ef64b111c899cd3",
+  "specSHA256": "f3e1b32e5f4614f8cf93041f245bab1824af62e06bb891cbe712366113bbaeeb",
+  "candidateHouseCSS": "93416803dd11cb80b372c67488c8be8f9b94f34f64b96f8bb706d8dd39a36325",
+  "caseSelection": "room reference survives owner return|sofa keeps an off-centre crop",
+  "unchangedBudgets": {
+    "caseMs": 60000,
+    "globalMs": 300000,
+    "retries": 0
+  },
+  "newAssertions": [
+    "Phone studio global Close label remains inside its fully exposed 44px-minimum button.",
+    "Phone sofa shared-view global Close label remains inside its fully exposed 44px-minimum button."
+  ],
+  "preserved": "Original room privacy/audio/reconnect and sofa off-centre handover/pan/leave/reseat tasks remain unchanged.",
+  "rawOutput": ".local/spatial-native-close-label-first",
+  "command": "APP_URL=http://127.0.0.1:4108 CI=true PW_OUTPUT_DIR=.local/spatial-native-close-label-first/results PW_REPORT_DIR=.local/spatial-native-close-label-first/report mise exec -- pnpm exec playwright test tests/e2e/spatial-places.spec.ts --grep \"room reference survives owner return|sofa keeps an off-centre crop\" --max-failures=1"
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "One archived first-candidate component landscape diagnostic; not current acceptance or a preflight retry.",
+  "viewport": {"width":844,"height":390,"hasTouch":true,"isMobile":true,"deviceScaleFactor":1},
+  "taskDeadlineMs":30000,
+  "retries":0,
+  "sources": {
+    "componentSHA256":"06f26f19eeb448474227f39186fb1b99e011c7ca7ce1983dcb3448147a905c8c",
+    "cssSHA256":"808cd54ce1db7fb34f24fcf3ec267d3c4651651334f9469b75f5f74525564261",
+    "fixtureSHA256":"b6fbfe2b2986954f728870a4a560601d8c2a4ba551265f4de874a2b1fa78c352"
+  },
+  "observations": "At the exact existing center and four3px-inset board coordinates, record numeric coordinates, allowlisted hit tag/classes, and board/cell/ancestor/foreign booleans. Record all24 actual cell rectangles, clipping, visibility and five hit samples. No body, DOM serialization or identities.",
+  "controls": [
+    "Original archived component with no overlay: record the actual hit identities and cell-target positive state.",
+    "In the same isolated fixture, add a fully opaque fixed overlay covering the board; original sample and cell tests must detect obstruction.",
+    "Remove only that overlay and record recovery to the original observation.",
+    "Change only the fixture board's border-radius to zero without changing its bounds or cells, record the same points, then restore the original inline style. This is a controlled diagnosis of rounded-corner sampling, not a production fix or replacement acceptance rule."
+  ],
+  "stopping": "Exactly one browser/context and one declared control sequence under30seconds; stop on error, preserve outputs, close context and browser and check unchanged archived source hashes. No evaluator or production edits, no acceptance retry.",
+  "decision": "Classify from actual hit identities and controls. If the decorative corner proxy is disproved, propose an independently reviewed amendment while retaining complete picture bounds,24 exposed44px cells,12 tray/paging44px and all task outcomes. Do not alter the original evaluator or preflight result."
+}

@@ -1,0 +1,37 @@
+{
+  "status": "PASS_OFFLINE_FIXTURE_CONTROL",
+  "scope": "Actual final production component and the exact new fixture use DOM activation in JSDOM; one ignored source copy removes only the durable pending guard to test evaluator sensitivity. This is not native Enter/layout/persistence acceptance.",
+  "checks": 4,
+  "cases": [
+    {
+      "name": "actual-final",
+      "componentSHA256": "a1081403e364a7f6c48c9cfa55d8d5f2c2e40ba361f6466df793ac94a387b2f5",
+      "actualDOMActivation": true,
+      "placeSendDelta": 0,
+      "placementCountBefore": 6,
+      "placementCountAfter": 6,
+      "domCountBefore": 6,
+      "domCountAfter": 6,
+      "assertionOutcome": "PASS"
+    },
+    {
+      "name": "permissive-counterfactual",
+      "componentSHA256": "f780d72d5b783d28e55bce58468ef33e53ae632a9ea630964fb2baccd656391e",
+      "actualDOMActivation": true,
+      "placeSendDelta": 1,
+      "placementCountBefore": 6,
+      "placementCountAfter": 6,
+      "domCountBefore": 6,
+      "domCountAfter": 6,
+      "assertionOutcome": "REJECTS_PERMISSIVE_PATH_AS_REQUIRED"
+    }
+  ],
+  "extraMutationControls": [
+    "Changed exact placement data rejected",
+    "Additional placed DOM cell rejected"
+  ],
+  "browserOrNetworkStarted": false,
+  "productionFilesChanged": false,
+  "fixtureSHA256": "4b9b3d50e39b96aa2288132bc85621cdf56ea38d2738428ed7af7a9d2970e0ff",
+  "guardSHA256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4"
+}

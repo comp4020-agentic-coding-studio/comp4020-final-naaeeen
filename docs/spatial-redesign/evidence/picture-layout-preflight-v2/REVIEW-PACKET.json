@@ -1,0 +1,38 @@
+{
+  "status": "READY_HELD_FOR_CONTEXTUAL_REVIEW_AND_SEPARATE_GO",
+  "browserOrNetworkStartedByV2": false,
+  "v2Bound": true,
+  "files": {
+    ".local/picture-layout-preflight-v2/runner.mjs": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+    ".local/picture-layout-preflight-v2/fixture.mjs": "57a9dd6b827538d49d422c392ded354079681d49c362467b659c66a49072dea5",
+    ".local/picture-layout-preflight-v2/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight-v2/recovery-tasks.mjs": "141182222f4018f3eda580d65d2ad5210a3810556285aded9160d4c45c988995",
+    ".local/picture-layout-preflight-v2/baseline-control.mjs": "025fe9852ce52434253a9572a3e0066952d414c8f546f931b00afc42de8685b7",
+    "docs/spatial-redesign/evidence/picture-layout-preflight-v2/protocol.json": "07d64801cf2dc8b0cd1dfaaff49fb2949d7024bb3826f3dd2f0deb7b6c0c985a",
+    ".local/picture-layout-preflight/proposed-board-proxy.mjs": "05ef19744f85ef21305c2e5473ce5515dd9b1e3df8e9d2236bb5d3cc72dc8d9e",
+    ".local/picture-layout-preflight/calibrate-proposed-board-proxy.mjs": "79e7ad69b356f6f5dbf7612e08609c7fe7f85e168933f59859d4807f666457dd"
+  },
+  "pureChecks": {
+    "unchangedOriginalGuards": 22,
+    "actualBaselineSharedFixtureDOMOutcomes": 7,
+    "newOnlyBaselineQueries": 0,
+    "derivedProxyCalibration": 15
+  },
+  "nativeControls": {
+    "archivedOneContextDiagnostic": "PASS_DIAGNOSTIC_ONLY",
+    "nativePartialOverlay": "NOT_RUN; required conditional prelude inside next reviewed90-second run before candidate acceptance"
+  },
+  "originalFirstEvaluatorUnchanged": true,
+  "originalFirstProtocolUnchanged": true,
+  "currentCandidateForLaterBinding": {
+    "public/house-puzzle-ui.js": "519f4537fe2f34981c960a7c5cf4b7867bb856d976f19556c6f85afb57d2778c",
+    "public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89"
+  },
+  "processAudit": {
+    "exitCode": 1,
+    "matches": 0
+  },
+  "nextStep": "Independent contextual source review. Only after approval and separate GO, bind new candidate once and execute one fresh label under unchanged90seconds/no retries.",
+  "finalPacket": "FINAL-PACKET.json",
+  "sourceManifestSHA256": "fe7e35e635e2dc3329f6c7861b8ee11a97b63ae0c5d3823f1e29df72a56d52d0"
+}

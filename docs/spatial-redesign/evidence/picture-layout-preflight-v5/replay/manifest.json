@@ -1,0 +1,161 @@
+{
+  "scope": "Replayable source-scoped synthetic V5 component evaluation. Materializer never starts a browser or service; all outputs are isolated under ignored.local. Raw bodies/PNGs are excluded.",
+  "sourceCommits": {
+    "old": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+    "current": "41ae6536c021d4321b868b0d6c4f36a287c5603b"
+  },
+  "protocolSHA256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "runnerSHA256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "entries": [
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/house-puzzle-ui.js",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/house-puzzle-ui.js",
+      "sha256": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/house.css",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/house.css",
+      "sha256": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/house.html",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/house.html",
+      "sha256": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/house-ui.js",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/house-ui.js",
+      "sha256": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/house-puzzle-content.js",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/house-puzzle-content.js",
+      "sha256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/old/public/assets/pictures/rainy-nook-v1.svg",
+      "gitRef": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+      "gitPath": "public/assets/pictures/rainy-nook-v1.svg",
+      "sha256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/house-puzzle-ui.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-puzzle-ui.js",
+      "sha256": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/house.css",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house.css",
+      "sha256": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/house.html",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house.html",
+      "sha256": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/house-ui.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-ui.js",
+      "sha256": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/house-puzzle-content.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-puzzle-content.js",
+      "sha256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/sources/new/public/assets/pictures/rainy-nook-v1.svg",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/assets/pictures/rainy-nook-v1.svg",
+      "sha256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+    },
+    {
+      "destination": "public/house-puzzle-ui.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-puzzle-ui.js",
+      "sha256": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8"
+    },
+    {
+      "destination": "public/house.css",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house.css",
+      "sha256": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9"
+    },
+    {
+      "destination": "public/house.html",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house.html",
+      "sha256": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73"
+    },
+    {
+      "destination": "public/house-ui.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-ui.js",
+      "sha256": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a"
+    },
+    {
+      "destination": "public/house-puzzle-content.js",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/house-puzzle-content.js",
+      "sha256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc"
+    },
+    {
+      "destination": "public/assets/pictures/rainy-nook-v1.svg",
+      "gitRef": "41ae6536c021d4321b868b0d6c4f36a287c5603b",
+      "gitPath": "public/assets/pictures/rainy-nook-v1.svg",
+      "sha256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/runner.mjs",
+      "packageFile": "evaluator/runner.mjs",
+      "sha256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/fixture.mjs",
+      "packageFile": "evaluator/fixture.mjs",
+      "sha256": "a66a9378f2be3d58175adbbe43d7b7ab591a9ce2b5bc7206e768547dcfc81b96"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/guards.mjs",
+      "packageFile": "evaluator/guards.mjs",
+      "sha256": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/recovery-tasks.mjs",
+      "packageFile": "evaluator/recovery-tasks.mjs",
+      "sha256": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b"
+    },
+    {
+      "destination": ".local/picture-layout-preflight-v5/placement-block-guard.mjs",
+      "packageFile": "evaluator/placement-block-guard.mjs",
+      "sha256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4"
+    },
+    {
+      "destination": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/protocol.json",
+      "packageFile": "protocol.json",
+      "sha256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d"
+    },
+    {
+      "destination": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/source-binding.json",
+      "packageFile": "source-binding.json",
+      "sha256": "4a350250811703723bf0288c6f03f2d71cd4fdd3b64690eb543882d41f35c46e"
+    },
+    {
+      "destination": "docs/spatial-redesign/evidence/six-browser/run-current-seats-first/result.json",
+      "packageFile": "baseline-source-map.json",
+      "sha256": "0e9957d542baa45d892d91aa1426747a37147124c723b8a98991aa7e1c070b8d"
+    }
+  ],
+  "requiredRuntime": "Recorded Linux Node24.21.0, pnpm11.9.0, installed Playwright1.63.0/Chromium1243 path, sandboxtrue/SwiftShader; matching locked dependencies in canonical repository."
+}

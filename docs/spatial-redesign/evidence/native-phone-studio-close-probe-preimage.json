@@ -1,0 +1,6 @@
+{
+  "source": "tests/e2e/spatial-places.spec.ts",
+  "sha256": "7cd76af9dc7b27ee7b5f11d7fa77de623a93c331d72a9f182d0a0e066646a7ad",
+  "beforeSource": "docs/spatial-redesign/evidence/native-phone-studio-close-probe-before.spec.ts",
+  "purpose": "Bounded actual Close geometry/hit measurement in the existing phone Studio flow. Existing task assertions and budgets stay unchanged."
+}

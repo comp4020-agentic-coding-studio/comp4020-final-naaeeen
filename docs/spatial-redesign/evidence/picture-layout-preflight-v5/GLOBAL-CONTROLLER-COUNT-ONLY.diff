@@ -1,0 +1,5 @@
+--- fbdc853:public/house-ui.js
++++ V5-captured-public/house-ui.js
+@@ -727 +727 @@
+- $("break-picture").setAttribute("aria-pressed",String(breakActivity==="picture"));$("break-four").setAttribute("aria-pressed",String(breakActivity==="four"));$("break-picture-count").textContent=(live?.puzzleRoster?.memberIds.length||0)+" / 6 active";$("break-four-count").textContent=(round?.players.filter(Boolean).length||0)+" / 2 active";
++ $("break-picture").setAttribute("aria-pressed",String(breakActivity==="picture"));$("break-four").setAttribute("aria-pressed",String(breakActivity==="four"));$("break-picture-count").textContent=(live?.puzzleRoster?.memberIds.length||0)+" / "+(Number.isInteger(live?.durable.house.capacity)&&live.durable.house.capacity>=2&&live.durable.house.capacity<=6?live.durable.house.capacity:6)+" active";$("break-four-count").textContent=(round?.players.filter(Boolean).length||0)+" / 2 active";

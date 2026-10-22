@@ -1,0 +1,43 @@
+{
+  "status": "PREPARED_HELD",
+  "browserOrNetworkStarted": false,
+  "sourceNewCaptured": false,
+  "syntaxChecks": "3 support modules plus baseline control PASS",
+  "pureGuardControls": {
+    "status": "PASS",
+    "checks": 22
+  },
+  "baselineProductionDOMControl": {
+    "status": "PASS",
+    "outcomes": 7,
+    "newOnlySelectorQueries": 0,
+    "nativeLayout": "NOT_RUN"
+  },
+  "files": {
+    ".local/picture-layout-preflight/runner.mjs": "836cab298d5943e8997edf359de5f032c2f7080f9b8dbf4a4ce33074d4ff280e",
+    ".local/picture-layout-preflight/fixture.mjs": "b6fbfe2b2986954f728870a4a560601d8c2a4ba551265f4de874a2b1fa78c352",
+    ".local/picture-layout-preflight/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight/baseline-control.mjs": "6731395ccf1720c3de62b06392e9fb4147bfa50355cefb6e8cdf1e372f699189",
+    "docs/spatial-redesign/evidence/picture-layout-preflight/protocol.json": "9e571bd2da7864a1a00a55dbfbc106809c3d23bbf9fd46f525b998e77a1ecf52"
+  },
+  "unchangedOldGitBlobs": {
+    "house.html": {
+      "gitBlobSHA256": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+      "capturedOldMatches": true
+    },
+    "house-ui.js": {
+      "gitBlobSHA256": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+      "capturedOldMatches": true
+    },
+    "house-puzzle-content.js": {
+      "gitBlobSHA256": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+      "capturedOldMatches": true
+    },
+    "assets/pictures/rainy-nook-v1.svg": {
+      "gitBlobSHA256": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+      "capturedOldMatches": true
+    }
+  },
+  "sixRunnerUnchanged": true,
+  "sixProtocolUnchanged": true
+}

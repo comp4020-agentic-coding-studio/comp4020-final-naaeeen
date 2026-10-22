@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "checks": 43,
+  "path": "docs/spatial-redesign/evidence/six-browser/calibration-preparation-v1.json",
+  "networkOrBrowserStarted": false
+}

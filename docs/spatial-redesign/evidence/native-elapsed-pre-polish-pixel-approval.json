@@ -1,0 +1,54 @@
+{
+  "status": "PARENT_PIXEL_APPROVAL_AND_BYTE_IDENTICAL_CURATION",
+  "parentApproval": "Parent reported viewing all seven original current-four PNGs and approved bit-identical curation before the Close CSS polish.",
+  "sourceScope": "The sealed native-four-elapsed-before.json and native-four-elapsed-after.json source and launch hashes apply. public/house.css was 57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9. These images do not show the later Close label containment polish.",
+  "originalMechanicalStatusUnchanged": "PASS_CURRENT4",
+  "copies": [
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-study-huddl-c1ef9-d-clears-on-membership-loss/study-chat-phone.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-study-chat-phone.png",
+      "sha256": "db5e0c58903c64242b231d586b0f7cc80eb276c5e3982ef8fed48f7d9f03109d",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-visit-phone.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-room-visit-phone.png",
+      "sha256": "95297a89fecce44c394a5c79020d1c0cf17e3ddccaf1ef40dad03d5c70766eb3",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-reference-world-after-close.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-room-reference-world-after-close.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-studio-desktop.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-room-studio-desktop.png",
+      "sha256": "0b014874d34240c19336c4630e18a12319389b124cf57f43a960fd1019230466",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-follow-phone.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-sofa-follow-phone.png",
+      "sha256": "da5bdd9e621a63a3f6b4263515e7571072deaf9ec394ebdcea378f9cbf35557e",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-touch-pan-handover-phone.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-sofa-touch-pan-handover-phone.png",
+      "sha256": "48e77e2a59d2ec0db9bbb9bbfcafb5e6d135889a55afc4ffe76fb11e9c75e5b1",
+      "byteIdentical": true
+    },
+    {
+      "originalPath": ".local/spatial-native-elapsed-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-presenter-desktop.png",
+      "curatedPath": "docs/spatial-redesign/evidence/native-elapsed-pre-polish-sofa-presenter-desktop.png",
+      "sha256": "240ad090763abcea4be362fbacff1dd585f5a5dba8d45b0318bd8f6b1c4eb659",
+      "byteIdentical": true
+    }
+  ],
+  "exclusions": [
+    "No human preference or physical-phone evidence.",
+    "No full accessibility or resource acceptance."
+  ]
+}

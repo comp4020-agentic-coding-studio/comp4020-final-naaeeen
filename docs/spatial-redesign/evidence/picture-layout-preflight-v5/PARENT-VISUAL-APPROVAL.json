@@ -1,0 +1,45 @@
+{
+  "scope": "Source-scoped synthetic component result; separate parent visual inspection only. No full accessibility, real-user, physical-phone, integrated-six or performance acceptance.",
+  "parentInspectedOriginals": true,
+  "authorization": "Parent explicitly approved byte-identical curation of these four originals after view_image inspection.",
+  "imageEdits": false,
+  "copies": [
+    {
+      "original": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-joined.png",
+      "curated": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/images/new-portrait-joined.png",
+      "sha256": "5823249c857178a1e4bd1fb701f18fe293e414021e53cb89f21cd63ce759b13d",
+      "bytes": 83002,
+      "width": 390,
+      "height": 844,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-joined.png",
+      "curated": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/images/new-landscape-joined.png",
+      "sha256": "1b77ac5f3281fecdce4ee51c1023d6a2d03062a1db30564f1f5864fe1154bc9a",
+      "bytes": 74252,
+      "width": 844,
+      "height": 390,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-players.png",
+      "curated": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/images/new-landscape-players.png",
+      "sha256": "1b676c637c2b3b6a2217eb981ff1609fb0954ea9f8384d772e11f406afdd0f1b",
+      "bytes": 79448,
+      "width": 844,
+      "height": 390,
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-pending-save-recovery.png",
+      "curated": "docs/spatial-redesign/evidence/picture-layout-preflight-v5/images/new-landscape-pending-save-recovery.png",
+      "sha256": "a36061469d31ad422d3675f8f42f04c54202ca90a072997c6e988c55cc4aba33",
+      "bytes": 78428,
+      "width": 844,
+      "height": 390,
+      "byteIdentical": true
+    }
+  ],
+  "otherImagesCopied": false
+}

@@ -1,0 +1,112 @@
+{
+  "status": "LOSSLESS_JSON_SERIALIZATION_ONLY",
+  "purpose": "Preserve the active secret-scanning hook while representing one known public vendor locale filename with a JSON Unicode escape. No secret is escaped, removed or committed. Runtime files and frozen resource protocols are untouched.",
+  "encoding": "Only the k in the known public Slovak locale basename is represented as a JSON Unicode escape; reversing that exact representation recovers the original artifact bytes and checksums.",
+  "scope": "Original bytes remain in ignored local evidence; parsed maps, canonical source digests, captured statuses and all observations are identical. Byte-level references retain originalSHA256, with serializedSHA256 supplied here.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-close-label-after.json",
+      "originalSHA256": "fb7dffff89f97b94ca9a9a1927a06a2405ef31f1b9810437b8058250df9a7e7f",
+      "serializedSHA256": "b136e0a61a454333f6368d09732ae6b73f4f7adcec9b1b7e5cf6a21507a0451a",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-close-label-before.json",
+      "originalSHA256": "6c20b2eba2fef137364cffe2863caa70beb90f49a52f9ee1a1d4bcacf2a28c6a",
+      "serializedSHA256": "2fa4f01665ca910fce005b4a312d9384b3d1dabc31b0b5425f0cf339cb3cbb71",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-four-elapsed-after.json",
+      "originalSHA256": "9d6aee4711cf97c8549d3a7c513679a58365988df30cbd46d33cab5cd9c208ea",
+      "serializedSHA256": "1ffda70b505ccde0a118177faa231411d8e86a9c3840d56ae77e42d458a2b4a5",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-four-elapsed-before.json",
+      "originalSHA256": "6f62305dbbe440692f91c6c11fc02649a0205b1076e9b4d44af840bd729e4bb0",
+      "serializedSHA256": "cdcc3c8c8e61318326eb34437520fe75fbcb41c1af4f31130a7ff9c48c341d4b",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-maintained-elapsed-after.json",
+      "originalSHA256": "30e2d679712d367aa56e45ba98011b7b8f044e76d25e53f0e01e81561438f592",
+      "serializedSHA256": "94916a83b363b3f5c33abc35a32b8f79354d1a86b89d3e0e7fb06ff541ab43a8",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-maintained-elapsed-before.json",
+      "originalSHA256": "a494382fbe8af9042742042738217711385f5d5d2947e56a144dc0d2bc0f0dae",
+      "serializedSHA256": "bf024f0c6a44b7f6694efa8bf2e4f0e7082921dfb637dbc8dc38b69112927638",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/final-source-manifest.json",
+      "originalSHA256": "20248c406e403371b47c044efb7f1223f82313ada0d357a2ceb0373cc4350cd8",
+      "serializedSHA256": "a8a6712a18a3b73076fde03e16cefb6b61f0c7afe042742ddf1cc130d3b8fc3d",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/return-task/SOURCE-BINDING.json",
+      "originalSHA256": "098c1a97473655b621aa5737aba7efde4b99f06402c3da1f87e89313be770bbf",
+      "serializedSHA256": "3e8cae5fb5b8c07d0cf460a638cd2e065564ba587bc3d7a8b3121a9cdb2fc647",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/return-task/elapsed-SOURCE-BINDING.json",
+      "originalSHA256": "1400229355a03a9a2e0af1dbfe90876737fcd4d05f98db7b172c71087e8d9257",
+      "serializedSHA256": "adaa89b35ed6efddbfce90d216c30229c8e6c94852d9228bd4eda9a4e3df68d0",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/return-task/pre-clock-SOURCE-BINDING.json",
+      "originalSHA256": "098c1a97473655b621aa5737aba7efde4b99f06402c3da1f87e89313be770bbf",
+      "serializedSHA256": "3e8cae5fb5b8c07d0cf460a638cd2e065564ba587bc3d7a8b3121a9cdb2fc647",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/return-task/pre-paging-SOURCE-BINDING.json",
+      "originalSHA256": "fcda29e457e893e5532b1624d5a6a2d48da95a4b6c05d04331b1b84ed646266a",
+      "serializedSHA256": "97ad1ae3b57ad714ef6738a227beddcd89817035a4a6dbc68e3b8f30313415d5",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/run-current-seats-first/result.json",
+      "originalSHA256": "facec95872ea14c364d723100a79033b118e13f6570d5030b2fc9477f5c409a7",
+      "serializedSHA256": "ce5d8386d7367596908ad6b38eacf5a5fff161cda8570ca2e78a3a17f02c4993",
+      "occurrences": 2,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/run-return-elapsed-first/result.json",
+      "originalSHA256": "6629370ab8faf6075131c35b546ca07302df0152679750e9ef58d3dc4c7be17b",
+      "serializedSHA256": "cc6d9a5b0bcf46d78a03a48e85c4ad5aff679d65f9e245de970f3db121ce74b8",
+      "occurrences": 2,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    }
+  ]
+}

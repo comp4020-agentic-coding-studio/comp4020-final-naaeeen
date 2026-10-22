@@ -1,0 +1,185 @@
+{
+  "status": "PASS_PROPOSAL_CALIBRATION_ONLY",
+  "appliedToEvaluator": false,
+  "browserStarted": false,
+  "checks": 15,
+  "cases": [
+    {
+      "name": "original",
+      "expected": true,
+      "observed": true,
+      "source": "Actual one-session native transcript"
+    },
+    {
+      "name": "opaque-overlay",
+      "expected": false,
+      "observed": false,
+      "source": "Actual one-session native transcript"
+    },
+    {
+      "name": "overlay-removed",
+      "expected": true,
+      "observed": true,
+      "source": "Actual one-session native transcript"
+    },
+    {
+      "name": "square-corner-only",
+      "expected": true,
+      "observed": true,
+      "source": "Actual one-session native transcript"
+    },
+    {
+      "name": "partial-blocked-cell-0",
+      "expected": false,
+      "observed": false,
+      "source": "Derived mixed transcript: actual opaque blocked cell plus unoccluded other cells. Not a native partial-overlay trial."
+    },
+    {
+      "name": "partial-blocked-cell-12",
+      "expected": false,
+      "observed": false,
+      "source": "Derived mixed transcript: actual opaque blocked cell plus unoccluded other cells. Not a native partial-overlay trial."
+    },
+    {
+      "name": "partial-blocked-cell-23",
+      "expected": false,
+      "observed": false,
+      "source": "Derived mixed transcript: actual opaque blocked cell plus unoccluded other cells. Not a native partial-overlay trial."
+    },
+    {
+      "name": "offscreen-board",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "clipped-board",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "hidden-board",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "missing-cell",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "duplicate-cell",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "under44px-cell",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "single-target-occluded",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    },
+    {
+      "name": "ancestor-hit-never-accepted",
+      "expected": false,
+      "observed": false,
+      "source": "Pure negative mutation of actual native transcript"
+    }
+  ],
+  "nativePartialOverlay": "NOT_RUN; required as conditional prelude in the next separately authorized reviewed90-second preflight. No additional browser is authorized now.",
+  "originalFivePointProxy": {
+    "pass": false,
+    "bottomRight": {
+      "x": 387,
+      "y": 370.421875,
+      "tag": "SECTION",
+      "classes": [
+        "puzzle-board-section"
+      ],
+      "board": false,
+      "cell": false,
+      "ancestor": true,
+      "foreign": true,
+      "insideBoard": false
+    }
+  },
+  "proposedFiveInteriorPoints": [
+    {
+      "x": 242,
+      "y": 273.078125,
+      "tag": "BUTTON",
+      "classes": [
+        "puzzle-cell"
+      ],
+      "board": false,
+      "cell": true,
+      "ancestor": false,
+      "foreign": false,
+      "insideBoard": true
+    },
+    {
+      "x": 122.828125,
+      "y": 201.5625,
+      "tag": "BUTTON",
+      "classes": [
+        "puzzle-cell",
+        "placed"
+      ],
+      "board": false,
+      "cell": true,
+      "ancestor": false,
+      "foreign": false,
+      "insideBoard": true
+    },
+    {
+      "x": 361.1640625,
+      "y": 201.5703125,
+      "tag": "BUTTON",
+      "classes": [
+        "puzzle-cell",
+        "placed"
+      ],
+      "board": false,
+      "cell": true,
+      "ancestor": false,
+      "foreign": false,
+      "insideBoard": true
+    },
+    {
+      "x": 122.828125,
+      "y": 344.578125,
+      "tag": "BUTTON",
+      "classes": [
+        "puzzle-cell"
+      ],
+      "board": false,
+      "cell": true,
+      "ancestor": false,
+      "foreign": false,
+      "insideBoard": true
+    },
+    {
+      "x": 361.1640625,
+      "y": 344.5859375,
+      "tag": "BUTTON",
+      "classes": [
+        "puzzle-cell"
+      ],
+      "board": false,
+      "cell": true,
+      "ancestor": false,
+      "foreign": false,
+      "insideBoard": true
+    }
+  ],
+  "proposalSHA256": "05ef19744f85ef21305c2e5473ce5515dd9b1e3df8e9d2236bb5d3cc72dc8d9e"
+}

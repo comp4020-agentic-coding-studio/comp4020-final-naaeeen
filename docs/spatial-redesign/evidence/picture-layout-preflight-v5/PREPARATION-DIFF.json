@@ -1,0 +1,43 @@
+{
+  "status": "PREPARED_HELD_NO_BROWSER",
+  "taskAssertionsUnchanged": true,
+  "helperComparisons": {
+    "runner.mjs": {
+      "v4SHA256": "2d99b2acec4508c4de5a041307a1493360dd3cd0d5df1f8280ef62e878095997",
+      "v5SHA256": "39ea8fd548d25d4ad8954a76555b6b950dd44c703a65956441fe809589429e62",
+      "difference": "Capture/evidence paths plus binding-only allowlist/message for declared house-ui capacity-badge expression"
+    },
+    "fixture.mjs": {
+      "v4SHA256": "4b9b3d50e39b96aa2288132bc85621cdf56ea38d2738428ed7af7a9d2970e0ff",
+      "v5SHA256": "a66a9378f2be3d58175adbbe43d7b7ab591a9ce2b5bc7206e768547dcfc81b96",
+      "difference": "Explicit capacity:6 input; old and new variants receive identical input; no task/assertion change"
+    },
+    "guards.mjs": {
+      "v4SHA256": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+      "v5SHA256": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+      "difference": "Byte-identical"
+    },
+    "recovery-tasks.mjs": {
+      "v4SHA256": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+      "v5SHA256": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+      "difference": "Byte-identical"
+    },
+    "placement-block-guard.mjs": {
+      "v4SHA256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+      "v5SHA256": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+      "difference": "Byte-identical"
+    }
+  },
+  "protocolOnlyChangedFields": [
+    "version",
+    "priorCandidate",
+    "sourceInputProvenance"
+  ],
+  "remainingProtocolExactlyEqual": true,
+  "fixtureCapacityInput": 6,
+  "preservedV4ResultSHA256": "bb90ec513751067cf67e42c2052bae3109f43544893434f8ca8317936f78e0d0",
+  "reverseRunnerPathAndBindingPreparationDiffByteEqual": true,
+  "reverseFixtureCapacityFieldByteEqual": true,
+  "deterministicOldControllerCapture": "Old house-ui reads only exact fbdc853 Git blob; reversing this preparation-only branch recovers the pre-provenance runner bytes.",
+  "reverseDeterministicOldCaptureBranchByteEqual": true
+}

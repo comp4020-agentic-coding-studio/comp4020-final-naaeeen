@@ -1,0 +1,466 @@
+{
+  "status": "FAIL",
+  "attempt": "current-compact-anchor-first",
+  "scope": "Matched synthetic component layout in actual Chromium. This is not six-user, server-persistence, human A/B, physical-phone, performance, or deployment acceptance.",
+  "durationMs": 20102.716044,
+  "deadlineMs": 90000,
+  "contexts": 6,
+  "retries": 0,
+  "firstFailure": "Disclosure secondary target start\n\nfalse !== true\n",
+  "failureScope": "Landscape candidate passed all six name rows and Return target reachability after normal layout/paging. It then failed Replace/Start target exposure after native scrollIntoViewIfNeeded. Exact target/menu bounds were not persisted before assertion.",
+  "nativeImageObservation": "Original PNG shows correctly left-anchored readable menu. Sticky Players/Close header covers the upper edge of Replace unfinished picture. Return is clear below. Further ordinary scrolling was not tested, so absolute unreachability is not established.",
+  "cases": [
+    {
+      "variant": "old",
+      "viewport": "portrait",
+      "status": "BASELINE_LAYOUT_FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "secondPageLayout": {
+        "pass": false,
+        "failures": [
+          "action-reference",
+          "action-chat",
+          "wrapper-game-panel-stand",
+          "wrapper-break-picture",
+          "wrapper-break-four"
+        ]
+      },
+      "watchingLayout": {
+        "pass": false,
+        "failures": [
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "nativePartialOverlay": null,
+      "sharedOutcomesPassed": 6,
+      "recoveryAndStartOutcomes": [],
+      "board": {
+        "x": 30,
+        "y": 464.78125,
+        "width": 330,
+        "height": 223.375,
+        "bottom": 688.15625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 21,
+        "y": 744.15625,
+        "width": 348,
+        "height": 120,
+        "bottom": 864.15625,
+        "visible": true,
+        "inViewport": false,
+        "clips": [
+          "panel",
+          "BODY"
+        ],
+        "hitExposed": false
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": false,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/old-portrait-joined.png",
+          "sha256": "53aa9a0c5e5e1ee848b2ee285f59c99ba5481a174941bad38705f3b2409f0c2c",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "portrait",
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nativePartialOverlay": {
+        "status": "PASS_NATIVE_CONTROL",
+        "blockedTarget": 7,
+        "containerPointsUnaffected": true,
+        "negativeDecision": {
+          "pass": false,
+          "failures": [
+            "cell-7"
+          ]
+        },
+        "restoredDecision": {
+          "pass": true,
+          "failures": []
+        }
+      },
+      "sharedOutcomesPassed": 6,
+      "recoveryAndStartOutcomes": [
+        "pending Join status/cue readable; original Retry explicit and non-enrolling; upfront44px Cancel invokes Leave/onLeave",
+        "durable pending: native piece selection and Enter on empty cell send no additional puzzle.place and leave exact placements/DOM count unchanged;44px Inspect/Return invoke callbacks; no full-board-fit claim while blocked",
+        "native focused initial Start sends no Join; fresh-round projection moves same node into closed options and focuses exposed enabled Join"
+      ],
+      "board": {
+        "x": 30,
+        "y": 326.328125,
+        "width": 330,
+        "height": 223.375,
+        "bottom": 549.703125,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 21,
+        "y": 622.890625,
+        "width": 348,
+        "height": 120,
+        "bottom": 742.890625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": true,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-portrait-joined.png",
+          "sha256": "5823249c857178a1e4bd1fb701f18fe293e414021e53cb89f21cd63ce759b13d",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-portrait-native-partial-negative.png",
+          "sha256": "09dfd31c395952e7529085cce81e24c1463843c4ab98a1279350a34c933ff163",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-portrait-players.png",
+          "sha256": "4d3dec2035686c26289a1e2d77ee4d15771cc3c4c4bbac58dd86de8bb0a0bb42",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-portrait-pending-join-recovery.png",
+          "sha256": "774f7b63cb0e7368abd206208994979eb45ece2b31abaf04b04b8cb7d8cafbee",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-portrait-pending-save-recovery.png",
+          "sha256": "7a9a5328224504893b7a40190231a05c4f80cb74819837787c1b88defaeb49ae",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": "desktop",
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nativePartialOverlay": null,
+      "sharedOutcomesPassed": 6,
+      "recoveryAndStartOutcomes": [],
+      "board": {
+        "x": 447,
+        "y": 454.109375,
+        "width": 650,
+        "height": 437.375,
+        "bottom": 891.484375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 1199,
+        "y": 491.3125,
+        "width": 350,
+        "height": 263.75,
+        "bottom": 755.0625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": true,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/old-desktop-joined.png",
+          "sha256": "ca8fa2d217695235e75f007393d809ffcee81250f9de5a0fd067da00170a1f22",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "desktop",
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nativePartialOverlay": null,
+      "sharedOutcomesPassed": 6,
+      "recoveryAndStartOutcomes": [
+        "pending Join status/cue readable; original Retry explicit and non-enrolling; upfront44px Cancel invokes Leave/onLeave",
+        "durable pending: native piece selection and Enter on empty cell send no additional puzzle.place and leave exact placements/DOM count unchanged;44px Inspect/Return invoke callbacks; no full-board-fit claim while blocked",
+        "native focused initial Start sends no Join; fresh-round projection moves same node into closed options and focuses exposed enabled Join"
+      ],
+      "board": {
+        "x": 447,
+        "y": 422.109375,
+        "width": 650,
+        "height": 437.375,
+        "bottom": 859.484375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 1199,
+        "y": 459.3125,
+        "width": 350,
+        "height": 263.75,
+        "bottom": 723.0625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": true,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-desktop-joined.png",
+          "sha256": "afe4ca15bac1b329e0a97404b28251f9c9339e6ddfadd5ff39b39dbaa21913ca",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-desktop-players.png",
+          "sha256": "65113cba32ee727a572404255687f6b3c10e81e1d64b5123b88f877234042afe",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-desktop-pending-join-recovery.png",
+          "sha256": "e0d36bb8f70ddf16dd50d8f744e9744690ea3720b65ba5a480b75a7a29501965",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-desktop-pending-save-recovery.png",
+          "sha256": "4cbe7f6aa4a4888b7af2af047ba154e78b3dc7659edf70bc3ec7276db9e59f03",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": "landscape",
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nativePartialOverlay": null,
+      "sharedOutcomesPassed": 6,
+      "recoveryAndStartOutcomes": [],
+      "board": {
+        "x": 94,
+        "y": 173,
+        "width": 296,
+        "height": 200.6875,
+        "bottom": 373.6875,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 483,
+        "y": 173,
+        "width": 340,
+        "height": 118,
+        "bottom": 291,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": true,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/old-landscape-joined.png",
+          "sha256": "d7df583321f2a1d7e9999f646e2a9cee534277ee5794cbee3717b625ee681510",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "landscape",
+      "status": "FAIL",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": null,
+      "nativePartialOverlay": null,
+      "sharedOutcomesPassed": 1,
+      "recoveryAndStartOutcomes": [],
+      "board": {
+        "x": 94,
+        "y": 158.546875,
+        "width": 296,
+        "height": 200.6875,
+        "bottom": 359.234375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 483,
+        "y": 158.546875,
+        "width": 340,
+        "height": 118,
+        "bottom": 276.546875,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "all24CellsExposed": true,
+      "all12PiecesExposed": true,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-landscape-joined.png",
+          "sha256": "1b77ac5f3281fecdce4ee51c1023d6a2d03062a1db30564f1f5864fe1154bc9a",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v4/run-current-compact-anchor-first/new-landscape-failure.png",
+          "sha256": "6b27fb12d695ca82e8d443e673df9909201a85cf339194665b75f3dc3adc9d1b",
+          "published": false
+        }
+      ]
+    }
+  ],
+  "notReached": [
+    "Landscape Close-target bounds after Start failure",
+    "Landscape remaining common tasks, watch/recovery/no-send and initial-Start focus transition"
+  ],
+  "sourceUnchanged": true,
+  "boundFileCount": 23,
+  "cleanup": {
+    "contexts": [
+      {
+        "case": "old-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      }
+    ],
+    "errors": [],
+    "browserDisconnected": true,
+    "remainingContexts": 0
+  },
+  "pageErrorCount": 0,
+  "unexpectedRequestCount": 0,
+  "processAudit": {
+    "command": "pgrep -af ms-playwright/.*/(chrome|headless_shell)",
+    "exitCode": 1,
+    "matches": 0
+  },
+  "pngPublication": "NOT_APPROVED_OR_COPIED",
+  "followup": "No app/evaluator changes or retry. Whole-six and maintained13 remain held."
+}

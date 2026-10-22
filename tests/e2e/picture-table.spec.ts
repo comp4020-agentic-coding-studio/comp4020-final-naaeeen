@@ -5,7 +5,9 @@ import { beginAdmission, closeTool, openHouseSettings } from './house-journey.ts
 type Placement = { pieceId: string; destination: number; actorId: string };
 type PictureSnapshot = {
   selfId: string;
+  zoneId: string;
   house: { id: string; capacity: number };
+  residents: { id: string; bedroomId: string }[];
   puzzle: { current: { id: string; placements: Placement[]; completed: boolean } | null };
 };
 
@@ -36,9 +38,9 @@ async function pauseView(page: Page) {
   await expect(page.locator('#connection-status')).toHaveText('Together, live');
 }
 
-async function watch(page: Page, active: number, progress: number) {
+async function watch(page: Page, active: number, progress: number, capacity: number) {
   await expect(page.locator('[data-puzzle-roster]')).toContainText('You are watching');
-  await expect(page.locator('[data-puzzle-roster]')).toContainText(`${active} / 6 active`);
+  await expect(page.locator('[data-puzzle-roster]')).toContainText(`${active} / ${capacity} active`);
   await expect(page.locator('[data-puzzle-progress]')).toHaveText(`${progress} / 24 placed`);
   await expect(page.locator('[data-puzzle-action="join"]')).toBeVisible();
   await expect(page.locator('[data-puzzle-destination="3"]')).toHaveAttribute('aria-disabled', 'true');
@@ -112,14 +114,14 @@ test('three friends explicitly contribute to a picture and continue after one le
       expect(admitted.house.id).toBe(houseId);
       await pictureTable(page);
       if (index === 0) await page.locator('[data-puzzle-action="start"]').click();
-      await watch(page, index, index); // Opening and Start never enroll the current identity.
+      await watch(page, index, index, admitted.house.capacity); // Opening and Start never enroll the current identity.
       const watching = await savedPicture(page);
       expect(watching.puzzle.current!.placements).toHaveLength(index);
       expect(watching.puzzle.current!.placements.some(value => value.actorId === admitted.selfId)).toBe(false);
       if (index === 2) await page.locator('[data-puzzle-action="join"]').tap();
       else await page.locator('[data-puzzle-action="join"]').click();
       await expect(page.locator('[data-puzzle-roster]')).toContainText('You joined');
-      await expect(page.locator('[data-puzzle-roster]')).toContainText(`${index + 1} / 6 active`);
+      await expect(page.locator('[data-puzzle-roster]')).toContainText(`${index + 1} / ${admitted.house.capacity} active`);
       await place(page, index, admitted.selfId, index === 2);
       // Ordinary Pause suspends inactive world rendering while preserving the real connection/consent.
       if (index < 2) await pauseView(page);
@@ -130,7 +132,7 @@ test('three friends explicitly contribute to a picture and continue after one le
     expect(new Set(three.puzzle.current!.placements.map(value => value.actorId))).toEqual(new Set(identities));
     for (const page of pages) {
       await expect(page.locator('#connection-status')).toHaveText('Together, live');
-      await expect(page.locator('[data-puzzle-roster]')).toContainText('3 / 6 active');
+      await expect(page.locator('[data-puzzle-roster]')).toContainText(`3 / ${three.house.capacity} active`);
     }
 
     await late.locator('[data-puzzle-action="leave"]').tap();
@@ -139,14 +141,14 @@ test('three friends explicitly contribute to a picture and continue after one le
     await expect(late.locator('#context-hint')).toContainText('Stand up');
     await late.locator('#game-table-reopen').tap(); // Withdrawal keeps the actual chair.
     await expect(late.locator('#game-panel')).toBeVisible();
-    await watch(late, 2, 3);
+    await watch(late, 2, 3, three.house.capacity);
     expect((await savedPicture(late)).puzzle.current!.placements).toEqual(three.puzzle.current!.placements);
     await late.locator('#game-panel-stand').tap();
     await expect(late.locator('#game-panel')).toBeHidden();
     await expect(late.locator('.house-world-canvas')).not.toHaveAttribute('data-self-animation', 'sit');
     await pictureTable(late);
     await expect(late.locator('.house-world-canvas')).toHaveAttribute('data-self-animation', 'sit');
-    await watch(late, 2, 3); // A new chair does not renew participation.
+    await watch(late, 2, 3, three.house.capacity); // A new chair does not renew participation.
 
     await peer.locator('#resume-game').click();
     await expect(peer.locator('.house-world-canvas')).toHaveAttribute('data-suspended', 'false');
@@ -181,7 +183,7 @@ test('one resident completes a picture and releases participation controls', asy
     const admitted = await savedPicture(page);
     await pictureTable(page);
     await page.locator('[data-puzzle-action="start"]').click();
-    await watch(page, 0, 0);
+    await watch(page, 0, 0, admitted.house.capacity);
     await page.locator('[data-puzzle-action="join"]').click();
     await expect(page.locator('[data-puzzle-roster]')).toContainText('You joined');
 
@@ -200,11 +202,38 @@ test('one resident completes a picture and releases participation controls', asy
     await expect(page.locator('[data-puzzle-board]')).toHaveCSS('background-image', `url("${new URL(art.url, baseURL).href}")`);
     await expect(page.locator('[data-puzzle-reference-image]')).toHaveJSProperty('complete', true);
     expect(await page.locator('[data-puzzle-reference-image]').evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-    await expect(page.locator('[data-puzzle-roster]')).toHaveText('You are watching · 0 / 6 active');
+    await expect(page.locator('[data-puzzle-roster]')).toHaveText(`You are watching · 0 / ${admitted.house.capacity} active`);
     await expect(page.locator('[data-puzzle-action="join"]')).toBeHidden();
     await expect(page.locator('[data-puzzle-action="leave"]')).toBeHidden();
-    await expect(page.locator('[data-puzzle-action="return"]')).toBeVisible();
-    await expect(page.locator('[data-puzzle-action="return"]')).toBeEnabled();
+    const summary = page.locator('[data-puzzle-menu-summary]');
+    await expect(summary).toContainText('Players & options');
+    await expect(summary).toHaveAttribute('aria-label', /^Players and table options/);
+    await summary.click();
+    const returnControl = page.locator('[data-puzzle-action="return"]');
+    await returnControl.scrollIntoViewIfNeeded();
+    await expect(returnControl).toBeVisible();
+    await expect(returnControl).toBeEnabled();
+    const returnBounds = await returnControl.boundingBox();
+    expect(returnBounds!.width).toBeGreaterThanOrEqual(44);
+    expect(returnBounds!.height).toBeGreaterThanOrEqual(44);
+    expect(await returnControl.evaluate(node => {
+      const r = node.getBoundingClientRect(), hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+      return r.x >= 0 && r.y >= 0 && r.right <= innerWidth && r.bottom <= innerHeight && Boolean(hit && (hit === node || node.contains(hit)));
+    })).toBe(true);
+    const ownRoomId = admitted.residents.find(resident => resident.id === admitted.selfId)?.bedroomId;
+    if (!ownRoomId) throw new Error('The authenticated resident must have its own saved bedroom.');
+    await returnControl.click();
+    await expect(page.locator('.house-world-canvas')).toHaveAttribute('data-zone-id', ownRoomId, { timeout: 30_000 });
+    await expect(page.locator('#studio-panel')).toBeVisible();
+    await expect(page.locator('#panel-title')).toHaveText('Room studio');
+    const roomResponse = await page.request.get(`/api/house/snapshot?zone=${encodeURIComponent(ownRoomId)}`, { timeout: 10_000 });
+    expect(roomResponse.status()).toBe(200);
+    const ownedRoom = await roomResponse.json();
+    expect(ownedRoom).toMatchObject({ selfId: admitted.selfId, house: { id: admitted.house.id }, zoneId: ownRoomId, room: { id: ownRoomId, ownerId: admitted.selfId } });
+    const meResponse = await page.request.get('/api/house/me', { timeout: 10_000 });
+    expect(meResponse.status()).toBe(200);
+    expect(await meResponse.json()).toMatchObject({ identity: { id: admitted.selfId }, home: { id: admitted.house.id } });
+    expect((await savedPicture(page)).puzzle.current!.placements).toEqual(completed.puzzle.current!.placements);
     await info.attach('solo-completed-picture', {
       body: JSON.stringify({ houseId: admitted.house.id, identity: admitted.selfId, picture: completed.puzzle.current }, null, 2),
       contentType: 'application/json',

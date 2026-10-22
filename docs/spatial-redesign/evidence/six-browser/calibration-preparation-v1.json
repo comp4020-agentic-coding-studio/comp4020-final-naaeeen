@@ -1,0 +1,182 @@
+{
+  "status": "PASS",
+  "scope": "Offline pure raw-frame and closure guard calibration; no browser or network",
+  "runnerSHA256": "3aa4c3287b2c3b6cdee1d3d1fc1c41ea58bfcc14d3b22bb5e60067ccdb1d1862",
+  "protocolSHA256": "53f7c72623f36df1af0c5e7ee56036fff4f09996a270cfc97fccc2031a331017",
+  "sourceManifestSHA256": "d6eb431988847dc20c6de8d551ad4e6f71e19d59d78bd55d670694e1eebd5af8",
+  "checks": [
+    {
+      "name": "current exact-scope snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "named house.snapshot event accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "successful subscribe ACK snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "private zone rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "observer controller rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing access generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster round rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate roster member rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale access after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale generation after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale roster after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale durable stream after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "old socket after reload rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "higher ordered current roster accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unwrapped durable object ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong named event ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "failed ACK ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "arbitrary nested snapshot ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed JSON ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "intentional reload close accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unexpected close cannot pass",
+      "status": "PASS"
+    },
+    {
+      "name": "legitimate reload with no high-level close is accepted by combined generations",
+      "status": "PASS"
+    },
+    {
+      "name": "extra main-document navigation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "extra WebSocket open rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing reload socket generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing reload document generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong navigation origin rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "returning own Watch clears self consent",
+      "status": "PASS"
+    },
+    {
+      "name": "retained old own consent rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "returner still present in peer roster rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "six distinct connected current game chairs accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "missing chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong purpose rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "disconnected chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong zone rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unsafe seat epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate physical chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing current self rejected",
+      "status": "PASS"
+    }
+  ],
+  "at": "2026-10-22T18:37:33.878Z"
+}

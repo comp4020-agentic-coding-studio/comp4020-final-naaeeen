@@ -1,0 +1,338 @@
+{
+  "status": "PASS",
+  "scope": "Offline pure raw-frame and closure guard calibration; no browser or network",
+  "runnerSHA256": "e825f2806eccf356620d9702f5483bd259a6b87b8eb2f73a9eb190647f5f44f5",
+  "protocolSHA256": "bfb409d664fdeaacfbdee8fe38b898ed449eb9c7e8d87368a7dbc2e6622346c0",
+  "sourceManifestSHA256": "5a0f6e13ab76939dfe6ae28e7e6b815e0ba2e928ced2cad29f57475c5c22216d",
+  "checks": [
+    {
+      "name": "current exact-scope snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "named house.snapshot event accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "successful subscribe ACK snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "private zone rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "observer controller rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing access generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster house rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong roster round rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate roster member rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale access after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale generation after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale roster after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "stale durable stream after current rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "old socket after reload rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "higher ordered current roster accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unwrapped durable object ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong named event ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "failed ACK ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "arbitrary nested snapshot ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed JSON ignored",
+      "status": "PASS"
+    },
+    {
+      "name": "intentional reload close accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "unexpected close cannot pass",
+      "status": "PASS"
+    },
+    {
+      "name": "legitimate reload with no high-level close is accepted by combined generations",
+      "status": "PASS"
+    },
+    {
+      "name": "extra main-document navigation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "extra WebSocket open rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing reload socket generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing reload document generation rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong navigation origin rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "returning own Watch clears self consent",
+      "status": "PASS"
+    },
+    {
+      "name": "retained old own consent rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "returner still present in peer roster rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "six distinct connected current game chairs accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "missing chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong purpose rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "disconnected chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong zone rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unsafe seat epoch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate physical chair rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing current self rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "actual final grader accepts valid visible six-person task only after closed resources",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails foreign identity despite later valid frame",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails foreign house despite later valid frame",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails private zone despite later valid frame",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails foreign epoch despite later valid frame",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails lost controller despite later valid frame",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader permits classified stale access ignore",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader permits classified stale generation ignore",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader permits classified stale durable ignore",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader permits classified stale roster ignore",
+      "status": "PASS"
+    },
+    {
+      "name": "old socket is permitted stale but unknown rejection cannot silently pass",
+      "status": "PASS"
+    },
+    {
+      "name": "declared document retirement ignores old socket before accepting its new socket",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects invisible chair while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects offscreen chair while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects covered chair while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects foreign avatar label while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects hidden sixth label while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects clipped sixth label while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects covered sixth label while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects missing sixth mesh while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects offscreen sixth mesh while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader rejects nonfinite sixth mesh while counters remain six",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails context close error after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails unresolved context close after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails missing context close event after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails context still present after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails browser still connected after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails remaining owned context after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails duplicate closed-context record after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails browser close error after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "final grader fails zero cleanup records despite six claims after completed placements",
+      "status": "PASS"
+    },
+    {
+      "name": "code-free native evidence view accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "native PNG preflight rejects housePanelHidden",
+      "status": "PASS"
+    },
+    {
+      "name": "native PNG preflight rejects codeDisplayVisible",
+      "status": "PASS"
+    },
+    {
+      "name": "native PNG preflight rejects inviteTextVisible",
+      "status": "PASS"
+    },
+    {
+      "name": "native PNG preflight rejects inviteInputVisible",
+      "status": "PASS"
+    },
+    {
+      "name": "native PNG preflight rejects inviteKnown",
+      "status": "PASS"
+    },
+    {
+      "name": "published metadata excludes raw bodies errors PNG text and navigation secrets",
+      "status": "PASS"
+    },
+    {
+      "name": "changed source cannot pass otherwise-valid native task",
+      "status": "PASS"
+    }
+  ],
+  "at": "2026-10-22T19:40:24.520Z"
+}

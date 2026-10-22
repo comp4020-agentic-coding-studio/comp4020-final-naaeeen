@@ -1,0 +1,762 @@
+{
+  "status": "FAIL",
+  "attempt": "current-compact-first",
+  "scope": "Matched synthetic component layout in actual Chromium. This is not six-user, server-persistence, human A/B, physical-phone, performance, or deployment acceptance.",
+  "durationMs": 15919.422759000001,
+  "fixedDeadlineMs": 90000,
+  "retries": 0,
+  "firstFailure": "New initial layout: board",
+  "failureClassification": "UNRESOLVED_CONTAINER_ONLY_HIT_TEST; board bounds and all24cell hit tests pass; no criterion/evaluator/source changes or rerun",
+  "nativeImageObservation": "Original candidate landscape PNG shows the complete board and tray; self/count wraps into a narrow column. Parent inspection pending.",
+  "cases": [
+    {
+      "variant": "old",
+      "viewport": "portrait",
+      "status": "BASELINE_LAYOUT_FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "board",
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "board": {
+        "x": 30,
+        "y": 464.78125,
+        "width": 330,
+        "height": 223.375,
+        "bottom": 688.15625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": false
+      },
+      "tray": {
+        "x": 21,
+        "y": 744.15625,
+        "width": 348,
+        "height": 120,
+        "bottom": 864.15625,
+        "visible": true,
+        "inViewport": false,
+        "clips": [
+          "panel",
+          "BODY"
+        ],
+        "hitExposed": false
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 53.328125,
+        "minHeight": 53.328125
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 6,
+        "minWidth": 53,
+        "minHeight": 53
+      },
+      "paging": {
+        "previous": {
+          "x": 21,
+          "y": 864.15625,
+          "width": 72.5,
+          "height": 44,
+          "bottom": 908.15625,
+          "visible": true,
+          "inViewport": false,
+          "clips": [
+            "panel",
+            "BODY"
+          ],
+          "hitExposed": false
+        },
+        "next": {
+          "x": 317.359375,
+          "y": 864.15625,
+          "width": 51.640625,
+          "height": 44,
+          "bottom": 908.15625,
+          "visible": true,
+          "inViewport": false,
+          "clips": [
+            "panel",
+            "BODY"
+          ],
+          "hitExposed": false
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 184.984375,
+          "y": 250.78125,
+          "width": 106.46875,
+          "height": 44,
+          "bottom": 294.78125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 297.453125,
+          "y": 250.78125,
+          "width": 71.546875,
+          "height": 44,
+          "bottom": 294.78125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 197.5,
+          "y": 333.78125,
+          "width": 171.5,
+          "height": 44,
+          "bottom": 377.78125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 6,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-portrait-joined.png",
+          "sha256": "53aa9a0c5e5e1ee848b2ee285f59c99ba5481a174941bad38705f3b2409f0c2c",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "portrait",
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "board": {
+        "x": 30,
+        "y": 326.328125,
+        "width": 330,
+        "height": 223.375,
+        "bottom": 549.703125,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 21,
+        "y": 622.890625,
+        "width": 348,
+        "height": 120,
+        "bottom": 742.890625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 53.328125,
+        "minHeight": 53.328125
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 12,
+        "minWidth": 53,
+        "minHeight": 53
+      },
+      "paging": {
+        "previous": {
+          "x": 21,
+          "y": 742.890625,
+          "width": 80.953125,
+          "height": 44,
+          "bottom": 786.890625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "next": {
+          "x": 312.703125,
+          "y": 742.890625,
+          "width": 56.296875,
+          "height": 44,
+          "bottom": 786.890625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 109.5,
+          "y": 247.328125,
+          "width": 82.5,
+          "height": 44,
+          "bottom": 291.328125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 198,
+          "y": 247.328125,
+          "width": 82.5,
+          "height": 44,
+          "bottom": 291.328125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 286.5,
+          "y": 247.328125,
+          "width": 82.5,
+          "height": 44,
+          "bottom": 291.328125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 6,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-portrait-joined.png",
+          "sha256": "10db955593a60d10af68f377e896c9f56e75420c91252573ccc43017ebfcee9d",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-portrait-players.png",
+          "sha256": "4d3dec2035686c26289a1e2d77ee4d15771cc3c4c4bbac58dd86de8bb0a0bb42",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": "desktop",
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "board": {
+        "x": 447,
+        "y": 454.109375,
+        "width": 650,
+        "height": 437.375,
+        "bottom": 891.484375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 1199,
+        "y": 491.3125,
+        "width": 350,
+        "height": 263.75,
+        "bottom": 755.0625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 106.328125,
+        "minHeight": 106.328125
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 12,
+        "minWidth": 79.25,
+        "minHeight": 79.25
+      },
+      "paging": {
+        "previous": {
+          "x": 1199,
+          "y": 757.0625,
+          "width": 76.71875,
+          "height": 44,
+          "bottom": 801.0625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "next": {
+          "x": 1495.03125,
+          "y": 757.0625,
+          "width": 53.96875,
+          "height": 44,
+          "bottom": 801.0625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 1324.59375,
+          "y": 307.109375,
+          "width": 130.15625,
+          "height": 44,
+          "bottom": 351.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 1460.75,
+          "y": 307.109375,
+          "width": 88.25,
+          "height": 44,
+          "bottom": 351.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 560.578125,
+          "y": 363.109375,
+          "width": 139.34375,
+          "height": 44,
+          "bottom": 407.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 6,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-desktop-joined.png",
+          "sha256": "ca8fa2d217695235e75f007393d809ffcee81250f9de5a0fd067da00170a1f22",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "desktop",
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "board": {
+        "x": 447,
+        "y": 422.109375,
+        "width": 650,
+        "height": 437.375,
+        "bottom": 859.484375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 1199,
+        "y": 459.3125,
+        "width": 350,
+        "height": 263.75,
+        "bottom": 723.0625,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 106.328125,
+        "minHeight": 106.328125
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 12,
+        "minWidth": 79.25,
+        "minHeight": 79.25
+      },
+      "paging": {
+        "previous": {
+          "x": 1199,
+          "y": 725.0625,
+          "width": 80.953125,
+          "height": 44,
+          "bottom": 769.0625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "next": {
+          "x": 1492.703125,
+          "y": 725.0625,
+          "width": 56.296875,
+          "height": 44,
+          "bottom": 769.0625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 1130.5,
+          "y": 339.109375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 383.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 1272,
+          "y": 339.109375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 383.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 1413.5,
+          "y": 339.109375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 383.109375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 6,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-desktop-joined.png",
+          "sha256": "afe4ca15bac1b329e0a97404b28251f9c9339e6ddfadd5ff39b39dbaa21913ca",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-desktop-players.png",
+          "sha256": "e920c9ba84ccf0ae60cbd116b4019d728ff03fd701faa8447d211d3713d0a7bb",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": "landscape",
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "board": {
+        "x": 94,
+        "y": 173,
+        "width": 296,
+        "height": 200.6875,
+        "bottom": 373.6875,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "tray": {
+        "x": 483,
+        "y": 173,
+        "width": 340,
+        "height": 118,
+        "bottom": 291,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 47.65625,
+        "minHeight": 47.65625
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 12,
+        "minWidth": 50.5,
+        "minHeight": 50.5
+      },
+      "paging": {
+        "previous": {
+          "x": 483,
+          "y": 291,
+          "width": 76.71875,
+          "height": 44,
+          "bottom": 335,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "next": {
+          "x": 769.03125,
+          "y": 291,
+          "width": 53.96875,
+          "height": 44,
+          "bottom": 335,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 427.375,
+          "y": 61,
+          "width": 106.46875,
+          "height": 44,
+          "bottom": 105,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 539.84375,
+          "y": 61,
+          "width": 71.546875,
+          "height": 44,
+          "bottom": 105,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 176.984375,
+          "y": 105,
+          "width": 114.125,
+          "height": 44,
+          "bottom": 149,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 6,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/old-landscape-joined.png",
+          "sha256": "d7df583321f2a1d7e9999f646e2a9cee534277ee5794cbee3717b625ee681510",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": "landscape",
+      "status": "FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "board"
+        ]
+      },
+      "board": {
+        "x": 94,
+        "y": 172.734375,
+        "width": 296,
+        "height": 200.6875,
+        "bottom": 373.421875,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": false
+      },
+      "tray": {
+        "x": 483,
+        "y": 172.734375,
+        "width": 340,
+        "height": 118,
+        "bottom": 290.734375,
+        "visible": true,
+        "inViewport": true,
+        "clips": [],
+        "hitExposed": true
+      },
+      "cells": {
+        "count": 24,
+        "exposed": 24,
+        "minWidth": 47.65625,
+        "minHeight": 47.65625
+      },
+      "pieces": {
+        "count": 12,
+        "exposed": 12,
+        "minWidth": 50.5,
+        "minHeight": 50.5
+      },
+      "paging": {
+        "previous": {
+          "x": 483,
+          "y": 290.734375,
+          "width": 80.953125,
+          "height": 44,
+          "bottom": 334.734375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "next": {
+          "x": 766.703125,
+          "y": 290.734375,
+          "width": 56.296875,
+          "height": 44,
+          "bottom": 334.734375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "primaryControls": {
+        "reference": {
+          "x": 192.890625,
+          "y": 82.859375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 126.859375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "chat": {
+          "x": 334.390625,
+          "y": 82.859375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 126.859375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        },
+        "leave": {
+          "x": 475.890625,
+          "y": 82.859375,
+          "width": 135.5,
+          "height": 44,
+          "bottom": 126.859375,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true
+        }
+      },
+      "completedInteractionOutcomes": 0,
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-landscape-joined.png",
+          "sha256": "69c177f5b29b1752996ae452d56f44c5f03c9c6db71149b22af24e7b1e5b22fd",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight/run-current-compact-first/new-landscape-failure.png",
+          "sha256": "69c177f5b29b1752996ae452d56f44c5f03c9c6db71149b22af24e7b1e5b22fd",
+          "published": false
+        }
+      ]
+    }
+  ],
+  "cleanup": {
+    "contexts": [
+      {
+        "case": "old-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      }
+    ],
+    "errors": [],
+    "browserDisconnected": true,
+    "remainingContexts": 0
+  },
+  "sourceUnchanged": true,
+  "unexpectedRequests": 0,
+  "pageErrors": 0,
+  "processAudit": {
+    "command": "pgrep -af ms-playwright/.*/(chrome|headless_shell)",
+    "exitCode": 1,
+    "matches": 0
+  },
+  "pngPublication": "NOT_APPROVED_OR_COPIED"
+}

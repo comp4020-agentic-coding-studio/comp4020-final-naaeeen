@@ -1,0 +1,31 @@
+{
+  "status": "READY_HELD_FOR_CONTEXTUAL_REVIEW_AND_SEPARATE_GO",
+  "browserStarted": false,
+  "fixedDeadlineMs": 90000,
+  "retries": 0,
+  "protocolSHA256": "07d64801cf2dc8b0cd1dfaaff49fb2949d7024bb3826f3dd2f0deb7b6c0c985a",
+  "runnerSHA256": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+  "sourceManifestSHA256": "fe7e35e635e2dc3329f6c7861b8ee11a97b63ae0c5d3823f1e29df72a56d52d0",
+  "sourceBindingPath": "docs/spatial-redesign/evidence/picture-layout-preflight-v2/source-binding.json",
+  "runCommand": "mise exec -- node .local/picture-layout-preflight-v2/runner.mjs --run --label current-compact-refined-first --protocol 07d64801cf2dc8b0cd1dfaaff49fb2949d7024bb3826f3dd2f0deb7b6c0c985a --freeze fe7e35e635e2dc3329f6c7861b8ee11a97b63ae0c5d3823f1e29df72a56d52d0 --runner 96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+  "preservedSourceCopies": {
+    ".local/picture-layout-preflight-v2/bound-pre-review/runner.mjs": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+    ".local/picture-layout-preflight-v2/bound-pre-review/fixture.mjs": "57a9dd6b827538d49d422c392ded354079681d49c362467b659c66a49072dea5",
+    ".local/picture-layout-preflight-v2/bound-pre-review/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight-v2/bound-pre-review/recovery-tasks.mjs": "141182222f4018f3eda580d65d2ad5210a3810556285aded9160d4c45c988995",
+    ".local/picture-layout-preflight-v2/bound-pre-review/protocol.json": "07d64801cf2dc8b0cd1dfaaff49fb2949d7024bb3826f3dd2f0deb7b6c0c985a"
+  },
+  "pureControls": {
+    "originalGuards": 22,
+    "actualBaselineSharedFixtureDOM": 7,
+    "derivedProxy": 15
+  },
+  "nativeNegativeGate": "NOT_RUN: same first candidate context must reject real opaque cell7 overlay while board5points unaffected, then pass restoration, inside unchanged90seconds before candidate acceptance.",
+  "coverageAdditions": [
+    "actual onLeave callback",
+    "pending direct Join/Retry/Cancel non-enrollment and recovery reachability/status",
+    "durable pending Inspect/Return and blocked-placement status; no full puzzle-fit claim while blocked",
+    "focused no-round Start sends no Join; fresh-round projection moves same Start node and focuses exposed enabled Join"
+  ],
+  "firstEvaluatorAndFailure": "Preserved unchanged. No preflight2 or whole-six run has happened."
+}

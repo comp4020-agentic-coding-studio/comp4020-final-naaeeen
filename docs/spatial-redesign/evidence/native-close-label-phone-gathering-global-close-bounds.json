@@ -1,0 +1,55 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "panelTitle": "Sofa · shared inspection",
+  "label": "Close",
+  "target": {
+    "x": 271.609375,
+    "y": 41.75,
+    "width": 85.390625,
+    "height": 44,
+    "right": 357,
+    "bottom": 85.75
+  },
+  "clips": [],
+  "hits": [
+    {
+      "x": 314.3046875,
+      "y": 63.75,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 273.609375,
+      "y": 63.75,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 355,
+      "y": 63.75,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 314.3046875,
+      "y": 43.75,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 314.3046875,
+      "y": 83.75,
+      "ownOrDescendant": true
+    }
+  ],
+  "targetWithinViewport": true,
+  "labelBounds": {
+    "x": 281.609375,
+    "y": 49.75,
+    "width": 65.390625,
+    "height": 28,
+    "right": 347,
+    "bottom": 77.75
+  },
+  "labelWithinViewport": true,
+  "labelWithinButton": true
+}

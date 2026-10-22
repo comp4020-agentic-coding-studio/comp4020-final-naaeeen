@@ -1,0 +1,7 @@
+{
+  "status": "UNRUN_PREPARATION_SUPERSEDED",
+  "reason": "Make historical house-ui capture deterministic from fbdc853 Git blob; captured old bytes already matched but the old optional prepare path would consult live before rejecting mismatched bytes. No native execution happened under this earlier registration.",
+  "runnerSHA256": "39ea8fd548d25d4ad8954a76555b6b950dd44c703a65956441fe809589429e62",
+  "preservedBinding": "pre-baseline-provenance-source-binding.json",
+  "preservedFinalPacket": "pre-baseline-provenance-FINAL-PACKET.json"
+}

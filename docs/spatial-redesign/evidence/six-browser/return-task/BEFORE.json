@@ -1,0 +1,9 @@
+{
+  "status": "PRESERVED_BEFORE_TASK_COMPATIBLE_AMENDMENT",
+  "files": {
+    "docs/spatial-redesign/evidence/six-browser/runner.mjs": "e825f2806eccf356620d9702f5483bd259a6b87b8eb2f73a9eb190647f5f44f5",
+    "docs/spatial-redesign/evidence/six-browser/protocol.md": "bfb409d664fdeaacfbdee8fe38b898ed449eb9c7e8d87368a7dbc2e6622346c0",
+    "tests/e2e/picture-table.spec.ts": "3dde108987df3750c894b623819ffa53df9385fa88ec81a65154f89cdd86e5ef"
+  },
+  "firstFailure": "../run-current-seats-first/result.json"
+}

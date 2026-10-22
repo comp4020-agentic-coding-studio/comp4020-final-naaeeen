@@ -1,0 +1,22 @@
+{
+  "atUTC": "2026-10-22T20:09:01.160952+00:00",
+  "sixStatus": "SEPARATE_GO_RECEIVED",
+  "label": "current-seats-first",
+  "resourceLaneRelease": {
+    "status": "STOPPED_AT_B2_RATE_LIMITED",
+    "allFourCompleted": false,
+    "A2": "NOT_RUN",
+    "parentVerifiedOwnedPIDsAbsent": [
+      32948,
+      32972
+    ],
+    "childExitCodeReportedByParent": 0,
+    "acceptanceInferred": false
+  },
+  "appFreezeReportedByParent": "fbdc853",
+  "origin": "http://127.0.0.1:4108",
+  "parentServerPID": 29271,
+  "sourceManifestSHA256": "dbe9aac6519b5438e6e020c0b0d66c7d92b7d1c30c1e65ff08776628d7767e8d",
+  "taskDeadlineMs": 240000,
+  "rule": "Exactly one reviewed attempt, no retries/criterion/source changes; raw captures ignored, native pixel inspection pending parent."
+}

@@ -1,0 +1,55 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "panelTitle": "Room studio",
+  "label": "Close",
+  "target": {
+    "x": 313,
+    "y": 47,
+    "width": 44,
+    "height": 44,
+    "right": 357,
+    "bottom": 91
+  },
+  "clips": [],
+  "hits": [
+    {
+      "x": 335,
+      "y": 69,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 315,
+      "y": 69,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 355,
+      "y": 69,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 335,
+      "y": 49,
+      "ownOrDescendant": true
+    },
+    {
+      "x": 335,
+      "y": 89,
+      "ownOrDescendant": true
+    }
+  ],
+  "targetWithinViewport": true,
+  "labelBounds": {
+    "x": 313,
+    "y": 55,
+    "width": 65.390625,
+    "height": 28,
+    "right": 378.390625,
+    "bottom": 83
+  },
+  "labelWithinViewport": true,
+  "labelWithinButton": false
+}

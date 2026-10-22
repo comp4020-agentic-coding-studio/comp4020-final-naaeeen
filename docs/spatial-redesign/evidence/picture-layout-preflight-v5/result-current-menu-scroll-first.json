@@ -1,0 +1,813 @@
+{
+  "status": "PASS_COMPONENT_LAYOUT_VISUAL_REVIEW_PENDING",
+  "label": "current-menu-scroll-first",
+  "scope": "Matched synthetic component layout in actual Chromium. This is not six-user, server-persistence, human A/B, physical-phone, performance, or deployment acceptance.",
+  "startedAt": "2026-10-22T21:20:20.327Z",
+  "finishedAt": "2026-10-22T21:20:42.293Z",
+  "durationMs": 23075.742902,
+  "protocolSHA256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "runnerSHA256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "sourceUnchanged": true,
+  "runtime": {
+    "node": "v24.21.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "angle": "swiftshader"
+  },
+  "cases": [
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "portrait",
+        "width": 390,
+        "height": 844,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "BASELINE_LAYOUT_FAIL",
+      "initialLayout": {
+        "pass": false,
+        "failures": [
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "secondPageLayout": {
+        "pass": false,
+        "failures": [
+          "action-reference",
+          "action-chat",
+          "wrapper-game-panel-stand",
+          "wrapper-break-picture",
+          "wrapper-break-four"
+        ]
+      },
+      "watchingLayout": {
+        "pass": false,
+        "failures": [
+          "tray",
+          "piece-chair-leg",
+          "piece-ivy-bell",
+          "piece-lamp-base",
+          "piece-red-teapot",
+          "piece-woven-basket",
+          "piece-fern-rain",
+          "action-previous",
+          "action-next"
+        ]
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 21,
+          "y": 32.78125,
+          "width": 157.984375,
+          "height": 98,
+          "right": 178.984375,
+          "bottom": 130.78125,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": false,
+          "hitSampleScheme": "unchanged-center-and3px-corners",
+          "hitSamples": [
+            {
+              "x": 99.9921875,
+              "y": 81.78125,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 24,
+              "y": 35.78125,
+              "ownOrDescendant": false
+            },
+            {
+              "x": 175.984375,
+              "y": 35.78125,
+              "ownOrDescendant": false
+            },
+            {
+              "x": 24,
+              "y": 127.78125,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 175.984375,
+              "y": 127.78125,
+              "ownOrDescendant": true
+            }
+          ]
+        },
+        "pass": false
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 191.78125,
+            "width": 348,
+            "height": 44,
+            "right": 369,
+            "bottom": 235.78125,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 195,
+                "y": 213.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 194.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 366,
+                "y": 194.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 232.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 366,
+                "y": 232.78125,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 142.78125,
+            "width": 171.5,
+            "height": 44,
+            "right": 192.5,
+            "bottom": 186.78125,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 106.75,
+                "y": 164.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 145.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 189.5,
+                "y": 145.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 183.78125,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 189.5,
+                "y": 183.78125,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/old-portrait-joined.png",
+          "sha256": "53aa9a0c5e5e1ee848b2ee285f59c99ba5481a174941bad38705f3b2409f0c2c",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "portrait",
+        "width": 390,
+        "height": 844,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "native-details",
+      "disclosurePresent": true,
+      "nativePartialOverlay": {
+        "status": "PASS_NATIVE_CONTROL",
+        "blockedTarget": 7,
+        "containerPointsUnaffected": true,
+        "negativeDecision": {
+          "pass": false,
+          "failures": [
+            "cell-7"
+          ]
+        },
+        "restoredDecision": {
+          "pass": true,
+          "failures": []
+        }
+      },
+      "recoveryChecks": [
+        "pending Join status/cue readable; original Retry explicit and non-enrolling; upfront44px Cancel invokes Leave/onLeave",
+        "durable pending: native piece selection and Enter on empty cell send no additional puzzle.place and leave exact placements/DOM count unchanged;44px Inspect/Return invoke callbacks; no full-board-fit claim while blocked",
+        "native focused initial Start sends no Join; fresh-round projection moves same node into closed options and focuses exposed enabled Join"
+      ],
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "native details keyboard toggle, six exact full names reachable, Return/Replace/Close targets44px",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-joined.png",
+          "sha256": "5823249c857178a1e4bd1fb701f18fe293e414021e53cb89f21cd63ce759b13d",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-native-partial-negative.png",
+          "sha256": "09dfd31c395952e7529085cce81e24c1463843c4ab98a1279350a34c933ff163",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-players.png",
+          "sha256": "0632d60ba5e0ab0039c6bb9846a51fdaad3d0ee15359447a8f3df6d38278f3a6",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-pending-join-recovery.png",
+          "sha256": "9413085c01567ab3468e6d04035938dd26b3f8bf1489c322cd9ea07b257f2ffe",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-portrait-pending-save-recovery.png",
+          "sha256": "f872638436747e0f3ace13e78ccd3b1a26b4f30803c196299b1bf5168819c3e4",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080,
+        "hasTouch": false,
+        "isMobile": false
+      },
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 371,
+          "y": 312.3125,
+          "width": 941.59375,
+          "height": 33.59375,
+          "right": 1312.59375,
+          "bottom": 345.90625,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true,
+          "hitSampleScheme": "unchanged-center-and3px-corners",
+          "hitSamples": [
+            {
+              "x": 841.796875,
+              "y": 329.109375,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 374,
+              "y": 315.3125,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 1309.59375,
+              "y": 315.3125,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 374,
+              "y": 342.90625,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 1309.59375,
+              "y": 342.90625,
+              "ownOrDescendant": true
+            }
+          ]
+        },
+        "pass": true
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 705.921875,
+            "y": 363.109375,
+            "width": 137.15625,
+            "height": 44,
+            "right": 843.078125,
+            "bottom": 407.109375,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 774.5,
+                "y": 385.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 708.921875,
+                "y": 366.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 840.078125,
+                "y": 366.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 708.921875,
+                "y": 404.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 840.078125,
+                "y": 404.109375,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 371,
+            "y": 363.109375,
+            "width": 183.578125,
+            "height": 44,
+            "right": 554.578125,
+            "bottom": 407.109375,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 462.7890625,
+                "y": 385.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 374,
+                "y": 366.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 551.578125,
+                "y": 366.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 374,
+                "y": 404.109375,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 551.578125,
+                "y": 404.109375,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/old-desktop-joined.png",
+          "sha256": "ca8fa2d217695235e75f007393d809ffcee81250f9de5a0fd067da00170a1f22",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080,
+        "hasTouch": false,
+        "isMobile": false
+      },
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "native-details",
+      "disclosurePresent": true,
+      "recoveryChecks": [
+        "pending Join status/cue readable; original Retry explicit and non-enrolling; upfront44px Cancel invokes Leave/onLeave",
+        "durable pending: native piece selection and Enter on empty cell send no additional puzzle.place and leave exact placements/DOM count unchanged;44px Inspect/Return invoke callbacks; no full-board-fit claim while blocked",
+        "native focused initial Start sends no Join; fresh-round projection moves same node into closed options and focuses exposed enabled Join"
+      ],
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "native details keyboard toggle, six exact full names reachable, Return/Replace/Close targets44px",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-desktop-joined.png",
+          "sha256": "afe4ca15bac1b329e0a97404b28251f9c9339e6ddfadd5ff39b39dbaa21913ca",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-desktop-players.png",
+          "sha256": "9eec85a519c1fbb5a0a02616b2ead2aeb75053a28ea0335741881c019d407c95",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-desktop-pending-join-recovery.png",
+          "sha256": "e0d36bb8f70ddf16dd50d8f744e9744690ea3720b65ba5a480b75a7a29501965",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-desktop-pending-save-recovery.png",
+          "sha256": "7e6d061e016a6b119ce91d8eaa459be4dba88dc370b58c73eacdf24179dee03c",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "old",
+      "viewport": {
+        "name": "landscape",
+        "width": 844,
+        "height": 390,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "BASELINE_PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "inline-roster",
+      "inlineRoster": {
+        "box": {
+          "id": "",
+          "x": 21,
+          "y": 62,
+          "width": 394.375,
+          "height": 42,
+          "right": 415.375,
+          "bottom": 104,
+          "visible": true,
+          "inViewport": true,
+          "clips": [],
+          "hitExposed": true,
+          "hitSampleScheme": "unchanged-center-and3px-corners",
+          "hitSamples": [
+            {
+              "x": 218.1875,
+              "y": 83,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 24,
+              "y": 65,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 412.375,
+              "y": 65,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 24,
+              "y": 101,
+              "ownOrDescendant": true
+            },
+            {
+              "x": 412.375,
+              "y": 101,
+              "ownOrDescendant": true
+            }
+          ]
+        },
+        "pass": true
+      },
+      "secondaryTargets": {
+        "return": {
+          "box": {
+            "id": "",
+            "x": 296.109375,
+            "y": 105,
+            "width": 112.296875,
+            "height": 44,
+            "right": 408.40625,
+            "bottom": 149,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 352.2578125,
+                "y": 127,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 299.109375,
+                "y": 108,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 405.40625,
+                "y": 108,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 299.109375,
+                "y": 146,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 405.40625,
+                "y": 146,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        },
+        "start": {
+          "box": {
+            "id": "",
+            "x": 21,
+            "y": 105,
+            "width": 150.984375,
+            "height": 44,
+            "right": 171.984375,
+            "bottom": 149,
+            "visible": true,
+            "inViewport": true,
+            "clips": [],
+            "hitExposed": true,
+            "hitSampleScheme": "unchanged-center-and3px-corners",
+            "hitSamples": [
+              {
+                "x": 96.4921875,
+                "y": 127,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 108,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 168.984375,
+                "y": 108,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 24,
+                "y": 146,
+                "ownOrDescendant": true
+              },
+              {
+                "x": 168.984375,
+                "y": 146,
+                "ownOrDescendant": true
+              }
+            ]
+          },
+          "pass": true
+        }
+      },
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "same six full names and existing inline Return/Replace found; baseline geometry outcomes recorded without stopping candidate",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/old-landscape-joined.png",
+          "sha256": "d7df583321f2a1d7e9999f646e2a9cee534277ee5794cbee3717b625ee681510",
+          "published": false
+        }
+      ]
+    },
+    {
+      "variant": "new",
+      "viewport": {
+        "name": "landscape",
+        "width": 844,
+        "height": 390,
+        "hasTouch": true,
+        "isMobile": true
+      },
+      "status": "PASS",
+      "initialLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "secondPageLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "watchingLayout": {
+        "pass": true,
+        "failures": []
+      },
+      "nameMechanism": "native-details",
+      "disclosurePresent": true,
+      "recoveryChecks": [
+        "pending Join status/cue readable; original Retry explicit and non-enrolling; upfront44px Cancel invokes Leave/onLeave",
+        "durable pending: native piece selection and Enter on empty cell send no additional puzzle.place and leave exact placements/DOM count unchanged;44px Inspect/Return invoke callbacks; no full-board-fit claim while blocked",
+        "native focused initial Start sends no Join; fresh-round projection moves same node into closed options and focuses exposed enabled Join"
+      ],
+      "checks": [
+        "native paging preserves 24 stable piece slots and two disjoint pages of twelve",
+        "native details keyboard toggle, six exact full names reachable, Return/Replace/Close targets44px",
+        "native Reference image, Escape/focus return, Chat callback",
+        "native tray/board ArrowRight and Enter invoke actual component placement payload; no persistence claim",
+        "native Leave/Join intent callbacks; ACK alone cannot enroll; synthetic accepted roster projection changes state",
+        "Return outcome invokes existing callback from each pattern’s own location"
+      ],
+      "screenshots": [
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-joined.png",
+          "sha256": "1b77ac5f3281fecdce4ee51c1023d6a2d03062a1db30564f1f5864fe1154bc9a",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-players.png",
+          "sha256": "1b676c637c2b3b6a2217eb981ff1609fb0954ea9f8384d772e11f406afdd0f1b",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-pending-join-recovery.png",
+          "sha256": "1f633b07400a049b9112b62bafc59022124caa933e0cb71ad81726512a4f8470",
+          "published": false
+        },
+        {
+          "path": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first/new-landscape-pending-save-recovery.png",
+          "sha256": "a36061469d31ad422d3675f8f42f04c54202ca90a072997c6e988c55cc4aba33",
+          "published": false
+        }
+      ]
+    }
+  ],
+  "failure": null,
+  "cleanup": {
+    "contexts": [
+      {
+        "case": "old-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-portrait",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-desktop",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "old-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      },
+      {
+        "case": "new-landscape",
+        "closeEvent": true,
+        "closed": true,
+        "stillPresent": false
+      }
+    ],
+    "errors": [],
+    "browserDisconnected": true,
+    "remainingContexts": 0
+  },
+  "rawDirectory": ".local/picture-layout-preflight-v5/run-current-menu-scroll-first",
+  "nativePixelReview": "NOT_RUN",
+  "approvedPNGBytesCopied": false
+}

@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "checks": 82,
+  "path": "docs/spatial-redesign/evidence/six-browser/calibration-dom-wiring-v1.json",
+  "networkOrBrowserStarted": false
+}

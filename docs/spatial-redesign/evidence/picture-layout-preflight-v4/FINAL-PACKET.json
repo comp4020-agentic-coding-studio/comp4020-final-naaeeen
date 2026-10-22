@@ -1,0 +1,25 @@
+{
+  "status": "READY_HELD_FOR_SEPARATE_ROOT_GO",
+  "browserStarted": false,
+  "fixedDeadlineMs": 90000,
+  "retries": 0,
+  "contexts": 6,
+  "protocolSHA256": "e403aa1f08eaae32423b966acac498fd99aded45d3361e25558429fbcf4ce5a3",
+  "runnerSHA256": "2d99b2acec4508c4de5a041307a1493360dd3cd0d5df1f8280ef62e878095997",
+  "sourceManifestSHA256": "8cd39bb41fc194a13d1e2c687ecece431dbba3f84a4cd984ebaf59451261dbc4",
+  "sourceBindingPath": "docs/spatial-redesign/evidence/picture-layout-preflight-v4/source-binding.json",
+  "runCommand": "mise exec -- node .local/picture-layout-preflight-v4/runner.mjs --run --label current-compact-anchor-first --protocol e403aa1f08eaae32423b966acac498fd99aded45d3361e25558429fbcf4ce5a3 --freeze 8cd39bb41fc194a13d1e2c687ecece431dbba3f84a4cd984ebaf59451261dbc4 --runner 2d99b2acec4508c4de5a041307a1493360dd3cd0d5df1f8280ef62e878095997",
+  "preservedSourceCopies": {
+    ".local/picture-layout-preflight-v4/bound-pre-review/runner.mjs": "2d99b2acec4508c4de5a041307a1493360dd3cd0d5df1f8280ef62e878095997",
+    ".local/picture-layout-preflight-v4/bound-pre-review/fixture.mjs": "4b9b3d50e39b96aa2288132bc85621cdf56ea38d2738428ed7af7a9d2970e0ff",
+    ".local/picture-layout-preflight-v4/bound-pre-review/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight-v4/bound-pre-review/recovery-tasks.mjs": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+    ".local/picture-layout-preflight-v4/bound-pre-review/placement-block-guard.mjs": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+    ".local/picture-layout-preflight-v4/bound-pre-review/protocol.json": "e403aa1f08eaae32423b966acac498fd99aded45d3361e25558429fbcf4ce5a3"
+  },
+  "assertionsAndCriteria": "All fixture/guard/recovery/blocked-placement helper bytes identical to V3; runner differs only in capture/evidence paths; protocol differs only in version and prior-candidate provenance. PREPARATION-DIFF.json verifies the reverse path replacement and exact remaining protocol equality.",
+  "candidateChange": "UI JavaScript remains reviewed a108. CSS changes only menu anchor right0 to unconditional left0/rightauto; captured exact diff beside this packet. All V3 first results remain preserved.",
+  "pureControlScope": "Prior V3 controls22+7+4 and proxy15 keep their original source/scope. No repeat control run or new native acceptance claimed.",
+  "nativeControlAndRecovery": "Unchanged mandatory native cell7 overlay rejection/restoration, all normal play/watch44px bounds/hits, six full names, recovery no-send and native Enter-Start focus transition/onLeave.",
+  "nextStep": "Await tiny source review and explicit GO. No trace, whole-six, maintained13, service or resource execution inferred."
+}

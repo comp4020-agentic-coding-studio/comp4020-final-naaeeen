@@ -1,0 +1,11 @@
+{
+  "status": "PASS_HISTORICAL_BASELINE_PROVENANCE",
+  "oldGitBlob": "fbdc853:public/house-ui.js",
+  "oldBlobSHA256": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+  "capturedOldSHA256": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+  "originalSixFirstFailureSHA256": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+  "capturedNewSHA256": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+  "oldBytesEqualGitAndHistorical": true,
+  "declaredDelta": "One global picture badge denominator expression now uses validated house capacity2-6 instead of literal6.",
+  "scope": "The component fixture does not import or boot house-ui.js. It binds the controller source for provenance and projects the same six-person wrapper counts explicitly. Native global-controller behavior is not proved by this component comparison."
+}

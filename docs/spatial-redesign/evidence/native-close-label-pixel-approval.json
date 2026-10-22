@@ -1,0 +1,56 @@
+{
+  "status": "PARENT_PIXEL_APPROVAL_AND_BYTE_IDENTICAL_CURATION",
+  "recordedAt": "2026-10-22T22:51:02.740909+00:00",
+  "approval": "Parent reported viewing all six original Room/Sofa PNGs and approved byte-identical curation after the scoped Close label containment polish.",
+  "mechanicalRecord": "native-close-label-after.json",
+  "mechanicalStatusPreserved": "PASS_CURRENT_CLOSE_PAIR_MECHANICAL_VISUAL_REVIEW_PENDING",
+  "sourceBinding": "native-close-label-before.json",
+  "publicHouseCSSSHA256": "93416803dd11cb80b372c67488c8be8f9b94f34f64b96f8bb706d8dd39a36325",
+  "specSHA256": "f3e1b32e5f4614f8cf93041f245bab1824af62e06bb891cbe712366113bbaeeb",
+  "scope": "Existing Room and Sofa journeys only, 390x844 touch peer plus desktop. Both global Close text labels are contained by exposed minimum44px targets. No new whole-six/current13/current4 result is inferred.",
+  "copies": [
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-reference-world-after-close.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-room-reference-world-after-close.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-studio-desktop.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-room-studio-desktop.png",
+      "sha256": "34e84b7ca8a6fec111ea36c5822cfe552b48b986ea72d3f300c848dcbf4d75a6",
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-visit-phone.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-room-visit-phone.png",
+      "sha256": "cccc95a900cd631f9d4a2691f05a70557b7b49a054a44599704903ce54ba4081",
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-follow-phone.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-sofa-follow-phone.png",
+      "sha256": "7d1571b99bd161e35a89142ef2a62cf8b9b76507594d28cfd4f9d888ec9a56bd",
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-presenter-desktop.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-sofa-presenter-desktop.png",
+      "sha256": "8234e72c9e6987b025208331efca366e5d451e11521d6a1665d13156de5f5909",
+      "byteIdentical": true
+    },
+    {
+      "original": ".local/spatial-native-close-label-first/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-touch-pan-handover-phone.png",
+      "curated": "docs/spatial-redesign/evidence/native-close-label-sofa-touch-pan-handover-phone.png",
+      "sha256": "d2a11a7aadb8abfe6f4fed0f767c4673f2c52ba46ab08fbd8f4451ec62257c62",
+      "byteIdentical": true
+    }
+  ],
+  "exclusions": [
+    "No human preference, physical-phone or full accessibility acceptance.",
+    "No resource/performance acceptance."
+  ],
+  "closure": "Both existing test finally blocks awaited context.close; Playwright exited 0; no browser or crashpad process remains. No background command remains in this lane.",
+  "sourceAndLaunchUnchanged": true,
+  "nativeLane": "IDLE; no further tests or browser launches authorized"
+}

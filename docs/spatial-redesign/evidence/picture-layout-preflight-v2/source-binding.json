@@ -1,0 +1,31 @@
+{
+  "status": "READY_HELD",
+  "browserStarted": false,
+  "protocolSHA256": "07d64801cf2dc8b0cd1dfaaff49fb2949d7024bb3826f3dd2f0deb7b6c0c985a",
+  "runnerSHA256": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+  "sourceManifestSHA256": "fe7e35e635e2dc3329f6c7861b8ee11a97b63ae0c5d3823f1e29df72a56d52d0",
+  "files": {
+    ".local/picture-layout-preflight-v2/sources/old/public/house-puzzle-ui.js": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab",
+    ".local/picture-layout-preflight-v2/sources/old/public/house.css": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00",
+    ".local/picture-layout-preflight-v2/sources/old/public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    ".local/picture-layout-preflight-v2/sources/old/public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    ".local/picture-layout-preflight-v2/sources/old/public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    ".local/picture-layout-preflight-v2/sources/old/public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    ".local/picture-layout-preflight-v2/sources/new/public/house-puzzle-ui.js": "519f4537fe2f34981c960a7c5cf4b7867bb856d976f19556c6f85afb57d2778c",
+    ".local/picture-layout-preflight-v2/sources/new/public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89",
+    ".local/picture-layout-preflight-v2/sources/new/public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    ".local/picture-layout-preflight-v2/sources/new/public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    ".local/picture-layout-preflight-v2/sources/new/public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    ".local/picture-layout-preflight-v2/sources/new/public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    "public/house-puzzle-ui.js": "519f4537fe2f34981c960a7c5cf4b7867bb856d976f19556c6f85afb57d2778c",
+    "public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89",
+    "public/house.html": "38ab124b7aa80a6412a3622fb9b69bf133fddd471ae353d995671974fc125c73",
+    "public/house-ui.js": "7592dd02398bbae78f858c58d27b9a38476285e5a3594685abc43cbe3f99d3eb",
+    "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+    "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
+    ".local/picture-layout-preflight-v2/runner.mjs": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+    ".local/picture-layout-preflight-v2/fixture.mjs": "57a9dd6b827538d49d422c392ded354079681d49c362467b659c66a49072dea5",
+    ".local/picture-layout-preflight-v2/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+    ".local/picture-layout-preflight-v2/recovery-tasks.mjs": "141182222f4018f3eda580d65d2ad5210a3810556285aded9160d4c45c988995"
+  }
+}

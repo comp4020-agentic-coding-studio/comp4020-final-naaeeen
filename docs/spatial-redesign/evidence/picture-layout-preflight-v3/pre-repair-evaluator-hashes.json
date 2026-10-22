@@ -1,0 +1,7 @@
+{
+  ".local/picture-layout-preflight-v2/runner.mjs": "96408fee266728afdc371e8e3b6fdb1c7e3712780054af20cafb7060de491c8c",
+  ".local/picture-layout-preflight-v2/fixture.mjs": "57a9dd6b827538d49d422c392ded354079681d49c362467b659c66a49072dea5",
+  ".local/picture-layout-preflight-v2/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+  ".local/picture-layout-preflight-v2/recovery-tasks.mjs": "141182222f4018f3eda580d65d2ad5210a3810556285aded9160d4c45c988995",
+  ".local/picture-layout-preflight-v2/baseline-control.mjs": "025fe9852ce52434253a9572a3e0066952d414c8f546f931b00afc42de8685b7"
+}

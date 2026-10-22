@@ -1,0 +1,11 @@
+{
+  "status": "PASS_SOURCE_PROVENANCE_AND_FREEZE",
+  "filesVerified": 23,
+  "baselineGitAndHistoricalMatch": true,
+  "currentHashesMatchExpectedFreeze": true,
+  "runtimeAssertionsUnchanged": true,
+  "protocolSHA256": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "runnerSHA256": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "browserStarted": false
+}

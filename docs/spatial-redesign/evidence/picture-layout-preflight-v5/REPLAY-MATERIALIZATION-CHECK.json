@@ -1,0 +1,14 @@
+{
+  "status": "MATERIALIZED_ONLY_NO_BROWSER_OR_SERVICE",
+  "scope": "Replayable source-scoped synthetic V5 component evaluation. Materializer never starts a browser or service; all outputs are isolated under ignored.local. Raw bodies/PNGs are excluded.",
+  "replayRoot": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/picture-layout-v5-replay-packaging-verify",
+  "inputsVerified": 26,
+  "boundFilesVerified": 23,
+  "sourceManifestSHA256": "2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942",
+  "sourceCommits": {
+    "old": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+    "current": "41ae6536c021d4321b868b0d6c4f36a287c5603b"
+  },
+  "cwdForOptionalFutureReplay": "/home/lizhi/comp4020/comp4020-final-naaeeen/.local/picture-layout-v5-replay-packaging-verify",
+  "optionalFutureCommand": "mise exec -- node .local/picture-layout-preflight-v5/runner.mjs --run --label replay-packaging-verify --protocol d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d --freeze 2b94530b1a072de6f5fa6905bc3f6f801b3ac3cf028eff3798ed27412836f942 --runner 093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3"
+}

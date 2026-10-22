@@ -1,0 +1,13 @@
+{
+  "baseline-source-map.json": "0e9957d542baa45d892d91aa1426747a37147124c723b8a98991aa7e1c070b8d",
+  "evaluator/fixture.mjs": "a66a9378f2be3d58175adbbe43d7b7ab591a9ce2b5bc7206e768547dcfc81b96",
+  "evaluator/guards.mjs": "365a54c64805b523e6a6aca14e105c62fb1e85b05b306fe67154e1f241ba0c87",
+  "evaluator/placement-block-guard.mjs": "bf731afec92ce03274dcde95e21f6adaaeab90ac335b5e43e26a507932f97fe4",
+  "evaluator/recovery-tasks.mjs": "0430e8005eb9a7568b97cd667f810933c9db0315b4976f76005f607f1c7f573b",
+  "evaluator/runner.mjs": "093efac2bbf72399d46afbfec068c04ec67b073321d275b12526e3b92f07d5d3",
+  "manifest.json": "e1c104d69e1f53bd6847bb953b6f75baba3b2408da63ab7697e89bb904d0eaec",
+  "materialize.mjs": "a4fe56aba964e01a90b6872abcdbb4df0eb58b7f8fa876c89de62524cb2a6d32",
+  "protocol.json": "d326fdf38e4076c4f52402f4d606e9deb57d1d8f41991bab7b6b8ab8d0f5384d",
+  "README.md": "f20f2a58d41c346ddc9b30f5825c41fbf735eb3b1f15da8b1936248763aa1207",
+  "source-binding.json": "4a350250811703723bf0288c6f03f2d71cd4fdd3b64690eb543882d41f35c46e"
+}

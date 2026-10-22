@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "scope": "Matched synthetic component layout in actual Chromium. This is not six-user, server-persistence, human A/B, physical-phone, performance, or deployment acceptance.",
+  "status": "PREPARED_HELD",
+  "factor": "The full picture HUD pattern, including roster presentation and action grouping/locations: captured production component/CSS before the phone repair versus the frozen repaired component/CSS. This comparison does not isolate a causal single-property effect.",
+  "fixed": {
+    "viewports": [
+      {"name": "portrait", "width": 390, "height": 844, "hasTouch": true, "isMobile": true},
+      {"name": "desktop", "width": 1920, "height": 1080, "hasTouch": false, "isMobile": false},
+      {"name": "landscape", "width": 844, "height": 390, "hasTouch": true, "isMobile": true}
+    ],
+    "names": ["Alexandria Montgomery", "Christopher Williamson", "Genevieve Featherstone", "Maximilian Worthington", "Theodora Nightingale", "Sebastian Winterbourne"],
+    "initialParticipants": 6,
+    "initialPlacements": 6,
+    "totalPieces": 24,
+    "trayPageSize": 12,
+    "minimumTargetCSSPixels": 44,
+    "deviceScaleFactor": 1,
+    "taskDeadlineMs": 90000,
+    "retries": 0,
+    "browser": {"playwright": "1.63.0", "chromiumSandbox": true, "angle": "swiftshader"}
+  },
+  "wrapper": "Extract the actual #panel aside and #modal-backdrop from captured production house.html. Preserve its markup/classes and all production CSS; project only house-ui.js's game-panel visibility, title, counts and explanatory strings. Do not inject layout overrides.",
+  "gates": [
+    "Before interaction or scrolling: all 24 board cells, all 12 current-page tray pieces, Previous/Next, Reference, Chat, primary Leave, panel Look around, Stand, and both activity buttons are inside viewport and clipping ancestors; controls are exposed to hit testing and at least 44 by 44 CSS pixels.",
+    "All board and tray layout bounds are finite, positive, and fit their viewport and clipping ancestors; no horizontal overflow.",
+    "After native Next and Previous: exactly 12 distinct stable pieces per page, pages disjoint, and 24 total piece IDs remain stable. The same layout gates pass on the second page.",
+    "Shared outcome: all six exact long names and Return/Replace remain reachable with targets at least44 by44. Baseline names and secondary controls are checked inline through its existing selectors, with no new disclosure requirement. Candidate native details opens with keyboard, supplies all six exact names/IDs (only self appends · you), supports native scrolling and Close, and restores the core layout. Return invokes the existing callback from each pattern’s own location.",
+    "Reference opens its native image and Escape restores focus; Chat invokes its callback. Native tray and board ArrowRight move focus, and Enter selects/places with the actual component callback payload.",
+    "Explicit Leave callback followed by synthetic accepted roster projection changes to watching; primary Join is visible/exposed and at least 44 by 44. Native Join invokes intent, and only the subsequent fixture roster projection restores joined state.",
+    "Every case records untouched native PNGs and DOM bounds, source hashes before/after, actual context-close events, zero remaining contexts and disconnected browser. Cleanup/source mismatch prevents a passing result."
+  ],
+  "comparisonDecision": "Record old and new geometry with identical names/state/wrapper/viewports. Old portrait must reproduce at least the tray or paging clipping gate. Baseline uses its inline names/actions; candidate uses its native disclosure/action pattern. Existing Start/Return locations need not match. Every repaired viewport must pass all outcome gates. Known baseline geometry failure is an expected comparison result and cannot stop candidate measurement; infrastructure or unknown fixture/interaction failure stops both. Any candidate failure stops after capture and cleanup.",
+  "privacy": "Fixture identities and names are scripted; there are no service sessions or invite codes. Full raw DOM/error/PNG artifacts remain under ignored .local. Commit only concise sanitized metadata; publish original PNG bytes only after parent inspection.",
+  "launchGate": "No browser until production source freeze, parent review, and separate explicit GO. Bind copies once; --run requires exact protocol, source-manifest, and runner SHA256 arguments and a fresh artifact label. Never overwrite failed six-browser evidence or alter its runner/protocol/criteria/deadline."
+}

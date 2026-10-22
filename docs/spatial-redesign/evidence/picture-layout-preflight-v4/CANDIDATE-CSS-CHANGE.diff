@@ -1,0 +1,7 @@
+--- V3-captured-e2ce3918-house.css
++++ V4-captured-790bd45c-house.css
+@@ -75 +75 @@
+-.puzzle-menu-body{position:absolute;z-index:5;right:0;top:calc(100% + 6px);width:min(340px,calc(100vw - 52px));max-height:min(60dvh,460px);overflow-y:auto;overflow-x:hidden;padding:12px;background:var(--paper);color:var(--paper-ink);border:1px solid #82916f;border-radius:10px;box-shadow:0 12px 40px #173a2a55}
++.puzzle-menu-body{position:absolute;z-index:5;left:0;right:auto;top:calc(100% + 6px);width:min(340px,calc(100vw - 52px));max-height:min(60dvh,460px);overflow-y:auto;overflow-x:hidden;padding:12px;background:var(--paper);color:var(--paper-ink);border:1px solid #82916f;border-radius:10px;box-shadow:0 12px 40px #173a2a55}
+@@ -90 +89,0 @@
+- .puzzle-menu-body{left:0;right:auto}
