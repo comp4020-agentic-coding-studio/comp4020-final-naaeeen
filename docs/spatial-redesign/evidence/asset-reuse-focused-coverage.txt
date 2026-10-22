@@ -1,0 +1,32 @@
+Already up to date
+Done in 53ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+[90mstdout[2m | spec/board-asset-reuse.test.ts[2m > [22m[2mimmutable HTTP asset allocation[2m > [22m[2m24 matched reads preserve all four registered images while sharing server backing stores
+[22m[39mASSET_ALLOCATION_COMPARISON {"task":"two houses, six resident reads each, two original images per reader","files":[{"seed":101,"houseIndex":0,"fileId":"resource_png_0","bytes":2018703,"sha256":"b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db"},{"seed":102,"houseIndex":0,"fileId":"resource_png_1","bytes":2018703,"sha256":"35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"},{"seed":201,"houseIndex":1,"fileId":"resource_png_0","bytes":2018703,"sha256":"b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c"},{"seed":202,"houseIndex":1,"fileId":"resource_png_1","bytes":2018703,"sha256":"c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"}],"reads":24,"sqliteBlobMaterializations":4,"uniqueSQLiteBackingStores":4,"uniqueResponseBackingStores":4,"retainedObservedBackingBytes":8074812,"claim":"allocation counts only; no RSS or full-workload result"}
+
+ [32m✓[39m spec/board-asset-reuse.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1665[2mms[22m[39m
+   [32m✓[39m immutable HTTP asset allocation [2m(4)[22m
+     [33m[2m✓[22m[39m 24 matched reads preserve all four registered images while sharing server backing stores[33m 1047[2mms[22m[39m
+     [33m[2m✓[22m[39m house and file keys stay separate, misses stay 404, and store buffers remain independently mutable[33m 327[2mms[22m[39m
+ [32m✓[39m spec/board-store.test.ts [2m([22m[2m53 tests[22m[2m)[22m[33m 3049[2mms[22m[39m
+ [32m✓[39m spec/board-service.test.ts [2m([22m[2m20 tests[22m[2m)[22m[33m 3061[2mms[22m[39m
+   [32m✓[39m actual board HTTP and Socket.IO [2m(20)[22m
+     [33m[2m✓[22m[39m subscribes to a valid near-limit scene plus maximum retained chat without duplicate full frames[33m 380[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m82 passed[39m[22m[90m (82)[39m
+[2m   Start at [22m 10:09:27
+[2m   Duration [22m 3.58s[2m (tests 90%, transform 6%, import 3%, worker 1%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+------------------|---------|----------|---------|---------|--------------------
+File              | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s  
+------------------|---------|----------|---------|---------|--------------------
+All files         |      90 |    86.45 |   97.22 |   89.69 |                    
+ board-service.ts |      90 |    86.45 |   97.22 |   89.69 | ...393-394,412,451 
+------------------|---------|----------|---------|---------|--------------------
+
+ACTUAL_EXIT=0

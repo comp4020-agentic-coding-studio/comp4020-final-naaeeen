@@ -106,8 +106,43 @@ function outboundFits(socket: Socket, value: unknown): boolean {
     }
     return conn.writeBuffer.length < 8 && queued + Buffer.byteLength(JSON.stringify(value)) + 64 <= 4 * 1024 * 1024;
 }
+type BoardAsset = NonNullable<ReturnType<BoardStore["getAsset"]>>;
+/** @internal Content only: callers must check current authority around every lookup. */
+export class BoardAssetCache {
+    private readonly entries = new Map<string, BoardAsset>();
+    private retainedBytes = 0;
+    get(houseId: string, fileId: string, load: () => BoardAsset | undefined): BoardAsset | undefined {
+        const key = JSON.stringify([houseId, fileId]), cached = this.entries.get(key);
+        if (cached) {
+            this.entries.delete(key);
+            this.entries.set(key, cached);
+            return cached;
+        }
+        const asset = load();
+        if (!asset)
+            return undefined;
+        // A subview retains its whole backing store, not just its visible bytes.
+        const bytes = asset.bytes.buffer.byteLength, limit = 8 * 1024 * 1024;
+        if (bytes > limit)
+            return asset;
+        while (this.entries.size >= 32 || this.retainedBytes + bytes > limit) {
+            const oldest = this.entries.keys().next().value!;
+            this.retainedBytes -= this.entries.get(oldest)!.bytes.buffer.byteLength;
+            this.entries.delete(oldest);
+        }
+        this.entries.set(key, asset);
+        this.retainedBytes += bytes;
+        return asset;
+    }
+    clear(): void {
+        // Responses may still own these buffers. Drop references without mutation.
+        this.entries.clear();
+        this.retainedBytes = 0;
+    }
+}
 /** Membership is checked on each action, after asynchronous body arrival, and immediately before delivery. */
 export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, store: BoardStore, options: Options = {}) {
+    const assets = new BoardAssetCache();
     const namespace = io.of("/board"), views = new Map<string, View>(), buckets = new Map<string, {
         at: number;
         count: number;
@@ -418,7 +453,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
                 const own = store.isOwnAsset(original.id, houseId, fileId);
                 if (!own)
                     member(original, houseId);
-                const asset = store.getAsset(houseId, fileId);
+                const asset = assets.get(houseId, fileId, () => store.getAsset(houseId, fileId));
                 sameActor(original);
                 if (!own)
                     member(original, houseId);
@@ -499,6 +534,7 @@ export function attachBoardService(io: Server, houseStore: BoardHouseAuthority, 
         }
         views.clear();
         buckets.clear();
+        assets.clear();
     }
     return { handle, close };
 }

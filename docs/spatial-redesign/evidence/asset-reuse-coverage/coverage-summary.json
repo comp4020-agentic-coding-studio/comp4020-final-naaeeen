@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":359,"covered":322,"skipped":0,"pct":89.69},"statements":{"total":380,"covered":342,"skipped":0,"pct":90},"functions":{"total":36,"covered":35,"skipped":0,"pct":97.22},"branches":{"total":251,"covered":217,"skipped":0,"pct":86.45},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
+,"/home/lizhi/comp4020/comp4020-final-naaeeen/src/board-service.ts": {"lines":{"total":359,"covered":322,"skipped":0,"pct":89.69},"functions":{"total":36,"covered":35,"skipped":0,"pct":97.22},"statements":{"total":380,"covered":342,"skipped":0,"pct":90},"branches":{"total":251,"covered":217,"skipped":0,"pct":86.45}}
+}

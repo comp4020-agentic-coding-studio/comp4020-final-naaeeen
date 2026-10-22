@@ -1,0 +1,26 @@
+Already up to date
+Done in 46ms using pnpm v11.9.0
+$ tsc --noEmit
+spec/board-asset-reuse.test.ts(102,34): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'Buffer<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+spec/board-asset-reuse.test.ts(121,32): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'Buffer<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+spec/board-asset-reuse.test.ts(121,74): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'Buffer<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+spec/board-asset-reuse.test.ts(132,46): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'Buffer<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+[ELIFECYCLE] Command failed with exit code 2.
+
+ACTUAL_EXIT=2

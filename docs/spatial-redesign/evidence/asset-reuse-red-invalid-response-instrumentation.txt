@@ -1,0 +1,96 @@
+Already up to date
+Done in 62ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+[90mstdout[2m | spec/board-asset-reuse.test.ts[2m > [22m[2mimmutable HTTP asset allocation[2m > [22m[2m24 matched reads preserve all four registered images while sharing server backing stores
+[22m[39mASSET_ALLOCATION_COMPARISON {"task":"two houses, six resident reads each, two original images per reader","files":[{"seed":101,"houseIndex":0,"fileId":"resource_png_0","bytes":2018703,"sha256":"b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db"},{"seed":102,"houseIndex":0,"fileId":"resource_png_1","bytes":2018703,"sha256":"35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"},{"seed":201,"houseIndex":1,"fileId":"resource_png_0","bytes":2018703,"sha256":"b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c"},{"seed":202,"houseIndex":1,"fileId":"resource_png_1","bytes":2018703,"sha256":"c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"}],"reads":0,"sqliteBlobMaterializations":24,"uniqueSQLiteBackingStores":24,"uniqueResponseBackingStores":0,"retainedObservedBackingBytes":0,"claim":"allocation counts only; no RSS or full-workload result"}
+
+ [31m❯[39m spec/board-asset-reuse.test.ts [2m([22m[2m4 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 1366[2mms[22m[39m
+   [31m❯[39m immutable HTTP asset allocation [2m(4)[22m
+[31m     [31m×[31m 24 matched reads preserve all four registered images while sharing server backing stores[39m[33m 856[2mms[22m[39m
+[31m     [31m×[31m house and file keys stay separate, misses stay 404, and store buffers remain independently mutable[39m[33m 385[2mms[22m[39m
+[31m     [31m×[31m cached reads still enforce current membership, own export, identity, origin and recovered sessions[39m[32m 66[2mms[22m[39m
+[31m     [31m×[31m rechecks membership and sessions immediately after a cache hit[39m[32m 58[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/board-asset-reuse.test.ts[2m > [22mimmutable HTTP asset allocation[2m > [22m24 matched reads preserve all four registered images while sharing server backing stores
+[31m[1mAssertionError[22m: expected [] to have a length of 24 but got +0[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 24[39m
+[31m+ 0[39m
+
+[36m [2m❯[22m spec/board-asset-reuse.test.ts:[2m114:29[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/board-asset-reuse.test.ts[2m > [22mimmutable HTTP asset allocation[2m > [22mhouse and file keys stay separate, misses stay 404, and store buffers remain independently mutable
+[31m[1mAssertionError[22m: expected [ …(4) ] to have a length of 3 but got 4[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 3[39m
+[31m+ 4[39m
+
+[36m [2m❯[22m spec/board-asset-reuse.test.ts:[2m125:98[22m[39m
+    [90m123|[39m         expect((await f.get(a!, "other_file")).bytes.equals(tinyPng)).…
+    [90m124|[39m         const reads = f.materialized.length;
+    [90m125|[39m         expect((await f.get(a!, "same_file")).response.status).toBe(20…
+    [90m   |[39m                                                                                                  [31m^[39m
+    [90m126|[39m         const missing = await f.get(a!, "missing"); expect(missing.res…
+    [90m127|[39m         f.put(a!, "missing"); expect((await f.get(a!, "missing")).byte…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/board-asset-reuse.test.ts[2m > [22mimmutable HTTP asset allocation[2m > [22mcached reads still enforce current membership, own export, identity, origin and recovered sessions
+[31m[1mAssertionError[22m: expected [ …(4) ] to have a length of 2 but got 4[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 4[39m
+
+[36m [2m❯[22m spec/board-asset-reuse.test.ts:[2m150:32[22m[39m
+    [90m148|[39m         f.house.recover(f.house.issueRecovery(group.guest.id));
+    [90m149|[39m         expect((await f.get(group, "guest_file", group.guest)).respons…
+    [90m150|[39m         expect(f.materialized).toHaveLength(reads);
+    [90m   |[39m                                [31m^[39m
+    [90m151|[39m     });
+    [90m152|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/board-asset-reuse.test.ts[2m > [22mimmutable HTTP asset allocation[2m > [22mrechecks membership and sessions immediately after a cache hit
+[31m[1mAssertionError[22m: expected [ …(3) ] to have a length of 1 but got 3[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 3[39m
+
+[36m [2m❯[22m spec/board-asset-reuse.test.ts:[2m168:58[22m[39m
+    [90m166|[39m         vi.spyOn(f.house, "session").mockImplementation(value => { if …
+    [90m167|[39m         expect((await f.get(group, "cached", group.owner)).response.st…
+    [90m168|[39m         expect(sessions).toBe(3); expect(f.materialized).toHaveLength(…
+    [90m   |[39m                                                          [31m^[39m
+    [90m169|[39m     });
+    [90m170|[39m });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[90m (4)[39m
+[2m   Start at [22m 10:07:28
+[2m   Duration [22m 1.73s[2m (tests 84%, transform 10%, import 6%)[22m
+
+
+ACTUAL_EXIT=1

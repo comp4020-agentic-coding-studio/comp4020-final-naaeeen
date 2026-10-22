@@ -1,0 +1,242 @@
+{
+  "status": "deterministic verification complete; held for fresh independent review and parent acceptance",
+  "baseCommitAtFreeze": "51a7aa5fb76947b8a00aecefe4855aec91acf3e9",
+  "runtime": {
+    "platform": "Windows to WSL Ubuntu/lizhi bridge",
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "APP_URL": "http://127.0.0.1:4108"
+  },
+  "productionScope": [
+    "src/board-service.ts"
+  ],
+  "sourceModuleAdded": false,
+  "bounds": {
+    "retainedBackingBytes": 8388608,
+    "entries": 32,
+    "charge": "asset.bytes.buffer.byteLength per entry; shared backing conservatively charged per retained entry",
+    "key": "JSON encoded [houseId,fileId]",
+    "eviction": "least recently used",
+    "clear": "board service close; references dropped without zero or mutation"
+  },
+  "comparison": {
+    "old": {
+      "task": "two houses, six resident reads each, two original images per reader",
+      "files": [
+        {
+          "seed": 101,
+          "houseIndex": 0,
+          "fileId": "resource_png_0",
+          "bytes": 2018703,
+          "sha256": "b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db"
+        },
+        {
+          "seed": 102,
+          "houseIndex": 0,
+          "fileId": "resource_png_1",
+          "bytes": 2018703,
+          "sha256": "35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"
+        },
+        {
+          "seed": 201,
+          "houseIndex": 1,
+          "fileId": "resource_png_0",
+          "bytes": 2018703,
+          "sha256": "b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c"
+        },
+        {
+          "seed": 202,
+          "houseIndex": 1,
+          "fileId": "resource_png_1",
+          "bytes": 2018703,
+          "sha256": "c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"
+        }
+      ],
+      "reads": 24,
+      "sqliteBlobMaterializations": 24,
+      "uniqueSQLiteBackingStores": 24,
+      "uniqueResponseBackingStores": 24,
+      "retainedObservedBackingBytes": 48448872,
+      "claim": "allocation counts only; no RSS or full-workload result"
+    },
+    "new": {
+      "task": "two houses, six resident reads each, two original images per reader",
+      "files": [
+        {
+          "seed": 101,
+          "houseIndex": 0,
+          "fileId": "resource_png_0",
+          "bytes": 2018703,
+          "sha256": "b08ab8ca08069301a9c13dfde94c779cc2ec0323246782ec75ecbef30f42e8db"
+        },
+        {
+          "seed": 102,
+          "houseIndex": 0,
+          "fileId": "resource_png_1",
+          "bytes": 2018703,
+          "sha256": "35c7f007479fbd047c8f6a54053265015b1280d247abf21207cfb0b044b683c9"
+        },
+        {
+          "seed": 201,
+          "houseIndex": 1,
+          "fileId": "resource_png_0",
+          "bytes": 2018703,
+          "sha256": "b37e05197f09c3b7f686ffb7fa5529011320842ffd72405faca656a327b77b4c"
+        },
+        {
+          "seed": 202,
+          "houseIndex": 1,
+          "fileId": "resource_png_1",
+          "bytes": 2018703,
+          "sha256": "c399e6c2f0d57a6f904da3ad45c77931401c03d8391fe5b83415b8e5bb944feb"
+        }
+      ],
+      "reads": 24,
+      "sqliteBlobMaterializations": 4,
+      "uniqueSQLiteBackingStores": 4,
+      "uniqueResponseBackingStores": 4,
+      "retainedObservedBackingBytes": 8074812,
+      "claim": "allocation counts only; no RSS or full-workload result"
+    },
+    "matchingFilesAndBytesVerified": true,
+    "materializationReduction": 20,
+    "limitations": [
+      "Counts server-owned backing stores, not RSS or peak process memory.",
+      "Instrumentation deliberately retains observed BLOB/response buffers in both arms to count distinct identities.",
+      "Six residents per house perform sequential binary GETs; this does not reproduce concurrent full resource workload scheduling.",
+      "Original registered file IDs and exact PNG generator seeds/digests are preserved."
+    ]
+  },
+  "verification": {
+    "red": {
+      "exit": 1,
+      "tests": 4,
+      "failed": 4,
+      "reason": "existing per-GET materialization; assertions expect reuse"
+    },
+    "focusedGreen": {
+      "exit": 0,
+      "tests": 82,
+      "files": 3,
+      "newContractTests": 9,
+      "paths": [
+        "spec/board-asset-reuse.test.ts",
+        "spec/board-service.test.ts",
+        "spec/board-store.test.ts"
+      ]
+    },
+    "typecheck": {
+      "exit": 0
+    },
+    "coverage": {
+      "total": {
+        "lines": {
+          "total": 359,
+          "covered": 322,
+          "skipped": 0,
+          "pct": 89.69
+        },
+        "statements": {
+          "total": 380,
+          "covered": 342,
+          "skipped": 0,
+          "pct": 90
+        },
+        "functions": {
+          "total": 36,
+          "covered": 35,
+          "skipped": 0,
+          "pct": 97.22
+        },
+        "branches": {
+          "total": 251,
+          "covered": 217,
+          "skipped": 0,
+          "pct": 86.45
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/src/board-service.ts": {
+        "lines": {
+          "total": 359,
+          "covered": 322,
+          "skipped": 0,
+          "pct": 89.69
+        },
+        "functions": {
+          "total": 36,
+          "covered": 35,
+          "skipped": 0,
+          "pct": 97.22
+        },
+        "statements": {
+          "total": 380,
+          "covered": 342,
+          "skipped": 0,
+          "pct": 90
+        },
+        "branches": {
+          "total": 251,
+          "covered": 217,
+          "skipped": 0,
+          "pct": 86.45
+        }
+      }
+    },
+    "authority": [
+      "real HTTP current removal denies cached nonauthor read",
+      "own asset remains readable after membership removal",
+      "recovered session denies cached own export asset",
+      "fresh isOwnAsset query on cached request",
+      "post-hit membership and session recheck",
+      "house/file separation and missing404",
+      "unchanged content MIME length and security headers"
+    ],
+    "storage": [
+      "fresh mutable BoardStore.getAsset independent from cached HTTP bytes",
+      "existing immutable asset ID rejects changed bytes; existing full board-store53tests pass"
+    ],
+    "lifecycle": [
+      "8MiB backing charge including subviews and oversize bypass",
+      "32 tiny images count cap",
+      "LRU refresh and eviction; no zero on evict/clear",
+      "clear resets byte accounting",
+      "service close calls clear once and cached request503"
+    ]
+  },
+  "preservedInitialFailures": [
+    {
+      "path": "asset-reuse-red-invalid-response-instrumentation.txt",
+      "reason": "writeHead-provided headers not visible via getHeader in response.end observer; fixed observer to record actual Buffer payloads",
+      "qualifiesComparison": false
+    },
+    {
+      "path": "asset-reuse-typecheck-initial-buffer-generic-failure.txt",
+      "reason": "default fixture Buffer inferred narrower than resource generator return; explicit Buffer annotation corrected",
+      "qualifiesTypecheck": false
+    }
+  ],
+  "hashesSHA256": {
+    "src/board-service.ts": "241e15797951113133944fa6f745eb01aa375badb345d4b04fbb30c2ce60e3e4",
+    "spec/board-asset-reuse.test.ts": "d98d8d06b4713e68493bb63453d8782654e941cebbe33b38253973ffcde99c64",
+    "docs/spatial-redesign/evidence/asset-reuse-board-service-preimage.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "docs/spatial-redesign/evidence/asset-reuse-red-spec.ts": "de4d20d289fb3eda7fefafa87e51d5cff545306642a8ccb05d0ea69c5e1b5d25",
+    "docs/spatial-redesign/evidence/asset-reuse-red.txt": "b172fe7a6e6e20d0f1edaf81fdd09929e26605f74bb841700773391461e6ea3c",
+    "docs/spatial-redesign/evidence/asset-reuse-green.txt": "c5eebdb917861b195f1bc6f5375d60a2654a3d8f7b9a1e46f6c2a61711d4357f",
+    "docs/spatial-redesign/evidence/asset-reuse-typecheck.txt": "2fd6c97ea1890da9a412cb40085aa02ec2fec568edbdb9b541b06aa1c7020c73",
+    "docs/spatial-redesign/evidence/asset-reuse-focused-coverage.txt": "a7d20d215f28b7f8b41f2db72eaf6ad31e7b4b8d4ec9cd0690aa5f1b51507d6f"
+  },
+  "notRun": [
+    "full suite",
+    "resource workload",
+    "browser",
+    "human A/B",
+    "deployment",
+    "commit/push"
+  ]
+}
