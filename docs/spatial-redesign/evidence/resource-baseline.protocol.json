@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "registeredAtUTC": "2026-10-22T22:51:35.084243+00:00",
+  "registeredAtUTC": "2026-10-22T23:17:42.749466+00:00",
   "status": "FROZEN_CURRENT_FULL_RESOURCE_REGISTRATION_ONLY",
   "scope": "Current-source original registered24view300s full12standing-actor10Hz baseline. Original conditions/criteria preserved; no current result until explicit executionGO.",
   "durationSeconds": 300,
@@ -42,7 +42,7 @@
     "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
     "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
     "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
-    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "src/board-service.ts": "241e15797951113133944fa6f745eb01aa375badb345d4b04fbb30c2ce60e3e4",
     "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
     "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
     "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
@@ -58,9 +58,9 @@
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
     "tools/board-resource-p7.mjs": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f",
     "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
-    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb"
+    "tools/spatial-resource.mjs": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8"
   },
-  "sourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+  "sourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
   "instrumentSHA256": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
   "configuration": {
     "houses": 2,
@@ -160,8 +160,8 @@
     "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
   ],
   "commands": {
-    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-final-baseline.protocol.json --inspect",
-    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-final-baseline.protocol.json --run --go <protocolSHA256> --freeze b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb"
+    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-reuse-baseline.protocol.json --inspect",
+    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-reuse-baseline.protocol.json --run --go <protocolSHA256> --freeze 49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84"
   },
   "sourceFiles": [
     ".gitattributes",
@@ -220,22 +220,23 @@
   ],
   "sourceBinding": {
     "status": "FROZEN_PARENT_BINDING_ONLY",
-    "boundAtUTC": "2026-10-22T22:51:35.084243+00:00",
-    "head": "1c041d34672ca4d3d1713c169e2c39c286f33e9c",
-    "runtimeScope": "CSS-only final layout; elapsed-clock backend and failure-category instruments unchanged",
+    "boundAtUTC": "2026-10-22T23:17:42.749466+00:00",
+    "head": "9073c8ce695cffcd98befee4e73f97c455a25e30",
+    "runtimeScope": "Bounded asset reuse and corrected workload zone header; other sources unchanged",
     "requiredFiles": 53,
     "node": "v24.21.0",
-    "priorProtocolSHA256": "fed4f30bfcc83b04e95e46a528fea9e5bcdde5137451bf67784483a7797d8f93",
-    "priorSourceProofProtocolSHA256": "fed4f30bfcc83b04e95e46a528fea9e5bcdde5137451bf67784483a7797d8f93",
-    "priorSourceManifestSHA256": "9bf3f70d400881cebeb939fd21b6ed1c5525cecddb45c38cf57870fb75f537e8",
+    "priorProtocolSHA256": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
+    "priorSourceProofProtocolSHA256": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
+    "priorSourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
     "approvedSourceChanges": {
-      "public/house.css": "93416803dd11cb80b372c67488c8be8f9b94f34f64b96f8bb706d8dd39a36325"
+      "src/board-service.ts": "241e15797951113133944fa6f745eb01aa375badb345d4b04fbb30c2ce60e3e4",
+      "tools/spatial-resource.mjs": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8"
     },
-    "registrationScriptSHA256": "bf5f5aa40d6f331820f312335335c7043aac59e8161d1e843df88c9b94ff471b",
+    "registrationScriptSHA256": "73ae9e0ef7a4dbf81657e1eb7f107cf69993b6284387dcefd74fb45ea0dc3fac",
     "authorization": "Registration and inspection only; parent owns separate full execution GO",
     "requiredCheckEvidence": {
-      "path": ".local/spatial-apply/required-current-10.json",
-      "sha256": "a16bd693c15bdb6967d68369eede5eb7e03bb7b81a8548cf23b30a0a09d406f7",
+      "path": ".local/spatial-apply/required-current-11.json",
+      "sha256": "638e9fd357354c4e66b0c7a34a98cada46c2dcb42f121cd30dcd477c6c28b927",
       "exitCode": 0,
       "sourceUnchanged": true,
       "coveredFiles": 48
@@ -261,7 +262,7 @@
   "baseWorkloadRegisteredAtUTC": "2026-10-07T01:17:56.243779+00:00",
   "memoryDiagnosticRegistration": {
     "schemaVersion": 1,
-    "purpose": "One NEW final-layout300second source qualification; original100ms sampler and gates unchanged; no rate trace opt-in",
+    "purpose": "One NEW asset-reuse300second source qualification; original100ms sampler and gates unchanged; no rate trace opt-in",
     "execution": "NOT_RUN_REQUIRES_SEPARATE_PARENT_GO",
     "automaticRetry": false
   }

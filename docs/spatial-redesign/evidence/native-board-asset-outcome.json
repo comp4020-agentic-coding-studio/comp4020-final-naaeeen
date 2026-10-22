@@ -1,0 +1,19 @@
+{
+  "framework": "3 PASS, 12.4s, exit0; actual maintained cases unchanged",
+  "wrapper": "FAIL_PRESERVED, exit1; complete package-manager log was incorrectly searched for skipped substring",
+  "reconciliation": "Independent analyzer passed actual full log and eight negative controls without any browser/test rerun. Parent independently confirmed case lines, last-run.json, all518 source hashes,35 launch hashes and realNUL process audit.",
+  "originalWrapperPID": 66220,
+  "originalPlaywrightPID": 66221,
+  "bothOriginalProcessesAbsent": true,
+  "browserPIDsAfter": [],
+  "playwrightLastRun": {
+    "status": "passed",
+    "failedTests": []
+  },
+  "sourceAndLaunchUnchanged": true,
+  "originalWrapperSHA256": "b6e0abf65866855925f75f3ed28c80c2ed0a5f9c9be8f59c1a2d2cb0eebe0838",
+  "analyzerSHA256": "1606f355bc77b182a02574e1c39e970f769fde171edbf6573975e3786134648c",
+  "raw": ".local/spatial-asset-native-first",
+  "originalPNGsApproved": false,
+  "nativeLane": "IDLE; no further tests, browsers or background commands"
+}

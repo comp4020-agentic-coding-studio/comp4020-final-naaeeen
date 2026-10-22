@@ -1,0 +1,47 @@
+{
+  "status": "READY_PARENT_FULL_EXECUTION_NOT_RUN",
+  "head": "9073c8ce695cffcd98befee4e73f97c455a25e30",
+  "protocolSHA256": {
+    "resource-reuse-baseline.protocol.json": "5bb4e7c9aabdc1f2166951673588b7ca5e29acf59a382e81734b829b0ac365a1",
+    "resource-reuse-mixed.protocol.json": "2f945399134c7d6e5f2a4097c60eeae6ff9ed764513809b5ed52b8e12a3e6042"
+  },
+  "sourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
+  "all53WorkingAndGitHEADHashesMatch": true,
+  "baselineGroups": 14,
+  "mixedGroups": 11,
+  "allNonNineRegistrationFieldsUnchanged": true,
+  "newExclusiveProtocolPreimages": 3,
+  "reusedResultPreimagesReadOnly": {
+    "evaluation/board-resource.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json",
+    "docs/spatial-redesign/evidence/resource-baseline.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json"
+  },
+  "reusedResultPreimageSHA256": {
+    "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+    "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+    "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4"
+  },
+  "protectedHistoryFilesAtBinding": 585,
+  "oldResultsUnchanged": true,
+  "metadataSpec": {
+    "beforeSHA256": "7e48a0786228e8d8546f6b3c5b39fc4f2177c00ec6d93ef6a5468298640cad78",
+    "currentSHA256": "ee2653b102179db6354dbd0d3dca8a18cf0b790e74bfb42b5a0168963814633b",
+    "onlyChange": "Four final-alias string occurrences retargeted to reuse aliases.",
+    "focusedResult": "4/4 PASS",
+    "APP_URL": "http://127.0.0.1:4108",
+    "log": "resource-reuse-metadata-tests.txt"
+  },
+  "freshOutputsUnused": [
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.results.json",
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.log",
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.closure.json",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.results.json",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.log",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.closure.json"
+  ],
+  "idleACK": "All owned commands exited. No active owned test, service, browser or resource process. Files frozen; no more commands pending parent execution."
+}

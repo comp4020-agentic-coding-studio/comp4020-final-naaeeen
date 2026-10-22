@@ -1,0 +1,19 @@
+✓ Lockfile passes supply-chain policies (verified 1d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath .githooks || true
+. prepare: Done
+Done in 573ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/spatial-resource.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 637[2mms[22m[39m
+   [32m✓[39m spatial resource protocol and evaluator calibration [2m(4)[22m
+     [33m[2m✓[22m[39m uses independently generated near-cap PNG bytes accepted unchanged by the real codec[33m 404[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 10:17:59
+[2m   Duration [22m 812ms[2m (tests 87%, transform 10%, import 3%)[22m
+

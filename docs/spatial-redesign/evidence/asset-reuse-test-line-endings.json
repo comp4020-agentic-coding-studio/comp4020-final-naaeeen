@@ -1,0 +1,6 @@
+{
+  "status": "CANONICAL_LF_BEFORE_FULL_CHECK",
+  "originalFocusedRunSHA256": "d98d8d06b4713e68493bb63453d8782654e941cebbe33b38253973ffcde99c64",
+  "canonicalFullCheckSHA256": "3afc022262b3627b8d958a69f195db58df3d671e32bae7a3282d3112bb88f391",
+  "change": "CRLF to LF only; test expressions and production source unchanged. Git already stored canonical LF. Full required check follows."
+}

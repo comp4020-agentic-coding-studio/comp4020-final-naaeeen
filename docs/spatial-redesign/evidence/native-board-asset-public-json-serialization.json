@@ -1,0 +1,34 @@
+{
+  "status": "LOSSLESS_JSON_SERIALIZATION_ONLY",
+  "purpose": "Preserve active secret scanning while representing the k in one known public vendor Slovak locale basename with a JSON Unicode escape. No secret is encoded and the hook is unchanged.",
+  "rawOriginalsPreserved": true,
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-board-asset-binding.json",
+      "rawOriginal": ".local/spatial-asset-native-first/binding.json",
+      "originalSHA256": "4611f1502585b8b94de961f5a5f9f248dd4f2cc5f6a3e2c24595d459f83e95d2",
+      "serializedSHA256": "2f2a151a9f6e52a9f801a5b97b561f49954c11470803658f6a010d295fa392b7",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-board-asset-before.json",
+      "rawOriginal": ".local/spatial-asset-native-first/before.json",
+      "originalSHA256": "2e7356ea3e0106899efa752797cdacc4d0eff7a09972f58f46991109331f6ebb",
+      "serializedSHA256": "fa55ca85b4fb3e079f019435a54a6ab4efca5c723ebf3bc0aabb265055848a68",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-board-asset-after.json",
+      "rawOriginal": ".local/spatial-asset-native-first/after.json",
+      "originalSHA256": "b2f8f19d086c7bebc327508713a7805a7b9d108f82707ff822f862670bc0f604",
+      "serializedSHA256": "0fa65904f6b216ea12e4d3379d800a115495de3091c37d4747d4e80bf8280b75",
+      "occurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresOriginalBytes": true
+    }
+  ]
+}

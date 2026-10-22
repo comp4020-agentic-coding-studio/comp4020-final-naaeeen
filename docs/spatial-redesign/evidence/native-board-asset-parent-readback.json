@@ -1,0 +1,17 @@
+{
+  "status": "PARENT_INDEPENDENT_READBACK_PASS_WRAPPER_FAILURE_PRESERVED",
+  "frameworkCasesPassed": 3,
+  "frameworkExitCode": 0,
+  "frameworkDurationSeconds": 12.4,
+  "lastRunStatus": "passed",
+  "failedTests": 0,
+  "boundSourceFiles": 518,
+  "sourceUnchangedAndCurrent": true,
+  "launchFiles": 35,
+  "launchPID": 66098,
+  "launchUnchangedAndCurrent": true,
+  "browserProcessesRemaining": [],
+  "rawWrapperStatus": "FAIL_PRESERVED",
+  "wrapperFailureCause": "Whole-log skipped substring matched package-manager resolution message; actual framework reported all3passed. Original wrapper/FAIL/raw outputs preserved.",
+  "scope": "Actual three unchanged board browser cases; no rerun, resource acceptance or human claim."
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PREPARED_HELD_NO_EXECUTION",
+  "runLabel": "spatial-asset-native-first",
+  "wrapper": ".local/spatial-asset-native-first/run.py",
+  "wrapperSHA256": "b6e0abf65866855925f75f3ed28c80c2ed0a5f9c9be8f59c1a2d2cb0eebe0838",
+  "executionCommand": "python3 .local/spatial-asset-native-first/run.py --binding .local/spatial-asset-native-first/binding.json",
+  "underlyingCommand": "APP_URL=http://127.0.0.1:4108 CI=true PW_OUTPUT_DIR=.local/spatial-asset-native-first/results PW_REPORT_DIR=.local/spatial-asset-native-first/report /home/lizhi/.local/bin/mise exec -- pnpm exec playwright test tests/e2e/board.spec.ts tests/e2e/board-receipt-recovery.spec.ts --max-failures=1",
+  "selection": {
+    "board.spec.ts": 2,
+    "board-receipt-recovery.spec.ts": 1
+  },
+  "budgets": {
+    "caseMs": 60000,
+    "globalMs": 300000,
+    "retries": 0
+  },
+  "maintainedSourceSHA256AtPreparation": {
+    "tests/e2e/board.spec.ts": "f15ac225524b160e90702fca934e648c4f8e66e2a3ad00e96ae755bdb129fb64",
+    "tests/e2e/board-receipt-recovery.spec.ts": "f7f33085d755e08cf88058706444283cdc1fd5723289a6bfe66e70900a449b20",
+    "tests/e2e/board-journey.ts": "d5b1b26a687a25cd466c336330f23a90bb85c8fb9fe09ded7510c244baff1516",
+    "playwright.config.ts": "80f462cf6b300c80d50617eafb0b60d8288403389d1a3b71e6b0ad8728778e95"
+  },
+  "maintainedAssertionsChanged": false,
+  "tasks": [
+    "Real desktop and phone board identities; native PNG paste/peer asset response, text and rectangle edits, scoped chat, undo/redo, saved scene and PNG export, reload identity.",
+    "Private-key recovery into original full-house slot; no credential capture.",
+    "Controlled accepted-reply loss; ordinary Retry pending replays original receipt after independent peer note, authored export and reload/editor download preserve both scene contributions."
+  ],
+  "executionPrerequisites": [
+    "Parent confirms content-cache source freeze/fullcheck and separately authorizes execution.",
+    "Parent restarts service; PID55373 is explicitly rejected as the old backend.",
+    "New binding.json must contain status PARENT_GO, this runLabel, origin, budgets, wrapperSHA256, expectedPID, launchRecordSHA256, and approved sourceSHA256 for all runtime/public/config/selected-test dependencies.",
+    "Verify all new runtime launch hashes and source bytes before and after the one run; no active browser lane; no debug/alternate executable overrides."
+  ],
+  "finalRuntimeBinding": "NOT_WRITTEN; cache production is unfinished and old runtime is not accepted.",
+  "artifacts": "Raw PNGs/logs/reports and before/after go only under the fresh ignored directory until parent review; no raw private identity fields are additionally captured.",
+  "stoppingRule": "No retries, no spec/app changes, no other selection. Record first failure and cleanup; no PASS unless all3 cases, source/launch equality and browser process closure pass.",
+  "currentPhase": "Only preparation source written; no tests, browsers, services or resource workloads launched."
+}

@@ -1,0 +1,120 @@
+{
+  "status": "FRAMEWORK_3_PASS_WRAPPER_FAIL_RECONCILED_WITHOUT_RERUN",
+  "recordedAt": "2026-10-22T23:16:47.272744+00:00",
+  "actualFrameworkExitCode": 0,
+  "actualSummary": "3 passed (12.4s)",
+  "actualCases": [
+    {
+      "name": "a lost board reply replays its original receipt after a peer addition and keeps authored export",
+      "durationSeconds": 4.2
+    },
+    {
+      "name": "standalone board core shares a saved canvas without the game",
+      "durationSeconds": 5.7
+    },
+    {
+      "name": "standalone board identity recovers its original place in a full house",
+      "durationSeconds": 1.7
+    }
+  ],
+  "originalWrapperStatusPreserved": "FAIL_PRESERVED",
+  "originalWrapperSHA256": "b6e0abf65866855925f75f3ed28c80c2ed0a5f9c9be8f59c1a2d2cb0eebe0838",
+  "originalLogSHA256": "44473283dd1618dc41df1475b76b5f23d609526e49e6917ecded547decda01a3",
+  "originalBeforeSHA256": "2e7356ea3e0106899efa752797cdacc4d0eff7a09972f58f46991109331f6ebb",
+  "originalAfterSHA256": "b2f8f19d086c7bebc327508713a7805a7b9d108f82707ff822f862670bc0f604",
+  "analyzerSHA256": "1606f355bc77b182a02574e1c39e970f769fde171edbf6573975e3786134648c",
+  "finding": "The original wrapper applies its no-skips substring check to the whole pnpm log, so resolution step is skipped falsely rejects all three passing Playwright cases. The summary regex itself is correct.",
+  "preliminaryInferenceCorrected": "Initial suspected escaping faults were disproved by actual source and JSON inspection. Original regex, JSON newlines and cmdline NUL escape are valid; no normalization was applied.",
+  "sourceFiles": 518,
+  "sourceUnchangedBeforeAfterAndCurrent": true,
+  "launchRecordUnchanged": true,
+  "launchPID": 66098,
+  "launchSourceCount": 35,
+  "independentBrowserPIDsAfter": [],
+  "originalCommandProcesses": [
+    {
+      "role": "original wrapper",
+      "pid": 66220,
+      "present": false
+    },
+    {
+      "role": "original Playwright command",
+      "pid": 66221,
+      "present": false
+    }
+  ],
+  "contextClosureEvidence": "All three existing test finally paths await their context close calls. The original Playwright process exited0, the original wrapper exited1 on its grader, both recorded process IDs are absent, and an independent real NUL-delimited /proc audit finds no browser or crashpad process. No per-context close event instrumentation was added.",
+  "controls": [
+    {
+      "name": "actual full log, including pnpm resolution-step skip text",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "wrong completed-case count",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "framework failure exit",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "missing framework exit",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "source changed",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "launch changed",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "remaining browser process",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "actual skipped-case summary",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "missing successful case line",
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "originalPNGs": [
+    {
+      "path": ".local/spatial-asset-native-first/results/board-receipt-recovery-a-l-0e2af-n-and-keeps-authored-export/receipt-recovered-board.png",
+      "sha256": "18933751e898af41e3f7a8c98110671f9b85ed8db0a086a8896dd90f9a992325",
+      "published": false
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-desktop.png",
+      "sha256": "21eb67825a96ce949b940f264957204a8d5256d9c08c66ce5f013ff13aa79ccb",
+      "published": false
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-phone.png",
+      "sha256": "30f0139acde5ed4a1d293317bdac40302a09f29f684e18672aa728bf3847322b",
+      "published": false
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.png",
+      "sha256": "7f571f9e9249c2f1e1b5d87958f65b847d8328618974c66de7eb712317745b16",
+      "published": false
+    }
+  ],
+  "noBrowserOrTestRerun": true,
+  "noOriginalOutputWrapperSpecOrAppMutation": true,
+  "scope": "Three maintained board tasks only; framework success, wrapper failure and this independent reconciliation remain separate. Original PNGs are unapproved for public curation.",
+  "nativeLane": "IDLE; no test, browser or background command remains"
+}

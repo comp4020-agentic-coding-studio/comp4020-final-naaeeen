@@ -1,0 +1,25 @@
+{
+  "status": "PARENT_READBACK_PASS_BEFORE_EXECUTION",
+  "head": "9073c8ce695cffcd98befee4e73f97c455a25e30",
+  "profiles": [
+    {
+      "profile": "baseline",
+      "protocolSHA256": "5bb4e7c9aabdc1f2166951673588b7ca5e29acf59a382e81734b829b0ac365a1",
+      "sourceFiles": 53,
+      "sourceAtGitHead": true,
+      "allNonRegistrationConditionsUnchanged": true,
+      "freshOutputs": true
+    },
+    {
+      "profile": "mixed",
+      "protocolSHA256": "2f945399134c7d6e5f2a4097c60eeae6ff9ed764513809b5ed52b8e12a3e6042",
+      "sourceFiles": 53,
+      "sourceAtGitHead": true,
+      "allNonRegistrationConditionsUnchanged": true,
+      "freshOutputs": true
+    }
+  ],
+  "canonicalCopiesByteIdentical": true,
+  "reusedHistoricalResultBytesUnchanged": true,
+  "execution": "NOT_RUN"
+}

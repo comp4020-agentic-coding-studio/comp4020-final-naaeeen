@@ -1,0 +1,47 @@
+{
+  "status": "PARENT_INSPECTED_ALL_FOUR_PUBLIC_COPY_ONLY_BINARY_EXPORT",
+  "recordedAt": "2026-10-22T23:18:08.641520+00:00",
+  "parentInspection": "Parent reported viewing receipt-recovered-board, board-desktop, board-phone, and shared-board originals.",
+  "scope": "Board UI was unchanged; this is inspection of one native cache-affected board selection, not a human or physical-phone acceptance study.",
+  "originalFrameworkWrapperAndReconciliationRemainSeparate": true,
+  "artifacts": [
+    {
+      "path": ".local/spatial-asset-native-first/results/board-receipt-recovery-a-l-0e2af-n-and-keeps-authored-export/receipt-recovered-board.png",
+      "sha256": "18933751e898af41e3f7a8c98110671f9b85ed8db0a086a8896dd90f9a992325",
+      "published": false,
+      "parentViewed": true,
+      "publicByteCopyApproved": false,
+      "publicCopy": null,
+      "reason": "Raw screenshot contains a synthetic house invite code in its header; keep private without redaction."
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-desktop.png",
+      "sha256": "21eb67825a96ce949b940f264957204a8d5256d9c08c66ce5f013ff13aa79ccb",
+      "published": false,
+      "parentViewed": true,
+      "publicByteCopyApproved": false,
+      "publicCopy": null,
+      "reason": "Raw screenshot contains a synthetic house invite code in its header; keep private without redaction."
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/board-phone.png",
+      "sha256": "30f0139acde5ed4a1d293317bdac40302a09f29f684e18672aa728bf3847322b",
+      "published": false,
+      "parentViewed": true,
+      "publicByteCopyApproved": false,
+      "publicCopy": null,
+      "reason": "Raw screenshot contains a synthetic house invite code in its header; keep private without redaction."
+    },
+    {
+      "path": ".local/spatial-asset-native-first/results/board-standalone-board-cor-ec6ca-ved-canvas-without-the-game/shared-board.png",
+      "sha256": "7f571f9e9249c2f1e1b5d87958f65b847d8328618974c66de7eb712317745b16",
+      "published": false,
+      "parentViewed": true,
+      "publicByteCopyApproved": true,
+      "publicCopy": "docs/spatial-redesign/evidence/native-board-asset-shared-board.png",
+      "reason": "Approved code-free binary board export; byte-identical copy."
+    }
+  ],
+  "binaryExportByteIdentity": true,
+  "nativeLane": "IDLE; no test/browser/background command remains"
+}
