@@ -236,7 +236,7 @@ test('room reference survives owner return and a named phone visit loses bytes a
 });
 function pageView(page: Page) { return page.locator('[data-studio-save-status]'); }
 
-test('sofa needs a real chair and Join before a deliberate house copy, follow and pointing', async ({ browser, baseURL }, info) => {
+test('sofa keeps an off-centre crop across voluntary presenter handover and touch pan', async ({ browser, baseURL }, info) => {
   const group = await friends(browser, baseURL, 2), [owner, peer] = group.pages;
   try {
     await place(owner, 'room'); const uploaded = await choosePng(owner); await exitRoom(owner);
@@ -254,7 +254,12 @@ test('sofa needs a real chair and Join before a deliberate house copy, follow an
     await expect(gathering(peer, 'follow')).toHaveAttribute('aria-pressed', 'false'); await gathering(peer, 'follow').tap();
     await expect(gathering(peer, 'follow')).toHaveAttribute('aria-pressed', 'true');
     await gathering(owner, 'in').click(); await expect.poll(async () => (await shared(owner, 'sofa')).view.zoom).toBe(1.25);
-    await expect(peer.locator('[data-gathering-plane]')).toHaveCSS('transform', await owner.locator('[data-gathering-plane]').evaluate(el => getComputedStyle(el).transform));
+    await gathering(owner, 'pan-right').click(); await expect.poll(async () => (await shared(owner, 'sofa')).view.x).toBeCloseTo(.55, 8);
+    await gathering(owner, 'pan-up').click(); await expect.poll(async () => (await shared(owner, 'sofa')).view.y).toBeCloseTo(.45, 8);
+    const transform = (page: Page) => page.locator('[data-gathering-plane]').evaluate(el => (el as HTMLElement).style.transform);
+    // Compare normalized inline transforms: computed matrix translations vary
+    // with the legitimate desktop/phone image dimensions for an off-centre view.
+    await expect.poll(() => transform(peer)).toBe(await transform(owner));
     const viewport = owner.locator('[data-gathering-viewport]'), picture = owner.locator('[data-gathering-image]');
     const imageBox = await picture.boundingBox(), viewportBox = await viewport.boundingBox();
     expect(imageBox).not.toBeNull(); expect(viewportBox).not.toBeNull();
@@ -273,13 +278,43 @@ test('sofa needs a real chair and Join before a deliberate house copy, follow an
     }).toBe(true);
     await evidence(peer, info, 'sofa-follow-phone');
     await bounds(owner, '[data-gathering-viewport]'); await evidence(owner, info, 'sofa-presenter-desktop');
+    const beforeDeparture = await shared(peer, 'sofa'), frozenTransform = await transform(peer);
+    await gathering(owner, 'leave').click();
+    await expect.poll(async () => (await shared(peer, 'sofa')).presenterId).toBeNull();
+    await expect(owner.locator('[data-gathering-role]')).toContainText('Choose Join');
+    await expect(peer.locator('[data-gathering-role]')).toContainText('Inspecting independently.');
+    await expect(gathering(peer, 'follow')).toHaveAttribute('aria-pressed', 'false');
+    await expect.poll(() => transform(peer)).toBe(frozenTransform);
+    expect((await shared(peer, 'sofa')).view).toEqual(beforeDeparture.view);
+    await expect(canvas(owner)).toHaveAttribute('data-self-animation', 'sit');
+    await gathering(peer, 'share').tap();
+    await expect.poll(async () => (await shared(peer, 'sofa')).presenterId).toBe(group.identities[1]);
+    await expect.poll(() => transform(peer)).toBe(frozenTransform);
+    const handover = await shared(peer, 'sofa');
+    expect(handover.item?.id).toBe(state.item!.id); expect(handover.view).toEqual(beforeDeparture.view);
+    await gathering(owner, 'join').click(); await expect(owner.locator('[data-gathering-role]')).toContainText('You joined.');
+    await expect(gathering(owner, 'follow')).toHaveAttribute('aria-pressed', 'false');
+    await gathering(owner, 'follow').click(); await expect(gathering(owner, 'follow')).toHaveAttribute('aria-pressed', 'true');
+    await bounds(peer, '[data-gathering-action="pan-left"]');
+    const panBox = (await gathering(peer, 'pan-left').boundingBox())!;
+    expect(panBox.width).toBeGreaterThanOrEqual(44); expect(panBox.height).toBeGreaterThanOrEqual(44);
+    let requestedX = beforeDeparture.view.x;
+    for (let step = 0; step < 2; step++) {
+      requestedX -= .05; await gathering(peer, 'pan-left').tap();
+      await expect.poll(async () => (await shared(peer, 'sofa')).view.x).toBeCloseTo(requestedX, 8);
+    }
+    const phonePanned = await shared(peer, 'sofa');
+    expect(phonePanned.view.x).toBeLessThan(beforeDeparture.view.x);
+    expect(phonePanned.view.y).toBe(beforeDeparture.view.y); expect(phonePanned.view.zoom).toBe(beforeDeparture.view.zoom);
+    await expect.poll(() => transform(owner)).toBe(await transform(peer));
+    await evidence(peer, info, 'sofa-touch-pan-handover-phone');
     await gathering(peer, 'leave').tap(); await expect.poll(async () => (await shared(peer, 'sofa')).selfJoined).toBe(false);
     await expect(canvas(peer)).toHaveAttribute('data-self-animation', 'sit');
     await gathering(peer, 'close').tap(); await expect(peer.locator('#gathering-panel')).toBeHidden();
     await peer.locator('#game-table-stand').tap(); await expect(canvas(peer)).not.toHaveAttribute('data-self-animation', 'sit');
     await place(peer, 'rest'); await expect(gathering(peer, 'join')).toBeVisible(); expect((await shared(peer, 'sofa')).selfJoined).toBe(false);
     await expect(gathering(peer, 'follow')).toHaveAttribute('aria-pressed', 'false');
-    await info.attach('sofa-saved-state', { body: JSON.stringify({ houseId: group.houseId, state, afterReseat: await shared(peer, 'sofa') }, null, 2), contentType: 'application/json' });
+    await info.attach('sofa-saved-state', { body: JSON.stringify({ houseId: group.houseId, state, beforeDeparture, handover, phonePanned, afterReseat: await shared(peer, 'sofa') }, null, 2), contentType: 'application/json' });
     expect(group.errors).toEqual([]);
   } finally { await Promise.allSettled(group.contexts.map(context => context.close())); }
 });

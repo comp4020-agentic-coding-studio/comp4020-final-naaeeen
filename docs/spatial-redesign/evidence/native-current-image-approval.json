@@ -1,0 +1,79 @@
+{
+  "capturedAtUTC": "2026-10-22T20:01:21.900022+00:00",
+  "scope": "Current four-place native run only; agent pixel inspection, not human preference/device validation",
+  "parentApprovalReceived": true,
+  "sourceAndCleanupVerified": true,
+  "images": [
+    {
+      "name": "room-studio-desktop",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/703d26ce4cbfe469e2d7dc87764c70174a8afe97.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-room-studio-desktop.png",
+      "sha256": "0b014874d34240c19336c4630e18a12319389b124cf57f43a960fd1019230466",
+      "bytes": 201022,
+      "unaltered": true,
+      "approval": "Exact size and SHA256 match previously parent-inspected approved image",
+      "previousApprovedImage": "docs/spatial-redesign/evidence/native-room-studio-desktop.png"
+    },
+    {
+      "name": "room-reference-world-after-close",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/a532ed4b2edd99fd83b1e85b3004305d9db4658e.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-room-reference-world-after-close.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "bytes": 203745,
+      "unaltered": true,
+      "approval": "Exact size and SHA256 match previously parent-inspected approved image",
+      "previousApprovedImage": "docs/spatial-redesign/evidence/native-room-reference-world-after-close.png"
+    },
+    {
+      "name": "room-visit-phone",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/e4a8d503d6bd8a83880b6ceec741d04a1cdf8a57.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-room-visit-phone.png",
+      "sha256": "95297a89fecce44c394a5c79020d1c0cf17e3ddccaf1ef40dad03d5c70766eb3",
+      "bytes": 58164,
+      "unaltered": true,
+      "approval": "Exact size and SHA256 match previously parent-inspected approved image",
+      "previousApprovedImage": "docs/spatial-redesign/evidence/native-room-visit-phone.png"
+    },
+    {
+      "name": "sofa-follow-phone",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/2f55866981502119ad0574d905a92867e6674d8d.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-sofa-follow-phone.png",
+      "sha256": "da5bdd9e621a63a3f6b4263515e7571072deaf9ec394ebdcea378f9cbf35557e",
+      "bytes": 81648,
+      "unaltered": true,
+      "approval": "Parent viewed current original: image/pointer/Pan controls readable and no invite/cookie/token visible",
+      "previousApprovedImage": null
+    },
+    {
+      "name": "sofa-presenter-desktop",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/c23029aa6d1da1ad643ae49b6bbc44234c7ce288.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-sofa-presenter-desktop.png",
+      "sha256": "e3b6cbf5e594746373318631cff9f11ab36b9a53e7b4600ca8989c09148d6b72",
+      "bytes": 276532,
+      "unaltered": true,
+      "approval": "Parent viewed current original: image/pointer/Pan controls readable and no invite/cookie/token visible",
+      "previousApprovedImage": null
+    },
+    {
+      "name": "sofa-touch-pan-handover-phone",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/4992066146b306cf3d1ce624fd6db068c05d6d41.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-sofa-touch-pan-handover-phone.png",
+      "sha256": "dc731409618c8b12b8e315df34acb475fbfa3abd7927e8f828cd72a3a5a65604",
+      "bytes": 73818,
+      "unaltered": true,
+      "approval": "Parent viewed current original: image/pointer/Pan controls readable and no invite/cookie/token visible",
+      "previousApprovedImage": null
+    },
+    {
+      "name": "study-chat-phone",
+      "source": ".local/spatial-native-ui-freeze-1/report/data/2895daf78970ff59860b8c62e024c03c75de85e7.png",
+      "destination": "docs/spatial-redesign/evidence/native-current-study-chat-phone.png",
+      "sha256": "db5e0c58903c64242b231d586b0f7cc80eb276c5e3982ef8fed48f7d9f03109d",
+      "bytes": 92118,
+      "unaltered": true,
+      "approval": "Exact size and SHA256 match previously parent-inspected approved image",
+      "previousApprovedImage": "docs/spatial-redesign/evidence/native-study-chat-phone.png"
+    }
+  ],
+  "oldEvidenceOverwritten": false
+}

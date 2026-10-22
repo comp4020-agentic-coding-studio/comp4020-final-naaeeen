@@ -1,0 +1,29 @@
+{
+  "reason": "A public built Slovak locale asset filename resembles a token to the commit hook. JSON Unicode escaping preserves the exact parsed source map; original raw bytes remain ignored. No credential or hook change.",
+  "files": [
+    {
+      "file": "docs/spatial-redesign/evidence/native-current-four-after.json",
+      "originalSHA256": "f5ed82cdd5da36ee8900d3bad38e86394dea4cb52838a6030cea9b8833aa474e",
+      "serializedSHA256": "0d30900aa3df6725501d2ffbb0c99e387c52254e6a389bf83ba07e066e55c38f",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "file": "docs/spatial-redesign/evidence/native-current-four-before.json",
+      "originalSHA256": "b4a13fbfb97da8578b35c97fec92ca232d9c1d160465554961f407b2837cf99d",
+      "serializedSHA256": "0c29a180073f148ddf816cbb032ccec86b61f9f6905619a4e889963ed7b3d629",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "file": "docs/spatial-redesign/evidence/native-current-thirteen-after.json",
+      "originalSHA256": "72d74550c833854aa2db2a9ee9f9677c33f447e992093fba2661b0a148380e95",
+      "serializedSHA256": "2351eb746ece353e33b3036e74e6b17eadfd41eada1a3841b0420de2c1229179",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "file": "docs/spatial-redesign/evidence/native-current-thirteen-before.json",
+      "originalSHA256": "4af59a8323e2fa57c268757a6d67e8c6b99ec61f9fe5273ab8e04e3581be5439",
+      "serializedSHA256": "b17f8037d45938ad0a96a645e50ec9b32c5bf0f49c19cb2bdace5361d3610295",
+      "parsedJSONExactlyEqual": true
+    }
+  ]
+}
