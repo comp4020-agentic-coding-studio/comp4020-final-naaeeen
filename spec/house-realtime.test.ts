@@ -48,6 +48,14 @@ async function setup(options = {}) {
   }
   return { store, realtime, url, client };
 }
+// Explicitly paired manual clocks are supplied only to tests that advance them.
+async function setupWithClock(options = {}) {
+  const base = Date.now(); let now = base;
+  vi.spyOn(Date, "now").mockImplementation(() => now);
+  const clock = { mockReturnValue(value: number) { now = value; return clock; } };
+  const fixture = await setup({ ...options, elapsedNow: () => now });
+  return { ...fixture, base, clock };
+}
 const ask = (socket: Socket, event: string, body: unknown = {}) => socket.timeout(1500).emitWithAck(event, body);
 const subscribe = (socket: Socket, token: string = randomUUID(), zoneId = "lounge") => ask(socket, "house.subscribe", { zoneId, controllerToken: token });
 const nextSnapshot = (socket: Socket, predicate = (_state: any) => true) => new Promise<any>((resolve, reject) => {
@@ -65,7 +73,8 @@ async function walkTo(socket: Socket, state: LiveSnapshot, layout: ReturnType<ty
   let now = Date.now(), sequence = motionSequences.get(socket) ?? 0;
   for (const point of route.slice(1)) {
     clock.mockReturnValue(now += 250);
-    expect((await ask(socket, "house.move", { generation: state.generation, sequence: ++sequence, ...point, heading: 0 })).ok).toBe(true);
+    const response = await ask(socket, "house.move", { generation: state.generation, sequence: ++sequence, ...point, heading: 0 });
+    expect(response, JSON.stringify({ phase: "route-approach", response })).toMatchObject({ ok: true });
   }
   motionSequences.set(socket, sequence);
 }
@@ -142,7 +151,7 @@ describe("house realtime authority", () => {
     expect((await ask(socket, "house.move", { generation, sequence: 4, x: pose.x, z: pose.z, heading: 0 })).code).toBe("STALE_INPUT");
   });
   test("speed tolerance is one bounded burst rather than extra distance on every packet", async () => {
-    const f = await setup(); const base = Date.now(); const clock = vi.spyOn(Date, "now").mockReturnValue(base);
+    const f = await setupWithClock(); const { base, clock } = f;
     const socket = await f.client(); const reply = await subscribe(socket); const pose = reply.snapshot.players.find((player: any) => player.id === f.store.ids[0]); clock.mockReturnValue(base + 100);
     expect((await ask(socket, "house.move", { generation: reply.snapshot.generation, sequence: 1, x: pose.x + .37, z: pose.z, heading: 0 })).ok).toBe(true);
     clock.mockReturnValue(base + 200);
@@ -150,8 +159,8 @@ describe("house realtime authority", () => {
   });
   test("logs an immediate walk-to-idle transition once without stationary frame spam", async () => {
     const records: Record<string, unknown>[] = [];
-    const f = await setup({ log: (record: Record<string, unknown>) => records.push(record) });
-    const base = Date.now(); const clock = vi.spyOn(Date, "now").mockReturnValue(base);
+    const f = await setupWithClock({ log: (record: Record<string, unknown>) => records.push(record) });
+    const { base, clock } = f;
     const socket = await f.client(); const reply = await subscribe(socket);
     const arrival = reply.snapshot.players.find((player: any) => player.id === f.store.ids[0]);
     const position = { x: arrival.x + .1, z: arrival.z, heading: 0 };
@@ -170,8 +179,8 @@ describe("house realtime authority", () => {
   });
   test("logs one timer stop after movement input ends and no duplicate on a later idle frame", async () => {
     const records: Record<string, unknown>[] = [];
-    const f = await setup({ log: (record: Record<string, unknown>) => records.push(record) });
-    const base = Date.now(); const clock = vi.spyOn(Date, "now").mockReturnValue(base);
+    const f = await setupWithClock({ log: (record: Record<string, unknown>) => records.push(record) });
+    const { base, clock } = f;
     const socket = await f.client(); const reply = await subscribe(socket);
     const arrival = reply.snapshot.players.find((player: any) => player.id === f.store.ids[0]);
     const position = { x: arrival.x + .1, z: arrival.z, heading: 0 };
@@ -218,7 +227,7 @@ describe("house realtime authority", () => {
     expect((await ask(b, "house.move", { generation: joined.snapshot.generation, sequence: 1, x: pose.x, z: pose.z, heading: 0 })).ok).toBe(true);
   });
   test("a saved furniture change reconciles both owner and visitor standing poses", async () => {
-    const f = await setup(); const base=Date.now(); const clock=vi.spyOn(Date,"now").mockReturnValue(base);
+    const f = await setupWithClock(); const { clock } = f;
     const socket=await f.client(); const first=await subscribe(socket,randomUUID(),f.store.bedroomId);
     const guest=await f.client(1);const guestState=await subscribe(guest,randomUUID(),f.store.bedroomId);
     const ownerArrival = first.snapshot.players.find((player: any) => player.id === f.store.ids[0]);
@@ -232,8 +241,8 @@ describe("house realtime authority", () => {
     const visitor=state.players.find((p:any)=>p.id===f.store.ids[1]);expect(visitor.x).toBe(visitorArrival.x);expect(visitor.z).toBe(visitorArrival.z);expect(visitor.generation).toBeGreaterThan(guestState.snapshot.generation);
   });
   test("moving an occupied bedroom chair releases its visitor lease and resets the pose", async () => {
-    const f=await setup(); const chairId=randomUUID(); f.store.placements=[{id:chairId,kind:"chair",x:2,z:1,rotation:0,colour:"sage"}];
-    const base=Date.now();const clock=vi.spyOn(Date,"now").mockReturnValue(base);const guest=await f.client(1);const first=await subscribe(guest,randomUUID(),f.store.bedroomId);
+    const f=await setupWithClock(); const chairId=randomUUID(); f.store.placements=[{id:chairId,kind:"chair",x:2,z:1,rotation:0,colour:"sage"}];
+    const {clock}=f;const guest=await f.client(1);const first=await subscribe(guest,randomUUID(),f.store.bedroomId);
     const arrival = first.snapshot.players.find((player: any) => player.id === f.store.ids[1]);
     await walkTo(guest, first.snapshot, bedroomLayout(f.store.placements), { x: 2, z: 2 }, clock);
     expect((await ask(guest,"house.seat",{generation:first.snapshot.generation,seatId:chairId})).ok).toBe(true);
@@ -241,7 +250,7 @@ describe("house realtime authority", () => {
     const state=await refreshed;const player=state.players.find((p:any)=>p.id===f.store.ids[1]);expect(player.x).toBe(arrival.x);expect(player.z).toBe(arrival.z);expect(player.seatId).toBeNull();
   });
   test("seats are atomic and released by stand, takeover and expired reconnect lease", async () => {
-    const f = await setup(); const clock = vi.spyOn(Date, "now").mockReturnValue(Date.now()); const a = await f.client(); const first = await subscribe(a);
+    const f = await setupWithClock(); const { clock } = f; const a = await f.client(); const first = await subscribe(a);
     const b = await f.client(1); const second = await subscribe(b);
     const layout = createLayout(f.store.capacity), target = layout.seats.find(seat => seat.id === "seat-1")!.target;
     await walkTo(a, first.snapshot, layout, target, clock); await walkTo(b, second.snapshot, layout, target, clock);
@@ -275,7 +284,7 @@ describe("house realtime authority", () => {
     expect((await ask(observer, "house.command", { generation: takeover.snapshot.generation, zoneId: "lounge", command: { ...command, payload: { zoneId: "private", text: "Keep draft private" } } })).code).toBe("STALE_ZONE");
   });
   test("an expired session cannot keep a seat while its old socket remains open", async () => {
-    const f=await setup();const clock=vi.spyOn(Date,"now").mockReturnValue(Date.now());const a=await f.client();const first=await subscribe(a);
+    const f=await setupWithClock();const {clock}=f;const a=await f.client();const first=await subscribe(a);
     const layout=createLayout(f.store.capacity),target=layout.seats.find(seat=>seat.id==="seat-1")!.target;
     await walkTo(a,first.snapshot,layout,target,clock);
     expect((await ask(a,"house.seat",{generation:first.snapshot.generation,seatId:"seat-1"})).ok).toBe(true);
@@ -297,11 +306,11 @@ describe("house realtime authority", () => {
 
 describe('actual client movement recovery against isolated realtime authority',()=>{
  async function actualClient(){
-  const f=await setup(),socket=await f.client(),states:any[]=[];
+  const f=await setupWithClock(),socket=await f.client(),states:any[]=[];
   vi.stubGlobal('io',()=>socket);
   const client=createHouseClient({storage:undefined,onSnapshot:state=>{if(state)states.push(state);}});cleanups.push(async()=>client.close());
   await client.connect();const state=states.at(-1),pose=state.players.find((player:any)=>player.id===state.durable.selfId);
-  const base=Date.now(),clock=vi.spyOn(Date,'now').mockReturnValue(base);
+  const {base,clock}=f;
   return {f,socket,client,state,pose,clock,base,states};
  }
  test('a dropped transport packet has one bounded flight and next held step still reaches the actual peer',async()=>{
@@ -442,12 +451,12 @@ describe("durable room socket integration",()=>{
  });
 
  test("server lounge control projection derives actual seat purpose and rejects reservation or stale controllers",async()=>{
-  const f=await setup(),a=await f.client(),token=randomUUID(),state=(await subscribe(a,token)).snapshot;
+  const f=await setupWithClock(),a=await f.client(),token=randomUUID(),state=(await subscribe(a,token)).snapshot;
   const id=f.store.ids[0]!;
   expect(f.realtime.loungeHttpControl(id,state.generation,token)).toMatchObject({houseId:f.store.houseId,actorId:id,generation:state.generation,seatId:null,seatPurpose:null});
   expect(()=>f.realtime.loungeHttpControl(id,state.generation,randomUUID())).toThrowError(expect.objectContaining({code:"NOT_CONTROLLER"}));
   expect(()=>f.realtime.loungeHttpControl(id,state.generation-1,token)).toThrowError(expect.objectContaining({code:"STALE_GENERATION"}));
-  const clock=vi.spyOn(Date,"now"),layout=createLayout(6),seat=layout.seats.find(s=>s.purpose==='study')!;await walkTo(a,state,layout,seat.target,clock);
+  const clock=f.clock,layout=createLayout(6),seat=layout.seats.find(s=>s.purpose==='study')!;await walkTo(a,state,layout,seat.target,clock);
   expect((await ask(a,'house.seat',{generation:state.generation,seatId:seat.id})).ok).toBe(true);
   const seated=f.realtime.currentLoungeSeat(id)!;expect(seated).toMatchObject({seatId:seat.id,seatPurpose:'study'});
   expect((await ask(a,'house.seat',{generation:state.generation,seatId:seat.id})).ok).toBe(true);expect(f.realtime.currentLoungeSeat(id)!.seatGeneration).toBe(seated.seatGeneration);

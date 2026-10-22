@@ -1,0 +1,14 @@
+{
+  "head": "812dd66051a81ba39ca9c0a9ec0ab6f5b8be7905",
+  "beforeSHA256": {
+    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1"
+  },
+  "plan": "docs/spatial-redesign/evidence/elapsed-clock-repair-plan.md",
+  "scope": [
+    "src/house-realtime.ts",
+    "src/server.ts",
+    "spec/house-elapsed-clock.test.ts"
+  ],
+  "knownLiveMixedACKCause": "UNKNOWN; independent clock-domain defects do not identify its branch"
+}

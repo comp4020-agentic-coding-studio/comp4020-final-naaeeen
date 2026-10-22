@@ -1,0 +1,327 @@
+{
+  "entry": {
+    "head": "812dd66051a81ba39ca9c0a9ec0ab6f5b8be7905",
+    "beforeSHA256": {
+      "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+      "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1"
+    },
+    "plan": "docs/spatial-redesign/evidence/elapsed-clock-repair-plan.md",
+    "scope": [
+      "src/house-realtime.ts",
+      "src/server.ts",
+      "spec/house-elapsed-clock.test.ts"
+    ],
+    "knownLiveMixedACKCause": "UNKNOWN; independent clock-domain defects do not identify its branch"
+  },
+  "afterSHA256": {
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+    "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd",
+    "spec/house-elapsed-clock.test.ts": "93caff7736509e945c29a0dbe193435f4b057aef33bb52059a98fee09291a8a7"
+  },
+  "diff": "docs/spatial-redesign/evidence/elapsed-core-source.diff",
+  "diffSHA256": "09fd83b6c7e8af7872f228928e3360b8b689a93b79e7d075a82a531557088ad8",
+  "contract": {
+    "internalHooks": [
+      "AttachOptions.elapsedNow?:()=>number",
+      "ServiceOptions.houseElapsedNow?:()=>number forwarded only to attachHouseRealtime"
+    ],
+    "default": "()=>performance.now() imported from node:perf_hooks",
+    "elapsedFields": [
+      "Context.budgetElapsedAt",
+      "Lease.lastMoveElapsedAt"
+    ],
+    "elapsedRules": [
+      "30 actions/1000ms window",
+      "3.2m/s movement credit,0.64cap,0.06slack",
+      "nonzero>=80ms movement interval",
+      "walk idle only after250ms",
+      "all existing creation/reset assignments incl spawn,zone,geometry,subscribe,takeover,Stand"
+    ],
+    "wallRulesPreserved": [
+      "session/house maintenance and expiry",
+      "30-second reservation expiresAt and projection",
+      "availabilitySetAt",
+      "log timestamps",
+      "slow-reader blockedAt policy",
+      "durable game timestamps"
+    ],
+    "unchanged": [
+      "thresholds",
+      "network payload schemas",
+      "generations/identity/admission",
+      "event scheduling",
+      "geometry/collision",
+      "SQLite schema",
+      "CLI/environment configuration"
+    ],
+    "standCredit": "Existing credit-carry behavior preserved; only origin clock changed"
+  },
+  "tests": {
+    "newCases": 17,
+    "handlerBoundary": "Actual Socket.IO clients + actual HouseStore; createService forwarding and direct raw-log attach path",
+    "wallAdjustmentsMs": [
+      -5000,
+      0,
+      5000
+    ],
+    "actionWindowForwardMs": 1001,
+    "coverage": [
+      "legitimate rollback/stall/forward motion",
+      "true79/80ms,zero exception,distancecap,duplicate sequence controls",
+      "30/1000ms window under civil rollback/stall/forward",
+      "250/251ms idle with raw wall log",
+      "six movement-origin reset paths",
+      "wall availability,raw logs,30-second offline seat reservation",
+      "one actual default real-timer walking case with wall rollback"
+    ]
+  },
+  "runs": [
+    {
+      "log": ".local/elapsed-core/red.log",
+      "exit": 1,
+      "testsFailed": 15,
+      "testsPassed": 1,
+      "scope": "Original16cases before production repair",
+      "calibrationGaps": [
+        "Service ActivityRecord uses ISO wall time; exact numeric raw-log assertion moved to direct attach fixture",
+        "Stand fixture now confirms actual seated snapshot before waiting for standing reset"
+      ]
+    },
+    {
+      "log": ".local/elapsed-core/green-first.log",
+      "exit": 0,
+      "testsPassed": 16
+    },
+    {
+      "log": ".local/elapsed-core/typecheck.log",
+      "exit": 1,
+      "diagnostics": "3owned new-test type errors, then fixed by record spread and2argument each callbacks"
+    },
+    {
+      "log": ".local/elapsed-core/red-calibrated-preimage.log",
+      "exit": 1,
+      "testsFailed": 15,
+      "testsPassed": 2,
+      "scope": "Matched corrected17-case suite against isolated frozen pre-repair source; no production rewind; failures are assertion outcomes not protocol disconnects"
+    },
+    {
+      "log": ".local/elapsed-core/closed-coverage.log",
+      "exit": 0,
+      "testsPassed": 17,
+      "skipped": 0
+    },
+    {
+      "log": ".local/elapsed-core/typecheck-closed.log",
+      "exit": 0,
+      "command": "pnpm typecheck"
+    }
+  ],
+  "coverage": {
+    "provider": "V8/Istanbul",
+    "entireModuleSummary": {
+      "total": {
+        "lines": {
+          "total": 671,
+          "covered": 294,
+          "skipped": 0,
+          "pct": 43.81
+        },
+        "statements": {
+          "total": 1108,
+          "covered": 445,
+          "skipped": 0,
+          "pct": 40.16
+        },
+        "functions": {
+          "total": 126,
+          "covered": 56,
+          "skipped": 0,
+          "pct": 44.44
+        },
+        "branches": {
+          "total": 1020,
+          "covered": 317,
+          "skipped": 0,
+          "pct": 31.07
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-realtime.ts": {
+        "lines": {
+          "total": 394,
+          "covered": 256,
+          "skipped": 0,
+          "pct": 64.97
+        },
+        "functions": {
+          "total": 73,
+          "covered": 52,
+          "skipped": 0,
+          "pct": 71.23
+        },
+        "statements": {
+          "total": 660,
+          "covered": 391,
+          "skipped": 0,
+          "pct": 59.24
+        },
+        "branches": {
+          "total": 634,
+          "covered": 302,
+          "skipped": 0,
+          "pct": 47.63
+        }
+      },
+      "/home/lizhi/comp4020/comp4020-final-naaeeen/src/server.ts": {
+        "lines": {
+          "total": 277,
+          "covered": 38,
+          "skipped": 0,
+          "pct": 13.71
+        },
+        "functions": {
+          "total": 53,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 7.54
+        },
+        "statements": {
+          "total": 448,
+          "covered": 54,
+          "skipped": 0,
+          "pct": 12.05
+        },
+        "branches": {
+          "total": 386,
+          "covered": 15,
+          "skipped": 0,
+          "pct": 3.88
+        }
+      }
+    },
+    "affectedMethod": "Select executable statement/branch-arm start lines in added/replaced lines from git diff --unified=0. Types/import-only lines have no executable map. This is changed-line coverage, not exhaustive behavioral coverage.",
+    "affectedFiles": {
+      "src/house-realtime.ts": {
+        "changedLines": [
+          2,
+          22,
+          23,
+          24,
+          33,
+          68,
+          69,
+          112,
+          271,
+          272,
+          273,
+          281,
+          285,
+          286,
+          337,
+          350,
+          351,
+          376,
+          395,
+          416,
+          417,
+          419,
+          427,
+          456
+        ],
+        "executableStatements": 47,
+        "coveredStatements": 43,
+        "statementPercent": 91.49,
+        "changedBranchArms": 21,
+        "coveredChangedBranchArms": 19,
+        "changedBranchPercent": 90.48,
+        "uncoveredStatements": [
+          {
+            "start": {
+              "line": 281,
+              "column": 43
+            },
+            "end": {
+              "line": 281,
+              "column": null
+            }
+          },
+          {
+            "start": {
+              "line": 285,
+              "column": 59
+            },
+            "end": {
+              "line": 285,
+              "column": 75
+            }
+          },
+          {
+            "start": {
+              "line": 285,
+              "column": 75
+            },
+            "end": {
+              "line": 285,
+              "column": 94
+            }
+          },
+          {
+            "start": {
+              "line": 285,
+              "column": 94
+            },
+            "end": {
+              "line": 285,
+              "column": 110
+            }
+          }
+        ]
+      },
+      "src/server.ts": {
+        "changedLines": [
+          25,
+          336
+        ],
+        "executableStatements": 2,
+        "coveredStatements": 2,
+        "statementPercent": 100.0,
+        "changedBranchArms": 2,
+        "coveredChangedBranchArms": 2,
+        "changedBranchPercent": 100.0,
+        "uncoveredStatements": []
+      }
+    },
+    "combinedAffectedStatements": {
+      "covered": 45,
+      "total": 49,
+      "percent": 91.84
+    },
+    "combinedAffectedBranchArms": {
+      "covered": 21,
+      "total": 23,
+      "percent": 91.3
+    },
+    "gap": "Whole realtime/server modules remain below80% in this intentionally narrow17-case run; unrelated routes/activities are not covered here. Four changed-line statements in unchanged wall maintenance/expiry branches are uncovered."
+  },
+  "diffCheck": "Scoped git diff --check PASS",
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi"
+  },
+  "review": "Parent independent fresh review pending; worker self-inspection complete",
+  "remaining": [
+    "Fixture worker affected8family validation",
+    "Parent full-required checks,independent review/refinement",
+    "New frozen-source baseline+mixed qualification under unchangedconditions",
+    "New native/six-browser qualification where required"
+  ],
+  "causalBoundary": "Existing live mixed first-rejected ACK category remains UNKNOWN; controlled clock defects do not identify its exact branch or host cause.",
+  "commits": "None by worker",
+  "services": "Only disposable test servers, all closed; no browser/resource workload/persistent service"
+}

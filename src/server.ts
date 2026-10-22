@@ -22,7 +22,7 @@ const COOKIE = "night_session";
 const BODY_LIMIT = 16 * 1024;
 const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, ACTIVITY_ACTIVE: 409, ACTIVITY_SEAT_REQUIRED: 409, UPLOAD_EXPIRED: 409, UPLOAD_INCOMPLETE: 409, UPLOAD_CONFLICT: 409, STUDIO_LIMIT: 409, GATHERING_LIMIT: 409, GATHERING_NO_ITEM: 409, STALE_GATHERING: 409, GATHERING_SEAT_REQUIRED: 409, GATHERING_NOT_JOINED: 409, GATHERING_PRESENTER_BUSY: 409, GATHERING_NOT_PRESENTER: 409, PUZZLE_UNAVAILABLE: 409, PUZZLE_COMPLETE: 409, PUZZLE_STALE_ROUND: 409, PUZZLE_NOT_JOINED: 409, PUZZLE_PIECE_TAKEN: 409, PUZZLE_WRONG_PLACE: 409, PUZZLE_RESET_CHANGED: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
 const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
-export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
+export interface ServiceOptions { houseElapsedNow?: () => number; dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
 interface Connection { response: ServerResponse; digest: string }
 
 function cookieToken(request: IncomingMessage, name = COOKIE): string | undefined {
@@ -333,7 +333,7 @@ export function createService(options: ServiceOptions) {
     }
   }
   const server = createServer((request, response) => { void handle(request, response); });
-  const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
+  const realtime = attachHouseRealtime(server, houseStore, {elapsedNow: options.houseElapsedNow, origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
   const gathering = new HouseGathering({
     authorizeHouse(actorId) {
       const snapshot = houseStore.snapshot(actorId, "lounge");

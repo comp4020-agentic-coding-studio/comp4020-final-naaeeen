@@ -1,0 +1,105 @@
+{
+  "scope": "Eight existing movement spec files; actual disposable Socket.IO/HTTP test servers; no browser, resource workload, retained server, full suite or live failure attribution.",
+  "initialChangedSet": {
+    "total": 125,
+    "passed": 124,
+    "failed": 1,
+    "sourceStable": true,
+    "files": [
+      {
+        "name": "board-resource-delivery.test.ts",
+        "tests": 19,
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "name": "house-game-realtime.test.ts",
+        "tests": 7,
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "name": "house-puzzle-realtime.test.ts",
+        "tests": 16,
+        "passed": 15,
+        "failed": 1
+      },
+      {
+        "name": "house-realtime.test.ts",
+        "tests": 30,
+        "passed": 30,
+        "failed": 0
+      },
+      {
+        "name": "house-recovery-service.test.ts",
+        "tests": 3,
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "name": "house-seat-authority.test.ts",
+        "tests": 17,
+        "passed": 17,
+        "failed": 0
+      },
+      {
+        "name": "house-spatial-http.test.ts",
+        "tests": 16,
+        "passed": 16,
+        "failed": 0
+      },
+      {
+        "name": "spatial-resource-rate.test.ts",
+        "tests": 17,
+        "passed": 17,
+        "failed": 0
+      }
+    ]
+  },
+  "refinement": {
+    "file": "spec/house-puzzle-realtime.test.ts",
+    "change": "Native monotonic elapsed base plus explicit synthetic route offset; original civil spy, route increments, native1050ms waits and strict assertions preserved.",
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "sourceHashes": {
+      "spec/house-puzzle-realtime.test.ts": "8d0d59edf7941907aab8f69850380d0f604aa1f23dfcc093dea4caeee284a1f9",
+      "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+      "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd"
+    }
+  },
+  "independentRateRegressions": {
+    "passed": 17,
+    "closure": {
+      "fixturesCreated": 17,
+      "servicesClosed": 17,
+      "socketsDisconnected": 17,
+      "directoriesRemoved": 17
+    },
+    "record": "elapsed-clock-fixture-green-observations.json"
+  },
+  "typecheckOwnAttempt": {
+    "exit": 2,
+    "errors": [
+      "Core-owned house-elapsed-clock.test.ts ActivityRecord/Record mismatch",
+      "Core-owned house-elapsed-clock.test.ts two test.each tuple callback arity errors"
+    ],
+    "followupOwner": "Core executor fixed and will rerun typecheck; parent reconciles result."
+  },
+  "sourceHashes": {
+    "spec/house-realtime.test.ts": "831c19d0f1171d6777442a7b4f399e15bdb8178b333620b20eacd07580a7ce18",
+    "spec/house-seat-authority.test.ts": "b4e2d803601e51bbdaa3b772d3d73affc6f78727342bd6035e718890b1508788",
+    "spec/house-spatial-http.test.ts": "3d92fa7d98cbdbd7dabf8029cf1c9b081e74494716340cad6ebf49097e5256ac",
+    "spec/house-game-realtime.test.ts": "894b8f672fcdeb0f91575bc03271e7a999f145418a493dbac43ae932aab1e2ba",
+    "spec/house-puzzle-realtime.test.ts": "8d0d59edf7941907aab8f69850380d0f604aa1f23dfcc093dea4caeee284a1f9",
+    "spec/house-recovery-service.test.ts": "396ba6f171c84435034ab74f829ce5a822d2530ab9b17155c01b604f7698725b",
+    "spec/board-resource-delivery.test.ts": "4f68be8e05ad3afa3bec982a52016fff98afb5ff9fc760f54d650e0696fcddd3",
+    "spec/spatial-resource-rate.test.ts": "e1f5a1d599d8a2fd1e1c5abcdc589eae65b662675ba2e96af50b4248c2b22f81",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+    "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd"
+  },
+  "historicalPreserved": {
+    "docs/spatial-redesign/evidence/rate-attribution-controls-observations.json": "500350c209f17abe511211ae15cafd4f708ac7a0bd15ec08a6ad17046ee50549",
+    "docs/spatial-redesign/evidence/elapsed-clock-historical-rate-spec.ts.txt": "32b343ff60d298306bdc54346598cbd9a4dac1ee4f3d82af2a009e61268fde70"
+  }
+}

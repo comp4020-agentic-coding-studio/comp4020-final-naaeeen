@@ -27,7 +27,8 @@ function png() {
 }
 async function fixture(members = 2) {
   const directory = mkdtempSync(join(tmpdir(), "house-spatial-http-")); cleanup.push(() => rmSync(directory, { recursive: true, force: true }));
-  const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {} }); cleanup.push(() => app.close());
+  let now = Date.now();
+  const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {}, houseElapsedNow: () => now }); cleanup.push(() => app.close());
   const people: Actor[] = Array.from({ length: members }, () => { const person = app.houseStore.ensureSession(); return { ...person, cookie: "house_session=" + person.token }; });
   const owner = people[0]!;
   app.houseStore.execute(owner.id, { commandId: randomUUID(), type: "house.create", payload: { capacity: 2, name: "Ada", colour: "sage" } });
@@ -36,7 +37,7 @@ async function fixture(members = 2) {
   const room = app.houseStore.snapshot(owner.id).residents.find(person => person.id === owner.id)!.bedroomId;
   await new Promise<void>(resolve => app.server.listen(0, "127.0.0.1", resolve));
   const base = "http://127.0.0.1:" + (app.server.address() as { port: number }).port;
-  let now = Date.now(); vi.spyOn(Date, "now").mockImplementation(() => now);
+  vi.spyOn(Date, "now").mockImplementation(() => now);
   function headers(actor = owner, control?: Control): Record<string, string> {
     return { Cookie: actor.cookie, Origin: base, "Content-Type": "application/json", "X-House-Identity": actor.id,
       ...(control ? { "X-House-Generation": String(control.state.generation), "X-House-Controller-Token": control.token, "X-House-Access-Generation": String(control.state.accessGeneration), "X-House-Seat-Generation": String(control.state.players.find(person => person.id === actor.id)?.seatGeneration) } : {}) };

@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "command": "APP_URL=http://127.0.0.1:4108 mise exec node@24.21.0 pnpm@11.9.0 -- pnpm check",
+  "requiredCheck": "build:board + typecheck + test",
+  "exitCode": 0,
+  "filesPassed": 69,
+  "testsPassed": 1523,
+  "elapsedSeconds": 39.79851293563843,
+  "startedAtUTC": "2026-10-22T22:11:09.397395+00:00",
+  "sourceUnchanged": true,
+  "boundFileCount": 510,
+  "fullSourceManifestSHA256": "e453e9d5edf4987273c4b8c57f41ca96e81834d439c8636535620200b4b9eda4",
+  "originalLogSHA256": "c4999b530266e7304ed96f14b40d880036620d004bf7b0fe366b206bfe126b85",
+  "runtimeSourceSHA256": {
+    "public/house-puzzle-ui.js": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+    "public/house.css": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9",
+    "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+    "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+    "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+    "src/board-service.ts": "0e0fcfed848a34edc4569da3f8be591768927c7473aa5bf85480a488156e0b6a",
+    "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+    "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+    "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
+    "src/house-gathering.ts": "5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f",
+    "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+    "src/house-store.ts": "53916a46e9b540d2904000c22c23eed13d062b28072d7fe73ab8f63b29b6b246",
+    "src/house-studio-codec.ts": "054c8a6028f1d314f0f2f89f98cd97b8eaa40c9d4aff5332dc7762763613b270",
+    "src/house-studio.ts": "87c7ef0b5c9dd53fa705450a1275b4448a7209d4f0c24835c5bfb9ea6f3754f1",
+    "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+    "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+    "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd",
+    "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+  },
+  "instrumentSHA256": {
+    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+    "tools/spatial-resource.mjs": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb"
+  },
+  "priorFailure": "Required#8 had1522/1523 atgamefixturemove; originalACKunknown. Localmonotonic+explicitroute clocks refined; all oldfailurelogs/preimages preserved.",
+  "scope": "Full automated behavior/build/types on repaired clock source; fresh resource/native qualification remains separate."
+}

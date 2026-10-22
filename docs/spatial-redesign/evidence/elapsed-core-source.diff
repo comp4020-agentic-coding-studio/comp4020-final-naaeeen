@@ -1,0 +1,171 @@
+diff --git a/src/house-realtime.ts b/src/house-realtime.ts
+index c6cb44e..e84f62f 100644
+--- a/src/house-realtime.ts
++++ b/src/house-realtime.ts
+@@ -1,4 +1,5 @@
+ import { createHash, randomUUID } from "node:crypto";
++import { performance } from "node:perf_hooks";
+ import type { Server as HttpServer, IncomingMessage } from "node:http";
+ import { Server, type Socket } from "socket.io";
+ import { HouseError } from "./house-contract.ts";
+@@ -18,9 +19,9 @@ export interface HouseAuthority {
+   maintainGames?(now?: number): boolean;
+   gameLifecycle?(id: string, event: "disconnect" | "left_lounge" | "seat_lost"): boolean;
+ }
+-interface Options { origin?: string; secureCookies?: boolean; log?: (record: Record<string, unknown>) => void }
+-interface Context { legacyReadonly: boolean; socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetAt: number; events: number; puzzleIntent: { sequence: number; hash: string; outcome: Record<string, unknown> } | null }
+-interface Lease { id: string; digest: string; houseId: string; token: string; socketId: string | null; generation: number; expiresAt: number; zoneId: string; x: number; z: number; heading: number; animation: "idle" | "walk" | "sit"; seatGeneration: number; seatId: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; sequence: number; lastMoveAt: number; motionCredit: number }
++export interface AttachOptions { elapsedNow?: () => number; origin?: string; secureCookies?: boolean; log?: (record: Record<string, unknown>) => void }
++interface Context { legacyReadonly: boolean; socket: Socket; id: string; digest: string; zoneId: string; accessGeneration: number; subscribed: boolean; pendingSnapshot: boolean; revoked: Record<string, unknown> | null; blockedAt: number; budgetElapsedAt: number; events: number; puzzleIntent: { sequence: number; hash: string; outcome: Record<string, unknown> } | null }
++interface Lease { id: string; digest: string; houseId: string; token: string; socketId: string | null; generation: number; expiresAt: number; zoneId: string; x: number; z: number; heading: number; animation: "idle" | "walk" | "sit"; seatGeneration: number; seatId: string | null; availability: "quiet" | "chat"; availabilitySetAt: number; sequence: number; lastMoveElapsedAt: number; motionCredit: number }
+ const LEASE_MS = 30_000, MAX_FRAME_BYTES = 1024 * 1024, MAX_BYTES = 2 * 1024 * 1024, MAX_CONNECTIONS = 12;
+ const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
+ const inputObject = (value: unknown): Record<string, unknown> => {
+@@ -29,7 +30,7 @@ const inputObject = (value: unknown): Record<string, unknown> => {
+ };
+ const failure = (error: unknown) => error instanceof HouseError ? { ok: false, code: error.code, message: error.message } : { ok: false, code: "STORAGE_UNAVAILABLE", message: "The house is temporarily unavailable. Please retry." };
+ 
+-function allowedOrigin(request: IncomingMessage, options: Options): boolean {
++function allowedOrigin(request: IncomingMessage, options: AttachOptions): boolean {
+   const origin = request.headers.origin;
+   if (!origin) return false;
+   if (options.origin) return origin === options.origin;
+@@ -64,7 +65,8 @@ function outbound(socket: Socket, bytes: number): "ready" | "wait" | "overflow"
+ }
+ 
+ /** SQLite owns durable intent; bounded process memory owns live pose and leases. */
+-export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, options: Options = {}) {
++export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, options: AttachOptions = {}) {
++  const elapsedNow = options.elapsedNow ?? (() => performance.now());
+   const io = new Server(server, { transports: ["websocket"], maxHttpBufferSize: 16 * 1024, perMessageDeflate: false, allowRequest: (request, done) => done(null, allowedOrigin(request, options)), serveClient: true, pingInterval: 10_000, pingTimeout: 10_000 });
+   const serverEpoch = randomUUID();
+   const contexts = new Map<string, Context>();
+@@ -107,7 +109,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+     if (!resident) throw new HouseError("FORBIDDEN", "Your permanent bedroom is unavailable.");
+     const arrival = { x: .65 * (resident.slot - (snapshot.house.capacity - 1) / 2), z: 3.3 };
+     const spawn = snapshot.room ? (validPosition(layout, arrival) ? arrival : layout.spawn) : (layout.arrivals?.[resident.slot] ?? layout.spawn);
+-    lease.x = spawn.x; lease.z = spawn.z; lease.heading = 0; lease.sequence = 0; lease.lastMoveAt = Date.now(); lease.motionCredit = 0;
++    lease.x = spawn.x; lease.z = spawn.z; lease.heading = 0; lease.sequence = 0; lease.lastMoveElapsedAt = elapsedNow(); lease.motionCredit = 0;
+   }
+   function controller(context: Context, generation: unknown): Lease {
+     requireSession(context);
+@@ -266,9 +268,9 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+   }
+   function tick() {
+     if (closed) return;
+-    const now = Date.now();
+-    if (now - sessionSweepAt >= 1000) {
+-      sessionSweepAt = now;
++    const wallNow = Date.now(), tickElapsedAt = elapsedNow();
++    if (wallNow - sessionSweepAt >= 1000) {
++      sessionSweepAt = wallNow;
+       try {
+         // Known revoked consent is removed before game maintenance can fail.
+         for (const context of contexts.values()) if (store.session(context.digest)?.id !== context.id) {
+@@ -276,12 +278,12 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+         }
+         pruneLeases();
+         flushGameLifecycles();
+-        if(store.maintainGames?.(now)) queueRefresh();
++        if(store.maintainGames?.(wallNow)) queueRefresh();
+       } catch { /* An action/projection reports storage failure; the next sweep retries due housekeeping. */ }
+     }
+     for (const [id, lease] of leases) {
+-      if (!lease.socketId && lease.expiresAt <= now) { release(lease); leases.delete(id); queueRefresh(); }
+-      if (lease.animation === "walk" && now - lease.lastMoveAt > 250) { log(lease.id, "motion.stop", "idle"); lease.animation = "idle"; motionDirty = true; }
++      if (!lease.socketId && lease.expiresAt <= wallNow) { release(lease); leases.delete(id); queueRefresh(); }
++      if (lease.animation === "walk" && tickElapsedAt - lease.lastMoveElapsedAt > 250) { log(lease.id, "motion.stop", "idle"); lease.animation = "idle"; motionDirty = true; }
+     }
+     const dirty = motionDirty; motionDirty = false;
+     for (const context of contexts.values()) {
+@@ -332,7 +334,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+       if (declaredVersion && socket.handshake.auth.worldVersion !== HOUSE_WORLD_VERSION) throw new HouseError("CLIENT_UPDATE_REQUIRED", "The house has changed. Download unsent drafts, then reload to update.");
+       if (contexts.size >= MAX_CONNECTIONS) throw new HouseError("LOAD_LIMIT", "This server has twelve connections. Close an unused tab and retry.");
+       if ([...contexts.values()].filter(context => context.id === identity.id).length >= 2) throw new HouseError("TAB_LIMIT", "Use one controlling tab and one observer.");
+-      const context: Context = { puzzleIntent: null, legacyReadonly, socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetAt: Date.now(), events: 0 };
++      const context: Context = { puzzleIntent: null, legacyReadonly, socket, id: identity.id, digest, zoneId: "lounge", accessGeneration: 0, subscribed: false, pendingSnapshot: false, revoked: null, blockedAt: 0, budgetElapsedAt: elapsedNow(), events: 0 };
+       contexts.set(socket.id, context);
+       socket.conn.once("close", () => cleanup(context));
+       next();
+@@ -345,7 +347,8 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+         let result: unknown;
+         try {
+           requireSession(context);
+-          if (Date.now() - context.budgetAt >= 1000) { context.events = 0; context.budgetAt = Date.now(); }
++          const eventElapsedAt = elapsedNow();
++          if (eventElapsedAt - context.budgetElapsedAt >= 1000) { context.events = 0; context.budgetElapsedAt = eventElapsedAt; }
+           if (++context.events > 30) throw new HouseError("RATE_LIMITED", "Please slow down your house actions.");
+           const body = inputObject(raw); result = action(body);
+         } catch (error) { result = failure(error); if (event !== "house.move") log(context.id, event, failure(error).code, { ...activityMetadata(event === "house.command" && raw && typeof raw === "object" ? (raw as Record<string, unknown>).command : undefined), transport: "socket" }); }
+@@ -370,7 +373,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+         release(lease);
+       }
+       const generation = ++nextGeneration;
+-      lease = { id: context.id, digest: context.digest, houseId: snapshot.house.id, token, socketId: socket.id, generation, expiresAt: Infinity, zoneId: snapshot.zoneId, x: 0, z: 0, heading: 0, animation: "idle", seatGeneration: ++nextSeatGeneration, seatId: null, availability: "quiet", availabilitySetAt: Date.now(), sequence: 0, lastMoveAt: Date.now(), motionCredit: 0 };
++      lease = { id: context.id, digest: context.digest, houseId: snapshot.house.id, token, socketId: socket.id, generation, expiresAt: Infinity, zoneId: snapshot.zoneId, x: 0, z: 0, heading: 0, animation: "idle", seatGeneration: ++nextSeatGeneration, seatId: null, availability: "quiet", availabilitySetAt: Date.now(), sequence: 0, lastMoveElapsedAt: elapsedNow(), motionCredit: 0 };
+       resetZone(lease, snapshot); leases.set(context.id, lease); return lease;
+     }
+     handle("house.subscribe", body => {
+@@ -389,7 +392,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+       if (lease.socketId === socket.id) {
+         if (alreadySubscribed) lease.generation = ++nextGeneration;
+         if (lease.zoneId !== body.zoneId) resetZone(lease, snapshot);
+-        lease.sequence = 0; lease.lastMoveAt = Date.now(); lease.motionCredit = 0;
++        lease.sequence = 0; lease.lastMoveElapsedAt = elapsedNow(); lease.motionCredit = 0;
+       }
+       queueRefresh(); log(context.id, "zone.subscribe", "ok");
+       return { ok: true, snapshot: project(context) };
+@@ -410,10 +413,10 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+       const lease = controller(context, body.generation);
+       if (!Number.isSafeInteger(body.sequence) || (body.sequence as number) <= lease.sequence) throw new HouseError("STALE_INPUT", "Use a newer motion sequence.");
+       if (![body.x, body.z, body.heading].every(value => typeof value === "number" && Number.isFinite(value)) || Math.abs(body.heading as number) > 1e6) throw new HouseError("INVALID_MOVE", "Use a finite house position.");
+-      const now = Date.now(), dx = (body.x as number) - lease.x, dz = (body.z as number) - lease.z;
+-      const credit = Math.min(.64, lease.motionCredit + 3.2 * Math.max(0, now - lease.lastMoveAt) / 1000);
++      const movementElapsedAt = elapsedNow(), dx = (body.x as number) - lease.x, dz = (body.z as number) - lease.z;
++      const credit = Math.min(.64, lease.motionCredit + 3.2 * Math.max(0, movementElapsedAt - lease.lastMoveElapsedAt) / 1000);
+       if (Math.hypot(dx, dz) > credit + .06 || lease.seatId) throw new HouseError("INVALID_MOVE", "Walk within the room at the allowed speed.");
+-      if (now - lease.lastMoveAt < 80 && Math.hypot(dx, dz) > .001) throw new HouseError("RATE_LIMITED", "Movement updates are limited to ten per second.");
++      if (movementElapsedAt - lease.lastMoveElapsedAt < 80 && Math.hypot(dx, dz) > .001) throw new HouseError("RATE_LIMITED", "Movement updates are limited to ten per second.");
+       const snapshot = authorised(context), layout = snapshot.room ? bedroomLayout(snapshot.room.placements) : createLayout(snapshot.house.capacity);
+       const candidate = { x: body.x as number, z: body.z as number };
+       const swept = slide(layout, { x: lease.x, z: lease.z }, dx, dz);
+@@ -421,7 +424,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+       const animation = Math.hypot(dx, dz) > .001 ? "walk" : "idle";
+       if (lease.animation !== animation) log(context.id, animation === "walk" ? "motion.start" : "motion.stop", animation === "walk" ? "walking" : "idle");
+       lease.motionCredit = credit - Math.hypot(dx, dz);
+-      lease.x = candidate.x; lease.z = candidate.z; lease.heading = (body.heading as number) % (Math.PI * 2); lease.sequence = body.sequence as number; lease.lastMoveAt = now; lease.animation = animation; motionDirty = true;
++      lease.x = candidate.x; lease.z = candidate.z; lease.heading = (body.heading as number) % (Math.PI * 2); lease.sequence = body.sequence as number; lease.lastMoveElapsedAt = movementElapsedAt; lease.animation = animation; motionDirty = true;
+       return { ok: true, sequence: lease.sequence };
+     });
+     handle("house.availability", body => {
+@@ -450,7 +453,7 @@ export function attachHouseRealtime(server: HttpServer, store: HouseAuthority, o
+         const seat = layout.seats.find(candidate => candidate.id === lease.seatId);
+         // Physical movement and transient consent clear even if SQLite housekeeping fails.
+         release(lease); revokeActivity(lease, "seat_lost"); const anchor = seat?.target ?? layout.spawn;
+-        lease.x = anchor.x; lease.z = anchor.z; lease.lastMoveAt = Date.now();
++        lease.x = anchor.x; lease.z = anchor.z; lease.lastMoveElapsedAt = elapsedNow();
+       }
+       queueRefresh(); log(context.id, "seat.stand", "ok"); return { ok: true };
+     });
+diff --git a/src/server.ts b/src/server.ts
+index e212702..77527fe 100644
+--- a/src/server.ts
++++ b/src/server.ts
+@@ -22,7 +22,7 @@ const COOKIE = "night_session";
+ const BODY_LIMIT = 16 * 1024;
+ const STATUS: Record<string, number> = { INVALID_INPUT: 400, COLLISION: 400, SPACE_FULL: 409, ALREADY_MEMBER: 409, CONTROL_MOVED: 409, SEAT_TAKEN: 409, ACTIVITY_ACTIVE: 409, ACTIVITY_SEAT_REQUIRED: 409, UPLOAD_EXPIRED: 409, UPLOAD_INCOMPLETE: 409, UPLOAD_CONFLICT: 409, STUDIO_LIMIT: 409, GATHERING_LIMIT: 409, GATHERING_NO_ITEM: 409, STALE_GATHERING: 409, GATHERING_SEAT_REQUIRED: 409, GATHERING_NOT_JOINED: 409, GATHERING_PRESENTER_BUSY: 409, GATHERING_NOT_PRESENTER: 409, PUZZLE_UNAVAILABLE: 409, PUZZLE_COMPLETE: 409, PUZZLE_STALE_ROUND: 409, PUZZLE_NOT_JOINED: 409, PUZZLE_PIECE_TAKEN: 409, PUZZLE_WRONG_PLACE: 409, PUZZLE_RESET_CHANGED: 409, NOT_CONTROLLER: 409, STALE_GENERATION: 409, STALE_ZONE: 409, UNAUTHENTICATED: 403, IDENTITY_CHANGED: 403, NO_HOUSE: 403, FORBIDDEN: 403, REVISION_CONFLICT: 409, COMMAND_ID_REUSED: 409, RATE_LIMITED: 429, STORAGE_UNAVAILABLE: 503 };
+ const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".glb": "model/gltf-binary", ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".woff2": "font/woff2", ".woff": "font/woff", ".ttf": "font/ttf", ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8" };
+-export interface ServiceOptions { dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
++export interface ServiceOptions { houseElapsedNow?: () => number; dataDir: string; publicDir?: string; readmePath?: string; secureCookies?: boolean; origin?: string; activityLog?: (record: ActivityRecord) => void }
+ interface Connection { response: ServerResponse; digest: string }
+ 
+ function cookieToken(request: IncomingMessage, name = COOKIE): string | undefined {
+@@ -333,7 +333,7 @@ export function createService(options: ServiceOptions) {
+     }
+   }
+   const server = createServer((request, response) => { void handle(request, response); });
+-  const realtime = attachHouseRealtime(server, houseStore, {origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
++  const realtime = attachHouseRealtime(server, houseStore, {elapsedNow: options.houseElapsedNow, origin: options.origin, secureCookies, log: (record) => activity({ ...record, transport: record.transport ?? "socket" })});
+   const gathering = new HouseGathering({
+     authorizeHouse(actorId) {
+       const snapshot = houseStore.snapshot(actorId, "lounge");

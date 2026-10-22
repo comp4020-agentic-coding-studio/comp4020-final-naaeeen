@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
+import { performance } from "node:perf_hooks";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -22,10 +23,11 @@ async function fixture(){
  const store=new HouseStore(path);cleanups.push(()=>store.close());const people=Array.from({length:4},()=>store.ensureSession());
  store.execute(people[0]!.id,{commandId:randomUUID(),type:"house.create",payload:{capacity:3,name:"Ada",colour:"sage"}});
  const home=store.me(people[0]!.id).home!;for(const p of people.slice(1,3))store.execute(p.id,{commandId:randomUUID(),type:"house.join",payload:{code:home.code,name:"Friend",colour:"rose"}});
- const server=createServer(),live=attachHouseRealtime(server,store);await new Promise<void>(r=>server.listen(0,"127.0.0.1",r));cleanups.push(()=>live.close());
+ let clockOffset=0;
+ const server=createServer(),live=attachHouseRealtime(server,store,{elapsedNow:()=>performance.now()+clockOffset});await new Promise<void>(r=>server.listen(0,"127.0.0.1",r));cleanups.push(()=>live.close());
  const url="http://127.0.0.1:"+(server.address() as {port:number}).port;
  // Real time still advances so disconnected-save maintenance can retry without another command.
- const layout=createLayout(3),realNow=Date.now.bind(Date);let clockOffset=0;vi.spyOn(Date,"now").mockImplementation(()=>realNow()+clockOffset);
+ const layout=createLayout(3),realNow=Date.now.bind(Date);vi.spyOn(Date,"now").mockImplementation(()=>realNow()+clockOffset);
  type Client={socket:Socket;token:string;n:number;state:LiveSnapshot;response:any;motion:number};
  async function connect(n=0,zoneId="lounge",token:string=randomUUID()):Promise<Client>{
   const socket=io(url,{auth:{worldVersion:HOUSE_WORLD_VERSION},transports:["websocket"],reconnection:false,extraHeaders:{Origin:url,Cookie:"house_session="+people[n]!.token}});
@@ -42,7 +44,7 @@ async function fixture(){
   if(self.seatId===seat.id)return;
   const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route,"A controller must walk a valid route to their actual game chair").not.toBeNull();
   for(const point of route!.slice(1)){
-   clockOffset+=100;expect(await ask(client.socket,"house.move",{generation:client.state.generation,sequence:++client.motion,...point,heading:0})).toMatchObject({ok:true});
+   clockOffset+=100;const response=await ask(client.socket,"house.move",{generation:client.state.generation,sequence:++client.motion,...point,heading:0});expect(response,JSON.stringify({phase:"game-seat-approach",response})).toMatchObject({ok:true});
   }
   expect(await ask(client.socket,"house.seat",{generation:client.state.generation,seatId:seat.id})).toMatchObject({ok:true});
  }

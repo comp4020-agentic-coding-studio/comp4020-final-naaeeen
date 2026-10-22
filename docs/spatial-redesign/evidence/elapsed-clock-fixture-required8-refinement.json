@@ -1,0 +1,79 @@
+{
+  "scope": "Fixture-provider refinement after required-current-8 failure; no production implementation edits.",
+  "priorFullRequiredFailure": {
+    "raw": ".local/spatial-apply/required-current-8.log",
+    "sha256": "e29ec3388219336bf1dfedc9e921b052aa52c6b3780762bde45955ccb5658b85",
+    "passed": 1522,
+    "total": 1523,
+    "files": 69,
+    "failure": "house-game-realtime.test.ts sit house.move at former line45, called by HTTP shares receipts test at former line96",
+    "exactAckCode": "UNKNOWN",
+    "note": "No retained raw ACK. A real wall component in the old elapsed wrapper is a source-evidenced defect; the exact rejected branch is not retrospectively attributed."
+  },
+  "audit": {
+    "house-game-realtime": "Elapsed performance.now()+same synthetic clockOffset; civil realDateNow+offset unchanged.",
+    "house-realtime": "Default attachment uses native elapsed clock; per-test setupWithClock explicitly injects a manually controlled counter and pairs the civil spy only in those cases.",
+    "house-recovery-service": "Native default except physical-route test explicitly passes fixed manual elapsed counter before subscription.",
+    "house-puzzle-realtime": "Existing independently controlled native monotonic base+synthetic route offset.",
+    "house-seat-authority": "Explicit fixed manual counter.",
+    "house-spatial-http": "Explicit fixed manual counter.",
+    "board-resource-delivery": "Explicit fixed manual counter.",
+    "spatial-resource-rate": "Independent synthetic elapsed and civil counters."
+  },
+  "verification": {
+    "command": [
+      "/home/lizhi/.local/bin/mise",
+      "exec",
+      "--",
+      "pnpm",
+      "exec",
+      "vitest",
+      "run",
+      "--config",
+      ".local/elapsed-fixtures/vitest.config.ts",
+      "spec/house-realtime.test.ts",
+      "spec/house-game-realtime.test.ts",
+      "spec/house-recovery-service.test.ts",
+      "spec/house-seat-authority.test.ts",
+      "spec/board-resource-delivery.test.ts",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile.json=.local/elapsed-fixtures/required8-refinement/tests.json"
+    ],
+    "exit": 0,
+    "passed": 76,
+    "failed": 0,
+    "total": 76,
+    "files": 5,
+    "sourcesStable": true,
+    "typecheck": {
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "typecheck"
+      ],
+      "exit": 0
+    },
+    "scopedDiffCheckExit": 0
+  },
+  "sourceHashes": {
+    "spec/house-realtime.test.ts": "8f72879410f90207ae9d57dbd91743f078c785cdad465be4ba3f60b9c1cc40bd",
+    "spec/house-seat-authority.test.ts": "c3c2fab980d6d87ea9166684b9e4bcdea9d1c7b004e38aa87cb615afd5b17d79",
+    "spec/house-spatial-http.test.ts": "3d92fa7d98cbdbd7dabf8029cf1c9b081e74494716340cad6ebf49097e5256ac",
+    "spec/house-game-realtime.test.ts": "252fda1fde2bd789f9b258af37c57a50ff49549e9de596ef138a59d01701c245",
+    "spec/house-puzzle-realtime.test.ts": "8d0d59edf7941907aab8f69850380d0f604aa1f23dfcc093dea4caeee284a1f9",
+    "spec/house-recovery-service.test.ts": "adcc8debef9a35289a34ca0be7642a466102374bd7154bbf19c94e6fbddb994f",
+    "spec/board-resource-delivery.test.ts": "6fb71255fa34c2722b2045e483bf408ac2be90ac081b58d7354365e6415d9920",
+    "spec/spatial-resource-rate.test.ts": "e1f5a1d599d8a2fd1e1c5abcdc589eae65b662675ba2e96af50b4248c2b22f81",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+    "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd"
+  },
+  "historicalJsonHash": "500350c209f17abe511211ae15cafd4f708ac7a0bd15ec08a6ad17046ee50549",
+  "limits": [
+    "No exact old ACK category recovered.",
+    "Native timers/default-clock behavior is covered by core clock tests separately; manual fixtures are not claimed wall-independent.",
+    "No full suite/browser/resource workload/retries/threshold relaxation/commit/push performed in this lane."
+  ]
+}

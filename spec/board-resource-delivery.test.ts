@@ -362,9 +362,9 @@ describe("combined resource command authority binding", () => {
     expect(c.houseId).toBe("bound-home"); expect(c.payload).toEqual({roundId:null}); expect(c.expectedRevision).toBe(0);
   });
   test("real socket authority rejects missing/foreign houses, saves complete games and replays original receipt", async () => {
-    const dir = mkdtempSync(join(tmpdir(), "resource-command-")), service = createService({dataDir:dir,secureCookies:false});
-    const sockets: Socket[] = [];
     let now = Date.now();
+    const dir = mkdtempSync(join(tmpdir(), "resource-command-")), service = createService({dataDir:dir,secureCookies:false,houseElapsedNow:()=>now});
+    const sockets: Socket[] = [];
     const clock = vi.spyOn(Date, "now").mockImplementation(() => now);
     try {
       await new Promise<void>(done=>service.server.listen(0,"127.0.0.1",done));
@@ -389,14 +389,15 @@ describe("combined resource command authority binding", () => {
           const subscription=await socket.timeout(3000).emitWithAck("house.subscribe",{zoneId:"lounge",controllerToken:randomUUID()});
           expect(subscription.ok).toBe(true);expect(subscription.snapshot.controller).toBe(true);person.snapshot=subscription.snapshot;people.push(person);
           // This authority fixture uses the real chair claim: standing elsewhere
-          // no longer grants a game role. Only the fixture's civil clock advances.
+          // no longer grants a game role. The paired fixture clocks advance together.
           const layout=createLayout(2), seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(n+1))!;
           const own=person.snapshot.players.find((candidate:any)=>candidate.id===person.identity);
           const route=findRoute(layout,{x:own.x,z:own.z},seat.target);
           expect(route).not.toBeNull();
           for(const point of route!.slice(1)) {
             now+=80;
-            expect(await socket.timeout(3000).emitWithAck("house.move",{generation:person.snapshot.generation,sequence:++person.motionSequence,...point,heading:0})).toMatchObject({ok:true});
+            const response=await socket.timeout(3000).emitWithAck("house.move",{generation:person.snapshot.generation,sequence:++person.motionSequence,...point,heading:0});
+            expect(response,JSON.stringify({phase:"resource-seat-approach",response})).toMatchObject({ok:true});
           }
           expect(await socket.timeout(3000).emitWithAck("house.seat",{generation:person.snapshot.generation,seatId:seat.id})).toMatchObject({ok:true});
           await vi.waitFor(()=>expect(person.snapshot.players.find((candidate:any)=>candidate.id===person.identity)?.seatId).toBe(seat.id));

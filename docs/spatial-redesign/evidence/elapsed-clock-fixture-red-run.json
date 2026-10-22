@@ -1,0 +1,20 @@
+{
+  "exit": 1,
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "--config",
+    ".local/elapsed-fixtures/vitest.config.ts",
+    "spec/spatial-resource-rate.test.ts"
+  ],
+  "sourceHashes": {
+    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1",
+    "spec/spatial-resource-rate.test.ts": "e1f5a1d599d8a2fd1e1c5abcdc589eae65b662675ba2e96af50b4248c2b22f81"
+  }
+}

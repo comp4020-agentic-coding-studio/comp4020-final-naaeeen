@@ -14,13 +14,14 @@ afterEach(async () => { vi.restoreAllMocks(); for (const fn of cleanup.splice(0)
 const ask = (socket: Socket, event: string, body: unknown = {}) => socket.timeout(2000).emitWithAck(event, body);
 async function fixture() {
  const directory = mkdtempSync(join(tmpdir(), "seat-authority-")); cleanup.push(() => rmSync(directory, { recursive: true, force: true }));
- const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {} }); cleanup.push(() => app.close());
+ let now = Date.now();
+ const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {}, houseElapsedNow: () => now }); cleanup.push(() => app.close());
  const store = app.houseStore, people = Array.from({ length: 6 }, () => store.ensureSession());
  store.execute(people[0]!.id, { commandId: randomUUID(), type: "house.create", payload: { capacity: 6, name: "Ada", colour: "sage" } });
  const home = store.me(people[0]!.id).home!;
  for (const person of people.slice(1)) store.execute(person.id, { commandId: randomUUID(), type: "house.join", payload: { code: home.code, name: "Friend", colour: "rose" } });
  await new Promise<void>(resolve => app.server.listen(0, "127.0.0.1", resolve)); const base = "http://127.0.0.1:" + (app.server.address() as { port: number }).port;
- let now = Date.now(); const clock = vi.spyOn(Date, "now").mockImplementation(() => now);
+ const clock = vi.spyOn(Date, "now").mockImplementation(() => now);
  const layout = createLayout(6);
  async function connect(n = 0, token = randomUUID()) {
   const socket = io(base, { auth: { worldVersion: HOUSE_WORLD_VERSION }, transports: ["websocket"], reconnection: false, extraHeaders: { Origin: base, Cookie: "house_session=" + people[n]!.token } });
@@ -39,7 +40,7 @@ async function fixture() {
  async function sit(client: Client, seatId = "game-seat-" + (client.n + 1)) {
   const seat = layout.seats.find(candidate => candidate.id === seatId)!;
   const route = findRoute(layout, client.pos, seat.target); expect(route).not.toBeNull();
-  for (const point of route!.slice(1)) { now += 80; expect(await ask(client.socket, "house.move", { generation: client.state.generation, sequence: ++client.motion, ...point, heading: 0 })).toMatchObject({ ok: true }); }
+  for (const point of route!.slice(1)) { now += 80; const response = await ask(client.socket, "house.move", { generation: client.state.generation, sequence: ++client.motion, ...point, heading: 0 }); expect(response, JSON.stringify({ phase: "seat-approach", response })).toMatchObject({ ok: true }); }
   client.pos = { x: seat.x, z: seat.z }; expect(await ask(client.socket, "house.seat", { generation: client.state.generation, seatId })).toMatchObject({ ok: true });
  }
  async function stand(client: Client) { const self = client.state.players.find(player => player.id === people[client.n]!.id)!; const seat = layout.seats.find(candidate => candidate.id === self.seatId); const response = await ask(client.socket, "house.stand", { generation: client.state.generation }); if (seat) client.pos = { ...seat.target }; return response; }

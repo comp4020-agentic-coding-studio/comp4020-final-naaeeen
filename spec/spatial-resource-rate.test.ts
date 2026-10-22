@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { io, type Socket } from "socket.io-client";
@@ -9,8 +9,8 @@ import { HOUSE_WORLD_VERSION, createLayout, slide, validPosition } from "../publ
 import type { LiveSnapshot } from "../src/house-contract.ts";
 import { classifyBootstrapRateAck } from "../tools/spatial-resource.mjs";
 
-// Actual service + Socket.IO I/O; only Date.now is spied. This counter represents
-// synthetic parent elapsed time. No test asserts real 100 ms pacing or B2 cause.
+// Actual service + Socket.IO I/O with independent injected elapsed and civil clocks.
+// These deterministic regressions do not assert real pacing, B2 cause or hosting acceptance.
 const cleanup: (() => unknown | Promise<unknown>)[] = [];
 const cases: Record<string, unknown>[] = [];
 const closure = { fixturesCreated: 0, servicesClosed: 0, socketsDisconnected: 0, directoriesRemoved: 0 };
@@ -34,26 +34,26 @@ afterEach(async () => {
   for (const fn of cleanup.splice(0).reverse()) await fn();
 });
 afterAll(() => {
-  writeFileSync(new URL("../docs/spatial-redesign/evidence/rate-attribution-controls-observations.json", import.meta.url), JSON.stringify({
-    schemaVersion: 1,
-    scope: "Actual loopback service and Socket.IO acknowledgements; Date.now spy and synthetic parent elapsed counters; no real 100ms cadence, B2 attribution, sustained load or hosting acceptance claim.",
-    elapsedClock: "Synthetic counter advanced by the test; not a real monotonic clock or timer.",
+  console.info(JSON.stringify({
+    schemaVersion: 2,
+    scope: "Actual loopback service and Socket.IO acknowledgements; independent injected elapsed and spied wall clocks; no real pacing, B2 attribution, sustained load or hosting acceptance claim.",
+    elapsedClock: "Independent synthetic counter supplied through houseElapsedNow; native socket scheduling remains real.",
     wallClock: "Date.now spy; real socket I/O and real service scheduling remain active.",
-    redCalibration: "A stalled-wall quarter-metre candidate is deliberately tried before the net70ms refinement; denied distance credit can mask the interval branch.",
+    historicalEvidence: "Original bug-characterization spec and rate-attribution-controls-observations.json remain frozen; corrected regressions emit only to stdout.",
     cases, closure,
-  }, null, 2) + "\n");
+  }, null, 2));
 });
 async function fixture() {
   const directory = mkdtempSync(join(tmpdir(), "spatial-rate-controls-"));
   cleanup.push(() => { rmSync(directory, { recursive: true, force: true }); closure.directoriesRemoved++; });
-  const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {} });
+  let wall = Date.now(), elapsed = 0;
+  const app = createService({ dataDir: directory, secureCookies: false, activityLog: () => {}, houseElapsedNow: () => elapsed });
   closure.fixturesCreated++;
   cleanup.push(async () => { await app.close(); closure.servicesClosed++; });
   const person = app.houseStore.ensureSession();
   app.houseStore.execute(person.id, { commandId: randomUUID(), type: "house.create", payload: { capacity: 6, name: "Rate fixture", colour: "sage" } });
   await new Promise<void>(resolve => app.server.listen(0, "127.0.0.1", resolve));
   const base = "http://127.0.0.1:" + (app.server.address() as { port: number }).port;
-  let wall = Date.now(), elapsed = 0;
   vi.spyOn(Date, "now").mockImplementation(() => wall);
   const socket = io(base, { auth: { worldVersion: HOUSE_WORLD_VERSION }, transports: ["websocket"], reconnection: false, extraHeaders: { Origin: base, Cookie: "house_session=" + person.token } });
   cleanup.push(() => { socket.disconnect(); closure.socketsDisconnected++; });
@@ -77,7 +77,7 @@ async function fixture() {
   return { step, move, available, origin, quarter, elapsed: () => elapsed, wall: () => wall };
 }
 
-describe("actual realtime rate attribution with synthetic elapsed and wall clocks", () => {
+describe("actual realtime elapsed-clock regressions with independent civil time", () => {
   test("normal synthetic elapsed100ms/wall100ms accepts paced quarter-metre moves", async () => {
     const f = await fixture(), start = f.wall(), rows = [];
     for (let index = 0; index < 12; index++) { f.step(100); rows.push(safeAck(await f.move(index % 2 ? f.origin : f.quarter))); }
@@ -86,43 +86,43 @@ describe("actual realtime rate attribution with synthetic elapsed and wall clock
     expect(result.classifications).toEqual({ OK: 12, ACTION_BUDGET: 0, MOVE_INTERVAL: 0, OTHER: 0 });
   });
 
-  test("backstep discriminator reaches movement interval with enough distance credit", async () => {
+  test("backward civil correction preserves a normally paced move", async () => {
     const f = await fixture(), start = f.wall();
     f.step(100); const first = safeAck(await f.move(f.quarter));
     // The accepted .25 m move earns .32 and leaves .07 by the source formula.
-    // Synthetic elapsed advances100 while wall advances100 then steps back30:
-    // net70ms earns .224 more, so .294 credit exceeds the .25m next move.
+    // Elapsed advances100 while civil time advances100 then steps back30.
+    // The wall correction must neither shorten the interval nor remove credit.
     f.step(100, 100); f.step(0, -30); const second = safeAck(await f.move(f.origin));
     summary("quarter-backstep-discriminator", "plus100ms-then-back30ms", [first, second], f.elapsed(), f.wall() - start, { derivedCreditAfterFirstMetres: .07 });
     expect(first).toEqual({ ok: true, code: "OK", classification: "OK" });
-    expect(second).toEqual({ ok: false, code: "RATE_LIMITED", classification: "MOVE_INTERVAL" });
+    expect(second).toEqual({ ok: true, code: "OK", classification: "OK" });
   });
 
-  test("stalled-wall quarter-metre control is distance-credit masked before the interval branch", async () => {
+  test("stalled civil time preserves normally accrued movement credit", async () => {
     const f = await fixture(), start = f.wall();
     f.step(100); const first = safeAck(await f.move(f.quarter));
     f.step(100, 0); const masked = safeAck(await f.move(f.origin));
     summary("quarter-stalled-credit-mask", "stalled-after-first-move", [first, masked], f.elapsed(), f.wall() - start, { derivedCreditAfterFirstMetres: .07 });
     expect(first).toEqual({ ok: true, code: "OK", classification: "OK" });
-    expect(masked).toEqual({ ok: false, code: "INVALID_MOVE", classification: "OTHER" });
+    expect(masked).toEqual({ ok: true, code: "OK", classification: "OK" });
   });
 
+  // Forward500ms/action stays below Socket.IO heartbeat expiry across the31 actions.
   for (const action of ["zero-move", "availability"] as const) {
-    for (const profile of ["normal", "stalled", "backward"] as const) {
-      test(`${action}:31 synthetic elapsed100ms actions distinguish ${profile} wall time`, async () => {
+    for (const profile of ["normal", "stalled", "backward", "forward"] as const) {
+      test(`${action}:31 paced elapsed100ms actions survive ${profile} civil time`, async () => {
         const f = await fixture();
-        // The measured loop starts after a wall-only setup jump; its first action
-        // resets the general budget so subscription is excluded from the31 count.
-        f.step(0, 1000);
+        // Reset the elapsed budget before the loop so subscription is excluded.
+        f.step(1000, 1000);
         const start = f.wall(), rows = [];
         for (let index = 0; index < 31; index++) {
-          f.step(100, profile === "normal" ? 100 : profile === "backward" && index > 0 ? -1 : 0);
+          f.step(100, profile === "normal" ? 100 : profile === "forward" ? 500 : profile === "backward" && index > 0 ? -1 : 0);
           rows.push(safeAck(action === "zero-move" ? await f.move() : await f.available(index)));
         }
-        const result = summary(`${action}-${profile}`, profile, rows, f.elapsed(), f.wall() - start, { subscriptionExcludedBySetupWallAdvanceMs: 1000 });
-        expect(result.accepted).toBe(profile === "normal" ? 31 : 30);
-        expect(result.classifications).toEqual({ OK: profile === "normal" ? 31 : 30, ACTION_BUDGET: profile === "normal" ? 0 : 1, MOVE_INTERVAL: 0, OTHER: 0 });
-        expect(rows.at(-1)).toEqual(profile === "normal" ? { ok: true, code: "OK", classification: "OK" } : { ok: false, code: "RATE_LIMITED", classification: "ACTION_BUDGET" });
+        const result = summary(`${action}-${profile}`, profile, rows, f.elapsed(), f.wall() - start, { subscriptionExcludedBySetupElapsedAdvanceMs: 1000 });
+        expect(result.accepted).toBe(31);
+        expect(result.classifications).toEqual({ OK: 31, ACTION_BUDGET: 0, MOVE_INTERVAL: 0, OTHER: 0 });
+        expect(rows.at(-1)).toEqual({ ok: true, code: "OK", classification: "OK" });
       });
     }
   }
@@ -137,13 +137,44 @@ describe("actual realtime rate attribution with synthetic elapsed and wall clock
   });
 
   test("genuine31-event burst remains denied by the general action budget", async () => {
-    const f = await fixture(); f.step(0, 1000);
+    const f = await fixture(); f.step(1000, 1000);
     const start = f.wall(), rows = [];
     for (let index = 0; index < 31; index++) rows.push(safeAck(await f.available(index)));
-    const result = summary("genuine-action-burst", "no-elapsed-or-wall-increments", rows, f.elapsed(), f.wall() - start, { subscriptionExcludedBySetupWallAdvanceMs: 1000 });
+    const result = summary("genuine-action-burst", "no-elapsed-or-wall-increments", rows, f.elapsed(), f.wall() - start, { subscriptionExcludedBySetupElapsedAdvanceMs: 1000 });
     expect(result.accepted).toBe(30);
     expect(result.classifications).toEqual({ OK: 30, ACTION_BUDGET: 1, MOVE_INTERVAL: 0, OTHER: 0 });
     expect(rows.at(-1)).toEqual({ ok: false, code: "RATE_LIMITED", classification: "ACTION_BUDGET" });
+  });
+
+  test("a forward civil jump cannot mint distance credit", async () => {
+    const f = await fixture(), start = f.wall();
+    f.step(0, 1000);
+    const denied = safeAck(await f.move(f.quarter));
+    summary("forward-wall-no-distance-credit", "plus1000ms-with-zero-elapsed", [denied], f.elapsed(), f.wall() - start);
+    expect(denied).toEqual({ ok: false, code: "INVALID_MOVE", classification: "OTHER" });
+  });
+
+  test("forward civil jumps cannot refresh an immediate thirty-action elapsed budget", async () => {
+    const f = await fixture(); f.step(1000, 1000);
+    const start = f.wall(), rows = [];
+    for (let index = 0; index < 31; index++) {
+      f.step(0, 500);
+      rows.push(safeAck(await f.available(index)));
+    }
+    const result = summary("forward-wall-no-budget-reset", "plus500ms-per-action-zero-elapsed", rows, f.elapsed(), f.wall() - start);
+    expect(result.accepted).toBe(30);
+    expect(result.classifications).toEqual({ OK: 30, ACTION_BUDGET: 1, MOVE_INTERVAL: 0, OTHER: 0 });
+    expect(rows.at(-1)).toEqual({ ok: false, code: "RATE_LIMITED", classification: "ACTION_BUDGET" });
+  });
+
+  test("elapsed movement accepts exactly80ms but rejects79ms despite forward civil time", async () => {
+    const f = await fixture(), start = f.wall();
+    f.step(200); expect(safeAck(await f.move(f.quarter))).toEqual({ ok: true, code: "OK", classification: "OK" });
+    f.step(79, 1000); const early = safeAck(await f.move(f.origin));
+    f.step(1, 0); const boundary = safeAck(await f.move(f.origin));
+    summary("elapsed-movement-boundary", "forward-civil-while-elapsed79-then80ms", [early, boundary], f.elapsed(), f.wall() - start);
+    expect(early).toEqual({ ok: false, code: "RATE_LIMITED", classification: "MOVE_INTERVAL" });
+    expect(boundary).toEqual({ ok: true, code: "OK", classification: "OK" });
   });
 
   test("duplicate accepted motion sequence remains STALE_INPUT below the general budget", async () => {

@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { performance } from "node:perf_hooks";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -13,7 +14,8 @@ afterEach(async()=>{vi.restoreAllMocks(); for(const fn of cleanup.splice(0).reve
 const ask=(socket:Socket,event:string,body:unknown={})=>socket.timeout(2000).emitWithAck(event,body);
 async function fixture() {
  const directory=mkdtempSync(join(tmpdir(),"picture-wire-")); cleanup.push(()=>rmSync(directory,{recursive:true,force:true}));
- const app=createService({dataDir:directory,secureCookies:false,activityLog:()=>{}}); cleanup.push(()=>app.close());
+ let elapsedOffset=0,elapsedClock=()=>performance.now()+elapsedOffset;
+ const app=createService({dataDir:directory,secureCookies:false,activityLog:()=>{},houseElapsedNow:()=>elapsedClock()}); cleanup.push(()=>app.close());
  const realNow=Date.now.bind(Date);let offset=0;vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
  const positions=new WeakMap<Socket,{x:number,z:number}>(),motion=new WeakMap<Socket,number>();
  const store=app.houseStore, people=Array.from({length:7},()=>store.ensureSession());
@@ -32,21 +34,23 @@ async function fixture() {
  }
  type Client=Awaited<ReturnType<typeof connect>>;
  async function sit(c:Client){
-  // Walk on a monotonic fixture clock: CPU scheduling and host wall-clock
-  // adjustments must not supply (or remove) the movement credit this route needs.
+  // Route steps advance independent fixture clocks by the same explicit amount.
+  // Outside walking, native elapsed time preserves the real action-window waits.
+  let walkingElapsed=elapsedClock();elapsedClock=()=>walkingElapsed;
   let walkingNow=realNow()+offset;vi.spyOn(Date,"now").mockImplementation(()=>walkingNow);
   try {
    const layout=createLayout(6),self=c.state.players.find(player=>player.id===people[c.n]!.id)!,seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(c.n+1))!;
    const route=findRoute(layout,{x:self.x!,z:self.z!},seat.target);expect(route).not.toBeNull();let sequence=0,previous={x:self.x!,z:self.z!};
    for(const point of route!.slice(1)){
     const distance=Math.hypot(point.x-previous.x,point.z-previous.z),advanceMs=Math.max(80,Math.ceil(distance/3.2*1000)+5);
-    walkingNow+=advanceMs;
+    walkingNow+=advanceMs;walkingElapsed+=advanceMs;
     const response=await ask(c.socket,"house.move",{generation:c.state.generation,sequence:++sequence,...point,heading:0});
     expect(response.ok,JSON.stringify({phase:"seat-approach",actor:c.n,sequence,from:previous,to:point,distance,advanceMs,response})).toBe(true);previous=point;
    }
    motion.set(c.socket,sequence);positions.set(c.socket,{x:seat.x,z:seat.z});
    const response=await ask(c.socket,"house.seat",{generation:c.state.generation,seatId:seat.id});expect(response.ok,JSON.stringify({phase:"seat-claim",actor:c.n,seatId:seat.id,response})).toBe(true);
   } finally {
+   elapsedOffset=walkingElapsed-performance.now();elapsedClock=()=>performance.now()+elapsedOffset;
    offset=walkingNow-realNow();vi.spyOn(Date,"now").mockImplementation(()=>realNow()+offset);
   }
  }
