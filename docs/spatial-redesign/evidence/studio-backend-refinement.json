@@ -1,0 +1,21 @@
+{
+  "issue": "Node ascii string decoding clears high bits in PNG chunk names",
+  "reproducer": "CRC-valid IDAT chunk whose first type byte has high bit set",
+  "targetedCommand": "mise exec -- pnpm exec vitest run --config vitest.house.config.ts spec/house-studio-codec.test.ts -t non-ASCII",
+  "red": {
+    "failure": "expected function to throw an error, but it did not",
+    "failed": 1,
+    "excludedByNameFilter": 21,
+    "exitCode": 1,
+    "startedAtLocal": "02:52:15"
+  },
+  "change": "Use latin1 decoding for raw PNG type bytes, then enforce ASCII chunk-name regex",
+  "green": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "startedAtLocal": "02:52:30"
+  },
+  "review": "self-review with actual red/green regression; no independent review claim"
+}

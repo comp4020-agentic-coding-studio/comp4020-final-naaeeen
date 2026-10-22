@@ -1,0 +1,110 @@
+{
+  "capturedAt": "2026-10-22T15:54:05.402222+00:00",
+  "scope": "focused local backend only",
+  "node": "24.21.0",
+  "pnpm": "11.9.0",
+  "vitest": "5.0.3",
+  "tests": {
+    "files": 2,
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "durationSeconds": 2.38
+  },
+  "sourceSha256": {
+    "src/house-studio.ts": "87c7ef0b5c9dd53fa705450a1275b4448a7209d4f0c24835c5bfb9ea6f3754f1",
+    "src/house-studio-codec.ts": "054c8a6028f1d314f0f2f89f98cd97b8eaa40c9d4aff5332dc7762763613b270",
+    "spec/house-studio.test.ts": "15d229b516b4608b81c9d20b0692f324424fea48a35ee7a85b242fe6dc74c67e",
+    "spec/house-studio-codec.test.ts": "ea19eb8f7c52fa226017b67299c52f2d6aad52e0efb635617865fee570a221c6",
+    "docs/spatial-redesign/STUDIO-API.md": "4a25cdb1325ae3d8e84c2ed7953334fb6cc4aa74dfa475d05b74dc747349102f"
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 237,
+        "covered": 237,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 363,
+        "covered": 356,
+        "skipped": 0,
+        "pct": 98.07
+      },
+      "functions": {
+        "total": 42,
+        "covered": 42,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 304,
+        "covered": 296,
+        "skipped": 0,
+        "pct": 97.36
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": "Unknown"
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-studio-codec.ts": {
+      "lines": {
+        "total": 61,
+        "covered": 61,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 4,
+        "covered": 4,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 94,
+        "covered": 94,
+        "skipped": 0,
+        "pct": 100
+      },
+      "branches": {
+        "total": 98,
+        "covered": 98,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "/home/lizhi/comp4020/comp4020-final-naaeeen/src/house-studio.ts": {
+      "lines": {
+        "total": 176,
+        "covered": 176,
+        "skipped": 0,
+        "pct": 100
+      },
+      "functions": {
+        "total": 38,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 100
+      },
+      "statements": {
+        "total": 269,
+        "covered": 262,
+        "skipped": 0,
+        "pct": 97.39
+      },
+      "branches": {
+        "total": 206,
+        "covered": 198,
+        "skipped": 0,
+        "pct": 96.11
+      }
+    }
+  },
+  "independentReview": "pending parent central review",
+  "typecheck": "latest concurrent run only unrelated spec/house-gathering.test.ts:12 UUID Map typing error; integrated rerun parent-owned"
+}

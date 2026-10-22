@@ -1,0 +1,24 @@
+Already up to date
+Done in 45ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m spec/house-studio-codec.test.ts [2m([22m[2m22 tests[22m[2m)[22m[32m 109[2mms[22m[39m
+ [32m✓[39m spec/house-studio.test.ts [2m([22m[2m42 tests[22m[2m)[22m[33m 2084[2mms[22m[39m
+   [32m✓[39m retained material and receipt admission budgets [2m(6)[22m
+     [33m[2m✓[22m[39m rejects retained image growth above 8 MiB across active and archived rooms while preserving old current bytes[33m 382[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m64 passed[39m[22m[90m (64)[39m
+[2m   Start at [22m 02:52:30
+[2m   Duration [22m 2.38s[2m (tests 89%, transform 9%, import 2%, worker 1%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   98.07 |    97.36 |     100 |     100 |                   
+ ...tudio-codec.ts |     100 |      100 |     100 |     100 |                   
+ house-studio.ts   |   97.39 |    96.11 |     100 |     100 | ...06,268,320-328 
+-------------------|---------|----------|---------|---------|-------------------
