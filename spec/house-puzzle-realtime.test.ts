@@ -182,17 +182,52 @@ describe("real Socket.IO and HTTP picture participation",()=>{
   expect((await ask(raw,"house.takeover",{controllerToken:token})).code).toBe("STORAGE_UNAVAILABLE");fault.mockRestore();await f.roster(b,[]);
   expect((await f.submit(a,f.place(a,joined.participationId,1))).code).toBe("PUZZLE_NOT_JOINED");
  });
- test("observer takeover denied by revoked bedroom access preserves the lounge controller's participation",async()=>{
+ test("observer takeover preflight rejects a synchronously closed bedroom before withdrawing current consent",async()=>{
   const f=await fixture(),a=await f.connect(),b=await f.connect(1);await f.start(a);const joined=await f.intent(a,"join");
-  const bedroom=f.store.snapshot(f.people[1]!.id).residents.find(r=>r.id===f.people[1]!.id)!.bedroomId;
-  const room=()=>f.store.snapshot(f.people[1]!.id,bedroom).room!;
-  f.store.execute(f.people[1]!.id,f.command("room.configure",{roomId:bedroom,open:true,palette:"sage"},room().revision));
+  const selfId=f.people[0]!.id,ownerId=f.people[1]!.id,originalGeneration=a.state.generation;
+  const bedroom=f.store.snapshot(ownerId).residents.find(r=>r.id===ownerId)!.bedroomId;
+  const room=()=>f.store.snapshot(ownerId,bedroom).room!;
+  expect(f.store.execute(ownerId,f.command("room.configure",{roomId:bedroom,open:true,palette:"sage"},room().revision)).ok).toBe(true);
   const observer=await f.connect();observer.state=(await ask(observer.socket,"house.subscribe",{zoneId:bedroom,controllerToken:observer.token})).snapshot;
-  expect(observer.state.controller).toBe(false);expect(observer.state.durable.zoneId).toBe(bedroom);
-  f.store.execute(f.people[1]!.id,f.command("room.configure",{roomId:bedroom,open:false,palette:"sage"},room().revision));
-  expect((await ask(observer.socket,"house.takeover",{controllerToken:observer.token})).code).toBe("FORBIDDEN");
-  expect((await f.submit(a,f.place(a,joined.participationId,0))).ok).toBe(true);
-  await f.roster(a,[f.people[0]!.id]);expect(a.state.puzzleRoster!.selfParticipationId).toBe(joined.participationId);
+  expect(observer.state.controller).toBe(false);expect(observer.state.durable.zoneId).toBe(bedroom);expect(room().open).toBe(true);
+  const authorize=f.store.authorizeZone.bind(f.store);let matchedPreflights=0;
+  const preflight=vi.spyOn(f.store,"authorizeZone").mockImplementation((actorId,zoneId)=>{
+   if(actorId===selfId && zoneId===bedroom){
+    matchedPreflights++;expect(matchedPreflights).toBe(1);const current=room();expect(current.open).toBe(true);
+    expect(f.store.execute(ownerId,f.command("room.configure",{roomId:bedroom,open:false,palette:"sage"},current.revision)).ok).toBe(true);
+   }
+   return authorize(actorId,zoneId);
+  });
+  const denied=await ask(observer.socket,"house.takeover",{controllerToken:observer.token});preflight.mockRestore();
+  expect(matchedPreflights).toBe(1);expect(denied,JSON.stringify(denied)).toMatchObject({ok:false,code:"FORBIDDEN"});expect(room().open).toBe(false);
+  const placed=await f.submit(a,f.place(a,joined.participationId,0));expect(placed.ok,JSON.stringify(placed)).toBe(true);
+  await f.roster(a,[selfId]);expect(a.state.controller).toBe(true);expect(a.state.generation).toBe(originalGeneration);expect(a.state.puzzleRoster!.selfParticipationId).toBe(joined.participationId);
+ });
+ test("observer bedroom revocation precedes a legal explicit lounge takeover without automatic picture consent",async()=>{
+  const f=await fixture(),a=await f.connect(),b=await f.connect(1);await f.start(a);const joined=await f.intent(a,"join");
+  const selfId=f.people[0]!.id,ownerId=f.people[1]!.id,originalGeneration=a.state.generation;
+  const bedroom=f.store.snapshot(ownerId).residents.find(r=>r.id===ownerId)!.bedroomId;
+  const room=()=>f.store.snapshot(ownerId,bedroom).room!;
+  expect(f.store.execute(ownerId,f.command("room.configure",{roomId:bedroom,open:true,palette:"sage"},room().revision)).ok).toBe(true);
+  const observer=await f.connect();observer.state=(await ask(observer.socket,"house.subscribe",{zoneId:bedroom,controllerToken:observer.token})).snapshot;
+  expect(observer.state.controller).toBe(false);expect(observer.state.durable.zoneId).toBe(bedroom);const bedroomAccess=observer.state.accessGeneration;
+  const revocations:Record<string,unknown>[]=[];observer.socket.on("house.revoked",record=>revocations.push(record));
+  b.state=(await ask(b.socket,"house.subscribe",{zoneId:bedroom,controllerToken:b.token})).snapshot;
+  expect(await f.submit(b,f.command("room.configure",{roomId:bedroom,open:false,palette:"sage"},room().revision))).toMatchObject({ok:true});
+  await vi.waitFor(()=>{
+   expect(revocations).toHaveLength(1);expect(revocations[0]).toMatchObject({code:"FORBIDDEN",zoneId:"lounge"});
+   expect(revocations[0]!.accessGeneration).toBeGreaterThan(bedroomAccess);expect(observer.state.durable.zoneId).toBe("lounge");
+   expect(observer.state.accessGeneration).toBe(revocations[0]!.accessGeneration);expect(observer.state.controller).toBe(false);
+  });
+  await f.roster(a,[selfId]);expect(a.state.controller).toBe(true);expect(a.state.generation).toBe(originalGeneration);expect(a.state.puzzleRoster!.selfParticipationId).toBe(joined.participationId);
+  const placed=await f.submit(a,f.place(a,joined.participationId,0));expect(placed.ok,JSON.stringify(placed)).toBe(true);
+  const forbidden=await ask(observer.socket,"house.subscribe",{zoneId:bedroom,controllerToken:observer.token});expect(forbidden,JSON.stringify(forbidden)).toMatchObject({ok:false,code:"FORBIDDEN"});
+  const stillPlaced=await f.submit(a,f.place(a,joined.participationId,1));expect(stillPlaced.ok,JSON.stringify(stillPlaced)).toBe(true);
+  const takeover=await ask(observer.socket,"house.takeover",{controllerToken:observer.token});expect(takeover,JSON.stringify(takeover)).toMatchObject({ok:true});observer.state=takeover.snapshot;
+  expect(observer.state.durable.zoneId).toBe("lounge");expect(observer.state.controller).toBe(true);expect(observer.state.generation).toBeGreaterThan(originalGeneration);
+  expect(observer.state.puzzleRoster!.memberIds).toEqual([]);expect(observer.state.puzzleRoster!.selfParticipationId).toBeNull();
+  await vi.waitFor(()=>expect(a.state.controller).toBe(false));await f.roster(a,[]);
+  const stale=await f.submit(a,f.place(a,joined.participationId,2));expect(stale,JSON.stringify(stale)).toMatchObject({ok:false,code:"NOT_CONTROLLER"});
  });
  test("invalid takeover shapes and denied resubscription preserve current picture consent",async()=>{
   const f=await fixture(),a=await f.connect();await f.start(a);const joined=await f.intent(a,"join"),observer=await f.connect();

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "base": {
+      "realtimeSHA256": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+      "change": "none"
+    },
+    "removed-preflight": {
+      "realtimeSHA256": "a44b68ff8013e2547e840de485f6936835a1b47a67e8c10cddd3637251ac284c",
+      "change": "only takeover handler permission-preflight ordering; ignored source copy"
+    },
+    "late-preflight": {
+      "realtimeSHA256": "42eabc9c021b79b920258b5e6c35c64ad9969f9fae9295a8e11cd33a49bff814",
+      "change": "only takeover handler permission-preflight ordering; ignored source copy"
+    }
+  },
+  "canonicalProductionMutation": false,
+  "scope": "Only ignored isolated source copies; real store and Socket.IO for each control",
+  "execution": {
+    "command": "mise exec node@24.21.0 pnpm@11.9.0 -- pnpm exec vitest run --config .local/observer-takeover-order/control.config.ts -t \"observer takeover preflight\"",
+    "log": ".local/observer-takeover-order/controls.log",
+    "exit": 1,
+    "base": "PASS:1 selected",
+    "removed-preflight": "EXPECTED FAIL:matchedPreflights=0 instead of1",
+    "late-preflight": "EXPECTED FAIL:original controller new placement returns PUZZLE_NOT_JOINED",
+    "filterSkipped": 45,
+    "meaning": "Positive control accepts current source; two isolated permission-order mutations are detected; not a production source failure"
+  }
+}
