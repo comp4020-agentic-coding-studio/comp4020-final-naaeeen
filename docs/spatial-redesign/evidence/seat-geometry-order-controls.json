@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "base": {
+      "sha256": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+      "mutation": "none"
+    },
+    "missing-pose-generation": {
+      "sha256": "ffcec832d0c43f9e769e4b24aaac331ebb2411c687d8b2050fa72c7942d2975f",
+      "mutation": "remove only generation advancement after invalid-pose reset"
+    }
+  },
+  "productionChanged": false,
+  "execution": {
+    "log": ".local/seat-geometry-order/controls.log",
+    "exit": 1,
+    "base": "PASS: unchanged copied source accepts new deterministic test",
+    "missing-pose-generation": "EXPECTED FAIL: old envelope was accepted with ok=true where strict false/STALE_GENERATION is required",
+    "filterSkipped": 32,
+    "productionBackendEdits": false
+  }
+}

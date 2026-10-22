@@ -89,15 +89,34 @@ describe("seat-bound activity authority on both real ingress paths", () => {
   f.advance(30_001);await vi.waitFor(()=>expect(clients[1]!.state.players.find(p=>p.id===f.people[0]!.id)?.seatId).toBeUndefined());
  });
  test("zone exit and geometry reconciliation clear picture consent without deleting progress",async()=>{
-  const f=await fixture(),a=await f.connect();await f.sit(a,"game-seat-2");await f.submit(a,f.startCommand(a));const joined=await f.intent(a,"join");await f.submit(a,f.place(joined.participationId));
-  // Synthetic geometry reset changes the authoritative database input, so both
-  // projection and maintenance-independent escape geometry observe the same layout.
+  const f=await fixture(),a=await f.connect();await f.sit(a,"game-seat-2");
+  const started=await f.submit(a,f.startCommand(a));expect(started.ok,JSON.stringify(started)).toBe(true);
+  const joined=await f.intent(a,"join");expect(joined.ok,JSON.stringify(joined)).toBe(true);
+  const placed=await f.submit(a,f.place(joined.participationId));expect(placed.ok,JSON.stringify(placed)).toBe(true);
+  const selfId=f.people[0]!.id,roundId=f.table().current!.id,profileBefore=f.store.me(selfId).identity;
+  const refresh=f.command("profile.set",{name:"After geometry",colour:"blue"},profileBefore.revision);
+  const oldEnvelope={generation:a.state.generation,zoneId:"lounge",command:refresh};
+  // Change the authoritative layout, then let an unaffected fresh peer's real
+  // subscription project it. Do not rely on the invalidated actor winning a race.
   f.store.db.prepare("UPDATE houses SET capacity=5 WHERE id=?").run(f.home.id);
-  expect(f.store.seatLayout(f.people[0]!.id).seats.filter(s=>s.purpose==='game')).toHaveLength(5);
-  expect(await f.submit(a,f.command("profile.set",{name:"Ada",colour:"sage"},f.store.me(f.people[0]!.id).identity.revision))).toMatchObject({ok:true});await vi.waitFor(()=>{expect(a.state.players.find(p=>p.id===f.people[0]!.id)?.seatId).toBeNull();expect(a.state.puzzleRoster!.memberIds).toEqual([]);});
+  expect(f.store.seatLayout(selfId).seats.filter(s=>s.purpose==='game')).toHaveLength(5);
+  const peer=await f.connect(1);expect(peer.state.controller).toBe(true);expect(peer.state.durable.house.capacity).toBe(5);
+  const stale=await ask(a.socket,"house.command",oldEnvelope);
+  expect(stale,JSON.stringify({phase:"old-generation-after-geometry",sentGeneration:oldEnvelope.generation,seenGeneration:a.state.generation,response:stale})).toMatchObject({ok:false,code:"STALE_GENERATION"});
+  expect(f.store.me(selfId).identity).toEqual(profileBefore);
+  expect(f.store.db.prepare("SELECT COUNT(*) AS n FROM receipts WHERE actor_id=? AND command_id=?").get(selfId,refresh.commandId)).toEqual({n:0});
+  await vi.waitFor(()=>{
+   expect(a.state.generation).toBeGreaterThan(oldEnvelope.generation);expect(a.state.players.find(p=>p.id===selfId)?.seatId).toBeNull();
+   expect(a.state.puzzleRoster!.memberIds).toEqual([]);expect(a.state.puzzleRoster!.selfParticipationId).toBeNull();
+  });
+  // The original unaccepted UUID/payload succeeds only with the new authority.
+  const accepted=await f.submit(a,refresh);expect(accepted.ok,JSON.stringify(accepted)).toBe(true);expect(accepted.commandId).toBe(refresh.commandId);
+  expect(f.store.me(selfId).identity).toMatchObject({name:"After geometry",colour:"blue",revision:profileBefore.revision+1});
+  expect(f.table().current!.id).toBe(roundId);expect(f.table().current!.placements).toHaveLength(1);expect(f.table().current!.placements[0]!.actorId).toBe(selfId);
   f.store.db.prepare("UPDATE houses SET capacity=6 WHERE id=?").run(f.home.id);
-  const room=f.store.snapshot(f.people[0]!.id).residents.find(r=>r.id===f.people[0]!.id)!.bedroomId;
-  a.state=(await ask(a.socket,"house.subscribe",{zoneId:room,controllerToken:a.token})).snapshot;expect(a.state.puzzleRoster).toBeNull();expect(f.table().current!.placements).toHaveLength(1);
+  const room=f.store.snapshot(selfId).residents.find(r=>r.id===selfId)!.bedroomId;
+  const entered=await ask(a.socket,"house.subscribe",{zoneId:room,controllerToken:a.token});expect(entered.ok,JSON.stringify(entered)).toBe(true);a.state=entered.snapshot;
+  expect(a.state.puzzleRoster).toBeNull();expect(f.table().current!.id).toBe(roundId);expect(f.table().current!.placements).toHaveLength(1);
  });
  test("disconnect reserves a visible chair without consent, and takeover revokes resumed consent", async () => {
   const f = await fixture(), a = await f.connect(), observer = await f.connect(1); await f.sit(a); await f.submit(a, f.startCommand(a)); await f.intent(a, "join");
