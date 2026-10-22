@@ -1,0 +1,26 @@
+Already up to date
+Done in 55ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m spec/house-gathering.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m spec/house-gathering-ui.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 800[2mms[22m[39m
+   [32m✓[39m explicit local gathering UI [2m(13)[22m
+     [33m[2m✓[22m[39m presenter uses fit/zoom, keyboard pan and normalized click pointer; clear is explicit[33m 344[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m38 passed[39m[22m[90m (38)[39m
+[2m   Start at [22m 02:55:08
+[2m   Duration [22m 1.66s[2m (tests 54%, import 34%, transform 10%, worker 2%)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   93.22 |     89.5 |   92.95 |     100 |                   
+ public            |   92.36 |    86.71 |   89.13 |     100 |                   
+  ...thering-ui.js |   92.36 |    86.71 |   89.13 |     100 | ...93-107,112-113 
+ src               |   94.56 |     93.5 |     100 |     100 |                   
+  ...-gathering.ts |   94.56 |     93.5 |     100 |     100 | ...16-117,120-123 
+-------------------|---------|----------|---------|---------|-------------------

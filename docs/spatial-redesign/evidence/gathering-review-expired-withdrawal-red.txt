@@ -1,0 +1,48 @@
+Already up to date
+Done in 46ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-gathering-ui.test.ts [2m([22m[2m18 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 568[2mms[22m[39m
+   [31m❯[39m explicit local gathering UI [2m(18)[22m
+[31m     [31m×[31m an expired old session releases pending withdrawal so the new epoch can be joined explicitly[39m[32m 120[2mms[22m[39m
+     [32m✓[39m rapid presenter zoom coalesces the newest local view after the first ACK[32m 37[2mms[22m[39m
+     [32m✓[39m following preserves normalized zero coordinates[32m 17[2mms[22m[39m
+     [32m✓[39m failed close withdrawal keeps the exact command and retries on explicit reopen[32m 27[2mms[22m[39m
+     [32m✓[39m a current self consent from state makes Leave usable after a recreated panel[32m 27[2mms[22m[39m
+     [32m✓[39m presenter uses fit/zoom, keyboard pan and normalized click pointer; clear is explicit[32m 89[2mms[22m[39m
+     [32m✓[39m delayed image is discarded after item withdrawal and invalid PNG shows a plain failure[32m 25[2mms[22m[39m
+     [32m✓[39m polling reflects host departure and revocation stops future reads[32m 20[2mms[22m[39m
+     [32m✓[39m Leave supersedes a delayed accepted Join ACK in the same open panel[32m 18[2mms[22m[39m
+     [32m✓[39m action failure preserves an exit and explicit study Follow opens board without viewport promise[32m 20[2mms[22m[39m
+     [32m✓[39m construction never reads/joins; open reads, Join and Follow remain separate[32m 23[2mms[22m[39m
+     [32m✓[39m study opens existing independent board without joining or claiming synchronization[32m 18[2mms[22m[39m
+     [32m✓[39m Follow is local and publication explicitly sends own room, no arbitrary source[32m 27[2mms[22m[39m
+     [32m✓[39m context changes invalidate late image/state ACK and stop following/polling[32m 19[2mms[22m[39m
+     [32m✓[39m image is object URL, revoked immediately on access change and late image is discarded[32m 19[2mms[22m[39m
+     [32m✓[39m close sends Leave and retains context seat; notify false avoids callback recursion[32m 25[2mms[22m[39m
+     [32m✓[39m late Join ACK cannot restore consent after close or seat switch[32m 21[2mms[22m[39m
+     [32m✓[39m network errors show plain state; invalid seat cannot join; pointer/view use normalized bounds[32m 13[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22mexplicit local gathering UI[2m > [22man expired old session releases pending withdrawal so the new epoch can be joined explicitly
+[31m[1mAssertionError[22m: expected true to be false // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- false[39m
+[31m+ true[39m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m18:599[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m17 passed[39m[22m[90m (18)[39m
+[2m   Start at [22m 05:07:43
+[2m   Duration [22m 1.12s[2m (tests 55%, import 40%, transform 5%)[22m
+

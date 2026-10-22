@@ -1,0 +1,49 @@
+Already up to date
+Done in 53ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-gathering.test.ts [2m([22m[2m18 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 27[2mms[22m[39m
+   [31m❯[39m bounded explicit place gathering [2m(18)[22m
+     [32m✓[39m read does not enroll; correct seats enable separate join and share[32m 3[2mms[22m[39m
+     [32m✓[39m wrong seat, spoofed facts and remote membership cannot mutate or read[32m 1[2mms[22m[39m
+     [32m✓[39m seat loss prunes membership; exact join replay returns old receipt without re-enrollment[32m 1[2mms[22m[39m
+     [32m✓[39m generation takeover clears old intent consent and cannot use stale current control[32m 1[2mms[22m[39m
+[31m     [31m×[31m leave after standing is allowed but old observer cannot remove new controller[39m[32m 5[2mms[22m[39m
+     [32m✓[39m presenter departure freezes view, clears pointer and requires explicit successor[32m 5[2mms[22m[39m
+     [32m✓[39m only joined presenter can share/move; no automatic handover[32m 1[2mms[22m[39m
+     [32m✓[39m sofa publishes original-owner canonical copy; source changes/room close do not alter it[32m 3[2mms[22m[39m
+     [32m✓[39m sofa claim needs item, explicit publication checks original owner, study rejects room payload[32m 1[2mms[22m[39m
+     [32m✓[39m last viewer releases bytes and clear invalidates item URLs[32m 1[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer NaN[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer Infinity[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer -0.1[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer 1.1[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer 0.2[32m 0[2mms[22m[39m
+     [32m✓[39m rejects mixed null pointer, unknown type/kind/keys and bounded bad sources[32m 1[2mms[22m[39m
+     [32m✓[39m membership removal and seat switch prune roles, maximum six identities[32m 1[2mms[22m[39m
+     [32m✓[39m accepted UUID cannot change command; session TTL rejects old intents instead of reenrolling[32m 0[2mms[22m[39m
+ [32m✓[39m spec/house-gathering-ui.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 330[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering.test.ts[2m > [22mbounded explicit place gathering[2m > [22mleave after standing is allowed but old observer cannot remove new controller
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-gathering.test.ts:[2m24:396[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m25 passed[39m[22m[90m (26)[39m
+[2m   Start at [22m 02:50:37
+[2m   Duration [22m 929ms[2m (import 49%, tests 37%, transform 13%, worker 1%)[22m
+

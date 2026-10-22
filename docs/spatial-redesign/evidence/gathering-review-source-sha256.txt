@@ -1,0 +1,6 @@
+5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f  src/house-gathering.ts
+4261b43f18e6ecdcdb8b7cd5e0f226ecd821b1ac949f24976b8970ce0c363318  public/house-gathering-ui.js
+65c1961adc9c80d9a1619d3db49f7fcc6788a946b8d5ed3b1bc2accca2d5996a  public/house-gathering.css
+eeff5d3771f2fd077b9699523aaf2033ebb8c2d6b32538327b1cddddcd86cf93  spec/house-gathering.test.ts
+cfe843e1dbe3e4ddde1e4304946f4ce79b5cfcbaed15578ded6c26dc72f0d7cf  spec/house-gathering-ui.test.ts
+8f2efa9423b9203095e87ea9bc8d10d46e9384360eb4abcde0e81e5e9957e792  docs/spatial-redesign/GATHERING-API.md

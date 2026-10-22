@@ -1,0 +1,166 @@
+Already up to date
+Done in 46ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-gathering.test.ts [2m([22m[2m28 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[32m 106[2mms[22m[39m
+   [31m❯[39m bounded explicit place gathering [2m(28)[22m
+[31m     [31m×[31m captured request epochs reject fresh ABA but exact receipts replay after current control authorization[39m[32m 6[2mms[22m[39m
+[31m     [31m×[31m fresh Leave ignores seat epoch mismatch but requires current request access epoch[39m[32m 2[2mms[22m[39m
+[31m     [31m×[31m member polling renews a fifty-minute huddle without rejoining[39m[32m 5[2mms[22m[39m
+[31m     [31m×[31m after the capped session empties, a new epoch permits explicit Join while old receipt replays safely[39m[32m 21[2mms[22m[39m
+     [32m✓[39m idle buffers expire without another API request and a closed store cancels cleanup[32m 5[2mms[22m[39m
+     [32m✓[39m current member can still leave after the ordinary action cap[32m 18[2mms[22m[39m
+     [32m✓[39m accessGeneration change before prune permanently revokes old consent[32m 1[2mms[22m[39m
+     [32m✓[39m seatGeneration change before prune permanently revokes old consent[32m 1[2mms[22m[39m
+     [32m✓[39m Leave tombstones a pending Join; an old consent Leave cannot cancel a later Join[32m 1[2mms[22m[39m
+     [32m✓[39m intent admission is bounded and historical retry remains available at the cap[32m 24[2mms[22m[39m
+     [32m✓[39m read does not enroll; correct seats enable separate join and share[32m 1[2mms[22m[39m
+     [32m✓[39m wrong seat, spoofed facts and remote membership cannot mutate or read[32m 1[2mms[22m[39m
+     [32m✓[39m seat loss prunes membership; exact join replay returns old receipt without re-enrollment[32m 1[2mms[22m[39m
+     [32m✓[39m generation takeover clears old intent consent and cannot use stale current control[32m 1[2mms[22m[39m
+     [32m✓[39m leave after standing is allowed but old observer cannot remove new controller[32m 1[2mms[22m[39m
+     [32m✓[39m presenter departure freezes view, clears pointer and requires explicit successor[32m 14[2mms[22m[39m
+     [32m✓[39m only joined presenter can share/move; no automatic handover[32m 1[2mms[22m[39m
+     [32m✓[39m sofa publishes original-owner canonical copy; source changes/room close do not alter it[32m 1[2mms[22m[39m
+     [32m✓[39m sofa claim needs item, explicit publication checks original owner, study rejects room payload[32m 0[2mms[22m[39m
+     [32m✓[39m last viewer releases bytes and clear invalidates item URLs[32m 1[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer NaN[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer Infinity[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer -0.1[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer 1.1[32m 0[2mms[22m[39m
+     [32m✓[39m rejects malformed normalized pointer 0.2[32m 0[2mms[22m[39m
+     [32m✓[39m rejects mixed null pointer, unknown type/kind/keys and bounded bad sources[32m 1[2mms[22m[39m
+     [32m✓[39m membership removal and seat switch prune roles, maximum six identities[32m 1[2mms[22m[39m
+     [32m✓[39m accepted UUID cannot change command; session TTL rejects old intents instead of reenrolling[32m 0[2mms[22m[39m
+ [31m❯[39m spec/house-gathering-ui.test.ts [2m([22m[2m17 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 564[2mms[22m[39m
+   [31m❯[39m explicit local gathering UI [2m(17)[22m
+[31m     [31m×[31m rapid presenter zoom coalesces the newest local view after the first ACK[39m[32m 132[2mms[22m[39m
+[31m     [31m×[31m following preserves normalized zero coordinates[39m[32m 24[2mms[22m[39m
+[31m     [31m×[31m failed close withdrawal keeps the exact command and retries on explicit reopen[39m[32m 23[2mms[22m[39m
+[31m     [31m×[31m a current self consent from state makes Leave usable after a recreated panel[39m[32m 17[2mms[22m[39m
+     [32m✓[39m presenter uses fit/zoom, keyboard pan and normalized click pointer; clear is explicit[32m 90[2mms[22m[39m
+     [32m✓[39m delayed image is discarded after item withdrawal and invalid PNG shows a plain failure[32m 25[2mms[22m[39m
+     [32m✓[39m polling reflects host departure and revocation stops future reads[32m 32[2mms[22m[39m
+     [32m✓[39m Leave supersedes a delayed accepted Join ACK in the same open panel[32m 18[2mms[22m[39m
+     [32m✓[39m action failure preserves an exit and explicit study Follow opens board without viewport promise[32m 23[2mms[22m[39m
+     [32m✓[39m construction never reads/joins; open reads, Join and Follow remain separate[32m 17[2mms[22m[39m
+     [32m✓[39m study opens existing independent board without joining or claiming synchronization[32m 18[2mms[22m[39m
+     [32m✓[39m Follow is local and publication explicitly sends own room, no arbitrary source[32m 30[2mms[22m[39m
+     [32m✓[39m context changes invalidate late image/state ACK and stop following/polling[32m 19[2mms[22m[39m
+     [32m✓[39m image is object URL, revoked immediately on access change and late image is discarded[32m 21[2mms[22m[39m
+     [32m✓[39m close sends Leave and retains context seat; notify false avoids callback recursion[32m 27[2mms[22m[39m
+     [32m✓[39m late Join ACK cannot restore consent after close or seat switch[32m 21[2mms[22m[39m
+     [32m✓[39m network errors show plain state; invalid seat cannot join; pointer/view use normalized bounds[32m 27[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 8 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22mexplicit local gathering UI[2m > [22mrapid presenter zoom coalesces the newest local view after the first ACK
+[31m[1mAssertionError[22m: expected { …(5) } to match object { type: 'gathering.view', …(1) }
+(3 matching properties omitted from actual)[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[2m    "payload": {[22m
+[2m      "x": 0.5,[22m
+[2m      "y": 0.5,[22m
+[32m-     "zoom": 1.75,[39m
+[31m+     "zoom": 1.25,[39m
+[2m    },[22m
+[2m    "type": "gathering.view",[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m18:843[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22mexplicit local gathering UI[2m > [22mfollowing preserves normalized zero coordinates
+[31m[1mAssertionError[22m: expected 'translate(0%, 0%) scale(2)' to be 'translate(100%, 100%) scale(2)' // Object.is equality[39m
+
+Expected: [32m"translate([7m10[27m0%, [7m10[27m0%) scale(2)"[39m
+Received: [31m"translate(0%, 0%) scale(2)"[39m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m19:392[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22mexplicit local gathering UI[2m > [22mfailed close withdrawal keeps the exact command and retries on explicit reopen
+[31m[1mAssertionError[22m: expected 'Sofa · shared inspectionLeave shared …' not to contain 'You joined.'[39m
+
+Expected: [32m"You joined."[39m
+Received: [31m"Sofa · shared inspectionLeave shared view · keep seat1 joined · AdaYou joined. No presenter. Inspecting independently.JoinLeave gatheringShare my viewShare my room reference with houseFollow presenterOpen independent boardLounge chatClear shared imageOne deliberately shared house-visible picture. Join, then Follow when you want the presenter's view. Sharing copies your chosen room reference for the current gathering.Fit imageZoom outZoom inNo shared image. Select a reference in your own room, then explicitly share it here.Reading the shared place…"[39m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m20:585[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22mexplicit local gathering UI[2m > [22ma current self consent from state makes Leave usable after a recreated panel
+[31m[1mAssertionError[22m: expected undefined to match object { type: 'gathering.leave', …(1) }[39m
+
+[32m- Expected:[39m
+{
+  "payload": {
+    "participationId": "recovered-consent",
+  },
+  "type": "gathering.leave",
+}
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m21:321[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering.test.ts[2m > [22mbounded explicit place gathering[2m > [22mcaptured request epochs reject fresh ABA but exact receipts replay after current control authorization
+[31m[1mAssertionError[22m: expected function to throw an error, but it didn't[39m
+[36m [2m❯[22m spec/house-gathering.test.ts:[2m23:558[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering.test.ts[2m > [22mbounded explicit place gathering[2m > [22mfresh Leave ignores seat epoch mismatch but requires current request access epoch
+[31m[1mAssertionError[22m: expected function to throw an error, but it didn't[39m
+[36m [2m❯[22m spec/house-gathering.test.ts:[2m24:567[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering.test.ts[2m > [22mbounded explicit place gathering[2m > [22mmember polling renews a fifty-minute huddle without rejoining
+[31m[1mAssertionError[22m: expected { ok: true, kind: 'study', …(9) } to match object { …(2) }
+(12 matching properties omitted from actual)[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "selfJoined": true,[39m
+[32m-   "sessionId": "c9efe83e-f461-478b-8da9-6fb57acd29c5",[39m
+[31m+   "selfJoined": false,[39m
+[31m+   "sessionId": "c19839f6-9a6a-4994-a5de-a65612ce7ec5",[39m
+[2m  }[22m
+
+[36m [2m❯[22m spec/house-gathering.test.ts:[2m25:211[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering.test.ts[2m > [22mbounded explicit place gathering[2m > [22mafter the capped session empties, a new epoch permits explicit Join while old receipt replays safely
+[31m[1mAssertionError[22m: expected '443d1e49-3824-4e7c-ae7c-0173eefdbf1a' not to be '443d1e49-3824-4e7c-ae7c-0173eefdbf1a' // Object.is equality[39m
+[36m [2m❯[22m spec/house-gathering.test.ts:[2m26:363[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m8 failed[39m[22m[2m | [22m[1m[32m37 passed[39m[22m[90m (45)[39m
+[2m   Start at [22m 05:03:44
+[2m   Duration [22m 1.10s[2m (tests 56%, import 34%, transform 9%, worker 1%)[22m
+
