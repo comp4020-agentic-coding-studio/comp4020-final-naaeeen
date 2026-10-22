@@ -1,0 +1,111 @@
+Already up to date
+Done in 58ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-puzzle-ui.test.ts [2m([22m[2m39 tests[22m[2m | [22m[31m2 failed[39m[2m | [22m[33m37 skipped[39m[2m)[22m[32m 192[2mms[22m[39m
+   [2m[90m↓[39m[22m opens as Watch, gives an honest active count and never joins from a Join ACK
+   [2m[90m↓[39m[22m starts a round separately from explicit Join
+   [2m[90m↓[39m[22m preserves stable slots, pages twelve pieces and supports roving keyboard navigation
+   [2m[90m↓[39m[22m keeps a wrong-place selection and captures participation with each placement
+   [2m[90m↓[39m[22m clears a peer-solved selected piece without removing focus or stable DOM
+   [2m[90m↓[39m[22m ignores late placement replies after a new round and new selection
+   [2m[90m↓[39m[22m begins newer Leave before immediate Return even while Join is unresolved
+   [2m[90m↓[39m[22m shows uncertain original retry and does not allow an ACK to enroll
+   [2m[90m↓[39m[22m requires leaving Four-in-a-row before joining the picture table
+   [2m[90m↓[39m[22m captures unfinished-reset authority and roster when confirmation opens
+   [2m[90m↓[39m[22m does not offer unfinished replacement to a nonowner or with another participant
+   [2m[90m↓[39m[22m keeps the complete image viewable after consent clears and gives a descriptive reference
+   [2m[90m↓[39m[22m isolates puzzle keys from world movement
+   [2m[90m↓[39m[22m cancels a destructive confirmation when controller authority changes
+   [2m[90m↓[39m[22m stops local placement immediately after Leave while the old roster is still visible
+   [2m[90m↓[39m[22m settles a placement flight after Leave without freezing a later explicit participation
+   [2m[90m↓[39m[22m exposes pending durable inspection and preserves uncertain participation copy
+   [2m[90m↓[39m[22m keeps saved progress safe when content identity is unavailable
+   [2m[90m↓[39m[22m offers cancellation and restores reference focus without propagating Escape
+   [2m[90m↓[39m[22m retains a newer withdrawal through an unjoined snapshot followed by a delayed joined roster
+   [2m[90m↓[39m[22m hides Leave after normal Join, accepted participation and same-round completion
+   [2m[90m↓[39m[22m a delayed Join ACK after peer completion does not claim participation is still arriving
+   [2m[90m↓[39m[22m completed rounds keep original pending retry and immediate Return without an active Leave control
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from undefined
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from study-seat-1
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from rest-seat-1
+   [2m[90m↓[39m[22m picture phone six keeps status/count upfront and all names in a closed labelled disclosure
+   [2m[90m↓[39m[22m picture phone six promotes Leave and keeps disabled unfinished replacement and Return inside options
+   [2m[90m↓[39m[22m picture phone six keeps primary Start/Join/Leave node identity and explicit consent across phases
+   [2m[90m↓[39m[22m picture phone six preserves disclosure and focus through ordinary roster/name updates without parsing names as HTML
+   [2m[90m↓[39m[22m picture phone six Escape closes options and returns focus before outer game handling
+   [2m[90m↓[39m[22m picture phone six closes disclosure on round boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on context boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on cleared boundaries
+   [2m[90m↓[39m[22m picture phone six keeps original participation recovery discoverable and Return immediately withdraws
+   [2m[90m↓[39m[22m picture phone six CSS preserves44px targets and places bounded options outside normal gameplay flow
+   [2m[90m↓[39m[22m picture phone six opens native Players and options and Close restores its summary focus
+[31m   [31m×[31m picture phone six cancelling replacement restores its original options control and focus[39m[32m 147[2mms[22m[39m
+[31m   [31m×[31m picture phone six context reset moves focus out of the now-closed disclosure[39m[32m 43[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six cancelling replacement restores its original options control and focus
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m117:20[22m[39m
+    [90m115|[39m  const s=sixPicture();s.durable.selfId=s.durable.house.ownerId;s.puzzl…
+    [90m116|[39m  click('[data-puzzle-action="start"]');expect(menu.open).toBe(false);e…
+    [90m117|[39m  expect(menu.open).toBe(true);expect(dom.window.document.activeElement…
+    [90m   |[39m                    [31m^[39m
+    [90m118|[39m });
+    [90m119|[39m it("picture phone six context reset moves focus out of the now-closed …
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six context reset moves focus out of the now-closed disclosure
+[31m[1mAssertionError[22m: expected HTMLButtonElement{ …(1) } to be HTMLElement{ …(1) } // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- <summary[39m
+[32m-   aria-label="Players and table options · 6 active"[39m
+[32m-   data-puzzle-menu-summary=""[39m
+[31m+ <button[39m
+[31m+   aria-label="Close players and table options"[39m
+[31m+   data-puzzle-action="close-menu"[39m
+[31m+   type="button"[39m
+[2m  >[22m
+[32m-   <span>[39m
+[32m-     Players & options[39m
+[32m-   </span>[39m
+[32m-   <span[39m
+[32m-     aria-hidden="true"[39m
+[32m-     data-puzzle-menu-alert=""[39m
+[32m-     hidden=""[39m
+[32m-   >[39m
+[32m-     ![39m
+[32m-   </span>[39m
+[32m- </summary>[39m
+[31m+   Close[39m
+[31m+ </button>[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m121:144[22m[39m
+    [90m119|[39m it("picture phone six context reset moves focus out of the now-closed …
+    [90m120|[39m  const s=sixPicture();ui.update(s);const menu=get("[data-puzzle-menu]"…
+    [90m121|[39m  const next=structuredClone(s);next.accessGeneration++;ui.update(next)…
+    [90m   |[39m                                                                                                                                                [31m^[39m
+    [90m122|[39m });
+    [90m123|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[33m37 skipped[39m[90m (39)[39m
+[2m   Start at [22m 07:27:52
+[2m   Duration [22m 1.09s[2m (import 73%, tests 20%, transform 7%)[22m
+

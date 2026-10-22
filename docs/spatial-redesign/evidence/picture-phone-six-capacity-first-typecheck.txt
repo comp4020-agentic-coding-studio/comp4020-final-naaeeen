@@ -1,0 +1,6 @@
+Already up to date
+Done in 50ms using pnpm v11.9.0
+$ tsc --noEmit
+spec/house-puzzle-ui.test.ts(57,178): error TS7006: Parameter 'player' implicitly has an 'any' type.
+spec/house-puzzle-ui.test.ts(61,169): error TS7006: Parameter 'player' implicitly has an 'any' type.
+[ELIFECYCLE] Command failed with exit code 2.

@@ -1,0 +1,38 @@
+Already up to date
+Done in 54ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[2m[90m-[39m[22m[33m[39m[31mx[39m[33m[39m[2m[90m-[39m[22m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six sending Join hands keyboard focus to its exposed cancel control
+[31m[1mAssertionError[22m: expected HTMLButtonElement{ …(1) } to be HTMLButtonElement{ …(1) } // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  <button[22m
+[32m-   aria-label="Cancel pending picture join"[39m
+[32m-   data-puzzle-action="leave"[39m
+[31m+   aria-label="Join picture table"[39m
+[31m+   class="primary"[39m
+[31m+   data-puzzle-action="join"[39m
+[31m+   hidden=""[39m
+[2m  >[22m
+[32m-   Cancel joining[39m
+[31m+   Join picture[39m
+[2m  </button>[22m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m159:124[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[33m46 skipped[39m[90m (47)[39m
+[2m   Start at [22m 07:40:04
+[2m   Duration [22m 1.07s[2m (import 76%, tests 15%, transform 8%)[22m
+

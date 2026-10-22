@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":85,"covered":84,"skipped":0,"pct":98.82},"statements":{"total":387,"covered":365,"skipped":0,"pct":94.31},"functions":{"total":63,"covered":54,"skipped":0,"pct":85.71},"branches":{"total":343,"covered":307,"skipped":0,"pct":89.5},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
+,"/home/lizhi/comp4020/comp4020-final-naaeeen/public/house-puzzle-ui.js": {"lines":{"total":85,"covered":84,"skipped":0,"pct":98.82},"functions":{"total":63,"covered":54,"skipped":0,"pct":85.71},"statements":{"total":387,"covered":365,"skipped":0,"pct":94.31},"branches":{"total":343,"covered":307,"skipped":0,"pct":89.5}}
+}

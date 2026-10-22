@@ -1,0 +1,1716 @@
+Already up to date
+Done in 51ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-puzzle-ui.test.ts [2m([22m[2m45 tests[22m[2m | [22m[31m6 failed[39m[2m | [22m[33m39 skipped[39m[2m)[22m[33m 651[2mms[22m[39m
+   [2m[90m↓[39m[22m opens as Watch, gives an honest active count and never joins from a Join ACK
+   [2m[90m↓[39m[22m starts a round separately from explicit Join
+   [2m[90m↓[39m[22m preserves stable slots, pages twelve pieces and supports roving keyboard navigation
+   [2m[90m↓[39m[22m keeps a wrong-place selection and captures participation with each placement
+   [2m[90m↓[39m[22m clears a peer-solved selected piece without removing focus or stable DOM
+   [2m[90m↓[39m[22m ignores late placement replies after a new round and new selection
+   [2m[90m↓[39m[22m begins newer Leave before immediate Return even while Join is unresolved
+   [2m[90m↓[39m[22m shows uncertain original retry and does not allow an ACK to enroll
+   [2m[90m↓[39m[22m requires leaving Four-in-a-row before joining the picture table
+   [2m[90m↓[39m[22m captures unfinished-reset authority and roster when confirmation opens
+   [2m[90m↓[39m[22m does not offer unfinished replacement to a nonowner or with another participant
+   [2m[90m↓[39m[22m keeps the complete image viewable after consent clears and gives a descriptive reference
+   [2m[90m↓[39m[22m isolates puzzle keys from world movement
+   [2m[90m↓[39m[22m cancels a destructive confirmation when controller authority changes
+   [2m[90m↓[39m[22m stops local placement immediately after Leave while the old roster is still visible
+   [2m[90m↓[39m[22m settles a placement flight after Leave without freezing a later explicit participation
+   [2m[90m↓[39m[22m exposes pending durable inspection and preserves uncertain participation copy
+   [2m[90m↓[39m[22m keeps saved progress safe when content identity is unavailable
+   [2m[90m↓[39m[22m offers cancellation and restores reference focus without propagating Escape
+   [2m[90m↓[39m[22m retains a newer withdrawal through an unjoined snapshot followed by a delayed joined roster
+   [2m[90m↓[39m[22m hides Leave after normal Join, accepted participation and same-round completion
+   [2m[90m↓[39m[22m a delayed Join ACK after peer completion does not claim participation is still arriving
+   [2m[90m↓[39m[22m completed rounds keep original pending retry and immediate Return without an active Leave control
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from undefined
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from study-seat-1
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from rest-seat-1
+   [2m[90m↓[39m[22m picture phone six keeps status/count upfront and all names in a closed labelled disclosure
+   [2m[90m↓[39m[22m picture phone six promotes Leave and keeps disabled unfinished replacement and Return inside options
+   [2m[90m↓[39m[22m picture phone six keeps primary Start/Join/Leave node identity and explicit consent across phases
+   [2m[90m↓[39m[22m picture phone six preserves disclosure and focus through ordinary roster/name updates without parsing names as HTML
+   [2m[90m↓[39m[22m picture phone six Escape closes options and returns focus before outer game handling
+   [2m[90m↓[39m[22m picture phone six closes disclosure on round boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on context boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on cleared boundaries
+   [2m[90m↓[39m[22m picture phone six keeps original participation recovery discoverable and Return immediately withdraws
+   [2m[90m↓[39m[22m picture phone six CSS preserves44px targets and places bounded options outside normal gameplay flow
+   [2m[90m↓[39m[22m picture phone six opens native Players and options and Close restores its summary focus
+   [2m[90m↓[39m[22m picture phone six cancelling replacement restores its original options control and focus
+   [2m[90m↓[39m[22m picture phone six context reset moves focus out of the now-closed disclosure
+[31m   [31m×[31m picture phone six new round hands focused primary Start to exposed Join without joining[39m[32m 148[2mms[22m[39m
+[31m   [31m×[31m picture phone six new round uses summary focus when the exposed Join is unavailable[39m[32m 47[2mms[22m[39m
+[31m   [31m×[31m picture phone six sending Join exposes one clear cancel action before a transport pending object exists[39m[32m 55[2mms[22m[39m
+[31m   [31m×[31m picture phone six uncertain Join keeps explicit original Retry in options and one upfront cancel[39m[32m 44[2mms[22m[39m
+[31m   [31m×[31m picture phone six durable pending keeps visible uncertainty, Leave and labelled draft inspection[39m[32m 43[2mms[22m[39m
+[31m   [31m×[31m picture phone six landscape status and toolbar wrap as readable units rather than squeezing status[39m[33m 313[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six new round hands focused primary Start to exposed Join without joining
+[31m[1mAssertionError[22m: expected HTMLBodyElement{} to be HTMLButtonElement{ …(1) } // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[31m+ <body>[39m
+[31m+   <section>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-top"[39m
+[31m+     >[39m
+[31m+       <p[39m
+[31m+         data-puzzle-roster=""[39m
+[31m+       >[39m
+[31m+         You are watching · 5 / 6 active[39m
+[31m+       </p>[39m
+[31m+       <div[39m
+[31m+         class="puzzle-toolbar"[39m
+[31m+       >[39m
+[31m+         <details[39m
+[31m+           class="puzzle-menu"[39m
+[31m+           data-puzzle-menu=""[39m
+[31m+         >[39m
+[31m+           <summary[39m
+[31m+             aria-label="Players and table options · 5 active"[39m
+[31m+             data-puzzle-menu-summary=""[39m
+[31m+           >[39m
+[31m+             <span>[39m
+[31m+               Players & options[39m
+[31m+             </span>[39m
+[31m+             <span[39m
+[31m+               aria-hidden="true"[39m
+[31m+               data-puzzle-menu-alert=""[39m
+[31m+               hidden=""[39m
+[31m+             >[39m
+[31m+               ![39m
+[31m+             </span>[39m
+[31m+           </summary>[39m
+[31m+           <div[39m
+[31m+             class="puzzle-menu-body"[39m
+[31m+             data-puzzle-menu-body=""[39m
+[31m+           >[39m
+[31m+             <header[39m
+[31m+               class="puzzle-menu-heading"[39m
+[31m+             >[39m
+[31m+               <h3>[39m
+[31m+                 Players[39m
+[31m+               </h3>[39m
+[31m+               <button[39m
+[31m+                 aria-label="Close players and table options"[39m
+[31m+                 data-puzzle-action="close-menu"[39m
+[31m+                 type="button"[39m
+[31m+               >[39m
+[31m+                 Close[39m
+[31m+               </button>[39m
+[31m+             </header>[39m
+[31m+             <ul[39m
+[31m+               class="puzzle-players"[39m
+[31m+               data-puzzle-players=""[39m
+[31m+             >[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000001"[39m
+[31m+               >[39m
+[31m+                 Alexandria Montgomery[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000002"[39m
+[31m+               >[39m
+[31m+                 Christopher Williamson[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000003"[39m
+[31m+               >[39m
+[31m+                 Genevieve Featherstone[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000004"[39m
+[31m+               >[39m
+[31m+                 Maximilian Worthington[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000005"[39m
+[31m+               >[39m
+[31m+                 Theodora Nightingale[39m
+[31m+               </li>[39m
+[31m+             </ul>[39m
+[31m+             <h3>[39m
+[31m+               Table options[39m
+[31m+             </h3>[39m
+[31m+             <div[39m
+[31m+               data-puzzle-secondary-start=""[39m
+[31m+             >[39m
+[31m+               <button[39m
+[31m+                 data-puzzle-action="start"[39m
+[31m+                 disabled=""[39m
+[31m+               >[39m
+[31m+                 Replace unfinished picture[39m
+[31m+               </button>[39m
+[31m+             </div>[39m
+[31m+             <button[39m
+[31m+               data-puzzle-action="return"[39m
+[31m+             >[39m
+[31m+               Return to my room[39m
+[31m+             </button>[39m
+[2m              <button[22m
+[31m+               data-puzzle-action="retry"[39m
+[31m+               disabled=""[39m
+[31m+               hidden=""[39m
+[31m+             >[39m
+[31m+               Retry original participation[39m
+[31m+             </button>[39m
+[31m+             <button[39m
+[31m+               data-puzzle-action="pending"[39m
+[31m+               hidden=""[39m
+[31m+             >[39m
+[31m+               Inspect pending picture action[39m
+[31m+             </button>[39m
+[31m+             <p[39m
+[31m+               class="subtle"[39m
+[31m+             >[39m
+[31m+               Replacing an unfinished picture needs the house owner and no other participants. Leave participation keeps your ordinary chair; Stand is separate.[39m
+[31m+             </p>[39m
+[31m+           </div>[39m
+[31m+         </details>[39m
+[31m+         <button[39m
+[31m+           aria-expanded="false"[39m
+[31m+           aria-label="Reference picture"[39m
+[31m+           data-puzzle-action="reference"[39m
+[31m+         >[39m
+[31m+           Reference[39m
+[31m+         </button>[39m
+[31m+         <button[39m
+[31m+           aria-label="Room chat"[39m
+[31m+           data-puzzle-action="chat"[39m
+[31m+         >[39m
+[31m+           Chat[39m
+[31m+         </button>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-primary"[39m
+[31m+           data-puzzle-primary=""[39m
+[31m+         >[39m
+[31m+           <button[39m
+[2m              aria-label="Join picture table"[22m
+[2m              class="primary"[22m
+[2m              data-puzzle-action="join"[22m
+[2m            >[22m
+[2m              Join picture[22m
+[31m+           </button>[39m
+[31m+           <button[39m
+[31m+             aria-label="Leave picture participation"[39m
+[31m+             data-puzzle-action="leave"[39m
+[31m+             hidden=""[39m
+[31m+           >[39m
+[31m+             Leave picture[39m
+[31m+           </button>[39m
+[31m+         </div>[39m
+[31m+       </div>[39m
+[31m+     </div>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-reset"[39m
+[31m+       data-puzzle-reset=""[39m
+[31m+       hidden=""[39m
+[31m+     >[39m
+[31m+       <p>[39m
+[31m+         Replace this unfinished picture? Its placed pieces will be cleared. Only the house owner can confirm while no one else participates.[39m
+[31m+       </p>[39m
+[31m+       <button[39m
+[31m+         class="danger"[39m
+[31m+         data-puzzle-action="confirm"[39m
+[31m+       >[39m
+[31m+         Confirm replacement[39m
+[31m+       </button>[39m
+[31m+       <button[39m
+[31m+         data-puzzle-action="cancel"[39m
+[31m+       >[39m
+[31m+         Keep this picture[39m
+[31m+       </button>[39m
+[31m+     </div>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-workspace"[39m
+[31m+     >[39m
+[31m+       <section[39m
+[31m+         aria-label="Shared picture"[39m
+[31m+         class="puzzle-board-section"[39m
+[31m+       >[39m
+[31m+         <div[39m
+[31m+           class="puzzle-section-heading"[39m
+[31m+         >[39m
+[31m+           <h3>[39m
+[31m+             Rain at the study nook[39m
+[31m+           </h3>[39m
+[31m+           <span[39m
+[31m+             data-puzzle-progress=""[39m
+[31m+           >[39m
+[31m+             6 / 24 placed[39m
+[31m+           </span>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           aria-label="Picture places, six columns and four rows"[39m
+[31m+           class="puzzle-board"[39m
+[31m+           data-puzzle-board=""[39m
+[31m+           role="group"[39m
+[31m+           style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\");"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ivy leaves beside a little brass bell, placed, top row, left edge"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="0"[39m
+[31m+             tabindex="0"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Gold crescent in the window arch, placed, top row, second spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="1"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Paper star with the window curve, placed, top row, third spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="2"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Red bird hanging from a string, placed, top row, fourth spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="3"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Trailing leaves above the small shelf, placed, top row, fifth spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="4"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Honey lamp cap with wall stitches, placed, top row, right edge"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="5"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="6"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="7"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="8"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="9"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="10"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="11"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="12"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="13"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="14"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="15"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="16"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="17"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="18"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="19"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="20"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="21"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="22"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="23"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+         </div>[39m
+[31m+         <p[39m
+[31m+           class="puzzle-instruction"[39m
+[31m+         >[39m
+[31m+           Choose a loose piece, then a picture place. Arrow keys move focus.[39m
+[31m+         </p>[39m
+[31m+       </section>[39m
+[31m+       <section[39m
+[31m+         aria-label="Picture pieces"[39m
+[31m+         class="puzzle-tray-section"[39m
+[31m+       >[39m
+[31m+         <div[39m
+[31m+           class="puzzle-section-heading"[39m
+[31m+         >[39m
+[31m+           <h3[39m
+[31m+             data-puzzle-tray-title=""[39m
+[31m+           >[39m
+[31m+             Loose pieces[39m
+[31m+           </h3>[39m
+[31m+           <span>[39m
+[31m+             12 per page[39m
+[31m+           </span>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           aria-label="Loose picture pieces"[39m
+[31m+           class="puzzle-tray"[39m
+[31m+           data-puzzle-tray=""[39m
+[31m+           role="group"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Green notebook with a red pencil"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="notebook"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 66.66666666666667%;"[39m
+[31m+             tabindex="0"[39m
+[31m+             title="Green notebook with a red pencil"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Paper star with the window curve, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="paper-star"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Paper star with the window curve"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Pair of red slippers below the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="slippers"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Pair of red slippers below the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Rainy glass beside the folded curtain"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="star-curtain"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Rainy glass beside the folded curtain"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Teal cup and saucer on the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="teal-cup"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Teal cup and saucer on the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Honey lamp cap with wall stitches, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="honey-cap"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Honey lamp cap with wall stitches"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Angled chair leg across the woven rug"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="chair-leg"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Angled chair leg across the woven rug"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ivy leaves beside a little brass bell, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="ivy-bell"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Ivy leaves beside a little brass bell"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Brass lamp base at the desk end"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="lamp-base"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Brass lamp base at the desk end"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Round red teapot and its curved spout"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="red-teapot"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Round red teapot and its curved spout"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Woven basket beside the rug corner"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="woven-basket"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Woven basket beside the rug corner"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Fern fronds beside the rainy glass"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="fern-rain"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Fern fronds beside the rainy glass"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Sleeping cat face against a blue book"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="cat-book"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Sleeping cat face against a blue book"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Trailing leaves above the small shelf, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="shelf-leaves"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Trailing leaves above the small shelf"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Pale leaf on the indigo rug border"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="rug-leaf"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Pale leaf on the indigo rug border"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Amber lampshade with a scalloped edge"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="lamp-shade"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Amber lampshade with a scalloped edge"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Red bird hanging from a string, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="bird-string"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Red bird hanging from a string"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ochre yarn coil and its loose thread"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="yarn-coil"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Ochre yarn coil and its loose thread"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Sage and ochre book spines on a shelf"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="book-spines"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Sage and ochre book spines on a shelf"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Three biscuits on a cream plate"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="biscuits"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Three biscuits on a cream plate"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Gold crescent in the window arch, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="crescent-arch"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Gold crescent in the window arch"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Wooden desk leg with a gold rug stripe"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="desk-leg"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Wooden desk leg with a gold rug stripe"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Rain streaks over a tiny blue roof"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="rain-roof"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Rain streaks over a tiny blue roof"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Striped cat tail curling over the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="cat-tail"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Striped cat tail curling over the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-browse"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             data-puzzle-action="previous"[39m
+[31m+           >[39m
+[31m+             Previous[39m
+[2m            </button>[22m
+[31m+           <span[39m
+[31m+             data-puzzle-page=""[39m
+[31m+           >[39m
+[31m+             Page 1 of 2[39m
+[31m+           </span>[39m
+[31m+           <button[39m
+[31m+             aria-disabled="false"[39m
+[31m+             data-puzzle-action="next"[39m
+[31m+           >[39m
+[31m+             Next[39m
+[31m+           </button>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-selection"[39m
+[31m+         >[39m
+[31m+           <div[39m
+[31m+             aria-hidden="true"[39m
+[31m+             class="puzzle-preview"[39m
+[31m+             data-puzzle-preview=""[39m
+[31m+             style="background-image: none;"[39m
+[31m+           />[39m
+[31m+           <p[39m
+[31m+             data-puzzle-selection=""[39m
+[31m+           >[39m
+[31m+             No piece selected.[39m
+[31m+           </p>[39m
+[31m+           <p[39m
+[31m+             data-puzzle-complete=""[39m
+[31m+             hidden=""[39m
+[31m+           >[39m
+[31m+             The picture is complete. Stay and chat, or return to your room. A new picture needs a fresh Start and Join.[39m
+[31m+           </p>[39m
+[31m+         </div>[39m
+[31m+       </section>[39m
+[31m+     </div>[39m
+[31m+     <p[39m
+[31m+       aria-live="polite"[39m
+[31m+       class="puzzle-feedback"[39m
+[31m+       data-puzzle-feedback=""[39m
+[31m+       role="status"[39m
+[31m+     >[39m
+[31m+       Sit in a game chair, then Start if needed and explicitly Join to contribute. Watching does not join.[39m
+[31m+     </p>[39m
+[31m+     <section[39m
+[31m+       aria-label="Reference picture"[39m
+[31m+       class="puzzle-reference"[39m
+[31m+       data-puzzle-reference=""[39m
+[31m+       hidden=""[39m
+[31m+     >[39m
+[31m+       <div>[39m
+[31m+         <h3>[39m
+[31m+           Reference picture[39m
+[31m+         </h3>[39m
+[31m+         <button[39m
+[31m+           data-puzzle-action="close-reference"[39m
+[31m+         >[39m
+[31m+           Close reference[39m
+[31m+         </button>[39m
+[31m+       </div>[39m
+[31m+       <img[39m
+[31m+         alt="Rain at the study nook"[39m
+[31m+         data-puzzle-reference-image=""[39m
+[31m+         src="/assets/pictures/rainy-nook-v1.svg"[39m
+[31m+       />[39m
+[31m+       <p[39m
+[31m+         data-puzzle-description=""[39m
+[31m+       >[39m
+[31m+         The rainy arched window and ivy are on the left, with a crescent and hanging star above. A red bird hangs between the window and the shelf. Trailing leaves and books sit above a red teapot. The honey lamp stands at the right end of a long wooden desk. A teal cup, sleeping cat, open book, green notebook and biscuits sit across the desk. Below are an indigo rug, chair and desk legs, red slippers, a coil of yarn and a woven basket.[39m
+[31m+       </p>[39m
+[31m+     </section>[39m
+[31m+   </section>[39m
+[31m+ </body>[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m127:44[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six new round uses summary focus when the exposed Join is unavailable
+[31m[1mAssertionError[22m: expected HTMLBodyElement{} to be HTMLElement{ …(1) } // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -1,5 +1,22 @@[39m
+[31m+ <body>[39m
+[31m+   <section>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-top"[39m
+[31m+     >[39m
+[31m+       <p[39m
+[31m+         data-puzzle-roster=""[39m
+[31m+       >[39m
+[31m+         You are watching · 5 / 6 active[39m
+[31m+       </p>[39m
+[31m+       <div[39m
+[31m+         class="puzzle-toolbar"[39m
+[31m+       >[39m
+[31m+         <details[39m
+[31m+           class="puzzle-menu"[39m
+[31m+           data-puzzle-menu=""[39m
+[31m+         >[39m
+[2m            <summary[22m
+[2m              aria-label="Players and table options · 5 active"[22m
+[2m              data-puzzle-menu-summary=""[22m
+[2m            >[22m
+[2m              <span>[22m
+[33m@@ -11,5 +28,751 @@[39m
+[2m                hidden=""[22m
+[2m              >[22m
+[2m                ![22m
+[2m              </span>[22m
+[2m            </summary>[22m
+[31m+           <div[39m
+[31m+             class="puzzle-menu-body"[39m
+[31m+             data-puzzle-menu-body=""[39m
+[31m+           >[39m
+[31m+             <header[39m
+[31m+               class="puzzle-menu-heading"[39m
+[31m+             >[39m
+[31m+               <h3>[39m
+[31m+                 Players[39m
+[31m+               </h3>[39m
+[31m+               <button[39m
+[31m+                 aria-label="Close players and table options"[39m
+[31m+                 data-puzzle-action="close-menu"[39m
+[31m+                 type="button"[39m
+[31m+               >[39m
+[31m+                 Close[39m
+[31m+               </button>[39m
+[31m+             </header>[39m
+[31m+             <ul[39m
+[31m+               class="puzzle-players"[39m
+[31m+               data-puzzle-players=""[39m
+[31m+             >[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000001"[39m
+[31m+               >[39m
+[31m+                 Alexandria Montgomery[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000002"[39m
+[31m+               >[39m
+[31m+                 Christopher Williamson[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000003"[39m
+[31m+               >[39m
+[31m+                 Genevieve Featherstone[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000004"[39m
+[31m+               >[39m
+[31m+                 Maximilian Worthington[39m
+[31m+               </li>[39m
+[31m+               <li[39m
+[31m+                 data-puzzle-player-id="00000000-0000-4000-8000-000000000005"[39m
+[31m+               >[39m
+[31m+                 Theodora Nightingale[39m
+[31m+               </li>[39m
+[31m+             </ul>[39m
+[31m+             <h3>[39m
+[31m+               Table options[39m
+[31m+             </h3>[39m
+[31m+             <div[39m
+[31m+               data-puzzle-secondary-start=""[39m
+[31m+             >[39m
+[31m+               <button[39m
+[31m+                 data-puzzle-action="start"[39m
+[31m+                 disabled=""[39m
+[31m+               >[39m
+[31m+                 Replace unfinished picture[39m
+[31m+               </button>[39m
+[31m+             </div>[39m
+[31m+             <button[39m
+[31m+               data-puzzle-action="return"[39m
+[31m+             >[39m
+[31m+               Return to my room[39m
+[31m+             </button>[39m
+[31m+             <button[39m
+[31m+               data-puzzle-action="retry"[39m
+[31m+               disabled=""[39m
+[31m+               hidden=""[39m
+[31m+             >[39m
+[31m+               Retry original participation[39m
+[31m+             </button>[39m
+[31m+             <button[39m
+[31m+               data-puzzle-action="pending"[39m
+[31m+               hidden=""[39m
+[31m+             >[39m
+[31m+               Inspect pending picture action[39m
+[31m+             </button>[39m
+[31m+             <p[39m
+[31m+               class="subtle"[39m
+[31m+             >[39m
+[31m+               Replacing an unfinished picture needs the house owner and no other participants. Leave participation keeps your ordinary chair; Stand is separate.[39m
+[31m+             </p>[39m
+[31m+           </div>[39m
+[31m+         </details>[39m
+[31m+         <button[39m
+[31m+           aria-expanded="false"[39m
+[31m+           aria-label="Reference picture"[39m
+[31m+           data-puzzle-action="reference"[39m
+[31m+         >[39m
+[31m+           Reference[39m
+[31m+         </button>[39m
+[31m+         <button[39m
+[31m+           aria-label="Room chat"[39m
+[31m+           data-puzzle-action="chat"[39m
+[31m+         >[39m
+[31m+           Chat[39m
+[31m+         </button>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-primary"[39m
+[31m+           data-puzzle-primary=""[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-label="Join picture table"[39m
+[31m+             class="primary"[39m
+[31m+             data-puzzle-action="join"[39m
+[31m+             disabled=""[39m
+[31m+           >[39m
+[31m+             Join picture[39m
+[31m+           </button>[39m
+[31m+           <button[39m
+[31m+             aria-label="Leave picture participation"[39m
+[31m+             data-puzzle-action="leave"[39m
+[31m+             hidden=""[39m
+[31m+           >[39m
+[31m+             Leave picture[39m
+[31m+           </button>[39m
+[31m+         </div>[39m
+[31m+       </div>[39m
+[31m+     </div>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-reset"[39m
+[31m+       data-puzzle-reset=""[39m
+[31m+       hidden=""[39m
+[31m+     >[39m
+[31m+       <p>[39m
+[31m+         Replace this unfinished picture? Its placed pieces will be cleared. Only the house owner can confirm while no one else participates.[39m
+[31m+       </p>[39m
+[31m+       <button[39m
+[31m+         class="danger"[39m
+[31m+         data-puzzle-action="confirm"[39m
+[31m+       >[39m
+[31m+         Confirm replacement[39m
+[31m+       </button>[39m
+[31m+       <button[39m
+[31m+         data-puzzle-action="cancel"[39m
+[31m+       >[39m
+[31m+         Keep this picture[39m
+[31m+       </button>[39m
+[31m+     </div>[39m
+[31m+     <div[39m
+[31m+       class="puzzle-workspace"[39m
+[31m+     >[39m
+[31m+       <section[39m
+[31m+         aria-label="Shared picture"[39m
+[31m+         class="puzzle-board-section"[39m
+[31m+       >[39m
+[31m+         <div[39m
+[31m+           class="puzzle-section-heading"[39m
+[31m+         >[39m
+[31m+           <h3>[39m
+[31m+             Rain at the study nook[39m
+[31m+           </h3>[39m
+[31m+           <span[39m
+[31m+             data-puzzle-progress=""[39m
+[31m+           >[39m
+[31m+             6 / 24 placed[39m
+[31m+           </span>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           aria-label="Picture places, six columns and four rows"[39m
+[31m+           class="puzzle-board"[39m
+[31m+           data-puzzle-board=""[39m
+[31m+           role="group"[39m
+[31m+           style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\");"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ivy leaves beside a little brass bell, placed, top row, left edge"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="0"[39m
+[31m+             tabindex="0"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Gold crescent in the window arch, placed, top row, second spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="1"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Paper star with the window curve, placed, top row, third spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="2"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Red bird hanging from a string, placed, top row, fourth spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="3"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Trailing leaves above the small shelf, placed, top row, fifth spot"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="4"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Honey lamp cap with wall stitches, placed, top row, right edge"[39m
+[31m+             class="puzzle-cell placed"[39m
+[31m+             data-puzzle-destination="5"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="6"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="7"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="8"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="9"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="10"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, second row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="11"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="12"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="13"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="14"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="15"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="16"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, third row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="17"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, left edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="18"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, second spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="19"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, third spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="20"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, fourth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="21"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, fifth spot"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="22"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Empty picture place, bottom row, right edge"[39m
+[31m+             class="puzzle-cell"[39m
+[31m+             data-puzzle-destination="23"[39m
+[31m+             tabindex="-1"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+         </div>[39m
+[31m+         <p[39m
+[31m+           class="puzzle-instruction"[39m
+[31m+         >[39m
+[31m+           Choose a loose piece, then a picture place. Arrow keys move focus.[39m
+[31m+         </p>[39m
+[31m+       </section>[39m
+[31m+       <section[39m
+[31m+         aria-label="Picture pieces"[39m
+[31m+         class="puzzle-tray-section"[39m
+[31m+       >[39m
+[31m+         <div[39m
+[31m+           class="puzzle-section-heading"[39m
+[31m+         >[39m
+[31m+           <h3[39m
+[31m+             data-puzzle-tray-title=""[39m
+[31m+           >[39m
+[31m+             Loose pieces[39m
+[31m+           </h3>[39m
+[31m+           <span>[39m
+[31m+             12 per page[39m
+[31m+           </span>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           aria-label="Loose picture pieces"[39m
+[31m+           class="puzzle-tray"[39m
+[31m+           data-puzzle-tray=""[39m
+[31m+           role="group"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Green notebook with a red pencil"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="notebook"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 66.66666666666667%;"[39m
+[31m+             tabindex="0"[39m
+[31m+             title="Green notebook with a red pencil"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Paper star with the window curve, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="paper-star"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Paper star with the window curve"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Pair of red slippers below the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="slippers"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Pair of red slippers below the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Rainy glass beside the folded curtain"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="star-curtain"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Rainy glass beside the folded curtain"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Teal cup and saucer on the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="teal-cup"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Teal cup and saucer on the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Honey lamp cap with wall stitches, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="honey-cap"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Honey lamp cap with wall stitches"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Angled chair leg across the woven rug"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="chair-leg"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Angled chair leg across the woven rug"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ivy leaves beside a little brass bell, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="ivy-bell"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Ivy leaves beside a little brass bell"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Brass lamp base at the desk end"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="lamp-base"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Brass lamp base at the desk end"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Round red teapot and its curved spout"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="red-teapot"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Round red teapot and its curved spout"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Woven basket beside the rug corner"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="woven-basket"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Woven basket beside the rug corner"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Fern fronds beside the rainy glass"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="fern-rain"[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Fern fronds beside the rainy glass"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Sleeping cat face against a blue book"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="cat-book"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Sleeping cat face against a blue book"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Trailing leaves above the small shelf, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="shelf-leaves"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Trailing leaves above the small shelf"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Pale leaf on the indigo rug border"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="rug-leaf"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 0% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Pale leaf on the indigo rug border"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Amber lampshade with a scalloped edge"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="lamp-shade"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 100% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Amber lampshade with a scalloped edge"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Red bird hanging from a string, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="bird-string"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Red bird hanging from a string"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Ochre yarn coil and its loose thread"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="yarn-coil"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Ochre yarn coil and its loose thread"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Sage and ochre book spines on a shelf"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="book-spines"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 60% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Sage and ochre book spines on a shelf"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Three biscuits on a cream plate"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="biscuits"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 80% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Three biscuits on a cream plate"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Gold crescent in the window arch, already placed"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece placed"[39m
+[31m+             data-puzzle-piece="crescent-arch"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 0%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Gold crescent in the window arch"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Wooden desk leg with a gold rug stripe"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="desk-leg"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 40% 100%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Wooden desk leg with a gold rug stripe"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Rain streaks over a tiny blue roof"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="rain-roof"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 33.333333333333336%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Rain streaks over a tiny blue roof"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             aria-label="Striped cat tail curling over the desk"[39m
+[31m+             aria-pressed="false"[39m
+[31m+             class="puzzle-piece"[39m
+[31m+             data-puzzle-piece="cat-tail"[39m
+[31m+             hidden=""[39m
+[31m+             style="background-image: url(\"/assets/pictures/rainy-nook-v1.svg\"); background-position: 20% 66.66666666666667%;"[39m
+[31m+             tabindex="-1"[39m
+[31m+             title="Striped cat tail curling over the desk"[39m
+[31m+             type="button"[39m
+[31m+           />[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-browse"[39m
+[31m+         >[39m
+[31m+           <button[39m
+[31m+             aria-disabled="true"[39m
+[31m+             data-puzzle-action="previous"[39m
+[31m+           >[39m
+[31m+             Previous[39m
+[31m+           </button>[39m
+[31m+           <span[39m
+[31m+             data-puzzle-page=""[39m
+[31m+           >[39m
+[31m+             Page 1 of 2[39m
+[31m+           </span>[39m
+[31m+           <button[39m
+[31m+             aria-disabled="false"[39m
+[31m+             data-puzzle-action="next"[39m
+[31m+           >[39m
+[31m+             Next[39m
+[31m+           </button>[39m
+[31m+         </div>[39m
+[31m+         <div[39m
+[31m+           class="puzzle-selection"[39m
+[31m+         >[39m
+[31m+           <div[39m
+[31m+             aria-hidden="true"[39m
+[31m+             class="puzzle-preview"[39m
+[31m+             data-puzzle-preview=""[39m
+[31m+             style="background-image: none;"[39m
+[31m+           />[39m
+[31m+           <p[39m
+[31m+             data-puzzle-selection=""[39m
+[31m+           >[39m
+[31m+             No piece selected.[39m
+[31m+           </p>[39m
+[31m+           <p[39m
+[31m+             data-puzzle-complete=""[39m
+[31m+             hidden=""[39m
+[31m+           >[39m
+[31m+             The picture is complete. Stay and chat, or return to your room. A new picture needs a fresh Start and Join.[39m
+[31m+           </p>[39m
+[31m+         </div>[39m
+[31m+       </section>[39m
+[31m+     </div>[39m
+[31m+     <p[39m
+[31m+       aria-live="polite"[39m
+[31m+       class="puzzle-feedback"[39m
+[31m+       data-puzzle-feedback=""[39m
+[31m+       role="status"[39m
+[31m+     >[39m
+[31m+       Sit in a game chair, then Start if needed and explicitly Join to contribute. Watching does not join.[39m
+[31m+     </p>[39m
+[31m+     <section[39m
+[31m+       aria-label="Reference picture"[39m
+[31m+       class="puzzle-reference"[39m
+[31m+       data-puzzle-reference=""[39m
+[31m+       hidden=""[39m
+[31m+     >[39m
+[31m+       <div>[39m
+[31m+         <h3>[39m
+[31m+           Reference picture[39m
+[31m+         </h3>[39m
+[31m+         <button[39m
+[31m+           data-puzzle-action="close-reference"[39m
+[31m+         >[39m
+[31m+           Close reference[39m
+[31m+         </button>[39m
+[31m+       </div>[39m
+[31m+       <img[39m
+[31m+         alt="Rain at the study nook"[39m
+[31m+         data-puzzle-reference-image=""[39m
+[31m+         src="/assets/pictures/rainy-nook-v1.svg"[39m
+[31m+       />[39m
+[31m+       <p[39m
+[31m+         data-puzzle-description=""[39m
+[31m+       >[39m
+[31m+         The rainy arched window and ivy are on the left, with a crescent and hanging star above. A red bird hangs between the window and the shelf. Trailing leaves and books sit above a red teapot. The honey lamp stands at the right end of a long wooden desk. A teal cup, sleeping cat, open book, green notebook and biscuits sit across the desk. Below are an indigo rug, chair and desk legs, red slippers, a coil of yarn and a woven basket.[39m
+[31m+       </p>[39m
+[31m+     </section>[39m
+[31m+   </section>[39m
+[31m+ </body>[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m132:130[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six sending Join exposes one clear cancel action before a transport pending object exists
+[31m[1mAssertionError[22m: expected [ HTMLButtonElement{ …(1) }, …(1) ] to deeply equal [ HTMLButtonElement{ …(1) } ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -1,7 +1,14 @@[39m
+[2m  [[22m
+[2m    <button[22m
+[31m+     aria-label="Join picture table"[39m
+[31m+     class="primary"[39m
+[31m+     data-puzzle-action="join"[39m
+[31m+   >[39m
+[31m+     Join picture[39m
+[31m+   </button>,[39m
+[31m+   <button[39m
+[2m      aria-label="Leave picture participation"[22m
+[2m      data-puzzle-action="leave"[22m
+[2m    >[22m
+[2m      Leave picture[22m
+[2m    </button>,[22m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m136:139[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six uncertain Join keeps explicit original Retry in options and one upfront cancel
+[31m[1mAssertionError[22m: expected [ HTMLButtonElement{ …(1) }, …(1) ] to deeply equal [ HTMLButtonElement{ …(1) } ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[33m@@ -1,7 +1,15 @@[39m
+[2m  [[22m
+[2m    <button[22m
+[31m+     aria-label="Join picture table"[39m
+[31m+     class="primary"[39m
+[31m+     data-puzzle-action="join"[39m
+[31m+     disabled=""[39m
+[31m+   >[39m
+[31m+     Join picture[39m
+[31m+   </button>,[39m
+[31m+   <button[39m
+[2m      aria-label="Leave picture participation"[22m
+[2m      data-puzzle-action="leave"[22m
+[2m    >[22m
+[2m      Leave picture[22m
+[2m    </button>,[22m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m142:117[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six durable pending keeps visible uncertainty, Leave and labelled draft inspection
+[31m[1mAssertionError[22m: expected 'You joined · 6 / 6 active' to match /save pending/i[39m
+
+[32m- Expected:[39m
+/save pending/i
+
+[31m+ Received:[39m
+"You joined · 6 / 6 active"
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m148:101[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six landscape status and toolbar wrap as readable units rather than squeezing status
+[31m[1mAssertionError[22m: expected 'nowrap' to be 'wrap' // Object.is equality[39m
+
+Expected: [32m"wrap"[39m
+Received: [31m"[7mno[27mwrap"[39m
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m155:67[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[33m39 skipped[39m[90m (45)[39m
+[2m   Start at [22m 07:36:19
+[2m   Duration [22m 1.24s[2m (tests 57%, import 36%, transform 7%)[22m
+

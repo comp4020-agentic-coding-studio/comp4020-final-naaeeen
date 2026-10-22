@@ -58,3 +58,38 @@ button.resident{text-align:left;white-space:normal;min-height:44px;cursor:pointe
 #game-panel-stand{float:right;margin:0 0 6px 10px;font-size:11px}.panel[data-tool=game] .panel-heading #panel-close{width:auto;min-width:44px;padding:7px 10px;font-size:12px}#game-panel-stand + .break-menu{clear:both}
 body[data-panel=studio] .chat-window{z-index:14}.panel[data-tool=studio]{width:min(1050px,calc(100% - 24px));max-height:calc(100dvh - 28px)}
 body[data-panel=gathering] .chat-window{z-index:14}.panel[data-tool=gathering]{width:min(1050px,calc(100% - 24px));max-height:calc(100dvh - 28px)}
+
+/* Picture controls have a fixed primary footprint; player names and secondary
+   table actions are available in an explicit, bounded native disclosure. */
+.puzzle-top{flex-wrap:wrap}
+.puzzle-top>[data-puzzle-roster]{font-size:13px;line-height:1.35;min-width:0;margin:0;flex-shrink:0;white-space:nowrap}
+.puzzle-toolbar{display:grid;grid-template-columns:repeat(4,minmax(44px,1fr));gap:6px;align-items:start;width:min(100%,560px);flex-shrink:0}
+.puzzle-primary{display:grid;gap:4px;min-width:0}
+.puzzle-toolbar>button,.puzzle-primary button,.puzzle-menu>summary{box-sizing:border-box;min-width:44px;min-height:44px;width:100%;padding:4px 6px;font-size:13px;line-height:1.2;white-space:normal}
+.puzzle-menu{position:relative;min-width:0}
+.puzzle-menu>summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:3px;text-align:center;border:1px solid #a5ae9366;border-radius:9px;background:#e8e2cb;cursor:pointer}
+.puzzle-menu>summary::-webkit-details-marker{display:none}
+.puzzle-menu>summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.puzzle-menu[open]>summary{background:#eed8a9;border-color:#77603b}
+[data-puzzle-menu-alert]{font-weight:700;color:#7b441e}
+.puzzle-menu-body{position:absolute;z-index:5;left:0;right:auto;top:calc(100% + 6px);width:min(340px,calc(100vw - 52px));max-height:min(60dvh,460px);display:flex;flex-direction:column;overflow:hidden;padding:12px;background:var(--paper);color:var(--paper-ink);border:1px solid #82916f;border-radius:10px;box-shadow:0 12px 40px #173a2a55}
+.puzzle-menu-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;position:static;flex-shrink:0;background:var(--paper);padding:4px 0}
+.puzzle-menu-scroll{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:0 4px 4px}
+.puzzle-menu-body h3{margin:12px 0 8px;font-size:18px}
+.puzzle-menu-heading h3{margin:0}
+.puzzle-menu-body button{min-width:44px;min-height:44px;width:100%;font-size:13px;line-height:1.35;margin:0 0 6px}
+.puzzle-menu-heading button{width:auto;flex-shrink:0;margin:0}
+.puzzle-players{margin:8px 0 12px;padding-left:21px;font-size:13px;line-height:1.45}
+.puzzle-players li{margin-bottom:6px;overflow-wrap:anywhere;white-space:normal}
+.puzzle-menu-body .subtle{font-size:12px;line-height:1.45;margin:6px 0 0}
+.panel[data-tool=game][data-break-activity=picture] .puzzle-cell,.puzzle-browse button{min-width:44px;min-height:44px}
+.puzzle-browse{font-size:12px}.puzzle-browse button{font-size:13px}
+@media(max-width:700px){
+ .puzzle-top{flex-direction:column;align-items:stretch;gap:6px;margin-bottom:8px}
+ .puzzle-top>[data-puzzle-roster]{flex:none;min-width:0;font-size:13px;line-height:1.35}
+ .puzzle-toolbar{width:100%}
+ .puzzle-instruction{font-size:12px;line-height:1.3}
+ .puzzle-section-heading span,.puzzle-selection p{font-size:12px}
+ .puzzle-feedback{font-size:12px;line-height:1.4;min-height:44px}
+ .puzzle-piece.placed:after{font-size:11px}
+}

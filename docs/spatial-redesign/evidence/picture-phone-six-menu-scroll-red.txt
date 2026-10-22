@@ -1,0 +1,88 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-puzzle-ui.test.ts [2m([22m[2m59 tests[22m[2m | [22m[31m1 failed[39m[2m | [22m[33m58 skipped[39m[2m)[22m[33m 379[2mms[22m[39m
+   [2m[90m↓[39m[22m opens as Watch, gives an honest active count and never joins from a Join ACK
+   [2m[90m↓[39m[22m starts a round separately from explicit Join
+   [2m[90m↓[39m[22m preserves stable slots, pages twelve pieces and supports roving keyboard navigation
+   [2m[90m↓[39m[22m keeps a wrong-place selection and captures participation with each placement
+   [2m[90m↓[39m[22m clears a peer-solved selected piece without removing focus or stable DOM
+   [2m[90m↓[39m[22m ignores late placement replies after a new round and new selection
+   [2m[90m↓[39m[22m begins newer Leave before immediate Return even while Join is unresolved
+   [2m[90m↓[39m[22m shows uncertain original retry and does not allow an ACK to enroll
+   [2m[90m↓[39m[22m requires leaving Four-in-a-row before joining the picture table
+   [2m[90m↓[39m[22m captures unfinished-reset authority and roster when confirmation opens
+   [2m[90m↓[39m[22m does not offer unfinished replacement to a nonowner or with another participant
+   [2m[90m↓[39m[22m keeps the complete image viewable after consent clears and gives a descriptive reference
+   [2m[90m↓[39m[22m isolates puzzle keys from world movement
+   [2m[90m↓[39m[22m cancels a destructive confirmation when controller authority changes
+   [2m[90m↓[39m[22m stops local placement immediately after Leave while the old roster is still visible
+   [2m[90m↓[39m[22m settles a placement flight after Leave without freezing a later explicit participation
+   [2m[90m↓[39m[22m exposes pending durable inspection and preserves uncertain participation copy
+   [2m[90m↓[39m[22m keeps saved progress safe when content identity is unavailable
+   [2m[90m↓[39m[22m offers cancellation and restores reference focus without propagating Escape
+   [2m[90m↓[39m[22m retains a newer withdrawal through an unjoined snapshot followed by a delayed joined roster
+   [2m[90m↓[39m[22m hides Leave after normal Join, accepted participation and same-round completion
+   [2m[90m↓[39m[22m a delayed Join ACK after peer completion does not claim participation is still arriving
+   [2m[90m↓[39m[22m completed rounds keep original pending retry and immediate Return without an active Leave control
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from undefined
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from study-seat-1
+   [2m[90m↓[39m[22m spatial requires a real game chair for Start and Join from rest-seat-1
+   [2m[90m↓[39m[22m picture phone six keeps status/count upfront and all names in a closed labelled disclosure
+   [2m[90m↓[39m[22m picture phone six promotes Leave and keeps disabled unfinished replacement and Return inside options
+   [2m[90m↓[39m[22m picture phone six keeps primary Start/Join/Leave node identity and explicit consent across phases
+   [2m[90m↓[39m[22m picture phone six preserves disclosure and focus through ordinary roster/name updates without parsing names as HTML
+   [2m[90m↓[39m[22m picture phone six Escape closes options and returns focus before outer game handling
+   [2m[90m↓[39m[22m picture phone six closes disclosure on round boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on context boundaries
+   [2m[90m↓[39m[22m picture phone six closes disclosure on cleared boundaries
+   [2m[90m↓[39m[22m picture phone six keeps original participation recovery discoverable and Return immediately withdraws
+   [2m[90m↓[39m[22m picture phone six CSS preserves44px targets and places bounded options outside normal gameplay flow
+   [2m[90m↓[39m[22m picture phone six menu anchors its first toolbar column to the left at all widths
+[31m   [31m×[31m picture phone six keeps Close outside the independently scrolling player and action region[39m[33m 378[2mms[22m[39m
+   [2m[90m↓[39m[22m picture phone six opens native Players and options and Close restores its summary focus
+   [2m[90m↓[39m[22m picture phone six cancelling replacement restores its original options control and focus
+   [2m[90m↓[39m[22m picture phone six context reset moves focus out of the now-closed disclosure
+   [2m[90m↓[39m[22m picture phone six new round hands focused primary Start to exposed Join without joining
+   [2m[90m↓[39m[22m picture phone six new round uses summary focus when the exposed Join is unavailable
+   [2m[90m↓[39m[22m picture phone six sending Join exposes one clear cancel action before a transport pending object exists
+   [2m[90m↓[39m[22m picture phone six uncertain Join keeps explicit original Retry in options and one upfront cancel
+   [2m[90m↓[39m[22m picture phone six durable pending keeps visible uncertainty, Leave and labelled draft inspection
+   [2m[90m↓[39m[22m picture phone six landscape status and toolbar wrap as readable units rather than squeezing status
+   [2m[90m↓[39m[22m picture phone six sending Join hands keyboard focus to its exposed cancel control
+   [2m[90m↓[39m[22m picture phone six definitive Join rejection restores deliberate Join without retrying
+   [2m[90m↓[39m[22m picture activation accepted Join then same-round completion clears inferred pending status
+   [2m[90m↓[39m[22m picture activation completion preserves an actual uncertain original Join
+   [2m[90m↓[39m[22m picture activation keeps an exposed focus anchor then hands off after snapshot before Start ACK
+   [2m[90m↓[39m[22m picture activation keeps an exposed focus anchor then hands off after snapshot after Start ACK
+   [2m[90m↓[39m[22m picture activation never takes focus back after choosing chat
+   [2m[90m↓[39m[22m picture activation never takes focus back after choosing reference
+   [2m[90m↓[39m[22m picture activation never takes focus back after choosing options
+   [2m[90m↓[39m[22m picture activation never takes focus back after choosing outside
+   [2m[90m↓[39m[22m picture activation does not hand off after leaving or a context change
+   [2m[90m↓[39m[22m picture activation a definitive Start rejection cannot claim a later round's focus
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-puzzle-ui.test.ts[2m > [22mpicture phone six keeps Close outside the independently scrolling player and action region
+[31m[1mAssertionError[22m: expected null to be truthy[39m
+
+[32m- Expected:[39m
+true
+
+[31m+ Received:[39m
+null
+
+[36m [2m❯[22m spec/house-puzzle-ui.test.ts:[2m117:182[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[33m58 skipped[39m[90m (59)[39m
+[2m   Start at [22m 08:07:26
+[2m   Duration [22m 971ms[2m (import 47%, tests 43%, transform 10%)[22m
+

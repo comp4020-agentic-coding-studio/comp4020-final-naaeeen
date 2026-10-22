@@ -1,0 +1,22 @@
+{
+  "public/house-puzzle-ui.js": {
+    "archive": ".local/picture-phone-six-refinement-before/house-puzzle-ui.js",
+    "sha256": "06f26f19eeb448474227f39186fb1b99e011c7ca7ce1983dcb3448147a905c8c"
+  },
+  "public/house.css": {
+    "archive": ".local/picture-phone-six-refinement-before/house.css",
+    "sha256": "808cd54ce1db7fb34f24fcf3ec267d3c4651651334f9469b75f5f74525564261"
+  },
+  "spec/house-puzzle-ui.test.ts": {
+    "archive": ".local/picture-phone-six-refinement-before/house-puzzle-ui.test.ts",
+    "sha256": "a8d966313ea4f46619c5b5e55285328ec3569e2825d33a4cb1e9dae236fa1de2"
+  },
+  ".local/picture-layout-preflight/run-current-compact-first/raw-result.json": {
+    "archive": ".local/picture-phone-six-refinement-before/raw-result.json",
+    "sha256": "991f157bb01eb649058e5a3bbed6bb5165bdc95e789d2f3d99530f4ea8299905"
+  },
+  ".local/picture-layout-preflight/run-current-compact-first/new-landscape-failure.png": {
+    "archive": ".local/picture-phone-six-refinement-before/new-landscape-failure.png",
+    "sha256": "69c177f5b29b1752996ae452d56f44c5f03c9c6db71149b22af24e7b1e5b22fd"
+  }
+}

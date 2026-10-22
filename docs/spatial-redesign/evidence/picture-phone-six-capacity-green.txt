@@ -1,0 +1,17 @@
+Already up to date
+Done in 48ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [32m✓[39m spec/house-puzzle-ui.test.ts [2m([22m[2m69 tests[22m[2m)[22m[33m 3383[2mms[22m[39m
+   [33m[2m✓[22m[39m picture phone six CSS preserves44px targets and places bounded options outside normal gameplay flow[33m 313[2mms[22m[39m
+ [32m✓[39m spec/house-ui.test.ts [2m([22m[2m138 tests[22m[2m)[22m[33m 23871[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps newer card typing when an earlier submitted version is acknowledged[33m 583[2mms[22m[39m
+   [33m[2m✓[22m[39m retains the original chat UUID through the actual client stale-ACK and automatic outbox retry[33m 394[2mms[22m[39m
+   [33m[2m✓[22m[39m P4 moving snapshots do not repeatedly inspect the persistent outbox[33m 367[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m207 passed[39m[22m[90m (207)[39m
+[2m   Start at [22m 08:11:14
+[2m   Duration [22m 24.68s[2m (tests 95%, import 3%, transform 1%)[22m
+

@@ -1,0 +1,10 @@
+{
+  "public/house-puzzle-ui.js": {
+    "preimage": "docs/spatial-redesign/evidence/picture-phone-six-before-house-puzzle-ui.js",
+    "sha256": "72c10db20bd73294b2cc8931a45c0b4f32f00c9b73fbd58c095749fb3d2ee8ab"
+  },
+  "public/house.css": {
+    "preimage": "docs/spatial-redesign/evidence/picture-phone-six-before-house.css",
+    "sha256": "ac23672a5b3bf349b29463eea8881b98de79e6ddbcef5a08bffab9b045f44e00"
+  }
+}

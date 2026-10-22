@@ -1,4 +1,5 @@
 import { JSDOM } from "jsdom";
+import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { createHousePuzzleUI } from "../public/house-puzzle-ui.js";
 import { PUZZLE_ILLUSTRATIONS } from "../public/house-puzzle-content.js";
@@ -41,3 +42,180 @@ it("a delayed Join ACK after peer completion does not claim participation is sti
 it("completed rounds keep original pending retry and immediate Return without an active Leave control",async()=>{ui.update(state());pending={mode:'join',roundId:'round-one',state:'pending',canRetry:true};ui.update(finishedState());expect(get('[data-puzzle-action="leave"]').hidden).toBe(true);expect(get('[data-puzzle-action="retry"]').hidden).toBe(false);expect((get('[data-puzzle-action="retry"]') as HTMLButtonElement).disabled).toBe(false);click('[data-puzzle-action="retry"]');await tick();expect(retry).toHaveBeenCalledOnce();intent.mockImplementationOnce(()=>new Promise(()=>{}));click('[data-puzzle-action="return"]');expect(onReturn).toHaveBeenCalledOnce();expect(intent).toHaveBeenCalledWith('leave','round-one');});
 
 it.each([undefined,'study-seat-1','rest-seat-1'])('spatial requires a real game chair for Start and Join from %s',seatId=>{const s=state();s.players=[{id:self,connected:true,zoneId:'lounge',seatId}];ui.update(s);expect((get('[data-puzzle-action="join"]') as HTMLButtonElement).disabled).toBe(true);click('[data-puzzle-action="join"]');expect(intent).not.toHaveBeenCalled();const fresh=structuredClone(s);fresh.durable.puzzle.current=null;ui.update(fresh);expect((get('[data-puzzle-action="start"]') as HTMLButtonElement).disabled).toBe(true);});
+
+const sixNames=["Alexandria Montgomery","Christopher Williamson","Genevieve Featherstone","Maximilian Worthington","Theodora Nightingale","Sebastian Winterbourne"];
+function sixPicture(){
+ const s=state(true),ids=sixNames.map((_,index)=>"00000000-0000-4000-8000-"+String(index+1).padStart(12,"0"));
+ s.durable.selfId=ids[5];s.durable.house={id:"00000000-0000-4000-8000-000000000090",ownerId:ids[0],capacity:6};
+ s.durable.residents=ids.map((id,index)=>({id,name:sixNames[index],slot:index,bedroomId:"room-"+index,open:false,colour:"sage",revision:1}));
+ s.players=ids.map((id,index)=>({id,connected:true,zoneId:"lounge",seatId:"game-seat-"+(index+1),seatGeneration:index+1}));
+ s.puzzleRoster.memberIds=ids;s.puzzleRoster.selfParticipationId="00000000-0000-4000-8000-000000000091";s.puzzleRoster.revision=7;
+ s.durable.puzzle.revision=7;s.durable.puzzle.current.id="00000000-0000-4000-8000-000000000092";s.puzzleRoster.roundId=s.durable.puzzle.current.id;s.durable.puzzle.current.placements=art.pieces.slice(0,6).map((piece,index)=>({pieceId:piece.id,destination:piece.destination,actorId:ids[index]}));return s;
+}
+function capacityPicture(capacity:number){
+ const s=sixPicture(),residents=[...s.durable.residents.slice(0,capacity-1),s.durable.residents.at(-1)];
+ s.durable.house.capacity=capacity;s.durable.residents=residents.map((resident,index)=>({...resident,slot:index}));s.players=residents.map((resident,index)=>({...s.players.find((player:{id:string})=>player.id===resident.id),seatId:"game-seat-"+(index+1)}));s.puzzleRoster.memberIds=residents.map(resident=>resident.id);
+ s.durable.puzzle.current.placements=art.pieces.slice(0,capacity).map((piece,index)=>({pieceId:piece.id,destination:piece.destination,actorId:residents[index].id}));return s;
+}
+it.each([2,3,4,5,6])("picture capacity %i counts only the permanent house's matching game chairs",capacity=>{
+ const s=capacityPicture(capacity);ui.update(s);expect(s.players).toHaveLength(capacity);expect(s.puzzleRoster.memberIds).toHaveLength(capacity);expect(s.players.every((player:{seatId:string})=>Number(player.seatId.split("-").at(-1))<=capacity)).toBe(true);
+ expect(get("[data-puzzle-roster]").textContent).toContain(capacity+" / "+capacity+" active");expect(host.querySelectorAll("[data-puzzle-player-id]")).toHaveLength(capacity);expect(intent).not.toHaveBeenCalled();
+});
+it.each([undefined,1,7,2.5,"2"])("picture capacity unavailable or invalid %s falls back to six",capacity=>{
+ const s=capacityPicture(2);s.durable.house.capacity=capacity;ui.update(s);expect(get("[data-puzzle-roster]").textContent).toContain("2 / 6 active");
+});
+it("picture phone six keeps status/count upfront and all names in a closed labelled disclosure",()=>{
+ const s=sixPicture();ui.update(s);const menu=get("[data-puzzle-menu]") as HTMLDetailsElement,summary=get("[data-puzzle-menu-summary]");
+ expect(menu).toBeTruthy();expect(menu.open).toBe(false);expect(summary.tagName).toBe("SUMMARY");expect(summary.textContent).toContain("Players");
+ expect(get("[data-puzzle-roster]").textContent).toContain("You joined");expect(get("[data-puzzle-roster]").textContent).toContain("6 / 6 active");
+ for(const name of sixNames){expect(get("[data-puzzle-roster]").textContent).not.toContain(name);expect(get("[data-puzzle-players]").textContent).toContain(name);}
+ expect(host.querySelectorAll("[data-puzzle-player-id]")).toHaveLength(6);expect(get("[data-puzzle-progress]").textContent).toBe("6 / 24 placed");
+ expect(host.querySelectorAll("[data-puzzle-destination]")).toHaveLength(24);expect([...host.querySelectorAll<HTMLElement>("[data-puzzle-piece]")].filter(item=>!item.hidden)).toHaveLength(12);
+ expect(intent).not.toHaveBeenCalled();expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six promotes Leave and keeps disabled unfinished replacement and Return inside options",()=>{
+ ui.update(sixPicture());const menu=get("[data-puzzle-menu]");
+ expect(get('[data-puzzle-action="leave"]').closest("[data-puzzle-menu]")).toBeNull();expect(get('[data-puzzle-action="leave"]').hidden).toBe(false);
+ expect(menu.contains(get('[data-puzzle-action="start"]'))).toBe(true);expect((get('[data-puzzle-action="start"]') as HTMLButtonElement).disabled).toBe(true);
+ expect(menu.contains(get('[data-puzzle-action="return"]'))).toBe(true);expect((get('[data-puzzle-action="return"]') as HTMLButtonElement).disabled).toBe(false);
+});
+it("picture phone six keeps primary Start/Join/Leave node identity and explicit consent across phases",()=>{
+ const s=sixPicture(),startButton=get('[data-puzzle-action="start"]');s.durable.puzzle.current=null;s.puzzleRoster.roundId=null;s.puzzleRoster.memberIds=[];s.puzzleRoster.selfParticipationId=null;ui.update(s);
+ expect(get("[data-puzzle-primary]").contains(startButton)).toBe(true);expect(startButton.hidden).toBe(false);
+ const watch=sixPicture();watch.puzzleRoster.memberIds=watch.puzzleRoster.memberIds.slice(0,5);watch.puzzleRoster.selfParticipationId=null;ui.update(watch);
+ expect(get("[data-puzzle-primary]").contains(get('[data-puzzle-action="join"]'))).toBe(true);expect(get('[data-puzzle-action="join"]').hidden).toBe(false);
+ ui.update(sixPicture());expect(get("[data-puzzle-primary]").contains(get('[data-puzzle-action="leave"]'))).toBe(true);expect(get('[data-puzzle-action="start"]')).toBe(startButton);
+ click('[data-puzzle-action="next"]');expect(get("[data-puzzle-page]").textContent).toContain("2 of 2");expect([...host.querySelectorAll<HTMLElement>("[data-puzzle-piece]")].filter(item=>!item.hidden)).toHaveLength(12);
+ expect(intent).not.toHaveBeenCalled();expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six preserves disclosure and focus through ordinary roster/name updates without parsing names as HTML",()=>{
+ const s=sixPicture();ui.update(s);const menu=get("[data-puzzle-menu]") as HTMLDetailsElement,summary=get("[data-puzzle-menu-summary]");menu.open=true;summary.focus();
+ const next=structuredClone(s);next.durable.residents[0].name="<img src=x onerror=alert(1)>";next.puzzleRoster.memberIds=next.puzzleRoster.memberIds.slice(0,5);next.puzzleRoster.revision++;ui.update(next);
+ expect(get("[data-puzzle-menu]")).toBe(menu);expect(menu.open).toBe(true);expect(dom.window.document.activeElement).toBe(summary);expect(host.querySelectorAll("[data-puzzle-player-id]")).toHaveLength(5);
+ expect(get("[data-puzzle-players]").textContent).toContain("<img src=x onerror=alert(1)>");expect(get("[data-puzzle-players]").querySelector("img")).toBeNull();
+});
+it("picture phone six Escape closes options and returns focus before outer game handling",()=>{
+ ui.update(sixPicture());const menu=get("[data-puzzle-menu]") as HTMLDetailsElement;menu.open=true;const outer=vi.fn();dom.window.document.addEventListener("keydown",outer);
+ const close=get('[data-puzzle-action="close-menu"]');close.focus();close.dispatchEvent(new dom.window.KeyboardEvent("keydown",{key:"Escape",bubbles:true,cancelable:true}));
+ expect(menu.open).toBe(false);expect(dom.window.document.activeElement).toBe(get("[data-puzzle-menu-summary]"));expect(outer).not.toHaveBeenCalled();
+ get("[data-puzzle-menu-summary]").dispatchEvent(new dom.window.KeyboardEvent("keydown",{key:"Escape",bubbles:true,cancelable:true}));expect(outer).toHaveBeenCalledOnce();
+});
+it.each(["round","context","cleared"])("picture phone six closes disclosure on %s boundaries",boundary=>{
+ const s=sixPicture();ui.update(s);const menu=get("[data-puzzle-menu]") as HTMLDetailsElement;menu.open=true;
+ const next=structuredClone(s);if(boundary==="round"){next.durable.puzzle.current.id="new-round";next.puzzleRoster.roundId="new-round";}else next.generation++;
+ ui.update(boundary==="cleared"?null:next);expect(menu.open).toBe(false);if(boundary==="cleared")expect(host.querySelectorAll("[data-puzzle-player-id]")).toHaveLength(0);
+});
+it("picture phone six keeps original participation recovery discoverable and Return immediately withdraws",()=>{
+ const s=sixPicture();ui.update(s);pending={mode:"join",roundId:s.durable.puzzle.current.id,state:"pending",canRetry:true};ui.update(sixPicture(),{pendingCount:1});
+ expect(get("[data-puzzle-menu-summary]").getAttribute("aria-label")).toMatch(/pending/i);expect(get("[data-puzzle-menu-alert]").hidden).toBe(false);
+ (get("[data-puzzle-menu]") as HTMLDetailsElement).open=true;click('[data-puzzle-action="retry"]');expect(retry).toHaveBeenCalledOnce();click('[data-puzzle-action="return"]');
+ expect(onReturn).toHaveBeenCalledOnce();expect(intent).toHaveBeenCalledWith("leave",s.durable.puzzle.current.id);expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six CSS preserves44px targets and places bounded options outside normal gameplay flow",()=>{
+ const style=dom.window.document.createElement("style");style.textContent=readFileSync(new URL("../public/house.css",import.meta.url),"utf8");dom.window.document.head.append(style);
+ const panel=dom.window.document.createElement("aside");panel.className="panel";panel.dataset.tool="game";panel.dataset.breakActivity="picture";host.replaceWith(panel);panel.append(host);ui.update(sixPicture());
+ for(const item of [get("[data-puzzle-menu-summary]"),get('[data-puzzle-action="reference"]'),get('[data-puzzle-action="chat"]'),get('[data-puzzle-action="leave"]'),get('[data-puzzle-action="previous"]'),get('[data-puzzle-action="next"]'),get('[data-puzzle-destination="0"]'),get('[data-puzzle-piece="notebook"]')]){
+  const css=dom.window.getComputedStyle(item);expect(Number.parseFloat(css.minHeight)).toBeGreaterThanOrEqual(44);expect(Number.parseFloat(css.minWidth)).toBeGreaterThanOrEqual(44);
+ }
+ expect(dom.window.getComputedStyle(get("[data-puzzle-menu-body]")).position).toBe("absolute");expect(dom.window.getComputedStyle(get("[data-puzzle-menu-scroll]")).overflowY).toBe("auto");
+});
+it("picture phone six menu anchors its first toolbar column to the left at all widths",()=>{
+ const style=dom.window.document.createElement("style");style.textContent=readFileSync(new URL("../public/house.css",import.meta.url),"utf8");dom.window.document.head.append(style);ui.update(sixPicture());
+ const menu=get("[data-puzzle-menu]");expect(get(".puzzle-toolbar").firstElementChild).toBe(menu);expect(dom.window.getComputedStyle(menu).position).toBe("relative");
+ const css=dom.window.getComputedStyle(get("[data-puzzle-menu-body]"));expect(css.left).toBe("0px");expect(css.right).toBe("auto");expect(Number.parseFloat(css.width)).toBeLessThanOrEqual(Math.min(340,dom.window.innerWidth-52));expect(css.overflow).toBe("hidden");expect(css.maxHeight).toContain("60dvh");
+});
+it("picture phone six keeps Close outside the independently scrolling player and action region",()=>{
+ const style=dom.window.document.createElement("style");style.textContent=readFileSync(new URL("../public/house.css",import.meta.url),"utf8");dom.window.document.head.append(style);ui.update(sixPicture());
+ const body=get("[data-puzzle-menu-body]"),scroll=get("[data-puzzle-menu-scroll]"),heading=get(".puzzle-menu-heading"),close=get('[data-puzzle-action="close-menu"]');expect(scroll).toBeTruthy();expect(heading.parentElement).toBe(body);expect(scroll.parentElement).toBe(body);expect(scroll.contains(close)).toBe(false);expect(heading.contains(close)).toBe(true);
+ for(const selector of ["[data-puzzle-players]",'[data-puzzle-action="start"]','[data-puzzle-action="return"]','[data-puzzle-action="retry"]','[data-puzzle-action="pending"]'])expect(scroll.contains(get(selector))).toBe(true);
+ const bodyCSS=dom.window.getComputedStyle(body),scrollCSS=dom.window.getComputedStyle(scroll),headerCSS=dom.window.getComputedStyle(heading);expect(bodyCSS.display).toBe("flex");expect(bodyCSS.flexDirection).toBe("column");expect(bodyCSS.overflow).toBe("hidden");expect(scrollCSS.overflowY).toBe("auto");expect(scrollCSS.minHeight).toBe("0px");expect(headerCSS.position).toBe("static");expect(headerCSS.flexShrink).toBe("0");expect(Number.parseFloat(dom.window.getComputedStyle(close).minHeight)).toBeGreaterThanOrEqual(44);
+});
+it("picture phone six opens native Players and options and Close restores its summary focus",()=>{
+ ui.update(sixPicture());const menu=get("[data-puzzle-menu]") as HTMLDetailsElement,summary=get("[data-puzzle-menu-summary]");summary.click();expect(menu.open).toBe(true);
+ click('[data-puzzle-action="close-menu"]');expect(menu.open).toBe(false);expect(dom.window.document.activeElement).toBe(summary);expect(intent).not.toHaveBeenCalled();expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six cancelling replacement restores its original options control and focus",()=>{
+ const s=sixPicture();s.durable.selfId=s.durable.house.ownerId;s.puzzleRoster.memberIds=[s.durable.selfId];ui.update(s);const menu=get("[data-puzzle-menu]") as HTMLDetailsElement;menu.open=true;
+ click('[data-puzzle-action="start"]');expect(menu.open).toBe(false);expect(get("[data-puzzle-reset]").hidden).toBe(false);click('[data-puzzle-action="cancel"]');
+ expect(menu.open).toBe(true);expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="start"]'));expect(send).not.toHaveBeenCalled();expect(intent).not.toHaveBeenCalled();
+});
+it("picture phone six context reset moves focus out of the now-closed disclosure",()=>{
+ const s=sixPicture();ui.update(s);const menu=get("[data-puzzle-menu]") as HTMLDetailsElement;menu.open=true;get('[data-puzzle-action="close-menu"]').focus();
+ const next=structuredClone(s);next.accessGeneration++;ui.update(next);expect(menu.open).toBe(false);expect(dom.window.document.activeElement).toBe(get("[data-puzzle-menu-summary]"));
+});
+it("picture phone six new round hands focused primary Start to exposed Join without joining",()=>{
+ const initial=sixPicture();initial.durable.puzzle.current=null;initial.puzzleRoster.roundId=null;initial.puzzleRoster.memberIds=[];initial.puzzleRoster.selfParticipationId=null;ui.update(initial);
+ const start=get('[data-puzzle-action="start"]');start.focus();const next=sixPicture();next.puzzleRoster.memberIds=next.puzzleRoster.memberIds.slice(0,5);next.puzzleRoster.selfParticipationId=null;ui.update(next);
+ expect(get("[data-puzzle-menu]").contains(start)).toBe(true);expect((get("[data-puzzle-menu]") as HTMLDetailsElement).open).toBe(false);
+ expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="join"]'));expect(intent).not.toHaveBeenCalled();expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six new round uses summary focus when the exposed Join is unavailable",()=>{
+ const initial=sixPicture();initial.durable.puzzle.current=null;initial.puzzleRoster.roundId=null;initial.puzzleRoster.memberIds=[];initial.puzzleRoster.selfParticipationId=null;ui.update(initial);get('[data-puzzle-action="start"]').focus();
+ const next=sixPicture();next.puzzleRoster.memberIds=next.puzzleRoster.memberIds.slice(0,5);next.puzzleRoster.selfParticipationId=null;next.controller=false;ui.update(next);
+ expect((get('[data-puzzle-action="join"]') as HTMLButtonElement).disabled).toBe(true);expect(dom.window.document.activeElement).toBe(get("[data-puzzle-menu-summary]"));expect(intent).not.toHaveBeenCalled();
+});
+it("picture phone six sending Join exposes one clear cancel action before a transport pending object exists",async()=>{
+ const s=sixPicture();s.puzzleRoster.memberIds=s.puzzleRoster.memberIds.slice(0,5);s.puzzleRoster.selfParticipationId=null;ui.update(s);let finish:any;intent.mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve;}));click('[data-puzzle-action="join"]');
+ const primary=[...get("[data-puzzle-primary]").querySelectorAll<HTMLButtonElement>("button")].filter(item=>!item.hidden);expect(primary).toEqual([get('[data-puzzle-action="leave"]')]);expect(primary[0].textContent).toBe("Cancel joining");
+ expect(get("[data-puzzle-roster]").textContent).toContain("watching");expect(get("[data-puzzle-roster]").textContent).toMatch(/join pending/i);expect(retry).not.toHaveBeenCalled();
+ finish({ok:true});await tick();expect(get("[data-puzzle-roster]").textContent).not.toContain("You joined");ui.update(sixPicture());expect(get('[data-puzzle-action="leave"]').textContent).toBe("Leave picture");expect(intent).toHaveBeenCalledOnce();
+});
+it("picture phone six uncertain Join keeps explicit original Retry in options and one upfront cancel",async()=>{
+ const s=sixPicture();s.puzzleRoster.memberIds=s.puzzleRoster.memberIds.slice(0,5);s.puzzleRoster.selfParticipationId=null;pending={mode:"join",roundId:s.durable.puzzle.current.id,state:"pending",canRetry:true};ui.update(s);
+ expect([...get("[data-puzzle-primary]").querySelectorAll<HTMLButtonElement>("button")].filter(item=>!item.hidden)).toEqual([get('[data-puzzle-action="leave"]')]);expect(get('[data-puzzle-action="leave"]').textContent).toBe("Cancel joining");
+ expect(get("[data-puzzle-roster]").textContent).toMatch(/join pending/i);expect(get("[data-puzzle-menu-summary]").getAttribute("aria-label")).toMatch(/pending/i);expect(get("[data-puzzle-menu-alert]").hidden).toBe(false);expect(retry).not.toHaveBeenCalled();expect(intent).not.toHaveBeenCalled();
+ get("[data-puzzle-menu-summary]").click();expect((get("[data-puzzle-menu]") as HTMLDetailsElement).open).toBe(true);expect(get('[data-puzzle-action="retry"]').textContent).toBe("Retry original join");click('[data-puzzle-action="retry"]');await tick();expect(retry).toHaveBeenCalledOnce();expect(intent).not.toHaveBeenCalled();expect(get("[data-puzzle-roster]").textContent).not.toContain("You joined");
+ click('[data-puzzle-action="leave"]');expect(intent).toHaveBeenCalledWith("leave",s.durable.puzzle.current.id);expect(onLeave).toHaveBeenCalledOnce();expect(send).not.toHaveBeenCalled();
+});
+it("picture phone six durable pending keeps visible uncertainty, Leave and labelled draft inspection",()=>{
+ const s=sixPicture();ui.update(s,{pendingCount:1});expect(get("[data-puzzle-roster]").textContent).toMatch(/save pending/i);expect(get("[data-puzzle-menu-alert]").hidden).toBe(false);
+ expect([...get("[data-puzzle-primary]").querySelectorAll<HTMLButtonElement>("button")].filter(item=>!item.hidden)).toEqual([get('[data-puzzle-action="leave"]')]);expect(get('[data-puzzle-action="leave"]').textContent).toBe("Leave picture");
+ get("[data-puzzle-menu-summary]").click();expect(get('[data-puzzle-action="pending"]').hidden).toBe(false);expect(get("[data-puzzle-menu]").contains(get('[data-puzzle-action="pending"]'))).toBe(true);expect(get('[data-puzzle-action="pending"]').textContent).toMatch(/pending.*action/i);
+ click('[data-puzzle-piece="notebook"]');click('[data-puzzle-destination="15"]');expect(send).not.toHaveBeenCalled();expect(intent).not.toHaveBeenCalled();expect(get('[data-puzzle-destination="15"]').getAttribute("aria-disabled")).toBe("true");
+});
+it("picture phone six landscape status and toolbar wrap as readable units rather than squeezing status",()=>{
+ const style=dom.window.document.createElement("style");style.textContent=readFileSync(new URL("../public/house.css",import.meta.url),"utf8");dom.window.document.head.append(style);ui.update(sixPicture());
+ expect(dom.window.getComputedStyle(get(".puzzle-top")).flexWrap).toBe("wrap");expect(dom.window.getComputedStyle(get("[data-puzzle-roster]")).flexShrink).toBe("0");expect(dom.window.getComputedStyle(get("[data-puzzle-roster]")).whiteSpace).toBe("nowrap");
+});
+it("picture phone six sending Join hands keyboard focus to its exposed cancel control",()=>{
+ const s=sixPicture();s.puzzleRoster.memberIds=s.puzzleRoster.memberIds.slice(0,5);s.puzzleRoster.selfParticipationId=null;ui.update(s);intent.mockImplementationOnce(()=>new Promise(()=>{}));
+ get('[data-puzzle-action="join"]').focus();click('[data-puzzle-action="join"]');expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="leave"]'));expect(intent).toHaveBeenCalledOnce();
+});
+it("picture phone six definitive Join rejection restores deliberate Join without retrying",async()=>{
+ const s=sixPicture();s.puzzleRoster.memberIds=s.puzzleRoster.memberIds.slice(0,5);s.puzzleRoster.selfParticipationId=null;ui.update(s);intent.mockRejectedValueOnce(Object.assign(new Error("Sit in an activity chair first."),{code:"ACTIVITY_SEAT_REQUIRED"}));
+ get('[data-puzzle-action="join"]').focus();click('[data-puzzle-action="join"]');await tick();expect(get('[data-puzzle-action="join"]').hidden).toBe(false);expect(get('[data-puzzle-action="leave"]').hidden).toBe(true);expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="join"]'));expect(get("[data-puzzle-roster]").textContent).not.toMatch(/join pending/i);expect(get("[data-puzzle-feedback]").textContent).toContain("Sit in an activity chair");expect(intent).toHaveBeenCalledOnce();expect(retry).not.toHaveBeenCalled();
+});
+it("picture activation accepted Join then same-round completion clears inferred pending status",async()=>{
+ const watch=sixPicture();watch.puzzleRoster.memberIds=watch.puzzleRoster.memberIds.slice(0,5);watch.puzzleRoster.selfParticipationId=null;ui.update(watch);click('[data-puzzle-action="join"]');await tick();ui.update(sixPicture());
+ const complete=sixPicture();complete.durable.puzzle.current.completed=true;complete.puzzleRoster.memberIds=[];complete.puzzleRoster.selfParticipationId=null;ui.update(complete);
+ expect(get("[data-puzzle-roster]").textContent).toContain("watching");expect(get("[data-puzzle-roster]").textContent).not.toMatch(/pending/i);expect(get("[data-puzzle-menu-alert]").hidden).toBe(true);expect(get("[data-puzzle-menu-summary]").getAttribute("aria-label")).not.toMatch(/pending/i);expect(get('[data-puzzle-action="leave"]').hidden).toBe(true);
+});
+it("picture activation completion preserves an actual uncertain original Join",()=>{
+ const complete=sixPicture();complete.durable.puzzle.current.completed=true;complete.puzzleRoster.memberIds=[];complete.puzzleRoster.selfParticipationId=null;pending={mode:"join",roundId:complete.durable.puzzle.current.id,state:"pending",canRetry:true};ui.update(complete);
+ expect(get("[data-puzzle-roster]").textContent).toMatch(/join pending/i);expect(get("[data-puzzle-menu-alert]").hidden).toBe(false);expect(get('[data-puzzle-action="retry"]').hidden).toBe(false);expect(retry).not.toHaveBeenCalled();expect(intent).not.toHaveBeenCalled();
+});
+function readyToStart(){
+ const s=sixPicture();s.durable.puzzle.current=null;s.puzzleRoster.roundId=null;s.puzzleRoster.memberIds=[];s.puzzleRoster.selfParticipationId=null;return s;
+}
+function watchingSix(){
+ const s=sixPicture();s.puzzleRoster.memberIds=s.puzzleRoster.memberIds.slice(0,5);s.puzzleRoster.selfParticipationId=null;return s;
+}
+it.each(["before","after"])("picture activation keeps an exposed focus anchor then hands off after snapshot %s Start ACK",async order=>{
+ let finish:any;send.mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve;}));ui.update(readyToStart());const start=get('[data-puzzle-action="start"]');start.focus();start.click();
+ expect(send).toHaveBeenCalledOnce();expect(send).toHaveBeenCalledWith("puzzle.start",expect.objectContaining({expectedRoundId:null}),7);expect((start as HTMLButtonElement).disabled).toBe(true);expect(dom.window.document.activeElement).toBe(get("[data-puzzle-menu-summary]"));
+ ui.update(readyToStart());expect(dom.window.document.activeElement).toBe(get("[data-puzzle-menu-summary]"));if(order==="after"){finish({ok:true});await tick();}
+ ui.update(watchingSix());expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="join"]'));expect(intent).not.toHaveBeenCalled();if(order==="before"){finish({ok:true});await tick();}expect(dom.window.document.activeElement).toBe(get('[data-puzzle-action="join"]'));
+});
+it.each(["chat","reference","options","outside"])("picture activation never takes focus back after choosing %s",choice=>{
+ send.mockImplementationOnce(()=>new Promise(()=>{}));ui.update(readyToStart());get('[data-puzzle-action="start"]').focus();click('[data-puzzle-action="start"]');
+ if(choice==="outside"){const outside=dom.window.document.createElement("button");outside.textContent="Other task";dom.window.document.body.append(outside);outside.focus();}
+ else{const control=get(choice==="options"?"[data-puzzle-menu-summary]":'[data-puzzle-action="'+choice+'"]');control.focus();control.click();}
+ const chosen=dom.window.document.activeElement;ui.update(watchingSix());expect(dom.window.document.activeElement).toBe(chosen);expect(dom.window.document.activeElement).not.toBe(get('[data-puzzle-action="join"]'));expect(intent).not.toHaveBeenCalled();expect(send).toHaveBeenCalledOnce();
+});
+it("picture activation does not hand off after leaving or a context change",()=>{
+ send.mockImplementation(()=>new Promise(()=>{}));ui.update(readyToStart());get('[data-puzzle-action="start"]').focus();click('[data-puzzle-action="start"]');ui.leave();ui.update(watchingSix());expect(dom.window.document.activeElement).not.toBe(get('[data-puzzle-action="join"]'));expect(onLeave).toHaveBeenCalledOnce();
+ const initial=readyToStart();ui.update(initial);get('[data-puzzle-action="start"]').focus();click('[data-puzzle-action="start"]');const changed=readyToStart();changed.generation++;changed.durable.selfId=changed.durable.residents[0].id;ui.update(changed);const arrival=watchingSix();arrival.generation=changed.generation;arrival.durable.selfId=changed.durable.selfId;ui.update(arrival);expect(dom.window.document.activeElement).not.toBe(get('[data-puzzle-action="join"]'));expect(intent).not.toHaveBeenCalled();
+});
+it("picture activation a definitive Start rejection cannot claim a later round's focus",async()=>{
+ let reject:any;send.mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));ui.update(readyToStart());get('[data-puzzle-action="start"]').focus();click('[data-puzzle-action="start"]');reject(Object.assign(new Error("Start rejected."),{code:"PUZZLE_STALE_ROUND"}));await tick();const chosen=dom.window.document.activeElement;ui.update(watchingSix());expect(dom.window.document.activeElement).toBe(chosen);expect(intent).not.toHaveBeenCalled();
+});

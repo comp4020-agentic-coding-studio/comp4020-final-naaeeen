@@ -1,0 +1,21 @@
+{
+  "gitHeadAtVerification": "bdcc1ea5945fa8952e2bcef4fb2bc26d1f19de3d",
+  "files": {
+    "public/house-puzzle-ui.js": "a1081403e364a7f6c48c9cfa55d8d5f2c2e40ba361f6466df793ac94a387b2f5",
+    "public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89",
+    "spec/house-puzzle-ui.test.ts": "136ce8d2c6a4d2212596c70d6829a3973c5f2decb25691d5b1241b83ab47865b"
+  },
+  "checks": {
+    "focusedComponent": "57/57 PASS",
+    "projectTypecheck": "PASS",
+    "nodeSyntax": "PASS",
+    "scopedDiffCheck": "PASS",
+    "browserNativeLoad": "NOT RUN in this refinement"
+  },
+  "coverage": {
+    "statements": 94.97,
+    "branches": 91.32,
+    "functions": 89.7,
+    "lines": 98.88
+  }
+}

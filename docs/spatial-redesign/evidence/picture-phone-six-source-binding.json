@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-23",
+  "head": "fbdc853fe48d655bad47383d67f2f802d5b8a957",
+  "applicationBaseline": "fbdc853",
+  "files": {
+    "public/house-puzzle-ui.js": "06f26f19eeb448474227f39186fb1b99e011c7ca7ce1983dcb3448147a905c8c",
+    "public/house.css": "808cd54ce1db7fb34f24fcf3ec267d3c4651651334f9469b75f5f74525564261",
+    "spec/house-puzzle-ui.test.ts": "a8d966313ea4f46619c5b5e55285328ec3569e2825d33a4cb1e9dae236fa1de2"
+  },
+  "checks": {
+    "componentTests": "39/39 PASS",
+    "wholeCheckoutTypecheck": "PASS",
+    "nodeSyntax": "PASS",
+    "ownedDiffWhitespace": "PASS",
+    "coverage": {
+      "statements": 93.36,
+      "branches": 86.92,
+      "functions": 85.71,
+      "lines": 98.78
+    }
+  },
+  "nativeFit": "NOT RUN by worker; parent matched real-wrapper preflight pending",
+  "otherBoundaries": {
+    "backend": "unchanged",
+    "geometry": "unchanged",
+    "outerWrapper": "unchanged",
+    "boardAndTrayScale": "unchanged",
+    "fullSuite": "not run",
+    "services": "none started",
+    "load": "not run",
+    "commits": "none"
+  }
+}
