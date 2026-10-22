@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "profile": "baseline",
+  "protocolSHA256": "5bb4e7c9aabdc1f2166951673588b7ca5e29acf59a382e81734b829b0ac365a1",
+  "sourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
+  "durationSeconds": 300,
+  "gatesPassed": 23,
+  "gateCount": 23,
+  "failedGates": [],
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": true,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": true,
+    "normalInputs": true,
+    "workload": true,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": true,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true
+  },
+  "sampledPeakMiB": 191.3515625,
+  "OSPeakMiB": 193.9765625,
+  "diagnosticStatus": "VALID",
+  "errors": {},
+  "processClosure": {
+    "generatorPID": 67127,
+    "serverPID": 67151,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "parentExecution": {
+    "exitCode": 0,
+    "elapsedSeconds": 300.1064863204956,
+    "reportedProcessIDsAbsent": true,
+    "reportedProcessIDs": {
+      "generatorPID": 67127,
+      "serverPID": 67151
+    },
+    "existingProcesses": {
+      "58795": "service",
+      "66098": "service"
+    },
+    "newOwnedProcessesRemaining": {},
+    "protocolUnchanged": true,
+    "sourceUnchanged": true
+  },
+  "scope": "Actual first reuse-candidate full run. Mixed completed300s with all24 spatial media checks, memory and29/30gates passing; two normal motion RATE_LIMITED ACK causes were not retained and remain UNKNOWN."
+}

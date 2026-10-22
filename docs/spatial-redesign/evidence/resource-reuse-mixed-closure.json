@@ -1,0 +1,74 @@
+{
+  "status": "FAIL",
+  "profile": "mixed",
+  "protocolSHA256": "2f945399134c7d6e5f2a4097c60eeae6ff9ed764513809b5ed52b8e12a3e6042",
+  "sourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
+  "durationSeconds": 300.001,
+  "gatesPassed": 29,
+  "gateCount": 30,
+  "failedGates": [
+    "normalInputs"
+  ],
+  "gates": {
+    "scopedDelivery": true,
+    "inbound": true,
+    "httpBudget": true,
+    "duration": true,
+    "all24Initial": true,
+    "all24Final": true,
+    "rss": true,
+    "boardQueues": true,
+    "houseQueues": true,
+    "telemetryValid": true,
+    "eventLoop": true,
+    "health": true,
+    "unexpectedDisconnects": true,
+    "allNormalDelivered": true,
+    "allDeliveredIncludingCatchup": true,
+    "normalP95": true,
+    "normalInputs": false,
+    "workload": true,
+    "recovery": true,
+    "negativeAck": true,
+    "slowExpiry": true,
+    "gameActionsAndVisibleRevisions": true,
+    "gameReceiptAndStateGrowth": true,
+    "spatialLifecycle": true,
+    "spatialMotion": true,
+    "receiptReplayExact": true,
+    "receiptStoredGrowth": true,
+    "pictureActionsAndDelivery": true,
+    "picturePersistenceAndReceipts": true,
+    "spatialPersistenceAndBounds": true
+  },
+  "sampledPeakMiB": 193.44140625,
+  "OSPeakMiB": 194.05078125,
+  "diagnosticStatus": "VALID",
+  "errors": {
+    "RATE_LIMITED": 2
+  },
+  "processClosure": {
+    "generatorPID": 67193,
+    "serverPID": 67217,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "parentExecution": {
+    "exitCode": 1,
+    "elapsedSeconds": 305.3815698623657,
+    "reportedProcessIDsAbsent": true,
+    "reportedProcessIDs": {
+      "generatorPID": 67193,
+      "serverPID": 67217
+    },
+    "existingProcesses": {
+      "58795": "service",
+      "66098": "service"
+    },
+    "newOwnedProcessesRemaining": {},
+    "protocolUnchanged": true,
+    "sourceUnchanged": true
+  },
+  "scope": "Actual first reuse-candidate full run. Mixed completed300s with all24 spatial media checks, memory and29/30gates passing; two normal motion RATE_LIMITED ACK causes were not retained and remain UNKNOWN."
+}
