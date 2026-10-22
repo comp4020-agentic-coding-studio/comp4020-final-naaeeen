@@ -1,0 +1,23 @@
+{
+  "extractedOldHeaderInstrumentSHA256": "80b8a178800c4adf79f58ca7287f8e7ec9c155078800e62db06cdaf482826f9e",
+  "specSHA256": "94ec9cf0c7dc6baabb522392322aa6b796e0acc39bf3f78c7aae9ac5b85aa3c0",
+  "observations": {
+    "statuses": [
+      409,
+      409,
+      409
+    ],
+    "commandRows": [
+      0,
+      0,
+      0
+    ],
+    "roomRevisionDeltas": [
+      0,
+      0,
+      0
+    ],
+    "uniqueCommandIds": 3,
+    "serviceClosed": true
+  }
+}

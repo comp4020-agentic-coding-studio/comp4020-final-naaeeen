@@ -1,0 +1,51 @@
+{
+  "status": "FIXTURE_FIX_A_FROZEN_FOR_FRESH_REVIEW",
+  "sourceHashes": {
+    "tools/spatial-resource.mjs": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8",
+    "spec/spatial-resource-zone-header.test.ts": "94ec9cf0c7dc6baabb522392322aa6b796e0acc39bf3f78c7aae9ac5b85aa3c0"
+  },
+  "originalSpatialSHA256": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb",
+  "scope": "Extracted existing header builder used by actual request(); only semantic header change is X-House-Zone from current actor.snapshot.durable.zoneId. Production authority, schedules, bodies, roles, limits, categories and gates unchanged.",
+  "firstRed": {
+    "statuses": [
+      409,
+      409,
+      409
+    ],
+    "commandRows": [
+      0,
+      0,
+      0
+    ],
+    "roomRevisionDeltas": [
+      0,
+      0,
+      0
+    ],
+    "uniqueCommandIds": 3,
+    "serviceClosed": true,
+    "log": "zone-header-first-red.txt"
+  },
+  "firstGreen": {
+    "statuses": [
+      409,
+      409,
+      200
+    ],
+    "commandRows": [
+      0,
+      0,
+      1
+    ],
+    "roomRevisionDeltas": [
+      0,
+      0,
+      1
+    ],
+    "uniqueCommandIds": 3,
+    "serviceClosed": true,
+    "log": "zone-header-first-green.txt"
+  },
+  "verificationScope": "One isolated real HTTP/Socket.IO controller and owned bedroom, real SQLite receipt counts; absolute mise with APP_URL=http://127.0.0.1:4108. No IDs/cookies/tokens/payloads retained in observations.",
+  "notRun": "No full resource, full suite, native browser, bootstrap, trace or binding. No performance/cause inference beyond this request boundary."
+}

@@ -1,0 +1,6 @@
+{
+  "status": "BEFORE_HEADER_EXTRACTION",
+  "spatialInstrumentSHA256": "1b4ce05747a286699f01d85cf3fdb19ea9e26777d6053768e48330e4bd702ebb",
+  "preimagePath": "docs/spatial-redesign/evidence/zone-header-preimage-spatial.mjs",
+  "scope": "Extract only the existing headers before RED; add current snapshot zone only after the real boundary RED."
+}

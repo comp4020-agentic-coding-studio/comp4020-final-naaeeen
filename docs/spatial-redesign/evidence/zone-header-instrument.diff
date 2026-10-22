@@ -1,0 +1,25 @@
+--- docs/spatial-redesign/evidence/zone-header-preimage-spatial.mjs
++++ tools/spatial-resource.mjs
+@@ -153,6 +153,11 @@
+   return games.length===4&&games.every(row=>row.seatedSeconds>=290)&&walkers.length===5&&walkers.every(row=>row.standingSeconds>=160);
+ }
+ 
++export function spatialRequestHeaders(origin, actor, hasBody) {
++  const own=actor.snapshot.players.find(person=>person.id===actor.identity);
++  return {Origin:origin,Cookie:actor.cookie,"X-House-Identity":actor.identity,...(hasBody?{"Content-Type":"application/json"}:{}),"X-House-Generation":String(actor.generation),"X-House-Controller-Token":actor.token,"X-House-Access-Generation":String(actor.snapshot.accessGeneration),"X-House-Seat-Generation":String(own.seatGeneration),"X-House-Zone":actor.snapshot.durable.zoneId};
++}
++
+ export function createSpatialWorkload({origin,scenario,signal,rpc,houses,views,onSubscribe,reconnect,rateAttribution=null}) {
+   const actors=resourceActorMap(houses,views),all=actors.byHouse.flat(),media=actors.media;
+   const evidence={status:"PREPARING",rootViews:12,boardViews:12,reconnects:0,allGameSeatsBy255:false,roleMap:{gameMembers:[1,2],mediaHouse:1,mediaMembers:[0,3,4],walkerMembers:[[0,3,4,5],[5]]},seatClaims:[],motion:[],media:{checks:{},uploads:[],markerActions:0,httpBudget:[]}};
+@@ -189,8 +194,8 @@
+   }
+   async function at(seconds){const deadline=start+seconds*1000;while(performance.now()<deadline)await timerDelay(Math.max(1,deadline-performance.now()),undefined,{signal});if(performance.now()-deadline>1000)fail("SPATIAL_MEDIA_DEADLINE");}
+   async function request(path,actor,body,expectedStatus=200,binary=false){
+-    const counter=httpCounts.get(actor),now=performance.now();counter[body===undefined?"reads":"posts"].push(now);const own=self(actor);
+-    const response=await fetch(origin+path,{method:body===undefined?"GET":"POST",headers:{Origin:origin,Cookie:actor.cookie,"X-House-Identity":actor.identity,...(body===undefined?{}:{"Content-Type":"application/json"}),"X-House-Generation":String(actor.generation),"X-House-Controller-Token":actor.token,"X-House-Access-Generation":String(actor.snapshot.accessGeneration),"X-House-Seat-Generation":String(own.seatGeneration)},...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.any([signal,AbortSignal.timeout(10000)])});
++    const counter=httpCounts.get(actor),now=performance.now();counter[body===undefined?"reads":"posts"].push(now);
++    const response=await fetch(origin+path,{method:body===undefined?"GET":"POST",headers:spatialRequestHeaders(origin,actor,body!==undefined),...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.any([signal,AbortSignal.timeout(10000)])});
+     if(response.status!==expectedStatus){const error=await response.json().catch(()=>({}));fail("SPATIAL_HTTP_"+response.status+"_"+(error.code??"UNKNOWN"));}
+     if(expectedStatus!==200)return response.json();if(binary){if(!response.headers.get("cache-control")?.includes("no-store")||response.headers.get("content-type")!=="image/png")fail("SPATIAL_IMAGE_HEADERS");return Buffer.from(await response.arrayBuffer());}return response.json();
+   }

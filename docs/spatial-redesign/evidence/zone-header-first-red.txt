@@ -1,0 +1,38 @@
+Already up to date
+Done in 50ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+[90mstdout[2m | spec/spatial-resource-zone-header.test.ts[2m > [22m[2mactual workload headers preserve missing/wrong-zone denial and admit one current-room effect
+[22m[39mzone-header-observation {"statuses":[409,409,409],"commandRows":[0,0,0],"roomRevisionDeltas":[0,0,0],"uniqueCommandIds":3,"serviceClosed":true}
+
+ [31m❯[39m spec/spatial-resource-zone-header.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 109[2mms[22m[39m
+[31m   [31m×[31m actual workload headers preserve missing/wrong-zone denial and admit one current-room effect[39m[32m 108[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m   Start at [22m 10:04:41
+[2m   Duration [22m 541ms[2m (transform 55%, tests 24%, import 21%, worker 1%)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-zone-header.test.ts[2m > [22mactual workload headers preserve missing/wrong-zone denial and admit one current-room effect
+[31m[1mAssertionError[22m: expected 409 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 409[39m
+
+[36m [2m❯[22m spec/spatial-resource-zone-header.test.ts:[2m58:33[22m[39m
+    [90m 56|[39m         expect(current.revision).toBe(revision); expect(current.open).…
+    [90m 57|[39m       } else {
+    [90m 58|[39m         expect(response.status).toBe(200); expect(reply.ok).toBe(true);
+    [90m   |[39m                                 [31m^[39m
+    [90m 59|[39m         expect(current.revision).toBe(revision + 1); expect(current.op…
+    [90m 60|[39m       }
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
