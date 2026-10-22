@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-23",
+  "reason": "Raw working-source digests must match LF Git/CI checkout; captured preimages/evidence remain byte-exact",
+  "scope": "Production src/public-top-level/tools only; no authored data or historical evidence normalized",
+  "changes": [
+    {
+      "path": "public/house-ambience.js",
+      "preimage": "docs/spatial-redesign/evidence/lf-source-preimages/public/house-ambience.js",
+      "beforeSHA256": "d16198bf0b17d95ba935b212dc739234c5f27251ca55a471ba5d14ce2dd2bd17",
+      "afterSHA256": "2600c35403db5ebf0f69cb9a3d19ef2d470048205c98e07223c5b2ad2c2f24b1",
+      "crlfPairsReplaced": 1,
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "public/house-studio.css",
+      "preimage": "docs/spatial-redesign/evidence/lf-source-preimages/public/house-studio.css",
+      "beforeSHA256": "4c382064492e7e49f15351f870a9074d6f2746fbc7a27f8cc67ce24214a49527",
+      "afterSHA256": "8b6bab8b42605607fcb4f73109a824a2327217591475ef13e8a1dccdd3816c1d",
+      "crlfPairsReplaced": 1,
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "public/house-studio-ui.js",
+      "preimage": "docs/spatial-redesign/evidence/lf-source-preimages/public/house-studio-ui.js",
+      "beforeSHA256": "f19303e3b3f7e66339d586fbd18383024c6fe4e6c2f395433df5e7064402975f",
+      "afterSHA256": "9ce9ba28abad46215efbb5244ba61bf79f878b1d1302c9a23c3a773c0fa83699",
+      "crlfPairsReplaced": 1,
+      "onlyCRLFToLF": true
+    }
+  ],
+  "followup": "Run current required and browser/resource acceptance on normalized final source"
+}

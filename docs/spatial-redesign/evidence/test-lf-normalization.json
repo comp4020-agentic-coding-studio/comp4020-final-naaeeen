@@ -1,0 +1,40 @@
+{
+  "scope": "Only files touched in this goal; pre-existing unrelated tests preserved",
+  "changes": [
+    {
+      "path": "spec/house-ambience.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/lf-test-preimages/spec/house-ambience.test.ts",
+      "beforeSHA256": "ed606becda7cc0a22c9295e179e9bdafde6d1f8262118bb62b1ee65292dca469",
+      "afterSHA256": "ee14346ec4b739467354d106880c2adea7dec531bf3063f722a4067d627b657b",
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "spec/house-gathering-ui.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/lf-test-preimages/spec/house-gathering-ui.test.ts",
+      "beforeSHA256": "cfe843e1dbe3e4ddde1e4304946f4ce79b5cfcbaed15578ded6c26dc72f0d7cf",
+      "afterSHA256": "2c04f0ac0c2b2033e63520d8d30b101ed8e665c5ce0fad5a9e88f48fe16b93f4",
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "spec/house-spatial-http.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/lf-test-preimages/spec/house-spatial-http.test.ts",
+      "beforeSHA256": "9086e99693e3dd08965b1cfaaef5a28f14d8a1ac6add34af62b78e4dec5d03f0",
+      "afterSHA256": "b2294c35f2c0f3f59d5f3d759ff8880ca5c84510c80630664852d849e1ed8f28",
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "spec/house-studio-ui.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/lf-test-preimages/spec/house-studio-ui.test.ts",
+      "beforeSHA256": "3fbcfe800eed1274b513758c90a423a47b2ff55fd02650daa374be15edf4a566",
+      "afterSHA256": "b5a2ff682db84e82cc83b76e8363b6fea2438497b60d7ad1c5c4e567d10668aa",
+      "onlyCRLFToLF": true
+    },
+    {
+      "path": "spec/house-studio.test.ts",
+      "preimage": "docs/spatial-redesign/evidence/lf-test-preimages/spec/house-studio.test.ts",
+      "beforeSHA256": "15d229b516b4608b81c9d20b0692f324424fea48a35ee7a85b242fe6dc74c67e",
+      "afterSHA256": "cdbf69c6ce9adb9ec77a0909469bd470c7585f9935bc025286ef4f274fa2c945",
+      "onlyCRLFToLF": true
+    }
+  ]
+}
