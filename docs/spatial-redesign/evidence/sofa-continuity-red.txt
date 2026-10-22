@@ -1,0 +1,146 @@
+Already up to date
+Done in 49ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/house-gathering-ui.test.ts [2m([22m[2m33 tests[22m[2m | [22m[31m12 failed[39m[2m | [22m[33m18 skipped[39m[2m)[22m[33m 486[2mms[22m[39m
+   [2m[90m↓[39m[22m explicit local gathering UI [2m(18)[22m
+     [2m[90m↓[39m[22m an expired old session releases pending withdrawal so the new epoch can be joined explicitly
+     [2m[90m↓[39m[22m rapid presenter zoom coalesces the newest local view after the first ACK
+     [2m[90m↓[39m[22m following preserves normalized zero coordinates
+     [2m[90m↓[39m[22m failed close withdrawal keeps the exact command and retries on explicit reopen
+     [2m[90m↓[39m[22m a current self consent from state makes Leave usable after a recreated panel
+     [2m[90m↓[39m[22m presenter uses fit/zoom, keyboard pan and normalized click pointer; clear is explicit
+     [2m[90m↓[39m[22m delayed image is discarded after item withdrawal and invalid PNG shows a plain failure
+     [2m[90m↓[39m[22m polling reflects host departure and revocation stops future reads
+     [2m[90m↓[39m[22m Leave supersedes a delayed accepted Join ACK in the same open panel
+     [2m[90m↓[39m[22m action failure preserves an exit and explicit study Follow opens board without viewport promise
+     [2m[90m↓[39m[22m construction never reads/joins; open reads, Join and Follow remain separate
+     [2m[90m↓[39m[22m study opens existing independent board without joining or claiming synchronization
+     [2m[90m↓[39m[22m Follow is local and publication explicitly sends own room, no arbitrary source
+     [2m[90m↓[39m[22m context changes invalidate late image/state ACK and stop following/polling
+     [2m[90m↓[39m[22m image is object URL, revoked immediately on access change and late image is discarded
+     [2m[90m↓[39m[22m close sends Leave and retains context seat; notify false avoids callback recursion
+     [2m[90m↓[39m[22m late Join ACK cannot restore consent after close or seat switch
+     [2m[90m↓[39m[22m network errors show plain state; invalid seat cannot join; pointer/view use normalized bounds
+[31m   [31m×[31m sofa continuity freezes the actually displayed crop on presenter departure and explicit claim ACK[39m[32m 118[2mms[22m[39m
+[31m   [31m×[31m sofa continuity an explicit presenting claim adopts the authoritative frozen crop only after its ACK[39m[32m 27[2mms[22m[39m
+[31m   [31m×[31m sofa continuity manual in zoom starts from the displayed followed crop[39m[32m 22[2mms[22m[39m
+[31m   [31m×[31m sofa continuity manual out zoom starts from the displayed followed crop[39m[32m 21[2mms[22m[39m
+[31m   [31m×[31m sofa continuity keyboard pan detaches from the currently displayed followed view[39m[32m 22[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native pan-left pans the displayed crop with a labelled44px touch target[39m[32m 71[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native pan-right pans the displayed crop with a labelled44px touch target[39m[32m 29[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native pan-up pans the displayed crop with a labelled44px touch target[39m[32m 27[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native pan-down pans the displayed crop with a labelled44px touch target[39m[32m 30[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native pan clamps normalized edges while detaching follow without a jump[39m[32m 33[2mms[22m[39m
+   [32m✓[39m sofa continuity new image never inherits the previous image crop[32m 18[2mms[22m[39m
+   [32m✓[39m sofa continuity new session never inherits the previous image crop[32m 14[2mms[22m[39m
+   [32m✓[39m sofa continuity stale same-session image state cannot restore a superseded crop[32m 16[2mms[22m[39m
+[31m   [31m×[31m sofa continuity native presenter pan keeps pointer coordinates relative to the transformed image plane[39m[32m 19[2mms[22m[39m
+[31m   [31m×[31m sofa continuity close clears queued native pan and late ACK cannot restore image or send another view[39m[32m 19[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 12 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity freezes the actually displayed crop on presenter departure and explicit claim ACK
+[31m[1mAssertionError[22m: expected 'translate(0%, 0%) scale(1)' to be 'translate(50%, -50%) scale(2)' // Object.is equality[39m
+
+Expected: [32m"translate([7m5[27m0%, [7m-5[27m0%) scale([7m2[27m)"[39m
+Received: [31m"translate(0%, 0%) scale([7m1[27m)"[39m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m45:312[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity an explicit presenting claim adopts the authoritative frozen crop only after its ACK
+[31m[1mAssertionError[22m: expected 'translate(0%, 0%) scale(1)' to be 'translate(50%, -50%) scale(2)' // Object.is equality[39m
+
+Expected: [32m"translate([7m5[27m0%, [7m-5[27m0%) scale([7m2[27m)"[39m
+Received: [31m"translate(0%, 0%) scale([7m1[27m)"[39m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m46:720[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity manual in zoom starts from the displayed followed crop
+[31m[1mAssertionError[22m: expected +0 to be close to 56.25, received difference is 56.25, but expected 0.005[39m
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m47:238[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity manual out zoom starts from the displayed followed crop
+[31m[1mAssertionError[22m: expected +0 to be close to 43.75, received difference is 43.75, but expected 0.005[39m
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m47:238[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity keyboard pan detaches from the currently displayed followed view
+[31m[1mAssertionError[22m: expected [ 4.999999999999999, +0, 1 ] to deeply equal [ 60, -50, 2 ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  [[22m
+[32m-   60,[39m
+[32m-   -50,[39m
+[32m-   2,[39m
+[31m+   4.999999999999999,[39m
+[31m+   0,[39m
+[31m+   1,[39m
+[2m  ][22m
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m48:338[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native pan-left pans the displayed crop with a labelled44px touch target
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native pan-right pans the displayed crop with a labelled44px touch target
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native pan-up pans the displayed crop with a labelled44px touch target
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native pan-down pans the displayed crop with a labelled44px touch target
+[31m[1mAssertionError[22m: expected null to be truthy[39m
+
+[32m- Expected:[39m
+true
+
+[31m+ Received:[39m
+null
+
+[36m [2m❯[22m spec/house-gathering-ui.test.ts:[2m49:517[22m[39m
+
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native pan clamps normalized edges while detaching follow without a jump
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'click')[39m
+[36m [2m❯[22m Object.click spec/house-gathering-ui.test.ts:[2m15:83[22m[39m
+
+[90m [2m❯[22m spec/house-gathering-ui.test.ts:[2m50:179[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity native presenter pan keeps pointer coordinates relative to the transformed image plane
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'click')[39m
+[36m [2m❯[22m Object.click spec/house-gathering-ui.test.ts:[2m15:83[22m[39m
+
+[90m [2m❯[22m spec/house-gathering-ui.test.ts:[2m53:360[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m spec/house-gathering-ui.test.ts[2m > [22msofa continuity close clears queued native pan and late ACK cannot restore image or send another view
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'click')[39m
+[36m [2m❯[22m Object.click spec/house-gathering-ui.test.ts:[2m15:83[22m[39m
+
+[90m [2m❯[22m spec/house-gathering-ui.test.ts:[2m54:478[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m12 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[2m | [22m[33m18 skipped[39m[90m (33)[39m
+[2m   Start at [22m 06:41:58
+[2m   Duration [22m 1.36s[2m (import 56%, tests 39%, transform 5%)[22m
+

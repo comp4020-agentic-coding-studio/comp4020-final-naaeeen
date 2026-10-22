@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-23",
+  "head": "8bdb8bb2d91ef25720657ce86b93333e3f3fa290",
+  "applicationBaseline": "8be15ef",
+  "files": {
+    "public/house-gathering-ui.js": "bf2596abb33a987f02eef73644d2810dd68323e0edb27722e9596915486fa3e1",
+    "public/house-gathering.css": "b922e2ba110e87b7a0508af4c926250d32fbf7675da1b90ae8ed726f4a5d0968",
+    "spec/house-gathering-ui.test.ts": "554d1b25b12bbc4d2cf6ce60026ebdf6f9bb393a53b2354d14fc8ba4c367d17e"
+  },
+  "checks": {
+    "gatheringUI": "34/34 PASS",
+    "wholeCheckoutTypecheck": "PASS",
+    "nodeSyntax": "PASS",
+    "ownedDiffWhitespace": "PASS",
+    "moduleCoverage": {
+      "statements": 93.31,
+      "branches": 87.91,
+      "functions": 92.85,
+      "lines": 100
+    }
+  },
+  "boundaries": {
+    "nativeBrowser": "NOT RUN by worker; parent executor awaits GO",
+    "services": "none started",
+    "load": "not run",
+    "backend": "unchanged",
+    "commits": "none"
+  }
+}

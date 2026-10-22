@@ -1,0 +1,8 @@
+{
+  "head": "6599615",
+  "files": {
+    "public/house-gathering-ui.js": "4261b43f18e6ecdcdb8b7cd5e0f226ecd821b1ac949f24976b8970ce0c363318",
+    "public/house-gathering.css": "08418e522caf3f6d3a833143402a2f86f9db9ea1b2a38dcc87a3628412aa4ad6",
+    "spec/house-gathering-ui.test.ts": "2c04f0ac0c2b2033e63520d8d30b101ed8e665c5ce0fad5a9e88f48fe16b93f4"
+  }
+}

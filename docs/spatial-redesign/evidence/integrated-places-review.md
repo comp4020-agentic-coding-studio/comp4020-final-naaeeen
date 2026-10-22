@@ -25,3 +25,15 @@ Current repair/recheck/native results remain pending and will be appended here.
 The review found no additional concrete permission blocker in its inspected paths.
 It did not validate room usefulness or preference. Its source-reading conclusions
 remain checked against concrete code and evidence rather than accepted by role.
+
+## Contextual closure
+
+Same reviewer checked the two repairs and ran six independent in-memory component
+controls: departure continuity, acknowledged presentation, local pan, replacement
+image, stale image state and revocation during queued pan/late ACK all pass.
+The parent inspected the diff. Native buttons avoid conflict with click-to-point;
+manual controls start at the visible followed crop. A new presentation explicitly
+resumes the server's frozen shared crop, so the label is Present shared image.
+No additional consequential finding in that bounded recheck. Executor34/34 UI cases,
+93.31% statements/87.91% branches and types/syntax/diff pass. Current native phone
+reachability/off-center task and full/resource acceptance remain separate gates.
