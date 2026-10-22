@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "scope": "Tests only; no production clock, limit, protocol or deployment changes.",
+  "initialInfrastructureAttempt": {
+    "status": "NOT_STARTED",
+    "exit": 1,
+    "reason": "mise executable absent from direct WSL PATH; resolved with previously verified absolute Linux executable; no test or service started in that attempt."
+  },
+  "initialActualRun": {
+    "exit": 1,
+    "tests": 11,
+    "passed": 10,
+    "failed": 1,
+    "failureKind": "Discriminator calibration: stalled wall denies distance credit before movement interval. Safe runtime projection was INVALID_MOVE / OTHER."
+  },
+  "refinement": "Preserve failed run and observations; change only discriminator controlled wall increment to100ms then30ms rollback (net70ms); add a passing characterization of the masked stalled-wall control.",
+  "productionChange": false,
+  "causalClaimAboutB2": false,
+  "real100msPacingClaim": false
+}

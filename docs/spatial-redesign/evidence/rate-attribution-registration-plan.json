@@ -1,0 +1,57 @@
+{
+  "status": "HELD_NO_PROTOCOL_OR_SOURCE_BINDING_CREATED",
+  "futureProtocol": "docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json",
+  "commands": {
+    "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json --inspect",
+    "singleProbeOnly": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json --bootstrap-calibration"
+  },
+  "requirements": [
+    "FinalpuzzleUI source frozen and nativecomponentpreflightclosed",
+    "Maintainedconcurrentdrainregression+types/syntaxPASS",
+    "Freshreviewrecheckfinalsource/spec",
+    "Parentnewsourcebindingapproval/executionGO separate"
+  ],
+  "configuration": "Copy currentmixed profile; preserve fixture/route/sleep100/ACK5000/budgets/210RSS; newmetadata+rateAttributionconfigonly. Do not rebind default/mixed/ABBA files.",
+  "rateAttribution": {
+    "schemaVersion": 1,
+    "geometrySHA256": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa",
+    "routes": [
+      {
+        "actorIndex": 2,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 4,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      },
+      {
+        "actorIndex": 14,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 16,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      }
+    ],
+    "maximumRows": 194,
+    "scope": "Pure canonical geometry/arrival bound; no service or bootstrap executed"
+  },
+  "expectedArtifacts": [
+    "rate-attribution-probe.results.json",
+    "rate-attribution-probe.memory-diagnostic.json (schema2serverWall)",
+    "rate-attribution-probe.rate-attribution.json (194rowcap)",
+    "rate-attribution-probe.log",
+    "rate-attribution-probe.closure.json"
+  ],
+  "probeCount": 1,
+  "retry": false,
+  "B2Cause": "UNKNOWN; injectedcontrolsdonotattributehistoricalfailure"
+}

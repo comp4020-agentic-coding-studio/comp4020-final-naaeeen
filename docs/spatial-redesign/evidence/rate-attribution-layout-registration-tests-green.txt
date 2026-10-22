@@ -1,0 +1,14 @@
+test_consistently_shortened_hash_list_is_rejected (__main__.RegistrationControls.test_consistently_shortened_hash_list_is_rejected) ... ok
+test_each_mixed_group_mutation_is_rejected (__main__.RegistrationControls.test_each_mixed_group_mutation_is_rejected) ... ok
+test_existing_file_and_dangling_symlink_are_rejected (__main__.RegistrationControls.test_existing_file_and_dangling_symlink_are_rejected) ... ok
+test_failed_incomplete_or_changed_required_records_are_rejected (__main__.RegistrationControls.test_failed_incomplete_or_changed_required_records_are_rejected) ... ok
+test_green_required_record_is_accepted_with_explicit_coverage (__main__.RegistrationControls.test_green_required_record_is_accepted_with_explicit_coverage) ... ok
+test_preflight_preserves_history_and_creates_no_outputs (__main__.RegistrationControls.test_preflight_preserves_history_and_creates_no_outputs) ... ok
+test_route_and_execution_metadata_mutations_are_rejected (__main__.RegistrationControls.test_route_and_execution_metadata_mutations_are_rejected) ... ok
+test_stale_or_reduced_required_source_maps_are_rejected (__main__.RegistrationControls.test_stale_or_reduced_required_source_maps_are_rejected) ... ok
+test_valid_candidate_has_exact_53_files_and_all_11_groups (__main__.RegistrationControls.test_valid_candidate_has_exact_53_files_and_all_11_groups) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.079s
+
+OK

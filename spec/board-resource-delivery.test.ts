@@ -5,8 +5,9 @@ import { join } from "node:path";
 import { io, type Socket } from "socket.io-client";
 import { createService } from "../src/server.ts";
 import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
+import { createLayout, findRoute } from "../public/house-geometry.js";
 import ts from "typescript";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 // Extract the executable instrument functions without running its CLI/server.
 const source = readFileSync(new URL("../tools/board-resource.mjs", import.meta.url), "utf8");
@@ -363,6 +364,8 @@ describe("combined resource command authority binding", () => {
   test("real socket authority rejects missing/foreign houses, saves complete games and replays original receipt", async () => {
     const dir = mkdtempSync(join(tmpdir(), "resource-command-")), service = createService({dataDir:dir,secureCookies:false});
     const sockets: Socket[] = [];
+    let now = Date.now();
+    const clock = vi.spyOn(Date, "now").mockImplementation(() => now);
     try {
       await new Promise<void>(done=>service.server.listen(0,"127.0.0.1",done));
       const address = service.server.address(); if (!address || typeof address === "string") throw new Error("No fixture port");
@@ -380,11 +383,23 @@ describe("combined resource command authority binding", () => {
           await http("/api/house/command",opened.cookie,{commandId:randomUUID(),type:n?"house.join":"house.create",payload:{...(n?{code:house.code}:{capacity:2}),name:"Resource fixture",colour:n?"rose":"sage"}});
           const me=await http("/api/house/me",opened.cookie); house=me.value.home;
           const socket=io(origin,{autoConnect:false,forceNew:true,reconnection:false,transports:["websocket"],auth:{worldVersion:HOUSE_WORLD_VERSION},extraHeaders:{Origin:origin,Cookie:opened.cookie}});
-          sockets.push(socket);const person:any={socket,identity:me.value.identity.id,snapshot:null};
+          sockets.push(socket);const person:any={socket,identity:me.value.identity.id,snapshot:null,motionSequence:0};
           socket.on("house.snapshot",r=>person.snapshot=r);
           await new Promise<void>((done,reject)=>{socket.once("connect",done);socket.once("connect_error",reject);socket.connect();});
           const subscription=await socket.timeout(3000).emitWithAck("house.subscribe",{zoneId:"lounge",controllerToken:randomUUID()});
           expect(subscription.ok).toBe(true);expect(subscription.snapshot.controller).toBe(true);person.snapshot=subscription.snapshot;people.push(person);
+          // This authority fixture uses the real chair claim: standing elsewhere
+          // no longer grants a game role. Only the fixture's civil clock advances.
+          const layout=createLayout(2), seat=layout.seats.find(candidate=>candidate.id==="game-seat-"+(n+1))!;
+          const own=person.snapshot.players.find((candidate:any)=>candidate.id===person.identity);
+          const route=findRoute(layout,{x:own.x,z:own.z},seat.target);
+          expect(route).not.toBeNull();
+          for(const point of route!.slice(1)) {
+            now+=80;
+            expect(await socket.timeout(3000).emitWithAck("house.move",{generation:person.snapshot.generation,sequence:++person.motionSequence,...point,heading:0})).toMatchObject({ok:true});
+          }
+          expect(await socket.timeout(3000).emitWithAck("house.seat",{generation:person.snapshot.generation,seatId:seat.id})).toMatchObject({ok:true});
+          await vi.waitFor(()=>expect(person.snapshot.players.find((candidate:any)=>candidate.id===person.identity)?.seatId).toBe(seat.id));
         }
         houses.push({id:house.id,people});
       }
@@ -413,7 +428,7 @@ describe("combined resource command authority binding", () => {
       }
       expect(service.houseStore.db.prepare("SELECT count(*) AS n FROM receipts").get()).toEqual({n:22});
     } finally {
-      for(const socket of sockets)socket.disconnect();await service.close();rmSync(dir,{recursive:true,force:true});
+      for(const socket of sockets)socket.disconnect();await service.close();clock.mockRestore();rmSync(dir,{recursive:true,force:true});
     }
   },20000);
 });

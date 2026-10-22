@@ -1,0 +1,51 @@
+Already up to date
+Done in 48ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/spatial-resource-rate.test.ts [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 760[2mms[22m[39m
+   [31m❯[39m actual realtime rate attribution with synthetic elapsed and wall clocks [2m(11)[22m
+     [32m✓[39m normal synthetic elapsed100ms/wall100ms accepts paced quarter-metre moves[32m 92[2mms[22m[39m
+[31m     [31m×[31m backstep discriminator reaches movement interval with enough distance credit[39m[32m 58[2mms[22m[39m
+     [32m✓[39m zero-move:31 synthetic elapsed100ms actions distinguish normal wall time[32m 74[2mms[22m[39m
+     [32m✓[39m zero-move:31 synthetic elapsed100ms actions distinguish stalled wall time[32m 74[2mms[22m[39m
+     [32m✓[39m zero-move:31 synthetic elapsed100ms actions distinguish backward wall time[32m 80[2mms[22m[39m
+     [32m✓[39m availability:31 synthetic elapsed100ms actions distinguish normal wall time[32m 70[2mms[22m[39m
+     [32m✓[39m availability:31 synthetic elapsed100ms actions distinguish stalled wall time[32m 69[2mms[22m[39m
+     [32m✓[39m availability:31 synthetic elapsed100ms actions distinguish backward wall time[32m 67[2mms[22m[39m
+     [32m✓[39m genuinely fast synthetic elapsed10ms/wall10ms movement remains denied after credit accrues[32m 52[2mms[22m[39m
+     [32m✓[39m genuine31-event burst remains denied by the general action budget[32m 71[2mms[22m[39m
+     [32m✓[39m duplicate accepted motion sequence remains STALE_INPUT below the general budget[32m 49[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m spec/spatial-resource-rate.test.ts[2m > [22mactual realtime rate attribution with synthetic elapsed and wall clocks[2m > [22mbackstep discriminator reaches movement interval with enough distance credit
+[31m[1mAssertionError[22m: expected { ok: false, …(2) } to deeply equal { ok: false, …(2) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "classification": "MOVE_INTERVAL",[39m
+[32m-   "code": "RATE_LIMITED",[39m
+[31m+   "classification": "OTHER",[39m
+[31m+   "code": "INVALID_MOVE",[39m
+[2m    "ok": false,[22m
+[2m  }[22m
+
+[36m [2m❯[22m spec/spatial-resource-rate.test.ts:[2m104:20[22m[39m
+    [90m102|[39m     summary("quarter-backstep-discriminator", "initial-stalled-wall-ca…
+    [90m103|[39m     expect(first).toEqual({ ok: true, code: "OK", classification: "OK"…
+    [90m104|[39m     expect(second).toEqual({ ok: false, code: "RATE_LIMITED", classifi…
+    [90m   |[39m                    [31m^[39m
+    [90m105|[39m   });
+    [90m106|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m10 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 07:18:23
+[2m   Duration [22m 1.18s[2m (tests 69%, transform 22%, import 9%)[22m
+

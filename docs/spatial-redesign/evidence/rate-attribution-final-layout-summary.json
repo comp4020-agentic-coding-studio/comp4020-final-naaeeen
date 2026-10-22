@@ -1,0 +1,67 @@
+{
+  "status": "COMPLETE_CALIBRATION_ONLY",
+  "durationSeconds": 0,
+  "oneExecution": true,
+  "retry": false,
+  "protocolSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "runtimeSourceUnchanged": true,
+  "attributionRows": 194,
+  "allACKOK": true,
+  "firstFailure": null,
+  "routes": [
+    {
+      "actorIndex": 2,
+      "moves": 41,
+      "seats": 1,
+      "minimumMoveSendMonotonicGapMs": 101.09605799999918,
+      "maximumMoveSendMonotonicGapMs": 106.48920000000044
+    },
+    {
+      "actorIndex": 4,
+      "moves": 54,
+      "seats": 1,
+      "minimumMoveSendMonotonicGapMs": 101.00646099999994,
+      "maximumMoveSendMonotonicGapMs": 107.75130699999863
+    },
+    {
+      "actorIndex": 14,
+      "moves": 41,
+      "seats": 1,
+      "minimumMoveSendMonotonicGapMs": 101.06364500000018,
+      "maximumMoveSendMonotonicGapMs": 106.647516
+    },
+    {
+      "actorIndex": 16,
+      "moves": 54,
+      "seats": 1,
+      "minimumMoveSendMonotonicGapMs": 100.62467500000002,
+      "maximumMoveSendMonotonicGapMs": 107.66590500000166
+    }
+  ],
+  "serverWallBackwardSamples": 0,
+  "parentWallBackwardSendsPerActor": 0,
+  "serverAdjacentWallMinusMonotonicDeltaRangeMs": [
+    -0.8562950000000455,
+    0.9765230000002703
+  ],
+  "sameProcessClockComparison": true,
+  "measurementGateRSSPeakMiB": 175.0390625,
+  "lifetimeSampledRSSPeakMiB": 175.0390625,
+  "separateOSMaxRSSMiB": 180.9140625,
+  "memoryDiagnosticStatus": "VALID",
+  "terminalSequence": 114,
+  "measurementEndSequence": 113,
+  "childClosed": true,
+  "processClosure": {
+    "generatorPID": 50370,
+    "serverPID": 50395,
+    "serverExitCode": 0,
+    "serverSignal": null,
+    "serverClosed": true
+  },
+  "newOwnedProcessesRemaining": [],
+  "elapsedSeconds": 15.69087028503418,
+  "interpretation": "Current declared routes completed. No rejection was observed to attribute; B2 original cause remains unknown. Lower RSS here is not an optimization result. No full300s workload, server clock repair, hosting acceptance or resumed ABBA is inferred."
+}

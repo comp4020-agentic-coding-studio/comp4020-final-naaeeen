@@ -1,0 +1,182 @@
+{
+  "status": "REVIEWED_FINAL_REGISTERED_EXECUTION_NOT_RUN",
+  "atUTC": "2026-10-22T20:52:15.856082+00:00",
+  "head": "bdcc1ea5945fa8952e2bcef4fb2bc26d1f19de3d",
+  "protocolPath": "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.protocol.json",
+  "protocolSHA256": "6e0e195716a18a57655a94a0f31d1101eb9cc75e4f422156a79b3a43d8668259",
+  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "sourceManifestSHA256": "f9a4bee5d674b1eba5a767b3c41b4232d5c080d9e20cfaf69da4ddc347021b5b",
+  "sourceFiles": 53,
+  "frozenSources": {
+    "public/house-puzzle-ui.js": "a1081403e364a7f6c48c9cfa55d8d5f2c2e40ba361f6466df793ac94a387b2f5",
+    "public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89",
+    ".gitattributes": "16513c4b2425a97897a940eb211ad37d1c4d466a76b3c39db3e27f97908bb229",
+    "tools/board-resource.mjs": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "tools/spatial-resource.mjs": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218"
+  },
+  "routeCap": 194,
+  "maximumExecutions": 1,
+  "retry": false,
+  "underlyingMixedAndTraceKeysUnchanged": [
+    "schemaVersion",
+    "scope",
+    "durationSeconds",
+    "automaticRetry",
+    "configuration",
+    "fixture",
+    "workload",
+    "slowReader",
+    "negativeControls",
+    "bounds",
+    "measurement",
+    "classification",
+    "limitations",
+    "storageAcceptance",
+    "p7Preparation",
+    "gameScenario",
+    "pictureScenario",
+    "baseWorkloadRegisteredAtUTC",
+    "spatialScenario",
+    "memoryDiagnosticRegistration",
+    "rateAttribution"
+  ],
+  "unchangedGroupHashes": {
+    "schemaVersion": {
+      "staged": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "final": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "equal": true
+    },
+    "scope": {
+      "staged": "def4e99993e5ceddadee5bb3c82395ec50ae438744abe5d0540a063f65f93489",
+      "final": "def4e99993e5ceddadee5bb3c82395ec50ae438744abe5d0540a063f65f93489",
+      "equal": true
+    },
+    "durationSeconds": {
+      "staged": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "final": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "equal": true
+    },
+    "automaticRetry": {
+      "staged": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "final": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "equal": true
+    },
+    "configuration": {
+      "staged": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "final": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "equal": true
+    },
+    "fixture": {
+      "staged": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "final": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "equal": true
+    },
+    "workload": {
+      "staged": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "final": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "equal": true
+    },
+    "slowReader": {
+      "staged": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "final": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "equal": true
+    },
+    "negativeControls": {
+      "staged": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "final": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "equal": true
+    },
+    "bounds": {
+      "staged": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "final": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "equal": true
+    },
+    "measurement": {
+      "staged": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "final": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "equal": true
+    },
+    "classification": {
+      "staged": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "final": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "equal": true
+    },
+    "limitations": {
+      "staged": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "final": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "equal": true
+    },
+    "storageAcceptance": {
+      "staged": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+      "final": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+      "equal": true
+    },
+    "p7Preparation": {
+      "staged": "66a8c16406d1096a3ea5ae10c9d85a409a188fab395dc0561c998773cadf75c5",
+      "final": "66a8c16406d1096a3ea5ae10c9d85a409a188fab395dc0561c998773cadf75c5",
+      "equal": true
+    },
+    "gameScenario": {
+      "staged": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+      "final": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+      "equal": true
+    },
+    "pictureScenario": {
+      "staged": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+      "final": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+      "equal": true
+    },
+    "baseWorkloadRegisteredAtUTC": {
+      "staged": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "final": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "equal": true
+    },
+    "spatialScenario": {
+      "staged": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+      "final": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+      "equal": true
+    },
+    "memoryDiagnosticRegistration": {
+      "staged": "30056b5ab345495a8556e7c8c4e09129575fb92f2f09b3f011097e2fd889f8de",
+      "final": "30056b5ab345495a8556e7c8c4e09129575fb92f2f09b3f011097e2fd889f8de",
+      "equal": true
+    },
+    "rateAttribution": {
+      "staged": "ecc4115405fd0d770540fde7359041cd3c2dc3f5a817ee6f8b0c68261589736b",
+      "final": "ecc4115405fd0d770540fde7359041cd3c2dc3f5a817ee6f8b0c68261589736b",
+      "equal": true
+    }
+  },
+  "stagedProtocolPreserved": {
+    "path": "docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json",
+    "sha256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e"
+  },
+  "oldProtocolsAndFirstArtifactsUnchanged": true,
+  "noIgnoredCode": true,
+  "zeroCRLF": true,
+  "commands": {
+    "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-reviewed-final.protocol.json --inspect",
+    "run": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-reviewed-final.protocol.json --bootstrap-calibration",
+    "calibration": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-reviewed-final.protocol.json --bootstrap-calibration"
+  },
+  "unusedArtifactPaths": [
+    "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.results.json",
+    "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.rate-attribution.json",
+    "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.log",
+    "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.closure.json"
+  ],
+  "execution": "NOT_RUN; separate executionGO required",
+  "inspection": {
+    "status": "READY",
+    "protocolSHA256": "6e0e195716a18a57655a94a0f31d1101eb9cc75e4f422156a79b3a43d8668259",
+    "sourceManifestSHA256": "f9a4bee5d674b1eba5a767b3c41b4232d5c080d9e20cfaf69da4ddc347021b5b",
+    "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "sceneBytes": 1865727,
+    "imageBytes": [
+      2018703,
+      2018703
+    ]
+  },
+  "unusedArtifactPathsVerified": true
+}

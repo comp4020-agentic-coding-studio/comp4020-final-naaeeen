@@ -1,0 +1,49 @@
+--- docs/spatial-redesign/evidence/rate-attribution-layout-register-path-failure.py
++++ docs/spatial-redesign/evidence/rate-attribution-layout-register.py
+@@ -5,6 +5,7 @@
+ import hashlib
+ import json
+ import math
++import os
+ import re
+ import subprocess
+ from datetime import datetime, timezone
+@@ -49,6 +50,7 @@
+     ".protocol.json", "-registration.json", ".inspect.json", ".results.json",
+     ".memory-diagnostic.json", ".rate-attribution.json", ".log", ".closure.json",
+ )
++MISE = Path("/home/lizhi/.local/bin/mise")
+ 
+ 
+ def require(condition, code):
+@@ -79,6 +81,15 @@
+ def require_unused(paths, root=ROOT):
+     require(all(not (root / p).exists() and not (root / p).is_symlink() for p in paths),
+             "OUTPUT_PATH_ALREADY_EXISTS")
++
++
++def inspector_command(protocol_path):
++    # Direct WSL --exec does not inherit the login PATH. This verified local
++    # installation is independent of PATH; never rewrite a registered protocol.
++    require(MISE.is_absolute() and MISE.is_file() and os.access(MISE, os.X_OK),
++            "VERIFIED_MISE_INSTALLATION_UNAVAILABLE")
++    return [str(MISE), "exec", "--", "node", "tools/board-resource.mjs",
++            "--protocol-file", protocol_path.as_posix(), "--inspect"]
+ 
+ 
+ def validate_candidate(base, candidate):
+@@ -275,12 +286,13 @@
+     required.update({"path": completion.as_posix(), "sha256": args.required_completion_sha256})
+     history = protected_history()
+     candidate = build_candidate(base, hashes, report, required)
++    command = inspector_command(output_paths()[0])
+     require(source_preflight(base)[0] == hashes, "PREWRITE_SOURCE_DRIFT")
+     require_unused(output_paths())
+     protocol_path, registration_path, inspect_path = output_paths()[:3]
+     write_exclusive(protocol_path, candidate)
+     inspection = subprocess.run(
+-        ["mise", "exec", "--", "node", "tools/board-resource.mjs", "--protocol-file", protocol_path.as_posix(), "--inspect"],
++        command,
+         cwd=ROOT, text=True, capture_output=True, check=False,
+     )
+     # Retain first stdout/stderr even if the inspector rejects this registration.

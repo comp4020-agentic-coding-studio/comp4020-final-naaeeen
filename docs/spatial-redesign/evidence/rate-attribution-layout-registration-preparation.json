@@ -1,0 +1,30 @@
+{
+  "status": "REGISTERED_READY_PREPARATION_COMPLETE_NO_PROBE",
+  "protocolSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "all53CurrentSourceHashesMatch": true,
+  "registrationHelperBoundPreimageSHA256": "f0e86e73825af3e5985f7d30e0c7ac94b7545fef7b4837f549fa1c581eeed2c2",
+  "currentHelperSHA256": "f5c0fd72a45fc183c12bb864f07fc4ffa1ffbddc3968c86671cacbad3234b285",
+  "helperRepairScope": "Registration helper only, outside53runtime files; no protocol rebind. Absolute known mise installation verified before any future write.",
+  "helperPathControls": {
+    "passed": 3,
+    "failed": 0,
+    "scope": "Pure empty-PATH/missing-installation/exclusive-output controls; no child process or protocol writes."
+  },
+  "registrationControls": {
+    "passed": 9,
+    "failed": 0,
+    "scope": "Before registration;11group mutations, shortened53list,route/counter mutations,invalidrequired maps,collisions rejected."
+  },
+  "firstPreparationControlFailure": {
+    "observed": "One negative-control candidate reused the caller sourceHashes dict; deleting a candidate key polluted later controls, yielding14subtest errors.",
+    "repair": "build_candidate copies sourceHashes; subsequent9tests passed.",
+    "evidenceLimit": "The first full console output was not saved as a separate file; tool output recorded the failure, and this explicit summary does not claim a retained raw log."
+  },
+  "firstRegistrationFailure": "rate-attribution-final-layout-registration-first-failure.json",
+  "standaloneInspection": "READY/exit0; first actual inspector execution, no helper rerun.",
+  "syntax": "PASS",
+  "whitespaceCheck": "git diff --no-index --check returned1 with empty diagnostics for each new file (normal file differences); no whitespace diagnostics.",
+  "newHelperReview": "PENDING_READ_ONLY_RECHECK",
+  "execution": "NOT_RUN; separate parent-owned probe command."
+}

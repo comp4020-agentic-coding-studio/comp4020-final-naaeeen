@@ -1,0 +1,242 @@
+{
+  "status": "UNRUN_STAGED_UI_SOURCE_FREEZE_REOPENED",
+  "atUTC": "2026-10-22T20:44:16.445374+00:00",
+  "head": "bdcc1ea5945fa8952e2bcef4fb2bc26d1f19de3d",
+  "protocolPath": "docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json",
+  "protocolSHA256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e",
+  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "sourceManifestSHA256": "e1fcdd9d9580fe8a51a902392cd07583ff2a8840773812b126cd1cf652346053",
+  "sourceFiles": 53,
+  "frozenSources": {
+    "tools/board-resource.mjs": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "tools/spatial-resource.mjs": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218",
+    "public/house-puzzle-ui.js": "519f4537fe2f34981c960a7c5cf4b7867bb856d976f19556c6f85afb57d2778c",
+    "public/house.css": "e2ce3918c19f56ce013d185130c4d9508f66f3a08fde7849663c0fcb3dbf9b89",
+    ".gitattributes": "16513c4b2425a97897a940eb211ad37d1c4d466a76b3c39db3e27f97908bb229"
+  },
+  "evaluationSpecHashes": {
+    "spec/spatial-resource-rate.test.ts": "32b343ff60d298306bdc54346598cbd9a4dac1ee4f3d82af2a009e61268fde70",
+    "spec/spatial-resource-rate-trace.test.ts": "86546fadaf719005f624aac27247d86ae41bc6dbe5eb12ba30cc5c97b84a35ec",
+    "spec/spatial-resource-memory.test.ts": "f29dc266ce5feff509bd219dc86989b2964c4683ff8f85e831045123f9526ae6"
+  },
+  "routeMaximumRows": 194,
+  "routes": [
+    {
+      "actorIndex": 2,
+      "moves": 41,
+      "seatActions": 1,
+      "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+    },
+    {
+      "actorIndex": 4,
+      "moves": 54,
+      "seatActions": 1,
+      "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+    },
+    {
+      "actorIndex": 14,
+      "moves": 41,
+      "seatActions": 1,
+      "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+    },
+    {
+      "actorIndex": 16,
+      "moves": 54,
+      "seatActions": 1,
+      "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+    }
+  ],
+  "memorySchemaVersion": 2,
+  "traceSchemaVersion": 1,
+  "changedMetadataKeys": [
+    "commands",
+    "instrumentSHA256",
+    "memoryDiagnosticRegistration",
+    "rateAttribution",
+    "rateAttributionRegistration",
+    "registeredAtUTC",
+    "scope",
+    "sourceBinding",
+    "sourceHashes",
+    "sourceManifestSHA256",
+    "status"
+  ],
+  "underlyingMixedKeysUnchanged": [
+    "schemaVersion",
+    "durationSeconds",
+    "automaticRetry",
+    "configuration",
+    "fixture",
+    "workload",
+    "slowReader",
+    "negativeControls",
+    "bounds",
+    "measurement",
+    "classification",
+    "limitations",
+    "sourceFiles",
+    "storageAcceptance",
+    "p7Preparation",
+    "gameScenario",
+    "pictureScenario",
+    "baseWorkloadRegisteredAtUTC",
+    "spatialScenario"
+  ],
+  "underlyingMixedGroupHashes": {
+    "schemaVersion": {
+      "before": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "after": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "equal": true
+    },
+    "durationSeconds": {
+      "before": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "after": "983bd614bb5afece5ab3b6023f71147cd7b6bc2314f9d27af7422541c6558389",
+      "equal": true
+    },
+    "automaticRetry": {
+      "before": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "after": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "equal": true
+    },
+    "configuration": {
+      "before": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "after": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+      "equal": true
+    },
+    "fixture": {
+      "before": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "after": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+      "equal": true
+    },
+    "workload": {
+      "before": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "after": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+      "equal": true
+    },
+    "slowReader": {
+      "before": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "after": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+      "equal": true
+    },
+    "negativeControls": {
+      "before": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "after": "7ff42e8865dcd8c2430c01949e47ea6aae089208b5646e377a3baf63233ca97e",
+      "equal": true
+    },
+    "bounds": {
+      "before": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "after": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+      "equal": true
+    },
+    "measurement": {
+      "before": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "after": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+      "equal": true
+    },
+    "classification": {
+      "before": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "after": "e13480eab6cb586d693d9f2dcb987e91239a4f4e2e6e87563bb44ed848e1e915",
+      "equal": true
+    },
+    "limitations": {
+      "before": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "after": "2e580a6c372653be89e566ccfcb5c9195dc6944d8be74b391bea0370479b7ec6",
+      "equal": true
+    },
+    "sourceFiles": {
+      "before": "39db30a607e8d0588a476b17213beb8e9fdcc59c1aef042477106f851fa5e4ec",
+      "after": "39db30a607e8d0588a476b17213beb8e9fdcc59c1aef042477106f851fa5e4ec",
+      "equal": true
+    },
+    "storageAcceptance": {
+      "before": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+      "after": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+      "equal": true
+    },
+    "p7Preparation": {
+      "before": "66a8c16406d1096a3ea5ae10c9d85a409a188fab395dc0561c998773cadf75c5",
+      "after": "66a8c16406d1096a3ea5ae10c9d85a409a188fab395dc0561c998773cadf75c5",
+      "equal": true
+    },
+    "gameScenario": {
+      "before": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+      "after": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+      "equal": true
+    },
+    "pictureScenario": {
+      "before": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+      "after": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+      "equal": true
+    },
+    "baseWorkloadRegisteredAtUTC": {
+      "before": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "after": "b78158b51361ab58ffaf3bc7bc5440be59515a3e8122fde404a6563f4127a81f",
+      "equal": true
+    },
+    "spatialScenario": {
+      "before": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+      "after": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595",
+      "equal": true
+    }
+  },
+  "protectedOldFilesSHA256": {
+    "evaluation/board-resource.protocol.json": "b511fa3efa73bd84cc936f9af5ed6b844f3383fcaf642af58c9740da8eb32ff7",
+    "docs/spatial-redesign/evidence/resource-mixed.protocol.json": "48a0d5f34a65fcab5fb1396afaff90e29915eb0d5f375ea2345e397f05c32255",
+    "evaluation/board-resource.results.json": "7c03f82f52df6aeed1a984181bbb5d460a3b6949b81c5e68aa73646f13f3a319",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A1.protocol.json": "b4286e395148222a8d936c696bd00949deb1ccb178fdb65a034ff0b4caa3a01a",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B1.protocol.json": "8d80b9c54347235b6e847b2757b50dfce95859dd1c841545e465c73c9874cc46",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B2.protocol.json": "a6612bc1efe50df9a66c1aa81ac083744de2d0d6eab8007b41f497f7a2bc1ef3",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A2.protocol.json": "228420f71ae6b6330fc4567459033b84137bc6f6e72090df56358a9674d9e7af",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A1.results.json": "2f2593655b0cbec1e37cb747018a1a346a1fbe7eb5699a1709b6a750a6f085eb",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A1.memory-diagnostic.json": "31cf41db95b5f558f6f975484e8774d6b77ebd46bbeaed875c3dedd938cde5a4",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A1.log": "0dec52caf5ba8ab75258d88602a88848bdd9ac917cf06f689c954ecce3757693",
+    "docs/spatial-redesign/evidence/memory-diagnostic-A1.closure.json": "e2670e07de7cc0be8bf60ba5141ac19c4b4ca464a591f6994a4d9102671a262c",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B1.results.json": "5d38a969b6f529df527cd9989fb56d8861ddea35c26d46fb094d7e5c1597135f",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B1.memory-diagnostic.json": "83038a94776157092919b0a8dadd6f3ce73d8283f117ad731748876b8735a452",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B1.log": "f66db5241f453db6c1b253ce8b2ee5258cba57e4f80ee2d89ffed7b39d758126",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B1.closure.json": "2f9e1ea27b277d19c63290f913c6dd0e3f60a5aa19be2a954f7ef52a9d58cbea",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B2.results.json": "9babf0bd89d52954105f530e0cae9e1fa4fbb738e481b0cb6326c018f8d40b0d",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B2.memory-diagnostic.json": "553c3ab9cf703cd32c864305f98cd96631a3b30d3ac18788bbbada1eceb8ffe0",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B2.log": "e119b2c969e3446d98b54255443bd1b706e1b02452eb649de0610d99f80799f7",
+    "docs/spatial-redesign/evidence/memory-diagnostic-B2.closure.json": "33d0c60efcbd27ea768fc3a2a8ab0865686381226d82ac7f8a2d24e24d953719"
+  },
+  "oldProtocolsAndFirstArtifactsUnchanged": true,
+  "noIgnoredCode": true,
+  "zeroCRLF": true,
+  "commands": {
+    "inspect": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json --inspect",
+    "run": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json --bootstrap-calibration",
+    "calibration": "mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json --bootstrap-calibration"
+  },
+  "expectedArtifactPaths": [
+    "docs/spatial-redesign/evidence/rate-attribution-probe.results.json",
+    "docs/spatial-redesign/evidence/rate-attribution-probe.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/rate-attribution-probe.rate-attribution.json",
+    "docs/spatial-redesign/evidence/rate-attribution-probe.log",
+    "docs/spatial-redesign/evidence/rate-attribution-probe.closure.json"
+  ],
+  "execution": "No probe command started; registration-only permission.",
+  "initialDraftPreserved": {
+    "path": "docs/spatial-redesign/evidence/rate-attribution-probe-initial-registration.protocol.json",
+    "sha256": "a490510fceb3343c3419bd0b6d86d7eae9ec14f0367825f430d03c4d5f08808a",
+    "reason": "Before final report, replaced inherited four-slot ABBA metadata with explicit ONE-attribution registration; no criterion/source/command change and no execution."
+  },
+  "inspectionForStagedSnapshot": {
+    "status": "READY",
+    "protocolSHA256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e",
+    "sourceManifestSHA256": "e1fcdd9d9580fe8a51a902392cd07583ff2a8840773812b126cd1cf652346053",
+    "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "sceneBytes": 1865727,
+    "imageBytes": [
+      2018703,
+      2018703
+    ]
+  },
+  "hold": {
+    "atUTC": "2026-10-22T20:46:12.326671+00:00",
+    "reason": "Parent reopened519/e2puzzleUI freeze after contextual pending/focus findings. Preserve this registration without overwrite; await explicit reviewed finalfreeze.",
+    "execution": "NOT_RUN; no probe execution authorized",
+    "stagedProtocolSHA256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e"
+  }
+}

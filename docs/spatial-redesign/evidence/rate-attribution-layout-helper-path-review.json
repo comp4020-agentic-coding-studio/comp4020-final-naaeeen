@@ -1,0 +1,10 @@
+{
+  "status": "READ_ONLY_RECHECK_CLEAR",
+  "reviewScope": "Registration helper absolute-PATH repair only; outside runtime source binding. No actionable issues found.",
+  "helperSHA256": "f5c0fd72a45fc183c12bb864f07fc4ffa1ffbddc3968c86671cacbad3234b285",
+  "inspectedControls": "3/3 PASS log; reviewer ran no tests/services/inspection and made no writes.",
+  "protocolSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
+  "registeredHelperPreimageSHA256": "f0e86e73825af3e5985f7d30e0c7ac94b7545fef7b4837f549fa1c581eeed2c2",
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "execution": "NOT_RUN; parent owns separate probe execution."
+}

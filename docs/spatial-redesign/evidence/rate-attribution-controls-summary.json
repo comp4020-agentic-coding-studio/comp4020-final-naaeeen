@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "scope": "Tests only; actual isolated loopback createService and Socket.IO acknowledgements; Date.now spy and synthetic elapsed counter. No real100ms cadence, B2 causation, hosting-fit, sustained workload or deployment claim.",
+  "command": "mise exec -- pnpm exec vitest run --config .local/resource-focused.config.mjs spec/spatial-resource-rate.test.ts",
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "11.9.0",
+    "vitest": "5.0.3",
+    "bridge": "Windows PowerShell to WSL Ubuntu/lizhi; Linux toolchain"
+  },
+  "runs": [
+    {
+      "file": "rate-attribution-controls-first.txt",
+      "exit": 1,
+      "passed": 10,
+      "failed": 1,
+      "type": "Discriminator negative calibration; wallstalledquartermove yielded INVALID_MOVE before intended interval branch."
+    },
+    {
+      "file": "rate-attribution-controls-refined-local-classifier.txt",
+      "exit": 0,
+      "passed": 12,
+      "failed": 0,
+      "type": "Wallnet70 discriminator and retained stalled-credit-mask control; temporary local exact classifier."
+    },
+    {
+      "file": "rate-attribution-controls-final.txt",
+      "exit": 0,
+      "passed": 12,
+      "failed": 0,
+      "type": "Final shared classifier import; actual sockets, synthetic clocks."
+    }
+  ],
+  "requirements": [
+    {
+      "requirement": "Normal quarter-metre cadence accepted",
+      "evidence": "quarter-normal:12/12 OK, synthetic elapsed and wall each+100ms/action",
+      "decision": "Normal control valid"
+    },
+    {
+      "requirement": "Clock-backstep discriminator reaches minimum movement interval without distance-credit masking",
+      "evidence": "quarter-backstep-discriminator: first move OK; synthetic elapsed+100ms and wall+100ms then-30ms yields MOVE_INTERVAL",
+      "decision": "The .07 derived remaining credit plus .224 derived refill exceeds .25m; exact rate classifier sees movement interval"
+    },
+    {
+      "requirement": "Independent general budget with subscription excluded",
+      "evidence": "zero-move and availability each: normal wall31/31 OK; stalled/backward wall30/31 OK then1 ACTION_BUDGET; synthetic elapsed+100ms/action",
+      "decision": "The shared budget depends on controlled wall; movement interval is not involved"
+    },
+    {
+      "requirement": "Preserve genuine negative controls",
+      "evidence": "Credit-preaccrued fast movement MOVE_INTERVAL;31-event burst ACTION_BUDGET; duplicate accepted sequence STALE_INPUT",
+      "decision": "Controls retain expected denials"
+    },
+    {
+      "requirement": "Distinguish credit masking",
+      "evidence": "Retained quarter-stalled-credit-mask: second move INVALID_MOVE / OTHER",
+      "decision": "Do not attribute every synthetic elapsed-paced denial to movement interval"
+    }
+  ],
+  "refinement": "Only test wall sequence and explicit masking control changed after the retained failed calibration; no backend clock or limit changed.",
+  "closure": {
+    "fixturesCreated": 12,
+    "servicesClosed": 12,
+    "socketsDisconnected": 12,
+    "directoriesRemoved": 12
+  },
+  "sanitization": {
+    "checked": true,
+    "result": "Artifacts have no UUID-shaped runtime identities, raw acknowledgement messages, tokens, action bodies, actor IDs or command IDs; only safe codes/classifications/counters retained."
+  },
+  "review": {
+    "freshStatic": "No actionable fixture defect reported; independent read-only review",
+    "contextualSharedImport": "No actionable issue; shared classifier exactly matches prior local branches, and safeAck retains no raw values. Independent static recheck only; reviewer did not run services/tests."
+  },
+  "sourceSHA256": {
+    "spec/spatial-resource-rate.test.ts": "32b343ff60d298306bdc54346598cbd9a4dac1ee4f3d82af2a009e61268fde70",
+    "src/house-realtime.ts": "b11a3cbe3d8d0f51494dfded5f546bc520f9b1f44ebd45b4852194474cdaf18d",
+    "src/server.ts": "1ba2a7864ba89e56aedc3ec321e22e105e07c1a86e81d8acd1ad7586a93b14f1",
+    "public/house-geometry.js": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa"
+  },
+  "preservedFirstArtifactSHA256": {
+    "rate-attribution-controls-first.txt": "b2691cb973fc67d5340bee1f0c1aea571965cfc433c98b09367c8d2fa96b4c09",
+    "rate-attribution-controls-first-observations.json": "aeddf21b6fd19f8813cb45fb5fd132325416648e43810392a32710ace013fbb6"
+  }
+}

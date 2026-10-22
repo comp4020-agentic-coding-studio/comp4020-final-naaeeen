@@ -1,0 +1,66 @@
+Already up to date
+Done in 48ms using pnpm v11.9.0
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/lizhi/comp4020/comp4020-final-naaeeen[39m
+
+ [31m❯[39m spec/spatial-resource-rate-trace.test.ts [2m([22m[2m18 tests[22m[2m | [22m[31m1 failed[39m[2m | [22m[33m17 skipped[39m[2m)[22m[32m 135[2mms[22m[39m
+   [2m[90m↓[39m[22m bounded bootstrap rate trace pure calibration [2m(9)[22m
+     [2m[90m↓[39m[22m classifies only exact RATE_LIMITED messages and keeps unknown replies as OTHER
+     [2m[90m↓[39m[22m binds actual canonical routes and completes exactly194 numeric rows with seat sequence context
+     [2m[90m↓[39m[22m rejects changed caps, actors, route counts, seat counts and route digest schemas
+     [2m[90m↓[39m[22m route length, coordinates, actor admission and duplicate registration drift stop new sends
+     [2m[90m↓[39m[22m wrong step, action, actor and sequence context fail before adding a row
+     [2m[90m↓[39m[22m first denial stops sends while already-started ACKs drain without replacing the failure
+     [2m[90m↓[39m[22m timeouts and invalid ACK ownership are explicit and do not retain raw errors
+     [2m[90m↓[39m[22m nonfinite and regressing ACK clocks stop the trace while wall rollback remains valid
+     [2m[90m↓[39m[22m raw ACK fields, identity strings, tokens and request bodies never enter serialized trace
+   [2m[90m↓[39m[22m optional server wall clock memory schema [2m(2)[22m
+     [2m[90m↓[39m[22m default v1 retains19 columns while v2 describes20 columns and permits finite wall rollback
+     [2m[90m↓[39m[22m v2 rejects missing and nonfinite wall values while default v1 excludes them
+   [2m[90m↓[39m[22m actual bootstrap caller rate attribution wiring [2m(4)[22m
+     [2m[90m↓[39m[22m the original socket ACK operation is unchanged
+     [2m[90m↓[39m[22m actual sit retains100ms sleeps and waits for each move ACK before sending another
+     [2m[90m↓[39m[22m actual caller stops on first denied ACK and records only its fixed classification
+     [2m[90m↓[39m[22m actual caller maps only the exact installed timeout message to timeout and clears its tracked job
+   [31m❯[39m rate trace ACK lifecycle and cleanup discrimination [2m(3)[22m
+     [2m[90m↓[39m[22m transport rejection is explicit ACK_TRANSPORT_ERROR without raw error retention
+     [2m[90m↓[39m[22m pure trace records transport rejection separately from an actual timeout
+[31m     [31m×[31m actual finally drains a concurrent successful ACK before disconnecting after another actor denies[39m[32m 134[2mms[22m[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  spec/spatial-resource-rate-trace.test.ts > rate trace ACK lifecycle and cleanup discrimination > actual finally drains a concurrent successful ACK before disconnecting after another actor denies
+AssertionError: expected { …(3) } to match object { …(3) }
+
+- Expected
++ Received
+
+  {
+-   "disconnectedBeforePendingACK": false,
++   "disconnectedBeforePendingACK": true,
+    "firstFailure": {
+      "actorIndex": 2,
+      "classification": "ACTION_BUDGET",
+      "outcome": "ACK_DENIED",
+    },
+-   "pendingActorOutcome": 1,
++   "pendingActorOutcome": 3,
+  }
+
+ ❯ spec/spatial-resource-rate-trace.test.ts:392:8
+    390|       pendingActorOutcome: trace.rows.find((row: number[]) => row[0] =…
+    391|       firstFailure: bootstrapRateArtifact(trace).firstFailure,
+    392|     }).toMatchObject({ disconnectedBeforePendingACK: false, pendingAct…
+       |        ^
+    393|     expect(bootstrapRateArtifact(trace).firstFailure).toBe(originalFai…
+    394|     expect(events.indexOf("drain-finish")).toBeLessThan(events.indexOf…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[33m17 skipped[39m[90m (18)[39m
+[2m   Start at [22m 07:31:58
+[2m   Duration [22m 574ms[2m (import 44%, tests 28%, transform 27%, worker 1%)[22m
+
+EXIT_CODE=1

@@ -1,0 +1,8 @@
+test_empty_path_keeps_verified_absolute_inspector (__main__.InspectorPathControls.test_empty_path_keeps_verified_absolute_inspector) ... ok
+test_missing_known_installation_rejects_before_protocol_write (__main__.InspectorPathControls.test_missing_known_installation_rejects_before_protocol_write) ... ok
+test_registered_destination_remains_exclusive (__main__.InspectorPathControls.test_registered_destination_remains_exclusive) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

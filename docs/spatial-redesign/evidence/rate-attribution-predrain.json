@@ -1,0 +1,16 @@
+{
+  "status": "PRESERVED_BEFORE_INFLIGHT_ACK_REPAIR",
+  "preimages": [
+    {
+      "source": "tools/board-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-predrain-board-instrument.mjs",
+      "sha256": "33d14828d47ad0b2aa6a60db49a8ce939c9cedbae647a909c2fd63b649be9156"
+    },
+    {
+      "source": "tools/spatial-resource.mjs",
+      "preimage": "docs/spatial-redesign/evidence/rate-attribution-predrain-spatial-instrument.mjs",
+      "sha256": "4dbb3d23526ac60d0d79ad8cef61253696d00ec87f9d8943a33dca9a6dc31774"
+    }
+  ],
+  "finding": "Disconnect before drain can convert pending ACK into cleanup rejection; not an actual timeout."
+}

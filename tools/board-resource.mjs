@@ -4,7 +4,7 @@ import { SERVER_NODE_ARGS } from "../src/server-runtime.ts";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
 import { HOUSE_WORLD_VERSION } from "../public/house-version.js";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, resolve, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { monitorEventLoopDelay, performance } from "node:perf_hooks";
 import { getHeapStatistics } from "node:v8";
@@ -13,6 +13,7 @@ import {setTimeout as timerDelay} from "node:timers/promises";
 import { crc32, deflateSync } from "node:zlib";
 import { Server } from "socket.io";
 import { io } from "socket.io-client";
+import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES } from "./spatial-resource.mjs";
 import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
 const arg = k => {
     const n = process.argv.indexOf(k);
@@ -22,6 +23,8 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const protocolPath = resolve(root, arg("--protocol-file") ?? "evaluation/board-resource.protocol.json");
 if (!protocolPath.endsWith(".protocol.json")) throw new Error("A .protocol.json file is required");
 const resultPath = protocolPath.replace(/\.protocol\.json$/, ".results.json");
+const memoryDiagnosticPath = protocolPath.replace(/\.protocol\.json$/, ".memory-diagnostic.json");
+const rateAttributionPath = protocolPath.replace(/\.protocol\.json$/, ".rate-attribution.json");
 const hash = b => createHash("sha256").update(b).digest("hex"), sleep = ms => new Promise(r => setTimeout(r, ms));
 const q = (a, p) => a.length ? [...a].sort((a, b) => a - b)[Math.max(0, Math.ceil(a.length * p) - 1)] : null, round = n => n === null ? null : Math.round(n * 1000) / 1000;
 const fail = code => {
@@ -117,19 +120,23 @@ async function serve() {
     const loop = monitorEventLoopDelay({ resolution: 10 });
     loop.enable();
     let rssPeak = 0, heapPeak = 0;
+    let memorySampleSequence = 0, heapTotalPeak = 0, externalPeak = 0, arrayBuffersPeak = 0;
     const filePeaks = new Map();
-    function sample() {
+    function sample(memoryBoundary = null) {
         for (const c of connections)
             inspect(c);
-        const m = process.memoryUsage();
+        const m = process.memoryUsage(), monotonicMs = performance.now(), serverWallMs=p.rateAttribution?Date.now():null, osMaxRSSMiB = process.resourceUsage().maxRSS / 1024;
         rssPeak = Math.max(rssPeak, m.rss);
         heapPeak = Math.max(heapPeak, m.heapUsed);
+        heapTotalPeak = Math.max(heapTotalPeak, m.heapTotal);
+        externalPeak = Math.max(externalPeak, m.external);
+        arrayBuffersPeak = Math.max(arrayBuffersPeak, m.arrayBuffers);
         const files = p.storageAcceptance ? databaseFiles(arg("--data")) : null;
         if (files) for (const f of files) {
             const prior = filePeaks.get(f.name) ?? { name:f.name, logicalBytes:0, allocatedBytes:0 };
             prior.logicalBytes=Math.max(prior.logicalBytes,f.logicalBytes); prior.allocatedBytes=Math.max(prior.allocatedBytes,f.allocatedBytes); filePeaks.set(f.name,prior);
         }
-        return { ...(files ? {databaseFiles:files,databaseFilePeaks:[...filePeaks.values()]} : {}), kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
+        return { ...(files ? {databaseFiles:files,databaseFilePeaks:[...filePeaks.values()]} : {}), memoryDiagnostic: {sequence:++memorySampleSequence,monotonicMs,heapTotalMiB:m.heapTotal/1024**2,heapTotalPeakMiB:heapTotalPeak/1024**2,externalPeakMiB:externalPeak/1024**2,arrayBuffersPeakMiB:arrayBuffersPeak/1024**2,osMaxRSSMiB,boundary:memoryBoundary,...(p.rateAttribution?{serverWallMs}: {})}, kind: "sample", rssMiB: m.rss / 1024 ** 2, heapMiB: m.heapUsed / 1024 ** 2, externalMiB: m.external / 1024 ** 2, arrayBuffersMiB: m.arrayBuffers / 1024 ** 2, rssPeakMiB: rssPeak / 1024 ** 2, heapPeakMiB: heapPeak / 1024 ** 2, queues: peaks, activeEngines: connections.size, houseViews: sio.of("/").sockets.size, boardViews: sio.of("/board").sockets.size, engines, namespaces, invalidTelemetry, eventLoop: { p95Ms: loop.percentile(95) / 1e6, p99Ms: loop.percentile(99) / 1e6, maxMs: loop.max / 1e6 }, cpu: process.cpuUsage(), actions };
     }
     // Read-only aggregate diagnostics; no authority or transport handler is replaced.
     const storageQueries = p.storageAcceptance || p.gameScenario ? {
@@ -160,13 +167,14 @@ async function serve() {
             else if (m?.kind === "storage")
                 process.send?.({ kind: "storage", requestId: m.requestId, ...storageSample() });
             else if (m?.kind === "sample")
-                process.send?.({ ...sample(), kind: "reply", requestId: m.requestId });
+                process.send?.({ ...sample(m.memoryBoundary ?? null), kind: "reply", requestId: m.requestId });
             else if (m?.kind === "stop" && !closing) {
                 closing = true;
                 clearInterval(timer);
                 process.send?.(sample());
                 loop.disable();
                 await service.close();
+                if(!await flushMemoryDiagnosticTerminal(process,memorySampleSequence))process.exit(1);
                 process.exit(0);
             }
         }
@@ -324,6 +332,7 @@ async function run() {
     const protocolBytes = readFileSync(protocolPath), p = JSON.parse(protocolBytes), protocolHash = hash(protocolBytes);
     freeze(p, protocolHash);
     const calibration = process.argv.includes("--bootstrap-calibration");
+    if(p.rateAttribution&&(!calibration||!p.spatialScenario))fail("RATE_TRACE_BOOTSTRAP_PROFILE_REQUIRED");
     if (!calibration && (!process.argv.includes("--run") || arg("--go") !== protocolHash || arg("--freeze") !== p.sourceManifestSHA256))
         fail("PARENT_GO_REQUIRED");
     const startedAt = new Date().toISOString(), dir = join(root, ".local/board-resource", startedAt.replaceAll(":", "-") + "-" + randomUUID());
@@ -333,8 +342,12 @@ async function run() {
     const gameEvidence = p.gameScenario ? { status: "NOT_RUN", actions: [], rounds: [], storage: [] } : null;
     const pictureEvidence = p.pictureScenario ? {status:"NOT_RUN",actions:[],admissions:[],invalidFrames:0,conflictingFrames:0} : null;
     const storageEvidence = p.storageAcceptance ? {baseline:null,final:null,verification:null} : null;
+    const memoryDiagnostic = newMemoryDiagnosticCapture({includeWallTime:!!p.rateAttribution});
+    const memorySampleSequences = new WeakMap();
+    let memoryMeasurementEndSequence=null,memoryMeasurementGateRSSPeakMiB=null;
     const boardACKLedger = p.storageAcceptance ? newBoardACKLedger() : null;
     let finalResult = null;
+    let spatial = null;
     const childExit = new Promise(done => child.once("exit",(code,signal)=>done({code,signal})));
     const httpCounts = new Map();
     const samples = [], errors = {}, houses = [], views = [], deliveries = new Map(), pendingByView = new Map(), latencies = { normal: [], slow: [] }, jobs = new Set(), stats = { motionSent: 0, motionOk: 0, motionRejected: 0, motionTimeouts: 0, pointerSent: 0, pointerOk: 0, pointerRejected: 0, pointerTimeouts: 0, patchScheduled: 0, patchSkipped: 0, patchSaved: 0, patchRejected: 0, chatSaved: 0,chatSkipped:0, expectedFaultTimeouts: 0, invalidSent: 0, invalidAcked: 0, initialSnapshots: 0, assetReads: 0, assetBytesRead: 0 };
@@ -350,6 +363,12 @@ async function run() {
             readyResolve();
         }
         if (["sample", "reply", "ready"].includes(v?.kind)) {
+            const captured = captureMemoryDiagnostic(memoryDiagnostic,v,phase);
+            if(!captured.ok) failure ??= {phase,code:captured.code};
+            // The old one-second series/grader sees exactly its prior fields.
+            const {memoryDiagnostic: ignoredMemoryDiagnostic,...regularSample}=v;
+            if(captured.ok)memorySampleSequences.set(regularSample,v.memoryDiagnostic.sequence);
+            v=regularSample;
             lastSample = v;
             if (!samples.length || performance.now() - samples.at(-1).parentAt >= 1000)
                 samples.push({ ...v, parentAt: performance.now(), phase });
@@ -360,6 +379,14 @@ async function run() {
         }
         if (v?.kind === "childFailure")
             failure ??= { phase, code: v.code };
+        if(v?.kind==="memoryDiagnosticTerminal") {
+            const terminal=captureMemoryDiagnosticTerminal(memoryDiagnostic,v.lastSequence);
+            if(!terminal.ok)failure??={phase,code:terminal.code};
+            else {
+                const ackFailed=()=>{memoryDiagnostic.terminalError="MEMORY_DIAGNOSTIC_TERMINAL_ACK_FAILED";failure??={phase,code:"MEMORY_DIAGNOSTIC_TERMINAL_ACK_FAILED"};};
+                try {child.send({kind:"memoryDiagnosticTerminalAck",lastSequence:v.lastSequence},error=>{if(error)ackFailed();});} catch {ackFailed();}
+            }
+        }
     });
     child.on("error", () => {
         readyReject(new Error("CHILD_PROCESS_ERROR"));
@@ -401,6 +428,14 @@ async function run() {
             });
             child.send({ kind, requestId, ...body });
         });
+    }
+    async function memoryBoundary(name) {
+        const index=MEMORY_DIAGNOSTIC_BOUNDARIES.indexOf(name);
+        if(index<0)fail("MEMORY_DIAGNOSTIC_BOUNDARY");
+        const before=performance.now(),value=await rpc("sample",{memoryBoundary:name});
+        memoryDiagnostic.boundaryAwaitOverhead.push([index,performance.now()-before]);
+        if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
+        return value;
     }
     async function http(path, m, body) {
         const captureAfterReflection=running;
@@ -503,7 +538,7 @@ async function run() {
                 rememberGameProjection(v, r.durable.game);
             }
             v.snapshot = r;
-            if (p.pictureScenario) capturePicture(v,r);
+            if (p.pictureScenario && (!spatial || !v.spatialSubscribing && r.durable.zoneId === "lounge")) capturePicture(v,r);
             v.generation = r.generation;
             v.houseSnapshots++;
         });
@@ -752,6 +787,7 @@ async function run() {
     let motionTimer, pointerTimer, writeTimer, freezeTimer, progressTimer;
     try {
         await Promise.race([ready, sleep(15000).then(() => fail("STARTUP_TIMEOUT"))]);
+        if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
         phase = "bootstrap";
         if (!(await http("/healthz")).value.ok)
             fail("HEALTH_START");
@@ -764,6 +800,7 @@ async function run() {
             const members = [], house = { index: h, id: null, code: null, elements:scene(h), images:[png(101+h*100),png(102+h*100)], expectedVersions: new Map(), expectedElements:new Map(), expectedChat: new Map(), receiptJournal: [], seedChat: [], chatSerial: 0 };
             houses.push(house);
             house.members=members;
+            await memoryBoundary("fixture.seed.before");
             for (let n = 0; n < 6; n++) {
                 const opened = await http("/api/house/me"), member = { cookie: opened.cookie, identity: opened.value.identity.id, memberIndex: n };
                 await http("/api/house/command", member, { commandId: randomUUID(), type: n === 0 ? "house.create" : "house.join", payload: { ...(n === 0 ? { capacity: 6 } : { code: house.code }), name: "Synthetic resident " + n, colour: ["sage", "blue", "rose", "amber", "peach", "lavender"][n] } });
@@ -776,6 +813,7 @@ async function run() {
             }
             for (let n = 0; n < 2; n++)
                 ok((await http("/api/board/asset", members[n], { id: randomUUID(), houseId: house.id, file: { id: "resource_png_" + n, mimeType: "image/png", dataURL: "data:image/png;base64," + house.images[n].toString("base64") } })).value);
+            await memoryBoundary("fixture.assets.after");
             let batch = [], batches = 0;
             async function submit() {
                 if (!batch.length)
@@ -792,21 +830,27 @@ async function run() {
                 batch.push(e);
             }
             await submit();
+            await memoryBoundary("fixture.elements.after");
             for (let n = 0; n < 100; n++)
                 ok((await http("/api/board/chat", members[n % 6], { id: randomUUID(), houseId: house.id, text: ("Synthetic retained message " + n).padEnd(4000, "c") })).value);
+            await memoryBoundary("fixture.chat.after");
             const saved = (await http("/api/board/snapshot?houseId=" + house.id, members[0])).value;
             house.seedChat = saved.chat.map(m => ({ id: m.id, sequence: m.sequence }));
             house.fixture = { elements: elements.length, sceneBytes, chatMessages: saved.chat.length, chatBytes: Buffer.byteLength(JSON.stringify(saved.chat)), files: saved.files.length, snapshotBytes: Buffer.byteLength(JSON.stringify(saved)), imageBytes: house.images.map(b => b.length), imageSHA256: house.images.map(hash), patchBatches: batches };
             if (saved.chat.length !== 100 || saved.files.length !== 2 || saved.files.some(f => Object.hasOwn(f, "dataURL")))
                 fail("FIXTURE_SNAPSHOT_MISMATCH");
+            await memoryBoundary("fixture.snapshot.after");
+            await memoryBoundary("subscriptions.before");
             for (const m of members) {
                 const controller = newView(m, h, "house");
                 await connect(controller);
                 ok(await controller.socket.timeout(3000).emitWithAck("house.availability", { generation: controller.generation, value: "chat" }));
                 await connect(newView(m, h, "board"));
             }
+            await memoryBoundary("subscriptions.after");
         }
         const boardViews = views.filter(v => v.role === "board");
+        await memoryBoundary("asset-fanout.before");
         await Promise.all(boardViews.map(async (v) => {
             for (let n = 0; n < 2; n++) {
                 countHttp(v, false);
@@ -821,10 +865,11 @@ async function run() {
             }
         }));
         await sleep(100);
-        const initial = await rpc("sample");
+        const initial = await memoryBoundary("asset-fanout.after");
         if (initial.houseViews !== 12 || initial.boardViews !== 12 || initial.activeEngines !== 24 || views.some(v => !v.socket.connected))
             fail("INITIAL_VIEW_COUNT");
         phase = "invalid-ack-negative";
+        await memoryBoundary("invalid-ack.before");
         const negative = boardViews.at(-1);
         negative.intendedFault = true;
         const prior = negative.disconnects;
@@ -835,13 +880,44 @@ async function run() {
         }
         for (let n = 0; n < 40 && negative.socket.connected; n++)
             await sleep(25);
-        const negativeSample = await rpc("sample");
+        const negativeSample = await memoryBoundary("invalid-ack.after");
         negativeEvidence = { requests: 100, transportFault: "server writable=false diagnostic", closed: negative.disconnects > prior, queuePacketsPeak: negativeSample.queues.board.packets, queueBytesPeak: negativeSample.queues.board.bytes };
         if (!negativeEvidence.closed || negativeEvidence.queuePacketsPeak > 8 || negativeEvidence.queueBytesPeak > 4194304)
             fail("INVALID_ACK_BOUND_FAILURE");
+        await memoryBoundary("rejoin.before");
         negative.socket.disconnect();
         await connect(negative);
         negative.intendedFault = false;
+        await memoryBoundary("rejoin.after");
+        if (p.spatialScenario) {
+            spatial = createSpatialWorkload({ origin, scenario:p.spatialScenario, signal:cancellation.signal, rpc, houses, views,rateAttribution:p.rateAttribution,
+                onSubscribe(v,snapshot) {
+                    v.snapshot=snapshot;v.generation=snapshot.generation;v.serverEpoch=snapshot.serverEpoch;
+                    rememberGameProjection(v,snapshot.durable.game);
+                    if(snapshot.durable.zoneId==="lounge") {
+                        v.pictureAuthority=capturePictureAuthority(snapshot);
+                        v.pictureFrames=new Map();
+                        const admission={houseIndex:v.house,memberIndex:v.memberIndex,viewIndex:v.index,connectionOrdinal:v.connections,...pictureAuthorityEvidence(v.pictureAuthority)};
+                        const index=pictureEvidence.admissions.findIndex(row=>row.viewIndex===v.index);
+                        if(index<0)fail("SPATIAL_ADMISSION_MISSING");pictureEvidence.admissions[index]=admission;
+                        capturePicture(v,snapshot);
+                    }
+                },
+                async reconnect(v) {
+                    v.intendedFault=true;
+                    if(v.eligibleAt)v.eligibleMs+=performance.now()-v.eligibleAt;
+                    v.socket.disconnect();
+                    const deadline=performance.now()+5000;
+                    while((await rpc("sample")).houseViews!==11) {if(performance.now()>deadline)fail("SPATIAL_OLD_CONTEXT_NOT_RELEASED");await sleep(25);}
+                    await connect(v);v.intendedFault=false;
+                }
+            });
+            await memoryBoundary("spatial.prepare.before");
+            if(p.rateAttribution)freeze(p,protocolHash);
+            await spatial.prepare();
+            if(p.rateAttribution)freeze(p,protocolHash);
+            await memoryBoundary("spatial.prepare.after");
+        }
         if (p.storageAcceptance || p.gameScenario) {
             const baseline=cleanSample(await rpc("storage"));
             if (storageEvidence) storageEvidence.baseline=baseline;
@@ -850,12 +926,14 @@ async function run() {
         if (calibration) {
             phase = "calibration-finish";
             start = performance.now();
+            spatial?.begin(start);
             end = start;
         }
         else {
             phase = "measurement";
             running = true;
             start = performance.now();
+            spatial?.begin(start);
             progressTimer = setInterval(() => process.stdout.write(JSON.stringify({ status: "RUNNING", elapsedSeconds: round((performance.now() - start) / 1000), phase, rssMiB: lastSample?.rssMiB, rssPeakMiB: lastSample?.rssPeakMiB, houseViews: lastSample?.houseViews, boardViews: lastSample?.boardViews, patchSaved: stats.patchSaved, chatSaved: stats.chatSaved, unexpectedDisconnects }) + "\n"), 30000);
             const duration = p.durationSeconds * 1000;
             for (const v of views) {
@@ -867,6 +945,7 @@ async function run() {
             }
             motionTimer = setInterval(() => {
                 const now = performance.now();
+                spatial?.sampleMotion(now);
                 for (const v of views) {
                     if (v.role !== "house" || now < v.nextMotion)
                         continue;
@@ -875,17 +954,20 @@ async function run() {
                         v.nextMotion = now + 100;
                     if (!v.ready || v.motionPending && !v.intendedFault || !v.socket.connected)
                         continue;
+                    if (spatial && !spatial.shouldMove(v)) continue;
                     v.motionPending = true;
                     v.motionSent++;
                     if (!v.intendedFault)
                         v.normalMotionSent++;
                     stats.motionSent++;
-                    const socket = v.socket, generation = v.generation;
+                    const socket = v.socket, generation = v.generation, point = spatial ? spatial.motionTarget(v) : {x:v.x,z:v.z};
                     launch(async () => {
                         try {
-                            const r = await socket.timeout(5000).emitWithAck("house.move", { generation, sequence: ++v.motionSequence, x: v.x, z: v.z, heading: 0 });
-                            if (r?.ok)
+                            const r = await socket.timeout(5000).emitWithAck("house.move", { generation, sequence: ++v.motionSequence, x: point.x, z: point.z, heading: 0 });
+                            if (r?.ok) {
                                 stats.motionOk++;
+                                spatial?.motionACK(v,point);
+                            }
                             else {
                                 stats.motionRejected++;
                                 error(r?.code ?? "MOTION_NO_ACK");
@@ -1041,12 +1123,14 @@ async function run() {
                 pictureEvidence.status="RUNNING";
                 for(let houseIndex=0;houseIndex<2;houseIndex++) launch(()=>playPicture(houseIndex));
             }
+            if(spatial) launch(()=>spatial.run());
             while (performance.now() - start < duration) {
                 if (failure)
                     break;
                 await sleep(Math.min(1000, duration - (performance.now() - start)));
             }
             end = performance.now();
+            spatial?.sampleMotion(end);
             running = false;
             for (const timer of [motionTimer, pointerTimer, writeTimer, freezeTimer, progressTimer])
                 clearInterval(timer);
@@ -1062,6 +1146,7 @@ async function run() {
         }
         if(pictureEvidence)pictureEvidence.status=calibration?"CALIBRATION_PICTURE_NOT_RUN":"COMPLETE";
         phase = "recovery-check";
+        await memoryBoundary("recovery.before");
         for (const v of views)
             if (v.eligibleAt && v.ready && !v.intendedFault)
                 v.eligibleMs += performance.now() - v.eligibleAt;
@@ -1072,7 +1157,9 @@ async function run() {
             recovery.push({ houseIndex: h.index, allSeedIds:h.elements.every(e=>actualElements.has(e.id)), allUnmodifiedElements:h.elements.filter(e=>!h.expectedVersions.has(e.id)).every(e=>canonical(actualElements.get(e.id))===canonical(e)),allLatestPayloads:[...h.expectedElements].every(([id,e])=>canonical(actualElements.get(id))===canonical(e)),tombstones:saved.elements.filter(e=>e.isDeleted).length, allLatestVersions: [...h.expectedVersions].every(([id, ver]) => (versions.get(id) ?? 0) >= ver), allScheduledChat: [...h.expectedChat].sort((a, b) => a[1] - b[1]).slice(-100).every(([id]) => saved.chat.some(m => m.id === id)), files: saved.files.length, metadataOnly: saved.files.every(f => !Object.hasOwn(f, "dataURL")), elements: saved.elements.length, chat: saved.chat.length });
         }
         await sleep(300);
-        const final = await rpc("sample");
+        const final = await memoryBoundary("recovery.after");
+        memoryMeasurementEndSequence=memorySampleSequences.get(final);
+        memoryMeasurementGateRSSPeakMiB=final.rssPeakMiB;
         lastSample = final;
         const health = (await http("/healthz")).value.ok === true;
         freeze(p, protocolHash);
@@ -1085,14 +1172,15 @@ async function run() {
             const baseline = gameEvidence.storage[0], finalStorage = gameEvidence.storage.at(-1);
             gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.gameReceipts.count - baseline.gameReceipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
         }
-        const result = { ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
+        if (spatial) { Object.assign(gates,spatial.finish()); spatial.evidence.originalFullMotionWorkloadGate=gates.workload; gates.workload=spatial.gradeWorkload(stats,perView,p.workload); }
+        const result = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
         finalResult=result;
 
     }
     catch (e) {
         failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE" };
         const status=failureStatus(failure.code);
-        finalResult = { ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
+        finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
         process.exitCode = 1;
     }
     finally {
@@ -1101,6 +1189,10 @@ async function run() {
         cancellation.abort();
         for (const t of [motionTimer, pointerTimer, writeTimer, freezeTimer, progressTimer])
             clearInterval(t);
+        // Stop new work first; preserve already-in-flight ACKs while the real
+        // sockets/server remain alive. Their original5000ms deadlines still apply.
+        if(p.rateAttribution&&spatial)await spatial.drainBootstrapTrace();
+        spatial?.close();
         for (const v of views)
             v.socket?.disconnect();
         if(child.connected)child.send({ kind: "stop" });
@@ -1112,6 +1204,10 @@ async function run() {
         finalResult.processClosure={generatorPID:process.pid,serverPID:child.pid,serverExitCode:child.exitCode,serverSignal:child.signalCode,serverClosed:child.exitCode!==null||child.signalCode!==null};
         try {
             freeze(p,protocolHash);
+            if(memoryDiagnostic.invalidSamples)fail("MEMORY_DIAGNOSTIC_INVALID_SAMPLE");
+            if(!memoryDiagnostic.rows.length)fail("MEMORY_DIAGNOSTIC_EMPTY_CAPTURE");
+            const completion=finalizeMemoryDiagnostic(memoryDiagnostic,memoryMeasurementEndSequence,memoryMeasurementGateRSSPeakMiB);
+            if(completion.status!=="VALID")fail(completion.failureCode);
             if(!finalResult.processClosure.serverClosed)fail("RESOURCE_SERVER_CLOSE_TIMEOUT");
             if(child.exitCode!==0)fail("RESOURCE_SERVER_EXIT_FAILED");
             if(storageEvidence && finalResult.gates) {
@@ -1124,8 +1220,9 @@ async function run() {
                     finalResult.gates.pictureActionsAndDelivery=calibration?null:gradePictureEvidence(p.pictureScenario,pictureEvidence);
                     pictureEvidence.persisted=verifyClosedPictureTables(join(dir,"data/house.sqlite"),houses,p.pictureScenario,pictureEvidence);
                     const b=storageEvidence.baseline,f=storageEvidence.final;
-                    finalResult.gates.picturePersistenceAndReceipts=calibration?null:pictureEvidence.persisted.allMatch&&f.receipts.count-b.receipts.count===174&&f.puzzleReceipts.count-b.puzzleReceipts.count===50&&f.puzzleTables.rows===2&&f.puzzleTables.completedTables===2&&f.puzzleTables.placements===48&&f.puzzleTables.maxStateBytes<=8192;
+                    finalResult.gates.picturePersistenceAndReceipts=calibration?null:pictureEvidence.persisted.allMatch&&f.receipts.count-b.receipts.count===(174+(p.spatialScenario?.media.expectedHouseCommands??0))&&f.puzzleReceipts.count-b.puzzleReceipts.count===50&&f.puzzleTables.rows===2&&f.puzzleTables.completedTables===2&&f.puzzleTables.placements===48&&f.puzzleTables.maxStateBytes<=8192;
                 }
+                if(spatial) finalResult.gates.spatialPersistenceAndBounds=spatial.verifyClosed(join(dir,"data/house.sqlite"));
                 finalResult.status=calibration?"CALIBRATION":Object.values(finalResult.gates).every(v=>v===true)?"PASS":"FAIL";
             }
             freeze(p,protocolHash);
@@ -1136,6 +1233,28 @@ async function run() {
         }
         finalResult.measurementFinishedAtUTC=finalResult.finishedAt;
         finalResult.finishedAt=new Date().toISOString();
+        if(p.rateAttribution&&spatial) {
+            try {
+                await spatial.drainBootstrapTrace();
+                freeze(p,protocolHash);
+                const trace=spatial.bootstrapRateTraceArtifact();
+                writeFileSync(rateAttributionPath,JSON.stringify(trace)+"\n");
+                finalResult.rateAttribution={artifact:relative(root,rateAttributionPath),sha256:hash(readFileSync(rateAttributionPath)),rows:trace.rows.length,status:trace.status,firstFailure:trace.firstFailure};
+            } catch(error) {
+                const status=failureStatus(error.code??error.name);finalResult.status=status;
+                if(status==="ABORTED"&&finalResult.failure){finalResult.preAbortFailure=finalResult.failure;finalResult.failure={phase:"rate-attribution-artifact",code:error.code??error.name};}
+                else finalResult.failure??={phase:"rate-attribution-artifact",code:error.code??"RATE_TRACE_WRITE_FAILED"};
+            }
+        }
+        // Child closure precedes compact diagnostic serialization; the resource
+        // criteria and original one-second result series remain independent.
+        try {
+            const diagnostic={...finalizeMemoryDiagnostic(memoryDiagnostic,memoryMeasurementEndSequence,memoryMeasurementGateRSSPeakMiB),protocolSHA256:protocolHash,sourceManifestSHA256:p.sourceManifestSHA256,instrumentSHA256:p.instrumentSHA256,childClosed:finalResult.processClosure.serverClosed};
+            writeFileSync(memoryDiagnosticPath,JSON.stringify(diagnostic)+"\n");
+            finalResult.memoryDiagnostic={artifact:relative(root,memoryDiagnosticPath),sha256:hash(readFileSync(memoryDiagnosticPath)),status:diagnostic.status,samples:memoryDiagnostic.rows.length,invalidSamples:memoryDiagnostic.invalidSamples,boundaryAwaits:memoryDiagnostic.boundaryAwaitOverhead.length};
+        } catch {
+            finalResult.status="FAIL";finalResult.failure??={phase:"memory-diagnostic-artifact",code:"MEMORY_DIAGNOSTIC_WRITE_FAILED"};
+        }
         writeResult(finalResult);
         process.stdout.write(JSON.stringify({status:finalResult.status,durationSeconds:finalResult.durationSeconds,rssMaxMiB:finalResult.server?.rssPeakMiB,normalP95Ms:finalResult.delivery?.normalP95Ms,gates:finalResult.gates,...(finalResult.failure?{failure:finalResult.failure}:{})})+"\n");
         if(!["PASS","CALIBRATION"].includes(finalResult.status))process.exitCode=1;

@@ -1,0 +1,67 @@
+{
+  "status": "REVIEWED_FINAL_REGISTERED_EXECUTION_HELD",
+  "atUTC": "2026-10-22T20:34:15.156603+00:00",
+  "sourceHashes": {
+    "tools/board-resource.mjs": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+    "tools/spatial-resource.mjs": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218",
+    "spec/spatial-resource-rate.test.ts": "32b343ff60d298306bdc54346598cbd9a4dac1ee4f3d82af2a009e61268fde70",
+    "spec/spatial-resource-rate-trace.test.ts": "86546fadaf719005f624aac27247d86ae41bc6dbe5eb12ba30cc5c97b84a35ec"
+  },
+  "backendAll17SourceFilesUnchanged": true,
+  "registeredDefaultAndMixedProtocolBytesUnchanged": true,
+  "ABBAAllFourProtocolBytesUnchanged": true,
+  "originalGateLineUnchanged": true,
+  "routeBound": {
+    "schemaVersion": 1,
+    "geometrySHA256": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa",
+    "routes": [
+      {
+        "actorIndex": 2,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 4,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      },
+      {
+        "actorIndex": 14,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 16,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      }
+    ],
+    "maximumRows": 194,
+    "scope": "Pure canonical geometry/arrival bound; no service or bootstrap executed"
+  },
+  "tests": {
+    "actualHandlers": "12/12PASS sharedclassifier, syntheticelapsed/wall labelled, realI/O independent; all12isolatedservicesclosed",
+    "firstControlRED": "10pass/1fail creditmask calibrated; preserved rate-attribution-controls-first.txt",
+    "pureFinal": "30oldmemory+18trace=48/48PASS; rate-attribution-memory-trace-final.txt",
+    "lifecycleRED": "Oldpredrain code1fail/17skip reproduces prematuredisconnect/falseTIMEOUT; preserveddrain-first-red.txt",
+    "syntaxTypeSelfchecks": "PASS; rate-attribution-typecheck-final.txt"
+  },
+  "review": "FreshAstra source/lifecyclefindingclosed and final18testcoveragegapclosed; current4hashes verified. No remaining actionablefinding, preparationreadinessonly.",
+  "futureRegistration": "Await explicit reviewed finalUI freeze; preserve stagedprotocol without overwrite",
+  "execution": "NO attributionprobe started; separate parentexecutionGO required",
+  "stagedRegistration": "docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json",
+  "stagedProtocolSHA256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e",
+  "stagedSourceManifestSHA256": "e1fcdd9d9580fe8a51a902392cd07583ff2a8840773812b126cd1cf652346053",
+  "finalRegistration": "docs/spatial-redesign/evidence/rate-attribution-reviewed-final-registration.json",
+  "finalProtocolPath": "docs/spatial-redesign/evidence/rate-attribution-reviewed-final.protocol.json",
+  "finalProtocolSHA256": "6e0e195716a18a57655a94a0f31d1101eb9cc75e4f422156a79b3a43d8668259",
+  "finalSourceManifestSHA256": "f9a4bee5d674b1eba5a767b3c41b4232d5c080d9e20cfaf69da4ddc347021b5b",
+  "staged519SnapshotPreserved": {
+    "path": "docs/spatial-redesign/evidence/rate-attribution-probe.protocol.json",
+    "sha256": "58a1f35cd20fd7961c3758d8025ef061accedcb99bf27ec739b14bec7633e62e"
+  }
+}

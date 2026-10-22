@@ -1,0 +1,109 @@
+{
+  "status": "REGISTERED_INSPECT_READY_EXECUTION_NOT_RUN",
+  "protocolPath": "docs/spatial-redesign/evidence/rate-attribution-final-layout.protocol.json",
+  "protocolSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
+  "protocolBeforeSHA256": "fe71c5c8ca7d34e6f4682fdd0273485469561b1e2e491feb329122a78b96a8ec",
+  "protocolUnchanged": true,
+  "sourceManifestSHA256": "8d74b63aaf503a37f8738215edd82e5190e459b21e7ce373095a71ed8886f14e",
+  "all53CurrentSourceHashesMatch": true,
+  "sourceFiles": 53,
+  "backendFilesUnchanged": 17,
+  "instrumentSHA256": "fea41ec20e2420007171f17df8ff1d94ee8147720fec6874df2a8c4f508a3c5c",
+  "spatialInstrumentSHA256": "749e3eea08c7a731839eca2e89e62538e03c2aaba655a17d05de6959fbb4d218",
+  "layoutSourceHashes": {
+    "public/house-puzzle-ui.js": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8",
+    "public/house.css": "57eb2039f0a55fe0530b91d9784a8c91466297f552fb9e93f5fb1f693474cce9",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a"
+  },
+  "attributesSHA256": "16513c4b2425a97897a940eb211ad37d1c4d466a76b3c39db3e27f97908bb229",
+  "unchanged11ConditionHashes": {
+    "configuration": "ea8522298045f2e9a6b6afcc57baf13bc9d6a380f156e9ae73fb800dc909e310",
+    "fixture": "e45ca23fb3ff9399645fc10612a9a23d60f191505f675d766e8ccf6cc65ce078",
+    "workload": "86957f08019cbce5f7bb2da038fd33d6a34bc4399b9119d9a603d17e3d888464",
+    "slowReader": "ef61ed1359b2ece889c5bdd8089cba745500ccba8b575f9580057fb7b98233e6",
+    "negativeControls": "3b314ffeac4b5fe4caa6f156efbe4f2d6ce737acb2e8dd77bcfd9351c51c7ab9",
+    "bounds": "03175563da11508e1edbaa62b232e7144408c533c6ec1d5f9081d12998c24a7f",
+    "measurement": "766e9dd565c5457f9a54f25db40982978e9b1fef5c8c063c57d7baf08db5df63",
+    "storageAcceptance": "3fad66a3ee80d548ed552032ba04da0b849e5033eb6dce7a3b0644f36818a494",
+    "gameScenario": "e589e98eff65a8a83c48e70d48530385ca4b714bc2e9cab214615e211d01d6f6",
+    "pictureScenario": "b3adc3e1862ef0aed5752e48725ba72d679f3630fa02487a133e5e0ad07b3be5",
+    "spatialScenario": "406e0e0f03553f0569cdc8dd520bf5a2098c82903a4dd8c0e62f16100df37595"
+  },
+  "otherNonRegistrationFieldsUnchanged": true,
+  "rateAttribution": {
+    "schemaVersion": 1,
+    "maximumRows": 194,
+    "routes": [
+      {
+        "actorIndex": 2,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 4,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      },
+      {
+        "actorIndex": 14,
+        "moves": 41,
+        "seatActions": 1,
+        "routeSHA256": "9ae8e979249abb2083a61893ca40d4a54320425e53759c9e86cb0c2afe611291"
+      },
+      {
+        "actorIndex": 16,
+        "moves": 54,
+        "seatActions": 1,
+        "routeSHA256": "d8355c539d7ac4d489e4a4b12aab6b7ac074a151021d3db1ab0ddfff21eae0ed"
+      }
+    ],
+    "geometrySHA256": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa"
+  },
+  "maximumExecutions": 1,
+  "retry": false,
+  "firstRegistrationFailure": "rate-attribution-final-layout-registration-first-failure.json",
+  "completionMethod": "Parent-authorized first standalone inspector launch using verified installed mise absolute path; no helper rerun/rebinding.",
+  "inspectionCommand": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "node",
+    "tools/board-resource.mjs",
+    "--protocol-file",
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.protocol.json",
+    "--inspect"
+  ],
+  "inspectionExitCode": 0,
+  "inspectionStatus": "READY",
+  "inspectPath": "docs/spatial-redesign/evidence/rate-attribution-final-layout.inspect.json",
+  "inspectionStderrPath": "docs/spatial-redesign/evidence/rate-attribution-final-layout-inspection-stderr.txt",
+  "protectedHistoryFiles": 140,
+  "protectedHistoryUnchanged": true,
+  "protectedHistoryProof": "docs/spatial-redesign/evidence/rate-attribution-final-layout-inspection-history.json",
+  "requiredCheckEvidence": {
+    "exitCode": 0,
+    "sourceUnchanged": true,
+    "finishedAt": 1792704469.804215,
+    "coveredResourceFiles": 48,
+    "directlyVerifiedOmissions": [
+      "fly.toml",
+      "mise.toml",
+      "tools/board-resource-p7.mjs",
+      "tools/board-resource.mjs",
+      "tools/spatial-resource.mjs"
+    ],
+    "path": ".local/spatial-apply/required-current-7.json",
+    "sha256": "1c2003eddcdcafebc06bdd7ce33e1fd96465250d00087e92db6fcb5e915ae269"
+  },
+  "unusedExecutionArtifactPaths": [
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.results.json",
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.rate-attribution.json",
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.log",
+    "docs/spatial-redesign/evidence/rate-attribution-final-layout.closure.json"
+  ],
+  "execution": "NOT_RUN; parent owns separate execution GO",
+  "exactParentExecutionCommand": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/rate-attribution-final-layout.protocol.json --bootstrap-calibration"
+}
