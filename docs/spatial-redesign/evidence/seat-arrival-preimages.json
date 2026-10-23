@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-22T23:56:21.602091+00:00",
+  "scope": "Client-only physical-seat handoff; World/UI remain readonly",
+  "preimages": {
+    "public/house-client.js": "18015bedfc25e1cba0e1dbf8b909c8c3fb304e5770f5c3f55f4b5b312943e767",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+    "spec/house-client.test.ts": "52f5b10e3413d74fda720aa3b96e194e1f550df4e75f373a097e97e9eebb4c3e"
+  }
+}

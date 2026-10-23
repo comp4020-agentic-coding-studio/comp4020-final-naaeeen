@@ -1,0 +1,13 @@
+--- round1/public/house-client.js
++++ round2/public/house-client.js
+@@ -528,8 +528,9 @@
+     // Do not latch a request that cannot be emitted. Keep the existing authority
+     // and connection errors, including compatibility recovery, unchanged.
+     if (updateRequired || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) return controlled('house.seat', { seatId });
++    const player = latestLive.players.find(value => value.id === latestLive.durable.selfId);
++    if (player?.seatId) return Promise.reject(report(problem('ALREADY_SEATED', 'Stand up first and wait until your avatar is standing before choosing another chair.')));
+     if (seatClaim) return Promise.reject(report(seatPendingProblem()));
+-    const player = latestLive.players.find(value => value.id === latestLive.durable.selfId);
+     const claim = { scope: seatScope(latestLive), connection: connectionGeneration,
+       seatGeneration: player?.seatGeneration, ack: false, standHeadAfter: null };
+     seatClaim = claim; // Set before emission; even an immediate RAF cannot overtake it.

@@ -1,0 +1,113 @@
+{
+  "recordedAt": "2026-10-23T00:33:48.446826+00:00",
+  "status": "SCOPED_GREEN_FROZEN_FOR_CONTEXTUAL_RECHECK",
+  "round1Status": "Preserved P2 and calibration findings; not retroactively relabelled clear",
+  "round1Archive": "seat-arrival-round1/manifest.json",
+  "round1ArchiveHashesMatch": {
+    "docs/spatial-redesign/evidence/seat-arrival-round1/house-client.js": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/house-seat-arrival-handoff.test.ts": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/source-freeze.json": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/verification.json": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/fix.diff": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/coverage.json": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/results.md": true,
+    "docs/spatial-redesign/evidence/seat-arrival-round1/review-round1.md": true
+  },
+  "checks": [
+    {
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "vitest.house.config.ts",
+        "spec/house-client.test.ts",
+        "spec/house-ui.test.ts",
+        "spec/house-world.test.ts",
+        "spec/house-seat-arrival-handoff.test.ts",
+        "--coverage",
+        "--coverage.include=public/house-client.js",
+        "--coverage.reportsDirectory=.local/seat-arrival/coverage-round2",
+        "--coverage.reporter=json",
+        "--coverage.reporter=json-summary",
+        "--coverage.reporter=text"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 42.72553152299952
+    },
+    {
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 7.217252201997326
+    }
+  ],
+  "counts": {
+    "files": 4,
+    "tests": 350,
+    "failed": 0,
+    "skipped": 0,
+    "newHandoffSpec": 28,
+    "actualUIWorldClientFixtureCases": 7,
+    "clientCallbackCases": 21,
+    "existingClient": 79,
+    "existingUI": 138,
+    "existingWorld": 105
+  },
+  "frozenHashesStillMatch": {
+    "public/house-client.js": true,
+    "spec/house-seat-arrival-handoff.test.ts": true,
+    "public/house-world.js": true,
+    "public/house-ui.js": true,
+    "src/house-realtime.ts": true
+  },
+  "canonicalLF": {
+    "public/house-client.js": true,
+    "spec/house-seat-arrival-handoff.test.ts": true
+  },
+  "diffCheck": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "public/house-client.js"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  "reviewRefinements": [
+    {
+      "finding": "Exported known-seated replacement claim can consume an earlier Stand generation",
+      "red": "seat-arrival-round2-p2-red.json",
+      "redCode": "seat-arrival-round1/house-client.js",
+      "redSpec": "seat-arrival-round2-p2-red-spec.ts",
+      "change": "Reject claimSeat before emission with ALREADY_SEATED while current self head is seated; explicit Stand remains usable and new claim waits for standing head",
+      "current": "Full ordering regression passes, including new claim after standing head and delayed new seat projection"
+    },
+    {
+      "finding": "Generation-only fixtures were incorrectly attributed to room-edit producer",
+      "change": "Relabelled synthetic lease-release/client-receipt contracts; added source-calibrated room fixture with pose reset and controller-generation change in both ACK/head orders",
+      "scope": "Transport fixture mirrors realtime release87, project238 and resetZone106-112 fields; no live server room-edit flow claimed"
+    },
+    {
+      "finding": "Round1 client-only 2-unit correction did not prove otherwise-current World flight settlement",
+      "change": "Added real UI/World/client manual DOM RAF fixture with unchanged broad scope, null seatId and 0.1-unit correction; confirms no snapshot position reset, then receipt recovery and subsequent held movement emission",
+      "scope": "Synthetic exported-client lease-generation contract, not native Places or actual room-edit producer"
+    }
+  ],
+  "remaining": [
+    "Parent contextual fresh review reconciliation",
+    "Full required checks, maintained native selection and whole visit on integrated source freeze",
+    "Resource qualification and human/device/release acceptance outside worker scope"
+  ]
+}

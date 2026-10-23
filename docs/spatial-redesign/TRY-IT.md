@@ -79,3 +79,10 @@ cards at **Options** → **Saved work**, and personal exports at **House setting
 **Download my saved data**. Lounge/bedroom chat keeps 100 messages for up to seven
 days. Gatherings, following and listening are temporary; missing replies belong in
 **Options** → **Pending drafts**.
+
+## If a chair is still confirming
+
+Wait for the seated pose before choosing another chair. **Stand / leave chair and
+activity** is the explicit way to get up. If the connection cannot confirm a chair,
+use **Options** → **Return to title** → **Continue saved home** to re-enter. A
+pending chair does not automatically replay a Join or claim another seat.

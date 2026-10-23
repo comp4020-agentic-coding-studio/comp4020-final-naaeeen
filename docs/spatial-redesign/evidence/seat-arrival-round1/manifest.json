@@ -1,0 +1,46 @@
+{
+  "recordedAt": "2026-10-23T00:29:06.388492+00:00",
+  "status": "Immutable round-1 candidate and review; P2 plus calibration findings remain",
+  "files": [
+    {
+      "source": "public/house-client.js",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/house-client.js",
+      "sha256": "743c08c6bba8ed9379f8d7c851c8405feb7e840c16d988ccb312bd4cf5246066"
+    },
+    {
+      "source": "spec/house-seat-arrival-handoff.test.ts",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/house-seat-arrival-handoff.test.ts",
+      "sha256": "e9a53b15393d37c4a8bc3a932dabcab7af6df4bd21a3b6d29af0a2b167adb1ac"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-source-freeze.json",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/source-freeze.json",
+      "sha256": "b314149a1a61ea999233ea4ff8f4d42aeedf36ea4aa0e3ddc78b65caf55f09d9"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-verification.json",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/verification.json",
+      "sha256": "ca7c656ad4fcc3b0e009032940f7c36596f5f9f5e6e96eda916df2e7e62a3cb8"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-fix.diff",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/fix.diff",
+      "sha256": "8dd82fd7d965d743aec8600219eb8004d14bf817d35a1650a86ae604e8788e73"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-coverage.json",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/coverage.json",
+      "sha256": "4420675f64b387da7330474c63a4c7f92abbed294b56095414414b51265747b5"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-results.md",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/results.md",
+      "sha256": "620e05dfcb5743a219bf56c663b163e92e4aac809778e1313f96cc96098da176"
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/seat-arrival-review-round1.md",
+      "archive": "docs/spatial-redesign/evidence/seat-arrival-round1/review-round1.md",
+      "sha256": "e87238c7e2a7a1898b9ea331538009ba15a2c68fbfeeabfc4f07c4b37905705a"
+    }
+  ]
+}

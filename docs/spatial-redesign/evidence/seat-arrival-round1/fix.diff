@@ -1,0 +1,109 @@
+diff --git a/public/house-client.js b/public/house-client.js
+index a6a9fc4..e7ffe7b 100644
+--- a/public/house-client.js
++++ b/public/house-client.js
+@@ -219,6 +219,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () =>
+   const inFlight = storage ? flightsByStorage.get(storage) : new Map();
+   const inspected = new Set();
+   let motionFlight = null, motionGeneration = 0, motionAuthority = null, updateRequired = null;
++  let seatClaim = null, seatHead = 0;
+   let puzzlePending = null, puzzleSequence = 0, connectionGeneration = 0, revokedWithoutHead = false;
+   const puzzleScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
+     snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.zoneId, snapshot.durable.puzzle?.current?.id ?? null]) : null;
+@@ -231,7 +232,27 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () =>
+   const motionScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
+     snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.streamId, snapshot.durable.zoneId,
+     snapshot.players.find(player => player.id === snapshot.durable.selfId)?.seatId ?? null]) : null;
++  // Physical chair ownership has its own handoff. UI panel intent can be canceled
++  // while the already-sent claim still changes the server's lease.
++  const seatScope = snapshot => snapshot ? JSON.stringify([snapshot.serverEpoch, snapshot.accessGeneration, snapshot.generation, snapshot.controller,
++    snapshot.durable.house.id, snapshot.durable.selfId, snapshot.durable.streamId, snapshot.durable.zoneId]) : null;
++  const seatPendingProblem = () => problem('PENDING', 'Your chair request is uncertain. Open Options, choose Return to title, then Continue saved home to recover.');
++  function reconcileSeatClaim(snapshot) {
++    const claim = seatClaim;
++    if (!claim) return;
++    if (claim.connection !== connectionGeneration || claim.scope !== seatScope(snapshot)) { seatClaim = null; return; }
++    const player = snapshot.players.find(value => value.id === snapshot.durable.selfId);
++    if (!player?.connected) return;
++    const advanced = nonnegative(player.seatGeneration) && nonnegative(claim.seatGeneration)
++      && player.seatGeneration > claim.seatGeneration;
++    // The old standing generation cannot settle a claim. After its ACK, an
++    // advanced generation proves either seating or a later release (for example
++    // a room edit removing that chair). Explicit Stand also has a head barrier.
++    if (claim.standHeadAfter !== null && seatHead > claim.standHeadAfter && !player.seatId
++      || claim.ack && advanced) seatClaim = null;
++  }
+   const reducer = createSnapshotReducer(snapshot => {
++    seatHead++; reconcileSeatClaim(snapshot);
+     if (puzzleScope(snapshot) !== puzzleScope(latestLive)) clearPuzzleIntent();
+     if (motionScope(snapshot) !== motionScope(latestLive)) { motionGeneration++; motionFlight = null; motionAuthority = null; }
+     latestLive = snapshot;
+@@ -498,10 +519,35 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () =>
+     }
+     return sendPuzzleIntent(pending);
+   }
+-  function controlled(event, body = {}) {
++  function controlled(event, body = {}, transformError = error => error) {
+     if (updateRequired) return Promise.reject(updateRequired);
+     if (!hasCompatibleHead() || !latestLive?.controller) return Promise.reject(report(problem('NOT_CONTROLLER', 'Take control in this tab first.')));
+-    return ask(event, { generation: latestLive.generation, ...body }).catch(error => { report(error); throw error; });
++    return ask(event, { generation: latestLive.generation, ...body }).catch(error => { const failure = transformError(error); report(failure); throw failure; });
++  }
++  function claimSeat(seatId) {
++    // Do not latch a request that cannot be emitted. Keep the existing authority
++    // and connection errors, including compatibility recovery, unchanged.
++    if (updateRequired || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected) return controlled('house.seat', { seatId });
++    if (seatClaim) return Promise.reject(report(seatPendingProblem()));
++    const player = latestLive.players.find(value => value.id === latestLive.durable.selfId);
++    const claim = { scope: seatScope(latestLive), connection: connectionGeneration,
++      seatGeneration: player?.seatGeneration, ack: false, standHeadAfter: null };
++    seatClaim = claim; // Set before emission; even an immediate RAF cannot overtake it.
++    return controlled('house.seat', { seatId }, error => {
++      if (seatClaim !== claim) return error;
++      if (error.code === 'PENDING') return seatPendingProblem();
++      seatClaim = null; return error;
++    }).then(reply => {
++      if (seatClaim === claim) { claim.ack = true; reconcileSeatClaim(latestLive); }
++      return reply;
++    });
++  }
++  function stand() {
++    const claim = seatClaim;
++    return controlled('house.stand', {}, error => seatClaim === claim && claim && error.code === 'PENDING' ? seatPendingProblem() : error).then(reply => {
++      if (claim && seatClaim === claim) claim.standHeadAfter = seatHead;
++      return reply;
++    });
+   }
+   async function identityContext() {
+     const request = requestGeneration; assertActive(request);
+@@ -580,13 +626,19 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () =>
+     },
+     puzzleIntent, retryPuzzleIntent, pendingPuzzleIntent,
+     move(position) {
+-      if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected || motionFlight) return false;
++      if (closed || !hasCompatibleHead() || !latestLive?.controller || !socket?.connected || motionFlight || seatClaim
++        || latestLive.players.find(player => player.id === latestLive.durable.selfId)?.seatId) return false;
+       const request = requestGeneration, lifecycle = motionGeneration, scope = motionScope(latestLive);
++      const seatGeneration = latestLive.players.find(player => player.id === latestLive.durable.selfId)?.seatGeneration;
+       const body = { generation: latestLive.generation, sequence: ++sequence, x: position.x, z: position.z, heading: position.heading };
+       const current = () => !closed && socket?.connected && request === requestGeneration && lifecycle === motionGeneration && scope === motionScope(latestLive);
+       // One transient flight, no replay queue. A dropped packet or ACK must settle.
+       const flight = socket.timeout(1000).volatile.emitWithAck('house.move', body).then(reply => {
+         if (!current()) return { ok: false, stale: true };
++        // A claim and release may both precede their first head, leaving seatId
++        // unchanged. Settle that former walk against the new authoritative pose;
++        // stale:true would leave World's otherwise current flight outstanding.
++        if (seatGeneration !== latestLive.players.find(player => player.id === latestLive.durable.selfId)?.seatGeneration) return { ok: false, position: motionAuthority && { ...motionAuthority } };
+         if (reply?.ok !== true || reply.sequence !== body.sequence) return { ok: false, code: reply?.code ?? 'INVALID_ACK', position: motionAuthority && { ...motionAuthority } };
+         motionAuthority = { x: body.x, z: body.z };
+         return { ok: true, position: { ...motionAuthority } };
+@@ -595,8 +647,7 @@ export function createHouseClient({ onSnapshot = () => {}, onDisconnect = () =>
+       return flight.finally(() => { if (motionFlight === flight) motionFlight = null; });
+     },
+     setAvailability: value => controlled('house.availability', { value }),
+-    claimSeat: seatId => controlled('house.seat', { seatId }),
+-    stand: () => controlled('house.stand'),
++    claimSeat, stand,
+     async takeover() {
+       requireCompatible(); const reply = await ask('house.takeover', { controllerToken }); sequence = 0;
+       if (!acceptLive(reply.snapshot)) throw updateRequired ?? problem('STALE_ZONE', 'The house has not confirmed control yet.');

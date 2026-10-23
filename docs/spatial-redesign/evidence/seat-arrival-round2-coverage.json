@@ -1,0 +1,121 @@
+{
+  "recordedAt": "2026-10-23T00:33:48.445530+00:00",
+  "sourceSHA256": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da",
+  "rawCoveragePath": ".local/seat-arrival/coverage-round2/coverage-final.json",
+  "rawCoverageSHA256": "219a75a762291d1f88b08ae6e8128570872a4472e465aa494de63bbf84abaf9a",
+  "wholeModule": {
+    "lines": {
+      "total": 441,
+      "covered": 358,
+      "skipped": 0,
+      "pct": 81.17
+    },
+    "statements": {
+      "total": 791,
+      "covered": 615,
+      "skipped": 0,
+      "pct": 77.74
+    },
+    "functions": {
+      "total": 132,
+      "covered": 108,
+      "skipped": 0,
+      "pct": 81.81
+    },
+    "branches": {
+      "total": 778,
+      "covered": 516,
+      "skipped": 0,
+      "pct": 66.32
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "addedExecutableScope": {
+    "method": "Select Istanbul statements, mapped branch alternatives and function declarations by source start line on git diff --unified=0 added lines. Line metric aggregates selected statement hits by start line. Unmapped branch alternatives are not assigned to this patch.",
+    "sourceLines": [
+      222,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      255,
+      522,
+      525,
+      526,
+      527,
+      528,
+      529,
+      530,
+      531,
+      532,
+      533,
+      534,
+      535,
+      536,
+      537,
+      538,
+      539,
+      540,
+      541,
+      542,
+      543,
+      544,
+      545,
+      546,
+      547,
+      548,
+      549,
+      550,
+      551,
+      630,
+      631,
+      633,
+      639,
+      640,
+      641,
+      642,
+      651
+    ],
+    "moduleUnmappedBranchAlternatives": 155,
+    "lines": {
+      "total": 34,
+      "covered": 33,
+      "pct": 97.06
+    },
+    "statements": {
+      "total": 61,
+      "covered": 60,
+      "pct": 98.36
+    },
+    "branches": {
+      "total": 47,
+      "covered": 45,
+      "pct": 95.74
+    },
+    "functions": {
+      "total": 17,
+      "covered": 16,
+      "pct": 94.12
+    }
+  }
+}

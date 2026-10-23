@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "--config",
+    "vitest.house.config.ts",
+    "spec/house-seat-arrival-handoff.test.ts",
+    "-t",
+    "preclaim motion ACK"
+  ],
+  "exitCode": 1,
+  "durationSeconds": 2.4546360809981707,
+  "expectedFailures": 1,
+  "scope": "A preclaim transient move ACK after accepted chair then authoritative release without an intermediate seated head"
+}

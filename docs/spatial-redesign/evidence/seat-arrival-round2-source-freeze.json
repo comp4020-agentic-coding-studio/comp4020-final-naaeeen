@@ -1,0 +1,12 @@
+{
+  "recordedAt": "2026-10-23T00:32:54.694944+00:00",
+  "scope": "Round-2 client/spec freeze after exactly P2 seated guard, producer calibration and coupled small-correction flight refinement; full/native/resource remain parent-owned",
+  "round1Archive": "seat-arrival-round1/manifest.json",
+  "sha256": {
+    "public/house-client.js": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da",
+    "spec/house-seat-arrival-handoff.test.ts": "f0a186465dec09394b7ea02cc1f8be5b871d5ca95625699ba7219810fd4cef17",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5"
+  }
+}

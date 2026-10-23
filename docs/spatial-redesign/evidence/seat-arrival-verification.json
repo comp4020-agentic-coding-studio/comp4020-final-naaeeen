@@ -1,0 +1,120 @@
+{
+  "recordedAt": "2026-10-23T00:10:50.270394+00:00",
+  "status": "SCOPED_GREEN_READY_FOR_FRESH_REVIEW",
+  "checks": [
+    {
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "vitest.house.config.ts",
+        "spec/house-client.test.ts",
+        "spec/house-ui.test.ts",
+        "spec/house-world.test.ts",
+        "spec/house-seat-arrival-handoff.test.ts",
+        "--coverage",
+        "--coverage.include=public/house-client.js",
+        "--coverage.reportsDirectory=.local/seat-arrival/coverage-freeze",
+        "--coverage.reporter=json",
+        "--coverage.reporter=json-summary",
+        "--coverage.reporter=text"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 41.3631825880002
+    },
+    {
+      "command": [
+        "/home/lizhi/.local/bin/mise",
+        "exec",
+        "--",
+        "pnpm",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 6.801788573000522
+    }
+  ],
+  "focusedCounts": {
+    "files": 4,
+    "tests": 346,
+    "failed": 0,
+    "newHandoffSpec": 24,
+    "existingClient": 79,
+    "existingUI": 138,
+    "existingWorld": 105
+  },
+  "frozenHashesStillMatch": {
+    "public/house-client.js": true,
+    "spec/house-seat-arrival-handoff.test.ts": true,
+    "public/house-world.js": true,
+    "public/house-ui.js": true,
+    "src/house-realtime.ts": true
+  },
+  "canonicalLF": {
+    "public/house-client.js": true,
+    "spec/house-seat-arrival-handoff.test.ts": true
+  },
+  "verificationScope": "Actual UI/World/client on manual DOM RAF with renderer/socket/HTTP fixture boundaries; current client/UI/World unit and integration specs. Not native-browser or live-server acceptance.",
+  "remaining": [
+    "Fresh independent review and parent reconciliation",
+    "Full required checks and identical native first-case rerun on an integrated frozen candidate",
+    "Full resource qualification and human/device evidence remain parent-owned"
+  ],
+  "retainedHistory": [
+    {
+      "case": "First unchanged-client actual-module route RED",
+      "tests": 1,
+      "failed": 1,
+      "evidence": "seat-arrival-first-red.json"
+    },
+    {
+      "case": "First expanded attempt",
+      "tests": 16,
+      "failed": 1,
+      "unhandled": 1,
+      "cause": "House-change fixture ownWork stream still referred to old house; fixed coherent stream fixture",
+      "log": ".local/seat-arrival/first-green-attempt.log"
+    },
+    {
+      "case": "Expanded initial handoff GREEN",
+      "tests": 21,
+      "failed": 0,
+      "log": ".local/seat-arrival/second-green-attempt.log"
+    },
+    {
+      "case": "First focused coverage GREEN",
+      "tests": 343,
+      "failed": 0,
+      "log": ".local/seat-arrival/focused-green.log"
+    },
+    {
+      "case": "Owner-parent room-edit release regression RED",
+      "testsSelected": 2,
+      "failed": 2,
+      "evidence": "seat-arrival-release-red.json"
+    },
+    {
+      "case": "Room-edit release refinement GREEN",
+      "tests": 345,
+      "failed": 0,
+      "log": ".local/seat-arrival/final-focused-green.log"
+    },
+    {
+      "case": "Worker late preclaim motion receipt regression RED",
+      "testsSelected": 1,
+      "failed": 1,
+      "evidence": "seat-arrival-late-motion-red.json"
+    },
+    {
+      "case": "Initial typecheck fixture failure",
+      "exitCode": 2,
+      "cause": "Optional arrivals field fixture access",
+      "log": ".local/seat-arrival/typecheck.log"
+    }
+  ]
+}

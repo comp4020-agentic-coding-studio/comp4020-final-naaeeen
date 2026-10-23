@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "--config",
+    "vitest.house.config.ts",
+    "spec/house-seat-arrival-handoff.test.ts",
+    "-t",
+    "advanced standing authority"
+  ],
+  "exitCode": 1,
+  "durationSeconds": 2.3891550410007767,
+  "expectedFailures": 2,
+  "scope": "Existing room-edit seat release; accepted claim and advanced unseated head in either order"
+}

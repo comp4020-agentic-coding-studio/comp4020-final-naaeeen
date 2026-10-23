@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "--config",
+    "vitest.house.config.ts",
+    "spec/house-seat-arrival-handoff.test.ts",
+    "-t",
+    "refuses a replacement chair"
+  ],
+  "exitCode": 1,
+  "durationSeconds": 2.955522659998678,
+  "expectedFailures": 1,
+  "scope": "Valid exported API Stand ACK, replacement claim while previous seated head remains, queued earlier standing head before replacement ACK"
+}

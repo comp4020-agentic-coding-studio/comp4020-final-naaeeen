@@ -35,3 +35,36 @@ route/lateACK rules. Fresh-review actual changes; rerun the same native case on 
 new frozen source with original budgets/controls, preserve this first result, and
 then qualify the complete selected candidate. Other workers own resource tools;
 no unrelated world styling, geometry, backend or game scope is authorized by this fix.
+
+## Selected implementation boundary after independent comparison
+
+Fresh Astra max and a separate Sol ultra trace agree on the ACK/projection gap.
+Compare World action-promise tracking (UI currently discards results/errors), an
+explicit UI-to-World barrier (risks conflating panel cancellation with physical
+ownership), and a scope-bound client transport latch. Select the client boundary:
+it observes real ACK/error and authoritative heads for every caller, including
+bedroom seats without an activity-panel kind. Keep World/UI unchanged unless a
+meaningful integration check demonstrates an additional requirement.
+
+Establish the latch before house.seat emission; block move() with its existing
+ineligible/busy return while pending, after accepted ACK awaiting current projection,
+and while authoritatively seated. Do not synthesize a seat from ACK alone. Clear
+only the matching latch on definitive rejection or causally current authority;
+invalidate on identity/house/connection/control/access/zone/epoch/close changes.
+Queued old standing heads and late old completions must not release a newer claim.
+Test head-before-ACK and explicit Stand/recovery ordering as well as ACK-before-head.
+
+The parent rejects the review's automatic-resubscribe suggestion for ambiguous
+claim timeout: current house.subscribe clears participation, advances authority
+and resets motion timing. That would silently change consent as a side effect of
+claim recovery. Keep unknown claims safe and provide an actionable explicit
+recovery through existing Return to title / re-enter (or an existing equally clear
+authority refresh chosen by the owner). No silent permanent hidden lock and no
+automatic replay of an uncertain chair request. Definitive failures remain usable.
+
+Authorized worker ownership: public/house-client.js, one new actual-module handoff
+spec and seat-arrival evidence. Existing client tests may gain meaningful targeted
+cases if needed; World/UI changes require a concrete failing behavior and parent
+scope approval. Preserve ordinary movement/urgent stop, held input, typing, pending
+receipt navigation, voluntary participation and server authority. No timer sleep,
+new server endpoint or generalized workflow framework is required.

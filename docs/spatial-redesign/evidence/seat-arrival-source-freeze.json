@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-23T00:09:04.633835+00:00",
+  "scope": "Worker owned client/spec freeze; UI/World/server readonly references, not whole-candidate release freeze",
+  "sha256": {
+    "public/house-client.js": "743c08c6bba8ed9379f8d7c851c8405feb7e840c16d988ccb312bd4cf5246066",
+    "spec/house-seat-arrival-handoff.test.ts": "e9a53b15393d37c4a8bc3a932dabcab7af6df4bd21a3b6d29af0a2b167adb1ac",
+    "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+    "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/home/lizhi/.local/bin/mise",
+    "exec",
+    "--",
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "--config",
+    "vitest.house.config.ts",
+    "spec/house-seat-arrival-handoff.test.ts"
+  ],
+  "exitCode": 1,
+  "durationSeconds": 3.8481861449981807,
+  "source": "unchanged client preimage",
+  "scope": "actual UI/World/client; DOM manual RAF; renderer/socket/HTTP seams stubbed"
+}
