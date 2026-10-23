@@ -60,11 +60,18 @@ Human task comparison remains separate and must not be described as completed.
 
 ## Current status
 
-Execution in progress. Lane records are in `evidence/seat-core-*`,
-`evidence/studio-*`, `evidence/gathering-*` and `evidence/ui-apply-*`.
-Cross-module, browser and resource acceptance remain pending until recorded below.
+Product slices and independent reviews are complete. Current full required12
+passes build/types and **73 files / 1,575 tests**, with all510 runtime/build hashes
+stable. The client seat handoff and tool-only pacing repairs have their own
+RED/GREEN and review records; all10affected native cases and the whole-six visit pass. Both300s resource
+profiles pass23/23 and30/30, with a highest sampled RSS of198.3828MiB. [Acceptance](ACCEPTANCE.md) records source-specific outcomes.
 
-## First integration and fresh-review cycle
+The room's saved reference, study huddle, sofa presentation and six-person picture
+flow are implemented. Earlier native successes retain their recorded source;
+final source verification is not inherited from them. The checked local preview is restored; publication remains
+outside this task.
+
+## Historical first integration and fresh-review cycle
 
 - `397e3f5` commits the room comparison and implementation gates before acceptance.
 - The first `pnpm check` stopped at a new HTTP test's TypeScript header-union
@@ -87,11 +94,11 @@ Cross-module, browser and resource acceptance remain pending until recorded belo
   retained foreground exec session. This was an environment lifecycle failure,
   not an inferred application crash or a reason to change product code.
 
-Current browser observations show creation of a six-person house, six physical
+This first-integration checkpoint observed creation of a six-person house, six physical
 activity places, ordinary My room -> studio arrival, and a furnished bedroom in
-the actual in-app browser. These are intermediate observations only; image upload,
+the actual in-app browser. At that point, image upload,
 visits, shared sessions, authority loss, phone and sustained resource acceptance
-are still pending in this checkpoint.
+were still pending; current acceptance above now closes those technical gates.
 
 
 ## Existing-data rehearsal
@@ -103,7 +110,8 @@ original table still matched afterward, all integrity/foreign-key checks passed,
 and all user_version values stayed unchanged. Only the four namespaced studio
 tables were added to house.sqlite. [Aggregate record](evidence/preview-copy-migration.json)
 contains no private database contents, credentials or raw identity identifiers.
-The original files were not opened for writing. The copied preview has not yet
-been started for the user; that follows final source and acceptance checks.
+The original files were not opened for writing. The checked copy is now served at http://localhost:4093/. The original data
+remains untouched; the current launch and later live-served CSS have separate
+hash records.
 
 Current implementation acceptance and open gates: [acceptance record](ACCEPTANCE.md).

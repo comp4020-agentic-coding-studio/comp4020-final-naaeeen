@@ -1,6 +1,7 @@
 # A house whose places do useful things
 
-Status: local implementation in progress, authorized23 October2026. See
+Status: local implementation and technical acceptance complete23 October2026.
+Real-friend utility tasks remain next evaluation. See
 [implementation checkpoint](IMPLEMENTATION.md) for slice ownership and current gates.
 The previous acceptance belongs to fb363cf runtime source. This plan replaces the spatial
 purpose assumptions of the previous post-Crit plan; its technical evidence remains

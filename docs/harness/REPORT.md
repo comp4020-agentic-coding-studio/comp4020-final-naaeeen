@@ -13,7 +13,9 @@ facts belong in PLAN, the capability contract and implementation evidence.
 ## 1. Authority and the question we are answering
 
 The goal is a usable, maintainable house for2–6 familiar friends, with real controlled
-avatars, dialogue, owned rooms, shared study and useful author-written next steps.
+avatars, dialogue, useful owned rooms, shared study and voluntary short breaks.
+Use the current spatial plan for concrete place tasks. Earlier authored work cards
+and next steps remain preserved under Saved work; they are not a mandatory entry task.
 A method earns its place by improving a decision, exposing a defect, verifying a
 promise or preserving inspectable evidence. Technique count is not a success metric.
 
@@ -562,3 +564,76 @@ Local environment/configuration files may contain credentials; output only expli
 allowlisted nonsecret fields, never the whole file or process environment. A source
 review does not require deployment tokens. Project AGENTS/CLAUDE carry this bounded
 rule; no permission setting, hook, credential or global configuration is changed.
+
+Before an exclusive browser/resource run, obtain an idle acknowledgement from every
+active executor that could start tests. A queued hold does not cancel an already
+running tool. Record any overlap with its actual timestamps and scope; do not
+claim an idle host, silently discard the run or infer a cause from coincidence.
+
+## Workload callers are part of the system under test,23October
+
+The first final mixed run reached a valid product guard with an invalid synthetic
+caller: the workload omitted X-House-Zone. General application tests and a passing
+baseline did not execute that media/configure boundary. Before expensive integrated
+qualification, exercise each new workload HTTP header/zone transition through the
+actual helper against a real service, with one valid effect and missing/wrong
+context negative controls. Keep the product guard strict. A helper-spy test alone
+cannot establish compatibility with the server. Preserve failed integrated runs
+and bind any corrected caller to a new candidate; do not retry unchanged artifacts.
+
+Separate correlated observations before choosing a repair: the same failed run
+also retained repeated image allocations at an earlier reconnect boundary. Decode
+phase/boundary indexes using the captured schema. An aborted diagnostic without a
+measurement endpoint is not a completed RSS gate; a source-backed allocation
+hypothesis needs its own comparison and subsequent unchanged-budget full result.
+Prefer a useful discriminating check over duplicating every full workload prefix.
+Keep content reuse separate from authorization reuse and count backing allocations,
+entry metadata and in-flight lifetimes rather than only visible byte slices.
+
+For future evidence registrations, avoid repeatedly embedding the same large
+historical result tree. Preserve immutable originals once and reference their
+paths/hashes where the protocol allows it. Existing frozen byte-copy commitments
+remain intact; compacting their history requires a separately reviewed transition.
+The observed repeated preimages increase repository size, not the deployed server's
+runtime memory, and do not provide independent additional experiments.
+
+## Seat acknowledgements and projected state,23October
+
+A native four-cycle movement check found a successful physical-seat ACK arriving
+before the seated projection. The renderer was still sending a final idle movement;
+the server correctly rejected it. Treat command completion and projected state as
+separate events. Protect the client handoff with the actual authority scope and
+observe both arrival orders; do not weaken a server guard to hide ordinary UI input.
+
+A fresh review then found that a previous standing projection could be mistaken
+for a newer claim. Reconcile reviewer traces with the real producer: a synthetic
+seat-generation-only fixture is not the room-edit path, which also changes the
+controller generation. A client receipt test is not a World flight test. Use a
+small correction below the renderer reset threshold to verify the real coupled
+flight. Preserve the first candidate and review before refining the fixture.
+
+For synthetic movement qualification, schedule the next send from actual dispatch
+and acknowledged transition time. A fixed deadline can bunch sends after a delayed
+callback. Test the actual helper through the real handler; retain unchanged rate,
+roles and grading and capture bounded safe failure categories prospectively. The
+two earlier unclassified rejection causes remain unknown. Stop each lane once its
+registered criteria pass; additional imagined edge cases belong in a bounded
+follow-up unless they expose a concrete material defect.
+
+## Output identity and terminal proof,23 October
+
+Static review of the native wrapper found that missing artifacts after an early
+browser failure could prevent its terminal after/closure record. Capture that
+failure explicitly and publish the source/process result regardless; do not assume
+that every failed runner creates its ordinary success files. This was a wrapper
+review finding, not an observed product failure.
+
+Two newly produced JSON files still carried a generated locale asset name that
+matched the existing secret hook. Verify the exact public asset and hash before
+classifying it; never print an unknown suspected key. Preserve exact preimages,
+escape only the confirmed filename losslessly, compare parsed JSON and reverse
+bytes, and record changed byte identities. Keep older byte-hash references scoped
+to their preimages with a supplemental notice. Do not disable the hook or claim
+that JSON semantic equality means identical bytes. Check every produced output,
+including full source maps and alternate runner results, rather than only the
+files listed by the first serializer.

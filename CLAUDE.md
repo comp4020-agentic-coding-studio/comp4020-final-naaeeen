@@ -57,10 +57,12 @@ and full independent shared whiteboard redesign. The previous S0–S4 local core
 historical evidence; current acceptance must follow the new owner brief. Read docs/implementation/ACTIVE-TASK.md.
 Record actual checks, fresh reviews, refinements and focused local commits per phase.
 Read owner original brief plus OWNER-POSITIONING-ADDENDUM-2026-10-06.md and
-PRODUCT-POSITIONING.md. Provisional target is2-6already-known university peers:
-when stuck,find a voluntarily willing friend,briefly converse,and preserve an
-author-written next step. User value is unvalidated;do not treat our prototypes
-or model agreement as demand,market uniqueness,productivity or HD proof.
+PRODUCT-POSITIONING.md. Current target is2–6 familiar university friends sharing an after-class house
+while working independently, explaining material, taking a short break or visiting
+an owner-selected reference. Follow the current spatial plan's concrete place
+contracts. Earlier cards/next steps remain Saved work, not a required daily form.
+User value remains an evaluation question; model agreement does not establish
+demand, market uniqueness, productivity or an HD grade.
 
 Mandatory house experience remains code/membership,owned DIY bedrooms/doors,
 controlled avatars,real text/presence/shared study and useful board. The 7 October owner redesign adds a full standalone-capable collaborative board

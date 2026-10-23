@@ -360,3 +360,43 @@ implementation status, with source and limitations retained in each evidence fil
 
 No row is a real-human A/B result. Technical comparisons, independent model review,
 controlled fault tests, native browser observations and human utility are separate.
+
+## Spatial current refinements,23October
+
+| ID | User task and choice | Actual comparison/review/refinement | Current verification |
+| --- | --- | --- | --- |
+| SP.1d | Six-player phone picture controls | Actual6identityclip -> compact primary actions/native player disclosure; Start focus, pending completion, leftanchor and independent scroll refinements |69component+138houseUI tests,15capacitycases, freshsource review, actualV5component3viewports; revisedwhole-sixpending |
+| SP.4c | Resume shared crop and pan by touch | Presenter departure freeze/claim; four44px labelled Pan controls start from displayedfollowedview |34modulecases, freshreview, actualphonehandover; currentPNGapproval |
+| SP.6d | Try the update without replacing authored data | Verified original-data copy/service migration; retained local4093 + title/health/current498hashes |Originals untouched; user-preview-restored.json, TRY-IT.md |
+| SP.7c | Verify legal authority orderings without hiding failures | Strict oldobserverdenial vs postfallbacktakeover; geometrygenerationinvalidatesoldprofile before freshsameUUIDeffect |Fullrequired67files1489PASS; both independent test-only reviews/mutants; no backendchange |
+| SP.7d | Bound resource diagnosis |194row numeric-only oneprobe/actualbranchcontrols; stoppedABBA preserved |194ACK_OK/4seats,VALID114samples,175.039MiBsampledCALIBRATION; full300sgates inprogress |
+| SP.Hc | Reject observer false positives/false negatives | Actualroundedcorner radius-only/full/partialoverlay controls; explicit interiorboardproxy retains24cell×5point/44pxchecks |V5componentPASS; paging amendment strengthens whole-six; no humanA/Bclaim |
+| SP.Hd | Verify model findings against complete boundaries | Freshwholeproductaudit withdrew missingchat claim after tracing board app; retained3boundedutilitytasks |final-product-purpose-review.md; no release-blocking product contradiction verified |
+| SP.He | Coordinate exclusive execution explicitly | Queuedhold arrived after purecalibration launch; recordtiming/scope, requireidleack before nextphase |resource-full-host-activity.json; no result replacement/causalclaim |
+
+## Spatial final workload boundaries,23October
+
+| Subsection | Requirement, observation and decision | Evidence and current verification |
+| --- | --- | --- |
+| SP.RSC.zone | Actual workload requests must carry the same controlled zone required by the product. First mixed run stopped before configure(true) because its header was absent. Keep server authority; repair the caller. | zone-header-readiness.json: realHTTP RED409/409/409 -> GREEN409/409/200, zero effects for invalid context, exactly one valid receipt/revision; fresh Astra high CLEAR; parent source reconciliation; local51a7aa5. Full mixed transitions remain pending. |
+| SP.RSC.alloc | Retain exact original images within fixed resource limits. Early image fan-out/rejoin retains repeated BLOB allocations; this is independent of the later HTTP rejection. | mixed-failure-independent-decision.md: fresh Astra max decoded actual rows, compared reuse/streaming/in-flight/GC alternatives; bounded HTTP-only8MiB backing/32entry candidate selected. Production, matched allocation, authority and full RSS checks are in progress. |
+| SP.UI.close | A visible textual Close label should fit its exposed target with existing typography. Original44px target was clickable; label overflowed its box while remaining inside the viewport. | scoped intrinsic CSS; full69files/1523tests PASS; actualRoom/Sofa pair2/2, both85.39x44px contained labels/fivehits; all518source/launch35 stable, all browsers closed; six original PNGs parent inspected, separate approval; local1c041d3/8a77d97. |
+| SP.RSC.final-first | Full results belong to exact registered source, not earlier passes. | final baseline23/23 at300s,194.28125MiB sampled; mixed aborted with STALE_ZONE and no endpoint. Both original protocols/results/source and closures preserved in19932f3; no unchanged retry or retrospective acceptance. |
+
+## Current local closure ledger,23 October
+
+These rows update the current gates of earlier spatial rows. Earlier failures and
+source-specific passes remain historical evidence in their original files.
+
+| ID | Concrete outcome | Evidence and refinement | Current gate |
+| --- | --- | --- | --- |
+| SP.C1 places/capacity | Study and game seats derive from2–6 house capacity; fresh activity requires a current real seat and explicit consent. | Geometry, actual HTTP/socket epoch/replay controls and current whole-six32checks/24placements/six authors. | Native technical PASS; human contribution balance open. |
+| SP.C2 owner room | Owner PNG/saved crop/world image, independent guest inspection, door revocation, optional local sound; earlier cards retained. | Room alternatives/research, codec/store/auth tests, actual owner/guest/sound cleanup and phone return. | Current native PASS; real-material return/visit utility open. |
+| SP.C3 study | Voluntary huddle opens the full independent canvas; board chat and view remain independently usable. | Current two-identity edits, membership-loss cleanup and phone lounge chat screenshot. | Native PASS; human channel discovery open. |
+| SP.C4 sofa | Deliberate image audience, opt-in follow/pointer, frozen presenter view and explicit handover. | Deferred-action controls plus current desktop/phone pan/follow/hand-over journey. | Native PASS; comparison with ordinary image chat open. |
+| SP.C5 navigation/recovery | Named visits, exit rug, scoped drafts and explicit Retry after physical arrival. | Current scoped drafts plus bedroom/game Return cases; exact saved effects and later drafts preserved. | Current native PASS; physical-device feel open. |
+| SP.C6 seat handoff | Seat command ACK and seated head are separate events. Client owns the authority latch. | Actual native RED ->28new focused controls; fresh P2 corrected by known-seated guard; actual producer fixture and coupled0.1World-flight proof; contextual recheck CLEAR. | Current native four-cycle motion PASS, zero observed rejections; no sub80ms exclusion claim. |
+| SP.C7 evidence/source | Current build/types/1,575tests and10native cases plus whole-six replace inherited acceptance. | All648native-source/launch35 stable during runs;14original PNGs parent viewed; exact-byte curation; output-serialization notice preserves earlier byte identities. | Native PASS; no human A/B claim. |
+| SP.C8 preview/data | Existing-data copy gains current implementation with original source untouched. | Stop verified owned service, read-only three-file backups/table hashes/integrity/FK/versions, restart/current498hashes/liveJS/health/IAB title. | Local4093preview ready; no release. |
+| SP.C9 resources | Exact images and current auth within original hosting shape; HTTP-only8MiB/32entry reuse. | Matched24→4backing allocations, current baseline23/23 at300.001s/196.7617MiB/8,142receipts. Actual-dispatch pacer19controls and fresh review. | Current mixed30/30 at300s/198.3828MiB;24media checks, zero normal motion rejection/timeouts. Old29/30failure preserved. |
+| SP.CH method | Fresh review informs decisions through verified traces, not verdict counting. | Corrected false missing-chat finding, mock outbox boundary, actual seat-producer calibration, native wrapper closure and generated-filename hook false positive. | Applicable harness refined; bounded lanes stop after registered criteria pass. |

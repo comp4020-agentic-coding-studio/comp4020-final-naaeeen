@@ -8,8 +8,24 @@ current product contracts in this root plan. Personal-room reference/atmosphere
 replaces the primary My work card loop; saved work remains retained and accessible.
 Physical seat plus explicit consent replaces remote fresh activity effects.
 Study huddles use the existing independent board, with no synchronized viewport
-claim. Current local acceptance remains in progress; historical gates below retain
+claim. Current local technical acceptance is complete at `fc99a55`:1,575tests,10native
+cases, whole-six visit and both unchanged300s resource profiles pass. The checked
+local4093preview is restored. Historical gates below retain
 the source and date they actually verified. No new publication is authorized.
+
+## Current purpose and scope
+
+An after-class common room for two to six familiar university friends who may want
+different things at the same time: work independently, explain something on the
+shared board, take a short cooperative break, or visit a friend's chosen material.
+The design puts those choices in recognizable places. Presence, active participation
+and room access remain separate decisions.
+
+The owned room now keeps a reference and its saved view, rather than requiring
+another goal form. Study, sofa and play have different tasks and lifecycles. This
+current spatial plan supersedes the older card-centred positioning below; authored
+cards remain retained under Saved work. Human return/visit utility and replay value
+are the next evaluation questions. See [try-it guide](docs/spatial-redesign/TRY-IT.md).
 
 # Active spatial redesign research
 
@@ -101,7 +117,7 @@ resource use on the actual Fly VM, WAN impairment, a real friend value pilot and
 student-authored PROCESS/reflections remain separate gates.
 
 
-# Shared Study House: purpose-first delivery plan
+# Historical initial positioning: Shared Study House
 
 6 October 2026. Authorised implementation is active; see docs/implementation/ACTIVE-TASK.md.
 This root PLAN.md is the one active plan. Prior plans are preserved in
