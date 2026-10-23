@@ -1,0 +1,17 @@
+[
+  {
+    "path": "tools/board-resource.mjs",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "path": "tools/spatial-resource.mjs",
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "check": "git diff whitespace",
+    "exitCode": 0,
+    "output": ""
+  }
+]

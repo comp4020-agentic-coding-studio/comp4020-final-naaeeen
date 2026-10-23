@@ -1,0 +1,21 @@
+{
+  "status": "BEFORE_OLD_SEMANTICS_EXTRACTION",
+  "head": "5f11288d6c7a8105873e05fac6f41286821ca9a5",
+  "sourcePreimages": {
+    "tools/board-resource.mjs": {
+      "sha256": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+      "preimage": "docs/spatial-redesign/evidence/motion-pacer-preimage-board.mjs"
+    },
+    "tools/spatial-resource.mjs": {
+      "sha256": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8",
+      "preimage": "docs/spatial-redesign/evidence/motion-pacer-preimage-spatial.mjs"
+    }
+  },
+  "immutableHistoryReferences": {
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.protocol.json": "5bb4e7c9aabdc1f2166951673588b7ca5e29acf59a382e81734b829b0ac365a1",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.protocol.json": "2f945399134c7d6e5f2a4097c60eeae6ff9ed764513809b5ed52b8e12a3e6042",
+    "docs/spatial-redesign/evidence/resource-reuse-baseline.results.json": "8b2801cc502165bf86fc82a64d77b1985bb69620cd90b99f1a15c6b044ad8c12",
+    "docs/spatial-redesign/evidence/resource-reuse-mixed.results.json": "9194e015f76164a0be5c6e459a43d1641bcbdf584f753e34d35a7ba8e17dc4fb"
+  },
+  "scope": "No history mutation or new large result copies; these unique first results are already preserved by parent."
+}

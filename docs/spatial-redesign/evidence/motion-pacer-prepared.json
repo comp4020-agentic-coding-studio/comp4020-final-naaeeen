@@ -1,0 +1,18 @@
+{
+  "status": "PREPARED_EXECUTION_HELD_PENDING_PARENT_NATIVE_RELEASE",
+  "sourceHashes": {
+    "tools/board-resource.mjs": "a0a7471b03a7adb04fbb38aff22ed6ce30fc85c29b740dc11014a2d56674c522",
+    "tools/spatial-resource.mjs": "ed890efec5bc07aadac1886bc7865e77f238d342e8996572a7da496cde4ebfef",
+    "spec/spatial-resource-motion-pacer.test.ts": "efc42c7a7d997d4ff78fdb05f2f45c1361478c6b75df911b50d9db9b3ad52854"
+  },
+  "extraction": "Old nominal deadline arithmetic only; actualboardtimer calls helper before unchangedguards. No pacerfix or normalrejectiondiagnostics yet.",
+  "specScope": "One sequential real-service/Socket.IO trial prepared only; direct handler timing/reset/budget/negativecontrols with explicitmonotoniccounter and unmodifiedwallclock; percasecleanup; desiredactualhelper pacingregression last.",
+  "observationPolicy": "Fixedcase/code/category enums andnumericpose/clock/generation/sequence/countfields only; max320rows; no rawACKs/messages/identities/tokens/bodies.",
+  "testExecution": "NOT_RUN",
+  "services": "NOT_STARTED",
+  "reviews": {
+    "extractionStatic": "CLEAR",
+    "testStatic": "Workerfreshreadonlyreviewpending; parentalso read draft with noobviousblocker."
+  },
+  "conditionalNextStep": "After parentrelease, run boundedtrial once; preserveactualRED/controls, stopunexpectedoutcome, thenproposeminimalpacer/diagnosticfix without changinggates. Historical2ACKcausesremainUNKNOWN."
+}

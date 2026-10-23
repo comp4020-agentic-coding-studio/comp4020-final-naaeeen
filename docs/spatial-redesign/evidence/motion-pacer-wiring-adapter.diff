@@ -1,0 +1,37 @@
+--- docs/spatial-redesign/evidence/motion-pacer-wiring-preimage.ts
++++ spec/spatial-resource-wiring.test.ts
+@@ -2,7 +2,7 @@
+ import { randomUUID } from "node:crypto";
+ import ts from "typescript";
+ import { expect, test } from "vitest";
+-import { createSpatialWorkload, resourceActorMap } from "../tools/spatial-resource.mjs";
++import { createSpatialWorkload, resourceActorMap, resourceMotionDue, resourceMotionControl, resourceMotionDispatched, resourceMotionSettled, newNormalMotionDiagnostics, recordNormalMotionRejection } from "../tools/spatial-resource.mjs";
+ 
+ function executableFunction(source: string, name: string) {
+   const ast=ts.createSourceFile("instrument.mjs",source,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);let found="";
+@@ -51,7 +51,7 @@
+   const raw=readFileSync(new URL("../tools/spatial-resource.mjs",import.meta.url),"utf8"),sent:any[]=[],actor:any={token:randomUUID(),motionSequence:8,generation:1};
+   const snapshot={generation:2,players:[{seatId:null,x:3,z:4}]};
+   actor.socket={timeout(){return this;},async emitWithAck(event:string,body:any){expect(actor.spatialSubscribing).toBe(true);sent.push({event,body});return {ok:true,snapshot};}};
+-  const subscribe=new Function("control","ok","onSubscribe","self","updatePosition","return ("+executableFunction(raw,"subscribe")+");")(async(_actor:any,operation:any)=>operation(),(reply:any)=>reply,(target:any,reply:any)=>{target.snapshot=reply;target.generation=reply.generation;},(target:any)=>target.snapshot.players[0],(target:any)=>{target.x=target.snapshot.players[0].x;});
++  const subscribe=new Function("control","ok","onSubscribe","self","updatePosition","resourceMotionControl","return ("+executableFunction(raw,"subscribe")+");")(async(_actor:any,operation:any)=>operation(),(reply:any)=>reply,(target:any,reply:any)=>{target.snapshot=reply;target.generation=reply.generation;},(target:any)=>target.snapshot.players[0],(target:any)=>{target.x=target.snapshot.players[0].x;},resourceMotionControl);
+   await subscribe(actor,"lounge");expect(sent).toEqual([{event:"house.subscribe",body:{zoneId:"lounge",controllerToken:actor.token}}]);expect(actor).toMatchObject({generation:2,motionSequence:0,spatialSeat:null,spatialSubscribing:false,x:3});
+ });
+ test("actual finish serializes a consistent standing denominator and rate at a rounding boundary",()=>{
+@@ -62,14 +62,14 @@
+ });
+ test("actual movement timer executes constructed actor -> routed target -> ACK callback and suppresses only seated actors",async()=>{
+   const ast=ts.createSourceFile("actual.mjs",actualSource,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);let callback="";
+-  function visit(node:ts.Node){if(ts.isCallExpression(node)&&node.expression.getText(ast)==="setInterval"&&node.arguments[0]?.getText(ast).includes("v.nextMotion"))callback=node.arguments[0].getText(ast);ts.forEachChild(node,visit);}visit(ast);
++  function visit(node:ts.Node){if(ts.isCallExpression(node)&&node.expression.getText(ast)==="setInterval"&&node.arguments[0]?.getText(ast).includes("resourceMotionDue(v, now)"))callback=node.arguments[0].getText(ast);ts.forEachChild(node,visit);}visit(ast);
+   expect(callback).not.toBe("");
+   for(const mixed of [false,true]){
+     const fixture=admittedFixture(mixed),jobs:Promise<any>[]=[],stats:any={motionSent:0,motionOk:0,motionRejected:0,motionTimeouts:0};
+     const spatial=mixed?createSpatialWorkload({origin:"http://fixture.invalid",scenario:{},signal:new AbortController().signal,rpc:async()=>({}),houses:fixture.houses,views:fixture.views,onSubscribe:()=>{},reconnect:async()=>{}}):null;
+     const routed=fixture.views.find(view=>view.role==="house"&&view.house===0&&view.memberIndex===3),point={x:0.25,z:0};routed.spatialRoute=[point];
+     spatial?.begin(0);
+-    const tick=new Function("performance","spatial","views","stats","launch","error","return ("+callback+");")({now:()=>100},spatial,fixture.views,stats,(operation:any)=>jobs.push(Promise.resolve().then(operation)),(code:string)=>{throw new Error(code);});
++    const tick=new Function("performance","spatial","views","stats","launch","error","resourceMotionDue","resourceMotionDispatched","resourceMotionSettled","recordNormalMotionRejection","normalMotionDiagnostics","return ("+callback+");")({now:()=>100},spatial,fixture.views,stats,(operation:any)=>jobs.push(Promise.resolve().then(operation)),(code:string)=>{throw new Error(code);},resourceMotionDue,resourceMotionDispatched,resourceMotionSettled,recordNormalMotionRejection,newNormalMotionDiagnostics());
+     tick();await Promise.all(jobs);
+     expect(fixture.emitted).toHaveLength(mixed?8:12);expect(stats.motionRejected).toBe(0);
+     if(mixed){expect(fixture.emitted.find(row=>row.viewIndex===routed.index).body).toMatchObject({x:0.25,z:0,generation:1,sequence:1});expect(routed.spatialRoute).toEqual([]);expect(routed.x).toBe(0.25);expect(fixture.emitted.some(row=>[2,4,14,16].includes(row.viewIndex))).toBe(false);}

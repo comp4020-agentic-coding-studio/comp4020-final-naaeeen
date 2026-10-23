@@ -1,0 +1,112 @@
+--- docs/spatial-redesign/evidence/motion-pacer-red-board.mjs
++++ tools/board-resource.mjs
+@@ -13,7 +13,7 @@
+ import { crc32, deflateSync } from "node:zlib";
+ import { Server } from "socket.io";
+ import { io } from "socket.io-client";
+-import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES, failResourceAck, resourceFailureCategory, resourceMotionDue } from "./spatial-resource.mjs";
++import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES, failResourceAck, resourceFailureCategory, resourceMotionDue, resourceMotionControl, resourceMotionDispatched, resourceMotionSettled, newNormalMotionDiagnostics, recordNormalMotionRejection } from "./spatial-resource.mjs";
+ import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
+ const arg = k => {
+     const n = process.argv.indexOf(k);
+@@ -343,6 +343,7 @@
+     const pictureEvidence = p.pictureScenario ? {status:"NOT_RUN",actions:[],admissions:[],invalidFrames:0,conflictingFrames:0} : null;
+     const storageEvidence = p.storageAcceptance ? {baseline:null,final:null,verification:null} : null;
+     const memoryDiagnostic = newMemoryDiagnosticCapture({includeWallTime:!!p.rateAttribution});
++    const normalMotionDiagnostics = newNormalMotionDiagnostics();
+     const memorySampleSequences = new WeakMap();
+     let memoryMeasurementEndSequence=null,memoryMeasurementGateRSSPeakMiB=null;
+     const boardACKLedger = p.storageAcceptance ? newBoardACKLedger() : null;
+@@ -594,6 +595,7 @@
+         }
+         v.ready = true;
+         v.eligibleAt = performance.now();
++        if(v.role==="house")resourceMotionControl(v,v.eligibleAt,"readiness");
+     }
+     function newView(m, house, role) {
+         const v = { ...m, house, role, index: views.length, token: randomUUID(), connections: 0, disconnects: 0, reasons: {}, disconnectEvents: [], ready: false, intendedFault: false, elements: new Map(), chatIds: new Set(), sequence: 0, patchEvents: 0, chatEvents: 0, snapshots: 0, presences: 0, houseSnapshots: 0, houseMotions: 0, revoked: 0, motionSent: 0, pointerSent: 0, normalMotionSent: 0, normalPointerSent: 0, motionPending: false, pointerPending: false, writePending: false, eligibleMs: 0, writerVersion: 1, saved: 0, skipped: 0,chatSkipped:0 };
+@@ -957,10 +959,14 @@
+                     if (!v.intendedFault)
+                         v.normalMotionSent++;
+                     stats.motionSent++;
+-                    const socket = v.socket, generation = v.generation, point = spatial ? spatial.motionTarget(v) : {x:v.x,z:v.z};
++                    const socket = v.socket, generation = v.generation, point = spatial ? spatial.motionTarget(v) : {x:v.x,z:v.z}, connectionOrdinal=v.connections, motionKind=v.spatialRoute?.[0]===point?"route":"stationary";
+                     launch(async () => {
+                         try {
++                            const sentAtMs=performance.now(),previousSendAtMs=v.motionSentAt,controlAtMs=v.motionControlAt,controlKind=v.motionControlKind,faultAtSend=v.intendedFault;
++                            if(socket===v.socket&&connectionOrdinal===v.connections)resourceMotionDispatched(v,sentAtMs);
+                             const r = await socket.timeout(5000).emitWithAck("house.move", { generation, sequence: ++v.motionSequence, x: point.x, z: point.z, heading: 0 });
++                            const ackAtMs=performance.now();
++                            if(socket===v.socket&&connectionOrdinal===v.connections)resourceMotionSettled(v,ackAtMs);
+                             if (r?.ok) {
+                                 stats.motionOk++;
+                                 spatial?.motionACK(v,point);
+@@ -968,6 +974,7 @@
+                             else {
+                                 stats.motionRejected++;
+                                 error(r?.code ?? "MOTION_NO_ACK");
++                                recordNormalMotionRejection(normalMotionDiagnostics,r,{viewIndex:v.index,connectionOrdinal,sentAtMs,ackAtMs,previousSendAtMs,controlAtMs,controlKind,motionKind,faultAtSend});
+                             }
+                         }
+                         catch {
+@@ -1170,14 +1177,14 @@
+             gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.gameReceipts.count - baseline.gameReceipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
+         }
+         if (spatial) { Object.assign(gates,spatial.finish()); spatial.evidence.originalFullMotionWorkloadGate=gates.workload; gates.workload=spatial.gradeWorkload(stats,perView,p.workload); }
+-        const result = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
++        const result = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, normalMotionDiagnostics, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
+         finalResult=result;
+ 
+     }
+     catch (e) {
+         failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE", ackCategory: resourceFailureCategory(e) };
+         const status=failureStatus(failure.code);
+-        finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
++        finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, normalMotionDiagnostics, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
+         process.exitCode = 1;
+     }
+     finally {
+--- docs/spatial-redesign/evidence/motion-pacer-red-spatial.mjs
++++ tools/spatial-resource.mjs
+@@ -153,12 +153,27 @@
+   return games.length===4&&games.every(row=>row.seatedSeconds>=290)&&walkers.length===5&&walkers.every(row=>row.standingSeconds>=160);
+ }
+ 
+-/** Existing nominal deadline calculation; isolated unchanged for bounded trials. */
++/** Keep nominal 10Hz without catching up an earlier delayed dispatch. */
+ export function resourceMotionDue(view, now) {
+   if(now<view.nextMotion)return false;
+-  view.nextMotion+=100;
+-  if(view.nextMotion<now)view.nextMotion=now+100;
++  view.nextMotion=now+100;
+   return true;
++}
++export function resourceMotionControl(view, now, kind) {
++  view.motionControlAt=now;view.motionControlKind=kind;view.nextMotion=now+100;
++}
++export function resourceMotionDispatched(view, now) { view.motionSentAt=now;view.nextMotion=now+100; }
++export function resourceMotionSettled(view, now) { view.motionAckAt=now;view.nextMotion=Math.max(view.nextMotion,now+80); }
++export function newNormalMotionDiagnostics() {
++  return {schemaVersion:1,maximumRows:16,totalRejected:0,categoryCounts:{ACTION_BUDGET:0,MOVE_INTERVAL:0,OTHER:0},rows:[]};
++}
++export function recordNormalMotionRejection(diagnostic, ack, context) {
++  const classified=classifyBootstrapRateAck(ack),category=classified==="ACTION_BUDGET"||classified==="MOVE_INTERVAL"?classified:"OTHER";
++  diagnostic.totalRejected++;diagnostic.categoryCounts[category]++;
++  if(diagnostic.rows.length>=16)return;
++  const number=value=>Number.isFinite(value)?value:null;
++  const code=["RATE_LIMITED","INVALID_MOVE","STALE_INPUT","STALE_GENERATION","STALE_ZONE","NOT_CONTROLLER","FORBIDDEN","UNAUTHENTICATED","INVALID_INPUT","NOT_SUBSCRIBED"].includes(ack?.code)?ack.code:"OTHER";
++  diagnostic.rows.push({viewIndex:number(context.viewIndex),connectionOrdinal:number(context.connectionOrdinal),sentAtMs:number(context.sentAtMs),ackAtMs:number(context.ackAtMs),previousSendAtMs:number(context.previousSendAtMs),controlAtMs:number(context.controlAtMs),controlKind:["readiness","subscribe","stand"].includes(context.controlKind)?context.controlKind:"none",motionKind:context.motionKind==="route"?"route":"stationary",faultAtSend:context.faultAtSend===true?1:0,code,category});
+ }
+ 
+ export function spatialRequestHeaders(origin, actor, hasBody) {
+@@ -185,8 +200,8 @@
+   async function waitFor(predicate,code,timeout=5000){const until=performance.now()+timeout;while(performance.now()<until){if(predicate())return;await timerDelay(5,undefined,{signal});}fail(code);}
+   function updatePosition(actor){const own=self(actor);actor.x=own.x;actor.z=own.z;}
+   async function control(actor,operation){await waitFor(()=>!actor.motionPending,"SPATIAL_PENDING_MOVE");actor.motionPending=true;try{return await operation();}finally{actor.motionPending=false;}}
+-  async function subscribe(actor,zoneId){await control(actor,async()=>{actor.spatialSubscribing=true;try{const reply=ok(await actor.socket.timeout(5000).emitWithAck("house.subscribe",{zoneId,controllerToken:actor.token}));onSubscribe(actor,reply.snapshot);actor.motionSequence=0;actor.spatialSeat=self(actor)?.seatId??null;updatePosition(actor);}finally{actor.spatialSubscribing=false;}});}
+-  async function stand(actor){await control(actor,async()=>{ok(await ask(actor,"house.stand",{}));actor.spatialSeat=null;await waitFor(()=>!self(actor)?.seatId,"SPATIAL_STAND_SNAPSHOT");updatePosition(actor);});}
++  async function subscribe(actor,zoneId){await control(actor,async()=>{actor.spatialSubscribing=true;try{const reply=ok(await actor.socket.timeout(5000).emitWithAck("house.subscribe",{zoneId,controllerToken:actor.token}));onSubscribe(actor,reply.snapshot);actor.motionSequence=0;actor.spatialSeat=self(actor)?.seatId??null;updatePosition(actor);resourceMotionControl(actor,performance.now(),"subscribe");}finally{actor.spatialSubscribing=false;}});}
++  async function stand(actor){await control(actor,async()=>{ok(await ask(actor,"house.stand",{}));actor.spatialSeat=null;await waitFor(()=>!self(actor)?.seatId,"SPATIAL_STAND_SNAPSHOT");updatePosition(actor);resourceMotionControl(actor,performance.now(),"stand");});}
+   async function sit(actor,seatId,bootstrap=false){
+     const layout=createLayout(6),seat=layout.seats.find(value=>value.id===seatId);if(!seat)fail("SPATIAL_SEAT_FIXTURE");
+     if(bootstrap&&rateTrace&&self(actor)?.seatId){rateTrace.stopped=true;rateTrace.firstFailure??={outcome:"INITIAL_SEAT_DRIFT",actorIndex:actor.index};fail("RATE_TRACE_ROUTE_DRIFT");}

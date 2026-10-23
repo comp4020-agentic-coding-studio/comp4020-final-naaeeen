@@ -1,0 +1,63 @@
+{
+  "status": "FROZEN_FOCUSED_GREEN_PARENT_QUALIFICATION_PENDING",
+  "sourceHashes": {
+    "tools/board-resource.mjs": "561336ed460655b4bd32068c3af3f060b93d4b58a29f83c23968dc4929323cde",
+    "tools/spatial-resource.mjs": "23751e362bab901c8a28870f2fd982d8c067a77b6505afbcda1828e632d1527d",
+    "spec/spatial-resource-motion-pacer.test.ts": "5864e97639f3b6876d72b26a02d1493217628bbc2a74bb3e414c2a1776a4906b",
+    "spec/spatial-resource-wiring.test.ts": "8a391f928b253b0aa6a74b557e9243234cff078a2014a5af6168a1fa1b99c2ca"
+  },
+  "historicalTwoRejections": "UNKNOWN; no retrospective ACK/view/timing attribution",
+  "actualRed": {
+    "result": "ExpectedonlyactualhelperdeadlineRED[true,true,false]",
+    "allWireControlsMatched": true,
+    "closure": {
+      "fixturesCreated": 16,
+      "servicesClosed": 16,
+      "socketsOpened": 32,
+      "socketsDisconnected": 32,
+      "directoriesRemoved": 16,
+      "cleanupFailures": 0
+    },
+    "log": "motion-pacer-first-red.txt"
+  },
+  "focusedGreen": {
+    "files": 2,
+    "tests": 19,
+    "passed": 19,
+    "realHandlerAckRows": 183,
+    "allWireControlsMatched": true,
+    "pacerDecisions": [
+      1,
+      0,
+      1
+    ],
+    "closure": {
+      "fixturesCreated": 16,
+      "servicesClosed": 16,
+      "socketsOpened": 32,
+      "socketsDisconnected": 32,
+      "directoriesRemoved": 16,
+      "cleanupFailures": 0
+    },
+    "log": "motion-pacer-first-green.txt"
+  },
+  "types": "PASS --noEmit",
+  "syntaxDiff": "PASS",
+  "unchangedInvariants": {
+    "originalGateObjectByteIdentical": true,
+    "originalStatsAndCountersByteIdentical": true,
+    "serverNodeFlagsImportLaunchAndRuntimeFileUnchanged": true,
+    "routedSitStepsAndSleepsByteIdentical": true,
+    "allMediaSchedulesBodiesAndRolesByteIdentical": true,
+    "standingDenominatorAndAcceptanceByteIdentical": true,
+    "everyDenialStillCounted": true
+  },
+  "pacing": "Nominal100ms fromactualdispatch; >=80ms afterACKsettlement; fresh100ms aftersuccessfulreadiness/subscribe/Stand beforeunlock; staleconnections cannotresetnewdeadlines.",
+  "normalRejectionEvidence": "Atmost16explicitnumeric/fixedenumrows; categorycounts andtotalRejected continue aftercap; oldstats/errors preserved; no rawmessages/payloads/IDs/tokens.",
+  "reviews": {
+    "source": "Read-onlyCLEAR board561336/spatial23751",
+    "testAppend": "FreshstaticCLEAR afterprivacyassertionrefinement, no executionsbyworker/reviewer"
+  },
+  "historyUnchanged": true,
+  "notRun": "No fullsuite, resource, nativebrowser, protocolbinding or commit. Nativearrivalfinding remains a separate app lane; sourcequalification remains parent-owned."
+}

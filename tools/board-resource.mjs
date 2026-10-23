@@ -13,7 +13,7 @@ import {setTimeout as timerDelay} from "node:timers/promises";
 import { crc32, deflateSync } from "node:zlib";
 import { Server } from "socket.io";
 import { io } from "socket.io-client";
-import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES, failResourceAck, resourceFailureCategory } from "./spatial-resource.mjs";
+import { createSpatialWorkload, newMemoryDiagnosticCapture, captureMemoryDiagnostic, captureMemoryDiagnosticTerminal, finalizeMemoryDiagnostic, flushMemoryDiagnosticTerminal, MEMORY_DIAGNOSTIC_BOUNDARIES, failResourceAck, resourceFailureCategory, resourceMotionDue, resourceMotionControl, resourceMotionDispatched, resourceMotionSettled, newNormalMotionDiagnostics, recordNormalMotionRejection } from "./spatial-resource.mjs";
 import { validateSourceBindings, capturePictureAuthority, pictureAuthorityEvidence, newBoardACKLedger, recordBoardACK, receiptStorage, databaseFiles, verifyClosedBoardLedger, gradeReceiptReplay, gradeReceiptGrowth, picturePlan, normalizePictureFrame, pictureFrameMatches, puzzleIntentACK, gradePictureEvidence, verifyClosedPictureTables } from "./board-resource-p7.mjs";
 const arg = k => {
     const n = process.argv.indexOf(k);
@@ -343,6 +343,7 @@ async function run() {
     const pictureEvidence = p.pictureScenario ? {status:"NOT_RUN",actions:[],admissions:[],invalidFrames:0,conflictingFrames:0} : null;
     const storageEvidence = p.storageAcceptance ? {baseline:null,final:null,verification:null} : null;
     const memoryDiagnostic = newMemoryDiagnosticCapture({includeWallTime:!!p.rateAttribution});
+    const normalMotionDiagnostics = newNormalMotionDiagnostics();
     const memorySampleSequences = new WeakMap();
     let memoryMeasurementEndSequence=null,memoryMeasurementGateRSSPeakMiB=null;
     const boardACKLedger = p.storageAcceptance ? newBoardACKLedger() : null;
@@ -594,6 +595,7 @@ async function run() {
         }
         v.ready = true;
         v.eligibleAt = performance.now();
+        if(v.role==="house")resourceMotionControl(v,v.eligibleAt,"readiness");
     }
     function newView(m, house, role) {
         const v = { ...m, house, role, index: views.length, token: randomUUID(), connections: 0, disconnects: 0, reasons: {}, disconnectEvents: [], ready: false, intendedFault: false, elements: new Map(), chatIds: new Set(), sequence: 0, patchEvents: 0, chatEvents: 0, snapshots: 0, presences: 0, houseSnapshots: 0, houseMotions: 0, revoked: 0, motionSent: 0, pointerSent: 0, normalMotionSent: 0, normalPointerSent: 0, motionPending: false, pointerPending: false, writePending: false, eligibleMs: 0, writerVersion: 1, saved: 0, skipped: 0,chatSkipped:0 };
@@ -947,11 +949,8 @@ async function run() {
                 const now = performance.now();
                 spatial?.sampleMotion(now);
                 for (const v of views) {
-                    if (v.role !== "house" || now < v.nextMotion)
+                    if (v.role !== "house" || !resourceMotionDue(v, now))
                         continue;
-                    v.nextMotion += 100;
-                    if (v.nextMotion < now)
-                        v.nextMotion = now + 100;
                     if (!v.ready || v.motionPending && !v.intendedFault || !v.socket.connected)
                         continue;
                     if (spatial && !spatial.shouldMove(v)) continue;
@@ -960,10 +959,14 @@ async function run() {
                     if (!v.intendedFault)
                         v.normalMotionSent++;
                     stats.motionSent++;
-                    const socket = v.socket, generation = v.generation, point = spatial ? spatial.motionTarget(v) : {x:v.x,z:v.z};
+                    const socket = v.socket, generation = v.generation, point = spatial ? spatial.motionTarget(v) : {x:v.x,z:v.z}, connectionOrdinal=v.connections, motionKind=v.spatialRoute?.[0]===point?"route":"stationary";
                     launch(async () => {
                         try {
+                            const sentAtMs=performance.now(),previousSendAtMs=v.motionSentAt,controlAtMs=v.motionControlAt,controlKind=v.motionControlKind,faultAtSend=v.intendedFault;
+                            if(socket===v.socket&&connectionOrdinal===v.connections)resourceMotionDispatched(v,sentAtMs);
                             const r = await socket.timeout(5000).emitWithAck("house.move", { generation, sequence: ++v.motionSequence, x: point.x, z: point.z, heading: 0 });
+                            const ackAtMs=performance.now();
+                            if(socket===v.socket&&connectionOrdinal===v.connections)resourceMotionSettled(v,ackAtMs);
                             if (r?.ok) {
                                 stats.motionOk++;
                                 spatial?.motionACK(v,point);
@@ -971,6 +974,7 @@ async function run() {
                             else {
                                 stats.motionRejected++;
                                 error(r?.code ?? "MOTION_NO_ACK");
+                                recordNormalMotionRejection(normalMotionDiagnostics,r,{viewIndex:v.index,connectionOrdinal,sentAtMs,ackAtMs,previousSendAtMs,controlAtMs,controlKind,motionKind,faultAtSend});
                             }
                         }
                         catch {
@@ -1173,14 +1177,14 @@ async function run() {
             gates.gameReceiptAndStateGrowth = calibration ? null : finalStorage.gameReceipts.count - baseline.gameReceipts.count === p.gameScenario.expectedActions && finalStorage.gameTables.rows === 2 && finalStorage.gameTables.activeTables === 0 && finalStorage.gameTables.maxStateBytes <= 8192;
         }
         if (spatial) { Object.assign(gates,spatial.finish()); spatial.evidence.originalFullMotionWorkloadGate=gates.workload; gates.workload=spatial.gradeWorkload(stats,perView,p.workload); }
-        const result = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
+        const result = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status: calibration ? "CALIBRATION" : Object.values(gates).every(v => v === true) ? "PASS" : "FAIL", scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, durationSeconds: round(seconds), fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(final), samples: samples.map(({ parentAt, ...s }) => ({ ...cleanSample(s), phase: s.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), stats, normalMotionDiagnostics, httpBudget, perView, delivery: { targets: pending + latencies.normal.length + latencies.slow.length, committedIntents: deliveries.size, observed: latencies.normal.length + latencies.slow.length, normalObserved: latencies.normal.length, slowObserved: latencies.slow.length, pending, normalPending, normalP95Ms: round(q(latencies.normal, 0.95)), normalP99Ms: round(q(latencies.normal, 0.99)), normalMaxMs: round(latencies.normal.length ? Math.max(...latencies.normal) : null), slowP95Ms: round(q(latencies.slow, 0.95)), slowMaxMs: round(latencies.slow.length ? Math.max(...latencies.slow) : null) }, negativeEvidence, slowEvidence, recovery, unexpectedDisconnects,scopeErrors,staleFramesIgnored, errors, gates, stderrBytes, stdoutBytes, limitations: p.limitations };
         finalResult=result;
 
     }
     catch (e) {
         failure ??= { phase, code: e.code ?? e.name ?? "HARNESS_FAILURE", ackCategory: resourceFailureCategory(e) };
         const status=failureStatus(failure.code);
-        finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
+        finalResult = { ...(spatial ? {spatial:spatial.evidence} : {}), ...(p.gameScenario ? { game: gameEvidence } : {}), ...(pictureEvidence ? {picture:pictureEvidence} : {}), ...(storageEvidence ? {receiptStorage:storageEvidence} : {}), schemaVersion: 1, status, scope: "SYNTHETIC; process RSS, not constrained to Fly", startedAt, finishedAt: new Date().toISOString(), protocolSHA256: protocolHash, sourceManifestSHA256: p.sourceManifestSHA256, instrumentSHA256: p.instrumentSHA256, sourceHashes: p.sourceHashes, runtime, phase, failure, stats, normalMotionDiagnostics, samples: samples.map(({ parentAt, ...sample }) => ({ ...cleanSample(sample), phase: sample.phase, elapsedSeconds: start ? round((parentAt - start) / 1000) : null })), perView: views.map(v => ({ viewIndex: v.index, houseIndex: v.house, role: v.role, connectionOrdinal: v.connections, currentSocketConnected: Boolean(v.socket?.connected), currentSubscriptionKnown: v.role === "board" ? Boolean(v.subscriptionId) : null, currentSnapshotCursor: v.recoveryCheckpoint?.sequence ?? v.snapshot?.durable?.sequence ?? null, ready: v.ready, pointerPending: v.pointerPending, motionPending: v.motionPending, disconnectEvents: v.disconnectEvents })), slowEvidence, fixture: houses.map(h => ({ houseIndex: h.index, ...h.fixture })), server: cleanSample(lastSample), unexpectedDisconnects, errors, stderrBytes, stdoutBytes, limitations: p.limitations };
         process.exitCode = 1;
     }
     finally {

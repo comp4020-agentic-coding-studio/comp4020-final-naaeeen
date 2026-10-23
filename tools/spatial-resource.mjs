@@ -153,6 +153,29 @@ export function gradeMixedMotion(evidence) {
   return games.length===4&&games.every(row=>row.seatedSeconds>=290)&&walkers.length===5&&walkers.every(row=>row.standingSeconds>=160);
 }
 
+/** Keep nominal 10Hz without catching up an earlier delayed dispatch. */
+export function resourceMotionDue(view, now) {
+  if(now<view.nextMotion)return false;
+  view.nextMotion=now+100;
+  return true;
+}
+export function resourceMotionControl(view, now, kind) {
+  view.motionControlAt=now;view.motionControlKind=kind;view.nextMotion=now+100;
+}
+export function resourceMotionDispatched(view, now) { view.motionSentAt=now;view.nextMotion=now+100; }
+export function resourceMotionSettled(view, now) { view.motionAckAt=now;view.nextMotion=Math.max(view.nextMotion,now+80); }
+export function newNormalMotionDiagnostics() {
+  return {schemaVersion:1,maximumRows:16,totalRejected:0,categoryCounts:{ACTION_BUDGET:0,MOVE_INTERVAL:0,OTHER:0},rows:[]};
+}
+export function recordNormalMotionRejection(diagnostic, ack, context) {
+  const classified=classifyBootstrapRateAck(ack),category=classified==="ACTION_BUDGET"||classified==="MOVE_INTERVAL"?classified:"OTHER";
+  diagnostic.totalRejected++;diagnostic.categoryCounts[category]++;
+  if(diagnostic.rows.length>=16)return;
+  const number=value=>Number.isFinite(value)?value:null;
+  const code=["RATE_LIMITED","INVALID_MOVE","STALE_INPUT","STALE_GENERATION","STALE_ZONE","NOT_CONTROLLER","FORBIDDEN","UNAUTHENTICATED","INVALID_INPUT","NOT_SUBSCRIBED"].includes(ack?.code)?ack.code:"OTHER";
+  diagnostic.rows.push({viewIndex:number(context.viewIndex),connectionOrdinal:number(context.connectionOrdinal),sentAtMs:number(context.sentAtMs),ackAtMs:number(context.ackAtMs),previousSendAtMs:number(context.previousSendAtMs),controlAtMs:number(context.controlAtMs),controlKind:["readiness","subscribe","stand"].includes(context.controlKind)?context.controlKind:"none",motionKind:context.motionKind==="route"?"route":"stationary",faultAtSend:context.faultAtSend===true?1:0,code,category});
+}
+
 export function spatialRequestHeaders(origin, actor, hasBody) {
   const own=actor.snapshot.players.find(person=>person.id===actor.identity);
   return {Origin:origin,Cookie:actor.cookie,"X-House-Identity":actor.identity,...(hasBody?{"Content-Type":"application/json"}:{}),"X-House-Generation":String(actor.generation),"X-House-Controller-Token":actor.token,"X-House-Access-Generation":String(actor.snapshot.accessGeneration),"X-House-Seat-Generation":String(own.seatGeneration),"X-House-Zone":actor.snapshot.durable.zoneId};
@@ -177,8 +200,8 @@ export function createSpatialWorkload({origin,scenario,signal,rpc,houses,views,o
   async function waitFor(predicate,code,timeout=5000){const until=performance.now()+timeout;while(performance.now()<until){if(predicate())return;await timerDelay(5,undefined,{signal});}fail(code);}
   function updatePosition(actor){const own=self(actor);actor.x=own.x;actor.z=own.z;}
   async function control(actor,operation){await waitFor(()=>!actor.motionPending,"SPATIAL_PENDING_MOVE");actor.motionPending=true;try{return await operation();}finally{actor.motionPending=false;}}
-  async function subscribe(actor,zoneId){await control(actor,async()=>{actor.spatialSubscribing=true;try{const reply=ok(await actor.socket.timeout(5000).emitWithAck("house.subscribe",{zoneId,controllerToken:actor.token}));onSubscribe(actor,reply.snapshot);actor.motionSequence=0;actor.spatialSeat=self(actor)?.seatId??null;updatePosition(actor);}finally{actor.spatialSubscribing=false;}});}
-  async function stand(actor){await control(actor,async()=>{ok(await ask(actor,"house.stand",{}));actor.spatialSeat=null;await waitFor(()=>!self(actor)?.seatId,"SPATIAL_STAND_SNAPSHOT");updatePosition(actor);});}
+  async function subscribe(actor,zoneId){await control(actor,async()=>{actor.spatialSubscribing=true;try{const reply=ok(await actor.socket.timeout(5000).emitWithAck("house.subscribe",{zoneId,controllerToken:actor.token}));onSubscribe(actor,reply.snapshot);actor.motionSequence=0;actor.spatialSeat=self(actor)?.seatId??null;updatePosition(actor);resourceMotionControl(actor,performance.now(),"subscribe");}finally{actor.spatialSubscribing=false;}});}
+  async function stand(actor){await control(actor,async()=>{ok(await ask(actor,"house.stand",{}));actor.spatialSeat=null;await waitFor(()=>!self(actor)?.seatId,"SPATIAL_STAND_SNAPSHOT");updatePosition(actor);resourceMotionControl(actor,performance.now(),"stand");});}
   async function sit(actor,seatId,bootstrap=false){
     const layout=createLayout(6),seat=layout.seats.find(value=>value.id===seatId);if(!seat)fail("SPATIAL_SEAT_FIXTURE");
     if(bootstrap&&rateTrace&&self(actor)?.seatId){rateTrace.stopped=true;rateTrace.firstFailure??={outcome:"INITIAL_SEAT_DRIFT",actorIndex:actor.index};fail("RATE_TRACE_ROUTE_DRIFT");}
