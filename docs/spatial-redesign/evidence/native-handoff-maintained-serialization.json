@@ -1,0 +1,20 @@
+{
+  "status": "LOSSLESS_PUBLIC_JSON_SERIALIZATION",
+  "reason": "Only known public vendor Slovak-locale basenames use JSON Unicode escaping. Raw originals remain ignored; no credential or hook change.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-maintained-before.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/maintained/maintained-before.original.json",
+      "originalSHA256": "0d69f30e2444b0bcf99aa3b034017a8308bbcfa6d10f83371c874182aadafc61",
+      "serializedSHA256": "0d69f30e2444b0bcf99aa3b034017a8308bbcfa6d10f83371c874182aadafc61",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-maintained-after.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/maintained/maintained-after.original.json",
+      "originalSHA256": "ee992fe3a6d8fc7595bcff72dcc05866ca7630f3b739bbd3761ae38e46155aa6",
+      "serializedSHA256": "ee992fe3a6d8fc7595bcff72dcc05866ca7630f3b739bbd3761ae38e46155aa6",
+      "parsedJSONExactlyEqual": true
+    }
+  ]
+}

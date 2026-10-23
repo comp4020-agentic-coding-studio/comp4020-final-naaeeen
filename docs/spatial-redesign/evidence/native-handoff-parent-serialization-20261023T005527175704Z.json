@@ -1,0 +1,150 @@
+{
+  "status": "SUPPLEMENTAL_LOSSLESS_PUBLIC_JSON_SERIALIZATION",
+  "recordedAt": "2026-10-23T00:55:27.176166+00:00",
+  "reason": "The first staged commit hook failed on the known generated public Slovak locale asset basename. Only its literal lowercase k is now represented by a JSON Unicode escape. No scanner, hook, credential, source, runner, protocol or acceptance change. No tests/build/browser run.",
+  "verifiedPublicAssetSHA256": "ac8b3bae64946cde530987815d29f80bd2d40633d5be98d86d14c6c5b2a8316e",
+  "verifiedLiteralSHA256": "278cca10d8f04d41d0255f133ef0cf033f3d4a57c7e7914001eccb1f5b5dee00",
+  "replacementDescription": "Only the one verified generated basename uses lowercase k JSON escape U+006B; no broad key or token-pattern transformation.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-final-source.json",
+      "exactPreimage": ".local/native-handoff-public-before-hook/20261023T005527175704Z/docs/spatial-redesign/evidence/native-handoff-final-source.json",
+      "preimageSHA256": "c0b9b2cf4d675e84a2b94270a3f4992736dd3780eab7c200c78c31d5bb80f072",
+      "currentSerializedSHA256": "99e34b79f06ca2f84e7af10de040fd85389b78a273b98c2b93ae90fb1f410c93",
+      "changedLiteralOccurrences": 1,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresExactPreimageBytes": true,
+      "canonicalLF": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json",
+      "exactPreimage": ".local/native-handoff-public-before-hook/20261023T005527175704Z/docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json",
+      "preimageSHA256": "308a53a38bad3c378360421fe6214bc6f5a7ba12256d245c2ca30c1897a04ddd",
+      "currentSerializedSHA256": "8e323ac4b38a54f7f279b02b085eaa98bf9504962292359ac39773e158196b60",
+      "changedLiteralOccurrences": 2,
+      "parsedJSONExactlyEqual": true,
+      "reverseEscapeRestoresExactPreimageBytes": true,
+      "canonicalLF": true
+    }
+  ],
+  "referenceScanScope": "All current JSON/Markdown/JSONL records under docs and evaluation, plus root JSON/Markdown. Current committed and uncommitted records are inspected; historical byte-identity records/preimages are retained unchanged. Git index and HEAD are not edited.",
+  "existingReferences": [
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-four-before.json",
+      "fields": [
+        {
+          "jsonPointer": "/sourceRecord",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-maintained-before.json",
+      "fields": [
+        {
+          "jsonPointer": "/sourceRecord",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-motion-before.json",
+      "fields": [
+        {
+          "jsonPointer": "/sourceRecord",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-motion-serialization.json",
+      "fields": [
+        {
+          "jsonPointer": "/files/0/path",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        },
+        {
+          "jsonPointer": "/files/0/originalSHA256",
+          "kind": "preimageByteHash",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        },
+        {
+          "jsonPointer": "/files/0/serializedSHA256",
+          "kind": "preimageByteHash",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-results.md",
+      "fields": [
+        {
+          "line": 43,
+          "kind": "textReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json",
+          "containsPreimageByteHash": false
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-six-before.json",
+      "fields": [
+        {
+          "jsonPointer": "/sourceRecord",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-six-serialization.json",
+      "fields": [
+        {
+          "jsonPointer": "/files/1/path",
+          "kind": "pathOrTextReference",
+          "target": "docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json"
+        },
+        {
+          "jsonPointer": "/files/1/originalSHA256",
+          "kind": "preimageByteHash",
+          "target": "docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json"
+        },
+        {
+          "jsonPointer": "/files/1/serializedSHA256",
+          "kind": "preimageByteHash",
+          "target": "docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json"
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    },
+    {
+      "record": "docs/spatial-redesign/evidence/native-handoff-wrapper-review.md",
+      "fields": [
+        {
+          "line": 24,
+          "kind": "textReference",
+          "target": "docs/spatial-redesign/evidence/native-handoff-final-source.json",
+          "containsPreimageByteHash": false
+        }
+      ],
+      "action": "UNCHANGED; historical preimage byte references retained; this supplemental notice binds current serialized bytes"
+    }
+  ],
+  "referenceInterpretation": "Existing exact byte hashes continue to identify original preimages rather than the new public serialization. This notice supplements current byte hashes; parsed source/result semantics and original statuses remain unchanged. Parent pixel approvals remain separate and untouched. Parent must restage only the two corrected public files and this notice.",
+  "referenceScanPrecision": "Exact target path or uniquely qualified relative path; generic result.json name matches excluded. Four old byte-hash fields remain historical preimage identities.",
+  "noticeDraftPreimage": {
+    "path": ".local/native-handoff-public-before-hook/20261023T005527175704Z/initial-notice-reference-list.json",
+    "sha256": "5ce60f118621c120d170f23803b91a6719f5222cf76d989457469132acc5a53e",
+    "reason": "Retains the initial supplemental notice before removing unrelated generic filename-only path-reference matches."
+  }
+}

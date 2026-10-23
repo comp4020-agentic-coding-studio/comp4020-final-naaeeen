@@ -1,0 +1,48 @@
+{
+  "status": "READY_PARENT_QUALIFICATION_NOT_RUN",
+  "head": "e800f4efa225d103ab8e5d4d309368803465484d",
+  "sourceManifestSHA256": "887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338",
+  "protocolSHA256": {
+    "resource-handoff-baseline.protocol.json": "959d7e6e04fc9a3fe9ece25e587afa8b3eb9ebe855eb6bddc7315781527aa029",
+    "resource-handoff-mixed.protocol.json": "e321bf959f27321d0888df30bc36aac63cda104806064a8a58e0699cc719f893"
+  },
+  "all53WorkingAndGitHEADMatch": true,
+  "copyProof": "Default/documentation/fresh baseline bytes identical; canonical/fresh mixed bytes identical.",
+  "baselineGroups": 14,
+  "mixedGroups": 11,
+  "allNonNineRegistrationFieldsUnchanged": true,
+  "newExclusiveProtocolPreimages": 3,
+  "reusedResultPreimagePaths": {
+    "evaluation/board-resource.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json",
+    "docs/spatial-redesign/evidence/resource-baseline.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json"
+  },
+  "reusedResultPreimageSHA256": {
+    "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+    "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+    "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4"
+  },
+  "oldResultsUnchanged": true,
+  "protectedHistoryFilesAtBinding": 684,
+  "metadataSpec": {
+    "beforeSHA256": "ee2653b102179db6354dbd0d3dca8a18cf0b790e74bfb42b5a0168963814633b",
+    "currentSHA256": "ca4fbf15a54502d6222a414187b0affa71c50719bafabc2c0c9a81490529ae0b",
+    "onlyChange": "Four reuse-alias string occurrences retargeted to handoff aliases.",
+    "result": "4/4 PASS",
+    "APP_URL": "http://127.0.0.1:4108",
+    "log": "resource-handoff-metadata-tests.txt"
+  },
+  "freshOutputPathsUnused": [
+    "docs/spatial-redesign/evidence/resource-handoff-baseline.results.json",
+    "docs/spatial-redesign/evidence/resource-handoff-baseline.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-handoff-baseline.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-handoff-baseline.log",
+    "docs/spatial-redesign/evidence/resource-handoff-baseline.closure.json",
+    "docs/spatial-redesign/evidence/resource-handoff-mixed.results.json",
+    "docs/spatial-redesign/evidence/resource-handoff-mixed.memory-diagnostic.json",
+    "docs/spatial-redesign/evidence/resource-handoff-mixed.rate-attribution.json",
+    "docs/spatial-redesign/evidence/resource-handoff-mixed.log",
+    "docs/spatial-redesign/evidence/resource-handoff-mixed.closure.json"
+  ],
+  "idleACK": "All owned commands exited; no active owned test, service, browser or resource process. Source and protocols frozen. No more commands pending parent qualification."
+}

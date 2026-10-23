@@ -1,0 +1,17 @@
+{
+  "rawPrivatePath": ".local/spatial-apply/required-current-12.json",
+  "rawSHA256": "d6bf8ec14506b3683205c30e7de4283d421c7591c1289a4e85fa2fdb578acd26",
+  "publicPath": "docs/spatial-redesign/evidence/required-handoff-pass.json",
+  "publicSHA256": "a07ad88ce6f52f3f52c353216938ec6d406fddc44157162f632fec9bdefd85a3",
+  "parsedJSONEqual": true,
+  "scope": "Lossless JSON key escaping for the single known generated locale vendor basename; raw record retained privately. No credentials were transformed.",
+  "runtimeBuildFiles": 510,
+  "exitCode": 0,
+  "sourceUnchanged": true,
+  "summaryLines": [
+    " Test Files  73 passed (73)",
+    "      Tests  1575 passed (1575)",
+    "   Duration  35.27s (tests 89%, import 8%, transform 3%)"
+  ],
+  "elapsedSeconds": 43.20627498626709
+}

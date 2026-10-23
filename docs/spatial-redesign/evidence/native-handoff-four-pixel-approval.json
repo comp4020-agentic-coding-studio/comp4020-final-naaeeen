@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-23",
+  "status": "PARENT_PIXEL_CHECK_PASS",
+  "scope": "All seven distinct original spatial-journey PNGs viewed at original resolution. Technical containment/state checks; not human preference or acoustic/device validation. Raw duplicate attachments and original pending marker remain unchanged.",
+  "images": [
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-reference-world-after-close-808452c34ce2878d1965255bacde67d607ceb0a7.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/room-world.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "width": 1920,
+      "height": 1080,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Saved reference is visible on the real room wall and desk after closing; furnished room and exit cue remain visible.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-studio-desktop-bfe2b10bf125920d990d8055dee210e562cc5f6a.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/room-studio-desktop.png",
+      "sha256": "34e84b7ca8a6fec111ea36c5822cfe552b48b986ea72d3f300c848dcbf4d75a6",
+      "width": 1920,
+      "height": 1080,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Desktop studio image, saved view, sound controls and full Close label fit the sheet.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-visit-phone-077085b11956590ab900f04da175261ca50a1609.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/room-visit-phone.png",
+      "sha256": "cccc95a900cd631f9d4a2691f05a70557b7b49a054a44599704903ce54ba4081",
+      "width": 390,
+      "height": 844,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Guest owner-reference/audience wording, independent crop and controls fit390x844.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-follow-phone-0b245f38478c18ae4978d3399b51ddec3db17155.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/sofa-follow-phone.png",
+      "sha256": "7d1571b99bd161e35a89142ef2a62cf8b9b76507594d28cfd4f9d888ec9a56bd",
+      "width": 390,
+      "height": 844,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Opt-in following, readable controls and presenter pointer are visible in the scrolled phone sheet.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-presenter-desktop-10b982157464ad8d6f17c0295fd2da23b2cab6dc.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/sofa-presenter-desktop.png",
+      "sha256": "745bbeeadd81635460ea22651064c14d99840044307cf5c20e0768e442dd9da0",
+      "width": 1920,
+      "height": 1080,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Desktop presenter, pointer, image and four Pan controls are visible.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-touch-pan-handover-phone-7a4b932e1ef3ddf3483e2c5a7d84aa8e172ccb44.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/sofa-handover-phone.png",
+      "sha256": "d2a11a7aadb8abfe6f4fed0f767c4673f2c52ba46ab08fbd8f4451ec62257c62",
+      "width": 390,
+      "height": 844,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Phone successor view contains image, fit/zoom and four labelled Pan controls within the sheet.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-study-huddl-c1ef9-d-clears-on-membership-loss/attachments/study-chat-phone-cefaf9a406029ded4dff09e3c101ffdf9e959cc9.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/study-chat-phone.png",
+      "sha256": "7618026d6d3a48e8e3cdd1a550d9fdbf42af93cd467276d8684d9c58210afe27",
+      "width": 390,
+      "height": 844,
+      "parentViewedOriginal": true,
+      "pixelObservation": "Movable lounge chat is readable above the study huddle; its relation to the independent board is stated.",
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    }
+  ]
+}

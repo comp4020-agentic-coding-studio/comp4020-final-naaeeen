@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-23",
+  "status": "PARENT_PIXEL_CHECK_PASS",
+  "scope": "The one distinct maintained-flow original PNG viewed at original resolution; raw pending markers unchanged. Technical inspection, not preference/device evaluation.",
+  "images": [
+    {
+      "original": ".local/spatial-apply/native-handoff-final/maintained/results/break-and-voice-friends-ch-d6b10--external-voice-destination/shared-break-phone.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/break-phone.png",
+      "sha256": "b34ae08004fd2b59c34cadd24d845d9876f4e14c7dd911d95efe91f18a3d1e9a",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false,
+      "pixelObservation": "390x844 Four-in-a-row has readable turn/role status, seven move controls, board, separate Leave/Stand and room-return actions within the phone sheet."
+    }
+  ]
+}

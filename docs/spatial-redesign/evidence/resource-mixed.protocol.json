@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "registeredAtUTC": "2026-10-22T23:17:42.749466+00:00",
+  "registeredAtUTC": "2026-10-23T00:49:16.134378+00:00",
   "status": "FROZEN_CURRENT_FULL_RESOURCE_REGISTRATION_ONLY",
   "scope": "New12root+12board mixed standing/seated profile. Same300s board pressure, budgets and faults; changed motion criterion explicitly grades standing10Hz periods and measured seated suppression. Original fullmotion baseline separately registered. NOT RUN.",
   "durationSeconds": 300,
@@ -15,7 +15,7 @@
     "public/assets/pictures/rainy-nook-v1.svg": "08af5570490c5c32b1b684a33e14a5b78f65274239b8156774394da50ab9bca6",
     "public/house-ambience.js": "2600c35403db5ebf0f69cb9a3d19ef2d470048205c98e07223c5b2ad2c2f24b1",
     "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
-    "public/house-client.js": "18015bedfc25e1cba0e1dbf8b909c8c3fb304e5770f5c3f55f4b5b312943e767",
+    "public/house-client.js": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da",
     "public/house-game-rules.d.ts": "9b2381b15fb4c17b2bdf5d2773f45209e1f72b9793cd9cf0e608b9d85f19b685",
     "public/house-game-rules.js": "511dae4db7fdff9f0b65291c00404ffd23d09a2356d92ac76f692e5c1bda9342",
     "public/house-game-ui.js": "1fbf5a5bcc1d357773609b7994bd806363997b6096dc626f913c3688900ec2e7",
@@ -57,11 +57,11 @@
     "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd",
     "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1",
     "tools/board-resource-p7.mjs": "5a5e8b254479c29b6c948e732a9ef1b5a77ed6c44f338fc48dfc446731ee4c1f",
-    "tools/board-resource.mjs": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
-    "tools/spatial-resource.mjs": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8"
+    "tools/board-resource.mjs": "561336ed460655b4bd32068c3af3f060b93d4b58a29f83c23968dc4929323cde",
+    "tools/spatial-resource.mjs": "23751e362bab901c8a28870f2fd982d8c067a77b6505afbcda1828e632d1527d"
   },
-  "sourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
-  "instrumentSHA256": "3dc0c6e583a1fff080abd72dde1b9d0f403b9acc5ad3d6ec8af36bf9f5a97e59",
+  "sourceManifestSHA256": "887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338",
+  "instrumentSHA256": "561336ed460655b4bd32068c3af3f060b93d4b58a29f83c23968dc4929323cde",
   "configuration": {
     "houses": 2,
     "membersPerHouse": 6,
@@ -160,8 +160,8 @@
     "This exercisereconnects liveauthority; actualfullprocessrestart persistence remains separatealreadytestedauthority/integration evidence"
   ],
   "commands": {
-    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-reuse-mixed.protocol.json --inspect",
-    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-reuse-mixed.protocol.json --run --go <protocolSHA256> --freeze 49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84"
+    "inspect": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-handoff-mixed.protocol.json --inspect",
+    "run": "/home/lizhi/.local/bin/mise exec -- node tools/board-resource.mjs --protocol-file docs/spatial-redesign/evidence/resource-handoff-mixed.protocol.json --run --go <protocolSHA256> --freeze 887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338"
   },
   "sourceFiles": [
     ".gitattributes",
@@ -220,23 +220,24 @@
   ],
   "sourceBinding": {
     "status": "FROZEN_PARENT_BINDING_ONLY",
-    "boundAtUTC": "2026-10-22T23:17:42.749466+00:00",
-    "head": "9073c8ce695cffcd98befee4e73f97c455a25e30",
-    "runtimeScope": "Bounded asset reuse and corrected workload zone header; other sources unchanged",
+    "boundAtUTC": "2026-10-23T00:49:16.134378+00:00",
+    "head": "e800f4efa225d103ab8e5d4d309368803465484d",
+    "runtimeScope": "Motion handoff pacing and final client policy; other sources unchanged",
     "requiredFiles": 53,
     "node": "v24.21.0",
-    "priorProtocolSHA256": "00c77a109bae47e2245dcd9db279a9f3e5d078c5f03e616fc28e30c41d1ce09c",
-    "priorSourceProofProtocolSHA256": "783035846e3095c4c6fce862cb43a5d8cd351da1027cdc3ee8fc6fd9451ed4f9",
-    "priorSourceManifestSHA256": "b380844819cf766dd0e8b0eed14c73aedae030c33c767852cd62dd8c7fe7ceeb",
+    "priorProtocolSHA256": "2f945399134c7d6e5f2a4097c60eeae6ff9ed764513809b5ed52b8e12a3e6042",
+    "priorSourceProofProtocolSHA256": "5bb4e7c9aabdc1f2166951673588b7ca5e29acf59a382e81734b829b0ac365a1",
+    "priorSourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
     "approvedSourceChanges": {
-      "src/board-service.ts": "241e15797951113133944fa6f745eb01aa375badb345d4b04fbb30c2ce60e3e4",
-      "tools/spatial-resource.mjs": "aac3caba800530d1f4f3b2047e8ba4d3e1bfe6f5f876d48e717e7844f04147b8"
+      "tools/board-resource.mjs": "561336ed460655b4bd32068c3af3f060b93d4b58a29f83c23968dc4929323cde",
+      "tools/spatial-resource.mjs": "23751e362bab901c8a28870f2fd982d8c067a77b6505afbcda1828e632d1527d",
+      "public/house-client.js": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da"
     },
-    "registrationScriptSHA256": "73ae9e0ef7a4dbf81657e1eb7f107cf69993b6284387dcefd74fb45ea0dc3fac",
+    "registrationScriptSHA256": "e69215a7936a886b88b84c1e2d5095d5b829f282d6bf7217c6ad353174674d99",
     "authorization": "Registration and inspection only; parent owns separate full execution GO",
     "requiredCheckEvidence": {
-      "path": ".local/spatial-apply/required-current-11.json",
-      "sha256": "638e9fd357354c4e66b0c7a34a98cada46c2dcb42f121cd30dcd477c6c28b927",
+      "path": ".local/spatial-apply/required-current-12.json",
+      "sha256": "d6bf8ec14506b3683205c30e7de4283d421c7591c1289a4e85fa2fdb578acd26",
       "exitCode": 0,
       "sourceUnchanged": true,
       "coveredFiles": 48
@@ -488,7 +489,7 @@
   },
   "memoryDiagnosticRegistration": {
     "schemaVersion": 1,
-    "purpose": "One NEW asset-reuse300second source qualification; original100ms sampler and gates unchanged; no rate trace opt-in",
+    "purpose": "One NEW motion-handoff300second source qualification; original100ms sampler and gates unchanged; no rate trace opt-in",
     "execution": "NOT_RUN_REQUIRES_SEPARATE_PARENT_GO",
     "automaticRetry": false
   }

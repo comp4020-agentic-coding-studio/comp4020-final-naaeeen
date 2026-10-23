@@ -1,0 +1,202 @@
+{
+  "status": "NATIVE_MECHANICS_PASS_VISUAL_REVIEW_PENDING",
+  "recordedAt": "2026-10-23T00:48:23.519833+00:00",
+  "sourceCommit": "e800f4efa225d103ab8e5d4d309368803465484d",
+  "sourceFiles": 648,
+  "sourceManifestSHA256": "2737fa44d4fe771b1fc311404e49712aa814b2521f6436db5290f14a4fbc660a",
+  "wrapperSHA256": "08028506f6b48a9f58fa7cceb669bd209f0bfb4a2ff2fc92132fa869e4f314cd",
+  "launchPID": 72794,
+  "launchRecordSHA256": "fbfa83ce63baad97340ba14349f1101ea90a52c8917740fcc77e2ae287aeb374",
+  "startupSourceCount": 35,
+  "runtime": {
+    "node": "v24.21.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "chromiumSandbox": true,
+    "angle": "swiftshader",
+    "deviceScaleFactor": 1,
+    "retainedService": {
+      "pid": 72794,
+      "startedAt": 1792715624.247965,
+      "sourceSHA256": "a4c0c11a77afb45fa35b4b1c9d3b65945f946b96cf80dc63302377fe80e783e2"
+    }
+  },
+  "playwrightCases": 10,
+  "selections": {
+    "motion": {
+      "status": "PASS",
+      "frameworkDurationSeconds": 24.163265,
+      "wrapperDurationSeconds": 26.612599151998438,
+      "sourceUnchanged": true,
+      "launchRecordUnchanged": true,
+      "ownedObservedProcesses": 11,
+      "ownedProcessesRemaining": 0,
+      "browserExecutableProcessesAfter": 0,
+      "record": "docs/spatial-redesign/evidence/native-handoff-motion-after.json"
+    },
+    "four": {
+      "status": "PASS",
+      "frameworkDurationSeconds": 134.672663,
+      "wrapperDurationSeconds": 136.67493242899945,
+      "sourceUnchanged": true,
+      "launchRecordUnchanged": true,
+      "ownedObservedProcesses": 20,
+      "ownedProcessesRemaining": 0,
+      "browserExecutableProcessesAfter": 0,
+      "record": "docs/spatial-redesign/evidence/native-handoff-four-after.json"
+    },
+    "maintained": {
+      "status": "PASS",
+      "frameworkDurationSeconds": 138.475376,
+      "wrapperDurationSeconds": 140.60691408099956,
+      "sourceUnchanged": true,
+      "launchRecordUnchanged": true,
+      "ownedObservedProcesses": 18,
+      "ownedProcessesRemaining": 0,
+      "browserExecutableProcessesAfter": 0,
+      "record": "docs/spatial-redesign/evidence/native-handoff-maintained-after.json"
+    },
+    "six": {
+      "status": "PASS_VISUAL_REVIEW_PENDING",
+      "frameworkDurationSeconds": 165.824434652,
+      "wrapperDurationSeconds": 167.46926311399875,
+      "sourceUnchanged": true,
+      "launchRecordUnchanged": true,
+      "ownedObservedProcesses": 29,
+      "ownedProcessesRemaining": 0,
+      "browserExecutableProcessesAfter": 0,
+      "record": "docs/spatial-redesign/evidence/native-handoff-six-after.json"
+    }
+  },
+  "motionSub80AfterStandCoverage": {
+    "observed": 0,
+    "declaredSeatCycles": 4,
+    "missingCoverageDoesNotExcludeTimingHypothesis": true
+  },
+  "six": {
+    "taskDurationSeconds": 165.824434652,
+    "deadlineSeconds": 240,
+    "checks": 32,
+    "placements": 24,
+    "authors": 6,
+    "perAuthorCounts": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "frameRejections": [],
+    "cleanup": {
+      "attempted": true,
+      "expectedContextCount": 6,
+      "contexts": [
+        {
+          "client": 0,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        },
+        {
+          "client": 1,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        },
+        {
+          "client": 2,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        },
+        {
+          "client": 3,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        },
+        {
+          "client": 4,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        },
+        {
+          "client": 5,
+          "closeResolved": true,
+          "closeEvent": true,
+          "stillPresent": false
+        }
+      ],
+      "errors": [],
+      "browserDisconnected": true,
+      "remainingContexts": 0
+    },
+    "nativePixelReview": "PARENT_PENDING",
+    "originalPNGs": [
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/complete-desktop.png",
+        "sha256": "678049bdfe1f8e7afd6780b8a410baeccff80a86fba7fc741bca7f04b3caa580",
+        "bytes": 260580,
+        "width": 1920,
+        "height": 1080,
+        "crcCheckedChunks": 67,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      },
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/complete-touch.png",
+        "sha256": "93dfdb6667ca43f1d0d205ac5d8cfa8c8f952252c7219d7b95e6330f448539be",
+        "bytes": 112884,
+        "width": 390,
+        "height": 844,
+        "crcCheckedChunks": 31,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      },
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/return-owned-room-touch.png",
+        "sha256": "dff2abe437cbe4a861af93c99dbc295b1e465dae2124621e6d20b29f04a84c95",
+        "bytes": 62026,
+        "width": 390,
+        "height": 844,
+        "crcCheckedChunks": 19,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      },
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/six-contributors-touch.png",
+        "sha256": "df81ae1294d8da853c676a801c76b17dae96cf69aab39064f6ff12476f602259",
+        "bytes": 90350,
+        "width": 390,
+        "height": 844,
+        "crcCheckedChunks": 25,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      },
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/six-physical-chairs-overview.png",
+        "sha256": "6ea1aa9e364310d22f88f6ebd36f47141cf4f776fc96536922af669f19adfbdd",
+        "bytes": 297691,
+        "width": 1920,
+        "height": 1080,
+        "crcCheckedChunks": 76,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      },
+      {
+        "path": ".local/spatial-six-browser/run-handoff-final/three-contributors.png",
+        "sha256": "04d5dd876726897f38205c1489d070c459ce706fcb7a683578b079248d1df251",
+        "bytes": 288044,
+        "width": 1920,
+        "height": 1080,
+        "crcCheckedChunks": 74,
+        "published": false,
+        "inspection": "PARENT_PENDING"
+      }
+    ]
+  },
+  "laneStatus": "IDLE_RELEASED_TO_PARENT",
+  "executionScope": "One attempt per declared lane. No test, browser, service or resource remains from this executor. No production/spec/runner/config/credential edit; no commit/push/deployment. Resource acceptance and parent pixel inspection remain separate."
+}

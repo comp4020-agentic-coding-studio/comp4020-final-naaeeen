@@ -1,0 +1,34 @@
+{
+  "status": "LOSSLESS_PUBLIC_JSON_SERIALIZATION",
+  "reason": "Only known public vendor Slovak-locale basenames use JSON Unicode escaping. Raw originals remain ignored; no credential or hook change.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-final-source.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/final-source.original.json",
+      "originalSHA256": "c0b9b2cf4d675e84a2b94270a3f4992736dd3780eab7c200c78c31d5bb80f072",
+      "serializedSHA256": "c0b9b2cf4d675e84a2b94270a3f4992736dd3780eab7c200c78c31d5bb80f072",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-motion-before.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/motion/motion-before.original.json",
+      "originalSHA256": "186081ce0968f59ce691bbf5e65a6b79d4f2143d8e516d3eba91538675dc5fa3",
+      "serializedSHA256": "186081ce0968f59ce691bbf5e65a6b79d4f2143d8e516d3eba91538675dc5fa3",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-motion-observations.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/motion/motion-observations.original.json",
+      "originalSHA256": "0bafa65d83bca53f9972d6bef60e22e6556495b11e72d2da9bb6294dcafb1473",
+      "serializedSHA256": "0bafa65d83bca53f9972d6bef60e22e6556495b11e72d2da9bb6294dcafb1473",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-motion-after.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/motion/motion-after.original.json",
+      "originalSHA256": "b4efc012c0b2ee97e91d3c6e15083d17fb1c895bc04ac827e65e0de616d8ddc8",
+      "serializedSHA256": "b4efc012c0b2ee97e91d3c6e15083d17fb1c895bc04ac827e65e0de616d8ddc8",
+      "parsedJSONExactlyEqual": true
+    }
+  ]
+}

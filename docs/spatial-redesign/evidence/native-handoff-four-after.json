@@ -1,0 +1,443 @@
+{
+  "recordedAt": "2026-10-23T00:42:28.503279+00:00",
+  "status": "PASS",
+  "lane": "four",
+  "sourceFiles": 648,
+  "sourceManifestSHA256": "2737fa44d4fe771b1fc311404e49712aa814b2521f6436db5290f14a4fbc660a",
+  "sourceUnchanged": true,
+  "sourceChanges": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "launchRecordUnchanged": true,
+  "launch": {
+    "recordSHA256": "fbfa83ce63baad97340ba14349f1101ea90a52c8917740fcc77e2ae287aeb374",
+    "pid": 72794,
+    "startedAt": 1792715624.247965,
+    "startupSourceCount": 35,
+    "startupSourceSHA256": {
+      "public/house-ambience.js": "2600c35403db5ebf0f69cb9a3d19ef2d470048205c98e07223c5b2ad2c2f24b1",
+      "public/house-camera.js": "b485dbd33be571f60c497d1009c2fe60ede4a7a473fc17def68ae05bbf3cfe2c",
+      "public/house-client.js": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da",
+      "public/house-game-rules.js": "511dae4db7fdff9f0b65291c00404ffd23d09a2356d92ac76f692e5c1bda9342",
+      "public/house-game-ui.js": "1fbf5a5bcc1d357773609b7994bd806363997b6096dc626f913c3688900ec2e7",
+      "public/house-gathering-ui.js": "bf2596abb33a987f02eef73644d2810dd68323e0edb27722e9596915486fa3e1",
+      "public/house-geometry.js": "1159a1de0aec286deccd40c372f002db3f93a6b30deaf36c3fbf71325b8b51fa",
+      "public/house-label-layout.js": "133d69f632f0a784599f1fc3e262e83aa42a9f9eb41b5695af51478baafbe0ba",
+      "public/house-puzzle-content.js": "42f123b13a6139e3774cd0c41b3719e081a3452d1ab6ba8e41c966163bb117dc",
+      "public/house-puzzle-rules.js": "f2b1e1591c1c2df84436ed2c874f75e91d3c2856927847f9c39a1c985bdc7397",
+      "public/house-puzzle-ui.js": "8cd1edc8449ba10009094534b2de1387e3d74bf665871e00e2f3f06e213540f8",
+      "public/house-room-content.js": "1cd0bc62944d3ddf87b65f6002adb3b35fc3a5a8806bb6e792f48ed992128522",
+      "public/house-shell.js": "5c50a1c5cdde27ea9859fae15c23862b90f87fbc24a82cc8f4ae03fe0bc56afd",
+      "public/house-studio-preview.js": "86a9bf5bfe31d79f435c0ce2c76f7ce24fb355445a9e3b678c1ce3e63943d1cd",
+      "public/house-studio-ui.js": "9ce9ba28abad46215efbb5244ba61bf79f878b1d1302c9a23c3a773c0fa83699",
+      "public/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a",
+      "public/house-version.js": "dad0d5427a7176e1c08f2b90b8ae34406eb2c1a92454feedf00ff48cf2aaf959",
+      "public/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+      "src/activity-log.ts": "f9ccef5c6dcd14e1c38b4b394ff7ddd9d8bbc0923b9b1423f26986ab5803d1d0",
+      "src/board-contract.ts": "6e8baa9a0bb7df1838258608a5e9b39a2d2661458e6041e0318013f663393cbc",
+      "src/board-receipt-codec.ts": "6bbe6f5cc1aa61076801b1d76f256fda7ed726505feed59f7bbcb0c070dcd042",
+      "src/board-service.ts": "241e15797951113133944fa6f745eb01aa375badb345d4b04fbb30c2ce60e3e4",
+      "src/board-store.ts": "5cd264abd599e18e4222fb07e897ff6a878f7c59b4f90d94430847fcdbaf900b",
+      "src/domain.ts": "9bd3f8f6720bea86f370d13e6435def6470c5bed140c210ad3f65c233a7b0d1b",
+      "src/house-contract.ts": "54bca56ec2a9459fc1dee7db164a47ab31b69599d3b6f372c871d96923d92dd4",
+      "src/house-gathering.ts": "5324d0e6309a2fb64d864f9c1f2f57353450453abca7898170f1658d2cc8b91f",
+      "src/house-puzzle-presence.ts": "26145279b585cac0d2a85845ca7becfd1cb01355b2d3b76a95c58e58b732b93e",
+      "src/house-realtime.ts": "84e0cd968bb2c50d68be5f891d5fcd15c021aa1cc94974a203ce0d16b109e9b5",
+      "src/house-store.ts": "53916a46e9b540d2904000c22c23eed13d062b28072d7fe73ab8f63b29b6b246",
+      "src/house-studio-codec.ts": "054c8a6028f1d314f0f2f89f98cd97b8eaa40c9d4aff5332dc7762763613b270",
+      "src/house-studio.ts": "87c7ef0b5c9dd53fa705450a1275b4448a7209d4f0c24835c5bfb9ea6f3754f1",
+      "src/house-voice.ts": "b2ae7eb119cdcd8f3643adf0570c597f972efbd9077313a67eb5cd7045a67902",
+      "src/server-runtime.ts": "eae2b0ebbe29105c27021c215e5aef6c382601fae24119d226782fc269b51a72",
+      "src/server.ts": "ce4ae8c93ab6bbe2c3cec12d65b11fc5fd2baa12f5ce1cf3d3f1bf0425977dfd",
+      "src/store.ts": "88233c71b2f88437f4cb23923a67271283e4a63a32e9dd4859b53c90a15e63e1"
+    },
+    "startupSourceMismatches": [],
+    "processIdentity": {
+      "pid": 72794,
+      "ppid": 72793,
+      "startTicks": 2478823,
+      "exe": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node"
+    }
+  },
+  "execution": {
+    "startedAt": "2026-10-23T00:40:14.070699+00:00",
+    "endedAt": "2026-10-23T00:42:28.439116+00:00",
+    "durationSeconds": 136.67493242899945,
+    "exitCode": 0,
+    "outerWatchdogExceeded": false,
+    "outerWatchdogSeconds": 340,
+    "signals": [],
+    "observedOwnedProcesses": [
+      {
+        "pid": 74385,
+        "ppid": 74382,
+        "startTicks": 2518549,
+        "exe": "/home/lizhi/.local/share/mise/installs/pnpm/11.9.0/pnpm",
+        "presentAfter": false
+      },
+      {
+        "pid": 74413,
+        "ppid": 74385,
+        "startTicks": 2518644,
+        "exe": "/home/lizhi/.local/share/mise/installs/pnpm/11.9.0/pnpm",
+        "presentAfter": false
+      },
+      {
+        "pid": 74426,
+        "ppid": 74385,
+        "startTicks": 2518689,
+        "exe": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+        "presentAfter": false
+      },
+      {
+        "pid": 74444,
+        "ppid": 74426,
+        "startTicks": 2518730,
+        "exe": "/home/lizhi/.local/share/mise/installs/node/24.21.0/bin/node",
+        "presentAfter": false
+      },
+      {
+        "pid": 74456,
+        "ppid": 74444,
+        "startTicks": 2518765,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74459,
+        "ppid": 74456,
+        "startTicks": 2518768,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74460,
+        "ppid": 74456,
+        "startTicks": 2518768,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74462,
+        "ppid": 74460,
+        "startTicks": 2518769,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74479,
+        "ppid": 74459,
+        "startTicks": 2518770,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74481,
+        "ppid": 74456,
+        "startTicks": 2518771,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74518,
+        "ppid": 74462,
+        "startTicks": 2518778,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74524,
+        "ppid": 74462,
+        "startTicks": 2518778,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74530,
+        "ppid": 74462,
+        "startTicks": 2518779,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74593,
+        "ppid": 74456,
+        "startTicks": 2522208,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74603,
+        "ppid": 74462,
+        "startTicks": 2522658,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74604,
+        "ppid": 74462,
+        "startTicks": 2522658,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74646,
+        "ppid": 74462,
+        "startTicks": 2526873,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74647,
+        "ppid": 74462,
+        "startTicks": 2526873,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74699,
+        "ppid": 74462,
+        "startTicks": 2529671,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      },
+      {
+        "pid": 74700,
+        "ppid": 74462,
+        "startTicks": 2529671,
+        "exe": "/home/lizhi/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+        "presentAfter": false
+      }
+    ],
+    "ownedProcessesRemaining": [],
+    "browserExecutableProcessesAfter": [],
+    "cleanupFailureObserved": false
+  },
+  "framework": {
+    "passed": true,
+    "expectedCases": 4,
+    "actualCases": 4,
+    "stats": {
+      "startTime": "2026-10-23T00:40:15.839Z",
+      "duration": 134672.663,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "globalTimeoutMs": 300000,
+    "lastRun": {
+      "status": "passed",
+      "failedTests": []
+    },
+    "lastRunPath": ".local/spatial-apply/native-handoff-final/four/results/.last-run.json",
+    "cases": [
+      {
+        "file": "spatial-places.spec.ts",
+        "title": "room reference survives owner return and a named phone visit loses bytes and sound when access ends",
+        "timeoutMs": 60000,
+        "expectedStatus": "passed",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 38726,
+            "retry": 0,
+            "errorHashes": []
+          }
+        ]
+      },
+      {
+        "file": "spatial-places.spec.ts",
+        "title": "sofa keeps an off-centre crop across voluntary presenter handover and touch pan",
+        "timeoutMs": 60000,
+        "expectedStatus": "passed",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 42182,
+            "retry": 0,
+            "errorHashes": []
+          }
+        ]
+      },
+      {
+        "file": "spatial-places.spec.ts",
+        "title": "study huddle keeps explicit consent across its independent board and clears on membership loss",
+        "timeoutMs": 60000,
+        "expectedStatus": "passed",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 27178,
+            "retry": 0,
+            "errorHashes": []
+          }
+        ]
+      },
+      {
+        "file": "spatial-places.spec.ts",
+        "title": "chat drafts keep both room scopes through a real bedroom exit and return",
+        "timeoutMs": 60000,
+        "expectedStatus": "passed",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 25881,
+            "retry": 0,
+            "errorHashes": []
+          }
+        ]
+      }
+    ]
+  },
+  "originalPNGs": [
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-reference-world-after-close-808452c34ce2878d1965255bacde67d607ceb0a7.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "bytes": 203745,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 53,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-studio-desktop-bfe2b10bf125920d990d8055dee210e562cc5f6a.png",
+      "sha256": "34e84b7ca8a6fec111ea36c5822cfe552b48b986ea72d3f300c848dcbf4d75a6",
+      "bytes": 201000,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 52,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/attachments/room-visit-phone-077085b11956590ab900f04da175261ca50a1609.png",
+      "sha256": "cccc95a900cd631f9d4a2691f05a70557b7b49a054a44599704903ce54ba4081",
+      "bytes": 58133,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 18,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-reference-world-after-close.png",
+      "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+      "bytes": 203745,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 53,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-studio-desktop.png",
+      "sha256": "34e84b7ca8a6fec111ea36c5822cfe552b48b986ea72d3f300c848dcbf4d75a6",
+      "bytes": 201000,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 52,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-room-refere-c5f87--and-sound-when-access-ends/room-visit-phone.png",
+      "sha256": "cccc95a900cd631f9d4a2691f05a70557b7b49a054a44599704903ce54ba4081",
+      "bytes": 58133,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 18,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-follow-phone-0b245f38478c18ae4978d3399b51ddec3db17155.png",
+      "sha256": "7d1571b99bd161e35a89142ef2a62cf8b9b76507594d28cfd4f9d888ec9a56bd",
+      "bytes": 81611,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 23,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-presenter-desktop-10b982157464ad8d6f17c0295fd2da23b2cab6dc.png",
+      "sha256": "745bbeeadd81635460ea22651064c14d99840044307cf5c20e0768e442dd9da0",
+      "bytes": 276632,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 71,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/attachments/sofa-touch-pan-handover-phone-7a4b932e1ef3ddf3483e2c5a7d84aa8e172ccb44.png",
+      "sha256": "d2a11a7aadb8abfe6f4fed0f767c4673f2c52ba46ab08fbd8f4451ec62257c62",
+      "bytes": 73777,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 21,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-follow-phone.png",
+      "sha256": "7d1571b99bd161e35a89142ef2a62cf8b9b76507594d28cfd4f9d888ec9a56bd",
+      "bytes": 81611,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 23,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-presenter-desktop.png",
+      "sha256": "745bbeeadd81635460ea22651064c14d99840044307cf5c20e0768e442dd9da0",
+      "bytes": 276632,
+      "width": 1920,
+      "height": 1080,
+      "crcCheckedChunks": 71,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-sofa-keeps--f87cb-nter-handover-and-touch-pan/sofa-touch-pan-handover-phone.png",
+      "sha256": "d2a11a7aadb8abfe6f4fed0f767c4673f2c52ba46ab08fbd8f4451ec62257c62",
+      "bytes": 73777,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 21,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-study-huddl-c1ef9-d-clears-on-membership-loss/attachments/study-chat-phone-cefaf9a406029ded4dff09e3c101ffdf9e959cc9.png",
+      "sha256": "7618026d6d3a48e8e3cdd1a550d9fdbf42af93cd467276d8684d9c58210afe27",
+      "bytes": 89401,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 25,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    },
+    {
+      "path": ".local/spatial-apply/native-handoff-final/four/results/spatial-places-study-huddl-c1ef9-d-clears-on-membership-loss/study-chat-phone.png",
+      "sha256": "7618026d6d3a48e8e3cdd1a550d9fdbf42af93cd467276d8684d9c58210afe27",
+      "bytes": 89401,
+      "width": 390,
+      "height": 844,
+      "crcCheckedChunks": 25,
+      "published": false,
+      "inspection": "PARENT_PENDING"
+    }
+  ],
+  "nativePixelReview": "PARENT_PENDING",
+  "scope": "Source-bound native mechanics only; no human, physical-phone, deployment or resource acceptance. Screenshots remain ignored/unpublished until separate parent inspection."
+}

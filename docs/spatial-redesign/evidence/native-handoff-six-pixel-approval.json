@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-23",
+  "status": "PARENT_PIXEL_CHECK_PASS",
+  "scope": "All six originals viewed at original resolution for state, containment and capacity. Original pending markers unchanged. Local browser emulation is separate from physical devices and human preference.",
+  "images": [
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/complete-desktop.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-complete-desktop.png",
+      "sha256": "678049bdfe1f8e7afd6780b8a410baeccff80a86fba7fc741bca7f04b3caa580",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/complete-touch.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-complete-touch.png",
+      "sha256": "93dfdb6667ca43f1d0d205ac5d8cfa8c8f952252c7219d7b95e6330f448539be",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/return-owned-room-touch.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-return-owned-room-touch.png",
+      "sha256": "dff2abe437cbe4a861af93c99dbc295b1e465dae2124621e6d20b29f04a84c95",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/six-contributors-touch.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-six-contributors-touch.png",
+      "sha256": "df81ae1294d8da853c676a801c76b17dae96cf69aab39064f6ff12476f602259",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/six-physical-chairs-overview.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-six-physical-chairs-overview.png",
+      "sha256": "6ea1aa9e364310d22f88f6ebd36f47141cf4f776fc96536922af669f19adfbdd",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    },
+    {
+      "original": ".local/spatial-six-browser/run-handoff-final/three-contributors.png",
+      "curated": "docs/spatial-redesign/evidence/native-handoff-images/six-three-contributors.png",
+      "sha256": "04d5dd876726897f38205c1489d070c459ce706fcb7a683578b079248d1df251",
+      "parentViewedOriginal": true,
+      "byteIdentical": true,
+      "visibleInviteOrRecoveryCode": false
+    }
+  ]
+}

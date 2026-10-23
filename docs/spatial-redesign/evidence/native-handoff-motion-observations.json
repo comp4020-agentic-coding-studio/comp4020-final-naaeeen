@@ -1,0 +1,1322 @@
+{
+  "scope": "One native authenticated desktop; four actual study-seat held-key Stand cycles and one own-room arrival. Wire content is summarized into fixed categories and numeric deltas only. No raw IDs, controller tokens, bodies, cookies, keys or URLs are stored.",
+  "timingScope": "All timestamps are monotonic Node-side observations of native input calls and Playwright WS frame notifications, not server receive/elapsed timestamps. Declared RAF offsets do not prove server push phase coverage.",
+  "flowComplete": true,
+  "controls": [
+    {
+      "expected": "ACK_OK",
+      "actual": "ACK_OK"
+    },
+    {
+      "expected": "MOVE_INTERVAL",
+      "actual": "MOVE_INTERVAL"
+    },
+    {
+      "expected": "ACTION_BUDGET",
+      "actual": "ACTION_BUDGET"
+    },
+    {
+      "expected": "RATE_UNKNOWN",
+      "actual": "RATE_UNKNOWN"
+    },
+    {
+      "expected": "INVALID_MOVE",
+      "actual": "INVALID_MOVE"
+    },
+    {
+      "expected": "MALFORMED_ACK",
+      "actual": "MALFORMED_ACK"
+    }
+  ],
+  "rows": [
+    {
+      "ordinal": 0,
+      "phase": "admission",
+      "cycle": -1,
+      "event": "SUBSCRIBE_LOUNGE",
+      "sentMs": 452.317,
+      "distanceDelta": null,
+      "ackMs": 521.281,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 1,
+      "phase": "steady-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 1063.902,
+      "distanceDelta": 0.347,
+      "ackMs": 1064.145,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 2,
+      "phase": "steady-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 1232.953,
+      "distanceDelta": 0.433,
+      "ackMs": 1233.012,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 3,
+      "phase": "steady-control",
+      "cycle": -1,
+      "event": "MOVE_ZERO",
+      "sentMs": 1564.087,
+      "distanceDelta": 0,
+      "ackMs": 1564.939,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 4,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 2233.428,
+      "distanceDelta": 0.094,
+      "ackMs": 2233.461,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 5,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 2344.89,
+      "distanceDelta": 0.25,
+      "ackMs": 2344.948,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 6,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 2631.564,
+      "distanceDelta": 0.25,
+      "ackMs": 2631.644,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 7,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 2828.45,
+      "distanceDelta": 0.25,
+      "ackMs": 2828.581,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 8,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3017.115,
+      "distanceDelta": 0.25,
+      "ackMs": 3017.176,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 9,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3195.562,
+      "distanceDelta": 0.25,
+      "ackMs": 3195.602,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 10,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3303.005,
+      "distanceDelta": 0.25,
+      "ackMs": 3303.032,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 11,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3573.102,
+      "distanceDelta": 0.5,
+      "ackMs": 3573.129,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 12,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3696.295,
+      "distanceDelta": 0.25,
+      "ackMs": 3696.776,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 13,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 3921.898,
+      "distanceDelta": 0.25,
+      "ackMs": 3921.919,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 14,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4031.74,
+      "distanceDelta": 0.25,
+      "ackMs": 4031.755,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 15,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4277.03,
+      "distanceDelta": 0.25,
+      "ackMs": 4278.013,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 16,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4460.239,
+      "distanceDelta": 0.477,
+      "ackMs": 4460.273,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 17,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4629.013,
+      "distanceDelta": 0.273,
+      "ackMs": 4629.548,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 18,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4803.367,
+      "distanceDelta": 0.25,
+      "ackMs": 4803.548,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 19,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 4993.086,
+      "distanceDelta": 0.5,
+      "ackMs": 4993.12,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 20,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 5104.807,
+      "distanceDelta": 0.25,
+      "ackMs": 5104.857,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 21,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 5316.406,
+      "distanceDelta": 0.5,
+      "ackMs": 5316.722,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 22,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 5425.277,
+      "distanceDelta": 0.25,
+      "ackMs": 5425.398,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 23,
+      "phase": "study-route",
+      "cycle": 0,
+      "event": "SEAT",
+      "sentMs": 5609.703,
+      "distanceDelta": null,
+      "ackMs": 5610.266,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 24,
+      "phase": "seat-held",
+      "cycle": 0,
+      "event": "STAND",
+      "sentMs": 6689.017,
+      "distanceDelta": null,
+      "ackMs": 6689.07,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 25,
+      "phase": "seat-held",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 6820.874,
+      "distanceDelta": 0.347,
+      "ackMs": 6820.965,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 26,
+      "phase": "seat-held",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 6941.121,
+      "distanceDelta": 0.191,
+      "ackMs": 6941.32,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 27,
+      "phase": "seat-held",
+      "cycle": 0,
+      "event": "MOVE_NONZERO",
+      "sentMs": 7077.267,
+      "distanceDelta": 0.063,
+      "ackMs": 7077.3,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 28,
+      "phase": "study-route",
+      "cycle": 1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 7898.923,
+      "distanceDelta": 0.174,
+      "ackMs": 7898.943,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 29,
+      "phase": "study-route",
+      "cycle": 1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 8022.714,
+      "distanceDelta": 0.25,
+      "ackMs": 8022.73,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 30,
+      "phase": "study-route",
+      "cycle": 1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 8138.071,
+      "distanceDelta": 0.25,
+      "ackMs": 8138.251,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 31,
+      "phase": "study-route",
+      "cycle": 1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 8254.06,
+      "distanceDelta": 0.25,
+      "ackMs": 8254.079,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 32,
+      "phase": "study-route",
+      "cycle": 1,
+      "event": "SEAT",
+      "sentMs": 8458.868,
+      "distanceDelta": null,
+      "ackMs": 8459.014,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 33,
+      "phase": "seat-held",
+      "cycle": 1,
+      "event": "STAND",
+      "sentMs": 9689.676,
+      "distanceDelta": null,
+      "ackMs": 9690.266,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 34,
+      "phase": "seat-held",
+      "cycle": 1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 9843.836,
+      "distanceDelta": 0.39,
+      "ackMs": 9848.551,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 35,
+      "phase": "seat-held",
+      "cycle": 1,
+      "event": "MOVE_ZERO",
+      "sentMs": 10027.435,
+      "distanceDelta": 0,
+      "ackMs": 10027.502,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 36,
+      "phase": "study-route",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 10766.914,
+      "distanceDelta": 0.057,
+      "ackMs": 10767.462,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 37,
+      "phase": "study-route",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 10910.553,
+      "distanceDelta": 0.25,
+      "ackMs": 10910.584,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 38,
+      "phase": "study-route",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 11039.318,
+      "distanceDelta": 0.25,
+      "ackMs": 11039.461,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 39,
+      "phase": "study-route",
+      "cycle": 2,
+      "event": "SEAT",
+      "sentMs": 11158.538,
+      "distanceDelta": null,
+      "ackMs": 11159.016,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 40,
+      "phase": "seat-held",
+      "cycle": 2,
+      "event": "STAND",
+      "sentMs": 11870.113,
+      "distanceDelta": null,
+      "ackMs": 11870.504,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 41,
+      "phase": "seat-held",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 11986.838,
+      "distanceDelta": 0.26,
+      "ackMs": 11986.907,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 42,
+      "phase": "seat-held",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 12100.737,
+      "distanceDelta": 0.259,
+      "ackMs": 12100.8,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 43,
+      "phase": "seat-held",
+      "cycle": 2,
+      "event": "MOVE_NONZERO",
+      "sentMs": 12213.023,
+      "distanceDelta": 0.197,
+      "ackMs": 12213.135,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 44,
+      "phase": "seat-held",
+      "cycle": 2,
+      "event": "MOVE_ZERO",
+      "sentMs": 12331.477,
+      "distanceDelta": 0,
+      "ackMs": 12331.545,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 45,
+      "phase": "study-route",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 13037.351,
+      "distanceDelta": 0.196,
+      "ackMs": 13038.565,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 46,
+      "phase": "study-route",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 13185.919,
+      "distanceDelta": 0.25,
+      "ackMs": 13186.206,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 47,
+      "phase": "study-route",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 13312.912,
+      "distanceDelta": 0.25,
+      "ackMs": 13313.295,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 48,
+      "phase": "study-route",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 13426.171,
+      "distanceDelta": 0.25,
+      "ackMs": 13427.535,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 49,
+      "phase": "study-route",
+      "cycle": 3,
+      "event": "SEAT",
+      "sentMs": 13531.519,
+      "distanceDelta": null,
+      "ackMs": 13531.601,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 50,
+      "phase": "seat-held",
+      "cycle": 3,
+      "event": "STAND",
+      "sentMs": 14124.838,
+      "distanceDelta": null,
+      "ackMs": 14125.355,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 51,
+      "phase": "seat-held",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 14232.836,
+      "distanceDelta": 0.26,
+      "ackMs": 14232.878,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 52,
+      "phase": "seat-held",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 14348.058,
+      "distanceDelta": 0.259,
+      "ackMs": 14348.167,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 53,
+      "phase": "seat-held",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 14458.015,
+      "distanceDelta": 0.197,
+      "ackMs": 14458.146,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 54,
+      "phase": "seat-held",
+      "cycle": 3,
+      "event": "MOVE_NONZERO",
+      "sentMs": 14574.009,
+      "distanceDelta": 0.043,
+      "ackMs": 14574.553,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 55,
+      "phase": "post-stand-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 15028.224,
+      "distanceDelta": 0.238,
+      "ackMs": 15028.252,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 56,
+      "phase": "post-stand-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 15230.362,
+      "distanceDelta": 0.52,
+      "ackMs": 15230.43,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 57,
+      "phase": "post-stand-control",
+      "cycle": -1,
+      "event": "MOVE_ZERO",
+      "sentMs": 15342.144,
+      "distanceDelta": 0,
+      "ackMs": 15342.196,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 58,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16076.079,
+      "distanceDelta": 0.08,
+      "ackMs": 16076.152,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 59,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16216.68,
+      "distanceDelta": 0.25,
+      "ackMs": 16216.766,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 60,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16315.717,
+      "distanceDelta": 0.25,
+      "ackMs": 16315.937,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 61,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16433.042,
+      "distanceDelta": 0.25,
+      "ackMs": 16433.065,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 62,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16532.981,
+      "distanceDelta": 0.25,
+      "ackMs": 16533.001,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 63,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16642.39,
+      "distanceDelta": 0.25,
+      "ackMs": 16642.432,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 64,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16825.181,
+      "distanceDelta": 0.477,
+      "ackMs": 16825.22,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 65,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 16936.629,
+      "distanceDelta": 0.273,
+      "ackMs": 16937.373,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 66,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17061.975,
+      "distanceDelta": 0.25,
+      "ackMs": 17062.008,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 67,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17175.805,
+      "distanceDelta": 0.25,
+      "ackMs": 17175.888,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 68,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17281.483,
+      "distanceDelta": 0.25,
+      "ackMs": 17282.322,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 69,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17389.166,
+      "distanceDelta": 0.25,
+      "ackMs": 17389.512,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 70,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17492.585,
+      "distanceDelta": 0.25,
+      "ackMs": 17492.692,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 71,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17621.011,
+      "distanceDelta": 0.25,
+      "ackMs": 17621.12,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 72,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17724.154,
+      "distanceDelta": 0.25,
+      "ackMs": 17724.204,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 73,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17837.562,
+      "distanceDelta": 0.25,
+      "ackMs": 17837.587,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 74,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 17954.482,
+      "distanceDelta": 0.25,
+      "ackMs": 17954.541,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 75,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18071.265,
+      "distanceDelta": 0.25,
+      "ackMs": 18071.319,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 76,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18349.232,
+      "distanceDelta": 0.5,
+      "ackMs": 18349.488,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 77,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18546.764,
+      "distanceDelta": 0.5,
+      "ackMs": 18547.069,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 78,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18654.507,
+      "distanceDelta": 0.25,
+      "ackMs": 18654.605,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 79,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18838.266,
+      "distanceDelta": 0.25,
+      "ackMs": 18838.281,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 80,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 18937.988,
+      "distanceDelta": 0.25,
+      "ackMs": 18938.143,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 81,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19043.519,
+      "distanceDelta": 0.25,
+      "ackMs": 19044.831,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 82,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19151.249,
+      "distanceDelta": 0.25,
+      "ackMs": 19151.285,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 83,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19254.377,
+      "distanceDelta": 0.25,
+      "ackMs": 19254.423,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 84,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19360.772,
+      "distanceDelta": 0.25,
+      "ackMs": 19360.83,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 85,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19460.985,
+      "distanceDelta": 0.25,
+      "ackMs": 19461.03,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 86,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19572.234,
+      "distanceDelta": 0.25,
+      "ackMs": 19572.307,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 87,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19708.943,
+      "distanceDelta": 0.25,
+      "ackMs": 19708.98,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 88,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 19811.604,
+      "distanceDelta": 0.25,
+      "ackMs": 19811.654,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 89,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 20024.418,
+      "distanceDelta": 0.25,
+      "ackMs": 20024.928,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 90,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 20148.749,
+      "distanceDelta": 0.25,
+      "ackMs": 20148.773,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 91,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 20321.319,
+      "distanceDelta": 0.25,
+      "ackMs": 20321.909,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 92,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 20505.76,
+      "distanceDelta": 0.477,
+      "ackMs": 20505.855,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 93,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 20602.769,
+      "distanceDelta": 0.104,
+      "ackMs": 20603.712,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 94,
+      "phase": "room-route",
+      "cycle": -1,
+      "event": "SUBSCRIBE_ROOM",
+      "sentMs": 20907.179,
+      "distanceDelta": null,
+      "ackMs": 20950.576,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 95,
+      "phase": "zone-held",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 21053.682,
+      "distanceDelta": 0.39,
+      "ackMs": 21062.202,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 96,
+      "phase": "zone-held",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 21229.91,
+      "distanceDelta": 0.433,
+      "ackMs": 21229.964,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 97,
+      "phase": "zone-held",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 21413.284,
+      "distanceDelta": 0.477,
+      "ackMs": 21413.781,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 98,
+      "phase": "zone-held",
+      "cycle": -1,
+      "event": "MOVE_ZERO",
+      "sentMs": 21505.78,
+      "distanceDelta": 0,
+      "ackMs": 21505.851,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 99,
+      "phase": "room-steady-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 22004.251,
+      "distanceDelta": 0.477,
+      "ackMs": 22004.286,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 100,
+      "phase": "room-steady-control",
+      "cycle": -1,
+      "event": "MOVE_NONZERO",
+      "sentMs": 22106.292,
+      "distanceDelta": 0.26,
+      "ackMs": 22106.361,
+      "ack": "ACK_OK"
+    },
+    {
+      "ordinal": 101,
+      "phase": "room-steady-control",
+      "cycle": -1,
+      "event": "MOVE_ZERO",
+      "sentMs": 22272.19,
+      "distanceDelta": 0,
+      "ackMs": 22272.245,
+      "ack": "ACK_OK"
+    }
+  ],
+  "marks": [
+    {
+      "category": "HEAD_STANDING",
+      "phase": "admission",
+      "cycle": -1,
+      "atMs": 521.466
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "steady-control",
+      "cycle": -1,
+      "atMs": 963.516
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "steady-control",
+      "cycle": -1,
+      "atMs": 1373.365
+    },
+    {
+      "category": "HEAD_SEATED",
+      "phase": "study-route",
+      "cycle": 0,
+      "atMs": 5653.238
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "panel-control",
+      "cycle": 0,
+      "atMs": 5934.704
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "panel-control",
+      "cycle": 0,
+      "atMs": 6240.799
+    },
+    {
+      "category": "FRAME_READY",
+      "phase": "seat-held",
+      "cycle": 0,
+      "atMs": 6572.944
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "seat-held",
+      "cycle": 0,
+      "atMs": 6572.95
+    },
+    {
+      "category": "HEAD_STANDING",
+      "phase": "seat-held",
+      "cycle": 0,
+      "atMs": 6747.665
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "seat-held",
+      "cycle": 0,
+      "atMs": 6995.383
+    },
+    {
+      "category": "HEAD_SEATED",
+      "phase": "study-route",
+      "cycle": 1,
+      "atMs": 8564.355
+    },
+    {
+      "category": "FRAME_READY",
+      "phase": "seat-held",
+      "cycle": 1,
+      "atMs": 9567.802
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "seat-held",
+      "cycle": 1,
+      "atMs": 9593.443
+    },
+    {
+      "category": "HEAD_STANDING",
+      "phase": "seat-held",
+      "cycle": 1,
+      "atMs": 9768.649
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "seat-held",
+      "cycle": 1,
+      "atMs": 10004.574
+    },
+    {
+      "category": "HEAD_SEATED",
+      "phase": "study-route",
+      "cycle": 2,
+      "atMs": 11182.505
+    },
+    {
+      "category": "FRAME_READY",
+      "phase": "seat-held",
+      "cycle": 2,
+      "atMs": 11759.366
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "seat-held",
+      "cycle": 2,
+      "atMs": 11811.957
+    },
+    {
+      "category": "HEAD_STANDING",
+      "phase": "seat-held",
+      "cycle": 2,
+      "atMs": 11885.658
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "seat-held",
+      "cycle": 2,
+      "atMs": 12224.481
+    },
+    {
+      "category": "HEAD_SEATED",
+      "phase": "study-route",
+      "cycle": 3,
+      "atMs": 13592.914
+    },
+    {
+      "category": "FRAME_READY",
+      "phase": "seat-held",
+      "cycle": 3,
+      "atMs": 14008.996
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "seat-held",
+      "cycle": 3,
+      "atMs": 14086.359
+    },
+    {
+      "category": "HEAD_STANDING",
+      "phase": "seat-held",
+      "cycle": 3,
+      "atMs": 14195.481
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "seat-held",
+      "cycle": 3,
+      "atMs": 14502.017
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "post-stand-control",
+      "cycle": -1,
+      "atMs": 14915.035
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "post-stand-control",
+      "cycle": -1,
+      "atMs": 15322.18
+    },
+    {
+      "category": "HEAD_ROOM",
+      "phase": "room-route",
+      "cycle": -1,
+      "atMs": 20950.608
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "zone-held",
+      "cycle": -1,
+      "atMs": 20950.824
+    },
+    {
+      "category": "ZONE_KEY_LANDED_ROOM",
+      "phase": "zone-held",
+      "cycle": -1,
+      "atMs": 21062.343
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "zone-held",
+      "cycle": -1,
+      "atMs": 21468.421
+    },
+    {
+      "category": "KEY_DOWN",
+      "phase": "room-steady-control",
+      "cycle": -1,
+      "atMs": 21837.148
+    },
+    {
+      "category": "KEY_UP",
+      "phase": "room-steady-control",
+      "cycle": -1,
+      "atMs": 22246.177
+    }
+  ],
+  "transitions": [
+    {
+      "cycle": 0,
+      "declaredFrameOffsetMs": 0,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 58.595,
+      "standAckToFirstMoveSendMs": 131.804,
+      "projectionToFirstMoveSendMs": 73.209,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 1,
+      "declaredFrameOffsetMs": 25,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 78.383,
+      "standAckToFirstMoveSendMs": 153.57,
+      "projectionToFirstMoveSendMs": 75.187,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 2,
+      "declaredFrameOffsetMs": 50,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 15.154,
+      "standAckToFirstMoveSendMs": 116.334,
+      "projectionToFirstMoveSendMs": 101.18,
+      "observedSub80AfterStandAck": false
+    },
+    {
+      "cycle": 3,
+      "declaredFrameOffsetMs": 75,
+      "standAck": "ACK_OK",
+      "firstMoveAck": "ACK_OK",
+      "standAckToProjectionMs": 70.126,
+      "standAckToFirstMoveSendMs": 107.481,
+      "projectionToFirstMoveSendMs": 37.355,
+      "observedSub80AfterStandAck": false
+    }
+  ],
+  "health": {
+    "parseFailures": 0,
+    "pageErrors": 0
+  },
+  "zoneHookErrors": 0,
+  "zoneArrival": {
+    "subscribeAck": "ACK_OK",
+    "subscribeAckToFirstMoveSendMs": 103.106,
+    "firstMoveAck": "ACK_OK",
+    "noMoveInHeldWindow": false,
+    "nativeKeyCapture": {
+      "category": "ZONE_KEY_LANDED_ROOM",
+      "trusted": true,
+      "browserAtMs": 21042.699999999255
+    },
+    "browserClockIsSeparateFromNodeObservationClock": true
+  },
+  "coverage": {
+    "observedSub80SeatCycles": 0,
+    "declaredCycles": 4,
+    "unobservedSub80IsNotAClaimOfSafety": true
+  },
+  "cleanup": {
+    "contextClosed": true,
+    "cleanupErrors": 0
+  },
+  "totalObservedMs": 22475.658
+}

@@ -1,0 +1,27 @@
+{
+  "status": "LOSSLESS_PUBLIC_JSON_SERIALIZATION",
+  "reason": "Only known public vendor Slovak-locale basenames use JSON Unicode escaping. Raw originals remain ignored; no credential or hook change.",
+  "files": [
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-six-before.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/six/six-before.original.json",
+      "originalSHA256": "a1f98ab7d71338c74926ed05d2ceb40f31655deb301990151e96bdc694124891",
+      "serializedSHA256": "a1f98ab7d71338c74926ed05d2ceb40f31655deb301990151e96bdc694124891",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/six-browser/run-handoff-final/result.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/six/six-public-result-original.json",
+      "originalSHA256": "308a53a38bad3c378360421fe6214bc6f5a7ba12256d245c2ca30c1897a04ddd",
+      "serializedSHA256": "308a53a38bad3c378360421fe6214bc6f5a7ba12256d245c2ca30c1897a04ddd",
+      "parsedJSONExactlyEqual": true
+    },
+    {
+      "path": "docs/spatial-redesign/evidence/native-handoff-six-after.json",
+      "rawOriginal": ".local/spatial-apply/native-handoff-final/six/six-after.original.json",
+      "originalSHA256": "add9bd7a18e76c524f337c9055b9c13244dce3f1befb273d2c2d072d71d6a1b7",
+      "serializedSHA256": "add9bd7a18e76c524f337c9055b9c13244dce3f1befb273d2c2d072d71d6a1b7",
+      "parsedJSONExactlyEqual": true
+    }
+  ]
+}

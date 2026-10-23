@@ -1,0 +1,19 @@
+{
+  "status": "PREPARED_FINAL_CLIENT_FREEZE_REQUIRED_NO_PROTOCOL_WRITTEN",
+  "priorSourceManifestSHA256": "49fe9a2ffe0dd025414ca9ad502000151c6ecd469556598b79d4ae2def8cff84",
+  "knownFilesMatched": 52,
+  "pendingClientFile": "public/house-client.js",
+  "approvedFixedSourceChanges": {
+    "tools/board-resource.mjs": "561336ed460655b4bd32068c3af3f060b93d4b58a29f83c23968dc4929323cde",
+    "tools/spatial-resource.mjs": "23751e362bab901c8a28870f2fd982d8c067a77b6505afbcda1828e632d1527d"
+  },
+  "newProtocolPreimages": 3,
+  "reusedResultPreimagePaths": {
+    "evaluation/board-resource.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json",
+    "docs/spatial-redesign/evidence/resource-baseline.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json",
+    "docs/spatial-redesign/evidence/resource-mixed.results.json": "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json"
+  },
+  "sourceManifestSHA256": null,
+  "requiredCompletion": "required-current-12.json green/current map only",
+  "execution": "NOT_RUN"
+}
