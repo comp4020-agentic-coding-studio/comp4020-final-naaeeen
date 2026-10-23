@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-23",
+  "status": "FINAL_CHECKS_PASS",
+  "required": "required-handoff-pass.json",
+  "native": "native-handoff-summary.json",
+  "nativeParentPixels": [
+    "native-handoff-four-pixel-approval.json",
+    "native-handoff-maintained-pixel-approval.json",
+    "native-handoff-six-pixel-approval.json"
+  ],
+  "resource": [
+    "resource-handoff-baseline-closure.json",
+    "resource-handoff-mixed-closure.json"
+  ],
+  "evidenceCheck": {
+    "exitCode": 0,
+    "reflections": [
+      "crit-8",
+      "crit-9",
+      "crit-10"
+    ],
+    "processCitedCommitsResolve": 7
+  },
+  "productionAudit": {
+    "exitCode": 0,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    }
+  },
+  "testPreview": {
+    "pid": 72794,
+    "closedAfterChecks": true
+  },
+  "userPreview": {
+    "port": 4093,
+    "pid": 75941,
+    "healthHTTP": 200,
+    "sourceFiles": 498,
+    "allStartupHashesCurrent": true
+  },
+  "scope": "Local technical checks only. No new publication or human evaluation."
+}

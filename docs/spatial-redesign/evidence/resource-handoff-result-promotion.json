@@ -1,0 +1,30 @@
+{
+  "status": "BOTH_COMPLETE_PASSES_PROMOTED",
+  "history": "Original failing/earlier results and reused preimages remain untouched. No duplicate full execution or relaxed condition.",
+  "entries": [
+    {
+      "source": "docs/spatial-redesign/evidence/resource-handoff-baseline.results.json",
+      "target": "evaluation/board-resource.results.json",
+      "preimage": "docs/spatial-redesign/evidence/resource-final-prebinding-default.results.json",
+      "previousSHA256": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+      "currentSHA256": "b50d14d3ecea32c89d0d03eecf1c5d2d38e3dede6b22bf3354c553df82837f31",
+      "byteIdentical": true
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-handoff-baseline.results.json",
+      "target": "docs/spatial-redesign/evidence/resource-baseline.results.json",
+      "preimage": "docs/spatial-redesign/evidence/resource-final-prebinding-baseline-copy.results.json",
+      "previousSHA256": "a49b47e59731ae0c7419c37c2cec82459a5c5a200adabe42857705d07d148594",
+      "currentSHA256": "b50d14d3ecea32c89d0d03eecf1c5d2d38e3dede6b22bf3354c553df82837f31",
+      "byteIdentical": true
+    },
+    {
+      "source": "docs/spatial-redesign/evidence/resource-handoff-mixed.results.json",
+      "target": "docs/spatial-redesign/evidence/resource-mixed.results.json",
+      "preimage": "docs/spatial-redesign/evidence/resource-final-prebinding-mixed.results.json",
+      "previousSHA256": "8014ef6a7c29c773499bdb5b5eb6a1f82f40417ffb0a980880455fc9394700e4",
+      "currentSHA256": "a34a07364f67b40f27056c067ec29fecaf988b8159ffa06c5b727ea632431671",
+      "byteIdentical": true
+    }
+  ]
+}

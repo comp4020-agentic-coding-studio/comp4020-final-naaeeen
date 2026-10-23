@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "protocolSHA256": "959d7e6e04fc9a3fe9ece25e587afa8b3eb9ebe855eb6bddc7315781527aa029",
+  "sourceManifestSHA256": "887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338",
+  "resultsSHA256": "b50d14d3ecea32c89d0d03eecf1c5d2d38e3dede6b22bf3354c553df82837f31",
+  "durationSeconds": 300.001,
+  "gatesPassed": 23,
+  "gatesTotal": 23,
+  "rssPeakMiB": 196.76171875,
+  "motionRejected": 0,
+  "motionTimeouts": 0,
+  "verifiedReceipts": 8142,
+  "memoryDiagnostic": {
+    "artifact": "docs/spatial-redesign/evidence/resource-handoff-baseline.memory-diagnostic.json",
+    "sha256": "7661c608bf7a07e1b6d7691195de2d26469615098454b9927d3b7e42c4551103",
+    "status": "VALID",
+    "samples": 3041,
+    "invalidSamples": 0,
+    "boundaryAwaits": 22
+  },
+  "execution": {
+    "exitCode": 0,
+    "elapsedSeconds": 303.56013107299805,
+    "reportedProcessIDsAbsent": true,
+    "reportedProcessIDs": {
+      "generatorPID": 76509,
+      "serverPID": 76533
+    },
+    "existingProcesses": {
+      "72794": "service",
+      "75941": "service"
+    },
+    "newOwnedProcessesRemaining": {},
+    "protocolUnchanged": true,
+    "sourceUnchanged": true
+  }
+}

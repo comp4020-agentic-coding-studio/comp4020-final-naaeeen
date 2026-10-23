@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-23",
+  "status": "CURRENT_SOURCE_PREVIEW_HTTP_AND_BROWSER_PASS",
+  "port": 4093,
+  "pid": 75941,
+  "startupSourceFiles": 498,
+  "allStartupSourceHashesCurrent": true,
+  "privateLaunchSHA256": "abcd48903c256156461cba850a4b40455b6605ac884d7baf41e3d638a22c5781",
+  "liveSourceHashes": {
+    "/house-client.js": "3d90ee2a2fd4bca9226ccdc22911dd0f62cae8680339783e8de3a9b65a8386da",
+    "/house-world.js": "5789c835745d0b4ebe33f5247e64e31f2f5c6f723aea842bf3873335240949de",
+    "/house-ui.js": "2541507c8998719b22da2f4312e1a75ee3aa1eb1e53f1765c2ecf6f6a4f40d2a"
+  },
+  "healthHTTP": 200,
+  "backup": "preview-final-handoff-backup.json",
+  "scope": "Checked existing-data copy; original source databases untouched; local preview only.",
+  "browserReadback": {
+    "browser": "Codex in-app browser",
+    "tabId": "2",
+    "url": "http://localhost:4093/",
+    "title": "Night Neighbourhood \u00b7 Study House",
+    "visibleControls": [
+      "Create house",
+      "Join friends",
+      "Options",
+      "About",
+      "Pending drafts",
+      "Recover identity"
+    ],
+    "noOpenUnsavedFormBeforeReload": true,
+    "reloadedAfterVerifiedBackupAndRestart": true,
+    "markedDeliverable": true
+  }
+}

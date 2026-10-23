@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-23T00:49:20.474368+00:00",
+  "status": "BACKUP_VERIFIED_PREVIEW_STOPPED",
+  "stoppedOwnedPid": 58795,
+  "originalSourceUntouched": true,
+  "noConcurrentServiceWriter": true,
+  "databases": [
+    {
+      "database": "neighbourhood.sqlite",
+      "tableCount": 6,
+      "allTableDigestsEqual": true,
+      "userVersionUnchanged": true,
+      "integrity": "ok",
+      "foreignKeyFailures": 0
+    },
+    {
+      "database": "house.sqlite",
+      "tableCount": 19,
+      "allTableDigestsEqual": true,
+      "userVersionUnchanged": true,
+      "integrity": "ok",
+      "foreignKeyFailures": 0
+    },
+    {
+      "database": "board.sqlite",
+      "tableCount": 6,
+      "allTableDigestsEqual": true,
+      "userVersionUnchanged": true,
+      "integrity": "ok",
+      "foreignKeyFailures": 0
+    }
+  ],
+  "scope": "Read-only per-file backup after stopping the verified owned preview; current checked copy only. Original source databases unchanged."
+}

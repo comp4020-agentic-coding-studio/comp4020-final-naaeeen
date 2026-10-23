@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-10-23T00:56:40.194512+00:00",
+  "registrationCommit": "1e1ba14102d52b6333cba65d753ccad088e9031a",
+  "status": "READY_NO_CONCURRENT_TEST_OR_BROWSER_LANE",
+  "explicitIdleACKs": {
+    "nativeExecutor": "All10cases and whole-six finished; all owned contexts/processes closed",
+    "resourceExecutor": "Binding/metadata tests closed; no pending command",
+    "clientExecutor": "Frozen after focused tests; no pending command",
+    "parent": "Preview backup/restart/HTTP/browser and14original-image inspections finished"
+  },
+  "knownIdleServices": [
+    {
+      "port": 4108,
+      "pid": 72794,
+      "scope": "synthetic test preview"
+    },
+    {
+      "port": 4093,
+      "pid": 75941,
+      "scope": "checked existing-data user preview"
+    }
+  ],
+  "iab": "User-facing4093title page retained; no further automated interaction during qualification",
+  "scope": "No other known agent test/build/browser/load overlaps; not an OS-wide guarantee against external/user activity."
+}
