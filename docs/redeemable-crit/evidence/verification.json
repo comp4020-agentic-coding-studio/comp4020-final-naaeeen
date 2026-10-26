@@ -1,0 +1,58 @@
+{
+  "scope": "Local current stable candidate; production runtime/tests/config unchanged from07d66fb. No deployment or human-use result inferred.",
+  "base": "07d66fbdf46c838327dc2ac83f624333956efe6e",
+  "requiredCheck": {
+    "exitCode": 0,
+    "files": 73,
+    "tests": 1575,
+    "durationSeconds": 72.84630928299998,
+    "workers": 2,
+    "fixtureFilesystem": "disk",
+    "processOnlyDependencyReconciliation": "disabled for verified shared pinned dependency symlink; no install/global config mutation"
+  },
+  "evidenceCheck": {
+    "exitCode": 0,
+    "commitRefs": 10,
+    "warning": "Course historical checker does not recognize the chosen redeemable filename. Public Week12 policy/API does not specify one."
+  },
+  "native": {
+    "exitCode": 0,
+    "cases": 1,
+    "case": "room reference survives owner return",
+    "screenshots": [
+      {
+        "file": "room-studio-desktop.png",
+        "sha256": "34e84b7ca8a6fec111ea36c5822cfe552b48b986ea72d3f300c848dcbf4d75a6",
+        "width": 1920,
+        "height": 1080,
+        "parentViewed": true
+      },
+      {
+        "file": "room-reference-world-after-close.png",
+        "sha256": "eb52c30dbf26a4f84473ebdc8c4e1992ee34a9a56d2661ce2f258a01692e8646",
+        "width": 1920,
+        "height": 1080,
+        "parentViewed": true
+      },
+      {
+        "file": "room-visit-phone.png",
+        "sha256": "cccc95a900cd631f9d4a2691f05a70557b7b49a054a44599704903ce54ba4081",
+        "width": 390,
+        "height": 844,
+        "parentViewed": true
+      }
+    ],
+    "limits": "Original60s case, zero retries; actual Chromium1920x1080 and390x844."
+  },
+  "runtimeBuildTestFiles": 198,
+  "runtimeBuildTestChanges": [],
+  "afterOwnerApproval": {
+    "reflectionSHA256": "381c1975aabcfa7cc89d5bffb926a20c1025f8d7ec9a998b0668f66c6e9d281b",
+    "documentChanges": "Added discoverable reflection link and replaced draft-status sentence after explicit confirmation.",
+    "affectedHTTPTests": 9,
+    "affectedHTTPExitCode": 0,
+    "evidenceExitCode": 0
+  },
+  "originalFullRecordSHA256": "e22335a026b8567604d8b1001cd2dcfcf7e7fd2d77520be6418d870e261b6fa3",
+  "initialFailure": "Missing historical/current/board README links; restored links and fullcheck passed. No test was weakened."
+}

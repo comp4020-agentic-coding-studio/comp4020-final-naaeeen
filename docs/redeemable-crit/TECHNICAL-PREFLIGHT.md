@@ -43,3 +43,24 @@ The unchanged historical evidence checker warns that `reflections/redeemable-cri
 The final full check and evidence check ran after the writer froze the refined documents. Final document SHA-256 values and the 198 bound runtime/build/test file hashes stayed unchanged before and after that full check. `final-verification.json` links the actual exits and source records. The selected native journey ran on the preceding prose draft; its 198 bound runtime/build/test files are byte-identical to the final candidate. It is therefore retained as current runtime evidence without repeating that unaffected feature journey. Final `/readme/` was checked against the refined source separately: HTTP 200, full rendered text equality (3,567 normalized characters), all three headings, direct `/board/`, current plan and accurately labelled earlier validation links.
 
 No production source, test, configuration, dependency, existing user database or other preview was changed in this lane. Local service 4112 stays available with synthetic data for review. CI/container/hosting, publication and actual classroom/physical-device acceptance remain separate; the parent owns those decisions. No new coverage run is warranted for this documentation-only candidate.
+
+
+## Approved final document check and public evidence
+
+The owner approved the reflection's Chinese reading version and explicitly
+requested the push. The final README adds its direct discoverable link; PROCESS
+replaces the draft-status sentence with the actual confirmation. All9 affected
+HTTP checks and evidence checking pass again. Production runtime, test and
+configuration source remain identical to the qualified base.
+
+[Compact verification](evidence/verification.json) and the byte-identical
+[owner studio](evidence/room-studio-desktop.png),
+[retained world reference](evidence/room-reference-world-after-close.png) and
+[phone visitor](evidence/room-visit-phone.png) are retained for inspection.
+Parent viewed the original pixels before copying them.
+
+The course secret scanner returned exit2 for credential-assignment heuristics,
+with no concrete key pattern. Independent candidate review and parent history
+comparison classified the scoped findings as code identifiers and test fixtures;
+[the review record](evidence/secret-review.json) retains the boundary. No scanner
+rule or hook was disabled. Publication verification remains a separate step.
