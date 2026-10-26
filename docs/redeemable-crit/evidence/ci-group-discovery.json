@@ -1,0 +1,60 @@
+{
+  "scope": "Playwright list-only; no browsers or app cases run",
+  "maintainedFiles": [
+    "ci-core.spec.ts",
+    "first-night.spec.ts",
+    "board.spec.ts",
+    "title-dialog.spec.ts",
+    "break-and-voice.spec.ts",
+    "picture-table.spec.ts",
+    "board-receipt-recovery.spec.ts"
+  ],
+  "groups": {
+    "A": [
+      "ci-core.spec.ts",
+      "first-night.spec.ts",
+      "picture-table.spec.ts"
+    ],
+    "B": [
+      "board.spec.ts",
+      "board-receipt-recovery.spec.ts",
+      "break-and-voice.spec.ts",
+      "title-dialog.spec.ts"
+    ]
+  },
+  "discovered": {
+    "A": [
+      "{\"id\":\"57351c04f18efe0a1567-88854c4022a071f0ebf1\",\"file\":\"picture-table.spec.ts\",\"line\":171,\"column\":1,\"title\":\"one resident completes a picture and releases participation controls\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"57351c04f18efe0a1567-d122b2821a769aadb9f1\",\"file\":\"picture-table.spec.ts\",\"line\":79,\"column\":1,\"title\":\"three friends explicitly contribute to a picture and continue after one leaves\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"f68276971f5e1eed12e9-a7eabdd7572e99d6d48e\",\"file\":\"ci-core.spec.ts\",\"line\":37,\"column\":1,\"title\":\"house browser core keeps two live identities and a saved authored next step\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"ff26f86ba2aa6be42f13-20ec519a6e1de2d4195e\",\"file\":\"first-night.spec.ts\",\"line\":31,\"column\":1,\"title\":\"a changed cookie identity gives the old page an explicit recovery path\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"ff26f86ba2aa6be42f13-443ce707fa4c89ea4b16\",\"file\":\"first-night.spec.ts\",\"line\":40,\"column\":1,\"title\":\"an acknowledgement lost after a real commit reuses its pending command\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"ff26f86ba2aa6be42f13-e0c58cd235a5aa74c135\",\"file\":\"first-night.spec.ts\",\"line\":25,\"column\":1,\"title\":\"published trace persists across reload and contribution can be withdrawn\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"ff26f86ba2aa6be42f13-e2a0c569da1b7081e059\",\"file\":\"first-night.spec.ts\",\"line\":4,\"column\":1,\"title\":\"two browser identities share authored lights and a saved visitor returns\",\"projectId\":\"\",\"projectName\":\"\"}"
+    ],
+    "B": [
+      "{\"id\":\"532fe21da112a36c31f1-f1879d43433051521e70\",\"file\":\"break-and-voice.spec.ts\",\"line\":18,\"column\":1,\"title\":\"friends choose a shared break, return to their next step and share an external voice destination\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"8e2a3123a0c4552ab20a-5cf645d516e20f34a642\",\"file\":\"board.spec.ts\",\"line\":18,\"column\":1,\"title\":\"standalone board core shares a saved canvas without the game\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"8e2a3123a0c4552ab20a-da401e61e21971333ab9\",\"file\":\"board.spec.ts\",\"line\":157,\"column\":1,\"title\":\"standalone board identity recovers its original place in a full house\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"a7f435110d082a30b826-141c572c0d476d96542a\",\"file\":\"title-dialog.spec.ts\",\"line\":24,\"column\":3,\"title\":\"title dialogs are visible and usable at 390x844\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"a7f435110d082a30b826-f129eb14760f46f28b44\",\"file\":\"title-dialog.spec.ts\",\"line\":24,\"column\":3,\"title\":\"title dialogs are visible and usable at 1920x1080\",\"projectId\":\"\",\"projectName\":\"\"}",
+      "{\"id\":\"bce35cb3189cbe0a37bc-8b00612cce88ab848906\",\"file\":\"board-receipt-recovery.spec.ts\",\"line\":19,\"column\":1,\"title\":\"a lost board reply replays its original receipt after a peer addition and keeps authored export\",\"projectId\":\"\",\"projectName\":\"\"}"
+    ]
+  },
+  "full": [
+    "{\"id\":\"532fe21da112a36c31f1-f1879d43433051521e70\",\"file\":\"break-and-voice.spec.ts\",\"line\":18,\"column\":1,\"title\":\"friends choose a shared break, return to their next step and share an external voice destination\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"57351c04f18efe0a1567-88854c4022a071f0ebf1\",\"file\":\"picture-table.spec.ts\",\"line\":171,\"column\":1,\"title\":\"one resident completes a picture and releases participation controls\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"57351c04f18efe0a1567-d122b2821a769aadb9f1\",\"file\":\"picture-table.spec.ts\",\"line\":79,\"column\":1,\"title\":\"three friends explicitly contribute to a picture and continue after one leaves\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"8e2a3123a0c4552ab20a-5cf645d516e20f34a642\",\"file\":\"board.spec.ts\",\"line\":18,\"column\":1,\"title\":\"standalone board core shares a saved canvas without the game\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"8e2a3123a0c4552ab20a-da401e61e21971333ab9\",\"file\":\"board.spec.ts\",\"line\":157,\"column\":1,\"title\":\"standalone board identity recovers its original place in a full house\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"a7f435110d082a30b826-141c572c0d476d96542a\",\"file\":\"title-dialog.spec.ts\",\"line\":24,\"column\":3,\"title\":\"title dialogs are visible and usable at 390x844\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"a7f435110d082a30b826-f129eb14760f46f28b44\",\"file\":\"title-dialog.spec.ts\",\"line\":24,\"column\":3,\"title\":\"title dialogs are visible and usable at 1920x1080\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"bce35cb3189cbe0a37bc-8b00612cce88ab848906\",\"file\":\"board-receipt-recovery.spec.ts\",\"line\":19,\"column\":1,\"title\":\"a lost board reply replays its original receipt after a peer addition and keeps authored export\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"f68276971f5e1eed12e9-a7eabdd7572e99d6d48e\",\"file\":\"ci-core.spec.ts\",\"line\":37,\"column\":1,\"title\":\"house browser core keeps two live identities and a saved authored next step\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"ff26f86ba2aa6be42f13-20ec519a6e1de2d4195e\",\"file\":\"first-night.spec.ts\",\"line\":31,\"column\":1,\"title\":\"a changed cookie identity gives the old page an explicit recovery path\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"ff26f86ba2aa6be42f13-443ce707fa4c89ea4b16\",\"file\":\"first-night.spec.ts\",\"line\":40,\"column\":1,\"title\":\"an acknowledgement lost after a real commit reuses its pending command\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"ff26f86ba2aa6be42f13-e0c58cd235a5aa74c135\",\"file\":\"first-night.spec.ts\",\"line\":25,\"column\":1,\"title\":\"published trace persists across reload and contribution can be withdrawn\",\"projectId\":\"\",\"projectName\":\"\"}",
+    "{\"id\":\"ff26f86ba2aa6be42f13-e2a0c569da1b7081e059\",\"file\":\"first-night.spec.ts\",\"line\":4,\"column\":1,\"title\":\"two browser identities share authored lights and a saved visitor returns\",\"projectId\":\"\",\"projectName\":\"\"}"
+  ],
+  "status": "PASS"
+}

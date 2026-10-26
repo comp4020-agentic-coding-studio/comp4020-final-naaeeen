@@ -1,0 +1,32 @@
+{
+  "originalRun": 40251378246,
+  "originalCommit": "9c9a4aaa5399de57d1fee033c1dd2ed89e40f31d",
+  "observedFailure": [
+    "Break journey started return at42.526s, leaving17.474s under60s case budget.",
+    "One13-case suite reached300s with9passed,1failed,3unrun."
+  ],
+  "changes": [
+    "Two sequential complete/disjoint discovered groups,A7 andB6.",
+    "Native selection of distinct physical chairs can overlap; exact assignment checked onbothpages."
+  ],
+  "preserved": [
+    "All13testidentities",
+    "Everyexistingbreakassertion",
+    "60s/case and300s/group",
+    "5min/step and20min/job",
+    "One worker,zero retries",
+    "Allsandbox/security/graphics/resourceboundaries"
+  ],
+  "reviews": [
+    "Astra decisionreview ofgrouping anddistinct-chair path",
+    "Fresh-context Astra sourcereview ofwrapper,checker,workflow: noactionablefinding",
+    "Parent inspectedactualbreakdiff andactualdiscovery/typecheckoutputs"
+  ],
+  "localChecks": {
+    "distinctChairJourney": "PASS1/1,36.408stest,38.147scommand;localnotCIperformancecomparison",
+    "typecheckExit": 0,
+    "fullGroupIdentityUnion": "PASS",
+    "resource53FileBindings": "Unchangedbothprofiles"
+  },
+  "pending": "ActualCI-container completion anddeployment"
+}

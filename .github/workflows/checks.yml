@@ -51,14 +51,25 @@ jobs:
         run: pnpm check
         env:
           APP_URL: http://localhost:8080
-      - name: Verify the maintained browser core against the image
+      - name: Verify maintained browser group A against the image
+        id: browser_a
         timeout-minutes: 5
-        run: bash tools/ci-browser.sh
+        run: bash tools/ci-browser.sh --group A
+        env:
+          APP_URL: http://localhost:8080
+          EXPECT_SECURE_COOKIES: 'true'
+      - name: Verify maintained browser group B against the image
+        id: browser_b
+        # Preserve diagnostics from B after A fails, without masking either failure.
+        if: ${{ !cancelled() && (steps.browser_a.outcome == 'success' || steps.browser_a.outcome == 'failure') }}
+        timeout-minutes: 5
+        run: bash tools/ci-browser.sh --group B
         env:
           APP_URL: http://localhost:8080
           EXPECT_SECURE_COOKIES: 'true'
       - name: Run the registered combined board workload
         id: registered_resource
+        if: ${{ success() && steps.browser_a.outcome == 'success' && steps.browser_b.outcome == 'success' }}
         timeout-minutes: 8
         # A reported Ubuntu runner, with the same frozen task/bounds; not Fly performance.
         # One attempt. Earlier failed WSL trials remain in their separate committed files.

@@ -6,6 +6,68 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 
+// Keep the maintained inventory independent of its partition so omissions fail closed.
+const maintainedFiles = [
+  'ci-core.spec.ts', 'first-night.spec.ts', 'board.spec.ts', 'title-dialog.spec.ts',
+  'break-and-voice.spec.ts', 'picture-table.spec.ts', 'board-receipt-recovery.spec.ts',
+];
+const groups = {
+  A: ['ci-core.spec.ts', 'first-night.spec.ts', 'picture-table.spec.ts'],
+  B: ['board.spec.ts', 'board-receipt-recovery.spec.ts', 'break-and-voice.spec.ts', 'title-dialog.spec.ts'],
+};
+const membership = Object.values(groups).flat();
+assert.equal(new Set(maintainedFiles).size, 7, 'Maintained inventory must contain seven unique files');
+assert.equal(new Set(membership).size, membership.length, 'Browser groups must be disjoint');
+assert.deepEqual([...membership].sort(), [...maintainedFiles].sort(), 'Browser groups must cover the maintained inventory');
+function selectedGroup(value = process.env.CI_BROWSER_GROUP) {
+  assert.ok(Object.hasOwn(groups, value ?? ''), 'CI_BROWSER_GROUP must be A or B');
+  return value;
+}
+if (process.argv[2] === '--group-files') {
+  assert.equal(process.argv.length, 4);
+  console.log(groups[selectedGroup(process.argv[3])].map(file => `tests/e2e/${file}`).join('\n'));
+  process.exit(0);
+}
+if (process.argv[2] === '--check-groups') {
+  assert.equal(process.argv.length, 3);
+  const discover = files => {
+    const report = JSON.parse(execFileSync(process.execPath,
+      ['node_modules/@playwright/test/cli.js', 'test', ...files.map(file => `tests/e2e/${file}`), '--list', '--reporter=json'],
+      { encoding: 'utf8', env: { ...process.env, CI: 'true' }, maxBuffer: 8 * 1024 * 1024 }));
+    assert.deepEqual(report.errors, [], 'Playwright discovery must succeed');
+    assert.equal(report.config.globalTimeout, 300_000);
+    assert.equal(report.config.workers, 1);
+    assert.ok(report.config.projects.every(project => project.timeout === 60_000 && project.retries === 0));
+    const identities = [];
+    const discoveredFiles = new Set();
+    const visit = suite => {
+      for (const spec of suite.specs ?? []) {
+        assert.ok(files.includes(spec.file), `Unexpected discovered file: ${spec.file}`);
+        discoveredFiles.add(spec.file);
+        for (const test of spec.tests) identities.push(JSON.stringify({
+          id: spec.id, file: spec.file, line: spec.line, column: spec.column,
+          title: spec.title, projectId: test.projectId, projectName: test.projectName,
+        }));
+      }
+      for (const child of suite.suites ?? []) visit(child);
+    };
+    for (const suite of report.suites) visit(suite);
+    assert.deepEqual([...discoveredFiles].sort(), [...files].sort(), 'Every maintained file must discover cases');
+    assert.ok(identities.length > 0, 'Discovery must not be empty');
+    assert.equal(new Set(identities).size, identities.length, 'Discovered identities must be unique');
+    return identities.sort();
+  };
+  const full = discover(maintainedFiles);
+  const discovered = Object.fromEntries(Object.entries(groups).map(([group, files]) => [group, discover(files)]));
+  const union = Object.values(discovered).flat();
+  assert.equal(new Set(union).size, union.length, 'Discovered group identities must be disjoint');
+  assert.deepEqual(union.sort(), full, 'Group identities must exactly equal full maintained discovery');
+  console.log(JSON.stringify({ scope: 'Playwright list-only; no browsers or app cases run',
+    maintainedFiles, groups, discovered, full, status: 'PASS' }, null, 2));
+  process.exit(0);
+}
+const group = process.argv[2] === '--renderer-controls' ? null : selectedGroup();
+
 const profileBytes = readFileSync('evaluation/ci-browser/seccomp-playwright-v1.63.0-node24.json');
 const upstreamBytes = readFileSync('evaluation/ci-browser/seccomp-playwright-v1.63.0.json');
 const upstream = JSON.parse(upstreamBytes);
@@ -27,7 +89,7 @@ function rendererIds(processInfo, browserPid) {
   assert.equal(new Set(ids).size, ids.length, 'CDP_DUPLICATE_RENDERER_ID');
   return ids;
 }
-const output = '.local/browser-environment';
+const output = `.local/browser-environment/${group}`;
 const save = (name, value) => writeFileSync(`${output}/${name}.json`, JSON.stringify(value, null, 2) + '\n');
 if (process.argv[2] === '--renderer-controls') {
   const browser = { type: 'browser', id: 100 }, renderer = { type: 'renderer', id: 200 };
@@ -54,6 +116,9 @@ if (process.argv[2] === '--renderer-controls') {
     profile);
   // Docker selects its default AppArmor profile at start when this create-time field is empty.
   assert.ok(['', 'docker-default'].includes(container.AppArmorProfile));
+  assert.ok(container.Config.Env.includes(`CI_BROWSER_GROUP=${group}`));
+  assert.ok(container.Config.Env.includes(`PW_OUTPUT_DIR=.local/browser-results/${group}/run`));
+  assert.ok(container.Config.Env.includes(`PW_REPORT_DIR=.local/browser-report/${group}/html`));
   assert.equal(container.Config.User, `${process.getuid()}:${process.getgid()}`);
   assert.notEqual(process.getuid(), 0);
   assert.equal(container.Image, imageId);
@@ -95,6 +160,9 @@ if (process.argv[2] === '--renderer-controls') {
   assert.equal(config.timeout, 60_000);
   assert.equal(config.globalTimeout, 300_000);
   assert.equal(config.retries, 0);
+  assert.equal(config.workers, 1);
+  assert.equal(config.outputDir, `.local/browser-results/${group}/run`);
+  assert.equal(config.reporter[1][1].outputFolder, `.local/browser-report/${group}/html`);
   const { chromium } = await import('@playwright/test');
   let server, browser, stage = 'launch', processCount = null, rendererCount = null;
   try {

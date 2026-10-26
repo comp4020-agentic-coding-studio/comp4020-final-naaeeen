@@ -7,7 +7,15 @@ if [[ "${1:-}" == --pull && $# == 1 ]]; then
   timeout 240s docker pull "$image"
   exit 0
 fi
-[[ $# == 0 ]] || { echo 'Usage: ci-browser.sh [--pull]' >&2; exit 2; }
+if [[ "${1:-}" == --check-groups && $# == 1 ]]; then
+  exec node tools/ci-browser-sandbox.mjs --check-groups
+fi
+[[ $# == 2 && "$1" == --group && ( "$2" == A || "$2" == B ) ]] || {
+  echo 'Usage: ci-browser.sh --pull | --check-groups | --group A|B' >&2; exit 2;
+}
+group=$2
+files_text=$(node tools/ci-browser-sandbox.mjs --group-files "$group")
+mapfile -t files <<< "$files_text"
 [[ "$(id -u)" != 0 ]] || { echo 'CI browsers require a non-root runner' >&2; exit 1; }
 [[ "${APP_URL:-}" == http://localhost:8080 && "${EXPECT_SECURE_COOKIES:-}" == true ]] || exit 1
 [[ "$(node -p process.version)" == v24.21.0 ]] || exit 1
@@ -16,7 +24,9 @@ sha256sum --check evaluation/ci-browser/seccomp-playwright-v1.63.0-node24.sha256
 repo=$(pwd -P)
 node_root=$(dirname "$(dirname "$(node -p process.execPath)")")
 profile="$repo/evaluation/ci-browser/seccomp-playwright-v1.63.0-node24.json"
-mkdir -p .local/browser-environment .local/browser-results .local/browser-report .local/ci-browser-home
+mkdir -p ".local/browser-environment/$group" ".local/browser-results/$group" ".local/browser-report/$group" .local/ci-browser-home
+# Actual list-only identities must equal the disjoint union before either group runs.
+node tools/ci-browser-sandbox.mjs --check-groups > ".local/browser-environment/$group/discovery.json"
 # Read the host restriction before/after; this script never writes a kernel setting.
 restriction=$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)
 container=
@@ -43,8 +53,9 @@ container=$(docker create --init --user "$(id -u):$(id -g)" \
   --env HOME=/ci-home --env PATH=/opt/ci-node/bin:/usr/local/bin:/usr/bin:/bin \
   --env APP_URL --env EXPECT_SECURE_COOKIES --env CI=true \
   --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
-  --env PW_OUTPUT_DIR=.local/browser-results/run \
-  --env PW_REPORT_DIR=.local/browser-report/html \
-  "$image_id" bash -c 'node tools/ci-browser-sandbox.mjs && exec node node_modules/@playwright/test/cli.js test tests/e2e/ci-core.spec.ts tests/e2e/first-night.spec.ts tests/e2e/board.spec.ts tests/e2e/title-dialog.spec.ts tests/e2e/break-and-voice.spec.ts tests/e2e/picture-table.spec.ts tests/e2e/board-receipt-recovery.spec.ts')
-node tools/ci-browser-sandbox.mjs --inspect "$container" "$image_id" "$restriction"
+  --env CI_BROWSER_GROUP="$group" \
+  --env PW_OUTPUT_DIR=".local/browser-results/$group/run" \
+  --env PW_REPORT_DIR=".local/browser-report/$group/html" \
+  "$image_id" bash -c 'node tools/ci-browser-sandbox.mjs && exec node node_modules/@playwright/test/cli.js test "$@"' ci-browser "${files[@]}")
+CI_BROWSER_GROUP="$group" node tools/ci-browser-sandbox.mjs --inspect "$container" "$image_id" "$restriction"
 docker start --attach "$container"

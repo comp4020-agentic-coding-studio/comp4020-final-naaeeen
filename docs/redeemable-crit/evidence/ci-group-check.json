@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "scope": "No browser launch, app run, CI dispatch or performance trial",
+  "yamlAndSequentialGates": "PASS",
+  "negativeControls": [
+    {
+      "arguments": [],
+      "exit": 2
+    },
+    {
+      "arguments": [
+        "--group",
+        "C"
+      ],
+      "exit": 2
+    },
+    {
+      "arguments": [
+        "--group",
+        "../A"
+      ],
+      "exit": 2
+    },
+    {
+      "arguments": [
+        "--group",
+        "A",
+        "extra"
+      ],
+      "exit": 2
+    },
+    {
+      "checkerGroup": "C",
+      "exit": 1
+    },
+    {
+      "checkerGroup": "../A",
+      "exit": 1
+    },
+    {
+      "checkerGroup": "constructor",
+      "exit": 1
+    },
+    {
+      "checkerGroup": "",
+      "exit": 1
+    }
+  ],
+  "discoveredCases": {
+    "A": 7,
+    "B": 6
+  },
+  "identityUnionEqualsFull": "PASS",
+  "resourceBindings": [
+    {
+      "protocol": "evaluation/board-resource.protocol.json",
+      "sourceFiles": 53,
+      "mismatches": [],
+      "sourceManifestSHA256": "887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338",
+      "ciHarnessBound": false
+    },
+    {
+      "protocol": "docs/spatial-redesign/evidence/resource-mixed.protocol.json",
+      "sourceFiles": 53,
+      "mismatches": [],
+      "sourceManifestSHA256": "887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338",
+      "ciHarnessBound": false
+    }
+  ]
+}
