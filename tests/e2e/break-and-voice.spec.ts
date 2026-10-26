@@ -1,16 +1,16 @@
 import { expect, test, type Page } from '@playwright/test';
-import { beginAdmission, closeTool, openHouseSettings, openStudyNotes } from './house-journey.ts';
+import { beginAdmission, chooseCamera, clickProjectedTarget, closeTool, openHouseSettings, openStudyNotes } from './house-journey.ts';
 
 async function live(page: Page) {
   await expect(page.locator('#connection-status')).toHaveText('Together, live');
   await expect(page.locator('.house-world-canvas')).toHaveAttribute('data-self-x', /^-?\d/);
 }
 
-async function breakTable(page: Page) {
-  await closeTool(page);
-  await page.getByRole('button', { name: 'Places', exact: true }).click();
-  await page.locator('#places-panel [data-place="game"]').click();
+async function breakTable(page: Page, seatId: 'game-seat-1' | 'game-seat-2') {
+  await chooseCamera(page, 'overview');
+  await clickProjectedTarget(page, { type: 'seat', seatId });
   await expect(page.locator('#break-four')).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator('.house-world-canvas')).toHaveAttribute('data-self-animation', 'sit');
   await page.locator('#break-four').click();
   await expect(page.locator('#game-panel')).toBeVisible();
 }
@@ -50,7 +50,16 @@ test('friends choose a shared break, return to their next step and share an exte
     await owner.getByLabel('Next step', { exact: true }).fill('Write the missing step myself');
     await owner.getByRole('button', { name: 'Save card', exact: true }).click();
     await expect(owner.locator('#card-status')).toHaveText('Your saved current card.');
-    await breakTable(owner); await breakTable(peer);
+    // Distinct physical chairs avoid a race for the same nearest free place.
+    await Promise.all([breakTable(owner, 'game-seat-1'), breakTable(peer, 'game-seat-2')]);
+    await Promise.all([owner, peer].map(async page => {
+      await closeTool(page);
+      await page.getByRole('button', { name: 'Places', exact: true }).click();
+      await expect(page.locator('#game-place-occupancy')).toHaveText('Game place 1 · CI break author; Game place 2 · CI break peer');
+      await closeTool(page);
+      await page.getByRole('button', { name: 'Table choices', exact: true }).click();
+      await expect(page.locator('#game-panel')).toBeVisible();
+    }));
     const before = await (await owner.request.get('/api/house/snapshot')).json();
     expect(before.game.current).toBeNull(); // Opening Watch does not imply consent.
     await owner.locator('[data-game-action="join"]').click();
