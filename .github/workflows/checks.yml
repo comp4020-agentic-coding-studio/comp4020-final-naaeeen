@@ -7,6 +7,12 @@ on:
   # /ship dispatches a run after flipping the repo public, since the flip
   # itself triggers no push event.
   workflow_dispatch:
+    inputs:
+      extended_checks:
+        description: Run all maintained browser journeys and the registered load workload
+        type: boolean
+        required: false
+        default: false
 
 # One deploy at a time, and never cancel one mid-flight.
 concurrency:
@@ -51,8 +57,17 @@ jobs:
         run: pnpm check
         env:
           APP_URL: http://localhost:8080
+      - name: Verify essential maintained browser cases against the image
+        id: browser_core
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.extended_checks }}
+        timeout-minutes: 5
+        run: bash tools/ci-browser.sh --group core
+        env:
+          APP_URL: http://localhost:8080
+          EXPECT_SECURE_COOKIES: 'true'
       - name: Verify maintained browser group A against the image
         id: browser_a
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.extended_checks }}
         timeout-minutes: 5
         run: bash tools/ci-browser.sh --group A
         env:
@@ -61,7 +76,7 @@ jobs:
       - name: Verify maintained browser group B against the image
         id: browser_b
         # Preserve diagnostics from B after A fails, without masking either failure.
-        if: ${{ !cancelled() && (steps.browser_a.outcome == 'success' || steps.browser_a.outcome == 'failure') }}
+        if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' && inputs.extended_checks && (steps.browser_a.outcome == 'success' || steps.browser_a.outcome == 'failure') }}
         timeout-minutes: 5
         run: bash tools/ci-browser.sh --group B
         env:
@@ -69,7 +84,7 @@ jobs:
           EXPECT_SECURE_COOKIES: 'true'
       - name: Run the registered combined board workload
         id: registered_resource
-        if: ${{ success() && steps.browser_a.outcome == 'success' && steps.browser_b.outcome == 'success' }}
+        if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.extended_checks && steps.browser_a.outcome == 'success' && steps.browser_b.outcome == 'success' }}
         timeout-minutes: 8
         # A reported Ubuntu runner, with the same frozen task/bounds; not Fly performance.
         # One attempt. Earlier failed WSL trials remain in their separate committed files.
@@ -84,6 +99,9 @@ jobs:
           const run = spawnSync(process.execPath, ["tools/board-resource.mjs", "--run", "--go", ready.protocolSHA256, "--freeze", ready.sourceManifestSHA256], { stdio: "inherit" });
           process.exit(run.status ?? 1);
           NODE
+      - name: Verify retained resource evidence matches source
+        # Extended runs regenerate the result above before this same required gate.
+        run: node tools/check-resource-evidence.mjs
       - name: Preserve the sanitized resource result
         if: ${{ !cancelled() && steps.registered_resource.outcome != 'skipped' }}
         uses: actions/upload-artifact@v5

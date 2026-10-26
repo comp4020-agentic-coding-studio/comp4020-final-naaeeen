@@ -1,55 +1,59 @@
-# Bounded maintained-browser groups
+# Essential and extended CI coverage
 
-26 October 2026. This changes CI orchestration, not application behaviour or the
-registered resource workload. The release candidate still needs a completed CI
-run and deployed-site verification after publication.
+26 October 2026. The owner requests necessary default CI checks without rerunning
+all long browser journeys and load trials on every push. No test code is removed.
+This changes orchestration; it does not establish that previously failing cases
+now pass or repair application behaviour.
 
-## Failure and comparison
+## Common task and comparison
 
-Run `40251378246`, head `9c9a4aa`, discovered thirteen maintained browser cases in
-one process. Nine passed; the combined break/voice case exceeded its per-case
-deadline, and three cases did not run before the shared 300-second suite deadline.
-The sanitized run log and timing analysis are retained locally in
-`.local/crit12-verify/ci-first-failed.log` and `ci-first-timing.json`. The log does
-not prove that the uncompleted product paths work. A separate focused test change
-addresses the long combined case; this orchestration change cannot fix it.
-
-The common task is to execute every case discovered from the existing seven-file
-maintained inventory, preserving security checks and all existing time bounds.
-The compared factor is suite partitioning; tests, workers, retries, service flags
-and sandbox requirements remain fixed. Acceptance is exact discovered-identity
-coverage, separate diagnostics, bounded sequential execution and failure gates.
+The task is to retain fast unit/service/build/type/evidence/security checks and a
+small native browser release gate, preserve all extended cases for explicit runs,
+and reject stale resource evidence rather than silently skipping its checks.
+Acceptance requires exact discovery coverage, explicit opt-in, secure bounded
+execution, source-bound evidence and failure propagation to deployment.
 
 | Alternative | Evidence and decision |
 | --- | --- |
-| Keep one maintained suite | Actual run exhausted its 300-second budget; it left three cases unrun. |
-| Two sequential complete groups | Selected: gives each bounded group its own existing suite/step budget, without concurrent browsers or omitting cases. Completion remains to be measured. |
-| Increase timeouts or reduce coverage | Rejected by owner constraints; no such change is included. |
+| All journeys and load on every push | Rejected for default use by the owner. Run `40251378246` exhausted the shared 300-second suite budget: nine passed, one failed and three did not run. |
+| Essential default; explicit extended run | Selected. Six essential browser cases supplement the unchanged full `pnpm check`; the full browser inventory and registered workload remain available through manual dispatch. |
+| Drop cases or raise deadlines | Rejected. No case code, timeout, worker count or retry bound is changed here. |
 
-Planning estimates are approximately 210 seconds for A and 195 for B, including
-case caps under the planning assumptions. Together with roughly 146 seconds of
-observed setup and the existing eight-minute resource step, these fit the
-20-minute job in that estimate. These are not measured group durations or a
-worst-case guarantee: setup, teardown and unrelated steps also consume time, and
-the two five-minute browser steps plus eight-minute resource cap alone total
-eighteen minutes. The existing 20-minute outer cutoff still applies.
+Run40253618276 subsequently passed all six B cases, including the repaired
+break/voice journey. Its A group passed six cases and timed out during solo
+picture completion at17of24 pieces. That extended result remains unresolved;
+changing default selection does not turn it into a pass. Full thirteen-case
+success is not claimed.
 
-## Inventory, outputs and gates
+## Coverage and execution
 
-| Group | Maintained files |
-| --- | --- |
-| A | `ci-core.spec.ts`, `first-night.spec.ts`, `picture-table.spec.ts` |
-| B | `board.spec.ts`, `board-receipt-recovery.spec.ts`, `break-and-voice.spec.ts`, `title-dialog.spec.ts` |
+| Mode/group | Maintained files | Discovery snapshot |
+| --- | --- | --- |
+| Default `core` | `ci-core.spec.ts`, `board.spec.ts`, `board-receipt-recovery.spec.ts`, `title-dialog.spec.ts` | 6 cases |
+| Extended A | `ci-core.spec.ts`, `first-night.spec.ts`, `picture-table.spec.ts` | 7 cases |
+| Extended B | `board.spec.ts`, `board-receipt-recovery.spec.ts`, `break-and-voice.spec.ts`, `title-dialog.spec.ts` | 6 cases |
 
-`tools/ci-browser-sandbox.mjs` keeps the original seven-file inventory separate
-from the group map. It asserts unique inventory entries and disjoint, complete
-file membership. Before each group, actual Playwright `--list --reporter=json`
-discovery runs for the full inventory, A and B. The checker compares sorted full
-identities, including Playwright spec ID, source location, title and project,
-against the disjoint union. It also requires cases from every listed file. This
-does not depend on a fixed case count, so splitting a long case remains covered.
+Pushes, pull requests and ordinary manual dispatch run `core`. The boolean manual
+dispatch input `extended_checks` defaults to false. Selecting true replaces core
+with sequential A/B and enables the registered 300-second load workload. The
+unchanged `pnpm check` still covers the provided checks, board build, typecheck
+and full fast unit/service suite. Process-evidence and both secret scans remain.
 
-Only enum values `A` and `B` are accepted. The enum derives these output paths:
+The resource-evidence checker runs as a required fast gate in both modes. On
+extended runs, the actual workload executes first, so its newly generated result
+is checked rather than blocking regeneration on an older result. Default runs
+check retained source-bound evidence directly. A missing, stale, failed or invalid
+required result must fail the gate; it must never become a successful skip.
+
+The seven-file maintained inventory is separate from the group map. Assertions
+require unique entries and disjoint, complete A/B file membership. Actual
+Playwright `--list --reporter=json` discovery runs for the full inventory and all
+three groups. The full identities (spec ID, source location, title and project)
+must equal the disjoint A/B union; core identities must be a subset of that full
+discovery. Every listed file must discover cases. Counts are descriptive snapshots,
+not substitutes for identity checks.
+
+Only enum values `core`, `A` and `B` are accepted. Each derives separate paths:
 
 | Artifact | Path |
 | --- | --- |
@@ -57,43 +61,40 @@ Only enum values `A` and `B` are accepted. The enum derives these output paths:
 | HTML report | `.local/browser-report/<group>/html` |
 | Host inspection, discovery and container sandbox evidence | `.local/browser-environment/<group>/` |
 
-The host inspector checks the group's container environment and output paths.
-The container preflight checks the same resolved Playwright paths. The existing
-artifact upload roots include both groups. The original non-root user, pinned
-browser/Node versions, seccomp profile/hash, default AppArmor, private IPC,
-shared-memory limit, capability restrictions, renderer process discovery,
-namespace and additional seccomp assertions remain required.
+Host inspection validates the container's group/output environment. The container
+preflight validates the resolved Playwright output paths. Existing upload roots
+include all groups. Original non-root identity, pinned browser/Node versions,
+seccomp hashes/profile, AppArmor, private IPC, memory size, capability restrictions,
+renderer discovery, namespaces and additional seccomp assertions remain mandatory.
 
-A and B each retain a five-minute workflow step, a 300-second suite limit,
-60-second test limit, one worker and zero retries. B follows A after success or
-failure unless cancelled; a skipped A does not trigger B. Neither step masks a
-failure. The registered resource step explicitly requires both to succeed;
-deployment still requires the successful check job. The job remains twenty
-minutes and the resource step remains eight minutes. App startup, production
-cookie protection, quality checks and deployment settings are unchanged.
+Each selected browser group retains its five-minute workflow step, 300-second
+suite limit, 60-second test limit, one worker and zero retries. In extended mode,
+B follows A after success or failure unless cancelled; skipped A does not trigger
+B. Neither failure is masked. The actual load step requires both groups to pass.
+The check job remains twenty minutes, load step eight minutes, and deployment
+requires the successful check job. App startup, secure cookies, service/quality
+flags and deployment configuration remain unchanged.
 
-## Local verification and limits
+Approximate extended planning estimates of A=210 seconds, B=195 seconds and
+146 seconds observed setup, plus the eight-minute load step, fit the twenty-minute
+job only under those assumptions. They are not measured group durations or a
+worst-case guarantee; the two five-minute browser caps and eight-minute load cap
+alone total eighteen minutes. The outer job cutoff remains authoritative.
 
-Browser-free verification passed through the Windows-to-Ubuntu bridge using the
-installed mise-managed Linux toolchain:
+## Verification boundaries
 
-- `bash -n tools/ci-browser.sh` and Node syntax checking.
-- Actual full/A/B Playwright JSON discovery with exact identity equality.
-- Native YAML parsing and assertions for order, conditions, budgets, retained
-  artifact roots and deployment dependency.
-- Eight invalid/missing-group controls; all reject before any Docker/browser run.
-- Six existing renderer PID controls; these are fixture validation only.
-- `git diff --check`.
+Browser-free checks use the installed mise-managed Linux toolchain through the
+Windows-to-Ubuntu bridge: Bash/Node syntax, actual full/core/A/B JSON discovery,
+YAML/input/selection/gate assertions, invalid enum/argument controls, existing
+renderer PID fixtures and final diff whitespace checking. Inspectable local
+records are `ci-group-check.py`, `ci-group-check.json` and
+`ci-group-discovery.json` under `.local/crit12-verify/`.
 
-The initial discovery found A=7 and B=6, full=13. These are a snapshot, not an
-acceptance count. Local inspectable records are `ci-group-discovery.json`,
-`ci-group-check.py` and `ci-group-check.json` under `.local/crit12-verify/`.
-
-Both current resource protocols still match all 53 bound source files and manifest
+Both current resource protocols retain their 53 source bindings and manifest
 `887b139aaeb7311c4416743affbf6f15c8d70e4790d872ba74b50a38a6cc4338`.
-The CI harness files are outside those manifests; the registered resource source,
-instrument and protocols are not edited by this change.
+CI harness files are outside those manifests. This orchestration change does not
+edit registered resource sources, instruments or protocols.
 
-No local browser group, fresh CI run, performance trial or deployment result is
-claimed by these checks. Independent source review and completed CI remain the
-release verification gates.
+This record does not claim a completed browser group, new load trial, fresh CI
+success, deployed-site verification or human acceptance. Independent source
+review and the actual selected-mode CI result remain release gates.

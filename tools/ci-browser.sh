@@ -10,8 +10,8 @@ fi
 if [[ "${1:-}" == --check-groups && $# == 1 ]]; then
   exec node tools/ci-browser-sandbox.mjs --check-groups
 fi
-[[ $# == 2 && "$1" == --group && ( "$2" == A || "$2" == B ) ]] || {
-  echo 'Usage: ci-browser.sh --pull | --check-groups | --group A|B' >&2; exit 2;
+[[ $# == 2 && "$1" == --group && ( "$2" == core || "$2" == A || "$2" == B ) ]] || {
+  echo 'Usage: ci-browser.sh --pull | --check-groups | --group core|A|B' >&2; exit 2;
 }
 group=$2
 files_text=$(node tools/ci-browser-sandbox.mjs --group-files "$group")

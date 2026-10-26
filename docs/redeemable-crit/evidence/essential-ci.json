@@ -1,0 +1,24 @@
+{
+  "ownerInstruction": "Run necessary default CI checks; keep long complete journeys and load trials for explicit extended runs.",
+  "defaultNativeCases": 6,
+  "extendedNativeCases": 13,
+  "providedChecks": "Preserved in full pnpm check, along with build/type/unit/service/evidence/security checks.",
+  "resourceGate": "Read-only exact source/protocol/result qualification binding; no fresh load on default push.",
+  "resourceProfiles": {
+    "baseline": 23,
+    "mixed": 30,
+    "boundSourceFiles": 53
+  },
+  "verification": {
+    "actualDiscoveryCoreSubset": true,
+    "actualDiscoveryABDisjointFullUnion": true,
+    "negativeGateTestsPassed": 28,
+    "pureGateTestsExit": 0,
+    "actualRetainedProfiles": "PASS",
+    "typecheckExit": 0,
+    "freshIndependentReview": "Two findings corrected: Windows path containment and stale failure wording. Parent subsequently chose byte-identical canonical mixed aliases."
+  },
+  "knownExtendedGap": "Run40253618276: B6 passed; A6 passed and solo picture timed out at17/24. Excluding it from default CI is not a repair or full-suite pass.",
+  "infrastructureAttempt": "An attempted filtered run with service globalSetup found preview4112 unavailable; preserved. Pure gate checks were rerun with an isolated config because they require no application server.",
+  "publication": "Await actual new CI and deployed verification."
+}

@@ -12,15 +12,18 @@ const maintainedFiles = [
   'break-and-voice.spec.ts', 'picture-table.spec.ts', 'board-receipt-recovery.spec.ts',
 ];
 const groups = {
+  core: ['ci-core.spec.ts', 'board.spec.ts', 'board-receipt-recovery.spec.ts', 'title-dialog.spec.ts'],
   A: ['ci-core.spec.ts', 'first-night.spec.ts', 'picture-table.spec.ts'],
   B: ['board.spec.ts', 'board-receipt-recovery.spec.ts', 'break-and-voice.spec.ts', 'title-dialog.spec.ts'],
 };
-const membership = Object.values(groups).flat();
+const membership = [...groups.A, ...groups.B];
 assert.equal(new Set(maintainedFiles).size, 7, 'Maintained inventory must contain seven unique files');
 assert.equal(new Set(membership).size, membership.length, 'Browser groups must be disjoint');
 assert.deepEqual([...membership].sort(), [...maintainedFiles].sort(), 'Browser groups must cover the maintained inventory');
+assert.equal(new Set(groups.core).size, groups.core.length, 'Core files must be unique');
+assert.ok(groups.core.every(file => maintainedFiles.includes(file)), 'Core files must belong to the maintained inventory');
 function selectedGroup(value = process.env.CI_BROWSER_GROUP) {
-  assert.ok(Object.hasOwn(groups, value ?? ''), 'CI_BROWSER_GROUP must be A or B');
+  assert.ok(Object.hasOwn(groups, value ?? ''), 'CI_BROWSER_GROUP must be core, A or B');
   return value;
 }
 if (process.argv[2] === '--group-files') {
@@ -59,9 +62,11 @@ if (process.argv[2] === '--check-groups') {
   };
   const full = discover(maintainedFiles);
   const discovered = Object.fromEntries(Object.entries(groups).map(([group, files]) => [group, discover(files)]));
-  const union = Object.values(discovered).flat();
+  const union = [...discovered.A, ...discovered.B];
   assert.equal(new Set(union).size, union.length, 'Discovered group identities must be disjoint');
   assert.deepEqual(union.sort(), full, 'Group identities must exactly equal full maintained discovery');
+  const fullSet = new Set(full);
+  assert.ok(discovered.core.every(identity => fullSet.has(identity)), 'Core identities must be a subset of full discovery');
   console.log(JSON.stringify({ scope: 'Playwright list-only; no browsers or app cases run',
     maintainedFiles, groups, discovered, full, status: 'PASS' }, null, 2));
   process.exit(0);
