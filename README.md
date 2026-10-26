@@ -1,116 +1,66 @@
 # Night Neighbourhood
 
-Night Neighbourhood is a small house for two to six university friends who want
-company while working on their own tasks. You might be revising quietly, welcome
-a short chat, or want help with a confusing paragraph. The house lets those
-activities happen together without requiring everyone to post a goal or reply.
+Night Neighbourhood is a shared house for two to six familiar university friends.
+Work on separate tasks, explain something on a board, take a short game break or
+visit someone's room. The design asks whether a persistent place can help friends
+spend time together without requiring everyone to do the same thing.
 
-## Quiet company, voluntary conversation
+[Redeemable Crit reflection, 26 October](reflections/redeemable-crit.md).
 
-Two avatars sitting at the same table tell you that their friends are connected.
-They do not tell you whether those people want to talk. Our main design decision
-is to keep presence, willingness and room access separate.
+## Giving a room a reason to return to
 
-New arrivals start in Quiet. Choose Can chat when you welcome conversation.
-Your friends see that value and when it was set. The time can also come from the
-default being initialized; it does not prove that you are watching the screen.
-Quiet hides house speech previews while keeping authorized messages and an unread
-cue. It is a soft convention, not a message block. The same control currently
-changes both public willingness and your previews.
+A bedroom used to lead back to a general work card. Visiting a friend's desk could
+open your own unrelated card. The room looked personal, but the interaction gave
+you little reason to be there.
 
-An always-open hangout would need less status maintenance and make chance
-encounters easier. Invitations accepted before each conversation would make
-agreement clearer, but add steps to a brief exchange between familiar friends.
-We chose a declaration between those options. Its cost is an extra choice and
-the possibility that someone forgets to update it.
+Now each resident can keep one reference image and save the view they were
+inspecting. It might be a diagram, design or personal illustration. It remains
+visible on the desk and wall after the panel closes. Returning resumes that
+material; visiting gives friends something of the owner's to discuss. Visitors
+pan and zoom independently, while only the owner changes the saved image and view.
 
-[Erickson and Kellogg (2000)](https://smg.media.mit.edu/library/erickson2000.pdf)
-explain how visibility helps people coordinate while also creating accountability.
-[Harrison and Dourish (1996)](https://dourish.com/~dourishc/publications/1996/cscw96-place.pdf)
-show why a shared setting needs social meaning beyond its geometry. These ideas
-help explain our choices; friends still need to develop and understand the
-convention through use.
+[Harrison and Dourish's author-hosted draft (1996)](https://dourish.com/~dourishc/publications/1996/cscw96-place.pdf)
+distinguishes geometric space from socially understood place. That suggests a
+question for this project: what belongs here, and what do friends expect to do
+here? An owner-selected reference is one answer to test. Another form would add
+reporting work; a timer would add little to a visit; general media would broaden
+expression but require more formats, playback and provider decisions.
 
-## Enter, explore and think together
+This choice has costs. Someone must bring material, PNG is limiting, and walking
+to a room takes longer than opening an image in chat. Saved context and a
+recognisable owner give that journey a possible purpose. Whether friends value
+it is still a question for use with real people.
 
-Create a house, share its eight-character code, or join one. A cookie returns you
-to the same identity; keep a recovery key private if you want another way back.
-Offline members keep their bedroom. Capacity counts residents, not browser tabs.
+## Enter and try a visit
 
-Move with WASD, arrows or touch controls. E uses the nearby door, seat or board.
-Follow keeps your avatar centred. Walking resumes Follow after a temporary camera
-drag; Look and Overview remain deliberate viewing choices. Places routes you to
-study seats, the rest corner, the break table, the board or your own room. New
-bedrooms start with different furnished arrangements. Existing rooms keep their
-contents; My room offers a preview before applying a starter arrangement. Each
-person can decorate their bedroom with a bounded furniture set.
-Bedrooms start closed. Opening one admits current housemates and exposes retained
-room chat; visiting does not grant decorating rights. Quiet does not hide your
-name, connection or coarse room location.
+Create a house or join with its eight-character code. Use separate browser
+profiles for distinct people; tabs in one profile share an identity. Move with
+WASD/arrows and E, or use touch controls and Places.
 
-Shared board opens a full canvas with drawing, notes, images and companion chat.
-It also works at [/board/](/board/) independently. Board conversation is house-wide,
-separate from room chat. Peers see shared canvas edits and pointer/selection
-awareness; each person controls their view. Study cards remain author-controlled.
-Saving a next step leaves the card active; closing records the author's choice.
-A bedroom desk opens its owner's Room studio. Keep one reference image there,
-save the crop you were inspecting, and return to it later. It can be a diagram,
-a design or something you want a visiting friend to see. The image stays visible
-on the room's desk and wall after the inspection panel closes. Guests inspect it
-locally; only the owner changes the saved reference and view. Choose a PNG; the
-upload prepares it within the room's image limit.
+Choose My room, walk inside and open Room studio. Choose one PNG, save it, adjust
+the crop and choose Save this view. Open your door in room settings to admit
+current housemates. Another resident can then use Places to visit and inspect
+your reference. Closing the door ends their current access; copies already
+obtained cannot be recalled. Optional room sound starts only after each visitor
+chooses Listen here and stops when they close the studio.
 
-Room atmosphere offers Rain, Fire or Night. The owner saves a preset, and each
-visitor chooses Listen here and their own volume. Leaving the studio stops that
-local sound. An open bedroom makes its chosen reference available to current
-housemates alongside its furniture and retained room chat.
+The [shared board](/board/) supports drawing, notes, images and companion house chat, with
+an independent viewport for each person. Study seats support a voluntary huddle;
+the sofa supports deliberately sharing and presenting an image. At the activity
+table, sitting starts Watch. Join separately to contribute to the cooperative
+picture table or the two-player Four-in-a-row game. Quiet/Can chat expresses
+availability separately from room access and activity participation. Voice options
+can open a house-configured Discord destination in another tab.
 
-The lounge's places support different ways of spending an evening. At a study
-seat, Join huddle when you want to work through something together. A volunteer
-can Lead huddle; the independent shared board keeps each person's own viewport.
-At a sofa seat, Join and deliberately share your room reference with the house.
-Others can inspect independently or Follow the presenter’s crop and pointer. That published copy is house-visible until the shared session clears it,
-even if its source bedroom closes. Closing the shared view leaves participation
-and keeps your ordinary seat.
+[Try it](docs/spatial-redesign/TRY-IT.md) contains the full controls and recovery
+steps. [The room decision](docs/spatial-redesign/ROOM-DECISION.md) records the
+alternatives. [Technical acceptance](docs/spatial-redesign/ACCEPTANCE.md) records
+ownership, persistence, browser and resource checks: these establish implemented
+rules, while usefulness, comfort and belonging require human judgement.
 
-The activity table has one physical chair per resident. Sit, then choose Watch
-or explicitly Join. At the picture table, up to six friends assemble one shared
-illustration: select a loose piece, then its place. Start and Join are separate
-choices. Progress stays when someone leaves. Reconnecting returns you to Watch;
-finishing releases everyone's participation.
-
-Four-in-a-row is another choice at that table. Two players Join and Ready while
-others can watch. Turns are untimed. Look around keeps your chair; Stand releases
-it and activity participation. After a disconnect, both players choose Resume
-before continuing. Waiting and idle rounds eventually clear.
-
-Return to my room leaves the activity and walks home to your reference desk.
-Earlier authored cards remain under Options -> Saved work, including saved goals,
-next steps and newer unsent drafts. Cards remain house-visible and author-controlled;
-they are separate from the bedroom's chosen reference and door access.
-
-The house owner can add an existing Discord invite or server-channel link in
-House settings. Voice options opens that destination in a separate tab; call
-participation and microphone controls stay in Discord. The house's Quiet choice,
-text chat and shared board continue independently.
-
-
-## What we check and what we still need to learn
-
-Code checks and browser journeys cover ownership, room access, saving, reconnects
-and message delivery. Unconfirmed submitted actions retain their IDs for retry.
-If local storage fails, an unsent board-chat draft may exist only in that tab.
-
-Whether this house feels welcoming, makes asking easier or is preferable to a
-well-configured Discord group needs real-friend evaluation. We have not established
-a learning benefit. [The decision and evidence](https://github.com/comp4020-agentic-coding-studio/comp4020-final-naaeeen/blob/main/docs/decisions/2026-10-07-explicit-willingness.md)
-explain the alternatives and checks.
-
-Built with Three.js, Socket.IO, SQLite and the MIT-licensed Excalidraw editor.
-Use the pinned Linux toolchain: pnpm build:board, pnpm start, and pnpm check.
-[Permissions and logging](docs/crit-10/PERMISSIONS-AND-LOGGING.md),
-[plan](PLAN.md), [spatial implementation](docs/spatial-redesign/IMPLEMENTATION.md),
-[post-Crit improvements](docs/post-crit/PLAN.md) and
-[earlier validation](docs/implementation/REDESIGN-VALIDATION.md)
-record development details. Research and drafting were assisted by AI;
-the project record is in PROCESS.md.
+Built with Node 24, SQLite, Socket.IO, Three.js and the MIT-licensed Excalidraw
+editor. Use the pinned Linux toolchain for `pnpm build:board`, `pnpm start` and
+`pnpm check`. [PROCESS.md](PROCESS.md) follows the development decisions and
+acknowledges assistance. The [current plan](PLAN.md) records the project direction;
+[earlier redesign validation](docs/implementation/REDESIGN-VALIDATION.md) preserves
+historical checks rather than acceptance of this candidate.

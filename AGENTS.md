@@ -1,3 +1,14 @@
+# Redeemable Crit release candidate, 26 October 2026
+
+This isolated crit12-redeemable worktree uses stable spatial source07d66fb for the
+Bada15:30 redeemable sitting. Read docs/redeemable-crit/PREPARATION.md and
+TECHNICAL-PREFLIGHT.md. The owner approved the reflection's Chinese reading version
+and explicitly requested commit/push, including existing CI/Fly release. Preserve
+all current runtime, test, hosting and historical-evidence contracts. The canonical
+post-crit-improvements worktree contains unfinished voice work and must remain
+untouched. All publication material is English. Earlier local-only notices below
+remain the record of their own tasks, not a veto on this explicit authorization.
+
 # Local configuration safety
 
 Local environment/configuration files can contain deployment credentials. Runtime

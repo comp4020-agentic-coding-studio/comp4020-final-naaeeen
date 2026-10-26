@@ -1,0 +1,43 @@
+{
+  "checkedOn": "2026-10-26",
+  "timezone": "Australia/Sydney",
+  "selectedSession": {
+    "group": "Bada",
+    "date": "2026-10-26",
+    "start": "15:30",
+    "end": "17:00",
+    "cutoff": "13:30",
+    "cutoffBasis": "Ordinary two-hours-before rule applied to published redeemable session; no separate Week12 deliverable row."
+  },
+  "normalGroup": "Shitao",
+  "week12": {
+    "week": 12,
+    "monday": "2026-10-26"
+  },
+  "officialAPI": {
+    "url": "https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/api/crit-groups.json",
+    "sha256": "de2249099afbb492c0d9873220962a900a07a9adf8a51463091438cae7301f3b",
+    "week12Deliverables": [
+      {
+        "kind": "assessment",
+        "slug": "final-project",
+        "title": "Final Project",
+        "week": 12,
+        "due": "2026-11-09T01:00:00.000Z",
+        "dueLocal": "2026-11-09T12:00",
+        "repoPrefix": "comp4020-final"
+      }
+    ]
+  },
+  "reflectionPath": "reflections/redeemable-crit.md",
+  "reflectionPathStatus": "Chosen clear working filename; dedicated Week12 filename not specified by inspected public page or API. No Crit11 or Crit12 inferred.",
+  "candidateBase": "07d66fbdf46c838327dc2ac83f624333956efe6e",
+  "remoteMainAtStart": "8cdad6ad17e698d5b02896d570afb7892f365351",
+  "ownerConfirmed": {
+    "session": "Monday Bada",
+    "ChineseReflectionReviewBeforeFinalization": true,
+    "ChineseReflectionApproved": true
+  },
+  "publication": "Owner approved finalization and push on26October2026; exact publication outcome must be verified separately.",
+  "eligibilityRule": "A higher redeemable mark can replace one earlier mark of1orbelow; no personal marks are recorded here."
+}

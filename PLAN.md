@@ -1,3 +1,17 @@
+# Redeemable Crit delivery, 26 October 2026
+
+The owner selected today's Bada15:30 sitting and approved the reflection's Chinese
+reading version, then explicitly requested the push. This isolated branch prepares
+stable spatial milestone07d66fb with current English README, PROCESS and
+[redeemable reflection](reflections/redeemable-crit.md). Read
+[preparation and course mapping](docs/redeemable-crit/PREPARATION.md) and
+[technical preflight](docs/redeemable-crit/TECHNICAL-PREFLIGHT.md).
+The filename is a clear chosen label: the public Week12 page/API does not prescribe
+one. Earlier Crit8–10 entries remain intact. Current runtime source is unchanged
+from the accepted spatial milestone; unfinished native voice work remains in the
+canonical post-crit-improvements checkout. Publication still requires exact remote,
+CI/Fly and live verification; local checks alone do not establish deployment.
+
 # Current local spatial implementation
 
 23October2026. The owner authorized applying the purposeful-house redesign on
